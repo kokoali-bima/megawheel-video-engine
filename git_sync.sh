@@ -41,6 +41,7 @@ case "${1:-status}" in
       fi
     fi
     git add -A
+    echo "[git_sync] file yang akan di-commit:"; git diff --cached --stat | tail -n 25
     if git diff --cached --name-only | grep -q '^credentials/'; then
       echo "[git_sync] STOP: credentials/ ikut ter-stage. Dibatalkan."; git reset -q; exit 1
     fi

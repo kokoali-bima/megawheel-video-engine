@@ -66,13 +66,10 @@ def next_slots(start_day, taken, now_utc):
 
 def plan(start):
     q = load()
-    now_ = dt.datetime.now(dt.timezone.utc)
-    stale = [it for it in q["items"] if it["status"] == "QUEUED" and
-             dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")) < now_ + dt.timedelta(hours=2)]
-    for it in stale:                                         # slot passed before upload -> give it a new slot
-        print(f"[queue] Ep. {it['episode']}: slot {it['publish_at_utc']} sudah lewat -> dijadwalkan ulang")
-    stale_eps = {it["episode"] for it in stale}
-    q["items"] = [it for it in q["items"] if it["episode"] not in stale_eps]
+    # Items already on YouTube (SCHEDULED/...) keep their slot. Every not-yet-uploaded item is re-slotted each plan,
+    # in episode order, into the earliest free future slots -> episode order is preserved even after a missed slot.
+    old = {it["episode"]: it["publish_at_utc"] for it in q["items"] if it["status"] == "QUEUED"}
+    q["items"] = [it for it in q["items"] if it["status"] != "QUEUED"]
     queued = {it["episode"] for it in q["items"]}
     taken = {dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")) for it in q["items"]}
     todo = [e for e in episodes.episodes()
@@ -82,9 +79,10 @@ def plan(start):
     start_day = start or now.astimezone(NY).date()                # earliest free future slot
     gen = next_slots(start_day, taken, now)
     for e in todo:
-        t = next(gen)
-        q["items"].append(dict(episode=e["episode"], video_id=e["video_id"], status="QUEUED",
-                               publish_at_utc=t.strftime("%Y-%m-%dT%H:%M:%SZ")))
+        t = next(gen).strftime("%Y-%m-%dT%H:%M:%SZ")
+        if e["episode"] in old and old[e["episode"]] != t:
+            print(f"[queue] Ep. {e['episode']}: slot {old[e['episode']]} -> {t}")
+        q["items"].append(dict(episode=e["episode"], video_id=e["video_id"], status="QUEUED", publish_at_utc=t))
     q["items"].sort(key=lambda it: it["publish_at_utc"])
     save(q)
     show()

@@ -22,9 +22,9 @@
 | # | Tugas | Status | Pemegang | Catatan / langkah berikut |
 |---|---|---|---|---|
 | A1 | Akses SSH 99.2 → 99.3 untuk agent (key terbatas, bukan root penuh) | ⏸️ | user | Disarankan `command=`-restricted key di `authorized_keys` 99.3 |
-| A2 | Uji upload terjadwal 1 episode (Ep. 1) + cek di YouTube Studio | ⏸️ | user | Upload dari Claude Code ditolak pengaman otomatisnya (2026-09-30). Jalankan sendiri: `publish_queue.py plan` lalu `publish_queue.py upload --confirm --max 1`, atau beri izin ke Claude Code. Cek: status "Terjadwal", jam sesuai, "Tidak dibuat untuk anak-anak", kategori Film & Animasi |
+| A2 | Uji upload terjadwal 1 episode (Ep. 1) + cek di YouTube Studio | ✅ 2026-09-30 | user / agent | Upload antrian dijalankan di VM: **Ep. 2–6 SCHEDULED** di YouTube (URL di PUBLISH_QUEUE.md). Ep. 1 terlewat slotnya → dijadwal ulang. Catatan lama: | Upload dari Claude Code ditolak pengaman otomatisnya (2026-09-30). Jalankan sendiri: `publish_queue.py plan` lalu `publish_queue.py upload --confirm --max 1`, atau beri izin ke Claude Code. Cek: status "Terjadwal", jam sesuai, "Tidak dibuat untuk anak-anak", kategori Film & Animasi |
 | A3 | Uji coba agent produksi + agent penjadwal di 99.2 (dry run) | ⬜ | user + agent | Setelah A1. Cek: agent tidak approve, mengisi PRODUCTION_LOG, commit |
-| A4 | Upload terjadwal Ep. 2–8 | ⬜ | agent penjadwal | Setelah A2 lolos |
+| A4 | Upload terjadwal Ep. 2–8 | 🔄 | agent penjadwal | Ep. 2–6 ✅ SCHEDULED. Sisa: Ep. 1, 7, 8 (QUEUED, urut nomor episode). Cek di YouTube Studio: status Terjadwal, "Tidak dibuat untuk anak-anak", kategori Film & Animasi |
 
 ## B. Kualitas engine
 
@@ -68,3 +68,4 @@
 | 2026-09-30 | Claude Code Opus | v2.9: B1 🔄 (5/10), B3 ✅, C1 🔄 (prototipe pseudo-3D), EPISODES_INDEX.md dibuat |
 | 2026-09-30 | Claude Code Opus | B4 ✅: `git_sync.sh` (pull/push/status) jadi satu-satunya cara sinkron VM ↔ GitHub |
 | 2026-09-30 | Claude Code Opus | PC user punya clone git sendiri; commit pertama dari PC (uji alur PC → GitHub → VM) |
+| 2026-09-30 | Claude Code Opus | A2 ✅ / A4 🔄: Ep. 2–6 terjadwal di YouTube. Commit `95de2ce` (pesan ".gitignore") ternyata juga memuat catatan upload itu (registry, antrian, manifest Ep. 2–6) yang belum di-commit di VM. Isinya benar, hanya pesannya tidak lengkap. Antrian: sisa item diurutkan ulang per nomor episode |
