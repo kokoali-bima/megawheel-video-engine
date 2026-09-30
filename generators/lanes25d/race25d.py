@@ -569,11 +569,15 @@ def main():
                 focus = c
             if c["jump_t"] is not None and -0.5 < t - c["jump_t"] < 2.2:
                 focus = c
+        near_finish = st[id(winner)][0] > FIN_X - 30 or (winner["finish"] is not None and t >= winner["finish"])
+        if near_finish or mode == "cta":
+            focus = winner                                       # finish + celebration: the winner is the star
         if mode == "replay":
             focus = spinner
         xs = [st[id(c)][0] for c in cars]
         mid = (max(xs) + min(xs)) / 2
-        target = 0.55 * (st[id(focus)][0] + 2) + 0.45 * mid if focus else mid + 1.5
+        wgt = 0.85 if focus is not None and (focus is jumper or focus is winner) else 0.55
+        target = wgt * (st[id(focus)][0] + 2) + (1 - wgt) * mid if focus else mid + 1.5
         if mode == "replay":
             target = st[id(spinner)][0] + 1
         spread = max(xs) - min(xs) + 9.0
