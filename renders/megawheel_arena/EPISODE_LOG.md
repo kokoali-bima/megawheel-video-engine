@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 22:08). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 23:18). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -30,3 +30,9 @@
 | SIM_SPLASH_V2_S003 | superseded by v2.8 (distinct water/lava sounds, melting, hydroplaning) | 2026-09-30 |
 | SIM_SPLASH_V2_S005 | no signature moment (spin / lava melt) on screen |  |
 | SIM_LAVA_V2_S001 | wheels visible below the lava pit floor (fixed in v2.8) |  |
+| SIM_RACE25D_V1_S002 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |
+| SIM_RACE25D_V1_S003 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |
+| SIM_RACE25D_V1_S004 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |
+| SIM_RACE25D_V1_S005 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |
+| SIM_RACE25D_V1_S006 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |
+| SIM_RACE25D_V1_S007 | superseded by race25d v2 (hazard library, dodge AI, YouTube end card) | 2026-09-30 |

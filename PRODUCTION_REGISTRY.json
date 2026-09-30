@@ -402,13 +402,15 @@
         "win+jump"
       ],
       "duration": 29.7,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s002",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s002/SIM_RACE25D_V1_S002_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s002",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s002/SIM_RACE25D_V1_S002_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     },
     {
       "video_id": "SIM_RACE25D_V1_S003",
@@ -433,13 +435,15 @@
         "p2"
       ],
       "duration": 28.8,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s003",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s003/SIM_RACE25D_V1_S003_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s003/SIM_RACE25D_V1_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     },
     {
       "video_id": "SIM_RACE25D_V1_S004",
@@ -464,13 +468,15 @@
         "win+jump"
       ],
       "duration": 29.53,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s004",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s004/SIM_RACE25D_V1_S004_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s004",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s004/SIM_RACE25D_V1_S004_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     },
     {
       "video_id": "SIM_RACE25D_V1_S005",
@@ -495,13 +501,15 @@
         "win+jump"
       ],
       "duration": 29.8,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s005",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s005/SIM_RACE25D_V1_S005_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s005",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s005/SIM_RACE25D_V1_S005_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     },
     {
       "video_id": "SIM_RACE25D_V1_S006",
@@ -526,13 +534,15 @@
         "p3+jump+bump"
       ],
       "duration": 29.7,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s006",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s006/SIM_RACE25D_V1_S006_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s006",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s006/SIM_RACE25D_V1_S006_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     },
     {
       "video_id": "SIM_RACE25D_V1_S007",
@@ -557,13 +567,15 @@
         "p3+bump"
       ],
       "duration": 28.97,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s007",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s007/SIM_RACE25D_V1_S007_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_race25d_s007",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_race25d_s007/SIM_RACE25D_V1_S007_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
+      "rejected_date": "2026-09-30"
     }
   ]
 }
