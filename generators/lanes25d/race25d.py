@@ -171,7 +171,8 @@ def simulate(seed):
                     if ahead is not None:
                         key2 = (id(c), id(ahead))
                         if key2 not in decided:
-                            decided[key2] = rng.random() < AGILITY.get(c["key"], 0.55)
+                            ag = AGILITY.get(c["key"], 0.55)             # agile cars always try, big ones only sometimes
+                            decided[key2] = ag >= 0.55 or rng.random() < ag
                         if decided[key2]:                        # keeps looking for a gap while there is room
                             free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
                                     and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 6.0
