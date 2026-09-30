@@ -158,6 +158,7 @@ Status: ✅ sudah ada di v2 · 🟡 sebagian · ⬜ belum (roadmap, bagian 9)
   - `bumps` **Cars VS Giant Speed Bumps**: 4–5 polisi tidur kuning-hitam yang makin tinggi. Juara: monster truck.
   - `splash` **Cars VS Splash Zone** (v2.7): genangan air licin (gesekan 0.06) sebelum dinding beton, tanjakan, dan lubang. Mobil gagal karena `crash` (menabrak dinding), `rollback` (mundur di tanjakan basah), atau jatuh. Juara: `win_pool="any"`, tokoh mana pun.
   - `lava` **Cars VS Lava Road** (v2.7): 3 ventilasi yang menyembur berkala + 2 kolam lahar; tema selalu `volcano`. Mobil gagal karena `lava` (terlempar/terbakar). Juara: `win_pool="any"`.
+- ✅ **Seri 2.5D `race25d`** (v3.1, gaya disetujui user 2026-09-30): balapan 4 tokoh di jalan berlajur dengan kedalaman (parallax), tokoh = gambar 2D yang sama persis. Genangan (spin menyeberang lajur + senggol), ramp (lompat slow-mo), finish + confetti, INSTANT REPLAY, CTA. Generator sendiri: `./venv/bin/python generators/lanes25d/race25d.py --seed <N> [--preview-only]`. Pemeriksaan ringan (stream, durasi 20–60 s, pemenang, spin+replay, lompatan, preview), bukan audit piksel 2D. Hasil ke `pending/` + registry seperti seri lain.
 - ✅ Juara bergilir: untuk `win_pool="any"`, engine memilih tokoh yang paling jarang menang (dari registry). Monster truck tidak selalu menang.
 - ✅ SFX efek visual (v2.7): cipratan air (roda masuk genangan), gemuruh semburan lahar (volume mengikuti jarak), desis terbakar, hantaman dinding beton. Versi melambat di replay.
 - ⬜ Highlight mengkilap / gradasi bodi, sorot lampu (light beam), velg chrome

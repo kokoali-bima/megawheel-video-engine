@@ -158,6 +158,24 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v3.1: seri 2.5D "race25d" — tokoh 2D persis, dunia berlajur (Claude Code, Opus)
+
+**Keputusan user:** hasil Blender 3D terasa berat, lambat, dan tokohnya tidak dikenali → minta 2.5D dengan bentuk kartun sama persis dengan 2D. Prototipe "paper cutout" dinilai **"sudah sesuai banget"**. 3D (Blender + Modal) ditunda, kodenya disimpan.
+
+**Engine** `generators/lanes25d/race25d.py` (cairo, CPU VM, gratis):
+- Tokoh digambar dengan fungsi 2D yang sama (`draw_body/draw_face/draw_wheel`, mood, tema, speed lines, splash, READY-GO, confetti, overlay replay).
+- 4 lajur dengan kedalaman: k(z) = 9000/(100 + 25z) px/m; garis lajur, kerb, pohon/kaktus/palem dengan parallax; adegan dinaikkan 260 px (aksi di tengah frame Shorts).
+- Kinematika skrip 120 Hz: genangan → spin 2 putaran menyeberang lajur + senggol (bubble HEY!), ramp → lompatan balistik slow-mo 0.35×, pendaratan squash + debu + guncangan.
+- Kamera: menjaga rombongan (zoom-out min 0.82), condong ke drama, fokus pemenang di 30 m terakhir.
+- **Variasi per seed:** tokoh (rotasi, maks 1 kendaraan besar & 1 monster truck), lajur, posisi genangan/ramp, kecepatan (pemenang bervariasi), tema & narator en-US (rotasi registry).
+- **Audio:** narasi tanpa tumpang tindih (intro, spin, lompat, pemenang, replay, CTA), mesin, beep, splash + swish, benturan, pendaratan, fanfare, rewind, musik tema + ducking.
+- **Timeline** ±29 s: balapan → pemenang + confetti → INSTANT REPLAY spin (0.4×) → CTA LIKE/SUBSCRIBE.
+- Output `pending/<tanggal>_race25d_s<seed>/` + manifest + preview (spin/jump/winner/outro) + pemeriksaan ringan + registry.
+
+**Uji:** seed 1–3 preview semua PASS (28.8–29.7 s; render 40–55 s termasuk TTS). Render nyata `SIM_RACE25D_V1_S001` (Nitro menang, tema kota, narator Emma) → pending. `test_all.sh` kini ikut menguji race25d.
+
+**Perbaikan saat uji:** efek kedalaman terlalu lemah (kamera dinaikkan); jalan menyempit saat zoom-out (jalan dibuat lebih lebar dari layar); bubble tidak ikut zoom; pemenang keluar frame saat finish; `registry._active()` butuh argumen.
+
 ## 2026-09-30 — v3.0: mode 3D — Blender + Modal GPU, tokoh 3D, "sutradara" 3D (Claude Code, Opus)
 
 **Keputusan user:** prototipe cairo pseudo-3D ditolak ("jauh dari layak tayang"). Mode 3D pakai renderer 3D sungguhan, sehemat mungkin sebelum monetisasi, tidak semua episode 3D (rencana 7–14 Shorts 3D/minggu + video 15 menit mingguan).

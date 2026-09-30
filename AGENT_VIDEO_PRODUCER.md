@@ -25,13 +25,15 @@ Awal sesi (wajib): cd /root/video-engine && bash git_sync.sh pull
   (kalau STOP karena ada perubahan belum di-commit atau riwayat bercabang: jangan diperbaiki sendiri, lapor ke user)
 
 Langkah per video:
- 1. Pilih seri: potholes | bumps | splash | lava. Maksimal 3 video berturut-turut dari seri yang sama;
+ 1. Pilih seri: potholes | bumps | splash | lava | race25d (2.5D). Maksimal 3 video berturut-turut dari seri yang sama;
     utamakan seri yang paling jarang dipakai di PRODUCTION_REGISTRY.json.
  2. Cari seed yang lolos analisa (preview saja, cepat):
       cd /root/video-engine && bash generators/physics_2d/find_seeds.sh <seri> <dari> <sampai>
     Mulai dari seed terbesar yang sudah dipakai di seri itu + 1.
  3. Render seed yang PASS:
       ./venv/bin/python generators/physics_2d/sim_engine.py --series <seri> --seed <N>
+    Khusus race25d (2.5D) tidak perlu find_seeds (semua seed valid):
+      ./venv/bin/python generators/lanes25d/race25d.py --seed <N>      (seed terbesar race25d + 1)
     Exit 0 + "[audit] PASS" = sukses, hasilnya di renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/.
     Exit 1 (STOP analisa) atau 5 (AUDIT_FAILED) = coba seed PASS berikutnya. Jangan pakai --force.
  4. Buka dan periksa PNG di folder preview/ (L1_event, L2_event, L3_event, outro). Tolak sendiri (jangan laporkan

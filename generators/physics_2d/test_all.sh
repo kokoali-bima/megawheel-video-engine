@@ -11,7 +11,7 @@ while [ $# -gt 0 ]; do
     *) series+=("$1"); shift ;;
   esac
 done
-[ ${#series[@]} -eq 0 ] && series=(potholes bumps splash lava)
+[ ${#series[@]} -eq 0 ] && series=(potholes bumps splash lava race25d)
 mkdir -p work/test_all
 bad=0
 for s in "${series[@]}"; do
@@ -19,11 +19,15 @@ for s in "${series[@]}"; do
   for seed in $(seq "$from" "$to"); do
     log="work/test_all/${s}_${seed}.log"
     name="TEST_${s}_${seed}"
-    ./venv/bin/python generators/physics_2d/sim_engine.py --series "$s" --seed "$seed" --name "$name" \
-        --preview-only > "$log" 2>&1 < /dev/null
+    if [ "$s" = race25d ]; then                                   # 2.5D lane race series (own generator)
+      ./venv/bin/python generators/lanes25d/race25d.py --seed "$seed" --name "$name" --preview-only > "$log" 2>&1 < /dev/null
+    else
+      ./venv/bin/python generators/physics_2d/sim_engine.py --series "$s" --seed "$seed" --name "$name" \
+          --preview-only > "$log" 2>&1 < /dev/null
+    fi
     rc=$?
     n=$((n + 1))
-    rm -rf "work/physics_2d/previews/$name"
+    rm -rf "work/physics_2d/previews/$name" "work/lanes25d/previews/$name"
     if [ $rc -eq 0 ]; then
       pass=$((pass + 1))
     elif grep -q Traceback "$log"; then
