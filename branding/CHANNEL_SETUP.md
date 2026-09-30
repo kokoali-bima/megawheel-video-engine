@@ -25,12 +25,22 @@ New videos every week. Subscribe and tell us in the comments: who's your favorit
 
 ## Kata kunci channel (Setelan → Channel → Info dasar)
 ```
-car crash, crash test, physics simulation, monster truck, car challenge, cartoon cars, speed bumps, potholes, satisfying crashes, MegaWheel Arena
+MegaWheel Arena, Car Crash Simulation, Physics Simulation, Crash Test, Monster Trucks, Cars, Cartoon Cars, Speed Bumps, Potholes, Shorts
 ```
 
 ## Setelan (Setelan → Channel)
 - **Audiens:** "Tidak, tetapkan channel ini sebagai tidak Dibuat untuk Anak-Anak". Ini sah **hanya selama** konten mengikuti BLUEPRINT Aturan Nol no. 7 (tanpa kata "kids", narator dewasa, gaya kompetisi).
-- **Kategori default:** **Autos & Vehicles** (atau Film & Animation). Jangan "Game", karena ini bukan rekaman gameplay.
+- **Kategori default:** **Film & Animation** (dipilih user 2026-09-30). Jangan "Game", karena ini bukan rekaman gameplay.
+- **Negara domisili:** negara tempat pemilik channel benar-benar tinggal (untuk pajak/AdSense), BUKAN negara target penonton.
+- **Tag/kata kunci DILARANG:** "BeamNG" (tidak dipakai, merek orang lain = metadata menyesatkan), "Kids", "Kids Gaming", "Gaming".
+- **Tag default upload:** `Shorts, Car Crash, Crash Test, Physics Simulation, Monster Truck, Cartoon Cars, Speed Bumps, Potholes, Simulation, MegaWheel Arena`
+- **Deskripsi default upload:**
+  ```
+  Which vehicle survives? 🚗💥 Epic car crash simulations, giant speed bumps, giant potholes and monster truck challenges! 🏆
+
+  Subscribe to MegaWheel Arena for new car challenges every week! 🏁
+  #Shorts #CarCrash #CrashTest #PhysicsSimulation #MegaWheelArena
+  ```
 - **Komentar:** aktif, moderasi Standar.
 - **Bahasa:** Inggris (Amerika Serikat).
 
