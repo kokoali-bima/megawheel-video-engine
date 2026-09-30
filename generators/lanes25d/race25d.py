@@ -10,6 +10,9 @@ HAZARD LIBRARY (v3.3): every video picks 3 different hazards, one per lane, from
   (car squashed flat, BOING back) · laser gate (car split in two, patched) · meteor (blast + flip + crater)
   · UFO (beam lifts the car and drops it behind) · dragon fire (burnt, stops for a tire change, slower)
   · dragon ice (frozen in an ice block, shatters free). Cartoon slapstick, never gore (BLUEPRINT rule 7).
+Lane-change AI: agile racers may swerve to a free lane to dodge a ground hazard they see coming (max 1 dodge
+per video, 'NICE!'), so winning is skill as well as luck. End card: YouTube-style LIKE/SUBSCRIBE with a tapping
+hand, highlight ring, +1, SUBSCRIBED + ringing bell.
 
 Every seed varies: cast (rotation), lanes, hazards + positions, speeds (winner varies), theme (rotation),
 narrator (en-US rotation). Timeline: READY-GO -> race -> winner + confetti -> INSTANT REPLAY of the most
@@ -68,6 +71,13 @@ HAZARDS = {
     "dragon_ice":  dict(weight=1.2, bubble="BRRR!", line="Brrr! The ice dragon freezes {n}!", prio=9,
                         slow=(-0.1, 0.7)),
 }
+
+# lane-change AI: racers see ground hazards coming and may swerve to a free lane (skill, not luck)
+AGILITY = {"f1": 0.75, "sports": 0.7, "police": 0.6, "taxi": 0.55, "monster": 0.45, "monster2": 0.45,
+           "icecream": 0.3, "firetruck": 0.25, "bus": 0.2, "bigrig": 0.15}
+DODGEABLE = {"puddle": "puddle", "pothole": "pothole", "lava": "lava vent", "wall": "wall", "crusher": "crusher",
+             "laser": "laser"}
+MAX_DODGES = 1                                   # keeps at least 2 hazard hits per video
 
 # per-video parameters (set in setup())
 RACERS, HZ, FIN_X, SECONDS = [], [], 0.0, 0.0     # HZ: list of dict(type, lane, x)
@@ -134,26 +144,53 @@ def simulate(seed):
     dt, n = 1 / 120, int(SECONDS * 120)
     cars = []
     for key, lane, v in RACERS:
-        hz = next((h for h in HZ if h["lane"] == lane), None)
+        hz = None                                                # assigned when a hazard actually hits the car
         cars.append(dict(key=key, lane=lane, v0=v, x=4.0 - lane * 1.2, z=float(lane), h=0.0, vh=0.0, yaw=0.0,
                          pitch=0.0, sq=1.0, split=0.0, burn=0.0, patched=0.0, ice=0.0, tires=0.0, thawed=False, v=0.0, hz=hz, trig=None, land=None,
                          bump_t=None, finish=None, surge=float(rng.uniform(0, 6.28)), rec=[]))
     events = []
+    decided, dodges = set(), [0]
+    for h in HZ:
+        h.pop("used", None)
     for i in range(n):
         t = i * dt
         for c in cars:
             go = min(1.0, t / 1.6)
             target = c["v0"] * (1 + 0.025 * math.sin(t * 0.7 + c["surge"]))
-            hz, a = c["hz"], (t - c["trig"]) if c["trig"] is not None else None
+            a = (t - c["trig"]) if c["trig"] is not None else None
             freeze = False                                       # hazard holds the car still (x not integrated)
-            if hz is not None and c["trig"] is None:
+            if c["trig"] is None and c["finish"] is None:
+                zl = int(round(c["z"]))
+                if not c.get("dodge_t") and dodges[0] < MAX_DODGES:      # see a ground hazard coming -> swerve?
+                    ahead = next((h for h in HZ if not h.get("used") and h["lane"] == zl and h["type"] in DODGEABLE
+                                  and 9 < h["x"] - c["x"] < 26 and (id(c), id(h)) not in decided), None)
+                    if ahead is not None:
+                        decided.add((id(c), id(ahead)))
+                        if rng.random() < AGILITY.get(c["key"], 0.4):
+                            free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
+                                    and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 9
+                                                for o in cars)
+                                    and not any(not h2.get("used") and h2["lane"] == ln and -2 < h2["x"] - c["x"] < 30
+                                                for h2 in HZ)]
+                            if free:
+                                c["lane"], c["dodge_t"], c["dodged"] = free[0], t, ahead["type"]
+                                dodges[0] += 1
+                                events.append(("dodge", t, c["x"], float(free[0])))
                 bw = se.VEHICLES[c["key"]]["body"][0]
-                lead = {"meteor": 0.0, "ufo": 0.0, "ramp": 0.0, "puddle": 2.0, "dragon_fire": 0.0,
-                        "dragon_ice": 0.0}.get(hz["type"], 0.5 * bw)
-                if c["x"] >= hz["x"] - lead:
-                    c["trig"], a = t, 0.0
-                    c["x0"] = c["x"]
-                    events.append((hz["type"], t, c["x"], float(c["lane"])))
+                for h in HZ:                                     # a hazard hits whoever is in its lane when it arrives
+                    if h.get("used") or abs(c["z"] - h["lane"]) > 0.35:
+                        continue
+                    lead = {"meteor": 0.0, "ufo": 0.0, "ramp": 0.0, "puddle": 2.0, "dragon_fire": 0.0,
+                            "dragon_ice": 0.0}.get(h["type"], 0.5 * bw)
+                    if h["x"] - lead <= c["x"] < h["x"] + 3.0:
+                        h["used"] = True
+                        c["hz"], c["trig"], a = h, t, 0.0
+                        c["lane"] = h["lane"]
+                        c["x0"] = c["x"]
+                        events.append((h["type"], t, c["x"], float(c["lane"])))
+                        break
+            hz = c["hz"]
+            if hz is not None and a == 0.0:
                     if hz["type"] in ("ramp",):
                         c["vh"] = 9.2
                     elif hz["type"] == "lava":
@@ -161,6 +198,8 @@ def simulate(seed):
                     elif hz["type"] == "meteor":
                         c["vh"], c["burn"] = 8.0, 1.0
             ty = hz["type"] if hz is not None else None
+            if not (a is not None and ty in ("puddle", "wall")) and c["bump_t"] is None:
+                c["z"] += float(np.clip(c["lane"] - c["z"], -1.9 * dt, 1.9 * dt))   # smooth lane change
             if a is not None:
                 if ty == "puddle":
                     to_lane = c["lane"] - 1 if c["lane"] > 0 else 1
@@ -337,7 +376,10 @@ def mood_of(c, t, x):
             return "dizzy"
     if c["bump_t"] is not None and 0 <= t - c["bump_t"] < 1.2:
         return "scared"
-    if c["hz"] is not None and c["trig"] is None and 0 < c["hz"]["x"] - x < 22:
+    if c.get("dodge_t") is not None and 0 <= t - c["dodge_t"] < 1.3:
+        return "happy"
+    zz = state(c, t)[1]
+    if (c["trig"] is None or t < c["trig"]) and any(abs(h["lane"] - zz) < 0.5 and 0 < h["x"] - x < 22 for h in HZ):
         return "scared"
     return "normal"
 
@@ -926,18 +968,148 @@ def draw_hud(ctx, cars, t):
         se.draw_text(ctx, nick(c["key"]).upper(), 235, y + 1, 38, max_w=190)
 
 
+def _thumb(ctx, x, y, sz, filled):
+    """Thumbs-up icon (outline or filled blue)."""
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.scale(sz / 100, sz / 100)
+    se.rrect(ctx, -46, -8, 22, 52, 5)                            # cuff
+    se.rrect(ctx, -20, -10, 62, 54, 14)                          # fist
+    ctx.move_to(-16, -8)
+    ctx.curve_to(-8, -30, 0, -48, 6, -52)
+    ctx.curve_to(18, -56, 22, -40, 14, -10)
+    ctx.close_path()
+    col = (0.1, 0.45, 1.0) if filled else (1, 1, 1)
+    ctx.set_source_rgb(*col)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.1, 0.1, 0.12)
+    ctx.set_line_width(7)
+    ctx.stroke()
+    ctx.restore()
+
+
+def _bell(ctx, x, y, sz, swing):
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.rotate(swing)
+    ctx.scale(sz / 100, sz / 100)
+    ctx.move_to(-36, 26)
+    ctx.curve_to(-30, 18, -32, -30, 0, -36)
+    ctx.curve_to(32, -30, 30, 18, 36, 26)
+    ctx.close_path()
+    ctx.set_source_rgb(1, 1, 1)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.1, 0.1, 0.12)
+    ctx.set_line_width(7)
+    ctx.stroke()
+    ctx.arc(0, 34, 9, 0, 2 * math.pi)
+    ctx.fill()
+    ctx.restore()
+
+
+def _hand(ctx, x, y, press):
+    """Cartoon pointer hand (fingertip at x, y)."""
+    ctx.save()
+    ctx.translate(x, y)
+    s = 1.0 - 0.15 * press
+    ctx.scale(s, s)
+    se.rrect(ctx, -14, 0, 28, 70, 14)                            # index finger
+    se.rrect(ctx, -34, 44, 78, 70, 22)                           # palm
+    ctx.set_source_rgb(1, 1, 1)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.1, 0.1, 0.12)
+    ctx.set_line_width(6)
+    ctx.stroke()
+    ctx.restore()
+
+
+def _ring(ctx, x, y, w, h, age):
+    """Pulsing highlight ring around a button (the 'look here' cue of the early episodes)."""
+    for q in range(2):
+        f = ((age * 1.6) + q * 0.5) % 1.0
+        se.rrect(ctx, x - w / 2 - 14 - 40 * f, y - h / 2 - 14 - 40 * f, w + 28 + 80 * f, h + 28 + 80 * f, h / 2 + 30)
+        ctx.set_source_rgba(1, 0.86, 0.12, 0.9 * (1 - f))
+        ctx.set_line_width(10)
+        ctx.stroke()
+
+
+CTA_LIKE_T, CTA_SUB_T = 1.3, 2.4                  # tap times inside the end card (audio uses them too)
+
+
 def draw_cta(ctx, age):
-    a = min(1.0, age / 0.3)
-    ctx.set_source_rgba(0.03, 0.03, 0.1, 0.55 * a)
+    """YouTube-style end card: channel row, LIKE + SUBSCRIBE buttons, a hand taps LIKE (turns blue, +1) then
+    SUBSCRIBE (turns grey 'SUBSCRIBED', bell rings); pulsing highlight ring on the next button."""
+    ctx.set_source_rgba(0.03, 0.03, 0.1, 0.6 * min(1.0, age / 0.3))
     ctx.paint()
     s = se.ease_out_back(min(1.0, age / 0.45))
-    for i, (txt, col, y) in enumerate((("LIKE", (0.2, 0.75, 1.0), 820), ("SUBSCRIBE", (1, 0.25, 0.25), 1000),
-                                       ("MEGAWHEEL ARENA", (1, 0.86, 0.12), 1180))):
-        ctx.save()
-        ctx.translate(540, y)
-        ctx.scale(s, s)
-        se.draw_text(ctx, txt, 0, 0, 110 if i < 2 else 80, fill=col)
-        ctx.restore()
+    ctx.save()
+    ctx.translate(540, 900 + (1 - min(1.0, age / 0.45)) * 200)
+    ctx.scale(s, s)
+    se.rrect(ctx, -460, -300, 920, 600, 48)
+    ctx.set_source_rgb(1, 1, 1)
+    ctx.fill()
+    ctx.arc(-330, -160, 72, 0, 2 * math.pi)                      # channel avatar
+    g = cairo.LinearGradient(-400, -230, -260, -90)
+    g.add_color_stop_rgb(0, 1, 0.3, 0.2)
+    g.add_color_stop_rgb(1, 0.95, 0.75, 0.1)
+    ctx.set_source(g)
+    ctx.fill()
+    se.draw_text(ctx, "MW", -330, -160, 62, fill=(1, 1, 1), stroke=(0.2, 0.05, 0.05), sw=6)
+    se.draw_text(ctx, "MegaWheel Arena", 70, -185, 64, fill=(0.1, 0.1, 0.14), stroke=(1, 1, 1), sw=2, max_w=560)
+    se.draw_text(ctx, "New races every day!", 70, -115, 40, fill=(0.4, 0.4, 0.45), stroke=(1, 1, 1), sw=2, max_w=560)
+    liked, subbed = age >= CTA_LIKE_T, age >= CTA_SUB_T
+    bx_like, bx_sub, by = -235, 175, 90
+    if not liked:
+        _ring(ctx, bx_like, by, 330, 120, age)
+    elif not subbed:
+        _ring(ctx, bx_sub, by, 440, 120, age)
+    pop = 1 + 0.18 * math.sin(math.pi * min(1.0, max(0.0, (age - CTA_LIKE_T) / 0.3))) if liked else 1.0
+    ctx.save()
+    ctx.translate(bx_like, by)
+    ctx.scale(pop, pop)
+    se.rrect(ctx, -165, -60, 330, 120, 60)
+    ctx.set_source_rgb(0.93, 0.93, 0.95)
+    ctx.fill()
+    _thumb(ctx, -85, 4, 72, liked)
+    se.draw_text(ctx, "LIKE", 45, 2, 54, fill=(0.1, 0.45, 1.0) if liked else (0.12, 0.12, 0.15),
+                 stroke=(0.93, 0.93, 0.95), sw=2)
+    ctx.restore()
+    if liked and age - CTA_LIKE_T < 1.0:                         # +1 floats up
+        f = (age - CTA_LIKE_T) / 1.0
+        se.draw_text(ctx, "+1", bx_like + 90, by - 90 - 80 * f, 56, fill=(0.1, 0.45, 1.0), alpha=1 - f)
+    pop = 1 + 0.18 * math.sin(math.pi * min(1.0, max(0.0, (age - CTA_SUB_T) / 0.3))) if subbed else 1.0
+    ctx.save()
+    ctx.translate(bx_sub, by)
+    ctx.scale(pop, pop)
+    se.rrect(ctx, -220, -60, 440, 120, 60)
+    ctx.set_source_rgb(*((0.9, 0.9, 0.92) if subbed else (0.9, 0.0, 0.0)))
+    ctx.fill()
+    if subbed:
+        swing = 0.5 * math.sin((age - CTA_SUB_T) * 22) * math.exp(-(age - CTA_SUB_T) * 2.5)
+        _bell(ctx, -150, 0, 64, swing)
+        se.draw_text(ctx, "SUBSCRIBED", 40, 2, 50, fill=(0.3, 0.3, 0.33), stroke=(0.9, 0.9, 0.92), sw=2, max_w=300)
+    else:
+        se.draw_text(ctx, "SUBSCRIBE", 0, 2, 58, fill=(1, 1, 1), stroke=(0.6, 0, 0), sw=4, max_w=380)
+    ctx.restore()
+    if subbed and age - CTA_SUB_T < 0.9:                         # sparkles
+        f = (age - CTA_SUB_T) / 0.9
+        for j in range(10):
+            ang = j * 2 * math.pi / 10
+            se.star(ctx, bx_sub + math.cos(ang) * (150 + 140 * f), by + math.sin(ang) * (70 + 90 * f), 16, ang)
+            ctx.set_source_rgba(1, 0.86, 0.12, 1 - f)
+            ctx.fill()
+    se.draw_text(ctx, "for more crazy races!", 0, 215, 46, fill=(0.95, 0.35, 0.1), stroke=(1, 1, 1), sw=3)
+    if age > 0.5:                                                # the hand: to LIKE, tap, to SUBSCRIBE, tap
+        path = [(0.5, (380, 420)), (CTA_LIKE_T - 0.05, (bx_like + 30, by + 40)), (CTA_LIKE_T + 0.35, (bx_like + 30, by + 40)),
+                (CTA_SUB_T - 0.05, (bx_sub + 60, by + 40)), (99.0, (bx_sub + 60, by + 40))]
+        for (t0, p0), (t1, p1) in zip(path, path[1:]):
+            if t0 <= age < t1:
+                f = se.ease_out_back(min(1.0, (age - t0) / max(0.01, min(0.6, t1 - t0)))) if t1 < 99 else 1.0
+                hx, hy = p0[0] + (p1[0] - p0[0]) * min(1.0, f), p0[1] + (p1[1] - p0[1]) * min(1.0, f)
+                press = max(0.0, 1 - abs(age - CTA_LIKE_T) / 0.12) + max(0.0, 1 - abs(age - CTA_SUB_T) / 0.12)
+                _hand(ctx, hx, hy, press)
+                break
+    ctx.restore()
 
 
 # ------------------------------------------------------------------ audio
@@ -995,7 +1167,7 @@ HAZ_SFX = {
 }
 
 
-def build_audio(frames, events, winner, star, replay, lines, voice, out_of):
+def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start):
     se.VOICE = voice
     total = len(frames) / FPS
     n = int(total * se.SR) + se.SR
@@ -1032,6 +1204,8 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of):
                 place(sfx, sig, max(0.0, o + dt_), g)
         elif kind == "bump":
             place(sfx, se.synth_impact(0.6, seed=7), o, 0.8)
+        elif kind == "dodge":
+            place(sfx, se.synth_whoosh(), o, 0.7)
         elif kind == "land":
             place(sfx, se.synth_impact(1.0, seed=11), o, 1.0)
     if winner["finish"] is not None:
@@ -1042,6 +1216,10 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of):
         place(sfx, se.synth_rewind(), r0, 0.6)
         for dt_, sig, g in HAZ_SFX[star["hz"]["type"]]():
             place(sfx, se.stretch(sig, 0.5), max(r0, o + dt_ / 0.4), g)
+    for tap in (CTA_LIKE_T, CTA_SUB_T):                         # end card: click pops + subscribe bell
+        place(sfx, se.tone(1300, 0.06, "sine", decay=0.02), cta_start + tap, 0.8)
+    place(sfx, se.tone(1760, 0.8, "sine", decay=0.35) + se.tone(2637, 0.8, "sine", decay=0.25) * 0.5,
+          cta_start + CTA_SUB_T + 0.05, 0.6)
     bgm = se.synth_bgm(total + 1, style=se.th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     talk = np.convolve((np.abs(narr) > 0.01).astype(float), np.ones(int(0.25 * se.SR)) / (0.25 * se.SR), "same")
@@ -1099,8 +1277,11 @@ def main():
 
     names = [nick(c["key"]) for c in cars]
     lines = [(0.15, f"Four racers, one finish line! {names[0]}, {names[1]}, {names[2]} and {names[3]}. Who will win?")]
-    for c in sorted(hits, key=lambda c: c["trig"]):
-        lines.append((out_of(c["trig"]) + 0.15, HAZARDS[c["hz"]["type"]]["line"].format(n=nick(c["key"]))))
+    story = [(c["trig"], HAZARDS[c["hz"]["type"]]["line"].format(n=nick(c["key"]))) for c in hits]
+    story += [(c["dodge_t"], f"Nice move! {nick(c['key'])} dodges the {DODGEABLE[c['dodged']]}!")
+              for c in cars if c.get("dodge_t") is not None]
+    for tt, txt in sorted(story):
+        lines.append((out_of(tt) + 0.15, txt))
     lines.append((out_of(winner["finish"]) + 0.2, f"{nick(winner['key'])} wins the race!"))
     if replay:
         lines.append((replay[0] + 0.1, se.REPLAY_LINE))
@@ -1113,7 +1294,7 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
-    se.write_wav(wav, build_audio(frames, events, winner, star, replay, lines, voice, out_of))
+    se.write_wav(wav, build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start))
     silent = f"{se.WORK}/v_{name}.mp4"
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
@@ -1123,12 +1304,18 @@ def main():
     marks = {}
     for c in hits:
         marks[int(out_of(c["trig"] + 0.3) * FPS)] = f"hz_{c['hz']['type']}"
+    for c in cars:
+        if c.get("dodge_t") is not None:
+            marks[int(out_of(c["dodge_t"] + 0.5) * FPS)] = "dodge"
     marks[int(out_of(winner["finish"] + 0.5) * FPS)] = "winner"
     marks[int((cta_start + 1.5) * FPS)] = "outro"
     camx, zoom, prev_mode, empty_frames = None, 1.0, None, 0
     for fi, (mode, t) in enumerate(frames):
         st = {id(c): state(c, t) for c in cars}
         focus = None
+        for c in cars:                                           # a dodge is a highlight too
+            if c.get("dodge_t") is not None and -0.8 < t - c["dodge_t"] < 1.4:
+                focus = c
         for c in hits:
             if -0.9 < t - c["trig"] < 2.4:
                 focus = c
@@ -1219,6 +1406,8 @@ def main():
                 bubble(ctx, HAZARDS[c["hz"]["type"]]["bubble"], hd[0], hd[1], t - c["trig"] - 0.1, hd[2] * zoom)
             if c["bump_t"] is not None:
                 bubble(ctx, "HEY!", hd[0], hd[1], t - c["bump_t"] - 0.1, hd[2] * zoom)
+            if c.get("dodge_t") is not None:
+                bubble(ctx, "NICE!", hd[0], hd[1], t - c["dodge_t"] - 0.1, hd[2] * zoom)
             if c is winner and c["finish"] is not None:
                 bubble(ctx, "YEAH!", hd[0], hd[1], t - c["finish"] - 0.3, hd[2] * zoom)
         if mode != "cta":
@@ -1256,13 +1445,14 @@ def main():
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
               "duration 20-60 s": 20 <= dur <= 60,
               "has winner": winner["finish"] is not None,
-              "3 hazards triggered": len(hits) == 3,
+              "at least 2 hazards hit": len(hits) >= 2,
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
               "no frame without a car": empty_frames == 0}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + (f"+{c['hz']['type']}" if c["trig"] is not None else "")
-                + ("+bump" if c["bump_t"] else "") for c in cars]
+                + ("+bump" if c["bump_t"] else "") + (f"+dodge_{c['dodged']}" if c.get("dodge_t") else "")
+                for c in cars]
     track_id = "race25d_" + hashlib.md5(json.dumps(params, sort_keys=True).encode()).hexdigest()[:8] + "@" + se.THEME_ID
     title = TITLES[opt.seed % len(TITLES)]
     folder_rel = os.path.relpath(out_dir, se.BASE)
