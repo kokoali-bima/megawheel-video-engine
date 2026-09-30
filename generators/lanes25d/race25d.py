@@ -73,8 +73,8 @@ HAZARDS = {
 }
 
 # lane-change AI: racers see ground hazards coming and may swerve to a free lane (skill, not luck)
-AGILITY = {"f1": 0.75, "sports": 0.7, "police": 0.6, "taxi": 0.55, "monster": 0.45, "monster2": 0.45,
-           "icecream": 0.3, "firetruck": 0.25, "bus": 0.2, "bigrig": 0.15}
+AGILITY = {"f1": 0.9, "sports": 0.85, "police": 0.75, "taxi": 0.7, "monster": 0.6, "monster2": 0.6,
+           "icecream": 0.45, "firetruck": 0.4, "bus": 0.35, "bigrig": 0.3}
 DODGEABLE = {"puddle": "puddle", "pothole": "pothole", "lava": "lava vent", "wall": "wall", "crusher": "crusher",
              "laser": "laser"}
 MAX_DODGES = 1                                   # keeps at least 2 hazard hits per video
@@ -129,6 +129,10 @@ def setup(seed, appearances, forced=None):
     else:
         w = np.array([HAZARDS[h]["weight"] for h in names])
         types = [str(t) for t in r.choice(names, size=3, replace=False, p=w / w.sum())]
+        if not any(t in DODGEABLE for t in types):               # always one ground hazard a racer can dodge
+            g = [n for n in names if n in DODGEABLE]
+            gw = np.array([HAZARDS[n]["weight"] for n in g])
+            types[int(r.integers(3))] = str(r.choice(g, p=gw / gw.sum()))
     hz_lanes = [int(v) for v in r.permutation(4)[:3]]
     xs = [110.0 + i * 95.0 + float(r.uniform(-8, 8)) for i in range(3)]
     HZ = [dict(type=t, lane=hz_lanes[i], x=xs[i]) for i, t in enumerate(types)]
@@ -166,7 +170,7 @@ def simulate(seed):
                                   and 9 < h["x"] - c["x"] < 26 and (id(c), id(h)) not in decided), None)
                     if ahead is not None:
                         decided.add((id(c), id(ahead)))
-                        if rng.random() < AGILITY.get(c["key"], 0.4):
+                        if rng.random() < AGILITY.get(c["key"], 0.55):
                             free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
                                     and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 9
                                                 for o in cars)

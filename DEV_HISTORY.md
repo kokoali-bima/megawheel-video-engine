@@ -158,6 +158,18 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.4: race25d engine v2 — pindah jalur (menghindar) + end card gaya YouTube (Claude Code, Opus)
+
+Permintaan user: peserta bisa pindah jalur untuk menghindari rintangan, supaya pemenang tidak terlihat sekadar beruntung; animasi LIKE/SUBSCRIBE dibuat mirip tombol YouTube dan diberi highlight seperti video-video awal.
+
+- **Rintangan tidak lagi terikat ke mobil.** Rintangan mengenai mobil mana pun yang berada di lajurnya saat ia tiba (dicek lewat `z` saat itu). Setiap rintangan hanya kena sekali, setiap mobil hanya bisa kena sekali.
+- **AI menghindar.** Mobil melihat rintangan darat 9–26 m di depan pada lajurnya (genangan, lubang, lahar, dinding, pres, laser; ramp/meteor/UFO/naga tidak bisa dihindari). Keputusan diambil sekali per pasangan mobil–rintangan, dengan peluang sesuai kelincahan (`AGILITY`: F1 0.75, sports 0.7, polisi 0.6 … truk besar 0.15). Mobil pindah ke lajur sebelah yang kosong: tidak ada mobil dalam jarak 9 m dan tidak ada rintangan dalam 30 m. Perpindahannya mulus, ±1.9 lajur/detik. Batas `MAX_DODGES = 1` per video, supaya tetap ada minimal 2 rintangan yang kena.
+- Dodge muncul sebagai event `dodge`: bunyi whoosh, bubble "NICE!", narasi "Nice move! X dodges the lava vent!", kamera menyorot aksinya, preview `dodge.png`, dan outcome `+dodge_<rintangan>`. Mood: "scared" kalau ada rintangan di lajur sendiri, "happy" sesaat setelah berhasil menghindar.
+- Cek otomatis "3 hazards triggered" diganti menjadi **"at least 2 hazards hit"**.
+- **End card gaya YouTube:** panel putih dengan avatar "MW", nama channel, dan "New races every day!". Tombol LIKE abu-abu (ikon jempol) dan SUBSCRIBE merah. Sebuah tangan kartun mengetuk LIKE: tombol membiru, muncul "+1". Lalu SUBSCRIBE diketuk: berubah abu-abu "SUBSCRIBED", lonceng bergoyang, ada percikan bintang. Cincin highlight kuning berdenyut di tombol berikutnya. Suara klik dan lonceng. Panel diletakkan di bawah judul "X WINS!".
+- **Engine version race25d → v2** (ID `SIM_RACE25D_V2_S###`). Pending v1 S002–S007 di-REJECT dengan alasan "superseded by race25d v2", lalu seed 2–7 dirender ulang sebagai v2. S001 v1 (Ep. 9, approved) tetap.
+- Uji: 6 seed dengan set paksa `puddle,lava,wall`, semua PASS, `empty_frames=0`. Dodge terjadi di seed 101 (Nitro menghindari lahar) dan 102 (Grizzly menghindari lahar).
+
 ## 2026-10-01 — v3.3: perpustakaan rintangan 2.5D + naga (Claude Code, Opus)
 
 **Keputusan user:** program harian 11:00 CHALLENGE · 15:00 RACE · 19:00 SMASH ARENA; tambah meteor, UFO, rintangan yang membuat mobil **penyet** dan **terbelah**; **naga api** (kena → melambat karena ganti ban) dan **naga es** (kena → membeku sesaat lalu lanjut).

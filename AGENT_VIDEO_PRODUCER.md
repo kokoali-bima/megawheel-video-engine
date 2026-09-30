@@ -33,7 +33,7 @@ Langkah per video:
  3. Render seed yang PASS:
       ./venv/bin/python generators/physics_2d/sim_engine.py --series <seri> --seed <N>
     Khusus race25d (2.5D) tidak perlu find_seeds (semua seed valid):
-      ./venv/bin/python generators/lanes25d/race25d.py --seed <N>      (seed terbesar race25d + 1)
+      ./venv/bin/python generators/lanes25d/race25d.py --seed <N>      (seed terbesar race25d engine v2 + 1; v1 sudah pensiun)
     Exit 0 + "[audit] PASS" = sukses, hasilnya di renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/.
     Exit 1 (STOP analisa) atau 5 (AUDIT_FAILED) = coba seed PASS berikutnya. Jangan pakai --force.
  4. Buka dan periksa PNG di folder preview/ (L1_event, L2_event, L3_event, outro). Tolak sendiri (jangan laporkan
