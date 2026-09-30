@@ -24,8 +24,8 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import sim_engine as se  # noqa: E402
 
 W, H, FPS = se.W, se.H, 30
-F_PERSP, D0, LANE_D = 7600.0, 100.0, 21.7        # k(z) = F / (D0 + z*LANE_D): front lane 76 px/m, lane 3 ≈ 46
-Y_H, CAM_H = 1000.0, 10.0                        # vanishing line and camera height: ground_y = Y_H + CAM_H*k
+F_PERSP, D0, LANE_D = 9000.0, 100.0, 25.0        # k(z) = F / (D0 + z*LANE_D): front lane 90 px/m, lane 3 ≈ 51
+Y_H, CAM_H = 640.0, 13.0                         # vanishing line and camera height: ground_y = Y_H + CAM_H*k
 PUD_X, RAMP_X, FIN_X = 100.0, 172.0, 252.0       # puddle (lane 1), ramp (lane 3), finish line
 SECONDS = 13.0
 
@@ -298,7 +298,7 @@ def bubble(ctx, text, sx, sy, age, k):
         return
     sc = se.ease_out_back(min(1.0, age / 0.25)) * min(1.0, (1.1 - age) / 0.2)
     ctx.save()
-    ctx.translate(sx, sy - 40)
+    ctx.translate(sx, sy - 110 * k / 70)
     ctx.scale(sc * k / 70, sc * k / 70)
     se.rrect(ctx, -150, -60, 300, 110, 40)
     ctx.set_source_rgb(1, 1, 1)
@@ -358,14 +358,17 @@ def main():
                 focus = c
             if c["jump_t"] is not None and -0.5 < t - c["jump_t"] < 2.2:
                 focus = c
-        xs = sorted((st[id(c)][0] for c in cars), reverse=True)
-        target = st[id(focus)][0] + 3 if focus else 0.6 * xs[0] + 0.4 * np.mean(xs) - 1
+        xs = [st[id(c)][0] for c in cars]
+        mid = (max(xs) + min(xs)) / 2
+        target = 0.55 * (st[id(focus)][0] + 2) + 0.45 * mid if focus else mid + 1.5
+        spread = max(xs) - min(xs) + 9.0
+        fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.62, 1.12))
         camx = target if camx is None else camx + (target - camx) * 0.12
         punch = 1.0
         for kind, et, ex, ez in events:                           # zoom punch + shake on impacts
             if kind in ("land", "bump", "splash") and 0 <= t - et < 0.35:
                 punch = max(punch, 1 + 0.08 * math.sin(math.pi * (t - et) / 0.35))
-        zoom += ((1.12 if focus else 1.0) * punch - zoom) * 0.15
+        zoom += (min(fit, 1.08 if focus else 1.0) * punch - zoom) * 0.12
         shx = shy = 0.0
         for kind, et, ex, ez in events:
             if kind in ("land", "bump") and 0 <= t - et < 0.4:
@@ -400,7 +403,6 @@ def main():
                     ctx.arc(px, y - age * 0.8 * k, (0.4 + age) * k * 0.6, 0, 2 * math.pi)
                     ctx.set_source_rgba(0.75, 0.68, 0.55, 0.6 * (1 - age / 0.8))
                     ctx.fill()
-        draw_props(ctx, camx * 1.0, -1.6, 13, back=False)
         ctx.restore()
         lead_v = max(st[id(c)][5] for c in cars)
         se.draw_speed_lines(ctx, lead_v, fi / FPS)
