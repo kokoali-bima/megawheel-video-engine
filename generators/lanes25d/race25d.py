@@ -949,7 +949,9 @@ def boing():
 
 
 def zap():
-    return se.sweep(2400, 300, 0.35, 0.9) + se.sweep(1800, 200, 0.3, 0.5)
+    a, b = se.sweep(2400, 300, 0.35, 0.9), se.sweep(1800, 200, 0.3, 0.5)
+    a[:len(b)] += b                                              # different lengths: overlay, not add
+    return a
 
 
 def ufo_hum(dur):
