@@ -686,7 +686,7 @@ def draw_dragon(ctx, hz, a, t, camx, cars):
     cx = state(car, t)[0]
     k = k_of(hz["lane"])
     gx, gy = lane_xy(cx, hz["lane"], camx)
-    hx, hy = gx + 7.0 * k, gy - 7.5 * k
+    hx, hy = gx + 3.2 * k, gy - 5.2 * k                          # close to its target: always in frame with it
     if a < -0.5:
         hx += (-0.5 - a) * 14 * k
         hy -= (-0.5 - a) * 3 * k
