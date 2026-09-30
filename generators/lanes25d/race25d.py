@@ -1266,6 +1266,7 @@ def main():
     hits = hit_cars(cars)
     print(f"[25d] {name} theme={se.THEME_ID} voice={voice} cast={[nick(c['key']) for c in cars]} "
           f"hazards={[(h['type'], h['lane']) for h in HZ]} hit={[(nick(c['key']), c['hz']['type']) for c in hits]} "
+          f"dodge={[(nick(c['key']), c['dodged']) for c in cars if c.get('dodge_t') is not None]} "
           f"finish={[nick(c['key']) for c in order]} frames={len(frames)} ({len(frames) / FPS:.1f}s)", flush=True)
     race_idx = [(j, ft) for j, (mode, ft) in enumerate(frames) if mode == "race"]
 
