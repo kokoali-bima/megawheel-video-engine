@@ -157,16 +157,18 @@ def face(root, x, z, width, tilt_deg, eye_r=0.19, mouth=None, look=(0.0, 0.0)):
     if mouth:                                                    # smile arc on the front bumper
         mx, mz, mw = mouth
         cu = bpy.data.curves.new("smile", "CURVE")
-        cu.dimensions, cu.bevel_depth, cu.bevel_resolution = "3D", 0.035, 3
+        cu.dimensions, cu.bevel_depth, cu.bevel_resolution = "3D", 0.055, 4
         sp = cu.splines.new("BEZIER")
         sp.bezier_points.add(2)
-        for bp, (yy, zz) in zip(sp.bezier_points, ((-mw / 2, 0.06), (0, -0.07), (mw / 2, 0.06))):
+        for bp, (yy, zz) in zip(sp.bezier_points, ((-mw / 2, 0.08), (0, -0.11), (mw / 2, 0.08))):
             bp.co = (0, yy, zz)
             bp.handle_left_type = bp.handle_right_type = "AUTO"
         o = bpy.data.objects.new("smile", cu)
         bpy.context.collection.objects.link(o)
         o.data.materials.append(mat("mouth", (0.05, 0.02, 0.02), 0.5))
         _parent(o, root, (mx, 0, mz))
+        sphere(root, mw * 0.13, (mx - 0.02, 0, mz - 0.06), mat("tongue", (0.9, 0.25, 0.35), 0.4),
+               scale=(0.35, 1.3, 0.6))
     return fr
 
 
@@ -193,10 +195,10 @@ def sedan(root, col, L=4.7, W=2.0, cab_len=2.3, low=False):
     for x in (L * 0.31, -L * 0.31):
         for y in (W / 2 - 0.1, -W / 2 + 0.1):
             wheel(root, x, y, r, 0.3)
-    lights(root, L / 2 + 0.01, zb + hb * 0.55, W * 0.34, rear_x=-L / 2 - 0.01)
+    lights(root, L / 2 + 0.01, zb + hb * 0.62, W * 0.36, rear_x=-L / 2 - 0.01)
     rbox(root, (0.12, W * 0.9, 0.16), (L / 2 + 0.02, 0, zb + 0.1), mat("bumper", (0.12, 0.12, 0.13), 0.5), bevel=0.04)
-    face(root, -0.25 + cab_len / 2 + 0.12, cz + 0.02, W * 0.8, 55, eye_r=0.2,
-         mouth=(L / 2 + 0.06, zb + hb * 0.3, 0.7))
+    face(root, -0.25 + cab_len / 2 + 0.12, cz + 0.02, W * 0.8, 55, eye_r=0.27,
+         mouth=(L / 2 + 0.05, zb + hb * 0.55, 0.62))
     return zb + hb, cz + ch / 2
 
 
@@ -242,7 +244,7 @@ def build_nitro(root, col):
         for y in (1.0, -1.0):
             wheel(root, x, y, r, w)
     text(root, "1", (-0.6, -0.9, 0.38), 0.3, mat("num", WHITE, 0.3))
-    face(root, 1.25, 0.6, 0.72, 20, eye_r=0.15, mouth=(2.3, 0.3, 0.45))
+    face(root, 1.25, 0.6, 0.72, 20, eye_r=0.18, mouth=(2.3, 0.3, 0.45))
 
 
 def build_monster(root, col):
@@ -262,7 +264,7 @@ def build_monster(root, col):
     for side in (-1, 1):
         sphere(root, 0.13, (-0.35, side * 0.7, 3.55), mat("roof_light", (1, 0.95, 0.7), 0.2, emit=3))
     lights(root, 2.01, 2.3, 0.75, rear_x=-2.01)
-    face(root, 0.66, 2.98, 1.7, 65, eye_r=0.24, mouth=(2.03, 2.0, 0.9))
+    face(root, 0.66, 2.98, 1.7, 65, eye_r=0.29, mouth=(2.03, 2.0, 0.9))
 
 
 def build_buster(root, col):
@@ -338,18 +340,19 @@ def build_sprinkles(root, col):
         rbox(root, (2.0, 0.02, 1.0), (-0.9, side * 1.21, 2.1), mat("hatch", (0.1, 0.05, 0.08), 0.4), bevel=0)
     text(root, "ICE CREAM", (-0.9, -1.24, 1.35), 0.32, mat("ice_txt", (0.95, 0.2, 0.5), 0.3))
     rbox(root, (0.05, 2.1, 0.9), (3.42, 0, 1.8), mat("glass", *GLASS), bevel=0, rot=(0, -math.radians(25), 0))
-    bpy.ops.mesh.primitive_cone_add(radius1=0.45, radius2=0.02, depth=1.2, vertices=20, location=(0, 0, 0),
+    cyl(root, 0.36, 0.28, (-0.7, 0, 3.12), mat("holder", (0.95, 0.95, 0.95), 0.4), rot=(0, 0, 0))  # roof holder
+    bpy.ops.mesh.primitive_cone_add(radius1=0.38, radius2=0.03, depth=0.95, vertices=20, location=(0, 0, 0),
                                     rotation=(math.pi, 0, 0))    # giant cone on the roof
     cone = bpy.context.object
     cone.data.materials.append(mat("waffle", (0.8, 0.5, 0.2), 0.6))
-    _parent(cone, root, (-0.7, 0, 3.6))
-    sphere(root, 0.55, (-0.7, 0, 4.3), mat("scoop", (1.0, 0.75, 0.85), 0.5))
-    sphere(root, 0.12, (-0.7, 0, 4.9), mat("cherry", (0.85, 0.02, 0.05), 0.2, coat=1))
+    _parent(cone, root, (-0.7, 0, 3.66))
+    sphere(root, 0.43, (-0.7, 0, 4.3), mat("scoop", (1.0, 0.75, 0.85), 0.5))
+    sphere(root, 0.12, (-0.7, 0, 4.78), mat("cherry", (0.85, 0.02, 0.05), 0.2, coat=1))
     for x in (2.6, -2.3):
         for side in (-1, 1):
             wheel(root, x, side * 1.05, 0.5, 0.38)
     lights(root, 3.41, 0.95, 0.8, rear_x=-3.31)
-    face(root, 3.44, 1.82, 1.9, 65, eye_r=0.27, mouth=(3.42, 0.7, 0.9))
+    face(root, 3.44, 1.82, 1.9, 65, eye_r=0.31, mouth=(3.42, 0.7, 0.9))
 
 
 BUILDERS = {"zippy": build_zippy, "siren": build_siren, "tilly": build_tilly, "nitro": build_nitro,
@@ -399,7 +402,7 @@ def preview(outdir, only, samples):
         build(cid, colors)
         L = LENGTH[cid]
         d = max(6.0, L * 1.05)
-        bpy.ops.object.camera_add(location=(d * 0.75, -d * 0.95, d * 0.55))
+        bpy.ops.object.camera_add(location=(d * 0.95, -d * 0.62, d * 0.45))
         cam = bpy.context.object
         cam.data.lens = 40
         target = bpy.data.objects.new("target", None)
