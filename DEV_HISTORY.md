@@ -158,6 +158,23 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v3.0: mode 3D — Blender + Modal GPU, tokoh 3D, "sutradara" 3D (Claude Code, Opus)
+
+**Keputusan user:** prototipe cairo pseudo-3D ditolak ("jauh dari layak tayang"). Mode 3D pakai renderer 3D sungguhan, sehemat mungkin sebelum monetisasi, tidak semua episode 3D (rencana 7–14 Shorts 3D/minggu + video 15 menit mingguan).
+
+**Infrastruktur**
+- VM 99.3 ternyata **ARM64** → Blender 5.0.1 dari apt (build resmi x64 tidak jalan). Benchmark CPU per frame 1080×1920: Workbench 6.7 s, Eevee 37 s, Cycles 49 s → terlalu lambat untuk produksi.
+- **Modal** (user memasang kartu; batas workspace $30): `generators/blender3d/modal_render.py` dan `generators/director3d/modal_director.py`. Isinya Blender 5.2.2 x64 di image, Cycles + **OptiX** di L4, adaptive sampling, persistent data, render paralel per potongan, dan encode MP4 di container. **Budget guard** memakai ledger `modal_usage.json` (di-commit): run ditolak kalau total bulan + estimasi terburuk > **$29**.
+- Benchmark Modal: 90 frame / 3× L4 = 51 s, $0.032 (0.85 s/frame).
+
+**Tokoh 3D** — `generators/blender3d/cast3d.py`: 10 tokoh prosedural (warna dari `characters.json`, ciri khas per tokoh, mata kartun di kaca, senyum + lidah, roda di pivot dengan jari-jari agar putarannya terlihat). v2: mata lebih besar di tengah, senyum terlihat, cone Sprinkles di dudukan. Catatan user: "harusnya lebih kartun" → tugas C1b.
+
+**Sutradara 3D (tahap 1)** — `generators/director3d/`:
+- `motion.py`: simulasi balapan race3d (grip ban, spin di genangan) → gerak 30 fps + putaran roda + roll di tikungan + pitch saat gas/rem + bounce, semua lewat pegas teredam. Kamera follow ke pusat rombongan sungguhan (mobil yang tertinggal > 30 m diabaikan), versi horizontal (16:9) dan vertikal (9:16).
+- `blender_scene.py`: jalan, kerb, garis, garis finish digabung jadi sedikit mesh; pohon berupa instance koleksi; genangan; tokoh cast3d dengan keyframe; motion blur.
+- **Demo:** 15 s × 2 aspek = 900 frame di 8× L4: **147 s wall, $0.235** (1.02 GPU-s/frame). Estimasi: Shorts 3D 45 s ≈ $0.35.
+- Kekurangan: spin masih kurang dramatis (tendangan yaw race3d lemah); balapan masih rapat dan landai → perlu "event sutradara" (spin besar, tabrakan, salip, finish) + HUD/narasi/audio.
+
 ## 2026-09-30 — v2.9: pacing lebih fleksibel, smoke test, indeks episode, prototipe Top-Down pseudo-3D (Claude Code, Opus)
 
 **Engine Shorts (`sim_engine.py`)**

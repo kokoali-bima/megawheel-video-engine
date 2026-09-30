@@ -45,7 +45,7 @@
 | C2 | Seri Roller Coaster | ⬜ | — | |
 | C3 | Format balapan 3–4 mobil (hitung mundur, HUD peringkat) | ⬜ | — | Cocok digabung dengan C1 |
 | C4 | Riset format video panjang 15 menit/minggu (cerita tokoh vs balapan vs campuran) | ⬜ | — | Keputusan berdasarkan data (monetisasi + penonton stabil). **Rencana user 2026-09-30:** 7–14 Shorts 3D/minggu (min. 1 Shorts 3D/hari). Video 15 menit mingguan dibuat dengan salah satu cara: (a) Shorts seminggu digabung + adegan penyambung jadi satu cerita utuh, atau (b) film 15 menit dibuat utuh lalu dipotong jadi Shorts harian. Kalau lancar: channel TikTok. Hitungan biaya Modal (L4, ±0.93 GPU-s/frame, 1080p): Shorts 45 s ≈ $0.33. 14 Shorts ≈ $4.6/minggu. Film 15 menit 30 fps ≈ $6.5 (24 fps + 12 sample ≈ $3.5). Budget $29/bulan cukup untuk (b) + Shorts potongannya. (a)+(b) sekaligus tiap minggu melewati budget |
-| C5 | Pipeline video panjang (16:9, rangkaian adegan, cerita) | ⬜ | — | Setelah C4 |
+| C5 | Pipeline video panjang (16:9, rangkaian adegan, cerita) — **"sutradara" 3D** | 🔄 | Claude Code Opus | Opsi (b) dipilih user: film 15 menit lalu dipotong/dirender ulang vertikal jadi Shorts. Tahap 1 ✅ (v3.0): `director3d/` motion → Blender → Modal, horizontal + vertikal dari animasi yang sama (demo 15 s: $0.235, review/director3d_demo). Berikutnya: event sutradara (spin besar, tabrakan, salip, finish/podium), HUD + narasi + audio, skrip adegan/cerita, gaya lebih kartun (C1b) |
 | C6 | Tarik metrik YouTube Analytics otomatis → `episodes.py set` | ⬜ | — | Perlu scope `yt-analytics.readonly` (login ulang YouTube) |
 | C7 | Evaluasi slot jam tayang setelah 2 minggu tayang | ⬜ | — | BLUEPRINT bagian 10 |
 
