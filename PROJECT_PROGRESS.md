@@ -33,7 +33,7 @@
 | B1 | Tingkat lolos seri splash ≥ 7/10 seed | 🔄 | Claude Code Opus | v2.9: 3/10 → **5/10** (varian tanpa replay + lintasan lebih pendek). Sisa hambatan: level juara 22–25 s. Langkah berikut: persingkat outro juara di splash atau naikkan `max_win` |
 | B2 | Kendaraan berat jangan selalu "stuck" | ⬜ | — | Roadmap BLUEPRINT 9 no. 3 |
 | B3 | Smoke test semua seri sebelum commit | ✅ 2026-09-30 | Claude Code Opus | `bash generators/physics_2d/test_all.sh` (default seed 901–903 semua seri). Exit 1 = ada error / seri 0 lolos |
-| B4 | Sinkronisasi VM = GitHub lewat git | ✅ 2026-09-30 | Claude Code Opus | `bash git_sync.sh pull` di awal sesi, `bash git_sync.sh push "<pesan>"` di akhir tugas (smoke test otomatis kalau kode berubah, menolak credentials/). Catatan: folder lokal user `sim-prototype` hanya salinan kerja Claude Code (PC user tidak punya git). Sumber kebenaran = GitHub = VM 99.3 |
+| B4 | Sinkronisasi VM = GitHub lewat git | ✅ 2026-09-30 | Claude Code Opus | `bash git_sync.sh pull` di awal sesi, `bash git_sync.sh push "<pesan>"` di akhir tugas (smoke test otomatis kalau kode berubah, menolak credentials/). PC user (2026-09-30): git terpasang + deploy key `id_ed25519_megawheel` (alias `github-megawheel`), clone di `ipandu-video/megawheel-video-engine`. Alur: edit di clone PC → commit → push GitHub → VM `bash git_sync.sh pull`. Folder lama `sim-prototype` = arsip, jangan dipakai lagi. Sumber kebenaran = GitHub |
 | B5 | Bersihkan MP4 di `renders/megawheel_arena/rejected/` (±95 MB) | ⏸️ | user | Butuh izin hapus dari user |
 
 ## C. Fitur dan pertumbuhan channel
@@ -67,3 +67,4 @@
 | 2026-09-30 | Claude Code | File dibuat. A2 ⏸️: upload dari Claude Code ditolak pengaman otomatis, menunggu user |
 | 2026-09-30 | Claude Code Opus | v2.9: B1 🔄 (5/10), B3 ✅, C1 🔄 (prototipe pseudo-3D), EPISODES_INDEX.md dibuat |
 | 2026-09-30 | Claude Code Opus | B4 ✅: `git_sync.sh` (pull/push/status) jadi satu-satunya cara sinkron VM ↔ GitHub |
+| 2026-09-30 | Claude Code Opus | PC user punya clone git sendiri; commit pertama dari PC (uji alur PC → GitHub → VM) |
