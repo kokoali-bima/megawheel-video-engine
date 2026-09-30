@@ -31,6 +31,7 @@ Contoh kegagalan nyata yang dicegah dokumen ini: agent membuat script sendiri â†
 | Python | `/root/video-engine/venv/bin/python` (satu venv untuk engine + uploader) |
 | Tokoh tetap | `/root/video-engine/cast/characters.json` + `cast/CAST.md` |
 | Upload (hanya setelah approval) | `/root/video-engine/upload_cli.py` + `core/youtube_uploader.py` + `core/tracker.py` |
+| Repo GitHub (private) | `kokoali-bima/megawheel-video-engine`, branch `main`. Push dari 99.3: `cd /root/video-engine && git push` (deploy key `/root/.ssh/id_ed25519_megawheel`, alias ssh `github-megawheel`) |
 | Library | pymunk 7.x (fisika), pycairo (grafis), numpy, edge-tts |
 | Font | `/root/.fonts/LuckiestGuy-Regular.ttf` |
 | Output | `/root/video-engine/renders/<VIDEO_ID>.mp4`, `<VIDEO_ID>.json` (manifest), `<VIDEO_ID>_preview/*.png` |
@@ -294,7 +295,9 @@ Video berstatus `AUDIT_FAILED` / `REJECTED` / `PROTOTYPE_NOT_FOR_UPLOAD` tidak d
      ./venv/bin/python upload_cli.py renders/<VIDEO_ID>.mp4 --title "<title dari manifest>" \
         --description "<description dari manifest>" --tags "<tags dipisah koma>" --privacy <sesuai perintah user>
    lalu isi status + youtube_url di PRODUCTION_REGISTRY.json (registry.set_status).
-7. Kalau engine diubah: uji --preview-only dan tambahkan entri di DEV_HISTORY.md
+7. Kalau engine diubah: uji --preview-only, tambahkan entri di DEV_HISTORY.md, lalu
+   git add -A && git commit -m "<ringkasan>" && git push
+   (credentials/, venv/, work/, MP4/PNG otomatis diabaikan .gitignore. Jangan pernah commit credentials.)
 ```
 
 ---
