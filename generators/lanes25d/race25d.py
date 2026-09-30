@@ -42,7 +42,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 
-SERIES, ENGINE_VERSION = "race25d", "v1"
+SERIES, ENGINE_VERSION = "race25d", "v2"             # v2: hazard library + dodge AI + YouTube end card
 W, H, FPS = se.W, se.H, 30
 F_PERSP, D0, LANE_D = 9000.0, 100.0, 25.0        # k(z) = F / (D0 + z*LANE_D): front lane 90 px/m, lane 3 ≈ 51
 Y_H, CAM_H = 640.0, 13.0                         # ground_y = Y_H + CAM_H*k
