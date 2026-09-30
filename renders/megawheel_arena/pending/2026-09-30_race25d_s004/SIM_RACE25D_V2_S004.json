@@ -1,0 +1,97 @@
+{
+  "video_id": "SIM_RACE25D_V2_S004",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v2",
+  "series": "race25d",
+  "seed": 4,
+  "fps": 30,
+  "duration": 35.1,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "sports",
+      "police"
+    ],
+    "lanes": [
+      1,
+      2,
+      0,
+      3
+    ],
+    "hazards": [
+      [
+        "meteor",
+        2,
+        116.2
+      ],
+      [
+        "dragon_fire",
+        1,
+        209.3
+      ],
+      [
+        "pothole",
+        0,
+        303.3
+      ]
+    ],
+    "finish": 414.7
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "snow",
+    "location": "mountains"
+  },
+  "theme_id": "noon-snow-mountains",
+  "voice": "en-US-MichelleNeural",
+  "outcomes": [
+    "p4+dragon_fire",
+    "p3+meteor",
+    "win+dodge_pothole",
+    "p2"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "4 Cars, 1 Finish Line! Who Wins? 🏁",
+  "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 #Shorts",
+  "description": "Titan, Grizzly, Zippy and Siren race to the finish line! 🏁 Obstacles today: dragon_fire, meteor, pothole! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "sports car",
+    "police car",
+    "dragon_fire",
+    "meteor",
+    "pothole"
+  ],
+  "narration": [
+    "Four racers, one finish line! Titan, Grizzly, Zippy and Siren. Who will win?",
+    "Kaboom! A meteor hits Grizzly!",
+    "The dragon breathes fire! Titan needs new tires!",
+    "Nice move! Zippy dodges the pothole!",
+    "Zippy wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-MichelleNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s004/SIM_RACE25D_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s004/preview"
+}

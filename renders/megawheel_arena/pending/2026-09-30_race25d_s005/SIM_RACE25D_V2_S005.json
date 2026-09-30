@@ -1,0 +1,97 @@
+{
+  "video_id": "SIM_RACE25D_V2_S005",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v2",
+  "series": "race25d",
+  "seed": 5,
+  "fps": 30,
+  "duration": 33.43,
+  "params": {
+    "cast": [
+      "firetruck",
+      "monster",
+      "taxi",
+      "f1"
+    ],
+    "lanes": [
+      1,
+      2,
+      0,
+      3
+    ],
+    "hazards": [
+      [
+        "wall",
+        0,
+        106.6
+      ],
+      [
+        "meteor",
+        1,
+        205.1
+      ],
+      [
+        "ufo",
+        3,
+        300.4
+      ]
+    ],
+    "finish": 406.2
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "noon-clear-city",
+  "voice": "en-US-AriaNeural",
+  "outcomes": [
+    "win",
+    "p2",
+    "p3+meteor+dodge_wall",
+    "p4+ufo"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Crazy Obstacle Race! Who Survives? 🏁💥",
+  "title": "Crazy Obstacle Race! Who Survives? 🏁💥 #Shorts",
+  "description": "Hydro, Rocky, Tilly and Nitro race to the finish line! 🏁 Obstacles today: meteor, ufo, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "fire truck",
+    "monster truck",
+    "taxi",
+    "race car",
+    "meteor",
+    "ufo",
+    "wall"
+  ],
+  "narration": [
+    "Four racers, one finish line! Hydro, Rocky, Tilly and Nitro. Who will win?",
+    "Nice move! Tilly dodges the wall!",
+    "Kaboom! A meteor hits Tilly!",
+    "Uh oh! A UFO grabs Nitro!",
+    "Hydro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s005/SIM_RACE25D_V2_S005.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s005/preview"
+}

@@ -1,0 +1,97 @@
+{
+  "video_id": "SIM_RACE25D_V2_S007",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v2",
+  "series": "race25d",
+  "seed": 7,
+  "fps": 30,
+  "duration": 34.17,
+  "params": {
+    "cast": [
+      "firetruck",
+      "f1",
+      "monster",
+      "taxi"
+    ],
+    "lanes": [
+      0,
+      3,
+      2,
+      1
+    ],
+    "hazards": [
+      [
+        "dragon_ice",
+        0,
+        117.3
+      ],
+      [
+        "dragon_fire",
+        2,
+        207.5
+      ],
+      [
+        "puddle",
+        3,
+        307.8
+      ]
+    ],
+    "finish": 408.3
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "morning-clear-beach",
+  "voice": "en-US-EmmaMultilingualNeural",
+  "outcomes": [
+    "p4+dragon_ice",
+    "win+dodge_puddle",
+    "p3+dragon_fire",
+    "p2"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Wildest Race Ever! Who Crosses First? 🏁",
+  "title": "Wildest Race Ever! Who Crosses First? 🏁 #Shorts",
+  "description": "Hydro, Nitro, Rocky and Tilly race to the finish line! 🏁 Obstacles today: dragon_fire, dragon_ice, puddle! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "fire truck",
+    "race car",
+    "monster truck",
+    "taxi",
+    "dragon_fire",
+    "dragon_ice",
+    "puddle"
+  ],
+  "narration": [
+    "Four racers, one finish line! Hydro, Nitro, Rocky and Tilly. Who will win?",
+    "Brrr! The ice dragon freezes Hydro!",
+    "The dragon breathes fire! Rocky needs new tires!",
+    "Nice move! Nitro dodges the puddle!",
+    "Nitro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s007/SIM_RACE25D_V2_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s007/preview"
+}
