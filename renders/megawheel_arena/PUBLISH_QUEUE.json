@@ -36,20 +36,20 @@
    "url": "https://www.youtube.com/shorts/nXlV3f6Wux8"
   },
   {
-   "episode": 7,
-   "video_id": "SIM_SPLASH_V2_S007",
+   "episode": 1,
+   "video_id": "SIM_POTHOLES_V2_S001",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-02T15:00:00Z"
   },
   {
-   "episode": 8,
-   "video_id": "SIM_LAVA_V2_S003",
+   "episode": 7,
+   "video_id": "SIM_SPLASH_V2_S007",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-02T19:00:00Z"
   },
   {
-   "episode": 1,
-   "video_id": "SIM_POTHOLES_V2_S001",
+   "episode": 8,
+   "video_id": "SIM_LAVA_V2_S003",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-02T23:00:00Z"
   }
