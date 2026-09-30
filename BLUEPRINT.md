@@ -327,7 +327,9 @@ Video berstatus `AUDIT_FAILED` / `REJECTED` / `PROTOTYPE_NOT_FOR_UPLOAD` tidak d
    (judul/deskripsi/tag dari manifest, kategori Film & Animation, made_for_kids=False; status + URL tercatat otomatis)
 8. EVALUASI: isi metrik dari YouTube Analytics → episodes.py set <EP> views=.. likes=.. retention=..% note="..."
    Daftar lengkap: renders/megawheel_arena/EPISODE_LOG.md (dibuat ulang otomatis)
-9. Kalau engine diubah: uji --preview-only, tambahkan entri di DEV_HISTORY.md, lalu
+9. Kalau engine diubah: WAJIB lolos smoke test
+     bash generators/physics_2d/test_all.sh          (exit 0; semua seri ≥ 1 lolos, tanpa Python error)
+   lalu tambahkan entri di DEV_HISTORY.md, update PROJECT_PROGRESS.md, lalu
    git add -A && git commit -m "<ringkasan>" && git push
    (credentials/, venv/, work/, MP4/PNG otomatis diabaikan .gitignore. Jangan pernah commit credentials.)
 ```

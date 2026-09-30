@@ -158,6 +158,24 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v2.9: pacing lebih fleksibel, smoke test, indeks episode, prototipe Top-Down pseudo-3D (Claude Code, Opus)
+
+**Engine Shorts (`sim_engine.py`)**
+- `level_timing(..., allow_replay=False)`: setiap level gagal yang punya replay juga diberi varian **tanpa replay** (sekitar 3.4 s lebih pendek).
+- `pick_combo` wajib menyisakan minimal 1 replay per video kalau ada level yang layak di-replay, dan memberi skor +0.8 per replay. Ini mewujudkan roadmap "replay hanya di level paling spektakuler".
+- Seri splash: lintasan lebih pendek (awal 15–18 m, genangan 4.5–6.5 m, jeda antar rintangan 6–8 / 5.5–7 m).
+- **Hasil B1:** splash 3/10 → **5/10** seed lolos (seed uji 901–910). Potholes 3/3, bumps 3/3, lava 2/3 (smoke test 901–903). Target 7/10 belum tercapai. Hambatan utama: level juara splash 22–25 s.
+
+**Alat baru**
+- `generators/physics_2d/test_all.sh [seri…] [--seeds A B]`: preview saja, tidak menyentuh registry. Wajib dijalankan sebelum commit perubahan engine. Pada sesi ini alat ini langsung menangkap bug `args` tertimpa di `main()` (ERROR_LOG B).
+- `EPISODES_INDEX.md` (otomatis dari `episodes.py`/`publish_queue.py`): kartu identitas setiap episode (Ep. N → VIDEO_ID, path MP4, judul, seed, tema, narator, tokoh + hasil, slot tayang).
+- `publish_queue.py`: slot terlewat dijadwalkan ulang, `--max` upload per run (kuota API), `publishAt` di uploader.
+
+**Prototipe Top-Down 2.5D / pseudo-3D (`generators/topdown/race3d.py`)**
+- Fisika: dunia datar pymunk tanpa gravitasi dengan model cengkeraman ban (friction circle, grip aspal 1.15, genangan 0.10), AI pure-pursuit per lajur, rem sebelum tikungan, menghindari mobil di depan, dan tendangan yaw saat hydroplaning (mobil berputar sungguhan).
+- Render: proyeksi 3D sederhana di cairo (kamera 21 m di atas, 24 m di belakang, pitch 46°, FOV 72°). Mobil berupa kotak low-poly bershading dengan back-face culling dan painter's sort. Ada jalan berkelok dengan kerb merah-putih, rumput kotak-kotak, pohon, genangan, garis finish, jejak ban (skid mark), semprotan air, label nama, menara posisi dan progress bar.
+- Uji: 14 s dirender dalam 41 s (1 proses), 1 mobil berputar di genangan. Status: **uji gaya**, belum ada audio, narasi, atau pipeline episode.
+
 ## 2026-09-30 — v2.8: suara air ≠ lava, mobil meleleh, hydroplaning, antrian upload (Claude Code, Opus)
 
 **Masukan user (review v2.7):**

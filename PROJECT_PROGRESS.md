@@ -30,9 +30,9 @@
 
 | # | Tugas | Status | Pemegang | Catatan |
 |---|---|---|---|---|
-| B1 | Tingkat lolos seri splash ≥ 7/10 seed (sekarang ±2–3/10) | ⬜ | — | Penyebab: durasi level terlalu panjang + momen spin wajib. Kandidat: lintasan lebih pendek, `max_win` 27 |
+| B1 | Tingkat lolos seri splash ≥ 7/10 seed | 🔄 | Claude Code Opus | v2.9: 3/10 → **5/10** (varian tanpa replay + lintasan lebih pendek). Sisa hambatan: level juara 22–25 s. Langkah berikut: persingkat outro juara di splash atau naikkan `max_win` |
 | B2 | Kendaraan berat jangan selalu "stuck" | ⬜ | — | Roadmap BLUEPRINT 9 no. 3 |
-| B3 | Smoke test semua seri sebelum commit (`test_all.sh`: preview 2 seed per seri) | ⬜ | — | |
+| B3 | Smoke test semua seri sebelum commit | ✅ 2026-09-30 | Claude Code Opus | `bash generators/physics_2d/test_all.sh` (default seed 901–903 semua seri). Exit 1 = ada error / seri 0 lolos |
 | B4 | Folder kerja lokal user (`sim-prototype`) diganti clone git | ⬜ | — | Hindari beda versi lokal vs VM |
 | B5 | Bersihkan MP4 di `renders/megawheel_arena/rejected/` (±95 MB) | ⏸️ | user | Butuh izin hapus dari user |
 
@@ -40,7 +40,7 @@
 
 | # | Tugas | Status | Pemegang | Catatan |
 |---|---|---|---|---|
-| C1 | Mode kamera **Top-Down 2.5D** (balapan, efek licin, kamera campuran) | ⬜ | — | Keputusan user 2026-09-30: kamera campuran. Samping untuk crash/lompat/lahar, atas untuk licin/balapan |
+| C1 | Mode kamera **Top-Down 2.5D / pseudo-3D** (balapan, efek licin, kamera campuran) | 🔄 | Claude Code Opus | Prototipe `generators/topdown/race3d.py` (v2.9): klip uji 14 s di `work/topdown/proto.mp4`, **menunggu review gaya dari user**. Setelah disetujui: audio + narasi, alur race penuh (start, finish, podium), analisa + audit, registry/episode |
 | C2 | Seri Roller Coaster | ⬜ | — | |
 | C3 | Format balapan 3–4 mobil (hitung mundur, HUD peringkat) | ⬜ | — | Cocok digabung dengan C1 |
 | C4 | Riset format video panjang 15 menit/minggu (cerita tokoh vs balapan vs campuran) | ⬜ | — | Keputusan berdasarkan data (monetisasi + penonton stabil) |
@@ -58,9 +58,11 @@
 | 2026-09-30 | v2.7 | Seri Splash Zone + Lava Road, juara fleksibel, SFX bahaya |
 | 2026-09-30 | v2.8 | Suara air ≠ lava, mobil meleleh, hydroplaning, momen khas wajib, antrian upload 3/hari (ET) |
 | 2026-09-30 | — | Dokumen agent produksi + penjadwal, PRODUCTION_LOG, PROJECT_PROGRESS |
+| 2026-09-30 | v2.9 | Varian tanpa replay (pacing), smoke test `test_all.sh`, EPISODES_INDEX, prototipe Top-Down pseudo-3D |
 
 ## Riwayat update file ini
 
 | Tanggal | Oleh | Perubahan |
 |---|---|---|
 | 2026-09-30 | Claude Code | File dibuat. A2 ⏸️: upload dari Claude Code ditolak pengaman otomatis, menunggu user |
+| 2026-09-30 | Claude Code Opus | v2.9: B1 🔄 (5/10), B3 ✅, C1 🔄 (prototipe pseudo-3D), EPISODES_INDEX.md dibuat |

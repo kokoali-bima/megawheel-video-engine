@@ -165,10 +165,10 @@ def make_splash_track(seed):
     PIT_KIND = "water"                                       # the pit is a deep water pool
     order = [str(k) for k in r.permutation(["wall", "hill", "pit"])]
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(16, 20)))
+    tb.flat(float(r.uniform(15, 18)))
     params, spans, obst, danger = [], [], [], []
     for kind in order:
-        pl = round(float(r.uniform(5, 8)), 1)
+        pl = round(float(r.uniform(4.5, 6.5)), 1)             # shorter track (B1: durations were too long)
         p0 = tb.x
         tb.flat(pl)
         PUDDLES.append((p0, tb.x))
@@ -184,7 +184,7 @@ def make_splash_track(seed):
             BARRIERS.append((tb.x, 1.0, bh))
             spans.append((p0, tb.x + 1.0))
             obst.append((tb.x + 0.5, "wall"))
-            tb.flat(float(r.uniform(9, 11)))
+            tb.flat(float(r.uniform(6, 8)))
             params.append(dict(kind=kind, puddle=pl, ramp=(rl, rh), wall=bh))
         elif kind == "hill":
             hh, run = round(float(r.uniform(3.2, 4.2)), 2), round(float(r.uniform(6.5, 8.0)), 1)
@@ -195,7 +195,7 @@ def make_splash_track(seed):
             tb.to(run * 1.2, 0.0)
             spans.append((p0, tb.x))
             obst.append((x0 + run, "hill"))
-            tb.flat(float(r.uniform(8, 10)))
+            tb.flat(float(r.uniform(5.5, 7)))
             params.append(dict(kind=kind, puddle=pl, hill=(hh, run)))
         else:
             tb.flat(3.0)
@@ -211,7 +211,7 @@ def make_splash_track(seed):
             PITS.append((px0, tb.x, pd))
             spans.append((p0, tb.x))
             obst.append(((px0 + tb.x) / 2, "pit"))
-            tb.flat(float(r.uniform(9, 11)))
+            tb.flat(float(r.uniform(6, 8)))
             params.append(dict(kind=kind, puddle=pl, ramp=(rl, rh), pit=(pw, pd)))
         danger.append(p0)
     FINISH_X = round(tb.x - 2.0, 1)
@@ -936,18 +936,20 @@ def candidate_runs():
     return out, intros
 
 
-def level_timing(vk, run, intro_d, outcome_d, cta_d):
-    """Level dict with replay/outro/bullet windows and output frames (no camera yet)."""
+def level_timing(vk, run, intro_d, outcome_d, cta_d, allow_replay=True):
+    """Level dict with replay/outro/bullet windows and output frames (no camera yet).
+    allow_replay=False gives the same run without its slow-mo replay (pick_combo may use it to fit the pacing)."""
     ev = run["event"]
     L = dict(vk=vk, v=VEHICLES[vk], **run)
     tmax = (len(run["rec"]["cx"]) - 1) / REC_HZ
+    L["could_replay"] = ev["type"] != "win" and bool(run["broken"] or ev["type"] == "flip")
     if ev["type"] == "win":
         L["outro_t"] = ev["t"] + outcome_d + 0.3
         L["live_end"] = L["outro_t"] + cta_d + 0.8
         L["replay"] = None
     else:
         L["live_end"] = ev["t"] + max(1.7, outcome_d + 0.45)
-        if run["broken"] or ev["type"] == "flip":
+        if L["could_replay"] and allow_replay:
             c = run["broken"]["t"] if run["broken"] else ev["t"]
             L["replay"] = (max(0.0, c - 0.75), min(tmax, c + 0.6))
         else:
@@ -988,12 +990,15 @@ def pick_combo(rng, timed):
         if spect == 0:
             continue
         PICK_STATS["spect_ok"] += 1
+        replays = sum(1 for L in fails if L["replay"])
+        if replays == 0 and any(L["could_replay"] for L in fails):
+            continue                                              # keep at least one slow-mo replay per video
         distinct = len({L["event"]["obstacle"] for L in fails}) == len(fails)
         sig = sum(1 for L in Ls if has_signature(L))              # series signature moment on screen
         if SERIES_DEFS[SERIES].get("signature") and sig == 0:
             continue                                              # mandatory: no spin / melt -> next seed
         score = 2.0 * distinct + 1.0 * (spect - 1) + 1.5 * min(crash, 1) - 0.3 * abs(total - 46.0) \
-            + 4.0 * min(sig, 1) + 0.5 * max(0, sig - 1)
+            + 4.0 * min(sig, 1) + 0.5 * max(0, sig - 1) + 0.8 * replays
         scored.append((score, combo))
     if not scored:
         return None
@@ -3461,7 +3466,10 @@ def main():
             text = outcome_line(vk, run)
             if text not in line_audio:
                 line_audio[text] = tts(text)
-            row.append(level_timing(vk, run, intro_durs[li], len(line_audio[text]) / SR, len(cta) / SR))
+            lt_args = (vk, run, intro_durs[li], len(line_audio[text]) / SR, len(cta) / SR)
+            row.append(level_timing(*lt_args))
+            if row[-1]["replay"]:                                 # same run without replay: shorter option
+                row.append(level_timing(*lt_args, allow_replay=False))
         timed.append(row)
     combo = pick_combo(rng, timed)
     if combo is None:
