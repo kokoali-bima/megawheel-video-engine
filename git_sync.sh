@@ -16,6 +16,7 @@ status() {
   n=$(git status --porcelain | wc -l)
   echo "[git_sync] file belum di-commit: $n"
   [ "$n" -gt 0 ] && git status --porcelain | head -n 20
+  return 0                                                   # status is informational: always exit 0
 }
 
 case "${1:-status}" in
