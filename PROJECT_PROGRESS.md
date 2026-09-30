@@ -40,7 +40,7 @@
 
 | # | Tugas | Status | Pemegang | Catatan |
 |---|---|---|---|---|
-| C1 | Mode kamera **Top-Down 2.5D / pseudo-3D** (balapan, efek licin, kamera campuran) | 🔄 | Claude Code Opus | Prototipe `generators/topdown/race3d.py` (v2.9): klip uji 14 s di `work/topdown/proto.mp4`, **menunggu review gaya dari user**. Setelah disetujui: audio + narasi, alur race penuh (start, finish, podium), analisa + audit, registry/episode |
+| C1 | Mode kamera **Top-Down 2.5D / pseudo-3D** (balapan, efek licin, kamera campuran) | 🔄 | Claude Code Opus | Prototipe cairo `race3d.py` **ditolak user** (jauh dari layak tayang). Pindah ke **Blender** (VM arm64: `apt install blender` 5.0.1 + Kenney Car Kit CC0). Benchmark CPU VM per frame 1080×1920: Workbench 6.7 s, Eevee 37 s, Cycles(24 spl) 49 s. Artinya Shorts 45 s ≈ 2.5 j / 14 j / 18 j. Pencahayaan uji pertama terlalu terang (akan disetel). Modal: kredit hanya $1 tanpa kartu → hanya untuk benchmark GPU. Menunggu keputusan user soal porsi/gaya 3D |
 | C2 | Seri Roller Coaster | ⬜ | — | |
 | C3 | Format balapan 3–4 mobil (hitung mundur, HUD peringkat) | ⬜ | — | Cocok digabung dengan C1 |
 | C4 | Riset format video panjang 15 menit/minggu (cerita tokoh vs balapan vs campuran) | ⬜ | — | Keputusan berdasarkan data (monetisasi + penonton stabil) |
