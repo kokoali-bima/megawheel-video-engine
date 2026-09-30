@@ -1,0 +1,57 @@
+{
+  "video_id": "SIM_POTHOLES_S001",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "seed": 1,
+  "duration": 41.6,
+  "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
+  "description": "Which car can survive the GIANT potholes? 🚗💥 Red sports car, yellow school bus, or monster truck? Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "tags": [
+    "cars",
+    "monster truck",
+    "school bus",
+    "potholes",
+    "kids",
+    "shorts",
+    "physics",
+    "MegaWheel Kids"
+  ],
+  "levels": [
+    {
+      "vehicle": "Red Sports Car",
+      "speed": 13.5,
+      "outcome": "pit",
+      "event_t": 8.1,
+      "obstacle": 2,
+      "start": 0.0,
+      "duration": 12.05
+    },
+    {
+      "vehicle": "Yellow School Bus",
+      "speed": 6.0,
+      "outcome": "stuck",
+      "event_t": 6.4,
+      "obstacle": 0,
+      "start": 12.03,
+      "duration": 9.16
+    },
+    {
+      "vehicle": "Monster Truck",
+      "speed": 15.05,
+      "outcome": "win",
+      "event_t": 8.1,
+      "obstacle": 2,
+      "start": 21.2,
+      "duration": 20.39
+    }
+  ],
+  "narration": [
+    "Level one! The speedy red sports car. Can it jump the giant potholes?",
+    "Level two! The big yellow school bus. It's heavy, but can it make it?",
+    "Level three! The mighty monster truck. Big wheels, big jump!",
+    "Oh no! Right into the giant pothole!",
+    "Uh oh... it's totally stuck!",
+    "Yes! The monster truck made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural"
+}

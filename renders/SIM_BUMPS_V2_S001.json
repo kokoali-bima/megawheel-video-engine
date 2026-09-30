@@ -1,0 +1,217 @@
+{
+  "video_id": "SIM_BUMPS_V2_S001",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "bumps",
+  "seed": 1,
+  "fps": 30,
+  "duration": 49.17,
+  "track_id": "bumps_a3f04e8b",
+  "track_params": {
+    "bumps": [
+      [
+        41.7,
+        44.3,
+        0.6
+      ],
+      [
+        52.7,
+        55.9,
+        1.26
+      ],
+      [
+        64.4,
+        68.2,
+        2.03
+      ],
+      [
+        75.9,
+        80.5,
+        2.7
+      ]
+    ]
+  },
+  "fingerprint": "bumps|police,firetruck,monster2|bumps_a3f04e8b|stuck@obs2,stuck@obs1,win",
+  "outcomes": [
+    "stuck@obs2",
+    "stuck@obs1",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->60.2 m, 3.0->50.2 m, 3.0->121.7 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "4 polisi tidur (42-80 m), finish 90 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "7.1s, 6.0s, 12.9s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 1]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "49.2 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
+      "ok": true,
+      "detail": "12.2s, 11.0s, 25.9s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "bumps|police,firetruck,monster2|bumps_a3f04e8b|stuck@obs2,stuck@obs1,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
+  "title": "Cars VS Giant Speed Bumps! 🚗💥 Who Makes It? #Shorts",
+  "description": "Can Siren, Hydro or Grizzly survive the GIANT SPEED BUMPS? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "tags": [
+    "cars",
+    "speed bumps",
+    "monster truck",
+    "kids",
+    "shorts",
+    "physics",
+    "MegaWheel Kids",
+    "police car",
+    "fire truck",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 12.5,
+      "outcome": "stuck",
+      "event_t": 7.13,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 12.23,
+      "event_out": 8.33,
+      "x_start": 3.0,
+      "x_end": 60.2,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 10.5,
+      "outcome": "stuck",
+      "event_t": 5.97,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 12.23,
+      "duration": 11.03,
+      "event_out": 19.4,
+      "x_start": 3.0,
+      "x_end": 50.2,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "GRIZZLY THE MONSTER TRUCK",
+      "speed": 16.06,
+      "outcome": "win",
+      "event_t": 12.93,
+      "obstacle": 3,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 23.27,
+      "duration": 25.9,
+      "event_out": 37.57,
+      "x_start": 3.0,
+      "x_end": 121.7,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Siren the police car is on patrol! Can Siren make it past the giant speed bumps?",
+    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant speed bumps?",
+    "Uh oh... Siren is totally stuck!",
+    "Uh oh... Hydro is totally stuck!",
+    "Yes! Grizzly made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
+  "video_path": "/root/video-engine/renders/SIM_BUMPS_V2_S001.mp4",
+  "preview_dir": "/root/video-engine/renders/SIM_BUMPS_V2_S001_preview",
+  "audit_path": "/root/video-engine/renders/SIM_BUMPS_V2_S001_audit.md"
+}

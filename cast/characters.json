@@ -1,0 +1,86 @@
+{
+  "_about": "MegaWheel Kids fixed cast. Identity lives here; physics lives in VEHICLES (generators/physics_2d/sim_engine.py). Add new characters on purpose (a planned debut), never auto-generate them. Rules: cast/CAST.md.",
+  "version": 1,
+  "characters": [
+    {
+      "id": "zippy",
+      "name": "Zippy",
+      "display": "ZIPPY THE SPORTS CAR",
+      "vehicle_id": "sports",
+      "role": "light",
+      "color_rgb": [237, 41, 46],
+      "personality": "Super fast and a little show-off. Always sure he will win, always in a hurry.",
+      "catchphrase": "Zoom zoom, make room!",
+      "rival": "siren",
+      "intro": "Level {lvl}! Zippy the sports car! Can Zippy survive the {obst}?",
+      "debut": "2026-09-30 SIM_POTHOLES_V2_S001"
+    },
+    {
+      "id": "siren",
+      "name": "Siren",
+      "display": "SIREN THE POLICE CAR",
+      "vehicle_id": "police",
+      "role": "light",
+      "color_rgb": [245, 245, 250],
+      "personality": "Brave and a bit bossy. Keeps the road safe, flashes her lights at every danger sign.",
+      "catchphrase": "Wee-woo! Coming through!",
+      "rival": "zippy",
+      "intro": "Level {lvl}! Siren the police car is on patrol! Can Siren make it past the {obst}?",
+      "debut": null
+    },
+    {
+      "id": "buster",
+      "name": "Buster",
+      "display": "BUSTER THE SCHOOL BUS",
+      "vehicle_id": "bus",
+      "role": "heavy",
+      "color_rgb": [255, 199, 13],
+      "personality": "Kind, patient and careful. Big and heavy, but never gives up.",
+      "catchphrase": "Slow and steady, everybody ready!",
+      "rival": "hydro",
+      "intro": "Level {lvl}! Buster the school bus. Big and heavy... can Buster make it?",
+      "debut": "2026-09-30 SIM_POTHOLES_V2_S001"
+    },
+    {
+      "id": "hydro",
+      "name": "Hydro",
+      "display": "HYDRO THE FIRE TRUCK",
+      "vehicle_id": "firetruck",
+      "role": "heavy",
+      "color_rgb": [224, 26, 26],
+      "personality": "Strong helper who loves splashing water. Loud, cheerful, a bit clumsy.",
+      "catchphrase": "Splash and dash!",
+      "rival": "buster",
+      "intro": "Level {lvl}! Hydro the fire truck! Long and heavy... can Hydro make it?",
+      "debut": null,
+      "note": "Renamed from 'Blaze' on 2026-09-30 before any render/upload (name clash with 'Blaze and the Monster Machines')."
+    },
+    {
+      "id": "rocky",
+      "name": "Rocky",
+      "display": "ROCKY THE MONSTER TRUCK",
+      "vehicle_id": "monster",
+      "role": "champion",
+      "color_rgb": [31, 115, 242],
+      "personality": "The friendly champion with giant wheels. Loves big jumps and cheering for friends.",
+      "catchphrase": "Big wheels, big jump!",
+      "rival": "grizzly",
+      "intro": "Level {lvl}! Rocky the monster truck. Big wheels, big jump!",
+      "debut": "2026-09-30 SIM_POTHOLES_V2_S001"
+    },
+    {
+      "id": "grizzly",
+      "name": "Grizzly",
+      "display": "GRIZZLY THE MONSTER TRUCK",
+      "vehicle_id": "monster2",
+      "role": "champion",
+      "color_rgb": [51, 184, 64],
+      "personality": "Rocky's growly green rival. Tough as a bear, secretly soft-hearted.",
+      "catchphrase": "Grrr-owl! Out of my way!",
+      "rival": "rocky",
+      "intro": "Level {lvl}! Grizzly the monster truck! Can Grizzly smash through the {obst}?",
+      "debut": null,
+      "note": "Renamed from 'Crusher' on 2026-09-30 before any render/upload (name clash with 'Blaze and the Monster Machines')."
+    }
+  ]
+}

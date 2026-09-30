@@ -1,0 +1,60 @@
+{
+  "last_updated": "2026-09-29 22:23:10 UTC",
+  "retention_days": 7,
+  "sources": [
+    {
+      "source_id": "SRC_01_BEAMNG_POTHOLES_ARCHIVE",
+      "title": "Cars VS Road Potholes - BeamNG drive",
+      "source_url": "https://archive.org/details/youtube-poHWN8q3TgE",
+      "origin_platform": "Archive.org / YouTube Archive",
+      "theme": "Road Potholes & Speed Bumps",
+      "local_path": "/root/local_videos/physics/beamng_test.mp4",
+      "downloaded_at": "2026-09-25 17:29:00 UTC",
+      "file_size_mb": 70.7,
+      "used_in_videos": [
+        "VIDEO_01_POTHOLES_PERFECT",
+        "VIDEO_02_JEEP_BUS_SEMI_TRUCK"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "source_id": "SRC_02_BEAMNG_WAVE_ROAD",
+      "title": "Vehicles VS Wave Road #19 - BeamNG drive",
+      "source_url": "https://archive.org/download/youtube-AT8v07eSx60/AT8v07eSx60.mp4",
+      "origin_platform": "Archive.org (AT8v07eSx60)",
+      "theme": "Extreme Wave Road Bumps & Roller Obstacles",
+      "local_path": "/root/local_videos/physics/beamng_wave_road.mp4",
+      "downloaded_at": "2026-09-29 16:14:16 UTC",
+      "timestamp": 1790698456.8007936,
+      "file_size_mb": 58.17,
+      "used_in_videos": [],
+      "status": "ACTIVE"
+    },
+    {
+      "source_id": "SRC_03_BEAMNG_CAR_SHREDDER",
+      "title": "Satisfying Car Crashes Compilation (Car Shredding Experiment)",
+      "source_url": "https://archive.org/download/youtube-GiiZYIEpsY0/GiiZYIEpsY0.mp4",
+      "origin_platform": "Archive.org (GiiZYIEpsY0)",
+      "theme": "Giant Hydraulic Crusher & Shredder Obstacles",
+      "local_path": "/root/local_videos/physics/beamng_car_shredder.mp4",
+      "downloaded_at": "2026-09-29 22:22:16 UTC",
+      "timestamp": 1790720536.501153,
+      "file_size_mb": 67.16,
+      "used_in_videos": [],
+      "status": "ACTIVE"
+    },
+    {
+      "source_id": "SRC_04_BEAMNG_MASSIVE_SPEEDBUMPS",
+      "title": "Cars vs Massive Speed Bumps #11 \u2013 BeamNG Drive",
+      "source_url": "https://archive.org/download/youtube-FmSajDvCW0Y/FmSajDvCW0Y.mp4",
+      "origin_platform": "Archive.org (FmSajDvCW0Y)",
+      "theme": "Massive Metal Speed Bumps Challenge",
+      "local_path": "/root/local_videos/physics/beamng_massive_speedbumps.mp4",
+      "downloaded_at": "2026-09-29 22:23:10 UTC",
+      "timestamp": 1790720590.2435055,
+      "file_size_mb": 19.85,
+      "used_in_videos": [],
+      "status": "ACTIVE"
+    }
+  ]
+}

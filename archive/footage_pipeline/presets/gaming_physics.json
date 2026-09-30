@@ -1,0 +1,9 @@
+{
+  "niche": "gaming_physics",
+  "resolution": [1080, 1920],
+  "max_duration_sec": 45,
+  "default_voice": "id_male",
+  "safe_margin_bottom": 480,
+  "bgm_volume_db": -16,
+  "bgm_ducked_db": -28
+}

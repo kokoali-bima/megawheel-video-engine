@@ -1,0 +1,115 @@
+{
+  "_about": "Registry keunikan video MegaWheel Kids 2D. Aturan: BLUEPRINT.md bagian 7. Tambah satu entri per video, jangan hapus entri lama.",
+  "videos": [
+    {
+      "video_id": "SIM_POTHOLES_S001",
+      "series": "potholes",
+      "engine_version": "v1",
+      "seed": 1,
+      "created": "2026-09-30",
+      "vehicles": [
+        "sports",
+        "bus",
+        "monster"
+      ],
+      "track_id": "potholes_std_3pit_ramp",
+      "outcomes": [
+        "pit@obs2",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 41.6,
+      "status": "PROTOTYPE_NOT_FOR_UPLOAD",
+      "audit": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S001",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 1,
+      "created": "2026-09-30",
+      "vehicles": [
+        "sports",
+        "bus",
+        "monster"
+      ],
+      "track_id": "potholes_std",
+      "outcomes": [
+        "pit@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 46.93,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_POTHOLES_V2_S001_audit.md",
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S002",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 2,
+      "created": "2026-09-30",
+      "vehicles": [
+        "sports",
+        "bus",
+        "monster"
+      ],
+      "track_id": "potholes_dc6ea3dd",
+      "outcomes": [
+        "flip@obs2+broken",
+        "stuck@obs2",
+        "win"
+      ],
+      "duration": 48.87,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_POTHOLES_V2_S002_audit.md",
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S006",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 6,
+      "created": "2026-09-30",
+      "vehicles": [
+        "sports",
+        "bus",
+        "monster"
+      ],
+      "track_id": "bumps_a1184bfc",
+      "outcomes": [
+        "flip@obs2",
+        "stuck@obs1",
+        "win"
+      ],
+      "duration": 49.3,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_BUMPS_V2_S006_audit.md",
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S001",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 1,
+      "created": "2026-09-30",
+      "vehicles": [
+        "police",
+        "firetruck",
+        "monster2"
+      ],
+      "track_id": "bumps_a3f04e8b",
+      "outcomes": [
+        "stuck@obs2",
+        "stuck@obs1",
+        "win"
+      ],
+      "duration": 49.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_BUMPS_V2_S001_audit.md",
+      "youtube_url": null
+    }
+  ]
+}

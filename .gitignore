@@ -1,0 +1,20 @@
+# secrets — never commit
+credentials/
+*.pem
+.env
+
+# environments / caches
+venv/
+__pycache__/
+*.pyc
+work/
+*.lock
+
+# heavy outputs (manifests + audits ARE committed)
+renders/**/*.mp4
+renders/**/*_preview/
+renders/**/*.png
+renders/**/*.wav
+
+# archived footage pipeline: code only, no media
+archive/**/*.mp4
