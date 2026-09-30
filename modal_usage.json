@@ -1,0 +1,17 @@
+{
+ "budget_usd": 25.0,
+ "runs": [
+  {
+   "date": "2026-09-30",
+   "note": "benchmark 90f L4",
+   "gpu": "L4",
+   "engine": "CYCLES",
+   "samples": 16,
+   "frames": 90,
+   "chunks": 3,
+   "gpu_seconds": 125.2,
+   "wall_seconds": 50.9,
+   "cost_usd": 0.032
+  }
+ ]
+}
