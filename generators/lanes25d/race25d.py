@@ -496,7 +496,7 @@ def main():
     opt = ap.parse_args()
     se.load_cast()
     se.detect_font()
-    active = registry._active()
+    active = registry._active(None)
     name = opt.name or f"SIM_RACE25D_{ENGINE_VERSION.upper()}_S{opt.seed:03d}"
     if not opt.preview_only and registry.find_seed(SERIES, ENGINE_VERSION, opt.seed):
         print(f"[25d] STOP: seed {opt.seed} sudah dipakai untuk {SERIES}. Pakai seed lain.", flush=True)
