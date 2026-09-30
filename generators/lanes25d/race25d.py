@@ -1043,7 +1043,7 @@ def draw_cta(ctx, age):
     ctx.paint()
     s = se.ease_out_back(min(1.0, age / 0.45))
     ctx.save()
-    ctx.translate(540, 900 + (1 - min(1.0, age / 0.45)) * 200)
+    ctx.translate(540, 1030 + (1 - min(1.0, age / 0.45)) * 200)
     ctx.scale(s, s)
     se.rrect(ctx, -460, -300, 920, 600, 48)
     ctx.set_source_rgb(1, 1, 1)
@@ -1098,7 +1098,7 @@ def draw_cta(ctx, age):
             se.star(ctx, bx_sub + math.cos(ang) * (150 + 140 * f), by + math.sin(ang) * (70 + 90 * f), 16, ang)
             ctx.set_source_rgba(1, 0.86, 0.12, 1 - f)
             ctx.fill()
-    se.draw_text(ctx, "for more crazy races!", 0, 215, 46, fill=(0.95, 0.35, 0.1), stroke=(1, 1, 1), sw=3)
+    se.draw_text(ctx, "for more crazy races!", 0, 240, 46, fill=(0.95, 0.35, 0.1), stroke=(1, 1, 1), sw=3)
     if age > 0.5:                                                # the hand: to LIKE, tap, to SUBSCRIBE, tap
         path = [(0.5, (380, 420)), (CTA_LIKE_T - 0.05, (bx_like + 30, by + 40)), (CTA_LIKE_T + 0.35, (bx_like + 30, by + 40)),
                 (CTA_SUB_T - 0.05, (bx_sub + 60, by + 40)), (99.0, (bx_sub + 60, by + 40))]
