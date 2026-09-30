@@ -21,6 +21,7 @@
 | 2026-09-30 | Blender tarball resmi: `cannot execute binary file: Exec format error` (1.2 GB terbuang, sudah dihapus) | VM 99.3 memakai CPU **ARM64 (aarch64, Neoverse-N1)**, sedangkan build Linux resmi Blender hanya x64 | Cek `uname -m` sebelum memasang binary apa pun. Di VM ini pakai paket Ubuntu (`apt install blender`, arm64, Blender 5.0.1). Image Modal (GPU) = x64: di sana tarball resmi boleh dipakai. |
 | 2026-10-01 | `ValueError: operands could not be broadcast` di audio race25d | Dua sinyal sintetis dengan durasi berbeda dijumlah langsung | Gabungkan sinyal beda panjang dengan overlay (`a[:len(b)] += b`) atau `place()`. Uji tiap rintangan baru dengan `--hazards`. |
 | 2026-10-01 | Patch Python via heredoc di Git Bash gagal: `unexpected EOF while looking for matching '` | Teks patch berisi banyak kutip tiga (`'''`) dan backslash | Patch besar ditulis sebagai file `.py` (Write) lalu dijalankan; heredoc hanya untuk skrip pendek. |
+| 2026-10-01 | Render batch race25d v2 di VM ternyata masih memakai kode lama (hasil identik) | `episodes.py reject` membuat tree VM kotor, lalu `git_sync.sh pull` di awal batch berhenti tanpa terlihat karena outputnya dipotong `tail -1` | Setelah reject/approve/render di VM, jalankan `git_sync.sh push` DULU, baru pull. Setelah pull, cek hash commit (`git log -1`) sebelum render. |
 | 2026-09-30 | Build `pycairo` gagal (`Unknown compiler`) | Tidak ada compiler / header cairo | `apt-get install libcairo2-dev pkg-config build-essential python3-dev` sebelum `pip install pycairo`. |
 
 ## B. Engine / kode
