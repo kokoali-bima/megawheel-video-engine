@@ -161,13 +161,15 @@ def simulate(seed):
         for c in cars:
             go = min(1.0, t / 1.6)
             target = c["v0"] * (1 + 0.025 * math.sin(t * 0.7 + c["surge"]))
+            if c.get("seek_t") is not None and t - c["seek_t"] < 0.05:
+                target *= 0.8                                    # blocked: brake to tuck in behind the neighbour
             a = (t - c["trig"]) if c["trig"] is not None else None
             freeze = False                                       # hazard holds the car still (x not integrated)
             if c["trig"] is None and c["finish"] is None:
                 zl = int(round(c["z"]))
                 if not c.get("dodge_t") and dodges[0] < MAX_DODGES:      # see a ground hazard coming -> swerve?
                     ahead = next((h for h in HZ if not h.get("used") and h["lane"] == zl and h["type"] in DODGEABLE
-                                  and 9 < h["x"] - c["x"] < 26), None)
+                                  and 9 < h["x"] - c["x"] < 40), None)
                     if ahead is not None:
                         key2 = (id(c), id(ahead))
                         if key2 not in decided:
@@ -179,7 +181,9 @@ def simulate(seed):
                                                 for o in cars)
                                     and not any(not h2.get("used") and h2["lane"] == ln and -2 < h2["x"] - c["x"] < 30
                                                 for h2 in HZ)]
-                            if free:
+                            if not free:
+                                c["seek_t"] = t
+                            else:
                                 c["lane"], c["dodge_t"], c["dodged"] = free[0], t, ahead["type"]
                                 dodges[0] += 1
                                 events.append(("dodge", t, c["x"], float(free[0])))
