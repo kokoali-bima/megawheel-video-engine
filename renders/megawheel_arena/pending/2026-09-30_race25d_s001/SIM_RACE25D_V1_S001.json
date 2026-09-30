@@ -1,0 +1,82 @@
+{
+  "video_id": "SIM_RACE25D_V1_S001",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v1",
+  "series": "race25d",
+  "seed": 1,
+  "fps": 30,
+  "duration": 29.23,
+  "params": {
+    "cast": [
+      "f1",
+      "firetruck",
+      "police",
+      "taxi"
+    ],
+    "lanes": [
+      0,
+      2,
+      3,
+      1
+    ],
+    "puddle": [
+      1,
+      117.1
+    ],
+    "ramp": [
+      0,
+      208.8
+    ],
+    "finish": 324.3
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "noon-clear-city",
+  "voice": "en-US-EmmaMultilingualNeural",
+  "outcomes": [
+    "win+jump+bump",
+    "p3",
+    "p2",
+    "p4+spin"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "has spin + replay": true,
+    "has jump": true,
+    "previews": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Slippery Race Showdown! Who Wins? 🏁💦",
+  "title": "Slippery Race Showdown! Who Wins? 🏁💦 #Shorts",
+  "description": "Nitro, Hydro, Siren and Tilly race to the finish line! 🏁 Watch out for the slippery puddle and the big ramp jump! 💦\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "fire truck",
+    "police car",
+    "taxi"
+  ],
+  "narration": [
+    "Four racers, one finish line! Nitro, Hydro, Siren and Tilly. Who will win?",
+    "Whoa! Tilly hits the water and spins out!",
+    "Nitro takes the ramp... big air!",
+    "Nitro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s001/SIM_RACE25D_V1_S001.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s001/preview"
+}

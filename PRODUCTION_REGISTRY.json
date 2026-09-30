@@ -345,6 +345,37 @@
       "youtube_url": null,
       "approved_date": "2026-09-30",
       "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts"
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S001",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 1,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "police",
+        "taxi"
+      ],
+      "track_id": "race25d_0e732264@noon-clear-city",
+      "theme": "noon-clear-city",
+      "voice": "en-US-EmmaMultilingualNeural",
+      "outcomes": [
+        "win+jump+bump",
+        "p3",
+        "p2",
+        "p4+spin"
+      ],
+      "duration": 29.23,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s001",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s001/SIM_RACE25D_V1_S001_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
