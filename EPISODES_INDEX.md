@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 22:08) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 22:15) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -20,9 +20,9 @@
 | 4 | `SIM_BUMPS_V2_S004` | bumps | UPLOADED_SCHEDULED 2026-10-01T15:00:00Z | Thu 2026-10-01 11:00 | https://www.youtube.com/shorts/3CfgGpkOx3Q |
 | 5 | `SIM_POTHOLES_V2_S005` | potholes | UPLOADED_SCHEDULED 2026-10-01T19:00:00Z | Thu 2026-10-01 15:00 | https://www.youtube.com/shorts/xEWas3W61QU |
 | 6 | `SIM_BUMPS_V2_S006` | bumps | UPLOADED_SCHEDULED 2026-10-01T23:00:00Z | Thu 2026-10-01 19:00 | https://www.youtube.com/shorts/nXlV3f6Wux8 |
-| 7 | `SIM_SPLASH_V2_S007` | splash | APPROVED | Fri 2026-10-02 15:00 |  |
-| 8 | `SIM_LAVA_V2_S003` | lava | APPROVED | Fri 2026-10-02 19:00 |  |
-| 9 | `SIM_RACE25D_V1_S001` | race25d | APPROVED |  |  |
+| 7 | `SIM_SPLASH_V2_S007` | splash | APPROVED | Fri 2026-10-02 19:00 |  |
+| 8 | `SIM_LAVA_V2_S003` | lava | APPROVED | Sat 2026-10-03 11:00 |  |
+| 9 | `SIM_RACE25D_V1_S001` | race25d | APPROVED | Fri 2026-10-02 15:00 |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
 
@@ -112,7 +112,7 @@
 - **Durasi:** 48.4 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → pit@obs0; Level 2: Sprinkles (icecream) → stuck@obs1; Level 3 (juara): Titan (bigrig) → win
 - **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-10-02T19:00:00Z
+- **Antrian:** QUEUED 2026-10-02T23:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 8 — `SIM_LAVA_V2_S003`
@@ -125,7 +125,7 @@
 - **Durasi:** 46.2 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs0; Level 2: Hydro (firetruck) → lava@obs2+broken; Level 3 (juara): Titan (bigrig) → win
 - **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-10-02T23:00:00Z
+- **Antrian:** QUEUED 2026-10-03T15:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 9 — `SIM_RACE25D_V1_S001`
@@ -138,5 +138,5 @@
 - **Durasi:** 29.23 s
 - **Tokoh dan hasil:** Level 1: Nitro (f1) → win+jump+bump; Level 2: Hydro (firetruck) → p3; Level 3 (juara): Siren (police) → p2; Level 4: Tilly (taxi) → p4+spin
 - **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** belum masuk antrian 
+- **Antrian:** QUEUED 2026-10-02T19:00:00Z
 - **YouTube:** belum diupload
