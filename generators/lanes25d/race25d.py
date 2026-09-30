@@ -30,7 +30,8 @@ PUD_X, RAMP_X, FIN_X = 100.0, 172.0, 252.0       # puddle (lane 1), ramp (lane 3
 SECONDS = 13.0
 
 # cast: key, lane, cruise speed (m/s)
-RACERS = [("sports", 0, 23.4), ("police", 1, 23.0), ("taxi", 2, 23.1), ("monster", 3, 21.6)]
+RACERS = [("sports", 0, 23.25), ("police", 1, 23.1), ("taxi", 2, 23.2), ("monster", 3, 22.6)]
+WORLD_DY = -260.0                                # lift the whole road scene so the action sits mid-frame
 
 
 def k_of(z):
@@ -148,21 +149,21 @@ def draw_ground(ctx, camx):
     g = cairo.LinearGradient(0, ground_y(4.6), 0, H)
     g.add_color_stop_rgb(0, *se.shade(gc, 0.85))
     g.add_color_stop_rgb(1, *gc)
-    ctx.rectangle(0, ground_y(4.6), W, H)
+    ctx.rectangle(-W, ground_y(4.6), 3 * W, H * 2)
     ctx.set_source(g)
     ctx.fill()
     top, bot = ground_y(3.55), ground_y(-0.55)                 # road band (lanes -0.5 .. 3.5)
     rg = cairo.LinearGradient(0, top, 0, bot)
     rg.add_color_stop_rgb(0, *se.lit((0.3, 0.3, 0.34)))
     rg.add_color_stop_rgb(1, *se.lit((0.23, 0.23, 0.27)))
-    ctx.rectangle(0, top, W, bot - top)
+    ctx.rectangle(-W, top, 3 * W, bot - top)
     ctx.set_source(rg)
     ctx.fill()
     for z0, z1 in ((-0.55, -0.72), (3.55, 3.7)):               # kerbs, red/white every 2 m (parallax per edge)
         k0, k1 = k_of(z0), k_of(z1)
         y0, y1 = ground_y(z0), ground_y(z1)
-        x = math.floor((camx - 540 / k1) / 2) * 2
-        while (x - camx) * k1 + 540 < W + 200:
+        x = math.floor((camx - 1600 / k1) / 2) * 2
+        while (x - camx) * k1 + 540 < 2 * W:
             poly = [((x - camx) * k0 + 540, y0), ((x + 2 - camx) * k0 + 540, y0),
                     ((x + 2 - camx) * k1 + 540, y1), ((x - camx) * k1 + 540, y1)]
             se.poly(ctx, poly)
@@ -171,8 +172,8 @@ def draw_ground(ctx, camx):
             x += 2
     for zl in (0.5, 1.5, 2.5):                                  # lane dashes: 1.6 m every 4 m
         k, y = k_of(zl), ground_y(zl)
-        x = math.floor((camx - 540 / k) / 4) * 4
-        while (x - camx) * k + 540 < W + 100:
+        x = math.floor((camx - 1600 / k) / 4) * 4
+        while (x - camx) * k + 540 < 2 * W:
             ctx.rectangle((x - camx) * k + 540, y - k * 0.06, 1.6 * k, k * 0.12)
             ctx.set_source_rgba(1, 1, 1, 0.9)
             ctx.fill()
@@ -362,7 +363,7 @@ def main():
         mid = (max(xs) + min(xs)) / 2
         target = 0.55 * (st[id(focus)][0] + 2) + 0.45 * mid if focus else mid + 1.5
         spread = max(xs) - min(xs) + 9.0
-        fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.62, 1.12))
+        fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.82, 1.12))
         camx = target if camx is None else camx + (target - camx) * 0.12
         punch = 1.0
         for kind, et, ex, ez in events:                           # zoom punch + shake on impacts
@@ -374,8 +375,9 @@ def main():
             if kind in ("land", "bump") and 0 <= t - et < 0.4:
                 amp = 16 * (1 - (t - et) / 0.4)
                 shx, shy = amp * math.sin(t * 90), amp * math.cos(t * 70)
-        se.draw_sky(ctx, camx * 0.35, 0.0, 1.0)
+        se.draw_sky(ctx, camx * 0.35, WORLD_DY / se.S, 1.0)
         ctx.save()
+        ctx.translate(0, WORLD_DY)
         ctx.translate(540 + shx, 1520 + shy)                      # world layer: zoom around the action
         ctx.scale(zoom, zoom)
         ctx.translate(-540, -1520)
@@ -386,7 +388,9 @@ def main():
         draw_ramp(ctx, camx)
         heads = {}
         for c in sorted(cars, key=lambda c: -st[id(c)][1]):       # far lanes first
-            heads[id(c)] = draw_car(ctx, c, t, camx)
+            hd = draw_car(ctx, c, t, camx)
+            heads[id(c)] = None if hd is None else (540 + (hd[0] - 540) * zoom + shx,
+                                                   1520 + (hd[1] - 1520) * zoom + shy + WORLD_DY, hd[2])
         for kind, et, ex, ez in events:                           # splash on the puddle / dust on landing
             age = t - et
             if kind == "splash" and 0 <= age < 1.6:
@@ -403,6 +407,7 @@ def main():
                     ctx.arc(px, y - age * 0.8 * k, (0.4 + age) * k * 0.6, 0, 2 * math.pi)
                     ctx.set_source_rgba(0.75, 0.68, 0.55, 0.6 * (1 - age / 0.8))
                     ctx.fill()
+        draw_props(ctx, camx, -0.95, 13, back=False)
         ctx.restore()
         lead_v = max(st[id(c)][5] for c in cars)
         se.draw_speed_lines(ctx, lead_v, fi / FPS)
