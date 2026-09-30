@@ -6,6 +6,9 @@
 
 ---
 
+> **Agent yang ditugasi produksi atau jadwal upload:** baca juga `AGENT_VIDEO_PRODUCER.md` (buat video, tanpa upload)
+> atau `AGENT_UPLOAD_SCHEDULER.md` (jadwalkan episode APPROVED). Riwayat render ada di `PRODUCTION_LOG.md`.
+
 ## 0. Aturan Nol (baca dulu)
 
 1. **Jangan menulis engine baru.** Semua video 2D MegaWheel Arena WAJIB dibuat dengan engine yang sudah ada (bagian 1). Kalau kamu merasa perlu menulis script fisika/render sendiri, BERHENTI dan tanya user.
