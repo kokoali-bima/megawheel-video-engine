@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SPLASH_V2_S007",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "splash",
   "seed": 7,
@@ -132,7 +132,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
-  "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 #Shorts",
+  "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
   "description": "Tilly the taxi, Sprinkles the ice cream truck and Titan the big rig take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -234,7 +234,10 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007_audit.md"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E007_2026-09-30_splash/SIM_SPLASH_V2_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E007_2026-09-30_splash/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E007_2026-09-30_splash/SIM_SPLASH_V2_S007_audit.md",
+  "episode": 7,
+  "season": 1,
+  "approved_date": "2026-09-30"
 }

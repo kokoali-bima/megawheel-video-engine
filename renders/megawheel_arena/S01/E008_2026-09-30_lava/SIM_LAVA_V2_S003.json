@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_LAVA_V2_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "lava",
   "seed": 3,
@@ -138,7 +138,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Lava Road! Who Survives? 🌋🔥",
-  "title": "Cars VS Lava Road! Who Survives? 🌋🔥 #Shorts",
+  "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
   "description": "Zippy the sports car, Hydro the fire truck and Titan the big rig take on the ERUPTING LAVA ROAD! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -241,7 +241,10 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003_audit.md"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E008_2026-09-30_lava/SIM_LAVA_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E008_2026-09-30_lava/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E008_2026-09-30_lava/SIM_LAVA_V2_S003_audit.md",
+  "episode": 8,
+  "season": 1,
+  "approved_date": "2026-09-30"
 }

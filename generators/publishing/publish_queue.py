@@ -65,14 +65,20 @@ def next_slots(start_day, taken, now_utc):
 
 def plan(start):
     q = load()
+    now_ = dt.datetime.now(dt.timezone.utc)
+    stale = [it for it in q["items"] if it["status"] == "QUEUED" and
+             dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")) < now_ + dt.timedelta(hours=2)]
+    for it in stale:                                         # slot passed before upload -> give it a new slot
+        print(f"[queue] Ep. {it['episode']}: slot {it['publish_at_utc']} sudah lewat -> dijadwalkan ulang")
+    stale_eps = {it["episode"] for it in stale}
+    q["items"] = [it for it in q["items"] if it["episode"] not in stale_eps]
     queued = {it["episode"] for it in q["items"]}
     taken = {dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")) for it in q["items"]}
     todo = [e for e in episodes.episodes()
             if e.get("status") == "APPROVED" and not e.get("youtube_url") and e["episode"] not in queued]
     todo.sort(key=lambda e: e["episode"])
     now = dt.datetime.now(dt.timezone.utc)
-    last = max(taken, default=None)
-    start_day = start or (last.astimezone(NY).date() if last else now.astimezone(NY).date())
+    start_day = start or now.astimezone(NY).date()                # earliest free future slot
     gen = next_slots(start_day, taken, now)
     for e in todo:
         t = next(gen)
@@ -88,9 +94,11 @@ def show():
         print(fh.read())
 
 
-def upload():
+def upload(max_n):
+    """Upload up to max_n QUEUED episodes (YouTube API quota: videos.insert = 1600 of 10000 units/day)."""
     from core.youtube_uploader import YouTubeUploader
     q = load()
+    done = 0
     uploader = YouTubeUploader()
     if not uploader.is_authenticated():
         sys.exit("[queue] STOP: YouTube belum terotentikasi (jalankan auth_youtube.py).")
@@ -98,6 +106,9 @@ def upload():
     for it in q["items"]:
         if it["status"] != "QUEUED":
             continue
+        if done >= max_n:
+            print(f"[queue] batas {max_n} upload per run tercapai (kuota API). Sisanya di run berikutnya.")
+            break
         t = dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00"))
         if t < now + dt.timedelta(minutes=30):
             print(f"[queue] SKIP Ep. {it['episode']}: slot {it['publish_at_utc']} sudah lewat -> jalankan plan ulang")
@@ -117,6 +128,7 @@ def upload():
         it.update(status="SCHEDULED", url=res["url"])
         episodes.mark_uploaded(it["episode"], res["url"], f"scheduled {it['publish_at_utc']}")
         save(q)
+        done += 1
         print(f"[queue] OK -> {res['url']}", flush=True)
     episodes.write_log()
     show()
@@ -127,6 +139,7 @@ def main():
     ap.add_argument("cmd", choices=["plan", "show", "upload"])
     ap.add_argument("--start", help="first publish day (New York date), default: today/after last slot")
     ap.add_argument("--confirm", action="store_true", help="required for upload (user instruction)")
+    ap.add_argument("--max", type=int, default=5, help="max uploads per run (API quota), default 5")
     a = ap.parse_args()
     if a.cmd == "plan":
         plan(dt.date.fromisoformat(a.start) if a.start else None)
@@ -135,7 +148,7 @@ def main():
     else:
         if not a.confirm:
             sys.exit("[queue] STOP: upload butuh --confirm (hanya atas instruksi eksplisit user).")
-        upload()
+        upload(a.max)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_SPLASH_V2_S007",
+  "video_id": "SIM_LAVA_V2_S003",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->35.1 m, 3.0->62.1 m, 3.0->125.5 m",
+      "value": "3.0->36.3 m, 3.0->84.3 m, 3.0->120.6 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "3 rintangan [pit, wall, hill] (18-99 m), finish 106 m",
+      "value": "5 rintangan [lava, vent, vent, lava, vent] (34-89 m), finish 98 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "6.2s, 9.2s, 13.7s",
+      "value": "4.8s, 6.1s, 9.6s",
       "hard": true
     },
     {
@@ -47,7 +47,7 @@
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "value": "rintangan [0, 1]",
+      "value": "rintangan [0, 2]",
       "hard": false
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "value": "48.4 s",
+      "value": "46.2 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "11.5s, 13.5s, 23.4s",
+      "value": "10.7s, 14.9s, 20.5s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "splash|taxi,icecream,bigrig|splash_1ddda902@night-clear-desert|pit@obs0,stuck@obs1,win",
+      "value": "lava|sports,firetruck,bigrig|lava_8caa7073@morning-clear-volcano|pit@obs0,lava@obs2+broken,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S01/E008_2026-09-30_lava/SIM_LAVA_V2_S003.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "48.40 s (manifest 48.4)",
+      "value": "46.20 s (manifest 46.2)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "11.8 MB",
+      "value": "14.7 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-0.4 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-13.1 dB",
+      "value": "-13.9 dB",
       "hard": true
     },
     {
@@ -159,7 +159,7 @@
       "id": "narration_count",
       "desc": "Narasi lengkap (intro + hasil tiap level + CTA)",
       "ok": true,
-      "value": "7 baris",
+      "value": "8 baris",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 8.5s",
+      "value": "48% piksel badge @ 7.2s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 12.1s",
+      "value": "56% piksel warna level @ 11.3s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 21.7s",
+      "value": "48% piksel badge @ 18.9s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 25.6s",
+      "value": "56% piksel warna level @ 26.3s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 39.7s",
+      "value": "28% piksel badge @ 36.4s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "70% piksel panel @ 47.6s",
+      "value": "70% piksel panel @ 45.4s",
       "hard": true
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "13 file",
+      "value": "14 file",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "splash|taxi,icecream,bigrig|splash_1ddda902@night-clear-desert|pit@obs0,stuck@obs1,win",
+      "value": "lava|sports,firetruck,bigrig|lava_8caa7073@morning-clear-volcano|pit@obs0,lava@obs2+broken,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 7",
+      "value": "seed 3",
       "hard": true
     },
     {
@@ -247,7 +247,7 @@
       "id": "streak",
       "desc": "Maks 3 video berturut-turut dari seri yang sama",
       "ok": true,
-      "value": "0 video splash berturut-turut sebelum ini",
+      "value": "0 video lava berturut-turut sebelum ini",
       "hard": false
     }
   ]

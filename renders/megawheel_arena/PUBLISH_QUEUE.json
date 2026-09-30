@@ -35,6 +35,18 @@
    "video_id": "SIM_BUMPS_V2_S006",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-01T23:00:00Z"
+  },
+  {
+   "episode": 7,
+   "video_id": "SIM_SPLASH_V2_S007",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-02T15:00:00Z"
+  },
+  {
+   "episode": 8,
+   "video_id": "SIM_LAVA_V2_S003",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-02T19:00:00Z"
   }
  ]
 }
