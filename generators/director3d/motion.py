@@ -64,24 +64,25 @@ def car_motion(c):
 
 
 def cameras(track, cars, n):
-    """Pack-follow cameras (leader-weighted), spring-smoothed position and heading."""
-    s_all = np.array([[c["rec"][i][3] for c in cars] for i in range(n)])
-    tgt_s = 0.55 * s_all.max(axis=1) + 0.45 * s_all.mean(axis=1)
-    tgt_s = spring(tgt_s, 0.12, 0.75)
-    pts = [track.point(float(s_), 0.0) for s_ in tgt_s]
-    heading = np.unwrap([track.t[int(np.clip((s_ + 12) / rd.STEP, 0, track.n - 1)), 2] for s_ in tgt_s])
-    heading = spring(heading, 0.06, 0.8)
+    """Follow cams aimed at the real centre of the pack (cars more than 30 m behind the leader are ignored,
+    so a spun-out straggler does not drag the shot); spring-smoothed position, aim and heading."""
+    cx, cy, hd = np.empty(n), np.empty(n), np.empty(n)
+    for i in range(n):
+        rec = [c["rec"][i] for c in cars]
+        lead = max(r[3] for r in rec)
+        pack = [r for r in rec if lead - r[3] < 30.0]
+        cx[i] = float(np.mean([r[0] for r in pack]))
+        cy[i] = float(np.mean([r[1] for r in pack]))
+        s_mid = float(np.mean([r[3] for r in pack]))
+        hd[i] = track.t[int(np.clip((s_mid + 6) / rd.STEP, 0, track.n - 1)), 2]
+    cx, cy = spring(cx, 0.16, 0.72), spring(cy, 0.16, 0.72)
+    hd = spring(np.unwrap(hd), 0.07, 0.78)
     out = {}
-    for name, back, height, ahead, lat in (("horizontal", 17.0, 7.5, 10.0, -2.0), ("vertical", 15.0, 11.0, 12.0, 0.0)):
-        cam = []
-        for (px, py), h in zip(pts, heading):
-            f, nl = (math.cos(h), math.sin(h)), (-math.sin(h), math.cos(h))
-            cx, cy = px - f[0] * back + nl[0] * lat, py - f[1] * back + nl[1] * lat
-            lx, ly = px + f[0] * ahead, py + f[1] * ahead
-            cam.append([cx, cy, height, lx, ly, 0.8])
-        arr = np.array(cam)
-        for k in range(6):
-            arr[:, k] = spring(arr[:, k], 0.2, 0.7)
+    #                 name          back  height ahead
+    for name, back, height, ahead in (("horizontal", 15.0, 8.0, 3.0), ("vertical", 11.0, 14.0, 2.0)):
+        f0, f1 = np.cos(hd), np.sin(hd)
+        arr = np.stack([cx - f0 * back, cy - f1 * back, np.full(n, height),
+                        cx + f0 * ahead, cy + f1 * ahead, np.full(n, 0.6)], axis=1)
         out[name] = arr.round(3).tolist()
     return out
 
