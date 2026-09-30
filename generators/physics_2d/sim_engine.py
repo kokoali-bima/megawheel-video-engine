@@ -43,9 +43,10 @@ BASE = "/root/video-engine"
 WORK = f"{BASE}/work/physics_2d"
 OUT_DIR = f"{BASE}/renders"
 CAST_FILE = f"{BASE}/cast/characters.json"
-VOICE = "en-US-AnaNeural"
+CHANNEL = "MegaWheel Arena"          # rebrand 2026-09-30 (was "MegaWheel Kids"): general audience, not made for kids
+VOICE = "en-US-AvaNeural"            # energetic adult female narrator (was the child voice en-US-AnaNeural)
 CTA = ("Tap LIKE if you enjoyed this video, DISLIKE if you didn't, "
-       "and smash SUBSCRIBE to MegaWheel Kids!")
+       f"and smash SUBSCRIBE to {CHANNEL}!")
 REPLAY_LINE = "Let's see that again, in slow motion!"
 
 # Audio balance (from PROJECT_HISTORY_AND_HANDOVER.md, stems normalised to 0.45 peak first)
@@ -58,11 +59,13 @@ FINISH_X = 100.0
 SERIES_DEFS = {
     "potholes": dict(title="CARS VS GIANT POTHOLES!", obst="giant potholes", max_fail=20.0, max_win=24.0,
                      yt_title="Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
-                     tags=["cars", "potholes", "monster truck", "kids", "shorts", "physics", "MegaWheel Kids"]),
+                     tags=["cars", "potholes", "monster truck", "crash test", "physics simulation", "shorts",
+                           "MegaWheel Arena"]),
     "bumps": dict(title="CARS VS GIANT SPEED BUMPS!", obst="giant speed bumps", speed_scale=1.25,
                   max_fail=18.0, max_win=27.0,
                   yt_title="Cars VS Giant Speed Bumps! 🚗💥 Who Makes It? #Shorts",
-                  tags=["cars", "speed bumps", "monster truck", "kids", "shorts", "physics", "MegaWheel Kids"]),
+                  tags=["cars", "speed bumps", "monster truck", "crash test", "physics simulation", "shorts",
+                        "MegaWheel Arena"]),
 }
 # Filled by make_track(series, seed). Potholes seed 1 is the reference track.
 SERIES = ""
@@ -1857,7 +1860,7 @@ def draw_hud(ctx, L, li, st, tl, gt, mode, car_x):
             ctx.restore()
         ctx.save()
         ctx.scale(p, p)
-        draw_text(ctx, "MEGAWHEEL KIDS", 0, 140, 58, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.3))
+        draw_text(ctx, CHANNEL.upper(), 0, 140, 58, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.3))
         ctx.restore()
         ctx.restore()
 
@@ -2170,7 +2173,7 @@ def main():
         title=SERIES_DEFS[SERIES]["yt_title"],
         description=(f"Can {', '.join(VEHICLES[vk]['nick'] for vk, _ in STORY[:-1])} or {VEHICLES[STORY[-1][0]]['nick']} "
                      f"survive the {SERIES_DEFS[SERIES]['obst'].upper()}? 🚗💥 Watch till the end! 🏁\n\n"
-                     "#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids"),
+                     "#Shorts #Cars #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena"),
         tags=SERIES_DEFS[SERIES]["tags"] + [VEHICLES[vk]["display"].split(" THE ")[1].lower() for vk, _ in STORY],
         levels=[dict(vehicle=L["v"]["display"], speed=round(L["speed"], 2), outcome=L["event"]["type"],
                      event_t=round(L["event"]["t"], 2), obstacle=L["event"]["obstacle"],

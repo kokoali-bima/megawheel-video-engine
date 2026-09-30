@@ -1,28 +1,28 @@
 {
-  "video_id": "SIM_POTHOLES_V2_S001",
-  "status": "SUPERSEDED_REBRAND",
+  "video_id": "SIM_POTHOLES_V2_S004",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "potholes",
-  "seed": 1,
+  "seed": 4,
   "fps": 30,
-  "duration": 46.93,
-  "track_id": "potholes_std",
+  "duration": 44.5,
+  "track_id": "potholes_643445ba",
   "track_params": {
-    "p1x": 30.0,
-    "p1w": 3.2,
-    "p1d": 3.2,
-    "rampx": 48.0,
-    "rampl": 6.0,
-    "ramph": 1.4,
-    "p2w": 8.0,
-    "p2d": 5.0,
-    "p3x": 78.0,
-    "p3w": 5.0,
-    "p3d": 3.5
+    "p1x": 26.0,
+    "p1w": 2.8,
+    "p1d": 2.9,
+    "rampx": 41.7,
+    "rampl": 6.2,
+    "ramph": 1.6,
+    "p2w": 6.8,
+    "p2d": 4.9,
+    "p3x": 69.1,
+    "p3w": 5.3,
+    "p3d": 3.8
   },
-  "fingerprint": "potholes|sports,bus,monster|potholes_std|pit@obs2+broken,stuck@obs0,win",
+  "fingerprint": "potholes|f1,firetruck,monster|potholes_643445ba|flip@obs2+broken,stuck@obs0,win",
   "outcomes": [
-    "pit@obs2+broken",
+    "flip@obs2+broken",
     "stuck@obs0",
     "win"
   ],
@@ -31,14 +31,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->80.7 m, 3.0->30.4 m, 3.0->133.5 m",
+      "detail": "3.0->72.7 m, 3.0->29.7 m, 3.0->134.4 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "3 lubang, ramp 48.0-54.0 m, finish 100 m",
+      "detail": "3 lubang (26-74 m), finish 100 m",
       "hard": true
     },
     {
@@ -59,7 +59,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "7.9s, 6.4s, 8.1s",
+      "detail": "5.6s, 5.9s, 9.1s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
     },
     {
       "id": "spectacular",
-      "desc": "Minimal 1 momen spektakuler (hancur/terbalik)",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
       "ok": true,
       "detail": "",
       "hard": true
@@ -80,43 +80,45 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "46.9 s",
+      "detail": "44.5 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "16.3s, 9.9s, 20.7s",
+      "detail": "14.6s, 9.9s, 20.0s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|sports,bus,monster|potholes_std|pit@obs2+broken,stuck@obs0,win",
+      "detail": "potholes|f1,firetruck,monster|potholes_643445ba|flip@obs2+broken,stuck@obs0,win",
       "hard": true
     }
   ],
-  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
-  "description": "Can Zippy, Buster or Rocky survive the GIANT potholes? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "description": "Can Nitro, Hydro or Rocky survive the GIANT POTHOLES? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
-    "monster truck",
-    "school bus",
     "potholes",
-    "kids",
+    "monster truck",
+    "crash test",
+    "physics simulation",
     "shorts",
-    "physics",
-    "MegaWheel Kids"
+    "MegaWheel Arena",
+    "race car",
+    "fire truck",
+    "monster truck"
   ],
   "levels": [
     {
-      "vehicle": "ZIPPY THE SPORTS CAR",
-      "speed": 14.5,
-      "outcome": "pit",
-      "event_t": 7.87,
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 19.4,
+      "outcome": "flip",
+      "event_t": 5.63,
       "obstacle": 2,
       "broken": true,
       "bullet_time": true,
@@ -127,10 +129,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 16.3,
-      "event_out": 8.8,
+      "duration": 14.6,
+      "event_out": 8.2,
       "x_start": 3.0,
-      "x_end": 80.7,
+      "x_end": 72.7,
       "level_color": [
         45,
         183,
@@ -138,24 +140,24 @@
       ]
     },
     {
-      "vehicle": "BUSTER THE SCHOOL BUS",
-      "speed": 6.0,
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 6.8,
       "outcome": "stuck",
-      "event_t": 6.4,
+      "event_t": 5.87,
       "obstacle": 0,
       "broken": false,
-      "bullet_time": false,
+      "bullet_time": true,
       "replay": false,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "OUCH!"
       ],
-      "start": 16.3,
-      "duration": 9.93,
-      "event_out": 22.73,
+      "start": 14.6,
+      "duration": 9.9,
+      "event_out": 21.17,
       "x_start": 3.0,
-      "x_end": 30.4,
+      "x_end": 29.7,
       "level_color": [
         255,
         132,
@@ -166,7 +168,7 @@
       "vehicle": "ROCKY THE MONSTER TRUCK",
       "speed": 15.05,
       "outcome": "win",
-      "event_t": 8.1,
+      "event_t": 9.07,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -176,11 +178,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 26.23,
-      "duration": 20.7,
-      "event_out": 35.23,
+      "start": 24.5,
+      "duration": 20.0,
+      "event_out": 34.93,
       "x_start": 3.0,
-      "x_end": 133.5,
+      "x_end": 134.4,
       "level_color": [
         153,
         76,
@@ -189,17 +191,17 @@
     }
   ],
   "narration": [
-    "Level one! Zippy the sports car! Can Zippy jump the giant potholes?",
-    "Level two! Buster the school bus. Big and heavy... can Buster make it?",
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the giant potholes?",
+    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
     "Level three! Rocky the monster truck. Big wheels, big jump!",
-    "Oh no! Zippy fell into the giant pothole!",
-    "Uh oh... Buster is totally stuck!",
+    "Whoa! Nitro flipped right over!",
+    "Uh oh... Hydro is totally stuck!",
     "Yes! Rocky made it! We have a winner!",
     "Let's see that again, in slow motion!",
-    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
-  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S001.mp4",
-  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S001_preview",
-  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S001_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
+  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S004_preview",
+  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S004_audit.md"
 }

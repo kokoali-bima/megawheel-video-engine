@@ -1,44 +1,45 @@
-# MegaWheel Kids — Channel Setup
+# MegaWheel Arena — Channel Setup
 
-Aset: `branding/profile_logo.png` / `profile_mascot.png` (800×800), `branding/banner.png` (2560×1440).
-Generator: `generators/branding/make_branding.py` (memakai gambar tokoh dari engine, jadi selalu konsisten dengan video).
+> Rebrand 2026-09-30: "MegaWheel Kids" → **MegaWheel Arena**. Target semua umur (remaja & dewasa, anak boleh ikut menonton).
+> Aset: `branding/profile_mascot.png` (disarankan) / `profile_logo.png` (800×800), `branding/banner.png` (2560×1440).
+> Generator: `generators/branding/make_branding.py` (memakai gambar tokoh dari engine).
+
+## Nama channel
+`MegaWheel Arena`. Ubah juga handle, misalnya `@MegaWheelArena`, kalau masih tersedia.
 
 ## Deskripsi channel (tempel apa adanya)
 
 ```
-Welcome to MegaWheel Kids! 🚗💥
+Welcome to MegaWheel Arena! 🏁💥
 
-Meet Rocky the monster truck, Buster the school bus, Zippy the sports car and their friends Siren, Hydro and Grizzly as they take on crazy car challenges: GIANT potholes, HUGE speed bumps and much more!
+10 cartoon vehicles. Giant potholes, huge speed bumps and brutal obstacles. Only one can survive.
 
-Who will crash? Who will make it to the finish line? Watch, cheer for your favorite car and find out! 🏁
+Meet the crew: Rocky and Grizzly the monster trucks, Nitro the race car, Titan the big rig, Buster the school bus, Hydro the fire truck, Siren the police car, Tilly the taxi, Zippy the sports car and Sprinkles the ice cream truck. Every challenge is a real physics simulation, so every crash, flip and jump really happens.
 
-🚙 New car challenge videos every week
-🎨 Colorful cartoon cars with funny faces and giant jumps
-👨‍👩‍👧 Family-friendly fun for kids and grown-ups
+🚗 Epic car challenges and crash tests
+🎬 Slow-motion replays of every big crash
+🏆 Who wins the most? Pick your champion!
 
-Team Rocky 💙 or Team Grizzly 💚? Subscribe and pick your favorite!
+New videos every week. Subscribe and tell us in the comments: who's your favorite?
 ```
 
 ## Kata kunci channel (Setelan → Channel → Info dasar)
 ```
-cars for kids, monster truck, school bus, fire truck, police car, cartoon cars, car challenge, kids videos, physics cars, car crash cartoon, MegaWheel Kids
+car crash, crash test, physics simulation, monster truck, car challenge, cartoon cars, speed bumps, potholes, satisfying crashes, MegaWheel Arena
 ```
 
-## Tab Beranda (Penyesuaian channel → Tab Beranda)
-1. Aktifkan **Tab Beranda**.
-2. Urutan bagian:
-   1. **Video singkat**: semua Shorts (konten utama)
-   2. **Playlist: Cars VS Giant Potholes**
-   3. **Playlist: Cars VS Giant Speed Bumps**
-   4. **Video**: untuk versi panjang nanti
-   5. **Untuk Anda**: biarkan (muncul otomatis kalau konten sudah cukup)
-3. Playlist dibuat setelah video pertama tiap seri tayang (playlist kosong tidak ditampilkan).
+## Setelan (Setelan → Channel)
+- **Audiens:** "Tidak, tetapkan channel ini sebagai tidak Dibuat untuk Anak-Anak". Ini sah **hanya selama** konten mengikuti BLUEPRINT Aturan Nol no. 7 (tanpa kata "kids", narator dewasa, gaya kompetisi).
+- **Kategori default:** **Autos & Vehicles** (atau Film & Animation). Jangan "Game", karena ini bukan rekaman gameplay.
+- **Komentar:** aktif, moderasi Standar.
+- **Bahasa:** Inggris (Amerika Serikat).
 
-## Audiens (WAJIB diputuskan)
-Setelan → Channel → Setelan lanjutan → **Audiens**. Konten ini jelas ditujukan untuk anak, jadi menurut aturan COPPA/YouTube harus **"Ya, dibuat untuk anak-anak"**. Konsekuensi: komentar & notifikasi lonceng mati, iklan non-personal (RPM lebih rendah), tapi video bisa masuk YouTube Kids.
+## Tab Beranda
+1. Aktifkan **Tab Beranda**.
+2. Urutan: **Video singkat** → **Playlist** (1 baris per seri setelah ada: "Cars VS Giant Potholes", "Cars VS Giant Speed Bumps") → **Video** → **Untuk Anda**.
+3. Bagian Live stream, Postingan, dan Kolaborasi boleh dihapus.
 
 ## Episode & playlist
-- Setiap seri = 1 playlist; setiap video di seri itu = 1 episode bernomor.
-- Format judul Shorts (hook di depan, nomor di belakang):
-  `Cars VS Giant Potholes! Who Makes It? 🚗💥 | Ep. 3 #Shorts`
-- Versi panjang (nanti): kompilasi per seri atau per tokoh, misalnya `Rocky's Biggest Jumps | Compilation Ep. 1`.
+- Setiap seri = 1 playlist; setiap video = 1 episode bernomor.
+- Format judul Shorts: `Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts`
+- Nanti: kompilasi per seri / per tokoh, papan skor juara ("Who wins the most?").

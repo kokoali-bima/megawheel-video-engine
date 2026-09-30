@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Automatic pre-preview audit for MegaWheel Kids 2D videos (BLUEPRINT.md sections 5 and 6).
+"""Automatic pre-preview audit for MegaWheel Arena 2D videos (BLUEPRINT.md sections 5 and 6).
 
 Usage:  cd /root/video-engine && ./venv/bin/python generators/physics_2d/audit.py <VIDEO_ID>
 
@@ -21,7 +21,7 @@ BASE = "/root/video-engine"
 OUT = f"{BASE}/renders"
 W, H = 1080, 1920
 CTA = ("Tap LIKE if you enjoyed this video, DISLIKE if you didn't, "
-       "and smash SUBSCRIBE to MegaWheel Kids!")
+       "and smash SUBSCRIBE to MegaWheel Arena!")
 FAIL_RED = (230, 26, 38)
 WIN_GOLD = (255, 194, 20)
 BADGE_BOX = (300, 690, 780, 850)       # x0, y0, x1, y1 around the FAIL/WINNER badge

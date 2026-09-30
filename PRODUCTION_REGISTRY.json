@@ -41,9 +41,10 @@
         "win"
       ],
       "duration": 46.93,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_POTHOLES_V2_S001_audit.md",
-      "youtube_url": null
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S002",
@@ -63,9 +64,10 @@
         "win"
       ],
       "duration": 48.87,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_POTHOLES_V2_S002_audit.md",
-      "youtube_url": null
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
     },
     {
       "video_id": "SIM_BUMPS_V2_S006",
@@ -85,9 +87,10 @@
         "win"
       ],
       "duration": 49.3,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_BUMPS_V2_S006_audit.md",
-      "youtube_url": null
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
     },
     {
       "video_id": "SIM_BUMPS_V2_S001",
@@ -107,9 +110,10 @@
         "win"
       ],
       "duration": 49.17,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_BUMPS_V2_S001_audit.md",
-      "youtube_url": null
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S003",
@@ -129,9 +133,10 @@
         "win"
       ],
       "duration": 48.77,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_POTHOLES_V2_S003_audit.md",
-      "youtube_url": null
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
     },
     {
       "video_id": "SIM_BUMPS_V2_S003",
@@ -151,8 +156,31 @@
         "win"
       ],
       "duration": 47.97,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "SUPERSEDED_REBRAND",
       "audit": "renders/SIM_BUMPS_V2_S003_audit.md",
+      "youtube_url": null,
+      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S004",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 4,
+      "created": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "monster"
+      ],
+      "track_id": "potholes_643445ba",
+      "outcomes": [
+        "flip@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 44.5,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_POTHOLES_V2_S004_audit.md",
       "youtube_url": null
     }
   ]

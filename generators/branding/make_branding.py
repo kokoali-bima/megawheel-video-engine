@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube channel branding for MegaWheel Kids, drawn with the engine's own cast art.
+"""YouTube channel branding for MegaWheel Arena, drawn with the engine's own cast art.
 
 Usage: cd /root/video-engine && ./venv/bin/python generators/branding/make_branding.py
 Writes branding/profile_*.png (800x800), branding/banner.png (2560x1440) and *_check.png
@@ -128,13 +128,13 @@ def sparkles(ctx, pts, size):
 
 
 def logo(ctx, cx, y_top, size, max_w):
-    """Two-line wordmark: MEGAWHEEL / KIDS."""
+    """Two-line wordmark: MEGAWHEEL / ARENA."""
     se.draw_text(ctx, "MEGAWHEEL", cx, y_top + size * 0.55, size, fill=YELLOW, stroke=NAVY, sw=size * 0.2,
                  max_w=max_w)
     ctx.save()
     ctx.translate(cx, y_top + size * 1.55)
     ctx.rotate(-0.04)
-    se.draw_text(ctx, "KIDS", 0, 0, size * 0.85, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=size * 0.2)
+    se.draw_text(ctx, "ARENA", 0, 0, size * 0.85, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=size * 0.2)
     ctx.restore()
 
 
@@ -169,7 +169,7 @@ def profile(path, with_text):
     if with_text:
         vehicle(ctx, "monster", 400, road_y, 96)
         se.draw_text(ctx, "MEGAWHEEL", 400, 122, 86, fill=YELLOW, stroke=NAVY, sw=17, max_w=560)
-        se.draw_text(ctx, "KIDS", 400, 705, 92, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=18)
+        se.draw_text(ctx, "ARENA", 400, 705, 92, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=18)
     else:
         vehicle(ctx, "monster", 400, road_y, 122)
         sparkles(ctx, [(135, 170, 1.0), (665, 150, 0.8), (690, 330, 0.6)], 34)
@@ -204,14 +204,14 @@ def banner(path):
         wv = vehicle_width(vk, s)
         vehicle(ctx, vk, x + wv / 2, road_y, s)
         x += wv + gap
-    se.draw_text(ctx, "FUN CAR CHALLENGES FOR KIDS!", 1280, 548, 42, fill=(1, 1, 1), stroke=NAVY, sw=8, max_w=820)
+    se.draw_text(ctx, "EPIC CAR CHALLENGES - WHO SURVIVES?", 1280, 548, 42, fill=(1, 1, 1), stroke=NAVY, sw=8, max_w=820)
     se.set_font(ctx, 118)
     w1 = ctx.text_extents("MEGAWHEEL").width
-    w2 = ctx.text_extents("KIDS").width
+    w2 = ctx.text_extents("ARENA").width
     gap_w = 40
     x0 = 1280 - (w1 + gap_w + w2) / 2
     se.draw_text(ctx, "MEGAWHEEL", x0 + w1 / 2, 650, 118, fill=YELLOW, stroke=NAVY, sw=22)
-    se.draw_text(ctx, "KIDS", x0 + w1 + gap_w + w2 / 2, 650, 118, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=22)
+    se.draw_text(ctx, "ARENA", x0 + w1 + gap_w + w2 / 2, 650, 118, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=22)
     sparkles(ctx, [(x0 - 60, 610, 0.9), (x0 + w1 + gap_w + w2 + 60, 600, 0.8)], 28)
     se.draw_text(ctx, "NEW VIDEOS EVERY WEEK", 1280, 1180, 64, fill=YELLOW, stroke=NAVY, sw=12)
     surf.write_to_png(path)

@@ -1,6 +1,6 @@
-# MegaWheel Kids — Video Engine
+# MegaWheel Arena — Video Engine
 
-Engine otomatis untuk channel YouTube **MegaWheel Kids**: video Shorts simulasi fisika 2D kartun, **100% dibuat sendiri** (tanpa footage pihak lain). Fisika pymunk, grafis cairo, audio sintetis, dan narasi Edge-TTS.
+Engine otomatis untuk channel YouTube **MegaWheel Arena**: video Shorts simulasi fisika 2D kartun, **100% dibuat sendiri** (tanpa footage pihak lain). Fisika pymunk, grafis cairo, audio sintetis, dan narasi Edge-TTS.
 
 **Wajib baca sebelum bekerja:** [`BLUEPRINT.md`](BLUEPRINT.md) (standar baku), [`DEV_HISTORY.md`](DEV_HISTORY.md) (riwayat dan pelajaran), [`cast/CAST.md`](cast/CAST.md) (tokoh tetap).
 
@@ -8,7 +8,8 @@ Engine otomatis untuk channel YouTube **MegaWheel Kids**: video Shorts simulasi 
 ```
 core/                      youtube_uploader.py, tracker.py (upload hanya setelah approval user)
 generators/physics_2d/     sim_engine.py (engine), audit.py, registry.py, find_seeds.sh, tune_bumps.py
-cast/                      characters.json + CAST.md (tokoh tetap: Zippy, Siren, Buster, Hydro, Rocky, Grizzly)
+cast/                      characters.json + CAST.md (10 tokoh tetap: Zippy, Siren, Nitro, Tilly, Buster, Hydro, Titan, Sprinkles, Rocky, Grizzly)
+branding/                  foto profil, banner, CHANNEL_SETUP.md (generator: generators/branding/make_branding.py)
 renders/                   MP4 + manifest (.json) + audit (_audit.md) + preview PNG  (MP4/PNG tidak di-commit)
 PRODUCTION_REGISTRY.json   registry keunikan semua video
 upload_cli.py, auth_*.py   upload & otorisasi YouTube (credentials/ tidak di-commit)

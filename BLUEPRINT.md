@@ -1,4 +1,4 @@
-# CETAK BIRU — MegaWheel Kids 2D Physics Video Engine
+# CETAK BIRU — MegaWheel Arena 2D Physics Video Engine
 
 > Versi: 1.3 (2026-09-30) · Engine: **physics_2d v2.3** di `/root/video-engine` (2 seri, 6 tokoh tetap, analisa/audit/registry otomatis)
 > Berlaku untuk SEMUA agent (Antigravity/Gemini, Claude Code, OpenAI/Codex, dll.) dan operator manusia.
@@ -8,9 +8,14 @@
 
 ## 0. Aturan Nol (baca dulu)
 
-1. **Jangan menulis engine baru.** Semua video 2D MegaWheel Kids WAJIB dibuat dengan engine yang sudah ada (bagian 1). Kalau kamu merasa perlu menulis script fisika/render sendiri, BERHENTI dan tanya user.
+1. **Jangan menulis engine baru.** Semua video 2D MegaWheel Arena WAJIB dibuat dengan engine yang sudah ada (bagian 1). Kalau kamu merasa perlu menulis script fisika/render sendiri, BERHENTI dan tanya user.
 2. **Jangan pakai pipeline footage lama** (`/root/video-engine/archive/footage_pipeline/`: server.py, downloader, scene detector, dll.). Itu sudah pensiun karena memakai footage pihak lain. `video-engine.service` (port 8000) sengaja di-stop & disable.
 6. **Nama dan sifat tokoh sudah baku** (`/root/video-engine/cast/`). Jangan ganti atau karang tokoh baru tanpa izin user.
+7. **Audiens: SEMUA UMUR, bukan konten anak** (keputusan user 2026-09-30, channel **MegaWheel Arena**, setting YouTube "Tidak dibuat untuk anak-anak"). Konsekuensi wajib:
+   - Jangan pakai kata "kids", "for kids", "children", atau "toddler" di judul, deskripsi, tag, teks layar, maupun narasi.
+   - Narator: suara wanita dewasa enerjik `en-US-AvaNeural` (bukan suara anak).
+   - Gaya bahasa: kompetisi / crash test / "who survives?", bukan bahasa balita.
+   - Tetap aman untuk keluarga: tanpa darah/sadis, tanpa kata kasar. Tokoh kartun berwajah boleh (ciri khas channel).
 3. **Video harus lolos Analisa (bagian 5) dan Audit (bagian 6)** sebelum preview dikirim ke user.
 4. **Dilarang upload ke YouTube tanpa kata "approved" / perintah upload eksplisit dari user.**
 5. **Setiap video harus unik**: cek dan catat di registry (bagian 7).
@@ -91,7 +96,7 @@ Kalau tidak ada `[sim]`, `[analysis]`, `[audit]` dan `[result]`, berarti kamu TI
               → utamakan rintangan gagal berbeda + mobil hancur/terbalik
 3. TIMELINE   live (1.0x) + bullet-time (0.38x di lompatan tertinggi sebelum hasil)
               + instant replay slow-mo (0.4x) untuk level gagal yang hancur/terbalik
-4. AUDIO      narasi Edge-TTS en-US-AnaNeural + suara mesin/benturan/kaca/buzzer/fanfare/BGM sintetis
+4. AUDIO      narasi Edge-TTS en-US-AvaNeural + suara mesin/benturan/kaca/buzzer/fanfare/BGM sintetis
 5. RENDER     cairo 1080x1920, 4 worker paralel → ffmpeg H.264 + AAC
 6. MANIFEST   <VIDEO_ID>.json (status RENDERED_PENDING_APPROVAL)
 ```
@@ -124,7 +129,7 @@ Parameter konten ada di bagian atas `sim_engine.py`:
 | 8 | **Keseimbangan audio** | Narasi 1.60, mesin 0.85, BGM 0.10, SFX 0.85 (stem dinormalisasi dulu), limiter −0.5 dBFS | Tidak clipping; narasi selalu terdengar paling jelas |
 
 CTA baku (jangan diubah tanpa izin user):
-*"Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"*
+*"Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"*
 
 ---
 

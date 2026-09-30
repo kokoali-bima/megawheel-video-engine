@@ -146,4 +146,16 @@
 - `core.youtube_uploader` + `core.tracker` import OK, `upload_cli.py --help` OK (tidak ada upload).
 - Render baru `SIM_BUMPS_V2_S001` (seri otomatis → bumps, rotasi → **Siren, Hydro, Grizzly**): 49.2 s, audit PASS.
 
+## 2026-09-30 — v2.4: 10 tokoh + rebrand ke MegaWheel Arena (Claude Code, Opus)
+
+**10 tokoh:** +Nitro (F1), Tilly (taksi), Titan (big rig, 4 roda), Sprinkles (es krim). `ROSTER` = 4 ringan / 4 berat / 2 juara. `ROLE_ORDER` + fallback otomatis kalau tokoh tidak bisa memberi hasil yang diminta di lintasan itu. `tune_cast.py` untuk uji tokoh baru. Banner digambar ulang dengan 10 tokoh.
+
+**Rebrand (keputusan user):** tujuan utama monetisasi + penonton semua umur → channel **MegaWheel Arena**, setting "Tidak dibuat untuk anak-anak".
+- `CHANNEL` konstanta; CTA: "...and smash SUBSCRIBE to MegaWheel Arena!" (engine + audit)
+- Narator: `en-US-AvaNeural` (wanita dewasa enerjik), menggantikan suara anak `en-US-AnaNeural`. Sampel pembanding: `branding/voice_samples/` (Ava, Aria, Jenny, Emma).
+- Tag/deskripsi video tanpa kata "kids"; teks outro di layar = nama channel.
+- Banner & foto profil: "MEGAWHEEL ARENA", tagline "EPIC CAR CHALLENGES - WHO SURVIVES?".
+- Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
+- BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
+
 **Pembersihan permanen (disetujui user, 2026-09-30):** dihapus `/root/local_videos` (325 MB footage BeamNG), `/root/sim-prototype.MIGRATED` (183 MB), dan 6 draft render di root `/root/renders` (V4–V7, FINAL_MASTERPIECE, VIDEO_02_POLICE). **Dipertahankan:** 8 MP4 di `/root/renders/youtube_shorts_batch/` karena masih dirujuk `VIDEO_PUBLISHING_TRACKER.json` (tracker berisi 9 entri: 3 sudah tayang + draft; `VIDEO_03_SUV_POLICE_TURBO_COUPE.mp4` sudah tidak ada sejak sebelum pembersihan). Backup `/root/backups/pre-merge-20260930.tar.gz` tetap ada.

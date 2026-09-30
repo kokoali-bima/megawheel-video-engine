@@ -1,5 +1,5 @@
 {
-  "_about": "MegaWheel Kids fixed cast. Identity lives here; physics lives in VEHICLES (generators/physics_2d/sim_engine.py). Add new characters on purpose (a planned debut), never auto-generate them. Rules: cast/CAST.md.",
+  "_about": "MegaWheel Arena fixed cast. Identity lives here; physics lives in VEHICLES (generators/physics_2d/sim_engine.py). Add new characters on purpose (a planned debut), never auto-generate them. Rules: cast/CAST.md.",
   "version": 1,
   "characters": [
     {

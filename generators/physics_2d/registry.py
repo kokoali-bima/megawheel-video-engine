@@ -12,7 +12,7 @@ PATH = f"{BASE}/PRODUCTION_REGISTRY.json"
 LOCK = PATH + ".lock"
 ABOUT = ("Registry keunikan video MegaWheel Kids 2D. Aturan: BLUEPRINT.md bagian 7. "
          "Tambah satu entri per video, jangan hapus entri lama.")
-IGNORED_STATUS = {"PROTOTYPE_NOT_FOR_UPLOAD", "REJECTED", "AUDIT_FAILED"}
+IGNORED_STATUS = {"PROTOTYPE_NOT_FOR_UPLOAD", "REJECTED", "AUDIT_FAILED", "SUPERSEDED_REBRAND"}
 
 
 def fingerprint(e):
