@@ -18,6 +18,7 @@ Sebelum mulai, baca di 99.3 (wajib, setiap sesi):
   /root/video-engine/BLUEPRINT.md              (standar baku; Aturan Nol + bagian 5-8)
   /root/video-engine/ERROR_LOG.md              (kesalahan yang tidak boleh diulang)
   /root/video-engine/PRODUCTION_LOG.md         (riwayat run sebelumnya: seri & seed terakhir)
+  /root/video-engine/PROJECT_PROGRESS.md       (status proyek; jangan produksi kalau ada larangan di sana)
 
 Langkah per video:
  1. Pilih seri: potholes | bumps | splash | lava. Maksimal 3 video berturut-turut dari seri yang sama;

@@ -14,6 +14,7 @@ Kamu bekerja dari VM 192.168.99.2 lewat SSH ke 192.168.99.3 (akses disiapkan ole
 Sebelum bekerja, baca di 99.3:
   /root/video-engine/AGENT_UPLOAD_SCHEDULER.md   (dokumen ini, wajib)
   /root/video-engine/BLUEPRINT.md bagian 10      (SOP publikasi)
+  /root/video-engine/PROJECT_PROGRESS.md         (status proyek; tugas A2/A4 = uji upload & upload Ep. 2-8)
 
 Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
  1. Lihat antrian:

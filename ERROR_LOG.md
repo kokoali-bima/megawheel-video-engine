@@ -14,6 +14,7 @@
 | 2026-09-30 | Seluruh perintah ssh gagal parse | `python -c "..."` dengan kurung/kutip di dalam argumen ssh | Pakai heredoc di dalam file script. |
 | 2026-09-30 | `last: command not found` | Tool tidak terpasang di Ubuntu minimal | Cek ketersediaan tool, jangan diasumsikan ada. |
 | 2026-09-30 | Pembuatan panduan trigger lintas-VM (99.2→99.3 via SSH root) **ditolak** oleh safety classifier Claude Code | Aksi otomasi lintas-server dengan akses root perlu izin eksplisit | Jangan mencoba jalur lain. Minta user memberi izin eksplisit, atau pekerjaan dilakukan agent/manusia lain. |
+| 2026-09-30 | Upload terjadwal Ep. 1 dari Claude Code **ditolak** pengaman otomatis (kategori transaksi dunia nyata), walau user sudah bilang "gas" | Upload ke YouTube = aksi publik yang diblok mode otomatis Claude Code | Jangan mencari jalan lain. Upload dijalankan user sendiri (`publish_queue.py upload --confirm`), agent penjadwal 99.2, atau user menambah izin di setting Claude Code. |
 | 2026-09-30 | Build `pycairo` gagal (`Unknown compiler`) | Tidak ada compiler / header cairo | `apt-get install libcairo2-dev pkg-config build-essential python3-dev` sebelum `pip install pycairo`. |
 
 ## B. Engine / kode
