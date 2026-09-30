@@ -18,7 +18,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 GLB_LOCAL = os.path.join(ROOT, "assets", "kenney_car_kit", "Models", "GLB format")
 SCENE_LOCAL = os.path.join(ROOT, "generators", "blender3d", "bench_scene.py")
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 25.0                       # monthly cap for our own runs (free credit is $30)
+BUDGET_USD = 29.0                       # monthly cap for our own runs (user, 2026-09-30); Modal workspace limit = $30
 MAX_FRAMES, MAX_CHUNKS = 1800, 8
 GPU_PRICE = {"T4": 0.000164, "L4": 0.000222, "A10": 0.000306, "L40S": 0.000542}   # $/s (modal.com/pricing)
 OVERHEAD = 1.15                         # CPU + memory of the container on top of the GPU price
