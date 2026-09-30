@@ -21,6 +21,9 @@ Sebelum mulai, baca di 99.3 (wajib, setiap sesi):
   /root/video-engine/PROJECT_PROGRESS.md       (status proyek; jangan produksi kalau ada larangan di sana)
   /root/video-engine/EPISODES_INDEX.md         (episode yang sudah ada: Ep. N = VIDEO_ID + path + judul)
 
+Awal sesi (wajib): cd /root/video-engine && bash git_sync.sh pull
+  (kalau STOP karena ada perubahan belum di-commit atau riwayat bercabang: jangan diperbaiki sendiri, lapor ke user)
+
 Langkah per video:
  1. Pilih seri: potholes | bumps | splash | lava. Maksimal 3 video berturut-turut dari seri yang sama;
     utamakan seri yang paling jarang dipakai di PRODUCTION_REGISTRY.json.
@@ -38,9 +41,7 @@ Langkah per video:
  6. Kalau ada error atau kejadian aneh: tambah 1 baris di ERROR_LOG.md bagian yang sesuai
     (tanggal, gejala, penyebab, pencegahan). Jangan hapus baris lama.
  7. Simpan jejak kode dan catatan ke git (MP4/PNG tidak ikut, sudah di .gitignore):
-      git add PRODUCTION_LOG.md ERROR_LOG.md PRODUCTION_REGISTRY.json renders/megawheel_arena
-      git commit -m "produce: <VIDEO_ID> (pending review)"
-      git push origin main
+      cd /root/video-engine && bash git_sync.sh push "produce: <VIDEO_ID> (pending review) [<nama model>]"
  8. Lapor ke user: VIDEO_ID, path MP4, durasi, tokoh, tema, narator, hasil audit, 2-3 PNG preview.
     Tutup dengan kalimat: "Menunggu approval Anda. Belum dijadwalkan dan belum diupload."
 

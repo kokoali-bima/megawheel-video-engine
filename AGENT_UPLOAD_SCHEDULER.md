@@ -18,6 +18,7 @@ Sebelum bekerja, baca di 99.3:
   /root/video-engine/EPISODES_INDEX.md           (Ep. N = VIDEO_ID + path MP4 + judul; jangan tebak)
 
 Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
+ 0. Sinkron dengan GitHub:  cd /root/video-engine && bash git_sync.sh pull   (STOP = lapor ke user)
  1. Lihat antrian:
       cd /root/video-engine && ./venv/bin/python generators/publishing/publish_queue.py show
  2. Isi slot untuk episode APPROVED yang belum dijadwalkan (juga menjadwal ulang slot yang terlewat):
@@ -25,15 +26,13 @@ Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
  3. Upload yang berstatus QUEUED sebagai video terjadwal (YouTube menayangkan sendiri pada jamnya):
       ./venv/bin/python generators/publishing/publish_queue.py upload --confirm
  4. Simpan catatan ke git:
-      git add renders/megawheel_arena PRODUCTION_REGISTRY.json
-      git commit -m "publish: schedule update <tanggal>"
-      git push origin main
+      bash git_sync.sh push "publish: schedule update <tanggal> [<nama model>]"
  5. Laporkan ke user: tabel PUBLISH_QUEUE (Ep, jam ET, jam WIB, status, URL), jumlah yang diupload hari ini,
     dan semua baris SKIP / STOP beserta alasannya.
 
 Aturan keras:
  - Jangan pernah menjalankan episodes.py approve/reject/set, sim_engine.py, publish.py, atau script lain di luar
-   publish_queue.py (show, plan, upload --confirm). Menyetujui video adalah hak user.
+   publish_queue.py (show, plan, upload --confirm) dan git_sync.sh (pull, push). Menyetujui video adalah hak user.
  - Jangan mengubah file apa pun di 99.3 selain yang ditulis publish_queue.py dan langkah git di atas.
  - Jangan pernah membuat video publik langsung, atau memakai --privacy public. Semua lewat jadwal publishAt.
  - Jangan menyentuh /root/video-engine/credentials/ (token YouTube). Jangan mencetak isinya.
