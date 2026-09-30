@@ -192,6 +192,64 @@
       "theme": "sunset-clear-countryside",
       "voice": "en-US-JennyNeural",
       "rerendered": "2026-09-30"
+    },
+    {
+      "video_id": "SIM_SPLASH_V2_S003",
+      "series": "splash",
+      "engine_version": "v2",
+      "seed": 3,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "bigrig",
+        "taxi"
+      ],
+      "track_id": "splash_7e3f037b@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "en-US-AvaMultilingualNeural",
+      "outcomes": [
+        "crash@obs1+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 48.67,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_splash_s003",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_LAVA_V2_S003",
+      "series": "lava",
+      "engine_version": "v2",
+      "seed": 3,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "bus"
+      ],
+      "track_id": "lava_79de68da@night-clear-volcano",
+      "theme": "night-clear-volcano",
+      "voice": "en-US-AriaNeural",
+      "outcomes": [
+        "flip@obs0",
+        "lava@obs2+broken",
+        "win"
+      ],
+      "duration": 47.1,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_lava_s003",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }

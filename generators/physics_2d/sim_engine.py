@@ -65,15 +65,32 @@ ENGINE_VERSION = "v2"
 START_X = 3.0
 FINISH_X = 100.0
 SERIES_DEFS = {
+    # win_pool: "any" = every character that can physically win on the track may be champion
+    # (fewest wins first); "monsters" = only the monster trucks (the physics demands it)
     "potholes": dict(title="CARS VS GIANT POTHOLES!", obst="giant potholes", max_fail=20.0, max_win=24.0,
+                     win_pool="any",
                      yt_title="Cars VS Giant Potholes! Who Survives? 🚗💥",
                      tags=["cars", "potholes", "monster truck", "crash test", "physics simulation", "shorts",
                            "MegaWheel Arena"]),
     "bumps": dict(title="CARS VS GIANT SPEED BUMPS!", obst="giant speed bumps", speed_scale=1.25,
-                  max_fail=18.0, max_win=27.0,
+                  max_fail=18.0, max_win=27.0, win_pool="monsters",
                   yt_title="Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
                   tags=["cars", "speed bumps", "monster truck", "crash test", "physics simulation", "shorts",
                         "MegaWheel Arena"]),
+    "splash": dict(title="CARS VS SPLASH ZONE!", obst="slippery splash zone", max_fail=20.0, max_win=26.0,
+                   win_pool="any",
+                   fail_lines={"crash": "Crash! {n} slid right into the wall!",
+                               "pit": "Splash! {n} skidded into the pit!"},
+                   yt_title="Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
+                   tags=["cars", "car crash", "slippery road", "water puddle", "crash test", "physics simulation",
+                         "shorts", "MegaWheel Arena"]),
+    "lava": dict(title="CARS VS LAVA ROAD!", obst="erupting lava road", max_fail=20.0, max_win=26.0,
+                 win_pool="any", force_theme=dict(location="volcano", weather="clear"),
+                 fail_lines={"pit": "Oh no! {n} fell into the lava!",
+                             "lava": "Yikes! {n} got blasted by the lava!"},
+                 yt_title="Cars VS Lava Road! Who Survives? 🌋🔥",
+                 tags=["cars", "lava", "volcano", "car crash", "crash test", "physics simulation", "shorts",
+                       "MegaWheel Arena"]),
 }
 # Filled by make_track(series, seed). Potholes seed 1 is the reference track.
 SERIES = ""
@@ -84,19 +101,177 @@ RAMP = None         # (x0, x1, height) or None
 OBSTACLES = []      # [(x_center, kind)] in track order, used for HUD markers + outcome tags
 DANGER_X = []       # where faces get scared
 SIGNS = []          # x of warning signs
+PUDDLES = []        # (x0, x1) low-grip water on the road
+BARRIERS = []       # (x, width, height) concrete walls
+VENTS = []          # dict(x, period, phase, dur, height) erupting lava vents
+RAMPS = []          # (x0, x1, height) wooden kickers (RAMP = first one, kept for potholes)
+PIT_KIND = "mud"    # "mud" | "lava"
+OBST_SPANS = []     # (x0, x1) of every hazard in track order (outcome tags "obs<i>")
 TRACK = []
 TRACK_PARAMS = {}
 TRACK_ID = ""
 
 
+def _reset_hazards():
+    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP
+    PUDDLES, BARRIERS, VENTS, RAMPS, PITS, BUMPS = [], [], [], [], [], []
+    PIT_KIND, RAMP = "mud", None
+
+
 def make_track(series, seed):
-    global SERIES, TITLE
+    global SERIES, TITLE, OBST_SPANS
     SERIES = series
     TITLE = SERIES_DEFS[series]["title"]
-    if series == "bumps":
-        make_bumps_track(seed)
-    else:
-        make_potholes_track(seed)
+    _reset_hazards()
+    {"bumps": make_bumps_track, "splash": make_splash_track, "lava": make_lava_track}.get(
+        series, make_potholes_track)(seed)
+    if not OBST_SPANS:
+        OBST_SPANS = [(a, b) for a, b, _ in (PITS or BUMPS)]
+
+
+class _TB:
+    """Tiny track builder: appends polyline points left to right."""
+
+    def __init__(self, x0=0.0):
+        self.pts = [(-40, 0), (x0, 0)]
+
+    @property
+    def x(self):
+        return self.pts[-1][0]
+
+    @property
+    def y(self):
+        return self.pts[-1][1]
+
+    def flat(self, length):
+        self.pts.append((round(self.x + length, 2), self.y))
+
+    def to(self, dx, y):
+        self.pts.append((round(self.x + dx, 2), round(y, 2)))
+
+    def drop(self, y):
+        self.pts.append((self.x, round(y, 2)))
+
+
+def make_splash_track(seed):
+    """Wet road: puddles steal traction right before a wall jump, a steep hill and a pit jump."""
+    global PUDDLES, BARRIERS, RAMPS, RAMP, PITS, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, \
+        FINISH_X, OBST_SPANS
+    r = np.random.default_rng(6000 + seed)
+    order = [str(k) for k in r.permutation(["wall", "hill", "pit"])]
+    tb = _TB(0.0)
+    tb.flat(float(r.uniform(16, 20)))
+    params, spans, obst, danger = [], [], [], []
+    for kind in order:
+        pl = round(float(r.uniform(5, 8)), 1)
+        p0 = tb.x
+        tb.flat(pl)
+        PUDDLES.append((p0, tb.x))
+        if kind == "wall":
+            tb.flat(3.0)
+            rl, rh = round(float(r.uniform(4.5, 5.5)), 1), round(float(r.uniform(0.9, 1.2)), 2)
+            x0 = tb.x
+            tb.to(rl, rh)
+            tb.drop(0.0)
+            RAMPS.append((x0, tb.x, rh))
+            tb.flat(1.2)
+            bh = round(float(r.uniform(1.4, 2.0)), 2)
+            BARRIERS.append((tb.x, 1.0, bh))
+            spans.append((p0, tb.x + 1.0))
+            obst.append((tb.x + 0.5, "wall"))
+            tb.flat(float(r.uniform(9, 11)))
+            params.append(dict(kind=kind, puddle=pl, ramp=(rl, rh), wall=bh))
+        elif kind == "hill":
+            hh, run = round(float(r.uniform(3.2, 4.2)), 2), round(float(r.uniform(6.5, 8.0)), 1)
+            x0 = tb.x
+            PUDDLES[-1] = (p0, x0 + run * 0.45)              # the lower half of the slope is wet too
+            tb.to(run, hh)
+            tb.flat(3.0)
+            tb.to(run * 1.2, 0.0)
+            spans.append((p0, tb.x))
+            obst.append((x0 + run, "hill"))
+            tb.flat(float(r.uniform(8, 10)))
+            params.append(dict(kind=kind, puddle=pl, hill=(hh, run)))
+        else:
+            tb.flat(3.0)
+            rl, rh = round(float(r.uniform(5, 6.5)), 1), round(float(r.uniform(1.2, 1.5)), 2)
+            x0 = tb.x
+            tb.to(rl, rh)
+            pw, pd = round(float(r.uniform(6.5, 8.5)), 1), round(float(r.uniform(3.8, 4.6)), 1)
+            tb.drop(-pd)
+            px0 = tb.x
+            tb.flat(pw)
+            tb.drop(0.0)
+            RAMPS.append((x0, px0, rh))
+            PITS.append((px0, tb.x, pd))
+            spans.append((p0, tb.x))
+            obst.append(((px0 + tb.x) / 2, "pit"))
+            tb.flat(float(r.uniform(9, 11)))
+            params.append(dict(kind=kind, puddle=pl, ramp=(rl, rh), pit=(pw, pd)))
+        danger.append(p0)
+    FINISH_X = round(tb.x - 2.0, 1)
+    tb.pts.append((FINISH_X + 80, 0))
+    TRACK = tb.pts
+    RAMP = RAMPS[0] if RAMPS else None
+    OBST_SPANS, OBSTACLES, DANGER_X = spans, obst, danger
+    SIGNS = [d - 3 for d in danger]
+    TRACK_PARAMS = dict(order=order, parts=params)
+    TRACK_ID = "splash_" + hashlib.md5(json.dumps(TRACK_PARAMS).encode()).hexdigest()[:8]
+
+
+def make_lava_track(seed):
+    """Volcano road: erupting vents (timing!) and lava pits, the big one after a ramp."""
+    global VENTS, RAMPS, RAMP, PITS, PIT_KIND, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, \
+        FINISH_X, OBST_SPANS
+    r = np.random.default_rng(7000 + seed)
+    PIT_KIND = "lava"
+    tb = _TB(0.0)
+    tb.flat(float(r.uniform(20, 24)))
+    spans, obst, danger = [], [], []
+
+    def vent():
+        v = dict(x=round(tb.x + 1.0, 2), period=round(float(r.uniform(2.2, 3.2)), 2),
+                 phase=round(float(r.uniform(0, 3)), 2), dur=round(float(r.uniform(0.7, 0.95)), 2),
+                 height=round(float(r.uniform(5, 7)), 1))
+        VENTS.append(v)
+        spans.append((v["x"] - 1.5, v["x"] + 1.5))
+        obst.append((v["x"], "vent"))
+        danger.append(v["x"] - 1.5)
+        tb.flat(2.0)
+
+    def pit(w, d, ramp=None):
+        if ramp:
+            x0 = tb.x
+            tb.to(ramp[0], ramp[1])
+            RAMPS.append((x0, tb.x, ramp[1]))
+        tb.drop(-d)
+        px0 = tb.x
+        tb.flat(w)
+        tb.drop(0.0)
+        PITS.append((px0, tb.x, d))
+        spans.append((px0, tb.x))
+        obst.append(((px0 + tb.x) / 2, "lava"))
+        danger.append(px0 - (ramp[0] if ramp else 0))
+
+    pit(round(float(r.uniform(3.0, 4.2)), 1), 3.0)          # a pit first: vents never fire before cars get going
+    tb.flat(float(r.uniform(7, 9)))
+    vent()
+    tb.flat(float(r.uniform(6, 8)))
+    vent()
+    tb.flat(float(r.uniform(6, 8)))
+    pit(round(float(r.uniform(6.5, 8.5)), 1), 4.5, ramp=(round(float(r.uniform(5, 6.5)), 1),
+                                                       round(float(r.uniform(1.2, 1.6)), 2)))
+    tb.flat(float(r.uniform(7, 9)))
+    vent()
+    tb.flat(12.0)
+    FINISH_X = round(tb.x - 2.0, 1)
+    tb.pts.append((FINISH_X + 80, 0))
+    TRACK = tb.pts
+    RAMP = RAMPS[0] if RAMPS else None
+    OBST_SPANS, OBSTACLES, DANGER_X = spans, obst, danger
+    SIGNS = [d - 3 for d in danger]
+    TRACK_PARAMS = dict(vents=VENTS, pits=PITS, ramps=RAMPS)
+    TRACK_ID = "lava_" + hashlib.md5(json.dumps(TRACK_PARAMS).encode()).hexdigest()[:8]
 
 
 # Speed-bump generator knobs (tuned with tune_bumps.py; see DEV_HISTORY)
@@ -158,6 +333,7 @@ def make_potholes_track(seed):
              (p["p3x"], -p["p3d"]), (p3x1, -p["p3d"]), (p3x1, 0), (170, 0)]
     PITS = [(p["p1x"], x1, p["p1d"]), (rx1, p2x1, p["p2d"]), (p["p3x"], p3x1, p["p3d"])]
     RAMP = (p["rampx"], rx1, p["ramph"])
+    RAMPS[:] = [RAMP]
     BUMPS = []
     OBSTACLES = [((a + b) / 2, "pit") for a, b, _ in PITS]
     DANGER_X = [p["p1x"], p["rampx"], p["p3x"]]
@@ -189,19 +365,29 @@ LOCATIONS = {
     "desert": dict(hills=[(0.95, 0.82, 0.58), (0.9, 0.72, 0.46)], ground=(0.86, 0.68, 0.42), cactus=True),
     "mountains": dict(hills=[(0.56, 0.6, 0.72), (0.4, 0.6, 0.42)], ground=(0.55, 0.42, 0.3), peaks=True),
     "beach": dict(hills=[(0.25, 0.58, 0.86), (0.96, 0.88, 0.64)], ground=(0.9, 0.8, 0.55), ocean=True, palms=True),
+    "volcano": dict(hills=[(0.36, 0.28, 0.28), (0.26, 0.2, 0.2)], ground=(0.32, 0.27, 0.26), volcano=True),
 }
-NO_SNOW = {"desert", "beach"}
+NO_SNOW = {"desert", "beach", "volcano"}
+RANDOM_LOCATIONS = ["countryside", "city", "desert", "mountains", "beach"]   # volcano only for the lava series
 THEME = dict(time="noon", weather="clear", location="countryside")
 THEME_ID = "noon-clear-countryside"
 
 
-def make_theme(seed, force=None):
-    """Pick time/weather/location from the seed (plausible combos only)."""
+def make_theme(seed, force=None, used=None):
+    """Time + location rotate (fewest uses in the registry first, seed breaks ties); weather is random
+    with plausible combos only. `used` = list of previous theme ids."""
     global THEME, THEME_ID
     r = np.random.default_rng(4000 + seed)
-    loc = str(r.choice(list(LOCATIONS)))
-    time_ = str(r.choice(list(TIMES), p=[0.25, 0.25, 0.25, 0.25]))
-    w = str(r.choice(["clear", "rain", "snow"], p=[0.55, 0.25, 0.2]))
+    used = used or []
+
+    def least(options, idx):
+        cnt = {o: sum(1 for u in used if u.split("-")[idx] == o) for o in options}
+        tie = {o: float(r.random()) for o in options}
+        return min(options, key=lambda o: (cnt[o], tie[o]))
+
+    loc = least(RANDOM_LOCATIONS, 2)
+    time_ = least(list(TIMES), 0)
+    w = str(r.choice(["clear", "rain", "snow"], p=[0.5, 0.25, 0.25]))
     if w == "snow" and loc in NO_SNOW:
         w = "clear"
     if w == "rain" and loc == "desert":
@@ -298,8 +484,9 @@ FACES.update({
     "icecream": dict(eyes=[(2.05, 0.38), (2.45, 0.38)], r=0.15, mouth=(2.5, -0.62), mw=0.35),
 })
 # Level roles: seed picks one vehicle per role (potholes seed 1 keeps the reference line-up)
-ROSTER = [(("sports", "police", "f1", "taxi"), "fail"), (("bus", "firetruck", "bigrig", "icecream"), "fail"),
-          (("monster", "monster2"), "win")]
+BASE_ROSTER = [(("sports", "police", "f1", "taxi"), "fail"), (("bus", "firetruck", "bigrig", "icecream"), "fail"),
+               (("monster", "monster2"), "win")]
+ROSTER = list(BASE_ROSTER)          # per video: champion options widened by make_story() (series win_pool)
 ROLE_ORDER = []     # per level: characters in preferred order (fewest appearances first); fallback if one can't fit
 STORY = [("sports", "fail"), ("bus", "fail"), ("monster", "win")]
 NUM_WORDS = ["one", "two", "three", "four", "five"]
@@ -319,22 +506,29 @@ def load_cast():
                  intro=c["intro"])
 
 
-def make_story(series, seed, appearances=None):
-    """Order the characters of each role: fewest appearances first (fair rotation), seed breaks ties.
+def make_story(series, seed, appearances=None, wins=None):
+    """Order the characters of each role (fair rotation, seed breaks ties).
 
-    STORY takes the first of each role; main() falls back to the next one if a character
-    cannot produce the wanted outcome on this track.
+    Fail roles: fewest appearances first. Champion role: fewest WINS first, and with win_pool "any"
+    every character may be champion (the physics decides; candidate_runs() falls back to the next
+    character when one cannot produce the wanted outcome). Nobody plays two levels.
     """
-    global STORY, ROLE_ORDER
+    global STORY, ROLE_ORDER, ROSTER
+    pool = SERIES_DEFS[series].get("win_pool", "monsters")
+    champs = tuple(VEHICLES) if pool == "any" else BASE_ROSTER[2][0]
+    ROSTER = [BASE_ROSTER[0], BASE_ROSTER[1], (champs, "win")]
     if series == "potholes" and seed == 1:
         ROLE_ORDER = [["sports"], ["bus"], ["monster"]]
     else:
         r = np.random.default_rng(3000 + seed)
-        appearances = appearances or {}
+        appearances, wins = appearances or {}, wins or {}
         ROLE_ORDER = []
-        for opts, _ in ROSTER:
+        for li, (opts, want) in enumerate(ROSTER):
             tie = {o: float(r.random()) for o in opts}
-            ROLE_ORDER.append(sorted(opts, key=lambda o: (appearances.get(o, 0), tie[o])))
+            if want == "win":
+                ROLE_ORDER.append(sorted(opts, key=lambda o: (wins.get(o, 0), appearances.get(o, 0), tie[o])))
+            else:
+                ROLE_ORDER.append(sorted(opts, key=lambda o: (appearances.get(o, 0), tie[o])))
     STORY = [(order[0], want) for order, (_, want) in zip(ROLE_ORDER, ROSTER)]
 
 
@@ -342,21 +536,41 @@ def intro_text(li, vk):
     return VEHICLES[vk]["intro"].format(lvl=NUM_WORDS[li], obst=SERIES_DEFS[SERIES]["obst"])
 FAIL_LINES = {"pit": "Oh no! {n} fell into the giant pothole!",
               "flip": "Whoa! {n} flipped right over!",
-              "stuck": "Uh oh... {n} is totally stuck!"}
+              "stuck": "Uh oh... {n} is totally stuck!",
+              "crash": "Crash! {n} slammed into the wall!",
+              "rollback": "Uh oh! {n} slid all the way back down!",
+              "lava": "Yikes! {n} got blasted by the lava!"}
 WIN_LINE = "Yes! {n} made it! We have a winner!"
 LEVEL_COLORS = [(0.18, 0.72, 0.3), (1.0, 0.52, 0.08), (0.6, 0.3, 0.92)]
 
 
 # ================================================================ physics
+PUDDLE_FRICTION = 0.06
+
+
+def in_puddle(x):
+    return any(x0 <= x <= x1 for x0, x1 in PUDDLES)
+
+
+def vent_active(vent, t):
+    return ((t + vent["phase"]) % vent["period"]) < vent["dur"]
+
+
 def build_space():
     space = pymunk.Space()
     space.gravity = (0, -9.81)
     space.iterations = 25
+    wf = WEATHERS[THEME["weather"]]["friction"]
     for a, b in zip(TRACK, TRACK[1:]):
         seg = pymunk.Segment(space.static_body, a, b, 0.08)
-        seg.friction = 1.0 * WEATHERS[THEME["weather"]]["friction"]
+        seg.friction = PUDDLE_FRICTION if in_puddle((a[0] + b[0]) / 2) else 1.0 * wf
         seg.elasticity = 0.05
         space.add(seg)
+    for bx, bwid, bh in BARRIERS:                         # solid concrete walls
+        wall = pymunk.Poly(space.static_body, [(bx, 0), (bx + bwid, 0), (bx + bwid, bh), (bx, bh)], radius=0.03)
+        wall.friction = 0.8
+        wall.elasticity = 0.15
+        space.add(wall)
     return space
 
 
@@ -404,7 +618,7 @@ def spawn(space, v, x0):
 
 def nearest_obstacle(x):
     best, bi = 1e9, -1
-    for i, (x0, x1, _) in enumerate(PITS or BUMPS):
+    for i, (x0, x1) in enumerate(OBST_SPANS):
         d = 0 if x0 - 1 <= x <= x1 + 1 else min(abs(x - x0), abs(x - x1))
         if d < best:
             best, bi = d, i
@@ -469,8 +683,9 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
     target = speed / r                      # SimpleMotor: wheel.w - chassis.w = -rate -> +x motion
     rec = dict(cx=[], cy=[], ca=[], wheels=[], wrel=[], speed=[], air=[])
     deb_rec, debris = [], []
-    impacts, event, broken = [], None, None
-    flip_t = stuck_t = None
+    impacts, event, broken, burned = [], None, None, None
+    flip_t = stuck_t = back_t = None
+    vent_hit = set()
     prev_v = ch.velocity
     last_imp = -1.0
     i = 0
@@ -510,6 +725,21 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         if dv > 2.5 and t - last_imp > 0.25:
             impacts.append((t, min(1.0, dv / 10.0), ch.position.x, ch.position.y))
             last_imp = t
+        front = ch.position.x + bw / 2 * math.cos(ch.angle)
+        if event is None and dv > 4.0 and any(bx - 1.0 <= front <= bx + bwid + 0.5 and ch.position.y < bh + bh_car(v)
+                                              for bx, bwid, bh in BARRIERS):
+            event = dict(type="crash", t=t)                 # slammed into a wall
+        for vi, vent in enumerate(VENTS):                   # lava eruption blasts the car
+            if vi in vent_hit or not vent_active(vent, t):
+                continue
+            # narrow fountain column: only the car body right above the vent is blasted (length-independent)
+            if abs(ch.position.x - vent["x"]) < 1.1 and ch.position.y < car["ride_y"] + 2.5:
+                vent_hit.add(vi)
+                m_tot = v["mass"]
+                ch.apply_impulse_at_local_point((m_tot * 1.0, m_tot * 7.0), (-bw * 0.3, 0))
+                burned = burned or t
+                if event is None:
+                    event = dict(type="lava", t=t)
         if event is not None and event["type"] != "win" and broken is None and dv > v["break_dv"]:
             debris = break_car(space, car, v, rng, dv, i)
             broken = dict(t=t, x=ch.position.x, y=ch.position.y)
@@ -524,6 +754,14 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 flip_t = None
             if event is None and ch.position.y - car["ride_y"] < -2.2:
                 event = dict(type="pit", t=max(0.0, t - 0.3))
+                if PIT_KIND == "lava":
+                    burned = burned or t
+            if event is None and t > 1.5 and ch.velocity.x < -0.8:  # slid back down a hill
+                back_t = back_t if back_t is not None else t
+                if t - back_t > 0.8:
+                    event = dict(type="rollback", t=back_t)
+            elif ch.velocity.x >= -0.8:
+                back_t = None
             if event is None and t > 2.0 and ch.velocity.length < 0.6:
                 stuck_t = stuck_t if stuck_t is not None else t
                 if t - stuck_t > 1.5:
@@ -534,11 +772,11 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 event = dict(type="win", t=t)
             if event is None and t > t_max:
                 event = dict(type="timeout", t=t)
-            if event is not None:
-                event["x"] = ch.position.x
-                event["obstacle"] = nearest_obstacle(ch.position.x)
         elif t >= event["t"] + (after_win if event["type"] == "win" else after_fail):
             break
+        if event is not None and "obstacle" not in event:   # also for crash/lava events set above
+            event["x"] = ch.position.x
+            event["obstacle"] = nearest_obstacle(ch.position.x)
 
     for k in rec:
         rec[k] = np.asarray(rec[k], dtype=np.float64)
@@ -547,11 +785,15 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
     for si, row in enumerate(deb_rec):
         for di, stt in enumerate(row):
             deb[si, di] = stt
-    if rec["cx"][-1] < rec["cx"][0] + 1 and event["type"] != "stuck":
+    if np.max(rec["cx"]) < rec["cx"][0] + 1 and event["type"] != "stuck":
         raise RuntimeError("car did not move forward, motor sign is wrong")
     meta = [{k: d[k] for k in ("kind", "size", "verts", "color", "spawn")} for d in debris]
-    return dict(rec=rec, impacts=impacts, event=event, speed=float(speed), broken=broken,
+    return dict(rec=rec, impacts=impacts, event=event, speed=float(speed), broken=broken, burned=burned,
                 debris=deb, debris_meta=meta, detached=car["detached"])
+
+
+def bh_car(v):
+    return v["body"][1] + v["wheel_r"] * 2 + v["travel"]
 
 
 TARGET_TOTAL = (42.0, 49.5)   # seconds, pacing window used when picking runs
@@ -602,6 +844,8 @@ def candidate_runs():
     out, story, intros = [], [], []
     for li, (order, (_, want)) in enumerate(zip(ROLE_ORDER, ROSTER)):
         for vk in order:
+            if any(vk == used for used, _ in story):         # nobody plays two levels
+                continue
             text = intro_text(li, vk)
             audio = tts(text)
             cands = runs_for(vk, want, len(audio) / SR)
@@ -957,6 +1201,74 @@ def synth_win():
     return np.concatenate([arp, chord + sparkle])
 
 
+def _band(x, lo, hi):
+    """Crude band-pass: difference of two moving averages (lo/hi in samples)."""
+    return smooth(x, lo) - smooth(x, hi)
+
+
+def synth_splash(strength=1.0, seed=41):
+    """Car hitting water: wet burst + falling droplets."""
+    n = int(0.8 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    body = _band(rng.standard_normal(n), 2, 30) * np.exp(-t / 0.12) * 1.4
+    hiss = (rng.standard_normal(n) - smooth(rng.standard_normal(n), 3)) * np.exp(-t / 0.3) * 0.4
+    drops = np.zeros(n)
+    for _ in range(18):
+        p = sweep(rng.uniform(900, 2200), rng.uniform(400, 900), 0.05, 0.35)
+        i0 = int(rng.uniform(0.05, 0.65) * SR)
+        drops[i0:i0 + len(p)] += p[:max(0, n - i0)]
+    return (body + hiss + drops) * (0.5 + 0.5 * strength)
+
+
+def synth_eruption(seed=43):
+    """Lava vent: deep rumble build-up, then a roaring blast with crackles (~1.6 s)."""
+    n = int(1.6 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    rumble = smooth(rng.standard_normal(n), 220) * 6.0 * np.clip(t / 0.4, 0, 1)
+    blast_env = np.where(t > 0.35, np.exp(-(t - 0.35) / 0.45), 0.0)
+    blast = _band(rng.standard_normal(n), 3, 60) * blast_env * 1.5
+    boom = np.sin(2 * np.pi * (48 - 12 * t) * t) * blast_env * 1.6
+    crackle = np.zeros(n)
+    for _ in range(40):
+        i0 = int(rng.uniform(0.35, 1.5) * SR)
+        m = int(0.004 * SR)
+        crackle[i0:i0 + m] += rng.standard_normal(min(m, n - i0)) * rng.uniform(0.3, 0.9)
+    return rumble + blast + boom + crackle
+
+
+def synth_sizzle(seed=47):
+    """Hot lava on metal: bright hiss with pops (~1.4 s)."""
+    n = int(1.4 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    x = rng.standard_normal(n)
+    hiss = (x - smooth(x, 2)) * np.minimum(1, t / 0.05) * np.exp(-t / 0.7) * 0.9
+    pops = np.zeros(n)
+    for _ in range(25):
+        i0 = int(rng.uniform(0, 1.3) * SR)
+        p = tone(rng.uniform(1500, 4000), 0.015, "sine", decay=0.004) * 0.6
+        pops[i0:i0 + len(p)] += p[:max(0, n - i0)]
+    return hiss + pops
+
+
+def synth_wall_crash(strength=1.0, seed=53):
+    """Car into concrete: heavy thud + crunch + metal clang + falling rubble (~1 s)."""
+    n = int(1.0 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    thud = np.sin(2 * np.pi * (60 - 25 * t) * t) * np.exp(-t / 0.3) * 1.8
+    crunch = smooth(rng.standard_normal(n), 4) * np.exp(-t / 0.12) * 1.2
+    clang = sum(np.sin(2 * np.pi * f * t) * np.exp(-t / d) for f, d in ((320, 0.25), (515, 0.18), (790, 0.12))) * 0.35
+    rubble = np.zeros(n)
+    for _ in range(22):
+        i0 = int(rng.uniform(0.12, 0.9) * SR)
+        m = int(0.02 * SR)
+        rubble[i0:i0 + m] += smooth(rng.standard_normal(min(m, n - i0)), 3) * np.exp(-np.arange(min(m, n - i0)) / SR / 0.006) * 0.7
+    return (thud + crunch + clang + rubble) * (0.6 + 0.4 * strength)
+
+
 def synth_whoosh():
     n = int(0.45 * SR)
     t = np.arange(n) / SR
@@ -1189,6 +1501,37 @@ def draw_sky(ctx, camx, camy, z):
                        (px + 25, horizon - ph + 70), (px - 20, horizon - ph + 95)])
             ctx.set_source_rgb(*lit((0.97, 0.98, 1.0)))
             ctx.fill()
+    if loc.get("volcano"):                                      # erupting volcano on the horizon
+        hg = cairo.LinearGradient(0, horizon - 500, 0, horizon + 60)
+        hg.add_color_stop_rgba(0, 1, 0.3, 0.05, 0.0)
+        hg.add_color_stop_rgba(1, 1, 0.35, 0.05, 0.45)
+        ctx.rectangle(0, horizon - 500, W, 560)
+        ctx.set_source(hg)
+        ctx.fill()
+        vx0 = 620 - (camx * S * 0.05) % 2200
+        for vx in (vx0, vx0 + 2200):
+            if -700 < vx < W + 700:
+                poly(ctx, [(vx - 560, horizon + 80), (vx - 110, horizon - 470), (vx + 110, horizon - 470),
+                           (vx + 560, horizon + 80)])
+                ctx.set_source_rgb(*lit((0.24, 0.18, 0.18)))
+                ctx.fill()
+                for k, off in enumerate((-60, 10, 70)):           # glowing lava streams (upper slope only)
+                    ctx.move_to(vx + off * 0.4, horizon - 470)
+                    ctx.curve_to(vx + off * 0.9, horizon - 400, vx + off * 1.4 - 15, horizon - 330,
+                                 vx + off * 1.8, horizon - 250)
+                    ctx.set_source_rgba(1, 0.4 + 0.1 * k, 0.05, 0.9)
+                    ctx.set_line_width(14 - 3 * k)
+                    ctx.stroke()
+                rg = cairo.RadialGradient(vx, horizon - 470, 20, vx, horizon - 470, 190)
+                rg.add_color_stop_rgba(0, 1, 0.6, 0.1, 0.9)
+                rg.add_color_stop_rgba(1, 1, 0.3, 0.0, 0.0)
+                ctx.arc(vx, horizon - 470, 190, 0, 2 * math.pi)
+                ctx.set_source(rg)
+                ctx.fill()
+                for j in range(6):                                # smoke plume
+                    ctx.arc(vx + 40 * j + 20 * math.sin(j), horizon - 540 - 70 * j, 55 + 18 * j, 0, 2 * math.pi)
+                    ctx.set_source_rgba(0.3, 0.27, 0.27, 0.55 - 0.07 * j)
+                    ctx.fill()
     if loc.get("skyline"):                                      # city buildings (far)
         rng = np.random.default_rng(7)
         blds = [(rng.uniform(60, 140), rng.uniform(180, 520)) for _ in range(24)]
@@ -1294,7 +1637,7 @@ def draw_weather(ctx, t):
         ctx.paint()
 
 
-def draw_track(ctx, view0, view1):
+def draw_track(ctx, view0, view1, t=0.0):
     gc = lit(th_loc()["ground"])
     for x0, x1, d in PITS:
         ctx.rectangle(x0, -d, x1 - x0, d)
@@ -1320,14 +1663,47 @@ def draw_track(ctx, view0, view1):
             ctx.set_source_rgb(*shade(gc, k))
             ctx.fill()
     for x0, x1, d in PITS:
+        if PIT_KIND == "lava":                                  # glowing lava pool with bubbles
+            glow = cairo.LinearGradient(0, -d, 0, 0)
+            glow.add_color_stop_rgba(0, 1, 0.45, 0.05, 0.8)
+            glow.add_color_stop_rgba(1, 1, 0.3, 0.0, 0.0)
+            ctx.rectangle(x0, -d, x1 - x0, d)
+            ctx.set_source(glow)
+            ctx.fill()
+            lg = cairo.LinearGradient(0, -d, 0, -d + 1.3)
+            lg.add_color_stop_rgb(0, 0.95, 0.25, 0.02)
+            lg.add_color_stop_rgb(1, 1.0, 0.75, 0.1)
+            ctx.rectangle(x0, -d, x1 - x0, 1.3)
+            ctx.set_source(lg)
+            ctx.fill()
+            for j in range(int((x1 - x0) / 0.7)):
+                ph = (t * 1.3 + j * 0.37) % 1.0
+                ctx.arc(x0 + 0.35 + j * 0.7, -d + 1.3 + ph * 0.25, 0.12 + 0.12 * ph, 0, 2 * math.pi)
+                ctx.set_source_rgba(1, 0.9, 0.3, 1 - ph)
+                ctx.fill()
+            continue
         ctx.rectangle(x0, -d, x1 - x0, 0.55)
         ctx.set_source_rgb(*shade(gc, 0.68))
         ctx.fill()
         for j in range(int((x1 - x0) / 0.8)):
             ctx.arc(x0 + 0.4 + j * 0.8, -d + 0.55, 0.22, 0, math.pi)
             ctx.fill()
+    ramp_x = [(a0, a1) for a0, a1, _ in RAMPS]
     for a, b in zip(TRACK, TRACK[1:]):
-        if a[1] < -0.01 or b[1] < -0.01 or abs(a[0] - b[0]) < 1e-6 or b[1] > 0.01 or a[1] > 0.01:
+        if min(a[1], b[1]) < -0.01 or abs(a[0] - b[0]) < 1e-6:
+            continue
+        mid = (a[0] + b[0]) / 2
+        if any(x0 <= mid <= x1 for x0, x1, _ in BUMPS) or any(x0 <= mid <= x1 for x0, x1 in ramp_x):
+            continue
+        if abs(a[1]) > 0.01 or abs(b[1]) > 0.01:                 # hill slopes: road band follows the slope
+            poly(ctx, [a, b, (b[0], b[1] - 0.55), (a[0], a[1] - 0.55)])
+            ctx.set_source_rgb(*lit((0.26, 0.26, 0.3)))
+            ctx.fill()
+            ctx.move_to(*a)
+            ctx.line_to(*b)
+            ctx.set_source_rgb(*lit((0.4, 0.4, 0.45)))
+            ctx.set_line_width(0.1)
+            ctx.stroke()
             continue
         poly(ctx, [a, b, (b[0], b[1] - 0.55), (a[0], a[1] - 0.55)])
         ctx.set_source_rgb(*lit((0.26, 0.26, 0.3)))
@@ -1348,14 +1724,57 @@ def draw_track(ctx, view0, view1):
             x += 3.0
     for x0, x1, d in PITS:
         for xe, sgn in [(x0, -1), (x1, 1)]:
-            if RAMP and abs(xe - RAMP[1]) < 1e-6:
+            if any(abs(xe - r1) < 1e-6 for _, r1, _ in RAMPS):
                 continue
             poly(ctx, [(xe, 0), (xe, -0.55), (xe + sgn * 0.25, -0.35), (xe + sgn * 0.12, -0.2),
                        (xe + sgn * 0.3, 0)])
             ctx.set_source_rgb(0.28, 0.17, 0.1)
             ctx.fill()
-    if RAMP:
-        rx0, rx1, rh = RAMP
+    for x0, x1 in PUDDLES:                                       # water on the road (follows slopes)
+        if x1 < view0 - 1 or x0 > view1 + 1:
+            continue
+        pts, x = [], x0
+        while x <= x1 + 1e-6:
+            pts.append((x, ground_h(x)))
+            x += 0.25
+        ctx.new_path()
+        ctx.move_to(pts[0][0], pts[0][1] + 0.02)
+        for px, py in pts:
+            ctx.line_to(px, py + 0.1)
+        for px, py in reversed(pts):
+            ctx.line_to(px, py - 0.2)
+        ctx.close_path()
+        ctx.set_source_rgba(*lit((0.35, 0.65, 1.0)), 0.85)
+        ctx.fill()
+        ctx.set_source_rgba(1, 1, 1, 0.7)                        # shimmer
+        ctx.set_line_width(0.05)
+        for k in range(int((x1 - x0) / 1.2)):
+            sx = x0 + 0.4 + k * 1.2 + 0.3 * math.sin(t * 3 + k)
+            ctx.move_to(sx, ground_h(sx) + 0.05)
+            ctx.line_to(sx + 0.4, ground_h(sx + 0.4) + 0.05)
+            ctx.stroke()
+    for bx, bwid, bh in BARRIERS:                                # concrete wall, red/white warning stripes
+        rrect(ctx, bx, 0, bwid, bh, 0.08)
+        fill_stroke(ctx, lit((0.75, 0.75, 0.78)), lw=0.06)
+        ctx.save()
+        rrect(ctx, bx, bh - 0.45, bwid, 0.35, 0.05)
+        ctx.clip()
+        k = 0
+        sx = bx - 0.5
+        while sx < bx + bwid + 0.5:
+            poly(ctx, [(sx, bh - 0.45), (sx + 0.25, bh - 0.45), (sx + 0.6, bh - 0.1), (sx + 0.35, bh - 0.1)])
+            ctx.set_source_rgb(*((0.9, 0.15, 0.15) if k % 2 else (1, 1, 1)))
+            ctx.fill()
+            sx += 0.25
+            k += 1
+        ctx.restore()
+    for vent in VENTS:                                           # glowing crack in the road
+        vx = vent["x"]
+        heat = 0.6 + 0.4 * math.sin(t * 6)
+        poly(ctx, [(vx - 0.9, 0.02), (vx - 0.4, -0.3), (vx, 0.0), (vx + 0.35, -0.35), (vx + 0.9, 0.02)])
+        ctx.set_source_rgb(1, 0.45 + 0.3 * heat, 0.05)
+        ctx.fill()
+    for rx0, rx1, rh in RAMPS:
         poly(ctx, [(rx0, 0), (rx1, rh), (rx1, 0)])
         fill_stroke(ctx, (0.85, 0.58, 0.28), lw=0.07)
         ctx.set_source_rgb(0.6, 0.38, 0.16)
@@ -1802,6 +2221,14 @@ def draw_car(ctx, L, s, mood, st):
     ctx.translate(cx, cy)
     ctx.rotate(ca)
     draw_body(ctx, vk, v, broken, st)
+    if L.get("burned") is not None and st >= L["burned"]:       # cartoon soot after a lava hit
+        bw, bh = v["body"]
+        rng = np.random.default_rng(17)
+        for _ in range(14):
+            ctx.arc(rng.uniform(-bw / 2, bw / 2), rng.uniform(-bh / 2, bh / 2 + 0.3), rng.uniform(0.15, 0.45),
+                    0, 2 * math.pi)
+            ctx.set_source_rgba(0.08, 0.06, 0.06, 0.55)
+            ctx.fill()
     draw_face(ctx, vk, mood, st)
     ctx.restore()
 
@@ -1840,9 +2267,12 @@ def draw_effects(ctx, L, s, st):
                 ctx.set_source_rgba(1, 0.75 + rng.uniform(0, 0.25), 0.2, 1 - age / 0.6)
                 ctx.set_line_width(0.07)
                 ctx.stroke()
+    smoke_t = min([x for x in ((b or {}).get("t"), L.get("burned")) if x is not None], default=None)
+    if smoke_t is not None and st >= smoke_t:
+        dark = 0.3 if L.get("burned") else 0.55                 # lava = thick black smoke
         k = 0                              # smoke puffs from the wreck
         while True:
-            ts = b["t"] + k * 0.18
+            ts = smoke_t + k * 0.18
             if ts > st:
                 break
             pa = st - ts
@@ -1851,9 +2281,20 @@ def draw_effects(ctx, L, s, st):
                 x = p["cx"] + 0.3 * pa + 0.2 * math.sin(k * 1.7)
                 y = p["cy"] + 0.4 + 1.3 * pa
                 ctx.arc(x, y, 0.25 + 0.45 * pa, 0, 2 * math.pi)
-                ctx.set_source_rgba(0.55, 0.55, 0.58, 0.5 * (1 - pa / 1.8))
+                ctx.set_source_rgba(dark, dark, dark + 0.03, 0.55 * (1 - pa / 1.8))
                 ctx.fill()
             k += 1
+    for wx, wy, _ in s["wheels"]:                                # water splash from wheels in a puddle
+        if in_puddle(wx) and s["speed"] > 1.5:
+            r = L["v"]["wheel_r"]
+            for j in range(9):
+                ph = (st * 3.0 + j * 0.11) % 1.0
+                vx, vy = -2.5 - (j % 3) * 1.2, 2.5 + (j % 4) * 0.9
+                x = wx + vx * ph * 0.6
+                y = wy - r + vy * ph * 0.6 - 4.9 * (ph * 0.6) ** 2
+                ctx.arc(x, y, 0.08 + 0.05 * (j % 3), 0, 2 * math.pi)
+                ctx.set_source_rgba(0.6, 0.85, 1.0, 0.85 * (1 - ph))
+                ctx.fill()
     ev = L["event"]
     if ev["type"] != "win" and st >= ev["t"] + 0.4:   # dizzy stars
         top = s["cy"] + L["v"]["body"][1] / 2 + 1.0
@@ -1861,6 +2302,46 @@ def draw_effects(ctx, L, s, st):
             a = st * 4 + k * 2 * math.pi / 3
             star(ctx, s["cx"] + math.cos(a) * 0.9, top + math.sin(a) * 0.22, 0.2, a)
             fill_stroke(ctx, (1, 0.88, 0.2), lw=0.03)
+
+
+def draw_eruptions(ctx, st):
+    """Lava fountains from the vents (drawn in world space, in front of the car)."""
+    FALL = 0.9                                                   # visual tail after the dangerous window
+    for vent in VENTS:
+        ph = (st + vent["phase"]) % vent["period"]
+        vx = vent["x"]
+        if ph < vent["dur"] + FALL:
+            a = ph / vent["dur"]
+            rise = min(1.0, ph / (vent["dur"] * 0.35))
+            fall = 1.0 if ph < vent["dur"] else max(0.0, 1 - (ph - vent["dur"]) / FALL)
+            top = vent["height"] * rise * fall
+            rg = cairo.RadialGradient(vx, top * 0.4, 0.2, vx, top * 0.4, max(1.0, top * 0.8))
+            rg.add_color_stop_rgba(0, 1, 0.6, 0.1, 0.55)
+            rg.add_color_stop_rgba(1, 1, 0.3, 0.0, 0.0)
+            ctx.arc(vx, top * 0.4, max(1.0, top * 0.8), 0, 2 * math.pi)
+            ctx.set_source(rg)
+            ctx.fill()
+            rng = np.random.default_rng(int(vx * 10))
+            for j in range(26):
+                h = top * (j / 26)
+                wob = 0.25 * math.sin(st * 20 + j) + rng.uniform(-0.2, 0.2)
+                ctx.arc(vx + wob, h, 0.45 - 0.25 * (j / 26), 0, 2 * math.pi)
+                ctx.set_source_rgb(1, 0.35 + 0.5 * (j / 26), 0.05)
+                ctx.fill()
+            for j in range(10):                                  # flying blobs
+                bt = (a + j * 0.1) % 1.0
+                bx = vx + (j - 5) * 0.5 * bt * 2
+                by = top * 0.8 * (1 - (2 * bt - 1) ** 2) + 0.5
+                ctx.arc(bx, by, 0.18, 0, 2 * math.pi)
+                ctx.set_source_rgb(1, 0.55, 0.1)
+                ctx.fill()
+        elif vent["period"] - ph < 0.5:                          # rumble warning: bubbling
+            w = 1 - (vent["period"] - ph) / 0.5
+            for j in range(4):
+                ctx.arc(vx - 0.5 + j * 0.33, 0.1 + 0.3 * w * ((j + int(st * 10)) % 2), 0.12 + 0.1 * w,
+                        0, 2 * math.pi)
+                ctx.set_source_rgba(1, 0.5, 0.1, 0.8)
+                ctx.fill()
 
 
 def draw_dust(ctx, impacts, t):
@@ -2110,11 +2591,11 @@ def analyze(intro_durs):
     xs = [(L["rec"]["cx"][0], L["rec"]["cx"][-1]) for L in LEVELS]
     res.append(check("forward", "Semua mobil bergerak maju ke kanan (+x)", all(b > a + 5 for a, b in xs),
                      ", ".join(f"{a:.1f}->{b:.1f} m" for a, b in xs)))
-    spans = PITS or BUMPS
-    ok_obs = len(spans) >= 2 and all(START_X < x0 < x1 < FINISH_X for x0, x1, _ in spans)
-    kind = "lubang" if PITS else "polisi tidur"
+    spans = OBST_SPANS
+    ok_obs = len(spans) >= 2 and all(START_X < x0 < x1 < FINISH_X for x0, x1 in spans)
+    kinds = ", ".join(k for _, k in OBSTACLES) if OBSTACLES else "?"
     res.append(check("obstacles", "Minimal 2 rintangan di antara start dan finish", ok_obs,
-                     f"{len(spans)} {kind} ({spans[0][0]:.0f}-{spans[-1][1]:.0f} m), finish {FINISH_X:.0f} m"
+                     f"{len(spans)} rintangan [{kinds}] ({spans[0][0]:.0f}-{spans[-1][1]:.0f} m), finish {FINISH_X:.0f} m"
                      if spans else "tidak ada rintangan"))
     got = ["win" if L["event"]["type"] == "win" else "fail" for L in LEVELS]
     want = [w for _, w in STORY]
@@ -2215,11 +2696,12 @@ def draw_frame(ctx, g):
     ctx.scale(S * z, -S * z)
     ctx.translate(-camx, -camy)
     half = 540 / (S * z) + 2
-    draw_track(ctx, camx - half, camx + half)
+    draw_track(ctx, camx - half, camx + half, st)
     draw_shadow(ctx, L, s)
     draw_dust(ctx, L["impacts"], st)
     draw_debris(ctx, L, st)
     draw_car(ctx, L, s, mood_at(L, st, s), st)
+    draw_eruptions(ctx, st)
     draw_effects(ctx, L, s, st)
     ctx.restore()
     draw_weather(ctx, g / FPS)                                  # rain/snow + time-of-day tint
@@ -2306,10 +2788,16 @@ def main():
     for e in active:
         for vk in e.get("vehicles", []):
             appearances[vk] = appearances.get(vk, 0) + 1
-    force = dict(zip(("time", "weather", "location"), args.theme.split(","))) if args.theme else None
-    make_theme(args.seed, force)
+    wins = {}
+    for e in active:
+        if e.get("outcomes") and e["outcomes"][-1] == "win" and e.get("vehicles"):
+            wins[e["vehicles"][-1]] = wins.get(e["vehicles"][-1], 0) + 1
+    force = dict(SERIES_DEFS[series].get("force_theme", {}))
+    if args.theme:
+        force.update(zip(("time", "weather", "location"), args.theme.split(",")))
+    make_theme(args.seed, force or None, used=[e.get("theme", "") for e in active if e.get("theme")])
     make_track(series, args.seed)
-    make_story(series, args.seed, appearances)
+    make_story(series, args.seed, appearances, wins)
     if replace:                                              # keep the approved cast
         global ROLE_ORDER
         ROLE_ORDER = [[vk] for vk in replace["vehicles"]]
@@ -2356,7 +2844,8 @@ def main():
     replay_vo = tts(REPLAY_LINE)
 
     def outcome_line(vk, run):
-        tmpl = WIN_LINE if run["event"]["type"] == "win" else FAIL_LINES[run["event"]["type"]]
+        lines = dict(FAIL_LINES, **SERIES_DEFS[SERIES].get("fail_lines", {}))
+        tmpl = WIN_LINE if run["event"]["type"] == "win" else lines[run["event"]["type"]]
         return tmpl.format(n=VEHICLES[vk]["nick"])
 
     line_audio = {}
@@ -2452,6 +2941,29 @@ def main():
                 place(sfx, synth_impact(s, seed=100 + j), st0 + out_time(L, ti), 0.9)
         if L["broken"]:
             place(sfx, synth_shatter(), st0 + out_time(L, L["broken"]["t"]), 0.7)
+        # hazard sounds (series-specific)
+        rec = L["rec"]
+        live_n = min(len(rec["cx"]), int(L["live_end"] * REC_HZ))
+        for pi_, (px0, px1) in enumerate(PUDDLES):              # splash when the front wheel hits the water
+            hit = next((i for i in range(live_n) if px0 <= rec["wheels"][i][-1][0] <= px1), None)
+            if hit is not None:
+                place(sfx, synth_splash(min(1.0, rec["speed"][hit] / 12), seed=41 + pi_), st0 + out_time(L, hit / REC_HZ), 1.0)
+        for vi, vent in enumerate(VENTS):                        # every eruption; louder when the car is near
+            k = 0
+            while True:
+                t_er = k * vent["period"] - vent["phase"] - 0.35    # rumble starts just before the blast
+                k += 1
+                if t_er < 0:
+                    continue
+                if t_er > L["live_end"]:
+                    break
+                cx_then = float(interp(rec["cx"], t_er + 0.35))
+                gain = float(np.clip(1.1 - abs(cx_then - vent["x"]) / 22, 0.15, 1.0))
+                place(sfx, synth_eruption(seed=43 + vi * 7 + k), st0 + out_time(L, t_er), 0.9 * gain)
+        if L.get("burned") is not None:
+            place(sfx, synth_sizzle(), st0 + out_time(L, L["burned"]), 0.8)
+        if L["event"]["type"] == "crash":
+            place(sfx, synth_wall_crash(1.0), st0 + out_time(L, L["event"]["t"]), 1.0)
         for bt, text in L["bubbles"]:
             place(sfx, pop, st0 + out_time(L, bt), 0.6)
             if text == "UH OH!":
@@ -2474,6 +2986,10 @@ def main():
                     place(sfx, stretch(synth_impact(s, seed=200 + j), 0.45), r0 + (ti - ta) / REPLAY_SPEED, 1.0)
             if L["broken"] and ta <= L["broken"]["t"] < tb:
                 place(sfx, stretch(synth_shatter(), 0.5), r0 + (L["broken"]["t"] - ta) / REPLAY_SPEED, 0.7)
+            if L["event"]["type"] == "crash" and ta <= L["event"]["t"] < tb:
+                place(sfx, stretch(synth_wall_crash(1.0), 0.5), r0 + (L["event"]["t"] - ta) / REPLAY_SPEED, 1.0)
+            if L.get("burned") is not None and ta <= L["burned"] < tb:
+                place(sfx, stretch(synth_sizzle(), 0.6), r0 + (L["burned"] - ta) / REPLAY_SPEED, 0.8)
     bgm = synth_bgm(total, style=th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     # ducking: engine + music dip while the narrator talks, so every word is easy to catch

@@ -158,6 +158,25 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v2.7: seri bahaya baru — genangan air, dinding, semburan lahar + SFX realistis (Claude Code, Opus)
+
+**Masukan user:** perlu gaya lain: genangan air yang membuat mobil tergelincir dan menabrak, lahar yang keluar dari tanah; monster truck jangan selalu menang; suara efek visual harus terasa nyata.
+
+**Yang ditambahkan**
+- **Seri `splash` "Cars VS Splash Zone"** (`make_splash_track`, rng 6000+seed): urutan acak dari dinding beton, tanjakan, dan lubang. Setiap rintangan didahului genangan air dengan gesekan per segmen 0.06 (`PUDDLE_FRICTION`). Mobil bisa tergelincir, mundur di tanjakan basah (`rollback`), atau menabrak dinding (`crash`).
+- **Seri `lava` "Cars VS Lava Road"** (`make_lava_track`, rng 7000+seed, tema dipaksa `volcano`): 3 ventilasi yang menyembur berkala (`vent_active`; impuls `(m*1.0, m*7.0)`) dan 2 kolam lahar (`PIT_KIND="lava"`, kolam kedua setelah ramp). Mobil yang kena menjadi `burned` (jelaga + asap hitam).
+- Tipe event baru: `crash`, `rollback`, `lava`, masing-masing dengan narasi di `FAIL_LINES`.
+- **Juara fleksibel**: `win_pool` di `SERIES_DEFS` (`"any"` = tokoh mana pun bisa menang, `"monsters"` = hanya monster truck). Rotasi juara memilih tokoh yang paling jarang menang (dihitung dari registry).
+- **Rotasi tema** berdasarkan registry: kombinasi waktu dan lokasi yang paling jarang dipakai didahulukan. Lokasi baru `volcano` (gunung berapi berasap, aliran lahar di lereng), khusus seri lava.
+- Visual: air genangan berkilau + cipratan roda, dinding beton bergaris merah-putih, retakan ventilasi yang menggelembung sebelum menyembur, air mancur lahar, kolam lahar bergelembung, beberapa ramp.
+- **SFX sintetis baru**: `synth_splash` (saat roda depan masuk genangan), `synth_eruption` (setiap semburan; volume mengikuti jarak mobil ke ventilasi), `synth_sizzle` (saat terbakar), `synth_wall_crash` (saat menabrak dinding). Versi melambat dipakai di instant replay.
+
+**Uji preview:** splash seed 1–3: 2/3 lolos (seed 1 STOP karena durasi). Lava versi pertama hanya 2/3 lolos di preview dan STOP saat render sungguhan. Setelah perbaikan zona semburan: `tune_cast` 9/9 tokoh bisa gagal/menang, **lava seed 1–6: 6/6 lolos**, juara bervariasi (Zippy, Titan, Buster, Sprinkles).
+
+**Render penuh (audit PASS, status pending):** `2026-09-30_splash_s003` (Nitro → Titan → Tilly, 48.7 s) dan `2026-09-30_lava_s003` (Nitro → Hydro → Buster, night-volcano, narator Aria).
+
+**Bug yang ditemukan saat uji (sudah diperbaiki):** `KeyError 'obstacle'` untuk event crash/lava (obstacle/x kini diisi setelah deteksi); aliran lahar latar terlalu panjang sampai ke jalan; semburan pertama melempar mobil terlalu tinggi sehingga kamera zoom-out berlebihan (impuls diturunkan dari `(m*2.5, m*10)`); zona kena semburan `1.5 + panjang/3` membuat bus/big rig selalu kena di ventilasi pertama (t≈2.8 s, terlalu awal), sehingga level 2 STOP. Perbaikan: kolom semburan sempit ±1.1 m (tidak bergantung panjang mobil), dan lintasan dimulai dengan kolam lahar, baru ventilasi.
+
 ## 2026-09-30 — v2.6: anti-monoton tahap 1 — tema, narator bergilir, audio jernih (Claude Code, Opus)
 
 **Masukan user:** 6 episode pertama membosankan/monoton; narator harus lebih enerjik & jelas; boleh ganti narator tiap episode (en-US saja); setuju re-render Ep. 1–6 (opsi B).

@@ -99,7 +99,7 @@ Kalau tidak ada `[sim]`, `[analysis]`, `[audit]` dan `[result]`, berarti kamu TI
               → utamakan rintangan gagal berbeda + mobil hancur/terbalik
 3. TIMELINE   live (1.0x) + bullet-time (0.38x di lompatan tertinggi sebelum hasil)
               + instant replay slow-mo (0.4x) untuk level gagal yang hancur/terbalik
-4. AUDIO      narasi Edge-TTS en-US-AvaNeural + suara mesin/benturan/kaca/buzzer/fanfare/BGM sintetis
+4. AUDIO      narasi Edge-TTS (narator en-US bergilir, VOICES) + suara mesin/benturan/kaca/buzzer/fanfare/BGM sintetis
 5. RENDER     cairo 1080x1920, 4 worker paralel → ffmpeg H.264 + AAC
 6. MANIFEST   <VIDEO_ID>.json (status RENDERED_PENDING_APPROVAL)
 ```
@@ -147,7 +147,13 @@ Status: ✅ sudah ada di v2 · 🟡 sebagian · ⬜ belum (roadmap, bagian 9)
   - Ringan (gagal): **Zippy** sports car merah, **Siren** mobil polisi (lampu sirene berkedip)
   - Berat (gagal): **Buster** school bus kuning, **Hydro** mobil pemadam kebakaran (tangga, lampu darurat)
   - Juara (menang): **Rocky** monster truck biru, **Grizzly** monster truck hijau
-- ✅ 2 seri: **Cars VS Giant Potholes** (3 lubang + ramp) dan **Cars VS Giant Speed Bumps** (4–5 polisi tidur bergaris kuning-hitam yang makin tinggi)
+- ✅ 4 seri (`--series`):
+  - `potholes` **Cars VS Giant Potholes**: 3 lubang + ramp. Juara: monster truck.
+  - `bumps` **Cars VS Giant Speed Bumps**: 4–5 polisi tidur kuning-hitam yang makin tinggi. Juara: monster truck.
+  - `splash` **Cars VS Splash Zone** (v2.7): genangan air licin (gesekan 0.06) sebelum dinding beton, tanjakan, dan lubang. Mobil gagal karena `crash` (menabrak dinding), `rollback` (mundur di tanjakan basah), atau jatuh. Juara: `win_pool="any"`, tokoh mana pun.
+  - `lava` **Cars VS Lava Road** (v2.7): 3 ventilasi yang menyembur berkala + 2 kolam lahar; tema selalu `volcano`. Mobil gagal karena `lava` (terlempar/terbakar). Juara: `win_pool="any"`.
+- ✅ Juara bergilir: untuk `win_pool="any"`, engine memilih tokoh yang paling jarang menang (dari registry). Monster truck tidak selalu menang.
+- ✅ SFX efek visual (v2.7): cipratan air (roda masuk genangan), gemuruh semburan lahar (volume mengikuti jarak), desis terbakar, hantaman dinding beton. Versi melambat di replay.
 - ⬜ Highlight mengkilap / gradasi bodi, sorot lampu (light beam), velg chrome
 
 ### 4.2 Kerusakan kartun
@@ -161,7 +167,8 @@ Status: ✅ sudah ada di v2 · 🟡 sebagian · ⬜ belum (roadmap, bagian 9)
 ### 4.3b Tema lingkungan (acak per seed, tercatat di manifest `theme_id` dan registry `theme`)
 - ✅ Waktu: `morning`, `noon`, `sunset`, `night` (bintang, bulan, lampu mobil menyala, jendela gedung menyala)
 - ✅ Cuaca: `clear`, `rain` (rintik, awan kelabu, jalan basah, gesekan ×0.72), `snow` (salju turun, puncak bukit putih, gesekan ×0.55)
-- ✅ Lokasi: `countryside`, `city` (siluet gedung), `desert` (bukit pasir, kaktus), `mountains` (gunung bersalju), `beach` (laut, pohon kelapa)
+- ✅ Lokasi: `countryside`, `city` (siluet gedung), `desert` (bukit pasir, kaktus), `mountains` (gunung bersalju), `beach` (laut, pohon kelapa), `volcano` (khusus seri lava, lewat `force_theme`)
+- ✅ Rotasi (v2.7): waktu dan lokasi yang paling jarang dipakai di registry didahulukan.
 - Aturan: tidak ada salju di gurun/pantai, tidak ada hujan di gurun. Musik ikut tema (tempo, akor, instrumen; lonceng saat salju).
 - Tema masuk ke sidik jari registry (`track_id@theme`), jadi lintasan yang sama dengan tema berbeda dihitung video berbeda.
 

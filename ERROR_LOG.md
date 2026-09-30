@@ -27,6 +27,9 @@
 | 2026-09-30 | Hanya 1/8 seed lolos (durasi > 50 s) | Run dipilih tanpa memperhitungkan total durasi | `pick_combo`: hitung durasi semua kombinasi dulu. |
 | 2026-09-30 | Bubble "WHOA!" saat bus terperosok | Mood "whoa" hanya mengecek "melayang" | Syarat: melayang **dan** di atas permukaan jalan. |
 | 2026-09-30 | Seri speed bumps 0/10 seed lolos | Parameter gundukan & batas durasi belum cocok | Tuning 5 percobaan (tabel di DEV_HISTORY v2.2), `tune_bumps.py` / `tune_cast.py` sebelum render. |
+| 2026-09-30 | `KeyError: 'obstacle'` saat event `crash`/`lava` | Event baru terdeteksi di luar jalur yang mengisi `obstacle`/`x` | Setiap tipe event baru wajib mengisi `obstacle` & `x` (diisi setelah deteksi kalau belum ada). |
+| 2026-09-30 | Aliran lahar latar gunung berapi memanjang sampai ke jalan; semburan melempar mobil terlalu tinggi | Titik akhir kurva di `horizon+40`; impuls `(m*2.5, m*10)` terlalu besar | Elemen latar harus tetap di dalam siluetnya. Setiap gaya/impuls baru dicek di PNG `L*_event.png` (kamera tidak boleh zoom-out berlebihan). |
+| 2026-09-30 | Lava seed lolos di preview, tapi STOP saat render sungguhan (level 2) | Zona kena semburan diskalakan dengan panjang mobil → kendaraan panjang selalu kena. Preview tidak mengubah registry, jadi rotasi tokoh saat render berbeda dari preview | Zona bahaya jangan diskalakan dengan ukuran mobil. Setiap seri baru: `tune_cast.py <seri> <SEMUA tokoh> 1 2 3`, karena rotasi bisa memilih tokoh mana pun. |
 | 2026-09-30 | Tokoh baru bisa membuat engine STOP terus (rotasi selalu memilihnya) | Rotasi adil mendahulukan tokoh jarang tampil walau tidak cocok dengan lintasan | `ROLE_ORDER` + fallback ke tokoh berikutnya dalam peran yang sama. Uji tokoh baru dengan `tune_cast.py`. |
 
 ## C. Konten / standar
@@ -49,3 +52,4 @@
 | Tanggal | Gejala | Penyebab | Pencegahan |
 |---|---|---|---|
 | 2026-09-30 | `python -c "..."` inline lewat ssh gagal parse (terjadi lagi setelah dicatat di bagian A) | Kebiasaan lama | Cek ulang perintah ssh sebelum dikirim: kalau ada kutip, kurung, pipe, atau `\|` di dalam argumen remote → pindahkan ke file script. |
+| 2026-09-30 | `bash script.sh \| grep -E "a\|b"` lewat ssh: grep error, pipe putus, **script uji ikut mati** setelah percobaan pertama | Sama: kutip dibuang PowerShell; SIGPIPE mematikan script | Script panjang dijalankan dengan `nohup ... > file.out &`, lalu hasilnya dibaca lewat script ringkasan terpisah. Jangan pernah mem-pipe output script lewat argumen ssh. |

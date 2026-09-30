@@ -1,0 +1,247 @@
+{
+  "video_id": "SIM_LAVA_V2_S003",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "lava",
+  "seed": 3,
+  "fps": 30,
+  "duration": 47.1,
+  "track_id": "lava_79de68da",
+  "track_params": {
+    "vents": [
+      {
+        "x": 34.52,
+        "period": 2.21,
+        "phase": 2.91,
+        "dur": 0.87,
+        "height": 5.5
+      },
+      {
+        "x": 44.25,
+        "period": 2.26,
+        "phase": 1.3,
+        "dur": 0.81,
+        "height": 5.8
+      },
+      {
+        "x": 73.97,
+        "period": 2.51,
+        "phase": 2.58,
+        "dur": 0.94,
+        "height": 6.0
+      }
+    ],
+    "pits": [
+      [
+        22.05,
+        25.25,
+        3.0
+      ],
+      [
+        57.86,
+        65.86,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        51.56,
+        57.86,
+        1.23
+      ]
+    ]
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "night-clear-volcano",
+  "voice": "en-US-AriaNeural",
+  "fingerprint": "lava|f1,firetruck,bus|lava_79de68da@night-clear-volcano|flip@obs0,lava@obs2+broken,win",
+  "outcomes": [
+    "flip@obs0",
+    "lava@obs2+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->24.3 m, 3.0->62.5 m, 3.0->108.9 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "5 rintangan [lava, vent, vent, lava, vent] (22-75 m), finish 85 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "5.8s, 5.6s, 7.2s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [0, 2]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "47.1 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "15.9s, 12.8s, 18.4s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "lava|f1,firetruck,bus|lava_79de68da@night-clear-volcano|flip@obs0,lava@obs2+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Lava Road! Who Survives? 🌋🔥",
+  "title": "Cars VS Lava Road! Who Survives? 🌋🔥 #Shorts",
+  "description": "Nitro the race car, Hydro the fire truck and Buster the school bus take on the ERUPTING LAVA ROAD! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "lava",
+    "volcano",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "fire truck",
+    "school bus"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 8.6,
+      "outcome": "flip",
+      "event_t": 5.8,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 15.93,
+      "event_out": 9.27,
+      "x_start": 3.0,
+      "x_end": 24.3,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 9.6,
+      "outcome": "lava",
+      "event_t": 5.6,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 15.93,
+      "duration": 12.8,
+      "event_out": 21.57,
+      "x_start": 3.0,
+      "x_end": 62.5,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 13.6,
+      "outcome": "win",
+      "event_t": 7.17,
+      "obstacle": 4,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 28.73,
+      "duration": 18.37,
+      "event_out": 36.83,
+      "x_start": 3.0,
+      "x_end": 108.9,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the erupting lava road?",
+    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Level three! Buster the school bus. Big and heavy... can Buster make it?",
+    "Whoa! Nitro flipped right over!",
+    "Yikes! Hydro got blasted by the lava!",
+    "Yes! Buster made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003_audit.md"
+}
