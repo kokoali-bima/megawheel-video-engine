@@ -1143,6 +1143,8 @@ def main():
         target = wgt * (st[id(focus)][0] + 2) + (1 - wgt) * mid if focus else mid + 1.5
         if mode == "replay":
             target = st[id(star)][0] + 1
+        if focus is not None and focus["hz"] is not None and focus["hz"]["type"].startswith("dragon")                 and focus is not winner:
+            target = st[id(focus)][0] + 2.2                     # frame the car AND the dragon hovering ahead of it
         spread = max(xs) - min(xs) + 9.0
         fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.82, 1.12))
         cut = camx is None or mode != prev_mode
