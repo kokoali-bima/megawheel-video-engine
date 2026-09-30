@@ -159,6 +159,7 @@ Status: ✅ sudah ada di v2 · 🟡 sebagian · ⬜ belum (roadmap, bagian 9)
   - `splash` **Cars VS Splash Zone** (v2.7): genangan air licin (gesekan 0.06) sebelum dinding beton, tanjakan, dan lubang. Mobil gagal karena `crash` (menabrak dinding), `rollback` (mundur di tanjakan basah), atau jatuh. Juara: `win_pool="any"`, tokoh mana pun.
   - `lava` **Cars VS Lava Road** (v2.7): 3 ventilasi yang menyembur berkala + 2 kolam lahar; tema selalu `volcano`. Mobil gagal karena `lava` (terlempar/terbakar). Juara: `win_pool="any"`.
 - ✅ **Seri 2.5D `race25d`** (v3.1, gaya disetujui user 2026-09-30): balapan 4 tokoh di jalan berlajur dengan kedalaman (parallax), tokoh = gambar 2D yang sama persis. Genangan (spin menyeberang lajur + senggol), ramp (lompat slow-mo), finish + confetti, INSTANT REPLAY, CTA. Generator sendiri: `./venv/bin/python generators/lanes25d/race25d.py --seed <N> [--preview-only]`. Pemeriksaan ringan (stream, durasi 20–60 s, pemenang, spin+replay, lompatan, preview), bukan audit piksel 2D. Hasil ke `pending/` + registry seperti seri lain.
+- ✅ **Perpustakaan rintangan (v3.3)**, dipakai bersama semua format. Tiap video race25d memilih 3 rintangan acak (1 per lajur): genangan (spin), ramp (lompat), lubang, semburan lahar (gosong), dinding beton, mesin pres (**penyet** lalu BOING), gerbang laser (**terbelah dua** lalu diplester), meteor (ledakan + salto + kawah), UFO (disedot, dijatuhkan di belakang), **naga api** (gosong, berhenti **ganti ban**, lalu lebih pelan), **naga es** (**membeku** dalam balok es, lalu pecah dan lanjut). **Gaya wajib: komedi kartun (slapstick), tidak sadis, tanpa darah.** Monster dan naga = desain sendiri (bukan Godzilla atau karakter milik pihak lain).
 - ✅ Juara bergilir: untuk `win_pool="any"`, engine memilih tokoh yang paling jarang menang (dari registry). Monster truck tidak selalu menang.
 - ✅ SFX efek visual (v2.7): cipratan air (roda masuk genangan), gemuruh semburan lahar (volume mengikuti jarak), desis terbakar, hantaman dinding beton. Versi melambat di replay.
 - ⬜ Highlight mengkilap / gradasi bodi, sorot lampu (light beam), velg chrome
@@ -383,6 +384,7 @@ Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/ri
 | 3 | 19:00 | Prime time malam | 06:00 (+1 hari) | 07:00 (+1 hari) |
 
 - 3 Shorts per hari, satu per slot, urut nomor episode **per peran slot** (standar, keputusan user 2026-10-01):
+  - **Program harian (disetujui user 2026-10-01): 11:00 CHALLENGE (tampak samping 2D) · 15:00 RACE (2.5D) · 19:00 SMASH ARENA (2.5D, saling tabrak, mobil terakhir menang; seri menyusul, sementara slot 19:00 diisi seri lain).** Nama sendiri, bukan "Royal Rumble" (merek WWE).
   - **15:00 ET setiap hari = Shorts balapan 2.5D (`race25d`)**. Wajib ada 1 per hari.
   - **11:00 dan 19:00 ET = seri Shorts lain** (potholes, bumps, splash, lava, dst.).
   - **Sabtu 19:00 ET = video panjang 15 menit mingguan** (seri `story15`). Slot ini tidak dipakai Shorts.

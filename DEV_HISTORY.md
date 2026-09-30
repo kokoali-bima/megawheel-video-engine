@@ -158,6 +158,26 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.3: perpustakaan rintangan 2.5D + naga (Claude Code, Opus)
+
+**Keputusan user:** program harian 11:00 CHALLENGE · 15:00 RACE · 19:00 SMASH ARENA; tambah meteor, UFO, rintangan yang membuat mobil **penyet** dan **terbelah**; **naga api** (kena → melambat karena ganti ban) dan **naga es** (kena → membeku sesaat lalu lanjut).
+
+- `race25d.py` diubah dari 2 rintangan tetap menjadi **perpustakaan `HAZARDS`** (bobot, bubble, narasi, prioritas replay, jendela slow-mo). Tiap video: 3 rintangan berbeda, 1 per lajur, posisi acak; `--hazards a,b,c` untuk uji.
+- Rintangan baru, semuanya prosedural (cairo) + suara sintetis:
+  - **lubang:** terperosok lalu memantul.
+  - **lahar:** air mancur lahar, mobil terlempar dan gosong berasap.
+  - **dinding beton:** tabrak, terpental, serpihan, lalu memutar lewat samping.
+  - **mesin pres:** pipih 26% lalu BOING (pegas).
+  - **gerbang laser:** terbelah dua (clip dua bagian) + percikan, lalu plester.
+  - **meteor:** bola api jatuh, ledakan, gelombang kejut, salto 360°, kawah.
+  - **UFO:** sinar penarik, diangkat, dibawa mundur 14 m, lalu dijatuhkan.
+  - **naga api:** naga kartun merah terbang masuk, menyembur api → gosong, berhenti ganti ban (ikon ban & kunci pas), lalu lebih pelan.
+  - **naga es:** naga biru → balok es transparan 1.7 s → pecahan es → lanjut.
+- Kamera: fokus ke mobil yang terkena; untuk naga, kamera membingkai mobil + naga.
+- Pemeriksaan baru: `3 hazards triggered` (+ tetap `no frame without a car`).
+- **Uji:** 3 set paksa mencakup kesembilan rintangan baru → semua PASS, empty_frames=0.
+- **Bug saat uji:** suara laser menjumlah dua array dengan panjang berbeda (ValueError); naga di luar frame (titik melayang terlalu jauh) → diperbaiki.
+
 ## 2026-10-01 — v3.2: kamera race25d tidak pernah kosong + peran slot jadwal (Claude Code, Opus)
 
 **Masukan user:** video race25d pertama siap tayang (→ **Ep. 9**). Video kedua ditolak: ada saat kamera tidak memperlihatkan satu mobil pun ("tidak boleh terjadi"). Jadwal: setiap hari wajib 1 Shorts balapan 2.5D; slot 11:00 / 15:00 / 19:00 ET; video 15 menit **Sabtu 19:00 ET**.
