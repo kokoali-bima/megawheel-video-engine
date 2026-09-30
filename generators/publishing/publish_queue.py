@@ -26,6 +26,24 @@ import episodes  # noqa: E402
 NY = ZoneInfo("America/New_York")
 WIB = ZoneInfo("Asia/Jakarta")
 SLOTS = [(11, 0), (15, 0), (19, 0)]      # ET: late morning, after school, evening prime time (BLUEPRINT 10)
+# Slot roles (standard, user 2026-10-01): every day 15:00 ET = the 2.5D race Short (series race25d);
+# Saturday 19:00 ET = the weekly 15-minute episode; all other slots = the other Shorts series.
+RACE_SERIES = {"race25d"}
+LONG_SERIES = {"story15"}                 # weekly long-form series id (reserved)
+WEEKLY_LONG_SLOT = (5, 19)                # Saturday (weekday 5), 19:00 ET
+
+
+def slot_role(t_utc):
+    et = t_utc.astimezone(NY)
+    if (et.weekday(), et.hour) == WEEKLY_LONG_SLOT:
+        return "long"
+    return "race" if et.hour == 15 else "short"
+
+
+def role_of(series):
+    return "race" if series in RACE_SERIES else "long" if series in LONG_SERIES else "short"
+
+
 QUEUE_FILE = f"{episodes.BASE}/renders/megawheel_arena/PUBLISH_QUEUE.json"
 QUEUE_MD = f"{episodes.BASE}/renders/megawheel_arena/PUBLISH_QUEUE.md"
 CATEGORY_FILM_ANIMATION = "1"
@@ -53,13 +71,13 @@ def save(q):
     episodes.write_index()                                   # keep the agent index in sync with the queue
 
 
-def next_slots(start_day, taken, now_utc):
+def next_slots(start_day, taken, now_utc, role):
     day = start_day
     while True:
         for h, m in SLOTS:
             t = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=NY).astimezone(dt.timezone.utc)
             # YouTube needs publishAt in the future; keep a 2 h margin for the upload itself
-            if t > now_utc + dt.timedelta(hours=2) and t not in taken:
+            if t > now_utc + dt.timedelta(hours=2) and t not in taken and slot_role(t) == role:
                 yield t
         day += dt.timedelta(days=1)
 
@@ -67,7 +85,7 @@ def next_slots(start_day, taken, now_utc):
 def plan(start):
     q = load()
     # Items already on YouTube (SCHEDULED/...) keep their slot. Every not-yet-uploaded item is re-slotted each plan,
-    # in episode order, into the earliest free future slots -> episode order is preserved even after a missed slot.
+    # in episode order per role, into the earliest free future slot OF ITS ROLE (race / short / long).
     old = {it["episode"]: it["publish_at_utc"] for it in q["items"] if it["status"] == "QUEUED"}
     q["items"] = [it for it in q["items"] if it["status"] != "QUEUED"]
     queued = {it["episode"] for it in q["items"]}
@@ -76,15 +94,25 @@ def plan(start):
             if e.get("status") == "APPROVED" and not e.get("youtube_url") and e["episode"] not in queued]
     todo.sort(key=lambda e: e["episode"])
     now = dt.datetime.now(dt.timezone.utc)
-    start_day = start or now.astimezone(NY).date()                # earliest free future slot
-    gen = next_slots(start_day, taken, now)
+    start_day = start or now.astimezone(NY).date()
+    gens = {r: next_slots(start_day, taken, now, r) for r in ("race", "short", "long")}
     for e in todo:
-        t = next(gen).strftime("%Y-%m-%dT%H:%M:%SZ")
+        t = next(gens[role_of(e.get("series", ""))]).strftime("%Y-%m-%dT%H:%M:%SZ")
         if e["episode"] in old and old[e["episode"]] != t:
             print(f"[queue] Ep. {e['episode']}: slot {old[e['episode']]} -> {t}")
-        q["items"].append(dict(episode=e["episode"], video_id=e["video_id"], status="QUEUED", publish_at_utc=t))
+        q["items"].append(dict(episode=e["episode"], video_id=e["video_id"], status="QUEUED", publish_at_utc=t,
+                               role=role_of(e.get("series", ""))))
     q["items"].sort(key=lambda it: it["publish_at_utc"])
     save(q)
+    # standard check: every day of the next 7 days needs a race25d Short at 15:00 ET
+    have = {dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")).astimezone(NY).date()
+            for it in q["items"] if slot_role(dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")))
+            == "race"}
+    today = now.astimezone(NY).date()
+    missing = [str(today + dt.timedelta(days=d)) for d in range(1, 8) if today + dt.timedelta(days=d) not in have]
+    if missing:
+        print(f"[queue] PERINGATAN STANDAR: belum ada Shorts race25d (15:00 ET) untuk {', '.join(missing)} "
+              f"-> produksi & approve race25d lagi")
     show()
 
 

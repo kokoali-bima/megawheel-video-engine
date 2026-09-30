@@ -28,6 +28,7 @@ Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
  4. Simpan catatan ke git:
       bash git_sync.sh push "publish: schedule update <tanggal> [<nama model>]"
  5. Laporkan ke user: tabel PUBLISH_QUEUE (Ep, jam ET, jam WIB, status, URL), jumlah yang diupload hari ini,
+    setiap baris "PERINGATAN STANDAR" (hari tanpa race25d di 15:00 ET) dari langkah 2,
     dan semua baris SKIP / STOP beserta alasannya.
 
 Aturan keras:

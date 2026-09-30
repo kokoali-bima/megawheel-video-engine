@@ -48,6 +48,8 @@ Langkah per video:
     Tutup dengan kalimat: "Menunggu approval Anda. Belum dijadwalkan dan belum diupload."
 
 Target harian: 3 video pending per hari (sama dengan 3 slot tayang), kecuali user bilang lain.
+WAJIB: minimal 1 dari 3 video per hari adalah race25d (slot 15:00 ET tiap hari, BLUEPRINT bagian 10).
+Jaga stok race25d (pending + approved belum tayang) minimal 3 supaya tidak ada hari tanpa balapan.
 Kalau stok pending yang belum di-review sudah ≥ 9, berhenti produksi dan tunggu user.
 
 Aturan keras:

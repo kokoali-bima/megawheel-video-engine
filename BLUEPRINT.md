@@ -382,7 +382,11 @@ Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/ri
 | 2 | 15:00 | Pulang sekolah/kerja Pantai Timur, siang Pantai Barat | 02:00 (+1 hari) | 03:00 (+1 hari) |
 | 3 | 19:00 | Prime time malam | 06:00 (+1 hari) | 07:00 (+1 hari) |
 
-- 3 Shorts per hari, satu per slot, urut nomor episode.
+- 3 Shorts per hari, satu per slot, urut nomor episode **per peran slot** (standar, keputusan user 2026-10-01):
+  - **15:00 ET setiap hari = Shorts balapan 2.5D (`race25d`)**. Wajib ada 1 per hari.
+  - **11:00 dan 19:00 ET = seri Shorts lain** (potholes, bumps, splash, lava, dst.).
+  - **Sabtu 19:00 ET = video panjang 15 menit mingguan** (seri `story15`). Slot ini tidak dipakai Shorts.
+  - `publish_queue.py plan` mengatur ini otomatis dan mencetak **PERINGATAN STANDAR** kalau ada hari dalam 7 hari ke depan yang belum punya race25d.
 - Zona waktu disimpan sebagai `America/New_York`, jadi pergantian daylight saving otomatis.
 - Mekanisme: video diupload sebagai `private` dengan `publishAt`. YouTube yang menayangkan tepat di jamnya, tidak ada cron di server kita.
 

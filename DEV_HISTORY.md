@@ -158,6 +158,16 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.2: kamera race25d tidak pernah kosong + peran slot jadwal (Claude Code, Opus)
+
+**Masukan user:** video race25d pertama siap tayang (→ **Ep. 9**). Video kedua ditolak: ada saat kamera tidak memperlihatkan satu mobil pun ("tidak boleh terjadi"). Jadwal: setiap hari wajib 1 Shorts balapan 2.5D; slot 11:00 / 15:00 / 19:00 ET; video 15 menit **Sabtu 19:00 ET**.
+
+- **Penyebab:** saat pindah adegan (balapan → REPLAY → CTA) kamera *menggeser pelan* dari posisi finish ke mobil yang spin, sehingga melewati jalan kosong.
+- **Perbaikan** (`race25d.py`): *hard cut* di setiap pergantian adegan; aturan keras "mobil kunci (fokus atau pemimpin) selalu di tengah frame" (clamp camx ±380 px); **pemeriksaan wajib `no frame without a car`** (setiap frame dihitung; satu frame kosong = gagal).
+- Video 2 dirender ulang (`SIM_RACE25D_V1_S002`, gurun, Tilly menang, narator Michelle): empty_frames=0. Seed 3–4 juga 0.
+- **Peran slot** di `publish_queue.py`: 15:00 ET = race25d, 11:00/19:00 = seri lain, Sabtu 19:00 = `story15` (video panjang). `plan` mencetak PERINGATAN STANDAR kalau ada hari tanpa race25d. BLUEPRINT bagian 10 + kedua dokumen agent diperbarui (produksi wajib ≥1 race25d/hari, stok ≥3).
+- Ide user dicatat (C1d): lokasi hutan/rally, gurun/Dakar, perkampungan; mode demolition derby.
+
 ## 2026-09-30 — v3.1: seri 2.5D "race25d" — tokoh 2D persis, dunia berlajur (Claude Code, Opus)
 
 **Keputusan user:** hasil Blender 3D terasa berat, lambat, dan tokohnya tidak dikenali → minta 2.5D dengan bentuk kartun sama persis dengan 2D. Prototipe "paper cutout" dinilai **"sudah sesuai banget"**. 3D (Blender + Modal) ditunda, kodenya disimpan.
