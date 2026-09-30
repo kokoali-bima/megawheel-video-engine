@@ -8,7 +8,7 @@ set -u
 cd /root/video-engine || exit 1
 export GIT_SSH_COMMAND="ssh -o BatchMode=yes"
 git config user.name >/dev/null || git config user.name "kokoali-bima"
-git config user.email >/dev/null || git config user.email "mu@infrasoft.id"
+git config user.email "mu.aliwardana@gmail.com"                 # author email (user, 2026-09-30)
 
 status() {
   git fetch -q origin || { echo "[git_sync] STOP: fetch gagal (cek deploy key / jaringan)"; exit 1; }
