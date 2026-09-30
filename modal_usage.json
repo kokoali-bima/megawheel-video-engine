@@ -12,6 +12,18 @@
    "gpu_seconds": 125.2,
    "wall_seconds": 50.9,
    "cost_usd": 0.032
+  },
+  {
+   "date": "2026-09-30",
+   "note": "director3d demo race 15s h+v",
+   "gpu": "L4",
+   "engine": "CYCLES",
+   "samples": 16,
+   "frames": 900,
+   "chunks": 8,
+   "gpu_seconds": 919.4,
+   "wall_seconds": 147.4,
+   "cost_usd": 0.2347
   }
  ]
 }
