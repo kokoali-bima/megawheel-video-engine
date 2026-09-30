@@ -101,18 +101,30 @@ def sphere(root, r, loc, m, scale=(1, 1, 1)):
 
 
 def wheel(root, x, y, r, width, monster=False):
-    tire = cyl(root, r, width, (x, y, r), mat("rubber", *RUBBER), verts=32 if not monster else 20,
-               bevel=r * 0.12)
+    """Wheel on its own pivot empty ("wheelpivot*", at the axle) so animation can spin it about local Y."""
+    piv = bpy.data.objects.new(f"wheelpivot_{x:+.2f}_{y:+.2f}", None)
+    bpy.context.collection.objects.link(piv)
+    _parent(piv, root, (x, y, r))
+    piv["radius"] = r
     side = 1 if y > 0 else -1
-    cyl(root, r * 0.55, 0.04, (x, y + side * width / 2, r), mat("hub", *CHROME), verts=24)
-    cyl(root, r * 0.18, 0.06, (x, y + side * (width / 2 + 0.02), r), mat("hubcap", (0.15, 0.15, 0.17), 0.4))
+    tire = cyl(piv, r, width, (0, 0, 0), mat("rubber", *RUBBER), verts=32 if not monster else 20, bevel=r * 0.12)
+    cyl(piv, r * 0.55, 0.04, (0, side * width / 2, 0), mat("hub", *CHROME), verts=24)
+    cyl(piv, r * 0.18, 0.06, (0, side * (width / 2 + 0.02), 0), mat("hubcap", (0.15, 0.15, 0.17), 0.4))
+    for k in range(5):                                           # spokes: make the rotation visible
+        a = 2 * math.pi * k / 5
+        rbox(piv, (r * 0.34, 0.03, r * 0.09), (math.cos(a) * r * 0.3, side * (width / 2 + 0.025), math.sin(a) * r * 0.3),
+             mat("spoke", (0.3, 0.3, 0.33), 0.35, metal=0.6), bevel=0, rot=(0, -a, 0))
     if monster:                                                  # chunky tread blocks
         for k in range(14):
             a = 2 * math.pi * k / 14
-            rbox(root, (r * 0.32, width * 1.02, r * 0.16),
-                 (x + math.cos(a) * r * 0.97, y, r + math.sin(a) * r * 0.97), mat("rubber", *RUBBER), bevel=0.02,
-                 rot=(0, -a + math.pi / 2, 0))
-    return tire
+            rbox(piv, (r * 0.32, width * 1.02, r * 0.16), (math.cos(a) * r * 0.97, 0, math.sin(a) * r * 0.97),
+                 mat("rubber", *RUBBER), bevel=0.02, rot=(0, -a + math.pi / 2, 0))
+    return piv
+
+
+def wheel_pivots(root):
+    """All wheel pivots of a character (recursive), for animation."""
+    return [o for o in root.children_recursive if o.name.startswith("wheelpivot")]
 
 
 def font():
