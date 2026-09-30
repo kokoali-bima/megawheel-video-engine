@@ -23,3 +23,4 @@ archive/**/*.mp4
 branding/*_check.png
 branding/voice_samples/
 branding/voice_samples_v2/
+venv-modal/

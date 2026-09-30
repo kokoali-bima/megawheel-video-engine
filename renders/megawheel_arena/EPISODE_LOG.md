@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 11:44). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 14:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -8,11 +8,11 @@
 | Ep | Season | Seri | Tokoh (L1, L2, Juara) | Render | Approve | Upload | Status | URL | Views | Likes | Retensi | Catatan |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | S01 | potholes | Zippy, Buster, Rocky | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
-| 2 | S01 | bumps | Tilly, Titan, Grizzly | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
-| 3 | S01 | potholes | Nitro, Sprinkles, Rocky | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
-| 4 | S01 | bumps | Siren, Hydro, Grizzly | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
-| 5 | S01 | potholes | Zippy, Sprinkles, Grizzly | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
-| 6 | S01 | bumps | Siren, Buster, Rocky | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
+| 2 | S01 | bumps | Tilly, Titan, Grizzly | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-09-30T19:00:00Z | https://www.youtube.com/shorts/dVBtbf8Bi_Q |  |  |  |  |
+| 3 | S01 | potholes | Nitro, Sprinkles, Rocky | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-09-30T23:00:00Z | https://www.youtube.com/shorts/yf0y4R83hto |  |  |  |  |
+| 4 | S01 | bumps | Siren, Hydro, Grizzly | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-10-01T15:00:00Z | https://www.youtube.com/shorts/3CfgGpkOx3Q |  |  |  |  |
+| 5 | S01 | potholes | Zippy, Sprinkles, Grizzly | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-10-01T19:00:00Z | https://www.youtube.com/shorts/xEWas3W61QU |  |  |  |  |
+| 6 | S01 | bumps | Siren, Buster, Rocky | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-10-01T23:00:00Z | https://www.youtube.com/shorts/nXlV3f6Wux8 |  |  |  |  |
 | 7 | S01 | splash | Tilly, Sprinkles, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 | 8 | S01 | lava | Zippy, Hydro, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 

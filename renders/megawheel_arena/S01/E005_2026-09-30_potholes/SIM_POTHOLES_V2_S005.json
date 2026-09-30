@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S005",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-01T19:00:00Z",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 5,
@@ -215,5 +215,7 @@
   "episode": 5,
   "season": 1,
   "approved_date": "2026-09-30",
-  "rerendered": "2026-09-30"
+  "rerendered": "2026-09-30",
+  "youtube_url": "https://www.youtube.com/shorts/xEWas3W61QU",
+  "upload_date": "2026-09-30"
 }

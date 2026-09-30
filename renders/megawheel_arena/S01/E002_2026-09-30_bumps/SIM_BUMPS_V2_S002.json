@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_BUMPS_V2_S002",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-09-30T19:00:00Z",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 2,
@@ -226,5 +226,7 @@
   "episode": 2,
   "season": 1,
   "approved_date": "2026-09-30",
-  "rerendered": "2026-09-30"
+  "rerendered": "2026-09-30",
+  "youtube_url": "https://www.youtube.com/shorts/dVBtbf8Bi_Q",
+  "upload_date": "2026-09-30"
 }

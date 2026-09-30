@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 11:44) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 14:00) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -14,12 +14,12 @@
 
 | Ep | VIDEO_ID | Seri | Status | Jadwal tayang (ET) | URL |
 |---|---|---|---|---|---|
-| 1 | `SIM_POTHOLES_V2_S001` | potholes | APPROVED | Wed 2026-09-30 11:00 |  |
-| 2 | `SIM_BUMPS_V2_S002` | bumps | APPROVED | Wed 2026-09-30 15:00 |  |
-| 3 | `SIM_POTHOLES_V2_S003` | potholes | APPROVED | Wed 2026-09-30 19:00 |  |
-| 4 | `SIM_BUMPS_V2_S004` | bumps | APPROVED | Thu 2026-10-01 11:00 |  |
-| 5 | `SIM_POTHOLES_V2_S005` | potholes | APPROVED | Thu 2026-10-01 15:00 |  |
-| 6 | `SIM_BUMPS_V2_S006` | bumps | APPROVED | Thu 2026-10-01 19:00 |  |
+| 1 | `SIM_POTHOLES_V2_S001` | potholes | APPROVED | Fri 2026-10-02 19:00 |  |
+| 2 | `SIM_BUMPS_V2_S002` | bumps | UPLOADED_SCHEDULED 2026-09-30T19:00:00Z | Wed 2026-09-30 15:00 | https://www.youtube.com/shorts/dVBtbf8Bi_Q |
+| 3 | `SIM_POTHOLES_V2_S003` | potholes | UPLOADED_SCHEDULED 2026-09-30T23:00:00Z | Wed 2026-09-30 19:00 | https://www.youtube.com/shorts/yf0y4R83hto |
+| 4 | `SIM_BUMPS_V2_S004` | bumps | UPLOADED_SCHEDULED 2026-10-01T15:00:00Z | Thu 2026-10-01 11:00 | https://www.youtube.com/shorts/3CfgGpkOx3Q |
+| 5 | `SIM_POTHOLES_V2_S005` | potholes | UPLOADED_SCHEDULED 2026-10-01T19:00:00Z | Thu 2026-10-01 15:00 | https://www.youtube.com/shorts/xEWas3W61QU |
+| 6 | `SIM_BUMPS_V2_S006` | bumps | UPLOADED_SCHEDULED 2026-10-01T23:00:00Z | Thu 2026-10-01 19:00 | https://www.youtube.com/shorts/nXlV3f6Wux8 |
 | 7 | `SIM_SPLASH_V2_S007` | splash | APPROVED | Fri 2026-10-02 11:00 |  |
 | 8 | `SIM_LAVA_V2_S003` | lava | APPROVED | Fri 2026-10-02 15:00 |  |
 
@@ -33,7 +33,7 @@
 - **Durasi:** 44.63 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs2+broken; Level 2: Buster (bus) → stuck@obs0; Level 3 (juara): Rocky (monster) → win
 - **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-09-30T15:00:00Z
+- **Antrian:** QUEUED 2026-10-02T23:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 2 — `SIM_BUMPS_V2_S002`
@@ -45,9 +45,9 @@
 - **Tema / narator:** night-clear-countryside / en-US-JennyNeural
 - **Durasi:** 49.23 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs3; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Grizzly (monster2) → win
-- **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-09-30T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-09-30T19:00:00Z (approve 2026-09-30)
+- **Antrian:** SCHEDULED 2026-09-30T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/dVBtbf8Bi_Q
 
 ## Ep. 3 — `SIM_POTHOLES_V2_S003`
 
@@ -58,9 +58,9 @@
 - **Tema / narator:** morning-clear-countryside / en-US-AvaMultilingualNeural
 - **Durasi:** 46.93 s
 - **Tokoh dan hasil:** Level 1: Nitro (f1) → pit@obs2+broken; Level 2: Sprinkles (icecream) → stuck@obs0; Level 3 (juara): Rocky (monster) → win
-- **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-09-30T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-09-30T23:00:00Z (approve 2026-09-30)
+- **Antrian:** SCHEDULED 2026-09-30T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/yf0y4R83hto
 
 ## Ep. 4 — `SIM_BUMPS_V2_S004`
 
@@ -71,9 +71,9 @@
 - **Tema / narator:** sunset-rain-mountains / en-US-MichelleNeural
 - **Durasi:** 49.33 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → stuck@obs2; Level 2: Hydro (firetruck) → stuck@obs2; Level 3 (juara): Grizzly (monster2) → win
-- **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-10-01T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-01T15:00:00Z (approve 2026-09-30)
+- **Antrian:** SCHEDULED 2026-10-01T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/3CfgGpkOx3Q
 
 ## Ep. 5 — `SIM_POTHOLES_V2_S005`
 
@@ -84,9 +84,9 @@
 - **Tema / narator:** noon-rain-beach / en-US-AriaNeural
 - **Durasi:** 47.8 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → flip@obs2+broken; Level 2: Sprinkles (icecream) → stuck@obs0; Level 3 (juara): Grizzly (monster2) → win
-- **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-10-01T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-01T19:00:00Z (approve 2026-09-30)
+- **Antrian:** SCHEDULED 2026-10-01T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/xEWas3W61QU
 
 ## Ep. 6 — `SIM_BUMPS_V2_S006`
 
@@ -97,9 +97,9 @@
 - **Tema / narator:** sunset-clear-countryside / en-US-JennyNeural
 - **Durasi:** 47.27 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → flip@obs2+broken; Level 2: Buster (bus) → flip@obs1+broken; Level 3 (juara): Rocky (monster) → win
-- **Status:** APPROVED (approve 2026-09-30)
-- **Antrian:** QUEUED 2026-10-01T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-01T23:00:00Z (approve 2026-09-30)
+- **Antrian:** SCHEDULED 2026-10-01T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/nXlV3f6Wux8
 
 ## Ep. 7 — `SIM_SPLASH_V2_S007`
 
