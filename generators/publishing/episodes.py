@@ -173,7 +173,69 @@ def write_log():
     os.makedirs(CHANNEL_DIR, exist_ok=True)
     with open(LOG, "w") as fh:
         fh.write("\n".join(lines) + "\n")
+    write_index()
     return LOG
+
+
+INDEX = f"{BASE}/EPISODES_INDEX.md"
+ROLE_WORDS = ["Level 1", "Level 2", "Level 3 (juara)"]
+
+
+def write_index():
+    """Agent-facing identity card per episode: which exact file/ID/title is 'Ep. N'."""
+    names = cast_names()
+    slots = {}
+    qf = f"{CHANNEL_DIR}/PUBLISH_QUEUE.json"
+    if os.path.exists(qf):
+        with open(qf) as fh:
+            for it in json.load(fh).get("items", []):
+                slots[it["episode"]] = it
+    lines = ["# EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena", "",
+             f"> Dibuat otomatis oleh `generators/publishing/episodes.py` ({time.strftime('%Y-%m-%d %H:%M')}) setiap "
+             "approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.",
+             "", "## Cara mengenali episode (wajib untuk semua agent)", "",
+             "1. **Nomor episode = kunci utama.** \"Ep. 1\" selalu berarti VIDEO_ID di kartu Ep. 1 di bawah, "
+             "bukan urutan render, tanggal di nama folder, atau nomor seed.",
+             "2. Nomor seed ≠ nomor episode. Contoh: `SIM_LAVA_V2_S003` adalah **Ep. 8**, bukan Ep. 3.",
+             "3. Hanya folder `renders/megawheel_arena/S01/E0NN_*` yang berisi episode. Folder `pending/` = belum "
+             "di-approve, `rejected/` = ditolak. Keduanya **bukan** episode dan tidak boleh diupload.",
+             "4. Sebelum upload atau menjawab pertanyaan tentang \"Ep. N\", cocokkan tiga hal: VIDEO_ID, path MP4, judul.",
+             "5. Ragu? Jalankan `./venv/bin/python generators/publishing/episodes.py list` di `/root/video-engine`.",
+             "", "## Ringkasan", "",
+             "| Ep | VIDEO_ID | Seri | Status | Jadwal tayang (ET) | URL |", "|---|---|---|---|---|---|"]
+    eps = episodes()
+    for e in eps:
+        sl = slots.get(e["episode"], {})
+        when = sl.get("publish_at_utc", "")
+        if when:
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
+            when = datetime.fromisoformat(when.replace("Z", "+00:00")).astimezone(
+                ZoneInfo("America/New_York")).strftime("%a %Y-%m-%d %H:%M")
+        lines.append(f"| {e['episode']} | `{e['video_id']}` | {e['series']} | {e['status']} | {when} | "
+                     f"{e.get('youtube_url') or ''} |")
+    for e in eps:
+        folder = e["folder"]
+        outs = e.get("outcomes") or []
+        cast = [f"{ROLE_WORDS[i] if i < 3 else f'Level {i + 1}'}: {names.get(v, v)} ({v}) → "
+                f"{outs[i] if i < len(outs) else ''}" for i, v in enumerate(e.get("vehicles", []))]
+        sl = slots.get(e["episode"], {})
+        lines += ["", f"## Ep. {e['episode']} — `{e['video_id']}`", "",
+                  f"- **Judul YouTube:** {e.get('title', '')}",
+                  f"- **File MP4:** `{BASE}/{folder}/{e['video_id']}.mp4`",
+                  f"- **Manifest:** `{BASE}/{folder}/{e['video_id']}.json` · audit: `{e.get('audit', '')}`",
+                  f"- **Season / seri / seed:** S{e['season']:02d} / {e['series']} / {e['seed']}",
+                  f"- **Tema / narator:** {e.get('theme', '')} / {e.get('voice', '')}",
+                  f"- **Durasi:** {e.get('duration', '')} s",
+                  "- **Tokoh dan hasil:** " + "; ".join(cast),
+                  f"- **Status:** {e['status']} (approve {e.get('approved_date', '')})",
+                  f"- **Antrian:** {sl.get('status', 'belum masuk antrian')} {sl.get('publish_at_utc', '')}",
+                  f"- **YouTube:** {e.get('youtube_url') or 'belum diupload'}"]
+    if not eps:
+        lines.append("| – | | | | | belum ada episode |")
+    with open(INDEX, "w") as fh:
+        fh.write("\n".join(lines) + "\n")
+    return INDEX
 
 
 def main():

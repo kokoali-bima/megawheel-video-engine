@@ -50,6 +50,7 @@ def save(q):
                      f"{et.astimezone(WIB):%a %Y-%m-%d %H:%M} | {it['status']} | {it.get('url', '')} |")
     with open(QUEUE_MD, "w") as fh:
         fh.write("\n".join(lines) + "\n")
+    episodes.write_index()                                   # keep the agent index in sync with the queue
 
 
 def next_slots(start_day, taken, now_utc):

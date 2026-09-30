@@ -9,6 +9,8 @@
 > **Agent yang ditugasi produksi atau jadwal upload:** baca juga `AGENT_VIDEO_PRODUCER.md` (buat video, tanpa upload)
 > atau `AGENT_UPLOAD_SCHEDULER.md` (jadwalkan episode APPROVED). Riwayat render ada di `PRODUCTION_LOG.md`.
 > **Status pekerjaan dan prioritas:** `PROJECT_PROGRESS.md`. Wajib dibaca di awal sesi dan diupdate saat tugas mulai/selesai.
+> **Identitas episode:** `EPISODES_INDEX.md` (otomatis). "Ep. N" hanya boleh dikenali lewat file ini.
+> Agent yang dipakai: **Claude Code (Opus)** dan **Antigravity (Gemini Pro)**. Catatan per model ada di kedua dokumen agent.
 
 ## 0. Aturan Nol (baca dulu)
 

@@ -19,6 +19,7 @@ Sebelum mulai, baca di 99.3 (wajib, setiap sesi):
   /root/video-engine/ERROR_LOG.md              (kesalahan yang tidak boleh diulang)
   /root/video-engine/PRODUCTION_LOG.md         (riwayat run sebelumnya: seri & seed terakhir)
   /root/video-engine/PROJECT_PROGRESS.md       (status proyek; jangan produksi kalau ada larangan di sana)
+  /root/video-engine/EPISODES_INDEX.md         (episode yang sudah ada: Ep. N = VIDEO_ID + path + judul)
 
 Langkah per video:
  1. Pilih seri: potholes | bumps | splash | lava. Maksimal 3 video berturut-turut dari seri yang sama;
@@ -86,3 +87,17 @@ Otomatis (jangan diedit manual): `PRODUCTION_REGISTRY.json`, `renders/megawheel_
 | Tanggal | Perubahan |
 |---|---|
 | 2026-09-30 | Dokumen dibuat (Claude Code) |
+
+## Catatan per model AI (agent yang dipakai: Claude Code Opus dan Antigravity Gemini Pro)
+
+Kedua model wajib mengikuti dokumen ini dengan sama persis. Catatan tambahan per model:
+
+| Model | Hal yang harus diwaspadai |
+|---|---|
+| **Claude Code (Opus)** | Mode otomatis Claude Code bisa menolak aksi publik (misalnya upload YouTube) lewat pengaman bawaan. Kalau ditolak: berhenti, jangan mencari jalan lain, laporkan ke user (ERROR_LOG A, 2026-09-30). Semua logika remote ditaruh di file script, bukan perintah inline panjang (ERROR_LOG A/D). |
+| **Antigravity (Gemini Pro)** | Pernah membuat video dengan script buatan sendiri, hasilnya mobil berjalan mundur dan tidak ada rintangan (ERROR_LOG C). **Jangan menulis, menyederhanakan, atau "memperbaiki" script.** Jalankan perintah di dokumen ini apa adanya. Bukti engine yang benar: log berisi baris `[sim]`, `[cast] final:`, `[analysis]`, `[audit] PASS`. Kalau tidak ada, berhenti. Terminal Antigravity bisa menjalankan perintah otomatis: batasi hanya pada perintah yang tertulis di sini. |
+
+Untuk keduanya:
+- Kenali episode hanya lewat `/root/video-engine/EPISODES_INDEX.md` (nomor episode → VIDEO_ID → path MP4 → judul).
+- Status proyek ada di `PROJECT_PROGRESS.md`.
+- Tulis nama model di kolom "Agent" pada `PRODUCTION_LOG.md` (misalnya `Antigravity Gemini Pro` atau `Claude Code Opus`) dan di pesan commit.

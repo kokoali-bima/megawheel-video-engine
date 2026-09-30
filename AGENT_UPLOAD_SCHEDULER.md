@@ -15,6 +15,7 @@ Sebelum bekerja, baca di 99.3:
   /root/video-engine/AGENT_UPLOAD_SCHEDULER.md   (dokumen ini, wajib)
   /root/video-engine/BLUEPRINT.md bagian 10      (SOP publikasi)
   /root/video-engine/PROJECT_PROGRESS.md         (status proyek; tugas A2/A4 = uji upload & upload Ep. 2-8)
+  /root/video-engine/EPISODES_INDEX.md           (Ep. N = VIDEO_ID + path MP4 + judul; jangan tebak)
 
 Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
  1. Lihat antrian:
@@ -66,3 +67,17 @@ Aturan keras:
 | Tanggal | Perubahan |
 |---|---|
 | 2026-09-30 | Dokumen dibuat (Claude Code). Ep. 1–8 APPROVED, siap dijadwalkan agent 99.2 |
+
+## Catatan per model AI (agent yang dipakai: Claude Code Opus dan Antigravity Gemini Pro)
+
+Kedua model wajib mengikuti dokumen ini dengan sama persis. Catatan tambahan per model:
+
+| Model | Hal yang harus diwaspadai |
+|---|---|
+| **Claude Code (Opus)** | Mode otomatis Claude Code bisa menolak aksi publik (misalnya upload YouTube) lewat pengaman bawaan. Kalau ditolak: berhenti, jangan mencari jalan lain, laporkan ke user (ERROR_LOG A, 2026-09-30). Semua logika remote ditaruh di file script, bukan perintah inline panjang (ERROR_LOG A/D). |
+| **Antigravity (Gemini Pro)** | Pernah membuat video dengan script buatan sendiri, hasilnya mobil berjalan mundur dan tidak ada rintangan (ERROR_LOG C). **Jangan menulis, menyederhanakan, atau "memperbaiki" script.** Jalankan perintah di dokumen ini apa adanya. Bukti engine yang benar: log berisi baris `[sim]`, `[cast] final:`, `[analysis]`, `[audit] PASS`. Kalau tidak ada, berhenti. Terminal Antigravity bisa menjalankan perintah otomatis: batasi hanya pada perintah yang tertulis di sini. |
+
+Untuk keduanya:
+- Kenali episode hanya lewat `/root/video-engine/EPISODES_INDEX.md` (nomor episode → VIDEO_ID → path MP4 → judul).
+- Status proyek ada di `PROJECT_PROGRESS.md`.
+- Tulis nama model di kolom "Agent" pada `PRODUCTION_LOG.md` (misalnya `Antigravity Gemini Pro` atau `Claude Code Opus`) dan di pesan commit.
