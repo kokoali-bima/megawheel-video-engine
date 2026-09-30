@@ -560,7 +560,7 @@ def main():
         marks[int(out_of(jumper["jump_t"] + 0.6) * FPS)] = "jump"
     marks[int(out_of(winner["finish"] + 0.5) * FPS)] = "winner"
     marks[int((cta_start + 1.5) * FPS)] = "outro"
-    camx, zoom = None, 1.0
+    camx, zoom, prev_mode, empty_frames = None, 1.0, None, 0
     for fi, (mode, t) in enumerate(frames):
         st = {id(c): state(c, t) for c in cars}
         focus = None
@@ -582,13 +582,21 @@ def main():
             target = st[id(spinner)][0] + 1
         spread = max(xs) - min(xs) + 9.0
         fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.82, 1.12))
-        camx = target if camx is None else camx + (target - camx) * (0.3 if mode == "replay" else 0.12)
+        cut = camx is None or mode != prev_mode                    # scene change = hard cut, never a pan
+        camx = target if cut else camx + (target - camx) * (0.3 if mode == "replay" else 0.12)
         punch = 1.0
         for kind, et, ex, ez in events:
             if kind in ("land", "bump", "splash") and 0 <= t - et < 0.35:
                 punch = max(punch, 1 + 0.08 * math.sin(math.pi * (t - et) / 0.35))
         want = 1.18 if mode == "replay" else min(fit, 1.08 if focus else 1.0)
-        zoom += (want * punch - zoom) * 0.12
+        zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
+        key = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
+        kx, kz = st[id(key)][0], st[id(key)][1]                   # hard rule: the key car stays in frame
+        reach = 380.0 / (k_of(kz) * zoom)
+        camx = float(np.clip(camx, kx - reach, kx + reach))
+        prev_mode = mode
+        if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
+            empty_frames += 1
         shx = shy = 0.0
         for kind, et, ex, ez in events:
             if kind in ("land", "bump") and 0 <= t - et < 0.4:
@@ -678,7 +686,8 @@ def main():
               "has winner": winner["finish"] is not None,
               "has spin + replay": spinner is not None and replay is not None,
               "has jump": jumper is not None,
-              "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro"))}
+              "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
+              "no frame without a car": empty_frames == 0}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + ("+spin" if c["spin_t"] else "")
                 + ("+jump" if c["jump_t"] else "") + ("+bump" if c["bump_t"] else "") for c in cars]
@@ -704,7 +713,7 @@ def main():
     with open(os.path.join(out_dir, f"{name}_audit.md"), "w") as fh:
         fh.write(f"# Checks {name}\n\n" + "\n".join(f"- {'✅' if ok else '❌'} {k}" for k, ok in checks.items())
                  + f"\n\nDuration {dur:.1f} s · theme {se.THEME_ID} · voice {voice}\n")
-    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks}", flush=True)
+    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames}", flush=True)
     if not opt.preview_only:
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
