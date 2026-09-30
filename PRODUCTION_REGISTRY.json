@@ -378,6 +378,37 @@
       "youtube_url": null,
       "approved_date": "2026-09-30",
       "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts"
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S002",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 2,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "bus",
+        "sports",
+        "taxi"
+      ],
+      "track_id": "race25d_31df529a@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "en-US-MichelleNeural",
+      "outcomes": [
+        "p4+spin",
+        "p2",
+        "p3",
+        "win+jump"
+      ],
+      "duration": 29.7,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s002",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s002/SIM_RACE25D_V1_S002_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
