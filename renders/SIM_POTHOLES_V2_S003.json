@@ -1,0 +1,207 @@
+{
+  "video_id": "SIM_POTHOLES_V2_S003",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "potholes",
+  "seed": 3,
+  "fps": 30,
+  "duration": 48.77,
+  "track_id": "potholes_0fb8fcd6",
+  "track_params": {
+    "p1x": 27.1,
+    "p1w": 2.9,
+    "p1d": 3.3,
+    "rampx": 44.3,
+    "rampl": 6.5,
+    "ramph": 1.5,
+    "p2w": 7.4,
+    "p2d": 5.0,
+    "p3x": 76.0,
+    "p3w": 5.1,
+    "p3d": 3.3
+  },
+  "fingerprint": "potholes|police,firetruck,monster2|potholes_0fb8fcd6|flip@obs2,stuck@obs0,win",
+  "outcomes": [
+    "flip@obs2",
+    "stuck@obs0",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->83.3 m, 3.0->30.9 m, 3.0->124.7 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 lubang (27-81 m), finish 100 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "7.3s, 6.1s, 9.1s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "48.8 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "ok": true,
+      "detail": "16.5s, 10.5s, 21.8s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "potholes|police,firetruck,monster2|potholes_0fb8fcd6|flip@obs2,stuck@obs0,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
+  "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
+  "description": "Can Siren, Hydro or Grizzly survive the GIANT POTHOLES? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "tags": [
+    "cars",
+    "potholes",
+    "monster truck",
+    "kids",
+    "shorts",
+    "physics",
+    "MegaWheel Kids",
+    "police car",
+    "fire truck",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 16.5,
+      "outcome": "flip",
+      "event_t": 7.27,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 16.47,
+      "event_out": 9.5,
+      "x_start": 3.0,
+      "x_end": 83.3,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 7.2,
+      "outcome": "stuck",
+      "event_t": 6.07,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 16.47,
+      "duration": 10.5,
+      "event_out": 23.1,
+      "x_start": 3.0,
+      "x_end": 30.9,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "GRIZZLY THE MONSTER TRUCK",
+      "speed": 12.85,
+      "outcome": "win",
+      "event_t": 9.07,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 26.97,
+      "duration": 21.8,
+      "event_out": 37.17,
+      "x_start": 3.0,
+      "x_end": 124.7,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Siren the police car is on patrol! Can Siren make it past the giant potholes?",
+    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant potholes?",
+    "Whoa! Siren flipped right over!",
+    "Uh oh... Hydro is totally stuck!",
+    "Yes! Grizzly made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
+  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S003_preview",
+  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S003_audit.md"
+}

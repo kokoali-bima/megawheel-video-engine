@@ -110,6 +110,50 @@
       "status": "RENDERED_PENDING_APPROVAL",
       "audit": "renders/SIM_BUMPS_V2_S001_audit.md",
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S003",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 3,
+      "created": "2026-09-30",
+      "vehicles": [
+        "police",
+        "firetruck",
+        "monster2"
+      ],
+      "track_id": "potholes_0fb8fcd6",
+      "outcomes": [
+        "flip@obs2",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 48.77,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_POTHOLES_V2_S003_audit.md",
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S003",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 3,
+      "created": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "icecream",
+        "monster2"
+      ],
+      "track_id": "bumps_d3de3b02",
+      "outcomes": [
+        "stuck@obs1",
+        "stuck@obs2",
+        "win"
+      ],
+      "duration": 47.97,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "audit": "renders/SIM_BUMPS_V2_S003_audit.md",
+      "youtube_url": null
     }
   ]
 }

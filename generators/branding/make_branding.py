@@ -195,22 +195,24 @@ def banner(path):
     for x, y, k in [(180, 180, 1.2), (700, 300, 0.9), (1150, 150, 1.0), (1700, 260, 0.8), (1950, 120, 1.1),
                     (300, 520, 0.7), (2200, 560, 0.7)]:
         cloud(ctx, x, y, k)
-    s = 46
-    left = ["sports", "police", "bus"]
-    right = ["monster", "firetruck", "monster2"]      # Rocky (profile mascot) next to the logo: visible on phones
-    x = 60.0
-    for vk in left:
+    # whole cast in one row; the two champions sit in the middle so phones (centre 1546 px) always show them
+    cast = ["sports", "police", "bus", "firetruck", "monster", "monster2", "bigrig", "icecream", "f1", "taxi"]
+    s, gap = 33, 22
+    total = sum(vehicle_width(vk, s) for vk in cast) + gap * (len(cast) - 1)
+    x = (w - total) / 2
+    for vk in cast:
         wv = vehicle_width(vk, s)
         vehicle(ctx, vk, x + wv / 2, road_y, s)
-        x += wv + 30
-    x = w - 60.0
-    for vk in reversed(right):
-        wv = vehicle_width(vk, s)
-        vehicle(ctx, vk, x - wv / 2, road_y, s)
-        x -= wv + 30
-    se.draw_text(ctx, "FUN CAR CHALLENGES FOR KIDS!", 1280, 548, 46, fill=(1, 1, 1), stroke=NAVY, sw=9, max_w=820)
-    logo(ctx, 1280, 585, 150, 900)
-    sparkles(ctx, [(815, 628, 1.0), (1745, 622, 0.9)], 30)
+        x += wv + gap
+    se.draw_text(ctx, "FUN CAR CHALLENGES FOR KIDS!", 1280, 548, 42, fill=(1, 1, 1), stroke=NAVY, sw=8, max_w=820)
+    se.set_font(ctx, 118)
+    w1 = ctx.text_extents("MEGAWHEEL").width
+    w2 = ctx.text_extents("KIDS").width
+    gap_w = 40
+    x0 = 1280 - (w1 + gap_w + w2) / 2
+    se.draw_text(ctx, "MEGAWHEEL", x0 + w1 / 2, 650, 118, fill=YELLOW, stroke=NAVY, sw=22)
+    se.draw_text(ctx, "KIDS", x0 + w1 + gap_w + w2 / 2, 650, 118, fill=(1, 1, 1), stroke=(0.85, 0.12, 0.2), sw=22)
+    sparkles(ctx, [(x0 - 60, 610, 0.9), (x0 + w1 + gap_w + w2 + 60, 600, 0.8)], 28)
     se.draw_text(ctx, "NEW VIDEOS EVERY WEEK", 1280, 1180, 64, fill=YELLOW, stroke=NAVY, sw=12)
     surf.write_to_png(path)
     check = cairo.ImageSurface(cairo.FORMAT_ARGB32, w, h)

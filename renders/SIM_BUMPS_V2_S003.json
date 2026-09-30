@@ -1,0 +1,217 @@
+{
+  "video_id": "SIM_BUMPS_V2_S003",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "bumps",
+  "seed": 3,
+  "fps": 30,
+  "duration": 47.97,
+  "track_id": "bumps_d3de3b02",
+  "track_params": {
+    "bumps": [
+      [
+        41.2,
+        43.8,
+        0.6
+      ],
+      [
+        52.3,
+        55.5,
+        1.35
+      ],
+      [
+        62.4,
+        66.1,
+        1.87
+      ],
+      [
+        74.0,
+        78.1,
+        2.41
+      ]
+    ]
+  },
+  "fingerprint": "bumps|f1,icecream,monster2|bumps_d3de3b02|stuck@obs1,stuck@obs2,win",
+  "outcomes": [
+    "stuck@obs1",
+    "stuck@obs2",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->53.6 m, 3.0->59.6 m, 3.0->93.5 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "4 polisi tidur (41-78 m), finish 88 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.0s, 7.4s, 8.5s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [1, 2]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "48.0 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
+      "ok": true,
+      "detail": "12.8s, 13.2s, 21.9s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "bumps|f1,icecream,monster2|bumps_d3de3b02|stuck@obs1,stuck@obs2,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
+  "title": "Cars VS Giant Speed Bumps! 🚗💥 Who Makes It? #Shorts",
+  "description": "Can Nitro, Sprinkles or Grizzly survive the GIANT SPEED BUMPS? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "tags": [
+    "cars",
+    "speed bumps",
+    "monster truck",
+    "kids",
+    "shorts",
+    "physics",
+    "MegaWheel Kids",
+    "race car",
+    "ice cream truck",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 12.25,
+      "outcome": "stuck",
+      "event_t": 7.97,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 12.8,
+      "event_out": 8.9,
+      "x_start": 3.0,
+      "x_end": 53.6,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 13.5,
+      "outcome": "stuck",
+      "event_t": 7.37,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 12.8,
+      "duration": 13.23,
+      "event_out": 22.07,
+      "x_start": 3.0,
+      "x_end": 59.6,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "GRIZZLY THE MONSTER TRUCK",
+      "speed": 22.25,
+      "outcome": "win",
+      "event_t": 8.47,
+      "obstacle": 3,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 26.03,
+      "duration": 21.93,
+      "event_out": 36.37,
+      "x_start": 3.0,
+      "x_end": 93.5,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the giant speed bumps?",
+    "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant speed bumps?",
+    "Uh oh... Nitro is totally stuck!",
+    "Uh oh... Sprinkles is totally stuck!",
+    "Yes! Grizzly made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
+  "video_path": "/root/video-engine/renders/SIM_BUMPS_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/SIM_BUMPS_V2_S003_preview",
+  "audit_path": "/root/video-engine/renders/SIM_BUMPS_V2_S003_audit.md"
+}

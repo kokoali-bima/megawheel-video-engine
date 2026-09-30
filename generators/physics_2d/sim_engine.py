@@ -200,8 +200,37 @@ FACES = {
     "monster": dict(eyes=[(-0.8, 0.9), (-0.35, 0.9)], r=0.16, mouth=(1.7, -0.22), mw=0.34),
 }
 FACES["monster2"] = FACES["monster"]
+# --- cast expansion (2026-09-30): F1 car, taxi, big rig, ice cream truck
+VEHICLES.update({
+    "f1": dict(nick="Nitro", display="NITRO THE RACE CAR", color=(0.1, 0.55, 0.95),
+               body=(4.6, 0.45), mass=750, wheel_r=0.36, wheel_m=22, wheel_x=(-1.6, 1.7),
+               travel=0.3, speeds=(8, 20), break_dv=4.5, zoom=1.1,
+               cabin=[(-0.9, 0.22), (0.2, 0.22), (-0.1, 0.55), (-0.7, 0.55)], engine=(70, 3.0),
+               intro="Level {lvl}! Nitro the race car! Super fast... but can Nitro handle the {obst}?"),
+    "taxi": dict(nick="Tilly", display="TILLY THE TAXI", color=(1.0, 0.8, 0.0),
+                 body=(4.3, 0.7), mass=1100, wheel_r=0.42, wheel_m=28, wheel_x=(-1.4, 1.4),
+                 travel=0.45, speeds=(7, 17), break_dv=4.5, zoom=1.05,
+                 cabin=[(-1.35, 0.35), (0.65, 0.35), (0.15, 0.95), (-1.15, 0.95)], engine=(48, 2.0),
+                 intro="Level {lvl}! Tilly the taxi! Hop in... can Tilly get past the {obst}?"),
+    "bigrig": dict(nick="Titan", display="TITAN THE BIG RIG", color=(0.95, 0.42, 0.1),
+                   body=(9.6, 2.3), mass=9000, wheel_r=0.6, wheel_x=(-4.0, -2.9, 2.2, 3.8), wheel_m=110,
+                   travel=0.35, speeds=(6, 13), break_dv=4.0, zoom=0.78, cabin=None, engine=(32, 1.1),
+                   intro="Level {lvl}! Titan the big rig! The biggest truck on the road... can Titan make it?"),
+    "icecream": dict(nick="Sprinkles", display="SPRINKLES THE ICE CREAM TRUCK", color=(1.0, 0.6, 0.76),
+                     body=(5.6, 2.2), mass=4200, wheel_r=0.5, wheel_m=80, wheel_x=(-1.9, 1.9),
+                     travel=0.35, speeds=(6, 14), break_dv=4.0, zoom=0.88, cabin=None, engine=(42, 1.4),
+                     intro="Level {lvl}! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?"),
+})
+FACES.update({
+    "f1": dict(eyes=[(0.55, 0.13), (0.9, 0.13)], r=0.1, mouth=(1.95, -0.1), mw=0.22),
+    "taxi": dict(eyes=[(-0.68, 0.62), (-0.26, 0.62)], r=0.13, mouth=(1.65, -0.18), mw=0.3),
+    "bigrig": dict(eyes=[(3.85, 0.5), (4.25, 0.5)], r=0.17, mouth=(4.4, -0.7), mw=0.4),
+    "icecream": dict(eyes=[(2.05, 0.38), (2.45, 0.38)], r=0.15, mouth=(2.5, -0.62), mw=0.35),
+})
 # Level roles: seed picks one vehicle per role (potholes seed 1 keeps the reference line-up)
-ROSTER = [(("sports", "police"), "fail"), (("bus", "firetruck"), "fail"), (("monster", "monster2"), "win")]
+ROSTER = [(("sports", "police", "f1", "taxi"), "fail"), (("bus", "firetruck", "bigrig", "icecream"), "fail"),
+          (("monster", "monster2"), "win")]
+ROLE_ORDER = []     # per level: characters in preferred order (fewest appearances first); fallback if one can't fit
 STORY = [("sports", "fail"), ("bus", "fail"), ("monster", "win")]
 NUM_WORDS = ["one", "two", "three", "four", "five"]
 
@@ -221,19 +250,22 @@ def load_cast():
 
 
 def make_story(series, seed, appearances=None):
-    """Pick one character per role: fewest appearances first (fair rotation), seed breaks ties."""
-    global STORY
+    """Order the characters of each role: fewest appearances first (fair rotation), seed breaks ties.
+
+    STORY takes the first of each role; main() falls back to the next one if a character
+    cannot produce the wanted outcome on this track.
+    """
+    global STORY, ROLE_ORDER
     if series == "potholes" and seed == 1:
-        STORY = [("sports", "fail"), ("bus", "fail"), ("monster", "win")]
-        return
-    r = np.random.default_rng(3000 + seed)
-    appearances = appearances or {}
-    story = []
-    for opts, want in ROSTER:
-        least = min(appearances.get(o, 0) for o in opts)
-        pool = [o for o in opts if appearances.get(o, 0) == least]
-        story.append((pool[int(r.integers(len(pool)))], want))
-    STORY = story
+        ROLE_ORDER = [["sports"], ["bus"], ["monster"]]
+    else:
+        r = np.random.default_rng(3000 + seed)
+        appearances = appearances or {}
+        ROLE_ORDER = []
+        for opts, _ in ROSTER:
+            tie = {o: float(r.random()) for o in opts}
+            ROLE_ORDER.append(sorted(opts, key=lambda o: (appearances.get(o, 0), tie[o])))
+    STORY = [(order[0], want) for order, (_, want) in zip(ROLE_ORDER, ROSTER)]
 
 
 def intro_text(li, vk):
@@ -476,27 +508,44 @@ def outcome_vo_t(ev_out, intro_d):
     return max(ev_out + 0.25, 0.15 + intro_d + 0.2)
 
 
-def candidate_runs(intro_durs):
-    """All simulated runs per level that match the wanted outcome and timing."""
-    out = []
+def runs_for(vk, want, intro_d):
+    """All simulated runs of one character that match the wanted outcome and timing."""
+    v = VEHICLES[vk]
     scale = SERIES_DEFS[SERIES].get("speed_scale", 1.0)
-    for li, (vk, want) in enumerate(STORY):
-        v = VEHICLES[vk]
-        lo = event_min_t(intro_durs[li])
-        hi = 15.0 if want == "win" else 11.5
-        cands, summary = [], []
-        for sp in np.linspace(v["speeds"][0] * scale, v["speeds"][1] * scale, 21):
-            run = simulate(v, sp)
-            ev = run["event"]
-            summary.append(f"{sp:.1f}:{ev['type']}@{ev['t']:.1f}s/obs{ev['obstacle']}{'/BRK' if run['broken'] else ''}")
-            is_win = ev["type"] == "win"
-            if (want == "win") == is_win and ev["type"] != "timeout" and lo <= ev["t"] <= hi:
-                cands.append(run)
-        print(f"[sim] {vk}: " + ", ".join(summary), flush=True)
-        if not cands:
-            raise SystemExit(f"[analysis] STOP: tidak ada run {vk} dengan hasil '{want}' di lintasan ini. Coba seed lain.")
+    lo = event_min_t(intro_d)
+    hi = 15.0 if want == "win" else 11.5
+    cands, summary = [], []
+    for sp in np.linspace(v["speeds"][0] * scale, v["speeds"][1] * scale, 21):
+        run = simulate(v, sp)
+        ev = run["event"]
+        summary.append(f"{sp:.1f}:{ev['type']}@{ev['t']:.1f}s/obs{ev['obstacle']}{'/BRK' if run['broken'] else ''}")
+        is_win = ev["type"] == "win"
+        if (want == "win") == is_win and ev["type"] != "timeout" and lo <= ev["t"] <= hi:
+            cands.append(run)
+    print(f"[sim] {vk}: " + ", ".join(summary), flush=True)
+    return cands
+
+
+def candidate_runs():
+    """Per level: first character of ROLE_ORDER that can produce the wanted outcome (fallback to next)."""
+    global STORY
+    out, story, intros = [], [], []
+    for li, (order, (_, want)) in enumerate(zip(ROLE_ORDER, ROSTER)):
+        for vk in order:
+            text = intro_text(li, vk)
+            audio = tts(text)
+            cands = runs_for(vk, want, len(audio) / SR)
+            if cands:
+                break
+            print(f"[cast] {vk} cannot '{want}' on this track -> trying next character", flush=True)
+        else:
+            raise SystemExit(f"[analysis] STOP: tidak ada tokoh peran level {li + 1} yang bisa '{want}' "
+                             f"di lintasan ini. Coba seed lain.")
+        story.append((vk, want))
+        intros.append((text, audio))
         out.append(cands)
-    return out
+    STORY = story
+    return out, intros
 
 
 def level_timing(vk, run, intro_d, outcome_d, cta_d):
@@ -1294,6 +1343,97 @@ def draw_body(ctx, vk, v, broken, t=0.0):
         local_text(ctx, "FIRE", -0.9, -0.72, 0.32, (1, 1, 1))
         ctx.arc(3.05, -0.4, 0.11, 0, 2 * math.pi)
         fill_stroke(ctx, (1, 0.95, 0.4), lw=0.03)
+    elif vk == "f1":
+        rrect(ctx, -2.5, 0.55, 0.75, 0.14, 0.04)                 # rear wing
+        fill_stroke(ctx, dark, lw=0.035)
+        ctx.rectangle(-2.2, 0.2, 0.12, 0.36)
+        ctx.set_source_rgb(0.15, 0.15, 0.18)
+        ctx.fill()
+        poly(ctx, [(-2.3, -0.22), (2.3, -0.22), (2.35, -0.08), (1.2, 0.04), (0.55, 0.22), (-1.7, 0.22), (-2.1, 0.08)])
+        fill_stroke(ctx, c)
+        ctx.rectangle(-1.6, -0.06, 2.6, 0.07)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+        ctx.arc(-0.35, 0.42, 0.21, 0, 2 * math.pi)             # driver helmet
+        fill_stroke(ctx, (1, 0.85, 0.1), lw=0.035)
+        rrect(ctx, -0.3, 0.36, 0.2, 0.1, 0.03)
+        ctx.set_source_rgb(0.1, 0.1, 0.15)
+        ctx.fill()
+        rrect(ctx, 1.85, -0.3, 0.7, 0.1, 0.03)                   # front wing
+        fill_stroke(ctx, dark, lw=0.03)
+        local_text(ctx, "1", -1.05, 0.03, 0.3, (1, 1, 1))
+    elif vk == "taxi":
+        poly(ctx, [(-1.35, 0.35), (0.65, 0.35), (0.15, 0.95), (-1.15, 0.95)])
+        fill_stroke(ctx, c)
+        poly(ctx, [(-1.2, 0.4), (0.48, 0.4), (0.08, 0.86), (-1.03, 0.86)])
+        fill_stroke(ctx, glass, lw=0.03)
+        ctx.set_source_rgb(0.1, 0.08, 0.12)
+        ctx.set_line_width(0.05)
+        ctx.move_to(-0.33, 0.4)
+        ctx.line_to(-0.33, 0.86)
+        ctx.stroke()
+        rrect(ctx, -0.75, 0.95, 0.62, 0.22, 0.05)                # roof sign
+        fill_stroke(ctx, (1, 1, 0.85), lw=0.03)
+        local_text(ctx, "TAXI", -0.44, 1.06, 0.15, (0.1, 0.1, 0.1))
+        poly(ctx, [(-2.15, -0.35), (2.15, -0.35), (2.15, 0.0), (1.75, 0.3), (0.75, 0.35), (-2.05, 0.35), (-2.15, 0.15)])
+        fill_stroke(ctx, c)
+        for i in range(16):                                     # checker stripe
+            for j in range(2):
+                ctx.rectangle(-1.9 + i * 0.23, -0.1 + j * 0.1, 0.23, 0.1)
+                ctx.set_source_rgb(*(((0.1,) * 3) if (i + j) % 2 else (1, 1, 1)))
+                ctx.fill()
+        ctx.arc(2.0, 0.08, 0.09, 0, 2 * math.pi)
+        fill_stroke(ctx, (1, 0.95, 0.4), lw=0.03)
+    elif vk == "bigrig":
+        rrect(ctx, -4.8, -0.9, 7.3, 2.05, 0.12)                  # trailer
+        fill_stroke(ctx, (0.9, 0.9, 0.94), lw=0.07)
+        for i in range(1, 7):
+            ctx.move_to(-4.8 + i * 1.04, -0.9)
+            ctx.line_to(-4.8 + i * 1.04, 1.15)
+        ctx.set_source_rgb(0.75, 0.75, 0.8)
+        ctx.set_line_width(0.04)
+        ctx.stroke()
+        local_text(ctx, "MEGA HAUL", -1.15, 0.15, 0.55, (0.12, 0.3, 0.7))
+        ctx.rectangle(-4.8, -1.15, 9.6, 0.25)
+        ctx.set_source_rgb(0.2, 0.2, 0.24)
+        ctx.fill()
+        ctx.rectangle(2.8, 0.85, 0.14, 0.75)                     # exhaust stack
+        fill_stroke(ctx, (0.7, 0.7, 0.75), lw=0.03)
+        poly(ctx, [(2.7, -1.1), (4.8, -1.1), (4.8, 0.2), (4.55, 1.0), (2.7, 1.0)])
+        fill_stroke(ctx, c, lw=0.07)
+        rrect(ctx, 3.55, 0.08, 1.0, 0.8, 0.1)
+        fill_stroke(ctx, glass, lw=0.04)
+        ctx.rectangle(4.62, -0.95, 0.16, 0.7)
+        ctx.set_source_rgb(0.25, 0.25, 0.28)
+        ctx.fill()
+        ctx.arc(4.68, -0.12, 0.1, 0, 2 * math.pi)
+        fill_stroke(ctx, (1, 0.95, 0.4), lw=0.03)
+    elif vk == "icecream":
+        ctx.move_to(-0.35, 1.95)                                 # giant cone on the roof
+        ctx.line_to(0.35, 1.95)
+        ctx.line_to(0.0, 1.05)
+        ctx.close_path()
+        fill_stroke(ctx, (0.85, 0.62, 0.3), lw=0.04)
+        ctx.arc(0, 2.1, 0.42, 0, 2 * math.pi)
+        fill_stroke(ctx, (1, 0.85, 0.9), lw=0.04)
+        ctx.arc(0, 2.55, 0.12, 0, 2 * math.pi)
+        fill_stroke(ctx, (0.9, 0.1, 0.2), lw=0.03)
+        rrect(ctx, -2.8, -1.05, 5.6, 2.1, 0.3)
+        fill_stroke(ctx, c, lw=0.08)
+        ctx.rectangle(-2.8, -1.05, 5.6, 0.5)
+        ctx.set_source_rgb(0.6, 0.95, 0.8)
+        ctx.fill()
+        rrect(ctx, -2.0, -0.15, 2.3, 0.8, 0.1)                   # serving window
+        fill_stroke(ctx, glass, lw=0.05)
+        for i in range(8):                                      # awning
+            ctx.rectangle(-2.1 + i * 0.31, 0.68, 0.31, 0.22)
+            ctx.set_source_rgb(*((1, 0.35, 0.55) if i % 2 else (1, 1, 1)))
+            ctx.fill()
+        rrect(ctx, 1.85, -0.05, 0.85, 0.8, 0.12)
+        fill_stroke(ctx, glass, lw=0.05)
+        local_text(ctx, "ICE CREAM", -0.85, -0.8, 0.34, (0.55, 0.1, 0.35))
+        ctx.arc(2.65, -0.35, 0.1, 0, 2 * math.pi)
+        fill_stroke(ctx, (1, 0.95, 0.4), lw=0.03)
     elif vk == "sports":
         poly(ctx, [(-1.3, 0.31), (0.5, 0.31), (-0.1, 0.85), (-1.0, 0.85)])
         fill_stroke(ctx, c)
@@ -1866,15 +2006,17 @@ def main():
         if os.path.exists(f"{OUT_DIR}/{name}.mp4"):
             raise SystemExit(f"[registry] STOP: {OUT_DIR}/{name}.mp4 sudah ada. Pakai seed lain atau --force.")
     print(f"[track] {TRACK_ID} {json.dumps(TRACK_PARAMS)}", flush=True)
-    print(f"[story] {SERIES}: " + " -> ".join(f"{vk}({want})" for vk, want in STORY), flush=True)
+    print(f"[story] {SERIES}: " + " | ".join(f"{want}: {'>'.join(order)}" for order, (_, want)
+                                             in zip(ROLE_ORDER, ROSTER)), flush=True)
     rng = np.random.default_rng(args.seed)
     t0 = time.time()
     print(f"[font] {FONT_FACE}", flush=True)
 
-    intro_texts = [intro_text(li, vk) for li, (vk, _) in enumerate(STORY)]
-    intros = [tts(s) for s in intro_texts]
+    cands, intro_pairs = candidate_runs()
+    intro_texts = [t for t, _ in intro_pairs]
+    intros = [a for _, a in intro_pairs]
     intro_durs = [len(x) / SR for x in intros]
-    cands = candidate_runs(intro_durs)
+    print(f"[cast] final: " + " -> ".join(VEHICLES[vk]["nick"] for vk, _ in STORY), flush=True)
     cta = tts(CTA)
     replay_vo = tts(REPLAY_LINE)
 

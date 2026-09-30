@@ -81,6 +81,58 @@
       "intro": "Level {lvl}! Grizzly the monster truck! Can Grizzly smash through the {obst}?",
       "debut": null,
       "note": "Renamed from 'Crusher' on 2026-09-30 before any render/upload (name clash with 'Blaze and the Monster Machines')."
+    },
+    {
+      "id": "nitro",
+      "name": "Nitro",
+      "display": "NITRO THE RACE CAR",
+      "vehicle_id": "f1",
+      "role": "light",
+      "color_rgb": [26, 140, 242],
+      "personality": "The fastest racer on the track. Impatient, loves speed more than anything.",
+      "catchphrase": "Full throttle, no stopping!",
+      "rival": "zippy",
+      "intro": "Level {lvl}! Nitro the race car! Super fast... but can Nitro handle the {obst}?",
+      "debut": null
+    },
+    {
+      "id": "tilly",
+      "name": "Tilly",
+      "display": "TILLY THE TAXI",
+      "vehicle_id": "taxi",
+      "role": "light",
+      "color_rgb": [255, 204, 0],
+      "personality": "Friendly and chatty. Knows every road in town and loves giving friends a ride.",
+      "catchphrase": "Hop in, let's go!",
+      "rival": "siren",
+      "intro": "Level {lvl}! Tilly the taxi! Hop in... can Tilly get past the {obst}?",
+      "debut": null
+    },
+    {
+      "id": "titan",
+      "name": "Titan",
+      "display": "TITAN THE BIG RIG",
+      "vehicle_id": "bigrig",
+      "role": "heavy",
+      "color_rgb": [242, 107, 26],
+      "personality": "The biggest truck on the road. Calm gentle giant, super strong but slow.",
+      "catchphrase": "Big load, no problem!",
+      "rival": "buster",
+      "intro": "Level {lvl}! Titan the big rig! The biggest truck on the road... can Titan make it?",
+      "debut": null
+    },
+    {
+      "id": "sprinkles",
+      "name": "Sprinkles",
+      "display": "SPRINKLES THE ICE CREAM TRUCK",
+      "vehicle_id": "icecream",
+      "role": "heavy",
+      "color_rgb": [255, 153, 194],
+      "personality": "Sweet and bubbly. Every kid's favourite, always playing a happy tune.",
+      "catchphrase": "Ice cream time!",
+      "rival": "hydro",
+      "intro": "Level {lvl}! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+      "debut": null
     }
   ]
 }

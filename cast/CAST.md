@@ -13,6 +13,10 @@
 | **Hydro** | Mobil pemadam | Berat | Merah | Penolong yang kuat, suka menyemprot air, ceria, agak ceroboh | "Splash and dash!" | Buster |
 | **Rocky** | Monster truck | Juara | Biru | Juara yang ramah, suka lompatan besar, menyemangati teman | "Big wheels, big jump!" | Grizzly |
 | **Grizzly** | Monster truck | Juara | Hijau | Rival Rocky yang galak seperti beruang, tapi sebenarnya baik | "Grrr-owl! Out of my way!" | Rocky |
+| **Nitro** | Mobil F1 | Ringan | Biru | Pembalap paling cepat, tidak sabaran, cinta kecepatan | "Full throttle, no stopping!" | Zippy |
+| **Tilly** | Taksi | Ringan | Kuning (kotak-kotak) | Ramah dan cerewet, hafal semua jalan, suka mengantar teman | "Hop in, let's go!" | Siren |
+| **Titan** | Truk gandeng (big rig) | Berat | Oranye + trailer perak | Raksasa yang kalem, sangat kuat tapi lambat | "Big load, no problem!" | Buster |
+| **Sprinkles** | Mobil es krim | Berat | Pink + mint | Manis dan ceria, favorit semua anak | "Ice cream time!" | Hydro |
 
 ## Aturan penokohan (wajib untuk semua agent)
 
@@ -24,6 +28,8 @@
 
 ## Riwayat
 - 2026-09-30: 6 tokoh ditetapkan. "Blaze" → **Hydro**, "Crusher" → **Grizzly** (sebelum pernah dirender/diupload).
+- 2026-09-30: +4 tokoh → **10**: Nitro (F1), Tilly (taksi), Titan (truk gandeng), Sprinkles (mobil es krim). Uji fisika (`tune_cast.py`): keempatnya bisa berperan gagal di potholes & bumps (3/3 seed). Nitro & Tilly kadang bisa menang di potholes.
+- Kalau tokoh terpilih tidak bisa menghasilkan hasil yang diminta di lintasan itu, engine otomatis memakai tokoh berikutnya di peran yang sama (log `[cast] ... trying next character`).
 
 ## Ide ke depan
 - Statistik per tokoh (tampil / menang / gagal) dari registry → konten "Siapa juara terbanyak?".
