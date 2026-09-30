@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_BUMPS_V2_S002",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 2,
   "fps": 30,
-  "duration": 46.4,
+  "duration": 49.23,
   "track_id": "bumps_926d31bb",
   "track_params": {
     "bumps": [
@@ -31,9 +31,16 @@
       ]
     ]
   },
-  "fingerprint": "bumps|taxi,bigrig,monster2|bumps_926d31bb|flip@obs2+broken,stuck@obs1,win",
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "countryside"
+  },
+  "theme_id": "night-clear-countryside",
+  "voice": "en-US-JennyNeural",
+  "fingerprint": "bumps|taxi,bigrig,monster2|bumps_926d31bb@night-clear-countryside|flip@obs3,stuck@obs1,win",
   "outcomes": [
-    "flip@obs2+broken",
+    "flip@obs3",
     "stuck@obs1",
     "win"
   ],
@@ -42,7 +49,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->71.8 m, 3.0->59.2 m, 3.0->118.5 m",
+      "detail": "3.0->71.2 m, 3.0->59.3 m, 3.0->118.5 m",
       "hard": true
     },
     {
@@ -70,14 +77,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "4.5s, 6.0s, 12.4s",
+      "detail": "5.9s, 5.7s, 12.4s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "detail": "rintangan [2, 1]",
+      "detail": "rintangan [3, 1]",
       "hard": false
     },
     {
@@ -91,27 +98,27 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "46.4 s",
+      "detail": "49.2 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "detail": "11.9s, 10.9s, 23.6s",
+      "detail": "15.0s, 10.7s, 23.5s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "bumps|taxi,bigrig,monster2|bumps_926d31bb|flip@obs2+broken,stuck@obs1,win",
+      "detail": "bumps|taxi,bigrig,monster2|bumps_926d31bb@night-clear-countryside|flip@obs3,stuck@obs1,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
-  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 #Shorts",
+  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
   "description": "Tilly the taxi, Titan the big rig and Grizzly the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -128,11 +135,11 @@
   "levels": [
     {
       "vehicle": "TILLY THE TAXI",
-      "speed": 20.62,
+      "speed": 20.0,
       "outcome": "flip",
-      "event_t": 4.53,
-      "obstacle": 2,
-      "broken": true,
+      "event_t": 5.93,
+      "obstacle": 3,
+      "broken": false,
       "bullet_time": true,
       "replay": true,
       "bubbles": [
@@ -141,10 +148,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 11.93,
-      "event_out": 5.87,
+      "duration": 14.97,
+      "event_out": 8.57,
       "x_start": 3.0,
-      "x_end": 71.8,
+      "x_end": 71.2,
       "level_color": [
         45,
         183,
@@ -153,9 +160,9 @@
     },
     {
       "vehicle": "TITAN THE BIG RIG",
-      "speed": 14.5,
+      "speed": 14.06,
       "outcome": "stuck",
-      "event_t": 6.0,
+      "event_t": 5.7,
       "obstacle": 1,
       "broken": false,
       "bullet_time": true,
@@ -165,11 +172,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 11.93,
-      "duration": 10.87,
-      "event_out": 19.67,
+      "start": 14.97,
+      "duration": 10.73,
+      "event_out": 22.4,
       "x_start": 3.0,
-      "x_end": 59.2,
+      "x_end": 59.3,
       "level_color": [
         255,
         132,
@@ -190,9 +197,9 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 22.8,
-      "duration": 23.6,
-      "event_out": 36.73,
+      "start": 25.7,
+      "duration": 23.53,
+      "event_out": 39.63,
       "x_start": 3.0,
       "x_end": 118.5,
       "level_color": [
@@ -212,8 +219,12 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s002/SIM_BUMPS_V2_S002.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s002/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s002/SIM_BUMPS_V2_S002_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-JennyNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E002_2026-09-30_bumps/SIM_BUMPS_V2_S002.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E002_2026-09-30_bumps/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E002_2026-09-30_bumps/SIM_BUMPS_V2_S002_audit.md",
+  "episode": 2,
+  "season": 1,
+  "approved_date": "2026-09-30",
+  "rerendered": "2026-09-30"
 }

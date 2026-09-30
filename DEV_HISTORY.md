@@ -158,6 +158,21 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v2.6: anti-monoton tahap 1 — tema, narator bergilir, audio jernih (Claude Code, Opus)
+
+**Masukan user:** 6 episode pertama membosankan/monoton; narator harus lebih enerjik & jelas; boleh ganti narator tiap episode (en-US saja); setuju re-render Ep. 1–6 (opsi B).
+
+**Yang ditambahkan**
+- **Tema lingkungan** (`make_theme`, `TIMES`/`WEATHERS`/`LOCATIONS`): 4 waktu × 3 cuaca × 5 lokasi, acak dari seed dengan aturan (tanpa salju di gurun/pantai, tanpa hujan di gurun). Langit, matahari/bulan/bintang, awan, siluet kota (jendela menyala di malam hari), gunung bersalju, laut + pohon kelapa, bukit pasir + kaktus, warna tanah per lokasi, jalan basah, tepi jalan bersalju, overlay hujan/salju, tint waktu (sunset/malam), lampu mobil di malam hari. Cuaca mengubah gesekan (hujan ×0.72, salju ×0.55).
+- **Musik per tema**: tempo, progresi akor, timbre lead; lonceng saat salju.
+- **Narator bergilir** (`VOICES`, 5 suara wanita en-US), rotasi paling jarang dipakai. Delivery enerjik (rate +12%, pitch +2Hz), filter kejernihan ffmpeg (highpass 90 Hz, +4 dB @3 kHz, kompresor). **Ducking** mesin + musik −8 dB saat narator bicara.
+- **"READY... GO!"** + beep di awal setiap level; **zoom punch** saat benturan keras.
+- `--theme` (paksa tema untuk uji), **`--replace-episode N`** (render ulang episode APPROVED di tempat: seri/seed/tokoh/nomor/judul tetap; hanya ditukar kalau audit lolos).
+- Registry/manifest mencatat `theme`, `voice`; sidik jari memakai `track_id@theme`.
+- Sampel suara untuk user: `branding/voice_samples_v2/` (dicampur mesin + musik + ducking).
+
+**Bug yang ditemukan saat uji visual (sudah diperbaiki):** siluet kota tidak muncul (titik awal tiling bernilai positif, tergambar di luar layar); celah kotak pink di antara kaki gunung (tambah alas solid).
+
 ## 2026-09-30 — v2.5: mulai bersih + sistem episode/season (Claude Code, Opus)
 
 **Pembersihan (permintaan user):** semua video dihapus (`renders/*` 107 MB, `/root/renders` 298 MB termasuk video era BeamNG, salinan lokal). Registry lama → `archive/legacy_publishing/PRODUCTION_REGISTRY_pre_arena.json`; registry baru kosong. `upload_cli.py`, `core/tracker.py`, `VIDEO_PUBLISHING_TRACKER.*` → `archive/legacy_publishing/`.

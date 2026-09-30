@@ -13,7 +13,7 @@
 6. **Nama dan sifat tokoh sudah baku** (`/root/video-engine/cast/`). Jangan ganti atau karang tokoh baru tanpa izin user.
 7. **Audiens: SEMUA UMUR, bukan konten anak** (keputusan user 2026-09-30, channel **MegaWheel Arena**, setting YouTube "Tidak dibuat untuk anak-anak"). Konsekuensi wajib:
    - Jangan pakai kata "kids", "for kids", "children", atau "toddler" di judul, deskripsi, tag, teks layar, maupun narasi.
-   - Narator: suara wanita dewasa enerjik `en-US-AvaNeural` (bukan suara anak).
+   - Narator: **bergilir per episode** di antara suara wanita dewasa **en-US saja** (`VOICES`: Aria, AvaMultilingual, EmmaMultilingual, Jenny, Michelle). Yang paling jarang dipakai didahulukan. DILARANG suara anak (`en-US-AnaNeural`) dan aksen non-US (keputusan user). Gaya enerjik (rate +12%, pitch +2Hz) + filter kejernihan + ducking 8 dB pada mesin/musik saat narator bicara.
    - Gaya bahasa: kompetisi / crash test / "who survives?", bukan bahasa balita.
    - Tetap aman untuk keluarga: tanpa darah/sadis, tanpa kata kasar. Tokoh kartun berwajah boleh (ciri khas channel).
 3. **Video harus lolos Analisa (bagian 5) dan Audit (bagian 6)** sebelum preview dikirim ke user.
@@ -52,6 +52,9 @@ cd /root/video-engine
 ./venv/bin/python generators/physics_2d/audit.py <VIDEO_ID>                      # audit ulang video yang sudah ada
 bash generators/physics_2d/find_seeds.sh <series> <dari> <sampai>                # cari seed yang lolos analisa (tanpa render)
 # opsional: --fps 60 (lebih halus, render ~2x lebih lama)
+# opsional: --theme <waktu>,<cuaca>,<lokasi>  (paksa tema, untuk uji; default acak dari seed)
+# render ulang episode APPROVED (belum diupload) di tempat, dengan tokoh/nomor/judul tetap:
+./venv/bin/python generators/physics_2d/sim_engine.py --replace-episode <EP>
 # JANGAN pakai --force / --allow-duplicate kecuali diminta user
 ```
 
@@ -155,7 +158,15 @@ Status: ✅ sudah ada di v2 · 🟡 sebagian · ⬜ belum (roadmap, bagian 9)
 - 🟡 Pegas + peredam pymunk sudah ada (redaman 0.6)
 - ⬜ Dibuat lebih "bouncy" (redaman 0.35–0.45) + squash & stretch visual saat mendarat
 
+### 4.3b Tema lingkungan (acak per seed, tercatat di manifest `theme_id` dan registry `theme`)
+- ✅ Waktu: `morning`, `noon`, `sunset`, `night` (bintang, bulan, lampu mobil menyala, jendela gedung menyala)
+- ✅ Cuaca: `clear`, `rain` (rintik, awan kelabu, jalan basah, gesekan ×0.72), `snow` (salju turun, puncak bukit putih, gesekan ×0.55)
+- ✅ Lokasi: `countryside`, `city` (siluet gedung), `desert` (bukit pasir, kaktus), `mountains` (gunung bersalju), `beach` (laut, pohon kelapa)
+- Aturan: tidak ada salju di gurun/pantai, tidak ada hujan di gurun. Musik ikut tema (tempo, akor, instrumen; lonceng saat salju).
+- Tema masuk ke sidik jari registry (`track_id@theme`), jadi lintasan yang sama dengan tema berbeda dihitung video berbeda.
+
 ### 4.4 Kamera & efek
+- ✅ "READY... GO!" + bunyi beep di awal setiap level; zoom mendadak (punch-in) saat benturan keras
 - ✅ Kamera mengikuti mobil, zoom out saat melayang, guncangan saat benturan, speed lines
 - ✅ Bullet-time di lompatan besar, INSTANT REPLAY slow-mo
 - ✅ Speech bubble: "UH OH!", "WHOA!", "OUCH!", "YEAH!"
@@ -320,14 +331,16 @@ Video berstatus `AUDIT_FAILED` / `REJECTED` / `PROTOTYPE_NOT_FOR_UPLOAD` tidak d
 | ✅ | Seri 2: Giant Speed Bumps | `--series bumps`, 4–5 gundukan setengah-sinus makin tinggi (hingga 2.7 m) |
 | ✅ | Tokoh tetap + rotasi adil | 6 tokoh, 3 peran, `cast/characters.json`; yang paling jarang tampil didahulukan |
 | ✅ | Satu engine | sim-prototype digabung ke `/root/video-engine` (2026-09-30), pipeline footage diarsipkan |
-| 1 | Variasi kegagalan kendaraan berat | Bus/fire truck hampir selalu `stuck` (di potholes selalu di lubang 1) → rintangan yang membuat kendaraan berat terbalik / hancur |
+| ✅ | Tema lingkungan + narator bergilir + ducking | v2.6 (2026-09-30) |
+| 1 | **Seri Roller Coaster Road** | Bukit raksasa, turunan curam, lompatan, loop 360°; tokoh jagoan per sirkuit |
+| 2 | **Format balapan** | 3 mobil sekaligus, hitung mundur, urutan finish |
+| 3 | Variasi kegagalan kendaraan berat | Bus/fire truck hampir selalu `stuck` (di potholes selalu di lubang 1) → rintangan yang membuat kendaraan berat terbalik / hancur |
 | 2 | Pacing Level 1 ≤ 12 s | Replay lebih pendek atau hanya di level paling spektakuler |
 | 3 | Suspensi juicy + squash & stretch | Redaman lebih rendah + deformasi visual saat mendarat |
 | 4 | Polish vektor | Highlight bodi, gradasi kaca, velg chrome, light beam |
 | 6 | Seri 3: Giant Pendulum Wrecking Ball | Bola berayun (pymunk PinJoint) |
 | 7 | Seri 4: Collapsing Wooden Bridge | Papan jembatan dengan sambungan yang bisa putus |
 | 8 | Seri 5: Hydraulic Car Grizzly | Pres bergerak naik-turun |
-| 9 | Tema lingkungan | Salju, malam, kota, gurun |
 
 Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/rintangan di `sim_engine.py`), bukan script terpisah.
 

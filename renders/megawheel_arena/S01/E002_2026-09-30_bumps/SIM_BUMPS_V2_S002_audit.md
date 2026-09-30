@@ -1,0 +1,63 @@
+# Audit otomatis: SIM_BUMPS_V2_S002
+
+- Tanggal: 2026-09-30 08:23 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 2 · Track: bumps_926d31bb
+- Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
+- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
+
+
+## 5.1 Analisa fisika
+| Cek | Hasil | Nilai |
+|---|---|---|
+| Semua mobil bergerak maju ke kanan (+x) | ✅ | 3.0->71.2 m, 3.0->59.3 m, 3.0->118.5 m |
+| Minimal 2 rintangan di antara start dan finish | ✅ | 4 polisi tidur (44-79 m), finish 89 m |
+| Pola cerita sesuai STORY | ✅ | ['fail', 'fail', 'win'] (target ['fail', 'fail', 'win']) |
+| Tidak ada timeout | ✅ |  |
+| Waktu event masuk akal | ✅ | 5.9s, 5.7s, 12.4s |
+| Level gagal di rintangan berbeda | ✅ | rintangan [3, 1] |
+| Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time) | ✅ |  |
+| Durasi total 40-50 s | ✅ | 49.2 s |
+| Level gagal <= 18 s, level menang (+outro) <= 27 s | ✅ | 15.0s, 10.7s, 23.5s |
+| Sidik jari belum ada di registry | ✅ | bumps|taxi,bigrig,monster2|bumps_926d31bb@night-clear-countryside|flip@obs3,stuck@obs1,win |
+
+## 6.1 Teknis
+| Cek | Hasil | Nilai |
+|---|---|---|
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S01/E002_2026-09-30_bumps/SIM_BUMPS_V2_S002.mp4 |
+| H.264 1080x1920 | ✅ | h264 1080x1920 |
+| Frame rate 30 | ✅ | 30/1 |
+| Audio AAC ada | ✅ | aac |
+| Durasi 40-50 s dan sama dengan manifest (±0.3 s) | ✅ | 49.23 s (manifest 49.23) |
+| Ukuran wajar (8-20 MB) | ✅ | 11.9 MB |
+
+## 6.2 Audio
+| Cek | Hasil | Nilai |
+|---|---|---|
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.4 dB |
+| mean_volume -20..-12 dB | ✅ | -13.4 dB |
+| Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
+| Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
+
+## 6.3 Sinkron
+| Cek | Hasil | Nilai |
+|---|---|---|
+| L1: badge LEVEL 1 tampil di awal level | ✅ | 59% piksel warna level @ 0.6s |
+| L1: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 9.0s |
+| L2: badge LEVEL 2 tampil di awal level | ✅ | 56% piksel warna level @ 15.6s |
+| L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 22.8s |
+| L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 26.3s |
+| L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 40.0s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 65% piksel panel @ 48.4s |
+
+## 5.2 Preview
+| Cek | Hasil | Nilai |
+|---|---|---|
+| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 14 file |
+
+## 7 Keunikan
+| Cek | Hasil | Nilai |
+|---|---|---|
+| Sidik jari unik di registry | ✅ | bumps|taxi,bigrig,monster2|bumps_926d31bb@night-clear-countryside|flip@obs3,stuck@obs1,win |
+| Seed belum dipakai video lain | ✅ | seed 2 |
+| Maks 3 video berturut-turut dari seri yang sama | ✅ | 1 video bumps berturut-turut sebelum ini |
+
+Keterangan: ❌ = wajib diperbaiki (gagal audit), ⚠️ = peringatan (boleh lanjut).

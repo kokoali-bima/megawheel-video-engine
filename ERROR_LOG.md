@@ -40,6 +40,9 @@
 | 2026-09-30 | Draft video ikut tercatat sebagai "video" di tracker lama | Tracker publikasi mencampur draft & tayang | Status jelas per video (registry baru: `RENDERED_PENDING_APPROVAL` vs `UPLOADED_*`). |
 | 2026-09-30 | **Uploader lama akan melabeli setiap video "Made for Kids"** + kategori Gaming + tag BeamNG/Kids | `core/youtube_uploader.upload_shorts` default `made_for_kids=True`, `category_id="20"`; `upload_cli.py` tidak pernah mengubahnya | Default diubah (`False`, kategori `1`, tag Arena). Upload hanya lewat `publish.py` (eksplisit `made_for_kids=False`, kategori 1, metadata dari manifest). `upload_cli.py` diarsipkan. |
 | 2026-09-30 | Audit ulang episode APPROVED mengembalikan status ke PENDING | `audit.py` selalu menulis status | Status hanya diubah kalau masih ANALYZED/PENDING/AUDIT_FAILED atau audit gagal. |
+| 2026-09-30 | Siluet kota tidak tergambar | `-(a) % n` di Python bernilai positif, jadi tiling mulai di luar layar kanan | Tiling paralaks: `x = -(a % period)`. Selalu cek PNG untuk setiap tema baru (`--theme` + `--preview-only`). |
+| 2026-09-30 | Kotak pink di latar gunung | Celah antar segitiga gunung memperlihatkan langit | Beri alas solid di bawah layer latar. |
+| 2026-09-30 | Perintah PowerShell diblokir total | `Remove-Item` dengan path variabel dianggap berbahaya oleh sandbox | Tulis ke folder baru, jangan menghapus folder scratchpad lewat variabel. |
 
 ## D. Kebiasaan agent (Claude Code)
 

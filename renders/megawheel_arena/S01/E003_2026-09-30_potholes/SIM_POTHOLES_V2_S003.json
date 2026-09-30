@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_POTHOLES_V2_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 3,
   "fps": 30,
-  "duration": 44.33,
+  "duration": 46.93,
   "track_id": "potholes_0fb8fcd6",
   "track_params": {
     "p1x": 27.1,
@@ -20,7 +20,14 @@
     "p3w": 5.1,
     "p3d": 3.3
   },
-  "fingerprint": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "countryside"
+  },
+  "theme_id": "morning-clear-countryside",
+  "voice": "en-US-AvaMultilingualNeural",
+  "fingerprint": "potholes|f1,icecream,monster|potholes_0fb8fcd6@morning-clear-countryside|pit@obs2+broken,stuck@obs0,win",
   "outcomes": [
     "pit@obs2+broken",
     "stuck@obs0",
@@ -31,7 +38,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->78.7 m, 3.0->27.7 m, 3.0->141.5 m",
+      "detail": "3.0->78.7 m, 3.0->27.7 m, 3.0->121.4 m",
       "hard": true
     },
     {
@@ -59,7 +66,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "6.8s, 5.2s, 7.7s",
+      "detail": "6.8s, 5.2s, 10.4s",
       "hard": true
     },
     {
@@ -80,27 +87,27 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "44.3 s",
+      "detail": "46.9 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "15.8s, 10.0s, 18.5s",
+      "detail": "15.9s, 10.4s, 20.6s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
+      "detail": "potholes|f1,icecream,monster|potholes_0fb8fcd6@morning-clear-countryside|pit@obs2+broken,stuck@obs0,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Giant Potholes! Who Survives? 🚗💥",
-  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 #Shorts",
+  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
   "description": "Nitro the race car, Sprinkles the ice cream truck and Rocky the monster truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -130,7 +137,7 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 15.83,
+      "duration": 15.9,
       "event_out": 8.77,
       "x_start": 3.0,
       "x_end": 78.7,
@@ -142,9 +149,9 @@
     },
     {
       "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
-      "speed": 6.8,
+      "speed": 7.2,
       "outcome": "stuck",
-      "event_t": 5.2,
+      "event_t": 5.17,
       "obstacle": 0,
       "broken": false,
       "bullet_time": true,
@@ -154,9 +161,9 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 15.83,
-      "duration": 9.97,
-      "event_out": 22.4,
+      "start": 15.9,
+      "duration": 10.43,
+      "event_out": 22.63,
       "x_start": 3.0,
       "x_end": 27.7,
       "level_color": [
@@ -167,9 +174,9 @@
     },
     {
       "vehicle": "ROCKY THE MONSTER TRUCK",
-      "speed": 16.7,
+      "speed": 11.75,
       "outcome": "win",
-      "event_t": 7.67,
+      "event_t": 10.4,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -179,11 +186,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 25.8,
-      "duration": 18.53,
-      "event_out": 34.8,
+      "start": 26.33,
+      "duration": 20.6,
+      "event_out": 37.8,
       "x_start": 3.0,
-      "x_end": 141.5,
+      "x_end": 121.4,
       "level_color": [
         153,
         76,
@@ -201,8 +208,12 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E003_2026-09-30_potholes/SIM_POTHOLES_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E003_2026-09-30_potholes/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E003_2026-09-30_potholes/SIM_POTHOLES_V2_S003_audit.md",
+  "episode": 3,
+  "season": 1,
+  "approved_date": "2026-09-30",
+  "rerendered": "2026-09-30"
 }

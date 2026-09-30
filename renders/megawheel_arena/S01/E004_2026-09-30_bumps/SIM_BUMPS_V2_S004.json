@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_BUMPS_V2_S004",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 4,
   "fps": 30,
-  "duration": 48.0,
+  "duration": 49.33,
   "track_id": "bumps_085ce19c",
   "track_params": {
     "bumps": [
@@ -31,10 +31,17 @@
       ]
     ]
   },
-  "fingerprint": "bumps|police,firetruck,monster2|bumps_085ce19c|stuck@obs2,flip@obs1+broken,win",
+  "theme": {
+    "time": "sunset",
+    "weather": "rain",
+    "location": "mountains"
+  },
+  "theme_id": "sunset-rain-mountains",
+  "voice": "en-US-MichelleNeural",
+  "fingerprint": "bumps|police,firetruck,monster2|bumps_085ce19c@sunset-rain-mountains|stuck@obs2,stuck@obs2,win",
   "outcomes": [
     "stuck@obs2",
-    "flip@obs1+broken",
+    "stuck@obs2",
     "win"
   ],
   "analysis": [
@@ -42,7 +49,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->65.2 m, 3.0->60.5 m, 3.0->113.6 m",
+      "detail": "3.0->65.5 m, 3.0->60.7 m, 3.0->109.4 m",
       "hard": true
     },
     {
@@ -70,14 +77,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "5.8s, 4.6s, 13.1s",
+      "detail": "7.7s, 6.8s, 13.2s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
-      "ok": true,
-      "detail": "rintangan [2, 1]",
+      "ok": false,
+      "detail": "rintangan [2, 2]",
       "hard": false
     },
     {
@@ -91,27 +98,27 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "48.0 s",
+      "detail": "49.3 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "detail": "11.6s, 12.1s, 24.3s",
+      "detail": "13.7s, 11.8s, 23.8s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "bumps|police,firetruck,monster2|bumps_085ce19c|stuck@obs2,flip@obs1+broken,win",
+      "detail": "bumps|police,firetruck,monster2|bumps_085ce19c@sunset-rain-mountains|stuck@obs2,stuck@obs2,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
-  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 #Shorts",
+  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 4 #Shorts",
   "description": "Siren the police car, Hydro the fire truck and Grizzly the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -128,9 +135,9 @@
   "levels": [
     {
       "vehicle": "SIREN THE POLICE CAR",
-      "speed": 18.75,
+      "speed": 16.88,
       "outcome": "stuck",
-      "event_t": 5.77,
+      "event_t": 7.73,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -141,10 +148,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 11.6,
-      "event_out": 8.37,
+      "duration": 13.73,
+      "event_out": 10.07,
       "x_start": 3.0,
-      "x_end": 65.2,
+      "x_end": 65.5,
       "level_color": [
         45,
         183,
@@ -153,23 +160,23 @@
     },
     {
       "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 17.5,
-      "outcome": "flip",
-      "event_t": 4.6,
-      "obstacle": 1,
-      "broken": true,
+      "speed": 13.0,
+      "outcome": "stuck",
+      "event_t": 6.83,
+      "obstacle": 2,
+      "broken": false,
       "bullet_time": true,
-      "replay": true,
+      "replay": false,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "OUCH!"
       ],
-      "start": 11.6,
-      "duration": 12.13,
-      "event_out": 17.4,
+      "start": 13.73,
+      "duration": 11.77,
+      "event_out": 21.87,
       "x_start": 3.0,
-      "x_end": 60.5,
+      "x_end": 60.7,
       "level_color": [
         255,
         132,
@@ -178,9 +185,9 @@
     },
     {
       "vehicle": "GRIZZLY THE MONSTER TRUCK",
-      "speed": 12.62,
+      "speed": 11.25,
       "outcome": "win",
-      "event_t": 13.1,
+      "event_t": 13.2,
       "obstacle": 3,
       "broken": false,
       "bullet_time": true,
@@ -190,11 +197,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 23.73,
-      "duration": 24.27,
-      "event_out": 38.33,
+      "start": 25.5,
+      "duration": 23.83,
+      "event_out": 39.67,
       "x_start": 3.0,
-      "x_end": 113.6,
+      "x_end": 109.4,
       "level_color": [
         153,
         76,
@@ -207,13 +214,16 @@
     "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
     "Level three! Grizzly the monster truck! Can Grizzly smash through the giant speed bumps?",
     "Uh oh... Siren is totally stuck!",
-    "Whoa! Hydro flipped right over!",
+    "Uh oh... Hydro is totally stuck!",
     "Yes! Grizzly made it! We have a winner!",
-    "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/SIM_BUMPS_V2_S004.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/SIM_BUMPS_V2_S004_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-MichelleNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E004_2026-09-30_bumps/SIM_BUMPS_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E004_2026-09-30_bumps/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E004_2026-09-30_bumps/SIM_BUMPS_V2_S004_audit.md",
+  "episode": 4,
+  "season": 1,
+  "approved_date": "2026-09-30",
+  "rerendered": "2026-09-30"
 }

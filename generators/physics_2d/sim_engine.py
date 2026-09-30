@@ -20,6 +20,7 @@ import json
 import math
 import multiprocessing as mp
 import os
+import shutil
 import subprocess
 import time
 import wave
@@ -45,7 +46,13 @@ CHANNEL_DIR = f"{BASE}/renders/megawheel_arena"   # pending/ -> S01/E001_<date>_
 OUT_DIR = f"{CHANNEL_DIR}/pending"                # set per job in main()
 CAST_FILE = f"{BASE}/cast/characters.json"
 CHANNEL = "MegaWheel Arena"          # rebrand 2026-09-30 (was "MegaWheel Kids"): general audience, not made for kids
-VOICE = "en-US-AvaNeural"            # energetic adult female narrator (was the child voice en-US-AnaNeural)
+# Narrator rotates per episode (fewest uses first). en-US adult female voices ONLY (user rule, 2026-09-30).
+VOICES = ["en-US-AriaNeural", "en-US-AvaMultilingualNeural", "en-US-EmmaMultilingualNeural",
+          "en-US-JennyNeural", "en-US-MichelleNeural"]
+VOICE = VOICES[0]                    # set per video in main()
+TTS_RATE, TTS_PITCH = "+12%", "+2Hz"  # energetic delivery
+TTS_CLARITY = "highpass=f=90,equalizer=f=3000:t=q:w=1.2:g=4,acompressor=threshold=-20dB:ratio=3:attack=5:release=90"
+DUCK_DB = 8.0                        # engine + music dip while the narrator talks
 CTA = ("Tap LIKE if you enjoyed this video, DISLIKE if you didn't, "
        f"and smash SUBSCRIBE to {CHANNEL}!")
 REPLAY_LINE = "Let's see that again, in slow motion!"
@@ -158,6 +165,65 @@ def make_potholes_track(seed):
     TRACK_PARAMS = p
     TRACK_ID = f"{SERIES}_std" if seed == 1 else \
         f"{SERIES}_" + hashlib.md5(json.dumps(p, sort_keys=True).encode()).hexdigest()[:8]
+
+
+# ---------------------------------------------------------------- themes (time of day x weather x location)
+TIMES = {
+    "morning": dict(sky=[(0, (0.45, 0.68, 1.0)), (0.6, (0.98, 0.8, 0.75)), (1, (1.0, 0.9, 0.8))],
+                    sun=(190, 600, 65, (1, 0.85, 0.5)), light=1.0, cloud=(1, 0.95, 0.95), tint=None,
+                    music=dict(bpm=118, chords=[(60, 64, 67), (65, 69, 72), (67, 71, 74), (60, 64, 67)], lead="tri")),
+    "noon": dict(sky=[(0, (0.36, 0.7, 1.0)), (0.6, (0.72, 0.9, 1.0)), (1, (0.85, 0.95, 1.0))],
+                 sun=(900, 520, 70, (1, 0.9, 0.35)), light=1.0, cloud=(1, 1, 1), tint=None,
+                 music=dict(bpm=128, chords=[(60, 64, 67), (55, 59, 62), (57, 60, 64), (53, 57, 60)], lead="tri")),
+    "sunset": dict(sky=[(0, (0.22, 0.22, 0.55)), (0.5, (0.95, 0.45, 0.35)), (1, (1.0, 0.72, 0.35))],
+                   sun=(800, 760, 100, (1, 0.55, 0.2)), light=0.82, cloud=(1, 0.75, 0.65), tint=(0.35, 0.1, 0.25, 0.12),
+                   music=dict(bpm=104, chords=[(57, 60, 64), (53, 57, 60), (60, 64, 67), (55, 59, 62)], lead="sine")),
+    "night": dict(sky=[(0, (0.02, 0.03, 0.12)), (0.6, (0.07, 0.1, 0.28)), (1, (0.15, 0.17, 0.35))],
+                  moon=(860, 560, 55), light=0.6, cloud=(0.5, 0.55, 0.7), tint=(0.02, 0.04, 0.18, 0.38),
+                  music=dict(bpm=122, chords=[(57, 60, 64), (53, 57, 60), (48, 52, 55), (55, 59, 62)], lead="saw")),
+}
+WEATHERS = {"clear": dict(friction=1.0), "rain": dict(friction=0.72), "snow": dict(friction=0.55)}
+LOCATIONS = {
+    "countryside": dict(hills=[(0.56, 0.8, 0.52), (0.42, 0.72, 0.38)], ground=(0.58, 0.38, 0.22)),
+    "city": dict(hills=[(0.5, 0.56, 0.66), (0.42, 0.66, 0.4)], ground=(0.5, 0.42, 0.36), skyline=True),
+    "desert": dict(hills=[(0.95, 0.82, 0.58), (0.9, 0.72, 0.46)], ground=(0.86, 0.68, 0.42), cactus=True),
+    "mountains": dict(hills=[(0.56, 0.6, 0.72), (0.4, 0.6, 0.42)], ground=(0.55, 0.42, 0.3), peaks=True),
+    "beach": dict(hills=[(0.25, 0.58, 0.86), (0.96, 0.88, 0.64)], ground=(0.9, 0.8, 0.55), ocean=True, palms=True),
+}
+NO_SNOW = {"desert", "beach"}
+THEME = dict(time="noon", weather="clear", location="countryside")
+THEME_ID = "noon-clear-countryside"
+
+
+def make_theme(seed, force=None):
+    """Pick time/weather/location from the seed (plausible combos only)."""
+    global THEME, THEME_ID
+    r = np.random.default_rng(4000 + seed)
+    loc = str(r.choice(list(LOCATIONS)))
+    time_ = str(r.choice(list(TIMES), p=[0.25, 0.25, 0.25, 0.25]))
+    w = str(r.choice(["clear", "rain", "snow"], p=[0.55, 0.25, 0.2]))
+    if w == "snow" and loc in NO_SNOW:
+        w = "clear"
+    if w == "rain" and loc == "desert":
+        w = "clear"
+    THEME = dict(time=time_, weather=w, location=loc)
+    if force:
+        THEME.update(force)
+    THEME_ID = f"{THEME['time']}-{THEME['weather']}-{THEME['location']}"
+
+
+def th_time():
+    return TIMES[THEME["time"]]
+
+
+def th_loc():
+    return LOCATIONS[THEME["location"]]
+
+
+def lit(c, extra=1.0):
+    """Apply the time-of-day light level to a colour."""
+    k = th_time()["light"] * extra
+    return tuple(min(1.0, v * k) for v in c)
 
 
 def ground_h(x):
@@ -288,7 +354,7 @@ def build_space():
     space.iterations = 25
     for a, b in zip(TRACK, TRACK[1:]):
         seg = pymunk.Segment(space.static_body, a, b, 0.08)
-        seg.friction = 1.0
+        seg.friction = 1.0 * WEATHERS[THEME["weather"]]["friction"]
         seg.elasticity = 0.05
         space.add(seg)
     return space
@@ -322,7 +388,7 @@ def spawn(space, v, x0):
         wb = pymunk.Body(v["wheel_m"], pymunk.moment_for_circle(v["wheel_m"], 0, r))
         wb.position = chassis.local_to_world((wx, -bh / 2 - 0.6 * travel))
         ws = pymunk.Circle(wb, r)
-        ws.friction = 1.6
+        ws.friction = 1.6 * WEATHERS[THEME["weather"]]["friction"]
         ws.elasticity = 0.1
         ws.filter = flt
         groove = pymunk.GrooveJoint(chassis, wb, (wx, -bh / 2 - 0.05), (wx, -bh / 2 - travel), (0, 0))
@@ -761,16 +827,16 @@ def write_wav(path, x):
 
 
 def tts(text):
-    key = hashlib.md5(f"{VOICE}|{text}".encode()).hexdigest()[:12]
+    key = hashlib.md5(f"{VOICE}|{TTS_RATE}|{TTS_PITCH}|{TTS_CLARITY}|{text}".encode()).hexdigest()[:12]
     mp3, wav = f"{WORK}/tts_{key}.mp3", f"{WORK}/tts_{key}.wav"
     if not os.path.exists(wav):
         import edge_tts
 
         async def go():
-            await edge_tts.Communicate(text, VOICE, rate="+6%").save(mp3)
+            await edge_tts.Communicate(text, VOICE, rate=TTS_RATE, pitch=TTS_PITCH).save(mp3)
         asyncio.run(go())
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ac", "1", "-ar", str(SR), wav],
-                       check=True)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-af", TTS_CLARITY, "-ac", "1",
+                        "-ar", str(SR), wav], check=True)
     x = read_wav(wav)
     nz = np.nonzero(np.abs(x) > 0.01)[0]          # trim silence
     if len(nz):
@@ -899,10 +965,13 @@ def synth_whoosh():
     return band * np.sin(np.pi * t / 0.45) ** 2
 
 
-def synth_bgm(dur, seed=11):
+def synth_bgm(dur, seed=11, style=None):
+    """Chiptune loop; style (from the theme) sets tempo, chord progression and lead timbre."""
+    style = style or TIMES["noon"]["music"]
     rng = np.random.default_rng(seed)
-    beat = 60 / 128
-    chords = [(60, 64, 67), (55, 59, 62), (57, 60, 64), (53, 57, 60)]
+    beat = 60 / style["bpm"]
+    chords = style["chords"]
+    lead = style["lead"]
     pats = [[0, 1, 2, 1, 0, 1, 2, 1], [2, 1, 0, 1, 2, 2, 1, 0]]
     n = int(dur * SR) + SR
     out = np.zeros(n)
@@ -921,7 +990,9 @@ def synth_bgm(dur, seed=11):
         for b in range(4):
             add(tone(f(ch[0] - 24), beat * 0.9, "sine", decay=beat * 0.5), t + b * beat, 0.6)
         for e, ci in enumerate(pats[bi % 2]):
-            add(tone(f(ch[ci] + 12), beat * 0.45, "tri", decay=0.12), t + e * beat / 2, 0.22)
+            add(tone(f(ch[ci] + 12), beat * 0.45, lead, decay=0.12), t + e * beat / 2, 0.22 if lead != "saw" else 0.14)
+        if THEME["weather"] == "snow":                       # sleigh-bell sparkle
+            add(tone(f(ch[2] + 36), 0.25, "sine", decay=0.08), t, 0.12)
             m = int(0.03 * SR)
             add(rng.standard_normal(m) * np.exp(-np.arange(m) / SR / 0.008), t + e * beat / 2, 0.08)
         t += 4 * beat
@@ -1028,53 +1099,211 @@ def init_scenery():
         ROCKS.append((x, y, rng.uniform(0.08, 0.28), rng.uniform(0.75, 0.95)))
 
 
+def _hill_y(sx, camx, camy, z, ground_sy, par, base, a1, a2):
+    wx = sx + camx * S * par
+    return ground_sy + base * z - camy * S * (1 - par) * 0.5 - a1 * math.sin(wx / 260) - a2 * math.sin(wx / 113 + 1)
+
+
 def draw_sky(ctx, camx, camy, z):
+    tm, loc, weather = th_time(), th_loc(), THEME["weather"]
     g = cairo.LinearGradient(0, 0, 0, H)
-    g.add_color_stop_rgb(0, 0.36, 0.7, 1.0)
-    g.add_color_stop_rgb(0.6, 0.72, 0.9, 1.0)
-    g.add_color_stop_rgb(1, 0.85, 0.95, 1.0)
+    for stop, col in tm["sky"]:
+        if weather == "rain":
+            col = tuple(v * 0.55 + 0.25 for v in col)            # overcast
+        elif weather == "snow":
+            col = tuple(v * 0.7 + 0.28 for v in col)
+        g.add_color_stop_rgb(stop, *col)
     ctx.set_source(g)
     ctx.paint()
-    rg = cairo.RadialGradient(900, 520, 40, 900, 520, 190)
-    rg.add_color_stop_rgba(0, 1, 0.95, 0.55, 0.9)
-    rg.add_color_stop_rgba(1, 1, 0.95, 0.55, 0)
-    ctx.set_source(rg)
-    ctx.arc(900, 520, 190, 0, 2 * math.pi)
-    ctx.fill()
-    ctx.set_source_rgb(1, 0.9, 0.35)
-    ctx.arc(900, 520, 70, 0, 2 * math.pi)
-    ctx.fill()
-    for i in range(7):
+    if "moon" in tm:                                            # stars + moon
+        rng = np.random.default_rng(99)
+        for i in range(90):
+            sx, sy = rng.uniform(0, W), rng.uniform(80, 1000)
+            a = 0.5 + 0.5 * math.sin(i * 1.7 + camx * 0.05)
+            ctx.set_source_rgba(1, 1, 0.9, 0.35 + 0.5 * a)
+            ctx.arc(sx, sy, rng.uniform(1.5, 3.5), 0, 2 * math.pi)
+            ctx.fill()
+        mx, my, mr = tm["moon"]
+        rg = cairo.RadialGradient(mx, my, mr * 0.6, mx, my, mr * 3)
+        rg.add_color_stop_rgba(0, 0.9, 0.95, 1, 0.35)
+        rg.add_color_stop_rgba(1, 0.9, 0.95, 1, 0)
+        ctx.set_source(rg)
+        ctx.arc(mx, my, mr * 3, 0, 2 * math.pi)
+        ctx.fill()
+        ctx.set_source_rgb(0.96, 0.96, 0.88)
+        ctx.arc(mx, my, mr, 0, 2 * math.pi)
+        ctx.fill()
+        ctx.set_source_rgba(0.8, 0.8, 0.72, 0.8)
+        for dx, dy, r in [(-15, -10, 10), (18, 12, 7), (5, 22, 5)]:
+            ctx.arc(mx + dx, my + dy, r, 0, 2 * math.pi)
+            ctx.fill()
+    elif weather == "clear":
+        sx, sy, sr, col = tm["sun"]
+        rg = cairo.RadialGradient(sx, sy, sr * 0.6, sx, sy, sr * 2.8)
+        rg.add_color_stop_rgba(0, *col, 0.9)
+        rg.add_color_stop_rgba(1, *col, 0)
+        ctx.set_source(rg)
+        ctx.arc(sx, sy, sr * 2.8, 0, 2 * math.pi)
+        ctx.fill()
+        ctx.set_source_rgb(*col)
+        ctx.arc(sx, sy, sr, 0, 2 * math.pi)
+        ctx.fill()
+    ccol = tm["cloud"] if weather == "clear" else (0.62, 0.64, 0.7) if weather == "rain" else (0.92, 0.93, 0.96)
+    n_clouds = 7 if weather == "clear" else 11
+    for i in range(n_clouds):
         x = (i * 430 - camx * S * 0.12) % (W + 700) - 350
-        y = 600 + (i % 3) * 110 + camy * S * 0.1
-        ctx.set_source_rgba(1, 1, 1, 0.92)
+        y = 560 + (i % 3) * 110 + camy * S * 0.1 - (80 if weather != "clear" else 0)
+        ctx.set_source_rgba(*ccol, 0.92)
+        k = 1.0 if weather == "clear" else 1.35
         for dx, dy, r in [(0, 0, 55), (60, -25, 65), (125, 0, 50), (60, 15, 55)]:
-            ctx.arc(x + dx, y + dy, r, 0, 2 * math.pi)
+            ctx.arc(x + dx * k, y + dy * k, r * k, 0, 2 * math.pi)
             ctx.fill()
     ground_sy = GROUND_Y + camy * S * z
-    for par, base, col, a1, a2 in [(0.2, -260, (0.56, 0.8, 0.52), 90, 45),
-                                   (0.45, -150, (0.42, 0.72, 0.38), 70, 35)]:
+    horizon = ground_sy - 300 * z - camy * S * 0.4
+    if loc.get("ocean"):                                        # sea band + waves
+        ctx.rectangle(0, horizon, W, H - horizon)
+        ctx.set_source_rgb(*lit(loc["hills"][0]))
+        ctx.fill()
+        ctx.set_source_rgba(1, 1, 1, 0.5)
+        ctx.set_line_width(4)
+        for row in range(4):
+            y = horizon + 30 + row * 45
+            off = (camx * S * (0.08 + 0.03 * row)) % 160
+            x = -off
+            while x < W:
+                ctx.move_to(x, y)
+                ctx.curve_to(x + 20, y - 10, x + 40, y - 10, x + 60, y)
+                x += 160
+            ctx.stroke()
+    if loc.get("peaks"):                                        # snowy mountain range (far)
+        ctx.rectangle(0, horizon + 40, W, H - horizon)          # solid base so no sky shows between peaks
+        ctx.set_source_rgb(*lit((0.5, 0.55, 0.68)))
+        ctx.fill()
+        for i in range(-1, 6):
+            px = (i * 320 - camx * S * 0.08) % (W + 640) - 320
+            ph = 330 + (i % 3) * 90
+            poly(ctx, [(px - 260, horizon + 60), (px, horizon - ph), (px + 260, horizon + 60)])
+            ctx.set_source_rgb(*lit((0.5, 0.55, 0.68)))
+            ctx.fill()
+            poly(ctx, [(px - 70, horizon - ph + 90), (px, horizon - ph), (px + 70, horizon - ph + 90),
+                       (px + 25, horizon - ph + 70), (px - 20, horizon - ph + 95)])
+            ctx.set_source_rgb(*lit((0.97, 0.98, 1.0)))
+            ctx.fill()
+    if loc.get("skyline"):                                      # city buildings (far)
+        rng = np.random.default_rng(7)
+        blds = [(rng.uniform(60, 140), rng.uniform(180, 520)) for _ in range(24)]
+        period = sum(b[0] + 18 for b in blds)
+        x = -((camx * S * 0.15) % period)                       # start left of the screen, tile to the right
+        night = "moon" in tm
+        while x < W + 200:
+            for bw_, bh_ in blds:
+                if x > W + 200:
+                    break
+                if x + bw_ < -10:
+                    x += bw_ + 18
+                    continue
+                ctx.rectangle(x, horizon + 80 - bh_, bw_, bh_ + 400)
+                ctx.set_source_rgb(*lit((0.42, 0.46, 0.58)))
+                ctx.fill()
+                for wy in range(int(horizon + 100 - bh_), int(horizon + 60), 36):
+                    for wx_ in range(int(x + 12), int(x + bw_ - 14), 26):
+                        on = night and (wx_ * 7 + wy * 3) % 5 < 2
+                        ctx.rectangle(wx_, wy, 12, 16)
+                        ctx.set_source_rgba(*((1, 0.9, 0.5) if on else (0.62, 0.68, 0.8)), 0.9 if on else 0.55)
+                        ctx.fill()
+                x += bw_ + 18
+    hills = loc["hills"]
+    layers = [(0.2, -260, hills[0], 90, 45), (0.45, -150, hills[1], 70, 35)]
+    if loc.get("ocean"):
+        layers = [(0.45, -110, hills[1], 40, 20)]              # beach: only a sand dune in front of the sea
+    for par, base, col, a1, a2 in layers:
         ctx.new_path()
         ctx.move_to(0, H)
         for sx in range(0, W + 21, 20):
-            wx = sx + camx * S * par
-            y = ground_sy + base * z - camy * S * (1 - par) * 0.5 - a1 * math.sin(wx / 260) - a2 * math.sin(wx / 113 + 1)
-            ctx.line_to(sx, y)
+            ctx.line_to(sx, _hill_y(sx, camx, camy, z, ground_sy, par, base, a1, a2))
         ctx.line_to(W, H)
         ctx.close_path()
-        ctx.set_source_rgb(*col)
+        ctx.set_source_rgb(*lit(col))
         ctx.fill()
+        if weather == "snow":                                   # snow on the crests
+            ctx.new_path()
+            for sx in range(0, W + 21, 20):
+                ctx.line_to(sx, _hill_y(sx, camx, camy, z, ground_sy, par, base, a1, a2) + 6)
+            ctx.set_source_rgba(0.97, 0.98, 1, 0.95)
+            ctx.set_line_width(22)
+            ctx.stroke()
+    par, base, _, a1, a2 = layers[-1]
+    if loc.get("cactus") or loc.get("palms"):                   # props on the front dune
+        step = 380
+        off = (camx * S * par) % step
+        for i in range(-1, W // step + 2):
+            sx = i * step - off + 120
+            sy = _hill_y(sx, camx, camy, z, ground_sy, par, base, a1, a2) + 8
+            if loc.get("cactus"):
+                ctx.set_source_rgb(*lit((0.25, 0.6, 0.3)))
+                rrect(ctx, sx - 14, sy - 150, 28, 150, 14)
+                rrect(ctx, sx - 50, sy - 110, 22, 60, 11)
+                rrect(ctx, sx + 28, sy - 125, 22, 70, 11)
+                ctx.fill()
+                ctx.rectangle(sx - 40, sy - 62, 30, 16)
+                ctx.rectangle(sx + 10, sy - 70, 30, 16)
+                ctx.fill()
+            else:
+                ctx.set_source_rgb(*lit((0.55, 0.38, 0.2)))
+                ctx.set_line_width(16)
+                ctx.move_to(sx, sy)
+                ctx.curve_to(sx + 10, sy - 90, sx + 30, sy - 160, sx + 40, sy - 210)
+                ctx.stroke()
+                ctx.set_source_rgb(*lit((0.2, 0.6, 0.3)))
+                for ang in (-2.6, -2.0, -1.2, -0.5, 0.1):
+                    ctx.save()
+                    ctx.translate(sx + 40, sy - 210)
+                    ctx.rotate(ang)
+                    ctx.scale(1, 0.3)
+                    ctx.arc(55, 0, 55, 0, 2 * math.pi)
+                    ctx.restore()
+                    ctx.fill()
+
+
+def draw_weather(ctx, t):
+    """Screen-space rain / snow on top of the world."""
+    w = THEME["weather"]
+    if w == "rain":
+        rng = np.random.default_rng(3)
+        ctx.set_source_rgba(0.85, 0.9, 1.0, 0.45)
+        ctx.set_line_width(3)
+        for i in range(140):
+            x0, y0, sp = rng.uniform(0, W + 300), rng.uniform(0, H), rng.uniform(1600, 2300)
+            y = (y0 + t * sp) % (H + 100) - 50
+            x = (x0 - t * sp * 0.25) % (W + 300) - 150
+            ctx.move_to(x, y)
+            ctx.line_to(x - 12, y + 48)
+        ctx.stroke()
+    elif w == "snow":
+        rng = np.random.default_rng(4)
+        ctx.set_source_rgba(1, 1, 1, 0.9)
+        for i in range(160):
+            x0, y0, sp, r = rng.uniform(0, W), rng.uniform(0, H), rng.uniform(80, 180), rng.uniform(3, 8)
+            y = (y0 + t * sp) % (H + 40) - 20
+            x = (x0 + 30 * math.sin(t * 1.3 + i)) % W
+            ctx.arc(x, y, r, 0, 2 * math.pi)
+            ctx.fill()
+    tint = th_time().get("tint")
+    if tint:
+        ctx.set_source_rgba(*tint)
+        ctx.paint()
 
 
 def draw_track(ctx, view0, view1):
+    gc = lit(th_loc()["ground"])
     for x0, x1, d in PITS:
         ctx.rectangle(x0, -d, x1 - x0, d)
-        ctx.set_source_rgb(0.28, 0.17, 0.1)
+        ctx.set_source_rgb(*shade(gc, 0.48))
         ctx.fill()
     poly(ctx, TRACK + [(170, -40), (-40, -40)])
-    ctx.set_source_rgb(0.58, 0.38, 0.22)
+    ctx.set_source_rgb(*gc)
     ctx.fill()
-    for depth, col in [(-6.0, (0.5, 0.32, 0.18)), (-8.0, (0.44, 0.27, 0.15)), (-10.5, (0.52, 0.5, 0.5))]:
+    for depth, col in [(-6.0, shade(gc, 0.86)), (-8.0, shade(gc, 0.76)), (-10.5, lit((0.52, 0.5, 0.5)))]:
         ctx.new_path()
         ctx.move_to(view0 - 2, -40)
         x = view0 - 2
@@ -1088,11 +1317,11 @@ def draw_track(ctx, view0, view1):
     for x, y, r, k in ROCKS:
         if view0 - 1 < x < view1 + 1:
             ctx.arc(x, y, r, 0, 2 * math.pi)
-            ctx.set_source_rgb(0.58 * k, 0.38 * k, 0.22 * k)
+            ctx.set_source_rgb(*shade(gc, k))
             ctx.fill()
     for x0, x1, d in PITS:
         ctx.rectangle(x0, -d, x1 - x0, 0.55)
-        ctx.set_source_rgb(0.4, 0.26, 0.13)
+        ctx.set_source_rgb(*shade(gc, 0.68))
         ctx.fill()
         for j in range(int((x1 - x0) / 0.8)):
             ctx.arc(x0 + 0.4 + j * 0.8, -d + 0.55, 0.22, 0, math.pi)
@@ -1101,11 +1330,16 @@ def draw_track(ctx, view0, view1):
         if a[1] < -0.01 or b[1] < -0.01 or abs(a[0] - b[0]) < 1e-6 or b[1] > 0.01 or a[1] > 0.01:
             continue
         poly(ctx, [a, b, (b[0], b[1] - 0.55), (a[0], a[1] - 0.55)])
-        ctx.set_source_rgb(0.26, 0.26, 0.3)
+        ctx.set_source_rgb(*lit((0.26, 0.26, 0.3)))
         ctx.fill()
-        ctx.set_source_rgb(0.4, 0.4, 0.45)
+        wet = THEME["weather"] == "rain"
+        ctx.set_source_rgb(*lit((0.62, 0.66, 0.75) if wet else (0.4, 0.4, 0.45)))
         ctx.rectangle(a[0], -0.08, b[0] - a[0], 0.08)
         ctx.fill()
+        if THEME["weather"] == "snow":                          # snow banks on the road edge
+            ctx.set_source_rgb(0.96, 0.97, 1.0)
+            ctx.rectangle(a[0], -0.55, b[0] - a[0], 0.12)
+            ctx.fill()
         ctx.set_source_rgb(1, 1, 1)
         x = math.ceil(a[0] / 3.0) * 3.0
         while x + 1.5 <= b[0]:
@@ -1927,12 +2161,52 @@ LEVELS = []
 INDEX = []          # global frame -> (level, local output frame)
 
 
+def zoom_punch(L, st):
+    """Quick camera push-in on hard impacts."""
+    k = 1.0
+    for ti, s, _, _ in L["impacts"]:
+        a = st - ti
+        if 0 <= a < 0.8 and s > 0.45:
+            k += 0.12 * s * math.exp(-a / 0.22)
+    return k
+
+
+def draw_headlights(ctx, L, s):
+    v = L["v"]
+    bw = v["body"][0]
+    ctx.save()
+    ctx.translate(s["cx"], s["cy"])
+    ctx.rotate(s["ca"])
+    lg = cairo.LinearGradient(bw / 2, 0, bw / 2 + 7, 0)
+    lg.add_color_stop_rgba(0, 1, 0.95, 0.6, 0.55)
+    lg.add_color_stop_rgba(1, 1, 0.95, 0.6, 0)
+    poly(ctx, [(bw / 2 - 0.1, -0.05), (bw / 2 + 7, -1.3), (bw / 2 + 7, 1.1), (bw / 2 - 0.1, 0.15)])
+    ctx.set_source(lg)
+    ctx.fill()
+    ctx.restore()
+
+
+def draw_ready_go(ctx, tl):
+    """READY... GO! pop at the start of every level."""
+    for t0, t1, text, col in ((0.0, 0.5, "READY...", (1, 0.86, 0.12)), (0.5, 1.05, "GO!", (0.3, 1, 0.4))):
+        if t0 <= tl < t1:
+            a = (tl - t0) / (t1 - t0)
+            sc = ease_out_back(min(1.0, a / 0.35))
+            ctx.save()
+            ctx.translate(540, 780)
+            ctx.scale(sc, sc)
+            draw_text(ctx, text, 0, 0, 150 if text == "GO!" else 110, fill=col, stroke=(0.07, 0.07, 0.2),
+                      alpha=max(0.0, min(1.0, (1 - a) / 0.25)))
+            ctx.restore()
+
+
 def draw_frame(ctx, g):
     li, j = INDEX[g]
     L = LEVELS[li]
     st, mode = L["frames"][j]
     tl = j / FPS
     camx, camy, z = L["cam"][j]
+    z *= zoom_punch(L, st)
     shx, shy = shake_offset(L, st)
     s = car_state(L, st)
     draw_sky(ctx, camx, camy, z)
@@ -1948,8 +2222,18 @@ def draw_frame(ctx, g):
     draw_car(ctx, L, s, mood_at(L, st, s), st)
     draw_effects(ctx, L, s, st)
     ctx.restore()
+    draw_weather(ctx, g / FPS)                                  # rain/snow + time-of-day tint
+    if "moon" in th_time():                                    # headlights glow above the night tint
+        ctx.save()
+        ctx.translate(540 + shx, GROUND_Y + shy)
+        ctx.scale(S * z, -S * z)
+        ctx.translate(-camx, -camy)
+        draw_headlights(ctx, L, s)
+        ctx.restore()
     if mode == "live" and s["air"] < 0.5:
         draw_speed_lines(ctx, s["speed"], tl)
+    if mode == "live":
+        draw_ready_go(ctx, tl)
     car_sx = 540 + shx + (s["cx"] - camx) * S * z
     car_sy = GROUND_Y + shy - (s["cy"] - camy) * S * z
     draw_bubbles(ctx, L, st, car_sx, car_sy, z)
@@ -1992,13 +2276,25 @@ def main():
     ap.add_argument("--preview-only", action="store_true", help="analysis + PNG previews, no MP4, no registry")
     ap.add_argument("--force", action="store_true", help="allow re-using a seed / overwriting a video")
     ap.add_argument("--allow-duplicate", action="store_true", help="allow a fingerprint already in the registry")
+    ap.add_argument("--replace-episode", type=int, default=None,
+                    help="re-render an APPROVED (not uploaded) episode in place: same series, seed and cast, "
+                         "new theme/voice/mix; episode number and title stay")
+    ap.add_argument("--theme", default=None, help="force a theme: <time>,<weather>,<location> (testing)")
     args = ap.parse_args()
+    global VOICE
     FPS = args.fps
     os.makedirs(WORK, exist_ok=True)
     import registry
     detect_font()
     load_cast()
     active = [e for e in registry.load()["videos"] if e.get("status") not in registry.IGNORED_STATUS]
+    replace = None
+    if args.replace_episode:
+        replace = next((e for e in active if e.get("episode") == args.replace_episode), None)
+        if not replace or replace.get("status") != "APPROVED":
+            raise SystemExit(f"[replace] STOP: episode {args.replace_episode} tidak ada atau bukan APPROVED "
+                             f"(yang sudah diupload tidak boleh diganti)")
+        args.series, args.seed, args.name, args.force = replace["series"], replace["seed"], replace["video_id"], True
     series = args.series
     if series == "auto":
         counts = {s: 0 for s in SERIES_DEFS}
@@ -2010,13 +2306,29 @@ def main():
     for e in active:
         for vk in e.get("vehicles", []):
             appearances[vk] = appearances.get(vk, 0) + 1
+    force = dict(zip(("time", "weather", "location"), args.theme.split(","))) if args.theme else None
+    make_theme(args.seed, force)
     make_track(series, args.seed)
     make_story(series, args.seed, appearances)
+    if replace:                                              # keep the approved cast
+        global ROLE_ORDER
+        ROLE_ORDER = [[vk] for vk in replace["vehicles"]]
     init_scenery()
+    uses = {v: 0 for v in VOICES}                             # narrator rotation: fewest uses first
+    for e in active:
+        if e.get("voice") in uses and e.get("video_id") != args.name:
+            uses[e["voice"]] += 1
+    vr = np.random.default_rng(5000 + args.seed)
+    tie = {v: float(vr.random()) for v in VOICES}
+    VOICE = min(VOICES, key=lambda v: (uses[v], tie[v]))
+    print(f"[theme] {THEME_ID}  [voice] {VOICE}", flush=True)
     name = args.name or f"SIM_{SERIES.upper()}_{ENGINE_VERSION.upper()}_S{args.seed:03d}"
     render_date = time.strftime("%Y-%m-%d")
     if args.preview_only:
         OUT_DIR = f"{WORK}/previews/{name}"             # previews never land in renders/
+    elif replace:
+        OUT_DIR = f"{WORK}/staging/{name}"               # swapped into the episode folder after the audit passes
+        shutil.rmtree(OUT_DIR, ignore_errors=True)
     else:
         OUT_DIR = f"{CHANNEL_DIR}/pending/{render_date}_{SERIES}_s{args.seed:03d}"
     if not args.preview_only and not args.force:
@@ -2087,7 +2399,8 @@ def main():
     analysis = analyze([len(x) / SR for x in intros])
     folder_rel = os.path.relpath(OUT_DIR, BASE)
     entry = dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=args.seed,
-                 created=render_date, render_date=render_date, vehicles=[vk for vk, _ in STORY], track_id=TRACK_ID,
+                 created=render_date, render_date=render_date, vehicles=[vk for vk, _ in STORY],
+                 track_id=f"{TRACK_ID}@{THEME_ID}", theme=THEME_ID, voice=VOICE,
                  outcomes=outcome_tags(), duration=round(total, 2), status="ANALYZED",
                  folder=folder_rel, audit=f"{folder_rel}/{name}_audit.md",
                  episode=None, season=None, upload_date=None, youtube_url=None)
@@ -2132,6 +2445,8 @@ def main():
         base, kk = L["v"]["engine"]
         place(eng, synth_engine(wrel, amp, pitch, base, kk, seed=li), st0)
         place(sfx, synth_whoosh(), st0, 0.5)
+        place(sfx, tone(660, 0.12, "sine", decay=0.08), st0 + 0.02, 0.5)       # READY beep
+        place(sfx, tone(990, 0.22, "sine", decay=0.12), st0 + 0.5, 0.6)        # GO beep
         for j, (ti, s, _, _) in enumerate(L["impacts"]):
             if ti < L["live_end"]:
                 place(sfx, synth_impact(s, seed=100 + j), st0 + out_time(L, ti), 0.9)
@@ -2159,9 +2474,13 @@ def main():
                     place(sfx, stretch(synth_impact(s, seed=200 + j), 0.45), r0 + (ti - ta) / REPLAY_SPEED, 1.0)
             if L["broken"] and ta <= L["broken"]["t"] < tb:
                 place(sfx, stretch(synth_shatter(), 0.5), r0 + (L["broken"]["t"] - ta) / REPLAY_SPEED, 0.7)
-    bgm = synth_bgm(total)
+    bgm = synth_bgm(total, style=th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
-    mix = peak(narr) * VOL_NARR + peak(eng) * VOL_ENGINE + peak(bgm) * VOL_BGM + peak(sfx) * VOL_SFX
+    # ducking: engine + music dip while the narrator talks, so every word is easy to catch
+    talk = np.convolve((np.abs(narr) > 0.01).astype(float), np.ones(int(0.25 * SR)) / (0.25 * SR), "same")
+    duck = 1.0 - (1.0 - 10 ** (-DUCK_DB / 20)) * np.clip(talk * 3, 0, 1)
+    mix = (peak(narr) * VOL_NARR + peak(eng) * VOL_ENGINE * duck + peak(bgm) * VOL_BGM * duck
+           + peak(sfx) * VOL_SFX * (0.5 + 0.5 * duck))
     mix = np.tanh(1.3 * mix) / np.tanh(1.3)
     mix = mix / max(1e-9, np.max(np.abs(mix))) * 0.95
     wav_path = f"{WORK}/mix_{name}.wav"
@@ -2190,7 +2509,8 @@ def main():
     manifest = dict(
         video_id=name, status="ANALYZED" if analysis_ok else "ANALYSIS_FAILED", engine=f"sim-prototype {ENGINE_VERSION}",
         series=SERIES, seed=args.seed, fps=FPS, duration=round(total, 2),
-        track_id=TRACK_ID, track_params=TRACK_PARAMS, fingerprint=fingerprint, outcomes=entry["outcomes"],
+        track_id=TRACK_ID, track_params=TRACK_PARAMS, theme=THEME, theme_id=THEME_ID, voice=VOICE,
+        fingerprint=fingerprint, outcomes=entry["outcomes"],
         analysis=analysis, cta=CTA,
         title_base=SERIES_DEFS[SERIES]["yt_title"],
         title=f"{SERIES_DEFS[SERIES]['yt_title']} #Shorts",       # episodes.py approve adds "| Ep. N"
@@ -2243,6 +2563,33 @@ def main():
     # automatic audit (BLUEPRINT.md section 6) + registry (section 7)
     import audit
     passed = audit.run_audit(name, folder=OUT_DIR)
+    if replace:
+        if not passed:
+            print(f"[replace] audit FAILED - episode {replace['episode']} left untouched; see {OUT_DIR}", flush=True)
+            raise SystemExit(5)
+        ep_dir = f"{BASE}/{replace['folder']}"
+        for fn in os.listdir(ep_dir):                      # old render out, new render in
+            p = f"{ep_dir}/{fn}"
+            shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
+        for fn in os.listdir(OUT_DIR):
+            shutil.move(f"{OUT_DIR}/{fn}", f"{ep_dir}/{fn}")
+        for fn in (f"{name}.json", f"{name}_audit.md", f"{name}_audit.json"):
+            p = f"{ep_dir}/{fn}"
+            with open(p) as fh:
+                txt = fh.read()
+            with open(p, "w") as fh:
+                fh.write(txt.replace(OUT_DIR, ep_dir))
+        with open(f"{ep_dir}/{name}.json") as fh:
+            man = json.load(fh)
+        man.update(episode=replace["episode"], season=replace["season"], title=replace["title"], status="APPROVED",
+                   approved_date=replace.get("approved_date"), rerendered=render_date)
+        with open(f"{ep_dir}/{name}.json", "w") as fh:
+            json.dump(man, fh, indent=2, ensure_ascii=False)
+        registry.update(name, duration=entry["duration"], outcomes=entry["outcomes"], track_id=entry["track_id"],
+                        theme=THEME_ID, voice=VOICE, vehicles=entry["vehicles"], rerendered=render_date)
+        shutil.rmtree(OUT_DIR, ignore_errors=True)
+        print(f"[replace] Ep. {replace['episode']} re-rendered in place -> {replace['folder']}", flush=True)
+        return
     entry["status"] = "RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED"
     registry.upsert(entry)
     print(f"[audit] {'PASS' if passed else 'FAIL'} -> {OUT_DIR}/{name}_audit.md", flush=True)

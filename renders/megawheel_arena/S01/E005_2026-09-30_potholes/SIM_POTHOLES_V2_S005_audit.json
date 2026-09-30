@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->76.8 m, 3.0->27.4 m, 3.0->135.8 m",
+      "value": "3.0->81.7 m, 3.0->27.4 m, 3.0->124.0 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "8.2s, 5.7s, 8.0s",
+      "value": "7.6s, 5.6s, 9.2s",
       "hard": true
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "value": "46.7 s",
+      "value": "47.8 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "value": "17.5s, 10.1s, 19.1s",
+      "value": "16.4s, 10.6s, 20.8s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+      "value": "potholes|sports,icecream,monster2|potholes_d0311b71@noon-rain-beach|flip@obs2+broken,stuck@obs0,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S01/E005_2026-09-30_potholes/SIM_POTHOLES_V2_S005.mp4",
       "hard": true
     },
     {
@@ -119,15 +119,15 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "46.67 s (manifest 46.67)",
+      "value": "47.80 s (manifest 47.8)",
       "hard": true
     },
     {
       "section": "6.1 Teknis",
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
-      "ok": true,
-      "value": "10.9 MB",
+      "ok": false,
+      "value": "23.5 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-0.4 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-13.3 dB",
+      "value": "-13.9 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 11.0s",
+      "value": "48% piksel badge @ 10.2s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 18.1s",
+      "value": "56% piksel warna level @ 17.0s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 24.6s",
+      "value": "48% piksel badge @ 23.9s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 28.2s",
+      "value": "56% piksel warna level @ 27.6s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 37.4s",
+      "value": "28% piksel badge @ 37.9s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "65% piksel panel @ 45.9s",
+      "value": "69% piksel panel @ 47.0s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+      "value": "potholes|sports,icecream,monster2|potholes_d0311b71@noon-rain-beach|flip@obs2+broken,stuck@obs0,win",
       "hard": true
     },
     {

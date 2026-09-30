@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_POTHOLES_V2_S005",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 5,
   "fps": 30,
-  "duration": 46.67,
+  "duration": 47.8,
   "track_id": "potholes_d0311b71",
   "track_params": {
     "p1x": 26.5,
@@ -20,9 +20,16 @@
     "p3w": 4.4,
     "p3d": 4.1
   },
-  "fingerprint": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+  "theme": {
+    "time": "noon",
+    "weather": "rain",
+    "location": "beach"
+  },
+  "theme_id": "noon-rain-beach",
+  "voice": "en-US-AriaNeural",
+  "fingerprint": "potholes|sports,icecream,monster2|potholes_d0311b71@noon-rain-beach|flip@obs2+broken,stuck@obs0,win",
   "outcomes": [
-    "pit@obs2+broken",
+    "flip@obs2+broken",
     "stuck@obs0",
     "win"
   ],
@@ -31,7 +38,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->76.8 m, 3.0->27.4 m, 3.0->135.8 m",
+      "detail": "3.0->81.7 m, 3.0->27.4 m, 3.0->124.0 m",
       "hard": true
     },
     {
@@ -59,7 +66,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "8.2s, 5.7s, 8.0s",
+      "detail": "7.6s, 5.6s, 9.2s",
       "hard": true
     },
     {
@@ -80,27 +87,27 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "46.7 s",
+      "detail": "47.8 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "17.5s, 10.1s, 19.1s",
+      "detail": "16.4s, 10.6s, 20.8s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+      "detail": "potholes|sports,icecream,monster2|potholes_d0311b71@noon-rain-beach|flip@obs2+broken,stuck@obs0,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Giant Potholes! Who Survives? 🚗💥",
-  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 #Shorts",
+  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 5 #Shorts",
   "description": "Zippy the sports car, Sprinkles the ice cream truck and Grizzly the monster truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -117,9 +124,9 @@
   "levels": [
     {
       "vehicle": "ZIPPY THE SPORTS CAR",
-      "speed": 14.0,
-      "outcome": "pit",
-      "event_t": 8.23,
+      "speed": 16.0,
+      "outcome": "flip",
+      "event_t": 7.57,
       "obstacle": 2,
       "broken": true,
       "bullet_time": true,
@@ -130,10 +137,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 17.47,
-      "event_out": 10.63,
+      "duration": 16.4,
+      "event_out": 9.8,
       "x_start": 3.0,
-      "x_end": 76.8,
+      "x_end": 81.7,
       "level_color": [
         45,
         183,
@@ -142,9 +149,9 @@
     },
     {
       "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
-      "speed": 6.4,
+      "speed": 7.2,
       "outcome": "stuck",
-      "event_t": 5.7,
+      "event_t": 5.6,
       "obstacle": 0,
       "broken": false,
       "bullet_time": true,
@@ -154,9 +161,9 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 17.47,
-      "duration": 10.1,
-      "event_out": 24.17,
+      "start": 16.4,
+      "duration": 10.63,
+      "event_out": 23.53,
       "x_start": 3.0,
       "x_end": 27.4,
       "level_color": [
@@ -167,9 +174,9 @@
     },
     {
       "vehicle": "GRIZZLY THE MONSTER TRUCK",
-      "speed": 15.6,
+      "speed": 12.85,
       "outcome": "win",
-      "event_t": 8.0,
+      "event_t": 9.2,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -179,11 +186,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 27.57,
-      "duration": 19.1,
-      "event_out": 37.03,
+      "start": 27.03,
+      "duration": 20.77,
+      "event_out": 37.5,
       "x_start": 3.0,
-      "x_end": 135.8,
+      "x_end": 124.0,
       "level_color": [
         153,
         76,
@@ -195,14 +202,18 @@
     "Level one! Zippy the sports car! Can Zippy survive the giant potholes?",
     "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
     "Level three! Grizzly the monster truck! Can Grizzly smash through the giant potholes?",
-    "Oh no! Zippy fell into the giant pothole!",
+    "Whoa! Zippy flipped right over!",
     "Uh oh... Sprinkles is totally stuck!",
     "Yes! Grizzly made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E005_2026-09-30_potholes/SIM_POTHOLES_V2_S005.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E005_2026-09-30_potholes/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E005_2026-09-30_potholes/SIM_POTHOLES_V2_S005_audit.md",
+  "episode": 5,
+  "season": 1,
+  "approved_date": "2026-09-30",
+  "rerendered": "2026-09-30"
 }

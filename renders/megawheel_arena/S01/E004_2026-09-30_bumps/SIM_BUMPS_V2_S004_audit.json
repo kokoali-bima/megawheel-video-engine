@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_POTHOLES_V2_S003",
+  "video_id": "SIM_BUMPS_V2_S004",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->78.7 m, 3.0->27.7 m, 3.0->141.5 m",
+      "value": "3.0->65.5 m, 3.0->60.7 m, 3.0->109.4 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "3 lubang (27-81 m), finish 100 m",
+      "value": "4 polisi tidur (43-80 m), finish 90 m",
       "hard": true
     },
     {
@@ -39,15 +39,15 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "6.8s, 5.2s, 7.7s",
+      "value": "7.7s, 6.8s, 13.2s",
       "hard": true
     },
     {
       "section": "5.1 Analisa fisika",
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
-      "ok": true,
-      "value": "rintangan [2, 0]",
+      "ok": false,
+      "value": "rintangan [2, 2]",
       "hard": false
     },
     {
@@ -63,15 +63,15 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "value": "44.3 s",
+      "value": "49.3 s",
       "hard": true
     },
     {
       "section": "5.1 Analisa fisika",
       "id": "level_len",
-      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "value": "15.8s, 10.0s, 18.5s",
+      "value": "13.7s, 11.8s, 23.8s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
+      "value": "bumps|police,firetruck,monster2|bumps_085ce19c@sunset-rain-mountains|stuck@obs2,stuck@obs2,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S01/E004_2026-09-30_bumps/SIM_BUMPS_V2_S004.mp4",
       "hard": true
     },
     {
@@ -119,15 +119,15 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "44.33 s (manifest 44.33)",
+      "value": "49.33 s (manifest 49.33)",
       "hard": true
     },
     {
       "section": "6.1 Teknis",
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
-      "ok": true,
-      "value": "10.5 MB",
+      "ok": false,
+      "value": "22.9 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-0.4 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-13.2 dB",
+      "value": "-12.9 dB",
       "hard": true
     },
     {
@@ -159,7 +159,7 @@
       "id": "narration_count",
       "desc": "Narasi lengkap (intro + hasil tiap level + CTA)",
       "ok": true,
-      "value": "8 baris",
+      "value": "7 baris",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 9.2s",
+      "value": "48% piksel badge @ 10.5s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 16.4s",
+      "value": "56% piksel warna level @ 14.3s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 22.8s",
+      "value": "48% piksel badge @ 22.3s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 26.4s",
+      "value": "56% piksel warna level @ 26.1s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 35.2s",
+      "value": "28% piksel badge @ 40.1s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "65% piksel panel @ 43.5s",
+      "value": "65% piksel panel @ 48.5s",
       "hard": true
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "14 file",
+      "value": "13 file",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
+      "value": "bumps|police,firetruck,monster2|bumps_085ce19c@sunset-rain-mountains|stuck@obs2,stuck@obs2,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 3",
+      "value": "seed 4",
       "hard": true
     },
     {
@@ -247,7 +247,7 @@
       "id": "streak",
       "desc": "Maks 3 video berturut-turut dari seri yang sama",
       "ok": true,
-      "value": "0 video potholes berturut-turut sebelum ini",
+      "value": "1 video bumps berturut-turut sebelum ini",
       "hard": false
     }
   ]
