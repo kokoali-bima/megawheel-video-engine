@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_SPLASH_V2_S003",
+  "video_id": "SIM_SPLASH_V2_S005",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->74.4 m, 3.0->36.6 m, 3.0->131.0 m",
+      "value": "3.0->62.3 m, 3.0->41.6 m, 3.0->126.4 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "3 rintangan [pit, wall, hill] (18-102 m), finish 110 m",
+      "value": "3 rintangan [pit, wall, hill] (16-102 m), finish 110 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "5.1s, 7.7s, 11.6s",
+      "value": "5.7s, 6.1s, 13.0s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "13.4s, 12.8s, 22.4s",
+      "value": "13.9s, 9.9s, 25.0s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "splash|f1,bigrig,taxi|splash_7e3f037b@morning-clear-desert|crash@obs1+broken,stuck@obs0,win",
+      "value": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/rejected/2026-09-30_splash_s005/SIM_SPLASH_V2_S005.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "48.66 s (manifest 48.67)",
+      "value": "48.73 s (manifest 48.73)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "12.8 MB",
+      "value": "14.5 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-0.4 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 6.9s",
+      "value": "48% piksel badge @ 7.2s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 14.0s",
+      "value": "56% piksel warna level @ 14.5s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 23.3s",
+      "value": "48% piksel badge @ 20.9s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 26.9s",
+      "value": "56% piksel warna level @ 24.4s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 40.1s",
+      "value": "28% piksel badge @ 38.9s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "70% piksel panel @ 47.9s",
+      "value": "69% piksel panel @ 47.9s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "splash|f1,bigrig,taxi|splash_7e3f037b@morning-clear-desert|crash@obs1+broken,stuck@obs0,win",
+      "value": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 3",
+      "value": "seed 5",
       "hard": true
     },
     {

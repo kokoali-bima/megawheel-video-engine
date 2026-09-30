@@ -158,6 +158,45 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v2.8: suara air ≠ lava, mobil meleleh, hydroplaning, antrian upload (Claude Code, Opus)
+
+**Masukan user (review v2.7):**
+1. Suara lava dan air terdengar sama.
+2. Mobil yang masuk kolam lahar harus terbakar dan bodinya meleleh.
+3. Mobil ngebut di air harus tergelincir atau berputar, dan cipratan harus lebih nyata.
+
+Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
+
+**Audio (dibangun ulang dengan filter FFT `_fband`)**
+- Air (terang, cepat): tepukan, *sploosh*, desis semprotan, gelembung dengan nada NAIK (ciri khas air), tetesan (`synth_splash`); desis ban membelah air selama di genangan (`synth_water_rush`); *swish* saat berputar (`synth_spin`); cipratan besar + gelembung *glug* untuk kolam air (`synth_gurgle`).
+- Lava (rendah, kental, lambat): *GLOOP* berat, *fwoomp* api, erangan logam panas, gelembung *blorp* lambat (`synth_lava_plunge`); gemuruh sub-bass + ledakan dalam + auman api + jatuhan batu (`synth_eruption`); api menyala (`synth_ignite`); api terus berkobar + gemeretak (`synth_fire`); ambience kolam lahar yang keras-lemahnya mengikuti jarak (`synth_lava_bed`).
+- `synth_sizzle` (desis, mirip air) dihapus.
+
+**Visual**
+- Mobil di kolam lahar tenggelam pelan (`sink_offset`). Bodi memerah di bawah dan gosong di atas, melorot (squash), lelehan logam mengalir di bodi, tetesan membara (`melt_amount`). Ada lapisan lahar di depan mobil (`draw_pit_front`), cincin panas, gumpalan lahar kental terlempar (`draw_lava_splash`), api kartun + bara (`draw_fire`).
+- Hydroplaning: `yaw` 2.5D (mobil diskalakan cos(yaw), terlihat berbalik arah saat berputar), ekspresi wajah kaget. Semprotan *rooster tail* per ban yang arahnya mengikuti yaw, kabut, riak, dan *crown splash* dua lembar air.
+- Seri splash: lubang diganti kolam air dalam (`PIT_KIND="water"`). Mobil terlihat di bawah air, ada gelembung naik.
+- Latar gunung berapi: alas solid (celah biru langit hilang).
+
+**Fisika**
+- `start_slide`: masuk genangan dengan vx > `SPIN_V` (6.5 m/s) → peluang spin naik dengan kecepatan (maks 80%, maks 1 spin per run, sisa tenaga 50%). Selain itu fishtail (visual). Ban besar monster truck lebih mencengkeram (×1.35). Salju: fishtail setelah mendarat keras.
+- Menyentuh cairan di kolam = event `pit` seketika (bukan `stuck`).
+- Lintasan lava: rintangan pertama di 32–36 m, kolam pertama lebih lebar.
+- Narasi khusus: `crash_spun`, `pit_spun`, `rollback_spun`.
+
+**Momen khas wajib (`signature`)**
+- Seri splash wajib ada spin, seri lava wajib ada mobil meleleh.
+- Tanpa momen itu, kombinasi ditolak dan engine pindah ke seed berikutnya.
+
+**Antrian upload:** `publish_queue.py` + `publishAt` di uploader, slot 11:00/15:00/19:00 ET (BLUEPRINT bagian 10). Ep. 1–6 sudah direncanakan, belum diupload.
+
+**Bug saat uji (diperbaiki):**
+- Spin terlalu sering dan terlalu banyak membuang tenaga, sehingga durasi melebihi batas.
+- Roda terlihat di bawah dasar kolam saat mobil tenggelam (sekarang di-clip).
+- Pemilih kombinasi awalnya hanya "mengutamakan" momen khas, sehingga video tetap tanpa spin/lelehan. Sekarang wajib.
+
+**Render (audit PASS, pending review):** `2026-09-30_splash_s007` (Tilly → Sprinkles → Titan, malam-gurun, Titan berputar di air) dan `2026-09-30_lava_s003` (Zippy meleleh di kolam lahar → Hydro → Titan). Render v2.7 dan percobaan tanpa momen khas dipindah ke `rejected/`.
+
 ## 2026-09-30 — v2.7: seri bahaya baru — genangan air, dinding, semburan lahar + SFX realistis (Claude Code, Opus)
 
 **Masukan user:** perlu gaya lain: genangan air yang membuat mobil tergelincir dan menabrak, lahar yang keluar dari tanah; monster truck jangan selalu menang; suara efek visual harus terasa nyata.

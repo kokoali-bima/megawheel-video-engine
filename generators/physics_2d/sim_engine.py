@@ -78,15 +78,19 @@ SERIES_DEFS = {
                   tags=["cars", "speed bumps", "monster truck", "crash test", "physics simulation", "shorts",
                         "MegaWheel Arena"]),
     "splash": dict(title="CARS VS SPLASH ZONE!", obst="slippery splash zone", max_fail=20.0, max_win=26.0,
-                   win_pool="any",
+                   win_pool="any", signature="spin",
                    fail_lines={"crash": "Crash! {n} slid right into the wall!",
-                               "pit": "Splash! {n} skidded into the pit!"},
+                               "crash_spun": "Crash! {n} spun out on the water and slammed the wall!",
+                               "pit": "Sploosh! {n} plunged into the water pit!",
+                               "pit_spun": "Sploosh! {n} spun out and splashed into the pool!",
+                               "rollback": "Oh no! {n} lost grip and slid back down!",
+                               "rollback_spun": "Whoa! {n} spun out and slid back down the hill!"},
                    yt_title="Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
                    tags=["cars", "car crash", "slippery road", "water puddle", "crash test", "physics simulation",
                          "shorts", "MegaWheel Arena"]),
     "lava": dict(title="CARS VS LAVA ROAD!", obst="erupting lava road", max_fail=20.0, max_win=26.0,
-                 win_pool="any", force_theme=dict(location="volcano", weather="clear"),
-                 fail_lines={"pit": "Oh no! {n} fell into the lava!",
+                 win_pool="any", signature="melt", force_theme=dict(location="volcano", weather="clear"),
+                 fail_lines={"pit": "Oh no! {n} fell into the lava and is melting!",
                              "lava": "Yikes! {n} got blasted by the lava!"},
                  yt_title="Cars VS Lava Road! Who Survives? 🌋🔥",
                  tags=["cars", "lava", "volcano", "car crash", "crash test", "physics simulation", "shorts",
@@ -156,8 +160,9 @@ class _TB:
 def make_splash_track(seed):
     """Wet road: puddles steal traction right before a wall jump, a steep hill and a pit jump."""
     global PUDDLES, BARRIERS, RAMPS, RAMP, PITS, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, \
-        FINISH_X, OBST_SPANS
+        FINISH_X, OBST_SPANS, PIT_KIND
     r = np.random.default_rng(6000 + seed)
+    PIT_KIND = "water"                                       # the pit is a deep water pool
     order = [str(k) for k in r.permutation(["wall", "hill", "pit"])]
     tb = _TB(0.0)
     tb.flat(float(r.uniform(16, 20)))
@@ -226,7 +231,7 @@ def make_lava_track(seed):
     r = np.random.default_rng(7000 + seed)
     PIT_KIND = "lava"
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(20, 24)))
+    tb.flat(float(r.uniform(32, 36)))                        # first hazard after the intro narration
     spans, obst, danger = [], [], []
 
     def vent():
@@ -253,7 +258,7 @@ def make_lava_track(seed):
         obst.append(((px0 + tb.x) / 2, "lava"))
         danger.append(px0 - (ramp[0] if ramp else 0))
 
-    pit(round(float(r.uniform(3.0, 4.2)), 1), 3.0)          # a pit first: vents never fire before cars get going
+    pit(round(float(r.uniform(4.5, 5.5)), 1), 3.0)          # a pit first: vents never fire before cars get going
     tb.flat(float(r.uniform(7, 9)))
     vent()
     tb.flat(float(r.uniform(6, 8)))
@@ -546,10 +551,44 @@ LEVEL_COLORS = [(0.18, 0.72, 0.3), (1.0, 0.52, 0.08), (0.6, 0.3, 0.92)]
 
 # ================================================================ physics
 PUDDLE_FRICTION = 0.06
+SPIN_V = 6.5        # m/s: hitting water faster than this may hydroplane into a spin (chance grows with speed)
+PIT_FILL = {"lava": 1.3, "water": None}   # liquid depth in a pit (None = filled up to 0.8 m below the road)
 
 
 def in_puddle(x):
     return any(x0 <= x <= x1 for x0, x1 in PUDDLES)
+
+
+def pit_surface(d):
+    """y of the liquid surface in a pit of depth d."""
+    fill = PIT_FILL.get(PIT_KIND)
+    return -d + fill if fill is not None else -0.8
+
+
+def start_slide(t, vx, v, rng, kind=None):
+    """Hydroplaning on water: a full spin (most drive lost) or a fishtail wobble (part drive).
+    Big tyres cut through water better (grip). At most one spin per run (caller passes kind="wobble")."""
+    grip = 1.35 if v["wheel_r"] >= 0.8 else 1.0
+    ve = vx / grip
+    if kind is None:
+        kind = "spin" if rng.uniform() < np.clip((ve - SPIN_V) / 5.0, 0.0, 0.8) else "wobble"
+    sign = 1.0 if rng.uniform() < 0.5 else -1.0
+    if kind == "spin":
+        turns = 2 if ve > 12.0 else 1
+        return dict(kind="spin", t0=t, dur=0.75 + 0.5 * turns, turns=turns, dir=sign, drive=0.5)
+    return dict(kind="wobble", t0=t, dur=1.5, amp=float(np.clip(0.2 + 0.045 * vx, 0.3, 0.7)), dir=sign, drive=1.0)
+
+
+def slide_yaw(sl, t):
+    """Yaw angle (rotation around the vertical axis, rendered 2.5D) of a slide at time t."""
+    if sl is None:
+        return 0.0
+    tau = t - sl["t0"]
+    if tau < 0 or tau > sl["dur"]:
+        return 0.0
+    if sl["kind"] == "spin":
+        return sl["dir"] * 2 * math.pi * sl["turns"] * (1 - (1 - tau / sl["dur"]) ** 2.2)
+    return sl["dir"] * sl["amp"] * math.sin(2 * math.pi * 1.7 * tau) * math.exp(-tau / 0.55)
 
 
 def vent_active(vent, t):
@@ -681,11 +720,12 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         space.step(dt)
 
     target = speed / r                      # SimpleMotor: wheel.w - chassis.w = -rate -> +x motion
-    rec = dict(cx=[], cy=[], ca=[], wheels=[], wrel=[], speed=[], air=[])
+    rec = dict(cx=[], cy=[], ca=[], wheels=[], wrel=[], speed=[], air=[], yaw=[])
     deb_rec, debris = [], []
     impacts, event, broken, burned = [], None, None, None
     flip_t = stuck_t = back_t = None
     vent_hit = set()
+    slide, slid, spun, sunk, air_since = None, set(), None, None, None
     prev_v = ch.velocity
     last_imp = -1.0
     i = 0
@@ -698,6 +738,8 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 rate, force = target * max(0.0, 1 - (t - event["t"]) / 2.5), car["torque"] * 0.6
             else:
                 rate, force = 0.0, 0.0
+            if slide is not None and t <= slide["t0"] + slide["dur"]:
+                force *= slide["drive"]                     # tyres floating on water: drive lost
             for m in motors:
                 m.rate, m.max_force = rate, force
 
@@ -711,6 +753,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         rec["speed"].append(ch.velocity.length)
         rec["air"].append(float(bool(attached) and all(w.position.y - r > ground_h(w.position.x) + 0.12
                                                       for w in attached)))
+        rec["yaw"].append(slide_yaw(slide, t))
         deb_rec.append([(d["body"].position.x, d["body"].position.y, d["body"].angle) for d in debris])
 
         for _ in range(SUB_PER_REC):
@@ -740,6 +783,28 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 burned = burned or t
                 if event is None:
                     event = dict(type="lava", t=t)
+        # hydroplaning: each puddle once; snow: fishtail after a hard landing
+        airborne = bool(rec["air"][-1])
+        if event is None and (slide is None or t > slide["t0"] + slide["dur"]):
+            fw = max((w.position.x for w in attached), default=ch.position.x)
+            pk = next((k for k, (x0, x1) in enumerate(PUDDLES) if x0 <= fw <= x1), None)
+            if pk is not None and pk not in slid and ch.velocity.x > 3.0 and not airborne:
+                slid.add(pk)
+                slide = start_slide(t, ch.velocity.x, v, rng, kind="wobble" if spun else None)
+                if slide["kind"] == "spin":
+                    spun = spun or t
+            elif (THEME["weather"] == "snow" and not airborne and air_since is not None and t - air_since > 0.25
+                  and ch.velocity.x > 4.0):
+                slide = start_slide(t, ch.velocity.x, v, rng, kind="wobble")
+        air_since = (air_since if air_since is not None else t) if airborne else None
+        for x0, x1, d in PITS:                              # touched the liquid in a pit (lava / water)
+            if sunk is None and PIT_KIND in PIT_FILL and x0 <= ch.position.x <= x1 \
+                    and ch.position.y - bh / 2 < pit_surface(d):
+                sunk = t
+                if PIT_KIND == "lava":
+                    burned = burned or t
+                if event is None:                           # touching the liquid is the fail (never "stuck")
+                    event = dict(type="pit", t=max(0.0, t - 0.2))
         if event is not None and event["type"] != "win" and broken is None and dv > v["break_dv"]:
             debris = break_car(space, car, v, rng, dv, i)
             broken = dict(t=t, x=ch.position.x, y=ch.position.y)
@@ -754,8 +819,6 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 flip_t = None
             if event is None and ch.position.y - car["ride_y"] < -2.2:
                 event = dict(type="pit", t=max(0.0, t - 0.3))
-                if PIT_KIND == "lava":
-                    burned = burned or t
             if event is None and t > 1.5 and ch.velocity.x < -0.8:  # slid back down a hill
                 back_t = back_t if back_t is not None else t
                 if t - back_t > 0.8:
@@ -789,7 +852,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         raise RuntimeError("car did not move forward, motor sign is wrong")
     meta = [{k: d[k] for k in ("kind", "size", "verts", "color", "spawn")} for d in debris]
     return dict(rec=rec, impacts=impacts, event=event, speed=float(speed), broken=broken, burned=burned,
-                debris=deb, debris_meta=meta, detached=car["detached"])
+                spun=spun, sunk=sunk, debris=deb, debris_meta=meta, detached=car["detached"])
 
 
 def bh_car(v):
@@ -811,8 +874,18 @@ def level_cap(L):
 
 
 def is_spectacular(L):
-    """Crash-worthy fail level: broken car, flip, or a big bullet-time jump."""
-    return bool(L["broken"] or L["event"]["type"] == "flip" or L.get("bullet"))
+    """Crash-worthy fail level: broken car, flip, a big bullet-time jump, or the series' signature moment."""
+    return bool(L["broken"] or L["event"]["type"] == "flip" or L.get("bullet") or has_signature(L))
+
+
+def has_signature(L):
+    """The moment a series is about: a hydroplane spin (splash), melting in a lava pit (lava)."""
+    sig = SERIES_DEFS[SERIES].get("signature")
+    if sig == "spin":
+        return L.get("spun") is not None and L["spun"] < L["event"]["t"] + 0.5
+    if sig == "melt":
+        return L.get("sunk") is not None and PIT_KIND == "lava"
+    return False
 
 
 def outcome_vo_t(ev_out, intro_d):
@@ -830,7 +903,8 @@ def runs_for(vk, want, intro_d):
     for sp in np.linspace(v["speeds"][0] * scale, v["speeds"][1] * scale, 21):
         run = simulate(v, sp)
         ev = run["event"]
-        summary.append(f"{sp:.1f}:{ev['type']}@{ev['t']:.1f}s/obs{ev['obstacle']}{'/BRK' if run['broken'] else ''}")
+        summary.append(f"{sp:.1f}:{ev['type']}@{ev['t']:.1f}s/obs{ev['obstacle']}{'/BRK' if run['broken'] else ''}"
+                       f"{'/SPIN' if run['spun'] else ''}")
         is_win = ev["type"] == "win"
         if (want == "win") == is_win and ev["type"] != "timeout" and lo <= ev["t"] <= hi:
             cands.append(run)
@@ -915,7 +989,11 @@ def pick_combo(rng, timed):
             continue
         PICK_STATS["spect_ok"] += 1
         distinct = len({L["event"]["obstacle"] for L in fails}) == len(fails)
-        score = 2.0 * distinct + 1.0 * (spect - 1) + 1.5 * min(crash, 1) - 0.3 * abs(total - 46.0)
+        sig = sum(1 for L in Ls if has_signature(L))              # series signature moment on screen
+        if SERIES_DEFS[SERIES].get("signature") and sig == 0:
+            continue                                              # mandatory: no spin / melt -> next seed
+        score = 2.0 * distinct + 1.0 * (spect - 1) + 1.5 * min(crash, 1) - 0.3 * abs(total - 46.0) \
+            + 4.0 * min(sig, 1) + 0.5 * max(0, sig - 1)
         scored.append((score, combo))
     if not scored:
         return None
@@ -938,7 +1016,15 @@ def car_state(L, st):
     rec = L["rec"]
     return dict(cx=float(interp(rec["cx"], st)), cy=float(interp(rec["cy"], st)), ca=float(interp(rec["ca"], st)),
                 wheels=interp(rec["wheels"], st), speed=float(interp(rec["speed"], st)),
-                air=float(interp(rec["air"], st)))
+                air=float(interp(rec["air"], st)), yaw=float(interp(rec["yaw"], st)) if "yaw" in rec else 0.0,
+                sink=sink_offset(L, st))
+
+
+def sink_offset(L, st):
+    """Visual sinking into lava (viscous, slow); the physics body rests on the pit floor."""
+    if PIT_KIND != "lava" or L.get("sunk") is None or st < L["sunk"]:
+        return 0.0
+    return min(0.7, 0.4 * (st - L["sunk"]))
 
 
 def bullet_window(L):
@@ -1028,6 +1114,8 @@ def mood_at(L, st, s):
     # "whoa" only for real jumps: airborne AND still above road level (not nose-diving into a pit)
     if s["air"] > 0.5 and s["cy"] > lift and s["cy"] - ground_h(s["cx"]) > lift + 0.5:
         return "whoa"
+    if abs(s.get("yaw", 0.0)) > 0.25:                            # spinning / fishtailing on water
+        return "whoa" if abs(s["yaw"]) > 1.5 else "scared"
     front = s["cx"] + L["v"]["body"][0] / 2 * math.cos(s["ca"])
     if any(0 < dx - front < 6.5 for dx in DANGER_X):
         return "scared"
@@ -1206,51 +1294,199 @@ def _band(x, lo, hi):
     return smooth(x, lo) - smooth(x, hi)
 
 
-def synth_splash(strength=1.0, seed=41):
-    """Car hitting water: wet burst + falling droplets."""
-    n = int(0.8 * SR)
+def _fband(x, lo=None, hi=None):
+    """Band-pass through an FFT mask with soft (2nd-order) edges; lo/hi in Hz, None = open."""
+    f = np.fft.rfftfreq(len(x), 1 / SR)
+    g = np.ones_like(f)
+    if lo:
+        g /= 1 + (lo / np.maximum(f, 1e-3)) ** 4
+    if hi:
+        g /= 1 + (f / hi) ** 4
+    return np.fft.irfft(np.fft.rfft(x) * g, len(x))
+
+
+def _norm(x, peak=1.0):
+    return x / max(1e-9, float(np.max(np.abs(x)))) * peak
+
+
+def _add(buf, sig, t0):
+    i0 = int(t0 * SR)
+    if 0 <= i0 < len(buf):
+        m = min(len(sig), len(buf) - i0)
+        buf[i0:i0 + m] += sig[:m]
+
+
+def _chirp(f0, f1, dur, decay):
+    """Exponential pitch glide with a fast attack; rising = water bubble, falling = heavy gloop."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    f = f0 * (f1 / f0) ** (t / dur)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / decay) * np.minimum(1, t / 0.002)
+
+
+def _crackle(n, rate, rng, lo=1200, hi=6000):
+    """Fire crackle: random short clicks with a heavy-tailed loudness."""
+    out = np.zeros(n)
+    for _ in range(int(rate * n / SR)):
+        m = int(rng.uniform(0.002, 0.007) * SR)
+        i0 = int(rng.uniform(0, n - m - 1))
+        out[i0:i0 + m] += rng.standard_normal(m) * np.exp(-np.arange(m) / (0.0015 * SR)) * rng.pareto(2.5)
+    return _fband(out, lo, hi)
+
+
+# ---- water: bright, fast, splashy; bubbles glide UP in pitch ----
+def synth_splash(strength=1.0, seed=41, big=False):
+    """Car hitting water: slap, sploosh, spray hiss, rising bubble plinks, then falling drops."""
+    dur = 1.8 if big else 1.1
+    n = int(dur * SR)
     t = np.arange(n) / SR
     rng = np.random.default_rng(seed)
-    body = _band(rng.standard_normal(n), 2, 30) * np.exp(-t / 0.12) * 1.4
-    hiss = (rng.standard_normal(n) - smooth(rng.standard_normal(n), 3)) * np.exp(-t / 0.3) * 0.4
+    slap = _fband(rng.standard_normal(n), 350, 4500) * np.exp(-t / 0.018)
+    sploosh = _fband(rng.standard_normal(n), 140 if big else 260, 2400) * np.minimum(1, t / 0.012) \
+        * np.exp(-t / (0.3 if big else 0.14))
+    spray = _fband(rng.standard_normal(n), 2500, 10000) * np.minimum(1, t / 0.03) * np.exp(-t / (0.6 if big else 0.35))
+    bubbles = np.zeros(n)
+    for _ in range(50 if big else 30):
+        t0 = 0.02 + rng.exponential(0.32 if big else 0.18)
+        if t0 < dur - 0.1:
+            f0 = rng.uniform(450, 1900) * (0.75 if big else 1.0)
+            _add(bubbles, _chirp(f0, f0 * rng.uniform(1.5, 2.4), rng.uniform(0.025, 0.06), rng.uniform(0.01, 0.025))
+                 * rng.uniform(0.3, 1.0), t0)
     drops = np.zeros(n)
-    for _ in range(18):
-        p = sweep(rng.uniform(900, 2200), rng.uniform(400, 900), 0.05, 0.35)
-        i0 = int(rng.uniform(0.05, 0.65) * SR)
-        drops[i0:i0 + len(p)] += p[:max(0, n - i0)]
-    return (body + hiss + drops) * (0.5 + 0.5 * strength)
+    for _ in range(26):
+        t0 = rng.uniform(0.3, dur - 0.05)
+        _add(drops, _chirp(rng.uniform(1800, 3800), rng.uniform(3000, 5000), 0.02, 0.006) * rng.uniform(0.2, 0.6), t0)
+    mix = slap * 0.8 + sploosh + spray * 0.35 + bubbles * 0.5 + drops * 0.3
+    if big:                                                          # big air pocket escaping: low bloop
+        _add(mix, _chirp(110, 230, 0.25, 0.12) * 0.8, 0.12)
+    return _norm(mix) * (0.55 + 0.45 * strength)
+
+
+def synth_water_rush(dur, strength=1.0, seed=61):
+    """Tyres ploughing through water: continuous shhhh with a restless surge."""
+    n = max(1, int(dur * SR))
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    hiss = _fband(rng.standard_normal(n), 700, 7000)
+    surge = 0.7 + 0.3 * _norm(_fband(rng.standard_normal(n), None, 8))
+    env = np.minimum(1, t / 0.05) * np.clip((dur - t) / 0.2, 0, 1)
+    return _norm(hiss * surge * env) * strength
+
+
+def synth_spin(dur, turns, seed=67):
+    """Hydroplane spin: swish-swish of spray as the car turns (one swell per half turn)."""
+    n = max(1, int(dur * SR))
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    ph = 2 * turns * (1 - (1 - t / dur) ** 2.2)                      # follows the yaw curve (half turns)
+    swell = np.sin(np.pi * ph) ** 2
+    swish = _fband(rng.standard_normal(n), 900, 6000) * (0.25 + swell)
+    scrub = _fband(rng.standard_normal(n), 120, 600) * swell * 0.5  # tyre rubber sliding sideways
+    return _norm((swish + scrub) * np.clip((dur - t) / 0.2, 0, 1))
+
+
+def synth_gurgle(seed=83):
+    """Sunk car under water: big bubbles glugging up (low, rising)."""
+    n = int(2.5 * SR)
+    out = np.zeros(n)
+    rng = np.random.default_rng(seed)
+    for k in range(14):
+        t0 = k * 0.16 + rng.uniform(0, 0.08)
+        f0 = rng.uniform(150, 320)
+        _add(out, _chirp(f0, f0 * rng.uniform(1.6, 2.2), 0.09, 0.05) * (1 - k / 16), t0)
+    return _norm(_fband(out, None, 1500))
+
+
+# ---- lava: low, thick, slow; fire roar + crackle; no bright hiss ----
+def _blorp(f0, dur):
+    """Viscous lava bubble: slow low swell that rises, then a dull pop."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    f = f0 * (1 + 0.7 * (t / dur) ** 2)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / dur) ** 1.5
+    pop = np.zeros(n)
+    m = int(0.02 * SR)
+    pop[-m:] = np.random.default_rng(int(f0)).standard_normal(m) * np.exp(-np.arange(m) / (0.004 * SR))
+    return body + _fband(pop, 80, 900) * 0.8
+
+
+def synth_fire(dur, seed=71):
+    """Burning car: low roar that flickers + crackling."""
+    n = max(1, int(dur * SR))
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    roar = _fband(rng.standard_normal(n), 60, 650)
+    flick = 0.55 + 0.45 * _norm(_fband(rng.standard_normal(n), None, 5))
+    env = np.minimum(1, t / 0.15) * np.clip((dur - t) / 0.6, 0, 1)
+    return _norm(_norm(roar * flick) + _norm(_crackle(n, 30, rng)) * 0.55) * env
+
+
+def synth_ignite(seed=73):
+    """Car catching fire: FWOOMP (low swell of flame) + first crackles."""
+    n = int(1.2 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    env = np.minimum(1, t / 0.08) * np.exp(-np.maximum(0, t - 0.08) / 0.4)
+    whoomp = _fband(rng.standard_normal(n), 70, 1100) * env
+    thump = _chirp(80, 45, 0.4, 0.15)
+    mix = _norm(whoomp)
+    _add(mix, thump * 0.8, 0.0)
+    return _norm(mix + _norm(_crackle(n, 25, rng)) * 0.35 * np.minimum(1, t / 0.2))
+
+
+def synth_lava_plunge(seed=79):
+    """Car sinking into lava: heavy GLOOP, fire whoomp, groaning hot metal, slow blorps."""
+    n = int(3.0 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    gloop = np.zeros(n)
+    _add(gloop, _chirp(130, 42, 0.55, 0.25), 0.0)
+    thud = _fband(rng.standard_normal(n), 35, 320) * np.exp(-t / 0.12)
+    env = np.minimum(1, t / 0.15) * (0.35 + 0.65 * np.exp(-t / 0.5)) * np.clip((3.0 - t) / 0.6, 0, 1)
+    roar = _norm(_fband(rng.standard_normal(n), 60, 800)) * env
+    f = 150 * (1 - 0.35 * t / 3.0) * (1 + 0.02 * np.sin(2 * np.pi * 5 * t))
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    groan = sum(np.sin(ph * k) / k for k in (1, 2.76, 5.4)) * np.clip((t - 0.4) / 0.5, 0, 1) \
+        * np.clip((2.8 - t) / 0.8, 0, 1)
+    blorps = np.zeros(n)
+    for _ in range(9):
+        _add(blorps, _blorp(rng.uniform(65, 150), rng.uniform(0.14, 0.28)), rng.uniform(0.3, 2.6))
+    mix = _norm(gloop) * 1.0 + _norm(thud) * 0.8 + roar * 0.7 + _norm(groan) * 0.22 + _norm(blorps) * 0.55 \
+        + _norm(_crackle(n, 20, rng)) * 0.3 * np.minimum(1, t / 0.4)
+    return _norm(mix)
 
 
 def synth_eruption(seed=43):
-    """Lava vent: deep rumble build-up, then a roaring blast with crackles (~1.6 s)."""
-    n = int(1.6 * SR)
+    """Lava vent: sub rumble build-up, deep boom, roaring fire column, falling rock thuds, blorps."""
+    n = int(1.9 * SR)
     t = np.arange(n) / SR
     rng = np.random.default_rng(seed)
-    rumble = smooth(rng.standard_normal(n), 220) * 6.0 * np.clip(t / 0.4, 0, 1)
-    blast_env = np.where(t > 0.35, np.exp(-(t - 0.35) / 0.45), 0.0)
-    blast = _band(rng.standard_normal(n), 3, 60) * blast_env * 1.5
-    boom = np.sin(2 * np.pi * (48 - 12 * t) * t) * blast_env * 1.6
-    crackle = np.zeros(n)
-    for _ in range(40):
-        i0 = int(rng.uniform(0.35, 1.5) * SR)
-        m = int(0.004 * SR)
-        crackle[i0:i0 + m] += rng.standard_normal(min(m, n - i0)) * rng.uniform(0.3, 0.9)
-    return rumble + blast + boom + crackle
+    rumble = _norm(_fband(rng.standard_normal(n), 18, 90)) * np.clip(t / 0.35, 0, 1) * np.clip((1.9 - t) / 0.5, 0, 1)
+    blast_env = np.where(t > 0.35, np.exp(-(t - 0.35) / 0.6), 0.0) * np.minimum(1, np.maximum(0, t - 0.35) / 0.05)
+    roar = _norm(_fband(rng.standard_normal(n), 60, 900)) * blast_env
+    boom = np.zeros(n)
+    _add(boom, _chirp(75, 32, 0.8, 0.3), 0.35)
+    rocks = np.zeros(n)
+    for _ in range(12):
+        m = int(0.03 * SR)
+        _add(rocks, _fband(rng.standard_normal(m), 90, 600) * np.exp(-np.arange(m) / (0.008 * SR))
+             * rng.uniform(0.4, 1.0), rng.uniform(0.6, 1.8))
+    blorps = np.zeros(n)
+    for _ in range(3):
+        _add(blorps, _blorp(rng.uniform(60, 110), 0.22), rng.uniform(0.0, 0.3))
+    return _norm(rumble * 0.9 + roar * 0.9 + _norm(boom) * 1.0 + _norm(rocks) * 0.4 + _norm(blorps) * 0.4
+                 + _norm(_crackle(n, 18, rng, 900, 4000)) * 0.2 * blast_env)
 
 
-def synth_sizzle(seed=47):
-    """Hot lava on metal: bright hiss with pops (~1.4 s)."""
-    n = int(1.4 * SR)
-    t = np.arange(n) / SR
+def synth_lava_bed(dur, seed=89):
+    """Lava pool ambience: slow blorps over a faint low roar (gain follows the distance)."""
+    n = max(1, int(dur * SR))
     rng = np.random.default_rng(seed)
-    x = rng.standard_normal(n)
-    hiss = (x - smooth(x, 2)) * np.minimum(1, t / 0.05) * np.exp(-t / 0.7) * 0.9
-    pops = np.zeros(n)
-    for _ in range(25):
-        i0 = int(rng.uniform(0, 1.3) * SR)
-        p = tone(rng.uniform(1500, 4000), 0.015, "sine", decay=0.004) * 0.6
-        pops[i0:i0 + len(p)] += p[:max(0, n - i0)]
-    return hiss + pops
+    out = _norm(_fband(rng.standard_normal(n), 40, 300)) * 0.25
+    b = np.zeros(n)
+    for _ in range(int(dur * 2.5)):
+        _add(b, _blorp(rng.uniform(55, 140), rng.uniform(0.15, 0.3)), rng.uniform(0, dur))
+    return _norm(out + _norm(b) * 0.8)
 
 
 def synth_wall_crash(strength=1.0, seed=53):
@@ -1509,6 +1745,9 @@ def draw_sky(ctx, camx, camy, z):
         ctx.set_source(hg)
         ctx.fill()
         vx0 = 620 - (camx * S * 0.05) % 2200
+        ctx.rectangle(0, horizon + 60, W, H)                     # solid plain: no sky gaps under the hills
+        ctx.set_source_rgb(*lit((0.24, 0.18, 0.18)))
+        ctx.fill()
         for vx in (vx0, vx0 + 2200):
             if -700 < vx < W + 700:
                 poly(ctx, [(vx - 560, horizon + 80), (vx - 110, horizon - 470), (vx + 110, horizon - 470),
@@ -1681,6 +1920,15 @@ def draw_track(ctx, view0, view1, t=0.0):
                 ctx.arc(x0 + 0.35 + j * 0.7, -d + 1.3 + ph * 0.25, 0.12 + 0.12 * ph, 0, 2 * math.pi)
                 ctx.set_source_rgba(1, 0.9, 0.3, 1 - ph)
                 ctx.fill()
+            continue
+        if PIT_KIND == "water":                                 # deep pool behind the car
+            sy = pit_surface(d)
+            wg = cairo.LinearGradient(0, -d, 0, sy)
+            wg.add_color_stop_rgb(0, *lit((0.05, 0.2, 0.42)))
+            wg.add_color_stop_rgb(1, *lit((0.2, 0.5, 0.85)))
+            ctx.rectangle(x0, -d, x1 - x0, sy + d)
+            ctx.set_source(wg)
+            ctx.fill()
             continue
         ctx.rectangle(x0, -d, x1 - x0, 0.55)
         ctx.set_source_rgb(*shade(gc, 0.68))
@@ -2152,9 +2400,10 @@ def draw_body(ctx, vk, v, broken, t=0.0):
             ctx.stroke()
 
 
-def draw_wheel(ctx, x, y, ang, r, monster):
+def draw_wheel(ctx, x, y, ang, r, monster, sx=1.0):
     ctx.save()
     ctx.translate(x, y)
+    ctx.scale(sx, 1.0)                                           # sx < 1: wheel seen at an angle (car spinning)
     ctx.rotate(ang)
     ctx.arc(0, 0, r, 0, 2 * math.pi)
     ctx.set_source_rgb(0.12, 0.12, 0.14)
@@ -2198,39 +2447,122 @@ def draw_shadow(ctx, L, s):
     ctx.fill()
 
 
+def yaw_scale(yaw):
+    """Apparent length of a car turned by `yaw` around the vertical axis (negative = facing backwards)."""
+    c = math.cos(yaw)
+    return 1.0 if abs(yaw) < 1e-4 else math.copysign(max(abs(c), 0.16), c)
+
+
+def melt_amount(L, st):
+    """0..1 how far the body has melted in a lava pit."""
+    if PIT_KIND != "lava" or L.get("sunk") is None or st < L["sunk"]:
+        return 0.0
+    return min(1.0, (st - L["sunk"]) / 2.2)
+
+
 def draw_car(ctx, L, s, mood, st):
     vk, v = L["vk"], L["v"]
-    cx, cy, ca, wheels = s["cx"], s["cy"], s["ca"], s["wheels"]
-    bh = v["body"][1]
+    cx, cy, ca, wheels = s["cx"], s["cy"] - s.get("sink", 0.0), s["ca"], s["wheels"]
+    bw, bh = v["body"]
+    sink = s.get("sink", 0.0)
+    ys = yaw_scale(s.get("yaw", 0.0))
+    co, sn = math.cos(ca), math.sin(ca)
+
+    def squeeze(wx, wy):                                         # wheel position after the yaw squeeze
+        dx, dy = wx - s["cx"], wy - s["cy"]
+        along, perp = dx * co + dy * sn, -dx * sn + dy * co
+        along *= ys
+        return cx + along * co - perp * sn, cy + along * sn + perp * co
+
     si = st * REC_HZ
+    clipped = sink > 0
+    if clipped:                                                  # sinking car never pokes out below the pit floor
+        pit = next(((a, b, dd) for a, b, dd in PITS if a <= s["cx"] <= b), None)
+        if pit:
+            ctx.save()
+            ctx.rectangle(pit[0] - 50, -pit[2], pit[1] - pit[0] + 100, 200)
+            ctx.clip()
+        else:
+            clipped = False
     ctx.set_source_rgb(0.3, 0.3, 0.34)
     ctx.set_line_width(0.14)
     for wi, ((wx, wy, _), lx) in enumerate(zip(wheels, v["wheel_x"])):
         det = L["detached"][wi]
         if det is not None and si >= det:
             continue
-        ax = cx + math.cos(ca) * lx - math.sin(ca) * (-bh / 2)
-        ay = cy + math.sin(ca) * lx + math.cos(ca) * (-bh / 2)
+        lx *= ys
+        ax = cx + co * lx - sn * (-bh / 2)
+        ay = cy + sn * lx + co * (-bh / 2)
         ctx.move_to(ax, ay)
-        ctx.line_to(wx, wy)
+        ctx.line_to(*squeeze(wx, wy - sink))
         ctx.stroke()
-    for wx, wy, wa in wheels:
-        draw_wheel(ctx, wx, wy, wa, v["wheel_r"], vk.startswith("monster"))
+    for wi, (wx, wy, wa) in enumerate(wheels):
+        det = L["detached"][wi]
+        px, py = squeeze(wx, wy - sink) if det is None or si < det else (wx, wy)
+        draw_wheel(ctx, px, py, wa, v["wheel_r"], vk.startswith("monster"),
+                   sx=max(0.3, abs(ys)) if det is None or si < det else 1.0)
     broken = L["broken"] is not None and st >= L["broken"]["t"]
+    melt = melt_amount(L, st)
     ctx.save()
     ctx.translate(cx, cy)
     ctx.rotate(ca)
+    ctx.scale(ys, 1.0)
+    if melt > 0:                                                 # sagging, softening body
+        ctx.translate(0, -bh / 2)
+        ctx.scale(1 + 0.08 * melt, 1 - 0.32 * melt)
+        ctx.translate(0, bh / 2)
+    ctx.push_group()
     draw_body(ctx, vk, v, broken, st)
-    if L.get("burned") is not None and st >= L["burned"]:       # cartoon soot after a lava hit
-        bw, bh = v["body"]
-        rng = np.random.default_rng(17)
-        for _ in range(14):
-            ctx.arc(rng.uniform(-bw / 2, bw / 2), rng.uniform(-bh / 2, bh / 2 + 0.3), rng.uniform(0.15, 0.45),
-                    0, 2 * math.pi)
-            ctx.set_source_rgba(0.08, 0.06, 0.06, 0.55)
-            ctx.fill()
     draw_face(ctx, vk, mood, st)
+    burned = L.get("burned") is not None and st >= L["burned"]
+    if burned or melt > 0:
+        ctx.set_operator(cairo.OPERATOR_ATOP)                     # paint only on the car's own pixels
+        top = bh / 2 + 1.4
+        g = cairo.LinearGradient(0, -bh / 2, 0, top)
+        if melt > 0:                                             # red-hot bottom, charred top
+            g.add_color_stop_rgba(0, 1.0, 0.5, 0.05, 0.95 * melt)
+            g.add_color_stop_rgba(0.45, 0.85, 0.2, 0.02, 0.75 * melt)
+            g.add_color_stop_rgba(1, 0.12, 0.07, 0.05, 0.25 + 0.55 * melt)
+        else:
+            g.add_color_stop_rgba(0, 0.1, 0.07, 0.06, 0.55)
+            g.add_color_stop_rgba(1, 0.1, 0.07, 0.06, 0.25)
+        ctx.set_source(g)
+        ctx.paint()
+        rng = np.random.default_rng(17)
+        for _ in range(14):                                      # soot blotches
+            ctx.arc(rng.uniform(-bw / 2, bw / 2), rng.uniform(-bh / 2, bh / 2 + 0.6), rng.uniform(0.15, 0.45),
+                    0, 2 * math.pi)
+            ctx.set_source_rgba(0.08, 0.06, 0.06, 0.5)
+            ctx.fill()
+        if melt > 0:                                             # molten metal running down the body
+            for k in range(7):
+                x = -bw / 2 + (k + 0.5) * bw / 7 + 0.15 * math.sin(k * 2.3)
+                y0 = bh / 2 + 1.2
+                ln = (0.6 + 0.5 * ((k * 37) % 5) / 5) * (bh + 1.3) * melt
+                w = 0.09 + 0.05 * (k % 3)
+                ctx.move_to(x - w, y0)
+                ctx.line_to(x - w, y0 - ln)
+                ctx.arc_negative(x, y0 - ln, w, math.pi, 0)
+                ctx.line_to(x + w, y0)
+                ctx.close_path()
+                ctx.set_source_rgba(1.0, 0.62 + 0.2 * math.sin(st * 6 + k), 0.12, 0.9)
+                ctx.fill()
+        ctx.set_operator(cairo.OPERATOR_OVER)
+    ctx.pop_group_to_source()
+    ctx.paint()
+    if melt > 0:                                                 # glowing drips hanging off the chassis
+        for k in range(5):
+            x = -bw / 2 + (k + 0.7) * bw / 5.5
+            ln = (0.15 + 0.35 * ((k * 53) % 7) / 7) * melt * (1 + 0.25 * math.sin(st * 3 + k))
+            ctx.move_to(x - 0.08, -bh / 2 + 0.05)
+            ctx.curve_to(x - 0.08, -bh / 2 - ln * 0.6, x - 0.13, -bh / 2 - ln, x, -bh / 2 - ln - 0.1)
+            ctx.curve_to(x + 0.13, -bh / 2 - ln, x + 0.08, -bh / 2 - ln * 0.6, x + 0.08, -bh / 2 + 0.05)
+            ctx.close_path()
+            ctx.set_source_rgba(1, 0.55, 0.08, 0.95)
+            ctx.fill()
     ctx.restore()
+    if clipped:
+        ctx.restore()
 
 
 def draw_debris(ctx, L, st):
@@ -2284,17 +2616,11 @@ def draw_effects(ctx, L, s, st):
                 ctx.set_source_rgba(dark, dark, dark + 0.03, 0.55 * (1 - pa / 1.8))
                 ctx.fill()
             k += 1
-    for wx, wy, _ in s["wheels"]:                                # water splash from wheels in a puddle
-        if in_puddle(wx) and s["speed"] > 1.5:
-            r = L["v"]["wheel_r"]
-            for j in range(9):
-                ph = (st * 3.0 + j * 0.11) % 1.0
-                vx, vy = -2.5 - (j % 3) * 1.2, 2.5 + (j % 4) * 0.9
-                x = wx + vx * ph * 0.6
-                y = wy - r + vy * ph * 0.6 - 4.9 * (ph * 0.6) ** 2
-                ctx.arc(x, y, 0.08 + 0.05 * (j % 3), 0, 2 * math.pi)
-                ctx.set_source_rgba(0.6, 0.85, 1.0, 0.85 * (1 - ph))
-                ctx.fill()
+    if PUDDLES:
+        draw_water_spray(ctx, L, st)
+    for sp in splash_events(L):
+        if 0 <= st - sp["t"] < 1.6:
+            (draw_lava_splash if sp["kind"] == "lava" else draw_water_splash)(ctx, sp, st - sp["t"])
     ev = L["event"]
     if ev["type"] != "win" and st >= ev["t"] + 0.4:   # dizzy stars
         top = s["cy"] + L["v"]["body"][1] / 2 + 1.0
@@ -2302,6 +2628,279 @@ def draw_effects(ctx, L, s, st):
             a = st * 4 + k * 2 * math.pi / 3
             star(ctx, s["cx"] + math.cos(a) * 0.9, top + math.sin(a) * 0.22, 0.2, a)
             fill_stroke(ctx, (1, 0.88, 0.2), lw=0.03)
+
+
+def draw_pit_front(ctx, L, s, st):
+    """Liquid in front of the car: opaque lava hides the sunk part, water is see-through."""
+    if PIT_KIND not in PIT_FILL:
+        return
+    for x0, x1, d in PITS:
+        sy = pit_surface(d)
+        ctx.new_path()
+        ctx.move_to(x0, -d - 0.1)
+        x = x0
+        while x <= x1 + 1e-6:
+            wave = 0.06 * math.sin(x * 2.1 + st * (1.6 if PIT_KIND == "lava" else 4.0))
+            ctx.line_to(x, sy + wave)
+            x += 0.2
+        ctx.line_to(x1, -d - 0.1)
+        ctx.close_path()
+        if PIT_KIND == "lava":
+            g = cairo.LinearGradient(0, -d, 0, sy)
+            g.add_color_stop_rgb(0, 0.8, 0.15, 0.02)
+            g.add_color_stop_rgb(0.7, 1.0, 0.45, 0.05)
+            g.add_color_stop_rgb(1, 1.0, 0.8, 0.2)
+            ctx.set_source(g)
+            ctx.fill()
+            for j in range(int((x1 - x0) / 0.9)):               # crust plates drifting on the lava
+                px = x0 + 0.4 + ((j * 0.9 + st * 0.25) % (x1 - x0 - 0.6))
+                ctx.save()
+                ctx.translate(px, sy - 0.12)
+                ctx.scale(0.32, 0.07)
+                ctx.arc(0, 0, 1, 0, 2 * math.pi)
+                ctx.restore()
+                ctx.set_source_rgba(0.35, 0.08, 0.03, 0.55)
+                ctx.fill()
+        else:
+            ctx.set_source_rgba(*lit((0.25, 0.6, 1.0)), 0.45)
+            ctx.fill()
+            ctx.set_source_rgba(1, 1, 1, 0.6)
+            ctx.set_line_width(0.06)
+            ctx.move_to(x0, sy)
+            ctx.line_to(x1, sy)
+            ctx.stroke()
+    if L.get("sunk") is None or st < L["sunk"]:
+        return
+    age = st - L["sunk"]
+    x0, x1, d = next(((a, b, dd) for a, b, dd in PITS if a <= s["cx"] <= b), (None, None, None))
+    if x0 is None:
+        return
+    sy = pit_surface(d)
+    if PIT_KIND == "lava":                                       # glowing ring where the car meets the lava
+        rg = cairo.RadialGradient(s["cx"], sy, 0.2, s["cx"], sy, L["v"]["body"][0] * 0.8)
+        rg.add_color_stop_rgba(0, 1, 0.95, 0.4, 0.8)
+        rg.add_color_stop_rgba(1, 1, 0.5, 0.05, 0.0)
+        ctx.save()
+        ctx.translate(0, 0)
+        ctx.rectangle(x0, sy - 0.6, x1 - x0, 1.2)
+        ctx.clip()
+        ctx.arc(s["cx"], sy, L["v"]["body"][0] * 0.8, 0, 2 * math.pi)
+        ctx.set_source(rg)
+        ctx.fill()
+        ctx.restore()
+    else:                                                        # air bubbles escaping from the sunk car
+        rng = np.random.default_rng(29)
+        for j in range(18):
+            t0 = j * 0.22
+            a = age - t0
+            if a < 0 or a > 1.6 or age > 5.0:
+                continue
+            bx = s["cx"] + rng.uniform(-1.2, 1.2) + 0.1 * math.sin(a * 9 + j)
+            by = s["cy"] + a * 2.2
+            if by > sy:
+                continue
+            ctx.arc(bx, by, 0.07 + 0.06 * (j % 3), 0, 2 * math.pi)
+            ctx.set_source_rgba(0.85, 0.95, 1.0, 0.8)
+            ctx.set_line_width(0.03)
+            ctx.stroke()
+
+
+SPRAY_DT = 0.025     # emission step of the tyre spray (fixed grid -> particles stay stable between frames)
+
+
+def splash_events(L):
+    """Cached: every moment something hits liquid -> dict(t, x, y, speed, kind, big)."""
+    if "_splashes" in L:
+        return L["_splashes"]
+    out, rec = [], L["rec"]
+    n = len(rec["cx"])
+    for x0, x1 in PUDDLES:                                       # front wheel enters each puddle
+        for i in range(n):
+            wx, wy, _ = rec["wheels"][i][-1]
+            if x0 <= wx <= x1 and rec["speed"][i] > 1.5:
+                out.append(dict(t=i / REC_HZ, x=wx, y=ground_h(wx), speed=float(rec["speed"][i]),
+                                kind="water", big=False))
+                break
+    if L.get("sunk") is not None:                                 # plunge into a pit
+        i = min(n - 1, int(L["sunk"] * REC_HZ))
+        d = next((dd for a, b, dd in PITS if a <= rec["cx"][i] <= b), 3.0)
+        prev = max(0, i - 3)
+        vy = abs(rec["cy"][i] - rec["cy"][prev]) * REC_HZ / 3
+        out.append(dict(t=L["sunk"], x=float(rec["cx"][i]), y=pit_surface(d), speed=max(6.0, vy),
+                        kind="lava" if PIT_KIND == "lava" else "water", big=True))
+    L["_splashes"] = out
+    return out
+
+
+def draw_water_spray(ctx, L, st):
+    """Rooster-tail spray + mist thrown by every tyre that is in the water (direction follows the yaw)."""
+    r = L["v"]["wheel_r"]
+    k0 = int(st / SPRAY_DT)
+    for k in range(k0, max(-1, k0 - int(0.75 / SPRAY_DT)), -1):
+        te = k * SPRAY_DT
+        age = st - te
+        p = car_state(L, te)
+        if p["speed"] < 1.5:
+            continue
+        back = -yaw_scale(p["yaw"]) if abs(p["yaw"]) > 1e-3 else -1.0
+        spin = abs(p["yaw"]) > 0.4
+        for wi, (wx, wy, _) in enumerate(p["wheels"]):
+            if not in_puddle(wx) or wy - r > ground_h(wx) + 0.25:
+                continue
+            gy = ground_h(wx)
+            rng = np.random.default_rng(k * 13 + wi)
+            sp = p["speed"]
+            for j in range(4):                                   # droplets / streaks
+                dirx = back if not spin else rng.uniform(-1, 1)
+                vx = sp * 0.35 + dirx * (1.5 + 0.3 * sp) + rng.uniform(-1.0, 1.0)
+                vy = 1.6 + 0.22 * sp + rng.uniform(-0.6, 1.4)
+                x = wx + dirx * r * 0.8 + vx * age
+                y = gy + vy * age - 4.9 * age * age
+                if y < ground_h(x) - 0.05:
+                    continue
+                a = 0.9 * (1 - age / 0.75)
+                if j == 0:
+                    ctx.move_to(x, y)
+                    ctx.line_to(x - vx * 0.05, y - (vy - 9.8 * age) * 0.05)
+                    ctx.set_source_rgba(0.85, 0.95, 1.0, a)
+                    ctx.set_line_width(0.06)
+                    ctx.stroke()
+                else:
+                    ctx.arc(x, y, 0.05 + 0.04 * j * rng.uniform(0.5, 1.0), 0, 2 * math.pi)
+                    ctx.set_source_rgba(0.62, 0.84, 1.0, a)
+                    ctx.fill()
+            if k % 3 == 0:                                       # soft mist behind the tyre
+                mx = wx + back * (0.5 + 1.2 * age) + sp * 0.2 * age
+                ctx.arc(mx, gy + 0.3 + 0.8 * age, 0.3 + 0.9 * age, 0, 2 * math.pi)
+                ctx.set_source_rgba(0.92, 0.97, 1.0, 0.22 * (1 - age / 0.75))
+                ctx.fill()
+    for sp in splash_events(L):                                  # ripples on the puddle surface
+        a = st - sp["t"]
+        if sp["kind"] == "water" and not sp["big"] and 0 <= a < 1.5:
+            for q in range(3):
+                aa = a - q * 0.18
+                if aa <= 0:
+                    continue
+                ctx.save()
+                ctx.translate(sp["x"], sp["y"] + 0.03)
+                ctx.scale(0.4 + 2.2 * aa, 0.1 + 0.25 * aa)
+                ctx.arc(0, 0, 1, 0, 2 * math.pi)
+                ctx.restore()
+                ctx.set_source_rgba(1, 1, 1, 0.6 * (1 - aa / 1.5))
+                ctx.set_line_width(0.04)
+                ctx.stroke()
+
+
+def draw_water_splash(ctx, sp, age):
+    """Crown splash: two curved water sheets + a fan of droplets + mist."""
+    big = 1.8 if sp["big"] else 1.0
+    s = big * (0.6 + 0.06 * sp["speed"])
+    x, y = sp["x"], sp["y"]
+    up = math.sin(math.pi * min(1.0, age / 0.8))
+    if age < 0.8:
+        for side in (-1, 1):
+            h = 1.6 * s * up
+            w0, w1 = 0.3 * s, (0.9 + 1.4 * age) * s
+            ctx.move_to(x + side * w0, y)
+            ctx.curve_to(x + side * w0 * 1.2, y + h * 0.6, x + side * w1 * 0.8, y + h, x + side * w1, y + h * 0.9)
+            ctx.curve_to(x + side * w1 * 0.9, y + h * 0.6, x + side * w0 * 2.2, y + h * 0.3, x + side * w0 * 2.4, y)
+            ctx.close_path()
+            g = cairo.LinearGradient(0, y, 0, y + h + 0.01)
+            g.add_color_stop_rgba(0, 0.55, 0.8, 1.0, 0.85 * (1 - age / 0.8))
+            g.add_color_stop_rgba(1, 1, 1, 1, 0.95 * (1 - age / 0.8))
+            ctx.set_source(g)
+            ctx.fill()
+    rng = np.random.default_rng(int(x * 100))
+    for j in range(int(28 * big)):
+        vx, vy = rng.uniform(-5, 5) * s, rng.uniform(3, 8) * math.sqrt(s)
+        px, py = x + vx * age, y + vy * age - 4.9 * age * age
+        if py < y - 0.05:
+            continue
+        ctx.arc(px, py, rng.uniform(0.05, 0.14) * (1 + 0.3 * big), 0, 2 * math.pi)
+        ctx.set_source_rgba(0.65, 0.87, 1.0, max(0.0, 0.95 - age / 1.6))
+        ctx.fill()
+    for j in range(5):
+        ctx.arc(x + (j - 2) * 0.5 * s, y + 0.4 * s + age * 1.2, (0.4 + 1.1 * age) * s, 0, 2 * math.pi)
+        ctx.set_source_rgba(0.95, 0.98, 1.0, 0.18 * max(0.0, 1 - age / 1.4))
+        ctx.fill()
+
+
+def draw_lava_splash(ctx, sp, age):
+    """Heavy, slow lava blobs thrown up by a car plunging in, plus a hot flash."""
+    x, y = sp["x"], sp["y"]
+    if age < 0.35:
+        rg = cairo.RadialGradient(x, y, 0.1, x, y, 3.5)
+        rg.add_color_stop_rgba(0, 1, 0.95, 0.5, 0.8 * (1 - age / 0.35))
+        rg.add_color_stop_rgba(1, 1, 0.5, 0.05, 0.0)
+        ctx.arc(x, y, 3.5, 0, 2 * math.pi)
+        ctx.set_source(rg)
+        ctx.fill()
+    rng = np.random.default_rng(int(x * 100) + 5)
+    for j in range(22):
+        vx, vy = rng.uniform(-3.2, 3.2), rng.uniform(2.5, 6.0)
+        px, py = x + vx * age, y + vy * age - 3.5 * age * age        # thick blobs: short, slow arcs
+        if py < y - 0.1:
+            continue
+        rad = rng.uniform(0.12, 0.3)
+        ctx.save()
+        ctx.translate(px, py)
+        ctx.rotate(math.atan2(vy - 7 * age, vx))
+        ctx.scale(1.35, 0.85)
+        ctx.arc(0, 0, rad, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(0.95, 0.35, 0.03)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(1, 0.85, 0.3, 0.8)
+        ctx.set_line_width(0.04)
+        ctx.stroke()
+
+
+def _flame(ctx, x, y, w, h, sway, cols):
+    for (r, g, b, a), k in zip(cols, (1.0, 0.62, 0.32)):
+        ww, hh = w * k, h * (0.35 + 0.65 * k)
+        ctx.move_to(x - ww, y)
+        ctx.curve_to(x - ww, y + hh * 0.45, x - ww * 0.25 + sway * 0.5, y + hh * 0.7, x + sway, y + hh)
+        ctx.curve_to(x + ww * 0.25 + sway * 0.5, y + hh * 0.7, x + ww, y + hh * 0.45, x + ww, y)
+        ctx.arc_negative(x, y, ww, 0, math.pi)
+        ctx.close_path()
+        ctx.set_source_rgba(r, g, b, a)
+        ctx.fill()
+
+
+def draw_fire(ctx, L, s, st):
+    """Cartoon flames + rising embers on a car hit by lava (bigger when it sank into a lava pit)."""
+    if L.get("burned") is None or st < L["burned"]:
+        return
+    age = st - L["burned"]
+    sunk = L.get("sunk") is not None and PIT_KIND == "lava"
+    size = (1.0 if sunk else 0.7) * min(1.0, age / 0.25)
+    v = L["v"]
+    bw, bh = v["body"]
+    ys = abs(yaw_scale(s.get("yaw", 0.0)))
+    cx, cy, ca = s["cx"], s["cy"] - s.get("sink", 0.0), s["ca"]
+    top = bh / 2 + (0.5 if v["cabin"] else 0.1)
+    n = max(3, int(bw / 0.55))
+    glow = cairo.RadialGradient(cx, cy + top, 0.3, cx, cy + top + 0.8, bw * 0.9)
+    glow.add_color_stop_rgba(0, 1, 0.6, 0.15, 0.35 * size)
+    glow.add_color_stop_rgba(1, 1, 0.4, 0.05, 0.0)
+    ctx.arc(cx, cy + top + 0.8, bw * 0.9, 0, 2 * math.pi)
+    ctx.set_source(glow)
+    ctx.fill()
+    cols = [(0.95, 0.25, 0.03, 0.9), (1.0, 0.6, 0.08, 0.95), (1.0, 0.93, 0.5, 1.0)]
+    for k in range(n):
+        lx = (k / (n - 1) - 0.5) * bw * 0.85 * ys
+        ly = top * (0.7 if k in (0, n - 1) else 1.0)
+        bx, by = cx + math.cos(ca) * lx - math.sin(ca) * ly, cy + math.sin(ca) * lx + math.cos(ca) * ly
+        h = size * (1.0 + 0.35 * math.sin(st * 11 + k * 1.7) + 0.2 * math.sin(st * 23 + k * 0.9)) \
+            * (1.25 if 0 < k < n - 1 else 0.8)
+        _flame(ctx, bx, by, 0.28 * size + 0.05, h, 0.18 * math.sin(st * 7 + k), cols)
+    for j in range(16):                                          # embers drifting up
+        ph = (st * 0.8 + j * 0.137) % 1.0
+        ex = cx + (((j * 0.61) % 1.0) - 0.5) * bw + 0.4 * math.sin(st * 3 + j)
+        ey = cy + top + ph * 3.5
+        ctx.arc(ex, ey, 0.05, 0, 2 * math.pi)
+        ctx.set_source_rgba(1, 0.7, 0.2, (1 - ph) * size)
+        ctx.fill()
 
 
 def draw_eruptions(ctx, st):
@@ -2656,8 +3255,9 @@ def draw_headlights(ctx, L, s):
     v = L["v"]
     bw = v["body"][0]
     ctx.save()
-    ctx.translate(s["cx"], s["cy"])
+    ctx.translate(s["cx"], s["cy"] - s.get("sink", 0.0))
     ctx.rotate(s["ca"])
+    ctx.scale(yaw_scale(s.get("yaw", 0.0)), 1.0)
     lg = cairo.LinearGradient(bw / 2, 0, bw / 2 + 7, 0)
     lg.add_color_stop_rgba(0, 1, 0.95, 0.6, 0.55)
     lg.add_color_stop_rgba(1, 1, 0.95, 0.6, 0)
@@ -2701,6 +3301,8 @@ def draw_frame(ctx, g):
     draw_dust(ctx, L["impacts"], st)
     draw_debris(ctx, L, st)
     draw_car(ctx, L, s, mood_at(L, st, s), st)
+    draw_pit_front(ctx, L, s, st)
+    draw_fire(ctx, L, s, st)
     draw_eruptions(ctx, st)
     draw_effects(ctx, L, s, st)
     ctx.restore()
@@ -2845,7 +3447,10 @@ def main():
 
     def outcome_line(vk, run):
         lines = dict(FAIL_LINES, **SERIES_DEFS[SERIES].get("fail_lines", {}))
-        tmpl = WIN_LINE if run["event"]["type"] == "win" else lines[run["event"]["type"]]
+        et = run["event"]["type"]
+        if run.get("spun") and f"{et}_spun" in lines:            # hydroplaned before the fail
+            et = f"{et}_spun"
+        tmpl = WIN_LINE if et == "win" else lines[et]
         return tmpl.format(n=VEHICLES[vk]["nick"])
 
     line_audio = {}
@@ -2944,10 +3549,31 @@ def main():
         # hazard sounds (series-specific)
         rec = L["rec"]
         live_n = min(len(rec["cx"]), int(L["live_end"] * REC_HZ))
-        for pi_, (px0, px1) in enumerate(PUDDLES):              # splash when the front wheel hits the water
-            hit = next((i for i in range(live_n) if px0 <= rec["wheels"][i][-1][0] <= px1), None)
-            if hit is not None:
-                place(sfx, synth_splash(min(1.0, rec["speed"][hit] / 12), seed=41 + pi_), st0 + out_time(L, hit / REC_HZ), 1.0)
+        for pi_, (px0, px1) in enumerate(PUDDLES):              # splash + tyre rush while in the water
+            inside = [i for i in range(live_n) if px0 <= rec["wheels"][i][-1][0] <= px1]
+            if inside:
+                hit, out_i = inside[0], inside[-1]
+                sp_ = min(1.0, rec["speed"][hit] / 12)
+                place(sfx, synth_splash(sp_, seed=41 + pi_), st0 + out_time(L, hit / REC_HZ), 1.0)
+                o0, o1 = out_time(L, hit / REC_HZ), out_time(L, out_i / REC_HZ)
+                if o1 - o0 > 0.15 and rec["speed"][hit] > 2:
+                    place(sfx, synth_water_rush(o1 - o0, 0.35 + 0.5 * sp_, seed=61 + pi_), st0 + o0, 0.7)
+        if L.get("spun") is not None:                            # hydroplane spin swish
+            sl_n = int(L["spun"] * REC_HZ)
+            yaws = rec["yaw"][sl_n:]
+            end = next((k for k, y in enumerate(yaws) if abs(y) < 1e-6 and k > 3), len(yaws))
+            turns = max(1, int(round(abs(yaws[max(0, end - 1)]) / (2 * math.pi)))) if end else 1
+            o0, o1 = out_time(L, L["spun"]), out_time(L, L["spun"] + end / REC_HZ)
+            place(sfx, synth_spin(max(0.3, o1 - o0), turns), st0 + o0, 0.8)
+        if PIT_KIND == "lava" and (PITS or VENTS):              # lava pools bubbling, louder when near
+            dur_live = out_time(L, L["live_end"])
+            bed = synth_lava_bed(dur_live, seed=89 + li)
+            ts = np.arange(0, L["live_end"], 0.1)
+            hz_x = [(a + b) / 2 for a, b, _ in PITS] + [vv["x"] for vv in VENTS]
+            gains = [float(np.clip(1.1 - min(abs(interp(rec["cx"], tt) - hx) for hx in hz_x) / 14, 0.08, 1.0))
+                     for tt in ts]
+            og = np.interp(np.arange(len(bed)) / SR, [out_time(L, tt) for tt in ts], gains)
+            place(sfx, bed * og, st0, 0.45)
         for vi, vent in enumerate(VENTS):                        # every eruption; louder when the car is near
             k = 0
             while True:
@@ -2960,8 +3586,19 @@ def main():
                 cx_then = float(interp(rec["cx"], t_er + 0.35))
                 gain = float(np.clip(1.1 - abs(cx_then - vent["x"]) / 22, 0.15, 1.0))
                 place(sfx, synth_eruption(seed=43 + vi * 7 + k), st0 + out_time(L, t_er), 0.9 * gain)
-        if L.get("burned") is not None:
-            place(sfx, synth_sizzle(), st0 + out_time(L, L["burned"]), 0.8)
+        sunk_lava = L.get("sunk") is not None and PIT_KIND == "lava"
+        if L.get("sunk") is not None and PIT_KIND == "water":   # plunge into the water pool + glugging
+            place(sfx, synth_splash(1.0, seed=45, big=True), st0 + out_time(L, L["sunk"]), 1.0)
+            place(sfx, synth_gurgle(), st0 + out_time(L, L["sunk"]) + 0.6, 0.6)
+        if sunk_lava:
+            place(sfx, synth_lava_plunge(), st0 + out_time(L, L["sunk"]), 1.0)
+        elif L.get("burned") is not None:
+            place(sfx, synth_ignite(), st0 + out_time(L, L["burned"]), 0.9)
+        if L.get("burned") is not None:                           # keeps burning until the level ends
+            f0 = out_time(L, L["burned"]) + (1.0 if sunk_lava else 0.5)
+            f1 = out_time(L, L["live_end"])
+            if f1 - f0 > 0.5:
+                place(sfx, synth_fire(f1 - f0, seed=71 + li), st0 + f0, 0.55)
         if L["event"]["type"] == "crash":
             place(sfx, synth_wall_crash(1.0), st0 + out_time(L, L["event"]["t"]), 1.0)
         for bt, text in L["bubbles"]:
@@ -2988,8 +3625,13 @@ def main():
                 place(sfx, stretch(synth_shatter(), 0.5), r0 + (L["broken"]["t"] - ta) / REPLAY_SPEED, 0.7)
             if L["event"]["type"] == "crash" and ta <= L["event"]["t"] < tb:
                 place(sfx, stretch(synth_wall_crash(1.0), 0.5), r0 + (L["event"]["t"] - ta) / REPLAY_SPEED, 1.0)
-            if L.get("burned") is not None and ta <= L["burned"] < tb:
-                place(sfx, stretch(synth_sizzle(), 0.6), r0 + (L["burned"] - ta) / REPLAY_SPEED, 0.8)
+            if L.get("sunk") is not None and ta <= L["sunk"] < tb:
+                sig = synth_lava_plunge() if PIT_KIND == "lava" else synth_splash(1.0, seed=45, big=True)
+                place(sfx, stretch(sig, 0.6), r0 + (L["sunk"] - ta) / REPLAY_SPEED, 1.0)
+            elif L.get("burned") is not None and ta <= L["burned"] < tb:
+                place(sfx, stretch(synth_ignite(), 0.6), r0 + (L["burned"] - ta) / REPLAY_SPEED, 0.9)
+            if L.get("spun") is not None and ta <= L["spun"] < tb:
+                place(sfx, stretch(synth_spin(1.4, 1), 0.6), r0 + (L["spun"] - ta) / REPLAY_SPEED, 0.7)
     bgm = synth_bgm(total, style=th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     # ducking: engine + music dip while the narrator talks, so every word is easy to catch

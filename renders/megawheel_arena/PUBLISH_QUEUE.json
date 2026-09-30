@@ -1,0 +1,40 @@
+{
+ "items": [
+  {
+   "episode": 1,
+   "video_id": "SIM_POTHOLES_V2_S001",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-09-30T15:00:00Z"
+  },
+  {
+   "episode": 2,
+   "video_id": "SIM_BUMPS_V2_S002",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-09-30T19:00:00Z"
+  },
+  {
+   "episode": 3,
+   "video_id": "SIM_POTHOLES_V2_S003",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-09-30T23:00:00Z"
+  },
+  {
+   "episode": 4,
+   "video_id": "SIM_BUMPS_V2_S004",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-01T15:00:00Z"
+  },
+  {
+   "episode": 5,
+   "video_id": "SIM_POTHOLES_V2_S005",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-01T19:00:00Z"
+  },
+  {
+   "episode": 6,
+   "video_id": "SIM_BUMPS_V2_S006",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-01T23:00:00Z"
+  }
+ ]
+}

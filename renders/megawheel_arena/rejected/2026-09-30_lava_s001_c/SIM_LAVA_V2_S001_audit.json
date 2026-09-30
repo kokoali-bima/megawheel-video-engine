@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_LAVA_V2_S003",
+  "video_id": "SIM_LAVA_V2_S001",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->36.3 m, 3.0->84.3 m, 3.0->120.6 m",
+      "value": "3.0->37.5 m, 3.0->85.9 m, 3.0->140.9 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "5 rintangan [lava, vent, vent, lava, vent] (34-89 m), finish 98 m",
+      "value": "5 rintangan [lava, vent, vent, lava, vent] (35-91 m), finish 100 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "4.8s, 6.1s, 9.6s",
+      "value": "5.1s, 6.6s, 7.7s",
       "hard": true
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "value": "46.2 s",
+      "value": "43.0 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "10.7s, 14.9s, 20.5s",
+      "value": "9.7s, 15.0s, 18.3s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "lava|sports,firetruck,bigrig|lava_8caa7073@morning-clear-volcano|pit@obs0,lava@obs2+broken,win",
+      "value": "lava|f1,firetruck,monster2|lava_46c26d11@noon-clear-volcano|pit@obs0,lava@obs2+broken,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s001/SIM_LAVA_V2_S001.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "46.20 s (manifest 46.2)",
+      "value": "43.00 s (manifest 43.0)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "14.7 MB",
+      "value": "14.1 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.4 dB",
+      "value": "-0.5 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-13.9 dB",
+      "value": "-12.6 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 7.2s",
+      "value": "48% piksel badge @ 6.3s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 11.3s",
+      "value": "56% piksel warna level @ 10.3s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 18.9s",
+      "value": "48% piksel badge @ 18.4s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 26.3s",
+      "value": "56% piksel warna level @ 25.3s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 36.4s",
+      "value": "28% piksel badge @ 34.2s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "70% piksel panel @ 45.4s",
+      "value": "69% piksel panel @ 42.2s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "lava|sports,firetruck,bigrig|lava_8caa7073@morning-clear-volcano|pit@obs0,lava@obs2+broken,win",
+      "value": "lava|f1,firetruck,monster2|lava_46c26d11@noon-clear-volcano|pit@obs0,lava@obs2+broken,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 3",
+      "value": "seed 1",
       "hard": true
     },
     {

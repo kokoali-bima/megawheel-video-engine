@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/rejected/2026-09-30_splash_s003/SIM_SPLASH_V2_S003.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |

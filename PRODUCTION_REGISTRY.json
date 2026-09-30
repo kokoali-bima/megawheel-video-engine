@@ -214,13 +214,104 @@
         "win"
       ],
       "duration": 48.67,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_splash_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-09-30_splash_s003/SIM_SPLASH_V2_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "reject_reason": "superseded by v2.8 (distinct water/lava sounds, melting, hydroplaning)",
+      "rejected_date": "2026-09-30"
+    },
+    {
+      "video_id": "SIM_SPLASH_V2_S005",
+      "series": "splash",
+      "engine_version": "v2",
+      "seed": 5,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "bigrig",
+        "bus"
+      ],
+      "track_id": "splash_813d65c1@noon-clear-city",
+      "theme": "noon-clear-city",
+      "voice": "en-US-AriaNeural",
+      "outcomes": [
+        "crash@obs1+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 48.07,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_splash_s005_b",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_splash_s005/SIM_SPLASH_V2_S005_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "reject_reason": "no signature moment (spin / lava melt) on screen"
+    },
+    {
+      "video_id": "SIM_SPLASH_V2_S007",
+      "series": "splash",
+      "engine_version": "v2",
+      "seed": 7,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "taxi",
+        "icecream",
+        "bigrig"
+      ],
+      "track_id": "splash_1ddda902@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "en-US-AvaMultilingualNeural",
+      "outcomes": [
+        "pit@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "duration": 48.4,
       "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_splash_s003",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_splash_s007",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_LAVA_V2_S001",
+      "series": "lava",
+      "engine_version": "v2",
+      "seed": 1,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "monster2"
+      ],
+      "track_id": "lava_46c26d11@noon-clear-volcano",
+      "theme": "noon-clear-volcano",
+      "voice": "en-US-EmmaMultilingualNeural",
+      "outcomes": [
+        "pit@obs0",
+        "lava@obs2+broken",
+        "win"
+      ],
+      "duration": 43.0,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-09-30_lava_s001_c",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_lava_s001/SIM_LAVA_V2_S001_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "reject_reason": "wheels visible below the lava pit floor (fixed in v2.8)"
     },
     {
       "video_id": "SIM_LAVA_V2_S003",
@@ -230,19 +321,19 @@
       "created": "2026-09-30",
       "render_date": "2026-09-30",
       "vehicles": [
-        "f1",
+        "sports",
         "firetruck",
-        "bus"
+        "bigrig"
       ],
-      "track_id": "lava_79de68da@night-clear-volcano",
-      "theme": "night-clear-volcano",
+      "track_id": "lava_8caa7073@morning-clear-volcano",
+      "theme": "morning-clear-volcano",
       "voice": "en-US-AriaNeural",
       "outcomes": [
-        "flip@obs0",
+        "pit@obs0",
         "lava@obs2+broken",
         "win"
       ],
-      "duration": 47.1,
+      "duration": 46.2,
       "status": "RENDERED_PENDING_APPROVAL",
       "folder": "renders/megawheel_arena/pending/2026-09-30_lava_s003",
       "audit": "renders/megawheel_arena/pending/2026-09-30_lava_s003/SIM_LAVA_V2_S003_audit.md",

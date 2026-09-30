@@ -1,0 +1,242 @@
+{
+ "video_id": "SIM_SPLASH_V2_S005",
+ "status": "REJECTED",
+ "engine": "sim-prototype v2",
+ "series": "splash",
+ "seed": 5,
+ "fps": 30,
+ "duration": 48.07,
+ "track_id": "splash_813d65c1",
+ "track_params": {
+  "order": [
+   "pit",
+   "wall",
+   "hill"
+  ],
+  "parts": [
+   {
+    "kind": "pit",
+    "puddle": 7.4,
+    "ramp": [
+     5.7,
+     1.45
+    ],
+    "pit": [
+     7.2,
+     4.1
+    ]
+   },
+   {
+    "kind": "wall",
+    "puddle": 5.4,
+    "ramp": [
+     4.8,
+     1.0
+    ],
+    "wall": 1.95
+   },
+   {
+    "kind": "hill",
+    "puddle": 7.0,
+    "hill": [
+     3.25,
+     7.9
+    ]
+   }
+  ]
+ },
+ "theme": {
+  "time": "noon",
+  "weather": "clear",
+  "location": "city"
+ },
+ "theme_id": "noon-clear-city",
+ "voice": "en-US-AriaNeural",
+ "fingerprint": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
+ "outcomes": [
+  "crash@obs1+broken",
+  "stuck@obs0",
+  "win"
+ ],
+ "analysis": [
+  {
+   "id": "forward",
+   "desc": "Semua mobil bergerak maju ke kanan (+x)",
+   "ok": true,
+   "detail": "3.0->62.3 m, 3.0->41.6 m, 3.0->131.0 m",
+   "hard": true
+  },
+  {
+   "id": "obstacles",
+   "desc": "Minimal 2 rintangan di antara start dan finish",
+   "ok": true,
+   "detail": "3 rintangan [pit, wall, hill] (16-102 m), finish 110 m",
+   "hard": true
+  },
+  {
+   "id": "story",
+   "desc": "Pola cerita sesuai STORY",
+   "ok": true,
+   "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+   "hard": true
+  },
+  {
+   "id": "no_timeout",
+   "desc": "Tidak ada timeout",
+   "ok": true,
+   "detail": "",
+   "hard": true
+  },
+  {
+   "id": "timing",
+   "desc": "Waktu event masuk akal",
+   "ok": true,
+   "detail": "5.7s, 6.1s, 12.3s",
+   "hard": true
+  },
+  {
+   "id": "distinct_fail",
+   "desc": "Level gagal di rintangan berbeda",
+   "ok": true,
+   "detail": "rintangan [1, 0]",
+   "hard": false
+  },
+  {
+   "id": "spectacular",
+   "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+   "ok": true,
+   "detail": "",
+   "hard": true
+  },
+  {
+   "id": "duration",
+   "desc": "Durasi total 40-50 s",
+   "ok": true,
+   "detail": "48.1 s",
+   "hard": true
+  },
+  {
+   "id": "level_len",
+   "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+   "ok": true,
+   "detail": "13.9s, 9.9s, 24.3s",
+   "hard": true
+  },
+  {
+   "id": "unique",
+   "desc": "Sidik jari belum ada di registry",
+   "ok": true,
+   "detail": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
+   "hard": true
+  }
+ ],
+ "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+ "title_base": "Cars VS Slippery Splash Zone! Who Survives? \ud83d\udca6\ud83d\ude97",
+ "title": "Cars VS Slippery Splash Zone! Who Survives? \ud83d\udca6\ud83d\ude97 #Shorts",
+ "description": "Nitro the race car, Titan the big rig and Buster the school bus take on the SLIPPERY SPLASH ZONE! \ud83d\udca5 Only one makes it to the finish line. Who's your pick? \ud83c\udfc1\n\nWatch till the end for the slow-motion replay! \ud83c\udfac\n\n\ud83c\udfc6 Comment your champion below!\n\ud83d\udd14 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+ "tags": [
+  "cars",
+  "car crash",
+  "slippery road",
+  "water puddle",
+  "crash test",
+  "physics simulation",
+  "shorts",
+  "MegaWheel Arena",
+  "race car",
+  "big rig",
+  "school bus"
+ ],
+ "levels": [
+  {
+   "vehicle": "NITRO THE RACE CAR",
+   "speed": 12.8,
+   "outcome": "crash",
+   "event_t": 5.73,
+   "obstacle": 1,
+   "broken": true,
+   "bullet_time": true,
+   "replay": true,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "OUCH!"
+   ],
+   "start": 0.0,
+   "duration": 13.87,
+   "event_out": 6.83,
+   "x_start": 3.0,
+   "x_end": 62.3,
+   "level_color": [
+    45,
+    183,
+    76
+   ]
+  },
+  {
+   "vehicle": "TITAN THE BIG RIG",
+   "speed": 7.75,
+   "outcome": "stuck",
+   "event_t": 6.1,
+   "obstacle": 0,
+   "broken": false,
+   "bullet_time": true,
+   "replay": false,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "OUCH!"
+   ],
+   "start": 13.87,
+   "duration": 9.9,
+   "event_out": 20.47,
+   "x_start": 3.0,
+   "x_end": 41.6,
+   "level_color": [
+    255,
+    132,
+    20
+   ]
+  },
+  {
+   "vehicle": "BUSTER THE SCHOOL BUS",
+   "speed": 12.8,
+   "outcome": "win",
+   "event_t": 12.33,
+   "obstacle": 2,
+   "broken": false,
+   "bullet_time": true,
+   "replay": false,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "YEAH!"
+   ],
+   "start": 23.77,
+   "duration": 24.3,
+   "event_out": 37.8,
+   "x_start": 3.0,
+   "x_end": 131.0,
+   "level_color": [
+    153,
+    76,
+    234
+   ]
+  }
+ ],
+ "narration": [
+  "Level one! Nitro the race car! Super fast... but can Nitro handle the slippery splash zone?",
+  "Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+  "Level three! Buster the school bus. Big and heavy... can Buster make it?",
+  "Crash! Nitro slid right into the wall!",
+  "Uh oh... Titan is totally stuck!",
+  "Yes! Buster made it! We have a winner!",
+  "Let's see that again, in slow motion!",
+  "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+ ],
+ "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+ "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s005/SIM_SPLASH_V2_S005.mp4",
+ "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s005/preview",
+ "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s005/SIM_SPLASH_V2_S005_audit.md",
+ "reject_reason": "no signature moment (spin / lava melt) on screen"
+}

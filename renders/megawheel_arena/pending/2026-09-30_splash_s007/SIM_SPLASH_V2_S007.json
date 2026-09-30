@@ -1,0 +1,240 @@
+{
+  "video_id": "SIM_SPLASH_V2_S007",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "splash",
+  "seed": 7,
+  "fps": 30,
+  "duration": 48.4,
+  "track_id": "splash_1ddda902",
+  "track_params": {
+    "order": [
+      "pit",
+      "wall",
+      "hill"
+    ],
+    "parts": [
+      {
+        "kind": "pit",
+        "puddle": 6.8,
+        "ramp": [
+          5.5,
+          1.31
+        ],
+        "pit": [
+          6.8,
+          4.4
+        ]
+      },
+      {
+        "kind": "wall",
+        "puddle": 7.2,
+        "ramp": [
+          4.7,
+          0.93
+        ],
+        "wall": 1.86
+      },
+      {
+        "kind": "hill",
+        "puddle": 5.9,
+        "hill": [
+          3.8,
+          6.9
+        ]
+      }
+    ]
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "night-clear-desert",
+  "voice": "en-US-AvaMultilingualNeural",
+  "fingerprint": "splash|taxi,icecream,bigrig|splash_1ddda902@night-clear-desert|pit@obs0,stuck@obs1,win",
+  "outcomes": [
+    "pit@obs0",
+    "stuck@obs1",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->35.1 m, 3.0->62.1 m, 3.0->125.5 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [pit, wall, hill] (18-99 m), finish 106 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "6.2s, 9.2s, 13.7s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [0, 1]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "48.4 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "11.5s, 13.5s, 23.4s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "splash|taxi,icecream,bigrig|splash_1ddda902@night-clear-desert|pit@obs0,stuck@obs1,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
+  "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 #Shorts",
+  "description": "Tilly the taxi, Sprinkles the ice cream truck and Titan the big rig take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "slippery road",
+    "water puddle",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "taxi",
+    "ice cream truck",
+    "big rig"
+  ],
+  "levels": [
+    {
+      "vehicle": "TILLY THE TAXI",
+      "speed": 7.0,
+      "outcome": "pit",
+      "event_t": 6.2,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 11.5,
+      "event_out": 8.07,
+      "x_start": 3.0,
+      "x_end": 35.1,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 8.0,
+      "outcome": "stuck",
+      "event_t": 9.17,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 11.5,
+      "duration": 13.53,
+      "event_out": 21.33,
+      "x_start": 3.0,
+      "x_end": 62.1,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 11.95,
+      "outcome": "win",
+      "event_t": 13.7,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 25.03,
+      "duration": 23.37,
+      "event_out": 39.3,
+      "x_start": 3.0,
+      "x_end": 125.5,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Tilly the taxi! Hop in... can Tilly get past the slippery splash zone?",
+    "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Level three! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Sploosh! Tilly plunged into the water pit!",
+    "Uh oh... Sprinkles is totally stuck!",
+    "Yes! Titan made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s007/SIM_SPLASH_V2_S007_audit.md"
+}

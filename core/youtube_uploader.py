@@ -106,7 +106,8 @@ class YouTubeUploader:
         tags: Optional[List[str]] = None,
         category_id: str = "1",  # 1: Film & Animation (MegaWheel Arena default)
         privacy_status: str = "unlisted",  # 'unlisted', 'private', 'public'
-        made_for_kids: bool = False  # general-audience channel (BLUEPRINT rule 7)
+        made_for_kids: bool = False,  # general-audience channel (BLUEPRINT rule 7)
+        publish_at: Optional[str] = None  # ISO-8601 UTC ("2026-10-01T15:00:00Z"): YouTube publishes it then
     ) -> Dict[str, Any]:
         """
         Upload a Shorts video to YouTube with resumable chunking.
@@ -139,6 +140,10 @@ class YouTubeUploader:
                 "license": "youtube"
             }
         }
+        if publish_at:                        # scheduled release: must be uploaded as private
+            body["status"]["privacyStatus"] = "private"
+            body["status"]["publishAt"] = publish_at
+            privacy_status = "scheduled"
 
         # 2MB chunks for robust uploading
         media = MediaFileUpload(

@@ -357,3 +357,31 @@ Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/ri
 3. Tambah gambar rintangannya di `draw_track()`.
 4. Setel parameter fisika dengan script mirip `generators/physics_2d/tune_bumps.py` (tanpa TTS/render, cepat), lalu `generators/physics_2d/find_seeds.sh <seri> 1 10`. Targetnya ≥ 7/10 seed lolos.
 5. Render 1 video, cek PNG, dan tulis entri di `DEV_HISTORY.md` (termasuk parameter akhir dan tingkat lolos).
+6. Kalau seri punya momen khas, isi `signature` di `SERIES_DEFS` (`"spin"`, `"melt"`). Kombinasi tanpa momen itu ditolak, jadi engine pindah ke seed berikutnya.
+
+---
+
+## 10. SOP Publikasi (jadwal upload)
+
+**Aturan:** hanya episode `APPROVED` yang boleh masuk antrian. Upload ke YouTube hanya atas instruksi eksplisit user.
+
+| Slot | Jam New York (ET) | Alasan | WIB saat EDT (s/d 1 Nov 2026) | WIB saat EST |
+|---|---|---|---|---|
+| 1 | 11:00 | Istirahat siang Pantai Timur, pagi Pantai Barat | 22:00 | 23:00 |
+| 2 | 15:00 | Pulang sekolah/kerja Pantai Timur, siang Pantai Barat | 02:00 (+1 hari) | 03:00 (+1 hari) |
+| 3 | 19:00 | Prime time malam | 06:00 (+1 hari) | 07:00 (+1 hari) |
+
+- 3 Shorts per hari, satu per slot, urut nomor episode.
+- Zona waktu disimpan sebagai `America/New_York`, jadi pergantian daylight saving otomatis.
+- Mekanisme: video diupload sebagai `private` dengan `publishAt`. YouTube yang menayangkan tepat di jamnya, tidak ada cron di server kita.
+
+**Perintah:**
+```
+./venv/bin/python generators/publishing/publish_queue.py plan      # isi slot kosong untuk episode APPROVED baru
+./venv/bin/python generators/publishing/publish_queue.py show      # renders/megawheel_arena/PUBLISH_QUEUE.md
+./venv/bin/python generators/publishing/publish_queue.py upload --confirm   # HANYA atas instruksi user
+```
+
+**Evaluasi:**
+- Setelah 2 minggu, bandingkan views per jam tayang dan persentase penonton yang bertahan di YouTube Analytics per slot.
+- Slot dengan hasil terburuk digeser. Setiap perubahan dicatat di DEV_HISTORY.

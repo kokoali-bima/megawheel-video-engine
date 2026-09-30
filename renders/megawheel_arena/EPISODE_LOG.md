@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 08:28). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 10:06). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -19,3 +19,12 @@
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
 | – | | | | | tidak ada |
+
+## Ditolak
+
+| Video ID | Alasan | Tanggal |
+|---|---|---|
+| SIM_SPLASH_V2_S003 | superseded by v2.8 (distinct water/lava sounds, melting, hydroplaning) | 2026-09-30 |
+| SIM_LAVA_V2_S003 | superseded by v2.8 (distinct water/lava sounds, melting, hydroplaning) | 2026-09-30 |
+| SIM_SPLASH_V2_S005 | no signature moment (spin / lava melt) on screen | 2026-09-30 |
+| SIM_LAVA_V2_S001 | no signature moment (spin / lava melt) on screen | 2026-09-30 |

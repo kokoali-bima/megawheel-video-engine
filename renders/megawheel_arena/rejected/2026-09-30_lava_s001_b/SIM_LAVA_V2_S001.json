@@ -1,0 +1,248 @@
+{
+ "video_id": "SIM_LAVA_V2_S001",
+ "status": "REJECTED",
+ "engine": "sim-prototype v2",
+ "series": "lava",
+ "seed": 1,
+ "fps": 30,
+ "duration": 45.73,
+ "track_id": "lava_dca3135d",
+ "track_params": {
+  "vents": [
+   {
+    "x": 36.23,
+    "period": 2.78,
+    "phase": 0.56,
+    "dur": 0.79,
+    "height": 5.3
+   },
+   {
+    "x": 44.5,
+    "period": 3.08,
+    "phase": 0.26,
+    "dur": 0.79,
+    "height": 6.2
+   },
+   {
+    "x": 76.13,
+    "period": 2.71,
+    "phase": 2.54,
+    "dur": 0.78,
+    "height": 6.7
+   }
+  ],
+  "pits": [
+   [
+    23.09,
+    26.99,
+    3.0
+   ],
+   [
+    58.56,
+    66.56,
+    4.5
+   ]
+  ],
+  "ramps": [
+   [
+    52.76,
+    58.56,
+    1.59
+   ]
+  ]
+ },
+ "theme": {
+  "time": "morning",
+  "weather": "clear",
+  "location": "volcano"
+ },
+ "theme_id": "morning-clear-volcano",
+ "voice": "en-US-EmmaMultilingualNeural",
+ "fingerprint": "lava|taxi,firetruck,sports|lava_dca3135d@morning-clear-volcano|lava@obs4+broken,lava@obs1+broken,win",
+ "outcomes": [
+  "lava@obs4+broken",
+  "lava@obs1+broken",
+  "win"
+ ],
+ "analysis": [
+  {
+   "id": "forward",
+   "desc": "Semua mobil bergerak maju ke kanan (+x)",
+   "ok": true,
+   "detail": "3.0->105.2 m, 3.0->52.7 m, 3.0->113.4 m",
+   "hard": true
+  },
+  {
+   "id": "obstacles",
+   "desc": "Minimal 2 rintangan di antara start dan finish",
+   "ok": true,
+   "detail": "5 rintangan [lava, vent, vent, lava, vent] (23-78 m), finish 87 m",
+   "hard": true
+  },
+  {
+   "id": "story",
+   "desc": "Pola cerita sesuai STORY",
+   "ok": true,
+   "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+   "hard": true
+  },
+  {
+   "id": "no_timeout",
+   "desc": "Tidak ada timeout",
+   "ok": true,
+   "detail": "",
+   "hard": true
+  },
+  {
+   "id": "timing",
+   "desc": "Waktu event masuk akal",
+   "ok": true,
+   "detail": "5.9s, 5.3s, 7.7s",
+   "hard": true
+  },
+  {
+   "id": "distinct_fail",
+   "desc": "Level gagal di rintangan berbeda",
+   "ok": true,
+   "detail": "rintangan [4, 1]",
+   "hard": false
+  },
+  {
+   "id": "spectacular",
+   "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+   "ok": true,
+   "detail": "",
+   "hard": true
+  },
+  {
+   "id": "duration",
+   "desc": "Durasi total 40-50 s",
+   "ok": true,
+   "detail": "45.7 s",
+   "hard": true
+  },
+  {
+   "id": "level_len",
+   "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+   "ok": true,
+   "detail": "14.2s, 13.2s, 18.3s",
+   "hard": true
+  },
+  {
+   "id": "unique",
+   "desc": "Sidik jari belum ada di registry",
+   "ok": true,
+   "detail": "lava|taxi,firetruck,sports|lava_dca3135d@morning-clear-volcano|lava@obs4+broken,lava@obs1+broken,win",
+   "hard": true
+  }
+ ],
+ "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+ "title_base": "Cars VS Lava Road! Who Survives? \ud83c\udf0b\ud83d\udd25",
+ "title": "Cars VS Lava Road! Who Survives? \ud83c\udf0b\ud83d\udd25 #Shorts",
+ "description": "Tilly the taxi, Hydro the fire truck and Zippy the sports car take on the ERUPTING LAVA ROAD! \ud83d\udca5 Only one makes it to the finish line. Who's your pick? \ud83c\udfc1\n\nWatch till the end for the slow-motion replay! \ud83c\udfac\n\n\ud83c\udfc6 Comment your champion below!\n\ud83d\udd14 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+ "tags": [
+  "cars",
+  "lava",
+  "volcano",
+  "car crash",
+  "crash test",
+  "physics simulation",
+  "shorts",
+  "MegaWheel Arena",
+  "taxi",
+  "fire truck",
+  "sports car"
+ ],
+ "levels": [
+  {
+   "vehicle": "TILLY THE TAXI",
+   "speed": 16.0,
+   "outcome": "lava",
+   "event_t": 5.93,
+   "obstacle": 4,
+   "broken": true,
+   "bullet_time": true,
+   "replay": true,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "OUCH!"
+   ],
+   "start": 0.0,
+   "duration": 14.17,
+   "event_out": 7.57,
+   "x_start": 3.0,
+   "x_end": 105.2,
+   "level_color": [
+    45,
+    183,
+    76
+   ]
+  },
+  {
+   "vehicle": "HYDRO THE FIRE TRUCK",
+   "speed": 10.8,
+   "outcome": "lava",
+   "event_t": 5.3,
+   "obstacle": 1,
+   "broken": true,
+   "bullet_time": true,
+   "replay": true,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "OUCH!"
+   ],
+   "start": 14.17,
+   "duration": 13.23,
+   "event_out": 20.7,
+   "x_start": 3.0,
+   "x_end": 52.7,
+   "level_color": [
+    255,
+    132,
+    20
+   ]
+  },
+  {
+   "vehicle": "ZIPPY THE SPORTS CAR",
+   "speed": 14.0,
+   "outcome": "win",
+   "event_t": 7.73,
+   "obstacle": 4,
+   "broken": false,
+   "bullet_time": true,
+   "replay": false,
+   "bubbles": [
+    "UH OH!",
+    "WHOA!",
+    "YEAH!"
+   ],
+   "start": 27.4,
+   "duration": 18.33,
+   "event_out": 36.67,
+   "x_start": 3.0,
+   "x_end": 113.4,
+   "level_color": [
+    153,
+    76,
+    234
+   ]
+  }
+ ],
+ "narration": [
+  "Level one! Tilly the taxi! Hop in... can Tilly get past the erupting lava road?",
+  "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+  "Level three! Zippy the sports car! Can Zippy survive the erupting lava road?",
+  "Yikes! Tilly got blasted by the lava!",
+  "Yikes! Hydro got blasted by the lava!",
+  "Yes! Zippy made it! We have a winner!",
+  "Let's see that again, in slow motion!",
+  "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+ ],
+ "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
+ "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s001/SIM_LAVA_V2_S001.mp4",
+ "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s001/preview",
+ "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_lava_s001/SIM_LAVA_V2_S001_audit.md",
+ "reject_reason": "no signature moment (spin / lava melt) on screen"
+}

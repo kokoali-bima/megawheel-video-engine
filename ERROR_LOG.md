@@ -52,4 +52,5 @@
 | Tanggal | Gejala | Penyebab | Pencegahan |
 |---|---|---|---|
 | 2026-09-30 | `python -c "..."` inline lewat ssh gagal parse (terjadi lagi setelah dicatat di bagian A) | Kebiasaan lama | Cek ulang perintah ssh sebelum dikirim: kalau ada kutip, kurung, pipe, atau `\|` di dalam argumen remote → pindahkan ke file script. |
+| 2026-09-30 | `grep -n "a\|b\|c"` inline lewat ssh lagi (ke-4 kali): pola rusak jadi nama file | Terburu-buru membaca file server | Untuk MEMBACA file server: `scp` ke scratchpad lalu pakai Read/Grep lokal. Jangan pernah grep inline di argumen ssh. |
 | 2026-09-30 | `bash script.sh \| grep -E "a\|b"` lewat ssh: grep error, pipe putus, **script uji ikut mati** setelah percobaan pertama | Sama: kutip dibuang PowerShell; SIGPIPE mematikan script | Script panjang dijalankan dengan `nohup ... > file.out &`, lalu hasilnya dibaca lewat script ringkasan terpisah. Jangan pernah mem-pipe output script lewat argumen ssh. |

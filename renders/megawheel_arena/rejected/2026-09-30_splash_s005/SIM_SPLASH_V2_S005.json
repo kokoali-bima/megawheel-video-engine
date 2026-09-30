@@ -1,12 +1,12 @@
 {
-  "video_id": "SIM_SPLASH_V2_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_SPLASH_V2_S005",
+  "status": "REJECTED",
   "engine": "sim-prototype v2",
   "series": "splash",
-  "seed": 3,
+  "seed": 5,
   "fps": 30,
-  "duration": 48.67,
-  "track_id": "splash_7e3f037b",
+  "duration": 48.73,
+  "track_id": "splash_813d65c1",
   "track_params": {
     "order": [
       "pit",
@@ -16,43 +16,43 @@
     "parts": [
       {
         "kind": "pit",
-        "puddle": 6.9,
+        "puddle": 7.4,
         "ramp": [
-          6.2,
-          1.47
+          5.7,
+          1.45
         ],
         "pit": [
-          6.8,
-          3.8
+          7.2,
+          4.1
         ]
       },
       {
         "kind": "wall",
-        "puddle": 5.7,
+        "puddle": 5.4,
         "ramp": [
-          4.7,
-          0.97
+          4.8,
+          1.0
         ],
-        "wall": 1.53
+        "wall": 1.95
       },
       {
         "kind": "hill",
-        "puddle": 7.9,
+        "puddle": 7.0,
         "hill": [
-          3.29,
-          7.4
+          3.25,
+          7.9
         ]
       }
     ]
   },
   "theme": {
-    "time": "morning",
+    "time": "noon",
     "weather": "clear",
-    "location": "desert"
+    "location": "city"
   },
-  "theme_id": "morning-clear-desert",
-  "voice": "en-US-AvaMultilingualNeural",
-  "fingerprint": "splash|f1,bigrig,taxi|splash_7e3f037b@morning-clear-desert|crash@obs1+broken,stuck@obs0,win",
+  "theme_id": "noon-clear-city",
+  "voice": "en-US-AriaNeural",
+  "fingerprint": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
   "outcomes": [
     "crash@obs1+broken",
     "stuck@obs0",
@@ -63,14 +63,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->74.4 m, 3.0->36.6 m, 3.0->131.0 m",
+      "detail": "3.0->62.3 m, 3.0->41.6 m, 3.0->126.4 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "3 rintangan [pit, wall, hill] (18-102 m), finish 110 m",
+      "detail": "3 rintangan [pit, wall, hill] (16-102 m), finish 110 m",
       "hard": true
     },
     {
@@ -91,7 +91,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "5.1s, 7.7s, 11.6s",
+      "detail": "5.7s, 6.1s, 13.0s",
       "hard": true
     },
     {
@@ -119,21 +119,21 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "detail": "13.4s, 12.8s, 22.4s",
+      "detail": "13.9s, 9.9s, 25.0s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "splash|f1,bigrig,taxi|splash_7e3f037b@morning-clear-desert|crash@obs1+broken,stuck@obs0,win",
+      "detail": "splash|f1,bigrig,bus|splash_813d65c1@noon-clear-city|crash@obs1+broken,stuck@obs0,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
   "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 #Shorts",
-  "description": "Nitro the race car, Titan the big rig and Tilly the taxi take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "description": "Nitro the race car, Titan the big rig and Buster the school bus take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -145,14 +145,14 @@
     "MegaWheel Arena",
     "race car",
     "big rig",
-    "taxi"
+    "school bus"
   ],
   "levels": [
     {
       "vehicle": "NITRO THE RACE CAR",
-      "speed": 18.2,
+      "speed": 12.8,
       "outcome": "crash",
-      "event_t": 5.07,
+      "event_t": 5.73,
       "obstacle": 1,
       "broken": true,
       "bullet_time": true,
@@ -163,10 +163,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 13.43,
-      "event_out": 6.47,
+      "duration": 13.87,
+      "event_out": 6.83,
       "x_start": 3.0,
-      "x_end": 74.4,
+      "x_end": 62.3,
       "level_color": [
         45,
         183,
@@ -175,9 +175,9 @@
     },
     {
       "vehicle": "TITAN THE BIG RIG",
-      "speed": 6.7,
+      "speed": 7.75,
       "outcome": "stuck",
-      "event_t": 7.73,
+      "event_t": 6.1,
       "obstacle": 0,
       "broken": false,
       "bullet_time": true,
@@ -187,11 +187,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 13.43,
-      "duration": 12.83,
-      "event_out": 22.93,
+      "start": 13.87,
+      "duration": 9.9,
+      "event_out": 20.47,
       "x_start": 3.0,
-      "x_end": 36.6,
+      "x_end": 41.6,
       "level_color": [
         255,
         132,
@@ -199,10 +199,10 @@
       ]
     },
     {
-      "vehicle": "TILLY THE TAXI",
-      "speed": 12.5,
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 11.2,
       "outcome": "win",
-      "event_t": 11.6,
+      "event_t": 13.03,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -212,11 +212,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 26.27,
-      "duration": 22.4,
-      "event_out": 39.7,
+      "start": 23.77,
+      "duration": 24.97,
+      "event_out": 38.47,
       "x_start": 3.0,
-      "x_end": 131.0,
+      "x_end": 126.4,
       "level_color": [
         153,
         76,
@@ -227,15 +227,16 @@
   "narration": [
     "Level one! Nitro the race car! Super fast... but can Nitro handle the slippery splash zone?",
     "Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
-    "Level three! Tilly the taxi! Hop in... can Tilly get past the slippery splash zone?",
+    "Level three! Buster the school bus. Big and heavy... can Buster make it?",
     "Crash! Nitro slid right into the wall!",
     "Uh oh... Titan is totally stuck!",
-    "Yes! Tilly made it! We have a winner!",
+    "Yes! Buster made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s003/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_splash_s003/SIM_SPLASH_V2_S003_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-09-30_splash_s005/SIM_SPLASH_V2_S005.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-09-30_splash_s005/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-09-30_splash_s005/SIM_SPLASH_V2_S005_audit.md",
+  "reject_reason": "no signature moment (spin / lava melt) on screen"
 }
