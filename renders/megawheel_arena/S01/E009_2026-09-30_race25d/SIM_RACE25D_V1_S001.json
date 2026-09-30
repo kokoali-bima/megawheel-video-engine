@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V1_S001",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v1",
   "series": "race25d",
   "seed": 1,
@@ -52,7 +52,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Slippery Race Showdown! Who Wins? 🏁💦",
-  "title": "Slippery Race Showdown! Who Wins? 🏁💦 #Shorts",
+  "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
   "description": "Nitro, Hydro, Siren and Tilly race to the finish line! 🏁 Watch out for the slippery puddle and the big ramp jump! 💦\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -77,6 +77,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s001/SIM_RACE25D_V1_S001.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s001/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E009_2026-09-30_race25d/SIM_RACE25D_V1_S001.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E009_2026-09-30_race25d/preview",
+  "episode": 9,
+  "season": 1,
+  "approved_date": "2026-09-30"
 }

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 14:34) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 22:08) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -22,6 +22,7 @@
 | 6 | `SIM_BUMPS_V2_S006` | bumps | UPLOADED_SCHEDULED 2026-10-01T23:00:00Z | Thu 2026-10-01 19:00 | https://www.youtube.com/shorts/nXlV3f6Wux8 |
 | 7 | `SIM_SPLASH_V2_S007` | splash | APPROVED | Fri 2026-10-02 15:00 |  |
 | 8 | `SIM_LAVA_V2_S003` | lava | APPROVED | Fri 2026-10-02 19:00 |  |
+| 9 | `SIM_RACE25D_V1_S001` | race25d | APPROVED |  |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
 
@@ -125,4 +126,17 @@
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs0; Level 2: Hydro (firetruck) → lava@obs2+broken; Level 3 (juara): Titan (bigrig) → win
 - **Status:** APPROVED (approve 2026-09-30)
 - **Antrian:** QUEUED 2026-10-02T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 9 — `SIM_RACE25D_V1_S001`
+
+- **Judul YouTube:** Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E009_2026-09-30_race25d/SIM_RACE25D_V1_S001.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E009_2026-09-30_race25d/SIM_RACE25D_V1_S001.json` · audit: `renders/megawheel_arena/S01/E009_2026-09-30_race25d/SIM_RACE25D_V1_S001_audit.md`
+- **Season / seri / seed:** S01 / race25d / 1
+- **Tema / narator:** noon-clear-city / en-US-EmmaMultilingualNeural
+- **Durasi:** 29.23 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → win+jump+bump; Level 2: Hydro (firetruck) → p3; Level 3 (juara): Siren (police) → p2; Level 4: Tilly (taxi) → p4+spin
+- **Status:** APPROVED (approve 2026-09-30)
+- **Antrian:** belum masuk antrian 
 - **YouTube:** belum diupload

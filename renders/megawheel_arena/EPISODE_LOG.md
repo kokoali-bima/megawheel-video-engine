@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 14:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 22:08). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -15,6 +15,7 @@
 | 6 | S01 | bumps | Siren, Buster, Rocky | 2026-09-30 | 2026-09-30 | 2026-09-30 | UPLOADED_SCHEDULED 2026-10-01T23:00:00Z | https://www.youtube.com/shorts/nXlV3f6Wux8 |  |  |  |  |
 | 7 | S01 | splash | Tilly, Sprinkles, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 | 8 | S01 | lava | Zippy, Hydro, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
+| 9 | S01 | race25d | Nitro, Hydro, Siren, Tilly | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 
 ## Menunggu approval (`pending/`)
 

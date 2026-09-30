@@ -369,13 +369,15 @@
         "p4+spin"
       ],
       "duration": 29.23,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s001",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s001/SIM_RACE25D_V1_S001_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E009_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E009_2026-09-30_race25d/SIM_RACE25D_V1_S001_audit.md",
+      "episode": 9,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-09-30",
+      "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts"
     }
   ]
 }
