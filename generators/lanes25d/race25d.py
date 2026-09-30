@@ -153,7 +153,7 @@ def simulate(seed):
                          pitch=0.0, sq=1.0, split=0.0, burn=0.0, patched=0.0, ice=0.0, tires=0.0, thawed=False, v=0.0, hz=hz, trig=None, land=None,
                          bump_t=None, finish=None, surge=float(rng.uniform(0, 6.28)), rec=[]))
     events = []
-    decided, dodges = set(), [0]
+    decided, dodges = {}, [0]                            # (car, hazard) -> agility roll (made once)
     for h in HZ:
         h.pop("used", None)
     for i in range(n):
@@ -167,12 +167,14 @@ def simulate(seed):
                 zl = int(round(c["z"]))
                 if not c.get("dodge_t") and dodges[0] < MAX_DODGES:      # see a ground hazard coming -> swerve?
                     ahead = next((h for h in HZ if not h.get("used") and h["lane"] == zl and h["type"] in DODGEABLE
-                                  and 9 < h["x"] - c["x"] < 26 and (id(c), id(h)) not in decided), None)
+                                  and 9 < h["x"] - c["x"] < 26), None)
                     if ahead is not None:
-                        decided.add((id(c), id(ahead)))
-                        if rng.random() < AGILITY.get(c["key"], 0.55):
+                        key2 = (id(c), id(ahead))
+                        if key2 not in decided:
+                            decided[key2] = rng.random() < AGILITY.get(c["key"], 0.55)
+                        if decided[key2]:                        # keeps looking for a gap while there is room
                             free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
-                                    and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 9
+                                    and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 6.0
                                                 for o in cars)
                                     and not any(not h2.get("used") and h2["lane"] == ln and -2 < h2["x"] - c["x"] < 30
                                                 for h2 in HZ)]
