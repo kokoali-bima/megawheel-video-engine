@@ -162,7 +162,7 @@ def simulate(seed):
             go = min(1.0, t / 1.6)
             target = c["v0"] * (1 + 0.025 * math.sin(t * 0.7 + c["surge"]))
             if c.get("seek_t") is not None and t - c["seek_t"] < 0.05:
-                target *= 0.8                                    # blocked: brake to tuck in behind the neighbour
+                target *= c["seek_k"]                            # blocked: sprint past / brake behind the neighbour
             a = (t - c["trig"]) if c["trig"] is not None else None
             freeze = False                                       # hazard holds the car still (x not integrated)
             if c["trig"] is None and c["finish"] is None:
@@ -177,12 +177,14 @@ def simulate(seed):
                             decided[key2] = ag >= 0.55 or rng.random() < ag
                         if decided[key2]:                        # keeps looking for a gap while there is room
                             free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
-                                    and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 6.0
+                                    and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 5.0
                                                 for o in cars)
                                     and not any(not h2.get("used") and h2["lane"] == ln and -2 < h2["x"] - c["x"] < 30
                                                 for h2 in HZ)]
                             if not free:
-                                c["seek_t"] = t
+                                near = [o["x"] - c["x"] for o in cars if o is not c and abs(o["x"] - c["x"]) < 5.0
+                                        and any(abs(o["z"] - ln) < 0.6 for ln in (zl - 1, zl + 1))]
+                                c["seek_t"], c["seek_k"] = t, (0.8 if near and min(near) > 1.0 else 1.18)
                             else:
                                 c["lane"], c["dodge_t"], c["dodged"] = free[0], t, ahead["type"]
                                 dodges[0] += 1
