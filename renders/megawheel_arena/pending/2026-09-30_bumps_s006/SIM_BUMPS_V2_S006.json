@@ -1,29 +1,40 @@
 {
-  "video_id": "SIM_POTHOLES_V2_S004",
+  "video_id": "SIM_BUMPS_V2_S006",
   "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
-  "series": "potholes",
-  "seed": 4,
+  "series": "bumps",
+  "seed": 6,
   "fps": 30,
-  "duration": 44.5,
-  "track_id": "potholes_643445ba",
+  "duration": 46.8,
+  "track_id": "bumps_a1184bfc",
   "track_params": {
-    "p1x": 26.0,
-    "p1w": 2.8,
-    "p1d": 2.9,
-    "rampx": 41.7,
-    "rampl": 6.2,
-    "ramph": 1.6,
-    "p2w": 6.8,
-    "p2d": 4.9,
-    "p3x": 69.1,
-    "p3w": 5.3,
-    "p3d": 3.8
+    "bumps": [
+      [
+        43.5,
+        46.1,
+        0.6
+      ],
+      [
+        53.3,
+        56.7,
+        1.24
+      ],
+      [
+        63.4,
+        67.5,
+        1.92
+      ],
+      [
+        75.7,
+        80.0,
+        2.61
+      ]
+    ]
   },
-  "fingerprint": "potholes|f1,firetruck,monster|potholes_643445ba|flip@obs2+broken,stuck@obs0,win",
+  "fingerprint": "bumps|police,bus,monster|bumps_a1184bfc|flip@obs3,stuck@obs2,win",
   "outcomes": [
-    "flip@obs2+broken",
-    "stuck@obs0",
+    "flip@obs3",
+    "stuck@obs2",
     "win"
   ],
   "analysis": [
@@ -31,14 +42,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->72.7 m, 3.0->29.7 m, 3.0->134.4 m",
+      "detail": "3.0->71.7 m, 3.0->59.8 m, 3.0->104.4 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "3 lubang (26-74 m), finish 100 m",
+      "detail": "4 polisi tidur (44-80 m), finish 90 m",
       "hard": true
     },
     {
@@ -59,14 +70,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "5.6s, 5.9s, 9.1s",
+      "detail": "6.0s, 6.7s, 9.0s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "detail": "rintangan [2, 0]",
+      "detail": "rintangan [3, 2]",
       "hard": false
     },
     {
@@ -80,47 +91,48 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "44.5 s",
+      "detail": "46.8 s",
       "hard": true
     },
     {
       "id": "level_len",
-      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "detail": "14.6s, 9.9s, 20.0s",
+      "detail": "14.7s, 11.4s, 20.7s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|f1,firetruck,monster|potholes_643445ba|flip@obs2+broken,stuck@obs0,win",
+      "detail": "bumps|police,bus,monster|bumps_a1184bfc|flip@obs3,stuck@obs2,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
-  "description": "Can Nitro, Hydro or Rocky survive the GIANT POTHOLES? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "title_base": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 #Shorts",
+  "description": "Siren the police car, Buster the school bus and Rocky the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
-    "potholes",
+    "speed bumps",
     "monster truck",
     "crash test",
     "physics simulation",
     "shorts",
     "MegaWheel Arena",
-    "race car",
-    "fire truck",
+    "police car",
+    "school bus",
     "monster truck"
   ],
   "levels": [
     {
-      "vehicle": "NITRO THE RACE CAR",
-      "speed": 19.4,
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 19.38,
       "outcome": "flip",
-      "event_t": 5.63,
-      "obstacle": 2,
-      "broken": true,
+      "event_t": 6.0,
+      "obstacle": 3,
+      "broken": false,
       "bullet_time": true,
       "replay": true,
       "bubbles": [
@@ -129,10 +141,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 14.6,
-      "event_out": 8.2,
+      "duration": 14.67,
+      "event_out": 8.4,
       "x_start": 3.0,
-      "x_end": 72.7,
+      "x_end": 71.7,
       "level_color": [
         45,
         183,
@@ -140,11 +152,11 @@
       ]
     },
     {
-      "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 6.8,
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 14.5,
       "outcome": "stuck",
-      "event_t": 5.87,
-      "obstacle": 0,
+      "event_t": 6.73,
+      "obstacle": 2,
       "broken": false,
       "bullet_time": true,
       "replay": false,
@@ -153,11 +165,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 14.6,
-      "duration": 9.9,
-      "event_out": 21.17,
+      "start": 14.67,
+      "duration": 11.4,
+      "event_out": 23.0,
       "x_start": 3.0,
-      "x_end": 29.7,
+      "x_end": 59.8,
       "level_color": [
         255,
         132,
@@ -166,10 +178,10 @@
     },
     {
       "vehicle": "ROCKY THE MONSTER TRUCK",
-      "speed": 15.05,
+      "speed": 18.81,
       "outcome": "win",
-      "event_t": 9.07,
-      "obstacle": 2,
+      "event_t": 9.0,
+      "obstacle": 3,
       "broken": false,
       "bullet_time": true,
       "replay": false,
@@ -178,11 +190,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 24.5,
-      "duration": 20.0,
-      "event_out": 34.93,
+      "start": 26.07,
+      "duration": 20.73,
+      "event_out": 37.27,
       "x_start": 3.0,
-      "x_end": 134.4,
+      "x_end": 104.4,
       "level_color": [
         153,
         76,
@@ -191,17 +203,17 @@
     }
   ],
   "narration": [
-    "Level one! Nitro the race car! Super fast... but can Nitro handle the giant potholes?",
-    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Level one! Siren the police car is on patrol! Can Siren make it past the giant speed bumps?",
+    "Level two! Buster the school bus. Big and heavy... can Buster make it?",
     "Level three! Rocky the monster truck. Big wheels, big jump!",
-    "Whoa! Nitro flipped right over!",
-    "Uh oh... Hydro is totally stuck!",
+    "Whoa! Siren flipped right over!",
+    "Uh oh... Buster is totally stuck!",
     "Yes! Rocky made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
-  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S004.mp4",
-  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S004_preview",
-  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S004_audit.md"
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s006/SIM_BUMPS_V2_S006.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s006/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s006/SIM_BUMPS_V2_S006_audit.md"
 }

@@ -38,3 +38,11 @@
 | 2026-09-30 | Nama tokoh "Blaze" & "Crusher" | Sama dengan serial *Blaze and the Monster Machines* | Cek nama tokoh baru terhadap kartun/brand terkenal (CAST.md aturan 4). |
 | 2026-09-30 | Laporan menyebut "7 karakter" padahal 6 | Salah hitung | Hitung dari `characters.json`, bukan dari ingatan. |
 | 2026-09-30 | Draft video ikut tercatat sebagai "video" di tracker lama | Tracker publikasi mencampur draft & tayang | Status jelas per video (registry baru: `RENDERED_PENDING_APPROVAL` vs `UPLOADED_*`). |
+| 2026-09-30 | **Uploader lama akan melabeli setiap video "Made for Kids"** + kategori Gaming + tag BeamNG/Kids | `core/youtube_uploader.upload_shorts` default `made_for_kids=True`, `category_id="20"`; `upload_cli.py` tidak pernah mengubahnya | Default diubah (`False`, kategori `1`, tag Arena). Upload hanya lewat `publish.py` (eksplisit `made_for_kids=False`, kategori 1, metadata dari manifest). `upload_cli.py` diarsipkan. |
+| 2026-09-30 | Audit ulang episode APPROVED mengembalikan status ke PENDING | `audit.py` selalu menulis status | Status hanya diubah kalau masih ANALYZED/PENDING/AUDIT_FAILED atau audit gagal. |
+
+## D. Kebiasaan agent (Claude Code)
+
+| Tanggal | Gejala | Penyebab | Pencegahan |
+|---|---|---|---|
+| 2026-09-30 | `python -c "..."` inline lewat ssh gagal parse (terjadi lagi setelah dicatat di bagian A) | Kebiasaan lama | Cek ulang perintah ssh sebelum dikirim: kalau ada kutip, kurung, pipe, atau `\|` di dalam argumen remote → pindahkan ke file script. |

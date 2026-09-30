@@ -104,9 +104,9 @@ class YouTubeUploader:
         title: str,
         description: str,
         tags: Optional[List[str]] = None,
-        category_id: str = "20",  # 20: Gaming, 24: Entertainment, 27: Education
+        category_id: str = "1",  # 1: Film & Animation (MegaWheel Arena default)
         privacy_status: str = "unlisted",  # 'unlisted', 'private', 'public'
-        made_for_kids: bool = True
+        made_for_kids: bool = False  # general-audience channel (BLUEPRINT rule 7)
     ) -> Dict[str, Any]:
         """
         Upload a Shorts video to YouTube with resumable chunking.
@@ -121,7 +121,7 @@ class YouTubeUploader:
         if "#Shorts" not in description:
             description = f"{description}\n\n#Shorts #YouTubeShorts"
 
-        tags = tags or ["Shorts", "BeamNG", "Kids", "Animation", "Physics"]
+        tags = tags or ["Shorts", "Car Crash", "Physics Simulation", "MegaWheel Arena"]
 
         youtube = self.get_service()
 

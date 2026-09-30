@@ -1,0 +1,208 @@
+{
+  "video_id": "SIM_POTHOLES_V2_S005",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "potholes",
+  "seed": 5,
+  "fps": 30,
+  "duration": 46.67,
+  "track_id": "potholes_d0311b71",
+  "track_params": {
+    "p1x": 26.5,
+    "p1w": 3.7,
+    "p1d": 3.1,
+    "rampx": 44.4,
+    "rampl": 6.7,
+    "ramph": 1.7,
+    "p2w": 6.9,
+    "p2d": 4.8,
+    "p3x": 74.6,
+    "p3w": 4.4,
+    "p3d": 4.1
+  },
+  "fingerprint": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+  "outcomes": [
+    "pit@obs2+broken",
+    "stuck@obs0",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->76.8 m, 3.0->27.4 m, 3.0->135.8 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 lubang (26-79 m), finish 100 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.2s, 5.7s, 8.0s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "46.7 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "ok": true,
+      "detail": "17.5s, 10.1s, 19.1s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "potholes|sports,icecream,monster2|potholes_d0311b71|pit@obs2+broken,stuck@obs0,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Giant Potholes! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 #Shorts",
+  "description": "Zippy the sports car, Sprinkles the ice cream truck and Grizzly the monster truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "potholes",
+    "monster truck",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "sports car",
+    "ice cream truck",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "ZIPPY THE SPORTS CAR",
+      "speed": 14.0,
+      "outcome": "pit",
+      "event_t": 8.23,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 17.47,
+      "event_out": 10.63,
+      "x_start": 3.0,
+      "x_end": 76.8,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 6.4,
+      "outcome": "stuck",
+      "event_t": 5.7,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 17.47,
+      "duration": 10.1,
+      "event_out": 24.17,
+      "x_start": 3.0,
+      "x_end": 27.4,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "GRIZZLY THE MONSTER TRUCK",
+      "speed": 15.6,
+      "outcome": "win",
+      "event_t": 8.0,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 27.57,
+      "duration": 19.1,
+      "event_out": 37.03,
+      "x_start": 3.0,
+      "x_end": 135.8,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Zippy the sports car! Can Zippy survive the giant potholes?",
+    "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant potholes?",
+    "Oh no! Zippy fell into the giant pothole!",
+    "Uh oh... Sprinkles is totally stuck!",
+    "Yes! Grizzly made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005_audit.md"
+}

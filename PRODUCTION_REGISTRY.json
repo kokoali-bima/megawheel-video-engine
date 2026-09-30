@@ -1,34 +1,13 @@
 {
-  "_about": "Registry keunikan video MegaWheel Kids 2D. Aturan: BLUEPRINT.md bagian 7. Tambah satu entri per video, jangan hapus entri lama.",
+  "_about": "Registry video MegaWheel Arena: keunikan + episode/season + status upload. Aturan: BLUEPRINT.md bagian 7. Diisi otomatis oleh engine dan episodes.py; jangan diedit manual, jangan hapus entri lama.",
   "videos": [
-    {
-      "video_id": "SIM_POTHOLES_S001",
-      "series": "potholes",
-      "engine_version": "v1",
-      "seed": 1,
-      "created": "2026-09-30",
-      "vehicles": [
-        "sports",
-        "bus",
-        "monster"
-      ],
-      "track_id": "potholes_std_3pit_ramp",
-      "outcomes": [
-        "pit@obs2",
-        "stuck@obs0",
-        "win"
-      ],
-      "duration": 41.6,
-      "status": "PROTOTYPE_NOT_FOR_UPLOAD",
-      "audit": null,
-      "youtube_url": null
-    },
     {
       "video_id": "SIM_POTHOLES_V2_S001",
       "series": "potholes",
       "engine_version": "v2",
       "seed": 1,
       "created": "2026-09-30",
+      "render_date": "2026-09-30",
       "vehicles": [
         "sports",
         "bus",
@@ -40,80 +19,41 @@
         "stuck@obs0",
         "win"
       ],
-      "duration": 46.93,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_POTHOLES_V2_S001_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
+      "duration": 45.4,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_potholes_s001",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_potholes_s001/SIM_POTHOLES_V2_S001_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     },
     {
-      "video_id": "SIM_POTHOLES_V2_S002",
-      "series": "potholes",
+      "video_id": "SIM_BUMPS_V2_S002",
+      "series": "bumps",
       "engine_version": "v2",
       "seed": 2,
       "created": "2026-09-30",
+      "render_date": "2026-09-30",
       "vehicles": [
-        "sports",
-        "bus",
-        "monster"
-      ],
-      "track_id": "potholes_dc6ea3dd",
-      "outcomes": [
-        "flip@obs2+broken",
-        "stuck@obs2",
-        "win"
-      ],
-      "duration": 48.87,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_POTHOLES_V2_S002_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
-    },
-    {
-      "video_id": "SIM_BUMPS_V2_S006",
-      "series": "bumps",
-      "engine_version": "v2",
-      "seed": 6,
-      "created": "2026-09-30",
-      "vehicles": [
-        "sports",
-        "bus",
-        "monster"
-      ],
-      "track_id": "bumps_a1184bfc",
-      "outcomes": [
-        "flip@obs2",
-        "stuck@obs1",
-        "win"
-      ],
-      "duration": 49.3,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_BUMPS_V2_S006_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
-    },
-    {
-      "video_id": "SIM_BUMPS_V2_S001",
-      "series": "bumps",
-      "engine_version": "v2",
-      "seed": 1,
-      "created": "2026-09-30",
-      "vehicles": [
-        "police",
-        "firetruck",
+        "taxi",
+        "bigrig",
         "monster2"
       ],
-      "track_id": "bumps_a3f04e8b",
+      "track_id": "bumps_926d31bb",
       "outcomes": [
-        "stuck@obs2",
+        "flip@obs2+broken",
         "stuck@obs1",
         "win"
       ],
-      "duration": 49.17,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_BUMPS_V2_S001_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
+      "duration": 46.4,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_bumps_s002",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_bumps_s002/SIM_BUMPS_V2_S002_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     },
     {
       "video_id": "SIM_POTHOLES_V2_S003",
@@ -121,66 +61,106 @@
       "engine_version": "v2",
       "seed": 3,
       "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "f1",
+        "icecream",
+        "monster"
+      ],
+      "track_id": "potholes_0fb8fcd6",
+      "outcomes": [
+        "pit@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 44.33,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_potholes_s003",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S004",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 4,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
       "vehicles": [
         "police",
         "firetruck",
         "monster2"
       ],
-      "track_id": "potholes_0fb8fcd6",
+      "track_id": "bumps_085ce19c",
       "outcomes": [
-        "flip@obs2",
-        "stuck@obs0",
+        "stuck@obs2",
+        "flip@obs1+broken",
         "win"
       ],
-      "duration": 48.77,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_POTHOLES_V2_S003_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
+      "duration": 48.0,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_bumps_s004",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_bumps_s004/SIM_BUMPS_V2_S004_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     },
     {
-      "video_id": "SIM_BUMPS_V2_S003",
-      "series": "bumps",
+      "video_id": "SIM_POTHOLES_V2_S005",
+      "series": "potholes",
       "engine_version": "v2",
-      "seed": 3,
+      "seed": 5,
       "created": "2026-09-30",
+      "render_date": "2026-09-30",
       "vehicles": [
-        "f1",
+        "sports",
         "icecream",
         "monster2"
       ],
-      "track_id": "bumps_d3de3b02",
+      "track_id": "potholes_d0311b71",
       "outcomes": [
-        "stuck@obs1",
-        "stuck@obs2",
-        "win"
-      ],
-      "duration": 47.97,
-      "status": "SUPERSEDED_REBRAND",
-      "audit": "renders/SIM_BUMPS_V2_S003_audit.md",
-      "youtube_url": null,
-      "note": "old brand 'MegaWheel Kids' + child narrator; not for upload"
-    },
-    {
-      "video_id": "SIM_POTHOLES_V2_S004",
-      "series": "potholes",
-      "engine_version": "v2",
-      "seed": 4,
-      "created": "2026-09-30",
-      "vehicles": [
-        "f1",
-        "firetruck",
-        "monster"
-      ],
-      "track_id": "potholes_643445ba",
-      "outcomes": [
-        "flip@obs2+broken",
+        "pit@obs2+broken",
         "stuck@obs0",
         "win"
       ],
-      "duration": 44.5,
+      "duration": 46.67,
       "status": "RENDERED_PENDING_APPROVAL",
-      "audit": "renders/SIM_POTHOLES_V2_S004_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_potholes_s005",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_potholes_s005/SIM_POTHOLES_V2_S005_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S006",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 6,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "police",
+        "bus",
+        "monster"
+      ],
+      "track_id": "bumps_a1184bfc",
+      "outcomes": [
+        "flip@obs3",
+        "stuck@obs2",
+        "win"
+      ],
+      "duration": 46.8,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_bumps_s006",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_bumps_s006/SIM_BUMPS_V2_S006_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
       "youtube_url": null
     }
   ]

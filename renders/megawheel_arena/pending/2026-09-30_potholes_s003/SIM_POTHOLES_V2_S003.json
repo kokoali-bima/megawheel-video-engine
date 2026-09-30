@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_POTHOLES_V2_S003",
-  "status": "SUPERSEDED_REBRAND",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 3,
   "fps": 30,
-  "duration": 48.77,
+  "duration": 44.33,
   "track_id": "potholes_0fb8fcd6",
   "track_params": {
     "p1x": 27.1,
@@ -20,9 +20,9 @@
     "p3w": 5.1,
     "p3d": 3.3
   },
-  "fingerprint": "potholes|police,firetruck,monster2|potholes_0fb8fcd6|flip@obs2,stuck@obs0,win",
+  "fingerprint": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
   "outcomes": [
-    "flip@obs2",
+    "pit@obs2+broken",
     "stuck@obs0",
     "win"
   ],
@@ -31,7 +31,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->83.3 m, 3.0->30.9 m, 3.0->124.7 m",
+      "detail": "3.0->78.7 m, 3.0->27.7 m, 3.0->141.5 m",
       "hard": true
     },
     {
@@ -59,7 +59,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "7.3s, 6.1s, 9.1s",
+      "detail": "6.8s, 5.2s, 7.7s",
       "hard": true
     },
     {
@@ -80,47 +80,48 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "48.8 s",
+      "detail": "44.3 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "16.5s, 10.5s, 21.8s",
+      "detail": "15.8s, 10.0s, 18.5s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|police,firetruck,monster2|potholes_0fb8fcd6|flip@obs2,stuck@obs0,win",
+      "detail": "potholes|f1,icecream,monster|potholes_0fb8fcd6|pit@obs2+broken,stuck@obs0,win",
       "hard": true
     }
   ],
-  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
-  "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
-  "description": "Can Siren, Hydro or Grizzly survive the GIANT POTHOLES? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Giant Potholes! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 #Shorts",
+  "description": "Nitro the race car, Sprinkles the ice cream truck and Rocky the monster truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "potholes",
     "monster truck",
-    "kids",
+    "crash test",
+    "physics simulation",
     "shorts",
-    "physics",
-    "MegaWheel Kids",
-    "police car",
-    "fire truck",
+    "MegaWheel Arena",
+    "race car",
+    "ice cream truck",
     "monster truck"
   ],
   "levels": [
     {
-      "vehicle": "SIREN THE POLICE CAR",
-      "speed": 16.5,
-      "outcome": "flip",
-      "event_t": 7.27,
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 18.2,
+      "outcome": "pit",
+      "event_t": 6.83,
       "obstacle": 2,
-      "broken": false,
+      "broken": true,
       "bullet_time": true,
       "replay": true,
       "bubbles": [
@@ -129,10 +130,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 16.47,
-      "event_out": 9.5,
+      "duration": 15.83,
+      "event_out": 8.77,
       "x_start": 3.0,
-      "x_end": 83.3,
+      "x_end": 78.7,
       "level_color": [
         45,
         183,
@@ -140,10 +141,10 @@
       ]
     },
     {
-      "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 7.2,
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 6.8,
       "outcome": "stuck",
-      "event_t": 6.07,
+      "event_t": 5.2,
       "obstacle": 0,
       "broken": false,
       "bullet_time": true,
@@ -153,11 +154,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 16.47,
-      "duration": 10.5,
-      "event_out": 23.1,
+      "start": 15.83,
+      "duration": 9.97,
+      "event_out": 22.4,
       "x_start": 3.0,
-      "x_end": 30.9,
+      "x_end": 27.7,
       "level_color": [
         255,
         132,
@@ -165,10 +166,10 @@
       ]
     },
     {
-      "vehicle": "GRIZZLY THE MONSTER TRUCK",
-      "speed": 12.85,
+      "vehicle": "ROCKY THE MONSTER TRUCK",
+      "speed": 16.7,
       "outcome": "win",
-      "event_t": 9.07,
+      "event_t": 7.67,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -178,11 +179,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 26.97,
-      "duration": 21.8,
-      "event_out": 37.17,
+      "start": 25.8,
+      "duration": 18.53,
+      "event_out": 34.8,
       "x_start": 3.0,
-      "x_end": 124.7,
+      "x_end": 141.5,
       "level_color": [
         153,
         76,
@@ -191,17 +192,17 @@
     }
   ],
   "narration": [
-    "Level one! Siren the police car is on patrol! Can Siren make it past the giant potholes?",
-    "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
-    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant potholes?",
-    "Whoa! Siren flipped right over!",
-    "Uh oh... Hydro is totally stuck!",
-    "Yes! Grizzly made it! We have a winner!",
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the giant potholes?",
+    "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Level three! Rocky the monster truck. Big wheels, big jump!",
+    "Oh no! Nitro fell into the giant pothole!",
+    "Uh oh... Sprinkles is totally stuck!",
+    "Yes! Rocky made it! We have a winner!",
     "Let's see that again, in slow motion!",
-    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
-  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S003_preview",
-  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S003_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s003/SIM_POTHOLES_V2_S003_audit.md"
 }

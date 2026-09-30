@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_BUMPS_V2_S006",
+  "video_id": "SIM_BUMPS_V2_S002",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->70.8 m, 3.0->49.8 m, 3.0->104.4 m",
+      "value": "3.0->71.8 m, 3.0->59.2 m, 3.0->118.5 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "4 polisi tidur (44-80 m), finish 90 m",
+      "value": "4 polisi tidur (44-79 m), finish 89 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "6.0s, 6.4s, 9.0s",
+      "value": "4.5s, 6.0s, 12.4s",
       "hard": true
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "value": "49.3 s",
+      "value": "46.4 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "value": "15.4s, 11.2s, 22.7s",
+      "value": "11.9s, 10.9s, 23.6s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "bumps|sports,bus,monster|bumps_a1184bfc|flip@obs2,stuck@obs1,win",
+      "value": "bumps|taxi,bigrig,monster2|bumps_926d31bb|flip@obs2+broken,stuck@obs1,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/SIM_BUMPS_V2_S006.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s002/SIM_BUMPS_V2_S002.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 40-50 s dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "49.30 s (manifest 49.3)",
+      "value": "46.40 s (manifest 46.4)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "12.6 MB",
+      "value": "12.4 MB",
       "hard": false
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-13.3 dB",
+      "value": "-13.7 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 9.0s",
+      "value": "48% piksel badge @ 6.3s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 16.0s",
+      "value": "56% piksel warna level @ 12.5s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 23.2s",
+      "value": "48% piksel badge @ 20.1s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 27.2s",
+      "value": "56% piksel warna level @ 23.4s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 38.2s",
+      "value": "28% piksel badge @ 37.1s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "68% piksel panel @ 48.5s",
+      "value": "65% piksel panel @ 45.6s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "bumps|sports,bus,monster|bumps_a1184bfc|flip@obs2,stuck@obs1,win",
+      "value": "bumps|taxi,bigrig,monster2|bumps_926d31bb|flip@obs2+broken,stuck@obs1,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 6",
+      "value": "seed 2",
       "hard": true
     },
     {

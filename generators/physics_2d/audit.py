@@ -6,6 +6,7 @@ Usage:  cd /root/video-engine && ./venv/bin/python generators/physics_2d/audit.p
 Writes renders/<VIDEO_ID>_audit.md + renders/<VIDEO_ID>_audit.json and sets the manifest
 status to RENDERED_PENDING_APPROVAL (pass) or AUDIT_FAILED (fail). Exit code 0 = pass.
 """
+import glob
 import json
 import os
 import re
@@ -59,9 +60,21 @@ def color_ratio(img, box, rgb, tol=45):
     return float(np.all(np.abs(region - np.array(rgb)) < tol, axis=2).mean())
 
 
-def run_audit(video_id, write=True):
-    mpath = f"{OUT}/{video_id}.json"
-    vpath = f"{OUT}/{video_id}.mp4"
+def find_folder(video_id):
+    """Folder holding <video_id>.json: from the registry, else search renders/."""
+    e = registry.get(video_id)
+    if e and e.get("folder") and os.path.exists(f"{BASE}/{e['folder']}/{video_id}.json"):
+        return f"{BASE}/{e['folder']}"
+    hits = glob.glob(f"{OUT}/**/{video_id}.json", recursive=True)
+    if not hits:
+        raise SystemExit(f"[audit] manifest {video_id}.json tidak ditemukan di {OUT}")
+    return os.path.dirname(hits[0])
+
+
+def run_audit(video_id, folder=None, write=True):
+    folder = folder or find_folder(video_id)
+    mpath = f"{folder}/{video_id}.json"
+    vpath = f"{folder}/{video_id}.mp4"
     m = json.load(open(mpath))
     items = []
 
@@ -130,7 +143,7 @@ def run_audit(video_id, write=True):
                           f"{r:.0%} piksel panel @ {dur - 0.8:.1f}s"))
 
     # 5.2 previews
-    prev = m.get("preview_dir", f"{OUT}/{video_id}_preview")
+    prev = m.get("preview_dir", f"{folder}/preview")
     pngs = sorted(os.listdir(prev)) if os.path.isdir(prev) else []
     items.append(item("5.2 Preview", "previews", "PNG preview tersedia (>= 6, termasuk outro)",
                       len(pngs) >= 6 and "outro.png" in pngs, f"{len(pngs)} file"))
@@ -149,20 +162,22 @@ def run_audit(video_id, write=True):
     passed = all(i["ok"] for i in items if i["hard"])
     warns = [i for i in items if not i["hard"] and not i["ok"]]
     if write:
-        write_report(video_id, m, items, passed, warns)
-        m["status"] = "RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED"
-        m["audit_path"] = f"{OUT}/{video_id}_audit.md"
+        write_report(video_id, m, items, passed, warns, folder)
+        # never downgrade an approved / uploaded episode when re-auditing
+        if not passed or m.get("status") in (None, "ANALYZED", "RENDERED_PENDING_APPROVAL", "AUDIT_FAILED"):
+            m["status"] = "RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED"
+        m["audit_path"] = f"{folder}/{video_id}_audit.md"
         with open(mpath, "w") as fh:
             json.dump(m, fh, indent=2, ensure_ascii=False)
     return passed
 
 
-def write_report(video_id, m, items, passed, warns):
+def write_report(video_id, m, items, passed, warns, folder):
     verdict = ("LOLOS" + (" dengan catatan" if warns else "")) if passed else "GAGAL"
     lines = [f"# Audit otomatis: {video_id}", "",
              f"- Tanggal: {time.strftime('%Y-%m-%d %H:%M')} · Auditor: audit.py (otomatis) · "
              f"Engine: {m.get('engine')} · Seed: {m.get('seed')} · Track: {m.get('track_id')}",
-             "- Mengacu: `/root/sim-prototype/BLUEPRINT.md` bagian 5, 6, 7",
+             "- Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7",
              f"- **Hasil: {verdict}**" + (" → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)" if passed
                                           else " → JANGAN dikirim ke user. Perbaiki / render seed lain."),
              ""]
@@ -174,15 +189,16 @@ def write_report(video_id, m, items, passed, warns):
         mark = "✅" if i["ok"] else ("❌" if i["hard"] else "⚠️")
         lines.append(f"| {i['desc']} | {mark} | {i['value']} |")
     lines += ["", "Keterangan: ❌ = wajib diperbaiki (gagal audit), ⚠️ = peringatan (boleh lanjut)."]
-    with open(f"{OUT}/{video_id}_audit.md", "w") as fh:
+    with open(f"{folder}/{video_id}_audit.md", "w") as fh:
         fh.write("\n".join(lines) + "\n")
-    with open(f"{OUT}/{video_id}_audit.json", "w") as fh:
+    with open(f"{folder}/{video_id}_audit.json", "w") as fh:
         json.dump(dict(video_id=video_id, passed=passed, items=items), fh, indent=2, ensure_ascii=False)
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit(__doc__)
-    ok = run_audit(sys.argv[1])
-    print(f"[audit] {'PASS' if ok else 'FAIL'} -> {OUT}/{sys.argv[1]}_audit.md")
+    fol = find_folder(sys.argv[1])
+    ok = run_audit(sys.argv[1], folder=fol)
+    print(f"[audit] {'PASS' if ok else 'FAIL'} -> {fol}/{sys.argv[1]}_audit.md")
     sys.exit(0 if ok else 1)

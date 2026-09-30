@@ -10,8 +10,8 @@ import os
 BASE = "/root/video-engine"
 PATH = f"{BASE}/PRODUCTION_REGISTRY.json"
 LOCK = PATH + ".lock"
-ABOUT = ("Registry keunikan video MegaWheel Kids 2D. Aturan: BLUEPRINT.md bagian 7. "
-         "Tambah satu entri per video, jangan hapus entri lama.")
+ABOUT = ("Registry video MegaWheel Arena: keunikan + episode/season + status upload. Aturan: BLUEPRINT.md bagian 7. "
+         "Diisi otomatis oleh engine dan episodes.py; jangan diedit manual, jangan hapus entri lama.")
 IGNORED_STATUS = {"PROTOTYPE_NOT_FOR_UPLOAD", "REJECTED", "AUDIT_FAILED", "SUPERSEDED_REBRAND"}
 
 
@@ -35,6 +35,23 @@ def _save(data):
 
 def _active(exclude_id):
     return [e for e in load()["videos"] if e["video_id"] != exclude_id and e.get("status") not in IGNORED_STATUS]
+
+
+def get(video_id):
+    for e in load()["videos"]:
+        if e["video_id"] == video_id:
+            return e
+    return None
+
+
+def update(video_id, **fields):
+    with open(LOCK, "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        data = load()
+        for e in data["videos"]:
+            if e["video_id"] == video_id:
+                e.update(fields)
+        _save(data)
 
 
 def find_seed(series, engine_version, seed, exclude_id=None):

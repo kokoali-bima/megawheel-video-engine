@@ -1,40 +1,40 @@
 {
-  "video_id": "SIM_BUMPS_V2_S001",
-  "status": "SUPERSEDED_REBRAND",
+  "video_id": "SIM_BUMPS_V2_S004",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "bumps",
-  "seed": 1,
+  "seed": 4,
   "fps": 30,
-  "duration": 49.17,
-  "track_id": "bumps_a3f04e8b",
+  "duration": 48.0,
+  "track_id": "bumps_085ce19c",
   "track_params": {
     "bumps": [
       [
-        41.7,
-        44.3,
+        42.6,
+        45.2,
         0.6
       ],
       [
-        52.7,
-        55.9,
-        1.26
+        53.0,
+        56.1,
+        1.28
       ],
       [
-        64.4,
-        68.2,
-        2.03
+        63.8,
+        67.6,
+        1.96
       ],
       [
-        75.9,
-        80.5,
-        2.7
+        75.0,
+        79.8,
+        2.68
       ]
     ]
   },
-  "fingerprint": "bumps|police,firetruck,monster2|bumps_a3f04e8b|stuck@obs2,stuck@obs1,win",
+  "fingerprint": "bumps|police,firetruck,monster2|bumps_085ce19c|stuck@obs2,flip@obs1+broken,win",
   "outcomes": [
     "stuck@obs2",
-    "stuck@obs1",
+    "flip@obs1+broken",
     "win"
   ],
   "analysis": [
@@ -42,14 +42,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->60.2 m, 3.0->50.2 m, 3.0->121.7 m",
+      "detail": "3.0->65.2 m, 3.0->60.5 m, 3.0->113.6 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "4 polisi tidur (42-80 m), finish 90 m",
+      "detail": "4 polisi tidur (43-80 m), finish 90 m",
       "hard": true
     },
     {
@@ -70,7 +70,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "7.1s, 6.0s, 12.9s",
+      "detail": "5.8s, 4.6s, 13.1s",
       "hard": true
     },
     {
@@ -91,35 +91,36 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "49.2 s",
+      "detail": "48.0 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
       "ok": true,
-      "detail": "12.2s, 11.0s, 25.9s",
+      "detail": "11.6s, 12.1s, 24.3s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "bumps|police,firetruck,monster2|bumps_a3f04e8b|stuck@obs2,stuck@obs1,win",
+      "detail": "bumps|police,firetruck,monster2|bumps_085ce19c|stuck@obs2,flip@obs1+broken,win",
       "hard": true
     }
   ],
-  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
-  "title": "Cars VS Giant Speed Bumps! 🚗💥 Who Makes It? #Shorts",
-  "description": "Can Siren, Hydro or Grizzly survive the GIANT SPEED BUMPS? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 #Shorts",
+  "description": "Siren the police car, Hydro the fire truck and Grizzly the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "speed bumps",
     "monster truck",
-    "kids",
+    "crash test",
+    "physics simulation",
     "shorts",
-    "physics",
-    "MegaWheel Kids",
+    "MegaWheel Arena",
     "police car",
     "fire truck",
     "monster truck"
@@ -127,9 +128,9 @@
   "levels": [
     {
       "vehicle": "SIREN THE POLICE CAR",
-      "speed": 12.5,
+      "speed": 18.75,
       "outcome": "stuck",
-      "event_t": 7.13,
+      "event_t": 5.77,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -140,10 +141,10 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 12.23,
-      "event_out": 8.33,
+      "duration": 11.6,
+      "event_out": 8.37,
       "x_start": 3.0,
-      "x_end": 60.2,
+      "x_end": 65.2,
       "level_color": [
         45,
         183,
@@ -152,23 +153,23 @@
     },
     {
       "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 10.5,
-      "outcome": "stuck",
-      "event_t": 5.97,
+      "speed": 17.5,
+      "outcome": "flip",
+      "event_t": 4.6,
       "obstacle": 1,
-      "broken": false,
+      "broken": true,
       "bullet_time": true,
-      "replay": false,
+      "replay": true,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "OUCH!"
       ],
-      "start": 12.23,
-      "duration": 11.03,
-      "event_out": 19.4,
+      "start": 11.6,
+      "duration": 12.13,
+      "event_out": 17.4,
       "x_start": 3.0,
-      "x_end": 50.2,
+      "x_end": 60.5,
       "level_color": [
         255,
         132,
@@ -177,9 +178,9 @@
     },
     {
       "vehicle": "GRIZZLY THE MONSTER TRUCK",
-      "speed": 16.06,
+      "speed": 12.62,
       "outcome": "win",
-      "event_t": 12.93,
+      "event_t": 13.1,
       "obstacle": 3,
       "broken": false,
       "bullet_time": true,
@@ -189,11 +190,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 23.27,
-      "duration": 25.9,
-      "event_out": 37.57,
+      "start": 23.73,
+      "duration": 24.27,
+      "event_out": 38.33,
       "x_start": 3.0,
-      "x_end": 121.7,
+      "x_end": 113.6,
       "level_color": [
         153,
         76,
@@ -206,12 +207,13 @@
     "Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
     "Level three! Grizzly the monster truck! Can Grizzly smash through the giant speed bumps?",
     "Uh oh... Siren is totally stuck!",
-    "Uh oh... Hydro is totally stuck!",
+    "Whoa! Hydro flipped right over!",
     "Yes! Grizzly made it! We have a winner!",
-    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
-  "video_path": "/root/video-engine/renders/SIM_BUMPS_V2_S001.mp4",
-  "preview_dir": "/root/video-engine/renders/SIM_BUMPS_V2_S001_preview",
-  "audit_path": "/root/video-engine/renders/SIM_BUMPS_V2_S001_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/SIM_BUMPS_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_bumps_s004/SIM_BUMPS_V2_S004_audit.md"
 }

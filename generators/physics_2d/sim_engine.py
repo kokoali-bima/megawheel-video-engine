@@ -41,7 +41,8 @@ REPLAY_SPEED = 0.4
 BULLET_RATE = 0.38
 BASE = "/root/video-engine"
 WORK = f"{BASE}/work/physics_2d"
-OUT_DIR = f"{BASE}/renders"
+CHANNEL_DIR = f"{BASE}/renders/megawheel_arena"   # pending/ -> S01/E001_<date>_<series>/ (episodes.py approve)
+OUT_DIR = f"{CHANNEL_DIR}/pending"                # set per job in main()
 CAST_FILE = f"{BASE}/cast/characters.json"
 CHANNEL = "MegaWheel Arena"          # rebrand 2026-09-30 (was "MegaWheel Kids"): general audience, not made for kids
 VOICE = "en-US-AvaNeural"            # energetic adult female narrator (was the child voice en-US-AnaNeural)
@@ -58,12 +59,12 @@ START_X = 3.0
 FINISH_X = 100.0
 SERIES_DEFS = {
     "potholes": dict(title="CARS VS GIANT POTHOLES!", obst="giant potholes", max_fail=20.0, max_win=24.0,
-                     yt_title="Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
+                     yt_title="Cars VS Giant Potholes! Who Survives? 🚗💥",
                      tags=["cars", "potholes", "monster truck", "crash test", "physics simulation", "shorts",
                            "MegaWheel Arena"]),
     "bumps": dict(title="CARS VS GIANT SPEED BUMPS!", obst="giant speed bumps", speed_scale=1.25,
                   max_fail=18.0, max_win=27.0,
-                  yt_title="Cars VS Giant Speed Bumps! 🚗💥 Who Makes It? #Shorts",
+                  yt_title="Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
                   tags=["cars", "speed bumps", "monster truck", "crash test", "physics simulation", "shorts",
                         "MegaWheel Arena"]),
 }
@@ -1903,6 +1904,18 @@ def analyze(intro_durs):
     return res
 
 
+def video_description():
+    """YouTube description template (general audience, no 'kids' wording). BLUEPRINT rule 7."""
+    nicks = [f"{VEHICLES[vk]['nick']} the {VEHICLES[vk]['display'].split(' THE ', 1)[1].lower()}" for vk, _ in STORY]
+    obst = SERIES_DEFS[SERIES]["obst"].upper()
+    return (f"{nicks[0]}, {nicks[1]} and {nicks[2]} take on the {obst}! 💥 "
+            f"Only one makes it to the finish line. Who's your pick? 🏁\n\n"
+            "Watch till the end for the slow-motion replay! 🎬\n\n"
+            "🏆 Comment your champion below!\n"
+            f"🔔 Subscribe to {CHANNEL} for new car challenges every week.\n\n"
+            "#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena")
+
+
 def outcome_tags():
     return [("win" if L["event"]["type"] == "win" else
              f"{L['event']['type']}@obs{L['event']['obstacle']}" + ("+broken" if L["broken"] else ""))
@@ -1968,7 +1981,7 @@ def save_png(g, path):
 
 # ================================================================ main
 def main():
-    global FPS
+    global FPS, OUT_DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--series", default="auto", choices=["auto"] + list(SERIES_DEFS),
@@ -1982,7 +1995,6 @@ def main():
     args = ap.parse_args()
     FPS = args.fps
     os.makedirs(WORK, exist_ok=True)
-    os.makedirs(OUT_DIR, exist_ok=True)
     import registry
     detect_font()
     load_cast()
@@ -2002,12 +2014,20 @@ def main():
     make_story(series, args.seed, appearances)
     init_scenery()
     name = args.name or f"SIM_{SERIES.upper()}_{ENGINE_VERSION.upper()}_S{args.seed:03d}"
+    render_date = time.strftime("%Y-%m-%d")
+    if args.preview_only:
+        OUT_DIR = f"{WORK}/previews/{name}"             # previews never land in renders/
+    else:
+        OUT_DIR = f"{CHANNEL_DIR}/pending/{render_date}_{SERIES}_s{args.seed:03d}"
     if not args.preview_only and not args.force:
         other = registry.find_seed(SERIES, ENGINE_VERSION, args.seed, exclude_id=name)
         if other:
             raise SystemExit(f"[registry] STOP: seed {args.seed} sudah dipakai oleh {other}. Pakai seed lain.")
-        if os.path.exists(f"{OUT_DIR}/{name}.mp4"):
-            raise SystemExit(f"[registry] STOP: {OUT_DIR}/{name}.mp4 sudah ada. Pakai seed lain atau --force.")
+        prev = registry.get(name)
+        if prev and prev.get("status") not in registry.IGNORED_STATUS:
+            raise SystemExit(f"[registry] STOP: {name} sudah ada ({prev.get('status')}, {prev.get('folder')}). "
+                             f"Pakai seed lain atau --force.")
+    os.makedirs(OUT_DIR, exist_ok=True)
     print(f"[track] {TRACK_ID} {json.dumps(TRACK_PARAMS)}", flush=True)
     print(f"[story] {SERIES}: " + " | ".join(f"{want}: {'>'.join(order)}" for order, (_, want)
                                              in zip(ROLE_ORDER, ROSTER)), flush=True)
@@ -2065,10 +2085,12 @@ def main():
 
     # analysis gate + uniqueness (BLUEPRINT.md sections 5 and 7)
     analysis = analyze([len(x) / SR for x in intros])
+    folder_rel = os.path.relpath(OUT_DIR, BASE)
     entry = dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=args.seed,
-                 created=time.strftime("%Y-%m-%d"), vehicles=[vk for vk, _ in STORY], track_id=TRACK_ID,
+                 created=render_date, render_date=render_date, vehicles=[vk for vk, _ in STORY], track_id=TRACK_ID,
                  outcomes=outcome_tags(), duration=round(total, 2), status="ANALYZED",
-                 audit=f"renders/{name}_audit.md", youtube_url=None)
+                 folder=folder_rel, audit=f"{folder_rel}/{name}_audit.md",
+                 episode=None, season=None, upload_date=None, youtube_url=None)
     fingerprint = registry.fingerprint(entry)
     dup = registry.find_fingerprint(fingerprint, exclude_id=name)
     analysis.append(check("unique", "Sidik jari belum ada di registry", dup is None or args.allow_duplicate,
@@ -2145,7 +2167,7 @@ def main():
     wav_path = f"{WORK}/mix_{name}.wav"
     write_wav(wav_path, mix)
 
-    prev_dir = f"{OUT_DIR}/{name}_preview"
+    prev_dir = f"{OUT_DIR}/preview"
     os.makedirs(prev_dir, exist_ok=True)
     marks = []
     for li, L in enumerate(LEVELS):
@@ -2170,10 +2192,9 @@ def main():
         series=SERIES, seed=args.seed, fps=FPS, duration=round(total, 2),
         track_id=TRACK_ID, track_params=TRACK_PARAMS, fingerprint=fingerprint, outcomes=entry["outcomes"],
         analysis=analysis, cta=CTA,
-        title=SERIES_DEFS[SERIES]["yt_title"],
-        description=(f"Can {', '.join(VEHICLES[vk]['nick'] for vk, _ in STORY[:-1])} or {VEHICLES[STORY[-1][0]]['nick']} "
-                     f"survive the {SERIES_DEFS[SERIES]['obst'].upper()}? 🚗💥 Watch till the end! 🏁\n\n"
-                     "#Shorts #Cars #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena"),
+        title_base=SERIES_DEFS[SERIES]["yt_title"],
+        title=f"{SERIES_DEFS[SERIES]['yt_title']} #Shorts",       # episodes.py approve adds "| Ep. N"
+        description=video_description(),
         tags=SERIES_DEFS[SERIES]["tags"] + [VEHICLES[vk]["display"].split(" THE ")[1].lower() for vk, _ in STORY],
         levels=[dict(vehicle=L["v"]["display"], speed=round(L["speed"], 2), outcome=L["event"]["type"],
                      event_t=round(L["event"]["t"], 2), obstacle=L["event"]["obstacle"],
@@ -2221,7 +2242,7 @@ def main():
 
     # automatic audit (BLUEPRINT.md section 6) + registry (section 7)
     import audit
-    passed = audit.run_audit(name)
+    passed = audit.run_audit(name, folder=OUT_DIR)
     entry["status"] = "RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED"
     registry.upsert(entry)
     print(f"[audit] {'PASS' if passed else 'FAIL'} -> {OUT_DIR}/{name}_audit.md", flush=True)

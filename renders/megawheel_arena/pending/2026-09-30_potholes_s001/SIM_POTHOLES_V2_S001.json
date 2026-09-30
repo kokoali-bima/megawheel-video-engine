@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_POTHOLES_V2_S001",
-  "status": "SUPERSEDED_REBRAND",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 1,
   "fps": 30,
-  "duration": 46.93,
+  "duration": 45.4,
   "track_id": "potholes_std",
   "track_params": {
     "p1x": 30.0,
@@ -31,14 +31,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->80.7 m, 3.0->30.4 m, 3.0->133.5 m",
+      "detail": "3.0->80.7 m, 3.0->34.8 m, 3.0->141.0 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "3 lubang, ramp 48.0-54.0 m, finish 100 m",
+      "detail": "3 lubang (30-83 m), finish 100 m",
       "hard": true
     },
     {
@@ -59,7 +59,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "7.9s, 6.4s, 8.1s",
+      "detail": "8.1s, 5.5s, 7.8s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
     },
     {
       "id": "spectacular",
-      "desc": "Minimal 1 momen spektakuler (hancur/terbalik)",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
       "ok": true,
       "detail": "",
       "hard": true
@@ -80,14 +80,14 @@
       "id": "duration",
       "desc": "Durasi total 40-50 s",
       "ok": true,
-      "detail": "46.9 s",
+      "detail": "45.4 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "16.3s, 9.9s, 20.7s",
+      "detail": "17.2s, 9.5s, 18.7s",
       "hard": true
     },
     {
@@ -98,25 +98,28 @@
       "hard": true
     }
   ],
-  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!",
-  "title": "Cars VS Giant Potholes! 🚗💥 Who Makes It? #Shorts",
-  "description": "Can Zippy, Buster or Rocky survive the GIANT potholes? 🚗💥 Watch till the end! 🏁\n\n#Shorts #Cars #MonsterTruck #KidsVideos #MegaWheelKids",
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Giant Potholes! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 #Shorts",
+  "description": "Zippy the sports car, Buster the school bus and Rocky the monster truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
-    "monster truck",
-    "school bus",
     "potholes",
-    "kids",
+    "monster truck",
+    "crash test",
+    "physics simulation",
     "shorts",
-    "physics",
-    "MegaWheel Kids"
+    "MegaWheel Arena",
+    "sports car",
+    "school bus",
+    "monster truck"
   ],
   "levels": [
     {
       "vehicle": "ZIPPY THE SPORTS CAR",
-      "speed": 14.5,
+      "speed": 14.0,
       "outcome": "pit",
-      "event_t": 7.87,
+      "event_t": 8.1,
       "obstacle": 2,
       "broken": true,
       "bullet_time": true,
@@ -127,8 +130,8 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 16.3,
-      "event_out": 8.8,
+      "duration": 17.23,
+      "event_out": 10.4,
       "x_start": 3.0,
       "x_end": 80.7,
       "level_color": [
@@ -139,23 +142,23 @@
     },
     {
       "vehicle": "BUSTER THE SCHOOL BUS",
-      "speed": 6.0,
+      "speed": 9.6,
       "outcome": "stuck",
-      "event_t": 6.4,
+      "event_t": 5.47,
       "obstacle": 0,
       "broken": false,
-      "bullet_time": false,
+      "bullet_time": true,
       "replay": false,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "OUCH!"
       ],
-      "start": 16.3,
-      "duration": 9.93,
-      "event_out": 22.73,
+      "start": 17.23,
+      "duration": 9.47,
+      "event_out": 23.63,
       "x_start": 3.0,
-      "x_end": 30.4,
+      "x_end": 34.8,
       "level_color": [
         255,
         132,
@@ -164,9 +167,9 @@
     },
     {
       "vehicle": "ROCKY THE MONSTER TRUCK",
-      "speed": 15.05,
+      "speed": 17.8,
       "outcome": "win",
-      "event_t": 8.1,
+      "event_t": 7.83,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -176,11 +179,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 26.23,
-      "duration": 20.7,
-      "event_out": 35.23,
+      "start": 26.7,
+      "duration": 18.7,
+      "event_out": 35.83,
       "x_start": 3.0,
-      "x_end": 133.5,
+      "x_end": 141.0,
       "level_color": [
         153,
         76,
@@ -189,17 +192,17 @@
     }
   ],
   "narration": [
-    "Level one! Zippy the sports car! Can Zippy jump the giant potholes?",
+    "Level one! Zippy the sports car! Can Zippy survive the giant potholes?",
     "Level two! Buster the school bus. Big and heavy... can Buster make it?",
     "Level three! Rocky the monster truck. Big wheels, big jump!",
     "Oh no! Zippy fell into the giant pothole!",
     "Uh oh... Buster is totally stuck!",
     "Yes! Rocky made it! We have a winner!",
     "Let's see that again, in slow motion!",
-    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Kids!"
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AnaNeural",
-  "video_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S001.mp4",
-  "preview_dir": "/root/video-engine/renders/SIM_POTHOLES_V2_S001_preview",
-  "audit_path": "/root/video-engine/renders/SIM_POTHOLES_V2_S001_audit.md"
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s001/SIM_POTHOLES_V2_S001.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s001/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_potholes_s001/SIM_POTHOLES_V2_S001_audit.md"
 }

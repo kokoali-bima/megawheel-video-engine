@@ -158,4 +158,19 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-09-30 — v2.5: mulai bersih + sistem episode/season (Claude Code, Opus)
+
+**Pembersihan (permintaan user):** semua video dihapus (`renders/*` 107 MB, `/root/renders` 298 MB termasuk video era BeamNG, salinan lokal). Registry lama → `archive/legacy_publishing/PRODUCTION_REGISTRY_pre_arena.json`; registry baru kosong. `upload_cli.py`, `core/tracker.py`, `VIDEO_PUBLISHING_TRACKER.*` → `archive/legacy_publishing/`.
+
+**Struktur episode** (keputusan: per season/episode + tanggal di nama folder, bukan folder harian, karena nomor episode permanen sedangkan tanggal render/upload bisa bergeser):
+- Engine menulis ke `renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/` (preview-only ke `work/physics_2d/previews/`).
+- `generators/publishing/episodes.py approve` → nomor episode berikutnya (tanpa bolong), Season = 30 episode, folder `S01/E001_<tanggal>_<seri>/`, judul `"... | Ep. N #Shorts"`. `reject` → `rejected/`. `set` → metrik evaluasi. `EPISODE_LOG.md` otomatis.
+- `generators/publishing/publish.py <EP>` → upload hanya episode APPROVED, metadata dari manifest, kategori Film & Animation (1), `made_for_kids=False`, status + URL tercatat.
+- Template deskripsi video (nama tokoh, seri, CTA channel) dan judul "Who Survives?".
+- Audit: bisa dijalankan pada folder mana pun; tidak lagi menurunkan status episode APPROVED/UPLOADED.
+
+**Bug kritis yang diperbaiki:** `core/youtube_uploader.upload_shorts` punya default `made_for_kids=True`, kategori Gaming, dan tag BeamNG/Kids. Kalau dibiarkan, setiap upload lewat script akan berlabel "dibuat untuk anak". Default sudah diubah, dan `publish.py` mengirim nilai eksplisit.
+
+**Uji:** sandbox `/tmp` untuk episodes.py (approve → Ep.1, reject, approve → Ep.2 tanpa bolong, path diperbarui, metrik, mark_uploaded, re-approve ditolak) LOLOS. `publish.py` menolak episode yang belum di-approve.
+
 **Pembersihan permanen (disetujui user, 2026-09-30):** dihapus `/root/local_videos` (325 MB footage BeamNG), `/root/sim-prototype.MIGRATED` (183 MB), dan 6 draft render di root `/root/renders` (V4–V7, FINAL_MASTERPIECE, VIDEO_02_POLICE). **Dipertahankan:** 8 MP4 di `/root/renders/youtube_shorts_batch/` karena masih dirujuk `VIDEO_PUBLISHING_TRACKER.json` (tracker berisi 9 entri: 3 sudah tayang + draft; `VIDEO_03_SUV_POLICE_TURBO_COUPE.mp4` sudah tidak ada sejak sebelum pembersihan). Backup `/root/backups/pre-merge-20260930.tar.gz` tetap ada.

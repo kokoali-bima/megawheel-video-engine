@@ -6,13 +6,15 @@ Engine otomatis untuk channel YouTube **MegaWheel Arena**: video Shorts simulasi
 
 ## Struktur
 ```
-core/                      youtube_uploader.py, tracker.py (upload hanya setelah approval user)
-generators/physics_2d/     sim_engine.py (engine), audit.py, registry.py, find_seeds.sh, tune_bumps.py
+core/                      youtube_uploader.py (dipanggil lewat publish.py)
+generators/physics_2d/     sim_engine.py (engine), audit.py, registry.py, find_seeds.sh, tune_bumps.py, tune_cast.py
+generators/publishing/     episodes.py (approve/reject/log episode), publish.py (upload HANYA episode APPROVED)
+renders/megawheel_arena/   pending/ → S01/E001_<tanggal>_<seri>/ ; rejected/ ; EPISODE_LOG.md
 cast/                      characters.json + CAST.md (10 tokoh tetap: Zippy, Siren, Nitro, Tilly, Buster, Hydro, Titan, Sprinkles, Rocky, Grizzly)
 branding/                  foto profil, banner, CHANNEL_SETUP.md (generator: generators/branding/make_branding.py)
-renders/                   MP4 + manifest (.json) + audit (_audit.md) + preview PNG  (MP4/PNG tidak di-commit)
+                           (MP4/PNG tidak di-commit; manifest .json + audit .md + EPISODE_LOG.md di-commit)
 PRODUCTION_REGISTRY.json   registry keunikan semua video
-upload_cli.py, auth_*.py   upload & otorisasi YouTube (credentials/ tidak di-commit)
+auth_*.py                  otorisasi YouTube (credentials/ tidak di-commit)
 archive/                   pipeline footage lama + engine v1 (tidak dipakai)
 ```
 

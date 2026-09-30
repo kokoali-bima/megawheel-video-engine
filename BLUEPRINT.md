@@ -35,11 +35,11 @@ Contoh kegagalan nyata yang dicegah dokumen ini: agent membuat script sendiri �
 | Registry keunikan | `/root/video-engine/generators/physics_2d/registry.py` + `/root/video-engine/PRODUCTION_REGISTRY.json` |
 | Python | `/root/video-engine/venv/bin/python` (satu venv untuk engine + uploader) |
 | Tokoh tetap | `/root/video-engine/cast/characters.json` + `cast/CAST.md` |
-| Upload (hanya setelah approval) | `/root/video-engine/upload_cli.py` + `core/youtube_uploader.py` + `core/tracker.py` |
+| Episode & upload | `generators/publishing/episodes.py` (approve/reject/log) + `generators/publishing/publish.py` (upload HANYA episode APPROVED) + `core/youtube_uploader.py` |
 | Repo GitHub (private) | `kokoali-bima/megawheel-video-engine`, branch `main`. Push dari 99.3: `cd /root/video-engine && git push` (deploy key `/root/.ssh/id_ed25519_megawheel`, alias ssh `github-megawheel`) |
 | Library | pymunk 7.x (fisika), pycairo (grafis), numpy, edge-tts |
 | Font | `/root/.fonts/LuckiestGuy-Regular.ttf` |
-| Output | `/root/video-engine/renders/<VIDEO_ID>.mp4`, `<VIDEO_ID>.json` (manifest), `<VIDEO_ID>_preview/*.png` |
+| Output | `/root/video-engine/renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/` berisi `<VIDEO_ID>.mp4`, `<VIDEO_ID>.json` (manifest), `<VIDEO_ID>_audit.md`, `preview/*.png`. Setelah approve: `renders/megawheel_arena/S01/E001_<tanggal>_<seri>/`. Daftar episode: `renders/megawheel_arena/EPISODE_LOG.md` |
 | Versi lama | `/root/video-engine/archive/physics_2d_v1/sim_video_v1.py` (jangan dipakai untuk produksi) |
 
 ### Perintah resmi (dijalankan di 99.3)
@@ -77,9 +77,9 @@ Log berisi baris-baris ini, berurutan:
 [sim] sports: ...   [sim] bus: ...   [sim] monster: ...
 [timeline] 4x.xs, NNNN frames @ 30fps
 [analysis] OK   forward: ...          (10 baris analisa)
-[preview] /root/video-engine/renders/<VIDEO_ID>_preview
-[render] NNNN frames in xx.xs -> /root/video-engine/renders/<VIDEO_ID>.mp4
-[audit] PASS -> /root/video-engine/renders/<VIDEO_ID>_audit.md
+[preview] /root/video-engine/renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/preview
+[render] NNNN frames in xx.xs -> .../pending/<tanggal>_<seri>_s<seed>/<VIDEO_ID>.mp4
+[audit] PASS -> .../pending/<tanggal>_<seri>_s<seed>/<VIDEO_ID>_audit.md
 [result] {"video_id": ..., "status": "RENDERED_PENDING_APPROVAL", ...}
 ```
 Kalau tidak ada `[sim]`, `[analysis]`, `[audit]` dan `[result]`, berarti kamu TIDAK memakai engine ini.
@@ -193,7 +193,7 @@ Level 1 saat ini masih 13–17 s karena ada replay (target 12 s ada di roadmap).
 - [ ] **Variasi rintangan**: level 1 dan level 2 sebaiknya gagal di rintangan yang berbeda (`levels[].obstacle`).
 - [ ] **Minimal 1 momen spektakuler di level gagal**: `broken: true`, `outcome: flip`, atau `bullet_time: true` (lompatan tinggi). Engine tetap memberi skor lebih pada kombinasi yang ada mobil hancur/terbalik.
 
-### 5.2 Analisa visual (buka PNG di `renders/<VIDEO_ID>_preview/`)
+### 5.2 Analisa visual (buka PNG di `<folder video>/preview/`)
 - [ ] `L1_start.png`: judul, badge LEVEL, nama karakter, progress bar, dan mobil di jalan menghadap kanan
 - [ ] `L*_bubble.png`: speech bubble dekat mobil dan tidak menutupi badge
 - [ ] `L*_event.png`: badge FAIL/WINNER cocok dengan kejadian di gambar
@@ -211,12 +211,12 @@ Level 1 saat ini masih 13–17 s karena ada replay (target 12 s ada di roadmap).
 
 ## 6. AUDIT SEBELUM PREVIEW (wajib, setelah render penuh)
 
-**Otomatis:** setelah render, engine menjalankan `audit.py`. Audit ini memeriksa 6.1–6.3 pada file MP4 yang sebenarnya, termasuk **mengukur warna piksel** badge LEVEL, FAIL/WINNER, dan panel outro tepat di detik kejadian. Hasilnya ditulis ke `renders/<VIDEO_ID>_audit.md` dan `_audit.json`, dan status diperbarui di manifest dan registry.
+**Otomatis:** setelah render, engine menjalankan `audit.py`. Audit ini memeriksa 6.1–6.3 pada file MP4 yang sebenarnya, termasuk **mengukur warna piksel** badge LEVEL, FAIL/WINNER, dan panel outro tepat di detik kejadian. Hasilnya ditulis ke `<folder video>/<VIDEO_ID>_audit.md` dan `_audit.json`, dan status diperbarui di manifest dan registry.
 Hanya kirim preview ke user kalau audit **LOLOS** (`[audit] PASS`, exit 0). Perintah manual di bawah ini untuk investigasi kalau audit gagal.
 
 ### 6.1 Audit teknis
 ```bash
-ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate -of compact /root/video-engine/renders/<VIDEO_ID>.mp4
+ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate -of compact <folder video>/<VIDEO_ID>.mp4
 ```
 - [ ] Video `h264`, 1080x1920, 30/1 (atau 60/1)
 - [ ] Audio `aac` ada
@@ -240,7 +240,7 @@ Detik yang dicek dihitung dari manifest (`levels[].start` + waktu kejadian):
 - [ ] Di 1.0 s terakhir video terlihat panel outro
 
 ### 6.4 Laporan audit
-Ditulis otomatis ke `/root/video-engine/renders/<VIDEO_ID>_audit.md` (✅ lolos, ❌ wajib diperbaiki, ⚠️ peringatan). Tanpa file audit berstatus LOLOS, video dianggap belum siap preview. Untuk audit ulang: `./venv/bin/python generators/physics_2d/audit.py <VIDEO_ID>`.
+Ditulis otomatis ke `<folder video>/<VIDEO_ID>_audit.md` (✅ lolos, ❌ wajib diperbaiki, ⚠️ peringatan). Tanpa file audit berstatus LOLOS, video dianggap belum siap preview. Untuk audit ulang: `./venv/bin/python generators/physics_2d/audit.py <VIDEO_ID>`.
 
 ---
 
@@ -261,7 +261,7 @@ File: `/root/video-engine/PRODUCTION_REGISTRY.json`. **Diisi otomatis oleh engin
   "outcomes": ["pit@obs2+broken", "stuck@obs0", "win"],
   "duration": 46.93,
   "status": "RENDERED_PENDING_APPROVAL",
-  "audit": "renders/SIM_POTHOLES_V2_S001_audit.md",
+  "audit": "renders/megawheel_arena/S01/E001_2026-09-30_potholes/SIM_POTHOLES_V2_S001_audit.md",
   "youtube_url": null
 }
 ```
@@ -277,7 +277,7 @@ File: `/root/video-engine/PRODUCTION_REGISTRY.json`. **Diisi otomatis oleh engin
 Aturan 1 dan 2 ditegakkan oleh engine (`[registry] STOP` / analisa `unique`). Aturan 3 muncul sebagai peringatan ⚠️ di audit. Aturan 4 wajib diperhatikan agent/user.
 
 ### 7.3 Status video
-`ANALYZED` → `RENDERED_PENDING_APPROVAL` → (`REJECTED` | `APPROVED`) → `UPLOADED_PUBLIC` / `UPLOADED_PRIVATE`
+`ANALYZED` → `RENDERED_PENDING_APPROVAL` (folder `pending/`) → `APPROVED` (dapat nomor episode, pindah ke `S01/E00x_...`, judul "| Ep. N") atau `REJECTED` (folder `rejected/`) → `UPLOADED_PRIVATE` / `UPLOADED_UNLISTED` / `UPLOADED_PUBLIC`.
 Status lain: `ANALYSIS_FAILED` (tidak dirender), `AUDIT_FAILED` (dirender tapi tidak boleh dikirim), `PROTOTYPE_NOT_FOR_UPLOAD`.
 Video berstatus `AUDIT_FAILED` / `REJECTED` / `PROTOTYPE_NOT_FOR_UPLOAD` tidak dihitung dalam pengecekan keunikan.
 
@@ -286,21 +286,24 @@ Video berstatus `AUDIT_FAILED` / `REJECTED` / `PROTOTYPE_NOT_FOR_UPLOAD` tidak d
 ## 8. Alur Kerja Standar untuk Agent (ringkas)
 
 ```
-1. Baca BLUEPRINT.md (file ini) + DEV_HISTORY.md
+1. Baca BLUEPRINT.md (file ini) + DEV_HISTORY.md + ERROR_LOG.md
 2. Lihat PRODUCTION_REGISTRY.json → pilih seri (atau biarkan otomatis) → seed terbesar di seri itu + 1
 3. cd /root/video-engine && ./venv/bin/python generators/physics_2d/sim_engine.py [--series <seri>] --seed <N>
      exit 1 (STOP analisa/registry) → seed + 1, ulangi (maks 5x, lalu lapor ke user)
      exit 5 (AUDIT_FAILED)          → jangan kirim; laporkan isi _audit.md
-     exit 0                         → lanjut
+     exit 0                         → video ada di renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/
 4. Buka & periksa PNG preview (bagian 5.2) — mata agent tetap wajib
-5. Kirim ke user: VIDEO_ID, durasi, ringkasan level (manifest → levels),
-   hasil audit (_audit.md), dan 2–3 PNG (L1_event, L1_replay/L2_event, outro)
-6. TUNGGU approval. Tanpa approval, jangan upload.
-   Setelah user bilang "approved" untuk VIDEO_ID tertentu:
-     ./venv/bin/python upload_cli.py renders/<VIDEO_ID>.mp4 --title "<title dari manifest>" \
-        --description "<description dari manifest>" --tags "<tags dipisah koma>" --privacy <sesuai perintah user>
-   lalu isi status + youtube_url di PRODUCTION_REGISTRY.json (registry.set_status).
-7. Kalau engine diubah: uji --preview-only, tambahkan entri di DEV_HISTORY.md, lalu
+5. Kirim ke user: VIDEO_ID, durasi, tokoh, hasil audit, dan 2–3 PNG (L1_event, L1_replay/L2_event, outro)
+6. APPROVE — HANYA setelah user bilang approve untuk VIDEO_ID tertentu:
+     ./venv/bin/python generators/publishing/episodes.py approve <VIDEO_ID> [<VIDEO_ID> ...]
+   (urutan argumen = urutan nomor episode; folder pindah ke S01/E00x_..., judul "| Ep. N #Shorts")
+   Ditolak user → ./venv/bin/python generators/publishing/episodes.py reject <VIDEO_ID> "<alasan>"
+7. UPLOAD — HANYA atas perintah user, HANYA episode APPROVED:
+     ./venv/bin/python generators/publishing/publish.py <EP> --privacy private|unlisted|public
+   (judul/deskripsi/tag dari manifest, kategori Film & Animation, made_for_kids=False; status + URL tercatat otomatis)
+8. EVALUASI: isi metrik dari YouTube Analytics → episodes.py set <EP> views=.. likes=.. retention=..% note="..."
+   Daftar lengkap: renders/megawheel_arena/EPISODE_LOG.md (dibuat ulang otomatis)
+9. Kalau engine diubah: uji --preview-only, tambahkan entri di DEV_HISTORY.md, lalu
    git add -A && git commit -m "<ringkasan>" && git push
    (credentials/, venv/, work/, MP4/PNG otomatis diabaikan .gitignore. Jangan pernah commit credentials.)
 ```
