@@ -1,0 +1,83 @@
+{
+  "video_id": "SIM_RACE25D_V1_S006",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v1",
+  "series": "race25d",
+  "seed": 6,
+  "fps": 30,
+  "duration": 29.7,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "sports",
+      "police"
+    ],
+    "lanes": [
+      1,
+      0,
+      3,
+      2
+    ],
+    "puddle": [
+      3,
+      132.0
+    ],
+    "ramp": [
+      2,
+      229.5
+    ],
+    "finish": 343.4
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "mountains"
+  },
+  "theme_id": "sunset-clear-mountains",
+  "voice": "en-US-JennyNeural",
+  "outcomes": [
+    "win",
+    "p2",
+    "p4+spin",
+    "p3+jump+bump"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "has spin + replay": true,
+    "has jump": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Crazy Lane Race! Who Crosses First? 🏁",
+  "title": "Crazy Lane Race! Who Crosses First? 🏁 #Shorts",
+  "description": "Buster, Grizzly, Zippy and Siren race to the finish line! 🏁 Watch out for the slippery puddle and the big ramp jump! 💦\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "sports car",
+    "police car"
+  ],
+  "narration": [
+    "Four racers, one finish line! Buster, Grizzly, Zippy and Siren. Who will win?",
+    "Whoa! Zippy hits the water and spins out!",
+    "Siren takes the ramp... big air!",
+    "Buster wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-JennyNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s006/SIM_RACE25D_V1_S006.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s006/preview"
+}

@@ -409,6 +409,161 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S003",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 3,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "icecream",
+        "police",
+        "f1",
+        "monster"
+      ],
+      "track_id": "race25d_e25bfbad@night-clear-city",
+      "theme": "night-clear-city",
+      "voice": "en-US-AvaMultilingualNeural",
+      "outcomes": [
+        "p4+spin",
+        "win+jump",
+        "p3+bump",
+        "p2"
+      ],
+      "duration": 28.8,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s003",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s003/SIM_RACE25D_V1_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S004",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 4,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_0ea25711@noon-snow-mountains",
+      "theme": "noon-snow-mountains",
+      "voice": "en-US-MichelleNeural",
+      "outcomes": [
+        "p3+bump",
+        "p2",
+        "p4+spin",
+        "win+jump"
+      ],
+      "duration": 29.53,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s004",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s004/SIM_RACE25D_V1_S004_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S005",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 5,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "race25d_37ad5c6f@noon-clear-city",
+      "theme": "noon-clear-city",
+      "voice": "en-US-AriaNeural",
+      "outcomes": [
+        "p3+bump",
+        "p2",
+        "p4+spin",
+        "win+jump"
+      ],
+      "duration": 29.8,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s005",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s005/SIM_RACE25D_V1_S005_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S006",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 6,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_3a0e4d3a@sunset-clear-mountains",
+      "theme": "sunset-clear-mountains",
+      "voice": "en-US-JennyNeural",
+      "outcomes": [
+        "win",
+        "p2",
+        "p4+spin",
+        "p3+jump+bump"
+      ],
+      "duration": 29.7,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s006",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s006/SIM_RACE25D_V1_S006_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V1_S007",
+      "series": "race25d",
+      "engine_version": "v1",
+      "seed": 7,
+      "created": "2026-09-30",
+      "render_date": "2026-09-30",
+      "vehicles": [
+        "firetruck",
+        "f1",
+        "monster",
+        "taxi"
+      ],
+      "track_id": "race25d_12932259@morning-clear-beach",
+      "theme": "morning-clear-beach",
+      "voice": "en-US-EmmaMultilingualNeural",
+      "outcomes": [
+        "p2",
+        "win+jump",
+        "p4+spin",
+        "p3+bump"
+      ],
+      "duration": 28.97,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s007",
+      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s007/SIM_RACE25D_V1_S007_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
