@@ -54,22 +54,23 @@ BARRIER_DOWN = 9.0                               # tyre barriers bounce cars bac
 # CHAOS library (v2, user 2026-10-01): sudden events that hit the arena. Own designs only (KRAGGOR is our
 # dino-robot kaiju, not Godzilla). warn = seconds of warning (target ring / shadow / cracks) before impact.
 CHAOS = {
-    "missile": dict(warn=1.5, banner="MISSILE STRIKE!", line="Incoming! Missile strike!", bubble="KABOOM!"),
-    "kraggor": dict(warn=2.4, banner="KRAGGOR ATTACK!", line="Oh no! It's Kraggor! The monster wants in on the action!",
-                    bubble="SPLAT!"),
-    "ufo":     dict(warn=1.3, banner="UFO INVASION!", line="Is that a UFO? It's grabbing {n}!", bubble="HELP!"),
-    "crack":   dict(warn=1.4, banner="THE FLOOR IS CRACKING!", line="The floor is cracking! Here comes the lava!",
-                    bubble="HOT HOT!"),
+    "missile": dict(warn=1.5, banner="MISSILE STRIKE!", line="Incoming missile!", bubble="KABOOM!"),
+    "kraggor": dict(warn=2.4, banner="KRAGGOR ATTACK!", line="Oh no... it's Kraggor!", bubble="SPLAT!"),
+    "ufo":     dict(warn=1.3, banner="UFO INVASION!", line="A UFO! It's got {n}!", bubble="HELP!"),
+    "crack":   dict(warn=1.4, banner="THE FLOOR IS CRACKING!", line="The floor is breaking!", bubble="HOT HOT!"),
 }
 CHAOS_AT = [(4.5, 5.8), (9.5, 10.8), (14.5, 15.8), (19.5, 20.8)]
 ANNOUNCERS = ["en-US-GuyNeural", "en-US-ChristopherNeural", "en-US-EricNeural"]   # arena announcer (male, en-US)
+# announcer delivery per line type (edge-tts rate, pitch): slow + deep intro, fast + high action calls
+VOICE_STYLE = {"intro": ("-8%", "-6Hz"), "hype": ("+20%", "+6Hz"), "call": ("+4%", "+2Hz"), "norm": ("+12%", "+0Hz")}
+HIT_CALLS = ["Oh my! What a hit!", "Boom! That's gotta hurt!", "What a slam!"]
 T_MAX = 40.0
 POOL = ["sports", "police", "taxi", "f1", "bus", "firetruck", "icecream", "bigrig", "monster", "monster2"]
 BIG = {"bus", "firetruck", "icecream", "bigrig"}
 ARENAS = {
-    "lava": dict(name="the lava", out_line="{n} is out! Into the lava!", bubble="HOT HOT!", grip=0.03),
-    "mud":  dict(name="the mud", out_line="{n} is out! Splat, right into the mud!", bubble="YUCK!", grip=0.028),
-    "ice":  dict(name="the icy water", out_line="{n} is out! Splash, into the icy water!", bubble="BRRR!", grip=0.01),
+    "lava": dict(name="the lava", out_line="{n} is out!", bubble="HOT HOT!", grip=0.03),
+    "mud":  dict(name="the mud", out_line="{n} is out!", bubble="YUCK!", grip=0.028),
+    "ice":  dict(name="the icy water", out_line="{n} is out!", bubble="BRRR!", grip=0.01),
 }
 VMAX = {"f1": 8.4, "sports": 8.2, "police": 7.6, "taxi": 7.4, "monster": 7.2, "monster2": 7.2,
         "icecream": 6.0, "bus": 5.8, "firetruck": 5.8, "bigrig": 5.4}
@@ -1158,6 +1159,113 @@ def draw_out_fx(ctx, c, t, camx):
 
 
 # ------------------------------------------------------------------ audio
+def _band_noise(n, rng, lo, hi):
+    x = rng.normal(0, 1, n)
+    return box_avg(x, max(1, int(se.SR / hi))) - box_avg(x, max(2, int(se.SR / lo)))
+
+
+def crowd_bed(dur, seed=5):
+    """Arena crowd under everything: many voices (band noise with slow swells + chatter) and scattered claps."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * se.SR)
+    tt = np.arange(n) / se.SR
+    x = _band_noise(n, rng, 250, 3500)
+    swell = 0.65 + 0.35 * np.sin(2 * math.pi * 0.13 * tt + 1) * np.sin(2 * math.pi * 0.07 * tt)
+    chatter = 0.7 + 0.3 * box_avg(np.abs(rng.normal(0, 1, n)), int(0.06 * se.SR)) / 0.8
+    x = x / max(1e-9, np.max(np.abs(x))) * swell * chatter
+    m = int(0.012 * se.SR)
+    clap = rng.normal(0, 1, m) * np.exp(-np.linspace(0, 6, m))
+    for i in rng.integers(0, max(1, n - m), int(dur * 16)):
+        x[i:i + m] += clap * float(rng.uniform(0.15, 0.4))
+    return x
+
+
+def cheer(dur, strength=1.0, seed=7):
+    """A cheer swell: crowd noise + a few 'wooo' voices."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * se.SR)
+    tt = np.arange(n) / se.SR
+    x = _band_noise(n, rng, 300, 4500)
+    x = x / max(1e-9, np.max(np.abs(x)))
+    for _ in range(6):                                           # 'wooo' yells
+        f0 = float(rng.uniform(450, 900))
+        f = f0 * (1 + 0.25 * np.minimum(1.0, tt / 0.5)) + 12 * np.sin(2 * math.pi * float(rng.uniform(4, 7)) * tt)
+        x += 0.08 * np.sin(2 * math.pi * np.cumsum(f) / se.SR) * np.exp(-tt * float(rng.uniform(0.8, 1.6)))
+    env = np.minimum(1.0, tt / 0.15) * np.exp(-np.maximum(0.0, tt - 0.4) * 1.2)
+    return x * env * strength
+
+
+def gasp(seed=9):
+    """Crowd 'ooooh!'."""
+    rng = np.random.default_rng(seed)
+    n = int(1.0 * se.SR)
+    tt = np.arange(n) / se.SR
+    x = 0.4 * _band_noise(n, rng, 200, 1500) / 3
+    for f in (310, 620, 700, 1150):
+        x += 0.18 * np.sin(2 * math.pi * f * (1 - 0.08 * tt) * tt)
+    return x * np.minimum(1.0, tt / 0.12) * np.exp(-tt * 2.2)
+
+
+def kaiju_roar(dur=2.1, seed=7):
+    """KRAGGOR's roar (own sound design): low saw growl + distorted screech gliding down + rasp, with echoes."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * se.SR)
+    tt = np.arange(n) / se.SR
+    env = np.minimum(1.0, tt / 0.25) * np.minimum(1.0, (dur - tt) / 0.7)
+    f = 660 - 160 * tt / dur + 22 * np.sin(2 * math.pi * 6.5 * tt)
+    ph = 2 * math.pi * np.cumsum(f) / se.SR
+    scr = np.tanh(2.6 * sum(np.sin(ph * h) / h for h in range(1, 7)))
+    fl = 68 + 10 * np.sin(2 * math.pi * 3 * tt)
+    growl = (2 * ((np.cumsum(fl) / se.SR) % 1.0) - 1) * (0.75 + 0.25 * np.sin(2 * math.pi * 11 * tt))
+    rasp = _band_noise(n, rng, 600, 3000)
+    rasp = rasp / max(1e-9, np.max(np.abs(rasp)))
+    sig = (0.55 * scr + 0.8 * growl + 0.3 * rasp) * env
+    out = np.zeros(n + int(0.5 * se.SR))
+    for d, g in ((0.0, 1.0), (0.11, 0.35), (0.24, 0.2)):
+        i = int(d * se.SR)
+        out[i:i + n] += sig * g
+    return out
+
+
+def kaiju_step(strength=1.0, seed=3):
+    """Giant footstep: deep boom + rumble."""
+    rng = np.random.default_rng(seed)
+    n = int(1.2 * se.SR)
+    tt = np.arange(n) / se.SR
+    boom = np.sin(2 * math.pi * (48 - 12 * tt) * tt) * np.exp(-tt * 4.5)
+    rum = box_avg(rng.normal(0, 1, n), int(se.SR / 180)) * 6 * np.exp(-tt * 3.0)
+    return (boom + 0.5 * rum) * strength
+
+
+def say(text, style):
+    se.TTS_RATE, se.TTS_PITCH = VOICE_STYLE[style]
+    return se.tts(text)
+
+
+def schedule_narration(anchors, extras):
+    """Announcer timing. anchors = [(want, text, style)] are always spoken, in order. extras = [(want, prio, text,
+    style, max_late)] are spoken only if they fit in a free gap without moving an anchor and start at most
+    max_late seconds after the action (higher priority first). Returns [(start, end, audio, text)] by start."""
+    placed, busy = [], 0.0
+    for w, txt, sty in sorted(anchors, key=lambda a: a[0]):
+        a = say(txt, sty)
+        t0 = max(w, busy + 0.15)
+        busy = t0 + len(a) / se.SR
+        placed.append((t0, busy, a, txt))
+    for w, pr, txt, sty, ml in sorted(extras, key=lambda x: (-x[1], x[0])):
+        a = say(txt, sty)
+        d = len(a) / se.SR
+        t0, moved = w, True
+        while moved:
+            moved = False
+            for s0, e0, _, _ in placed:
+                if t0 < e0 + 0.15 and t0 + d > s0 - 0.15:
+                    t0, moved = e0 + 0.15, True
+        if t0 <= w + ml:
+            placed.append((t0, t0 + d, a, txt))
+    return sorted(placed, key=lambda q: q[0])
+
+
 def crowd(dur, seed=3):
     rng = np.random.default_rng(seed)
     n = int(dur * se.SR)
@@ -1180,13 +1288,10 @@ def box_avg(x, k):
     return np.pad(y, (pad // 2, pad - pad // 2), mode="edge")
 
 
-def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, cta_start):
-    se.VOICE = voice
-    se.TTS_RATE, se.TTS_PITCH = "+14%", "+0Hz"                  # hyped arena announcer, with a PA echo
-    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"
+def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start):
     total = len(frames) / FPS
     n = int(total * se.SR) + se.SR
-    narr, eng, sfx = np.zeros(n), np.zeros(n), np.zeros(n)
+    narr, eng, sfx, crowd_buf = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n)
 
     def place(buf, sig, t, gain=1.0):
         i0 = int(t * se.SR)
@@ -1194,12 +1299,8 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
             m = min(len(sig), n - i0)
             buf[i0:i0 + m] += sig[:m] * gain
 
-    busy = 0.0
-    for t_want, text in lines:
-        a = se.tts(text)
-        t0 = max(t_want, busy + 0.15)
+    for t0, _, a, _ in placed:
         place(narr, a, t0)
-        busy = t0 + len(a) / se.SR
     wrel, amp, pitch = [], [], []
     for mode, t in frames:
         v = R.state(winner, t)[5] if mode != "cta" else 0.0
@@ -1219,7 +1320,7 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
             place(sfx, se.stretch(sig, slow) if slow != 1 else sig, o, 0.7 + 0.4 * s)
             if s > 0.5:
                 place(sfx, se.synth_shatter(seed=ev[5] % 20), o + 0.03, 0.35)
-                place(sfx, crowd(1.4, seed=ev[5]), o + 0.1, 0.25)
+                place(crowd_buf, gasp(seed=ev[5]) if s > 0.75 else cheer(1.2, 0.6, seed=ev[5]), o + 0.05, 0.9)
         elif kind == "ringout":
             if ARENA == "lava":
                 place(sfx, se.synth_lava_plunge(), o + 0.3, 0.9)
@@ -1228,11 +1329,11 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
             else:
                 place(sfx, se.synth_splash(1.0, seed=47, big=True), o + 0.3, 0.9)
                 place(sfx, se.synth_shatter(seed=5), o + 0.3, 0.4)
-            place(sfx, crowd(2.0, seed=9), o + 0.4, 0.4)
+            place(crowd_buf, cheer(2.6, 1.1, seed=9), o + 0.3, 1.0)
         elif kind == "wreck":
             place(sfx, se.synth_impact(1.0, seed=31), o, 0.8)
             place(sfx, R.boing(), o + 0.2, 0.6)
-            place(sfx, crowd(2.0, seed=11), o + 0.3, 0.4)
+            place(crowd_buf, cheer(2.6, 1.1, seed=11), o + 0.2, 1.0)
         elif kind == "shrink":
             place(sfx, horn(), o, 0.45)
         elif kind == "sudden":
@@ -1243,11 +1344,11 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
                 for q in range(3):
                     place(sfx, se.tone(880, 0.14, "sine", decay=0.1), o + q * 0.35, 0.5)
                 place(sfx, se.sweep(1500, 260, 0.9, 0.5), o + w - 0.9, 0.7)
-            elif typ == "kraggor":
+            elif typ == "kraggor":                               # footsteps while rising, roar with the open jaw
                 for q in range(3):
-                    place(sfx, se.synth_impact(0.35, seed=60 + q), o + 0.2 + q * 0.6, 0.6)
-                place(sfx, se.stretch(R.dragon_roar(), 1.6), o + 0.85, 1.0)
-                place(sfx, crowd(1.8, seed=31), o + 1.0, 0.4)
+                    place(sfx, kaiju_step(0.6 + 0.15 * q, seed=60 + q), o + q * 0.45, 1.0)
+                place(sfx, kaiju_roar(2.1), o + 0.85, 1.25)
+                place(sfx, gasp(seed=31), o + 0.3, 0.8)
             elif typ == "ufo":
                 place(sfx, R.ufo_hum(w + 3.0), o, 0.6)
             elif typ == "crack":
@@ -1259,15 +1360,16 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
                 place(sfx, se.synth_eruption(seed=47), o, 1.0)
                 place(sfx, se.synth_impact(1.0, seed=21), o, 0.9)
             elif typ == "kraggor":
-                place(sfx, se.synth_wall_crash(1.0), o, 1.0)
-                place(sfx, se.synth_impact(1.0, seed=3), o, 1.0)
+                place(sfx, kaiju_step(1.6, seed=5), o, 1.2)
+                place(sfx, se.synth_wall_crash(1.0), o, 0.8)
                 place(sfx, R.boing(), o + 1.0, 0.6)
+                place(sfx, kaiju_roar(1.4, seed=8), o + 0.5, 0.8)
             elif typ == "ufo":
                 place(sfx, se.sweep(300, 1300, 0.8, 0.4), o, 0.6)
             elif typ == "crack":
                 place(sfx, se.synth_eruption(seed=43), o, 1.0)
                 place(sfx, se.synth_ignite(), o + 0.1, 0.7)
-            place(sfx, crowd(2.0, seed=41), o + 0.2, 0.45)
+            place(crowd_buf, cheer(2.2, 1.0, seed=41), o + 0.2, 1.0)
         elif kind == "erupt":
             place(sfx, se.synth_impact(0.6, seed=17), o, 0.7)
             place(sfx, se.synth_fire(0.8, seed=21), o, 0.6)
@@ -1277,7 +1379,11 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
     for ev in events:
         ev_sfx(ev, out_of(ev[1]))
     place(sfx, se.synth_win(), out_of(winner["finish"]), 0.9)
-    place(sfx, crowd(2.5, seed=21), out_of(winner["finish"]) + 0.1, 0.5)
+    place(crowd_buf, cheer(4.5, 1.5, seed=21), out_of(winner["finish"]) + 0.05, 1.0)
+    bed = crowd_bed(total + 1)                                   # the arena is never quiet (louder until the CTA)
+    bed_env = np.ones(len(bed))
+    bed_env[int(cta_start * se.SR):] = 0.45
+    place(crowd_buf, bed * bed_env, 0.0, 0.35)
     if replay:
         r0, a, b = replay
         place(sfx, se.synth_rewind(), r0, 0.6)
@@ -1292,8 +1398,9 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     talk = box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))   # O(N), was a 40 s np.convolve
     duck = 1.0 - (1.0 - 10 ** (-se.DUCK_DB / 20)) * np.clip(talk * 3, 0, 1)
-    mix = (se.peak(narr) * se.VOL_NARR + se.peak(eng) * se.VOL_ENGINE * 0.8 * duck + se.peak(bgm) * se.VOL_BGM * duck
-           + se.peak(sfx) * se.VOL_SFX * (0.5 + 0.5 * duck))
+    # arena mix: announcer on top, crowd + effects big, engines low (it is a battle, not a race), music under
+    mix = (se.peak(narr) * se.VOL_NARR + se.peak(eng) * se.VOL_ENGINE * 0.22 * duck + se.peak(bgm) * se.VOL_BGM * 0.6 * duck
+           + se.peak(sfx) * se.VOL_SFX * (0.7 + 0.3 * duck) + se.peak(crowd_buf) * se.VOL_SFX * 0.75 * (0.6 + 0.4 * duck))
     mix = np.tanh(1.3 * mix) / np.tanh(1.3)
     mix = mix[:int(total * se.SR)]
     return mix / max(1e-9, np.max(np.abs(mix))) * 0.95
@@ -1359,30 +1466,45 @@ def main():
 
     names = [nick(c["key"]) for c in cars]
     arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink"}[ARENA]
-    lines = [(0.1, "Ladies and gentlemen... it's time to smash!")]
-    cands = []                                                   # (time, priority, line): announcer style
+    se.VOICE = voice
+    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"   # arena PA echo
+    anchors = [(0.05, "Ladies and gentlemen... it's time to smash!", "intro"),
+               (out_of(winner["finish"]) + 0.25, f"Your winner... {nick(winner['key'])}!", "call"),
+               (cta_start + 0.2, se.CTA, "norm")]
+    extras = []                                                  # (want, priority, text, style, max late)
     for ch in CHAOS_PLAN:
         if ch.get("done") and not ch.get("skip"):
-            cands.append((ch["T"] - ch["warn"], 3, CHAOS[ch["type"]]["line"].format(n=nick(ch["victim"]["key"]))))
+            extras.append((out_of(ch["T"] - ch["warn"]) + 0.05, 3,
+                           CHAOS[ch["type"]]["line"].format(n=nick(ch["victim"]["key"])), "hype", 1.0))
     for c in outs:
-        cands.append((c["out"], 2, ARENAS[ARENA]["out_line"].format(n=nick(c["key"])) if c["out_kind"] == "ring"
-                      else f"{nick(c['key'])} is down! Down for the count!"))
+        extras.append((out_of(c["out"]) + 0.15, 2, ARENAS[ARENA]["out_line"].format(n=nick(c["key"]))
+                       if c["out_kind"] == "ring" else f"{nick(c['key'])} is down!", "hype", 1.3))
     if BARRIER_DOWN < winner["finish"]:
-        cands.append((BARRIER_DOWN, 1, "The barriers are down!"))
+        extras.append((out_of(BARRIER_DOWN), 1, "Barriers down!", "hype", 0.6))
+    if replay:                                                   # replay: announce it, then call the moment again
+        anchors.append((replay[0] + 0.1, "Let's see that again... in slow motion!", "call"))
+        r0, ra, rb = replay
+        star_call = "What a slam!"
+        for ch in CHAOS_PLAN:
+            if ch.get("done") and not ch.get("skip") and abs(ch["T"] - star_t) < 0.05:
+                vn = nick(ch["victim"]["key"])
+                star_call = {"kraggor": f"Look at that! Kraggor flattens {vn}!", "missile": f"Kaboom! Right on {vn}!",
+                             "ufo": f"The UFO takes {vn} for a ride!", "crack": f"Lava blasts {vn} into the air!"}[ch["type"]]
+        for c in outs:
+            if abs(c["out"] - star_t) < 0.05:
+                star_call = f"Look at {nick(c['key'])} go flying!" if c["out_kind"] == "ring" else f"{nick(c['key'])} is crushed!"
+        anchors.append((r0 + (star_t - ra) / 0.4 - 0.4, star_call, "hype"))
     bigh = sorted([h for h in hits if h["rel"] > 7], key=lambda h: -h["rel"])[:3]
-    for h in bigh:
-        cands.append((h["t"], 0, f"What a hit! {nick(h['a']['key'])} slams {nick(h['b']['key'])}!"))
-    story = []
-    for tt, pr, txt in sorted(cands, key=lambda c: (-c[1], c[0])):
-        if pr >= 2 or all(abs(tt - s[0]) > 2.4 for s in story):
-            story.append((tt, txt))
-    for tt, txt in sorted(story):
-        lines.append((out_of(tt) + 0.1, txt))
-    lines.append((out_of(winner["finish"]) + 0.2,
-                  f"And your winner... {nick(winner['key'])}! The champion of the Smash Arena!"))
-    if replay:
-        lines.append((replay[0] + 0.1, se.REPLAY_LINE))
-    lines.append((cta_start + 0.2, se.CTA))
+    for i, h in enumerate(bigh):
+        extras.append((out_of(h["t"]) + 0.05, 0, HIT_CALLS[i % len(HIT_CALLS)], "hype", 0.6))
+    placed = schedule_narration(anchors, extras)
+    need = max(e for _, e, _, _ in placed) + 0.8                 # the end card lasts until the CTA is said
+    while len(frames) / FPS < need:
+        frames.append(("cta", frames[-1][1]))
+    lines = [(t0, txt) for t0, _, _, txt in placed]
+    print(f"[smash] narration (video {len(frames) / FPS:.1f}s, winner {out_of(winner['finish']):.1f}s, "
+          f"replay {replay[0] if replay else -1:.1f}s, CTA {cta_start:.1f}s): "
+          + " | ".join(f"{t0:.1f}-{e0:.1f} {txt[:34]}" for t0, e0, _, txt in placed), flush=True)
 
     date = time.strftime("%Y-%m-%d")
     out_dir = (f"{se.BASE}/work/lanes25d/previews/{name}" if opt.preview_only
@@ -1391,7 +1513,7 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
-    se.write_wav(wav, build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, cta_start))
+    se.write_wav(wav, build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start))
     silent = f"{se.WORK}/v_{name}.mp4"
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
