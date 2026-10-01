@@ -7,7 +7,8 @@ draw_face / draw_wheel), so they look exactly like the 2D cast; a car turning ar
 
 Rules: every car has 100 HP. Rams do damage by closing speed and (effective) mass, side hits hurt more, the
 attacker's front is reinforced. A car is OUT when its HP hits 0 (wrecked, smoking) or when it is pushed off
-the floor (lava ring / mud pit / icy water). The floor shrinks every few seconds. Last car standing wins.
+the floor (lava ring / mud pit / icy water). CHAOS (v2): missile strike, the kaiju KRAGGOR (own design) stomping,
+UFO abduction, floor cracking with lava geysers, all with a warning so agile drivers can escape. Last car wins.
 Arenas (rotation): lava ring (steel floor) · mud pit (dirt floor) · ice rink (slippery, low grip).
 Cartoon slapstick only (BLUEPRINT rule 7): no fire deaths, no people; wrecks smoke and get dizzy.
 
@@ -45,17 +46,29 @@ W, H, FPS = se.W, se.H, 30
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
 Y_H, CAM_H = 276.0, 20.4
 WORLD_DY, PIV_Y = -130.0, 1190.0                  # zoom pivot (world space)
-ZC = 4.25                                        # arena centre depth
-HX0, HZ0, HX_MIN, HZ_MIN = 9.5, 4.25, 4.6, 2.3   # floor half-size at start / after the last shrink
-SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 9.0, 6.0, 0.2
-BARRIER_DOWN = SHRINK_AT                         # tyre barriers bounce cars back until the first shrink
+ZC = 5.0                                         # arena centre depth
+HX0, HZ0, HX_MIN, HZ_MIN = 13.0, 5.0, 8.5, 3.6   # floor half-size at start / after the last shrink (v2: wider)
+SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 18.0, 7.0, 0.12
+BARRIER_DOWN = 9.0                               # tyre barriers bounce cars back until then
+# CHAOS library (v2, user 2026-10-01): sudden events that hit the arena. Own designs only (KRAGGOR is our
+# dino-robot kaiju, not Godzilla). warn = seconds of warning (target ring / shadow / cracks) before impact.
+CHAOS = {
+    "missile": dict(warn=1.5, banner="MISSILE STRIKE!", line="Incoming! Missile strike!", bubble="KABOOM!"),
+    "kraggor": dict(warn=2.4, banner="KRAGGOR ATTACK!", line="Oh no! It's Kraggor! The monster wants in on the action!",
+                    bubble="SPLAT!"),
+    "ufo":     dict(warn=1.3, banner="UFO INVASION!", line="Is that a UFO? It's grabbing {n}!", bubble="HELP!"),
+    "crack":   dict(warn=1.4, banner="THE FLOOR IS CRACKING!", line="The floor is cracking! Here comes the lava!",
+                    bubble="HOT HOT!"),
+}
+CHAOS_AT = [(4.5, 5.8), (9.5, 10.8), (14.5, 15.8), (19.5, 20.8)]
+ANNOUNCERS = ["en-US-GuyNeural", "en-US-ChristopherNeural", "en-US-EricNeural"]   # arena announcer (male, en-US)
 T_MAX = 40.0
 POOL = ["sports", "police", "taxi", "f1", "bus", "firetruck", "icecream", "bigrig", "monster", "monster2"]
 BIG = {"bus", "firetruck", "icecream", "bigrig"}
 ARENAS = {
-    "lava": dict(name="the lava", out_line="{n} is pushed into the lava!", bubble="HOT HOT!", grip=0.03),
-    "mud":  dict(name="the mud", out_line="Splat! {n} slides into the mud pit!", bubble="YUCK!", grip=0.028),
-    "ice":  dict(name="the icy water", out_line="Splash! {n} slides into the icy water!", bubble="BRRR!", grip=0.01),
+    "lava": dict(name="the lava", out_line="{n} is out! Into the lava!", bubble="HOT HOT!", grip=0.03),
+    "mud":  dict(name="the mud", out_line="{n} is out! Splat, right into the mud!", bubble="YUCK!", grip=0.028),
+    "ice":  dict(name="the icy water", out_line="{n} is out! Splash, into the icy water!", bubble="BRRR!", grip=0.01),
 }
 VMAX = {"f1": 8.4, "sports": 8.2, "police": 7.6, "taxi": 7.4, "monster": 7.2, "monster2": 7.2,
         "icecream": 6.0, "bus": 5.8, "firetruck": 5.8, "bigrig": 5.4}
@@ -67,7 +80,7 @@ TITLES = ["4 Cars Enter, 1 Survives! 💥 Smash Arena", "Last Car Standing Wins!
 TAGS = ["cars", "car crash", "demolition derby", "cartoon cars", "funny cars", "smash", "car battle", "shorts",
         "MegaWheel Arena"]
 
-CAST, ARENA = [], "lava"
+CAST, ARENA, CHAOS_PLAN = [], "lava", []
 FREEZE_T = 1e9                                   # the floor stops shrinking once there is a winner
 
 
@@ -140,7 +153,10 @@ def setup(seed, appearances, used_arenas, forced_arena=None):
         cnt = {a: used_arenas.count(a) for a in ARENAS}
         at = {a: float(r.random()) for a in ARENAS}
         ARENA = min(ARENAS, key=lambda a: (cnt[a], at[a]))
-    return dict(cast=cast, arena=ARENA)
+    global CHAOS_PLAN
+    kinds = [str(k) for k in r.permutation(list(CHAOS))]
+    CHAOS_PLAN = [dict(type=k, T=float(r.uniform(*CHAOS_AT[i])), warn=CHAOS[k]["warn"]) for i, k in enumerate(kinds)]
+    return dict(cast=cast, arena=ARENA, chaos=[[c["type"], round(c["T"], 2)] for c in CHAOS_PLAN])
 
 
 # ------------------------------------------------------------------ scripted battle (120 Hz)
@@ -150,7 +166,10 @@ def simulate(seed):
     rng = np.random.default_rng(13000 + seed)
     dt = 1 / 120
     grip = ARENAS[ARENA]["grip"]
-    corners = [(-6.5, ZC - 2.6), (6.5, ZC + 2.6), (6.5, ZC - 2.6), (-6.5, ZC + 2.6)]
+    corners = [(-9.0, ZC - 3.0), (9.0, ZC + 3.0), (9.0, ZC - 3.0), (-9.0, ZC + 3.0)]
+    for ch in CHAOS_PLAN:
+        for kk in ("armed", "done", "skip", "victim", "carry_end"):
+            ch.pop(kk, None)
     cars = []
     for i, vk in enumerate(CAST):
         x, z = corners[i]
@@ -173,8 +192,30 @@ def simulate(seed):
         if not sudden and t > 34.0 and len(alive) > 1:
             sudden = True
             events.append(("sudden", t, 0.0, ZC))
+        danger = []                                              # warned impact zones: drivers try to escape
+        for ch in CHAOS_PLAN:
+            if ch.get("armed") and not ch.get("done") and not ch.get("skip") and ch["type"] in ("missile", "kraggor"):
+                danger.append((ch["tx"], ch["tz"], 4.5 if ch["type"] == "missile" else 4.0))
         for c in cars:
             vk = c["key"]
+            if c.get("carry") is not None:                       # held in the UFO beam
+                cy = c["carry"]
+                a_ = t - cy["T"]
+                e_ = min(1.0, a_ / 1.8)
+                e_ = e_ * e_ * (3 - 2 * e_)
+                c["x"] = cy["x0"] + (cy["dx"] - cy["x0"]) * e_
+                c["z"] = cy["z0"] + (cy["dz"] - cy["z0"]) * e_
+                c["h"] = 3.8 * min(1.0, a_ / 0.6)
+                c["vx"] = c["vz"] = c["vh"] = 0.0
+                c["yaw"] += 2.5 * dt
+                if a_ >= 1.8:                                    # dropped!
+                    c["carry"] = None
+                    c["vh"] = -2.0
+                    c["stun"], c["last_push"] = 1.2, t
+                    c["hp"] = max(0.0, c["hp"] - 18)
+                    c["hits_taken"].append(t)
+                    c["last_hit"] = t
+                continue
             if c["alive"] and go and winner is None:
                 c["retarget"] -= dt
                 if c["target"] is None or not c["target"]["alive"] or c["retarget"] <= 0:
@@ -199,6 +240,11 @@ def simulate(seed):
                     ax -= math.copysign(ex * gain, c["x"])
                 if ez > 0:
                     az -= math.copysign(ez * gain, c["z"] - ZC)
+                for dx_, dz_, rr in danger:                      # escape the target ring / the kaiju's shadow
+                    dd = math.hypot(c["x"] - dx_, c["z"] - dz_)
+                    if dd < rr + 1.5:
+                        ax += (c["x"] - dx_) / max(dd, 0.3) * 14.0
+                        az += (c["z"] - dz_) / max(dd, 0.3) * 14.0
                 want = math.atan2(az, ax)
                 d = (want - c["th"] + math.pi) % (2 * math.pi) - math.pi
                 c["th"] += float(np.clip(d, -TURN[vk] * dt, TURN[vk] * dt))
@@ -222,6 +268,8 @@ def simulate(seed):
                 c["vh"] -= 22.0 * dt
                 c["h"] += c["vh"] * dt
                 if c["h"] <= 0:
+                    if c["vh"] < -7 and winner is None:
+                        events.append(("land", t, c["x"], c["z"]))
                     c["h"], c["vh"] = 0.0, 0.0
                     c["land"] = t
             c["spin"] = max(0.0, c["spin"] - dt)
@@ -235,8 +283,115 @@ def simulate(seed):
             else:
                 tgt = face + round((c["yaw"] - face) / (2 * math.pi)) * 2 * math.pi
                 c["yaw"] += float(np.clip(tgt - c["yaw"], -7 * dt, 7 * dt))
+        # CHAOS: warn -> impact
+        for ch in CHAOS_PLAN:
+            if winner is not None or ch.get("skip") or ch.get("done"):
+                continue
+            if not ch.get("armed") and t >= ch["T"] - ch["warn"]:
+                cand = [c for c in cars if c["alive"] and c.get("carry") is None]
+                if not cand:
+                    ch["skip"] = True
+                    continue
+                v = cand[int(rng.integers(len(cand)))]
+                ch["armed"], ch["victim"] = True, v
+                ch["tx"], ch["tz"] = v["x"], v["z"]
+                if ch["type"] == "missile":                      # aimed where the victim is heading
+                    ch["tx"] = float(np.clip(v["x"] + v["vx"] * ch["warn"] * 0.7, -hx + 1, hx - 1))
+                    ch["tz"] = float(np.clip(v["z"] + v["vz"] * ch["warn"] * 0.7, ZC - hz + 1, ZC + hz - 1))
+                if ch["type"] == "crack":
+                    ch["tx"] = float(np.clip(v["x"], -hx + 2, hx - 2))
+                    ch["tz"] = float(np.clip(v["z"], ZC - hz + 1.5, ZC + hz - 1.5))
+                    ang = float(rng.uniform(0.25, 1.3)) * (1 if rng.random() < 0.5 else -1)
+                    ch["ux"], ch["uz"], ch["L"] = math.cos(ang), math.sin(ang) * 0.55, 5.5
+                    ch["seedc"] = int(rng.integers(1000))
+                    ch["hit"] = set()
+                events.append(("warn", t, ch["tx"], ch["tz"], ch["type"]))
+            if not ch.get("armed"):
+                continue
+            v = ch["victim"]
+            if ch["type"] == "kraggor" and t < ch["T"] - 0.9 and v["alive"]:   # the shadow follows, then locks
+                ch["tx"] = float(np.clip(v["x"], -hx + 1, hx - 1))
+                ch["tz"] = float(np.clip(v["z"], ZC - hz + 0.8, ZC + hz - 0.8))
+            if ch["type"] == "ufo" and v["alive"]:
+                ch["tx"], ch["tz"] = v["x"], v["z"]
+            if t < ch["T"]:
+                continue
+            ch["done"] = True
+            typ, tx_, tz_ = ch["type"], ch["tx"], ch["tz"]
+            if typ == "ufo":
+                if not v["alive"] or v.get("carry") is not None:
+                    cand = [c for c in cars if c["alive"] and c.get("carry") is None]
+                    if not cand:
+                        ch["skip"] = True
+                        continue
+                    v = ch["victim"] = cand[int(rng.integers(len(cand)))]
+                if t >= BARRIER_DOWN and v["hp"] < 60:           # weak car: dropped off the edge!
+                    side = 1 if v["x"] >= 0 else -1
+                    dxp, dzp = side * (hx + 2.2), float(np.clip(v["z"], ZC - hz + 1, ZC + hz - 1))
+                else:
+                    dxp = float(rng.uniform(-hx + 2, hx - 2))
+                    dzp = float(rng.uniform(ZC - hz + 1, ZC + hz - 1))
+                v["carry"] = dict(T=t, x0=v["x"], z0=v["z"], dx=dxp, dz=dzp)
+                v.setdefault("chaos_hits", []).append((t, typ))
+                ch.update(x0=v["x"], z0=v["z"], dx=dxp, dz=dzp)
+                tx_, tz_ = v["x"], v["z"]
+            for c in cars:
+                if not c["alive"] or c.get("carry") is not None:
+                    continue
+                d = math.hypot(c["x"] - tx_, c["z"] - tz_)
+                ux, uz = (c["x"] - tx_) / max(d, 0.3), (c["z"] - tz_) / max(d, 0.3)
+                if typ == "missile" and d < 4.5:
+                    c.setdefault("chaos_hits", []).append((t, typ))
+                    f = 1 - d / 4.5
+                    c["hp"] = max(0.0, c["hp"] - (12 + 30 * f))
+                    c["vx"] += ux * (3 + 12 * f)
+                    c["vz"] += uz * (3 + 12 * f)
+                    c["vh"], c["spin"], c["stun"], c["last_push"] = 2 + 6 * f, 0.7, 0.9, t
+                    c["soot"] = True
+                    c["hits_taken"].append(t)
+                    c["last_hit"] = t
+                elif typ == "kraggor" and d < 7.0:
+                    if d < 2.8:
+                        c.setdefault("chaos_hits", []).append((t, typ))
+                        c["hp"] = max(0.0, c["hp"] - 40)
+                        c["squash_t"] = t
+                        c["x"], c["z"] = tx_ + ux * 2.9, tz_ + uz * 2.9
+                        c["stun"] = 1.4
+                    else:
+                        f = 1 - d / 7.0
+                        c["hp"] = max(0.0, c["hp"] - 8 * f)
+                        c["vx"] += ux * (2 + 7 * f)
+                        c["vz"] += uz * (2 + 7 * f)
+                        c["vh"], c["stun"] = 1.5 + 3 * f, 0.6
+                    c["last_push"] = t
+                    c["hits_taken"].append(t)
+                    c["last_hit"] = t
+            events.append(("chaos", t, tx_, tz_, typ))
+        for ch in CHAOS_PLAN:                                    # lava erupting from the crack (2.4 s)
+            if ch["type"] != "crack" or not ch.get("done") or ch.get("skip") or not 0 <= t - ch["T"] < 2.4:
+                continue
+            if winner is not None:
+                continue
+            for c in cars:
+                if not c["alive"] or id(c) in ch["hit"] or c.get("carry") is not None:
+                    continue
+                rx, rz = c["x"] - ch["tx"], c["z"] - ch["tz"]
+                along = max(-ch["L"], min(ch["L"], rx * ch["ux"] + rz * ch["uz"]))
+                px_, pz_ = rx - along * ch["ux"], rz - along * ch["uz"]
+                dd = math.hypot(px_, pz_)
+                if dd < 1.1 + 0.25 * c["r"]:
+                    ch["hit"].add(id(c))
+                    nxp, nzp = (px_ / dd, pz_ / dd) if dd > 0.05 else (-ch["uz"], ch["ux"])
+                    c["hp"] = max(0.0, c["hp"] - 28)
+                    c["vx"] += nxp * 8
+                    c["vz"] += nzp * 8
+                    c["vh"], c["stun"], c["last_push"], c["soot"] = 7.0, 0.9, t, True
+                    c["hits_taken"].append(t)
+                    c["last_hit"] = t
+                    c.setdefault("chaos_hits", []).append((t, "crack"))
+                    events.append(("erupt", t, c["x"], c["z"]))
         # collisions (alive cars and wrecks; cars that fell off are gone)
-        solid = [c for c in cars if c["out_kind"] != "ring" or c["out"] is None]
+        solid = [c for c in cars if (c["out_kind"] != "ring" or c["out"] is None) and c.get("carry") is None]
         for i in range(len(solid)):
             for j in range(i + 1, len(solid)):
                 a, b = solid[i], solid[j]
@@ -256,7 +411,7 @@ def simulate(seed):
                 if winner is None and go:                        # pushing and grinding wears both down
                     for me, oth in ((a, b), (b, a)):
                         if me["alive"]:
-                            me["hp"] = max(0.0, me["hp"] - 3.6 * esc * dt * oth["m"] / (oth["m"] + me["m"]))
+                            me["hp"] = max(0.0, me["hp"] - 2.8 * esc * dt * oth["m"] / (oth["m"] + me["m"]))
                 if rel <= 0:
                     continue
                 e = 0.35
@@ -277,7 +432,7 @@ def simulate(seed):
                     front = math.cos(me["th"]) * nx * sgn + math.sin(me["th"]) * nz * sgn   # 1 = I hit with my nose
                     side = 1.35 if abs(front) < 0.45 else 1.0
                     armour = 0.55 if front > 0.6 else 1.0
-                    dmg = 1.45 * rel * (oth["m"] / (oth["m"] + me["m"])) * 2 * side * armour * esc
+                    dmg = 1.1 * rel * (oth["m"] / (oth["m"] + me["m"])) * 2 * side * armour * esc
                     me["hp"] = max(0.0, me["hp"] - dmg)
                     me["recoil"] = 0.85 if front > 0.3 else 0.35
                     me["stun"] = 0.2 + 0.3 * min(1.0, rel / 10) * (oth["m"] / me["m"]) ** 0.5
@@ -293,7 +448,7 @@ def simulate(seed):
                                se.VEHICLES[a["key"]]["color"], se.VEHICLES[b["key"]]["color"]))
         # eliminations (none after the winner is decided)
         for c in cars:
-            if not c["alive"] or winner is not None:
+            if not c["alive"] or winner is not None or c.get("carry") is not None:
                 continue
             if c["hp"] <= 0:
                 c["alive"], c["out"], c["out_kind"] = False, t, "wreck"
@@ -318,7 +473,7 @@ def simulate(seed):
                 if abs(c["z"] - ZC) > hz + 0.2:
                     c["z"] = ZC + math.copysign(hz + 0.2, c["z"] - ZC)
                     c["vz"] = min(c["vz"], 0) if c["z"] > ZC else max(c["vz"], 0)
-            elif abs(c["x"]) > hx + 0.2 or abs(c["z"] - ZC) > hz + 0.2:
+            elif (abs(c["x"]) > hx + 0.2 or abs(c["z"] - ZC) > hz + 0.2) and c["h"] < 0.4:
                 c["alive"], c["out"], c["out_kind"] = False, t, "ring"
                 c["vh"] = 3.5
                 events.append(("ringout", t, c["x"], c["z"]))
@@ -342,7 +497,11 @@ def simulate(seed):
                 c["sink_rec"] = c.get("sink_rec", []) + [sink]
                 tilt = 0.22 if c["out_kind"] == "wreck" else (-0.12 * min(1.0, c["vh"] / 4) if c["h"] > 0 else 0.0)
                 sq = 0.88 if c["out_kind"] == "wreck" else 1.0
-                burn = 1.0 if (c["hp"] < 45 or (c["out_kind"] == "ring" and ARENA == "lava" and sink > 0)) else 0.0
+                if c.get("squash_t") is not None and 0 <= t - c["squash_t"] < 1.4:   # flattened by Kraggor, BOING
+                    a_ = t - c["squash_t"]
+                    sq = 0.42 if a_ < 0.9 else 0.42 + 0.58 * se.ease_out_back(min(1.0, (a_ - 0.9) / 0.4))
+                burn = 1.0 if (c["hp"] < 45 or c.get("soot") or
+                               (c["out_kind"] == "ring" and ARENA == "lava" and sink > 0)) else 0.0
                 c["rec"].append((c["x"], c["z"], c["h"], c["yaw"], tilt, math.hypot(c["vx"], c["vz"]), sq, 0.0, burn,
                                  0.0, 0.0, 0.0))
                 c.setdefault("hp_rec", []).append(c["hp"])
@@ -369,6 +528,9 @@ def big_moments(cars, hits):
     mom = [(c["out"], 9 + (1 if c["out_kind"] == "ring" else 0), c) for c in cars if c["out"] is not None
            and c["finish"] is None]
     mom += [(h["t"], h["rel"] / 2, h["b"]) for h in hits if h["rel"] > 6]
+    for ch in CHAOS_PLAN:
+        if ch.get("done") and not ch.get("skip"):
+            mom.append((ch["T"], 11.5 if ch["type"] in ("kraggor", "missile") else 10.5, ch["victim"]))
     return sorted(mom, key=lambda m: -m[1])
 
 
@@ -554,6 +716,328 @@ def draw_arena(ctx, camx, t, flash):
     ctx.stroke()
 
 
+def chaos_live():
+    return [ch for ch in CHAOS_PLAN if ch.get("armed") and not ch.get("skip")]
+
+
+def crack_points(ch):
+    rng = np.random.default_rng(ch["seedc"])
+    pts = []
+    for i in range(15):
+        u = -ch["L"] + 2 * ch["L"] * i / 14
+        j = float(rng.uniform(-0.35, 0.35)) if 0 < i < 14 else 0.0
+        pts.append((ch["tx"] + u * ch["ux"] - j * ch["uz"], ch["tz"] + u * ch["uz"] + j * ch["ux"], u))
+    return pts
+
+
+def draw_kraggor_head(ctx, ch, t, stands_top):
+    """KRAGGOR, our own dino-robot kaiju: rises behind the stands (screen space), roars, sinks back."""
+    a = t - (ch["T"] - ch["warn"])
+    if not 0 <= a < ch["warn"] + 2.3:
+        return
+    end = ch["warn"] + 1.5
+    rise = se.ease_out_back(min(1.0, a / 0.8)) if a < end else max(0.0, 1 - (a - end) / 0.8)
+    roar = max(0.0, math.sin(min(math.pi, max(0.0, a - 0.8) * 1.6)))
+    S = 40.0
+    body, metal = (0.24, 0.55, 0.36), (0.66, 0.68, 0.76)
+    dark = se.shade(body, 0.62)
+    ctx.save()
+    ctx.translate(800, stands_top + 1.2 * S + (1 - rise) * 13 * S + math.sin(t * 20) * 3 * roar)
+    ctx.scale(S, S)
+    se.rrect(ctx, -3.0, -3, 6.0, 12, 1.4)                        # neck
+    ctx.set_source_rgb(*se.lit(dark))
+    ctx.fill()
+    for i in range(5):                                           # silver back spikes
+        bx = -3.0 + i * 1.5
+        se.poly(ctx, [(bx - 0.65, -9.4), (bx, -12.0 - (0.8 if i == 2 else 0.0)), (bx + 0.65, -9.4)])
+        ctx.set_source_rgb(*se.lit(metal))
+        ctx.fill()
+    se.rrect(ctx, -4.6, -10.2, 9.2, 7.6, 2.3)                    # head
+    ctx.set_source_rgb(*se.lit(body))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*dark)
+    ctx.set_line_width(0.28)
+    ctx.stroke()
+    se.rrect(ctx, -4.0, -9.6, 8.0, 1.4, 0.6)                     # metal brow plate + bolts
+    ctx.set_source_rgb(*se.lit(metal))
+    ctx.fill()
+    for bx in (-3.3, -1.1, 1.1, 3.3):
+        ctx.arc(bx, -8.9, 0.25, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.35, 0.35, 0.42)
+        ctx.fill()
+    for sgn in (-1, 1):                                          # glowing eyes, angry brows
+        ex = sgn * 1.9
+        ctx.arc(ex, -7.0, 1.0, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 0.88, 0.15)
+        ctx.fill()
+        ctx.arc(ex, -7.0, 1.6, 0, 2 * math.pi)
+        ctx.set_source_rgba(1, 0.9, 0.2, 0.25 + 0.2 * roar)
+        ctx.fill()
+        ctx.arc(ex + sgn * 0.15, -6.9, 0.42, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.85, 0.15, 0.05)
+        ctx.fill()
+        se.poly(ctx, [(ex - 1.3 * sgn, -8.5), (ex + 1.2 * sgn, -7.9), (ex + 1.2 * sgn, -8.4), (ex - 1.3 * sgn, -8.9)])
+        ctx.set_source_rgb(*dark)
+        ctx.fill()
+    mh = 0.4 + 2.6 * roar                                        # mouth (cartoon, teeth only)
+    se.rrect(ctx, -3.1, -4.2, 6.2, mh + 0.4, 0.5)
+    ctx.set_source_rgb(0.5, 0.1, 0.14)
+    ctx.fill()
+    for i in range(7):
+        tx_ = -2.7 + i * 0.9
+        se.poly(ctx, [(tx_ - 0.32, -4.2), (tx_ + 0.32, -4.2), (tx_, -3.5)])
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+        se.poly(ctx, [(tx_ - 0.3, -3.8 + mh), (tx_ + 0.3, -3.8 + mh), (tx_, -4.4 + mh)])
+        ctx.fill()
+    se.rrect(ctx, -3.7, -6.0, 7.4, 1.9, 0.8)                     # snout
+    ctx.set_source_rgb(*se.lit(body))
+    ctx.fill()
+    for sgn in (-1, 1):
+        ctx.arc(sgn * 0.9, -5.3, 0.28, 0, 2 * math.pi)
+        ctx.set_source_rgb(*dark)
+        ctx.fill()
+    se.rrect(ctx, -3.6, -4.0 + mh, 7.2, 1.7, 0.7)                # lower jaw
+    ctx.set_source_rgb(*se.lit(body))
+    ctx.fill()
+    ctx.restore()
+    if roar > 0.35:                                              # roar waves
+        for q in range(3):
+            r = (1.5 + q * 1.4 + (t * 6) % 1.4) * S
+            ctx.arc(800, stands_top - 2 * S, r, math.pi * 1.1, math.pi * 1.9)
+            ctx.set_source_rgba(1, 1, 1, 0.5 * roar * (1 - q / 3))
+            ctx.set_line_width(6)
+            ctx.stroke()
+
+
+def draw_chaos_ground(ctx, ch, t, camx):
+    typ, a = ch["type"], t - ch["T"]
+    tx, tz = ch["tx"], ch["tz"]
+    sx, sy = pxy(tx, tz, camx)
+    k = k_of(tz)
+
+    def ellipse(rx, alpha, rgb, fill=True, lw=6):
+        ctx.save()
+        ctx.translate(sx, sy)
+        ctx.scale(1.0, 0.42)
+        ctx.arc(0, 0, rx * k, 0, 2 * math.pi)
+        ctx.restore()
+        if fill:
+            ctx.set_source_rgba(*rgb, alpha)
+            ctx.fill()
+        else:
+            ctx.set_source_rgba(*rgb, alpha)
+            ctx.set_line_width(lw)
+            ctx.stroke()
+
+    if typ == "missile":
+        if -ch["warn"] <= a < 0:                                 # pulsing target ring + crosshair
+            pulse = 0.5 + 0.5 * math.sin(t * 18)
+            ellipse(4.5, 0.18 + 0.12 * pulse, (1, 0.1, 0.1))
+            ellipse(4.5, 0.9, (1, 0.15, 0.1), fill=False, lw=8)
+            ellipse(2.2, 0.9, (1, 0.15, 0.1), fill=False, lw=6)
+            for ang in (0, math.pi / 2, math.pi, 3 * math.pi / 2):
+                ctx.move_to(sx + math.cos(ang) * 1.0 * k, sy + math.sin(ang) * 0.42 * k)
+                ctx.line_to(sx + math.cos(ang) * 5.0 * k, sy + math.sin(ang) * 0.42 * 5.0 * k)
+            ctx.set_source_rgba(1, 0.15, 0.1, 0.9)
+            ctx.set_line_width(6)
+            ctx.stroke()
+        elif a >= 0:                                             # crater
+            ellipse(2.0, 0.85, (0.12, 0.1, 0.1))
+            ellipse(2.0, 0.6, (0.35, 0.3, 0.28), fill=False, lw=0.18 * k)
+            if a < 0.5:
+                ellipse(4.5 * a / 0.5 + 0.5, 0.8 * (1 - a / 0.5), (1, 0.85, 0.5), fill=False, lw=10)
+    elif typ == "kraggor":
+        if -1.7 <= a < 0:                                        # the giant shadow grows
+            g = 1 + a / 1.7
+            ellipse(0.6 + 2.4 * g, 0.25 + 0.35 * g, (0, 0, 0))
+        elif a >= 0:                                             # footprint cracks
+            for q in range(9):
+                ang = q * 2 * math.pi / 9 + 0.2
+                ctx.move_to(sx + math.cos(ang) * 2.4 * k, sy + math.sin(ang) * 1.0 * k)
+                ctx.line_to(sx + math.cos(ang + 0.15) * 4.2 * k, sy + math.sin(ang + 0.15) * 1.8 * k)
+            ctx.set_source_rgba(0.1, 0.08, 0.08, 0.7)
+            ctx.set_line_width(max(2, 0.1 * k))
+            ctx.stroke()
+            if a < 0.9:
+                ellipse(3 + a * 6, 0.7 * (1 - a / 0.9), (0.85, 0.78, 0.65))
+    elif typ == "ufo":
+        if -ch["warn"] <= a < 1.8:
+            ux, uz = ufo_pos(ch, t)[:2]
+            px, py = pxy(ux, uz, camx)
+            ctx.save()
+            ctx.translate(px, py)
+            ctx.scale(1.0, 0.42)
+            ctx.arc(0, 0, 2.0 * k_of(uz), 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(0.3, 1, 0.4, 0.3 if a >= 0 else 0.12)
+            ctx.fill()
+    elif typ == "crack":
+        if a < -ch["warn"]:
+            return
+        pts = crack_points(ch)
+        frac = min(1.0, (a + ch["warn"]) / ch["warn"])
+        vis = [(x, z) for x, z, u in pts if abs(u) <= frac * ch["L"] + 1e-6]
+        if len(vis) < 2:
+            return
+        sp = [pxy(x, z, camx) for x, z in vis]
+        if a >= 0:                                               # glowing fissure
+            hot = 1.0 if a < 2.4 else max(0.35, 1 - (a - 2.4) / 2)
+            for wdt, col in ((0.55, (1, 0.35, 0.05)), (0.25, (1, 0.85, 0.2))):
+                ctx.move_to(*sp[0])
+                for q in sp[1:]:
+                    ctx.line_to(*q)
+                ctx.set_source_rgba(*col, hot)
+                ctx.set_line_width(wdt * k)
+                ctx.stroke()
+        else:
+            ctx.move_to(*sp[0])
+            for q in sp[1:]:
+                ctx.line_to(*q)
+            ctx.set_source_rgba(0.08, 0.06, 0.06, 0.9)
+            ctx.set_line_width(max(3, 0.14 * k))
+            ctx.stroke()
+
+
+def ufo_pos(ch, t):
+    """UFO position (x, z, altitude): flies in, follows its catch, leaves with a whoosh."""
+    a = t - ch["T"]
+    if a < 0:
+        return ch["tx"] + (-a) * 9.0, ch["tz"], 7.5
+    if a < 1.8:
+        e = min(1.0, a / 1.8)
+        e = e * e * (3 - 2 * e)
+        return ch["x0"] + (ch["dx"] - ch["x0"]) * e, ch["z0"] + (ch["dz"] - ch["z0"]) * e, 7.5
+    b = a - 1.8
+    return ch["dx"] - b * 13.0, ch["dz"], 7.5 + b * 5.0
+
+
+def draw_chaos_air(ctx, ch, t, camx):
+    typ, a = ch["type"], t - ch["T"]
+    tx, tz = ch["tx"], ch["tz"]
+    sx, sy = pxy(tx, tz, camx)
+    k = k_of(tz)
+    if typ == "missile":
+        if -0.6 <= a < 0:                                        # the missile drops in
+            hh = 30.0 * (-a / 0.6)
+            ctx.save()
+            ctx.translate(sx, sy - hh * k)
+            ctx.rotate(0.15)
+            for j in range(3):                                   # flame tail (above: it falls down)
+                fl = 1.6 + 0.6 * math.sin(t * 50 + j)
+                se.poly(ctx, [(-0.3 * k, -2.0 * k), (0.3 * k, -2.0 * k), (0, (-2.0 - fl) * k)])
+                ctx.set_source_rgba(1, 0.6 + 0.15 * j, 0.1, 0.8)
+                ctx.fill()
+            se.rrect(ctx, -0.32 * k, -2.0 * k, 0.64 * k, 1.8 * k, 0.15 * k)
+            ctx.set_source_rgb(0.95, 0.95, 0.97)
+            ctx.fill()
+            se.poly(ctx, [(-0.32 * k, -0.2 * k), (0.32 * k, -0.2 * k), (0, 0.6 * k)])
+            ctx.set_source_rgb(0.9, 0.12, 0.1)
+            ctx.fill()
+            for sgn in (-1, 1):
+                se.poly(ctx, [(sgn * 0.32 * k, -2.0 * k), (sgn * 0.85 * k, -2.3 * k), (sgn * 0.32 * k, -1.4 * k)])
+                ctx.set_source_rgb(0.5, 0.52, 0.6)
+                ctx.fill()
+            ctx.restore()
+        elif 0 <= a < 1.2:                                       # explosion
+            f = a / 1.2
+            for j, (col, rr) in enumerate((((0.35, 0.33, 0.33), 1.0), ((1, 0.45, 0.1), 0.8), ((1, 0.9, 0.35), 0.5))):
+                if j > 0 and a > 0.55:
+                    continue
+                for q in range(7):
+                    ang = q * 2 * math.pi / 7 + j
+                    r = (1.0 + 4.0 * min(1.0, a / 0.35)) * rr * k
+                    ctx.arc(sx + math.cos(ang) * r * 0.55, sy - 1.6 * k - (a * 3) * k + math.sin(ang) * r * 0.45,
+                            r * 0.55, 0, 2 * math.pi)
+                    ctx.set_source_rgba(*col, (1 - f) * (0.9 if j else 0.7))
+                    ctx.fill()
+    elif typ == "kraggor":
+        if -0.45 <= a < 1.4:                                     # the giant foot from the sky
+            if a < 0:
+                hf = 22.0 * (-a / 0.45) ** 2
+            elif a < 0.8:
+                hf = 0.0
+            else:
+                hf = 22.0 * ((a - 0.8) / 0.6) ** 2
+            fy = sy - hf * k
+            body = (0.24, 0.55, 0.36)
+            dark = se.shade(body, 0.62)
+            ctx.rectangle(sx - 1.7 * k, -3000, 3.4 * k, fy - 1.0 * k + 3000)   # leg
+            ctx.set_source_rgb(*se.lit(body))
+            ctx.fill()
+            for q in range(30):                                  # scale stripes
+                yy = fy - 1.6 * k - q * 1.2 * k
+                if yy < -200:
+                    break
+                ctx.move_to(sx - 1.7 * k, yy)
+                ctx.line_to(sx + 1.7 * k, yy - 0.3 * k)
+            ctx.set_source_rgba(*dark, 0.7)
+            ctx.set_line_width(max(2, 0.12 * k))
+            ctx.stroke()
+            se.rrect(ctx, sx - 2.7 * k, fy - 1.7 * k, 5.4 * k, 1.8 * k, 0.6 * k)   # foot
+            ctx.set_source_rgb(*se.lit(body))
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*dark)
+            ctx.set_line_width(max(2, 0.1 * k))
+            ctx.stroke()
+            for q in (-1, 0, 1):                                 # toes + white claws
+                cx = sx + q * 1.75 * k
+                ctx.arc(cx, fy - 0.5 * k, 0.8 * k, 0, 2 * math.pi)
+                ctx.set_source_rgb(*se.lit(body))
+                ctx.fill()
+                se.poly(ctx, [(cx - 0.35 * k, fy - 0.1 * k), (cx + 0.35 * k, fy - 0.1 * k), (cx + 0.15 * k, fy + 0.45 * k)])
+                ctx.set_source_rgb(1, 1, 1)
+                ctx.fill()
+    elif typ == "ufo":
+        if -ch["warn"] <= a < 3.2:
+            ux, uz, alt = ufo_pos(ch, t)
+            kk = k_of(uz)
+            px, gy = pxy(ux, uz, camx)
+            py = gy - alt * kk
+            if 0 <= a < 1.8:                                     # tractor beam
+                se.poly(ctx, [(px - 0.8 * kk, py + 0.3 * kk), (px + 0.8 * kk, py + 0.3 * kk),
+                              (px + 2.0 * kk, gy), (px - 2.0 * kk, gy)])
+                ctx.set_source_rgba(0.4, 1, 0.5, 0.3 + 0.08 * math.sin(t * 25))
+                ctx.fill()
+            ctx.save()
+            ctx.translate(px, py)
+            ctx.scale(1.0, 0.32)
+            ctx.arc(0, 0, 3.0 * kk, 0, 2 * math.pi)
+            ctx.restore()
+            g = cairo.LinearGradient(0, py - kk, 0, py + kk)
+            g.add_color_stop_rgb(0, 0.85, 0.87, 0.92)
+            g.add_color_stop_rgb(1, 0.45, 0.47, 0.55)
+            ctx.set_source(g)
+            ctx.fill()
+            ctx.arc(px, py - 0.25 * kk, 1.3 * kk, math.pi, 2 * math.pi)
+            ctx.set_source_rgba(0.5, 0.9, 1.0, 0.9)
+            ctx.fill()
+            for q in range(7):                                   # blinking rim lights
+                lx = px + (q - 3) * 0.8 * kk
+                on = (int(t * 8) + q) % 2 == 0
+                ctx.arc(lx, py + 0.15 * kk, 0.17 * kk, 0, 2 * math.pi)
+                ctx.set_source_rgb(*((1, 0.9, 0.2) if on else (0.9, 0.3, 0.9)))
+                ctx.fill()
+    elif typ == "crack":
+        if 0 <= a < 2.4:                                         # lava geysers along the crack
+            pts = crack_points(ch)
+            for j in range(1, 14, 2):
+                x, z, u = pts[j]
+                gx, gy = pxy(x, z, camx)
+                kk = k_of(z)
+                if a < 0.5:                                      # first burst: tall glowing columns
+                    hcol = 5.5 * math.sin(math.pi * a / 0.5)
+                    se.rrect(ctx, gx - 0.35 * kk, gy - hcol * kk, 0.7 * kk, hcol * kk, 0.3 * kk)
+                    ctx.set_source_rgba(1, 0.55, 0.1, 0.9)
+                    ctx.fill()
+                for q in range(3):
+                    ph = (a * 1.5 + q / 3 + j * 0.13) % 1.0
+                    hh = 16 * ph * (1 - ph) * (1 - 0.4 * a / 2.4)
+                    ctx.arc(gx + (ph - 0.5) * 0.8 * kk, gy - hh * kk, 0.3 * kk, 0, 2 * math.pi)
+                    ctx.set_source_rgba(1, 0.75 if q else 0.45, 0.15, 0.95)
+                    ctx.fill()
+
+
 def draw_hpbar(ctx, sx, sy, hp, k):
     w, h = 2.4 * k, 0.4 * k
     se.rrect(ctx, sx - w / 2 - 3, sy - 3, w + 6, h + 6, 6)
@@ -684,6 +1168,8 @@ def horn():
 
 def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, cta_start):
     se.VOICE = voice
+    se.TTS_RATE, se.TTS_PITCH = "+14%", "+0Hz"                  # hyped arena announcer, with a PA echo
+    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"
     total = len(frames) / FPS
     n = int(total * se.SR) + se.SR
     narr, eng, sfx = np.zeros(n), np.zeros(n), np.zeros(n)
@@ -737,6 +1223,42 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
             place(sfx, horn(), o, 0.45)
         elif kind == "sudden":
             place(sfx, horn(), o, 0.6)
+        elif kind == "warn":
+            typ, w = ev[4], CHAOS[ev[4]]["warn"]
+            if typ == "missile":
+                for q in range(3):
+                    place(sfx, se.tone(880, 0.14, "sine", decay=0.1), o + q * 0.35, 0.5)
+                place(sfx, se.sweep(1500, 260, 0.9, 0.5), o + w - 0.9, 0.7)
+            elif typ == "kraggor":
+                for q in range(3):
+                    place(sfx, se.synth_impact(0.35, seed=60 + q), o + 0.2 + q * 0.6, 0.6)
+                place(sfx, se.stretch(R.dragon_roar(), 1.6), o + 0.85, 1.0)
+                place(sfx, crowd(1.8, seed=31), o + 1.0, 0.4)
+            elif typ == "ufo":
+                place(sfx, R.ufo_hum(w + 3.0), o, 0.6)
+            elif typ == "crack":
+                place(sfx, se.synth_lava_bed(w + 2.6, seed=89), o, 0.6)
+                place(sfx, se.synth_shatter(seed=7), o + 0.2, 0.5)
+        elif kind == "chaos":
+            typ = ev[4]
+            if typ == "missile":
+                place(sfx, se.synth_eruption(seed=47), o, 1.0)
+                place(sfx, se.synth_impact(1.0, seed=21), o, 0.9)
+            elif typ == "kraggor":
+                place(sfx, se.synth_wall_crash(1.0), o, 1.0)
+                place(sfx, se.synth_impact(1.0, seed=3), o, 1.0)
+                place(sfx, R.boing(), o + 1.0, 0.6)
+            elif typ == "ufo":
+                place(sfx, se.sweep(300, 1300, 0.8, 0.4), o, 0.6)
+            elif typ == "crack":
+                place(sfx, se.synth_eruption(seed=43), o, 1.0)
+                place(sfx, se.synth_ignite(), o + 0.1, 0.7)
+            place(sfx, crowd(2.0, seed=41), o + 0.2, 0.45)
+        elif kind == "erupt":
+            place(sfx, se.synth_impact(0.6, seed=17), o, 0.7)
+            place(sfx, se.synth_fire(0.8, seed=21), o, 0.6)
+        elif kind == "land":
+            place(sfx, se.synth_impact(0.8, seed=11), o, 0.8)
 
     for ev in events:
         ev_sfx(ev, out_of(ev[1]))
@@ -746,7 +1268,7 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
         r0, a, b = replay
         place(sfx, se.synth_rewind(), r0, 0.6)
         for ev in events:
-            if a <= ev[1] < b and ev[0] in ("hit", "ringout", "wreck"):
+            if a <= ev[1] < b and ev[0] in ("hit", "ringout", "wreck", "chaos", "erupt", "land"):
                 ev_sfx(ev, r0 + (ev[1] - a) / 0.4, slow=0.5)
     for tap in (R.CTA_LIKE_T, R.CTA_SUB_T):
         place(sfx, se.tone(1300, 0.06, "sine", decay=0.02), cta_start + tap, 0.8)
@@ -787,13 +1309,13 @@ def main():
     used_arenas = [e.get("arena") for e in active if e.get("series") == SERIES]
     params = setup(opt.seed, appearances, used_arenas, opt.arena or None)
     se.make_theme(opt.seed, used=[e.get("theme", "") for e in active if e.get("theme")])
-    uses = {v: 0 for v in se.VOICES}
+    uses = {v: 0 for v in ANNOUNCERS}
     for e in active:
         if e.get("voice") in uses:
             uses[e["voice"]] += 1
     vr = np.random.default_rng(5100 + opt.seed)
-    tie = {v: float(vr.random()) for v in se.VOICES}
-    voice = min(se.VOICES, key=lambda v: (uses[v], tie[v]))
+    tie = {v: float(vr.random()) for v in ANNOUNCERS}
+    voice = min(ANNOUNCERS, key=lambda v: (uses[v], tie[v]))
     cars, events, hits, winner = simulate(opt.seed)
     for st in shrink_times():
         if st < winner["finish"]:
@@ -803,6 +1325,7 @@ def main():
     outs = sorted([c for c in cars if c["out"] is not None and c is not winner], key=lambda c: c["out"])
     print(f"[smash] {name} arena={ARENA} theme={se.THEME_ID} voice={voice} cast={[nick(c['key']) for c in cars]} "
           f"hits={len(hits)} big={sum(h['rel'] > 6 for h in hits)} "
+          f"chaos={[(ch['type'], round(ch['T'], 1)) for ch in CHAOS_PLAN if ch.get('done') and not ch.get('skip')]} "
           f"outs={[(nick(c['key']), c['out_kind'], round(c['out'], 1)) for c in outs]} winner={nick(winner['key'])} "
           f"hp={round(winner['hp'])} battle={winner['finish']:.1f}s frames={len(frames)} ({len(frames) / FPS:.1f}s)",
           flush=True)
@@ -816,23 +1339,27 @@ def main():
 
     names = [nick(c["key"]) for c in cars]
     arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink"}[ARENA]
-    lines = [(0.15, f"Welcome to the Smash Arena! {names[0]}, {names[1]}, {names[2]} and {names[3]} "
-                    f"battle on {arena_word}. Only one car survives!")]
-    story = []
-    shr = [e for e in events if e[0] == "shrink"]
-    if shr:
-        story.append((shr[0][1], "Watch out! The arena is shrinking!"))
+    lines = [(0.1, "Ladies and gentlemen... it's time to smash!")]
+    cands = []                                                   # (time, priority, line): announcer style
+    for ch in CHAOS_PLAN:
+        if ch.get("done") and not ch.get("skip"):
+            cands.append((ch["T"] - ch["warn"], 3, CHAOS[ch["type"]]["line"].format(n=nick(ch["victim"]["key"]))))
     for c in outs:
-        story.append((c["out"], ARENAS[ARENA]["out_line"].format(n=nick(c["key"])) if c["out_kind"] == "ring"
-                      else f"{nick(c['key'])} is wrecked! {nick(c['key'])} is out!"))
-    bigh = sorted([h for h in hits if h["rel"] > 7], key=lambda h: -h["rel"])[:2]
+        cands.append((c["out"], 2, ARENAS[ARENA]["out_line"].format(n=nick(c["key"])) if c["out_kind"] == "ring"
+                      else f"{nick(c['key'])} is down! Down for the count!"))
+    if BARRIER_DOWN < winner["finish"]:
+        cands.append((BARRIER_DOWN, 1, "The barriers are down!"))
+    bigh = sorted([h for h in hits if h["rel"] > 7], key=lambda h: -h["rel"])[:3]
     for h in bigh:
-        if all(abs(h["t"] - s[0]) > 2.5 for s in story):
-            story.append((h["t"], f"Wham! {nick(h['a']['key'])} smashes into {nick(h['b']['key'])}!"))
+        cands.append((h["t"], 0, f"What a hit! {nick(h['a']['key'])} slams {nick(h['b']['key'])}!"))
+    story = []
+    for tt, pr, txt in sorted(cands, key=lambda c: (-c[1], c[0])):
+        if pr >= 2 or all(abs(tt - s[0]) > 2.4 for s in story):
+            story.append((tt, txt))
     for tt, txt in sorted(story):
-        lines.append((out_of(tt) + 0.15, txt))
+        lines.append((out_of(tt) + 0.1, txt))
     lines.append((out_of(winner["finish"]) + 0.2,
-                  f"{nick(winner['key'])} is the last car standing! {nick(winner['key'])} wins!"))
+                  f"And your winner... {nick(winner['key'])}! The champion of the Smash Arena!"))
     if replay:
         lines.append((replay[0] + 0.1, se.REPLAY_LINE))
     lines.append((cta_start + 0.2, se.CTA))
@@ -856,6 +1383,10 @@ def main():
         marks[int(out_of(c["out"] + 0.35) * FPS)] = f"out_{nick(c['key']).lower()}"
     if bigh:
         marks.setdefault(int(out_of(bigh[0]["t"] + 0.05) * FPS), "bighit")
+    for ch in chaos_live():
+        if ch.get("done"):
+            marks[int(out_of(ch["T"] + (0.5 if ch["type"] == "ufo" else 0.12)) * FPS)] = f"chaos_{ch['type']}"
+            marks.setdefault(int(out_of(ch["T"] - ch["warn"] * 0.5) * FPS), f"warn_{ch['type']}")
     marks[int(out_of(winner["finish"] + 0.8) * FPS)] = "winner"
     marks[int((cta_start + 1.5) * FPS)] = "outro"
     hit_ev = [e for e in events if e[0] == "hit"]
@@ -867,6 +1398,13 @@ def main():
         for h in hits:                                           # zoom in a little on big hits
             if h["rel"] > 7 and -0.2 < t - h["t"] < 0.8:
                 focus = (h["x"], h["z"])
+        wide = False
+        for ch in chaos_live():                                  # chaos is the show: frame it
+            if ch["T"] - ch["warn"] * 0.85 < t < ch["T"] + (2.0 if ch["type"] == "ufo" else 1.3):
+                focus = (ch["tx"], ch["tz"])
+                if ch["type"] == "ufo" and t >= ch["T"]:
+                    focus = ufo_pos(ch, t)[:2]
+                wide = ch["type"] in ("kraggor", "ufo")
         if mode == "replay" and star is not None:
             focus = (st[id(star)][0], st[id(star)][1])
         if (winner["finish"] is not None and t >= winner["finish"]) or mode == "cta":
@@ -879,6 +1417,8 @@ def main():
         if focus is not None:
             target = 0.6 * focus[0] + 0.4 * mid
             want = min(1.6, max(fit, 1.15) * (1.2 if mode == "replay" else 1.08))
+            if wide:
+                want = min(want, 1.1)
         cut = camx is None or mode != prev_mode
         punch = 1.0
         for e in hit_ev:
@@ -894,10 +1434,20 @@ def main():
             if e[4] > 0.45 and 0 <= t - e[1] < 0.35:
                 amp = 18 * e[4] * (1 - (t - e[1]) / 0.35)
                 shx, shy = amp * math.sin(t * 90), amp * math.cos(t * 70)
+        for e in events:
+            if e[0] == "chaos" and e[4] in ("missile", "kraggor", "crack") and 0 <= t - e[1] < 0.6:
+                amp = 32 * (1 - (t - e[1]) / 0.6)
+                shx, shy = amp * math.sin(t * 90), amp * math.cos(t * 70)
         flash = any(0 <= t - s < 1.3 and int((t - s) * 6) % 2 == 0 for s in shrink_times())
-        cheer = 1.0 if any(0 <= t - e[1] < 1.5 for e in events if e[0] in ("ringout", "wreck")) or \
+        cheer = 1.0 if any(0 <= t - e[1] < 1.5 for e in events if e[0] in ("ringout", "wreck", "chaos")) or \
             (t >= winner["finish"]) else 0.3
         se.draw_sky(ctx, camx * 0.35, WORLD_DY / se.S, 1.0)
+        zb_top = ZC + HZ0 + 3.0 + 5 * 1.6                       # top row of the stands, in screen space
+        top_w = ground_y(zb_top) - 6 * 1.25 * k_of(zb_top)
+        stands_top = PIV_Y + (top_w - PIV_Y) * zoom + WORLD_DY + shy
+        for ch in chaos_live():
+            if ch["type"] == "kraggor":
+                draw_kraggor_head(ctx, ch, t, stands_top)
         ctx.save()
         ctx.translate(0, WORLD_DY)
         ctx.translate(540 + shx, PIV_Y + shy)
@@ -905,6 +1455,8 @@ def main():
         ctx.translate(-540, -PIV_Y)
         draw_stands(ctx, camx, t, cheer)
         draw_arena(ctx, camx, t, flash)
+        for ch in chaos_live():
+            draw_chaos_ground(ctx, ch, t, camx)
         for e in hit_ev:
             draw_debris(ctx, e, t, camx, airborne=False)
         heads = {}
@@ -927,6 +1479,8 @@ def main():
         for e in hit_ev:
             draw_debris(ctx, e, t, camx, airborne=True)
             draw_impact(ctx, e, t, camx)
+        for ch in chaos_live():
+            draw_chaos_air(ctx, ch, t, camx)
         ctx.restore()
         se.draw_weather(ctx, fi / FPS)
         if mode != "cta":
@@ -938,19 +1492,24 @@ def main():
                 if c["out"] is not None and c is not winner:
                     R.bubble(ctx, ARENAS[ARENA]["bubble"] if c["out_kind"] == "ring" else "I'M OUT!", sx, sy,
                              t - c["out"] - 0.1, k * zoom)
+                for ht, typ in c.get("chaos_hits", []):
+                    R.bubble(ctx, CHAOS[typ]["bubble"], sx, sy, t - ht - 0.05, k * zoom)
                 if c is winner:
                     R.bubble(ctx, "CHAMPION!", sx, sy, t - winner["finish"] - 0.3, k * zoom)
             draw_hud(ctx, cars, t)
         if mode == "race":
             se.draw_ready_go(ctx, t)
-            for s in shrink_times():
-                if 0 <= t - s < 1.6 and t < winner["finish"]:
-                    a = t - s
+            banners = [(s_, "ARENA SHRINKING!") for s_ in shrink_times()]
+            banners += [(BARRIER_DOWN, "BARRIERS DOWN!")]
+            banners += [(ch["T"] - ch["warn"], CHAOS[ch["type"]]["banner"]) for ch in chaos_live()]
+            for s_, txt in banners:
+                if 0 <= t - s_ < 1.6 and t < winner["finish"]:
+                    a = t - s_
                     sc = se.ease_out_back(min(1.0, a / 0.3)) * min(1.0, (1.6 - a) / 0.3)
                     ctx.save()
                     ctx.translate(540, 640)
                     ctx.scale(sc, sc)
-                    se.draw_text(ctx, "ARENA SHRINKING!", 0, 0, 84, fill=(1, 0.3, 0.2))
+                    se.draw_text(ctx, txt, 0, 0, 84, fill=(1, 0.3, 0.2), max_w=1000)
                     ctx.restore()
         if mode == "replay":
             se.draw_replay_overlay(ctx, fi / FPS)
@@ -983,8 +1542,9 @@ def main():
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
               "duration 20-60 s": 20 <= dur <= 60,
               "one winner, 3 cars out": len(outs) == 3,
-              "battle 10-38 s": 10 <= winner["finish"] <= 38,
-              "at least 4 big hits": sum(h["rel"] > 6 for h in hits) >= 4,
+              "battle 15-38 s": 15 <= winner["finish"] <= 38,
+              "at least 3 chaos events": sum(1 for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")) >= 3,
+              "at least 3 big hits": sum(h["rel"] > 6 for h in hits) >= 3,
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
               "no frame without a car": empty_frames == 0}
@@ -999,11 +1559,12 @@ def main():
         params=params, arena=ARENA, theme=se.THEME, theme_id=se.THEME_ID, voice=voice, outcomes=outcomes,
         checks=checks, cta=se.CTA, title_base=title, title=f"{title} #Shorts",
         description=(f"{', '.join(names[:3])} and {names[3]} enter the Smash Arena on {arena_word}! 💥 "
-                     "Last car standing wins!\n\n"
+                     "Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\n"
                      "Watch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n"
                      f"🔔 Subscribe to {se.CHANNEL} for new car battles every day.\n\n"
                      "#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena"),
-        tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + [ARENA],
+        tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + [ARENA, "ufo",
+                                                                                                 "kaiju", "missile"],
         narration=[txt for _, txt in lines],
         assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS " + voice,
         video_path=out, preview_dir=prev)
