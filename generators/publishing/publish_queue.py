@@ -26,20 +26,24 @@ import episodes  # noqa: E402
 NY = ZoneInfo("America/New_York")
 WIB = ZoneInfo("Asia/Jakarta")
 SLOTS = [(11, 0), (15, 0), (19, 0)]      # ET: late morning, after school, evening prime time (BLUEPRINT 10)
-# UPLOAD RULE (user 2026-10-01, strict): 11:00 ET = CHALLENGE (2D side view) only, 15:00 ET = RACE (race25d) only,
-# 19:00 ET = SMASH ARENA (smash25d) only. Saturday 19:00 ET is reserved for the weekly long episode (story15); while
-# no long episode is approved, SMASH takes it. No other fallback: an empty slot stays empty and plan() warns.
+# UPLOAD RULE (user 2026-10-01, strict): Shorts every day at 11:00 ET = CHALLENGE (2D side view) only,
+# 15:00 ET = RACE (race25d) only, 19:00 ET = SMASH ARENA (smash25d) only. The weekly long episode (story15) has its
+# OWN slot, Saturday 13:00 ET, so Shorts and long-form both run (user: "short tetap ada, panjang tetap ada").
+# No fallback between types: an empty slot stays empty and plan() warns.
 # Stock standard: at least 7 days of each type queued (plan() prints PERINGATAN STOK).
 RACE_SERIES = {"race25d"}
 SMASH_SERIES = {"smash25d"}
 LONG_SERIES = {"story15"}                 # weekly long-form series id (reserved)
-WEEKLY_LONG_SLOT = (5, 19)                # Saturday (weekday 5), 19:00 ET
+WEEKLY_LONG_SLOT = (5, 13)                # Saturday (weekday 5), 13:00 ET: long-form only, never a Short
+LONG_HM = (13, 0)
 
 
 def slot_role(t_utc):
     et = t_utc.astimezone(NY)
     if (et.weekday(), et.hour) == WEEKLY_LONG_SLOT:
         return "long"
+    if (et.hour, et.minute) == LONG_HM:                          # 13:00 on other days: no slot
+        return None
     return "race" if et.hour == 15 else "smash" if et.hour == 19 else "short"
 
 
@@ -48,8 +52,8 @@ def role_of(series):
             else "long" if series in LONG_SERIES else "short")
 
 
-SLOT_ROLES_OF = {"race": {"race"}, "smash": {"smash", "long"}, "short": {"short"}, "long": {"long"}}
-PLAN_ORDER = {"race": 0, "long": 1, "smash": 2, "short": 3}   # a long episode claims Saturday 19:00 before SMASH
+SLOT_ROLES_OF = {"race": {"race"}, "smash": {"smash"}, "short": {"short"}, "long": {"long"}}
+PLAN_ORDER = {"race": 0, "long": 1, "smash": 2, "short": 3}
 ROLE_NAME = {"short": "CHALLENGE (11:00 ET)", "race": "RACE race25d (15:00 ET)", "smash": "SMASH smash25d (19:00 ET)"}
 STOCK_DAYS = 7
 
@@ -84,7 +88,7 @@ def save(q):
 def next_slots(start_day, taken, now_utc, roles):
     day = start_day
     while True:
-        for h, m in SLOTS:
+        for h, m in sorted(SLOTS + [LONG_HM]):
             t = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=NY).astimezone(dt.timezone.utc)
             # YouTube needs publishAt in the future; keep a 2 h margin for the upload itself
             if t > now_utc + dt.timedelta(hours=2) and t not in taken and slot_role(t) in roles:

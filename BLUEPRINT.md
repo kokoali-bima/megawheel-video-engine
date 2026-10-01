@@ -389,9 +389,9 @@ Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/ri
   - **15:00 ET setiap hari = Shorts balapan 2.5D (`race25d`)**. Wajib ada 1 per hari.
   - **11:00 ET = CHALLENGE** (seri 2D: potholes, bumps, splash, lava, dst.).
   - **19:00 ET = SMASH ARENA (`smash25d`)**.
-  - **ATURAN UPLOAD TEGAS (user 2026-10-01):** 11:00 hanya CHALLENGE, 15:00 hanya RACE, 19:00 hanya SMASH; tidak ada cadangan lintas jenis (slot kosong dibiarkan kosong). Sabtu 19:00 dicadangkan untuk video panjang mingguan (`story15`); selama belum ada, SMASH yang mengisinya.
+  - **ATURAN UPLOAD TEGAS (user 2026-10-01):** 11:00 hanya CHALLENGE, 15:00 hanya RACE, 19:00 hanya SMASH; tidak ada cadangan lintas jenis (slot kosong dibiarkan kosong). **Video panjang mingguan (`story15`) punya slot sendiri: Sabtu 13:00 ET** (Shorts tetap 3x sehari, termasuk Sabtu 19:00 SMASH).
   - **Standar stok: minimal 7 hari ke depan untuk tiap jenis** (7 CHALLENGE + 7 RACE + 7 SMASH dalam antrian). `plan` mencetak PERINGATAN STOK per jenis.
-  - **Sabtu 19:00 ET = video panjang 15 menit mingguan** (seri `story15`). Slot ini tidak dipakai Shorts.
+  - **Sabtu 13:00 ET = video panjang 15 menit mingguan** (seri `story15`), slot terpisah dari Shorts.
   - `publish_queue.py plan` mengatur ini otomatis dan mencetak **PERINGATAN STANDAR** kalau ada hari dalam 7 hari ke depan yang belum punya race25d.
 - Zona waktu disimpan sebagai `America/New_York`, jadi pergantian daylight saving otomatis.
 - Mekanisme: video diupload sebagai `private` dengan `publishAt`. YouTube yang menayangkan tepat di jamnya, tidak ada cron di server kita.
