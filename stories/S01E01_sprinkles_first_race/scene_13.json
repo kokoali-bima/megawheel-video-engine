@@ -1,0 +1,90 @@
+{
+ "title": "Scene 13 - Rival jadi teman",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "sunset",
+ "music": "warm",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.6,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 6.5,
+   "z": 1.2,
+   "face": -1,
+   "emo": "shy"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -9,
+   "z": 1.9,
+   "emo": "normal"
+  }
+ },
+ "shots": [
+  {
+   "cam": "two",
+   "on": "zippy",
+   "zoom": 1.3,
+   "lines": [
+    [
+     "zippy",
+     "Sprinkles... I was wrong about you. You've got more guts than all of us.",
+     "shy"
+    ]
+   ],
+   "with": "sprinkles"
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "lines": [
+    [
+     "sprinkles",
+     "Want some ice cream?",
+     "happy"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "lines": [
+    [
+     "zippy",
+     "...Strawberry, please.",
+     "laugh"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "buster",
+   "zoom": 1.15,
+   "music": "hopeful",
+   "lines": [
+    [
+     "buster",
+     "Your grandpa would be so proud.",
+     "calm"
+    ]
+   ],
+   "with": "sprinkles"
+  },
+  {
+   "look": {
+    "x": 0,
+    "z": 4.0,
+    "y": 13.0,
+    "zoom": 1.5
+   },
+   "hold": 3.0,
+   "music": "hopeful"
+  }
+ ]
+}

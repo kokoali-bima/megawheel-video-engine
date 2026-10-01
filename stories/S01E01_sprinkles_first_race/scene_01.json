@@ -1,0 +1,135 @@
+{
+ "title": "Scene 1 - Pembuka (kait)",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "rain",
+ "music": "tense",
+ "ambience": "rain",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.6,
+   "emo": "sad"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 7,
+   "z": 1.8,
+   "face": -1,
+   "emo": "tease"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -8,
+   "z": 2.3,
+   "emo": "normal"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 12,
+   "z": 2.8,
+   "face": -1
+  }
+ },
+ "shots": [
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "music": "sad",
+   "tail": 0.8,
+   "lines": [
+    [
+     "narrator",
+     "Everyone said she was too slow. Too heavy. Too... sweet.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "sprinkles",
+   "hold": 2.4,
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "sfx": [
+    "thunder"
+   ],
+   "fx": [
+    "lightning"
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "lines": [
+    [
+     "zippy",
+     "An ice cream truck? In MY race?",
+     "tease"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.4,
+   "kraggor": {
+    "mode": "roar",
+    "sx": 0.68,
+    "sy": 0.3,
+    "scale": 0.9
+   },
+   "sfx": [
+    "roar",
+    [
+     "thunder",
+     0.4
+    ]
+   ],
+   "fx": [
+    "lightning",
+    "shake"
+   ],
+   "emote": {
+    "sprinkles": "scared",
+    "zippy": "scared",
+    "rocky": "scared"
+   }
+  },
+  {
+   "cam": "wide",
+   "music": "hopeful",
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "narrator",
+     "But this is the story of the day Sprinkles changed everything.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.6,
+   "title": "SPRINKLES' FIRST RACE",
+   "music": "hopeful"
+  },
+  {
+   "cam": "wide",
+   "caption": "ONE MONTH EARLIER",
+   "music": "warm",
+   "lines": [
+    [
+     "narrator",
+     "It all started one month earlier...",
+     "calm"
+    ]
+   ]
+  }
+ ]
+}

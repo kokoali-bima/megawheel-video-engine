@@ -1,0 +1,122 @@
+{
+ "title": "Scene 7 - Hari balapan",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "morning",
+ "music": "epic",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "finish": 3.2,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.4,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 0,
+   "z": 1.3,
+   "emo": "tease"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 0,
+   "z": 2.2,
+   "emo": "normal"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 0,
+   "z": 3.0,
+   "emo": "normal"
+  },
+  "siren": {
+   "vk": "police",
+   "x": -9,
+   "z": 0.2,
+   "emo": "proud"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "sfx": [
+    "cheer"
+   ],
+   "lines": [
+    [
+     "announcer",
+     "Ladies and gentlemen... welcome to the MegaWheel Grand Race!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "lines": [
+    [
+     "announcer2",
+     "And... is that an ice cream truck at the start line?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "music": "sad",
+   "lines": [
+    [
+     "sprinkles",
+     "For you, Grandpa.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "lines": [
+    [
+     "siren",
+     "Ready... set... let's go!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "nitro",
+   "dx": -6,
+   "hold": 3.6,
+   "speedlines": true,
+   "sfx": [
+    "engine",
+    [
+     "cheer",
+     0.3
+    ]
+   ],
+   "moves": {
+    "zippy": {
+     "to_x": 80,
+     "speed": 17
+    },
+    "nitro": {
+     "to_x": 80,
+     "speed": 16
+    },
+    "rocky": {
+     "to_x": 80,
+     "speed": 13
+    },
+    "sprinkles": {
+     "to_x": 80,
+     "speed": 7
+    }
+   }
+  }
+ ]
+}

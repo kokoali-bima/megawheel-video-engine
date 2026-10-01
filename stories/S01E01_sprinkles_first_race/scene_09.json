@@ -1,0 +1,145 @@
+{
+ "title": "Scene 9 - KRAGGOR datang",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "sunset",
+ "music": "tense",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -5,
+   "z": 0.4,
+   "emo": "scared"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 10,
+   "z": 1.4,
+   "emo": "scared"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 2,
+   "z": 2.3,
+   "emo": "scared"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 6,
+   "z": 3.0,
+   "emo": "scared"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "hold": 3.6,
+   "kraggor": {
+    "mode": "roar",
+    "sx": 0.55,
+    "sy": 0.28,
+    "scale": 1.0
+   },
+   "sfx": [
+    "roar",
+    [
+     "gasp",
+     0.5
+    ]
+   ],
+   "fx": [
+    "shake"
+   ]
+  },
+  {
+   "cam": "wide",
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.55,
+    "sy": 0.28,
+    "scale": 1.0
+   },
+   "lines": [
+    [
+     "announcer",
+     "Oh no... it's Kraggor!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.2,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": 0.2
+   },
+   "sfx": [
+    [
+     "stomp",
+     0.6
+    ]
+   ],
+   "fx": [
+    "shake"
+   ],
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.55,
+    "sy": 0.28,
+    "scale": 1.0
+   }
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "lines": [
+    [
+     "zippy",
+     "Help! Somebody HELP!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.6,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "rocky": {
+     "to_x": -30,
+     "speed": 11
+    },
+    "nitro": {
+     "to_x": -30,
+     "speed": 13
+    }
+   }
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 2.2,
+   "music": "sad",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "emote": {
+    "sprinkles": "worried"
+   }
+  }
+ ]
+}

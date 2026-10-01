@@ -1,0 +1,63 @@
+{
+ "title": "Scene 12 - Garis finis",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "sunset",
+ "music": "sad",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "finish": 20,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 4,
+   "z": 0.4,
+   "emo": "shy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "hold": 4.4,
+   "moves": {
+    "sprinkles": {
+     "to_x": 24,
+     "speed": 4.5
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 2.2,
+   "sfx": [
+    [
+     "cheer",
+     1.2
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "confetti": true,
+   "music": "hopeful",
+   "sfx": [
+    "cheer"
+   ],
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "lines": [
+    [
+     "announcer",
+     "She finished last...",
+     "calm"
+    ],
+    [
+     "announcer2",
+     "...but I think we all know who the real champion is!",
+     "excited"
+    ]
+   ]
+  }
+ ]
+}

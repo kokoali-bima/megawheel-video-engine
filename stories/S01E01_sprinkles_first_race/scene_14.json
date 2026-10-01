@@ -1,0 +1,81 @@
+{
+ "title": "Scene 14 - Penghargaan",
+ "location": "podium",
+ "theme_location": "city",
+ "time": "sunset",
+ "music": "hopeful",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "props": [
+  {
+   "type": "podium"
+  }
+ ],
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.3,
+   "emo": "shy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 7,
+   "z": 0.8,
+   "face": -1,
+   "emo": "proud"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -7,
+   "z": 0.9,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "hold": 2.2,
+   "sfx": [
+    "cheer"
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "lines": [
+    [
+     "siren",
+     "For the bravest racer on the track... the Golden Heart Award!",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.4,
+   "crown": "sprinkles",
+   "confetti": true,
+   "sfx": [
+    "cheer"
+   ],
+   "emote": {
+    "sprinkles": "happy"
+   }
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "tail": 1.4,
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "I kept my promise, Grandpa.",
+     "happy"
+    ]
+   ]
+  }
+ ]
+}

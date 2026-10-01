@@ -1,0 +1,99 @@
+{
+ "title": "Scene 10 - Pilihan",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "sunset",
+ "music": "sad",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -5,
+   "z": 0.4,
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 10,
+   "z": 1.4,
+   "emo": "scared"
+  }
+ },
+ "shots": [
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "tint": "sepia",
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "lines": [
+    [
+     "grandpa_cone",
+     "A champion is the one who stops... to help someone else.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.8,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "music": "hopeful",
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 5,
+     "speed": 4
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "music": "hopeful",
+   "lines": [
+    [
+     "announcer2",
+     "She's... going the wrong way?!",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.0,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "sfx": [
+    "ding",
+    [
+     "ding",
+     0.8
+    ]
+   ],
+   "emote": {
+    "sprinkles": "determined"
+   }
+  }
+ ]
+}

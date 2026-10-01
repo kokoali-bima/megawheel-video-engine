@@ -1,0 +1,142 @@
+{
+ "title": "Scene 3 - Pendaftaran & ditertawakan",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "noon",
+ "music": "warm",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "props": [
+  {
+   "type": "desk",
+   "x": 3.6,
+   "text": "RACE REGISTRATION"
+  }
+ ],
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -3.5,
+   "z": 1.0,
+   "emo": "shy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 4.0,
+   "z": 1.8,
+   "face": -1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -14,
+   "z": 2.2,
+   "emo": "tease",
+   "hidden": true
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -17,
+   "z": 2.8,
+   "emo": "normal",
+   "hidden": true
+  }
+ },
+ "shots": [
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "zoom": 1.2,
+   "lines": [
+    [
+     "sprinkles",
+     "One... one entry, please.",
+     "shy"
+    ]
+   ],
+   "with": "siren"
+  },
+  {
+   "cam": "wide",
+   "hold": 2.4,
+   "sfx": [
+    "laugh"
+   ],
+   "emote": {
+    "zippy": "laugh",
+    "nitro": "laugh"
+   },
+   "moves": {
+    "zippy": {
+     "show": true,
+     "to_x": -9,
+     "speed": 4
+    },
+    "nitro": {
+     "show": true,
+     "to_x": -12,
+     "speed": 4
+    }
+   }
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "sfx": [
+    "laugh"
+   ],
+   "lines": [
+    [
+     "zippy",
+     "Ha! What's next? A shopping cart?",
+     "laugh"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "lines": [
+    [
+     "siren",
+     "Rules are rules. Anyone with four wheels can race.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "music": "sad"
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "music": "sad",
+   "lines": [
+    [
+     "sprinkles",
+     "I have four wheels.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "zippy",
+   "zoom": 1.3,
+   "music": "tense",
+   "lines": [
+    [
+     "zippy",
+     "She won't even reach the first turn.",
+     "tease"
+    ]
+   ],
+   "with": "nitro"
+  }
+ ]
+}

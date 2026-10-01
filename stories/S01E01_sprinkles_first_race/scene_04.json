@@ -1,0 +1,74 @@
+{
+ "title": "Scene 4 - Malam yang sepi",
+ "location": "garage",
+ "theme_location": "city",
+ "time": "night",
+ "music": "sad",
+ "tears": true,
+ "props": [
+  {
+   "type": "photo",
+   "x": -1.6
+  }
+ ],
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 2.4,
+   "z": 1.2,
+   "face": -1,
+   "emo": "sad"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "hold": 2.8
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "lines": [
+    [
+     "sprinkles",
+     "Maybe they're right...",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": -1.6,
+    "z": 3.6,
+    "y": 6.1,
+    "zoom": 3.0
+   },
+   "hold": 2.8
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "emote": {
+    "sprinkles": "cry"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Grandpa... what would you do?",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": -1.6,
+    "z": 3.6,
+    "y": 6.1,
+    "zoom": 3.6
+   },
+   "hold": 2.6,
+   "photo_glow": true,
+   "music": "warm"
+  }
+ ]
+}

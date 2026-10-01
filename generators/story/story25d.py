@@ -398,6 +398,110 @@ def draw_podium(ctx, camx):
         ctx.fill()
 
 
+def draw_finish(ctx, x, camx):
+    for row in range(8):
+        za, zb = -0.6 + row * 0.5, -0.1 + row * 0.5
+        for col in range(2):
+            xa = x + col * 0.9
+            se.poly(ctx, [pxy(xa, za, camx), pxy(xa + 0.9, za, camx), pxy(xa + 0.9, zb, camx), pxy(xa, zb, camx)])
+            ctx.set_source_rgb(*((0.05, 0.05, 0.05) if (row + col) % 2 else (1, 1, 1)))
+            ctx.fill()
+
+
+def draw_foot(ctx, x, z, camx, drop):
+    """Kraggor's giant foot (own design) blocking the track; drop 0 = on the ground, 1 = high in the sky."""
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    fy = gy - drop * 22 * k
+    body = se.lit((0.24, 0.55, 0.36))
+    dark = se.shade((0.24, 0.55, 0.36), 0.62)
+    ctx.rectangle(sx - 1.7 * k, -4000, 3.4 * k, fy - 1.0 * k + 4000)
+    ctx.set_source_rgb(*body)
+    ctx.fill()
+    se.rrect(ctx, sx - 2.7 * k, fy - 1.7 * k, 5.4 * k, 1.8 * k, 0.6 * k)
+    ctx.set_source_rgb(*body)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*dark)
+    ctx.set_line_width(max(2, 0.1 * k))
+    ctx.stroke()
+    for q in (-1, 0, 1):
+        cx = sx + q * 1.75 * k
+        ctx.arc(cx, fy - 0.5 * k, 0.8 * k, 0, 2 * math.pi)
+        ctx.set_source_rgb(*body)
+        ctx.fill()
+        se.poly(ctx, [(cx - 0.35 * k, fy - 0.1 * k), (cx + 0.35 * k, fy - 0.1 * k), (cx + 0.15 * k, fy + 0.45 * k)])
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+
+
+def kraggor_head(ctx, u, spec):
+    """Kraggor's head in screen space (smash25d design). spec: sx, sy (0..1 of the frame), scale,
+    mode: "rise" (rises then calm), "roar" (rises + roars), "calm" (already there), "munch" (eating ice cream)."""
+    mode = spec.get("mode", "rise")
+    if mode == "roar":
+        a = min(u, 2.7)
+    elif mode == "rise":
+        a = min(u, 0.8)
+    elif mode == "munch":
+        a = 0.8 + 0.18 * (1 + math.sin(u * 9))                    # small jaw movements
+    else:
+        a = 3.0                                                   # fully up, mouth closed
+    ctx.save()
+    sx, sy, sc = spec.get("sx", 0.62) * W, spec.get("sy", 0.42) * H, spec.get("scale", 1.0) * (H / 1080)
+    ctx.translate(sx, sy)
+    ctx.scale(sc, sc)
+    ctx.translate(-905, -400)
+    SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 400)
+    ctx.restore()
+
+
+def ice_cream_toss(ctx, u, spec, camx, actors):
+    """An ice cream cone flying from the truck window to a screen point (Kraggor's mouth)."""
+    a = actors[spec["from"]]
+    if not 0 <= u - spec.get("at", 0.0) < spec.get("dur", 1.2):
+        return
+    f = (u - spec.get("at", 0.0)) / spec.get("dur", 1.2)
+    k = k_of(a["z"])
+    x0, y0 = pxy(a["x"] + 1.0 * a["face"], a["z"], camx)
+    y0 -= 2.6 * k
+    x1, y1 = spec.get("tx", 0.6) * W, spec.get("ty", 0.3) * H
+    x = x0 + (x1 - x0) * f
+    y = y0 + (y1 - y0) * f - math.sin(math.pi * f) * 0.25 * H
+    s_ = 0.5 * k
+    se.poly(ctx, [(x - s_ * 0.5, y), (x + s_ * 0.5, y), (x, y + s_ * 1.4)])
+    ctx.set_source_rgb(0.9, 0.7, 0.35)
+    ctx.fill()
+    ctx.arc(x, y - s_ * 0.2, s_ * 0.6, 0, 2 * math.pi)
+    ctx.set_source_rgb(1, 0.6, 0.75)
+    ctx.fill()
+
+
+def card(ctx, lines, age, dur):
+    """Full-screen text card (next-episode tease)."""
+    a = min(1.0, age / 0.5, max(0.0, (dur - age) / 0.5))
+    ctx.rectangle(0, 0, W, H)
+    ctx.set_source_rgba(0.02, 0.02, 0.08, 0.85 * a)
+    ctx.fill()
+    for i, ln in enumerate(lines):
+        se.draw_text(ctx, ln, W / 2, H * (0.38 + i * 0.14), 84 if i == 0 else 60,
+                     fill=(1, 0.86, 0.12) if i == 0 else (1, 1, 1), stroke=(0.1, 0.05, 0.2), sw=6, alpha=a, max_w=W * 0.9)
+
+
+def vertical_overlay(ctx, fn, *args):
+    """Run a 1080x1920 overlay (race25d end card) fitted into the current frame."""
+    s_ = min(W / 1080, H / 1920)
+    ctx.save()
+    ctx.translate((W - 1080 * s_) / 2, (H - 1920 * s_) / 2)
+    ctx.scale(s_, s_)
+    w0, h0 = se.W, se.H
+    se.W, se.H, R.W, R.H = 1080, 1920, 1080, 1920
+    try:
+        fn(ctx, *args)
+    finally:
+        se.W, se.H, R.W, R.H = w0, h0, w0, h0
+        ctx.restore()
+
+
 # ------------------------------------------------------------------ cameras
 def cam_for(shot, actors, t, u):
     """(camx, zoom, focus screen y) for a shot at shot-local time u."""
@@ -430,6 +534,8 @@ def cam_for(shot, actors, t, u):
         return face_x, shot.get("zoom", 5.0) * (1 + 0.04 * u), face_y
     if kind == "low":
         return on["x"], shot.get("zoom", 1.7), ground_y(on["z"]) - 0.4 * k
+    if kind == "track":                                            # follow a moving car (race)
+        return on["x"] + shot.get("dx", 2.0), shot.get("zoom", 1.1), None
     return on["x"] + shot.get("dx", 0.0), shot.get("zoom", 1.0), None
 
 
@@ -757,11 +863,35 @@ def render_scene(ep, num, aspect):
             elif prop["type"] == "podium":
                 draw_podium(ctx, camx)
         draw_props_layer(ctx, loc, camx, 11, back=True)
+        if "finish" in scene:
+            draw_finish(ctx, scene["finish"], camx)
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
             draw_actor(ctx, a, t, camx)
+        ft = sh.get("foot")
+        if ft:
+            uu = u - ft.get("at", 0.0)
+            drop = max(0.0, 1 - uu / 0.4) ** 2 if uu < 0.4 else (0.0 if uu < ft.get("stay", 99) else
+                                                                 min(1.0, (uu - ft.get("stay", 99)) / 0.6) ** 2)
+            if uu >= 0:
+                draw_foot(ctx, ft["x"], ft.get("z", 1.0), camx, drop)
         draw_props_layer(ctx, loc, camx, 13, back=False)
         ctx.restore()
+        if sh.get("kraggor"):
+            kraggor_head(ctx, u, sh["kraggor"])
+        if sh.get("toss"):
+            ice_cream_toss(ctx, u, sh["toss"], camx, actors)
+        if sh.get("speedlines"):
+            se.draw_speed_lines(ctx, 24.0, t)
+        if sh.get("confetti"):
+            se.draw_confetti(ctx, u)
+        if sh.get("crown"):
+            cr = actors[sh["crown"]]
+            sx_, gy_ = pxy(cr["x"], cr["z"], camx)
+            k_ = k_of(cr["z"])
+            px_ = W / 2 + (sx_ - CX) * zoom
+            py_ = H / 2 + (gy_ - 3.6 * k_ - piv_y) * zoom
+            SM.crown(ctx, px_, py_ - 8 * math.sin(t * 4), 0.9 * k_ * zoom)
         se.draw_weather(ctx, t)
         if "lightning" in sh.get("fx", []) and int(u * 10) in (3, 4, 9):
             ctx.rectangle(0, 0, W, H)
@@ -777,6 +907,10 @@ def render_scene(ep, num, aspect):
             g.add_color_stop_rgba(1, 0.15, 0.08, 0.02, 0.6)
             ctx.set_source(g)
             ctx.fill()
+        if sh.get("card"):
+            card(ctx, sh["card"], u, sh["t1"] - sh["t0"])
+        if sh.get("endcard"):
+            vertical_overlay(ctx, R.draw_cta, u)
         if sh.get("calendar") is not None:
             calendar(ctx, sh["calendar"], aspect)
         if sh.get("caption"):

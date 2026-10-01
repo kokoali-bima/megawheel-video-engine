@@ -1,0 +1,180 @@
+{
+ "title": "Scene 6 - Empat minggu latihan",
+ "location": "country",
+ "theme_location": "countryside",
+ "time": "morning",
+ "music": "playful",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -10,
+   "z": 1.0,
+   "emo": "excited"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 9,
+   "z": 2.0,
+   "face": -1,
+   "emo": "normal",
+   "hidden": true
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -20,
+   "z": 2.2,
+   "emo": "normal",
+   "hidden": true
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "calendar": 30,
+   "caption": "WEEK 1",
+   "hold": 2.8,
+   "sfx": [
+    "engine"
+   ],
+   "moves": {
+    "sprinkles": {
+     "to_x": 2,
+     "speed": 6
+    }
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "hold": 2.0,
+   "emote": {
+    "sprinkles": "surprised"
+   },
+   "sfx": [
+    "splat"
+   ],
+   "fx": [
+    "shake"
+   ],
+   "calendar": 27
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "zoom": 1.15,
+   "calendar": 25,
+   "moves": {
+    "rocky": {
+     "show": true,
+     "x": 8
+    }
+   },
+   "lines": [
+    [
+     "rocky",
+     "You okay?",
+     "calm"
+    ],
+    [
+     "sprinkles",
+     "Never better!",
+     "laugh"
+    ]
+   ],
+   "with": "rocky"
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "zoom": 1.1,
+   "calendar": 21,
+   "caption": "WEEK 2",
+   "music": "warm",
+   "moves": {
+    "buster": {
+     "show": true,
+     "x": -8
+    },
+    "rocky": {
+     "show": false
+    }
+   },
+   "lines": [
+    [
+     "buster",
+     "You don't have to be the fastest. Just keep going.",
+     "calm"
+    ]
+   ],
+   "with": "buster"
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "calendar": 14,
+   "caption": "WEEK 3",
+   "hold": 3.0,
+   "sfx": [
+    "engine"
+   ],
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 26,
+     "speed": 9
+    },
+    "buster": {
+     "show": false
+    }
+   }
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "calendar": 7,
+   "caption": "WEEK 4",
+   "hold": 3.4,
+   "speedlines": true,
+   "music": "hopeful",
+   "moves": {
+    "rocky": {
+     "show": true,
+     "x": 30,
+     "to_x": 44,
+     "speed": 7
+    },
+    "sprinkles": {
+     "to_x": 50,
+     "speed": 10
+    }
+   }
+  },
+  {
+   "cam": "close",
+   "on": "rocky",
+   "music": "hopeful",
+   "emote": {
+    "rocky": "proud"
+   },
+   "lines": [
+    [
+     "rocky",
+     "Okay... now you're a racer.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "calendar": "RACE DAY",
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "music": "hopeful"
+  }
+ ]
+}
