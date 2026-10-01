@@ -454,6 +454,26 @@
    "gpu_seconds": 50.7,
    "wall_seconds": 78.8,
    "cost_usd": 0.0129
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer SIM_SMASH25D_V4_S014 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 57.0,
+   "wall_seconds": 88.7,
+   "cost_usd": 0.0145
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer SIM_SMASH25D_V4_S015 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 52.0,
+   "wall_seconds": 78.2,
+   "cost_usd": 0.0133
   }
  ]
 }

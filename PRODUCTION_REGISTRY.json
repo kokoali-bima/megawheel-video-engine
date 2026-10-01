@@ -1826,6 +1826,70 @@
       "youtube_url": null,
       "approved_date": "2026-10-01",
       "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V4_S014",
+      "series": "smash25d",
+      "engine_version": "v4",
+      "seed": 14,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "smash25d_69d935ba@noon-rain-countryside",
+      "arena": "ice",
+      "theme": "noon-rain-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p3+ring",
+        "p4+wreck",
+        "win",
+        "p2+wreck"
+      ],
+      "duration": 50.03,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014/SIM_SMASH25D_V4_S014_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V4_S015",
+      "series": "smash25d",
+      "engine_version": "v4",
+      "seed": 15,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "sports"
+      ],
+      "track_id": "smash25d_f7fa5a6a@noon-clear-beach",
+      "arena": "lava",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "win",
+        "p3+ring",
+        "p2+wreck"
+      ],
+      "duration": 49.77,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015/SIM_SMASH25D_V4_S015_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
