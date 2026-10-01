@@ -5,15 +5,15 @@
   "series": "smash25d",
   "seed": 11,
   "fps": 30,
-  "duration": 51.67,
+  "duration": 52.87,
   "params": {
     "cast": [
+      "monster",
       "icecream",
-      "monster2",
-      "sports",
-      "f1"
+      "police",
+      "sports"
     ],
-    "arena": "mud",
+    "arena": "lava",
     "chaos": [
       [
         "kraggor",
@@ -33,19 +33,19 @@
       ]
     ]
   },
-  "arena": "mud",
+  "arena": "lava",
   "theme": {
-    "time": "noon",
+    "time": "sunset",
     "weather": "clear",
     "location": "desert"
   },
-  "theme_id": "noon-clear-desert",
+  "theme_id": "sunset-clear-desert",
   "voice": "chatterbox:mw-announcers-m1f1",
   "outcomes": [
     "win",
     "p2+ring",
-    "p4+wreck",
-    "p3+ring"
+    "p3+ring",
+    "p4+ring"
   ],
   "checks": {
     "video+audio streams": true,
@@ -61,7 +61,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Crash Battle! Only One Can Win! 💥",
   "title": "Crash Battle! Only One Can Win! 💥 #Shorts",
-  "description": "Sprinkles, Grizzly, Zippy and Nitro enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "description": "Rocky, Sprinkles, Siren and Zippy enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -72,32 +72,31 @@
     "car battle",
     "shorts",
     "MegaWheel Arena",
-    "ice cream truck",
     "monster truck",
+    "ice cream truck",
+    "police car",
     "sports car",
-    "race car",
-    "mud",
+    "lava",
     "ufo",
     "kaiju",
     "missile"
   ],
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
+    "Rocky, the monster truck!",
     "Sprinkles, the ice cream truck!",
-    "Grizzly, the monster truck!",
-    "Zippy, the sports car!",
-    "And... Nitro, the race car!",
+    "Siren, the police car!",
+    "And... Zippy, the sports car!",
     "Ready... Go!",
     "Oh no... it's Kraggor!",
     "Did you see that?",
-    "Ouch! That's gotta hurt!",
-    "A UFO! It's got Nitro!",
+    "A UFO! It's got Siren!",
     "The floor is breaking!",
     "Incoming missile!",
-    "The winner is... Sprinkles! Yeah!",
+    "The winner is... Rocky! Yeah!",
     "What a champion!",
     "Let's see that again... in slow motion!",
-    "Look at that! Kraggor flattens Sprinkles!",
+    "Look at that! Kraggor flattens Rocky!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",

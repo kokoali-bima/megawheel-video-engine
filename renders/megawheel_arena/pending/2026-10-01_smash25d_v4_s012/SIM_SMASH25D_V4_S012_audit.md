@@ -10,4 +10,4 @@
 - ✅ previews
 - ✅ no frame without a car
 
-Duration 45.8 s · arena lava · theme night-clear-beach · voice chatterbox:mw-announcers-m1f1
+Duration 46.4 s · arena lava · theme night-clear-mountains · voice edge:en-US-GuyNeural+en-US-AriaNeural

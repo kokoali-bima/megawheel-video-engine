@@ -5,12 +5,12 @@
   "series": "smash25d",
   "seed": 12,
   "fps": 30,
-  "duration": 45.8,
+  "duration": 46.43,
   "params": {
     "cast": [
       "bigrig",
+      "monster2",
       "taxi",
-      "monster",
       "police"
     ],
     "arena": "lava",
@@ -37,10 +37,10 @@
   "theme": {
     "time": "night",
     "weather": "clear",
-    "location": "beach"
+    "location": "mountains"
   },
-  "theme_id": "night-clear-beach",
-  "voice": "chatterbox:mw-announcers-m1f1",
+  "theme_id": "night-clear-mountains",
+  "voice": "edge:en-US-GuyNeural+en-US-AriaNeural",
   "outcomes": [
     "p4+ring",
     "win",
@@ -61,7 +61,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "4 Cars Enter, 1 Survives! 💥 Smash Arena",
   "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena #Shorts",
-  "description": "Titan, Tilly, Rocky and Siren enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "description": "Titan, Grizzly, Tilly and Siren enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -73,8 +73,8 @@
     "shorts",
     "MegaWheel Arena",
     "big rig",
-    "taxi",
     "monster truck",
+    "taxi",
     "police car",
     "lava",
     "ufo",
@@ -84,23 +84,21 @@
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
     "Titan, the big rig!",
+    "Grizzly, the monster truck!",
     "Tilly, the taxi!",
-    "Rocky, the monster truck!",
     "And... Siren, the police car!",
     "Ready... Go!",
     "Oh no... it's Kraggor!",
-    "Did you see that?",
-    "Oh my goodness! What a hit!",
     "The floor is breaking!",
     "Titan is out!",
     "A UFO! It's got Siren!",
-    "The winner is... Tilly! Yeah!",
-    "What a champion!",
+    "Tilly is down!",
+    "The winner is... Grizzly! Yeah!",
     "Let's see that again... in slow motion!",
     "Look at that! Kraggor flattens Siren!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS edge:en-US-GuyNeural+en-US-AriaNeural",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012/SIM_SMASH25D_V4_S012.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012/preview"
 }

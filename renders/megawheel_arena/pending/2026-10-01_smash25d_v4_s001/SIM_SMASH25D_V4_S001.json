@@ -5,13 +5,13 @@
   "series": "smash25d",
   "seed": 1,
   "fps": 30,
-  "duration": 45.83,
+  "duration": 49.93,
   "params": {
     "cast": [
-      "bigrig",
       "monster2",
-      "f1",
-      "sports"
+      "bigrig",
+      "police",
+      "f1"
     ],
     "arena": "ice",
     "chaos": [
@@ -42,9 +42,9 @@
   "theme_id": "night-clear-desert",
   "voice": "chatterbox:mw-announcers-m1f1",
   "outcomes": [
-    "p4+ring",
-    "win",
+    "p4+wreck",
     "p3+ring",
+    "win",
     "p2+wreck"
   ],
   "checks": {
@@ -61,7 +61,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Last Car Standing Wins! 💥",
   "title": "Last Car Standing Wins! 💥 #Shorts",
-  "description": "Titan, Grizzly, Nitro and Zippy enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "description": "Grizzly, Titan, Siren and Nitro enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -72,10 +72,10 @@
     "car battle",
     "shorts",
     "MegaWheel Arena",
-    "big rig",
     "monster truck",
+    "big rig",
+    "police car",
     "race car",
-    "sports car",
     "ice",
     "ufo",
     "kaiju",
@@ -83,21 +83,21 @@
   ],
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
-    "Titan, the big rig!",
     "Grizzly, the monster truck!",
-    "Nitro, the race car!",
-    "And... Zippy, the sports car!",
+    "Titan, the big rig!",
+    "Siren, the police car!",
+    "And... Nitro, the race car!",
     "Ready... Go!",
-    "Did you see that?",
-    "A UFO! It's got Grizzly!",
-    "Incoming missile!",
-    "Titan is out!",
-    "Oh no... it's Kraggor!",
+    "A UFO! It's got Titan!",
     "Ouch! That's gotta hurt!",
-    "The winner is... Grizzly! Yeah!",
+    "Incoming missile!",
+    "Oh no... it's Kraggor!",
+    "Grizzly is down!",
+    "Titan is out!",
+    "The winner is... Siren! Yeah!",
     "What a champion!",
     "Let's see that again... in slow motion!",
-    "Kaboom! Right on Nitro!",
+    "Kaboom! Right on Siren!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",

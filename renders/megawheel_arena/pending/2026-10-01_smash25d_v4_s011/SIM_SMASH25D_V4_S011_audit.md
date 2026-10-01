@@ -10,4 +10,4 @@
 - ✅ previews
 - ✅ no frame without a car
 
-Duration 51.7 s · arena mud · theme noon-clear-desert · voice chatterbox:mw-announcers-m1f1
+Duration 52.9 s · arena lava · theme sunset-clear-desert · voice chatterbox:mw-announcers-m1f1

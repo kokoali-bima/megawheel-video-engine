@@ -5,15 +5,15 @@
   "series": "smash25d",
   "seed": 8,
   "fps": 30,
-  "duration": 49.8,
+  "duration": 45.93,
   "params": {
     "cast": [
-      "firetruck",
       "monster",
+      "firetruck",
       "sports",
-      "f1"
+      "taxi"
     ],
-    "arena": "ice",
+    "arena": "mud",
     "chaos": [
       [
         "missile",
@@ -33,19 +33,19 @@
       ]
     ]
   },
-  "arena": "ice",
+  "arena": "mud",
   "theme": {
     "time": "night",
     "weather": "snow",
-    "location": "city"
+    "location": "countryside"
   },
-  "theme_id": "night-snow-city",
+  "theme_id": "night-snow-countryside",
   "voice": "chatterbox:mw-announcers-m1f1",
   "outcomes": [
-    "p2+wreck",
-    "p3+ring",
+    "p2+ring",
     "p4+ring",
-    "win"
+    "win",
+    "p3+ring"
   ],
   "checks": {
     "video+audio streams": true,
@@ -61,7 +61,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "4 Cars Enter, 1 Survives! 💥 Smash Arena",
   "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena #Shorts",
-  "description": "Hydro, Rocky, Zippy and Nitro enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "description": "Rocky, Hydro, Zippy and Tilly enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -72,32 +72,31 @@
     "car battle",
     "shorts",
     "MegaWheel Arena",
-    "fire truck",
     "monster truck",
+    "fire truck",
     "sports car",
-    "race car",
-    "ice",
+    "taxi",
+    "mud",
     "ufo",
     "kaiju",
     "missile"
   ],
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
-    "Hydro, the fire truck!",
     "Rocky, the monster truck!",
+    "Hydro, the fire truck!",
     "Zippy, the sports car!",
-    "And... Nitro, the race car!",
+    "And... Tilly, the taxi!",
     "Ready... Go!",
-    "Did you see that?",
     "Incoming missile!",
+    "Did you see that?",
     "The floor is breaking!",
+    "Hydro is out!",
     "Oh no... it's Kraggor!",
-    "Zippy is out!",
-    "Rocky is out!",
-    "The winner is... Nitro! Yeah!",
+    "The winner is... Zippy! Yeah!",
     "What a champion!",
     "Let's see that again... in slow motion!",
-    "Kaboom! Right on Hydro!",
+    "Kaboom! Right on Rocky!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
