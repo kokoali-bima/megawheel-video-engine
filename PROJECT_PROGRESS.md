@@ -45,6 +45,9 @@
 | C1c | **Variasi arena & kamera 2.5D** (user 2026-09-30: "sudah sesuai banget") | ⬜ | — | Gaya 2.5D DISETUJUI. Tambah: jalan melengkung/menikung ke arah kamera, arena oval/melingkar dilihat dari atas-miring (tokoh tetap gambar 2D, dibalik saat arah berubah, gaya Paper Mario), variasi kamera (samping, atas-miring, close-up reaksi), tema/lokasi bergilir |
 | C1e | **Perpustakaan rintangan** (dipakai 3 format) | 🔄 | Claude Code Opus | ✅ v3.3 di race25d: lubang, lahar, dinding, pres (penyet), laser (terbelah), meteor, UFO, naga api (ganti ban), naga es (beku) + genangan & ramp. Semua diuji PASS, 0 frame kosong. ✅ v3.4 (engine v2): rintangan kena siapa pun yang ada di lajurnya; AI pindah jalur untuk menghindar (maks. 1 per video, kelincahan per kendaraan), end card LIKE/SUBSCRIBE gaya YouTube. S002–S007 dirender ulang sebagai v2. Berikutnya: pasang juga di CHALLENGE 2D dan SMASH ARENA; tambah tornado, gempa, batu menggelinding |
 | C10 | **SMASH ARENA** (slot 19:00 ET) | 🔄 | Claude Code Opus | ✅ v3.5 `smash25d`: arena lahar/lumpur/es, 100 HP, serpihan copot, keluar arena atau hancur = gugur, pagar ban sampai detik 9. ✅ v2 (masukan user): arena lebih luas, kekacauan rudal / KRAGGOR / UFO / lantai retak + lahar, narasi announcer gaya tinju/gulat. 4 episode (S001–S004) pending review. Berikutnya: atap gedung, pantai; kartu kejutan lain (tornado, meteor) |
+| C13 | **Rintangan CHALLENGE tidak monoton** (user 2026-10-01) | ⬜ | — | Posisi rintangan acak (awal / tengah / akhir lintasan), varian bentuk: lubang dangkal berbatu, lubang dalam, deretan polisi tidur, genangan + kerikil, dll. Setiap episode harus beda |
+| C14 | **Minggu ke-2: arena baru** (user 2026-10-01) | ⬜ | — | RACE di lintasan melengkung; CHALLENGE di jalur ala roller coaster; SMASH di ring / octagon (masih opsi). Rintangan terus dikembangkan, tiap episode ada pembeda |
+| C15 | **Alur cerita & nilai historis** (user 2026-10-01: "kalau mau punya fans, film harus ada cerita") | ⬜ | — | Rangkaian cerita antar-klip: rivalitas tokoh, klasemen liga (C12), Kraggor sebagai penjahat tetap, rekor/statistik per tokoh, recap mingguan di video panjang Sabtu 13:00 ET |
 | C11 | **Kaiju KRAGGOR** (dino-robot, desain sendiri) + kartu kejutan | ⬜ | — | ±1 dari 3 video: kaiju menangkap peserta, UFO, meteor, tornado, gempa. Kraggor bisa jadi "penjahat" tetap di cerita mingguan |
 | C12 | **LIGA mingguan** | ⬜ | — | Poin per video (juara 10, dst.), klasemen di akhir Shorts, final 3 besar di video Sabtu 19:00 |
 | C1d | **Variasi lokasi & mode balapan 2.5D** (ide user 2026-10-01) | ⬜ | — | Hutan (rally, jalan tanah), padang pasir (Dakar, gundukan pasir), jalan perkampungan, dll. + mode **arena saling tabrak** (demolition derby → tugas C10). Arena: jalan berkelok, oval atas-miring, **sky track melayang ala roller coaster**. Wajib: kamera tidak pernah kosong (cek `no frame without a car`) |
@@ -72,6 +75,7 @@
 
 | Tanggal | Oleh | Perubahan |
 |---|---|---|
+| 2026-10-01 | Claude Code Opus | Aturan upload tegas 11 CHALLENGE / 15 RACE / 19 SMASH, video panjang Sabtu 13:00 ET (slot sendiri), stok 7 hari per jenis; 12 video di-approve (Ep. 16–27); C13–C15 ditambahkan |
 | 2026-10-01 | Claude Code Opus | C1e: race25d engine v2 (dodge AI + end card YouTube); v1 S002–S007 REJECTED (superseded) → v2 S002–S007 pending |
 | 2026-09-30 | Claude Code | File dibuat. A2 ⏸️: upload dari Claude Code ditolak pengaman otomatis, menunggu user |
 | 2026-09-30 | Claude Code Opus | v2.9: B1 🔄 (5/10), B3 ✅, C1 🔄 (prototipe pseudo-3D), EPISODES_INDEX.md dibuat |
