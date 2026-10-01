@@ -1166,6 +1166,14 @@ def horn():
     return np.concatenate([se.tone(440, 0.22, "tri"), se.tone(330, 0.22, "tri"), se.tone(440, 0.22, "tri")])
 
 
+def box_avg(x, k):
+    """Centred moving average (same result as np.convolve(x, ones(k)/k, "same"), but O(N))."""
+    c = np.concatenate([[0.0], np.cumsum(x)])
+    y = (c[k:] - c[:-k]) / k
+    pad = len(x) - len(y)
+    return np.pad(y, (pad // 2, pad - pad // 2), mode="edge")
+
+
 def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, cta_start):
     se.VOICE = voice
     se.TTS_RATE, se.TTS_PITCH = "+14%", "+0Hz"                  # hyped arena announcer, with a PA echo
@@ -1276,7 +1284,7 @@ def build_audio(frames, events, winner, star_t, replay, lines, voice, out_of, ct
           cta_start + R.CTA_SUB_T + 0.05, 0.6)
     bgm = se.synth_bgm(total + 1, style=se.th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
-    talk = np.convolve((np.abs(narr) > 0.01).astype(float), np.ones(int(0.25 * se.SR)) / (0.25 * se.SR), "same")
+    talk = box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))   # O(N), was a 40 s np.convolve
     duck = 1.0 - (1.0 - 10 ** (-se.DUCK_DB / 20)) * np.clip(talk * 3, 0, 1)
     mix = (se.peak(narr) * se.VOL_NARR + se.peak(eng) * se.VOL_ENGINE * 0.8 * duck + se.peak(bgm) * se.VOL_BGM * duck
            + se.peak(sfx) * se.VOL_SFX * (0.5 + 0.5 * duck))
