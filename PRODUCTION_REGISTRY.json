@@ -31,7 +31,9 @@
       "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 1 #Shorts",
       "theme": "sunset-clear-beach",
       "voice": "en-US-EmmaMultilingualNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "13mmc7buRyhiI3nxIltsiGBcAMWooMroQ",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E001_SIM_POTHOLES_V2_S001.mp4"
     },
     {
       "video_id": "SIM_BUMPS_V2_S002",
@@ -63,7 +65,9 @@
       "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
       "theme": "night-clear-countryside",
       "voice": "en-US-JennyNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "1VvRoTkelqpuT07FAWXo6mDOYaHK1eTdQ",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E002_SIM_BUMPS_V2_S002.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S003",
@@ -95,7 +99,9 @@
       "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
       "theme": "morning-clear-countryside",
       "voice": "en-US-AvaMultilingualNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "1RqMyNGYHyVZxYuqR9B6gcFZWR4fl8y9I",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E003_SIM_POTHOLES_V2_S003.mp4"
     },
     {
       "video_id": "SIM_BUMPS_V2_S004",
@@ -127,7 +133,9 @@
       "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 4 #Shorts",
       "theme": "sunset-rain-mountains",
       "voice": "en-US-MichelleNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "1hkHca9kQe3ORhbUNBAq_tMfyvF0x_Pgs",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E004_SIM_BUMPS_V2_S004.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S005",
@@ -159,7 +167,9 @@
       "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 5 #Shorts",
       "theme": "noon-rain-beach",
       "voice": "en-US-AriaNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "1QVI_-aMR_udDuFjNgMeYGRwJgHt9vO3c",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E005_SIM_POTHOLES_V2_S005.mp4"
     },
     {
       "video_id": "SIM_BUMPS_V2_S006",
@@ -191,7 +201,9 @@
       "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 6 #Shorts",
       "theme": "sunset-clear-countryside",
       "voice": "en-US-JennyNeural",
-      "rerendered": "2026-09-30"
+      "rerendered": "2026-09-30",
+      "drive_id": "12Qzj3fLK_B-qCFiVSbThYVUhodNbnpx2",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E006_SIM_BUMPS_V2_S006.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S003",
@@ -222,7 +234,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by v2.8 (distinct water/lava sounds, melting, hydroplaning)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1xtnFQXXFLIj8iIpORoCOnn9xLvsZ4Wra",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SPLASH_V2_S003.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S005",
@@ -252,7 +266,9 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "reject_reason": "no signature moment (spin / lava melt) on screen"
+      "reject_reason": "no signature moment (spin / lava melt) on screen",
+      "drive_id": "18sEmJqiQbHrFKId66fShsCO80w-2GnyC",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SPLASH_V2_S005.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S007",
@@ -283,7 +299,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-09-30",
-      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts"
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
+      "drive_id": "1-wv2OLms2YKLYCGwmYi4rBZuK-sWozln",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E007_SIM_SPLASH_V2_S007.mp4"
     },
     {
       "video_id": "SIM_LAVA_V2_S001",
@@ -313,7 +331,9 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "reject_reason": "wheels visible below the lava pit floor (fixed in v2.8)"
+      "reject_reason": "wheels visible below the lava pit floor (fixed in v2.8)",
+      "drive_id": "1toIHYYmfufFp8SlAQHIBeyR0pIQpEJkU",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_LAVA_V2_S001.mp4"
     },
     {
       "video_id": "SIM_LAVA_V2_S003",
@@ -344,7 +364,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-09-30",
-      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts"
+      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
+      "drive_id": "1Lsw3pTVv7xLLt2zEcy6Wcri5GqPFNLcK",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E008_SIM_LAVA_V2_S003.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S001",
@@ -377,7 +399,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-09-30",
-      "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts"
+      "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
+      "drive_id": "16g4C2E5B6pOIIDOJceaQc3oHPkNmbCIn",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E009_SIM_RACE25D_V1_S001.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S002",
@@ -410,7 +434,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1VPc-4XJtxK4x6eFJHTXhg4UZgfJgy3kW",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S002.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S003",
@@ -443,7 +469,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1GBC7o-M8Y4e8wnp7MOGgRIHxSJbMB5FI",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S003.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S004",
@@ -476,7 +504,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1PnR4h0R6s5czUZDRvd__K1dUxDewzTOV",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S004.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S005",
@@ -509,7 +539,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1hnsvJXtG7XkwXw_AJy1Pwo6tl4L1N6D9",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S005.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S006",
@@ -542,7 +574,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1VTFv46M_eAuEYHxgCgAqMhz4C7-TPxqK",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S006.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S007",
@@ -575,7 +609,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by race25d v2 (hazard library, dodge AI, YouTube end card)",
-      "rejected_date": "2026-09-30"
+      "rejected_date": "2026-09-30",
+      "drive_id": "1x_iwAUc9kzOZ4Xeo1_5W1wLRIbFfhIQY",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V1_S007.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S002",
@@ -608,7 +644,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts"
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts",
+      "drive_id": "1BfzuYmcXADBJQa88kmVALCBdq1bHDcqt",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E010_SIM_RACE25D_V2_S002.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S003",
@@ -641,7 +679,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts"
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
+      "drive_id": "1AkRaUD_hygrk7JNMBmcFo5xhM57uw76Y",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E011_SIM_RACE25D_V2_S003.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S004",
@@ -674,7 +714,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts"
+      "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts",
+      "drive_id": "1ZI6qKsK8k-hUTt38VpC9B3FBXDzUIdDo",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E012_SIM_RACE25D_V2_S004.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S005",
@@ -707,7 +749,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts"
+      "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts",
+      "drive_id": "1aCErUXEOX_kuUYxmCwcA-Dxn9in20WFk",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E013_SIM_RACE25D_V2_S005.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S006",
@@ -740,7 +784,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 14 #Shorts"
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 14 #Shorts",
+      "drive_id": "1doVWGG08M9MvyaRv9_m7r3Io1bamMh5w",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E014_SIM_RACE25D_V2_S006.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S007",
@@ -773,7 +819,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts"
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts",
+      "drive_id": "1hUjIYHPe62_1BV0TlMOJMpp366KK2sUx",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E015_SIM_RACE25D_V2_S007.mp4"
     },
     {
       "video_id": "SIM_LAVA_V2_S004",
@@ -804,7 +852,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1XL2FjVDcEy4_li1agJ0M1P6U5s0-jNHe",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_LAVA_V2_S004.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S008",
@@ -835,7 +885,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1_VPKVaePamqe1_e8wuEDlFSv_9Jm2Wvs",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SPLASH_V2_S008.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S006",
@@ -866,7 +918,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1jzT9HZKZE3S1GOIaDQno8wkmnrzBvfW0",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_POTHOLES_V2_S006.mp4"
     },
     {
       "video_id": "SIM_BUMPS_V2_S007",
@@ -897,7 +951,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1Q4mdf2Hs0wq2FZ47hVS2b2pghZiAOB35",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_BUMPS_V2_S007.mp4"
     },
     {
       "video_id": "SIM_LAVA_V2_S008",
@@ -928,7 +984,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "19sMkR0DRWhL7bd-kqKNAQcEp0VcCU24j",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_LAVA_V2_S008.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S010",
@@ -959,7 +1017,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1JHcjT1CGxXQYLSj-5z5NwGPGB30AskRl",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SPLASH_V2_S010.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S001",
@@ -993,7 +1053,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1fbSLaDrfBsoiG0WJ1iNK_h3tQRxXfaei",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V1_S001.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S002",
@@ -1027,7 +1089,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1fl3y-uSV2tbD_wSi4ul-T2e6IdSYvvnY",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V1_S002.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S003",
@@ -1061,7 +1125,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1dK5-gLbRPx6xYNXN2PPgL1adr22z9Psl",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V1_S003.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S004",
@@ -1095,7 +1161,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1Orc1f0UBUqzN307NMS5w8cZ8L_GOFkKD",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V1_S004.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S001",
@@ -1129,7 +1197,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1sSjxK6MH6Oqc2wDIVJY_Ev8KjoV4Qg3A",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V2_S001.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S002",
@@ -1163,7 +1233,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1dq4kxOpEO9-03LLCfFgq5tbuthKp3phM",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V2_S002.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S003",
@@ -1197,7 +1269,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1mjkvbcqFKlYjfvaBhmEgfEt7JEWKYYzC",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V2_S003.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S004",
@@ -1231,7 +1305,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1QAgvVBu44frFIqnTUHuwebr92UDQ4h_0",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V2_S004.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S001",
@@ -1265,7 +1341,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "16kaidFIhLxkV7NEEaqkEsKl1n9vGKI2N",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S001.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S003",
@@ -1299,7 +1377,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "15c8DVFpFfSLi81kEY9lNgw77zGc4gVrT",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S003.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S007",
@@ -1333,7 +1413,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1EKUNlEUxCUN6stoaWsqez0sxlexrLQ1P",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S007.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S009",
@@ -1367,7 +1449,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1_iVbuJTzlRBMFMBxG2C3tcw_Gs9VQxrA",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S009.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S008",
@@ -1401,7 +1485,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "1sTlrZraNvERFc6TtTJjjswXA259BgyC6",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S008.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S010",
@@ -1435,7 +1521,9 @@
       "upload_date": null,
       "youtube_url": null,
       "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
-      "rejected_date": "2026-10-01"
+      "rejected_date": "2026-10-01",
+      "drive_id": "11yVzYHO0n9_l96HT30Bfp3yVv3lej-XW",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_SMASH25D_V3_S010.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S011",
@@ -1466,7 +1554,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 16 #Shorts"
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 16 #Shorts",
+      "drive_id": "1tADaV5gydBvkhZyLqJFQ8h7BTwDSIiwz",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E016_SIM_SPLASH_V2_S011.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S007",
@@ -1497,7 +1587,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 17 #Shorts"
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 17 #Shorts",
+      "drive_id": "1ytsrO1_VOK84iT0kvDXX-Ragz9bx_C63",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E017_SIM_POTHOLES_V2_S007.mp4"
     },
     {
       "video_id": "SIM_BUMPS_V2_S010",
@@ -1528,7 +1620,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 18 #Shorts"
+      "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 18 #Shorts",
+      "drive_id": "1HcIVofXakpwJ1DjsPW9goxD29inSH4AT",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E018_SIM_BUMPS_V2_S010.mp4"
     },
     {
       "video_id": "SIM_LAVA_V2_S021",
@@ -1559,7 +1653,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 19 #Shorts"
+      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 19 #Shorts",
+      "drive_id": "1Cu-8tUcQ6A6c0EyEOxHVHjLM4hcN_Mtf",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E019_SIM_LAVA_V2_S021.mp4"
     },
     {
       "video_id": "SIM_SPLASH_V2_S012",
@@ -1590,7 +1686,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 20 #Shorts"
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 20 #Shorts",
+      "drive_id": "1XJc2f0QRu1m-Tuc1Faf43osgnKP15mtb",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E020_SIM_SPLASH_V2_S012.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S008",
@@ -1621,7 +1719,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts"
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts",
+      "drive_id": "1FIRg90r-NtcLIM-rxrxLqXyzsMJO8YYr",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E021_SIM_POTHOLES_V2_S008.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S001",
@@ -1655,7 +1755,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts"
+      "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts",
+      "drive_id": "1ZdTX1_UIrd46TIb8VJ5NB5NUr5rIDSCg",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E022_SIM_SMASH25D_V4_S001.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S008",
@@ -1689,7 +1791,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts"
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
+      "drive_id": "1Z9YWhjzSJ6KDnctGy0dfAR2oaSkQUxPz",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E025_SIM_SMASH25D_V4_S008.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S011",
@@ -1723,7 +1827,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 26 #Shorts"
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 26 #Shorts",
+      "drive_id": "10K2GK2zZ5mBVRR1498T2-JD6iLhaANm3",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E026_SIM_SMASH25D_V4_S011.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S003",
@@ -1757,7 +1863,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts"
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
+      "drive_id": "1mHUbfb9SdglYq9IN-u4vJsgvesYbR9oB",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E023_SIM_SMASH25D_V4_S003.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S007",
@@ -1791,7 +1899,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts"
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts",
+      "drive_id": "1BicFcRRF96LDxoN73vGD3SstBGdpmkQR",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E024_SIM_SMASH25D_V4_S007.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S012",
@@ -1825,7 +1935,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts"
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts",
+      "drive_id": "1W0ziDzad5azxFRemh7ghKAFpDyVvIugT",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E027_SIM_SMASH25D_V4_S012.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S014",
@@ -1859,7 +1971,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts"
+      "title": "Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts",
+      "drive_id": "1R2FcZ7KXZJIrZ46kykWnVPcHHMYXbP7T",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E028_SIM_SMASH25D_V4_S014.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S015",
@@ -1893,7 +2007,9 @@
       "upload_date": null,
       "youtube_url": null,
       "approved_date": "2026-10-01",
-      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts"
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts",
+      "drive_id": "1_Og3civi_tWB5kpvTvSGU8vkAdYbOdi5",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E029_SIM_SMASH25D_V4_S015.mp4"
     }
   ]
 }
