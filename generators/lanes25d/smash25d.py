@@ -70,7 +70,8 @@ CHAOS = {
 CHAOS_AT = [(4.5, 5.8), (9.5, 10.8), (14.5, 15.8), (19.5, 20.8)]
 ANNOUNCERS = ["en-US-GuyNeural", "en-US-ChristopherNeural", "en-US-EricNeural"]   # arena announcer (male, en-US)
 # announcer delivery per line type (edge-tts rate, pitch): slow + deep intro, fast + high action calls
-VOICE_STYLE = {"intro": ("-8%", "-6Hz"), "hype": ("+20%", "+6Hz"), "call": ("+4%", "+2Hz"), "norm": ("+12%", "+0Hz")}
+VOICE_STYLE = {"intro": ("-8%", "-6Hz"), "hype": ("+20%", "+6Hz"), "call": ("+4%", "+2Hz"), "norm": ("+12%", "+0Hz"),
+               "clear": ("+8%", "+0Hz")}
 T_MAX = 40.0
 POOL = ["sports", "police", "taxi", "f1", "bus", "firetruck", "icecream", "bigrig", "monster", "monster2"]
 BIG = {"bus", "firetruck", "icecream", "bigrig"}

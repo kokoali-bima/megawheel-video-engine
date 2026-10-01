@@ -1210,7 +1210,7 @@ def cb_finish(note):
 
 
 READY_LINE, GO_LINE = "Ready...", "Go!"
-READY_SET_GO = "Ready... set... GO!"             # one phrase: very short lines come out garbled in voice C
+READY_SET_GO = "Ready... set... let's go!"     # one phrase ("GO!" alone came out as "Geo" in voice C)
 READY_SENTINEL = "__READY_GO__"                  # narration placeholder for the spoken READY... GO!
 READY_GO_T = 0.5                                 # when "GO!" pops (s after READY); set by ready_go_audio()
 HOLD_S = 0.0                                     # CHALLENGE: car waits on the line this long (READY... GO!)
