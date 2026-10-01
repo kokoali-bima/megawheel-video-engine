@@ -30,8 +30,9 @@ MODAL = os.path.join(ROOT, "venv-modal", "bin", "modal")
 VOICE_ID = "chatterbox:mw-announcers-m1f1"
 # style -> (exaggeration, cfg_weight): sample "C" used exaggeration +0.35 over the base and cfg 0.3
 STYLE = {"intro": (1.15, 0.3), "hype": (1.35, 0.3), "call": (1.3, 0.3), "norm": (0.9, 0.35)}
-FX = ("highpass=f=90,equalizer=f=3000:t=q:w=1.2:g=3,acompressor=threshold=-18dB:ratio=3:attack=5:release=90,"
-      "aecho=0.8:0.5:45|90:0.22|0.12")
+_CLEAN = "highpass=f=90,equalizer=f=3000:t=q:w=1.2:g=3,acompressor=threshold=-18dB:ratio=3:attack=5:release=90"
+FXS = {"arena": _CLEAN + ",aecho=0.8:0.5:45|90:0.22|0.12",   # SMASH ARENA: PA echo
+       "studio": _CLEAN}                                       # RACE / CHALLENGE narrator: dry
 
 
 def _ref_md5(who):
@@ -39,22 +40,23 @@ def _ref_md5(who):
         return hashlib.md5(fh.read()).hexdigest()[:10]
 
 
-def path(text, style, who="m1"):
-    key = hashlib.md5(f"chatterbox|{who}|{_ref_md5(who)}|{STYLE[style]}|{FX}|{text}".encode()).hexdigest()[:14]
+def path(text, style, who="m1", fx="arena"):
+    key = hashlib.md5(f"chatterbox|{who}|{_ref_md5(who)}|{STYLE[style]}|{FXS[fx]}|{text}".encode()).hexdigest()[:14]
     return os.path.join(CACHE, f"{key}.wav")
 
 
 def prefetch(items, note="announcer"):
-    """items: [(text, style, who)]. Returns True when every line is cached (generating the missing ones on Modal)."""
+    """items: [(text, style, who[, fx])]. Returns True when every line is cached (missing ones made on Modal)."""
+    items = [tuple(it) if len(it) == 4 else (*it, "arena") for it in items]
     if not all(os.path.exists(r) for r in REFS.values()) or not os.path.exists(MODAL):
         print(f"[voice] announcer tidak tersedia (ref/modal tidak ada) -> Edge TTS", flush=True)
         return False
     os.makedirs(CACHE, exist_ok=True)
-    todo = list(dict.fromkeys((t, s, w) for t, s, w in items if not os.path.exists(path(t, s, w))))
+    todo = list(dict.fromkeys(it for it in items if not os.path.exists(path(*it))))
     if todo:
         shutil.rmtree(BATCH, ignore_errors=True)
         os.makedirs(BATCH)
-        lines = [dict(text=t, exaggeration=STYLE[s][0], cfg=STYLE[s][1], ref=w) for t, s, w in todo]
+        lines = [dict(text=t, exaggeration=STYLE[s][0], cfg=STYLE[s][1], ref=w) for t, s, w, _ in todo]
         with open(os.path.join(BATCH, "lines.json"), "w") as fh:
             json.dump(lines, fh, indent=1)
         try:
@@ -67,17 +69,17 @@ def prefetch(items, note="announcer"):
                     print(ln.split(" license=")[0], flush=True)
         except Exception as ex:                                  # network / Modal down: caller uses Edge TTS
             print(f"[voice] Modal gagal: {ex}", flush=True)
-        for i, (t, s, w) in enumerate(todo):
+        for i, (t, s, w, fx) in enumerate(todo):
             src = os.path.join(BATCH, f"line_{i:02d}.wav")
             if os.path.exists(src):
-                subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-af", FX, "-ac", "1", "-ar",
-                                str(se.SR), path(t, s, w)], check=True)
+                subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-af", FXS[fx], "-ac", "1", "-ar",
+                                str(se.SR), path(t, s, w, fx)], check=True)
         print(f"[voice] {len(todo)} kalimat baru dibuat, {len(items) - len(todo)} dari cache", flush=True)
-    return all(os.path.exists(path(t, s, w)) for t, s, w in items)
+    return all(os.path.exists(path(*it)) for it in items)
 
 
-def get(text, style, who="m1"):
-    x = se.read_wav(path(text, style, who))
+def get(text, style, who="m1", fx="arena"):
+    x = se.read_wav(path(text, style, who, fx))
     nz = np.nonzero(np.abs(x) > 0.01)[0]                         # trim silence (same as se.tts)
     if len(nz):
         x = x[max(0, nz[0] - 200): nz[-1] + 2000]

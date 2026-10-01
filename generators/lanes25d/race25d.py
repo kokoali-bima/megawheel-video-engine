@@ -1191,6 +1191,7 @@ def box_avg(x, k):
 def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start):
     se.VOICE = voice
     total = len(frames) / FPS
+    sched = []
     n = int(total * se.SR) + se.SR
     narr, eng, sfx = np.zeros(n), np.zeros(n), np.zeros(n)
 
@@ -1206,6 +1207,8 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_
         t0 = max(t_want, busy + 0.15)
         place(narr, a, t0)
         busy = t0 + len(a) / se.SR
+        sched.append(f"{t_want:.1f}>{t0:.1f}-{busy:.1f} {text[:28]}")
+    print(f"[25d] narration (video {total:.1f}s): " + " | ".join(sched), flush=True)
     lead = winner
     wrel, amp, pitch = [], [], []
     for mode, t in frames:
@@ -1281,6 +1284,7 @@ def main():
     vr = np.random.default_rng(5000 + opt.seed)
     tie = {v: float(vr.random()) for v in se.VOICES}
     voice = min(se.VOICES, key=lambda v: (uses[v], tie[v]))
+    voice = se.cb_pick(active, opt.seed) or voice                # narrator "C" (m1/f1 alternating) when available
     cars, events = simulate(opt.seed)
     frames, winner, star, replay, cta_start = build_timeline(cars)
     order = sorted(cars, key=lambda c: c["place"])
@@ -1316,7 +1320,9 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
-    se.write_wav(wav, build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start))
+    audio = build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start)
+    se.cb_finish(f"narrator {name}")                             # missing voice-C lines -> Modal -> restart
+    se.write_wav(wav, audio)
     silent = f"{se.WORK}/v_{name}.mp4"
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
@@ -1491,7 +1497,7 @@ def main():
                      "#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena"),
         tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + sorted({h["type"] for h in HZ}),
         narration=[txt for _, txt in lines],
-        assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS " + voice,
+        assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration " + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {voice}" if voice.startswith("chatterbox") else f"Edge-TTS {voice}"),
         video_path=out, preview_dir=prev)
     with open(os.path.join(out_dir, f"{name}.json"), "w") as fh:
         json.dump(manifest, fh, indent=2, ensure_ascii=False)

@@ -1864,7 +1864,7 @@ def main():
         tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + [ARENA, "ufo",
                                                                                                  "kaiju", "missile"],
         narration=[txt for _, txt in lines],
-        assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS " + voice,
+        assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration " + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {voice}" if voice.startswith("chatterbox") else f"Edge-TTS {voice}"),
         video_path=out, preview_dir=prev)
     with open(os.path.join(out_dir, f"{name}.json"), "w") as fh:
         json.dump(manifest, fh, indent=2, ensure_ascii=False)

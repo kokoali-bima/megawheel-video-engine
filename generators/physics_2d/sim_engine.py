@@ -1163,14 +1163,66 @@ def write_wav(path, x):
         w.writeframes((x * 32767).astype(np.int16).tobytes())
 
 
+# Narrator voice "C" (Chatterbox on Modal, user 2026-10-01): m1 (male) / f1 (female) alternate per video. Lines come
+# from the announcer cache; missing lines are collected (Edge stands in), generated in ONE Modal call by cb_finish(),
+# and the generator restarts itself with the full cache (max 3 rounds, then the whole video uses Edge TTS).
+CB = {"on": False, "who": "m1", "edge": "en-US-GuyNeural", "missing": []}
+CB_VOICES = ["chatterbox:m1", "chatterbox:f1"]
+CB_EDGE = {"m1": "en-US-GuyNeural", "f1": "en-US-AriaNeural"}
+
+
+def _announcer():
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "voice"))
+    import announcer
+    return announcer
+
+
+def cb_pick(active, seed, exclude_id=None):
+    """Narrator for this video (fewest uses of m1/f1); None = Edge rotation (MW_CB_OFF / MW_VOICE=edge)."""
+    if os.environ.get("MW_CB_OFF") or os.environ.get("MW_VOICE") == "edge":
+        return None
+    uses = {v: 0 for v in CB_VOICES}
+    for e in active:
+        if e.get("voice") in uses and e.get("video_id") != exclude_id:
+            uses[e["voice"]] += 1
+    vr = np.random.default_rng(5000 + seed)
+    tie = {v: float(vr.random()) for v in CB_VOICES}
+    v = min(CB_VOICES, key=lambda x: (uses[x], tie[x]))
+    who = v.split(":")[1]
+    CB.update(on=True, who=who, edge=CB_EDGE[who], missing=[])
+    return v
+
+
+def cb_finish(note):
+    """Call after every narration line was synthesized, before rendering frames."""
+    if not CB["on"] or not CB["missing"]:
+        return
+    rnd = int(os.environ.get("MW_CB_ROUND", "0"))
+    ok = _announcer().prefetch(list(dict.fromkeys(CB["missing"])), note=note)
+    os.environ["MW_CB_ROUND"] = str(rnd + 1)
+    if not ok or rnd >= 2:
+        os.environ["MW_CB_OFF"] = "1"
+        print("[voice] suara C tidak lengkap -> seluruh video memakai Edge TTS", flush=True)
+    print(f"[voice] restart dengan cache suara (putaran {rnd + 1})", flush=True)
+    sys.stdout.flush()
+    os.execv(sys.executable, [sys.executable] + sys.argv)
+
+
 def tts(text):
-    key = hashlib.md5(f"{VOICE}|{TTS_RATE}|{TTS_PITCH}|{TTS_CLARITY}|{text}".encode()).hexdigest()[:12]
+    if CB["on"]:
+        an = _announcer()
+        style = "norm" if text == CTA else "call"
+        if os.path.exists(an.path(text, style, CB["who"], "studio")):
+            return an.get(text, style, CB["who"], "studio")
+        CB["missing"].append((text, style, CB["who"], "studio"))
+    voice = CB["edge"] if CB["on"] else VOICE
+    key = hashlib.md5(f"{voice}|{TTS_RATE}|{TTS_PITCH}|{TTS_CLARITY}|{text}".encode()).hexdigest()[:12]
     mp3, wav = f"{WORK}/tts_{key}.mp3", f"{WORK}/tts_{key}.wav"
     if not os.path.exists(wav):
         import edge_tts
 
         async def go():
-            await edge_tts.Communicate(text, VOICE, rate=TTS_RATE, pitch=TTS_PITCH).save(mp3)
+            await edge_tts.Communicate(text, voice, rate=TTS_RATE, pitch=TTS_PITCH).save(mp3)
         asyncio.run(go())
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-af", TTS_CLARITY, "-ac", "1",
                         "-ar", str(SR), wav], check=True)
@@ -3409,13 +3461,15 @@ def main():
         global ROLE_ORDER
         ROLE_ORDER = [[vk] for vk in replace["vehicles"]]
     init_scenery()
-    uses = {v: 0 for v in VOICES}                             # narrator rotation: fewest uses first
-    for e in active:
-        if e.get("voice") in uses and e.get("video_id") != args.name:
-            uses[e["voice"]] += 1
-    vr = np.random.default_rng(5000 + args.seed)
-    tie = {v: float(vr.random()) for v in VOICES}
-    VOICE = min(VOICES, key=lambda v: (uses[v], tie[v]))
+    VOICE = cb_pick(active, args.seed, exclude_id=args.name)   # narrator "C": m1/f1 alternating
+    if VOICE is None:
+        uses = {v: 0 for v in VOICES}                         # Edge narrator rotation: fewest uses first
+        for e in active:
+            if e.get("voice") in uses and e.get("video_id") != args.name:
+                uses[e["voice"]] += 1
+        vr = np.random.default_rng(5000 + args.seed)
+        tie = {v: float(vr.random()) for v in VOICES}
+        VOICE = min(VOICES, key=lambda v: (uses[v], tie[v]))
     print(f"[theme] {THEME_ID}  [voice] {VOICE}", flush=True)
     name = args.name or f"SIM_{SERIES.upper()}_{ENGINE_VERSION.upper()}_S{args.seed:03d}"
     render_date = time.strftime("%Y-%m-%d")
@@ -3643,12 +3697,17 @@ def main():
     bgm = synth_bgm(total, style=th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     # ducking: engine + music dip while the narrator talks, so every word is easy to catch
-    talk = np.convolve((np.abs(narr) > 0.01).astype(float), np.ones(int(0.25 * SR)) / (0.25 * SR), "same")
+    xs = (np.abs(narr) > 0.01).astype(float)                 # O(N) moving average (np.convolve took minutes)
+    kk = int(0.25 * SR)
+    cs = np.concatenate([[0.0], np.cumsum(xs)])
+    mv = (cs[kk:] - cs[:-kk]) / kk
+    talk = np.pad(mv, ((len(xs) - len(mv)) // 2, len(xs) - len(mv) - (len(xs) - len(mv)) // 2), mode="edge")
     duck = 1.0 - (1.0 - 10 ** (-DUCK_DB / 20)) * np.clip(talk * 3, 0, 1)
     mix = (peak(narr) * VOL_NARR + peak(eng) * VOL_ENGINE * duck + peak(bgm) * VOL_BGM * duck
            + peak(sfx) * VOL_SFX * (0.5 + 0.5 * duck))
     mix = np.tanh(1.3 * mix) / np.tanh(1.3)
     mix = mix / max(1e-9, np.max(np.abs(mix))) * 0.95
+    cb_finish(f"narrator {name}")                             # missing voice-C lines -> Modal -> restart
     wav_path = f"{WORK}/mix_{name}.wav"
     write_wav(wav_path, mix)
 
@@ -3692,8 +3751,8 @@ def main():
                 for li, L in enumerate(LEVELS)],
         narration=intro_texts + outcome_lines + ([REPLAY_LINE] if any_replay else [])
                   + [CTA],
-        assets="100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS "
-               + VOICE,
+        assets="100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration "
+               + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {VOICE}" if VOICE.startswith("chatterbox") else f"Edge-TTS {VOICE}"),
         video_path=f"{OUT_DIR}/{name}.mp4", preview_dir=prev_dir,
     )
     with open(f"{OUT_DIR}/{name}.json", "w") as fh:
