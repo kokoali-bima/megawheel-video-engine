@@ -1348,6 +1348,70 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V3_S008",
+      "series": "smash25d",
+      "engine_version": "v3",
+      "seed": 8,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "f1",
+        "sports"
+      ],
+      "track_id": "smash25d_1fe68e54@morning-snow-countryside",
+      "arena": "mud",
+      "theme": "morning-snow-countryside",
+      "voice": "en-US-GuyNeural",
+      "outcomes": [
+        "p4+ring",
+        "p2+ring",
+        "win",
+        "p3+ring"
+      ],
+      "duration": 44.37,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s008",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s008/SIM_SMASH25D_V3_S008_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V3_S010",
+      "series": "smash25d",
+      "engine_version": "v3",
+      "seed": 10,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "smash25d_29cf5319@morning-clear-beach",
+      "arena": "mud",
+      "theme": "morning-clear-beach",
+      "voice": "en-US-ChristopherNeural",
+      "outcomes": [
+        "win",
+        "p2+wreck",
+        "p4+ring",
+        "p3+wreck"
+      ],
+      "duration": 57.03,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010/SIM_SMASH25D_V3_S010_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }

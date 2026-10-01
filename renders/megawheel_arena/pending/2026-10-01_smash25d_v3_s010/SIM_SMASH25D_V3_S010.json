@@ -1,0 +1,104 @@
+{
+  "video_id": "SIM_SMASH25D_V3_S010",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "smash25d v3",
+  "series": "smash25d",
+  "seed": 10,
+  "fps": 30,
+  "duration": 57.03,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "taxi",
+      "f1"
+    ],
+    "arena": "mud",
+    "chaos": [
+      [
+        "kraggor",
+        4.78
+      ],
+      [
+        "ufo",
+        9.69
+      ],
+      [
+        "missile",
+        14.74
+      ],
+      [
+        "crack",
+        19.89
+      ]
+    ]
+  },
+  "arena": "mud",
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "morning-clear-beach",
+  "voice": "en-US-ChristopherNeural",
+  "outcomes": [
+    "win",
+    "p2+wreck",
+    "p4+ring",
+    "p3+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Who Survives the Smash Arena? 💥",
+  "title": "Who Survives the Smash Arena? 💥 #Shorts",
+  "description": "Buster, Grizzly, Tilly and Nitro enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "taxi",
+    "race car",
+    "mud",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Buster, the school bus!",
+    "Grizzly, the monster truck!",
+    "Tilly, the taxi!",
+    "And... Nitro, the race car!",
+    "Oh no... it's Kraggor!",
+    "A UFO! It's got Tilly!",
+    "Tilly is out!",
+    "Incoming missile!",
+    "Nitro is down!",
+    "The floor is breaking!",
+    "The winner is... Buster! Yeah!",
+    "Let's see that again... in slow motion!",
+    "Look at that! Kraggor flattens Nitro!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-ChristopherNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010/SIM_SMASH25D_V3_S010.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010/preview"
+}
