@@ -973,13 +973,15 @@
         "p2+wreck"
       ],
       "duration": 35.7,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001/SIM_SMASH25D_V1_S001_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s001",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s001/SIM_SMASH25D_V1_S001_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S002",
@@ -1005,13 +1007,15 @@
         "p4+ring"
       ],
       "duration": 31.03,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s002",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s002/SIM_SMASH25D_V1_S002_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s002",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s002/SIM_SMASH25D_V1_S002_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S003",
@@ -1037,13 +1041,15 @@
         "p4+ring"
       ],
       "duration": 32.8,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V1_S003_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s003/SIM_SMASH25D_V1_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S004",
@@ -1069,13 +1075,15 @@
         "p2+wreck"
       ],
       "duration": 33.73,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s004",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s004/SIM_SMASH25D_V1_S004_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s004",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_s004/SIM_SMASH25D_V1_S004_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)",
+      "rejected_date": "2026-10-01"
     }
   ]
 }

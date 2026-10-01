@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V1_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "engine": "smash25d v1",
   "series": "smash25d",
   "seed": 3,
@@ -95,6 +95,7 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EricNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V1_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_smash25d_s003/SIM_SMASH25D_V1_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_smash25d_s003/preview",
+  "reject_reason": "superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound)"
 }
