@@ -1,8 +1,8 @@
-# S01E01 — "Sprinkles' First Race" (DRAFT v2, menunggu persetujuan user)
+# S01E01 — "Sprinkles' First Race" (v2 — alur & 15 scene disetujui user 2026-10-01)
 
 > Seri `story15`, format "drama China" (STORY15_PLAN.md). Draf oleh Claude Code (Opus), 2026-10-01.
 > Bahasa video: English (en-US). Catatan produksi dalam Bahasa Indonesia.
-> Target tayang: Minggu 4 Okt 13:00 ET (= Senin 00:00 WIB); batas approve Minggu ±20:00 WIB. Versi ringkas ±9 scene (±8–10 menit) bila waktu tidak cukup untuk 15 scene;
+> Target tayang: Minggu 4 Okt 13:00 ET (= Senin 00:00 WIB); batas approve Minggu ±20:00 WIB. **Dipilih user: 15 scene penuh.** (Tanda [RINGKAS] hanya cadangan darurat;
 > scene bertanda **[RINGKAS]** adalah yang dipakai di versi ringkas.
 
 ## Tema & pesan
@@ -78,6 +78,7 @@ mundur ke hari ke-1, sebulan sebelumnya. Di hari balapan Sprinkles sudah dewasa;
 
 ### Scene 5 — Kilas balik: janji kecil **[RINGKAS]**
 *Lokasi: tepi lintasan, masa lalu (warna sepia, butir film). Shot: rendah, sudut pandang Little Sprinkles.*
+- *Tulisan di layar: "MANY YEARS AGO". Hanya kenangan singkat (ucapan kakek), bukan bagian dari latihan.*
 - LITTLE SPRINKLES (kagum): "Grandpa! Look how fast they go!"
 - GRANDPA CONE (tertawa lembut): "Fast is nice, little one. But do you know what makes a real champion?"
 - LITTLE SPRINKLES: "Winning?"

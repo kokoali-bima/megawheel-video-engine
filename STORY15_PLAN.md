@@ -127,4 +127,5 @@ stories/S01E01_sprinkles_first_race/
 | 2026-10-01 | Dua versi rasio (16:9 video panjang, 9:16 Shorts "Part N") |
 | 2026-10-01 | Tetap 3 Shorts/hari: 1 slot/hari jadi "Part N" bergiliran CHALLENGE/SMASH (RACE tetap); nanti pakai data Analytics |
 | 2026-10-01 | Episode pertama: "Sprinkles' First Race" |
+| 2026-10-01 | S01E01: 15 scene penuh; garis waktu = pembuka kilas-maju hari balapan, cerita mulai 30 hari sebelumnya, latihan 4 minggu, kilas balik masa kecil hanya kenangan singkat ("MANY YEARS AGO") |
 | 2026-10-01 | Jadwal video panjang pindah ke **Minggu 13:00 ET** (= Senin 00:00 WIB): waktu keluarga + tambahan 1 hari produksi |

@@ -24,13 +24,22 @@ import sim_engine as se  # noqa: E402
 # speakers: m1 = male ring announcer / play-by-play, f1 = female colour commentator (same energy)
 REFS = {"m1": os.path.join(ROOT, "branding", "voice", "announcer_ref.wav"),
         "f1": os.path.join(ROOT, "branding", "voice", "announcer_f1_ref.wav")}
+# story characters (story15): branding/voice/characters/<name>.wav -> speaker key "<name>" (e.g. "sprinkles")
+_CHAR_DIR = os.path.join(ROOT, "branding", "voice", "characters")
+if os.path.isdir(_CHAR_DIR):
+    for _f in sorted(os.listdir(_CHAR_DIR)):
+        if _f.endswith(".wav"):
+            REFS[_f[:-4]] = os.path.join(_CHAR_DIR, _f)
 CACHE = os.path.join(ROOT, "work", "voice", "cache")
 BATCH = os.path.join(ROOT, "work", "voice", "batch")
 MODAL = os.path.join(ROOT, "venv-modal", "bin", "modal")
 VOICE_ID = "chatterbox:mw-announcers-m1f1"
 # style -> (exaggeration, cfg_weight): sample "C" used exaggeration +0.35 over the base and cfg 0.3
 STYLE = {"intro": (1.15, 0.3), "hype": (1.35, 0.3), "call": (1.3, 0.3), "norm": (0.9, 0.35),
-         "clear": (0.65, 0.5)}                               # short calls (READY... SET... GO!) need a calm, clear take
+         "clear": (0.65, 0.5),                               # short calls (READY... SET... GO!) need a calm, clear take
+         # story15 drama emotions
+         "calm": (0.5, 0.5), "sad": (0.45, 0.55), "happy": (0.85, 0.4), "excited": (1.15, 0.35),
+         "angry": (1.05, 0.35), "scared": (0.9, 0.4), "proud": (0.75, 0.45)}
 QA_MIN = 0.75                                            # speech-recognition match a cached take must reach
 _CLEAN = "highpass=f=90,equalizer=f=3000:t=q:w=1.2:g=3,acompressor=threshold=-18dB:ratio=3:attack=5:release=90"
 FXS = {"arena": _CLEAN + ",aecho=0.8:0.5:45|90:0.22|0.12",   # SMASH ARENA: PA echo
@@ -50,7 +59,7 @@ def path(text, style, who="m1", fx="arena"):
 def prefetch(items, note="announcer"):
     """items: [(text, style, who[, fx])]. Returns True when every line is cached (missing ones made on Modal)."""
     items = [tuple(it) if len(it) == 4 else (*it, "arena") for it in items]
-    if not all(os.path.exists(r) for r in REFS.values()) or not os.path.exists(MODAL):
+    if not all(os.path.exists(REFS[it[2]]) for it in items if it[2] in REFS) or not os.path.exists(MODAL):
         print(f"[voice] announcer tidak tersedia (ref/modal tidak ada) -> Edge TTS", flush=True)
         return False
     os.makedirs(CACHE, exist_ok=True)
@@ -75,7 +84,8 @@ def _generate(todo, items, note):
             json.dump(lines, fh, indent=1)
         try:
             r = subprocess.run([MODAL, "run", "generators/voice/modal_tts.py", "--lines", os.path.join(BATCH, "lines.json"),
-                                "--out", BATCH, "--refs", ",".join(f"{k}={v}" for k, v in REFS.items()), "--note", note],
+                                "--out", BATCH, "--refs", ",".join(f"{k}={REFS[k]}" for k in sorted({w for _, _, w, _ in todo})),
+                                "--note", note],
                                cwd=ROOT, capture_output=True, text=True,
                                timeout=1500)
             for ln in (r.stdout + r.stderr).splitlines():
