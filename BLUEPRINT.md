@@ -376,6 +376,19 @@ Setiap seri baru WAJIB tetap memakai engine yang sama (tambah fungsi lintasan/ri
 
 ## 10. SOP Publikasi (jadwal upload)
 
+**Lokasi video (user 2026-10-01: satu lokasi, lewat Google Drive API, tanpa mount):**
+
+| Tahap | Lokasi di Google Drive (My Drive/me/ai-develop/ipandu-video/) | Siapa yang memindahkan |
+|---|---|---|
+| Selesai render, menunggu review | `review/<VIDEO_ID>.mp4` + `_sheet.png` | agent produksi: `drive_sync.py sync` |
+| Approved, menunggu tayang | `review/approved/E0xx_<VIDEO_ID>.mp4` | otomatis saat `episodes.py approve` |
+| Sudah di YouTube (riwayat channel) | `archive/S0x/E0xx_<VIDEO_ID>.mp4` | otomatis setelah upload (`mark_uploaded`); MP4 di VM dihapus setelah ukuran di Drive cocok |
+| Ditolak / diganti versi baru | `archive/rejected/<VIDEO_ID>.mp4` | otomatis saat `episodes.py reject` |
+
+VM hanya menyimpan MP4 sebagai salinan kerja sampai video tayang (upload YouTube butuh filenya). Manifest, audit,
+registry tetap di git. Kredensial: `credentials/drive_client_secret.json` + `drive_token.json` (tidak pernah di git).
+`drive_sync.py sync` aman dijalankan berulang (idempotent); `drive_sync.py status` menampilkan lokasi tiap video.
+
 **Aturan:** hanya episode `APPROVED` yang boleh masuk antrian. Upload ke YouTube hanya atas instruksi eksplisit user.
 
 | Slot | Jam New York (ET) | Alasan | WIB saat EDT (s/d 1 Nov 2026) | WIB saat EST |

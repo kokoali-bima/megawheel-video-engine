@@ -25,9 +25,13 @@ Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
       ./venv/bin/python generators/publishing/publish_queue.py plan
  3. Upload yang berstatus QUEUED sebagai video terjadwal (YouTube menayangkan sendiri pada jamnya):
       ./venv/bin/python generators/publishing/publish_queue.py upload --confirm
- 4. Simpan catatan ke git:
+ 4. Arsip otomatis: setelah upload sukses, video dipindah sendiri di Google Drive dari review/approved/ ke
+    archive/S0x/E0xx_<VIDEO_ID>.mp4 dan salinan di VM dihapus (drive_sync, dipanggil oleh mark_uploaded).
+    Pastikan semuanya sudah rapi:
+      ./venv/bin/python generators/publishing/drive_sync.py sync
+ 5. Simpan catatan ke git:
       bash git_sync.sh push "publish: schedule update <tanggal> [<nama model>]"
- 5. Laporkan ke user: tabel PUBLISH_QUEUE (Ep, jam ET, jam WIB, status, URL), jumlah yang diupload hari ini,
+ 6. Laporkan ke user: tabel PUBLISH_QUEUE (Ep, jam ET, jam WIB, status, URL), jumlah yang diupload hari ini,
     setiap baris "PERINGATAN STANDAR" (hari tanpa race25d di 15:00 ET) dari langkah 2,
     dan semua baris SKIP / STOP beserta alasannya.
 

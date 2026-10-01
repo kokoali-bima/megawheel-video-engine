@@ -44,9 +44,13 @@ Langkah per video:
     (tanggal WIB, agent, VIDEO_ID, seri, seed, tokoh L1→L2→L3, durasi, hasil audit, catatan).
  6. Kalau ada error atau kejadian aneh: tambah 1 baris di ERROR_LOG.md bagian yang sesuai
     (tanggal, gejala, penyebab, pencegahan). Jangan hapus baris lama.
- 7. Simpan jejak kode dan catatan ke git (MP4/PNG tidak ikut, sudah di .gitignore):
+ 7. Taruh video di Google Drive untuk direview (WAJIB, satu-satunya lokasi review untuk user):
+      cd /root/video-engine && ./venv/bin/python generators/publishing/drive_sync.py sync
+    -> MP4 + contact sheet masuk ke Drive "me/ai-develop/ipandu-video/review/". JANGAN menyalin video ke tempat lain
+       (tidak ke PC, tidak ke folder lain). Kalau sync gagal: catat di ERROR_LOG dan lapor ke user.
+ 8. Simpan jejak kode dan catatan ke git (MP4/PNG tidak ikut, sudah di .gitignore):
       cd /root/video-engine && bash git_sync.sh push "produce: <VIDEO_ID> (pending review) [<nama model>]"
- 8. Lapor ke user: VIDEO_ID, path MP4, durasi, tokoh, tema, narator, hasil audit, 2-3 PNG preview.
+ 9. Lapor ke user: VIDEO_ID, lokasi di Drive (review/<VIDEO_ID>.mp4), durasi, tokoh, tema, narator, hasil audit.
     Tutup dengan kalimat: "Menunggu approval Anda. Belum dijadwalkan dan belum diupload."
 
 Target harian: 3 video pending per hari (sama dengan 3 slot tayang), kecuali user bilang lain.
