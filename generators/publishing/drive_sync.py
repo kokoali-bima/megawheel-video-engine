@@ -13,6 +13,8 @@ Run on VM 99.3 (cd /root/video-engine):
   venv/bin/python generators/publishing/drive_sync.py sync            # idempotent: put every video where it belongs
   venv/bin/python generators/publishing/drive_sync.py sync --only SIM_SMASH25D_V4_S014
   venv/bin/python generators/publishing/drive_sync.py status          # what is where
+  venv/bin/python generators/publishing/drive_sync.py fetch E016      # VM needs an archived video (weekly long
+        episode, re-edit, recap): download it on demand to work/drive_cache/ (temporary; delete after use)
   venv/bin/python generators/publishing/drive_sync.py auth --port 8085   # one-time login (token -> credentials/)
 episodes.py approve/reject and publish_queue.py upload call sync_one() automatically (non-fatal if Drive is down).
 Credentials (never committed): credentials/drive_client_secret.json, credentials/drive_token.json
@@ -196,6 +198,32 @@ def try_sync_one(video_id):
         print(f"[drive] sync {video_id} gagal (akan dicoba lagi oleh 'drive_sync.py sync'): {ex}")
 
 
+CACHE = os.path.join(BASE, "work", "drive_cache")
+
+
+def fetch(ref, dest=None):
+    """Download a video kept on Drive (by VIDEO_ID or episode 'E016' / '16') for temporary use on the VM.
+    Returns the local path. No mount needed: the VM pulls only what a job needs."""
+    from googleapiclient.http import MediaIoBaseDownload
+    want = ref.upper().lstrip("E")
+    e = next((x for x in registry.load()["videos"] if x["video_id"] == ref
+              or (want.isdigit() and x.get("episode") == int(want))), None)
+    if not e or not e.get("drive_id"):
+        raise RuntimeError(f"{ref}: tidak ada di Drive (cek 'drive_sync.py status')")
+    local = os.path.join(BASE, e["folder"], f"{e['video_id']}.mp4")
+    if os.path.exists(local):                                   # still on the VM: no download needed
+        return local
+    os.makedirs(CACHE, exist_ok=True)
+    dest = dest or os.path.join(CACHE, os.path.basename(e.get("drive_path", e["video_id"] + ".mp4")))
+    with open(dest, "wb") as fh:
+        dl = MediaIoBaseDownload(fh, service().files().get_media(fileId=e["drive_id"]), chunksize=8 * 1024 * 1024)
+        done = False
+        while not done:
+            _, done = dl.next_chunk()
+    print(f"[drive] {e['video_id']} -> {dest}")
+    return dest
+
+
 def status():
     for e in registry.load()["videos"]:
         t = target(e)
@@ -216,7 +244,8 @@ def auth(port):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["sync", "status", "auth"])
+    ap.add_argument("cmd", choices=["sync", "status", "auth", "fetch"])
+    ap.add_argument("ref", nargs="?", default="", help="fetch: VIDEO_ID or episode (E016)")
     ap.add_argument("--only", default="")
     ap.add_argument("--port", type=int, default=8085)
     a = ap.parse_args()
@@ -224,5 +253,7 @@ if __name__ == "__main__":
         auth(a.port)
     elif a.cmd == "status":
         status()
+    elif a.cmd == "fetch":
+        fetch(a.ref)
     else:
         sync(a.only or None)
