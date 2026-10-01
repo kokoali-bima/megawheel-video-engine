@@ -1851,13 +1851,15 @@
         "p2+wreck"
       ],
       "duration": 50.03,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014/SIM_SMASH25D_V4_S014_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E028_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E028_2026-10-01_smash25d/SIM_SMASH25D_V4_S014_audit.md",
+      "episode": 28,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S015",
@@ -1883,13 +1885,15 @@
         "p2+wreck"
       ],
       "duration": 49.77,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015/SIM_SMASH25D_V4_S015_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E029_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E029_2026-10-01_smash25d/SIM_SMASH25D_V4_S015_audit.md",
+      "episode": 29,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts"
     }
   ]
 }

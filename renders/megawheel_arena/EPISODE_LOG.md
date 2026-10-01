@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 12:30). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 13:33). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -34,6 +34,8 @@
 | 25 | S01 | smash25d | Rocky, Hydro, Zippy, Tilly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 26 | S01 | smash25d | Rocky, Sprinkles, Siren, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 27 | S01 | smash25d | Titan, Grizzly, Tilly, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 28 | S01 | smash25d | Hydro, Rocky, Nitro, Tilly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 29 | S01 | smash25d | Buster, Grizzly, Nitro, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 
 ## Menunggu approval (`pending/`)
 

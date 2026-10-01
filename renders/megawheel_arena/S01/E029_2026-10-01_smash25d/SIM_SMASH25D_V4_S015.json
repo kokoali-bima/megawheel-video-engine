@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V4_S015",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "smash25d v4",
   "series": "smash25d",
   "seed": 15,
@@ -60,7 +60,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Crash Battle! Only One Can Win! 💥",
-  "title": "Crash Battle! Only One Can Win! 💥 #Shorts",
+  "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts",
   "description": "Buster, Grizzly, Nitro and Zippy enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
@@ -100,6 +100,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015/SIM_SMASH25D_V4_S015.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s015/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E029_2026-10-01_smash25d/SIM_SMASH25D_V4_S015.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E029_2026-10-01_smash25d/preview",
+  "episode": 29,
+  "season": 1,
+  "approved_date": "2026-10-01"
 }

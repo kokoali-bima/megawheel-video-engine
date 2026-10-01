@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 12:31) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 13:33) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -41,6 +41,8 @@
 | 25 | `SIM_SMASH25D_V4_S008` | smash25d | APPROVED | Mon 2026-10-05 19:00 |  |
 | 26 | `SIM_SMASH25D_V4_S011` | smash25d | APPROVED | Tue 2026-10-06 19:00 |  |
 | 27 | `SIM_SMASH25D_V4_S012` | smash25d | APPROVED | Wed 2026-10-07 19:00 |  |
+| 28 | `SIM_SMASH25D_V4_S014` | smash25d | APPROVED | Thu 2026-10-08 19:00 |  |
+| 29 | `SIM_SMASH25D_V4_S015` | smash25d | APPROVED | Fri 2026-10-09 19:00 |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
 
@@ -391,4 +393,30 @@
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → win; Level 2: Grizzly (monster2) → p3+ring; Level 3 (juara): Tilly (taxi) → p4+ring; Level 4: Zippy (sports) → p2+ring
 - **Status:** APPROVED (approve 2026-10-01)
 - **Antrian:** QUEUED 2026-10-07T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 28 — `SIM_SMASH25D_V4_S014`
+
+- **Judul YouTube:** Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E028_2026-10-01_smash25d/SIM_SMASH25D_V4_S014.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E028_2026-10-01_smash25d/SIM_SMASH25D_V4_S014.json` · audit: `renders/megawheel_arena/S01/E028_2026-10-01_smash25d/SIM_SMASH25D_V4_S014_audit.md`
+- **Season / seri / seed:** S01 / smash25d / 14
+- **Tema / narator:** noon-rain-countryside / chatterbox:mw-announcers-m1f1
+- **Durasi:** 50.03 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p3+ring; Level 2: Rocky (monster) → p4+wreck; Level 3 (juara): Nitro (f1) → win; Level 4: Tilly (taxi) → p2+wreck
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-08T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 29 — `SIM_SMASH25D_V4_S015`
+
+- **Judul YouTube:** Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E029_2026-10-01_smash25d/SIM_SMASH25D_V4_S015.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E029_2026-10-01_smash25d/SIM_SMASH25D_V4_S015.json` · audit: `renders/megawheel_arena/S01/E029_2026-10-01_smash25d/SIM_SMASH25D_V4_S015_audit.md`
+- **Season / seri / seed:** S01 / smash25d / 15
+- **Tema / narator:** noon-clear-beach / chatterbox:mw-announcers-m1f1
+- **Durasi:** 49.77 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p4+ring; Level 2: Grizzly (monster2) → win; Level 3 (juara): Nitro (f1) → p3+ring; Level 4: Zippy (sports) → p2+wreck
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-09T23:00:00Z
 - **YouTube:** belum diupload

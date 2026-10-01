@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V4_S014",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "smash25d v4",
   "series": "smash25d",
   "seed": 14,
@@ -60,7 +60,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Who Survives the Smash Arena? 💥",
-  "title": "Who Survives the Smash Arena? 💥 #Shorts",
+  "title": "Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts",
   "description": "Hydro, Rocky, Nitro and Tilly enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
@@ -102,6 +102,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014/SIM_SMASH25D_V4_S014.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s014/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E028_2026-10-01_smash25d/SIM_SMASH25D_V4_S014.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E028_2026-10-01_smash25d/preview",
+  "episode": 28,
+  "season": 1,
+  "approved_date": "2026-10-01"
 }
