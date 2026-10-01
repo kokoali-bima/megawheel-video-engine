@@ -857,6 +857,7 @@ def render_scene(ep, num, aspect):
             camx += (cx - camx) * 0.12
             zoom += (z_ - zoom) * 0.12
         piv_y = focus_y if focus_y is not None else ground_y(1.0) - 1.2 * k_of(1.0)
+        piv_y -= sh.get("lift", 0.0) * k_of(1.0)                   # camera tilted up (show the sky: Kraggor)
         # draw
         ctx.save()
         shake = 0.0

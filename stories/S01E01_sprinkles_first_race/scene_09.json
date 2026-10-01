@@ -50,7 +50,9 @@
    ],
    "fx": [
     "shake"
-   ]
+   ],
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "wide",
@@ -66,7 +68,9 @@
      "Oh no... it's Kraggor!",
      "scared"
     ]
-   ]
+   ],
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "wide",
@@ -90,7 +94,9 @@
     "sx": 0.55,
     "sy": 0.47,
     "scale": 0.85
-   }
+   },
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "close",

@@ -28,7 +28,9 @@
      "That day, Sprinkles didn't win the race. She won something better.",
      "calm"
     ]
-   ]
+   ],
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "wide",
@@ -45,7 +47,9 @@
      "But who is Kraggor... and why is he so alone?",
      "calm"
     ]
-   ]
+   ],
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "wide",

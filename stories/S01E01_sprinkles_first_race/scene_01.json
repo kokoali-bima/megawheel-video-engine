@@ -97,7 +97,9 @@
     "sprinkles": "scared",
     "zippy": "scared",
     "rocky": "scared"
-   }
+   },
+   "lift": 3.5,
+   "zoom": 0.85
   },
   {
    "cam": "wide",
