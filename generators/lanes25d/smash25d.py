@@ -277,7 +277,10 @@ def simulate(seed):
             if c["out_kind"] == "ring" and c["h"] <= 0 and t - c["out"] > 0.3:
                 c["vx"] *= 0.9
                 c["vz"] *= 0.9
-            face = 0.0 if math.cos(c["th"]) >= 0 else math.pi    # paper-card flip toward the driving direction
+            cs = math.cos(c["th"])                               # paper-card flip toward the driving direction,
+            if c.get("face") is None or (c["face"] == 0.0 and cs < -0.35) or (c["face"] != 0.0 and cs > 0.35):
+                c["face"] = 0.0 if cs >= 0 else math.pi          # (hysteresis: no flicker when driving in depth)
+            face = c["face"]
             if c["spin"] > 0:
                 c["yaw"] += 14.0 * dt
             else:
@@ -744,7 +747,7 @@ def draw_kraggor_head(ctx, ch, t, stands_top):
     body, metal = (0.24, 0.55, 0.36), (0.66, 0.68, 0.76)
     dark = se.shade(body, 0.62)
     ctx.save()
-    ctx.translate(850, stands_top + 1.2 * S + (1 - rise) * 13 * S + math.sin(t * 20) * 3 * roar)
+    ctx.translate(905, stands_top + 1.2 * S + (1 - rise) * 13 * S + math.sin(t * 20) * 3 * roar)
     ctx.scale(S, S)
     se.rrect(ctx, -3.0, -3, 6.0, 12, 1.4)                        # neck
     ctx.set_source_rgb(*se.lit(dark))
@@ -806,7 +809,7 @@ def draw_kraggor_head(ctx, ch, t, stands_top):
     if roar > 0.35:                                              # roar waves
         for q in range(3):
             r = (1.5 + q * 1.4 + (t * 6) % 1.4) * S
-            ctx.arc(850, stands_top - 2 * S, r, math.pi * 1.1, math.pi * 1.9)
+            ctx.arc(905, stands_top - 2 * S, r, math.pi * 1.1, math.pi * 1.9)
             ctx.set_source_rgba(1, 1, 1, 0.5 * roar * (1 - q / 3))
             ctx.set_line_width(6)
             ctx.stroke()
