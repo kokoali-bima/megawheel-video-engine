@@ -624,6 +624,16 @@
    "gpu_seconds": 33.4,
    "wall_seconds": 55.9,
    "cost_usd": 0.0085
+  },
+  {
+   "date": "2026-10-01",
+   "note": "story S01E01_sprinkles_first_race#2 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 38.9,
+   "wall_seconds": 68.5,
+   "cost_usd": 0.0099
   }
  ]
 }
