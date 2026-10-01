@@ -1,0 +1,226 @@
+{
+  "video_id": "SIM_BUMPS_V2_S007",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "bumps",
+  "seed": 7,
+  "fps": 30,
+  "duration": 44.7,
+  "track_id": "bumps_daee7ff7",
+  "track_params": {
+    "bumps": [
+      [
+        43.0,
+        45.5,
+        0.6
+      ],
+      [
+        53.3,
+        56.5,
+        1.24
+      ],
+      [
+        64.4,
+        68.3,
+        1.83
+      ],
+      [
+        75.2,
+        79.6,
+        2.7
+      ]
+    ]
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "noon-clear-beach",
+  "voice": "en-US-EmmaMultilingualNeural",
+  "fingerprint": "bumps|police,icecream,monster2|bumps_daee7ff7@noon-clear-beach|flip@obs2+broken,flip@obs1+broken,win",
+  "outcomes": [
+    "flip@obs2+broken",
+    "flip@obs1+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->75.0 m, 3.0->61.5 m, 3.0->129.1 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "4 rintangan [bump, bump, bump, bump] (43-80 m), finish 90 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "4.7s, 4.4s, 8.5s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 1]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "44.7 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 18 s, level menang (+outro) <= 27 s",
+      "ok": true,
+      "detail": "12.4s, 11.3s, 21.0s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "bumps|police,icecream,monster2|bumps_daee7ff7@noon-clear-beach|flip@obs2+broken,flip@obs1+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥",
+  "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 #Shorts",
+  "description": "Siren the police car, Sprinkles the ice cream truck and Grizzly the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "speed bumps",
+    "monster truck",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "police car",
+    "ice cream truck",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 21.25,
+      "outcome": "flip",
+      "event_t": 4.7,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 12.37,
+      "event_out": 6.4,
+      "x_start": 3.0,
+      "x_end": 75.0,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 17.0,
+      "outcome": "flip",
+      "event_t": 4.4,
+      "obstacle": 1,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 12.37,
+      "duration": 11.3,
+      "event_out": 17.5,
+      "x_start": 3.0,
+      "x_end": 61.5,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "GRIZZLY THE MONSTER TRUCK",
+      "speed": 20.88,
+      "outcome": "win",
+      "event_t": 8.53,
+      "obstacle": 3,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 23.67,
+      "duration": 21.03,
+      "event_out": 35.53,
+      "x_start": 3.0,
+      "x_end": 129.1,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Siren the police car is on patrol! Can Siren make it past the giant speed bumps?",
+    "Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Level three! Grizzly the monster truck! Can Grizzly smash through the giant speed bumps?",
+    "Whoa! Siren flipped right over!",
+    "Whoa! Sprinkles flipped right over!",
+    "Yes! Grizzly made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_bumps_s007/SIM_BUMPS_V2_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_bumps_s007/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_bumps_s007/SIM_BUMPS_V2_S007_audit.md"
+}
