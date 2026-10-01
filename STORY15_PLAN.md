@@ -108,11 +108,13 @@ stories/S01E01_sprinkles_first_race/
 
 ## 10. Keputusan terbuka
 
-- [ ] **Rasio layar.** Video panjang di YouTube umumnya 16:9 (horizontal); Shorts 9:16 (vertikal). Karena engine kita
-  menggambar sendiri, setiap scene bisa dirender **dua kali dengan bingkai kamera berbeda** (16:9 untuk video panjang,
-  9:16 untuk Shorts "Part N"). Pilihan: (a) dua versi, (b) vertikal saja.
-- [ ] Apakah scene juga ditayangkan sebagai Shorts "Part N", dan di slot mana?
-- [ ] Judul episode pertama dan daftar tokoh yang tampil.
+- [x] **Rasio layar: dua versi** (user 2026-10-01). Setiap scene dirender dua kali dengan bingkai kamera berbeda:
+  16:9 untuk video panjang, 9:16 untuk Shorts "Part N".
+- [x] **Shorts "Part N": tetap 3 Shorts per hari** (user 2026-10-01). Satu slot per hari diganti "Part N" sebagai
+  selingan; RACE 15:00 tetap setiap hari. Slot yang diganti bergiliran antara CHALLENGE (11:00) dan SMASH (19:00).
+  Setelah ada data YouTube Analytics (±2 minggu), yang peminatnya lebih sepi lebih sering diganti.
+  Seminggu = 7 Part (scene paling menarik dari episode minggu itu, dengan kait "full episode on our channel").
+- [x] Episode pertama: **"Sprinkles' First Race"** (user 2026-10-01). Daftar tokoh menyusul di naskah.
 
 ## Riwayat keputusan
 
@@ -122,3 +124,6 @@ stories/S01E01_sprinkles_first_race/
 | 2026-10-01 | Tokoh bersuara (lebih emosional) + narator + subtitle |
 | 2026-10-01 | Aturan usia suara: kecil sekali = suara anak, remaja = suara remaja, narator dewasa |
 | 2026-10-01 | Format "drama China": 15 scene × ±1 menit, setiap scene berakhir dengan kait, dirender per scene |
+| 2026-10-01 | Dua versi rasio (16:9 video panjang, 9:16 Shorts "Part N") |
+| 2026-10-01 | Tetap 3 Shorts/hari: 1 slot/hari jadi "Part N" bergiliran CHALLENGE/SMASH (RACE tetap); nanti pakai data Analytics |
+| 2026-10-01 | Episode pertama: "Sprinkles' First Race" |
