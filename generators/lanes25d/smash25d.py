@@ -45,7 +45,7 @@ W, H, FPS = se.W, se.H, 30
 # perspective: x, z in metres (z = depth). Higher camera than race25d so the floor reads as an arena.
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
 Y_H, CAM_H = 276.0, 20.4
-WORLD_DY, PIV_Y = -130.0, 1190.0                  # zoom pivot (world space)
+WORLD_DY, PIV_Y = 20.0, 1190.0                  # zoom pivot (world space)
 ZC = 5.0                                         # arena centre depth
 HX0, HZ0, HX_MIN, HZ_MIN = 13.0, 5.0, 8.5, 3.6   # floor half-size at start / after the last shrink (v2: wider)
 SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 18.0, 7.0, 0.12
@@ -327,10 +327,10 @@ def simulate(seed):
                     v = ch["victim"] = cand[int(rng.integers(len(cand)))]
                 if t >= BARRIER_DOWN and v["hp"] < 60:           # weak car: dropped off the edge!
                     side = 1 if v["x"] >= 0 else -1
-                    dxp, dzp = side * (hx + 2.2), float(np.clip(v["z"], ZC - hz + 1, ZC + hz - 1))
+                    dxp, dzp = side * (hx + 2.2), float(np.clip(v["z"], ZC - hz + 1, ZC))
                 else:
                     dxp = float(rng.uniform(-hx + 2, hx - 2))
-                    dzp = float(rng.uniform(ZC - hz + 1, ZC + hz - 1))
+                    dzp = float(rng.uniform(ZC - hz + 1, ZC))                  # drop it near the camera
                 v["carry"] = dict(T=t, x0=v["x"], z0=v["z"], dx=dxp, dz=dzp)
                 v.setdefault("chaos_hits", []).append((t, typ))
                 ch.update(x0=v["x"], z0=v["z"], dx=dxp, dz=dzp)
@@ -744,7 +744,7 @@ def draw_kraggor_head(ctx, ch, t, stands_top):
     body, metal = (0.24, 0.55, 0.36), (0.66, 0.68, 0.76)
     dark = se.shade(body, 0.62)
     ctx.save()
-    ctx.translate(800, stands_top + 1.2 * S + (1 - rise) * 13 * S + math.sin(t * 20) * 3 * roar)
+    ctx.translate(850, stands_top + 1.2 * S + (1 - rise) * 13 * S + math.sin(t * 20) * 3 * roar)
     ctx.scale(S, S)
     se.rrect(ctx, -3.0, -3, 6.0, 12, 1.4)                        # neck
     ctx.set_source_rgb(*se.lit(dark))
@@ -806,7 +806,7 @@ def draw_kraggor_head(ctx, ch, t, stands_top):
     if roar > 0.35:                                              # roar waves
         for q in range(3):
             r = (1.5 + q * 1.4 + (t * 6) % 1.4) * S
-            ctx.arc(800, stands_top - 2 * S, r, math.pi * 1.1, math.pi * 1.9)
+            ctx.arc(850, stands_top - 2 * S, r, math.pi * 1.1, math.pi * 1.9)
             ctx.set_source_rgba(1, 1, 1, 0.5 * roar * (1 - q / 3))
             ctx.set_line_width(6)
             ctx.stroke()
@@ -905,13 +905,13 @@ def ufo_pos(ch, t):
     """UFO position (x, z, altitude): flies in, follows its catch, leaves with a whoosh."""
     a = t - ch["T"]
     if a < 0:
-        return ch["tx"] + (-a) * 9.0, ch["tz"], 7.5
+        return ch["tx"] + (-a) * 9.0, ch["tz"], 5.5
     if a < 1.8:
         e = min(1.0, a / 1.8)
         e = e * e * (3 - 2 * e)
-        return ch["x0"] + (ch["dx"] - ch["x0"]) * e, ch["z0"] + (ch["dz"] - ch["z0"]) * e, 7.5
+        return ch["x0"] + (ch["dx"] - ch["x0"]) * e, ch["z0"] + (ch["dz"] - ch["z0"]) * e, 5.5
     b = a - 1.8
-    return ch["dx"] - b * 13.0, ch["dz"], 7.5 + b * 5.0
+    return ch["dx"] - b * 13.0, ch["dz"], 5.5 + b * 5.0
 
 
 def draw_chaos_air(ctx, ch, t, camx):
@@ -1004,18 +1004,18 @@ def draw_chaos_air(ctx, ch, t, camx):
             ctx.save()
             ctx.translate(px, py)
             ctx.scale(1.0, 0.32)
-            ctx.arc(0, 0, 3.0 * kk, 0, 2 * math.pi)
+            ctx.arc(0, 0, 3.9 * kk, 0, 2 * math.pi)
             ctx.restore()
             g = cairo.LinearGradient(0, py - kk, 0, py + kk)
             g.add_color_stop_rgb(0, 0.85, 0.87, 0.92)
             g.add_color_stop_rgb(1, 0.45, 0.47, 0.55)
             ctx.set_source(g)
             ctx.fill()
-            ctx.arc(px, py - 0.25 * kk, 1.3 * kk, math.pi, 2 * math.pi)
+            ctx.arc(px, py - 0.3 * kk, 1.7 * kk, math.pi, 2 * math.pi)
             ctx.set_source_rgba(0.5, 0.9, 1.0, 0.9)
             ctx.fill()
             for q in range(7):                                   # blinking rim lights
-                lx = px + (q - 3) * 0.8 * kk
+                lx = px + (q - 3) * 1.05 * kk
                 on = (int(t * 8) + q) % 2 == 0
                 ctx.arc(lx, py + 0.15 * kk, 0.17 * kk, 0, 2 * math.pi)
                 ctx.set_source_rgb(*((1, 0.9, 0.2) if on else (0.9, 0.3, 0.9)))
@@ -1509,11 +1509,12 @@ def main():
             draw_hud(ctx, cars, t)
         if mode == "race":
             se.draw_ready_go(ctx, t)
-            banners = [(s_, "ARENA SHRINKING!") for s_ in shrink_times()]
-            banners += [(BARRIER_DOWN, "BARRIERS DOWN!")]
-            banners += [(ch["T"] - ch["warn"], CHAOS[ch["type"]]["banner"]) for ch in chaos_live()]
-            for s_, txt in banners:
-                if 0 <= t - s_ < 1.6 and t < winner["finish"]:
+            banners = [(s_, "ARENA SHRINKING!", 0) for s_ in shrink_times()]
+            banners += [(BARRIER_DOWN, "BARRIERS DOWN!", 0)]
+            banners += [(ch["T"] - ch["warn"], CHAOS[ch["type"]]["banner"], 1) for ch in chaos_live(t)]
+            live = [(pr, s_, txt) for s_, txt, pr in banners if 0 <= t - s_ < 1.6 and t < winner["finish"]]
+            for pr, s_, txt in sorted(live)[-1:]:                # one banner at a time: chaos first, then newest
+                if True:
                     a = t - s_
                     sc = se.ease_out_back(min(1.0, a / 0.3)) * min(1.0, (1.6 - a) / 0.3)
                     ctx.save()
