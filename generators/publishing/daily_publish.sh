@@ -10,6 +10,8 @@ cd /root/video-engine
 exec 9>/tmp/megawheel_daily_publish.lock
 flock -n 9 || { echo "[daily] $(date -u +%FT%TZ) sudah ada run lain yang berjalan -> keluar"; exit 0; }
 echo "===== [daily] $(date -u +%FT%TZ) mulai"
+# records left uncommitted by an earlier manual/agent run (plan, approve, ...) would block the pull: commit them first
+bash git_sync.sh push "auto: records left uncommitted before daily run" | tail -2
 bash git_sync.sh pull | tee /tmp/daily_pull.log
 grep -q "OK: VM = GitHub" /tmp/daily_pull.log || { echo "[daily] STOP: git_sync pull gagal, tidak upload"; exit 1; }
 ./venv/bin/python generators/publishing/publish_queue.py plan | grep -E "queue\]" || true
