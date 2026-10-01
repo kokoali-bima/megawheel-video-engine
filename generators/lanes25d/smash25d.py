@@ -40,6 +40,14 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 import race25d as R  # noqa: E402  (shared drawing: car, bubble, YouTube end card, sounds)
+sys.path.insert(0, os.path.join(HERE, "..", "voice"))
+import announcer  # noqa: E402  (Chatterbox announcer on Modal, cached; Edge TTS fallback)
+
+USE_CB = False                                   # set per video: True = Chatterbox announcer lines from the cache
+# two commentators (user 2026-10-01): m1 = ring announcer / play-by-play, f1 = colour commentator (reactions)
+EDGE_VOICES = {"m1": "en-US-GuyNeural", "f1": "en-US-AriaNeural"}     # Edge fallback per speaker
+HIT_CALLS_F = ["Oh my goodness! What a hit!", "Ouch! That's gotta hurt!", "Did you see that?"]
+CHAOS_WHO = {"missile": "f1", "ufo": "f1", "kraggor": "m1", "crack": "m1"}
 
 SERIES, ENGINE_VERSION = "smash25d", "v3"             # v3: fighter intros + winner showcase (v2: chaos, announcer)
 W, H, FPS = se.W, se.H, 30
@@ -63,7 +71,6 @@ CHAOS_AT = [(4.5, 5.8), (9.5, 10.8), (14.5, 15.8), (19.5, 20.8)]
 ANNOUNCERS = ["en-US-GuyNeural", "en-US-ChristopherNeural", "en-US-EricNeural"]   # arena announcer (male, en-US)
 # announcer delivery per line type (edge-tts rate, pitch): slow + deep intro, fast + high action calls
 VOICE_STYLE = {"intro": ("-8%", "-6Hz"), "hype": ("+20%", "+6Hz"), "call": ("+4%", "+2Hz"), "norm": ("+12%", "+0Hz")}
-HIT_CALLS = ["Oh my! What a hit!", "Boom! That's gotta hurt!", "What a slam!"]
 T_MAX = 40.0
 POOL = ["sports", "police", "taxi", "f1", "bus", "firetruck", "icecream", "bigrig", "monster", "monster2"]
 BIG = {"bus", "firetruck", "icecream", "bigrig"}
@@ -1299,23 +1306,41 @@ def kaiju_step(strength=1.0, seed=3):
     return (boom + 0.5 * rum) * strength
 
 
-def say(text, style):
+def say(text, style, who="m1"):
+    if USE_CB:
+        return announcer.get(text, style, who)
+    se.VOICE = EDGE_VOICES[who]
     se.TTS_RATE, se.TTS_PITCH = VOICE_STYLE[style]
     return se.tts(text)
 
 
+def star_call_for(star_t, outs):
+    """What the announcer says when the replay reaches the big moment."""
+    call = "What a slam!"
+    for ch in CHAOS_PLAN:
+        if ch.get("done") and not ch.get("skip") and abs(ch["T"] - star_t) < 0.05:
+            vn = nick(ch["victim"]["key"])
+            call = {"kraggor": f"Look at that! Kraggor flattens {vn}!", "missile": f"Kaboom! Right on {vn}!",
+                    "ufo": f"The UFO takes {vn} for a ride!", "crack": f"Lava blasts {vn} into the air!"}[ch["type"]]
+    for c in outs:
+        if abs(c["out"] - star_t) < 0.05:
+            call = f"Look at {nick(c['key'])} go flying!" if c["out_kind"] == "ring" else f"{nick(c['key'])} is crushed!"
+    return call
+
+
 def schedule_narration(anchors, extras):
-    """Announcer timing. anchors = [(want, text, style)] are always spoken, in order. extras = [(want, prio, text,
-    style, max_late)] are spoken only if they fit in a free gap without moving an anchor and start at most
-    max_late seconds after the action (higher priority first). Returns [(start, end, audio, text)] by start."""
+    """Commentary timing. anchors = [(want, text, style, who)] are always spoken, in order. extras = [(want, prio, text,
+    style, max_late, who)] are spoken only if they fit in a free gap without moving an anchor and start at most
+    max_late seconds after the action (higher priority first). The two commentators never talk over each other.
+    Returns [(start, end, audio, text)] by start."""
     placed, busy = [], 0.0
-    for w, txt, sty in sorted(anchors, key=lambda a: a[0]):
-        a = say(txt, sty)
+    for w, txt, sty, who in sorted(anchors, key=lambda a: a[0]):
+        a = say(txt, sty, who)
         t0 = max(w, busy + 0.15)
         busy = t0 + len(a) / se.SR
         placed.append((t0, busy, a, txt))
-    for w, pr, txt, sty, ml in sorted(extras, key=lambda x: (-x[1], x[0])):
-        a = say(txt, sty)
+    for w, pr, txt, sty, ml, who in sorted(extras, key=lambda x: (-x[1], x[0])):
+        a = say(txt, sty, who)
         d = len(a) / se.SR
         t0, moved = w, True
         while moved:
@@ -1480,6 +1505,8 @@ def main():
     ap.add_argument("--preview-only", action="store_true")
     ap.add_argument("--name", default="")
     ap.add_argument("--arena", default="", choices=["", *ARENAS])
+    ap.add_argument("--voice", default="chatterbox", choices=["chatterbox", "edge"],
+                    help="announcer: chatterbox (Modal, cached; default) or edge (Edge TTS)")
     ap.add_argument("--dry-run", action="store_true", help="simulate + battle checks only, no render (seed search)")
     opt = ap.parse_args()
     se.load_cast()
@@ -1523,14 +1550,38 @@ def main():
               and sum(1 for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")) >= 3)
         print(f"[smash] dry-run {'PASS' if ok else 'FAIL'}", flush=True)
         raise SystemExit(0 if ok else 5)
-    # INTRO: wide shot "Ladies and gentlemen", then every fighter is introduced (slot = length of the call)
+    # every line the announcer may say, generated in ONE Modal call (cached); Edge TTS for the whole video if it fails
+    global USE_CB
     se.VOICE = voice
-    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"   # arena PA echo
+    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"   # arena PA echo (Edge fallback)
     ladies = "Ladies and gentlemen... it's time to smash!"
     calls = [("And... " if i == 3 else "") + f"{nick(c['key'])}, the "
              f"{se.VEHICLES[c['key']]['display'].split(' THE ')[1].lower()}!" for i, c in enumerate(cars)]
-    wide_len = len(say(ladies, "intro")) / se.SR + 0.45
-    slots = [max(1.7, len(say(cl, "hype")) / se.SR + 0.5) for cl in calls]
+    bigh = sorted([h for h in hits if h["rel"] > 7], key=lambda h: -h["rel"])[:3]
+    star_call = star_call_for(star_t, outs) if replay else None
+    win_line = f"The winner is... {nick(winner['key'])}! Yeah!"
+    chaos_lines = [CHAOS[ch["type"]]["line"].format(n=nick(ch["victim"]["key"])) for ch in CHAOS_PLAN
+                   if ch.get("done") and not ch.get("skip")]
+    out_lines = [ARENAS[ARENA]["out_line"].format(n=nick(c["key"])) if c["out_kind"] == "ring"
+                 else f"{nick(c['key'])} is down!" for c in outs]
+    chaos_who = [CHAOS_WHO[ch["type"]] for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")]
+    react = "What a champion!"
+    needed = ([(ladies, "intro", "m1")] + [(cl, "hype", "m1") for cl in calls]
+              + [(x, "hype", w) for x, w in zip(chaos_lines, chaos_who)] + [(x, "hype", "f1") for x in out_lines]
+              + [("Barriers down!", "hype", "m1")] + [(HIT_CALLS_F[i % 3], "hype", "f1") for i in range(len(bigh))]
+              + [(win_line, "call", "m1"), (react, "hype", "f1"),
+                 ("Let's see that again... in slow motion!", "call", "f1"), (se.CTA, "norm", "m1")]
+              + ([(star_call, "hype", "m1")] if star_call else []))
+    USE_CB = opt.voice == "chatterbox" and announcer.prefetch(needed, note=f"announcer {name}")
+    if USE_CB:
+        voice = announcer.VOICE_ID
+    else:
+        EDGE_VOICES["m1"] = voice
+        voice = f"edge:{voice}+{EDGE_VOICES['f1']}"
+    print(f"[smash] announcer: {voice}", flush=True)
+    # INTRO: wide shot "Ladies and gentlemen", then every fighter is introduced (slot = length of the call)
+    wide_len = len(say(ladies, "intro", "m1")) / se.SR + 0.45
+    slots = [max(1.7, len(say(cl, "hype", "m1")) / se.SR + 0.5) for cl in calls]
     intro_starts = [wide_len + sum(slots[:i]) for i in range(4)]
     intro_frames = [("intro", j / FPS) for j in range(int((wide_len + sum(slots)) * FPS))]
     lf = len(intro_frames) / FPS
@@ -1548,36 +1599,23 @@ def main():
 
     names = [nick(c["key"]) for c in cars]
     arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink"}[ARENA]
-    anchors = [(0.05, ladies, "intro"),
-               (out_of(winner["finish"]) + 0.3, f"The winner is... {nick(winner['key'])}! Yeah!", "call"),
-               (cta_start + 0.2, se.CTA, "norm")]
-    anchors += [(intro_starts[i] + 0.2, calls[i], "hype") for i in range(4)]
-    extras = []                                                  # (want, priority, text, style, max late)
-    for ch in CHAOS_PLAN:
-        if ch.get("done") and not ch.get("skip"):
-            extras.append((out_of(ch["T"] - ch["warn"]) + 0.05, 3,
-                           CHAOS[ch["type"]]["line"].format(n=nick(ch["victim"]["key"])), "hype", 1.0))
-    for c in outs:
-        extras.append((out_of(c["out"]) + 0.15, 2, ARENAS[ARENA]["out_line"].format(n=nick(c["key"]))
-                       if c["out_kind"] == "ring" else f"{nick(c['key'])} is down!", "hype", 1.3))
+    anchors = [(0.05, ladies, "intro", "m1"),
+               (out_of(winner["finish"]) + 0.3, win_line, "call", "m1"),
+               (cta_start + 0.2, se.CTA, "norm", "m1")]
+    anchors += [(intro_starts[i] + 0.2, calls[i], "hype", "m1") for i in range(4)]
+    extras = [(out_of(winner["finish"]) + 2.0, 2, react, "hype", 1.6, "f1")]   # (want, prio, text, style, late, who)
+    for ch, line, who in zip([ch for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")], chaos_lines, chaos_who):
+        extras.append((out_of(ch["T"] - ch["warn"]) + 0.05, 3, line, "hype", 1.0, who))
+    for c, line in zip(outs, out_lines):
+        extras.append((out_of(c["out"]) + 0.15, 2, line, "hype", 1.3, "f1"))
     if BARRIER_DOWN < winner["finish"]:
-        extras.append((out_of(BARRIER_DOWN), 1, "Barriers down!", "hype", 0.6))
+        extras.append((out_of(BARRIER_DOWN), 1, "Barriers down!", "hype", 0.6, "m1"))
     if replay:                                                   # replay: announce it, then call the moment again
-        anchors.append((replay[0] + 0.1, "Let's see that again... in slow motion!", "call"))
+        anchors.append((replay[0] + 0.1, "Let's see that again... in slow motion!", "call", "f1"))
         r0, ra, rb = replay
-        star_call = "What a slam!"
-        for ch in CHAOS_PLAN:
-            if ch.get("done") and not ch.get("skip") and abs(ch["T"] - star_t) < 0.05:
-                vn = nick(ch["victim"]["key"])
-                star_call = {"kraggor": f"Look at that! Kraggor flattens {vn}!", "missile": f"Kaboom! Right on {vn}!",
-                             "ufo": f"The UFO takes {vn} for a ride!", "crack": f"Lava blasts {vn} into the air!"}[ch["type"]]
-        for c in outs:
-            if abs(c["out"] - star_t) < 0.05:
-                star_call = f"Look at {nick(c['key'])} go flying!" if c["out_kind"] == "ring" else f"{nick(c['key'])} is crushed!"
-        anchors.append((r0 + (star_t - ra) / 0.4 - 0.4, star_call, "hype"))
-    bigh = sorted([h for h in hits if h["rel"] > 7], key=lambda h: -h["rel"])[:3]
+        anchors.append((r0 + (star_t - ra) / 0.4 - 0.4, star_call, "hype", "m1"))
     for i, h in enumerate(bigh):
-        extras.append((out_of(h["t"]) + 0.05, 0, HIT_CALLS[i % len(HIT_CALLS)], "hype", 0.6))
+        extras.append((out_of(h["t"]) + 0.05, 0, HIT_CALLS_F[i % 3], "hype", 0.6, "f1"))
     placed = schedule_narration(anchors, extras)
     need = max(e for _, e, _, _ in placed) + 0.8                 # the end card lasts until the CTA is said
     while len(frames) / FPS < need:

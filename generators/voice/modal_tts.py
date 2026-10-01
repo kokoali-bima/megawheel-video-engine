@@ -4,8 +4,10 @@ build pakai mesin modal.com kita?").
 
 Run on VM 99.3 (cd /root/video-engine):
   venv-modal/bin/modal run generators/voice/modal_tts.py --lines work/voice/lines.json --out work/voice/chatterbox
-  lines.json = [{"text": "...", "exaggeration": 0.9, "cfg": 0.4, "ref": true}, ...]   (ref = use --ref voice prompt)
-  --ref work/voice/ref.wav   synthetic reference voice for the speaker (never a real person's voice)
+  lines.json = [{"text": "...", "exaggeration": 0.9, "cfg": 0.4, "ref": "m1"}, ...]   (ref: key of --refs, or true =
+  the single --ref voice, or false = Chatterbox default voice)
+  --refs m1=branding/voice/announcer_ref.wav,f1=branding/voice/announcer_f1_ref.wav   synthetic reference voices
+  (never a real person's voice)
 Every run is logged in modal_usage.json. The run is REFUSED if this month's logged spend + the worst-case estimate
 would pass BUDGET_USD.
 """
@@ -41,21 +43,23 @@ image = (
 
 
 @app.function(image=image, gpu="L4", timeout=900)
-def speak(items: list, ref: bytes = b"") -> dict:
+def speak(items: list, ref: bytes = b"", refs: dict = None) -> dict:
     import importlib.metadata as md
 
     import torchaudio
     from chatterbox.tts import ChatterboxTTS
     t0 = time.time()
     model = ChatterboxTTS.from_pretrained(device="cuda")
-    ref_path = None
-    if ref:
-        ref_path = "/tmp/ref.wav"
-        with open(ref_path, "wb") as fh:
-            fh.write(ref)
+    paths = {}
+    for name, data in ({"__single__": ref} if ref else {}).items() | (refs or {}).items():
+        paths[name] = f"/tmp/ref_{name}.wav"
+        with open(paths[name], "wb") as fh:
+            fh.write(data)
     wavs = []
     for it in items:
-        wav = model.generate(it["text"], audio_prompt_path=ref_path if it.get("ref") else None,
+        r = it.get("ref")
+        rp = paths.get("__single__") if r is True else paths.get(r) if isinstance(r, str) else None
+        wav = model.generate(it["text"], audio_prompt_path=rp,
                              exaggeration=float(it.get("exaggeration", 0.5)), cfg_weight=float(it.get("cfg", 0.5)))
         buf = io.BytesIO()
         torchaudio.save(buf, wav.cpu(), model.sr, format="wav")
@@ -73,7 +77,7 @@ def _ledger():
 
 
 @app.local_entrypoint()
-def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox", ref: str = "",
+def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox", ref: str = "", refs: str = "",
          note: str = "tts sample"):
     with open(lines) as fh:
         items = json.load(fh)[:MAX_LINES]
@@ -88,8 +92,13 @@ def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox
     if ref:
         with open(ref, "rb") as fh:
             ref_bytes = fh.read()
+    ref_map = {}
+    for kv in filter(None, refs.split(",")):
+        k, v = kv.split("=", 1)
+        with open(v, "rb") as fh:
+            ref_map[k] = fh.read()
     t0 = time.time()
-    res = speak.remote(items, ref_bytes)
+    res = speak.remote(items, ref_bytes, ref_map)
     wall = time.time() - t0
     os.makedirs(out, exist_ok=True)
     for i, w in enumerate(res["wavs"]):
