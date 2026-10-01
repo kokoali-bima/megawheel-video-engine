@@ -600,13 +600,15 @@
         "p4+ufo"
       ],
       "duration": 32.8,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s002",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s002/SIM_RACE25D_V2_S002_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E010_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E010_2026-09-30_race25d/SIM_RACE25D_V2_S002_audit.md",
+      "episode": 10,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V2_S003",
@@ -631,13 +633,15 @@
         "win+dodge_lava"
       ],
       "duration": 34.97,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s003",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s003/SIM_RACE25D_V2_S003_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E011_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003_audit.md",
+      "episode": 11,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V2_S004",
@@ -662,13 +666,15 @@
         "p2"
       ],
       "duration": 35.1,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s004",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s004/SIM_RACE25D_V2_S004_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E012_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E012_2026-09-30_race25d/SIM_RACE25D_V2_S004_audit.md",
+      "episode": 12,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V2_S005",
@@ -693,13 +699,15 @@
         "p4+ufo"
       ],
       "duration": 33.43,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s005",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s005/SIM_RACE25D_V2_S005_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E013_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E013_2026-09-30_race25d/SIM_RACE25D_V2_S005_audit.md",
+      "episode": 13,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V2_S006",
@@ -724,13 +732,15 @@
         "win"
       ],
       "duration": 35.23,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s006",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s006/SIM_RACE25D_V2_S006_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E014_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E014_2026-09-30_race25d/SIM_RACE25D_V2_S006_audit.md",
+      "episode": 14,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 14 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V2_S007",
@@ -755,13 +765,15 @@
         "p2"
       ],
       "duration": 34.17,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-09-30_race25d_s007",
-      "audit": "renders/megawheel_arena/pending/2026-09-30_race25d_s007/SIM_RACE25D_V2_S007_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E015_2026-09-30_race25d",
+      "audit": "renders/megawheel_arena/S01/E015_2026-09-30_race25d/SIM_RACE25D_V2_S007_audit.md",
+      "episode": 15,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 23:18). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 02:03). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -16,6 +16,12 @@
 | 7 | S01 | splash | Tilly, Sprinkles, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 | 8 | S01 | lava | Zippy, Hydro, Titan | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
 | 9 | S01 | race25d | Nitro, Hydro, Siren, Tilly | 2026-09-30 | 2026-09-30 |  | APPROVED |  |  |  |  |  |
+| 10 | S01 | race25d | Nitro, Buster, Zippy, Tilly | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 11 | S01 | race25d | Sprinkles, Siren, Nitro, Rocky | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 12 | S01 | race25d | Titan, Grizzly, Zippy, Siren | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 13 | S01 | race25d | Hydro, Rocky, Tilly, Nitro | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 14 | S01 | race25d | Buster, Grizzly, Zippy, Siren | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 15 | S01 | race25d | Hydro, Nitro, Rocky, Tilly | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 
 ## Menunggu approval (`pending/`)
 

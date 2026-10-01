@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V2_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v2",
   "series": "race25d",
   "seed": 3,
@@ -62,7 +62,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Wildest Race Ever! Who Crosses First? 🏁",
-  "title": "Wildest Race Ever! Who Crosses First? 🏁 #Shorts",
+  "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
   "description": "Sprinkles, Siren, Nitro and Rocky race to the finish line! 🏁 Obstacles today: dragon_fire, lava, meteor! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -92,6 +92,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s003/SIM_RACE25D_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s003/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E011_2026-09-30_race25d/preview",
+  "episode": 11,
+  "season": 1,
+  "approved_date": "2026-10-01"
 }

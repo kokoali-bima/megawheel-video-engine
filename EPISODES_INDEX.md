@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-09-30 23:18) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 02:03) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -23,6 +23,12 @@
 | 7 | `SIM_SPLASH_V2_S007` | splash | APPROVED | Fri 2026-10-02 19:00 |  |
 | 8 | `SIM_LAVA_V2_S003` | lava | APPROVED | Sat 2026-10-03 11:00 |  |
 | 9 | `SIM_RACE25D_V1_S001` | race25d | APPROVED | Fri 2026-10-02 15:00 |  |
+| 10 | `SIM_RACE25D_V2_S002` | race25d | APPROVED | Sat 2026-10-03 15:00 |  |
+| 11 | `SIM_RACE25D_V2_S003` | race25d | APPROVED | Sun 2026-10-04 15:00 |  |
+| 12 | `SIM_RACE25D_V2_S004` | race25d | APPROVED | Mon 2026-10-05 15:00 |  |
+| 13 | `SIM_RACE25D_V2_S005` | race25d | APPROVED | Tue 2026-10-06 15:00 |  |
+| 14 | `SIM_RACE25D_V2_S006` | race25d | APPROVED | Wed 2026-10-07 15:00 |  |
+| 15 | `SIM_RACE25D_V2_S007` | race25d | APPROVED | Thu 2026-10-08 15:00 |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
 
@@ -139,4 +145,82 @@
 - **Tokoh dan hasil:** Level 1: Nitro (f1) → win+jump+bump; Level 2: Hydro (firetruck) → p3; Level 3 (juara): Siren (police) → p2; Level 4: Tilly (taxi) → p4+spin
 - **Status:** APPROVED (approve 2026-09-30)
 - **Antrian:** QUEUED 2026-10-02T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 10 — `SIM_RACE25D_V2_S002`
+
+- **Judul YouTube:** Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E010_2026-09-30_race25d/SIM_RACE25D_V2_S002.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E010_2026-09-30_race25d/SIM_RACE25D_V2_S002.json` · audit: `renders/megawheel_arena/S01/E010_2026-09-30_race25d/SIM_RACE25D_V2_S002_audit.md`
+- **Season / seri / seed:** S01 / race25d / 2
+- **Tema / narator:** morning-clear-desert / en-US-MichelleNeural
+- **Durasi:** 32.8 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → p3+dragon_ice; Level 2: Buster (bus) → win+lava; Level 3 (juara): Zippy (sports) → p2; Level 4: Tilly (taxi) → p4+ufo
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-03T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 11 — `SIM_RACE25D_V2_S003`
+
+- **Judul YouTube:** Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003.json` · audit: `renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003_audit.md`
+- **Season / seri / seed:** S01 / race25d / 3
+- **Tema / narator:** night-clear-city / en-US-AvaMultilingualNeural
+- **Durasi:** 34.97 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2; Level 2: Siren (police) → p4+dragon_fire; Level 3 (juara): Nitro (f1) → p3+meteor; Level 4: Rocky (monster) → win+dodge_lava
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-04T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 12 — `SIM_RACE25D_V2_S004`
+
+- **Judul YouTube:** 4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E012_2026-09-30_race25d/SIM_RACE25D_V2_S004.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E012_2026-09-30_race25d/SIM_RACE25D_V2_S004.json` · audit: `renders/megawheel_arena/S01/E012_2026-09-30_race25d/SIM_RACE25D_V2_S004_audit.md`
+- **Season / seri / seed:** S01 / race25d / 4
+- **Tema / narator:** noon-snow-mountains / en-US-MichelleNeural
+- **Durasi:** 35.1 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+dragon_fire; Level 2: Grizzly (monster2) → p3+meteor; Level 3 (juara): Zippy (sports) → win+dodge_pothole; Level 4: Siren (police) → p2
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-05T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 13 — `SIM_RACE25D_V2_S005`
+
+- **Judul YouTube:** Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E013_2026-09-30_race25d/SIM_RACE25D_V2_S005.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E013_2026-09-30_race25d/SIM_RACE25D_V2_S005.json` · audit: `renders/megawheel_arena/S01/E013_2026-09-30_race25d/SIM_RACE25D_V2_S005_audit.md`
+- **Season / seri / seed:** S01 / race25d / 5
+- **Tema / narator:** noon-clear-city / en-US-AriaNeural
+- **Durasi:** 33.43 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → win; Level 2: Rocky (monster) → p2; Level 3 (juara): Tilly (taxi) → p3+meteor+dodge_wall; Level 4: Nitro (f1) → p4+ufo
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-06T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 14 — `SIM_RACE25D_V2_S006`
+
+- **Judul YouTube:** Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 14 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E014_2026-09-30_race25d/SIM_RACE25D_V2_S006.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E014_2026-09-30_race25d/SIM_RACE25D_V2_S006.json` · audit: `renders/megawheel_arena/S01/E014_2026-09-30_race25d/SIM_RACE25D_V2_S006_audit.md`
+- **Season / seri / seed:** S01 / race25d / 6
+- **Tema / narator:** sunset-clear-mountains / en-US-JennyNeural
+- **Durasi:** 35.23 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p3+crusher; Level 2: Grizzly (monster2) → p4+ufo; Level 3 (juara): Zippy (sports) → p2+meteor; Level 4: Siren (police) → win
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-07T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 15 — `SIM_RACE25D_V2_S007`
+
+- **Judul YouTube:** Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/E015_2026-09-30_race25d/SIM_RACE25D_V2_S007.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/E015_2026-09-30_race25d/SIM_RACE25D_V2_S007.json` · audit: `renders/megawheel_arena/S01/E015_2026-09-30_race25d/SIM_RACE25D_V2_S007_audit.md`
+- **Season / seri / seed:** S01 / race25d / 7
+- **Tema / narator:** morning-clear-beach / en-US-EmmaMultilingualNeural
+- **Durasi:** 34.17 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p4+dragon_ice; Level 2: Nitro (f1) → win+dodge_puddle; Level 3 (juara): Rocky (monster) → p3+dragon_fire; Level 4: Tilly (taxi) → p2
+- **Status:** APPROVED (approve 2026-10-01)
+- **Antrian:** QUEUED 2026-10-08T19:00:00Z
 - **YouTube:** belum diupload

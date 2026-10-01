@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V2_S005",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v2",
   "series": "race25d",
   "seed": 5,
@@ -62,7 +62,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Crazy Obstacle Race! Who Survives? 🏁💥",
-  "title": "Crazy Obstacle Race! Who Survives? 🏁💥 #Shorts",
+  "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts",
   "description": "Hydro, Rocky, Tilly and Nitro race to the finish line! 🏁 Obstacles today: meteor, ufo, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -92,6 +92,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s005/SIM_RACE25D_V2_S005.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-09-30_race25d_s005/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E013_2026-09-30_race25d/SIM_RACE25D_V2_S005.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E013_2026-09-30_race25d/preview",
+  "episode": 13,
+  "season": 1,
+  "approved_date": "2026-10-01"
 }
