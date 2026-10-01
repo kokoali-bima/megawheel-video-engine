@@ -1,0 +1,240 @@
+{
+  "video_id": "SIM_SPLASH_V2_S012",
+  "status": "ANALYSIS_FAILED",
+  "engine": "sim-prototype v2",
+  "series": "splash",
+  "seed": 12,
+  "fps": 30,
+  "duration": 54.13,
+  "track_id": "splash_faddff76",
+  "track_params": {
+    "order": [
+      "pit",
+      "hill",
+      "wall"
+    ],
+    "parts": [
+      {
+        "kind": "pit",
+        "puddle": 5.2,
+        "ramp": [
+          5.6,
+          1.33
+        ],
+        "pit": [
+          8.2,
+          4.6
+        ]
+      },
+      {
+        "kind": "hill",
+        "puddle": 6.4,
+        "hill": [
+          3.27,
+          6.8
+        ]
+      },
+      {
+        "kind": "wall",
+        "puddle": 5.2,
+        "ramp": [
+          4.8,
+          1.16
+        ],
+        "wall": 1.41
+      }
+    ]
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "mountains"
+  },
+  "theme_id": "noon-clear-mountains",
+  "voice": "chatterbox:m1",
+  "fingerprint": "splash|f1,bus,icecream|splash_faddff76@noon-clear-mountains|flip@obs2,pit@obs0+broken,win",
+  "outcomes": [
+    "flip@obs2",
+    "pit@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->87.0 m, 3.0->34.7 m, 3.0->120.6 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [pit, hill, wall] (17-91 m), finish 95 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "7.4s, 6.2s, 9.1s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": false,
+      "detail": "54.1 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "17.4s, 15.2s, 21.5s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "splash|f1,bus,icecream|splash_faddff76@noon-clear-mountains|flip@obs2,pit@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
+  "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 #Shorts",
+  "description": "Nitro the race car, Buster the school bus and Sprinkles the ice cream truck take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "slippery road",
+    "water puddle",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "school bus",
+    "ice cream truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 19.4,
+      "outcome": "flip",
+      "event_t": 7.4,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 17.43,
+      "event_out": 11.27,
+      "x_start": 3.0,
+      "x_end": 87.0,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 6.4,
+      "outcome": "pit",
+      "event_t": 6.2,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 17.43,
+      "duration": 15.23,
+      "event_out": 26.4,
+      "x_start": 3.0,
+      "x_end": 34.7,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 13.6,
+      "outcome": "win",
+      "event_t": 9.07,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 32.67,
+      "duration": 21.47,
+      "event_out": 45.17,
+      "x_start": 3.0,
+      "x_end": 120.6,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Nitro the race car! Super fast... but can Nitro handle the slippery splash zone?",
+    "Ready... Go! Level two! Buster the school bus. Big and heavy... can Buster make it?",
+    "Ready... Go! Level three! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Whoa! Nitro flipped right over!",
+    "Sploosh! Buster plunged into the water pit!",
+    "Yes! Sprinkles made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s012/SIM_SPLASH_V2_S012.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s012/preview"
+}
