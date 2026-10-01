@@ -158,6 +158,22 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.5: SMASH ARENA (`smash25d`) + batch CHALLENGE + peran slot 19:00 (Claude Code, Opus)
+
+User: program harian = 1 CHALLENGE + 1 RACE + 1 SMASH ARENA. Setelah melihat v1: "masih kurang, terlalu sempit, harusnya tiba-tiba ada halangan: UFO, rudal, atau godzilla … lantai terbelah lalu keluar lahar … narasinya gaya petinju / UFC / pembawa acara gulat".
+
+- **CHALLENGE 2D:** 6 video pending (LAVA S004 & S008, SPLASH S008 & S010, POTHOLES S006, BUMPS S007).
+- **`generators/lanes25d/smash25d.py`:** gambar mobil memakai `race25d.draw_car` (proyeksi dan mood diarahkan ke versi arena), jadi tokohnya identik dengan 2D.
+  - Fisika 120 Hz: impuls tabrakan, massa efektif `(massa/1000)^0.4`, damage dari kecepatan tumbukan, tabrakan samping ×1.35, moncong penabrak lebih kuat, damage gerus saat saling dorong, terhuyung sesaat setelah kena, eskalasi damage, duel akhir.
+  - Aturan keluar arena: hanya kalau baru ditabrak; kalau tidak, mobil goyang di tepi lalu kembali. Mobil berbalik seperti kartu kertas (dengan histeresis supaya tidak berkedip).
+  - Penyeimbangan lewat simulasi massal: rasio keluar arena / hancur seimbang, 8–9 tokoh berbeda bisa menang.
+- **v2 KEKACAUAN:** rudal, KRAGGOR (desain sendiri), UFO, lantai retak + lahar. Keempatnya muncul di setiap video dengan urutan acak. Ada fase peringatan, dan AI berusaha kabur dari zona bahaya. Kamera membingkai kejadian. Satu banner pada satu waktu (kekacauan diprioritaskan). Replay mengutamakan momen kekacauan.
+- **Narasi announcer:** "Ladies and gentlemen... it's time to smash!", "And your winner...!" Suara pria en-US bergilir, rate +14%, efek gema PA.
+- Pengecekan otomatis: 3 mobil gugur, pertarungan 15–38 s, ≥3 kejadian kekacauan, ≥3 tabrakan besar, ada replay, 0 frame tanpa mobil. Opsi `--dry-run` untuk mencari seed tanpa render.
+- **publish_queue:** 11:00 CHALLENGE / 15:00 RACE / 19:00 SMASH. CHALLENGE jadi cadangan 19:00 kalau stok SMASH kosong.
+- **Performa:** ducking narasi memakai `np.convolve` (1,5 juta × 11.025) dan memakan puluhan menit saat CPU penuh → diganti `box_avg` O(N), juga di race25d. Render SMASH sekarang ±70 detik per video.
+- Hasil: SIM_SMASH25D_V1_S001–S004 pending (es, lumpur, lahar, lumpur). Pemenang: Grizzly, Rocky, Sprinkles, Rocky (HP tersisa 1!).
+
 ## 2026-10-01 — v3.4: race25d engine v2 — pindah jalur (menghindar) + end card gaya YouTube (Claude Code, Opus)
 
 Permintaan user: peserta bisa pindah jalur untuk menghindari rintangan, supaya pemenang tidak terlihat sekadar beruntung; animasi LIKE/SUBSCRIBE dibuat mirip tombol YouTube dan diberi highlight seperti video-video awal.
