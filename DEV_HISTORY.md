@@ -158,6 +158,20 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.8: suara announcer Chatterbox (Modal) + dua komentator SMASH (Claude Code, Opus)
+
+User: "tidak adakah suara yang bisa kita build pakai mesin modal.com kita?" → uji A/B/C → user: "suara C paling oke". Lalu: "semua video pakai suara C bagus ya? tapi divariasikan dengan suara cewek dengan ekspresi sama. Untuk smash arena, apakah lebih seru kalau naratornya ada 2?"
+
+- `generators/voice/modal_tts.py`: Chatterbox TTS (open source, lisensi MIT dicek dari metadata paket) di GPU L4, dengan cek anggaran dan pencatatan ke modal_usage.json. Mendukung beberapa referensi suara dalam satu panggilan.
+- `generators/voice/announcer.py`:
+  - Cache kalimat di `work/voice/cache`.
+  - `prefetch()` = satu panggilan Modal per video, hanya untuk kalimat baru. Efek clarity + gema PA ikut di file cache.
+  - Speaker m1 (pria) dan f1 (wanita), dengan referensi sintetis di `branding/voice/announcer_ref.wav` dan `announcer_f1_ref.wav` (dibuat dengan Edge TTS, bukan suara orang sungguhan).
+  - Kalau Modal gagal, seluruh video memakai Edge TTS (tidak pernah campur dua mesin).
+- SMASH: dua komentator yang tidak pernah bicara bersamaan. m1 = ring announcer / play-by-play (pembuka, nama peserta, Kraggor/retak, pemenang, komentar replay, CTA). f1 = color commentator (rudal/UFO, yang gugur, reaksi tabrakan, "What a champion!", "Let's see that again"). Opsi `--voice edge` tersedia.
+- Biaya: sampel 12 kalimat $0.016; 20 kalimat duo $0.022. Kalimat berulang diambil dari cache.
+- Berikutnya (menunggu user mendengar preview duo): RACE dan CHALLENGE pindah ke suara C, dengan m1/f1 bergiliran per video.
+
 ## 2026-10-01 — v3.7: SMASH ARENA v3 — perkenalan peserta + momen pemenang (Claude Code, Opus)
 
 User: "karena ini model royal rumble, bukankah seharusnya kita memperkenalkan pesertanya? Dan saat menang, beri kesempatan pemenang menunjukkan dirinya sebentar di ring: the winner is Rocky… yeaaah!"
