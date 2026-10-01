@@ -41,7 +41,7 @@ import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 import race25d as R  # noqa: E402  (shared drawing: car, bubble, YouTube end card, sounds)
 
-SERIES, ENGINE_VERSION = "smash25d", "v2"             # v2: chaos + announcer scheduler + arena mix
+SERIES, ENGINE_VERSION = "smash25d", "v3"             # v3: fighter intros + winner showcase (v2: chaos, announcer)
 W, H, FPS = se.W, se.H, 30
 # perspective: x, z in metres (z = depth). Higher camera than race25d so the floor reads as an arena.
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
