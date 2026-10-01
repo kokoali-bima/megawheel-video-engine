@@ -44,6 +44,36 @@
    "gpu_seconds": 86.6,
    "wall_seconds": 115.6,
    "cost_usd": 0.0221
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator vc_race20",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 7,
+   "gpu_seconds": 66.8,
+   "wall_seconds": 93.5,
+   "cost_usd": 0.0171
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator SIM_BUMPS_V2_S009",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 10,
+   "gpu_seconds": 69.8,
+   "wall_seconds": 99.1,
+   "cost_usd": 0.0178
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator SIM_BUMPS_V2_S009",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 42.3,
+   "wall_seconds": 70.0,
+   "cost_usd": 0.0108
   }
  ]
 }
