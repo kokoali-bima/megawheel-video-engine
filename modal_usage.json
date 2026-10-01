@@ -424,6 +424,36 @@
    "gpu_seconds": 71.7,
    "wall_seconds": 101.5,
    "cost_usd": 0.0183
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer SIM_SMASH25D_V4_S003 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 60.3,
+   "wall_seconds": 89.3,
+   "cost_usd": 0.0154
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer SIM_SMASH25D_V4_S007 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 46.7,
+   "wall_seconds": 76.1,
+   "cost_usd": 0.0119
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer SIM_SMASH25D_V4_S012 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 50.7,
+   "wall_seconds": 78.8,
+   "cost_usd": 0.0129
   }
  ]
 }

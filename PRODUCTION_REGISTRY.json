@@ -1644,70 +1644,6 @@
       "youtube_url": null
     },
     {
-      "video_id": "SIM_SMASH25D_V4_S003",
-      "series": "smash25d",
-      "engine_version": "v4",
-      "seed": 3,
-      "created": "2026-10-01",
-      "render_date": "2026-10-01",
-      "vehicles": [
-        "monster",
-        "icecream",
-        "sports",
-        "police"
-      ],
-      "track_id": "smash25d_badb0a80@sunset-clear-countryside",
-      "arena": "mud",
-      "theme": "sunset-clear-countryside",
-      "voice": "edge:en-US-EricNeural+en-US-AriaNeural",
-      "outcomes": [
-        "p3+ring",
-        "win",
-        "p4+ring",
-        "p2+wreck"
-      ],
-      "duration": 43.4,
-      "status": "AUDIT_FAILED",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003/SIM_SMASH25D_V4_S003_audit.md",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null
-    },
-    {
-      "video_id": "SIM_SMASH25D_V4_S007",
-      "series": "smash25d",
-      "engine_version": "v4",
-      "seed": 7,
-      "created": "2026-10-01",
-      "render_date": "2026-10-01",
-      "vehicles": [
-        "monster",
-        "firetruck",
-        "taxi",
-        "police"
-      ],
-      "track_id": "smash25d_bae5e528@sunset-clear-mountains",
-      "arena": "lava",
-      "theme": "sunset-clear-mountains",
-      "voice": "chatterbox:mw-announcers-m1f1",
-      "outcomes": [
-        "p4+ring",
-        "p2+ring",
-        "p3+ring",
-        "win"
-      ],
-      "duration": 42.23,
-      "status": "AUDIT_FAILED",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007/SIM_SMASH25D_V4_S007_audit.md",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null
-    },
-    {
       "video_id": "SIM_SMASH25D_V4_S008",
       "series": "smash25d",
       "engine_version": "v4",
@@ -1772,6 +1708,70 @@
       "youtube_url": null
     },
     {
+      "video_id": "SIM_SMASH25D_V4_S003",
+      "series": "smash25d",
+      "engine_version": "v4",
+      "seed": 3,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "smash25d_a3cb0db2@sunset-clear-city",
+      "arena": "mud",
+      "theme": "sunset-clear-city",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p2+wreck",
+        "p4+ring",
+        "p3+wreck"
+      ],
+      "duration": 47.2,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003/SIM_SMASH25D_V4_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V4_S007",
+      "series": "smash25d",
+      "engine_version": "v4",
+      "seed": 7,
+      "created": "2026-10-01",
+      "render_date": "2026-10-01",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "smash25d_63bf6c28@morning-clear-mountains",
+      "arena": "lava",
+      "theme": "morning-clear-mountains",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p2+wreck",
+        "win",
+        "p3+ring"
+      ],
+      "duration": 48.1,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007/SIM_SMASH25D_V4_S007_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
       "video_id": "SIM_SMASH25D_V4_S012",
       "series": "smash25d",
       "engine_version": "v4",
@@ -1782,19 +1782,19 @@
         "bigrig",
         "monster2",
         "taxi",
-        "police"
+        "sports"
       ],
-      "track_id": "smash25d_cdaf2664@night-clear-mountains",
-      "arena": "lava",
-      "theme": "night-clear-mountains",
-      "voice": "edge:en-US-GuyNeural+en-US-AriaNeural",
+      "track_id": "smash25d_581205e1@night-clear-beach",
+      "arena": "ice",
+      "theme": "night-clear-beach",
+      "voice": "chatterbox:mw-announcers-m1f1",
       "outcomes": [
-        "p4+ring",
         "win",
-        "p3+wreck",
+        "p3+ring",
+        "p4+ring",
         "p2+ring"
       ],
-      "duration": 46.43,
+      "duration": 47.0,
       "status": "RENDERED_PENDING_APPROVAL",
       "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012",
       "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012/SIM_SMASH25D_V4_S012_audit.md",
