@@ -1,4 +1,4 @@
-# S01E01 — "Sprinkles' First Race" (DRAFT v1, menunggu persetujuan user)
+# S01E01 — "Sprinkles' First Race" (DRAFT v2, menunggu persetujuan user)
 
 > Seri `story15`, format "drama China" (STORY15_PLAN.md). Draf oleh Claude Code (Opus), 2026-10-01.
 > Bahasa video: English (en-US). Catatan produksi dalam Bahasa Indonesia.
@@ -25,6 +25,17 @@ almarhum kakek, harga diri vs kebaikan.
 | **Narator** | — | hangat, bercerita | suara C (m1) |
 | **Announcer** | — | komentator balapan | suara C duo (m1 + f1) |
 
+## Garis waktu (diperjelas setelah masukan user, draf v2)
+| Waktu | Usia Sprinkles | Scene |
+|---|---|---|
+| Masa kecil (kilas balik) | kecil, suara anak | 5 |
+| **Hari ke-1** (hari ini): poster, pendaftaran, malam sepi | dewasa | 2, 3, 4 |
+| **Minggu 1–4**: latihan setiap hari, pelan-pelan makin bisa | dewasa | 6 |
+| **Hari balapan** (30 hari kemudian) | dewasa | **1** (kilas maju sebagai pembuka), 7–15 |
+
+Scene 1 adalah **potongan dari hari balapan** yang ditaruh di depan sebagai kait (teknik "in medias res"), lalu cerita
+mundur ke hari ke-1, sebulan sebelumnya. Di hari balapan Sprinkles sudah dewasa; versi kecilnya hanya ada di kilas balik.
+
 ## Scene
 
 ### Scene 1 — Pembuka (kait) **[RINGKAS]**
@@ -35,13 +46,14 @@ almarhum kakek, harga diri vs kebaikan.
 - *Cut: KRAGGOR mengaum di kejauhan, petir menyambar.*
 - NARRATOR: "But this is the story of the day Sprinkles changed everything."
 - **Judul: "SPRINKLES' FIRST RACE"**
-- *Kait: "...tapi sebelumnya, mari mundur tiga hari."*
+- NARRATOR: "It all started one month earlier..."
+- *Kait: layar kembali ke pagi yang cerah, tulisan "ONE MONTH EARLIER".*
 
 ### Scene 2 — Kota di pagi hari **[RINGKAS]**
 *Lokasi: jalan kota, pagi cerah. Shot: lebar, lalu ikut Sprinkles yang berjualan.*
 - SPRINKLES (bernyanyi kecil): "Ding-ding! Ice cream for everyone!"
-- *Mobil-mobil lewat dengan cepat; poster besar: "MEGAWHEEL GRAND RACE — SATURDAY!"*
-- SPRINKLES (berhenti, menatap poster, close-up mata berbinar): "Saturday..."
+- *Mobil-mobil lewat dengan cepat; poster besar: "MEGAWHEEL GRAND RACE — 30 DAYS TO GO!"*
+- SPRINKLES (berhenti, menatap poster, close-up mata berbinar): "Thirty days..."
 - BUSTER (datang pelan): "You're staring at that poster again, Sprinkles."
 - SPRINKLES (malu): "Just looking, Buster. Just... looking."
 - *Kait: close-up poster, ada tulisan kecil "Pendaftaran tutup hari ini."*
@@ -75,13 +87,18 @@ almarhum kakek, harga diri vs kebaikan.
 - GRANDPA CONE: "I know you will."
 - *Kait: kembali ke masa kini, mata Sprinkles basah, ia tersenyum.*
 
-### Scene 6 — Latihan (montase lucu)
-*Lokasi: jalan pedesaan, berbagai waktu. Musik naik semangat.*
-- *Montase: Sprinkles mencoba ngebut, es krimnya beterbangan; tergelincir di genangan; tersangkut lumpur; Rocky menariknya keluar.*
+### Scene 6 — Empat minggu latihan (montase)
+*Lokasi: jalan pedesaan, berbagai waktu (pagi, hujan, malam, senja). Musik naik semangat.
+Penanda waktu: kalender di garasi disobek, 30… 21… 14… 7… 1.*
+- *Minggu 1 (lucu): es krim beterbangan saat ngebut, tergelincir di genangan, tersangkut lumpur; Rocky menariknya keluar.*
 - ROCKY (kalem): "You okay?"
 - SPRINKLES (berlumpur, tertawa): "Never better!"
+- *Minggu 2: latihan malam di bawah lampu jalan; Buster melatihnya dengan sabar.*
 - BUSTER (bijak): "You don't have to be the fastest. Just keep going."
-- *Kait: hari Sabtu tiba, matahari terbit.*
+- *Minggu 3: mulai bisa menikung tanpa tergelincir; penonton kecil (burung, kucing) bersorak.*
+- *Minggu 4: menyalip Rocky di tanjakan untuk pertama kali. Rocky tersenyum bangga.*
+- ROCKY: "Okay... now you're a racer."
+- *Kait: kalender menunjukkan "RACE DAY", matahari terbit.*
 
 ### Scene 7 — Hari balapan **[RINGKAS]**
 *Lokasi: arena, penonton ramai. Announcer.*
