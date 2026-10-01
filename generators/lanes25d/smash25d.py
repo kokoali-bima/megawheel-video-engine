@@ -716,8 +716,10 @@ def draw_arena(ctx, camx, t, flash):
     ctx.stroke()
 
 
-def chaos_live():
-    return [ch for ch in CHAOS_PLAN if ch.get("armed") and not ch.get("skip")]
+def chaos_live(t=None):
+    """Chaos events to draw: armed ones; an event cut short by the final whistle is only shown until its impact."""
+    return [ch for ch in CHAOS_PLAN if ch.get("armed") and not ch.get("skip")
+            and (t is None or ch.get("done") or t < ch["T"])]
 
 
 def crack_points(ch):
@@ -1407,7 +1409,7 @@ def main():
             if h["rel"] > 7 and -0.2 < t - h["t"] < 0.8:
                 focus = (h["x"], h["z"])
         wide = False
-        for ch in chaos_live():                                  # chaos is the show: frame it
+        for ch in chaos_live(t):                                 # chaos is the show: frame it
             if ch["T"] - ch["warn"] * 0.85 < t < ch["T"] + (2.0 if ch["type"] == "ufo" else 1.3):
                 focus = (ch["tx"], ch["tz"])
                 if ch["type"] == "ufo" and t >= ch["T"]:
@@ -1453,7 +1455,7 @@ def main():
         zb_top = ZC + HZ0 + 3.0 + 5 * 1.6                       # top row of the stands, in screen space
         top_w = ground_y(zb_top) - 6 * 1.25 * k_of(zb_top)
         stands_top = PIV_Y + (top_w - PIV_Y) * zoom + WORLD_DY + shy
-        for ch in chaos_live():
+        for ch in chaos_live(t):
             if ch["type"] == "kraggor":
                 draw_kraggor_head(ctx, ch, t, stands_top)
         ctx.save()
@@ -1463,7 +1465,7 @@ def main():
         ctx.translate(-540, -PIV_Y)
         draw_stands(ctx, camx, t, cheer)
         draw_arena(ctx, camx, t, flash)
-        for ch in chaos_live():
+        for ch in chaos_live(t):
             draw_chaos_ground(ctx, ch, t, camx)
         for e in hit_ev:
             draw_debris(ctx, e, t, camx, airborne=False)
@@ -1487,7 +1489,7 @@ def main():
         for e in hit_ev:
             draw_debris(ctx, e, t, camx, airborne=True)
             draw_impact(ctx, e, t, camx)
-        for ch in chaos_live():
+        for ch in chaos_live(t):
             draw_chaos_air(ctx, ch, t, camx)
         ctx.restore()
         se.draw_weather(ctx, fi / FPS)
