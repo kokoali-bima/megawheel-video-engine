@@ -1077,8 +1077,12 @@ def intro_card(ctx, vk, age, last):
     se.draw_text(ctx, ("AND... " if last else "") + nick(vk).upper(), 560, 1470, 120, fill=(1, 0.86, 0.12), max_w=880)
     se.draw_text(ctx, "THE " + veh["display"].split(" THE ")[1], 560, 1560, 52, max_w=880)
     stars = int(round(1 + 4 * (VMAX[vk] - 5.4) / 3.0))
-    se.draw_text(ctx, f"WEIGHT {veh['mass'] / 1000:.1f} T    SPEED " + "★" * stars + "☆" * (5 - stars), 560, 1625, 40,
-                 fill=(0.8, 0.85, 1.0), max_w=880)
+    se.draw_text(ctx, f"WEIGHT {veh['mass'] / 1000:.1f} T", 330, 1625, 40, fill=(0.8, 0.85, 1.0))
+    se.draw_text(ctx, "SPEED", 640, 1625, 40, fill=(0.8, 0.85, 1.0))
+    for q in range(5):                                           # drawn stars (the font has no star glyph)
+        se.star(ctx, 745 + q * 48, 1625, 21, 0.0)
+        ctx.set_source_rgb(*((1, 0.82, 0.1) if q < stars else (0.35, 0.37, 0.45)))
+        ctx.fill()
     ctx.restore()
 
 
