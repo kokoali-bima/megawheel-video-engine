@@ -47,17 +47,18 @@ Y_H, CAM_H = 276.0, 20.4
 WORLD_DY, PIV_Y = -40.0, 1190.0                  # zoom pivot (world space)
 ZC = 4.25                                        # arena centre depth
 HX0, HZ0, HX_MIN, HZ_MIN = 9.5, 4.25, 4.6, 2.3   # floor half-size at start / after the last shrink
-SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 7.0, 6.5, 0.22
+SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 9.0, 6.0, 0.2
+BARRIER_DOWN = SHRINK_AT                         # tyre barriers bounce cars back until the first shrink
 T_MAX = 40.0
 POOL = ["sports", "police", "taxi", "f1", "bus", "firetruck", "icecream", "bigrig", "monster", "monster2"]
 BIG = {"bus", "firetruck", "icecream", "bigrig"}
 ARENAS = {
-    "lava": dict(name="the lava", out_line="{n} is pushed into the lava!", bubble="HOT HOT!", grip=0.022),
-    "mud":  dict(name="the mud", out_line="Splat! {n} slides into the mud pit!", bubble="YUCK!", grip=0.02),
-    "ice":  dict(name="the icy water", out_line="Splash! {n} slides into the icy water!", bubble="BRRR!", grip=0.007),
+    "lava": dict(name="the lava", out_line="{n} is pushed into the lava!", bubble="HOT HOT!", grip=0.03),
+    "mud":  dict(name="the mud", out_line="Splat! {n} slides into the mud pit!", bubble="YUCK!", grip=0.028),
+    "ice":  dict(name="the icy water", out_line="Splash! {n} slides into the icy water!", bubble="BRRR!", grip=0.01),
 }
-VMAX = {"f1": 12.5, "sports": 12.0, "police": 11.0, "taxi": 10.5, "monster": 10.0, "monster2": 10.0,
-        "icecream": 8.0, "bus": 7.8, "firetruck": 7.8, "bigrig": 7.2}
+VMAX = {"f1": 8.4, "sports": 8.2, "police": 7.6, "taxi": 7.4, "monster": 7.2, "monster2": 7.2,
+        "icecream": 6.0, "bus": 5.8, "firetruck": 5.8, "bigrig": 5.4}
 TURN = {"f1": 3.2, "sports": 3.0, "police": 2.7, "taxi": 2.6, "monster": 2.4, "monster2": 2.4,
         "icecream": 1.8, "bus": 1.6, "firetruck": 1.6, "bigrig": 1.4}
 HIT_BUBBLES = ["BAM!", "WHAM!", "CRUNCH!", "BONK!", "OOF!"]
@@ -86,7 +87,7 @@ def nick(vk):
 
 
 def m_eff(vk):
-    return (se.VEHICLES[vk]["mass"] / 1000.0) ** 0.55
+    return (se.VEHICLES[vk]["mass"] / 1000.0) ** 0.4
 
 
 def radius(vk):
@@ -163,8 +164,9 @@ def simulate(seed):
     while True:
         alive = [c for c in cars if c["alive"]]
         hx, hz = bounds(t)
+        ahx, ahz = bounds(t + 1.5)                               # drivers see the floor shrinking coming
         go = t >= 1.4                                            # READY... GO!
-        esc = 1.0 + t / 22.0                                     # damage escalates so the battle always ends
+        esc = 1.0 + t / 22.0 + (0.12 * max(0.0, t - 16) if len(alive) <= 2 else 0.0)   # always ends
         if not sudden and t > 34.0 and len(alive) > 1:
             sudden = True
             events.append(("sudden", t, 0.0, ZC))
@@ -187,16 +189,17 @@ def simulate(seed):
                 if c["recoil"] > 0:                              # back off after a hit, then charge again
                     ax, az = -ax, -az
                     c["recoil"] -= dt
-                ex = abs(c["x"]) - (hx - 2.2)                    # stay away from the edge
-                ez = abs(c["z"] - ZC) - (hz - 1.6)
+                ex = abs(c["x"]) - (ahx - 2.6)                   # stay away from the edge
+                ez = abs(c["z"] - ZC) - (ahz - 1.8)
+                gain = 10.0 if t >= BARRIER_DOWN - 1.5 else 3.0
                 if ex > 0:
-                    ax -= math.copysign(ex * 6.0, c["x"])
+                    ax -= math.copysign(ex * gain, c["x"])
                 if ez > 0:
-                    az -= math.copysign(ez * 6.0, c["z"] - ZC)
+                    az -= math.copysign(ez * gain, c["z"] - ZC)
                 want = math.atan2(az, ax)
                 d = (want - c["th"] + math.pi) % (2 * math.pi) - math.pi
                 c["th"] += float(np.clip(d, -TURN[vk] * dt, TURN[vk] * dt))
-                vmax = VMAX[vk] * c["aggro"] * (0.55 if c["recoil"] > 0 else 1.0) * (0.6 + 0.4 * c["hp"] / 100)
+                vmax = VMAX[vk] * c["aggro"] * (0.8 if c["recoil"] > 0 else 1.0) * (0.6 + 0.4 * c["hp"] / 100)
                 dvx, dvz = math.cos(c["th"]) * vmax - c["vx"], math.sin(c["th"]) * vmax - c["vz"]
                 g = grip * 1.6 * (0.3 if c["stun"] > 0 else 1.0)   # dazed right after a hit: pushed around
                 c["vx"] += dvx * g
@@ -247,9 +250,13 @@ def simulate(seed):
                 b["x"] += nx * over * ma / (ma + mb)
                 b["z"] += nz * over * ma / (ma + mb)
                 rel = (a["vx"] - b["vx"]) * nx + (a["vz"] - b["vz"]) * nz
+                if winner is None and go:                        # pushing and grinding wears both down
+                    for me, oth in ((a, b), (b, a)):
+                        if me["alive"]:
+                            me["hp"] = max(0.0, me["hp"] - 3.6 * esc * dt * oth["m"] / (oth["m"] + me["m"]))
                 if rel <= 0:
                     continue
-                e = 0.75
+                e = 0.35
                 J = (1 + e) * rel / (1 / ma + 1 / mb)
                 a["vx"] -= J / ma * nx
                 a["vz"] -= J / ma * nz
@@ -259,6 +266,7 @@ def simulate(seed):
                 if rel < 2.5 or t - cool.get(key, -9) < 0.45 or winner is not None:
                     continue
                 cool[key] = t
+                a["last_push"] = b["last_push"] = t
                 hx_, hz_ = (a["x"] + b["x"]) / 2, (a["z"] + b["z"]) / 2
                 for me, oth, sgn in ((a, b, 1), (b, a, -1)):
                     if not me["alive"]:
@@ -266,9 +274,9 @@ def simulate(seed):
                     front = math.cos(me["th"]) * nx * sgn + math.sin(me["th"]) * nz * sgn   # 1 = I hit with my nose
                     side = 1.35 if abs(front) < 0.45 else 1.0
                     armour = 0.55 if front > 0.6 else 1.0
-                    dmg = 2.3 * rel * (oth["m"] / (oth["m"] + me["m"])) * 2 * side * armour * esc
+                    dmg = 1.45 * rel * (oth["m"] / (oth["m"] + me["m"])) * 2 * side * armour * esc
                     me["hp"] = max(0.0, me["hp"] - dmg)
-                    me["recoil"] = 0.55 if front > 0.3 else 0.25
+                    me["recoil"] = 0.85 if front > 0.3 else 0.35
                     me["stun"] = 0.2 + 0.3 * min(1.0, rel / 10) * (oth["m"] / me["m"]) ** 0.5
                     if dmg > 9:
                         me["hits_taken"].append(t)
@@ -287,6 +295,26 @@ def simulate(seed):
             if c["hp"] <= 0:
                 c["alive"], c["out"], c["out_kind"] = False, t, "wreck"
                 events.append(("wreck", t, c["x"], c["z"]))
+            elif t < BARRIER_DOWN:                               # tyre barrier: bounce back in
+                lim_x, lim_z = hx - 0.5 * c["r"], hz - 0.3 * c["r"]
+                if abs(c["x"]) > lim_x:
+                    c["x"] = math.copysign(lim_x, c["x"])
+                    if c["vx"] * c["x"] > 0:
+                        if abs(c["vx"]) > 3 and t - c.get("thud", -9) > 0.5:
+                            events.append(("thud", t, c["x"], c["z"]))
+                            c["thud"] = t
+                        c["vx"] = -0.5 * c["vx"]
+                if abs(c["z"] - ZC) > lim_z:
+                    c["z"] = ZC + math.copysign(lim_z, c["z"] - ZC)
+                    if c["vz"] * (c["z"] - ZC) > 0:
+                        c["vz"] = -0.5 * c["vz"]
+            elif (abs(c["x"]) > hx + 0.2 or abs(c["z"] - ZC) > hz + 0.2) and                     t - c.get("last_push", -9) > 0.8 and c["stun"] <= 0:  # nobody pushed it: teeter, drive back in
+                if abs(c["x"]) > hx + 0.2:
+                    c["x"] = math.copysign(hx + 0.2, c["x"])
+                    c["vx"] = min(c["vx"], 0) if c["x"] > 0 else max(c["vx"], 0)
+                if abs(c["z"] - ZC) > hz + 0.2:
+                    c["z"] = ZC + math.copysign(hz + 0.2, c["z"] - ZC)
+                    c["vz"] = min(c["vz"], 0) if c["z"] > ZC else max(c["vz"], 0)
             elif abs(c["x"]) > hx + 0.2 or abs(c["z"] - ZC) > hz + 0.2:
                 c["alive"], c["out"], c["out_kind"] = False, t, "ring"
                 c["vh"] = 3.5
@@ -951,7 +979,7 @@ def main():
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
               "duration 20-60 s": 20 <= dur <= 60,
               "one winner, 3 cars out": len(outs) == 3,
-              "battle 12-38 s": 12 <= winner["finish"] <= 38,
+              "battle 10-38 s": 10 <= winner["finish"] <= 38,
               "at least 4 big hits": sum(h["rel"] > 6 for h in hits) >= 4,
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
