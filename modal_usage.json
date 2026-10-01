@@ -34,6 +34,16 @@
    "gpu_seconds": 63.8,
    "wall_seconds": 100.7,
    "cost_usd": 0.0163
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer duo_1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 20,
+   "gpu_seconds": 86.6,
+   "wall_seconds": 115.6,
+   "cost_usd": 0.0221
   }
  ]
 }
