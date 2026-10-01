@@ -159,6 +159,7 @@ def upload(max_n):
     uploader = YouTubeUploader()
     if not uploader.is_authenticated():
         sys.exit("[queue] STOP: YouTube belum terotentikasi (jalankan auth_youtube.py).")
+    reconcile_uploading(q, uploader)                             # a previous run died mid-upload? never re-upload blindly
     now = dt.datetime.now(dt.timezone.utc)
     for it in q["items"]:
         if it["status"] != "QUEUED":
@@ -178,10 +179,17 @@ def upload(max_n):
         with open(f"{folder}/{e['video_id']}.json") as fh:
             m = json.load(fh)
         print(f"[queue] Ep. {it['episode']} | {m['title']} | publishAt {it['publish_at_utc']}", flush=True)
-        res = uploader.upload_shorts(video_path=f"{folder}/{e['video_id']}.mp4", title=m["title"],
-                                     description=m["description"], tags=m["tags"],
-                                     category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
-                                     made_for_kids=False, publish_at=it["publish_at_utc"])
+        it.update(status="UPLOADING", title=m["title"], upload_started=dt.datetime.now(dt.timezone.utc).isoformat())
+        save(q)                                                  # marker first: a crash can never cause a duplicate
+        try:
+            res = uploader.upload_shorts(video_path=f"{folder}/{e['video_id']}.mp4", title=m["title"],
+                                         description=m["description"], tags=m["tags"],
+                                         category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
+                                         made_for_kids=False, publish_at=it["publish_at_utc"])
+        except Exception as ex:                                  # stop the run; the next run checks YouTube first
+            print(f"[queue] STOP: upload Ep. {it['episode']} gagal ({ex}). Item tetap UPLOADING; run berikutnya "
+                  f"mengecek channel dulu (tidak upload ulang tanpa cek).", flush=True)
+            sys.exit(2)
         it.update(status="SCHEDULED", url=res["url"])
         episodes.mark_uploaded(it["episode"], res["url"], f"scheduled {it['publish_at_utc']}")
         save(q)
@@ -189,6 +197,48 @@ def upload(max_n):
         print(f"[queue] OK -> {res['url']}", flush=True)
     episodes.write_log()
     show()
+
+
+def _channel_titles(uploader):
+    """{title: video_id} of the channel's latest uploads (private / scheduled included for the owner)."""
+    yt = uploader.get_service()
+    ch = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0]
+    pl = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+    out, token = {}, None
+    for _ in range(4):                                           # newest 200 uploads are plenty
+        r = yt.playlistItems().list(part="snippet", playlistId=pl, maxResults=50, pageToken=token).execute()
+        for x in r.get("items", []):
+            out[x["snippet"]["title"]] = x["snippet"]["resourceId"]["videoId"]
+        token = r.get("nextPageToken")
+        if not token:
+            break
+    return out
+
+
+def reconcile_uploading(q, uploader):
+    """Items left UPLOADING by an interrupted run: already on YouTube -> SCHEDULED (no re-upload); not there ->
+    back to QUEUED; check impossible -> left as is with PERLU CEK (never uploaded blindly)."""
+    stuck = [it for it in q["items"] if it["status"] == "UPLOADING"]
+    if not stuck:
+        return
+    try:
+        titles = _channel_titles(uploader)
+    except Exception as ex:
+        for it in stuck:
+            print(f"[queue] PERLU CEK Ep. {it['episode']}: status UPLOADING, cek ke YouTube gagal ({ex}). "
+                  f"Tidak diupload ulang. Cek YouTube Studio.")
+        return
+    for it in stuck:
+        vid = titles.get(it.get("title", ""))
+        if vid:
+            url = f"https://www.youtube.com/shorts/{vid}"
+            it.update(status="SCHEDULED", url=url)
+            episodes.mark_uploaded(it["episode"], url, f"scheduled {it['publish_at_utc']}")
+            print(f"[queue] Ep. {it['episode']}: ternyata sudah ada di YouTube -> SCHEDULED {url} (tidak upload ulang)")
+        else:
+            it["status"] = "QUEUED"
+            print(f"[queue] Ep. {it['episode']}: tidak ada di YouTube -> kembali QUEUED")
+        save(q)
 
 
 def main():
