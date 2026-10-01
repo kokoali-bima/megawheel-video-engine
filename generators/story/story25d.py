@@ -74,8 +74,11 @@ def ground_y(z):
     return Y_H + CAM_H * k_of(z)
 
 
+CX = 540.0     # world x of the camera centre: the shared Shorts drawing (race25d.draw_car, props, stands) assumes 540
+
+
 def pxy(x, z, camx):
-    return (x - camx) * k_of(z) + W / 2, ground_y(z)
+    return (x - camx) * k_of(z) + CX, ground_y(z)
 
 
 EMO_MOOD = {}
@@ -276,7 +279,7 @@ def draw_set(ctx, loc, camx, t):
         ctx.set_source_rgb(*se.lit((0.22, 0.2, 0.24)))
         ctx.fill()
         for i in range(-20, 21):                                   # wooden wall planks
-            x = (i * 1.6 - camx) * k_of(4) + W / 2
+            x = (i * 1.6 - camx) * k_of(4) + CX
             ctx.rectangle(x, 0, 3, ground_y(4))
             ctx.set_source_rgba(0, 0, 0, 0.25)
             ctx.fill()
@@ -298,12 +301,13 @@ def draw_set(ctx, loc, camx, t):
         if loc != "country":
             k, y = k_of(1.3), ground_y(1.3)
             x = math.floor((camx - W / k) / 4) * 4
-            while (x - camx) * k + W / 2 < 2 * W:
-                ctx.rectangle((x - camx) * k + W / 2, y - k * 0.06, 1.6 * k, k * 0.12)
+            while (x - camx) * k + CX < 2 * W:
+                ctx.rectangle((x - camx) * k + CX, y - k * 0.06, 1.6 * k, k * 0.12)
                 ctx.set_source_rgba(1, 1, 1, 0.85)
                 ctx.fill()
                 x += 4
     if loc in ("arena", "trackside", "podium"):
+        SM.STANDS_TEXT = SCENE.get("stands_text", "MEGAWHEEL RACEWAY")
         SM.draw_stands(ctx, camx, t, 0.6)
 
 
@@ -739,7 +743,7 @@ def render_scene(ep, num, aspect):
             shake = 14 * math.sin(t * 60)
         ctx.translate(W / 2 + shake, H * 0.5)
         ctx.scale(zoom, zoom * (1.12 if sh.get("cam") == "low" else 1.0))
-        ctx.translate(-W / 2, -piv_y)
+        ctx.translate(-CX, -piv_y)
         draw_set(ctx, loc, camx, t)
         if loc == "garage":
             draw_lamp(ctx, camx)

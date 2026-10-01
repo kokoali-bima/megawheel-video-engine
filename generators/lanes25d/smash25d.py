@@ -91,6 +91,7 @@ TAGS = ["cars", "car crash", "demolition derby", "cartoon cars", "funny cars", "
         "MegaWheel Arena"]
 
 CAST, ARENA, CHAOS_PLAN = [], "lava", []
+STANDS_TEXT = "SMASH ARENA"                      # banner on the stands (story scenes reuse the stands)
 FREEZE_T = 1e9                                   # the floor stops shrinking once there is a winner
 
 
@@ -626,7 +627,7 @@ def draw_stands(ctx, camx, t, cheer):
     ctx.fill()
     x0 = math.floor((camx - 1500 / k) / 12) * 12
     while (x0 - camx) * k + 540 < 2 * W:
-        se.draw_text(ctx, "SMASH ARENA", (x0 - camx) * k + 540, y - 0.45 * k, 0.62 * k, fill=(1, 0.86, 0.12),
+        se.draw_text(ctx, STANDS_TEXT, (x0 - camx) * k + 540, y - 0.45 * k, 0.62 * k, fill=(1, 0.86, 0.12),
                      stroke=(0.12, 0.12, 0.2), sw=3)
         x0 += 12
 
