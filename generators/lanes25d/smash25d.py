@@ -1307,14 +1307,10 @@ def kaiju_step(strength=1.0, seed=3):
 
 
 def say(text, style, who="m1"):
-    if text == se.READY_SENTINEL:                                # "Ready... Go!" timed to the READY / GO pop
-        r, g = say(se.READY_LINE, "call", who), say(se.GO_LINE, "hype", who)
-        off = max(len(r) + int(0.05 * se.SR), int(0.42 * se.SR))
-        se.READY_GO_T = off / se.SR                              # GO pop on the spoken "Go!"
-        out = np.zeros(off + len(g))
-        out[:len(r)] += r
-        out[off:] += g
-        return out
+    if text == se.READY_SENTINEL:                                # "Ready... set... GO!" (one phrase: clearer)
+        x = say(se.READY_SET_GO, "clear", who)
+        se.READY_GO_T = max(0.42, se.last_word_onset(x))         # GO pop on the spoken "GO"
+        return x
     if USE_CB:
         return announcer.get(text, style, who)
     se.VOICE = EDGE_VOICES[who]
@@ -1574,7 +1570,7 @@ def main():
                  else f"{nick(c['key'])} is down!" for c in outs]
     chaos_who = [CHAOS_WHO[ch["type"]] for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")]
     react = "What a champion!"
-    needed = ([(ladies, "intro", "m1"), (se.READY_LINE, "call", "m1"), (se.GO_LINE, "hype", "m1")]
+    needed = ([(ladies, "intro", "m1"), (se.READY_SET_GO, "clear", "m1")]
               + [(cl, "hype", "m1") for cl in calls]
               + [(x, "hype", w) for x, w in zip(chaos_lines, chaos_who)] + [(x, "hype", "f1") for x in out_lines]
               + [("Barriers down!", "hype", "m1")] + [(HIT_CALLS_F[i % 3], "hype", "f1") for i in range(len(bigh))]

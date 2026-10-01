@@ -31,15 +31,28 @@ app = modal.App("megawheel-tts")
 
 def _download():
     from chatterbox.tts import ChatterboxTTS
+    from faster_whisper import WhisperModel
     ChatterboxTTS.from_pretrained(device="cpu")                # bake the weights into the image (no GPU time)
+    WhisperModel("base.en", device="cpu", compute_type="int8")
 
 
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("ffmpeg", "git")
-    .pip_install("chatterbox-tts")
+    .pip_install("chatterbox-tts", "faster-whisper")
     .run_function(_download)
 )
+
+
+def _words(s):
+    import re
+    return re.sub(r"[^a-z0-9 ]", " ", s.lower().replace("...", " ")).split()
+
+
+def _score(want, got):
+    """Word match 0..1 between the script line and what speech recognition heard."""
+    import difflib
+    return difflib.SequenceMatcher(None, _words(want), _words(got)).ratio()
 
 
 @app.function(image=image, gpu="L4", timeout=900)
@@ -48,25 +61,40 @@ def speak(items: list, ref: bytes = b"", refs: dict = None) -> dict:
 
     import torchaudio
     from chatterbox.tts import ChatterboxTTS
+    from faster_whisper import WhisperModel
     t0 = time.time()
     model = ChatterboxTTS.from_pretrained(device="cuda")
+    asr = WhisperModel("base.en", device="cpu", compute_type="int8")   # QA: does the take say the line?
     paths = {}
     for name, data in ({"__single__": ref} if ref else {}).items() | (refs or {}).items():
         paths[name] = f"/tmp/ref_{name}.wav"
         with open(paths[name], "wb") as fh:
             fh.write(data)
-    wavs = []
+    wavs, qa = [], []
     for it in items:
         r = it.get("ref")
         rp = paths.get("__single__") if r is True else paths.get(r) if isinstance(r, str) else None
-        wav = model.generate(it["text"], audio_prompt_path=rp,
-                             exaggeration=float(it.get("exaggeration", 0.5)), cfg_weight=float(it.get("cfg", 0.5)))
-        buf = io.BytesIO()
-        torchaudio.save(buf, wav.cpu(), model.sr, format="wav")
-        wavs.append(buf.getvalue())
+        ex, cfg = float(it.get("exaggeration", 0.5)), float(it.get("cfg", 0.5))
+        best = None
+        for attempt in range(4):                                 # re-take until speech recognition hears the line
+            wav = model.generate(it["text"], audio_prompt_path=rp, exaggeration=ex, cfg_weight=cfg)
+            buf = io.BytesIO()
+            torchaudio.save(buf, wav.cpu(), model.sr, format="wav")
+            data = buf.getvalue()
+            with open("/tmp/take.wav", "wb") as fh:
+                fh.write(data)
+            heard = " ".join(sg.text for sg in asr.transcribe("/tmp/take.wav", language="en", beam_size=3)[0])
+            sc = _score(it["text"], heard)
+            if best is None or sc > best[0]:
+                best = (sc, data, heard, attempt)
+            if sc >= 0.85:
+                break
+            ex, cfg = max(0.5, ex * 0.8), min(0.6, cfg + 0.1)    # calmer + closer to the text for the next take
+        wavs.append(best[1])
+        qa.append(dict(text=it["text"], heard=best[2].strip(), score=round(best[0], 2), takes=best[3] + 1))
     meta = md.metadata("chatterbox-tts")
-    return dict(wavs=wavs, secs=time.time() - t0, license=meta.get("License") or meta.get("License-Expression") or "?",
-                version=meta.get("Version"))
+    return dict(wavs=wavs, qa=qa, secs=time.time() - t0,
+                license=meta.get("License") or meta.get("License-Expression") or "?", version=meta.get("Version"))
 
 
 def _ledger():
@@ -84,7 +112,7 @@ def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox
     led = _ledger()
     month = dt.date.today().strftime("%Y-%m")
     spent = sum(r["cost_usd"] for r in led["runs"] if r["date"].startswith(month))
-    worst = (120 + 12 * len(items)) * GPU_PRICE["L4"] * OVERHEAD
+    worst = (150 + 40 * len(items)) * GPU_PRICE["L4"] * OVERHEAD   # up to 4 takes per line
     print(f"[tts] bulan {month}: tercatat ${spent:.2f} / ${BUDGET_USD:.2f}; estimasi terburuk run ini ${worst:.2f}")
     if spent + worst > BUDGET_USD:
         raise SystemExit("[tts] STOP: budget bulanan akan terlewati. Tidak dijalankan. (ubah hanya atas izin user)")
@@ -104,6 +132,12 @@ def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox
     for i, w in enumerate(res["wavs"]):
         with open(os.path.join(out, f"line_{i:02d}.wav"), "wb") as fh:
             fh.write(w)
+    with open(os.path.join(out, "qa.json"), "w") as fh:
+        json.dump(res["qa"], fh, indent=1)
+    bad = [q for q in res["qa"] if q["score"] < 0.85]
+    for q in res["qa"]:
+        print(f"[tts] QA {q['score']:.2f} x{q['takes']} '{q['text'][:40]}' -> '{q['heard'][:40]}'")
+    print(f"[tts] QA: {len(res['qa']) - len(bad)}/{len(res['qa'])} kalimat lolos (>=0.85)")
     cost = res["secs"] * GPU_PRICE["L4"] * OVERHEAD
     led["runs"].append(dict(date=dt.date.today().isoformat(), note=note, gpu="L4", engine="chatterbox-tts",
                             lines=len(items), gpu_seconds=round(res["secs"], 1), wall_seconds=round(wall, 1),

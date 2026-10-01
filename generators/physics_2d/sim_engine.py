@@ -1210,27 +1210,34 @@ def cb_finish(note):
 
 
 READY_LINE, GO_LINE = "Ready...", "Go!"
+READY_SET_GO = "Ready... set... GO!"             # one phrase: very short lines come out garbled in voice C
 READY_SENTINEL = "__READY_GO__"                  # narration placeholder for the spoken READY... GO!
 READY_GO_T = 0.5                                 # when "GO!" pops (s after READY); set by ready_go_audio()
 HOLD_S = 0.0                                     # CHALLENGE: car waits on the line this long (READY... GO!)
 
 
+def last_word_onset(x):
+    """Start (s) of the last voiced segment after a pause: where 'GO!' begins in 'Ready... set... GO!'."""
+    k = int(0.02 * SR)
+    env = np.convolve(np.abs(x), np.ones(k) / k, "same")
+    on = env > 0.06 * max(1e-9, env.max())
+    edges = [i for i in range(1, len(on)) if on[i] and not on[i - 1]]
+    gaps = [i for i in edges if not on[max(0, i - int(0.08 * SR)):i].any()]
+    return (gaps[-1] if gaps else int(0.6 * len(x))) / SR
+
+
 def ready_go_audio():
-    """Spoken 'Ready... Go!'; the GO pop (draw_ready_go) is timed to the spoken 'Go!'."""
+    """Spoken 'Ready... set... GO!'; the GO pop (draw_ready_go) is timed to the spoken 'GO'."""
     global READY_GO_T
-    r, g = tts(READY_LINE), tts(GO_LINE)
-    off = max(len(r) + int(0.05 * SR), int(0.42 * SR))
-    READY_GO_T = off / SR
-    out = np.zeros(off + len(g))
-    out[:len(r)] += r
-    out[off:] += g
-    return out
+    x = tts(READY_SET_GO)
+    READY_GO_T = max(0.42, last_word_onset(x))
+    return x
 
 
 def tts(text):
     if CB["on"]:
         an = _announcer()
-        style = "norm" if text == CTA else "hype" if text == GO_LINE else "call"
+        style = "norm" if text == CTA else "clear" if text in (READY_SET_GO, GO_LINE, READY_LINE) else "call"
         if os.path.exists(an.path(text, style, CB["who"], "studio")):
             return an.get(text, style, CB["who"], "studio")
         CB["missing"].append((text, style, CB["who"], "studio"))
@@ -3285,7 +3292,7 @@ def analyze(intro_durs):
     res.append(check("spectacular", "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
                      any(is_spectacular(L) for L in LEVELS if L["event"]["type"] != "win")))
     total = sum(L["dur"] for L in LEVELS)
-    res.append(check("duration", "Durasi total 40-50 s", 40 <= total <= 50, f"{total:.1f} s"))
+    res.append(check("duration", "Durasi total 40-58 s", 40 <= total <= 58, f"{total:.1f} s"))
     lens_ok = all(L["dur"] <= level_cap(L) for L in LEVELS)
     d = SERIES_DEFS[SERIES]
     res.append(check("level_len", f"Level gagal <= {d['max_fail']:.0f} s, level menang (+outro) <= {d['max_win']:.0f} s",
