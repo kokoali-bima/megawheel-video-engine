@@ -26,9 +26,10 @@ import episodes  # noqa: E402
 NY = ZoneInfo("America/New_York")
 WIB = ZoneInfo("Asia/Jakarta")
 SLOTS = [(11, 0), (15, 0), (19, 0)]      # ET: late morning, after school, evening prime time (BLUEPRINT 10)
-# Slot roles (standard, user 2026-10-01): 11:00 ET = CHALLENGE (2D side view), 15:00 ET = RACE (race25d),
-# 19:00 ET = SMASH ARENA (smash25d); Saturday 19:00 ET = the weekly 15-minute episode.
-# Fallback: a 19:00 slot with no SMASH ARENA video in stock is filled by a CHALLENGE Short.
+# UPLOAD RULE (user 2026-10-01, strict): 11:00 ET = CHALLENGE (2D side view) only, 15:00 ET = RACE (race25d) only,
+# 19:00 ET = SMASH ARENA (smash25d) only. Saturday 19:00 ET is reserved for the weekly long episode (story15); while
+# no long episode is approved, SMASH takes it. No other fallback: an empty slot stays empty and plan() warns.
+# Stock standard: at least 7 days of each type queued (plan() prints PERINGATAN STOK).
 RACE_SERIES = {"race25d"}
 SMASH_SERIES = {"smash25d"}
 LONG_SERIES = {"story15"}                 # weekly long-form series id (reserved)
@@ -47,8 +48,10 @@ def role_of(series):
             else "long" if series in LONG_SERIES else "short")
 
 
-SLOT_ROLES_OF = {"race": {"race"}, "smash": {"smash"}, "short": {"short", "smash"}, "long": {"long"}}
-PLAN_ORDER = {"race": 0, "smash": 1, "long": 2, "short": 3}   # SMASH gets its 19:00 slots before the fallback
+SLOT_ROLES_OF = {"race": {"race"}, "smash": {"smash", "long"}, "short": {"short"}, "long": {"long"}}
+PLAN_ORDER = {"race": 0, "long": 1, "smash": 2, "short": 3}   # a long episode claims Saturday 19:00 before SMASH
+ROLE_NAME = {"short": "CHALLENGE (11:00 ET)", "race": "RACE race25d (15:00 ET)", "smash": "SMASH smash25d (19:00 ET)"}
+STOCK_DAYS = 7
 
 
 QUEUE_FILE = f"{episodes.BASE}/renders/megawheel_arena/PUBLISH_QUEUE.json"
@@ -113,21 +116,30 @@ def plan(start):
                                role=role_of(e.get("series", ""))))
     q["items"].sort(key=lambda it: it["publish_at_utc"])
     save(q)
-    # standard check: every day of the next 7 days needs a race25d Short at 15:00 ET
-    have = {dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")).astimezone(NY).date()
-            for it in q["items"] if slot_role(dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")))
-            == "race"}
+    # stock standard: each of the next STOCK_DAYS days needs its CHALLENGE, RACE and SMASH Short
     today = now.astimezone(NY).date()
-    missing = [str(today + dt.timedelta(days=d)) for d in range(1, 8) if today + dt.timedelta(days=d) not in have]
-    if missing:
-        print(f"[queue] PERINGATAN STANDAR: belum ada Shorts race25d (15:00 ET) untuk {', '.join(missing)} "
-              f"-> produksi & approve race25d lagi")
-    fill = [it for it in q["items"] if it.get("status") == "QUEUED" and it.get("role") == "short" and
-            slot_role(dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00"))) == "smash"]
-    if fill:
-        print(f"[queue] CATATAN: {len(fill)} slot 19:00 ET diisi CHALLENGE (cadangan) karena stok SMASH ARENA kosong "
-              f"-> produksi & approve smash25d")
+    days = [today + dt.timedelta(days=d) for d in range(1, STOCK_DAYS + 1)]
+    for role in ("short", "race", "smash"):
+        have = set()
+        for it in q["items"]:
+            t = dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00"))
+            if role_of_item(it) == role:
+                have.add(t.astimezone(NY).date())
+        missing = [str(d_) for d_ in days if d_ not in have]
+        if missing:
+            print(f"[queue] PERINGATAN STOK: belum ada {ROLE_NAME[role]} untuk {', '.join(missing)} "
+                  f"-> produksi & approve lagi (standar {STOCK_DAYS} hari)")
+        else:
+            print(f"[queue] stok {ROLE_NAME[role]}: OK {STOCK_DAYS} hari ke depan")
     show()
+
+
+def role_of_item(it):
+    """Role of a queue item (older items have no 'role' field: derive it from the registry series)."""
+    if it.get("role"):
+        return it["role"]
+    e = next((x for x in episodes.episodes() if x["episode"] == it["episode"]), {})
+    return role_of(e.get("series", ""))
 
 
 def show():
