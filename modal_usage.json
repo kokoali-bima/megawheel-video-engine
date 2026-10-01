@@ -514,6 +514,16 @@
    "gpu_seconds": 70.8,
    "wall_seconds": 101.9,
    "cost_usd": 0.0181
+  },
+  {
+   "date": "2026-10-01",
+   "note": "S01E01 voice casting r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 7,
+   "gpu_seconds": 70.5,
+   "wall_seconds": 158.1,
+   "cost_usd": 0.018
   }
  ]
 }
