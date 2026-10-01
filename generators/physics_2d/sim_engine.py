@@ -891,7 +891,7 @@ def has_signature(L):
 
 def outcome_vo_t(ev_out, intro_d):
     """Output time (level-local) of the outcome narration: after the event AND after the intro."""
-    return max(ev_out + 0.25, 0.15 + intro_d + 0.2)
+    return max(ev_out + 0.25, HOLD_S + 0.15 + intro_d + 0.2)
 
 
 def runs_for(vk, want, intro_d):
@@ -922,7 +922,7 @@ def candidate_runs():
             if any(vk == used for used, _ in story):         # nobody plays two levels
                 continue
             text = intro_text(li, vk)
-            audio = np.concatenate([ready_go_audio(), np.zeros(int(0.12 * SR)), tts(text)])
+            audio = tts(text)
             cands = runs_for(vk, want, len(audio) / SR)
             if cands:
                 break
@@ -1059,7 +1059,7 @@ def bullet_window(L):
 def build_frames(L):
     ev, tmax = L["event"], (len(L["rec"]["cx"]) - 1) / REC_HZ
     bw = L["bullet"]
-    frames, t = [], 0.0
+    frames, t = [(0.0, "live")] * int(round(HOLD_S * FPS)), 0.0    # READY... GO! hold on the start line
     live_end = min(L["live_end"], tmax)
     while t < live_end:
         frames.append((t, "live"))
@@ -1211,12 +1211,16 @@ def cb_finish(note):
 
 READY_LINE, GO_LINE = "Ready...", "Go!"
 READY_SENTINEL = "__READY_GO__"                  # narration placeholder for the spoken READY... GO!
+READY_GO_T = 0.5                                 # when "GO!" pops (s after READY); set by ready_go_audio()
+HOLD_S = 0.0                                     # CHALLENGE: car waits on the line this long (READY... GO!)
 
 
 def ready_go_audio():
-    """Spoken 'Ready... Go!' matching the READY (0-0.5 s) / GO (0.5-1.05 s) pop: GO starts at >= 0.42 s."""
+    """Spoken 'Ready... Go!'; the GO pop (draw_ready_go) is timed to the spoken 'Go!'."""
+    global READY_GO_T
     r, g = tts(READY_LINE), tts(GO_LINE)
     off = max(len(r) + int(0.05 * SR), int(0.42 * SR))
+    READY_GO_T = off / SR
     out = np.zeros(off + len(g))
     out[:len(r)] += r
     out[off:] += g
@@ -3341,7 +3345,8 @@ def draw_headlights(ctx, L, s):
 
 def draw_ready_go(ctx, tl):
     """READY... GO! pop at the start of every level."""
-    for t0, t1, text, col in ((0.0, 0.5, "READY...", (1, 0.86, 0.12)), (0.5, 1.05, "GO!", (0.3, 1, 0.4))):
+    g = READY_GO_T
+    for t0, t1, text, col in ((0.0, g, "READY...", (1, 0.86, 0.12)), (g, g + 0.55, "GO!", (0.3, 1, 0.4))):
         if t0 <= tl < t1:
             a = (tl - t0) / (t1 - t0)
             sc = ease_out_back(min(1.0, a / 0.35))
@@ -3503,7 +3508,7 @@ def main():
         if prev and prev.get("status") not in registry.IGNORED_STATUS:
             raise SystemExit(f"[registry] STOP: {name} sudah ada ({prev.get('status')}, {prev.get('folder')}). "
                              f"Pakai seed lain atau --force.")
-    os.makedirs(OUT_DIR, exist_ok=True)
+    # OUT_DIR is created when the preview folder is made (after the analysis passed): no empty folders on STOP
     print(f"[track] {TRACK_ID} {json.dumps(TRACK_PARAMS)}", flush=True)
     print(f"[story] {SERIES}: " + " | ".join(f"{want}: {'>'.join(order)}" for order, (_, want)
                                              in zip(ROLE_ORDER, ROSTER)), flush=True)
@@ -3511,6 +3516,9 @@ def main():
     t0 = time.time()
     print(f"[font] {FONT_FACE}", flush=True)
 
+    global HOLD_S
+    ready_vo = ready_go_audio()                               # also sets READY_GO_T
+    HOLD_S = READY_GO_T + 0.12                                # the car launches right on "GO!"
     cands, intro_pairs = candidate_runs()
     intro_texts = [t for t, _ in intro_pairs]
     intros = [a for _, a in intro_pairs]
@@ -3682,7 +3690,8 @@ def main():
             place(sfx, pop, st0 + out_time(L, bt), 0.6)
             if text == "UH OH!":
                 place(sfx, gulp, st0 + out_time(L, bt) + 0.1, 0.6)
-        place(narr, intros[li], st0 + 0.15)
+        place(narr, ready_vo, st0 + 0.0)
+        place(narr, intros[li], st0 + HOLD_S + 0.15)
         place(narr, outcomes[li], st0 + outcome_vo_t(out_time(L, ev["t"]), len(intros[li]) / SR))
         if ev["type"] == "win":
             place(sfx, synth_win(), st0 + out_time(L, ev["t"]), 0.9)

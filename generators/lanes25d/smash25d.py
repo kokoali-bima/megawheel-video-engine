@@ -1310,6 +1310,7 @@ def say(text, style, who="m1"):
     if text == se.READY_SENTINEL:                                # "Ready... Go!" timed to the READY / GO pop
         r, g = say(se.READY_LINE, "call", who), say(se.GO_LINE, "hype", who)
         off = max(len(r) + int(0.05 * se.SR), int(0.42 * se.SR))
+        se.READY_GO_T = off / se.SR                              # GO pop on the spoken "Go!"
         out = np.zeros(off + len(g))
         out[:len(r)] += r
         out[off:] += g

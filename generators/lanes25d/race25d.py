@@ -1320,6 +1320,7 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
+    se.ready_go_audio()                                          # sets se.READY_GO_T (GO pop on the spoken "Go!")
     busy = 0.0                                                   # end card lasts until the CTA has been said
     for t_want, text in lines:
         d = len(se.ready_go_audio() if text == se.READY_SENTINEL else se.tts(text)) / se.SR
