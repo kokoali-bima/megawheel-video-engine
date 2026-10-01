@@ -92,6 +92,7 @@ TAGS = ["cars", "car crash", "demolition derby", "cartoon cars", "funny cars", "
 
 CAST, ARENA, CHAOS_PLAN = [], "lava", []
 STANDS_TEXT = "SMASH ARENA"                      # banner on the stands (story scenes reuse the stands)
+STANDS_ROWS = 6                                  # story scenes use fewer rows (sky visible for Kraggor)
 FREEZE_T = 1e9                                   # the floor stops shrinking once there is a winner
 
 
@@ -604,7 +605,7 @@ def floor_poly(hx, hz, camx, pad=0.0):
 def draw_stands(ctx, camx, t, cheer):
     """Crowd stands behind the arena (simple shapes; cars are the only characters)."""
     zb = ZC + HZ0 + 3.0
-    for row in range(6):
+    for row in range(STANDS_ROWS):
         z = zb + row * 1.6
         k, y = k_of(z), ground_y(z) - row * 1.25 * k_of(z)
         ctx.rectangle(-W, y - 1.25 * k, 3 * W, 1.3 * k)

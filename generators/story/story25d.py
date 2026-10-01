@@ -310,6 +310,7 @@ def draw_set(ctx, loc, camx, t, after_sky=None):
                 x += 4
     if loc in ("arena", "trackside", "podium"):
         SM.STANDS_TEXT = SCENE.get("stands_text", "MEGAWHEEL RACEWAY")
+        SM.STANDS_ROWS = 3
         SM.draw_stands(ctx, camx, t, 0.6)
 
 
@@ -436,7 +437,13 @@ def draw_foot(ctx, x, z, camx, drop):
         ctx.fill()
 
 
-def kraggor_head(ctx, u, spec):
+def stands_top_world():
+    rows = 3
+    zb = SM.ZC + SM.HZ0 + 3.0 + (rows - 1) * 1.6
+    return ground_y(zb) - rows * 1.25 * k_of(zb)
+
+
+def kraggor_head(ctx, u, spec, stands_top=None):
     """Kraggor's head in screen space (smash25d design). spec: sx, sy (0..1 of the frame), scale,
     mode: "rise" (rises then calm), "roar" (rises + roars), "calm" (already there), "munch" (eating ice cream)."""
     mode = spec.get("mode", "rise")
@@ -449,11 +456,17 @@ def kraggor_head(ctx, u, spec):
     else:
         a = 3.0                                                   # fully up, mouth closed
     ctx.save()
-    sx, sy, sc = spec.get("sx", 0.62) * W, spec.get("sy", 0.42) * H, spec.get("scale", 1.0) * (H / 1080)
-    ctx.translate(sx, sy)
-    ctx.scale(sc, sc)
-    ctx.translate(-905, -400)
-    SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 400)
+    sc = spec.get("scale", 1.0) * (H / 1080)
+    if stands_top is not None and not spec.get("front"):        # rises from behind the stands' top row
+        ctx.translate(spec.get("sx", 0.62) * W, stands_top)
+        ctx.scale(sc, sc)
+        ctx.translate(-905, 0)
+        SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
+    else:
+        ctx.translate(spec.get("sx", 0.62) * W, spec.get("sy", 0.42) * H)
+        ctx.scale(sc, sc)
+        ctx.translate(-905, -400)
+        SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 400)
     ctx.restore()
 
 
@@ -855,9 +868,10 @@ def render_scene(ep, num, aspect):
         def behind():
             kr = sh.get("kraggor")
             if kr and not kr.get("front"):
+                st_screen = H / 2 + (stands_top_world() - piv_y) * zoom
                 ctx.save()
                 ctx.identity_matrix()
-                kraggor_head(ctx, u, kr)
+                kraggor_head(ctx, u, kr, stands_top=st_screen)
                 ctx.restore()
         draw_set(ctx, loc, camx, t, after_sky=behind)
         if loc == "garage":
