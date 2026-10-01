@@ -78,6 +78,15 @@ def _update_manifest(folder_abs, video_id, **fields):
     return m
 
 
+def _drive(video_id):
+    """Keep Google Drive in step (generators/publishing/drive_sync.py); never breaks the caller."""
+    try:
+        import drive_sync
+        drive_sync.try_sync_one(video_id)
+    except Exception as ex:
+        print(f"[drive] dilewati: {ex}")
+
+
 def _move(e, new_rel):
     old_abs, new_abs = f"{BASE}/{e['folder']}", f"{BASE}/{new_rel}"
     if os.path.exists(new_abs):
@@ -105,6 +114,7 @@ def approve(video_id):
     registry.update(video_id, status="APPROVED", episode=ep, season=season, folder=new_rel,
                     audit=f"{new_rel}/{video_id}_audit.md", approved_date=_today(), title=title)
     print(f"[episodes] APPROVED {video_id} -> S{season:02d} Ep. {ep}: {title}")
+    _drive(video_id)                                             # Drive: review/ -> review/approved/E0xx_...
     return ep
 
 
@@ -120,6 +130,7 @@ def reject(video_id, reason):
     registry.update(video_id, status="REJECTED", folder=new_rel, audit=f"{new_rel}/{video_id}_audit.md",
                     reject_reason=reason, rejected_date=_today())
     print(f"[episodes] REJECTED {video_id}: {reason}")
+    _drive(video_id)                                             # Drive: -> archive/rejected/
 
 
 def mark_uploaded(ep, url, privacy):
@@ -127,6 +138,7 @@ def mark_uploaded(ep, url, privacy):
     status = f"UPLOADED_{privacy.upper()}"
     registry.update(e["video_id"], status=status, youtube_url=url, upload_date=_today())
     _update_manifest(f"{BASE}/{e['folder']}", e["video_id"], status=status, youtube_url=url, upload_date=_today())
+    _drive(e["video_id"])                                        # Drive: -> archive/S0x/ (VM copy removed)
 
 
 def set_fields(ep, pairs):
