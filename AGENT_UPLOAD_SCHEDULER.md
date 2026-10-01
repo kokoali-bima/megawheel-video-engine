@@ -47,6 +47,18 @@ Aturan keras:
  - Kalau antrian kosong (tidak ada episode APPROVED baru), laporkan "tidak ada episode baru" lalu selesai.
 ```
 
+## 1b. Jadwal otomatis (cron) — cara resmi
+
+Satu-satunya script untuk upload terjadwal: `generators/publishing/daily_publish.sh`. Script ini menjalankan
+pull → plan → upload --confirm (maks 5) → drive_sync sync → push, memakai kunci (tidak pernah jalan dobel), dan
+berhenti kalau `git_sync pull` gagal. Pasang **di VM 99.3** (tempat kode dan token berada), **sekali sehari**:
+
+```
+0 12 * * * /root/video-engine/generators/publishing/daily_publish.sh >> /root/video-engine/work/daily_publish.log 2>&1
+```
+(12:00 WIB = 01:00 ET, jauh sebelum slot 11:00 ET.) Jangan menjadwalkan lebih sering dari 1× sehari (kuota YouTube),
+jangan menambah langkah approve/render ke cron. Cek hasil: `tail -50 /root/video-engine/work/daily_publish.log`.
+
 ## 2. Latar singkat untuk agent
 
 | Hal | Nilai |
