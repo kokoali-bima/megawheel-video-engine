@@ -1311,7 +1311,7 @@ def main():
 
     date = time.strftime("%Y-%m-%d")
     out_dir = (f"{se.BASE}/work/lanes25d/previews/{name}" if opt.preview_only
-               else f"{se.CHANNEL_DIR}/pending/{date}_{SERIES}_s{opt.seed:03d}")
+               else f"{se.CHANNEL_DIR}/pending/{date}_{SERIES}_{ENGINE_VERSION}_s{opt.seed:03d}")   # version: never mixed
     prev = os.path.join(out_dir, "preview")
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)

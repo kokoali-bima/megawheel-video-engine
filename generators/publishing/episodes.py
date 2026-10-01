@@ -113,6 +113,8 @@ def reject(video_id, reason):
     if not e or e.get("status") != "RENDERED_PENDING_APPROVAL":
         raise SystemExit(f"[episodes] STOP: {video_id} tidak sedang menunggu approval")
     new_rel = f"renders/megawheel_arena/rejected/{os.path.basename(e['folder'])}"
+    if os.path.exists(f"{BASE}/{new_rel}"):                      # same folder name rejected before: keep both
+        new_rel = f"{new_rel}_{video_id}"
     new_abs = _move(e, new_rel)
     _update_manifest(new_abs, video_id, status="REJECTED", reject_reason=reason)
     registry.update(video_id, status="REJECTED", folder=new_rel, audit=f"{new_rel}/{video_id}_audit.md",

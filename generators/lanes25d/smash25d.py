@@ -457,6 +457,13 @@ def simulate(seed):
         for c in cars:
             if not c["alive"] or winner is not None or c.get("carry") is not None:
                 continue
+            if not any(o["alive"] for o in cars if o is not c):  # last car standing: it survives, whatever happens
+                c["hp"] = max(c["hp"], 1.0)
+                if abs(c["x"]) > hx + 0.2:
+                    c["x"] = math.copysign(hx + 0.2, c["x"])
+                if abs(c["z"] - ZC) > hz + 0.2:
+                    c["z"] = ZC + math.copysign(hz + 0.2, c["z"] - ZC)
+                continue
             if c["hp"] <= 0:
                 c["alive"], c["out"], c["out_kind"] = False, t, "wreck"
                 events.append(("wreck", t, c["x"], c["z"]))
@@ -1582,7 +1589,7 @@ def main():
 
     date = time.strftime("%Y-%m-%d")
     out_dir = (f"{se.BASE}/work/lanes25d/previews/{name}" if opt.preview_only
-               else f"{se.CHANNEL_DIR}/pending/{date}_{SERIES}_s{opt.seed:03d}")
+               else f"{se.CHANNEL_DIR}/pending/{date}_{SERIES}_{ENGINE_VERSION}_s{opt.seed:03d}")   # version: never mixed
     prev = os.path.join(out_dir, "preview")
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
