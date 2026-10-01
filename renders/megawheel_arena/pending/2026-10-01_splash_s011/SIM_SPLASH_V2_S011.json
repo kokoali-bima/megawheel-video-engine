@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_SPLASH_V2_S011",
-  "status": "ANALYSIS_FAILED",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "splash",
   "seed": 11,
   "fps": 30,
-  "duration": 53.63,
+  "duration": 56.5,
   "track_id": "splash_e187289f",
   "track_params": {
     "order": [
@@ -63,7 +63,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->81.9 m, 3.0->34.0 m, 3.0->105.9 m",
+      "detail": "3.0->81.9 m, 3.0->34.0 m, 3.0->105.0 m",
       "hard": true
     },
     {
@@ -91,7 +91,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "7.5s, 6.0s, 13.4s",
+      "detail": "7.5s, 6.0s, 14.8s",
       "hard": true
     },
     {
@@ -110,16 +110,16 @@
     },
     {
       "id": "duration",
-      "desc": "Durasi total 40-50 s",
-      "ok": false,
-      "detail": "53.6 s",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "56.5 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "detail": "16.2s, 12.1s, 25.3s",
+      "detail": "17.6s, 12.6s, 26.4s",
       "hard": true
     },
     {
@@ -163,8 +163,8 @@
         "OUCH!"
       ],
       "start": 0.0,
-      "duration": 16.23,
-      "event_out": 10.0,
+      "duration": 17.57,
+      "event_out": 10.7,
       "x_start": 3.0,
       "x_end": 81.9,
       "level_color": [
@@ -175,9 +175,9 @@
     },
     {
       "vehicle": "BUSTER THE SCHOOL BUS",
-      "speed": 6.8,
+      "speed": 7.2,
       "outcome": "pit",
-      "event_t": 6.0,
+      "event_t": 5.97,
       "obstacle": 0,
       "broken": true,
       "bullet_time": true,
@@ -187,9 +187,9 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 16.23,
-      "duration": 12.07,
-      "event_out": 24.4,
+      "start": 17.57,
+      "duration": 12.57,
+      "event_out": 26.7,
       "x_start": 3.0,
       "x_end": 34.0,
       "level_color": [
@@ -200,9 +200,9 @@
     },
     {
       "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 9.2,
+      "speed": 8.4,
       "outcome": "win",
-      "event_t": 13.4,
+      "event_t": 14.8,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -212,11 +212,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 28.3,
-      "duration": 25.33,
-      "event_out": 43.8,
+      "start": 30.13,
+      "duration": 26.37,
+      "event_out": 47.2,
       "x_start": 3.0,
-      "x_end": 105.9,
+      "x_end": 105.0,
       "level_color": [
         153,
         76,
@@ -236,5 +236,6 @@
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s011/SIM_SPLASH_V2_S011.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s011/preview"
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s011/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_splash_s011/SIM_SPLASH_V2_S011_audit.md"
 }
