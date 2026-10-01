@@ -158,6 +158,24 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.9: suara C untuk semua seri + "Ready… set… let's go!" + QA suara otomatis (Claude Code, Opus)
+
+User: "lanjut" (suara C untuk semua video, narator pria/wanita bergiliran); "narator tidak menyebutkan ready… GO!"; lalu: "ready go-nya tidak jelas … GO berubah jadi bahasa apa … bukan ready go!".
+
+- **RACE + CHALLENGE pakai suara C:**
+  - `se.cb_pick()` memilih m1/f1 bergiliran per video (dicatat di registry sebagai `chatterbox:m1` / `chatterbox:f1`).
+  - `se.tts()` mengambil dari cache announcer (efek "studio", tanpa gema). Kalimat yang belum ada dicatat dan sementara diisi Edge. `se.cb_finish()` membuatnya dalam satu panggilan Modal lalu generator restart sendiri (maks. 3 putaran; kalau gagal, seluruh video memakai Edge).
+- **"Ready… set… let's go!" diucapkan:**
+  - CHALLENGE: mobil menunggu di garis start (`HOLD_S`) lalu melaju tepat saat kata terakhir.
+  - RACE/SMASH: kalimat wajib di awal balapan/pertarungan.
+  - Grafis GO muncul pada onset kata terakhir (`last_word_onset`).
+  - Batas durasi CHALLENGE kini 44–57 s (analisa 40–58, audit 40–58), batas per level ditambah jeda Ready-Go.
+- **QA suara otomatis (Modal):** setiap take Chatterbox ditranskrip oleh faster-whisper (base.en). Kalau kecocokan kata <0.85, dibuat ulang (maks. 4 take, emosi diturunkan). Take dengan skor <0.75 tidak pernah masuk cache. Hasil QA dicetak di log.
+  - Hasil pertama: 18/20 lolos. "Ready… set… GO!" terdengar "Ready Set, **Geo**" di 4 take → frasa diganti "Ready… set… let's go!" (lolos di take pertama).
+  - Cache lama (tanpa QA) diabaikan (kunci baru `chatterbox-qa1`).
+- CHALLENGE tidak lagi membuat folder pending kosong saat analisa STOP; batch membersihkan folder seed yang gagal.
+- Konflik git karena VM commit ledger saat PC push: rebase berhenti (metadata Google Drive) → dibatalkan, lalu merge biasa (tidak ada perubahan yang hilang, diverifikasi dengan diff).
+
 ## 2026-10-01 — v3.8: suara announcer Chatterbox (Modal) + dua komentator SMASH (Claude Code, Opus)
 
 User: "tidak adakah suara yang bisa kita build pakai mesin modal.com kita?" → uji A/B/C → user: "suara C paling oke". Lalu: "semua video pakai suara C bagus ya? tapi divariasikan dengan suara cewek dengan ekspresi sama. Untuk smash arena, apakah lebih seru kalau naratornya ada 2?"
