@@ -79,8 +79,8 @@
    "kraggor": {
     "mode": "roar",
     "sx": 0.68,
-    "sy": 0.3,
-    "scale": 0.9
+    "sy": 0.47,
+    "scale": 0.85
    },
    "sfx": [
     "roar",

@@ -272,8 +272,10 @@ def actor_state(a, t):
 
 
 # ------------------------------------------------------------------ sets / locations
-def draw_set(ctx, loc, camx, t):
+def draw_set(ctx, loc, camx, t, after_sky=None):
     se.draw_sky(ctx, camx * 0.35, 0.0, 1.0)
+    if after_sky:                                                  # things behind the stands (Kraggor rising)
+        after_sky()
     if loc == "garage":
         ctx.rectangle(-W, -H, 3 * W, 3 * H)
         ctx.set_source_rgb(*se.lit((0.22, 0.2, 0.24)))
@@ -850,7 +852,14 @@ def render_scene(ep, num, aspect):
         ctx.translate(W / 2 + shake, H * 0.5)
         ctx.scale(zoom, zoom * (1.12 if sh.get("cam") == "low" else 1.0))
         ctx.translate(-CX, -piv_y)
-        draw_set(ctx, loc, camx, t)
+        def behind():
+            kr = sh.get("kraggor")
+            if kr and not kr.get("front"):
+                ctx.save()
+                ctx.identity_matrix()
+                kraggor_head(ctx, u, kr)
+                ctx.restore()
+        draw_set(ctx, loc, camx, t, after_sky=behind)
         if loc == "garage":
             draw_lamp(ctx, camx)
         for prop in scene.get("props", []):
@@ -877,7 +886,7 @@ def render_scene(ep, num, aspect):
                 draw_foot(ctx, ft["x"], ft.get("z", 1.0), camx, drop)
         draw_props_layer(ctx, loc, camx, 13, back=False)
         ctx.restore()
-        if sh.get("kraggor"):
+        if sh.get("kraggor") and sh["kraggor"].get("front"):      # close-up of Kraggor: in front of everything
             kraggor_head(ctx, u, sh["kraggor"])
         if sh.get("toss"):
             ice_cream_toss(ctx, u, sh["toss"], camx, actors)

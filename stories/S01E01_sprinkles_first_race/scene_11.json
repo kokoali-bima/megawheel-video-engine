@@ -31,7 +31,8 @@
    "kraggor": {
     "mode": "calm",
     "sx": 0.6,
-    "sy": 0.28
+    "sy": 0.47,
+    "scale": 0.85
    }
   },
   {
@@ -61,7 +62,8 @@
    "kraggor": {
     "mode": "calm",
     "sx": 0.6,
-    "sy": 0.28
+    "sy": 0.47,
+    "scale": 0.85
    },
    "toss": {
     "from": "sprinkles",
@@ -81,7 +83,8 @@
     "mode": "munch",
     "sx": 0.5,
     "sy": 0.66,
-    "scale": 1.8
+    "scale": 1.8,
+    "front": true
    }
   },
   {
@@ -96,7 +99,8 @@
    "kraggor": {
     "mode": "calm",
     "sx": 0.6,
-    "sy": 0.28
+    "sy": 0.47,
+    "scale": 0.85
    },
    "emote": {
     "zippy": "surprised"
@@ -129,7 +133,8 @@
    "kraggor": {
     "mode": "calm",
     "sx": 0.6,
-    "sy": 0.28
+    "sy": 0.47,
+    "scale": 0.85
    }
   }
  ]
