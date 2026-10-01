@@ -158,6 +158,23 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.7: SMASH ARENA v3 — perkenalan peserta + momen pemenang (Claude Code, Opus)
+
+User: "karena ini model royal rumble, bukankah seharusnya kita memperkenalkan pesertanya? Dan saat menang, beri kesempatan pemenang menunjukkan dirinya sebentar di ring: the winner is Rocky… yeaaah!"
+
+- **Perkenalan (sebelum READY-GO):**
+  - Shot lebar "Ladies and gentlemen… it's time to smash!" dengan tulisan "4 FIGHTERS… 1 SURVIVOR!".
+  - Lalu tiap peserta: kamera zoom, lampu sorot, mobil melompat-lompat, kartu nama (NAMA, jenis kendaraan, berat, bintang kecepatan yang digambar), whoosh + dentuman + sorak penonton, dan panggilan announcer "Hydro, the fire truck!" … "And… Nitro, the race car!".
+  - Durasi tiap slot = panjang suara announcer + 0,5 s, jadi tidak ada yang terpotong.
+- **Momen pemenang (±4 s sebelum replay):** kamera dekat, lampu sorot, mahkota emas di atas kepala, pemenang melompat sambil berputar, sorakan dua gelombang, "The winner is… Rocky! Yeah!".
+- Durasi video sekarang ±46–58 s (batas Shorts 60 s, dicek otomatis).
+- **Bug & perapian:**
+  - Dua mobil terakhir bisa gugur di tick yang sama sehingga render crash → mobil terakhir kini tidak pernah tereliminasi.
+  - `episodes.reject` bentrok nama folder di `rejected/` → kini diberi akhiran ID video.
+  - Render v2 dan v3 tercampur di satu folder pending → nama folder render kini memuat versi mesin (`<tanggal>_<seri>_<versi>_s<seed>`), di race25d juga.
+  - VM dirapikan: v2 dipindah ke `rejected/…_v2_s00N`, folder v3 diganti nama, sisa render yang crash dihapus.
+- smash25d engine → v3. v3 S001, S003, S007, S008, S009, S010 pending review.
+
 ## 2026-10-01 — v3.6: SMASH ARENA audio v2 — narasi sinkron, gaya announcer, penonton, suara kaiju (Claude Code, Opus)
 
 Evaluasi user atas SIM_SMASH25D_V1_S001: narasi tidak pas dengan video dan masih terdengar setelah video selesai; gaya bicara kurang cocok untuk arena gulat; harus ada sorak penonton; suara mesin kebesaran; Kraggor perlu efek suara; CTA dan replay harus disebut narator, dan komentar replay harus ikut momen replay.
