@@ -49,7 +49,7 @@ EDGE_VOICES = {"m1": "en-US-GuyNeural", "f1": "en-US-AriaNeural"}     # Edge fal
 HIT_CALLS_F = ["Oh my goodness! What a hit!", "Ouch! That's gotta hurt!", "Did you see that?"]
 CHAOS_WHO = {"missile": "f1", "ufo": "f1", "kraggor": "m1", "crack": "m1"}
 
-SERIES, ENGINE_VERSION = "smash25d", "v3"             # v3: fighter intros + winner showcase (v2: chaos, announcer)
+SERIES, ENGINE_VERSION = "smash25d", "v4"             # v4: voice C duo commentators + spoken READY-GO (v3: intros)
 W, H, FPS = se.W, se.H, 30
 # perspective: x, z in metres (z = depth). Higher camera than race25d so the floor reads as an arena.
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
