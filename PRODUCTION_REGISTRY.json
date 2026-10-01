@@ -796,13 +796,15 @@
         "win"
       ],
       "duration": 47.67,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_lava_s004",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_lava_s004/SIM_LAVA_V2_S004_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_lava_s004",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_lava_s004/SIM_LAVA_V2_S004_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SPLASH_V2_S008",
@@ -825,13 +827,15 @@
         "win"
       ],
       "duration": 48.07,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_splash_s008",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_splash_s008/SIM_SPLASH_V2_S008_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_splash_s008",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_splash_s008/SIM_SPLASH_V2_S008_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S006",
@@ -854,13 +858,15 @@
         "win"
       ],
       "duration": 47.37,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_potholes_s006",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_potholes_s006/SIM_POTHOLES_V2_S006_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_potholes_s006",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_potholes_s006/SIM_POTHOLES_V2_S006_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_BUMPS_V2_S007",
@@ -883,13 +889,15 @@
         "win"
       ],
       "duration": 44.7,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_bumps_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_bumps_s007/SIM_BUMPS_V2_S007_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_bumps_s007",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_bumps_s007/SIM_BUMPS_V2_S007_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_LAVA_V2_S008",
@@ -912,13 +920,15 @@
         "win"
       ],
       "duration": 42.73,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_lava_s008",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_lava_s008/SIM_LAVA_V2_S008_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_lava_s008",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_lava_s008/SIM_LAVA_V2_S008_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SPLASH_V2_S010",
@@ -941,13 +951,15 @@
         "win"
       ],
       "duration": 46.1,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_splash_s010",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_splash_s010/SIM_SPLASH_V2_S010_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_splash_s010",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_splash_s010/SIM_SPLASH_V2_S010_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V1_S001",
@@ -1245,13 +1257,15 @@
         "p2+wreck"
       ],
       "duration": 50.93,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s001/SIM_SMASH25D_V3_S001_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s001",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s001/SIM_SMASH25D_V3_S001_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S003",
@@ -1277,13 +1291,15 @@
         "win"
       ],
       "duration": 45.97,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s003/SIM_SMASH25D_V3_S003_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s003/SIM_SMASH25D_V3_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S007",
@@ -1309,13 +1325,15 @@
         "p3+ring"
       ],
       "duration": 48.57,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007/SIM_SMASH25D_V3_S007_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s007",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s007/SIM_SMASH25D_V3_S007_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S009",
@@ -1341,13 +1359,15 @@
         "win"
       ],
       "duration": 46.47,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009/SIM_SMASH25D_V3_S009_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s009",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s009/SIM_SMASH25D_V3_S009_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S008",
@@ -1373,13 +1393,15 @@
         "p3+ring"
       ],
       "duration": 44.37,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s008",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s008/SIM_SMASH25D_V3_S008_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s008",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s008/SIM_SMASH25D_V3_S008_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S010",
@@ -1405,13 +1427,15 @@
         "p3+wreck"
       ],
       "duration": 57.03,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s010/SIM_SMASH25D_V3_S010_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s010",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v3_s010/SIM_SMASH25D_V3_S010_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v4 (voice C duo commentators, spoken READY-GO)",
+      "rejected_date": "2026-10-01"
     }
   ]
 }

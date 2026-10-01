@@ -1,0 +1,241 @@
+{
+  "video_id": "SIM_SPLASH_V2_S008",
+  "status": "REJECTED",
+  "engine": "sim-prototype v2",
+  "series": "splash",
+  "seed": 8,
+  "fps": 30,
+  "duration": 48.07,
+  "track_id": "splash_eedbcd73",
+  "track_params": {
+    "order": [
+      "wall",
+      "pit",
+      "hill"
+    ],
+    "parts": [
+      {
+        "kind": "wall",
+        "puddle": 5.7,
+        "ramp": [
+          5.2,
+          1.06
+        ],
+        "wall": 1.49
+      },
+      {
+        "kind": "pit",
+        "puddle": 5.5,
+        "ramp": [
+          6.2,
+          1.48
+        ],
+        "pit": [
+          7.9,
+          4.1
+        ]
+      },
+      {
+        "kind": "hill",
+        "puddle": 5.9,
+        "hill": [
+          3.32,
+          7.7
+        ]
+      }
+    ]
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "morning-clear-desert",
+  "voice": "en-US-AvaMultilingualNeural",
+  "fingerprint": "splash|f1,bigrig,firetruck|splash_eedbcd73@morning-clear-desert|pit@obs1,stuck@obs1,win",
+  "outcomes": [
+    "pit@obs1",
+    "stuck@obs1",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->55.5 m, 3.0->63.0 m, 3.0->118.1 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [wall, pit, hill] (15-94 m), finish 98 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.6s, 9.1s, 9.5s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": false,
+      "detail": "rintangan [1, 1]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "48.1 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "14.8s, 12.4s, 20.8s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "splash|f1,bigrig,firetruck|splash_eedbcd73@morning-clear-desert|pit@obs1,stuck@obs1,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗",
+  "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 #Shorts",
+  "description": "Nitro the race car, Titan the big rig and Hydro the fire truck take on the SLIPPERY SPLASH ZONE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "slippery road",
+    "water puddle",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "big rig",
+    "fire truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 8.6,
+      "outcome": "pit",
+      "event_t": 8.63,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 14.8,
+      "event_out": 10.57,
+      "x_start": 3.0,
+      "x_end": 55.5,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 8.45,
+      "outcome": "stuck",
+      "event_t": 9.07,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": false,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 14.8,
+      "duration": 12.43,
+      "event_out": 23.9,
+      "x_start": 3.0,
+      "x_end": 63.0,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 12.8,
+      "outcome": "win",
+      "event_t": 9.53,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 27.23,
+      "duration": 20.83,
+      "event_out": 38.73,
+      "x_start": 3.0,
+      "x_end": 118.1,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the slippery splash zone?",
+    "Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Level three! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Sploosh! Nitro spun out and splashed into the pool!",
+    "Uh oh... Titan is totally stuck!",
+    "Yes! Hydro made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AvaMultilingualNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_splash_s008/SIM_SPLASH_V2_S008.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_splash_s008/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_splash_s008/SIM_SPLASH_V2_S008_audit.md",
+  "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO"
+}

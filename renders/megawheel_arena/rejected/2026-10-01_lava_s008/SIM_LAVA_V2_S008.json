@@ -1,0 +1,246 @@
+{
+  "video_id": "SIM_LAVA_V2_S008",
+  "status": "REJECTED",
+  "engine": "sim-prototype v2",
+  "series": "lava",
+  "seed": 8,
+  "fps": 30,
+  "duration": 42.73,
+  "track_id": "lava_f0e06872",
+  "track_params": {
+    "vents": [
+      {
+        "x": 50.01,
+        "period": 2.56,
+        "phase": 2.48,
+        "dur": 0.8,
+        "height": 6.4
+      },
+      {
+        "x": 59.66,
+        "period": 2.57,
+        "phase": 1.87,
+        "dur": 0.7,
+        "height": 6.6
+      },
+      {
+        "x": 89.37,
+        "period": 3.11,
+        "phase": 2.74,
+        "dur": 0.83,
+        "height": 6.9
+      }
+    ],
+    "pits": [
+      [
+        35.51,
+        41.01,
+        3.0
+      ],
+      [
+        73.81,
+        81.01,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        68.11,
+        73.81,
+        1.51
+      ]
+    ]
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "night-clear-volcano",
+  "voice": "en-US-AriaNeural",
+  "fingerprint": "lava|f1,bigrig,monster|lava_f0e06872@night-clear-volcano|pit@obs0,stuck@obs0,win",
+  "outcomes": [
+    "pit@obs0",
+    "stuck@obs0",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->38.0 m, 3.0->36.7 m, 3.0->150.2 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "5 rintangan [lava, vent, vent, lava, vent] (36-91 m), finish 100 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "6.9s, 5.3s, 7.0s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": false,
+      "detail": "rintangan [0, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-50 s",
+      "ok": true,
+      "detail": "42.7 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "14.0s, 9.9s, 18.9s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "lava|f1,bigrig,monster|lava_f0e06872@night-clear-volcano|pit@obs0,stuck@obs0,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Cars VS Lava Road! Who Survives? 🌋🔥",
+  "title": "Cars VS Lava Road! Who Survives? 🌋🔥 #Shorts",
+  "description": "Nitro the race car, Titan the big rig and Rocky the monster truck take on the ERUPTING LAVA ROAD! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "lava",
+    "volcano",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "big rig",
+    "monster truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 8.0,
+      "outcome": "pit",
+      "event_t": 6.87,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 0.0,
+      "duration": 13.97,
+      "event_out": 9.93,
+      "x_start": 3.0,
+      "x_end": 38.0,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 11.95,
+      "outcome": "stuck",
+      "event_t": 5.3,
+      "obstacle": 0,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 13.97,
+      "duration": 9.9,
+      "event_out": 20.57,
+      "x_start": 3.0,
+      "x_end": 36.7,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "ROCKY THE MONSTER TRUCK",
+      "speed": 20.0,
+      "outcome": "win",
+      "event_t": 7.03,
+      "obstacle": 4,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 23.87,
+      "duration": 18.87,
+      "event_out": 32.43,
+      "x_start": 3.0,
+      "x_end": 150.2,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Level one! Nitro the race car! Super fast... but can Nitro handle the erupting lava road?",
+    "Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Level three! Rocky the monster truck. Big wheels, big jump!",
+    "Oh no! Nitro fell into the lava and is melting!",
+    "Uh oh... Titan is totally stuck!",
+    "Yes! Rocky made it! We have a winner!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-AriaNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_lava_s008/SIM_LAVA_V2_S008.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_lava_s008/preview",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-01_lava_s008/SIM_LAVA_V2_S008_audit.md",
+  "reject_reason": "superseded: re-made with narrator voice C + spoken READY-GO"
+}
