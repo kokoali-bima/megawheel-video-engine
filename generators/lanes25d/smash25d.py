@@ -19,6 +19,7 @@ Usage (cd /root/video-engine):
   ./venv/bin/python generators/lanes25d/smash25d.py --seed 1                 # -> renders/megawheel_arena/pending/
   ./venv/bin/python generators/lanes25d/smash25d.py --seed 1 --preview-only  # -> work/lanes25d/previews/
   [--arena lava|mud|ice]   force the arena (tests)
+  [--dry-run]              simulate + battle checks only (fast seed search, nothing written)
 Exit codes: 0 ok · 1 duplicate / STOP · 5 checks failed.
 """
 import argparse
@@ -1305,6 +1306,7 @@ def main():
     ap.add_argument("--preview-only", action="store_true")
     ap.add_argument("--name", default="")
     ap.add_argument("--arena", default="", choices=["", *ARENAS])
+    ap.add_argument("--dry-run", action="store_true", help="simulate + battle checks only, no render (seed search)")
     opt = ap.parse_args()
     se.load_cast()
     se.detect_font()
@@ -1342,6 +1344,11 @@ def main():
           f"outs={[(nick(c['key']), c['out_kind'], round(c['out'], 1)) for c in outs]} winner={nick(winner['key'])} "
           f"hp={round(winner['hp'])} battle={winner['finish']:.1f}s frames={len(frames)} ({len(frames) / FPS:.1f}s)",
           flush=True)
+    if opt.dry_run:
+        ok = (len(outs) == 3 and 15 <= winner["finish"] <= 38 and sum(h["rel"] > 6 for h in hits) >= 3
+              and sum(1 for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")) >= 3)
+        print(f"[smash] dry-run {'PASS' if ok else 'FAIL'}", flush=True)
+        raise SystemExit(0 if ok else 5)
     race_idx = [(j, ft) for j, (mode, ft) in enumerate(frames) if mode == "race"]
 
     def out_of(t):
