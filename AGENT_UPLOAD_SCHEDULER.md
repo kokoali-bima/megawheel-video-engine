@@ -59,6 +59,9 @@ berhenti kalau `git_sync pull` gagal. Pasang **di VM 99.3** (tempat kode dan tok
 (12:00 WIB = 01:00 ET, jauh sebelum slot 11:00 ET.) Jangan menjadwalkan lebih sering dari 1× sehari (kuota YouTube),
 jangan menambah langkah approve/render ke cron. Cek hasil: `tail -50 /root/video-engine/work/daily_publish.log`.
 
+**Verifikasi harian: bot agent user, 14:00 WIB** (user 2026-10-01): membaca log, `publish_queue.py show`,
+`drive_sync.py status`, lalu melapor ke user ("PERLU TINDAKAN" di baris pertama kalau run gagal atau tidak ada).
+
 ## 2. Latar singkat untuk agent
 
 | Hal | Nilai |
