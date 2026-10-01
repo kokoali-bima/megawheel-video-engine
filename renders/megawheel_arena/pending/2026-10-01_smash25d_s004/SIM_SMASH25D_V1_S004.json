@@ -1,0 +1,99 @@
+{
+  "video_id": "SIM_SMASH25D_V1_S004",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "smash25d v1",
+  "series": "smash25d",
+  "seed": 4,
+  "fps": 30,
+  "duration": 33.73,
+  "params": {
+    "cast": [
+      "bus",
+      "monster",
+      "sports",
+      "taxi"
+    ],
+    "arena": "mud",
+    "chaos": [
+      [
+        "ufo",
+        5.11
+      ],
+      [
+        "kraggor",
+        9.77
+      ],
+      [
+        "crack",
+        15.52
+      ],
+      [
+        "missile",
+        20.67
+      ]
+    ]
+  },
+  "arena": "mud",
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "morning-clear-beach",
+  "voice": "en-US-GuyNeural",
+  "outcomes": [
+    "p4+ring",
+    "win",
+    "p3+ring",
+    "p2+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "4 Cars Enter, 1 Survives! 💥 Smash Arena",
+  "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena #Shorts",
+  "description": "Buster, Rocky, Zippy and Tilly enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "sports car",
+    "taxi",
+    "mud",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Is that a UFO? It's grabbing Tilly!",
+    "Oh no! It's Kraggor! The monster wants in on the action!",
+    "Buster is out! Splat, right into the mud!",
+    "Zippy is out! Splat, right into the mud!",
+    "The floor is cracking! Here comes the lava!",
+    "Tilly is down! Down for the count!",
+    "And your winner... Rocky! The champion of the Smash Arena!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-GuyNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s004/SIM_SMASH25D_V1_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s004/preview"
+}
