@@ -1,0 +1,100 @@
+{
+  "video_id": "SIM_SMASH25D_V2_S003",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "smash25d v2",
+  "series": "smash25d",
+  "seed": 3,
+  "fps": 30,
+  "duration": 33.93,
+  "params": {
+    "cast": [
+      "icecream",
+      "monster2",
+      "taxi",
+      "f1"
+    ],
+    "arena": "lava",
+    "chaos": [
+      [
+        "kraggor",
+        4.9
+      ],
+      [
+        "crack",
+        10.11
+      ],
+      [
+        "ufo",
+        15.3
+      ],
+      [
+        "missile",
+        20.57
+      ]
+    ]
+  },
+  "arena": "lava",
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "countryside"
+  },
+  "theme_id": "night-clear-countryside",
+  "voice": "en-US-EricNeural",
+  "outcomes": [
+    "win",
+    "p3+ring",
+    "p2+ring",
+    "p4+ring"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Crash Battle! Only One Can Win! 💥",
+  "title": "Crash Battle! Only One Can Win! 💥 #Shorts",
+  "description": "Sprinkles, Grizzly, Tilly and Nitro enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "ice cream truck",
+    "monster truck",
+    "taxi",
+    "race car",
+    "lava",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Oh no... it's Kraggor!",
+    "Oh my! What a hit!",
+    "The floor is breaking!",
+    "Nitro is out!",
+    "Grizzly is out!",
+    "A UFO! It's got Tilly!",
+    "Your winner... Sprinkles!",
+    "Let's see that again... in slow motion!",
+    "Look at that! Kraggor flattens Nitro!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EricNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/preview"
+}
