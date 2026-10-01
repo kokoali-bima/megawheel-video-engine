@@ -1203,7 +1203,7 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_
 
     busy = 0.0
     for t_want, text in lines:                                   # narration: never overlapping
-        a = se.tts(text)
+        a = se.ready_go_audio() if text == se.READY_SENTINEL else se.tts(text)
         t0 = max(t_want, busy + 0.15)
         place(narr, a, t0)
         busy = t0 + len(a) / se.SR
@@ -1302,7 +1302,7 @@ def main():
         return len(frames) / FPS
 
     names = [nick(c["key"]) for c in cars]
-    lines = [(0.15, f"Four racers, one finish line! {names[0]}, {names[1]}, {names[2]} and {names[3]}. Who will win?")]
+    lines = [(0.0, se.READY_SENTINEL), (1.2, f"Four racers, one finish line! {names[0]}, {names[1]}, {names[2]} and {names[3]}. Who will win?")]
     story = [(c["trig"], HAZARDS[c["hz"]["type"]]["line"].format(n=nick(c["key"]))) for c in hits]
     story += [(c["dodge_t"], f"Nice move! {nick(c['key'])} dodges the {DODGEABLE[c['dodged']]}!")
               for c in cars if c.get("dodge_t") is not None]
@@ -1320,6 +1320,12 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
+    busy = 0.0                                                   # end card lasts until the CTA has been said
+    for t_want, text in lines:
+        d = len(se.ready_go_audio() if text == se.READY_SENTINEL else se.tts(text)) / se.SR
+        busy = max(t_want, busy + 0.15) + d
+    while len(frames) / FPS < busy + 0.7:
+        frames.append(("cta", frames[-1][1]))
     audio = build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_start)
     se.cb_finish(f"narrator {name}")                             # missing voice-C lines -> Modal -> restart
     se.write_wav(wav, audio)
@@ -1496,7 +1502,7 @@ def main():
                      f"🔔 Subscribe to {se.CHANNEL} for new car challenges every week.\n\n"
                      "#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena"),
         tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + sorted({h["type"] for h in HZ}),
-        narration=[txt for _, txt in lines],
+        narration=["Ready... Go!" if txt == se.READY_SENTINEL else txt for _, txt in lines],
         assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration " + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {voice}" if voice.startswith("chatterbox") else f"Edge-TTS {voice}"),
         video_path=out, preview_dir=prev)
     with open(os.path.join(out_dir, f"{name}.json"), "w") as fh:

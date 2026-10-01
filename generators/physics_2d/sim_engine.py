@@ -922,7 +922,7 @@ def candidate_runs():
             if any(vk == used for used, _ in story):         # nobody plays two levels
                 continue
             text = intro_text(li, vk)
-            audio = tts(text)
+            audio = np.concatenate([ready_go_audio(), np.zeros(int(0.12 * SR)), tts(text)])
             cands = runs_for(vk, want, len(audio) / SR)
             if cands:
                 break
@@ -1209,10 +1209,24 @@ def cb_finish(note):
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
 
+READY_LINE, GO_LINE = "Ready...", "Go!"
+READY_SENTINEL = "__READY_GO__"                  # narration placeholder for the spoken READY... GO!
+
+
+def ready_go_audio():
+    """Spoken 'Ready... Go!' matching the READY (0-0.5 s) / GO (0.5-1.05 s) pop: GO starts at >= 0.42 s."""
+    r, g = tts(READY_LINE), tts(GO_LINE)
+    off = max(len(r) + int(0.05 * SR), int(0.42 * SR))
+    out = np.zeros(off + len(g))
+    out[:len(r)] += r
+    out[off:] += g
+    return out
+
+
 def tts(text):
     if CB["on"]:
         an = _announcer()
-        style = "norm" if text == CTA else "call"
+        style = "norm" if text == CTA else "hype" if text == GO_LINE else "call"
         if os.path.exists(an.path(text, style, CB["who"], "studio")):
             return an.get(text, style, CB["who"], "studio")
         CB["missing"].append((text, style, CB["who"], "studio"))
@@ -3750,7 +3764,7 @@ def main():
                      x_start=round(float(L["rec"]["cx"][0]), 1), x_end=round(float(L["rec"]["cx"][-1]), 1),
                      level_color=[int(c * 255) for c in LEVEL_COLORS[li]])
                 for li, L in enumerate(LEVELS)],
-        narration=intro_texts + outcome_lines + ([REPLAY_LINE] if any_replay else [])
+        narration=[f"Ready... Go! {t}" for t in intro_texts] + outcome_lines + ([REPLAY_LINE] if any_replay else [])
                   + [CTA],
         assets="100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration "
                + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {VOICE}" if VOICE.startswith("chatterbox") else f"Edge-TTS {VOICE}"),

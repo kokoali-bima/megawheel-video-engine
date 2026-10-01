@@ -1307,6 +1307,13 @@ def kaiju_step(strength=1.0, seed=3):
 
 
 def say(text, style, who="m1"):
+    if text == se.READY_SENTINEL:                                # "Ready... Go!" timed to the READY / GO pop
+        r, g = say(se.READY_LINE, "call", who), say(se.GO_LINE, "hype", who)
+        off = max(len(r) + int(0.05 * se.SR), int(0.42 * se.SR))
+        out = np.zeros(off + len(g))
+        out[:len(r)] += r
+        out[off:] += g
+        return out
     if USE_CB:
         return announcer.get(text, style, who)
     se.VOICE = EDGE_VOICES[who]
@@ -1566,7 +1573,8 @@ def main():
                  else f"{nick(c['key'])} is down!" for c in outs]
     chaos_who = [CHAOS_WHO[ch["type"]] for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")]
     react = "What a champion!"
-    needed = ([(ladies, "intro", "m1")] + [(cl, "hype", "m1") for cl in calls]
+    needed = ([(ladies, "intro", "m1"), (se.READY_LINE, "call", "m1"), (se.GO_LINE, "hype", "m1")]
+              + [(cl, "hype", "m1") for cl in calls]
               + [(x, "hype", w) for x, w in zip(chaos_lines, chaos_who)] + [(x, "hype", "f1") for x in out_lines]
               + [("Barriers down!", "hype", "m1")] + [(HIT_CALLS_F[i % 3], "hype", "f1") for i in range(len(bigh))]
               + [(win_line, "call", "m1"), (react, "hype", "f1"),
@@ -1603,6 +1611,7 @@ def main():
                (out_of(winner["finish"]) + 0.3, win_line, "call", "m1"),
                (cta_start + 0.2, se.CTA, "norm", "m1")]
     anchors += [(intro_starts[i] + 0.2, calls[i], "hype", "m1") for i in range(4)]
+    anchors.append((out_of(0.0), se.READY_SENTINEL, "call", "m1"))
     extras = [(out_of(winner["finish"]) + 2.0, 2, react, "hype", 1.6, "f1")]   # (want, prio, text, style, late, who)
     for ch, line, who in zip([ch for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")], chaos_lines, chaos_who):
         extras.append((out_of(ch["T"] - ch["warn"]) + 0.05, 3, line, "hype", 1.0, who))
@@ -1863,7 +1872,7 @@ def main():
                      "#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena"),
         tags=TAGS + [se.VEHICLES[c["key"]]["display"].split(" THE ")[1].lower() for c in cars] + [ARENA, "ufo",
                                                                                                  "kaiju", "missile"],
-        narration=[txt for _, txt in lines],
+        narration=["Ready... Go!" if txt == se.READY_SENTINEL else txt for _, txt in lines],
         assets="100% procedurally generated (cairo 2.5D render + synthesized audio), narration " + (f"Chatterbox TTS (open source, Modal GPU) synthetic voice {voice}" if voice.startswith("chatterbox") else f"Edge-TTS {voice}"),
         video_path=out, preview_dir=prev)
     with open(os.path.join(out_dir, f"{name}.json"), "w") as fh:
