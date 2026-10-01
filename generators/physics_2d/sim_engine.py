@@ -860,7 +860,7 @@ def bh_car(v):
     return v["body"][1] + v["wheel_r"] * 2 + v["travel"]
 
 
-TARGET_TOTAL = (42.0, 49.5)   # seconds, pacing window used when picking runs
+TARGET_TOTAL = (44.0, 57.0)   # seconds, pacing window (v3.9: +READY-GO hold, voice C; Shorts limit 60 s)
 PICK_STATS = {}
 
 
@@ -871,7 +871,7 @@ def event_min_t(intro_d):
 
 def level_cap(L):
     d = SERIES_DEFS[SERIES]
-    return d["max_win"] if L["event"]["type"] == "win" else d["max_fail"]
+    return (d["max_win"] + 1.5 if L["event"]["type"] == "win" else d["max_fail"]) + HOLD_S   # + READY-GO hold, voice-C CTA
 
 
 def is_spectacular(L):
