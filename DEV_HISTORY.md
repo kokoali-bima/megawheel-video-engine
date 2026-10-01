@@ -158,6 +158,27 @@
 - Semua video lama berstatus `RENDERED_PENDING_APPROVAL` (6 video, CTA "MegaWheel Kids" + suara anak) → **`SUPERSEDED_REBRAND`**. Tidak untuk diupload, dan tidak dihitung dalam rotasi/keunikan.
 - BLUEPRINT Aturan Nol no. 7: aturan audiens semua umur.
 
+## 2026-10-01 — v3.6: SMASH ARENA audio v2 — narasi sinkron, gaya announcer, penonton, suara kaiju (Claude Code, Opus)
+
+Evaluasi user atas SIM_SMASH25D_V1_S001: narasi tidak pas dengan video dan masih terdengar setelah video selesai; gaya bicara kurang cocok untuk arena gulat; harus ada sorak penonton; suara mesin kebesaran; Kraggor perlu efek suara; CTA dan replay harus disebut narator, dan komentar replay harus ikut momen replay.
+
+**Analisa (diukur):**
+- Narasi masuk antrian tanpa ada yang dibuang: pemenang telat 7,0 s, kalimat replay telat 9,5 s, CTA telat 5,1 s. Narasi selesai di 40,6 s, padahal video 35,7 s, jadi CTA terpotong.
+- Kalimatnya terlalu panjang (kalimat Kraggor 4,5 s).
+- Mixing masih resep balapan: mesin kontinu, penonton hanya letupan pendek.
+- Auman Kraggor hanya auman naga yang dipanjangkan, lalu diredam oleh ducking narasi.
+
+**Perbaikan:**
+- `schedule_narration`: kalimat wajib (pembuka, pemenang, "Let's see that again… in slow motion!", komentar momen replay pada detik slow-mo-nya, CTA) diletakkan berurutan. Kalimat aksi hanya masuk kalau muat di celah dan telat ≤0,6–1,3 s; kalau tidak, dibuang. End card memanjang sampai CTA selesai diucapkan.
+- Kalimat pendek gaya gulat, dengan intonasi per jenis (`VOICE_STYLE`): pembuka lambat dan dalam, aksi cepat dan tinggi, pengumuman pemenang tegas. Efek gema PA.
+- Mixing arena:
+  - Mesin ×0.22, musik ×0.6.
+  - `crowd_bed` kontinu (riuh dan tepuk tangan).
+  - `cheer`/`gasp` di setiap tabrakan besar, eliminasi, dan kekacauan; sorakan terbesar saat pemenang diumumkan.
+- `kaiju_roar` (geraman saw rendah, jeritan terdistorsi, rasp, gema) dan `kaiju_step` (dentuman rendah): langkah kaki saat kepala naik, auman saat mulut terbuka, dentuman saat menginjak.
+- Log render sekarang mencetak jadwal narasi untuk verifikasi.
+- smash25d engine → v2. v1 S001–S004 REJECTED (superseded). v2 S001–S004 pending: semua PASS, narasi selesai sebelum video berakhir.
+
 ## 2026-10-01 — v3.5: SMASH ARENA (`smash25d`) + batch CHALLENGE + peran slot 19:00 (Claude Code, Opus)
 
 User: program harian = 1 CHALLENGE + 1 RACE + 1 SMASH ARENA. Setelah melihat v1: "masih kurang, terlalu sempit, harusnya tiba-tiba ada halangan: UFO, rudal, atau godzilla … lantai terbelah lalu keluar lahar … narasinya gaya petinju / UFC / pembawa acara gulat".
