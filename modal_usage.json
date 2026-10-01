@@ -634,6 +634,16 @@
    "gpu_seconds": 38.9,
    "wall_seconds": 68.5,
    "cost_usd": 0.0099
+  },
+  {
+   "date": "2026-10-01",
+   "note": "S01E01 all dialogue r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 36,
+   "gpu_seconds": 208.1,
+   "wall_seconds": 247.9,
+   "cost_usd": 0.0531
   }
  ]
 }
