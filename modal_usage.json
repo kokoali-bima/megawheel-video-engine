@@ -517,13 +517,73 @@
   },
   {
    "date": "2026-10-01",
-   "note": "S01E01 voice casting r1",
+   "note": "narrator TEST_bumps_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 76.0,
+   "wall_seconds": 105.6,
+   "cost_usd": 0.0194
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_splash_902 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 6,
+   "gpu_seconds": 78.6,
+   "wall_seconds": 108.9,
+   "cost_usd": 0.0201
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_splash_903 r1",
    "gpu": "L4",
    "engine": "chatterbox-tts",
    "lines": 7,
-   "gpu_seconds": 70.5,
-   "wall_seconds": 158.1,
-   "cost_usd": 0.018
+   "gpu_seconds": 88.9,
+   "wall_seconds": 129.4,
+   "cost_usd": 0.0227
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_lava_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 45.7,
+   "wall_seconds": 74.3,
+   "cost_usd": 0.0117
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_race25d_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 59.5,
+   "wall_seconds": 195.1,
+   "cost_usd": 0.0152
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_race25d_902 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 49.9,
+   "wall_seconds": 72.8,
+   "cost_usd": 0.0127
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator TEST_race25d_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 64.7,
+   "wall_seconds": 93.4,
+   "cost_usd": 0.0165
   }
  ]
 }
