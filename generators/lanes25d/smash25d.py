@@ -257,7 +257,9 @@ def simulate(seed):
                 c["vz"] += dvz * g
             else:                                                # wrecked / waiting / celebrating: roll to a stop
                 damp = 0.985 if ARENA == "ice" else 0.94
-                if c is winner and t_end is not None:            # victory donut
+                if c is winner and t_end is not None:            # victory donut + hops
+                    if c["h"] <= 0 and t - winner["finish"] > 0.6 and t - c.get("hop_t", -9) > 1.0:
+                        c["vh"], c["hop_t"] = 5.0, t
                     c["th"] += 2.6 * dt
                     c["vx"] += (math.cos(c["th"]) * 5 - c["vx"]) * 0.08
                     c["vz"] += (math.sin(c["th"]) * 5 - c["vz"]) * 0.08
@@ -491,7 +493,7 @@ def simulate(seed):
                     c["alive"], c["out"], c["out_kind"] = False, t, "wreck"
                     events.append(("wreck", t, c["x"], c["z"]))
             winner["finish"] = t
-            t_end = t + 2.6
+            t_end = t + 4.6                                      # winner showcase
             FREEZE_T = t
         # record (race25d.state layout: x, z, h, yaw, pitch, v, sq, split, burn, patched, ice, tires)
         if int(round(t * 120)) % 4 == 0:
@@ -543,7 +545,7 @@ def build_timeline(cars, hits, winner):
     mom = big_moments(cars, hits)
     slows = sorted([(m[0] - 0.15, m[0] + 0.5) for m in mom[:2]])
     frames, t = [], 0.0
-    end = winner["finish"] + 2.2
+    end = winner["finish"] + 4.2                                 # the winner shows off before the replay
     while t < end:
         frames.append(("race", t))
         t += (0.4 if any(a < t < b for a, b in slows) else 1.0) / FPS
@@ -1045,6 +1047,55 @@ def draw_chaos_air(ctx, ch, t, camx):
                     ctx.fill()
 
 
+def spotlight(ctx, x, y, r0=130, r1=460, a=0.62):
+    g = cairo.RadialGradient(x, y, r0, x, y, r1)
+    g.add_color_stop_rgba(0, 0, 0, 0, 0)
+    g.add_color_stop_rgba(1, 0, 0, 0.05, a)
+    ctx.rectangle(0, 0, W, H)
+    ctx.set_source(g)
+    ctx.fill()
+    g2 = cairo.RadialGradient(x, y, 0, x, y, r0 * 1.3)          # warm light cone
+    g2.add_color_stop_rgba(0, 1, 0.95, 0.75, 0.22)
+    g2.add_color_stop_rgba(1, 1, 0.95, 0.75, 0)
+    ctx.arc(x, y, r0 * 1.3, 0, 2 * math.pi)
+    ctx.set_source(g2)
+    ctx.fill()
+
+
+def intro_card(ctx, vk, age, last):
+    """Fighter card (lower third): name, what it is, weight, speed stars."""
+    veh = se.VEHICLES[vk]
+    slide = 1 - se.ease_out_back(min(1.0, age / 0.35))
+    ctx.save()
+    ctx.translate(-1100 * slide, 0)
+    se.rrect(ctx, 40, 1390, 1000, 270, 34)
+    ctx.set_source_rgba(0.05, 0.05, 0.14, 0.88)
+    ctx.fill()
+    se.rrect(ctx, 40, 1390, 36, 270, 18)
+    ctx.set_source_rgb(*veh["color"])
+    ctx.fill()
+    se.draw_text(ctx, ("AND... " if last else "") + nick(vk).upper(), 560, 1470, 120, fill=(1, 0.86, 0.12), max_w=880)
+    se.draw_text(ctx, "THE " + veh["display"].split(" THE ")[1], 560, 1560, 52, max_w=880)
+    stars = int(round(1 + 4 * (VMAX[vk] - 5.4) / 3.0))
+    se.draw_text(ctx, f"WEIGHT {veh['mass'] / 1000:.1f} T    SPEED " + "★" * stars + "☆" * (5 - stars), 560, 1625, 40,
+                 fill=(0.8, 0.85, 1.0), max_w=880)
+    ctx.restore()
+
+
+def crown(ctx, x, y, s):
+    se.poly(ctx, [(x - s, y), (x - s, y - 0.9 * s), (x - 0.5 * s, y - 0.45 * s), (x, y - 1.1 * s),
+                  (x + 0.5 * s, y - 0.45 * s), (x + s, y - 0.9 * s), (x + s, y)])
+    ctx.set_source_rgb(1, 0.82, 0.1)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.6, 0.4, 0.0)
+    ctx.set_line_width(max(2, s * 0.08))
+    ctx.stroke()
+    for q, cx in enumerate((x - 0.5 * s, x, x + 0.5 * s)):
+        ctx.arc(cx, y - 0.25 * s, s * 0.12, 0, 2 * math.pi)
+        ctx.set_source_rgb(*((0.9, 0.1, 0.2) if q != 1 else (0.1, 0.5, 0.95)))
+        ctx.fill()
+
+
 def draw_hpbar(ctx, sx, sy, hp, k):
     w, h = 2.4 * k, 0.4 * k
     se.rrect(ctx, sx - w / 2 - 3, sy - 3, w + 6, h + 6, 6)
@@ -1288,7 +1339,7 @@ def box_avg(x, k):
     return np.pad(y, (pad // 2, pad - pad // 2), mode="edge")
 
 
-def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start):
+def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start, intro_times=()):
     total = len(frames) / FPS
     n = int(total * se.SR) + se.SR
     narr, eng, sfx, crowd_buf = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n)
@@ -1303,7 +1354,7 @@ def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, c
         place(narr, a, t0)
     wrel, amp, pitch = [], [], []
     for mode, t in frames:
-        v = R.state(winner, t)[5] if mode != "cta" else 0.0
+        v = R.state(winner, t)[5] if mode not in ("cta", "intro") else 0.0
         wrel.append(v / se.VEHICLES[winner["key"]]["wheel_r"] * 1.6)
         amp.append(0.0 if mode == "cta" else 0.55 + 0.45 * min(1.0, v / 10))
         pitch.append(1.0 if mode == "race" else 0.6)
@@ -1378,7 +1429,12 @@ def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, c
 
     for ev in events:
         ev_sfx(ev, out_of(ev[1]))
+    for q, it in enumerate(intro_times):                          # each fighter: whoosh + the crowd goes wild
+        place(sfx, se.synth_whoosh(), it, 0.6)
+        place(sfx, kaiju_step(0.5, seed=80 + q), it + 0.05, 0.5)
+        place(crowd_buf, cheer(1.8, 0.9, seed=70 + q), it + 0.1, 1.0)
     place(sfx, se.synth_win(), out_of(winner["finish"]), 0.9)
+    place(crowd_buf, cheer(3.0, 1.3, seed=23), out_of(winner["finish"]) + 1.6, 1.0)
     place(crowd_buf, cheer(4.5, 1.5, seed=21), out_of(winner["finish"]) + 0.05, 1.0)
     bed = crowd_bed(total + 1)                                   # the arena is never quiet (louder until the CTA)
     bed_env = np.ones(len(bed))
@@ -1456,6 +1512,21 @@ def main():
               and sum(1 for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")) >= 3)
         print(f"[smash] dry-run {'PASS' if ok else 'FAIL'}", flush=True)
         raise SystemExit(0 if ok else 5)
+    # INTRO: wide shot "Ladies and gentlemen", then every fighter is introduced (slot = length of the call)
+    se.VOICE = voice
+    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"   # arena PA echo
+    ladies = "Ladies and gentlemen... it's time to smash!"
+    calls = [("And... " if i == 3 else "") + f"{nick(c['key'])}, the "
+             f"{se.VEHICLES[c['key']]['display'].split(' THE ')[1].lower()}!" for i, c in enumerate(cars)]
+    wide_len = len(say(ladies, "intro")) / se.SR + 0.45
+    slots = [max(1.7, len(say(cl, "hype")) / se.SR + 0.5) for cl in calls]
+    intro_starts = [wide_len + sum(slots[:i]) for i in range(4)]
+    intro_frames = [("intro", j / FPS) for j in range(int((wide_len + sum(slots)) * FPS))]
+    lf = len(intro_frames) / FPS
+    frames = intro_frames + frames
+    cta_start += lf
+    if replay:
+        replay = (replay[0] + lf, replay[1], replay[2])
     race_idx = [(j, ft) for j, (mode, ft) in enumerate(frames) if mode == "race"]
 
     def out_of(t):
@@ -1466,11 +1537,10 @@ def main():
 
     names = [nick(c["key"]) for c in cars]
     arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink"}[ARENA]
-    se.VOICE = voice
-    se.TTS_CLARITY = se.TTS_CLARITY + ",aecho=0.8:0.5:45|90:0.22|0.12"   # arena PA echo
-    anchors = [(0.05, "Ladies and gentlemen... it's time to smash!", "intro"),
-               (out_of(winner["finish"]) + 0.25, f"Your winner... {nick(winner['key'])}!", "call"),
+    anchors = [(0.05, ladies, "intro"),
+               (out_of(winner["finish"]) + 0.3, f"The winner is... {nick(winner['key'])}! Yeah!", "call"),
                (cta_start + 0.2, se.CTA, "norm")]
+    anchors += [(intro_starts[i] + 0.2, calls[i], "hype") for i in range(4)]
     extras = []                                                  # (want, priority, text, style, max late)
     for ch in CHAOS_PLAN:
         if ch.get("done") and not ch.get("skip"):
@@ -1513,14 +1583,18 @@ def main():
     os.makedirs(prev, exist_ok=True)
     os.makedirs(se.WORK, exist_ok=True)
     wav = f"{se.WORK}/mix_{name}.wav"
-    se.write_wav(wav, build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start))
+    se.write_wav(wav, build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, cta_start,
+                                  intro_times=intro_starts))
     silent = f"{se.WORK}/v_{name}.mp4"
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
                           stdin=subprocess.PIPE)
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     ctx = cairo.Context(surf)
-    marks = {int(out_of(2.5) * FPS): "start"}
+    marks = {int(out_of(2.5) * FPS): "start", int(wide_len * 0.6 * FPS): "intro_wide"}
+    for i, c in enumerate(cars):
+        marks[int((intro_starts[i] + 1.0) * FPS)] = f"intro_{nick(c['key']).lower()}"
+    marks[int(out_of(winner["finish"] + 2.6) * FPS)] = "showcase"
     for c in outs:
         marks[int(out_of(c["out"] + 0.35) * FPS)] = f"out_{nick(c['key']).lower()}"
     if bigh:
@@ -1534,6 +1608,11 @@ def main():
     hit_ev = [e for e in events if e[0] == "hit"]
     camx, zoom, prev_mode, empty_frames = None, 1.0, None, 0
     for fi, (mode, t) in enumerate(frames):
+        u, intro_i = None, None
+        if mode == "intro":                                      # cars wait on their spots during the intro
+            u, t = t, 0.0
+            if u >= wide_len:
+                intro_i = max(i for i in range(4) if u >= intro_starts[i])
         st = {id(c): R.state(c, t) for c in cars}
         show = [c for c in cars if c["out"] is None or t < c["out"] + 1.6]
         focus = None
@@ -1551,6 +1630,8 @@ def main():
             focus = (st[id(star)][0], st[id(star)][1])
         if (winner["finish"] is not None and t >= winner["finish"]) or mode == "cta":
             focus = (st[id(winner)][0], st[id(winner)][1])
+        if mode == "intro":
+            focus = None if intro_i is None else (st[id(cars[intro_i])][0], st[id(cars[intro_i])][1])
         xs = [st[id(c)][0] for c in show]
         lo, hi = min(xs) - 3.0, max(xs) + 3.0
         mid = (lo + hi) / 2
@@ -1561,7 +1642,9 @@ def main():
             want = min(1.6, max(fit, 1.15) * (1.2 if mode == "replay" else 1.08))
             if wide:
                 want = min(want, 1.1)
-        cut = camx is None or mode != prev_mode
+            if mode == "intro":
+                target, want = focus[0], 1.55
+        cut = camx is None or (mode != prev_mode and not (prev_mode == "intro" and mode == "race"))
         punch = 1.0
         for e in hit_ev:
             if e[4] > 0.5 and 0 <= t - e[1] < 0.3:
@@ -1582,7 +1665,7 @@ def main():
                 shx, shy = amp * math.sin(t * 90), amp * math.cos(t * 70)
         flash = any(0 <= t - s < 1.3 and int((t - s) * 6) % 2 == 0 for s in shrink_times())
         cheer = 1.0 if any(0 <= t - e[1] < 1.5 for e in events if e[0] in ("ringout", "wreck", "chaos")) or \
-            (t >= winner["finish"]) else 0.3
+            (t >= winner["finish"]) or mode == "intro" else 0.3
         se.draw_sky(ctx, camx * 0.35, WORLD_DY / se.S, 1.0)
         zb_top = ZC + HZ0 + 3.0 + 5 * 1.6                       # top row of the stands, in screen space
         top_w = ground_y(zb_top) - 6 * 1.25 * k_of(zb_top)
@@ -1608,7 +1691,13 @@ def main():
                 continue
             if sink > 0:
                 ctx.push_group()
+            hop = 0.0
+            if intro_i is not None and c is cars[intro_i]:      # the introduced fighter bounces for the crowd
+                hop = abs(math.sin((u - intro_starts[intro_i]) * 6.0)) * 0.7 * k_of(st[id(c)][1])
+            ctx.save()
+            ctx.translate(0, -hop)
             hd = R.draw_car(ctx, c, t, camx)
+            ctx.restore()
             if sink > 0:
                 ctx.pop_group_to_source()
                 ctx.paint_with_alpha(1 - sink)
@@ -1625,7 +1714,24 @@ def main():
             draw_chaos_air(ctx, ch, t, camx)
         ctx.restore()
         se.draw_weather(ctx, fi / FPS)
-        if mode != "cta":
+        if mode == "intro":
+            if intro_i is None:
+                se.draw_text(ctx, "SMASH ARENA!", W / 2, 170, 120, fill=(1, 0.86, 0.12))
+                a_ = min(1.0, u / 0.5)
+                se.draw_text(ctx, "4 FIGHTERS... 1 SURVIVOR!", W / 2, 1520, 76, fill=(1, 1, 1), alpha=a_)
+            else:
+                c = cars[intro_i]
+                x_, z_ = st[id(c)][0], st[id(c)][1]
+                sx_ = 540 + (x_ - camx) * k_of(z_) * zoom
+                sy_ = PIV_Y + (ground_y(z_) - 1.3 * k_of(z_) - PIV_Y) * zoom + WORLD_DY
+                spotlight(ctx, sx_, sy_)
+                se.draw_text(ctx, "SMASH ARENA!", W / 2, 170, 100, fill=(1, 0.86, 0.12))
+                intro_card(ctx, c["key"], u - intro_starts[intro_i], intro_i == 3)
+        if mode == "race" and t >= winner["finish"] + 0.4 and id(winner) in heads:   # winner showcase
+            sx_, sy_, k_, _ = heads[id(winner)]
+            spotlight(ctx, sx_, sy_ + 60, 160, 520, 0.5)
+            crown(ctx, sx_, sy_ - 70 - 6 * math.sin(t * 5), 0.9 * k_ * zoom)
+        if mode not in ("cta", "intro"):
             for sx, sy, k, c in heads.values():
                 for h in hits:
                     if h["rel"] > 6 and h["b"] is c:
