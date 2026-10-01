@@ -1,0 +1,24 @@
+{
+  "title": "Scene 2 - Kota di pagi hari",
+  "location": "town", "theme_location": "city", "time": "morning", "weather": "clear", "music": "warm",
+  "actors": {
+    "sprinkles": {"vk": "icecream", "x": -9, "z": 1.0, "face": 1, "emo": "happy"},
+    "buster": {"vk": "bus", "x": 16, "z": 1.9, "face": -1, "emo": "normal", "hidden": true}
+  },
+  "props": [{"type": "poster", "x": 3.5, "z": 4.2, "w": 6.4, "h": 3.6,
+             "text": "MEGAWHEEL GRAND RACE\n30 DAYS TO GO!\nRegistration closes TODAY"}],
+  "shots": [
+    {"cam": "wide", "dx": -2, "hold": 4.0, "moves": {"sprinkles": {"to_x": -1.5, "speed": 2.2}}, "sfx": ["ding", ["ding", 1.6]],
+     "lines": [["sprinkles", "Ding-ding! Ice cream for everyone!", "happy"]]},
+    {"cam": "medium", "on": "sprinkles", "hold": 1.8, "emote": {"sprinkles": "surprised"}},
+    {"look": {"x": 3.5, "z": 4.2, "y": 8.0, "zoom": 2.2}, "hold": 2.4, "music": "hopeful"},
+    {"cam": "close", "on": "sprinkles", "music": "hopeful", "emote": {"sprinkles": "happy"},
+     "lines": [["sprinkles", "Thirty days...", "happy"]]},
+    {"cam": "two", "on": "sprinkles", "with": "buster", "zoom": 1.15,
+     "moves": {"buster": {"show": true, "to_x": 7.5, "speed": 3.5}},
+     "lines": [["buster", "You're staring at that poster again, Sprinkles.", "normal"]]},
+    {"cam": "close", "on": "sprinkles", "emote": {"sprinkles": "shy"},
+     "lines": [["sprinkles", "Just looking, Buster. Just... looking.", "shy"]]},
+    {"look": {"x": 3.5, "z": 4.2, "y": 7.2, "zoom": 3.2}, "hold": 2.2, "music": "tense"}
+  ]
+}

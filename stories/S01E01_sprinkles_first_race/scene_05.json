@@ -1,0 +1,29 @@
+{
+  "title": "Scene 5 - Kilas balik: janji kecil",
+  "location": "trackside", "theme_location": "countryside", "time": "sunset", "weather": "clear",
+  "music": "sad", "tint": "sepia",
+  "actors": {
+    "little_sprinkles": {"vk": "icecream", "x": -0.5, "z": 0.3, "face": 1, "scale": 0.62, "emo": "surprised"},
+    "grandpa_cone": {"vk": "icecream", "x": -6.5, "z": 0.6, "face": 1, "emo": "happy",
+                     "color": [0.55, 0.72, 0.92], "mustache": true},
+    "racer1": {"vk": "sports", "x": -40, "z": 2.6, "face": 1},
+    "racer2": {"vk": "f1", "x": -55, "z": 2.9, "face": 1}
+  },
+  "shots": [
+    {"cam": "wide", "dx": -2, "hold": 4.2, "caption": "MANY YEARS AGO", "sfx": [["engine", 1.2], ["engine", 2.0]],
+     "moves": {"racer1": {"to_x": 60, "speed": 30, "delay": 0.8}, "racer2": {"to_x": 60, "speed": 34, "delay": 1.3}}},
+    {"cam": "low", "on": "little_sprinkles", "emote": {"little_sprinkles": "excited"},
+     "moves": {"little_sprinkles": {"hop": true}},
+     "lines": [["little_sprinkles", "Grandpa! Look how fast they go!", "excited"]]},
+    {"cam": "two", "on": "grandpa_cone", "with": "little_sprinkles", "zoom": 1.25,
+     "lines": [["grandpa_cone", "Fast is nice, little one. But do you know what makes a real champion?", "calm"]]},
+    {"cam": "close", "on": "little_sprinkles", "lines": [["little_sprinkles", "Winning?", "surprised"]]},
+    {"cam": "close", "on": "grandpa_cone", "music": "hopeful",
+     "lines": [["grandpa_cone", "No. A champion is the one who stops... to help someone else.", "calm"]]},
+    {"cam": "two", "on": "grandpa_cone", "with": "little_sprinkles", "zoom": 1.25, "music": "hopeful",
+     "emote": {"grandpa_cone": "happy"}, "moves": {"little_sprinkles": {"hop": true}},
+     "lines": [["little_sprinkles", "Then one day, I'll race. And I'll be that kind of champion!", "excited"]]},
+    {"cam": "ecu", "on": "grandpa_cone", "music": "hopeful", "tail": 1.6,
+     "lines": [["grandpa_cone", "I know you will.", "calm"]]}
+  ]
+}
