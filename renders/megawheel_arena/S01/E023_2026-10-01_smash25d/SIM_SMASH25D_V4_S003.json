@@ -1,0 +1,109 @@
+{
+  "video_id": "SIM_SMASH25D_V4_S003",
+  "status": "APPROVED",
+  "engine": "smash25d v4",
+  "series": "smash25d",
+  "seed": 3,
+  "fps": 30,
+  "duration": 47.2,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "f1",
+      "police"
+    ],
+    "arena": "mud",
+    "chaos": [
+      [
+        "kraggor",
+        4.9
+      ],
+      [
+        "crack",
+        10.11
+      ],
+      [
+        "ufo",
+        15.3
+      ],
+      [
+        "missile",
+        20.57
+      ]
+    ]
+  },
+  "arena": "mud",
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "sunset-clear-city",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "win",
+    "p2+wreck",
+    "p4+ring",
+    "p3+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Crash Battle! Only One Can Win! 💥",
+  "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
+  "description": "Buster, Grizzly, Nitro and Siren enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "race car",
+    "police car",
+    "mud",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Buster, the school bus!",
+    "Grizzly, the monster truck!",
+    "Nitro, the race car!",
+    "And... Siren, the police car!",
+    "Ready... Go!",
+    "Oh no... it's Kraggor!",
+    "Oh my goodness! What a hit!",
+    "The floor is breaking!",
+    "Nitro is out!",
+    "Siren is down!",
+    "A UFO! It's got Grizzly!",
+    "The winner is... Buster! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Look at that! Kraggor flattens Siren!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E023_2026-10-01_smash25d/SIM_SMASH25D_V4_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E023_2026-10-01_smash25d/preview",
+  "episode": 23,
+  "season": 1,
+  "approved_date": "2026-10-01"
+}

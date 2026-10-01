@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 08:05). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 12:30). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -22,6 +22,18 @@
 | 13 | S01 | race25d | Hydro, Rocky, Tilly, Nitro | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 14 | S01 | race25d | Buster, Grizzly, Zippy, Siren | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 15 | S01 | race25d | Hydro, Nitro, Rocky, Tilly | 2026-09-30 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 16 | S01 | splash | Nitro, Buster, Hydro | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 17 | S01 | potholes | Zippy, Sprinkles, Buster | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 18 | S01 | bumps | Tilly, Titan, Grizzly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 19 | S01 | lava | Siren, Buster, Hydro | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 20 | S01 | splash | Nitro, Sprinkles, Tilly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 21 | S01 | potholes | Zippy, Titan, Sprinkles | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 22 | S01 | smash25d | Grizzly, Titan, Siren, Nitro | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 23 | S01 | smash25d | Buster, Grizzly, Nitro, Siren | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 24 | S01 | smash25d | Titan, Rocky, Tilly, Siren | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 25 | S01 | smash25d | Rocky, Hydro, Zippy, Tilly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 26 | S01 | smash25d | Rocky, Sprinkles, Siren, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
+| 27 | S01 | smash25d | Titan, Grizzly, Tilly, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 
 ## Menunggu approval (`pending/`)
 

@@ -1,0 +1,108 @@
+{
+  "video_id": "SIM_SMASH25D_V4_S011",
+  "status": "APPROVED",
+  "engine": "smash25d v4",
+  "series": "smash25d",
+  "seed": 11,
+  "fps": 30,
+  "duration": 52.87,
+  "params": {
+    "cast": [
+      "monster",
+      "icecream",
+      "police",
+      "sports"
+    ],
+    "arena": "lava",
+    "chaos": [
+      [
+        "kraggor",
+        5.73
+      ],
+      [
+        "ufo",
+        10.58
+      ],
+      [
+        "crack",
+        15.02
+      ],
+      [
+        "missile",
+        20.5
+      ]
+    ]
+  },
+  "arena": "lava",
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "sunset-clear-desert",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "win",
+    "p2+ring",
+    "p3+ring",
+    "p4+ring"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Crash Battle! Only One Can Win! 💥",
+  "title": "Crash Battle! Only One Can Win! 💥 | Ep. 26 #Shorts",
+  "description": "Rocky, Sprinkles, Siren and Zippy enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "monster truck",
+    "ice cream truck",
+    "police car",
+    "sports car",
+    "lava",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Rocky, the monster truck!",
+    "Sprinkles, the ice cream truck!",
+    "Siren, the police car!",
+    "And... Zippy, the sports car!",
+    "Ready... Go!",
+    "Oh no... it's Kraggor!",
+    "Did you see that?",
+    "A UFO! It's got Siren!",
+    "The floor is breaking!",
+    "Incoming missile!",
+    "The winner is... Rocky! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Look at that! Kraggor flattens Rocky!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E026_2026-10-01_smash25d/SIM_SMASH25D_V4_S011.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E026_2026-10-01_smash25d/preview",
+  "episode": 26,
+  "season": 1,
+  "approved_date": "2026-10-01"
+}

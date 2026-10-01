@@ -1,0 +1,108 @@
+{
+  "video_id": "SIM_SMASH25D_V4_S008",
+  "status": "APPROVED",
+  "engine": "smash25d v4",
+  "series": "smash25d",
+  "seed": 8,
+  "fps": 30,
+  "duration": 45.93,
+  "params": {
+    "cast": [
+      "monster",
+      "firetruck",
+      "sports",
+      "taxi"
+    ],
+    "arena": "mud",
+    "chaos": [
+      [
+        "missile",
+        4.9
+      ],
+      [
+        "crack",
+        9.91
+      ],
+      [
+        "kraggor",
+        14.95
+      ],
+      [
+        "ufo",
+        20.74
+      ]
+    ]
+  },
+  "arena": "mud",
+  "theme": {
+    "time": "night",
+    "weather": "snow",
+    "location": "countryside"
+  },
+  "theme_id": "night-snow-countryside",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "p2+ring",
+    "p4+ring",
+    "win",
+    "p3+ring"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "4 Cars Enter, 1 Survives! 💥 Smash Arena",
+  "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
+  "description": "Rocky, Hydro, Zippy and Tilly enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "monster truck",
+    "fire truck",
+    "sports car",
+    "taxi",
+    "mud",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Rocky, the monster truck!",
+    "Hydro, the fire truck!",
+    "Zippy, the sports car!",
+    "And... Tilly, the taxi!",
+    "Ready... Go!",
+    "Incoming missile!",
+    "Did you see that?",
+    "The floor is breaking!",
+    "Hydro is out!",
+    "Oh no... it's Kraggor!",
+    "The winner is... Zippy! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Kaboom! Right on Rocky!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/E025_2026-10-01_smash25d/SIM_SMASH25D_V4_S008.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E025_2026-10-01_smash25d/preview",
+  "episode": 25,
+  "season": 1,
+  "approved_date": "2026-10-01"
+}

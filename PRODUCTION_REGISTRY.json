@@ -1458,13 +1458,15 @@
         "win"
       ],
       "duration": 56.5,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_splash_s011",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_splash_s011/SIM_SPLASH_V2_S011_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E016_2026-10-01_splash",
+      "audit": "renders/megawheel_arena/S01/E016_2026-10-01_splash/SIM_SPLASH_V2_S011_audit.md",
+      "episode": 16,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 16 #Shorts"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S007",
@@ -1487,13 +1489,15 @@
         "win"
       ],
       "duration": 49.33,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_potholes_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_potholes_s007/SIM_POTHOLES_V2_S007_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E017_2026-10-01_potholes",
+      "audit": "renders/megawheel_arena/S01/E017_2026-10-01_potholes/SIM_POTHOLES_V2_S007_audit.md",
+      "episode": 17,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 17 #Shorts"
     },
     {
       "video_id": "SIM_BUMPS_V2_S010",
@@ -1516,13 +1520,15 @@
         "win"
       ],
       "duration": 48.57,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_bumps_s010",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_bumps_s010/SIM_BUMPS_V2_S010_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E018_2026-10-01_bumps",
+      "audit": "renders/megawheel_arena/S01/E018_2026-10-01_bumps/SIM_BUMPS_V2_S010_audit.md",
+      "episode": 18,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 18 #Shorts"
     },
     {
       "video_id": "SIM_LAVA_V2_S021",
@@ -1545,13 +1551,15 @@
         "win"
       ],
       "duration": 46.07,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_lava_s021",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_lava_s021/SIM_LAVA_V2_S021_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E019_2026-10-01_lava",
+      "audit": "renders/megawheel_arena/S01/E019_2026-10-01_lava/SIM_LAVA_V2_S021_audit.md",
+      "episode": 19,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 19 #Shorts"
     },
     {
       "video_id": "SIM_SPLASH_V2_S012",
@@ -1574,13 +1582,15 @@
         "win"
       ],
       "duration": 48.9,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_splash_s012",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_splash_s012/SIM_SPLASH_V2_S012_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E020_2026-10-01_splash",
+      "audit": "renders/megawheel_arena/S01/E020_2026-10-01_splash/SIM_SPLASH_V2_S012_audit.md",
+      "episode": 20,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 20 #Shorts"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S008",
@@ -1603,13 +1613,15 @@
         "win"
       ],
       "duration": 46.7,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_potholes_s008",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_potholes_s008/SIM_POTHOLES_V2_S008_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E021_2026-10-01_potholes",
+      "audit": "renders/megawheel_arena/S01/E021_2026-10-01_potholes/SIM_POTHOLES_V2_S008_audit.md",
+      "episode": 21,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S001",
@@ -1635,13 +1647,15 @@
         "p2+wreck"
       ],
       "duration": 49.93,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s001/SIM_SMASH25D_V4_S001_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E022_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E022_2026-10-01_smash25d/SIM_SMASH25D_V4_S001_audit.md",
+      "episode": 22,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S008",
@@ -1667,13 +1681,15 @@
         "p3+ring"
       ],
       "duration": 45.93,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s008",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s008/SIM_SMASH25D_V4_S008_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E025_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E025_2026-10-01_smash25d/SIM_SMASH25D_V4_S008_audit.md",
+      "episode": 25,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S011",
@@ -1699,13 +1715,15 @@
         "p4+ring"
       ],
       "duration": 52.87,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s011",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s011/SIM_SMASH25D_V4_S011_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E026_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E026_2026-10-01_smash25d/SIM_SMASH25D_V4_S011_audit.md",
+      "episode": 26,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 26 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S003",
@@ -1731,13 +1749,15 @@
         "p3+wreck"
       ],
       "duration": 47.2,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s003/SIM_SMASH25D_V4_S003_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E023_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E023_2026-10-01_smash25d/SIM_SMASH25D_V4_S003_audit.md",
+      "episode": 23,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S007",
@@ -1763,13 +1783,15 @@
         "p3+ring"
       ],
       "duration": 48.1,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s007/SIM_SMASH25D_V4_S007_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E024_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E024_2026-10-01_smash25d/SIM_SMASH25D_V4_S007_audit.md",
+      "episode": 24,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S012",
@@ -1795,13 +1817,15 @@
         "p2+ring"
       ],
       "duration": 47.0,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v4_s012/SIM_SMASH25D_V4_S012_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/E027_2026-10-01_smash25d",
+      "audit": "renders/megawheel_arena/S01/E027_2026-10-01_smash25d/SIM_SMASH25D_V4_S012_audit.md",
+      "episode": 27,
+      "season": 1,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "approved_date": "2026-10-01",
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts"
     }
   ]
 }
