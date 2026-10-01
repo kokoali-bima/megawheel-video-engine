@@ -50,9 +50,10 @@ def _words(s):
 
 
 def _score(want, got):
-    """Word match 0..1 between the script line and what speech recognition heard."""
+    """Letter-level match 0..1 between the script line and what speech recognition heard (made-up names like
+    'Kraggor' heard as 'Cragger' still pass; a wrong word like 'Siren' -> 'Lyroid' does not)."""
     import difflib
-    return difflib.SequenceMatcher(None, _words(want), _words(got)).ratio()
+    return difflib.SequenceMatcher(None, " ".join(_words(want)), " ".join(_words(got))).ratio()
 
 
 @app.function(image=image, gpu="L4", timeout=900)

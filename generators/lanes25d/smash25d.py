@@ -1345,6 +1345,8 @@ def schedule_narration(anchors, extras):
         busy = t0 + len(a) / se.SR
         placed.append((t0, busy, a, txt))
     for w, pr, txt, sty, ml, who in sorted(extras, key=lambda x: (-x[1], x[0])):
+        if USE_CB and not announcer.cached(txt, sty, who):       # failed voice QA: skip this reaction line
+            continue
         a = say(txt, sty, who)
         d = len(a) / se.SR
         t0, moved = w, True
@@ -1578,7 +1580,13 @@ def main():
               + [(win_line, "call", "m1"), (react, "hype", "f1"),
                  ("Let's see that again... in slow motion!", "call", "f1"), (se.CTA, "norm", "m1")]
               + ([(star_call, "hype", "m1")] if star_call else []))
-    USE_CB = opt.voice == "chatterbox" and announcer.prefetch(needed, note=f"announcer {name}")
+    essential = ([(ladies, "intro", "m1"), (se.READY_SET_GO, "clear", "m1"), (win_line, "call", "m1"),
+                  ("Let's see that again... in slow motion!", "call", "f1"), (se.CTA, "norm", "m1")]
+                 + [(cl, "hype", "m1") for cl in calls] + ([(star_call, "hype", "m1")] if star_call else []))
+    if opt.voice == "chatterbox":
+        announcer.prefetch(needed, note=f"announcer {name}")
+    # voice C if every MUST-say line passed QA; a reaction line that failed QA is simply skipped
+    USE_CB = opt.voice == "chatterbox" and all(announcer.cached(*e) for e in essential)
     if USE_CB:
         voice = announcer.VOICE_ID
     else:

@@ -54,7 +54,19 @@ def prefetch(items, note="announcer"):
         print(f"[voice] announcer tidak tersedia (ref/modal tidak ada) -> Edge TTS", flush=True)
         return False
     os.makedirs(CACHE, exist_ok=True)
-    todo = list(dict.fromkeys(it for it in items if not os.path.exists(path(*it))))
+    for rnd in range(2):                                         # 2nd round: re-take the lines that failed QA
+        todo = list(dict.fromkeys(it for it in items if not os.path.exists(path(*it))))
+        if not todo:
+            break
+        _generate(todo, items, f"{note} r{rnd + 1}")
+    return all(os.path.exists(path(*it)) for it in items)
+
+
+def cached(text, style, who="m1", fx="arena"):
+    return os.path.exists(path(text, style, who, fx))
+
+
+def _generate(todo, items, note):
     if todo:
         shutil.rmtree(BATCH, ignore_errors=True)
         os.makedirs(BATCH)
@@ -83,8 +95,7 @@ def prefetch(items, note="announcer"):
             if os.path.exists(src):
                 subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-af", FXS[fx], "-ac", "1", "-ar",
                                 str(se.SR), path(t, s, w, fx)], check=True)
-        print(f"[voice] {len(todo)} kalimat baru dibuat, {len(items) - len(todo)} dari cache", flush=True)
-    return all(os.path.exists(path(*it)) for it in items)
+        print(f"[voice] {len(todo)} kalimat baru diminta, {len(items) - len(todo)} dari cache", flush=True)
 
 
 def get(text, style, who="m1", fx="arena"):
