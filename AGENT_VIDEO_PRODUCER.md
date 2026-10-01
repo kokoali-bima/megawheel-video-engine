@@ -25,7 +25,7 @@ Awal sesi (wajib): cd /root/video-engine && bash git_sync.sh pull
   (kalau STOP karena ada perubahan belum di-commit atau riwayat bercabang: jangan diperbaiki sendiri, lapor ke user)
 
 Langkah per video:
- 1. Pilih seri: potholes | bumps | splash | lava | race25d (2.5D). Maksimal 3 video berturut-turut dari seri yang sama;
+ 1. Pilih seri: potholes | bumps | splash | lava (CHALLENGE 2D) | race25d (RACE 2.5D) | smash25d (SMASH ARENA 2.5D). Maksimal 3 video berturut-turut dari seri yang sama;
     utamakan seri yang paling jarang dipakai di PRODUCTION_REGISTRY.json.
  2. Cari seed yang lolos analisa (preview saja, cepat):
       cd /root/video-engine && bash generators/physics_2d/find_seeds.sh <seri> <dari> <sampai>
@@ -34,6 +34,8 @@ Langkah per video:
       ./venv/bin/python generators/physics_2d/sim_engine.py --series <seri> --seed <N>
     Khusus race25d (2.5D) tidak perlu find_seeds (semua seed valid):
       ./venv/bin/python generators/lanes25d/race25d.py --seed <N>      (seed terbesar race25d engine v2 + 1; v1 sudah pensiun)
+    SMASH ARENA juga tanpa find_seeds; kalau exit 5 (cek gagal, mis. pertarungan terlalu singkat) coba seed berikutnya:
+      ./venv/bin/python generators/lanes25d/smash25d.py --seed <N>     (seed terbesar smash25d + 1; arena bergilir otomatis)
     Exit 0 + "[audit] PASS" = sukses, hasilnya di renders/megawheel_arena/pending/<tanggal>_<seri>_s<seed>/.
     Exit 1 (STOP analisa) atau 5 (AUDIT_FAILED) = coba seed PASS berikutnya. Jangan pakai --force.
  4. Buka dan periksa PNG di folder preview/ (L1_event, L2_event, L3_event, outro). Tolak sendiri (jangan laporkan
@@ -48,8 +50,8 @@ Langkah per video:
     Tutup dengan kalimat: "Menunggu approval Anda. Belum dijadwalkan dan belum diupload."
 
 Target harian: 3 video pending per hari (sama dengan 3 slot tayang), kecuali user bilang lain.
-WAJIB: minimal 1 dari 3 video per hari adalah race25d (slot 15:00 ET tiap hari, BLUEPRINT bagian 10).
-Jaga stok race25d (pending + approved belum tayang) minimal 3 supaya tidak ada hari tanpa balapan.
+WAJIB: program harian = 1 CHALLENGE 2D (11:00 ET) + 1 race25d (15:00 ET) + 1 smash25d (19:00 ET), BLUEPRINT bagian 10.
+Jaga stok tiap jenis (pending + approved belum tayang) minimal 3 supaya tidak ada slot kosong.
 Kalau stok pending yang belum di-review sudah ≥ 9, berhenti produksi dan tunggu user.
 
 Aturan keras:

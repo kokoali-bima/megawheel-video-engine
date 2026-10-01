@@ -49,7 +49,7 @@ Aturan keras:
 |---|---|
 | Channel | MegaWheel Arena. Audiens umum, **bukan** "made for kids", kategori Film & Animation (1) |
 | Episode siap tayang | Status `APPROVED` di `PRODUCTION_REGISTRY.json` (diberikan user lewat `episodes.py approve`) |
-| Slot tayang | 3 per hari: 11:00, 15:00, 19:00 **America/New_York**. WIB saat EDT: 22:00, 02:00, 06:00; saat EST +1 jam |
+| Slot tayang | 3 per hari: 11:00 CHALLENGE, 15:00 RACE (race25d), 19:00 SMASH ARENA (smash25d; cadangan CHALLENGE kalau stok kosong) **America/New_York**. WIB saat EDT: 22:00, 02:00, 06:00; saat EST +1 jam |
 | Mekanisme | Upload `private` + `publishAt`. YouTube yang membuat publik di jam slot |
 | Berkas antrian | `renders/megawheel_arena/PUBLISH_QUEUE.json` dan `.md` (dibuat otomatis) |
 | Status item | `QUEUED` = punya slot, belum diupload. `SCHEDULED` = sudah di YouTube, menunggu jam tayang |

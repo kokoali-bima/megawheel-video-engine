@@ -44,7 +44,7 @@ W, H, FPS = se.W, se.H, 30
 # perspective: x, z in metres (z = depth). Higher camera than race25d so the floor reads as an arena.
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
 Y_H, CAM_H = 276.0, 20.4
-WORLD_DY, PIV_Y = -40.0, 1190.0                  # zoom pivot (world space)
+WORLD_DY, PIV_Y = -130.0, 1190.0                  # zoom pivot (world space)
 ZC = 4.25                                        # arena centre depth
 HX0, HZ0, HX_MIN, HZ_MIN = 9.5, 4.25, 4.6, 2.3   # floor half-size at start / after the last shrink
 SHRINK_AT, SHRINK_EVERY, SHRINK_STEP = 9.0, 6.0, 0.2
@@ -68,6 +68,7 @@ TAGS = ["cars", "car crash", "demolition derby", "cartoon cars", "funny cars", "
         "MegaWheel Arena"]
 
 CAST, ARENA = [], "lava"
+FREEZE_T = 1e9                                   # the floor stops shrinking once there is a winner
 
 
 def k_of(z):
@@ -97,7 +98,7 @@ def radius(vk):
 def bounds(t):
     """Floor half-size (hx, hz) at time t: shrinks in eased steps."""
     hx, hz = HX0, HZ0
-    s = t - SHRINK_AT
+    s = min(t, FREEZE_T) - SHRINK_AT
     while s > 0:
         p = min(1.0, s / 1.2)
         e = p * p * (3 - 2 * p)
@@ -144,6 +145,8 @@ def setup(seed, appearances, used_arenas, forced_arena=None):
 
 # ------------------------------------------------------------------ scripted battle (120 Hz)
 def simulate(seed):
+    global FREEZE_T
+    FREEZE_T = 1e9
     rng = np.random.default_rng(13000 + seed)
     dt = 1 / 120
     grip = ARENAS[ARENA]["grip"]
@@ -288,9 +291,9 @@ def simulate(seed):
                 hits.append(dict(t=t, a=a, b=b, rel=rel, x=hx_, z=hz_))
                 events.append(("hit", t, hx_, hz_, min(1.0, rel / 13.0), int(t * 1000) % 997,
                                se.VEHICLES[a["key"]]["color"], se.VEHICLES[b["key"]]["color"]))
-        # eliminations
+        # eliminations (none after the winner is decided)
         for c in cars:
-            if not c["alive"]:
+            if not c["alive"] or winner is not None:
                 continue
             if c["hp"] <= 0:
                 c["alive"], c["out"], c["out_kind"] = False, t, "wreck"
@@ -329,6 +332,7 @@ def simulate(seed):
                     events.append(("wreck", t, c["x"], c["z"]))
             winner["finish"] = t
             t_end = t + 2.6
+            FREEZE_T = t
         # record (race25d.state layout: x, z, h, yaw, pitch, v, sq, split, burn, patched, ice, tires)
         if int(round(t * 120)) % 4 == 0:
             for c in cars:
@@ -551,7 +555,7 @@ def draw_arena(ctx, camx, t, flash):
 
 
 def draw_hpbar(ctx, sx, sy, hp, k):
-    w, h = 1.9 * k, 0.24 * k
+    w, h = 2.4 * k, 0.4 * k
     se.rrect(ctx, sx - w / 2 - 3, sy - 3, w + 6, h + 6, 6)
     ctx.set_source_rgba(0.05, 0.05, 0.15, 0.8)
     ctx.fill()
@@ -868,13 +872,13 @@ def main():
         if (winner["finish"] is not None and t >= winner["finish"]) or mode == "cta":
             focus = (st[id(winner)][0], st[id(winner)][1])
         xs = [st[id(c)][0] for c in show]
-        lo, hi = min(xs) - 4.0, max(xs) + 4.0
+        lo, hi = min(xs) - 3.0, max(xs) + 3.0
         mid = (lo + hi) / 2
-        fit = float(np.clip(W * 0.95 / ((hi - lo) * k_of(ZC - 1)), 0.78, 1.15))
+        fit = float(np.clip(W * 0.95 / ((hi - lo) * k_of(ZC - 1)), 1.0, 1.45))
         target, want = (mid, fit)
         if focus is not None:
             target = 0.6 * focus[0] + 0.4 * mid
-            want = min(1.3, max(fit, 1.05) * (1.15 if mode == "replay" else 1.05))
+            want = min(1.6, max(fit, 1.15) * (1.2 if mode == "replay" else 1.08))
         cut = camx is None or mode != prev_mode
         punch = 1.0
         for e in hit_ev:
@@ -940,7 +944,7 @@ def main():
         if mode == "race":
             se.draw_ready_go(ctx, t)
             for s in shrink_times():
-                if 0 <= t - s < 1.6 and s < winner["finish"]:
+                if 0 <= t - s < 1.6 and t < winner["finish"]:
                     a = t - s
                     sc = se.ease_out_back(min(1.0, a / 0.3)) * min(1.0, (1.6 - a) / 0.3)
                     ctx.save()
