@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 06:08). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-01 06:35). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -33,6 +33,10 @@
 | SIM_BUMPS_V2_S007 | bumps | Siren, Sprinkles, Grizzly | 2026-10-01 | 44.7 s | `renders/megawheel_arena/pending/2026-10-01_bumps_s007` |
 | SIM_LAVA_V2_S008 | lava | Nitro, Titan, Rocky | 2026-10-01 | 42.73 s | `renders/megawheel_arena/pending/2026-10-01_lava_s008` |
 | SIM_SPLASH_V2_S010 | splash | Zippy, Titan, Grizzly | 2026-10-01 | 46.1 s | `renders/megawheel_arena/pending/2026-10-01_splash_s010` |
+| SIM_SMASH25D_V3_S001 | smash25d | Hydro, Grizzly, Siren, Nitro | 2026-10-01 | 50.93 s | `renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s001` |
+| SIM_SMASH25D_V3_S003 | smash25d | Sprinkles, Rocky, Zippy, Siren | 2026-10-01 | 45.97 s | `renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s003` |
+| SIM_SMASH25D_V3_S007 | smash25d | Titan, Rocky, Tilly, Siren | 2026-10-01 | 48.57 s | `renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007` |
+| SIM_SMASH25D_V3_S009 | smash25d | Buster, Grizzly, Tilly, Zippy | 2026-10-01 | 46.47 s | `renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009` |
 
 ## Ditolak
 
@@ -51,3 +55,7 @@
 | SIM_SMASH25D_V1_S002 | superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound) | 2026-10-01 |
 | SIM_SMASH25D_V1_S003 | superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound) | 2026-10-01 |
 | SIM_SMASH25D_V1_S004 | superseded by smash25d v2 (narration sync, announcer, crowd, kaiju sound) | 2026-10-01 |
+| SIM_SMASH25D_V2_S001 | superseded by smash25d v3 (fighter intros, winner showcase) | 2026-10-01 |
+| SIM_SMASH25D_V2_S002 | superseded by smash25d v3 (fighter intros, winner showcase) | 2026-10-01 |
+| SIM_SMASH25D_V2_S003 | superseded by smash25d v3 (fighter intros, winner showcase) | 2026-10-01 |
+| SIM_SMASH25D_V2_S004 | superseded by smash25d v3 (fighter intros, winner showcase) | 2026-10-01 |

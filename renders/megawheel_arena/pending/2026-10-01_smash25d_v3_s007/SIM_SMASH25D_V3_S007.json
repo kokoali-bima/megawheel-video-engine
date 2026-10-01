@@ -1,51 +1,51 @@
 {
-  "video_id": "SIM_SMASH25D_V3_S003",
+  "video_id": "SIM_SMASH25D_V3_S007",
   "status": "RENDERED_PENDING_APPROVAL",
   "engine": "smash25d v3",
   "series": "smash25d",
-  "seed": 3,
+  "seed": 7,
   "fps": 30,
-  "duration": 45.97,
+  "duration": 48.57,
   "params": {
     "cast": [
-      "icecream",
+      "bigrig",
       "monster",
-      "sports",
+      "taxi",
       "police"
     ],
     "arena": "lava",
     "chaos": [
       [
         "kraggor",
-        4.9
-      ],
-      [
-        "crack",
-        10.11
-      ],
-      [
-        "ufo",
-        15.3
+        5.37
       ],
       [
         "missile",
-        20.57
+        10.38
+      ],
+      [
+        "crack",
+        15.53
+      ],
+      [
+        "ufo",
+        20.06
       ]
     ]
   },
   "arena": "lava",
   "theme": {
-    "time": "night",
+    "time": "noon",
     "weather": "clear",
-    "location": "desert"
+    "location": "city"
   },
-  "theme_id": "night-clear-desert",
-  "voice": "en-US-ChristopherNeural",
+  "theme_id": "noon-clear-city",
+  "voice": "en-US-EricNeural",
   "outcomes": [
     "p4+ring",
-    "p2+ring",
-    "p3+wreck",
-    "win"
+    "p2+wreck",
+    "win",
+    "p3+ring"
   ],
   "checks": {
     "video+audio streams": true,
@@ -61,7 +61,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Crash Battle! Only One Can Win! 💥",
   "title": "Crash Battle! Only One Can Win! 💥 #Shorts",
-  "description": "Sprinkles, Rocky, Zippy and Siren enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "description": "Titan, Rocky, Tilly and Siren enter the Smash Arena on the lava ring! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -72,9 +72,9 @@
     "car battle",
     "shorts",
     "MegaWheel Arena",
-    "ice cream truck",
+    "big rig",
     "monster truck",
-    "sports car",
+    "taxi",
     "police car",
     "lava",
     "ufo",
@@ -83,21 +83,23 @@
   ],
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
-    "Sprinkles, the ice cream truck!",
+    "Titan, the big rig!",
     "Rocky, the monster truck!",
-    "Zippy, the sports car!",
+    "Tilly, the taxi!",
     "And... Siren, the police car!",
-    "Oh no... it's Kraggor!",
-    "Oh my! What a hit!",
-    "The floor is breaking!",
-    "Sprinkles is out!",
     "What a slam!",
-    "The winner is... Siren! Yeah!",
+    "Oh no... it's Kraggor!",
+    "Incoming missile!",
+    "Titan is out!",
+    "Siren is out!",
+    "Boom! That's gotta hurt!",
+    "The floor is breaking!",
+    "The winner is... Tilly! Yeah!",
     "Let's see that again... in slow motion!",
-    "Look at that! Kraggor flattens Siren!",
+    "Look at that! Kraggor flattens Tilly!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-ChristopherNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V3_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s003/preview"
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-EricNeural",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007/SIM_SMASH25D_V3_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007/preview"
 }

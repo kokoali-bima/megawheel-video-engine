@@ -99,6 +99,6 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Edge-TTS en-US-GuyNeural",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s009/SIM_SMASH25D_V3_S009.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_s009/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009/SIM_SMASH25D_V3_S009.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009/preview"
 }

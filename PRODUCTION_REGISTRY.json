@@ -1109,13 +1109,15 @@
         "p2+wreck"
       ],
       "duration": 36.43,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001/SIM_SMASH25D_V2_S001_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s001",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s001/SIM_SMASH25D_V2_S001_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S002",
@@ -1141,13 +1143,15 @@
         "p4+ring"
       ],
       "duration": 32.17,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s002",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s002/SIM_SMASH25D_V2_S002_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s002",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s002/SIM_SMASH25D_V2_S002_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S003",
@@ -1173,13 +1177,15 @@
         "p4+ring"
       ],
       "duration": 33.93,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V2_S003_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s003/SIM_SMASH25D_V2_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V2_S004",
@@ -1205,13 +1211,15 @@
         "p2+wreck"
       ],
       "duration": 34.47,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s004",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s004/SIM_SMASH25D_V2_S004_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s004",
+      "audit": "renders/megawheel_arena/rejected/2026-10-01_smash25d_v2_s004/SIM_SMASH25D_V2_S004_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "superseded by smash25d v3 (fighter intros, winner showcase)",
+      "rejected_date": "2026-10-01"
     },
     {
       "video_id": "SIM_SMASH25D_V3_S001",
@@ -1238,8 +1246,8 @@
       ],
       "duration": 50.93,
       "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s001/SIM_SMASH25D_V3_S001_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s001",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s001/SIM_SMASH25D_V3_S001_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
@@ -1270,8 +1278,8 @@
       ],
       "duration": 45.97,
       "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s003/SIM_SMASH25D_V3_S003_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s003",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s003/SIM_SMASH25D_V3_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
@@ -1302,8 +1310,8 @@
       ],
       "duration": 48.57,
       "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s007",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s007/SIM_SMASH25D_V3_S007_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s007/SIM_SMASH25D_V3_S007_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
@@ -1334,8 +1342,8 @@
       ],
       "duration": 46.47,
       "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_s009",
-      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_s009/SIM_SMASH25D_V3_S009_audit.md",
+      "folder": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009",
+      "audit": "renders/megawheel_arena/pending/2026-10-01_smash25d_v3_s009/SIM_SMASH25D_V3_S009_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
