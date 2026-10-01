@@ -19,7 +19,8 @@
 6. **Nama dan sifat tokoh sudah baku** (`/root/video-engine/cast/`). Jangan ganti atau karang tokoh baru tanpa izin user.
 7. **Audiens: SEMUA UMUR, bukan konten anak** (keputusan user 2026-09-30, channel **MegaWheel Arena**, setting YouTube "Tidak dibuat untuk anak-anak"). Konsekuensi wajib:
    - Jangan pakai kata "kids", "for kids", "children", atau "toddler" di judul, deskripsi, tag, teks layar, maupun narasi.
-   - Narator: **bergilir per episode** di antara suara wanita dewasa **en-US saja** (`VOICES`: Aria, AvaMultilingual, EmmaMultilingual, Jenny, Michelle). Yang paling jarang dipakai didahulukan. DILARANG suara anak (`en-US-AnaNeural`) dan aksen non-US (keputusan user). Gaya enerjik (rate +12%, pitch +2Hz) + filter kejernihan + ducking 8 dB pada mesin/musik saat narator bicara.
+   - **Narator / announcer = suara "C"** (Chatterbox di Modal, keputusan user 2026-10-01): dewasa, **aksen en-US**, dari referensi sintetis `branding/voice/` (m1 pria, f1 wanita; bukan suara orang sungguhan). CHALLENGE & RACE: m1/f1 bergiliran per video; SMASH: duo komentator. Setiap take diperiksa Whisper (QA). Cadangan: Edge TTS en-US. Aksen non-US dilarang.
+   - **Suara TOKOH di cerita (story15), aturan usia (user 2026-10-01):** tokoh yang masih kecil sekali (adegan masa kecil) = suara anak; tokoh usia remaja = suara remaja; tokoh dewasa = suara dewasa. Narator selalu dewasa. Semua suara sintetis rancangan sendiri, en-US. Larangan kata "kids/children" di judul/deskripsi/tag tetap berlaku.
    - Gaya bahasa: kompetisi / crash test / "who survives?", bukan bahasa balita.
    - Tetap aman untuk keluarga: tanpa darah/sadis, tanpa kata kasar. Tokoh kartun berwajah boleh (ciri khas channel).
 3. **Video harus lolos Analisa (bagian 5) dan Audit (bagian 6)** sebelum preview dikirim ke user.
