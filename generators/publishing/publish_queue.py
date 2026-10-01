@@ -28,13 +28,13 @@ WIB = ZoneInfo("Asia/Jakarta")
 SLOTS = [(11, 0), (15, 0), (19, 0)]      # ET: late morning, after school, evening prime time (BLUEPRINT 10)
 # UPLOAD RULE (user 2026-10-01, strict): Shorts every day at 11:00 ET = CHALLENGE (2D side view) only,
 # 15:00 ET = RACE (race25d) only, 19:00 ET = SMASH ARENA (smash25d) only. The weekly long episode (story15) has its
-# OWN slot, Saturday 13:00 ET, so Shorts and long-form both run (user: "short tetap ada, panjang tetap ada").
+# OWN slot, Sunday 13:00 ET (user 2026-10-01, was Saturday), so Shorts and long-form both run (user: "short tetap ada, panjang tetap ada").
 # No fallback between types: an empty slot stays empty and plan() warns.
 # Stock standard: at least 7 days of each type queued (plan() prints PERINGATAN STOK).
 RACE_SERIES = {"race25d"}
 SMASH_SERIES = {"smash25d"}
 LONG_SERIES = {"story15"}                 # weekly long-form series id (reserved)
-WEEKLY_LONG_SLOT = (5, 13)                # Saturday (weekday 5), 13:00 ET: long-form only, never a Short
+WEEKLY_LONG_SLOT = (6, 13)                # Sunday (weekday 6), 13:00 ET = Monday 00:00 WIB: long-form only
 LONG_HM = (13, 0)
 
 

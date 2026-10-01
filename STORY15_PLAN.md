@@ -10,7 +10,7 @@
   dan slapstick, orang dewasa terikat pada hati ceritanya (persahabatan, gagal lalu bangkit, rival jadi sahabat).
 - Membangun **jalur fans**: tokoh punya sejarah, rivalitas, dan rekor. Setiap kemenangan punya bobot karena ada ceritanya.
 - Mendukung monetisasi: video panjang menambah jam tayang (jalur YPP 4.000 jam tayang).
-- Jadwal tayang: **Sabtu 13:00 ET** (slot sendiri, terpisah dari Shorts 11:00 / 15:00 / 19:00).
+- Jadwal tayang: **Minggu 13:00 ET** (slot sendiri, terpisah dari Shorts 11:00 / 15:00 / 19:00).
 
 ## 2. Format: "drama China" (dracin), usulan user 2026-10-01
 
@@ -80,7 +80,7 @@ mata, dan **gerak mulut** saat bicara.
 ```
 naskah (Claude menulis)  ->  USER MENYETUJUI naskah  ->  shotlist per scene (JSON)  ->  render per scene
   ->  suara + musik + efek  ->  QA otomatis per scene  ->  rakit 15 menit + chapter  ->  Drive review/
-  ->  USER APPROVE  ->  tayang Sabtu 13:00 ET  ->  arsip Drive archive/
+  ->  USER APPROVE  ->  tayang Minggu 13:00 ET  ->  arsip Drive archive/
 ```
 
 Rencana lokasi file:
@@ -120,10 +120,11 @@ stories/S01E01_sprinkles_first_race/
 
 | Tanggal | Keputusan |
 |---|---|
-| 2026-10-01 | Video panjang mingguan ±15 menit, slot sendiri Sabtu 13:00 ET (Shorts tetap 3× sehari) |
+| 2026-10-01 | Video panjang mingguan ±15 menit, slot sendiri Minggu 13:00 ET (Shorts tetap 3× sehari) |
 | 2026-10-01 | Tokoh bersuara (lebih emosional) + narator + subtitle |
 | 2026-10-01 | Aturan usia suara: kecil sekali = suara anak, remaja = suara remaja, narator dewasa |
 | 2026-10-01 | Format "drama China": 15 scene × ±1 menit, setiap scene berakhir dengan kait, dirender per scene |
 | 2026-10-01 | Dua versi rasio (16:9 video panjang, 9:16 Shorts "Part N") |
 | 2026-10-01 | Tetap 3 Shorts/hari: 1 slot/hari jadi "Part N" bergiliran CHALLENGE/SMASH (RACE tetap); nanti pakai data Analytics |
 | 2026-10-01 | Episode pertama: "Sprinkles' First Race" |
+| 2026-10-01 | Jadwal video panjang pindah ke **Minggu 13:00 ET** (= Senin 00:00 WIB): waktu keluarga + tambahan 1 hari produksi |

@@ -68,7 +68,7 @@ jangan menambah langkah approve/render ke cron. Cek hasil: `tail -50 /root/video
 |---|---|
 | Channel | MegaWheel Arena. Audiens umum, **bukan** "made for kids", kategori Film & Animation (1) |
 | Episode siap tayang | Status `APPROVED` di `PRODUCTION_REGISTRY.json` (diberikan user lewat `episodes.py approve`) |
-| Slot tayang | 3 per hari, **aturan tegas**: 11:00 hanya CHALLENGE, 15:00 hanya RACE (race25d), 19:00 hanya SMASH ARENA (smash25d) **America/New_York**. Tidak ada cadangan lintas jenis. Video panjang (story15) punya slot sendiri: Sabtu 13:00 ET (Shorts tetap 3x sehari). Stok minimal 7 hari per jenis; laporkan setiap PERINGATAN STOK ke user. WIB saat EDT: 22:00, 02:00, 06:00; saat EST +1 jam |
+| Slot tayang | 3 per hari, **aturan tegas**: 11:00 hanya CHALLENGE, 15:00 hanya RACE (race25d), 19:00 hanya SMASH ARENA (smash25d) **America/New_York**. Tidak ada cadangan lintas jenis. Video panjang (story15) punya slot sendiri: Minggu 13:00 ET (Shorts tetap 3x sehari). Stok minimal 7 hari per jenis; laporkan setiap PERINGATAN STOK ke user. WIB saat EDT: 22:00, 02:00, 06:00; saat EST +1 jam |
 | Mekanisme | Upload `private` + `publishAt`. YouTube yang membuat publik di jam slot |
 | Berkas antrian | `renders/megawheel_arena/PUBLISH_QUEUE.json` dan `.md` (dibuat otomatis) |
 | Status item | `QUEUED` = punya slot, belum diupload. `SCHEDULED` = sudah di YouTube, menunggu jam tayang |
