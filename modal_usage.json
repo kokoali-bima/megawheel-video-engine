@@ -264,6 +264,26 @@
    "gpu_seconds": 99.7,
    "wall_seconds": 160.7,
    "cost_usd": 0.0255
+  },
+  {
+   "date": "2026-10-01",
+   "note": "announcer qa_smash1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 58.8,
+   "wall_seconds": 105.5,
+   "cost_usd": 0.015
+  },
+  {
+   "date": "2026-10-01",
+   "note": "narrator qa_race20",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 42.6,
+   "wall_seconds": 71.1,
+   "cost_usd": 0.0109
   }
  ]
 }
