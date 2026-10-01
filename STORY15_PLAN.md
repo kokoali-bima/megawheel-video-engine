@@ -2,7 +2,7 @@
 
 > Dokumen induk untuk seri cerita panjang (series id `story15`). Disimpan di git sebagai bagian dari sejarah channel.
 > Disusun oleh Claude Code (Opus) bersama user, 2026-10-01. Setiap keputusan baru dicatat di bagian "Riwayat keputusan".
-> Dokumen terkait: BLUEPRINT.md (aturan channel), PROJECT_PROGRESS.md (C9, C12, C15), EPISODES_INDEX.md.
+> Dokumen terkait: BLUEPRINT.md (aturan channel), **CHARACTERS.md (character bible)**, PROJECT_PROGRESS.md (C9, C12, C15), EPISODES_INDEX.md.
 
 ## 1. Tujuan
 
