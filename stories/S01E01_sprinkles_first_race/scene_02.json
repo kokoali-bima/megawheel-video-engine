@@ -110,7 +110,7 @@
    "moves": {
     "tilly": {
      "to_x": 24,
-     "speed": 5
+     "speed": 12
     }
    }
   },
@@ -122,7 +122,12 @@
     "fit": 7.4
    },
    "hold": 3.0,
-   "music": "hopeful"
+   "music": "hopeful",
+   "moves": {
+    "tilly": {
+     "show": false
+    }
+   }
   },
   {
    "cam": "close",

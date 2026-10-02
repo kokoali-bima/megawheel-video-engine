@@ -1424,7 +1424,8 @@ def render_scene(ep, num, aspect):
         pv = (focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)) - sh.get("lift", 0.0) * k_of(1.0)
         if si != prev_si:                                          # new shot: glide the camera there (no rushed
             hard = camx is None or sh.get("punch") or sh.get("triple") or sh.get("cut") == "hard"   # cuts)
-            glide = None if hard else (camx, zoom, piv, sh["t0"], sh.get("glide", scene.get("glide", 1.8)))
+            glide = None if hard else (camx, zoom, piv, sh["t0"],      # slow, but settled before mid-shot
+                                       min(sh.get("glide", scene.get("glide", 1.8)), 0.45 * (sh["t1"] - sh["t0"])))
             if hard:
                 camx, zoom, piv = cx, z_, pv
             prev_si = si

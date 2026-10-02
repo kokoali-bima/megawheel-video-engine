@@ -72,7 +72,16 @@
      "angry"
     ]
    ],
-   "roll": 8
+   "moves": {
+    "nitro": {
+     "to_x": 24,
+     "speed": 2.5
+    },
+    "zippy": {
+     "to_x": 31,
+     "speed": 2.5
+    }
+   }
   },
   {
    "cam": "close",
@@ -84,7 +93,16 @@
      "tease"
     ]
    ],
-   "roll": 8
+   "moves": {
+    "zippy": {
+     "to_x": 36,
+     "speed": 2.5
+    },
+    "nitro": {
+     "to_x": 29,
+     "speed": 2.5
+    }
+   }
   },
   {
    "cam": "wide",
@@ -92,16 +110,16 @@
    "hold": 3.0,
    "moves": {
     "zippy": {
-     "to_x": 34,
-     "speed": 4
+     "to_x": 58,
+     "speed": 6
     },
     "nitro": {
-     "to_x": 27,
-     "speed": 4
+     "to_x": 52,
+     "speed": 6
     },
     "tilly": {
-     "to_x": 20,
-     "speed": 3
+     "to_x": 30,
+     "speed": 4
     }
    }
   },
@@ -115,8 +133,7 @@
      "Build your speed before the hill... and keep rolling.",
      "calm"
     ]
-   ],
-   "roll": 6
+   ]
   },
   {
    "cam": "wide",
@@ -144,7 +161,12 @@
      "excited"
     ]
    ],
-   "roll": 9
+   "moves": {
+    "sprinkles": {
+     "to_x": 50,
+     "speed": 3
+    }
+   }
   },
   {
    "cam": "ecu",
@@ -153,8 +175,7 @@
    "emote": {
     "sprinkles": "scared"
    },
-   "triple": true,
-   "roll": 6
+   "triple": true
   },
   {
    "cam": "wide",
