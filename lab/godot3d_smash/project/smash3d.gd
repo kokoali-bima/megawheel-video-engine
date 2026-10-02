@@ -289,7 +289,8 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	add_child(body)
 	var c = {"vk": vk, "nick": nick, "col": col, "body": body, "spr": spr, "wheels": wheels, "tex": tex,
 			 "bw": bw, "bh": bh, "ride": ride, "hp": 100.0, "alive": true, "out": false,
-			 "vmax": 8.0 if vk in ["f1", "sports", "police"] else 6.5, "last_hit": -9.0}
+			 "vmax": 9.0 if vk in ["f1", "sports", "police"] else 7.5, "last_hit": -9.0,
+			 "mode": "charge", "mode_t": 0.0, "stall": 0.0}
 	body.body_entered.connect(func(other): call_deferred("_on_hit", c, other))
 	return c
 
@@ -475,6 +476,8 @@ func _on_hit(c: Dictionary, other) -> void:
 	for o in cars:
 		if o["body"] == other and o["alive"]:
 			var rel = (c["body"].linear_velocity - o["body"].linear_velocity).length()
+			c["mode"] = "back"                              # rammed: reverse, then charge again
+			c["mode_t"] = t
 			if rel > 3.0:
 				c["last_hit"] = vt()
 				var dmg = rel * 3.2 * o["body"].mass / c["body"].mass
@@ -517,7 +520,19 @@ func _physics_process(delta: float) -> void:
 			continue
 		var to = target["body"].global_position - b.global_position
 		to.y = 0
+		if c["mode"] == "charge" and to.length() < 3.6 and b.linear_velocity.length() < 1.2:
+			c["stall"] += delta                             # pushing match: back off
+			if c["stall"] > 0.5:
+				c["mode"] = "back"
+				c["mode_t"] = t
+				c["stall"] = 0.0
+		if c["mode"] == "back" and t - c["mode_t"] > 0.9:
+			c["mode"] = "charge"
 		var want = to.normalized() * c["vmax"] * go
+		if c["mode"] == "back":
+			var centre = Vector3(0, 0, ARENA_HZ) - b.global_position
+			centre.y = 0
+			want = (-to.normalized() * 0.6 + centre.normalized() * 0.4).normalized() * c["vmax"] * 0.7
 		var v = b.linear_velocity
 		var dv = Vector3(want.x - v.x, 0, want.z - v.z)
 		if b.global_position.y < c["ride"] + 0.4:            # only drive when the wheels are on the floor
@@ -642,7 +657,7 @@ func _stomp(spot: Vector3) -> void:
 		var d = c["body"].global_position - spot
 		var dist = Vector2(d.x, d.z).length()
 		if dist < 3.0:
-			_damage(c, 100.0, "SPLAT!")
+			_damage(c, 70.0, "SPLAT!")
 		elif dist < 8.0:
 			var f = 1.0 - dist / 8.0
 			c["body"].apply_central_impulse((Vector3(d.x, 0, d.z).normalized() * 7.0 + Vector3(0, 6.0, 0)) * f * c["body"].mass)
