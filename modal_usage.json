@@ -734,6 +734,16 @@
    "gpu_seconds": 57.6,
    "wall_seconds": 61.5,
    "cost_usd": 0.0359
+  },
+  {
+   "date": "2026-10-02",
+   "note": "intro v4 (user review)",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 191.0,
+   "wall_seconds": 216.3,
+   "cost_usd": 0.0488
   }
  ]
 }
