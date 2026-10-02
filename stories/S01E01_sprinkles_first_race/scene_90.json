@@ -1,0 +1,148 @@
+{
+ "title": "TRAILER (Shorts 9:16) - full episode Sunday",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "rain",
+ "music": "tense",
+ "ambience": "rain",
+ "stands_text": "MEGAWHEEL GRAND RACE",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.6,
+   "emo": "sad"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 7,
+   "z": 1.6,
+   "face": -1,
+   "emo": "tease"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 12,
+   "z": 2.4,
+   "face": -1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -9,
+   "z": 2.6,
+   "emo": "normal"
+  }
+ },
+ "shots": [
+  {
+   "teaser": true,
+   "cam": "wide",
+   "lift": 2.0,
+   "hold": 2.8,
+   "cut": "hard",
+   "music": "tense",
+   "eyes": {
+    "sx": 0.62,
+    "sy": 0.3,
+    "r": 14
+   },
+   "fx": [
+    "lightning"
+   ],
+   "sfx": [
+    "thunder"
+   ]
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "music": "sad",
+   "tail": 0.8,
+   "lines": [
+    [
+     "narrator",
+     "Everyone said she was too slow. Too heavy. Too... sweet.",
+     "calm"
+    ]
+   ],
+   "sfx": [],
+   "hold": 5.0
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "lines": [
+    [
+     "zippy",
+     "An ice cream truck? In MY race?",
+     "tease"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Not this time.",
+     "determined"
+    ]
+   ],
+   "punch": true
+  },
+  {
+   "cam": "wide",
+   "hold": 3.2,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "kraggor": {
+    "mode": "rise",
+    "sx": 0.68,
+    "scale": 0.8
+   },
+   "sfx": [
+    "thunder",
+    [
+     "roar",
+     1.0
+    ]
+   ],
+   "fx": [
+    "lightning",
+    "shake"
+   ],
+   "emote": {
+    "sprinkles": "scared",
+    "zippy": "scared",
+    "nitro": "scared"
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 4.2,
+   "music": "hopeful",
+   "title": "SPRINKLES' FIRST RACE"
+  },
+  {
+   "cam": "wide",
+   "hold": 4.0,
+   "music": "hopeful",
+   "card": [
+    "FULL EPISODE",
+    "THIS SUNDAY"
+   ]
+  }
+ ],
+ "gap": 0.65,
+ "tail": 1.2,
+ "edge_fade": false,
+ "chapter": null,
+ "trailer": true,
+ "end_hold": 0.4
+}
