@@ -380,12 +380,18 @@ func _crash_check(c: Dictionary, threshold: float) -> void:
 
 
 func _drive(c: Dictionary, go: float, cap: float) -> void:
+	## speed controller: pushes the body toward power x 14 m/s (reliable pacing); wheels spin from ground friction
 	if not c["alive"]:
 		return
+	var body: RigidBody2D = c["body"]
+	var target = c["power"] * 14.0 * PPM * go
+	var v = body.linear_velocity.x * c["dir"]
+	var f = clampf((target - v) * body.mass * 3.0, -body.mass * 900.0, body.mass * 900.0)
+	body.apply_central_force(Vector2(f * c["dir"], 0))
 	for w in c["wheels"]:
 		var wb: RigidBody2D = w
 		if abs(wb.angular_velocity) < cap:
-			wb.apply_torque(c["power"] * 52000.0 * go * c["dir"])
+			wb.apply_torque(c["power"] * 8000.0 * go * c["dir"])
 
 
 # ================================================================== CHALLENGE: giant pits
@@ -614,7 +620,7 @@ func _physics_process(delta: float) -> void:
 				continue
 			cap = 60.0
 		_drive(c, go, cap)
-		_crash_check(c, 1500.0 if MODE != "challenge" else 1250.0)
+		_crash_check(c, 1500.0 if MODE != "challenge" else 520.0)
 	if MODE == "race":
 		_race_physics(go)
 	elif MODE == "smash":
