@@ -38,37 +38,52 @@
   {
    "episode": 1,
    "video_id": "SIM_POTHOLES_V2_S001",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-02T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Giant Potholes! Who Survives? \ud83d\ude97\ud83d\udca5 | Ep. 1 #Shorts",
+   "upload_started": "2026-10-02T05:00:05.103838+00:00",
+   "url": "https://www.youtube.com/shorts/PwlO0ptmi-c"
   },
   {
    "episode": 9,
    "video_id": "SIM_RACE25D_V1_S001",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-02T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Slippery Race Showdown! Who Wins? \ud83c\udfc1\ud83d\udca6 | Ep. 9 #Shorts",
+   "upload_started": "2026-10-02T05:00:12.047807+00:00",
+   "url": "https://www.youtube.com/shorts/lA92He_9FeQ"
   },
   {
    "episode": 22,
    "video_id": "SIM_SMASH25D_V4_S001",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-02T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Last Car Standing Wins! \ud83d\udca5 | Ep. 22 #Shorts",
+   "upload_started": "2026-10-02T05:00:16.440714+00:00",
+   "url": "https://www.youtube.com/shorts/Q-7067tL0A8"
   },
   {
    "episode": 7,
    "video_id": "SIM_SPLASH_V2_S007",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-03T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Slippery Splash Zone! Who Survives? \ud83d\udca6\ud83d\ude97 | Ep. 7 #Shorts",
+   "upload_started": "2026-10-02T05:00:21.596827+00:00",
+   "url": "https://www.youtube.com/shorts/0FEC9QmNYw0"
   },
   {
    "episode": 10,
    "video_id": "SIM_RACE25D_V2_S002",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-03T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Meteors, Lasers & Lava! Who Wins the Race? \ud83c\udfc1 | Ep. 10 #Shorts",
+   "upload_started": "2026-10-02T05:00:25.824303+00:00",
+   "url": "https://www.youtube.com/shorts/0o6TY6tXF_c"
   },
   {
    "episode": 23,
