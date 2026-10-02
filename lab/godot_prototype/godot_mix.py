@@ -9,7 +9,7 @@ import sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
+sys.path.insert(0, os.path.join(HERE, "..", "..", "generators", "physics_2d"))
 import sim_engine as se  # noqa: E402
 
 

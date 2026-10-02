@@ -27,5 +27,5 @@ venv-modal/
 assets/
 
 # generated sprites for the Godot prototype (export_sprites.py)
-generators/godot_race/project/sprites/
-generators/godot_race/project/.godot/
+lab/godot_prototype/project/sprites/
+lab/godot_prototype/project/.godot/
