@@ -1,0 +1,21 @@
+; MegaWheel Arena — Godot race prototype (Shorts 1080x1920). Rendered headless-ish via xvfb + Movie Maker.
+config_version=5
+
+[application]
+config/name="MegaWheel Race Prototype"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+
+[physics]
+common/physics_ticks_per_second=120
+2d/default_gravity=980.0
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=2
+environment/defaults/default_clear_color=Color(0.55, 0.75, 0.95, 1)
