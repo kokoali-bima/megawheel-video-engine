@@ -82,7 +82,8 @@ def folder(*parts):
 
 def upload(local, parent, name):
     from googleapiclient.http import MediaFileUpload
-    mime = "video/mp4" if local.endswith(".mp4") else "image/png"
+    mime = {".mp4": "video/mp4", ".mp3": "audio/mpeg", ".wav": "audio/wav", ".png": "image/png"}.get(
+        os.path.splitext(local)[1].lower(), "application/octet-stream")
     media = MediaFileUpload(local, mimetype=mime, resumable=True, chunksize=8 * 1024 * 1024)
     f = service().files().create(body=dict(name=name, parents=[parent]), media_body=media,
                                  fields="id,size").execute()
