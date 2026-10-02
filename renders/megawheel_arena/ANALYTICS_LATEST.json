@@ -1,0 +1,21 @@
+{
+ "generated": "2026-10-02T17:06:43.925736+00:00",
+ "start": "2026-09-04",
+ "end": "2026-10-01",
+ "days": 28,
+ "channel": {
+  "views": 31,
+  "minutes": 7,
+  "subs": 2
+ },
+ "series": {},
+ "videos": [],
+ "upcoming": [
+  "Sat 03/10 02:00 WIB - Ep 9 - SCHEDULED",
+  "Sat 03/10 06:00 WIB - Ep 22 - SCHEDULED",
+  "Sat 03/10 22:00 WIB - Ep 7 - SCHEDULED",
+  "Sun 04/10 02:00 WIB - Ep 10 - SCHEDULED",
+  "Sun 04/10 04:00 WIB - Ep 1501 - QUEUED",
+  "Sun 04/10 06:00 WIB - Ep 23 - QUEUED"
+ ]
+}
