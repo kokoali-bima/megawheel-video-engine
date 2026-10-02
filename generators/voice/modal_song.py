@@ -89,7 +89,7 @@ def sing(songs: list) -> dict:
     asr = WhisperModel("base.en", device="cpu", compute_type="int8")
     out = {}
     for sg in songs:
-        best = None
+        takes = []
         for take in range(int(sg.get("takes", 3))):
             path = f"/tmp/{sg['name']}_{take}.wav"
             seed = int(sg.get("seed", 100)) + take * 17
@@ -103,10 +103,11 @@ def sing(songs: list) -> dict:
                 path = os.path.join("/tmp", cands[-1]) if cands else path
             heard = " ".join(s.text for s in asr.transcribe(path, language="en", beam_size=3)[0])
             sc = _score(sg["lyrics"], heard)
-            if best is None or sc > best[0]:
-                best = (sc, path, heard, take, seed)
-        best = (best[0], _finish(best[1], sg)) + best[2:]
-        out[sg["name"]] = dict(wav=best[1], score=round(best[0], 2), heard=best[2][:300], take=best[3], seed=best[4])
+            takes.append((sc, path, heard, take, seed))
+        takes.sort(key=lambda x: -x[0])
+        for rank, (sc, path, heard, take, seed) in enumerate(takes[:int(sg.get("keep", 1))]):
+            name = sg["name"] if rank == 0 else f"{sg['name']}_alt{rank}"   # "keep": top-N takes for a human pick
+            out[name] = dict(wav=_finish(path, sg), score=round(sc, 2), heard=heard[:300], take=take, seed=seed)
     return dict(songs=out, secs=time.time() - t0)
 
 
