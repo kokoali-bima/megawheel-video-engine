@@ -26,7 +26,7 @@ var shake = 0.0
 var slow_used = false
 var slow_until = -1.0
 var winner = null
-var chaos = [[6.0, "missile"], [11.5, "kraggor"], [16.5, "missile"], [22.0, "missile"], [27.0, "kraggor"]]
+var chaos = [[7.0, "missile"], [13.0, "kraggor"], [18.5, "missile"], [24.0, "missile"], [29.0, "kraggor"]]
 var rng = RandomNumberGenerator.new()
 var CAM_FOV = 48.0
 var CAM_Y = 10.0
@@ -255,8 +255,8 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	body.continuous_cd = true
 	body.can_sleep = false                               # a sleeping body ignores the drive force
 	var pm = PhysicsMaterial.new()
-	pm.friction = 0.8
-	pm.bounce = 0.25
+	pm.friction = 0.12                                    # a sliding box stands in for rolling wheels
+	pm.bounce = 0.3
 	body.physics_material_override = pm
 	var cs = CollisionShape3D.new()
 	var bs = BoxShape3D.new()
@@ -394,7 +394,7 @@ func explode(pos: Vector3, power: float, push := true) -> void:
 				c["body"].apply_central_impulse((Vector3(d.x, 0, d.z).normalized() * 9.0 + Vector3(0, 8.0, 0))
 												* f * c["body"].mass * power)
 				c["body"].apply_torque_impulse(Vector3(0, 0, rng.randf_range(-1, 1) * 6.0 * c["body"].mass * f))
-				_damage(c, 70.0 * f * power, "KABOOM!")
+				_damage(c, 45.0 * f * power, "KABOOM!")
 	if not slow_used:
 		slow_used = true
 		Engine.time_scale = 0.45
@@ -480,7 +480,7 @@ func _on_hit(c: Dictionary, other) -> void:
 			c["mode_t"] = t
 			if rel > 3.0:
 				c["last_hit"] = vt()
-				var dmg = rel * 3.2 * o["body"].mass / c["body"].mass
+				var dmg = rel * 2.0 * o["body"].mass / c["body"].mass
 				_log("crash", clampf(rel / 14.0, 0.2, 1.0))
 				var mid = (c["body"].global_position + o["body"].global_position) / 2.0
 				_particles(mid + Vector3(0, 1.0, 0), 30, 0.5, Vector2(5, 12), Vector3(0, -12, 0), Vector2(0.06, 0.14),
@@ -657,7 +657,7 @@ func _stomp(spot: Vector3) -> void:
 		var d = c["body"].global_position - spot
 		var dist = Vector2(d.x, d.z).length()
 		if dist < 3.0:
-			_damage(c, 70.0, "SPLAT!")
+			_damage(c, 55.0, "SPLAT!")
 		elif dist < 8.0:
 			var f = 1.0 - dist / 8.0
 			c["body"].apply_central_impulse((Vector3(d.x, 0, d.z).normalized() * 7.0 + Vector3(0, 6.0, 0)) * f * c["body"].mass)
