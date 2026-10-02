@@ -1,0 +1,25 @@
+{
+  "video_id": "2026-10-02_story15_e01",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "series": "story15",
+  "story_episode": 1,
+  "engine": "story25d",
+  "title_base": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+  "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+  "description": "Everyone said she was too slow, too heavy... too sweet. One month before the MegaWheel Grand Race, Sprinkles the ice cream truck decides to race anyway: four weeks of training, a promise to her Grandpa, and a race day nobody will ever forget... because KRAGGOR is coming. 🦖\n\nWho is the real champion? Watch till the end! 🏆\n\n⏱️ Chapters\n0:00 The Night Everything Changed\n0:45 Theme Song: Let's Go!\n1:14 Thirty Days to Go\n2:04 Lucky Number 13\n2:51 A Lonely Night\n3:19 Grandpa's Promise\n4:14 Lesson 1: Slow Is Smooth\n5:01 Lesson 2: Keep Rolling\n5:50 Lesson 3: The Rainy Night\n6:41 Race Day\n7:18 The Hill Again\n7:51 KRAGGOR!\n8:16 The Choice\n8:46 A Jumbo Ice Cream\n9:17 Champion of Hearts\n9:54 The Golden Heart\n10:06 Who Is Kraggor?\n10:20 Meet the Racers\n\n🔔 Subscribe to MegaWheel Arena: a new story episode every Sunday, new car races every day.\n\n#MegaWheelArena #CartoonCars #AnimatedStory",
+  "tags": [
+    "MegaWheel Arena",
+    "cartoon cars",
+    "animated story",
+    "car cartoon",
+    "ice cream truck",
+    "monster truck",
+    "kaiju",
+    "racing cartoon",
+    "Sprinkles",
+    "Kraggor",
+    "animation"
+  ],
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-02_story15_e01/2026-10-02_story15_e01.mp4",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), voices Chatterbox TTS (open source) synthetic, theme songs ACE-Step (Apache-2.0)"
+}

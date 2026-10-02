@@ -2010,6 +2010,69 @@
       "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts",
       "drive_id": "1_Og3civi_tWB5kpvTvSGU8vkAdYbOdi5",
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E029_SIM_SMASH25D_V4_S015.mp4"
+    },
+    {
+      "video_id": "2026-10-02_story15_e01",
+      "series": "story15",
+      "engine_version": "story25d",
+      "seed": 1,
+      "created": "2026-10-02",
+      "render_date": "2026-10-02",
+      "vehicles": [
+        "icecream",
+        "sports",
+        "bus",
+        "monster",
+        "police",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "story_e01",
+      "outcomes": [
+        "story15"
+      ],
+      "duration": null,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-02_story15_e01",
+      "audit": "renders/megawheel_arena/pending/2026-10-02_story15_e01/2026-10-02_story15_e01_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "story_episode": 1
+    },
+    {
+      "video_id": "2026-10-02_story15_trailer_e01",
+      "series": "story15_trailer",
+      "engine_version": "story25d",
+      "seed": 1,
+      "created": "2026-10-02",
+      "render_date": "2026-10-02",
+      "vehicles": [
+        "icecream",
+        "sports",
+        "bus",
+        "monster",
+        "police",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "story_e01",
+      "outcomes": [
+        "story15_trailer"
+      ],
+      "duration": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/STORY_1501_2026-10-02_story15_trailer",
+      "audit": "renders/megawheel_arena/S01/STORY_1501_2026-10-02_story15_trailer/2026-10-02_story15_trailer_e01_audit.md",
+      "episode": 1501,
+      "season": 1,
+      "upload_date": null,
+      "youtube_url": null,
+      "story_episode": 1,
+      "publish_at_et": "2026-10-03T17:00",
+      "approved_date": "2026-10-02",
+      "title": "Sprinkles' First Race 🍦 Full Episode This Sunday!"
     }
   ]
 }
