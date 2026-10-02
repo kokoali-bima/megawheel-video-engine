@@ -754,6 +754,16 @@
    "gpu_seconds": 3600.0,
    "wall_seconds": 3700.0,
    "cost_usd": 2.2439
+  },
+  {
+   "date": "2026-10-02",
+   "note": "intro v1 remix (band +)",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 0,
+   "gpu_seconds": 14.0,
+   "wall_seconds": 22.3,
+   "cost_usd": 0.0036
   }
  ]
 }
