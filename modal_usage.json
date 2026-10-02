@@ -694,6 +694,16 @@
    "gpu_seconds": 53.8,
    "wall_seconds": 83.2,
    "cost_usd": 0.0137
+  },
+  {
+   "date": "2026-10-02",
+   "note": "theme songs v2",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 2,
+   "gpu_seconds": 195.4,
+   "wall_seconds": 219.9,
+   "cost_usd": 0.0499
   }
  ]
 }
