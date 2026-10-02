@@ -2,10 +2,17 @@
  "ident": "INFRASOFT\npresents",
  "transitions": [
   [
+   "fadeblack",
+   1.4
+  ],
+  [
+   "fade",
+   0.8
+  ],
+  [
    "fade",
    2.6
   ],
-  "fadewhite",
   "smoothleft",
   "fadeblack",
   "dissolve",
@@ -22,6 +29,27 @@
   "fadeblack",
   "dissolve"
  ],
- "note": "name = default duration (XF_DUR, 1.0 s); [name, seconds] to override",
- "ident_logo": "branding/infrasoft/logo_transparent_white.png"
+ "note": "order: cold open (scene 1) -> ident -> theme (scene 0) -> story. transitions: one per gap in 'order'.",
+ "ident_logo": "branding/infrasoft/logo_transparent_white.png",
+ "order": [
+  1,
+  "ident",
+  0,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17
+ ]
 }
