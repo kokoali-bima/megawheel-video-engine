@@ -185,6 +185,31 @@ def profile(path, with_text):
     check.write_to_png(path.replace(".png", "_check.png"))
 
 
+# ---------------------------------------------------------------- YouTube Studio video watermark
+def watermark(src, path, size):
+    """Round badge from the mascot profile picture: transparent corners, thin white ring (visible on light and
+    dark scenes). YouTube Studio > Customization > Branding > Video watermark (square PNG, >= 150x150, < 1 MB)."""
+    img = cairo.ImageSurface.create_from_png(src)
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
+    ctx = cairo.Context(surf)
+    r = size / 2
+    ring = max(2.0, size * 0.035)
+    ctx.arc(r, r, r - 0.5, 0, 2 * math.pi)
+    ctx.set_source_rgb(1, 1, 1)
+    ctx.fill()
+    ctx.save()
+    ctx.arc(r, r, r - ring, 0, 2 * math.pi)
+    ctx.clip()
+    sc = (size - 2 * ring) / img.get_width()
+    ctx.translate(ring, ring)
+    ctx.scale(sc, sc)
+    ctx.set_source_surface(img, 0, 0)
+    ctx.get_source().set_filter(cairo.FILTER_BEST)
+    ctx.paint()
+    ctx.restore()
+    surf.write_to_png(path)
+
+
 # ---------------------------------------------------------------- banner
 def banner(path):
     w, h = 2560, 1440
@@ -235,6 +260,11 @@ def banner(path):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
+    if "--watermark" in sys.argv:                                  # only the Studio watermark files
+        for n in (150, 300):
+            watermark(f"{OUT}/profile_mascot.png", f"{OUT}/watermark_{n}.png", n)
+        print("watermark_150.png, watermark_300.png")
+        return
     se.detect_font()
     se.load_cast()
     profile(f"{OUT}/profile_mascot.png", with_text=False)
