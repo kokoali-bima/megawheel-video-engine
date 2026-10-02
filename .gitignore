@@ -25,3 +25,7 @@ branding/voice_samples/
 branding/voice_samples_v2/
 venv-modal/
 assets/
+
+# generated sprites for the Godot prototype (export_sprites.py)
+generators/godot_race/project/sprites/
+generators/godot_race/project/.godot/
