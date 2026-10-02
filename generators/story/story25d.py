@@ -16,6 +16,7 @@ Output: work/story/<episode>/scene_02_h.mp4 (+ preview PNGs); --assemble -> work
 """
 import argparse
 import json
+import shutil
 import math
 import os
 import subprocess
@@ -1339,24 +1340,45 @@ def assemble(ep, aspect):
         with open(edit) as fh:
             tr = json.load(fh)["transitions"]
         assert len(tr) == len(parts) - 1, f"edit.json: {len(tr)} transisi untuk {len(parts)} scene"
+        # low-RAM build: every clip is split into body + head/tail; each transition is rendered from just two short
+        # pieces (xfade), then all pieces are joined with the concat demuxer (same codec settings everywhere)
         durs = [dur_of(os.path.join(d, p)) for p in parts]
-        fc, v, a, off = [], "[0:v]", "[0:a]", 0.0
-        for i, name in enumerate(tr, start=1):
-            xd = XF_DUR.get(name, 0.5)
-            off += durs[i - 1] - xd
-            fc.append(f"{v}[{i}:v]xfade=transition={name}:duration={xd}:offset={off:.3f}[v{i}]")
-            fc.append(f"{a}[{i}:a]acrossfade=d={xd}:c1=tri:c2=tri[a{i}]")
-            v, a = f"[v{i}]", f"[a{i}]"
-        total = off + durs[-1]
-        fc.append(f"{v}fade=t=in:d=0.6,fade=t=out:st={total - 1.2:.3f}:d=1.2[vo]")
-        fc.append(f"{a}afade=t=in:d=0.4,afade=t=out:st={total - 1.2:.3f}:d=1.2[ao]")
+        xds = [XF_DUR.get(n, 0.5) for n in tr]
+        tmp = os.path.join(d, "xf")
+        os.makedirs(tmp, exist_ok=True)
+        enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
+               "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"]
+        pieces = []
+
+        def ff(args, out):
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error"] + args + enc + [out], check=True)
+            pieces.append(out)
+
+        for i, p in enumerate(parts):
+            src = os.path.join(d, p)
+            head = xds[i - 1] if i > 0 else 0.0
+            tail = xds[i] if i < len(tr) else 0.0
+            ff(["-ss", f"{head:.3f}", "-t", f"{durs[i] - head - tail:.3f}", "-i", src], os.path.join(tmp, f"b{i:02d}.mp4"))
+            if i < len(tr):
+                nxt = os.path.join(d, parts[i + 1])
+                xd = xds[i]
+                ff(["-ss", f"{durs[i] - xd:.3f}", "-t", f"{xd:.3f}", "-i", src, "-t", f"{xd:.3f}", "-i", nxt,
+                    "-filter_complex", f"[0:v][1:v]xfade=transition={tr[i]}:duration={xd}:offset=0[v];"
+                                       f"[0:a][1:a]acrossfade=d={xd}:c1=tri:c2=tri[a]", "-map", "[v]", "-map", "[a]"],
+                   os.path.join(tmp, f"x{i:02d}.mp4"))
+        lst = os.path.join(tmp, "list.txt")
+        with open(lst, "w") as fh:
+            for q in pieces:
+                fh.write(f"file '{q}'\n")
+        joined = os.path.join(tmp, "joined.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy",
+                        joined], check=True)
+        total = dur_of(joined)
         out = os.path.join(d, f"{ep}_{aspect}.mp4")
-        cmd = ["ffmpeg", "-y", "-loglevel", "error"]
-        for p in parts:
-            cmd += ["-i", os.path.join(d, p)]
-        cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]", "-c:v", "libx264", "-crf", "18",
-                "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", out]
-        subprocess.run(cmd, check=True)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", joined, "-vf",
+                        f"fade=t=in:d=0.6,fade=t=out:st={total - 1.2:.3f}:d=1.2", "-af",
+                        f"afade=t=in:d=0.4,afade=t=out:st={total - 1.2:.3f}:d=1.2"] + enc + [out], check=True)
+        shutil.rmtree(tmp)
         print(f"[story] episode {ep} ({aspect}): {len(parts)} scenes, transisi drama -> {out} ({total / 60:.2f} menit)")
         return
     lst = os.path.join(d, f"concat_{aspect}.txt")

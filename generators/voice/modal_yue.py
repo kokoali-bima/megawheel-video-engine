@@ -1,4 +1,4 @@
-"""MegaWheel Arena theme songs with YuE (HKUST / M-A-P, Apache-2.0) on a Modal L40S: lyrics -> full song, rich backing.
+"""MegaWheel Arena theme songs with YuE v1 (HKUST / M-A-P, Apache-2.0 weights; NOT YuE2 = CC BY-NC) on a Modal L40S: lyrics -> full song, rich backing.
 Credit required in the video description: "Music generated with YuE by HKUST/M-A-P".
 Every take is returned (a human picks); faster-whisper lyric score is printed as a hint.
 Same monthly budget guard + modal_usage.json ledger as modal_tts.py / modal_song.py.
@@ -36,7 +36,9 @@ def _download():
 image = (
     modal.Image.debian_slim(python_version="3.10")
     .apt_install("git", "git-lfs", "ffmpeg", "libsndfile1")
-    .run_commands("git clone --depth 1 https://github.com/multimodal-art-projection/YuE.git /YuE",
+    # YuE v1 (Apache-2.0 weights). The repo's main branch is now YuE2 (CC BY-NC weights): check out the last v1 commit.
+    .run_commands("git clone https://github.com/multimodal-art-projection/YuE.git /YuE",
+                  "cd /YuE && git checkout $(git rev-list -n 1 HEAD -- inference/infer.py)~1",
                   # no flash-attn wheel in this image: fall back to PyTorch SDPA attention
                   "sed -i 's/flash_attention_2/sdpa/g' /YuE/inference/infer.py")
     .pip_install("torch==2.5.1", "torchaudio==2.5.1")

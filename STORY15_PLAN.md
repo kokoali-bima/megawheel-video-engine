@@ -139,7 +139,8 @@ Channel dimonetisasi, jadi hanya model yang lisensinya mengizinkan pemakaian kom
 | Model | Lisensi | Boleh dipakai? |
 |---|---|---|
 | **ACE-Step v1 3.5B** (dipakai, `generators/voice/modal_song.py`) | Apache-2.0 | ✅ ya |
-| YuE (HKUST / M-A-P) | Apache-2.0; hasil boleh dimonetisasi, wajib kredit "YuE by HKUST/M-A-P" | ✅ cadangan (tulis kredit di deskripsi) |
+| YuE **v1** (`YuE-s1-7B` + `s2-1B`, `generators/voice/modal_yue.py`) | Apache-2.0; hasil boleh dimonetisasi; kredit "YuE by HKUST/M-A-P" | ✅ cadangan (tulis kredit di deskripsi) |
+| YuE**2** (`YuE2-3B`, repo main sejak 2026) | bobot CC BY-NC 4.0 + izin khusus kreator individu; perusahaan wajib lisensi | ⚠️ jangan, kecuali keputusan user |
 | DiffRhythm | Apache-2.0 | ✅ cadangan |
 | SongGeneration / LeVo (Tencent) | "License Terms of SongGeneration": hanya akademik/riset/pendidikan, **dilarang komersial/produksi** | ❌ jangan |
 | MusicGen (Meta), Stable Audio Open | bobot non-komersial / lisensi terbatas, instrumental saja | ❌ jangan |
