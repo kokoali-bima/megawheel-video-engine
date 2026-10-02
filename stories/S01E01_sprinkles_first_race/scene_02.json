@@ -147,7 +147,7 @@
    "moves": {
     "buster": {
      "show": true,
-     "to_x": 3.0,
+     "to_x": 6.5,
      "speed": 3.5
     }
    },
