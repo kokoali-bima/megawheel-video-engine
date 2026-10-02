@@ -794,6 +794,16 @@
    "gpu_seconds": 98.0,
    "wall_seconds": 127.1,
    "cost_usd": 0.025
+  },
+  {
+   "date": "2026-10-02",
+   "note": "announcer LAB_SMASH_777 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 43.3,
+   "wall_seconds": 71.3,
+   "cost_usd": 0.0111
   }
  ]
 }
