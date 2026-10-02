@@ -42,7 +42,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 
-SERIES, ENGINE_VERSION = "race25d", "v2"             # v2: hazard library + dodge AI + YouTube end card
+SERIES, ENGINE_VERSION = "race25d", "v3"             # v3: curved circuit, hammer/container/oil, question hook, jingle
 W, H, FPS = se.W, se.H, 30
 F_PERSP, D0, LANE_D = 9000.0, 100.0, 25.0        # k(z) = F / (D0 + z*LANE_D): front lane 90 px/m, lane 3 ≈ 51
 Y_H, CAM_H = 640.0, 13.0                         # ground_y = Y_H + CAM_H*k
@@ -70,17 +70,40 @@ HAZARDS = {
                         prio=9, slow=(-0.1, 0.7)),
     "dragon_ice":  dict(weight=1.2, bubble="BRRR!", line="Brrr! The ice dragon freezes {n}!", prio=9,
                         slow=(-0.1, 0.7)),
+    "hammer":    dict(weight=1.6, bubble="BONK!", line="BONK! The giant hammer flattens {n}!", prio=9,
+                      slow=(-0.35, 0.5)),
+    "container": dict(weight=1.4, bubble="WHAM!", line="A container drops from the sky! {n} crashes right into it!",
+                      prio=8, slow=(-0.4, 0.4)),
+    "oil":       dict(weight=1.3, bubble="WHEEE!", line="Oil slick! {n} spins like a top!", prio=5),
 }
+BEHAVE = {"hammer": "crusher", "container": "wall", "oil": "puddle"}   # new looks, proven physics
+QUESTION = {"hammer": "the Giant Hammer", "container": "Falling Containers", "oil": "the Oil Slick",
+            "meteor": "the Meteors", "laser": "the Laser", "crusher": "the Crusher", "dragon_fire": "the Fire Dragon",
+            "dragon_ice": "the Ice Dragon", "ufo": "the UFO", "lava": "the Lava", "wall": "the Wall",
+            "puddle": "the Puddles", "pothole": "the Potholes", "ramp": "the Big Ramp"}
+NEW_HZ = ("hammer", "container", "oil")
+
+
+def behave(ty):
+    return BEHAVE.get(ty, ty)
 
 # lane-change AI: racers see ground hazards coming and may swerve to a free lane (skill, not luck)
 AGILITY = {"f1": 0.9, "sports": 0.85, "police": 0.75, "taxi": 0.7, "monster": 0.6, "monster2": 0.6,
            "icecream": 0.45, "firetruck": 0.4, "bus": 0.35, "bigrig": 0.3}
 DODGEABLE = {"puddle": "puddle", "pothole": "pothole", "lava": "lava vent", "wall": "wall", "crusher": "crusher",
-             "laser": "laser"}
+             "laser": "laser", "oil": "oil slick"}
 MAX_DODGES = 1                                   # keeps at least 2 hazard hits per video
 
 # per-video parameters (set in setup())
 RACERS, HZ, FIN_X, SECONDS = [], [], 0.0, 0.0     # HZ: list of dict(type, lane, x)
+CURVE = None                                     # curved circuit (visual depth offset along x), set in setup()
+
+
+def zc(x):
+    """Road depth offset at x (lanes): the circuit sweeps away from the camera and back (0..amp, never closer)."""
+    if not CURVE:
+        return 0.0
+    return CURVE["amp"] * (0.5 - 0.5 * math.cos(2 * math.pi * x / CURVE["length"] + CURVE["phase"]))
 
 
 def k_of(z):
@@ -92,6 +115,7 @@ def ground_y(z):
 
 
 def lane_xy(x, z, camx):
+    z = z + zc(x)
     return (x - camx) * k_of(z) + 540, ground_y(z)
 
 
@@ -133,6 +157,10 @@ def setup(seed, appearances, forced=None):
             g = [n for n in names if n in DODGEABLE]
             gw = np.array([HAZARDS[n]["weight"] for n in g])
             types[int(r.integers(3))] = str(r.choice(g, p=gw / gw.sum()))
+    if not forced and not any(t in NEW_HZ for t in types):    # week 2: every race shows a new obstacle
+        types[int(r.integers(3))] = str(r.choice([n for n in NEW_HZ if n not in types]))
+    global CURVE
+    CURVE = dict(amp=float(r.uniform(0.9, 1.4)), length=float(r.uniform(120, 170)), phase=float(r.uniform(0, 6.28)))
     hz_lanes = [int(v) for v in r.permutation(4)[:3]]
     xs = [110.0 + i * 95.0 + float(r.uniform(-8, 8)) for i in range(3)]
     HZ = [dict(type=t, lane=hz_lanes[i], x=xs[i]) for i, t in enumerate(types)]
@@ -194,7 +222,7 @@ def simulate(seed):
                     if h.get("used") or abs(c["z"] - h["lane"]) > 0.35:
                         continue
                     lead = {"meteor": 0.0, "ufo": 0.0, "ramp": 0.0, "puddle": 2.0, "dragon_fire": 0.0,
-                            "dragon_ice": 0.0}.get(h["type"], 0.5 * bw)
+                            "dragon_ice": 0.0}.get(behave(h["type"]), 0.5 * bw)
                     if h["x"] - lead <= c["x"] < h["x"] + 3.0:
                         h["used"] = True
                         c["hz"], c["trig"], a = h, t, 0.0
@@ -210,7 +238,7 @@ def simulate(seed):
                         c["vh"], c["burn"] = 6.0, 1.0
                     elif hz["type"] == "meteor":
                         c["vh"], c["burn"] = 8.0, 1.0
-            ty = hz["type"] if hz is not None else None
+            ty = behave(hz["type"]) if hz is not None else None
             if not (a is not None and ty in ("puddle", "wall")) and c["bump_t"] is None:
                 c["z"] += float(np.clip(c["lane"] - c["z"], -1.9 * dt, 1.9 * dt))   # smooth lane change
             if a is not None:
@@ -318,7 +346,7 @@ def simulate(seed):
             if i % 4 == 0:
                 c["rec"].append((c["x"], c["z"], c["h"], c["yaw"], c["pitch"], c["v"], c["sq"], c["split"],
                                  c["burn"], c["patched"], c["ice"], c["tires"]))
-        sp = next((c for c in cars if c["hz"] and c["hz"]["type"] == "puddle" and c["trig"] is not None
+        sp = next((c for c in cars if c["hz"] and behave(c["hz"]["type"]) == "puddle" and c["trig"] is not None
                    and t - c["trig"] < 1.2), None)
         if sp:
             to_lane = sp["lane"] - 1 if sp["lane"] > 0 else 1
@@ -328,7 +356,7 @@ def simulate(seed):
                     c["bump_t"] = t
                     events.append(("bump", t, c["x"], float(to_lane)))
         for c in cars:
-            if c["bump_t"] is not None and not (c["hz"] and c["hz"]["type"] == "wall" and c["trig"] is not None):
+            if c["bump_t"] is not None and not (c["hz"] and behave(c["hz"]["type"]) == "wall" and c["trig"] is not None):
                 aa = t - c["bump_t"]
                 side = -1 if c["lane"] == 0 else 1
                 c["z"] = c["lane"] + side * 0.28 * math.sin(min(math.pi, aa * 2.6)) if aa < 1.3 else float(c["lane"])
@@ -375,7 +403,9 @@ def state(c, t):
     i = int(f)
     a = f - i
     r0, r1 = c["rec"][i], c["rec"][i + 1]
-    return tuple(r0[j] * (1 - a) + r1[j] * a for j in range(REC_N))
+    st = [r0[j] * (1 - a) + r1[j] * a for j in range(REC_N)]
+    st[1] += zc(st[0])                                           # curved circuit: drawn deeper where the road sweeps away
+    return tuple(st)
 
 
 def mood_of(c, t, x):
@@ -391,7 +421,7 @@ def mood_of(c, t, x):
         return "scared"
     if c.get("dodge_t") is not None and 0 <= t - c["dodge_t"] < 1.3:
         return "happy"
-    zz = state(c, t)[1]
+    zz = state(c, t)[1] - zc(x)
     if (c["trig"] is None or t < c["trig"]) and any(abs(h["lane"] - zz) < 0.5 and 0 < h["x"] - x < 22 for h in HZ):
         return "scared"
     return "normal"
@@ -399,6 +429,8 @@ def mood_of(c, t, x):
 
 # ------------------------------------------------------------------ drawing: world
 def draw_ground(ctx, camx):
+    if CURVE:
+        return draw_ground_curved(ctx, camx)
     gc = se.lit(se.th_loc()["ground"])
     g = cairo.LinearGradient(0, ground_y(4.6), 0, H)
     g.add_color_stop_rgb(0, *se.shade(gc, 0.85))
@@ -441,6 +473,70 @@ def draw_ground(ctx, camx):
             xa = FIN_X + col * 0.9
             se.poly(ctx, [((xa - camx) * k_of(za) + 540, ground_y(za)), ((xa + 0.9 - camx) * k_of(za) + 540, ground_y(za)),
                           ((xa + 0.9 - camx) * k_of(zb) + 540, ground_y(zb)), ((xa - camx) * k_of(zb) + 540, ground_y(zb))])
+            ctx.set_source_rgb(*((0.05, 0.05, 0.05) if (row + col) % 2 else (1, 1, 1)))
+            ctx.fill()
+
+
+def _strip(ctx, x0, x1, za, zb, camx, step=1.0):
+    """Quad strip between depths za..zb (lanes, before the curve) from x0 to x1, following the curve."""
+    xs, x = [], x0
+    while x < x1:
+        xs.append(x)
+        x += step
+    xs.append(x1)
+    top = [lane_xy(xx, za, camx) for xx in xs]
+    bot = [lane_xy(xx, zb, camx) for xx in reversed(xs)]
+    se.poly(ctx, top + bot)
+
+
+def draw_ground_curved(ctx, camx):
+    gc = se.lit(se.th_loc()["ground"])
+    g = cairo.LinearGradient(0, ground_y(4.6), 0, H)
+    g.add_color_stop_rgb(0, *se.shade(gc, 0.85))
+    g.add_color_stop_rgb(1, *gc)
+    ctx.rectangle(-W, ground_y(5.4), 3 * W, H * 2)
+    ctx.set_source(g)
+    ctx.fill()
+    span = 1700 / k_of(3.7 + CURVE["amp"])
+    x0, x1 = camx - span, camx + span
+    _strip(ctx, x0, x1, 3.55, -0.55, camx)                       # asphalt
+    ctx.set_source_rgb(*se.lit((0.27, 0.27, 0.31)))
+    ctx.fill()
+    if se.THEME["weather"] == "rain":
+        _strip(ctx, x0, x1, 3.55, -0.55, camx)
+        ctx.set_source_rgba(0.6, 0.7, 0.85, 0.12)
+        ctx.fill()
+    _strip(ctx, x0, x1, 4.15, 3.85, camx)                        # guard wall base (far side)
+    ctx.set_source_rgb(*se.lit((0.55, 0.57, 0.62)))
+    ctx.fill()
+    x = math.floor(x0 / 2) * 2                                   # kerbs, both sides, red/white blocks
+    while x < x1:
+        for za, zb in ((3.55, 3.75), (-0.55, -0.72)):
+            _strip(ctx, x, x + 2, za, zb, camx, step=2)
+            ctx.set_source_rgb(*((0.85, 0.1, 0.1) if int(x / 2) % 2 else (0.96, 0.96, 0.96)))
+            ctx.fill()
+        x += 2
+    x = math.floor(x0 / 4) * 4                                   # lane dashes
+    while x < x1:
+        for zl in (0.5, 1.5, 2.5):
+            _strip(ctx, x, x + 1.6, zl - 0.04, zl + 0.04, camx, step=1.6)
+            ctx.set_source_rgba(1, 1, 1, 0.9)
+            ctx.fill()
+        x += 4
+    x = math.floor(x0 / 3) * 3                                   # wall panels (blue/white) standing on the base
+    while x < x1:
+        p0, p1 = lane_xy(x, 3.95, camx), lane_xy(x + 3, 3.95, camx)
+        kk = k_of(3.95 + zc(x))
+        se.poly(ctx, [p0, p1, (p1[0], p1[1] - 0.9 * kk), (p0[0], p0[1] - 0.9 * kk)])
+        ctx.set_source_rgb(*se.lit((0.15, 0.35, 0.8) if int(x / 3) % 2 else (0.92, 0.94, 0.98)))
+        ctx.fill()
+        x += 3
+    for row in range(8):                                         # finish line follows the curve too
+        za, zb = -0.55 + row * 0.5, -0.05 + row * 0.5
+        for col in range(2):
+            xa = FIN_X + col * 0.9
+            se.poly(ctx, [lane_xy(xa, za, camx), lane_xy(xa + 0.9, za, camx), lane_xy(xa + 0.9, zb, camx),
+                          lane_xy(xa, zb, camx)])
             ctx.set_source_rgb(*((0.05, 0.05, 0.05) if (row + col) % 2 else (1, 1, 1)))
             ctx.fill()
 
@@ -497,12 +593,29 @@ def hz_trig(hz, cars):
 
 def draw_hazard_ground(ctx, hz, camx, t, cars):
     """Hazards that lie on / in the road (drawn before the cars)."""
-    k = k_of(hz["lane"])
+    k = k_of(hz["lane"] + zc(hz["x"]))
     sx, y = lane_xy(hz["x"], hz["lane"], camx)
     if not -900 < sx < W + 900:
         return
     ty, tr = hz["type"], hz_trig(hz, cars)
-    if ty == "puddle":
+    if ty == "oil":                                              # black slick with a rainbow sheen
+        cx = sx + 2.5 * k
+        ctx.save()
+        ctx.translate(cx, y)
+        ctx.scale(4.6 * k, 0.5 * k)
+        ctx.arc(0, 0, 1, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgba(0.04, 0.04, 0.06, 0.95)
+        ctx.fill()
+        for j, col in enumerate(((0.9, 0.3, 0.9), (0.3, 0.8, 0.9), (0.95, 0.85, 0.3))):
+            ctx.save()
+            ctx.translate(cx + (j - 1) * 1.2 * k + 6 * math.sin(t * 2 + j), y - 0.05 * k)
+            ctx.scale(1.3 * k, 0.12 * k)
+            ctx.arc(0, 0, 1, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(*col, 0.35)
+            ctx.fill()
+    elif ty == "puddle":
         cx = sx + 2.5 * k
         ctx.save()
         ctx.translate(cx, y)
@@ -567,7 +680,7 @@ def draw_hazard_ground(ctx, hz, camx, t, cars):
     elif ty == "laser":
         for dz, post in ((-0.45, True), (0.45, True)):           # two posts, beam across the lane
             px, py = lane_xy(hz["x"], hz["lane"] + dz, camx)
-            kk = k_of(hz["lane"] + dz)
+            kk = k_of(hz["lane"] + dz + zc(hz["x"]))
             se.rrect(ctx, px - 0.18 * kk, py - 2.2 * kk, 0.36 * kk, 2.2 * kk, 0.08 * kk)
             ctx.set_source_rgb(*se.lit((0.35, 0.36, 0.42)))
             ctx.fill()
@@ -578,12 +691,18 @@ def draw_hazard_ground(ctx, hz, camx, t, cars):
 
 def draw_hazard_front(ctx, hz, camx, t, cars):
     """Hazards that tower over / fall on the cars (drawn after the cars)."""
-    k = k_of(hz["lane"])
+    k = k_of(hz["lane"] + zc(hz["x"]))
     sx, y = lane_xy(hz["x"], hz["lane"], camx)
     ty, tr = hz["type"], hz_trig(hz, cars)
     if not -1200 < sx < W + 1200:
         return
     a = (t - tr) if tr is not None else None
+    if ty == "hammer":
+        draw_hammer(ctx, sx, y, k, t, tr)
+        return
+    if ty == "container":
+        draw_container(ctx, sx, y, k, t, tr, hz)
+        return
     if ty == "wall":
         se.poly(ctx, [(sx - 0.1 * k, y), (sx + 0.9 * k, y), (sx + 0.9 * k, y - 1.7 * k), (sx - 0.1 * k, y - 1.7 * k)])
         ctx.set_source_rgb(*se.lit((0.72, 0.72, 0.75)))
@@ -731,6 +850,78 @@ def draw_hazard_front(ctx, hz, camx, t, cars):
             lx = ux + (j - 2.5) * 0.9 * k
             ctx.arc(lx, uy + 0.25 * k, 0.16 * k, 0, 2 * math.pi)
             ctx.set_source_rgb(*((1, 0.9, 0.2) if (j + int(t * 8)) % 2 else (1, 0.3, 0.3)))
+            ctx.fill()
+
+
+def draw_hammer(ctx, sx, y, k, t, tr):
+    """Giant swinging hammer (pendulum from a gantry): idles side to side, slams straight down onto the car."""
+    piv_x, piv_y, arm = sx + 0.6 * k, y - 9.5 * k, 7.6 * k
+    for dx in (-2.8, 3.6):                                       # gantry legs + beam
+        se.rrect(ctx, sx + dx * k - 0.22 * k, piv_y - 0.4 * k, 0.44 * k, 9.9 * k, 0.1 * k)
+        ctx.set_source_rgb(*se.lit((0.32, 0.34, 0.4)))
+        ctx.fill()
+    se.rrect(ctx, sx - 3.2 * k, piv_y - 0.8 * k, 7.2 * k, 0.7 * k, 0.12 * k)
+    ctx.fill()
+    a = None if tr is None else t - tr
+    if a is None or a < -0.35:
+        ang = 0.75 * math.sin(t * 2.4)                          # idle swing
+    elif a < 0.0:
+        ang = 0.75 * (1 - (a + 0.35) / 0.35) ** 2               # whoosh down
+    elif a < 1.1:
+        ang = 0.0
+    else:
+        ang = 0.9 * min(1.0, (a - 1.1) / 0.8) * math.sin(min(math.pi / 2, (a - 1.1) * 2.0))
+    hx, hy = piv_x + math.sin(ang) * arm, piv_y + math.cos(ang) * arm
+    ctx.move_to(piv_x, piv_y)
+    ctx.line_to(hx, hy)
+    ctx.set_source_rgb(*se.lit((0.55, 0.38, 0.2)))
+    ctx.set_line_width(0.45 * k)
+    ctx.stroke()
+    ctx.save()
+    ctx.translate(hx, hy)
+    ctx.rotate(-ang)
+    se.rrect(ctx, -2.2 * k, -0.2 * k, 4.4 * k, 1.9 * k, 0.35 * k)  # hammer head
+    ctx.set_source_rgb(*se.lit((0.55, 0.57, 0.62)))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.15, 0.15, 0.2)
+    ctx.set_line_width(3)
+    ctx.stroke()
+    for side in (-1, 1):
+        ctx.rectangle(side * 2.2 * k - (0.35 * k if side > 0 else 0), -0.2 * k, 0.35 * k, 1.9 * k)
+        ctx.set_source_rgb(0.85, 0.1, 0.1)
+        ctx.fill()
+    ctx.restore()
+
+
+def draw_container(ctx, sx, y, k, t, tr, hz):
+    """Shipping container: falls from the sky just before the car arrives, then blocks the lane."""
+    if tr is None:
+        return
+    a = t - tr
+    if a < -0.45:
+        return
+    drop = 1.0 if a >= -0.05 else 1 - ((a + 0.45) / 0.4) ** 2
+    yb = y - drop * 22 * k
+    col = [(0.9, 0.45, 0.1), (0.15, 0.45, 0.8), (0.75, 0.15, 0.15)][int(hz["x"]) % 3]
+    se.poly(ctx, [(sx - 0.1 * k, yb), (sx + 3.2 * k, yb), (sx + 3.2 * k, yb - 2.6 * k), (sx - 0.1 * k, yb - 2.6 * k)])
+    ctx.set_source_rgb(*se.lit(col))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.1, 0.08, 0.06)
+    ctx.set_line_width(3)
+    ctx.stroke()
+    for j in range(1, 8):                                        # corrugated ridges
+        xx = sx - 0.1 * k + j * 0.41 * k
+        ctx.move_to(xx, yb - 0.15 * k)
+        ctx.line_to(xx, yb - 2.45 * k)
+        ctx.set_source_rgba(0, 0, 0, 0.25)
+        ctx.set_line_width(max(2, 0.06 * k))
+        ctx.stroke()
+    se.draw_text(ctx, "MEGA", sx + 1.55 * k, yb - 1.3 * k, 0.75 * k, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.1), sw=2)
+    if 0 <= a + 0.05 < 0.6:                                      # dust puff on landing
+        g = (a + 0.05) / 0.6
+        for j in range(7):
+            ctx.arc(sx + (j - 1) * 0.6 * k, y - g * 0.6 * k, (0.4 + g) * 0.6 * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.75, 0.7, 0.6, 0.6 * (1 - g))
             ctx.fill()
 
 
@@ -965,7 +1156,24 @@ def bubble(ctx, text, sx, sy, age, k):
     ctx.restore()
 
 
+QUESTION_TEXT = [""]
+
+
+def question_for(cars):
+    """Hook: the underdog (biggest / least agile racer) + the most striking hazard, as a question."""
+    under = min(cars, key=lambda c: AGILITY.get(c["key"], 0.55))
+    star_hz = max(HZ, key=lambda h: (h["type"] in NEW_HZ, HAZARDS[h["type"]]["prio"]))
+    return f"Can {nick(under['key'])} Survive {QUESTION[star_hz['type']]}?"
+
+
 def draw_hud(ctx, cars, t):
+    if t < 3.4 and QUESTION_TEXT[0]:                             # first seconds: the question (same as the title)
+        a = min(1.0, t / 0.25, (3.4 - t) / 0.4)
+        words = QUESTION_TEXT[0].upper().split()
+        cut = len(words) // 2
+        for i, ln in enumerate((" ".join(words[:cut]), " ".join(words[cut:]))):
+            se.draw_text(ctx, ln, W / 2, 130 + i * 100, 88, fill=(1, 0.86, 0.12), alpha=a, max_w=W * 0.92)
+        return
     se.draw_text(ctx, "MEGAWHEEL RACE!", W / 2, 150, 92, fill=(1, 0.86, 0.12))
     order = sorted(cars, key=lambda c: (c["finish"] if c["finish"] is not None and c["finish"] <= t else 1e9,
                                         -state(c, t)[0]))
@@ -1177,7 +1385,17 @@ HAZ_SFX = {
                             (0.7, se.synth_impact(0.4, seed=13), 0.5)],
     "dragon_ice": lambda: [(-0.6, dragon_roar(), 0.8), (0.0, ice_blast(), 0.9)],
     "thaw": lambda: [(0.0, se.synth_shatter(seed=3), 0.9)],
+    "hammer": lambda: [(-0.35, se.synth_whoosh(), 0.8), (-0.02, se.synth_impact(1.0, seed=19), 1.0), (1.3, boing(), 0.8)],
+    "container": lambda: [(-0.45, se.sweep(1200, 300, 0.4, 0.5), 0.6), (-0.05, se.synth_impact(1.0, seed=23), 0.9),
+                          (0.0, se.synth_wall_crash(1.0), 0.9)],
+    "oil": lambda: [(0.0, se.synth_spin(1.4, 2), 0.9), (0.0, se.synth_splash(0.5, seed=29), 0.4)],
 }
+
+
+def sonic_logo():
+    """MegaWheel sonic logo ('Mega, Mega, MegaWheel...' from the theme song), mono 44.1 kHz."""
+    path = os.path.join(se.BASE, "branding", "music", "sonic_logo_mono.wav")
+    return se.read_wav(path) if os.path.exists(path) else np.zeros(1)
 
 
 def box_avg(x, k):
@@ -1234,6 +1452,7 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_
             place(sfx, se.synth_impact(1.0, seed=11), o, 1.0)
     if winner["finish"] is not None:
         place(sfx, se.synth_win(), out_of(winner["finish"]), 0.9)
+        place(sfx, sonic_logo(), out_of(winner["finish"]) + 0.5, 0.75)   # brand jingle on the win
     if replay:
         r0, a, b = replay
         o = r0 + (star["trig"] - a) / 0.4
@@ -1302,7 +1521,9 @@ def main():
         return len(frames) / FPS
 
     names = [nick(c["key"]) for c in cars]
-    lines = [(0.0, se.READY_SENTINEL), (1.2, f"Four racers, one finish line! {names[0]}, {names[1]}, {names[2]} and {names[3]}. Who will win?")]
+    QUESTION_TEXT[0] = question_for(cars)
+    lines = [(0.0, se.READY_SENTINEL), (1.2, f"{QUESTION_TEXT[0]} {names[0]}, {names[1]}, {names[2]} and {names[3]}... "
+                                             f"who will win?")]
     story = [(c["trig"], HAZARDS[c["hz"]["type"]]["line"].format(n=nick(c["key"]))) for c in hits]
     story += [(c["dodge_t"], f"Nice move! {nick(c['key'])} dodges the {DODGEABLE[c['dodged']]}!")
               for c in cars if c.get("dodge_t") is not None]
@@ -1373,7 +1594,8 @@ def main():
         camx = target if cut else camx + (target - camx) * (0.3 if mode == "replay" else 0.12)
         punch = 1.0
         for kind, et, ex, ez in events:
-            if kind in ("land", "bump", "puddle", "crusher", "meteor", "wall") and 0 <= t - et < 0.35:
+            if kind in ("land", "bump", "puddle", "crusher", "meteor", "wall", "hammer", "container", "oil") \
+                    and 0 <= t - et < 0.35:
                 punch = max(punch, 1 + 0.09 * math.sin(math.pi * (t - et) / 0.35))
         want = 1.15 if mode == "replay" else min(fit, 1.05 if focus else 1.0)
         zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
@@ -1386,7 +1608,7 @@ def main():
             empty_frames += 1
         shx = shy = 0.0
         for kind, et, ex, ez in events:
-            if kind in ("land", "bump", "wall", "crusher", "meteor") and 0 <= t - et < 0.45:
+            if kind in ("land", "bump", "wall", "crusher", "meteor", "hammer", "container") and 0 <= t - et < 0.45:
                 amp = (24 if kind == "meteor" else 16) * (1 - (t - et) / 0.45)
                 shx, shy = amp * math.sin(t * 90), amp * math.cos(t * 70)
         se.draw_sky(ctx, camx * 0.35, WORLD_DY / se.S, 1.0)
@@ -1414,15 +1636,15 @@ def main():
                 draw_hazard_front(ctx, hz, camx, t, cars)
         for kind, et, ex, ez in events:
             age = t - et
-            if kind == "puddle" and 0 <= age < 1.6:
-                k, y = k_of(ez), ground_y(ez)
+            if kind in ("puddle", "oil") and 0 <= age < 1.6:
+                k, y = k_of(ez + zc(ex)), ground_y(ez + zc(ex))
                 ctx.save()
                 ctx.translate((ex - camx) * k + 540, y)
                 ctx.scale(k, -k)
                 se.draw_water_splash(ctx, dict(x=0.0, y=0.0, speed=22.0, big=False), age)
                 ctx.restore()
             if kind in ("land", "pothole") and 0 <= age < 0.8:
-                k, y = k_of(ez), ground_y(ez)
+                k, y = k_of(ez + zc(ex)), ground_y(ez + zc(ex))
                 for j in range(8):
                     px = (ex - camx) * k + 540 + (j - 3.5) * 0.7 * k * (1 + age * 2)
                     ctx.arc(px, y - age * 0.8 * k, (0.4 + age) * k * 0.6, 0, 2 * math.pi)
@@ -1489,7 +1711,7 @@ def main():
                 + ("+bump" if c["bump_t"] else "") + (f"+dodge_{c['dodged']}" if c.get("dodge_t") else "")
                 for c in cars]
     track_id = "race25d_" + hashlib.md5(json.dumps(params, sort_keys=True).encode()).hexdigest()[:8] + "@" + se.THEME_ID
-    title = TITLES[opt.seed % len(TITLES)]
+    title = f"{QUESTION_TEXT[0]} 🏁"                              # question hook (research W2), honest payoff
     folder_rel = os.path.relpath(out_dir, se.BASE)
     hz_words = ", ".join(sorted({h["type"] for h in HZ}))
     manifest = dict(
