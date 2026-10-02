@@ -66,7 +66,11 @@
 | Godot | 4.4.1 ARM64 `/root/tools/godot`, `xvfb-run` + `gl_compatibility`, Movie Maker `--fixed-fps 30`, cek parse `--headless` dulu |
 | Aturan Godot | slow-mo ≤ 1×/video · zoom ≥ 1.0 · kamera per momen · CCD · `call_deferred` di callback · hindari `:=` dari Variant |
 | Metode A | frame cairo asli + lapisan FX Godot (`lab/godot_fx`), cue posisi dari hook tanpa ubah produksi |
-| SFX | Sonniss GDC di `/root/lab/sfx/` (unduh pakai UA browser + referer) |
+| SFX | Sonniss GDC di `/root/lab/sfx/` (unduh pakai UA browser + referer); bank `sfx_bank.py` → `/root/lab/sfx/bank/` |
+| Metode A | ❌ ditolak user ("tidak kerasa bedanya") |
+| Metode B (3D) v2 | `lab/godot3d_smash`: arena baja 20×24 m di atas air + hiu, kamera (0,30,-8)→(0,0,11.5) fov 40 KEEP_WIDTH (50 px/m depan, lihat **SCALE_STANDARD.md**), kartu mobil miring 0,5 rad, kerusakan bertahap + POW + hit-stop 3 frame, replay di mix3d |
+| Durasi SMASH 3D | 30–40 dtk (user 2026-10-03): KO tidak boleh sebelum 9 / 16,5 / 23,5 dtk, stop keras 28 dtk |
+| Chaos | **satu tema per video** (meteor / kraggor / missile, bergiliran antar episode); hujan meteor = 3 batu, maks 1 KO |
 
 ## 7. Kredensial (lokasi saja — jangan pernah di-commit)
 `credentials/` di VM 99.3 (git-ignored, dicek bersih 2026-10-03): YouTube upload token, YouTube Analytics token
@@ -81,3 +85,5 @@
 6. Dua sesi agent di file yang sama → cek `git log` sebelum patch; jangan timpa.
 7. Klip lebih pendek dari total transisinya → assemble memeriksa durasi part vs transisi.
 8. Sampel/eksperimen wajib mengikuti format tayang (kamera, rasio mobil, HUD) — jangan membuat format baru.
+9. Ukuran jangan ditebak: semua dimensi (mobil, arena, px/m, zona layar) ada di `SCALE_STANDARD.md`; render Godot
+   wajib mencetak `SCALE` dan lolos toleransinya.

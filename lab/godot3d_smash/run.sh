@@ -18,6 +18,7 @@ xvfb-run -a -s "-screen 0 1080x1920x24" $GD --path $P --rendering-driver opengl3
 echo "render $N frames: $(( $(date +%s) - S )) s"
 grep -E "SCRIPT ERROR|ERROR:" $D/godot.log | grep -v MSAA | sort | uniq -c | head -6
 ffmpeg -loglevel error -y -i $D/s3d.avi -c:v libx264 -pix_fmt yuv420p -crf 19 $D/SMASH3D_${TAG}_video.mp4 && rm -f $D/s3d.avi
+cp /tmp/godot_scale.json $D/scale_${TAG}.json 2>/dev/null; grep "^SCALE" $D/godot.log | head -1
 cp /tmp/godot_events.json $D/events_${TAG}.json 2>/dev/null || echo '{"events":[]}' > $D/events_${TAG}.json
 venv/bin/python lab/godot3d_smash/mix3d.py --video $D/SMASH3D_${TAG}_video.mp4 --events $D/events_${TAG}.json --out $D/SMASH3D_B_${TAG}.mp4
 python3 -c "import json;e=json.load(open('$D/events_${TAG}.json'))['events'];import collections;print(collections.Counter(x['type'] for x in e));print([(round(x['t'],1),x['type']) for x in e if x['type'] in ('ko','win','fall','chomp')])"

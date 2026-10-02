@@ -6,8 +6,8 @@ extends Node3D
 ## A director keeps the fight ~24 s (video 30-40 s, user 2026-10-03): KOs are allowed only from fixed beats (edges are walled until then).
 ##   godot --path project --write-movie out.avi --fixed-fps 30 --quit-after N -- <sprite_dir> [fov y z look_z] [debug]
 
-const ARENA_HX = 10.5
-const ARENA_HZ = 13.0
+const ARENA_HX = 10.0                                    # SCALE_STANDARD.md §3: 20 x 24 m
+const ARENA_HZ = 12.0
 const WATER_Y = -1.2
 const KO_T = [9.0, 16.5, 23.5]                           # earliest time for the 1st / 2nd / final KO
 var sprite_dir = "/root/lab/fx/sprites"
@@ -42,10 +42,10 @@ var chaos = "meteor"
 var beats = [[5.5, "soft", 0], [9.0, "push_out", 0], [12.5, "kill", 0],
 			 [15.0, "storm", 1], [20.0, "kill", 1], [26.5, "kill", 2]]
 var rng = RandomNumberGenerator.new()
-var CAM_FOV = 46.0
+var CAM_FOV = 40.0
 var CAM_Y = 30.0
 var CAM_Z = -8.0
-var LOOK_Z = 12.0
+var LOOK_Z = 11.5
 const CARD_TILT = 0.5                                    # cards recline to face the high camera (not squashed)
 var cam_base = Vector3.ZERO
 
@@ -103,6 +103,22 @@ func _ready() -> void:
 	cam.look_at(Vector3(0, 0, LOOK_Z), Vector3.UP)
 	cam.make_current()
 	_hud()
+	_scale_report()
+
+
+func _scale_report() -> void:
+	## measured on-screen scale vs SCALE_STANDARD.md (px per metre at the front / back edge, arena box, car sizes)
+	var fl = cam.unproject_position(Vector3(ARENA_HX, 0, 0))
+	var fr = cam.unproject_position(Vector3(-ARENA_HX, 0, 0))
+	var bl = cam.unproject_position(Vector3(ARENA_HX, 0, ARENA_HZ * 2))
+	var br = cam.unproject_position(Vector3(-ARENA_HX, 0, ARENA_HZ * 2))
+	var r = {"arena_m": [ARENA_HX * 2, ARENA_HZ * 2], "front_px_per_m": absf(fr.x - fl.x) / (ARENA_HX * 2),
+			 "back_px_per_m": absf(br.x - bl.x) / (ARENA_HX * 2), "front_y": fl.y, "back_y": bl.y,
+			 "front_x": [minf(fl.x, fr.x), maxf(fl.x, fr.x)], "cam": [CAM_FOV, CAM_Y, CAM_Z, LOOK_Z]}
+	for c in cars:
+		r[c["vk"] + "_px_front"] = c["bw"] * r["front_px_per_m"]
+	print("SCALE " + JSON.stringify(r))
+	FileAccess.open("/tmp/godot_scale.json", FileAccess.WRITE).store_string(JSON.stringify(r))
 
 
 # ================================================================== world
