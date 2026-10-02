@@ -1254,6 +1254,55 @@ SFX = {
 }
 
 
+def amb_birds(n, rng):
+    """Daytime outdoors: soft birdsong (short frequency-swept chirps) over a faint breeze."""
+    out = SM.box_avg(rng.normal(0, 1, n), 120) * 0.25
+    for i in rng.integers(0, max(1, n - se.SR), max(1, int(n / se.SR * 1.6))):
+        f0 = rng.uniform(2800, 4800)
+        for k in range(int(rng.integers(2, 5))):
+            L = int(rng.uniform(0.05, 0.11) * se.SR)
+            tt = np.arange(L) / se.SR
+            ch = np.sin(2 * math.pi * (f0 + rng.uniform(-900, 900) * tt / tt[-1]) * tt) * np.sin(np.pi * tt / tt[-1])
+            j = i + int(k * 0.13 * se.SR)
+            out[j:j + L] += ch[:max(0, min(L, n - j))] * 0.5
+    return out
+
+
+def amb_night(n, rng):
+    """Night outdoors: crickets (pulsed 4.5 kHz trills) and a low hush."""
+    tt = np.arange(n) / se.SR
+    trill = np.sin(2 * math.pi * 4500 * tt) * (np.sin(2 * math.pi * 28 * tt) > 0.3)
+    gate = (np.sin(2 * math.pi * 0.9 * tt + rng.uniform(0, 6)) > -0.2).astype(float)
+    return trill * SM.box_avg(gate, int(0.05 * se.SR)) * 0.25 + SM.box_avg(rng.normal(0, 1, n), 200) * 0.3
+
+
+def amb_room(n, rng):
+    """Garage room tone: low hum + air."""
+    tt = np.arange(n) / se.SR
+    return np.sin(2 * math.pi * 60 * tt) * 0.15 + SM.box_avg(rng.normal(0, 1, n), 60) * 0.35
+
+
+def ambience_bed(scene, n):
+    """Pick the bed from scene "ambience" or location / time. Level is low: felt, not heard."""
+    kind = scene.get("ambience")
+    loc, time_ = scene.get("location", "town"), scene.get("time", "morning")
+    if kind is None:
+        kind = "room" if loc == "garage" else "crowd" if loc in ("arena", "podium") else             "night" if time_ == "night" else "birds" if loc in ("town", "country", "trackside") else None
+    rng = np.random.default_rng(9)
+    if kind == "crowd":
+        x, g = SM.crowd_bed(n / se.SR + 0.1, seed=7)[:n], 0.05
+    elif kind == "birds":
+        x, g = amb_birds(n, rng), 0.035
+    elif kind == "night":
+        x, g = amb_night(n, rng), 0.03
+    elif kind == "room":
+        x, g = amb_room(n, rng), 0.03
+    else:
+        return np.zeros(n)
+    x = np.pad(x, (0, max(0, n - len(x))))[:n]
+    return x / max(1e-9, np.max(np.abs(x))) * g
+
+
 def build_audio(shots, placed, total, scene):
     n = int(total * se.SR) + se.SR
     narr, sfx = np.zeros(n), np.zeros(n)
@@ -1291,6 +1340,8 @@ def build_audio(shots, placed, total, scene):
     talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))
     duck = 1.0 - 0.55 * np.clip(talk * 3, 0, 1)
     mix = se.peak(narr) * 1.0 + se.peak(mus) * 0.32 * duck + se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
+    if scene.get("ambience") != "rain" and scene.get("ambience") != "none":
+        mix = mix + ambience_bed(scene, len(mix)) * (0.7 + 0.3 * duck)
     if scene.get("ambience") == "rain":                            # soft, calming rain (user review: was too loud)
         rng = np.random.default_rng(2)
         hiss = SM.box_avg(rng.normal(0, 1, n), 40)
