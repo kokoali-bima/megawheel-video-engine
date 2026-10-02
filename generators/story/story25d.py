@@ -1687,6 +1687,16 @@ def render_scene(ep, num, aspect):
 XF_DUR = {"dissolve": 2.0, "fadeblack": 1.8, "fadewhite": 1.4}       # others: 1.6 s
 
 
+def make_black(d, aspect, dur):
+    """Silent black clip: a breath between parts (theme song -> story) so nothing overlaps."""
+    setup_projection(aspect)
+    out = os.path.join(d, f"black_{dur:.1f}_{aspect}.mp4")
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "lavfi", "-i", f"color=c=black:s={W}x{H}:r={FPS}:d={dur}",
+                    "-f", "lavfi", "-i", f"anullsrc=r=48000:cl=stereo", "-t", f"{dur}", "-c:v", "libx264",
+                    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", out], check=True)
+    return out
+
+
 def make_ident(d, aspect, text, dur=3.6, logo=None):
     """'INFRASOFT presents' card: soft fade, gentle chime."""
     setup_projection(aspect)
@@ -1750,7 +1760,10 @@ def assemble(ep, aspect):
         xds = [XF_DUR.get(x, 1.6) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
         if ed.get("order"):                                        # e.g. [1, "ident", 0, 2, ...]: cold open first
             ident = os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))                 if "ident" in ed["order"] else None
-            parts = [ident if x == "ident" else f"scene_{int(x):02d}_{aspect}.mp4" for x in ed["order"]]
+            parts = [ident if x == "ident" else
+                     os.path.basename(make_black(d, aspect, float(x.split(":")[1]) if ":" in x else 1.2))
+                     if isinstance(x, str) and x.startswith("black") else
+                     f"scene_{int(x):02d}_{aspect}.mp4" for x in ed["order"]]
         elif ed.get("ident"):                                      # studio ident before the theme song
             parts = [os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))] + parts
             tr, xds = ["fade"] + tr, [0.8] + xds
