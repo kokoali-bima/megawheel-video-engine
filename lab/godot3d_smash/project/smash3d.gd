@@ -28,10 +28,10 @@ var slow_until = -1.0
 var winner = null
 var chaos = [[6.0, "missile"], [11.5, "kraggor"], [16.5, "missile"], [22.0, "missile"], [27.0, "kraggor"]]
 var rng = RandomNumberGenerator.new()
-var CAM_FOV = 46.0
-var CAM_Y = 11.0
-var CAM_Z = -17.0
-var LOOK_Z = 5.6
+var CAM_FOV = 48.0
+var CAM_Y = 10.0
+var CAM_Z = -15.0
+var LOOK_Z = 8.0
 
 
 func vt() -> float:
@@ -92,7 +92,7 @@ func _environment() -> void:
 	env.background_mode = Environment.BG_SKY
 	env.sky = sky
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_energy = 0.8
+	env.ambient_light_energy = 0.5
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
 	env.glow_intensity = 0.45
@@ -102,7 +102,7 @@ func _environment() -> void:
 	add_child(we)
 	var sun = DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-55, -35, 0)
-	sun.light_energy = 1.3
+	sun.light_energy = 1.1
 	sun.light_color = Color(1.0, 0.95, 0.85)
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 60.0
@@ -153,7 +153,7 @@ void fragment() {
 	vec3 w = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec2 g = abs(fract(w.xz / 1.6) - 0.5);
 	float line = step(0.47, max(g.x, g.y));
-	ALBEDO = mix(vec3(0.36, 0.37, 0.41), vec3(0.24, 0.25, 0.28), line);
+	ALBEDO = mix(vec3(0.27, 0.28, 0.31), vec3(0.17, 0.18, 0.2), line);
 	ROUGHNESS = 0.8;
 	METALLIC = 0.05;
 }
@@ -233,7 +233,7 @@ func _stands() -> void:
 	banner.position = Vector3(0, 4.0, 13.0)
 	banner.rotation_degrees = Vector3(0, 180, 0)
 	banner.pixel_size = 0.012
-	add_child(banner)
+	# banner removed: the HUD already shows the title (it overlapped the HP panel)
 
 
 func _tex(name: String) -> ImageTexture:
