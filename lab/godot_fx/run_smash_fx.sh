@@ -38,7 +38,7 @@ def place(sig, t, g):
     if 0 <= i < n: m = min(len(sig), n - i); x[i:i+m] += sig[:m] * g
 for c in cues:
     t = c["f"] / 30.0
-    if c["type"] in ("wreck", "missile"):
+    if c["type"] in ("wreck", "missile", "ringout"):
         place(se.synth_eruption(seed=47), t, 1.0); place(se.synth_shatter(seed=3), t + 0.03, 0.6)
     elif c["type"] == "hit" and c.get("power", 0) > 0.6:
         place(se.synth_impact(1.0, seed=9), t, 0.5)

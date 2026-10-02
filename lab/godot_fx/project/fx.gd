@@ -104,10 +104,14 @@ func _fx(c) -> void:
 		"wreck":
 			_explode(p, s, 1.0)
 			_fracture(c, p, s)
-		"ringout":
-			_light(p, s * 8.0, Color(1, 0.55, 0.15), 2.2, 0.8)
-			_parts(p, 60, 1.1, Vector2(5, 12) * s, s * 14.0, Vector2(0.12, 0.3) * s,
-				   Color(1, 0.8, 0.2), Color(0.9, 0.2, 0.0, 0))
+		"ringout":                                   # falls into the lava: big lava burst + glow + small wave
+			_light(p, s * 12.0, Color(1, 0.5, 0.12), 2.8, 1.2)
+			_parts(p, 110, 1.4, Vector2(6, 16) * s, s * 14.0, Vector2(0.15, 0.4) * s,
+				   Color(1, 0.85, 0.25), Color(0.9, 0.15, 0.0, 0))
+			_parts(p + Vector2(0, -s), 30, 2.2, Vector2(1, 3) * s, -s * 1.5, Vector2(0.5, 1.1) * s,
+				   Color(0.25, 0.2, 0.2, 0.7), Color(0.4, 0.4, 0.4, 0), 100.0)
+			_ring(p, s * 7.0, Color(1, 0.6, 0.2, 0.8), 0.5, 16)
+			shake = max(shake, 12.0)
 		"missile":
 			_explode(p, s, 1.6)
 		"kraggor":
