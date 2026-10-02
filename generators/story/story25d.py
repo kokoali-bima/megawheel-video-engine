@@ -904,8 +904,8 @@ def build(scene):
                 continue
             a = announcer.get(*it)
             placed.append(dict(t0=t + u, audio=a, spk=spk, text=text, emo=emo))
-            u += len(a) / se.SR + sh.get("gap", 0.3)
-        sh["t1"] = t + max(u + sh.get("tail", 0.4), sh.get("hold", 0.0), 1.6 if sh.get("triple") else 0.0)
+            u += len(a) / se.SR + sh.get("gap", scene.get("gap", 0.3))
+        sh["t1"] = t + max(u + sh.get("tail", scene.get("tail", 0.4)), sh.get("hold", 0.0), 1.6 if sh.get("triple") else 0.0)
         sh["t1"] += sh.get("freeze", 0.0)
         t = sh["t1"]
     return scene["shots"], placed, t

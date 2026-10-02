@@ -157,5 +157,7 @@
    "punch": true,
    "freeze": 1.8
   }
- ]
+ ],
+ "gap": 0.55,
+ "tail": 0.8
 }
