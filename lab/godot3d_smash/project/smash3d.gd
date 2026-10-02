@@ -621,9 +621,11 @@ func explode(pos: Vector3, power: float, push := true, lethal = null, push_h := 
 			   Vector2(0.08, 0.18), Color(1, 0.92, 0.4), Color(1, 0.4, 0.1, 0))                         # sparks
 	_ring(pos, 7.0 * power, Color(1, 0.85, 0.5, 0.9), 0.45)
 	_pow(pos + Vector3(0, 1.8, -0.5), 3.6 * fb)
-	_scorch(pos, 1.8 * fb)
+	_scorch(pos, 1.1 * fb)
 	shake = max(shake, 0.5 * power)
 	fov_kick = max(fov_kick, 3.0 * fb)
+	if lethal != null and not _lethal_ok(lethal):
+		lethal = null
 	if push:
 		for c in cars:
 			if not c["alive"]:
@@ -651,7 +653,7 @@ func _scorch(pos: Vector3, r: float) -> void:
 	cm.height = 0.02
 	mi.mesh = cm
 	var m = StandardMaterial3D.new()
-	m.albedo_color = Color(0.05, 0.04, 0.04, 0.65)
+	m.albedo_color = Color(0.05, 0.04, 0.04, 0.45)
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mi.material_override = m
 	mi.position = Vector3(pos.x, 0.015, pos.z)
@@ -746,6 +748,11 @@ func fracture(c: Dictionary) -> void:
 # ================================================================== director + battle
 func dead_count() -> int:
 	return cars.filter(func(cc): return not cc["alive"]).size()
+
+
+func _lethal_ok(c) -> bool:
+	## a 'finishing' hit only counts for the KO it was planned for (no double KO from a late meteor)
+	return c != null and c["alive"] and int(c.get("ko_idx", -1)) == dead_count()
 
 
 func ko_allowed() -> bool:
@@ -957,6 +964,7 @@ func _director(alive: Array) -> void:
 					weakest = c
 			if mine != k:
 				continue
+			weakest["ko_idx"] = k
 			if act == "soft":
 				var spot = alive[rng.randi() % alive.size()]["body"].global_position
 				_chaos_hit(Vector3(spot.x + 1.5, 0, spot.z), null, 7.0)
@@ -1113,10 +1121,12 @@ func _stomp(spot: Vector3, push_h: float, lethal) -> void:
 	_ring(spot, 9.0, Color(0.85, 0.85, 0.85, 0.9), 0.6)
 	_particles(spot + Vector3(0, 0.3, 0), 90, 1.8, Vector2(3, 8), Vector3(0, -2, 0), Vector2(0.8, 1.8),
 			   Color(0.62, 0.62, 0.64, 0.8), Color(0.5, 0.5, 0.52, 0), 100.0, false)          # gray dust
-	_scorch(spot, 2.4)
+	_scorch(spot, 1.6)
 	shake = max(shake, 0.8)
 	fov_kick = max(fov_kick, 3.5)
 	_hitstop(3)
+	if lethal != null and not _lethal_ok(lethal):
+		lethal = null
 	for c in cars:
 		if not c["alive"]:
 			continue

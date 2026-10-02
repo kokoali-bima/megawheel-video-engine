@@ -159,13 +159,13 @@ def main():
         cw, ch = 1080 / ZOOM, 1920 / ZOOM
         x = int(np.clip(sx - cw / 2, 0, 1080 - cw))
         y = int(np.clip(sy - ch / 2, 0, 1920 - ch))
-        vf = (f"[0:v]trim=0:{t_ins:.3f},setpts=PTS-STARTPTS[a];"
-              f"[0:v]trim={r0:.3f}:{r1:.3f},setpts=PTS-STARTPTS,crop={int(cw)}:{int(ch)}:{x}:{y},scale=1080:1920,"
+        vf = (f"[0:v]trim=0:{t_ins:.3f},setpts=PTS-STARTPTS,setsar=1[a];"
+              f"[0:v]trim={r0:.3f}:{r1:.3f},setpts=PTS-STARTPTS,crop={int(cw)}:{int(ch)}:{x}:{y},scale=1080:1920,setsar=1,"
               f"fade=t=in:st=0:d=0.18:color=white,"
               f"drawtext=fontfile={FONT}:text='REPLAY':fontsize=120:fontcolor=white:borderw=12:bordercolor=0xd02020:"
               f"x=(w-text_w)/2:y=230,"
               f"drawbox=x=170:y=262:w=56:h=56:color=0xff2020:t=fill:enable='lt(mod(t\\,0.8)\\,0.45)'[b];"
-              f"[0:v]trim={t_ins:.3f},setpts=PTS-STARTPTS[c];[a][b][c]concat=n=3:v=1:a=0[v]")
+              f"[0:v]trim={t_ins:.3f},setpts=PTS-STARTPTS,setsar=1[c];[a][b][c]concat=n=3:v=1:a=0[v]")
         cmd = ["ffmpeg", "-loglevel", "error", "-y", "-i", a.video, "-i", wav, "-filter_complex", vf, "-map", "[v]",
                "-map", "1:a", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19"]
     else:
