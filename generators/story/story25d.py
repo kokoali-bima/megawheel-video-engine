@@ -884,6 +884,12 @@ def vertical_overlay(ctx, fn, *args):
 
 
 # ------------------------------------------------------------------ cameras
+def hill_focus(x):
+    """Default framing height, raised by the hill under x (None = default)."""
+    hh, _ = hill_h(x)
+    return ground_y(1.0) - (2.3 + hh) * k_of(1.0) if hh > 0 else None
+
+
 def cam_for(shot, actors, t, u):
     """(camx, zoom, focus screen y) for a shot at shot-local time u."""
     kind = shot.get("cam", "wide")
@@ -899,8 +905,8 @@ def cam_for(shot, actors, t, u):
     if on is None:
         vis = [a for a in actors.values() if not a["hidden"]]
         xs = [a["x"] for a in vis] or [0.0]
-        mid = (min(xs) + max(xs)) / 2
-        return mid + shot.get("dx", 0.0), shot.get("zoom", 1.0), None
+        mid = (min(xs) + max(xs)) / 2 + shot.get("dx", 0.0)
+        return mid, shot.get("zoom", 1.0), hill_focus(mid)
     veh = se.VEHICLES[on["key"]]
     bw, bh = veh["body"]
     k = k_of(on["z"])
@@ -928,8 +934,8 @@ def cam_for(shot, actors, t, u):
         z_l = min(shot.get("zoom", 1.7), 0.6 * fit, 0.5 * H / tall)
         return on["x"] + bw * 0.1 * on["face"] * on["small"], z_l, ground_y(on["z"]) - (hh + 0.5 * tall / k) * k
     if kind == "track":                                            # follow a moving car (race)
-        return on["x"] + shot.get("dx", 2.0), shot.get("zoom", 1.1), None
-    return on["x"] + shot.get("dx", 0.0), shot.get("zoom", 1.0), None
+        return on["x"] + shot.get("dx", 2.0), shot.get("zoom", 1.1), hill_focus(on["x"])
+    return on["x"] + shot.get("dx", 0.0), shot.get("zoom", 1.0), hill_focus(on["x"])
 
 
 # ------------------------------------------------------------------ overlays

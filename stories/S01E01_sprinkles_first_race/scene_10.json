@@ -136,8 +136,7 @@
    ]
   },
   {
-   "cam": "wide",
-   "dx": 14,
+   "cam": "track",
    "hold": 5.0,
    "speedlines": true,
    "music": "hopeful",
@@ -149,10 +148,12 @@
      "to_x": 44,
      "speed": 11
     }
-   }
+   },
+   "on": "sprinkles",
+   "zoom": 0.9
   },
   {
-   "cam": "wide",
+   "cam": "medium",
    "music": "hopeful",
    "lines": [
     [
@@ -163,10 +164,11 @@
    ],
    "moves": {
     "sprinkles": {
-     "to_x": 50,
-     "speed": 3
+     "to_x": 47,
+     "speed": 2
     }
-   }
+   },
+   "on": "sprinkles"
   },
   {
    "cam": "ecu",
@@ -197,7 +199,9 @@
     "nitro": "scared"
    },
    "freeze": 2.0,
-   "note": "BOOM... BOOM... the ground is shaking. Something huge is coming!"
+   "note": "BOOM... BOOM... the ground is shaking. Something huge is coming!",
+   "on": "sprinkles",
+   "zoom": 0.8
   }
  ],
  "gap": 0.65,
