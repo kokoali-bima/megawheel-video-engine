@@ -46,11 +46,7 @@
    "hold": 3.6,
    "sfx": [
     "whoosh",
-    "ding",
-    [
-     "ding",
-     1.6
-    ]
+    "ding"
    ],
    "moves": {
     "sprinkles": {
