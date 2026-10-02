@@ -132,7 +132,9 @@
     "mode": "smile",
     "sx": 0.86,
     "sy": 0.62,
-    "scale": 0.35
+    "scale": 0.35,
+    "stand": true,
+    "gz": 40
    },
    "emote": {
     "siren": "laugh",
@@ -144,11 +146,6 @@
    "hold": 4.0,
    "title": "MEGAWHEEL ARENA",
    "confetti": true
-  },
-  {
-   "cam": "wide",
-   "hold": 3.5,
-   "caption": "Episode 1: Sprinkles' First Race"
   }
  ],
  "edge_fade": false

@@ -20,7 +20,9 @@
     "mode": "calm",
     "sx": 0.78,
     "sy": 0.62,
-    "scale": 0.32
+    "scale": 0.32,
+    "stand": true,
+    "gz": 40
    },
    "lines": [
     [
@@ -35,10 +37,13 @@
    "cam": "wide",
    "music": "sad",
    "kraggor": {
-    "mode": "calm",
-    "sx": 0.83,
-    "sy": 0.63,
-    "scale": 0.28
+    "mode": "smile",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.35,
+    "wink": 2.4
    },
    "lines": [
     [
@@ -47,8 +52,8 @@
      "calm"
     ]
    ],
-   "punch": true,
-   "freeze": 2.0
+   "freeze": 2.0,
+   "hold": 4.2
   },
   {
    "cam": "wide",

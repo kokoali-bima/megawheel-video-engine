@@ -79,24 +79,6 @@
    ]
   },
   {
-   "cam": "wide",
-   "hold": 3.0,
-   "sfx": [
-    "ding",
-    [
-     "ding",
-     1.2
-    ],
-    [
-     "ding",
-     2.4
-    ]
-   ],
-   "emote": {
-    "sprinkles": "sad"
-   }
-  },
-  {
    "cam": "close",
    "on": "sprinkles",
    "emote": {
@@ -112,6 +94,17 @@
   },
   {
    "cam": "wide",
+   "hold": 8.6,
+   "sfx": [
+    "jingle"
+   ],
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "note": "Sprinkles plays Grandpa's ice-cream song..."
+  },
+  {
+   "cam": "wide",
    "hold": 3.2,
    "eyes": {
     "sx": 0.82,
@@ -119,13 +112,9 @@
     "r": 12
    },
    "music": "tense",
-   "sfx": [
-    [
-     "ding",
-     0.5
-    ]
-   ],
-   "punch": true
+   "sfx": [],
+   "punch": true,
+   "note": "Something in the mountains is listening..."
   },
   {
    "cam": "ecu",
@@ -219,7 +208,9 @@
     "sy": 0.28,
     "r": 10
    },
-   "freeze": 2.0
+   "freeze": 2.0,
+   "sfx": [],
+   "note": "Something in the mountains is listening..."
   }
  ],
  "gap": 0.55,

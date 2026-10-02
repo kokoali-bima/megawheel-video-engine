@@ -1,6 +1,10 @@
 {
+ "ident": "INFRASOFT\npresents",
  "transitions": [
-  "zoomin",
+  [
+   "fade",
+   2.0
+  ],
   "fadewhite",
   "smoothleft",
   "fadeblack",
@@ -18,5 +22,5 @@
   "fadeblack",
   "dissolve"
  ],
- "note": "ffmpeg xfade names; whoosh SFX on flashy cuts is in the next scene's first shot"
+ "note": "name = default duration (XF_DUR, 1.0 s); [name, seconds] to override"
 }

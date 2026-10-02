@@ -31,10 +31,11 @@
  "props": [
   {
    "type": "poster",
-   "x": 3.5,
-   "z": 4.2,
+   "x": -8.0,
+   "z": 4.4,
    "w": 6.4,
    "h": 3.6,
+   "pole": 2.6,
    "text": "MEGAWHEEL GRAND RACE\n30 DAYS TO GO!\nRegistration closes TODAY"
   }
  ],
@@ -119,12 +120,12 @@
   },
   {
    "look": {
-    "x": 3.5,
-    "z": 4.2,
-    "y": 8.0,
-    "zoom": 2.2
+    "x": -8.0,
+    "z": 4.4,
+    "y": 4.4,
+    "fit": 7.6
    },
-   "hold": 2.4,
+   "hold": 3.0,
    "music": "hopeful"
   },
   {
@@ -199,12 +200,12 @@
   },
   {
    "look": {
-    "x": 3.5,
-    "z": 4.2,
-    "y": 7.2,
-    "zoom": 3.2
+    "x": -8.0,
+    "z": 4.4,
+    "y": 3.6,
+    "fit": 5.2
    },
-   "hold": 2.0,
+   "hold": 2.6,
    "music": "tense"
   },
   {

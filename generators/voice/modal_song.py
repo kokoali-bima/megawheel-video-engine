@@ -128,6 +128,15 @@ def sing(songs: list) -> dict:
     return dict(songs=out, secs=time.time() - t0)
 
 
+@app.function(image=image, gpu="L4", timeout=900)
+def remix(wav: bytes, sg: dict) -> dict:
+    """Post-process an existing song (no generation): Demucs rebalance / pitch / fades."""
+    t0 = time.time()
+    with open("/tmp/src.wav", "wb") as fh:
+        fh.write(wav)
+    return dict(wav=_finish("/tmp/src.wav", sg), secs=time.time() - t0)
+
+
 def _ledger():
     if os.path.exists(LEDGER):
         with open(LEDGER) as fh:
@@ -147,8 +156,19 @@ def main(songs: str = "branding/music/songs.json", out: str = "branding/music", 
     if spent + worst > BUDGET_USD:
         raise SystemExit("[song] STOP: budget bulanan akan terlewati. Tidak dijalankan.")
     t0 = time.time()
-    res = sing.remote(items)
     os.makedirs(out, exist_ok=True)
+    post = [s for s in items if s.get("src")]                       # {"src": "x.wav", "name": ...}: remix only
+    items = [s for s in items if not s.get("src")]
+    res = {"songs": {}, "secs": 0.0}
+    for sg in post:
+        with open(sg["src"], "rb") as fh:
+            r = remix.remote(fh.read(), sg)
+        res["songs"][sg["name"]] = dict(wav=r["wav"], score=1.0, heard="(remix)", take=0, seed=0)
+        res["secs"] += r["secs"]
+    if items:
+        g = sing.remote(items)
+        res["songs"].update(g["songs"])
+        res["secs"] += g["secs"]
     for name, r in res["songs"].items():
         with open(os.path.join(out, f"{name}.wav"), "wb") as fh:
             fh.write(r["wav"])

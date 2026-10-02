@@ -53,9 +53,11 @@
    "moves": {
     "sprinkles": {
      "to_x": 2,
-     "speed": 6
+     "speed": 6,
+     "reverse": true
     }
-   }
+   },
+   "note": "Too heavy... Sprinkles starts rolling back down!"
   },
   {
    "cam": "close",
@@ -91,9 +93,11 @@
    "moves": {
     "sprinkles": {
      "to_x": -1,
-     "speed": 5
+     "speed": 5,
+     "reverse": true
     }
-   }
+   },
+   "note": "SPLAT! She slides right into the mud."
   },
   {
    "cam": "two",
@@ -103,6 +107,9 @@
     "rocky": {
      "show": true,
      "x": -8
+    },
+    "sprinkles": {
+     "stuck": true
     }
    },
    "lines": [
@@ -123,7 +130,12 @@
      "You can't climb a hill by stopping halfway. Build your speed BEFORE the hill... and keep rolling.",
      "calm"
     ]
-   ]
+   ],
+   "moves": {
+    "sprinkles": {
+     "stuck": true
+    }
+   }
   },
   {
    "cam": "close",
@@ -134,7 +146,12 @@
      "What if I fail again?",
      "worried"
     ]
-   ]
+   ],
+   "moves": {
+    "sprinkles": {
+     "stuck": true
+    }
+   }
   },
   {
    "cam": "close",
@@ -148,7 +165,12 @@
      "Then you get stuck again. Everybody gets stuck sometimes. What matters is you keep rolling.",
      "calm"
     ]
-   ]
+   ],
+   "moves": {
+    "sprinkles": {
+     "stuck": true
+    }
+   }
   },
   {
    "cam": "wide",
@@ -179,7 +201,8 @@
    "moves": {
     "sprinkles": {
      "to_x": 3,
-     "speed": 7
+     "speed": 7,
+     "reverse": true
     }
    }
   },
@@ -197,5 +220,12 @@
  ],
  "gap": 0.55,
  "tail": 0.8,
- "edge_fade": false
+ "edge_fade": false,
+ "props": [
+  {
+   "type": "mud",
+   "x": -1.0,
+   "w": 6.5
+  }
+ ]
 }

@@ -136,7 +136,7 @@
   {
    "cam": "close",
    "on": "sprinkles",
-   "hold": 2.4,
+   "hold": 8.6,
    "foot": {
     "x": 12.5,
     "z": 1.4,
@@ -149,19 +149,12 @@
     }
    },
    "sfx": [
-    "ding",
-    [
-     "ding",
-     0.8
-    ],
-    [
-     "ding",
-     1.6
-    ]
+    "jingle"
    ],
    "emote": {
     "sprinkles": "determined"
-   }
+   },
+   "note": "Sprinkles plays Grandpa's song... for Kraggor."
   },
   {
    "cam": "wide",

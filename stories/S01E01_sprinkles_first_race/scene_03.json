@@ -10,6 +10,7 @@
    "type": "desk",
    "x": 4.0,
    "z": 2.6,
+   "table_x": 1.6,
    "table_z": 1.25,
    "text": "RACE REGISTRATION"
   }
@@ -23,10 +24,11 @@
   },
   "siren": {
    "vk": "police",
-   "x": 4.0,
-   "z": 1.9,
+   "x": 6.4,
+   "z": 2.6,
    "face": -1,
-   "emo": "normal"
+   "emo": "normal",
+   "h": 0.75
   },
   "zippy": {
    "vk": "sports",
@@ -180,11 +182,12 @@
   {
    "cam": "close",
    "on": "sprinkles",
-   "hold": 1.2,
-   "caption": "#13",
+   "hold": 3.0,
+   "caption": "RACE NUMBER 13",
    "sfx": [
     "ding"
-   ]
+   ],
+   "note": "Sprinkles gets race number 13 - the very last spot."
   },
   {
    "cam": "close",

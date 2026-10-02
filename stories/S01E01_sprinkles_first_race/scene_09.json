@@ -159,7 +159,8 @@
      "Number thirteen is... taking it slow?",
      "surprised"
     ]
-   ]
+   ],
+   "roll": 6
   },
   {
    "cam": "track",
@@ -191,7 +192,8 @@
      "happy"
     ]
    ],
-   "freeze": 1.6
+   "freeze": 1.6,
+   "roll": 7
   }
  ],
  "gap": 0.55,

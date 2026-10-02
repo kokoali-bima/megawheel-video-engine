@@ -50,7 +50,9 @@
    ],
    "sfx": [
     "whoosh"
-   ]
+   ],
+   "caption": "Episode 1: Sprinkles' First Race",
+   "hold": 5.0
   },
   {
    "cam": "low",

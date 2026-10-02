@@ -39,7 +39,7 @@
   },
   {
    "cam": "wide",
-   "hold": 2.0,
+   "hold": 2.8,
    "moves": {
     "sprinkles": {
      "to_x": 5.5,
@@ -57,7 +57,8 @@
    ],
    "emote": {
     "sprinkles": "surprised"
-   }
+   },
+   "note": "BONK! Sprinkles bumps into the garage wall while parking."
   },
   {
    "cam": "close",

@@ -73,7 +73,8 @@
      "Move over, Zippy!",
      "angry"
     ]
-   ]
+   ],
+   "roll": 8
   },
   {
    "cam": "close",
@@ -84,7 +85,8 @@
      "In your dreams!",
      "tease"
     ]
-   ]
+   ],
+   "roll": 8
   },
   {
    "cam": "wide",
@@ -115,7 +117,8 @@
      "Build your speed before the hill... and keep rolling.",
      "calm"
     ]
-   ]
+   ],
+   "roll": 6
   },
   {
    "cam": "wide",
@@ -142,7 +145,8 @@
      "Whoa! The ice cream truck is climbing like a rocket!",
      "excited"
     ]
-   ]
+   ],
+   "roll": 9
   },
   {
    "cam": "ecu",
@@ -172,10 +176,12 @@
     "zippy": "scared",
     "nitro": "scared"
    },
-   "freeze": 2.0
+   "freeze": 2.0,
+   "note": "BOOM... BOOM... the ground is shaking. Something huge is coming!"
   }
  ],
  "gap": 0.55,
  "tail": 0.8,
- "edge_fade": false
+ "edge_fade": false,
+ "race": true
 }

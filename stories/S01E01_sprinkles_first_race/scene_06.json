@@ -48,7 +48,7 @@
   },
   {
    "cam": "wide",
-   "hold": 3.0,
+   "hold": 3.4,
    "calendar": 29,
    "caption": "DAY 1",
    "sfx": [
@@ -76,7 +76,8 @@
      "Whoa-whoa-WHOA!",
      "scared"
     ]
-   ]
+   ],
+   "note": "Day 1: too fast! Sprinkles loses control and skids off the road."
   },
   {
    "cam": "two",
@@ -192,12 +193,12 @@
   },
   {
    "look": {
-    "x": 40,
-    "z": 5.0,
-    "y": 4.0,
-    "zoom": 1.6
+    "x": 51,
+    "z": 1.0,
+    "y": 3.0,
+    "zoom": 1.0
    },
-   "hold": 2.4,
+   "hold": 3.0,
    "music": "tense",
    "lines": [
     [
@@ -220,5 +221,12 @@
  ],
  "gap": 0.55,
  "tail": 0.8,
- "edge_fade": false
+ "edge_fade": false,
+ "hill": {
+  "x0": 36,
+  "x1": 48,
+  "x2": 54,
+  "x3": 66,
+  "h": 5.0
+ }
 }

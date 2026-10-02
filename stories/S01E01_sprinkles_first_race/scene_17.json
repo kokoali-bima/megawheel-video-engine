@@ -8,109 +8,237 @@
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": 0,
-   "z": 0.6,
-   "emo": "happy"
-  },
-  "buster": {
-   "vk": "bus",
-   "x": -9,
-   "z": 1.8,
-   "emo": "happy"
-  },
-  "rocky": {
-   "vk": "monster",
-   "x": 8,
-   "z": 2.0,
+   "x": -36,
+   "z": 0.8,
    "emo": "happy"
   },
   "zippy": {
    "vk": "sports",
-   "x": -4,
-   "z": 1.2,
+   "x": -24,
+   "z": 0.8,
    "emo": "happy",
    "patched": 1
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -12,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 0,
+   "z": 0.8,
+   "emo": "happy"
   },
   "siren": {
    "vk": "police",
    "x": 12,
-   "z": 2.8,
+   "z": 0.8,
    "emo": "happy"
   },
   "tilly": {
    "vk": "taxi",
-   "x": -13,
-   "z": 3.0,
+   "x": 24,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 36,
+   "z": 0.8,
    "emo": "happy"
   }
  },
  "shots": [
   {
-   "cam": "wide",
-   "hold": 4.0,
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 5.0,
+   "emote": {
+    "sprinkles": "laugh"
+   },
    "moves": {
-    "tilly": {
-     "to_x": -40,
-     "speed": 4,
-     "delay": 1.0
-    },
-    "siren": {
-     "to_x": 40,
-     "speed": 4,
-     "delay": 1.5
+    "sprinkles": {
+     "hop": true
     }
    },
-   "sfx": []
+   "nametag": {
+    "name": "SPRINKLES",
+    "role": "The ice cream truck with a big heart",
+    "color": [
+     1.0,
+     0.6,
+     0.76
+    ]
+   }
   },
   {
-   "cam": "two",
+   "cam": "close",
    "on": "zippy",
-   "zoom": 1.1,
-   "hold": 3.4,
+   "hold": 5.0,
    "emote": {
-    "zippy": "laugh",
-    "sprinkles": "laugh"
+    "zippy": "laugh"
    },
    "moves": {
     "zippy": {
      "hop": true
     }
    },
-   "with": "sprinkles"
-  },
-  {
-   "cam": "two",
-   "on": "buster",
-   "zoom": 0.95,
-   "hold": 3.4,
-   "moves": {
-    "buster": {
-     "to_x": -40,
-     "speed": 3,
-     "delay": 1.4
-    },
-    "rocky": {
-     "to_x": 40,
-     "speed": 3,
-     "delay": 1.8
-    }
-   },
-   "with": "rocky"
+   "nametag": {
+    "name": "ZIPPY",
+    "role": "The fastest show-off in town",
+    "color": [
+     0.95,
+     0.25,
+     0.25
+    ]
+   }
   },
   {
    "cam": "close",
-   "on": "sprinkles",
-   "hold": 3.0,
+   "on": "buster",
+   "hold": 5.0,
    "emote": {
-    "sprinkles": "happy"
+    "buster": "laugh"
    },
+   "moves": {
+    "buster": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "BUSTER",
+    "role": "The wise old school bus",
+    "color": [
+     1.0,
+     0.8,
+     0.1
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "rocky",
+   "hold": 5.0,
+   "emote": {
+    "rocky": "laugh"
+   },
+   "moves": {
+    "rocky": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "ROCKY",
+    "role": "The gentle monster truck",
+    "color": [
+     0.3,
+     0.6,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "hold": 5.0,
+   "emote": {
+    "siren": "laugh"
+   },
+   "moves": {
+    "siren": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "SIREN",
+    "role": "The fair-play police car",
+    "color": [
+     0.75,
+     0.85,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "tilly",
+   "hold": 5.0,
+   "emote": {
+    "tilly": "laugh"
+   },
+   "moves": {
+    "tilly": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "TILLY",
+    "role": "The taxi who knows everything",
+    "color": [
+     1.0,
+     0.85,
+     0.2
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "nitro",
+   "hold": 5.0,
+   "emote": {
+    "nitro": "laugh"
+   },
+   "moves": {
+    "nitro": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "NITRO",
+    "role": "The cool, focused race car",
+    "color": [
+     0.35,
+     0.7,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 5.2,
+   "kraggor": {
+    "mode": "smile",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.2,
+    "wink": 2.6
+   },
+   "nametag": {
+    "name": "KRAGGOR",
+    "role": "Big, scary... and secretly sweet",
+    "color": [
+     0.4,
+     0.85,
+     0.5
+    ]
+   }
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.42,
+   "hold": 5.0,
    "sfx": [
     "ding"
    ]
   },
   {
    "cam": "wide",
-   "hold": 3.0,
+   "zoom": 0.42,
+   "hold": 4.0,
    "card": [
     "NEXT SUNDAY",
     "Who is Kraggor?"

@@ -379,10 +379,11 @@ def draw_poster(ctx, p, camx):
     k = k_of(z)
     sx, gy = pxy(x, z, camx)
     w, hh = p.get("w", 6.0) * k, p.get("h", 3.4) * k
-    ctx.rectangle(sx - 0.15 * k, gy - 6.2 * k, 0.3 * k, 6.2 * k)
+    pole = p.get("pole", 6.2)
+    ctx.rectangle(sx - 0.15 * k, gy - pole * k, 0.3 * k, pole * k)
     ctx.set_source_rgb(*se.lit((0.35, 0.3, 0.28)))
     ctx.fill()
-    se.rrect(ctx, sx - w / 2, gy - 6.2 * k - hh, w, hh, 0.2 * k)
+    se.rrect(ctx, sx - w / 2, gy - pole * k - hh, w, hh, 0.2 * k)
     ctx.set_source_rgb(*se.lit((0.98, 0.94, 0.85)))
     ctx.fill_preserve()
     ctx.set_source_rgb(0.85, 0.15, 0.15)
@@ -390,7 +391,7 @@ def draw_poster(ctx, p, camx):
     ctx.stroke()
     lines = p["text"].split("\n")
     for i, ln in enumerate(lines):
-        se.draw_text(ctx, ln, sx, gy - 6.2 * k - hh + hh * (i + 0.8) / (len(lines) + 0.4), 0.8 * k if i == 0 else 0.55 * k,
+        se.draw_text(ctx, ln, sx, gy - pole * k - hh + hh * (i + 0.8) / (len(lines) + 0.4), 0.8 * k if i == 0 else 0.55 * k,
                      fill=(0.85, 0.12, 0.12) if i == 0 else (0.1, 0.1, 0.2), stroke=(1, 1, 1), sw=2, max_w=w * 0.9)
 
 
@@ -404,15 +405,30 @@ def draw_frame_photo(ctx, p, camx, t):
     se.rrect(ctx, sx - w / 2 - 0.22 * k, y0 - 0.22 * k, w + 0.44 * k, hh + 0.44 * k, 0.1 * k)
     ctx.set_source_rgb(0.45, 0.28, 0.12)
     ctx.fill()
-    ctx.rectangle(sx - w / 2, y0, w, hh)
-    ctx.set_source_rgb(0.92, 0.84, 0.66)
-    ctx.fill()
     ctx.save()
     ctx.rectangle(sx - w / 2, y0, w, hh)
     ctx.clip()
-    sc = w * 0.78 / 5.6                                   # truck body 5.6 m (+ roof cone) fitted in the frame
-    ctx.translate(sx, y0 + hh * 0.66)
+    g = cairo.LinearGradient(0, y0, 0, y0 + hh)                     # old holiday photo: sky, sea, sand, sun
+    g.add_color_stop_rgb(0, 0.62, 0.78, 0.86)
+    g.add_color_stop_rgb(0.55, 0.86, 0.88, 0.84)
+    ctx.rectangle(sx - w / 2, y0, w, hh)
+    ctx.set_source(g)
+    ctx.fill()
+    ctx.arc(sx + w * 0.3, y0 + hh * 0.2, hh * 0.1, 0, 2 * math.pi)
+    ctx.set_source_rgb(1, 0.88, 0.55)
+    ctx.fill()
+    ctx.rectangle(sx - w / 2, y0 + hh * 0.5, w, hh * 0.16)
+    ctx.set_source_rgb(0.32, 0.58, 0.72)
+    ctx.fill()
+    ctx.rectangle(sx - w / 2, y0 + hh * 0.66, w, hh * 0.34)
+    ctx.set_source_rgb(0.9, 0.8, 0.58)
+    ctx.fill()
+    sc = w * 0.56 / 5.6                                   # truck 5.6 m long, wheels on the sand
+    ground = y0 + hh * 0.86
+    ctx.translate(sx, ground - 1.81 * sc)
     ctx.scale(sc, -sc)
+    for lx in (-1.9, 1.9):
+        se.draw_wheel(ctx, lx, 0.5 - 1.81, 0.0, 0.5, False)
     veh = se.VEHICLES["icecream"]
     old, old_acc = veh["color"], veh.get("accent")
     veh["color"], veh["accent"] = (0.93, 0.86, 0.70), (0.62, 0.42, 0.25)
@@ -427,10 +443,87 @@ def draw_frame_photo(ctx, p, camx, t):
     story_face(ctx, "icecream", "happy", t)
     CUR["aid"], CUR["mustache"] = None, False
     ctx.restore()
+    ctx.rectangle(sx - w / 2, y0, w, hh)                            # faded print
+    ctx.set_source_rgba(0.95, 0.85, 0.65, 0.25)
+    ctx.fill()
     if p.get("glow"):
         ctx.rectangle(sx - w / 2, y0, w, hh)
         ctx.set_source_rgba(1, 0.9, 0.6, 0.25)
         ctx.fill()
+
+
+def draw_mud(ctx, p, camx, t):
+    """A mud puddle on the road (wobbly brown patch across the lanes)."""
+    x, w = p.get("x", 0.0), p.get("w", 6.0)
+    pts = []
+    for i in range(25):
+        xx = x - w / 2 + w * i / 24
+        pts.append(pxy(xx, -0.4 + 0.25 * math.sin(i * 1.7), camx))
+    for i in range(25):
+        xx = x + w / 2 - w * i / 24
+        pts.append(pxy(xx, 2.6 + 0.3 * math.sin(i * 2.3), camx))
+    se.poly(ctx, pts)
+    ctx.set_source_rgb(*se.lit((0.36, 0.24, 0.13)))
+    ctx.fill()
+    for i in range(7):                                              # wet shine
+        bx, by = pxy(x - w * 0.35 + i * w * 0.11, 0.6 + (i % 3) * 0.6, camx)
+        ctx.save()
+        ctx.translate(bx, by)
+        ctx.scale(0.5 * k_of(1.0), 0.12 * k_of(1.0))
+        ctx.arc(0, 0, 1, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgba(0.6, 0.45, 0.3, 0.6)
+        ctx.fill()
+
+
+def mud_spray(ctx, a, t, camx):
+    """Wheels spinning in the mud: brown drops flung backwards."""
+    veh = se.VEHICLES[a["key"]]
+    k = k_of(a["z"])
+    rng = np.random.default_rng(int(t * 30))
+    for lx in veh["wheel_x"]:
+        wx, gy = pxy(a["x"] + lx * a["small"], a["z"], camx)
+        for _ in range(6):
+            ph = rng.uniform(0, 1)
+            dx = -a["face"] * (0.3 + 1.6 * ph) * k
+            dy = -(1.2 * ph - 1.4 * ph * ph) * 2.2 * k
+            ctx.arc(wx + dx, gy + dy, rng.uniform(0.08, 0.18) * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.33, 0.22, 0.12, 0.9)
+            ctx.fill()
+
+
+def nametag(ctx, tag, age, dur):
+    """Character introduction (lower third): NAME + who they are, slides in from the left."""
+    a = min(1.0, age / 0.5, max(0.0, (dur - age) / 0.6))
+    if a <= 0:
+        return
+    slide = (1 - se.ease_out_back(min(1.0, age / 0.7))) * -W * 0.4
+    x0, y0 = W * 0.06 + slide, H * 0.66
+    bw, bh = W * 0.42, H * 0.16
+    col = tuple(tag.get("color", (1, 0.86, 0.12)))
+    se.rrect(ctx, x0, y0, bw, bh, bh * 0.18)
+    ctx.set_source_rgba(0.06, 0.05, 0.14, 0.78 * a)
+    ctx.fill()
+    ctx.rectangle(x0, y0, bh * 0.12, bh)
+    ctx.set_source_rgba(*col, a)
+    ctx.fill()
+    se.draw_text(ctx, tag["name"], x0 + bw / 2, y0 + bh * 0.38, 72 if W > H else 64, fill=col, stroke=(0, 0, 0),
+                 sw=5, alpha=a, max_w=bw * 0.86)
+    se.draw_text(ctx, tag.get("role", ""), x0 + bw / 2, y0 + bh * 0.76, 34, fill=(1, 1, 1), stroke=(0, 0, 0), sw=2,
+                 alpha=a, max_w=bw * 0.9)
+
+
+def note(ctx, text, age, dur):
+    """Short description box at the top (explains what happens: bumps, crashes, numbers...)."""
+    a = min(1.0, age / 0.5, max(0.0, (dur - age) / 0.5))
+    if a <= 0:
+        return
+    bw, bh = W * 0.86, H * 0.085
+    se.rrect(ctx, (W - bw) / 2, H * 0.035, bw, bh, bh * 0.3)
+    ctx.set_source_rgba(0.05, 0.05, 0.12, 0.62 * a)
+    ctx.fill()
+    se.draw_text(ctx, text, W / 2, H * 0.035 + bh * 0.52, 38 if W > H else 34, fill=(1, 0.95, 0.75),
+                 stroke=(0, 0, 0), sw=3, alpha=a, max_w=bw * 0.94)
 
 
 def draw_lamp(ctx, camx):
@@ -485,7 +578,7 @@ def draw_desk(ctx, d, camx):
 
 def draw_desk_front(ctx, d, camx):
     """The registration table: drawn after the actors, in front of the official standing behind it."""
-    x, z = d.get("x", 3.6), d.get("table_z", 1.25)
+    x, z = d.get("table_x", d.get("x", 3.6)), d.get("table_z", 1.25)
     k = k_of(z)
     sx, gy = pxy(x, z, camx)
     se.rrect(ctx, sx - 2.0 * k, gy - 1.25 * k, 4.0 * k, 1.25 * k, 0.08 * k)
@@ -671,6 +764,26 @@ def kraggor_smile(ctx, a):
     ctx.restore()
 
 
+KR_EYES = [(-1.9, -8.6), (1.9, -8.6)]                    # eye centres in kraggor_smile units (head-local)
+
+
+def kraggor_wink(ctx, eye):
+    """Close one eye: a lid in body colour and a happy closed-eye arc."""
+    ctx.save()
+    ctx.translate(905, 1.2 * 40)
+    ctx.scale(40, 40)
+    ex, ey = eye
+    ctx.arc(ex, ey, 1.25, 0, 2 * math.pi)
+    ctx.set_source_rgb(*se.lit(KR_BODY))
+    ctx.fill()
+    ctx.arc(ex, ey + 0.6, 0.9, 1.15 * math.pi, 1.85 * math.pi)
+    ctx.set_source_rgb(0.1, 0.05, 0.05)
+    ctx.set_line_width(0.4)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    ctx.stroke()
+    ctx.restore()
+
+
 def kraggor_mouth(spec, base_y):
     """Screen point of Kraggor's mouth (target of the ice cream)."""
     sc = spec.get("scale", 1.0) * (H / 1080)
@@ -693,6 +806,9 @@ def kraggor_head(ctx, u, spec, stands_top=None):
     roar = max(0.0, math.sin(min(math.pi, max(0.0, a - 0.8) * 1.6))) if mode == "roar" else 0.0
     base_y = stands_top if stands_top is not None else spec.get("sy", 0.42) * H
     sc = spec.get("scale", 1.0) * (H / 1080)
+    if spec.get("push"):                                           # slow push-in on Kraggor
+        e = min(1.0, u / 1.8)
+        sc *= 1 + spec["push"] * e * e * (3 - 2 * e)
     ctx.save()
     ctx.translate(spec.get("sx", 0.62) * W, base_y)
     ctx.scale(sc, sc)
@@ -705,6 +821,9 @@ def kraggor_head(ctx, u, spec, stands_top=None):
     SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
     if mode == "smile":
         kraggor_smile(ctx, a)
+        w0 = spec.get("wink")
+        if w0 is not None and w0 <= u < w0 + 0.6:                  # a friendly wink (one eye closes)
+            kraggor_wink(ctx, spec.get("wink_eye", KR_EYES[0]))
     ctx.restore()
 
 
@@ -769,7 +888,12 @@ def cam_for(shot, actors, t, u):
     kind = shot.get("cam", "wide")
     if "look" in shot:                                             # camera on a prop / point (poster, sky, ...)
         lk = shot["look"]
-        return lk["x"], lk.get("zoom", 2.0) * (1 + 0.03 * u), ground_y(lk.get("z", 1.0)) - lk.get("y", 0.0) * k_of(lk.get("z", 1.0))
+        z0 = lk.get("z", 1.0)
+        zm = lk.get("zoom", 2.0)
+        if lk.get("fit"):                                          # frame a prop of this width (m) with a margin
+            zm = 0.8 * W / (lk["fit"] * k_of(z0))
+        hh, _ = hill_h(lk["x"]) if lk.get("on_hill") else (0.0, 0.0)
+        return lk["x"], zm * (1 + 0.02 * u), ground_y(z0) - (lk.get("y", 0.0) + hh) * k_of(z0)
     on = actors.get(shot.get("on"))
     if on is None:
         vis = [a for a in actors.values() if not a["hidden"]]
@@ -782,19 +906,24 @@ def cam_for(shot, actors, t, u):
     fx, fy = se.FACES[on["key"]]["eyes"][0]
     face_x = on["x"] + fx * on["face"] * on["small"]
     ride = veh["wheel_r"] + 0.6 * veh["travel"] + bh / 2
-    face_y = ground_y(on["z"]) - (on["h"] + (ride + fy) * on["small"] * on["sq"]) * k
+    hh, _ = hill_h(on["x"])
+    lift_h = on["h"] + hh
+    face_y = ground_y(on["z"]) - (lift_h + (ride + fy) * on["small"] * on["sq"]) * k
+    body_y = ground_y(on["z"]) - (lift_h + (ride + 0.25 * bh) * on["small"]) * k   # a bit above the body centre
+    fit = W / (bw * on["small"] * k)                               # zoom at which the body fills the frame width
     if kind == "two":
         other = actors.get(shot.get("with"))
         mid = (on["x"] + other["x"]) / 2 if other else on["x"]
         return mid, shot.get("zoom", 1.25), None
-    if kind == "medium":
-        return on["x"] + bw * 0.15 * on["face"], shot.get("zoom", 1.6), ground_y(on["z"]) - (1.9 + on["h"]) * k
-    if kind == "close":
-        return face_x + 0.6 * on["face"], shot.get("zoom", 2.8), face_y
+    if kind == "medium":                                           # whole vehicle, roomy
+        return on["x"] + bw * 0.1 * on["face"] * on["small"], min(shot.get("zoom", 1.6), 0.55 * fit), body_y
+    if kind == "close":                                            # whole vehicle, face side favoured (cinematic)
+        z_c = min(shot.get("zoom", 2.8), 0.78 * fit)
+        return on["x"] + bw * 0.12 * on["face"] * on["small"], z_c, 0.6 * body_y + 0.4 * face_y
     if kind == "ecu":
         return face_x, shot.get("zoom", 5.0) * (1 + 0.04 * u), face_y
     if kind == "low":
-        return on["x"], shot.get("zoom", 1.7), ground_y(on["z"]) - 0.4 * k
+        return on["x"], shot.get("zoom", 1.7), ground_y(on["z"]) - (0.4 + hh) * k
     if kind == "track":                                            # follow a moving car (race)
         return on["x"] + shot.get("dx", 2.0), shot.get("zoom", 1.1), None
     return on["x"] + shot.get("dx", 0.0), shot.get("zoom", 1.0), None
@@ -836,7 +965,7 @@ def subtitle(ctx, speaker, text, aspect, age):
 
 
 def caption(ctx, text, age, dur, big=False):
-    a = min(1.0, age / 0.4, max(0.0, (dur - age) / 0.4))
+    a = min(1.0, age / 0.6, max(0.0, (dur - age) / 0.9))
     if a <= 0:
         return
     if big:
@@ -974,6 +1103,44 @@ def sting():
     return 0.9 * boom + 0.45 * stab
 
 
+JINGLE = [("E5", 1), ("G5", 1), ("C6", 1), ("G5", 1), ("A5", 1), ("G5", 1), ("E5", 2),
+          ("F5", 1), ("A5", 1), ("D6", 1), ("A5", 1), ("G5", 1), ("F5", 1), ("E5", 2),
+          ("E5", 1), ("G5", 1), ("C6", 1), ("E6", 1), ("D6", 1), ("C6", 1), ("A5", 1), ("G5", 1),
+          ("F5", 1), ("E5", 1), ("D5", 1), ("G5", 1), ("C6", 4)]          # original melody (MegaWheel), not a cover
+
+
+def jingle(step=0.26):
+    """Grandpa Cone's ice-cream song: a music-box melody (bell tones with a soft echo)."""
+    names = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11}
+    total = sum(d for _, d in JINGLE) * step + 1.5
+    out = np.zeros(int(total * se.SR))
+    t0 = 0.0
+    for nm, d in JINGLE:
+        f = 440.0 * 2 ** ((names[nm[0]] + 12 * (int(nm[1]) + 1) - 69) / 12)
+        L = int(min(1.4, d * step + 0.8) * se.SR)
+        tt = np.arange(L) / se.SR
+        tone = (np.sin(2 * math.pi * f * tt) + 0.35 * np.sin(2 * math.pi * 2 * f * tt) +
+                0.12 * np.sin(2 * math.pi * 3.01 * f * tt)) * np.exp(-tt * 3.2)
+        i0 = int(t0 * se.SR)
+        out[i0:i0 + L] += tone[:len(out) - i0]
+        t0 += d * step
+    echo = np.zeros_like(out)
+    dly = int(0.21 * se.SR)
+    echo[dly:] = out[:-dly] * 0.35
+    out = out + echo
+    return 0.5 * out / max(1e-9, np.max(np.abs(out)))
+
+
+def soft_hit():
+    """Cinematic low hit + short string swell (replaces the harsh stab)."""
+    n = int(2.2 * se.SR)
+    t = np.arange(n) / se.SR
+    boom = np.sin(2 * math.pi * (52 - 18 * t) * t) * np.exp(-t * 2.4)
+    sw = sum(np.sin(2 * math.pi * f * t) for f in (146.8, 174.6, 220.0)) / 3
+    sw *= np.minimum(1, t / 0.35) * np.exp(-np.maximum(0, t - 0.35) * 2.0)
+    return 0.8 * boom + 0.25 * sw
+
+
 def heartbeat(beats=4, bpm=72):
     gap = 60.0 / bpm
     out = np.zeros(int((beats * gap + 0.4) * se.SR))
@@ -987,7 +1154,8 @@ def heartbeat(beats=4, bpm=72):
 
 
 SFX = {
-    "sting": sting,
+    "sting": soft_hit,
+    "jingle": jingle,
     "heartbeat": heartbeat,
     "whoosh": lambda: se.synth_whoosh(),
     "ding": lambda: np.concatenate([se.tone(1320, 0.18, "sine", decay=0.12), se.tone(1046, 0.3, "sine", decay=0.18)]),
@@ -1021,13 +1189,13 @@ def build_audio(shots, placed, total, scene):
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
     for sh in shots:
         if sh.get("punch"):
-            place(sfx, se.synth_whoosh(), sh["t0"], 0.6)
-            place(sfx, sting(), sh["t0"] + 0.15, 0.9)
-        if sh.get("triple"):
+            place(sfx, se.synth_whoosh(), sh["t0"], 0.55)
+        if sh.get("triple"):                                       # whoosh per cut, one soft hit
             for k in range(3):
-                place(sfx, sting(), sh["t0"] + 0.45 * k, 0.55 + 0.2 * k)
+                place(sfx, se.synth_whoosh(), sh["t0"] + 0.45 * k, 0.35 + 0.1 * k)
+            place(sfx, soft_hit(), sh["t0"] + 0.9, 0.6)
         if sh.get("freeze"):
-            place(sfx, sting(), sh["t1"] - sh["freeze"], 1.0)
+            place(sfx, soft_hit(), sh["t1"] - sh["freeze"], 0.7)
     mus = np.zeros(n)
     if scene.get("song"):
         song = se.read_wav(os.path.join(BASE, scene["song"]))     # theme song (ACE-Step), already mastered
@@ -1094,7 +1262,7 @@ def render_scene(ep, num, aspect):
     start = {aid: (a["x"], a["z"], a["face"]) for aid, a in actors.items()}
     marks = {int((sh["t0"] + (sh["t1"] - sh["t0"]) * 0.6) * FPS): f"shot{i + 1:02d}_{sh.get('cam', 'wide')}"
              for i, sh in enumerate(shots)}
-    camx = zoom = None
+    camx = zoom = piv = glide = None
     prev_si = -1
     for fi in range(nfr):
         t = fi / FPS
@@ -1111,9 +1279,17 @@ def render_scene(ep, num, aspect):
             a["h"], a["v"], a["sq"], a["dizzy"] = a["h0"], 0.0, 1.0, False
             a["patched"] = float(scene["actors"][aid].get("patched", 0))
             a["hidden"] = scene["actors"][aid].get("hidden", False)
+        for a in actors.values():
+            a["stuck"] = False
         for j in range(si + 1):
             s_ = shots[j]
             uu = min(t, s_["t1"]) - s_["t0"]
+            if s_.get("roll"):                                     # still driving while talking: wheels turn,
+                for a in actors.values():                          # the world scrolls past, the camera follows
+                    if not a["hidden"] and a["id"] not in s_.get("parked", []):
+                        a["x"] += s_["roll"] * uu
+                        if j == si:
+                            a["v"] = s_["roll"]
             for aid, mv in s_.get("moves", {}).items():
                 a = actors[aid]
                 if "show" in mv:
@@ -1141,7 +1317,12 @@ def render_scene(ep, num, aspect):
                     a["x"] += d * pr * pr * (3 - 2 * pr)
                     if 0 < pr < 1:
                         a["v"] = abs(d) / T * 6 * pr * (1 - pr)
-                    a["face"] = 1 if d >= 0 else -1
+                    if not mv.get("reverse"):                      # reverse: rolls back, still facing forward
+                        a["face"] = 1 if d >= 0 else -1
+                if mv.get("stuck") and j == si:                    # wheels spinning in the mud
+                    a["h"] = a["h0"] + 0.06 * abs(math.sin(uu * 37))
+                    a["v"] = 9.0
+                    a["stuck"] = True
                 if mv.get("hop") and j == si:
                     a["h"] = abs(math.sin(uu * 7)) * 0.5
         # emotions + talking
@@ -1165,13 +1346,25 @@ def render_scene(ep, num, aspect):
             EMO_MOOD[aid] = MOOD_BASE.get(e, "normal")
         # camera
         cx, z_, focus_y = cam_for(sh, actors, t, u)
-        cut = camx is None or si != prev_si                   # hard cut between shots, smooth moves within a shot
-        prev_si = si
-        if cut:
-            camx, zoom = cx, z_
+        pv = (focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)) - sh.get("lift", 0.0) * k_of(1.0)
+        if si != prev_si:                                          # new shot: glide the camera there (no rushed
+            hard = camx is None or sh.get("punch") or sh.get("triple") or sh.get("cut") == "hard"   # cuts)
+            glide = None if hard else (camx, zoom, piv, sh["t0"], sh.get("glide", scene.get("glide", 1.2)))
+            if hard:
+                camx, zoom, piv = cx, z_, pv
+            prev_si = si
+        if glide:
+            e = min(1.0, max(0.0, (t - glide[3]) / glide[4]))
+            e = e * e * (3 - 2 * e)
+            camx = glide[0] + (cx - glide[0]) * e
+            zoom = glide[1] * (z_ / glide[1]) ** e                 # zoom eases geometrically (feels even)
+            piv = glide[2] + (pv - glide[2]) * e
+            if e >= 1.0:
+                glide = None
         else:
             camx += (cx - camx) * 0.12
             zoom += (z_ - zoom) * 0.12
+            piv += (pv - piv) * 0.12
         zmul = 1.0
         if sh.get("punch"):                                        # crash zoom onto the face
             zmul = 1.0 + 0.45 * (1 - (1 - min(1.0, u / 0.25)) ** 3)
@@ -1179,8 +1372,7 @@ def render_scene(ep, num, aspect):
             zmul = (1.0, 1.4, 1.9)[min(2, int(u / 0.45))]
         if frz:
             zmul *= 1.0 + 0.12 * (1 - (1 - frz) ** 2)
-        piv_y = focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)
-        piv_y -= sh.get("lift", 0.0) * k_of(1.0)                   # camera tilted up (show the sky: Kraggor)
+        piv_y = piv
         # draw
         ctx.save()
         shake = 0.0
@@ -1193,6 +1385,9 @@ def render_scene(ep, num, aspect):
             kr = sh.get("kraggor")
             if kr and not kr.get("front"):
                 st_screen = H / 2 + (stands_top_world() - piv_y) * zoom
+                if kr.get("stand"):                                # feet on the far ground, not floating
+                    sc_ = kr.get("scale", 1.0) * (H / 1080)
+                    st_screen = H / 2 + (ground_y(kr.get("gz", 30.0)) - piv_y) * zoom - (1.2 + 19.2) * 40 * sc_
                 ctx.save()
                 ctx.identity_matrix()
                 kraggor_head(ctx, u, kr, stands_top=st_screen)
@@ -1211,11 +1406,16 @@ def render_scene(ep, num, aspect):
                 draw_podium(ctx, camx)
         draw_props_layer(ctx, loc, camx, 11, back=True)
         draw_hill(ctx, camx)
+        for prop in scene.get("props", []):
+            if prop["type"] == "mud":
+                draw_mud(ctx, prop, camx, t)
         if "finish" in scene:
             draw_finish(ctx, scene["finish"], camx)
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
             draw_actor(ctx, a, t, camx)
+            if a.get("stuck"):
+                mud_spray(ctx, a, t, camx)
             if a["dizzy"]:
                 sx_, gy_ = pxy(a["x"], a["z"], camx)
                 k_ = k_of(a["z"])
@@ -1250,6 +1450,8 @@ def render_scene(ep, num, aspect):
         vmax = max([a.get("v", 0.0) for a in actors.values() if not a["hidden"]] + [0.0])
         if sh.get("eyes"):
             glow_eyes(ctx, t, sh["eyes"])
+        if sh.get("roll", 0) > 3 and not sh.get("speedlines"):       # wind lines while cruising
+            se.draw_speed_lines(ctx, min(12.0, sh["roll"] * 1.4), t)
         if sh.get("speedlines") and vmax > 6:
             se.draw_speed_lines(ctx, min(26.0, vmax * 1.6), t)
         if sh.get("confetti"):
@@ -1284,6 +1486,10 @@ def render_scene(ep, num, aspect):
             calendar(ctx, sh["calendar"], aspect)
         if sh.get("caption"):
             caption(ctx, sh["caption"], u, sh["t1"] - sh["t0"])
+        if sh.get("note"):
+            note(ctx, sh["note"], u, sh["t1"] - sh["t0"])
+        if sh.get("nametag"):
+            nametag(ctx, sh["nametag"], u, sh["t1"] - sh["t0"])
         if sh.get("title"):
             caption(ctx, sh["title"], u, sh["t1"] - sh["t0"], big=True)
         if frz:                                                    # freeze-frame: drain the colour, white flash
@@ -1323,7 +1529,43 @@ def render_scene(ep, num, aspect):
     return out
 
 
-XF_DUR = {"dissolve": 1.0, "fadeblack": 0.8}
+XF_DUR = {"dissolve": 1.4, "fadeblack": 1.2, "fadewhite": 0.9}
+
+
+def make_ident(d, aspect, text, dur=3.6):
+    """'INFRASOFT presents' card: soft fade, gentle chime."""
+    setup_projection(aspect)
+    se.detect_font()
+    out = os.path.join(d, f"ident_{aspect}.mp4")
+    wav = os.path.join(d, f"ident_{aspect}.wav")
+    n = int(dur * se.SR)
+    t = np.arange(n) / se.SR
+    chime = sum(np.sin(2 * math.pi * f * t) * np.exp(-np.maximum(0, t - dl) * 1.6) * (t >= dl)
+                for f, dl in ((659.3, 0.5), (987.8, 0.75), (1318.5, 1.0))) * 0.25
+    se.write_wav(wav, chime)
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
+    ctx = cairo.Context(surf)
+    ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
+                           "-r", str(FPS), "-i", "-", "-i", wav, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19",
+                           "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-shortest", out],
+                          stdin=subprocess.PIPE)
+    big, small = (text.split("\n") + [""])[:2]
+    for fi in range(int(dur * FPS)):
+        tt = fi / FPS
+        a = min(1.0, max(0.0, (tt - 0.3) / 0.8), max(0.0, (dur - 0.3 - tt) / 0.8))
+        ctx.rectangle(0, 0, W, H)
+        ctx.set_source_rgb(0.03, 0.03, 0.06)
+        ctx.fill()
+        se.draw_text(ctx, big, W / 2, H * 0.47, 120 if W > H else 96, fill=(1, 1, 1), stroke=(0.2, 0.4, 0.9), sw=4,
+                     alpha=a, max_w=W * 0.8)
+        se.draw_text(ctx, small, W / 2, H * 0.6, 54, fill=(0.75, 0.82, 1), stroke=(0, 0, 0), sw=2,
+                     alpha=max(0.0, a - 0.2) / 0.8, max_w=W * 0.6)
+        surf.flush()
+        ff.stdin.write(bytes(surf.get_data()))
+    ff.stdin.close()
+    ff.wait()
+    os.remove(wav)
+    return out
 
 
 def dur_of(path):
@@ -1338,12 +1580,16 @@ def assemble(ep, aspect):
     edit = os.path.join(BASE, "stories", ep, "edit.json")
     if os.path.exists(edit):                                       # drama transitions (re-encode)
         with open(edit) as fh:
-            tr = json.load(fh)["transitions"]
+            ed = json.load(fh)
+        tr = [x if isinstance(x, str) else x[0] for x in ed["transitions"]]
+        xds = [XF_DUR.get(x, 1.0) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
+        if ed.get("ident"):                                        # studio ident before the theme song
+            parts = [os.path.basename(make_ident(d, aspect, ed["ident"]))] + parts
+            tr, xds = ["fade"] + tr, [0.8] + xds
         assert len(tr) == len(parts) - 1, f"edit.json: {len(tr)} transisi untuk {len(parts)} scene"
         # low-RAM build: every clip is split into body + head/tail; each transition is rendered from just two short
         # pieces (xfade), then all pieces are joined with the concat demuxer (same codec settings everywhere)
         durs = [dur_of(os.path.join(d, p)) for p in parts]
-        xds = [XF_DUR.get(n, 0.5) for n in tr]
         tmp = os.path.join(d, "xf")
         os.makedirs(tmp, exist_ok=True)
         enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
