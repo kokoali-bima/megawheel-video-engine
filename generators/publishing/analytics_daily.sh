@@ -12,5 +12,6 @@ echo "===== [analytics] $(date -u +%FT%TZ) mulai"
 bash git_sync.sh push "records before analytics" 2>&1 | tail -1
 bash git_sync.sh pull 2>&1 | tail -1
 venv/bin/python generators/publishing/yt_analytics.py report --days 28 || { echo "[analytics] report GAGAL"; exit 1; }
+python3 tools/make_changelog.py || echo "[analytics] changelog gagal (lanjut)"
 bash git_sync.sh push "analytics: daily report $(date -u +%F)" 2>&1 | tail -1
 echo "===== [analytics] $(date -u +%FT%TZ) selesai"
