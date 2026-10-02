@@ -41,8 +41,10 @@ image = (
                   "cd /YuE && git checkout $(git rev-list -n 1 HEAD -- inference/infer.py)~1",
                   # no flash-attn wheel in this image: fall back to PyTorch SDPA attention
                   "sed -i 's/flash_attention_2/sdpa/g' /YuE/inference/infer.py")
-    .pip_install("torch==2.5.1", "torchaudio==2.5.1")
+    # transformers now refuses torch.load below torch 2.6; torchaudio < 2.9 still saves without torchcodec
+    .pip_install("torch==2.6.0", "torchaudio==2.6.0")
     .run_commands("pip install -r /YuE/requirements.txt")
+    .pip_install("torch==2.6.0", "torchaudio==2.6.0")
     # YuE's requirements pin an old protobuf; Modal's in-container client needs a newer one
     .pip_install("faster-whisper", "huggingface_hub", "soundfile", "protobuf>=4.25,<6")
     .run_function(_download)
