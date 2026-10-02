@@ -22,5 +22,6 @@
   "fadeblack",
   "dissolve"
  ],
- "note": "name = default duration (XF_DUR, 1.0 s); [name, seconds] to override"
+ "note": "name = default duration (XF_DUR, 1.0 s); [name, seconds] to override",
+ "ident_logo": "branding/infrasoft/logo_transparent_white.png"
 }

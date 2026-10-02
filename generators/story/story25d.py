@@ -1541,7 +1541,7 @@ def render_scene(ep, num, aspect):
 XF_DUR = {"dissolve": 1.4, "fadeblack": 1.2, "fadewhite": 0.9}
 
 
-def make_ident(d, aspect, text, dur=3.6):
+def make_ident(d, aspect, text, dur=3.6, logo=None):
     """'INFRASOFT presents' card: soft fade, gentle chime."""
     setup_projection(aspect)
     se.detect_font()
@@ -1559,15 +1559,25 @@ def make_ident(d, aspect, text, dur=3.6):
                            "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-shortest", out],
                           stdin=subprocess.PIPE)
     big, small = (text.split("\n") + [""])[:2]
+    img = cairo.ImageSurface.create_from_png(os.path.join(BASE, logo)) if logo else None
     for fi in range(int(dur * FPS)):
         tt = fi / FPS
         a = min(1.0, max(0.0, (tt - 0.3) / 0.8), max(0.0, (dur - 0.3 - tt) / 0.8))
         ctx.rectangle(0, 0, W, H)
         ctx.set_source_rgb(0.03, 0.03, 0.06)
         ctx.fill()
-        se.draw_text(ctx, big, W / 2, H * 0.47, 120 if W > H else 96, fill=(1, 1, 1), stroke=(0.2, 0.4, 0.9), sw=4,
-                     alpha=a, max_w=W * 0.8)
-        se.draw_text(ctx, small, W / 2, H * 0.6, 54, fill=(0.75, 0.82, 1), stroke=(0, 0, 0), sw=2,
+        if img is not None:                                        # logo, gentle push-in
+            sc = min(W * 0.5 / img.get_width(), H * 0.62 / img.get_height()) * (0.96 + 0.04 * min(1.0, tt / dur))
+            ctx.save()
+            ctx.translate(W / 2, H * 0.43)
+            ctx.scale(sc, sc)
+            ctx.set_source_surface(img, -img.get_width() / 2, -img.get_height() / 2)
+            ctx.paint_with_alpha(a)
+            ctx.restore()
+        else:
+            se.draw_text(ctx, big, W / 2, H * 0.47, 120 if W > H else 96, fill=(1, 1, 1), stroke=(0.2, 0.4, 0.9),
+                         sw=4, alpha=a, max_w=W * 0.8)
+        se.draw_text(ctx, small, W / 2, H * (0.82 if img is not None else 0.6), 54, fill=(0.75, 0.82, 1), stroke=(0, 0, 0), sw=2,
                      alpha=max(0.0, a - 0.2) / 0.8, max_w=W * 0.6)
         surf.flush()
         ff.stdin.write(bytes(surf.get_data()))
@@ -1593,7 +1603,7 @@ def assemble(ep, aspect):
         tr = [x if isinstance(x, str) else x[0] for x in ed["transitions"]]
         xds = [XF_DUR.get(x, 1.0) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
         if ed.get("ident"):                                        # studio ident before the theme song
-            parts = [os.path.basename(make_ident(d, aspect, ed["ident"]))] + parts
+            parts = [os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))] + parts
             tr, xds = ["fade"] + tr, [0.8] + xds
         assert len(tr) == len(parts) - 1, f"edit.json: {len(tr)} transisi untuk {len(parts)} scene"
         # low-RAM build: every clip is split into body + head/tail; each transition is rendered from just two short

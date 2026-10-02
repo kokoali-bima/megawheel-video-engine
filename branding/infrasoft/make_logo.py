@@ -50,7 +50,7 @@ def play_path(ctx):
     ctx.close_path()
 
 
-def icon(ctx, cx, cy, size, dark=False):
+def icon(ctx, cx, cy, size, dark=False, gap=True):
     ctx.save()
     ctx.translate(cx, cy)
     ctx.scale(size / 2.3, size / 2.3)
@@ -62,9 +62,15 @@ def icon(ctx, cx, cy, size, dark=False):
     ctx.set_source(g)
     ctx.fill()
     play_path(ctx)                                  # a gap around the triangle where it crosses the ring
-    ctx.set_source_rgb(*((0.04, 0.05, 0.10) if dark else (1, 1, 1)))
     ctx.set_line_width(0.16)
-    ctx.stroke_preserve()
+    if gap:
+        ctx.set_source_rgb(*((0.04, 0.05, 0.10) if dark else (1, 1, 1)))
+        ctx.stroke_preserve()
+    else:                                           # transparent: cut the gap out of the gear
+        ctx.save()
+        ctx.set_operator(cairo.OPERATOR_CLEAR)
+        ctx.stroke_preserve()
+        ctx.restore()
     ctx.set_source_rgb(*ORANGE)
     ctx.fill()
     ctx.restore()
@@ -85,14 +91,15 @@ def text(ctx, s, cx, cy, size, rgb, weight=cairo.FONT_WEIGHT_BOLD, track=0.0):
         x += w + track * size
 
 
-def logo(path, dark):
+def logo(path, dark, transparent=False):
     W, H = 2000, 1600
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     ctx = cairo.Context(surf)
-    ctx.rectangle(0, 0, W, H)
-    ctx.set_source_rgb(*((0.04, 0.05, 0.10) if dark else (1, 1, 1)))
-    ctx.fill()
-    icon(ctx, W / 2 - 40, 560, 820, dark)
+    if not transparent:
+        ctx.rectangle(0, 0, W, H)
+        ctx.set_source_rgb(*((0.04, 0.05, 0.10) if dark else (1, 1, 1)))
+        ctx.fill()
+    icon(ctx, W / 2 - 40, 560, 820, dark, gap=not transparent)
     text(ctx, "INFRASOFT", W / 2, 1185, 250, (1, 1, 1) if dark else NAVY, track=0.04)
     text(ctx, "MEDIA & TECH", W / 2, 1390, 96, BLUE2 if dark else BLUE, weight=cairo.FONT_WEIGHT_NORMAL, track=0.32)
     surf.write_to_png(path)
@@ -101,7 +108,7 @@ def logo(path, dark):
 def icon_png(path, size=1024):
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
     ctx = cairo.Context(surf)
-    icon(ctx, size / 2 - size * 0.02, size / 2, size * 0.92, dark=True)
+    icon(ctx, size / 2 - size * 0.02, size / 2, size * 0.92, dark=True, gap=False)
     surf.write_to_png(path)
 
 
@@ -115,6 +122,8 @@ def icon_svg(path):
 if __name__ == "__main__":
     logo(os.path.join(HERE, "logo_light.png"), False)
     logo(os.path.join(HERE, "logo_dark.png"), True)
+    logo(os.path.join(HERE, "logo_transparent_white.png"), True, transparent=True)   # for dark backgrounds
+    logo(os.path.join(HERE, "logo_transparent_navy.png"), False, transparent=True)   # for light backgrounds
     icon_png(os.path.join(HERE, "icon.png"))
     icon_svg(os.path.join(HERE, "icon.svg"))
     print("ok")
