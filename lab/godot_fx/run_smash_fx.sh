@@ -5,10 +5,12 @@ set -u
 cd /root/video-engine
 SEED=${1:-777}; ARENA=${2:-lava}; NAME=LAB_SMASH_${SEED}
 D=/root/lab/fx/$NAME; mkdir -p $D
+if [ -f $D/cues.json ] && [ "${RECAPTURE:-0}" = 0 ] && [ -f work/lanes25d/previews/$NAME/$NAME.mp4 ]; then echo "reuse capture"; else
 venv/bin/python -u lab/godot_fx/capture_smash.py --seed $SEED --name $NAME --arena $ARENA 2>&1 | grep -E "lab-capture|checks|result|STOP|Error|Traceback" | tail -6
+fi
 SRC=work/lanes25d/previews/$NAME/$NAME.mp4
 [ -f $SRC ] || { echo "no source video"; exit 1; }
-rm -rf $D/frames && mkdir -p $D/frames && ffmpeg -loglevel error -i $SRC $D/frames/%05d.png
+[ -d $D/frames ] && [ "$(ls $D/frames | wc -l)" -gt 100 ] || { rm -rf $D/frames && mkdir -p $D/frames && ffmpeg -loglevel error -i $SRC $D/frames/%05d.png; }
 N=$(ls $D/frames | wc -l); echo "frames: $N"
 mkdir -p /root/lab/fx/sprites && venv/bin/python - <<'PY'
 import sys, os

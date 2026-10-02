@@ -15,6 +15,7 @@ var shake = 0.0
 var light_tex: GradientTexture2D
 var wave_mat: ShaderMaterial
 var wave_rect: ColorRect
+var dot_tex: GradientTexture2D
 
 
 func _ready() -> void:
@@ -40,6 +41,17 @@ func _ready() -> void:
 	light_tex.fill_to = Vector2(1.0, 0.5)
 	light_tex.width = 256
 	light_tex.height = 256
+	var gd = Gradient.new()                          # soft round particle (no square pixels)
+	gd.set_color(0, Color(1, 1, 1, 1))
+	gd.add_point(0.55, Color(1, 1, 1, 0.75))
+	gd.set_color(gd.get_point_count() - 1, Color(1, 1, 1, 0))
+	dot_tex = GradientTexture2D.new()
+	dot_tex.gradient = gd
+	dot_tex.fill = GradientTexture2D.FILL_RADIAL
+	dot_tex.fill_from = Vector2(0.5, 0.5)
+	dot_tex.fill_to = Vector2(1.0, 0.5)
+	dot_tex.width = 64
+	dot_tex.height = 64
 	# screen-space shockwave distortion (reads the screen behind it)
 	var sh = Shader.new()
 	sh.code = """
@@ -84,7 +96,7 @@ func _process(_d: float) -> void:
 	f += 1
 	_load_frame(f)
 	for c in cues:
-		if int(c["f"]) == f:
+		if int(c["f"]) == f and f < frames - 180:      # last 6 s = end card: keep it clean
 			_fx(c)
 	shake *= 0.85
 	bg.position = Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
@@ -132,7 +144,8 @@ func _light(p: Vector2, size_px: float, col: Color, energy: float, fade: float) 
 	l.texture = light_tex
 	l.texture_scale = size_px / 128.0
 	l.color = col
-	l.energy = energy
+	l.energy = energy * 0.35
+	l.texture_scale = min(l.texture_scale, 3.2)
 	l.position = p
 	add_child(l)
 	var tw = create_tween()
@@ -144,6 +157,7 @@ func _parts(p: Vector2, n: int, life: float, vel: Vector2, grav: float, size: Ve
 			spread := 180.0) -> void:
 	var e = CPUParticles2D.new()
 	e.position = p
+	e.texture = dot_tex
 	e.one_shot = true
 	e.explosiveness = 0.9
 	e.amount = n
@@ -153,8 +167,8 @@ func _parts(p: Vector2, n: int, life: float, vel: Vector2, grav: float, size: Ve
 	e.initial_velocity_min = vel.x
 	e.initial_velocity_max = vel.y
 	e.gravity = Vector2(0, grav)
-	e.scale_amount_min = size.x
-	e.scale_amount_max = size.y
+	e.scale_amount_min = size.x / 32.0
+	e.scale_amount_max = size.y / 32.0
 	var g = Gradient.new()
 	g.set_color(0, c0)
 	g.set_color(1, c1)
@@ -198,7 +212,7 @@ func _explode(p: Vector2, s: float, power: float) -> void:
 		   Vector2(0.05, 0.12) * s, Color(1, 0.9, 0.35), Color(1, 0.4, 0.1, 0))                      # sparks
 	_ring(p, s * 10.0 * power, Color(1, 0.95, 0.8, 0.85), 0.45, 18)
 	wave_mat.set_shader_parameter("center", p / Vector2(1080, 1920))
-	wave_mat.set_shader_parameter("strength", 0.03 * power)
+	wave_mat.set_shader_parameter("strength", 0.012 * power)
 	var tw = create_tween()
 	tw.tween_method(func(r): wave_mat.set_shader_parameter("radius", r), 0.0, 0.45 * power, 0.5)
 	tw.tween_callback(func(): wave_mat.set_shader_parameter("strength", 0.0))
