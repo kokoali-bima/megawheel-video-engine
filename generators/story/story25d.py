@@ -1285,12 +1285,10 @@ def render_scene(ep, num, aspect):
         for j in range(si + 1):
             s_ = shots[j]
             uu = min(t, s_["t1"]) - s_["t0"]
-            if s_.get("roll"):                                     # still driving while talking: wheels turn,
-                for a in actors.values():                          # the world scrolls past, the camera follows
-                    if not a["hidden"] and a["id"] not in s_.get("parked", []):
-                        a["x"] += s_["roll"] * uu
-                        if j == si:
-                            a["v"] = s_["roll"]
+            if s_.get("roll") and j == si:                         # still driving while talking (see `off`)
+                for a in actors.values():
+                    if not a["hidden"]:
+                        a["v"] = s_["roll"]
             for aid, mv in s_.get("moves", {}).items():
                 a = actors[aid]
                 if "show" in mv:
@@ -1374,7 +1372,13 @@ def render_scene(ep, num, aspect):
         if frz:
             zmul *= 1.0 + 0.12 * (1 - (1 - frz) ** 2)
         piv_y = piv
-        # draw
+        # draw. "roll": the world scrolls past (per shot) while the cars keep their place on screen and their
+        # wheels turn (drawn at x + off with the camera at camx + off -> same screen spot, spinning wheels)
+        off = sh.get("roll", 0.0) * u
+        camx_real = camx
+        camx = camx + off
+        for a in actors.values():
+            a["x"] += off
         ctx.save()
         shake = 0.0
         if "shake" in sh.get("fx", []):
@@ -1441,6 +1445,9 @@ def render_scene(ep, num, aspect):
                 draw_foot(ctx, ft["x"], ft.get("z", 1.0), camx, drop)
         draw_props_layer(ctx, loc, camx, 13, back=False)
         ctx.restore()
+        for a in actors.values():
+            a["x"] -= off
+        camx = camx_real
         if sh.get("kraggor") and sh["kraggor"].get("front"):      # close-up of Kraggor: in front of everything
             kraggor_head(ctx, u, sh["kraggor"])
         if sh.get("toss"):

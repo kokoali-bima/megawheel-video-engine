@@ -80,10 +80,6 @@ def simulate(scene):
                 if not mv.get("reverse"):
                     a["face"] = 1 if d >= 0 else -1
                 a["x"] = mv["to_x"]
-        if sh.get("roll"):
-            for a in actors.values():
-                if not a["hidden"]:
-                    a["x"] += sh["roll"] * dur
         states.append((before, {aid: dict(a) for aid, a in actors.items()}))
     return states
 

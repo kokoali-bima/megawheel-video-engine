@@ -143,11 +143,11 @@
   {
    "cam": "two",
    "on": "sprinkles",
-   "zoom": 0.9,
+   "zoom": 0.75,
    "moves": {
     "buster": {
      "show": true,
-     "to_x": 4.5,
+     "to_x": 3.0,
      "speed": 3.5
     }
    },
