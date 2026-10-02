@@ -744,6 +744,16 @@
    "gpu_seconds": 191.0,
    "wall_seconds": 216.3,
    "cost_usd": 0.0488
+  },
+  {
+   "date": "2026-10-02",
+   "note": "YuE v1 intro \u2014 TIMEOUT 3600s, 0 takes (manual entry, run crashed before logging)",
+   "gpu": "L40S",
+   "engine": "YuE-s1-7B+s2-1B",
+   "songs": 0,
+   "gpu_seconds": 3600.0,
+   "wall_seconds": 3700.0,
+   "cost_usd": 2.2439
   }
  ]
 }

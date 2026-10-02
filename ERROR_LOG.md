@@ -80,3 +80,11 @@
 ## 2026-10-02 — Proses `modal run modal_tts.py` menggantung 18 jam di VM
 - Gejala: proses lokal `modal run ... SIM_SPLASH_V2_S013` masih hidup 18 jam; app Modal-nya sudah `stopped` (tidak ada biaya GPU).
 - Tindakan: `kill` proses. Pencegahan: jalankan modal lewat `timeout` (seperti `modal_song`), cek `pgrep -af "modal run"` sebelum batch.
+
+## 2026-10-02 — YuE v1 di Modal: 4 kegagalan berturut-turut
+1. Repo main sudah YuE2 (struktur baru, `inference/infer.py` hilang; bobot YuE2 = CC BY-NC) → checkout commit v1 terakhir.
+2. Protobuf lama dari requirements YuE merusak klien Modal di container → `protobuf>=4.25,<6`.
+3. transformers menolak `torch.load` di torch < 2.6 → torch 2.6.
+4. Tanpa flash-attn (pakai SDPA) 3 take > 3600 s → timeout, ≈$2.24 terbuang dan **tidak tercatat otomatis** (dicatat manual).
+- Keputusan: YuE ditunda; ACE-Step dipakai (user memilih gaya v3_alt2). Pelajaran: 1 take per pemanggilan + simpan hasil per take,
+  dan catat ledger juga saat gagal (try/finally).
