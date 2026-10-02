@@ -242,6 +242,10 @@ def _mouth(ctx, f, emo, talk, t):
     mw = f["mw"]
     ink = (0.05, 0.05, 0.1)
     ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    vis = VIS.get(CUR["aid"]) if CUR.get("aid") else None
+    if vis and vis != "X" and talk > 0.02:                         # phoneme mouth (Rhubarb, Preston Blair set)
+        _viseme_mouth(ctx, mx, my, mw, vis, emo, talk)
+        return
     if talk > 0.08:                                                # talking: open mouth, size from the voice
         o = 0.12 + 0.38 * min(1.0, talk)
         smile = {"happy": 0.12, "laugh": 0.15, "proud": 0.1, "sad": -0.08, "cry": -0.1, "angry": -0.05}.get(emo, 0.0)
@@ -272,6 +276,68 @@ def _mouth(ctx, f, emo, talk, t):
     else:
         ctx.arc(mx, my + mw * 0.3, mw * 0.5, 1.2 * math.pi, 1.8 * math.pi)
         ctx.stroke()
+
+
+def _viseme_mouth(ctx, mx, my, mw, v, emo, talk):
+    """A closed M/B/P - B slightly open + teeth (K S T EE) - C open (EH AE) - D wide (AA) - E round (AO ER)
+    - F pucker (OO W) - G F/V (teeth on lip) - H L (tongue). Size breathes a little with the voice."""
+    dark, teeth, tongue = (0.45, 0.05, 0.1), (1, 1, 1), (0.95, 0.45, 0.5)
+    smile = {"happy": 0.1, "laugh": 0.14, "proud": 0.08, "sad": -0.08, "cry": -0.1, "angry": -0.05}.get(emo, 0.0)
+    g = 0.9 + 0.2 * min(1.0, talk)
+    ctx.save()
+    ctx.translate(mx, my + smile * mw)
+    ctx.scale(g, g)
+    ink = (0.05, 0.05, 0.1)
+
+    def oval(w, h):
+        ctx.save()
+        ctx.scale(w, h)
+        ctx.arc(0, 0, 1, 0, 2 * math.pi)
+        ctx.restore()
+
+    if v == "A":
+        ctx.move_to(-mw * 0.32, 0)
+        ctx.curve_to(-mw * 0.1, mw * 0.04, mw * 0.1, mw * 0.04, mw * 0.32, 0)
+        ctx.set_source_rgb(*ink)
+        ctx.set_line_width(mw * 0.16)
+        ctx.stroke()
+    elif v in ("B", "G"):
+        oval(mw * 0.3, mw * (0.13 if v == "B" else 0.11))
+        se.fill_stroke(ctx, dark, lw=mw * 0.08)
+        ctx.rectangle(-mw * 0.24, -mw * 0.11 if v == "G" else -mw * 0.02, mw * 0.48, mw * 0.06)
+        ctx.set_source_rgb(*teeth)
+        ctx.fill()
+    elif v == "C":
+        oval(mw * 0.3, mw * 0.2)
+        se.fill_stroke(ctx, dark, lw=mw * 0.08)
+    elif v == "D":
+        oval(mw * 0.34, mw * 0.3)
+        se.fill_stroke(ctx, dark, lw=mw * 0.08)
+        ctx.rectangle(-mw * 0.22, -mw * 0.27, mw * 0.44, mw * 0.07)
+        ctx.set_source_rgb(*teeth)
+        ctx.fill()
+        ctx.save()
+        ctx.translate(0, mw * 0.17)
+        oval(mw * 0.16, mw * 0.08)
+        ctx.restore()
+        ctx.set_source_rgb(*tongue)
+        ctx.fill()
+    elif v == "E":
+        oval(mw * 0.2, mw * 0.22)
+        se.fill_stroke(ctx, dark, lw=mw * 0.08)
+    elif v == "F":
+        oval(mw * 0.12, mw * 0.13)
+        se.fill_stroke(ctx, dark, lw=mw * 0.09)
+    elif v == "H":
+        oval(mw * 0.28, mw * 0.22)
+        se.fill_stroke(ctx, dark, lw=mw * 0.08)
+        ctx.save()
+        ctx.translate(0, -mw * 0.06)
+        oval(mw * 0.13, mw * 0.08)
+        ctx.restore()
+        ctx.set_source_rgb(*tongue)
+        ctx.fill()
+    ctx.restore()
 
 
 se.draw_face = story_face
@@ -1050,6 +1116,53 @@ def build(scene):
     return scene["shots"], placed, t
 
 
+RHUBARB = os.environ.get("RHUBARB", "/root/tools/rhubarb-lip-sync/build/rhubarb/rhubarb")
+VIS_CACHE = os.path.join(BASE, "work", "voice", "visemes")
+VIS = {}                                                         # actor id -> current mouth shape (A..H, X)
+
+
+def visemes(audio, text):
+    """Rhubarb Lip Sync on one line -> [(t_start, shape)], cached by audio + text. [] when unavailable."""
+    import hashlib
+    import wave as _wave
+    if not os.path.exists(RHUBARB):
+        return []
+    key = hashlib.md5(np.asarray(audio, dtype=np.float32).tobytes() + text.encode()).hexdigest()
+    cache = os.path.join(VIS_CACHE, key + ".json")
+    if os.path.exists(cache):
+        with open(cache) as fh:
+            return [tuple(x) for x in json.load(fh)]
+    os.makedirs(VIS_CACHE, exist_ok=True)
+    wav, txt = os.path.join(VIS_CACHE, key + ".wav"), os.path.join(VIS_CACHE, key + ".txt")
+    with _wave.open(wav, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(se.SR)
+        w.writeframes((np.clip(audio, -1, 1) * 32767).astype(np.int16).tobytes())
+    with open(txt, "w") as fh:
+        fh.write(text)
+    r = subprocess.run([RHUBARB, "-q", "-f", "json", "--extendedShapes", "GHX", "-d", txt, wav],
+                       capture_output=True, text=True)
+    os.remove(wav)
+    os.remove(txt)
+    if r.returncode:
+        print(f"[lipsync] rhubarb gagal ({r.stderr.strip()[-120:]}) -> mulut volume")
+        return []
+    cues = [(c["start"], c["value"]) for c in json.loads(r.stdout)["mouthCues"]]
+    with open(cache, "w") as fh:
+        json.dump(cues, fh)
+    return cues
+
+
+def shape_at(cues, t):
+    sh = "X"
+    for st_, v in cues:
+        if st_ > t:
+            break
+        sh = v
+    return sh
+
+
 def envelope(a):
     k = max(1, int(se.SR / FPS))
     n = len(a) // k
@@ -1377,6 +1490,8 @@ def render_scene(ep, num, aspect):
             shots[-1]["t1"] += slen - total
             total = slen
     envs = [(p, envelope(p["audio"])) for p in placed]
+    for p in placed:
+        p["vis"] = visemes(p["audio"], p["text"])
     out_dir = os.path.join(BASE, "work", "story", ep)
     prev = os.path.join(out_dir, f"preview_{num:02d}_{aspect}")
     os.makedirs(prev, exist_ok=True)
@@ -1468,6 +1583,7 @@ def render_scene(ep, num, aspect):
         # emotions + talking
         EMO.clear()
         TALK.clear()
+        VIS.clear()
         for aid in actors:
             EMO[aid] = scene["actors"][aid].get("emo", "normal")
         for j in range(si + 1):
@@ -1481,6 +1597,9 @@ def render_scene(ep, num, aspect):
                     if p["emo"] not in ("talk", "whisper"):
                         EMO[p["spk"]] = p["emo"]
                     TALK[p["spk"]] = float(env[min(len(env) - 1, int((t - p["t0"]) * FPS))])
+                    VIS[p["spk"]] = shape_at(p["vis"], t - p["t0"]) if p.get("vis") else None
+                    if p["spk"] in actors and TALK[p["spk"]] > 0.55:      # stressed syllable: tiny body bounce
+                        actors[p["spk"]]["h"] += 0.05 * (TALK[p["spk"]] - 0.55)
         EMO_MOOD.clear()
         for aid, e in EMO.items():
             EMO_MOOD[aid] = MOOD_BASE.get(e, "normal")
