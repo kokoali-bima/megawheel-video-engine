@@ -912,6 +912,7 @@ def cam_for(shot, actors, t, u):
     face_y = ground_y(on["z"]) - (lift_h + (ride + fy) * on["small"] * on["sq"]) * k
     body_y = ground_y(on["z"]) - (lift_h + (ride + 0.25 * bh) * on["small"]) * k   # a bit above the body centre
     fit = W / (bw * on["small"] * k)                               # zoom at which the body fills the frame width
+    tall = (ride + bh / 2 + 0.6) * on["small"] * k
     if kind == "two":
         other = actors.get(shot.get("with"))
         mid = (on["x"] + other["x"]) / 2 if other else on["x"]
@@ -919,13 +920,13 @@ def cam_for(shot, actors, t, u):
     if kind == "medium":                                           # whole vehicle, roomy
         return on["x"] + bw * 0.1 * on["face"] * on["small"], min(shot.get("zoom", 1.6), 0.55 * fit), body_y
     if kind == "close":                                            # whole vehicle, face side favoured (cinematic)
-        tall = (ride + bh / 2 + 0.6) * on["small"] * k             # tall vehicles (monster truck) fit by height
         z_c = min(shot.get("zoom", 2.8), 0.78 * fit, 0.62 * H / tall)
         return on["x"] + bw * 0.12 * on["face"] * on["small"], z_c, 0.6 * body_y + 0.4 * face_y
     if kind == "ecu":
         return face_x, shot.get("zoom", 5.0) * (1 + 0.04 * u), face_y
-    if kind == "low":
-        return on["x"], shot.get("zoom", 1.7), ground_y(on["z"]) - (0.4 + hh) * k
+    if kind == "low":                                              # looking up a little, whole vehicle in frame
+        z_l = min(shot.get("zoom", 1.7), 0.6 * fit, 0.5 * H / tall)
+        return on["x"] + bw * 0.1 * on["face"] * on["small"], z_l, ground_y(on["z"]) - (hh + 0.5 * tall / k) * k
     if kind == "track":                                            # follow a moving car (race)
         return on["x"] + shot.get("dx", 2.0), shot.get("zoom", 1.1), None
     return on["x"] + shot.get("dx", 0.0), shot.get("zoom", 1.0), None
@@ -1143,6 +1144,80 @@ def soft_hit():
     return 0.8 * boom + 0.25 * sw
 
 
+def _reverb(x, secs=1.2, mix=0.35, seed=5):
+    """Cheap plate: convolve with decaying noise (FFT)."""
+    n = int(secs * se.SR)
+    ir = np.random.default_rng(seed).standard_normal(n) * np.exp(-np.arange(n) / se.SR * 4.5)
+    ir /= np.sqrt(np.sum(ir ** 2))
+    m = len(x) + n
+    wet = np.fft.irfft(np.fft.rfft(x, m) * np.fft.rfft(ir, m), m)[:m]
+    out = np.zeros(m)
+    out[:len(x)] += x * (1 - mix)
+    return out + wet * mix
+
+
+def cine_whoosh(dur=1.3, peak=0.62, lo=180.0, hi=2600.0, reverse=False, seed=9):
+    """Cinematic transition whoosh: band-pass air sweep (low -> high -> low), a soft tonal body, reverb tail."""
+    n = int(dur * se.SR)
+    t = np.arange(n) / se.SR
+    noise = np.random.default_rng(seed).standard_normal(n)
+    hop, win = 512, 2048
+    out = np.zeros(n + win)
+    w = np.hanning(win)
+    freqs = np.fft.rfftfreq(win, 1 / se.SR)
+    for i0 in range(0, n - win, hop):
+        ph = (i0 + win / 2) / n
+        bell = math.exp(-((ph - peak) / 0.28) ** 2)
+        fc = lo * (hi / lo) ** bell                                # centre frequency rises to the peak and back
+        spec = np.fft.rfft(noise[i0:i0 + win] * w)
+        spec *= np.exp(-0.5 * (np.log2(np.maximum(freqs, 20) / fc) / 0.9) ** 2)
+        out[i0:i0 + win] += np.fft.irfft(spec, win) * w
+    air = out[:n]
+    env = np.where(t / dur < peak, (t / dur / peak) ** 2, np.exp(-(t / dur - peak) / (1 - peak) * 3.2))
+    body = np.sin(2 * math.pi * np.cumsum(70 + 60 * env) / se.SR) * env * 0.35
+    x = air / max(1e-9, np.max(np.abs(air))) * env + body
+    if reverse:
+        x = x[::-1]
+    x = _reverb(x, 1.3, 0.4)
+    return 0.6 * x / max(1e-9, np.max(np.abs(x)))
+
+
+def memory_swell(dur=2.6):
+    """Into a memory: reversed whoosh + airy pad swell + one soft bell note with echo."""
+    n = int(dur * se.SR)
+    t = np.arange(n) / se.SR
+    pad = sum(np.sin(2 * math.pi * f * t) for f in (261.6, 329.6, 392.0, 523.3)) / 4
+    pad *= np.sin(np.pi * t / dur) ** 2
+    bell = np.zeros(n)
+    i0 = int(dur * 0.55 * se.SR)
+    tt = np.arange(n - i0) / se.SR
+    bell[i0:] = (np.sin(2 * math.pi * 784 * tt) + 0.3 * np.sin(2 * math.pi * 1568 * tt)) * np.exp(-tt * 2.5)
+    w = cine_whoosh(dur * 0.6, reverse=True, seed=13)
+    x = np.zeros(n + len(w))
+    x[:n] += 0.35 * pad + 0.4 * bell
+    x[:len(w)] += 0.5 * w
+    x = _reverb(x, 1.8, 0.5)
+    return 0.55 * x / max(1e-9, np.max(np.abs(x)))
+
+
+def truck_tune():
+    """The ice-cream truck's music (first phrase of Grandpa's song), replaces the old 'ting-tong' ding."""
+    keep = 8
+    names = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11}
+    step = 0.22
+    out = np.zeros(int((keep * step + 1.2) * se.SR))
+    t0 = 0.0
+    for nm, d in JINGLE[:keep]:
+        f = 440.0 * 2 ** ((names[nm[0]] + 12 * (int(nm[1]) + 1) - 69) / 12)
+        L = int(1.0 * se.SR)
+        tt = np.arange(L) / se.SR
+        tone = (np.sin(2 * math.pi * f * tt) + 0.35 * np.sin(2 * math.pi * 2 * f * tt)) * np.exp(-tt * 3.5)
+        i0 = int(t0 * se.SR)
+        out[i0:i0 + L] += tone[:len(out) - i0]
+        t0 += d * step
+    return 0.45 * out / max(1e-9, np.max(np.abs(out)))
+
+
 def heartbeat(beats=4, bpm=72):
     gap = 60.0 / bpm
     out = np.zeros(int((beats * gap + 0.4) * se.SR))
@@ -1159,15 +1234,16 @@ SFX = {
     "sting": soft_hit,
     "jingle": jingle,
     "heartbeat": heartbeat,
-    "whoosh": lambda: se.synth_whoosh(),
-    "ding": lambda: np.concatenate([se.tone(1320, 0.18, "sine", decay=0.12), se.tone(1046, 0.3, "sine", decay=0.18)]),
+    "whoosh": cine_whoosh,
+    "memory": memory_swell,
+    "ding": truck_tune,
     "laugh": lambda: SM.cheer(1.6, 0.6, seed=4),
     "cheer": lambda: SM.cheer(3.0, 1.2, seed=5),
     "gasp": lambda: SM.gasp(seed=6),
     "roar": lambda: SM.kaiju_roar(2.2),
     "stomp": lambda: SM.kaiju_step(1.4),
     "thunder": lambda: se.synth_impact(1.0, seed=3) * 0.8,
-    "engine": lambda: se.synth_whoosh(),
+    "engine": lambda: cine_whoosh(0.9, peak=0.5, lo=120.0, hi=1400.0, seed=21),
     "splat": lambda: se.synth_splash(0.8, seed=12),
 }
 
@@ -1190,14 +1266,7 @@ def build_audio(shots, placed, total, scene):
             if name in SFX:
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
     for sh in shots:
-        if sh.get("punch"):
-            place(sfx, se.synth_whoosh(), sh["t0"], 0.55)
-        if sh.get("triple"):                                       # whoosh per cut, one soft hit
-            for k in range(3):
-                place(sfx, se.synth_whoosh(), sh["t0"] + 0.45 * k, 0.35 + 0.1 * k)
-            place(sfx, soft_hit(), sh["t0"] + 0.9, 0.6)
-        if sh.get("freeze"):
-            place(sfx, soft_hit(), sh["t1"] - sh["freeze"], 0.7)
+        pass                                                       # shock moments: picture only (user, v7)
     mus = np.zeros(n)
     if scene.get("song"):
         song = se.read_wav(os.path.join(BASE, scene["song"]))     # theme song (ACE-Step), already mastered
@@ -1345,11 +1414,17 @@ def render_scene(ep, num, aspect):
         for aid, e in EMO.items():
             EMO_MOOD[aid] = MOOD_BASE.get(e, "normal")
         # camera
+        off = sum(s_.get("roll", 0.0) * (s_["t1"] - s_["t0"]) for s_ in shots[:si]) + sh.get("roll", 0.0) * u
+        for a in actors.values():                                  # camera sees the rolled positions (hill!)
+            a["x"] += off
         cx, z_, focus_y = cam_for(sh, actors, t, u)
+        for a in actors.values():
+            a["x"] -= off
+        cx -= off
         pv = (focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)) - sh.get("lift", 0.0) * k_of(1.0)
         if si != prev_si:                                          # new shot: glide the camera there (no rushed
             hard = camx is None or sh.get("punch") or sh.get("triple") or sh.get("cut") == "hard"   # cuts)
-            glide = None if hard else (camx, zoom, piv, sh["t0"], sh.get("glide", scene.get("glide", 1.2)))
+            glide = None if hard else (camx, zoom, piv, sh["t0"], sh.get("glide", scene.get("glide", 1.8)))
             if hard:
                 camx, zoom, piv = cx, z_, pv
             prev_si = si
@@ -1375,7 +1450,6 @@ def render_scene(ep, num, aspect):
         piv_y = piv
         # draw. "roll": the world scrolls past (per shot) while the cars keep their place on screen and their
         # wheels turn (drawn at x + off with the camera at camx + off -> same screen spot, spinning wheels)
-        off = sh.get("roll", 0.0) * u
         camx_real = camx
         camx = camx + off
         for a in actors.values():
@@ -1401,6 +1475,7 @@ def render_scene(ep, num, aspect):
         draw_set(ctx, loc, camx, t, after_sky=behind)
         if loc == "garage":
             draw_lamp(ctx, camx)
+        draw_props_layer(ctx, loc, camx, 11, back=True)            # trees first, signs in front of them
         for prop in scene.get("props", []):
             if prop["type"] == "poster":
                 draw_poster(ctx, prop, camx)
@@ -1410,7 +1485,6 @@ def render_scene(ep, num, aspect):
                 draw_desk(ctx, prop, camx)
             elif prop["type"] == "podium":
                 draw_podium(ctx, camx)
-        draw_props_layer(ctx, loc, camx, 11, back=True)
         draw_hill(ctx, camx)
         for prop in scene.get("props", []):
             if prop["type"] == "mud":
@@ -1538,7 +1612,7 @@ def render_scene(ep, num, aspect):
     return out
 
 
-XF_DUR = {"dissolve": 1.4, "fadeblack": 1.2, "fadewhite": 0.9}
+XF_DUR = {"dissolve": 2.0, "fadeblack": 1.8, "fadewhite": 1.4}       # others: 1.6 s
 
 
 def make_ident(d, aspect, text, dur=3.6, logo=None):
@@ -1601,7 +1675,7 @@ def assemble(ep, aspect):
         with open(edit) as fh:
             ed = json.load(fh)
         tr = [x if isinstance(x, str) else x[0] for x in ed["transitions"]]
-        xds = [XF_DUR.get(x, 1.0) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
+        xds = [XF_DUR.get(x, 1.6) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
         if ed.get("ident"):                                        # studio ident before the theme song
             parts = [os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))] + parts
             tr, xds = ["fade"] + tr, [0.8] + xds

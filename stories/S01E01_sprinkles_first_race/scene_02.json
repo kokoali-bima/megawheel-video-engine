@@ -45,7 +45,6 @@
    "dx": -2,
    "hold": 3.6,
    "sfx": [
-    "whoosh",
     "ding",
     [
      "ding",
@@ -220,7 +219,7 @@
    "freeze": 1.8
   }
  ],
- "gap": 0.55,
- "tail": 0.8,
+ "gap": 0.65,
+ "tail": 1.2,
  "edge_fade": false
 }
