@@ -183,11 +183,11 @@
    "cam": "close",
    "on": "sprinkles",
    "hold": 3.0,
-   "caption": "RACE NUMBER #13",
+   "caption": "#13",
    "sfx": [
     "ding"
    ],
-   "note": "Sprinkles gets race number 13 - the very last spot."
+   "note": "Sprinkles gets race number #13 - the very last spot."
   },
   {
    "cam": "close",

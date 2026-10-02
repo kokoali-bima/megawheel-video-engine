@@ -519,10 +519,11 @@ def note(ctx, text, age, dur):
     if a <= 0:
         return
     bw, bh = W * 0.86, H * 0.085
-    se.rrect(ctx, (W - bw) / 2, H * 0.035, bw, bh, bh * 0.3)
+    y0 = H * 0.105                                                 # below the letterbox bar
+    se.rrect(ctx, (W - bw) / 2, y0, bw, bh, bh * 0.3)
     ctx.set_source_rgba(0.05, 0.05, 0.12, 0.62 * a)
     ctx.fill()
-    se.draw_text(ctx, text, W / 2, H * 0.035 + bh * 0.52, 38 if W > H else 34, fill=(1, 0.95, 0.75),
+    se.draw_text(ctx, text, W / 2, y0 + bh * 0.52, 38 if W > H else 34, fill=(1, 0.95, 0.75),
                  stroke=(0, 0, 0), sw=3, alpha=a, max_w=bw * 0.94)
 
 
@@ -764,7 +765,7 @@ def kraggor_smile(ctx, a):
     ctx.restore()
 
 
-KR_EYES = [(-1.9, -8.6), (1.9, -8.6)]                    # eye centres in kraggor_smile units (head-local)
+KR_EYES = [(-1.9, -7.2), (1.9, -7.2)]                    # eye centres in kraggor_smile units (head-local)
 
 
 def kraggor_wink(ctx, eye):
@@ -1392,7 +1393,7 @@ def render_scene(ep, num, aspect):
                 st_screen = H / 2 + (stands_top_world() - piv_y) * zoom
                 if kr.get("stand"):                                # feet on the far ground, not floating
                     sc_ = kr.get("scale", 1.0) * (H / 1080)
-                    st_screen = H / 2 + (ground_y(kr.get("gz", 30.0)) - piv_y) * zoom - (1.2 + 19.2) * 40 * sc_
+                    st_screen = H / 2 + (ground_y(kr.get("gz", 7.0)) - piv_y) * zoom - (1.2 + 19.2) * 40 * sc_
                 ctx.save()
                 ctx.identity_matrix()
                 kraggor_head(ctx, u, kr, stands_top=st_screen)
