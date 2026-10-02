@@ -76,3 +76,7 @@
 | 2026-09-30 | `git log --format="VM HEAD %h <%ae>"` inline lewat ssh: `syntax error near unexpected token newline` (ke-5 kali pelanggaran aturan ini) | Kutip dibuang PowerShell, lalu `<` `>` dibaca bash sebagai redirect | Semua perintah remote yang memuat kutip/`<>`/`\|` WAJIB lewat file script, termasuk perintah "kecil". |
 | 2026-09-30 | Commit dari PC gagal diam-diam: `pathspec 'Claude' did not match`, lalu push tidak mengirim apa-apa dan preview VM jalan tanpa file baru | Pesan commit dalam kutip ganda PowerShell berisi `\$29`: `$` diekspansi dan `\"` merusak kutip argumen git | Pesan commit dari PowerShell SELALU dalam kutip tunggal `'...'`, tanpa `$`. Cek hash di `git show --stat` sebelum lanjut ke VM. |
 | 2026-09-30 | `bash script.sh \| grep -E "a\|b"` lewat ssh: grep error, pipe putus, **script uji ikut mati** setelah percobaan pertama | Sama: kutip dibuang PowerShell; SIGPIPE mematikan script | Script panjang dijalankan dengan `nohup ... > file.out &`, lalu hasilnya dibaca lewat script ringkasan terpisah. Jangan pernah mem-pipe output script lewat argumen ssh. |
+
+## 2026-10-02 — Proses `modal run modal_tts.py` menggantung 18 jam di VM
+- Gejala: proses lokal `modal run ... SIM_SPLASH_V2_S013` masih hidup 18 jam; app Modal-nya sudah `stopped` (tidak ada biaya GPU).
+- Tindakan: `kill` proses. Pencegahan: jalankan modal lewat `timeout` (seperti `modal_song`), cek `pgrep -af "modal run"` sebelum batch.

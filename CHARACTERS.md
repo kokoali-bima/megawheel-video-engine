@@ -50,3 +50,9 @@
 | 2026-10-02 | **Siren = perempuan** (sebelumnya belum pernah ditentukan di Shorts) |
 | 2026-10-02 | **Tilly = perempuan** (cerewet, lucu) dan **Nitro = laki-laki** (dingin, fokus) disetujui user |
 | 2026-10-02 | Referensi suara `tilly` dan `nitro` dibuat (sintetis en-US) untuk draf S01E01 v4 |
+
+## Perlindungan HKI (rencana, kalau channel viral)
+- Tokoh = **hak cipta** (otomatis sejak dibuat) + **merek** untuk nama/logo. Paten tidak berlaku untuk tokoh.
+- Bukti tanggal penciptaan: riwayat git repo ini (desain di `sim_engine.VEHICLES`, `CHARACTERS.md`, render).
+- Langkah: daftarkan merek "MegaWheel Arena" (+ nama tokoh utama) di DJKI (kelas 41 hiburan, 9 video digital,
+  28 mainan, 25 pakaian); catatkan hak cipta desain tokoh di e-Hak Cipta DJKI; untuk AS: USPTO. Konsultasi konsultan HKI.
