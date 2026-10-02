@@ -42,6 +42,7 @@
   {
    "cam": "wide",
    "sfx": [
+    "whoosh",
     "cheer"
    ],
    "lines": [
@@ -194,5 +195,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

@@ -39,6 +39,7 @@
    "cam": "wide",
    "hold": 2.2,
    "sfx": [
+    "whoosh",
     "cheer"
    ]
   },
@@ -82,5 +83,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

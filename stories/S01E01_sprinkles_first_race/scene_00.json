@@ -75,7 +75,8 @@
      "to_x": 30,
      "speed": 8
     }
-   }
+   },
+   "sfx": []
   },
   {
    "cam": "medium",
@@ -149,5 +150,6 @@
    "hold": 3.5,
    "caption": "Episode 1: Sprinkles' First Race"
   }
- ]
+ ],
+ "edge_fade": false
 }

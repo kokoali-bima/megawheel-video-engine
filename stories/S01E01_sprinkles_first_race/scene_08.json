@@ -40,7 +40,10 @@
   {
    "cam": "wide",
    "hold": 2.6,
-   "calendar": 7
+   "calendar": 7,
+   "sfx": [
+    "whoosh"
+   ]
   },
   {
    "cam": "close",
@@ -220,5 +223,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

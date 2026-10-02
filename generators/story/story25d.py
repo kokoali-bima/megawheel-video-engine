@@ -1302,7 +1302,7 @@ def render_scene(ep, num, aspect):
         t = treal
         if cur is not None:
             subtitle(ctx, cur["spk"], cur["text"], aspect, t - cur["t0"])
-        fade = min(1.0, t / 0.4, max(0.0, (total - t) / 0.4))
+        fade = min(1.0, t / 0.4, max(0.0, (total - t) / 0.4)) if scene.get("edge_fade", True) else 1.0
         if fade < 1.0:
             ctx.rectangle(0, 0, W, H)
             ctx.set_source_rgba(0, 0, 0, 1 - fade)
@@ -1322,9 +1322,43 @@ def render_scene(ep, num, aspect):
     return out
 
 
+XF_DUR = {"dissolve": 1.0, "fadeblack": 0.8}
+
+
+def dur_of(path):
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path],
+                       capture_output=True, text=True)
+    return float(r.stdout.strip())
+
+
 def assemble(ep, aspect):
     d = os.path.join(BASE, "work", "story", ep)
     parts = sorted(f for f in os.listdir(d) if f.startswith("scene_") and f.endswith(f"_{aspect}.mp4"))
+    edit = os.path.join(BASE, "stories", ep, "edit.json")
+    if os.path.exists(edit):                                       # drama transitions (re-encode)
+        with open(edit) as fh:
+            tr = json.load(fh)["transitions"]
+        assert len(tr) == len(parts) - 1, f"edit.json: {len(tr)} transisi untuk {len(parts)} scene"
+        durs = [dur_of(os.path.join(d, p)) for p in parts]
+        fc, v, a, off = [], "[0:v]", "[0:a]", 0.0
+        for i, name in enumerate(tr, start=1):
+            xd = XF_DUR.get(name, 0.5)
+            off += durs[i - 1] - xd
+            fc.append(f"{v}[{i}:v]xfade=transition={name}:duration={xd}:offset={off:.3f}[v{i}]")
+            fc.append(f"{a}[{i}:a]acrossfade=d={xd}:c1=tri:c2=tri[a{i}]")
+            v, a = f"[v{i}]", f"[a{i}]"
+        total = off + durs[-1]
+        fc.append(f"{v}fade=t=in:d=0.6,fade=t=out:st={total - 1.2:.3f}:d=1.2[vo]")
+        fc.append(f"{a}afade=t=in:d=0.4,afade=t=out:st={total - 1.2:.3f}:d=1.2[ao]")
+        out = os.path.join(d, f"{ep}_{aspect}.mp4")
+        cmd = ["ffmpeg", "-y", "-loglevel", "error"]
+        for p in parts:
+            cmd += ["-i", os.path.join(d, p)]
+        cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]", "-c:v", "libx264", "-crf", "18",
+                "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", out]
+        subprocess.run(cmd, check=True)
+        print(f"[story] episode {ep} ({aspect}): {len(parts)} scenes, transisi drama -> {out} ({total / 60:.2f} menit)")
+        return
     lst = os.path.join(d, f"concat_{aspect}.txt")
     with open(lst, "w") as fh:
         for p in parts:

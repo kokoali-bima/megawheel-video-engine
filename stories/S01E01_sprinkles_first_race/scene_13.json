@@ -40,6 +40,9 @@
      "H-hey, big guy... you like that song? Want some ice cream?",
      "scared"
     ]
+   ],
+   "sfx": [
+    "whoosh"
    ]
   },
   {
@@ -217,5 +220,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

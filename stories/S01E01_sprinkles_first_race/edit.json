@@ -1,0 +1,22 @@
+{
+ "transitions": [
+  "zoomin",
+  "fadewhite",
+  "smoothleft",
+  "fadeblack",
+  "dissolve",
+  "fadewhite",
+  "smoothleft",
+  "smoothleft",
+  "fadewhite",
+  "hblur",
+  "zoomin",
+  "fadewhite",
+  "hblur",
+  "fadewhite",
+  "smoothup",
+  "fadeblack",
+  "dissolve"
+ ],
+ "note": "ffmpeg xfade names; whoosh SFX on flashy cuts is in the next scene's first shot"
+}

@@ -59,6 +59,9 @@
      "Zippy takes the lead! Nitro right behind him!",
      "excited"
     ]
+   ],
+   "sfx": [
+    "whoosh"
    ]
   },
   {
@@ -173,5 +176,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

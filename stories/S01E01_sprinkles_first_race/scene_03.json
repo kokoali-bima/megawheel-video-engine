@@ -46,7 +46,10 @@
  "shots": [
   {
    "cam": "wide",
-   "hold": 2.4
+   "hold": 2.4,
+   "sfx": [
+    "whoosh"
+   ]
   },
   {
    "cam": "two",
@@ -207,5 +210,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

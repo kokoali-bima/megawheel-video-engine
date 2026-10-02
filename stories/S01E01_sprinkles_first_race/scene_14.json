@@ -39,7 +39,10 @@
      "to_x": 24,
      "speed": 4
     }
-   }
+   },
+   "sfx": [
+    "whoosh"
+   ]
   },
   {
    "cam": "wide",
@@ -159,5 +162,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }

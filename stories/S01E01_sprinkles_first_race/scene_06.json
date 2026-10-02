@@ -41,6 +41,9 @@
      "Tomorrow, I start training.",
      "determined"
     ]
+   ],
+   "sfx": [
+    "whoosh"
    ]
   },
   {
@@ -216,5 +219,6 @@
   }
  ],
  "gap": 0.55,
- "tail": 0.8
+ "tail": 0.8,
+ "edge_fade": false
 }
