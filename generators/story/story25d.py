@@ -1697,7 +1697,10 @@ def assemble(ep, aspect):
             ed = json.load(fh)
         tr = [x if isinstance(x, str) else x[0] for x in ed["transitions"]]
         xds = [XF_DUR.get(x, 1.6) if isinstance(x, str) else float(x[1]) for x in ed["transitions"]]
-        if ed.get("ident"):                                        # studio ident before the theme song
+        if ed.get("order"):                                        # e.g. [1, "ident", 0, 2, ...]: cold open first
+            ident = os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))                 if "ident" in ed["order"] else None
+            parts = [ident if x == "ident" else f"scene_{int(x):02d}_{aspect}.mp4" for x in ed["order"]]
+        elif ed.get("ident"):                                      # studio ident before the theme song
             parts = [os.path.basename(make_ident(d, aspect, ed["ident"], logo=ed.get("ident_logo")))] + parts
             tr, xds = ["fade"] + tr, [0.8] + xds
         assert len(tr) == len(parts) - 1, f"edit.json: {len(tr)} transisi untuk {len(parts)} scene"
@@ -1739,6 +1742,21 @@ def assemble(ep, aspect):
                         f"fade=t=in:d=0.6,fade=t=out:st={total - 1.2:.3f}:d=1.2", "-af",
                         f"afade=t=in:d=0.4,afade=t=out:st={total - 1.2:.3f}:d=1.2"] + enc + [out], check=True)
         shutil.rmtree(tmp)
+        chap, t0 = [], 0.0                                         # YouTube chapters (scene "chapter" titles)
+        for i, part in enumerate(parts):
+            start = t0 - (xds[i - 1] / 2 if i else 0.0)
+            t0 += durs[i] - (xds[i] if i < len(xds) else 0.0)
+            if part.startswith("scene_"):
+                title = json.load(open(os.path.join(BASE, "stories", ep, part[:8] + ".json"))).get("chapter")
+                if title:
+                    chap.append((0.0 if not chap else max(0.0, start), title))
+            elif not chap:
+                chap.append((0.0, None))                           # ident: merged into the next chapter
+        if chap and chap[0][1] is None:
+            chap = [(0.0, chap[1][1])] + chap[2:] if len(chap) > 1 else []
+        with open(os.path.join(d, f"{ep}_{aspect}_chapters.txt"), "w") as fh:
+            for st_, title in chap:
+                fh.write(f"{int(st_ // 60)}:{int(st_ % 60):02d} {title}\n")
         print(f"[story] episode {ep} ({aspect}): {len(parts)} scenes, transisi drama -> {out} ({total / 60:.2f} menit)")
         return
     lst = os.path.join(d, f"concat_{aspect}.txt")

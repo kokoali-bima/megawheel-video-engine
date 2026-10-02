@@ -215,5 +215,6 @@
  "gap": 0.65,
  "tail": 1.2,
  "edge_fade": false,
- "race": true
+ "race": true,
+ "chapter": "The Hill Again"
 }

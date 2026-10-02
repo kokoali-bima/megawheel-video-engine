@@ -37,6 +37,25 @@
  },
  "shots": [
   {
+   "teaser": true,
+   "cam": "wide",
+   "lift": 2.0,
+   "hold": 2.8,
+   "cut": "hard",
+   "music": "tense",
+   "eyes": {
+    "sx": 0.62,
+    "sy": 0.3,
+    "r": 14
+   },
+   "fx": [
+    "lightning"
+   ],
+   "sfx": [
+    "thunder"
+   ]
+  },
+  {
    "cam": "ecu",
    "on": "sprinkles",
    "music": "sad",
@@ -184,5 +203,6 @@
  ],
  "gap": 0.65,
  "tail": 1.2,
- "edge_fade": false
+ "edge_fade": false,
+ "chapter": "The Night Everything Changed"
 }
