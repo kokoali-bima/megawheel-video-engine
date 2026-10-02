@@ -1,0 +1,19 @@
+; LAB: Godot FX layer over cairo frames (format stays identical). Rendered with xvfb + Movie Maker.
+config_version=5
+
+[application]
+config/name="MegaWheel FX Layer (lab)"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+
+[physics]
+common/physics_ticks_per_second=120
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
