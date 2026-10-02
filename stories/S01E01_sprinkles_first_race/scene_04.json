@@ -1,5 +1,5 @@
 {
- "title": "Scene 4 - Malam yang sepi",
+ "title": "Scene 4 - Malam yang Sepi",
  "location": "garage",
  "theme_location": "city",
  "time": "night",
@@ -23,7 +23,7 @@
  "shots": [
   {
    "cam": "wide",
-   "hold": 2.8
+   "hold": 2.6
   },
   {
    "cam": "close",
@@ -31,7 +31,43 @@
    "lines": [
     [
      "sprinkles",
-     "Maybe they're right...",
+     "Maybe they're right. I'm just an ice cream truck.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.0,
+   "moves": {
+    "sprinkles": {
+     "to_x": 5.5,
+     "speed": 6
+    }
+   },
+   "sfx": [
+    [
+     "splat",
+     1.0
+    ]
+   ],
+   "fx": [
+    "shake"
+   ],
+   "emote": {
+    "sprinkles": "surprised"
+   }
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "See? I can't even park.",
      "sad"
     ]
    ]
@@ -40,8 +76,8 @@
    "look": {
     "x": -1.6,
     "z": 3.6,
-    "y": 6.1,
-    "zoom": 3.0
+    "y": 3.9,
+    "zoom": 3.2
    },
    "hold": 2.8
   },
@@ -60,15 +96,30 @@
    ]
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 2.0,
+   "emote": {
+    "sprinkles": "cry"
+   }
+  },
+  {
    "look": {
     "x": -1.6,
     "z": 3.6,
-    "y": 6.1,
-    "zoom": 3.6
+    "y": 3.9,
+    "zoom": 4.0
    },
-   "hold": 2.6,
    "photo_glow": true,
-   "music": "warm"
+   "music": "warm",
+   "tail": 1.4,
+   "lines": [
+    [
+     "narrator",
+     "...and she started to remember.",
+     "calm"
+    ]
+   ]
   }
  ]
 }

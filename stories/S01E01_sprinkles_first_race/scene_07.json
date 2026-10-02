@@ -1,122 +1,186 @@
 {
- "title": "Scene 7 - Hari balapan",
- "location": "arena",
- "theme_location": "city",
- "time": "morning",
- "music": "epic",
- "stands_text": "MEGAWHEEL GRAND RACE",
- "finish": 3.2,
+ "title": "Scene 7 - Latihan 2: Bukit",
+ "location": "country",
+ "theme_location": "countryside",
+ "time": "noon",
+ "music": "playful",
+ "hill": {
+  "x0": 6,
+  "x1": 22,
+  "x2": 30,
+  "x3": 44,
+  "h": 5.0
+ },
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": 0,
-   "z": 0.4,
+   "x": -6,
+   "z": 1.0,
    "emo": "determined"
-  },
-  "zippy": {
-   "vk": "sports",
-   "x": 0,
-   "z": 1.3,
-   "emo": "tease"
   },
   "rocky": {
    "vk": "monster",
-   "x": 0,
-   "z": 2.2,
-   "emo": "normal"
-  },
-  "nitro": {
-   "vk": "f1",
-   "x": 0,
-   "z": 3.0,
-   "emo": "normal"
-  },
-  "siren": {
-   "vk": "police",
-   "x": -9,
-   "z": 0.2,
-   "emo": "proud"
+   "x": -20,
+   "z": 2.0,
+   "emo": "normal",
+   "hidden": true
   }
  },
  "shots": [
   {
    "cam": "wide",
-   "sfx": [
-    "cheer"
-   ],
-   "lines": [
-    [
-     "announcer",
-     "Ladies and gentlemen... welcome to the MegaWheel Grand Race!",
-     "excited"
-    ]
-   ]
+   "dx": 6,
+   "hold": 3.4,
+   "calendar": 21,
+   "caption": "WEEK 3",
+   "moves": {
+    "sprinkles": {
+     "to_x": 14,
+     "speed": 6
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "dx": 4,
+   "hold": 2.6,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 2,
+     "speed": 6
+    }
+   }
   },
   {
    "cam": "close",
    "on": "sprinkles",
    "lines": [
     [
-     "announcer2",
-     "And... is that an ice cream truck at the start line?",
-     "surprised"
+     "sprinkles",
+     "I'm too heavy! I'll never make it!",
+     "sad"
     ]
    ]
   },
   {
-   "cam": "ecu",
+   "cam": "wide",
+   "hold": 2.0,
+   "sfx": [
+    "splat"
+   ],
+   "fx": [
+    "shake"
+   ],
+   "emote": {
+    "sprinkles": "surprised"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": -1,
+     "speed": 5
+    }
+   }
+  },
+  {
+   "cam": "two",
    "on": "sprinkles",
-   "music": "sad",
+   "zoom": 1.1,
+   "moves": {
+    "rocky": {
+     "show": true,
+     "x": -8
+    }
+   },
    "lines": [
     [
-     "sprinkles",
-     "For you, Grandpa.",
+     "rocky",
+     "Hey. Stuck in the mud? Hold on, I got you.",
+     "calm"
+    ]
+   ],
+   "with": "rocky"
+  },
+  {
+   "cam": "close",
+   "on": "rocky",
+   "lines": [
+    [
+     "rocky",
+     "You can't climb a hill by stopping halfway. Build your speed BEFORE the hill... and keep rolling.",
      "calm"
     ]
    ]
   },
   {
    "cam": "close",
-   "on": "siren",
+   "on": "sprinkles",
    "lines": [
     [
-     "siren",
-     "Ready... set... let's go!",
-     "excited"
+     "sprinkles",
+     "What if I fail again?",
+     "worried"
     ]
    ]
   },
   {
-   "cam": "track",
-   "on": "nitro",
-   "dx": -6,
-   "hold": 3.6,
-   "speedlines": true,
-   "sfx": [
-    "engine",
+   "cam": "close",
+   "on": "rocky",
+   "emote": {
+    "rocky": "happy"
+   },
+   "lines": [
     [
-     "cheer",
-     0.3
+     "rocky",
+     "Then you get stuck again. Everybody gets stuck sometimes. What matters is you keep rolling.",
+     "calm"
     ]
-   ],
+   ]
+  },
+  {
+   "cam": "wide",
+   "dx": 8,
+   "hold": 4.2,
+   "calendar": 14,
+   "emote": {
+    "sprinkles": "determined"
+   },
    "moves": {
-    "zippy": {
-     "to_x": 80,
-     "speed": 17
-    },
-    "nitro": {
-     "to_x": 80,
-     "speed": 16
+    "sprinkles": {
+     "x": -14,
+     "to_x": 21,
+     "speed": 9
     },
     "rocky": {
-     "to_x": 80,
-     "speed": 13
-    },
+     "show": false
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "dx": 6,
+   "hold": 2.8,
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "moves": {
     "sprinkles": {
-     "to_x": 80,
+     "to_x": 3,
      "speed": 7
     }
    }
+  },
+  {
+   "cam": "wide",
+   "hold": 2.0,
+   "calendar": 7,
+   "music": "sad",
+   "weather_fx": "rain",
+   "sfx": [
+    "thunder"
+   ]
   }
  ]
 }

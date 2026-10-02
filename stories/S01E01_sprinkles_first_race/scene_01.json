@@ -1,5 +1,5 @@
 {
- "title": "Scene 1 - Pembuka (kait)",
+ "title": "Scene 1 - Malam Itu",
  "location": "arena",
  "theme_location": "city",
  "time": "night",
@@ -17,21 +17,22 @@
   "zippy": {
    "vk": "sports",
    "x": 7,
-   "z": 1.8,
+   "z": 1.6,
    "face": -1,
    "emo": "tease"
-  },
-  "rocky": {
-   "vk": "monster",
-   "x": -8,
-   "z": 2.3,
-   "emo": "normal"
   },
   "nitro": {
    "vk": "f1",
    "x": 12,
-   "z": 2.8,
-   "face": -1
+   "z": 2.4,
+   "face": -1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -9,
+   "z": 2.6,
+   "emo": "normal"
   }
  },
  "shots": [
@@ -51,7 +52,7 @@
   {
    "cam": "low",
    "on": "sprinkles",
-   "hold": 2.4,
+   "hold": 2.6,
    "emote": {
     "sprinkles": "determined"
    },
@@ -74,19 +75,45 @@
    ]
   },
   {
+   "cam": "close",
+   "on": "nitro",
+   "lines": [
+    [
+     "nitro",
+     "She'll be gone before the first turn.",
+     "normal"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Not this time.",
+     "determined"
+    ]
+   ]
+  },
+  {
    "cam": "wide",
-   "hold": 3.4,
+   "hold": 3.2,
+   "lift": 3.5,
+   "zoom": 0.85,
    "kraggor": {
-    "mode": "roar",
+    "mode": "rise",
     "sx": 0.68,
-    "sy": 0.47,
-    "scale": 0.85
+    "scale": 0.8
    },
    "sfx": [
-    "roar",
+    "thunder",
     [
-     "thunder",
-     0.4
+     "roar",
+     1.0
     ]
    ],
    "fx": [
@@ -96,21 +123,16 @@
    "emote": {
     "sprinkles": "scared",
     "zippy": "scared",
-    "rocky": "scared"
-   },
-   "lift": 3.5,
-   "zoom": 0.85
+    "nitro": "scared"
+   }
   },
   {
    "cam": "wide",
    "music": "hopeful",
-   "emote": {
-    "sprinkles": "determined"
-   },
    "lines": [
     [
      "narrator",
-     "But this is the story of the day Sprinkles changed everything.",
+     "This is the story of the day Sprinkles changed everything.",
      "calm"
     ]
    ]
@@ -125,10 +147,11 @@
    "cam": "wide",
    "caption": "ONE MONTH EARLIER",
    "music": "warm",
+   "tail": 1.2,
    "lines": [
     [
      "narrator",
-     "It all started one month earlier...",
+     "It all started... one month earlier.",
      "calm"
     ]
    ]

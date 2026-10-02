@@ -1,0 +1,131 @@
+{
+ "title": "OUTRO - See You Next Time",
+ "location": "town",
+ "theme_location": "city",
+ "time": "sunset",
+ "letterbox": false,
+ "song": "branding/music/outro_see_you_mono.wav",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": 0.6,
+   "emo": "happy"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -9,
+   "z": 1.8,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 8,
+   "z": 2.0,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -4,
+   "z": 1.2,
+   "emo": "happy",
+   "patched": 1
+  },
+  "siren": {
+   "vk": "police",
+   "x": 12,
+   "z": 2.8,
+   "emo": "happy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -13,
+   "z": 3.0,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "hold": 4.0,
+   "moves": {
+    "tilly": {
+     "to_x": -40,
+     "speed": 4,
+     "delay": 1.0
+    },
+    "siren": {
+     "to_x": 40,
+     "speed": 4,
+     "delay": 1.5
+    }
+   }
+  },
+  {
+   "cam": "two",
+   "on": "zippy",
+   "zoom": 1.1,
+   "hold": 3.4,
+   "emote": {
+    "zippy": "laugh",
+    "sprinkles": "laugh"
+   },
+   "moves": {
+    "zippy": {
+     "hop": true
+    }
+   },
+   "with": "sprinkles"
+  },
+  {
+   "cam": "two",
+   "on": "buster",
+   "zoom": 0.95,
+   "hold": 3.4,
+   "moves": {
+    "buster": {
+     "to_x": -40,
+     "speed": 3,
+     "delay": 1.4
+    },
+    "rocky": {
+     "to_x": 40,
+     "speed": 3,
+     "delay": 1.8
+    }
+   },
+   "with": "rocky"
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 3.0,
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.0,
+   "card": [
+    "NEXT SUNDAY",
+    "Who is Kraggor?"
+   ]
+  },
+  {
+   "cam": "wide",
+   "endcard": true,
+   "hold": 6.0,
+   "lines": [
+    [
+     "narrator",
+     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+     "calm"
+    ]
+   ]
+  }
+ ]
+}

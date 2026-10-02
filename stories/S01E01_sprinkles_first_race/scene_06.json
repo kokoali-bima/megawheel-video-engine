@@ -1,5 +1,5 @@
 {
- "title": "Scene 6 - Empat minggu latihan",
+ "title": "Scene 6 - Latihan 1: Pelan-pelan",
  "location": "country",
  "theme_location": "countryside",
  "time": "morning",
@@ -7,174 +7,191 @@
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": -10,
+   "x": -12,
    "z": 1.0,
-   "emo": "excited"
-  },
-  "rocky": {
-   "vk": "monster",
-   "x": 9,
-   "z": 2.0,
-   "face": -1,
-   "emo": "normal",
-   "hidden": true
+   "emo": "happy"
   },
   "buster": {
    "vk": "bus",
-   "x": -20,
+   "x": -24,
    "z": 2.2,
    "emo": "normal",
+   "hidden": true
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -40,
+   "z": 2.6,
+   "emo": "tease",
    "hidden": true
   }
  },
  "shots": [
   {
-   "cam": "wide",
-   "calendar": 30,
-   "caption": "WEEK 1",
-   "hold": 2.8,
-   "sfx": [
-    "engine"
-   ],
-   "moves": {
-    "sprinkles": {
-     "to_x": 2,
-     "speed": 6
-    }
-   }
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 1.0,
+   "calendar": 29,
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Tomorrow, I start training.",
+     "determined"
+    ]
+   ]
   },
   {
-   "cam": "medium",
-   "on": "sprinkles",
-   "hold": 2.0,
-   "emote": {
-    "sprinkles": "surprised"
-   },
+   "cam": "wide",
+   "hold": 3.0,
+   "calendar": 29,
+   "caption": "DAY 1",
    "sfx": [
-    "splat"
+    "engine",
+    [
+     "splat",
+     1.8
+    ]
    ],
    "fx": [
     "shake"
    ],
-   "calendar": 27
-  },
-  {
-   "cam": "two",
-   "on": "sprinkles",
-   "zoom": 1.15,
-   "calendar": 25,
+   "emote": {
+    "sprinkles": "surprised"
+   },
    "moves": {
-    "rocky": {
-     "show": true,
-     "x": 8
+    "sprinkles": {
+     "to_x": 4,
+     "speed": 10
     }
    },
    "lines": [
     [
-     "rocky",
-     "You okay?",
-     "calm"
-    ],
-    [
      "sprinkles",
-     "Never better!",
-     "laugh"
+     "Whoa-whoa-WHOA!",
+     "scared"
     ]
-   ],
-   "with": "rocky"
+   ]
   },
   {
    "cam": "two",
    "on": "sprinkles",
-   "zoom": 1.1,
-   "calendar": 21,
-   "caption": "WEEK 2",
-   "music": "warm",
+   "zoom": 1.05,
    "moves": {
     "buster": {
      "show": true,
-     "x": -8
-    },
-    "rocky": {
-     "show": false
+     "x": -4
     }
    },
    "lines": [
     [
      "buster",
-     "You don't have to be the fastest. Just keep going.",
+     "Easy, easy. Why are you rushing?",
      "calm"
+    ],
+    [
+     "sprinkles",
+     "Because everyone else is faster than me!",
+     "sad"
     ]
    ],
    "with": "buster"
   },
   {
+   "cam": "close",
+   "on": "buster",
+   "lines": [
+    [
+     "buster",
+     "Then don't try to be them. Listen to your engine. Start slow... then smooth.",
+     "calm"
+    ]
+   ]
+  },
+  {
    "cam": "track",
    "on": "sprinkles",
-   "calendar": 14,
-   "caption": "WEEK 3",
-   "hold": 3.0,
-   "sfx": [
-    "engine"
-   ],
+   "hold": 3.2,
+   "calendar": 27,
    "emote": {
     "sprinkles": "determined"
    },
    "moves": {
     "sprinkles": {
-     "to_x": 26,
-     "speed": 9
-    },
-    "buster": {
-     "show": false
-    }
-   }
-  },
-  {
-   "cam": "track",
-   "on": "sprinkles",
-   "calendar": 7,
-   "caption": "WEEK 4",
-   "hold": 3.4,
-   "speedlines": true,
-   "music": "hopeful",
-   "moves": {
-    "rocky": {
-     "show": true,
-     "x": 30,
-     "to_x": 44,
-     "speed": 7
-    },
-    "sprinkles": {
-     "to_x": 50,
-     "speed": 10
+     "to_x": 16,
+     "speed": 4
     }
    }
   },
   {
    "cam": "close",
-   "on": "rocky",
-   "music": "hopeful",
+   "on": "sprinkles",
    "emote": {
-    "rocky": "proud"
+    "sprinkles": "laugh"
    },
    "lines": [
     [
-     "rocky",
-     "Okay... now you're a racer.",
-     "proud"
+     "sprinkles",
+     "I didn't spill a single scoop!",
+     "happy"
     ]
    ]
   },
   {
    "cam": "close",
-   "on": "sprinkles",
-   "hold": 1.8,
-   "calendar": "RACE DAY",
+   "on": "buster",
    "emote": {
-    "sprinkles": "happy"
+    "buster": "happy"
    },
-   "music": "hopeful"
+   "lines": [
+    [
+     "buster",
+     "Slow is smooth. Smooth is fast.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.2,
+   "calendar": 25,
+   "moves": {
+    "zippy": {
+     "show": true,
+     "x": -30,
+     "to_x": 50,
+     "speed": 20
+    }
+   },
+   "sfx": [
+    "engine"
+   ],
+   "lines": [
+    [
+     "zippy",
+     "Nice speed, grandma!",
+     "tease"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 40,
+    "z": 5.0,
+    "y": 4.0,
+    "zoom": 1.6
+   },
+   "hold": 2.4,
+   "music": "tense",
+   "lines": [
+    [
+     "sprinkles",
+     "That hill...",
+     "worried"
+    ]
+   ]
   }
  ]
 }

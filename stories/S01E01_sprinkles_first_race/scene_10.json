@@ -1,98 +1,164 @@
 {
- "title": "Scene 10 - Pilihan",
+ "title": "Scene 10 - Bukit Itu Lagi",
  "location": "arena",
  "theme_location": "city",
- "time": "sunset",
- "music": "sad",
+ "time": "noon",
+ "music": "epic",
  "stands_text": "MEGAWHEEL GRAND RACE",
+ "hill": {
+  "x0": 20,
+  "x1": 36,
+  "x2": 46,
+  "x3": 60,
+  "h": 5.0
+ },
  "actors": {
-  "sprinkles": {
-   "vk": "icecream",
-   "x": -5,
-   "z": 0.4,
-   "emo": "worried"
-  },
   "zippy": {
    "vk": "sports",
-   "x": 10,
-   "z": 1.4,
-   "emo": "scared"
+   "x": 8,
+   "z": 1.3,
+   "emo": "tease"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 5,
+   "z": 2.2,
+   "emo": "angry"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 12,
+   "z": 3.0
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -6,
+   "z": 0.4,
+   "emo": "determined"
   }
  },
  "shots": [
   {
-   "cam": "ecu",
-   "on": "sprinkles",
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
-   "tint": "sepia",
-   "emote": {
-    "sprinkles": "sad"
+   "cam": "track",
+   "on": "zippy",
+   "hold": 1.0,
+   "speedlines": true,
+   "moves": {
+    "zippy": {
+     "to_x": 26,
+     "speed": 9
+    },
+    "nitro": {
+     "to_x": 24,
+     "speed": 9
+    }
    },
    "lines": [
     [
-     "grandpa_cone",
-     "A champion is the one who stops... to help someone else.",
+     "announcer",
+     "Zippy takes the lead! Nitro right behind him!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "nitro",
+   "lines": [
+    [
+     "nitro",
+     "Move over, Zippy!",
+     "angry"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "lines": [
+    [
+     "zippy",
+     "In your dreams!",
+     "tease"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "dx": 10,
+   "hold": 3.0,
+   "moves": {
+    "zippy": {
+     "to_x": 34,
+     "speed": 4
+    },
+    "nitro": {
+     "to_x": 31,
+     "speed": 4
+    },
+    "tilly": {
+     "to_x": 30,
+     "speed": 3
+    }
+   }
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "tint": "sepia",
+   "lines": [
+    [
+     "rocky",
+     "Build your speed before the hill... and keep rolling.",
      "calm"
     ]
    ]
   },
   {
    "cam": "wide",
-   "hold": 2.8,
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
+   "dx": 14,
+   "hold": 5.0,
+   "speedlines": true,
    "music": "hopeful",
    "emote": {
     "sprinkles": "determined"
    },
    "moves": {
     "sprinkles": {
-     "to_x": 5,
-     "speed": 4
+     "to_x": 52,
+     "speed": 11
     }
    }
   },
   {
    "cam": "wide",
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
    "music": "hopeful",
    "lines": [
     [
      "announcer2",
-     "She's... going the wrong way?!",
-     "surprised"
+     "Whoa! The ice cream truck is climbing like a rocket!",
+     "excited"
     ]
    ]
   },
   {
-   "cam": "close",
-   "on": "sprinkles",
-   "hold": 2.0,
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
+   "cam": "wide",
+   "hold": 2.4,
+   "music": "tense",
+   "fx": [
+    "shake"
+   ],
    "sfx": [
-    "ding",
+    "stomp",
     [
-     "ding",
-     0.8
+     "stomp",
+     1.0
     ]
    ],
    "emote": {
-    "sprinkles": "determined"
+    "sprinkles": "scared",
+    "zippy": "scared",
+    "nitro": "scared"
    }
   }
  ]

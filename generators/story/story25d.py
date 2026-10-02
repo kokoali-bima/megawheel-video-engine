@@ -318,7 +318,9 @@ def draw_actor(ctx, a, t, camx):
 
 def actor_state(a, t):
     yaw = 0.0 if a["face"] > 0 else math.pi
-    st = (a["x"], a["z"], a["h"], yaw, 0.0, a.get("v", 0.0), a["sq"], 0.0, 0.0, a["patched"], 0.0, 0.0)
+    hh, slope = hill_h(a["x"])
+    pitch = math.atan(slope) * a["face"]
+    st = (a["x"], a["z"], a["h"] + hh, yaw, pitch, a.get("v", 0.0), a["sq"], 0.0, 0.0, a["patched"], 0.0, 0.0)
     a["rec"] = [st, st]
     return st
 
@@ -500,6 +502,70 @@ def draw_podium(ctx, camx):
         sx, gy = pxy(x, 1.0, camx)
         ctx.rectangle(sx - 1.5 * k, gy - hh * k, 3.0 * k, hh * k)
         ctx.set_source_rgb(*se.lit([(0.75, 0.75, 0.8), (1, 0.82, 0.2), (0.8, 0.5, 0.25)][i]))
+        ctx.fill()
+
+
+def hill_h(x):
+    """Height (m) of the scene's hill at x: ramp up x0->x1, plateau to x2, down to x3."""
+    hl = SCENE.get("hill")
+    if not hl:
+        return 0.0, 0.0
+    x0, x1, x2, x3, hh = hl["x0"], hl["x1"], hl["x2"], hl["x3"], hl["h"]
+    if x <= x0 or x >= x3:
+        return 0.0, 0.0
+    if x < x1:
+        f = (x - x0) / (x1 - x0)
+        return hh * f * f * (3 - 2 * f), hh * 6 * f * (1 - f) / (x1 - x0)
+    if x <= x2:
+        return hh, 0.0
+    f = (x - x2) / (x3 - x2)
+    return hh * (1 - f * f * (3 - 2 * f)), -hh * 6 * f * (1 - f) / (x3 - x2)
+
+
+def draw_hill(ctx, camx):
+    hl = SCENE.get("hill")
+    if not hl:
+        return
+    pts_back, pts_front = [], []
+    for i in range(61):
+        x = hl["x0"] + (hl["x3"] - hl["x0"]) * i / 60
+        hh, _ = hill_h(x)
+        pts_back.append((x, hh))
+    k_b, k_f = k_of(3.2), k_of(-0.6)
+    poly = [((x - camx) * k_b + CX, ground_y(3.2) - hh * k_b) for x, hh in pts_back]
+    poly += [((x - camx) * k_f + CX, ground_y(-0.6) - hh * k_f) for x, hh in reversed(pts_back)]
+    se.poly(ctx, poly)
+    ctx.set_source_rgb(*se.lit((0.45, 0.32, 0.2)))                 # earth ramp (the road climbs it)
+    ctx.fill()
+    side = [((x - camx) * k_f + CX, ground_y(-0.6) - hh * k_f) for x, hh in pts_back]
+    side += [((hl["x3"] - camx) * k_f + CX, ground_y(-0.6)), ((hl["x0"] - camx) * k_f + CX, ground_y(-0.6))]
+    se.poly(ctx, side)
+    ctx.set_source_rgb(*se.lit((0.35, 0.25, 0.15)))
+    ctx.fill()
+    edge = [((x - camx) * k_b + CX, ground_y(3.2) - hh * k_b) for x, hh in pts_back]
+    ctx.move_to(*edge[0])
+    for q in edge[1:]:
+        ctx.line_to(*q)
+    ctx.set_source_rgb(*se.lit((0.3, 0.55, 0.25)))
+    ctx.set_line_width(0.5 * k_b)
+    ctx.stroke()
+
+
+def glow_eyes(ctx, t, spec):
+    """A pair of giant yellow eyes glowing in the dark (Kraggor, far away)."""
+    sx, sy, r = spec.get("sx", 0.8) * W, spec.get("sy", 0.3) * H, spec.get("r", 14) * H / 1080
+    if (t * 0.6) % 3.0 < 0.12:                                     # slow blink
+        return
+    for d in (-1, 1):
+        g = cairo.RadialGradient(sx + d * r * 2.4, sy, 0, sx + d * r * 2.4, sy, r * 3)
+        g.add_color_stop_rgba(0, 1, 0.9, 0.2, 0.95)
+        g.add_color_stop_rgba(0.35, 1, 0.8, 0.1, 0.6)
+        g.add_color_stop_rgba(1, 1, 0.8, 0.1, 0.0)
+        ctx.arc(sx + d * r * 2.4, sy, r * 3, 0, 2 * math.pi)
+        ctx.set_source(g)
+        ctx.fill()
+        ctx.arc(sx + d * r * 2.4, sy, r * 0.35, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.85, 0.15, 0.05)
         ctx.fill()
 
 
@@ -926,6 +992,13 @@ def build_audio(shots, placed, total, scene):
             if name in SFX:
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
     mus = np.zeros(n)
+    if scene.get("song"):
+        song = se.read_wav(os.path.join(BASE, scene["song"]))     # theme song (ACE-Step), already mastered
+        place(mus, song[:n], 0.0, 1.0)
+        mix = se.peak(narr) * 0.9 + se.peak(mus) * 0.9 + se.peak(sfx) * 0.4
+        mix = np.tanh(1.1 * mix) / np.tanh(1.1)
+        mix = mix[:int(total * se.SR)]
+        return mix / max(1e-9, np.max(np.abs(mix))) * 0.95
     for sh in shots:                                               # music per shot mood (crossfaded by the pads)
         m = sh.get("music", scene.get("music", "warm"))
         seg = score(m, sh["t1"] - sh["t0"] + 1.0, seed=3)
@@ -962,6 +1035,11 @@ def render_scene(ep, num, aspect):
                                 location=scene.get("theme_location", "city")))
     actors = {aid: make_actor(aid, a) for aid, a in scene["actors"].items()}
     shots, placed, total = build(scene)
+    if scene.get("song"):                                          # intro/outro: the scene lasts as long as the song
+        slen = len(se.read_wav(os.path.join(BASE, scene["song"]))) / se.SR
+        if slen > total:
+            shots[-1]["t1"] += slen - total
+            total = slen
     envs = [(p, envelope(p["audio"])) for p in placed]
     out_dir = os.path.join(BASE, "work", "story", ep)
     prev = os.path.join(out_dir, f"preview_{num:02d}_{aspect}")
@@ -1084,6 +1162,7 @@ def render_scene(ep, num, aspect):
             elif prop["type"] == "podium":
                 draw_podium(ctx, camx)
         draw_props_layer(ctx, loc, camx, 11, back=True)
+        draw_hill(ctx, camx)
         if "finish" in scene:
             draw_finish(ctx, scene["finish"], camx)
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
@@ -1121,6 +1200,8 @@ def render_scene(ep, num, aspect):
                 tspec["target"] = kraggor_mouth(sh["kraggor"], H / 2 + (stands_top_world() - piv_y) * zoom)
             ice_cream_toss(ctx, u, tspec, camx, actors)
         vmax = max([a.get("v", 0.0) for a in actors.values() if not a["hidden"]] + [0.0])
+        if sh.get("eyes"):
+            glow_eyes(ctx, t, sh["eyes"])
         if sh.get("speedlines") and vmax > 6:
             se.draw_speed_lines(ctx, min(26.0, vmax * 1.6), t)
         if sh.get("confetti"):

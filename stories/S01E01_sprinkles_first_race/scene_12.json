@@ -1,63 +1,176 @@
 {
- "title": "Scene 12 - Garis finis",
+ "title": "Scene 12 - Pilihan",
  "location": "arena",
  "theme_location": "city",
  "time": "sunset",
  "music": "sad",
  "stands_text": "MEGAWHEEL GRAND RACE",
- "finish": 20,
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": 4,
+   "x": -5,
    "z": 0.4,
-   "emo": "shy"
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 12.5,
+   "z": 1.4,
+   "emo": "dizzy"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -16,
+   "z": 2.9,
+   "emo": "scared"
   }
  },
  "shots": [
   {
-   "cam": "track",
+   "cam": "ecu",
    "on": "sprinkles",
-   "hold": 4.4,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "tint": "sepia",
+   "emote": {
+    "sprinkles": "sad"
+   },
    "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "lines": [
+    [
+     "grandpa_cone",
+     "A champion is the one who stops... to help someone else.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.0,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "music": "hopeful",
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    },
     "sprinkles": {
-     "to_x": 24,
-     "speed": 4.5
+     "to_x": 5,
+     "speed": 4
     }
    }
   },
   {
    "cam": "wide",
-   "hold": 2.2,
-   "sfx": [
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "music": "hopeful",
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "lines": [
     [
-     "cheer",
-     1.2
+     "announcer2",
+     "She's... going the wrong way?!",
+     "surprised"
     ]
    ]
   },
   {
-   "cam": "wide",
-   "confetti": true,
-   "music": "hopeful",
-   "sfx": [
-    "cheer"
-   ],
-   "emote": {
-    "sprinkles": "happy"
+   "cam": "close",
+   "on": "buster",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
    },
    "lines": [
     [
-     "announcer",
-     "She finished last...",
-     "calm"
-    ],
-    [
-     "announcer2",
-     "...but I think we all know who the real champion is!",
-     "excited"
+     "buster",
+     "Sprinkles, no!",
+     "scared"
     ]
    ]
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.4,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "sfx": [
+    "ding",
+    [
+     "ding",
+     0.8
+    ],
+    [
+     "ding",
+     1.6
+    ]
+   ],
+   "emote": {
+    "sprinkles": "determined"
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 2.6,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "music": "warm",
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.42,
+    "scale": 0.85
+   }
   }
  ]
 }

@@ -1,0 +1,153 @@
+{
+ "title": "INTRO - MegaWheel Arena, Let's Go!",
+ "location": "town",
+ "theme_location": "city",
+ "time": "morning",
+ "letterbox": false,
+ "song": "branding/music/intro_lets_go_mono.wav",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -24,
+   "z": 0.5,
+   "emo": "happy"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -32,
+   "z": 1.6,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -40,
+   "z": 2.4,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -18,
+   "z": 1.1,
+   "emo": "tease"
+  },
+  "siren": {
+   "vk": "police",
+   "x": -46,
+   "z": 2.9,
+   "emo": "happy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -52,
+   "z": 3.2,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "track",
+   "on": "zippy",
+   "dx": 4,
+   "hold": 4.5,
+   "speedlines": true,
+   "moves": {
+    "zippy": {
+     "to_x": 30,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": 30,
+     "speed": 9
+    },
+    "buster": {
+     "to_x": 30,
+     "speed": 8
+    },
+    "rocky": {
+     "to_x": 30,
+     "speed": 9
+    },
+    "siren": {
+     "to_x": 30,
+     "speed": 9
+    },
+    "tilly": {
+     "to_x": 30,
+     "speed": 8
+    }
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "zippy",
+   "hold": 2.2,
+   "emote": {
+    "zippy": "laugh"
+   },
+   "moves": {
+    "zippy": {
+     "hop": true
+    }
+   }
+  },
+  {
+   "cam": "two",
+   "on": "rocky",
+   "zoom": 1.0,
+   "hold": 2.6,
+   "emote": {
+    "rocky": "laugh"
+   },
+   "moves": {
+    "rocky": {
+     "hop": true
+    },
+    "buster": {
+     "hop": true
+    }
+   },
+   "with": "buster"
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.4,
+   "emote": {
+    "sprinkles": "laugh"
+   },
+   "sfx": [
+    "ding"
+   ],
+   "moves": {
+    "sprinkles": {
+     "hop": true
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 3.0,
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.86,
+    "sy": 0.62,
+    "scale": 0.35
+   },
+   "emote": {
+    "siren": "laugh",
+    "tilly": "laugh"
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 4.0,
+   "title": "MEGAWHEEL ARENA",
+   "confetti": true
+  },
+  {
+   "cam": "wide",
+   "hold": 3.5,
+   "caption": "Episode 1: Sprinkles' First Race"
+  }
+ ]
+}

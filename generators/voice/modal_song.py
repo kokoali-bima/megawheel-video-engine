@@ -33,7 +33,10 @@ def _download():
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("ffmpeg", "git", "libsndfile1")
-    .pip_install("git+https://github.com/ace-step/ACE-Step.git", "faster-whisper", "huggingface_hub")
+    # torchaudio >= 2.9 saves through torchcodec (not installed) -> pin the pair ACE-Step was built on
+    .pip_install("torch==2.5.1", "torchaudio==2.5.1")
+    .pip_install("git+https://github.com/ace-step/ACE-Step.git", "faster-whisper", "huggingface_hub",
+                 "torch==2.5.1", "torchaudio==2.5.1")
     .run_function(_download)
 )
 

@@ -1,151 +1,190 @@
 {
- "title": "Scene 9 - KRAGGOR datang",
+ "title": "Scene 9 - Hari Balapan",
  "location": "arena",
  "theme_location": "city",
- "time": "sunset",
- "music": "tense",
+ "time": "morning",
+ "music": "epic",
  "stands_text": "MEGAWHEEL GRAND RACE",
+ "finish": 3.2,
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": -5,
+   "x": 0,
    "z": 0.4,
-   "emo": "scared"
+   "emo": "determined"
   },
   "zippy": {
    "vk": "sports",
-   "x": 10,
-   "z": 1.4,
-   "emo": "scared"
-  },
-  "rocky": {
-   "vk": "monster",
-   "x": 2,
-   "z": 2.3,
-   "emo": "scared"
+   "x": 0,
+   "z": 1.3,
+   "emo": "tease"
   },
   "nitro": {
    "vk": "f1",
-   "x": 6,
+   "x": 0,
+   "z": 2.2,
+   "emo": "normal"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 0,
    "z": 3.0,
-   "emo": "scared"
+   "emo": "happy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": -9,
+   "z": 0.2,
+   "emo": "proud"
   }
  },
  "shots": [
   {
    "cam": "wide",
-   "hold": 3.6,
-   "kraggor": {
-    "mode": "roar",
-    "sx": 0.55,
-    "sy": 0.47,
-    "scale": 0.85
-   },
    "sfx": [
-    "roar",
-    [
-     "gasp",
-     0.5
-    ]
+    "cheer"
    ],
-   "fx": [
-    "shake"
-   ],
-   "lift": 3.5,
-   "zoom": 0.85
-  },
-  {
-   "cam": "wide",
-   "kraggor": {
-    "mode": "calm",
-    "sx": 0.55,
-    "sy": 0.47,
-    "scale": 0.85
-   },
    "lines": [
     [
      "announcer",
-     "Oh no... it's Kraggor!",
-     "scared"
-    ]
-   ],
-   "lift": 3.5,
-   "zoom": 0.85
-  },
-  {
-   "cam": "wide",
-   "hold": 2.2,
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": 0.2
-   },
-   "sfx": [
-    [
-     "stomp",
-     0.6
-    ]
-   ],
-   "fx": [
-    "shake"
-   ],
-   "kraggor": {
-    "mode": "calm",
-    "sx": 0.55,
-    "sy": 0.47,
-    "scale": 0.85
-   },
-   "lift": 3.5,
-   "zoom": 0.85
-  },
-  {
-   "cam": "close",
-   "on": "zippy",
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
-   "lines": [
-    [
-     "zippy",
-     "Help! Somebody HELP!",
-     "scared"
+     "Ladies and gentlemen... welcome to the MegaWheel Grand Race!",
+     "excited"
     ]
    ]
   },
   {
-   "cam": "wide",
-   "hold": 2.6,
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
+   "cam": "close",
+   "on": "sprinkles",
+   "lines": [
+    [
+     "announcer2",
+     "And look at lane four... is that an ice cream truck?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "zippy",
+   "zoom": 1.2,
+   "sfx": [
+    "laugh"
+   ],
+   "emote": {
+    "zippy": "laugh",
+    "nitro": "laugh"
    },
-   "moves": {
-    "rocky": {
-     "to_x": -30,
-     "speed": 11
-    },
-    "nitro": {
-     "to_x": -30,
-     "speed": 13
-    }
-   }
+   "hold": 1.8,
+   "with": "nitro"
+  },
+  {
+   "cam": "wide",
+   "sfx": [
+    "cheer"
+   ],
+   "lines": [
+    [
+     "rocky",
+     "Keep rolling, Sprinkles!",
+     "excited"
+    ]
+   ]
   },
   {
    "cam": "ecu",
    "on": "sprinkles",
-   "hold": 2.2,
    "music": "sad",
-   "foot": {
-    "x": 12.5,
-    "z": 1.4,
-    "at": -5
-   },
-   "emote": {
-    "sprinkles": "worried"
+   "lines": [
+    [
+     "sprinkles",
+     "For you, Grandpa.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "lines": [
+    [
+     "siren",
+     "Ready... set... let's go!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "nitro",
+   "dx": -6,
+   "hold": 3.6,
+   "speedlines": true,
+   "sfx": [
+    "engine",
+    [
+     "cheer",
+     0.3
+    ]
+   ],
+   "moves": {
+    "zippy": {
+     "to_x": 80,
+     "speed": 17
+    },
+    "nitro": {
+     "to_x": 80,
+     "speed": 16
+    },
+    "tilly": {
+     "to_x": 80,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": 40,
+     "speed": 6
+    }
    }
+  },
+  {
+   "cam": "wide",
+   "lines": [
+    [
+     "announcer2",
+     "Number thirteen is... taking it slow?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "hold": 3.0,
+   "moves": {
+    "sprinkles": {
+     "x": 40,
+     "to_x": 62,
+     "speed": 7
+    },
+    "tilly": {
+     "x": 52,
+     "to_x": 58,
+     "speed": 3
+    }
+   }
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "emote": {
+    "sprinkles": "laugh"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "I passed someone!",
+     "happy"
+    ]
+   ]
   }
  ]
 }

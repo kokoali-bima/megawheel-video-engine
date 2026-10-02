@@ -1,0 +1,67 @@
+{
+ "title": "Scene 15b - Penutup & kait",
+ "location": "country",
+ "theme_location": "mountains",
+ "time": "night",
+ "music": "warm",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -4,
+   "z": 0.8,
+   "face": 1,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "wide",
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.78,
+    "sy": 0.62,
+    "scale": 0.32
+   },
+   "lines": [
+    [
+     "narrator",
+     "That day, Sprinkles didn't win the race. She won something better.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "music": "sad",
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.83,
+    "sy": 0.63,
+    "scale": 0.28
+   },
+   "lines": [
+    [
+     "narrator",
+     "But who is Kraggor... and why is he so alone?",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "card": [
+    "NEXT SUNDAY",
+    "Who is Kraggor?"
+   ],
+   "hold": 3.0,
+   "music": "tense",
+   "lines": [
+    [
+     "narrator",
+     "Find out next Sunday, on MegaWheel Arena.",
+     "calm"
+    ]
+   ]
+  }
+ ]
+}

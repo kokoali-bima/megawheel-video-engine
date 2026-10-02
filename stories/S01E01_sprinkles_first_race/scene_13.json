@@ -1,5 +1,5 @@
 {
- "title": "Scene 13 - Rival jadi teman",
+ "title": "Scene 13 - Es Krim Jumbo",
  "location": "arena",
  "theme_location": "city",
  "time": "sunset",
@@ -8,34 +8,136 @@
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": 0,
-   "z": 0.6,
-   "emo": "happy"
+   "x": 5,
+   "z": 0.4,
+   "emo": "scared"
   },
   "zippy": {
    "vk": "sports",
-   "x": 6.5,
-   "z": 1.2,
-   "face": -1,
-   "emo": "shy"
-  },
-  "buster": {
-   "vk": "bus",
-   "x": -9,
-   "z": 1.9,
-   "emo": "normal"
+   "x": 12.5,
+   "z": 1.4,
+   "emo": "dizzy"
   }
  },
  "shots": [
   {
+   "cam": "close",
+   "on": "sprinkles",
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "H-hey, big guy... you like that song? Want some ice cream?",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 2.4,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.42,
+    "scale": 0.85
+   },
+   "toss": {
+    "from": "sprinkles",
+    "at": 0.3,
+    "dur": 1.4,
+    "jumbo": true
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 3.0,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "dizzy": true
+    }
+   },
+   "music": "playful",
+   "sfx": [
+    "laugh"
+   ],
+   "kraggor": {
+    "mode": "munch",
+    "sx": 0.42,
+    "scale": 0.85
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 2.6,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "foot": {
+    "x": 12.5,
+    "z": 1.4,
+    "at": -5,
+    "stay": 5.6
+   },
+   "music": "playful",
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.42,
+    "scale": 0.85
+   },
+   "moves": {
+    "zippy": {
+     "squash": 0.42,
+     "hold": 0.8,
+     "patched": true
+    }
+   },
+   "emote": {
+    "zippy": "surprised"
+   }
+  },
+  {
    "cam": "two",
    "on": "zippy",
    "zoom": 1.3,
+   "moves": {
+    "zippy": {
+     "patched": true
+    }
+   },
    "lines": [
     [
      "zippy",
-     "Sprinkles... I was wrong about you. You've got more guts than all of us.",
-     "shy"
+     "You... you saved me. Why?",
+     "sad"
     ]
    ],
    "with": "sprinkles"
@@ -43,48 +145,53 @@
   {
    "cam": "close",
    "on": "sprinkles",
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "moves": {
+    "zippy": {
+     "patched": true
+    }
+   },
    "lines": [
     [
      "sprinkles",
-     "Want some ice cream?",
-     "happy"
+     "Because that's what champions do.",
+     "proud"
     ]
    ]
   },
   {
-   "cam": "close",
-   "on": "zippy",
-   "lines": [
-    [
-     "zippy",
-     "...Strawberry, please.",
-     "laugh"
-    ]
-   ]
-  },
-  {
-   "cam": "two",
-   "on": "buster",
-   "zoom": 1.15,
-   "music": "hopeful",
-   "lines": [
-    [
-     "buster",
-     "Your grandpa would be so proud.",
-     "calm"
-    ]
-   ],
-   "with": "sprinkles"
-  },
-  {
-   "look": {
-    "x": 0,
-    "z": 4.0,
-    "y": 13.0,
-    "zoom": 1.5
+   "cam": "wide",
+   "hold": 2.2,
+   "lift": 3.5,
+   "zoom": 0.85,
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.42,
+    "scale": 0.85
    },
-   "hold": 3.0,
-   "music": "hopeful"
+   "moves": {
+    "zippy": {
+     "patched": true
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "moves": {
+    "zippy": {
+     "patched": true
+    }
+   },
+   "music": "sad",
+   "lines": [
+    [
+     "announcer",
+     "And the race... is over?",
+     "surprised"
+    ]
+   ]
   }
  ]
 }
