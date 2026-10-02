@@ -221,5 +221,8 @@
  ],
  "gap": 0.55,
  "tail": 0.8,
- "edge_fade": false
+ "edge_fade": false,
+ "context": [
+  "jingle"
+ ]
 }

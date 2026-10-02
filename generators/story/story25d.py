@@ -918,7 +918,8 @@ def cam_for(shot, actors, t, u):
     if kind == "medium":                                           # whole vehicle, roomy
         return on["x"] + bw * 0.1 * on["face"] * on["small"], min(shot.get("zoom", 1.6), 0.55 * fit), body_y
     if kind == "close":                                            # whole vehicle, face side favoured (cinematic)
-        z_c = min(shot.get("zoom", 2.8), 0.78 * fit)
+        tall = (ride + bh / 2 + 0.6) * on["small"] * k             # tall vehicles (monster truck) fit by height
+        z_c = min(shot.get("zoom", 2.8), 0.78 * fit, 0.62 * H / tall)
         return on["x"] + bw * 0.12 * on["face"] * on["small"], z_c, 0.6 * body_y + 0.4 * face_y
     if kind == "ecu":
         return face_x, shot.get("zoom", 5.0) * (1 + 0.04 * u), face_y

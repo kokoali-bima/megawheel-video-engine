@@ -84,7 +84,7 @@
     },
     "nitro": {
      "show": true,
-     "to_x": -13,
+     "to_x": -17,
      "speed": 4
     }
    }
@@ -183,7 +183,7 @@
    "cam": "close",
    "on": "sprinkles",
    "hold": 3.0,
-   "caption": "RACE NUMBER 13",
+   "caption": "RACE NUMBER #13",
    "sfx": [
     "ding"
    ],

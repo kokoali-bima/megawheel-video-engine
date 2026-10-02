@@ -21,13 +21,13 @@
   },
   "nitro": {
    "vk": "f1",
-   "x": 5,
+   "x": 1,
    "z": 2.2,
    "emo": "angry"
   },
   "tilly": {
    "vk": "taxi",
-   "x": 12,
+   "x": -12,
    "z": 3.0
   },
   "sprinkles": {
@@ -49,7 +49,7 @@
      "speed": 9
     },
     "nitro": {
-     "to_x": 24,
+     "to_x": 19,
      "speed": 9
     }
    },
@@ -98,11 +98,11 @@
      "speed": 4
     },
     "nitro": {
-     "to_x": 31,
+     "to_x": 27,
      "speed": 4
     },
     "tilly": {
-     "to_x": 30,
+     "to_x": 20,
      "speed": 3
     }
    }
@@ -155,7 +155,8 @@
    "emote": {
     "sprinkles": "scared"
    },
-   "triple": true
+   "triple": true,
+   "roll": 6
   },
   {
    "cam": "wide",

@@ -8,37 +8,37 @@
  "actors": {
   "sprinkles": {
    "vk": "icecream",
-   "x": -24,
+   "x": -52,
    "z": 0.5,
    "emo": "happy"
   },
   "buster": {
    "vk": "bus",
-   "x": -32,
+   "x": -34,
    "z": 1.6,
    "emo": "happy"
   },
   "rocky": {
    "vk": "monster",
-   "x": -40,
+   "x": -24,
    "z": 2.4,
    "emo": "happy"
   },
   "zippy": {
    "vk": "sports",
-   "x": -18,
+   "x": -44,
    "z": 1.1,
    "emo": "tease"
   },
   "siren": {
    "vk": "police",
-   "x": -46,
+   "x": -16,
    "z": 2.9,
    "emo": "happy"
   },
   "tilly": {
    "vk": "taxi",
-   "x": -52,
+   "x": -8,
    "z": 3.2,
    "emo": "happy"
   }
@@ -46,33 +46,33 @@
  "shots": [
   {
    "cam": "track",
-   "on": "zippy",
+   "on": "rocky",
    "dx": 4,
    "hold": 4.5,
    "speedlines": true,
    "moves": {
     "zippy": {
-     "to_x": 30,
+     "to_x": 16,
      "speed": 12
     },
     "sprinkles": {
-     "to_x": 30,
+     "to_x": 8,
      "speed": 9
     },
     "buster": {
-     "to_x": 30,
+     "to_x": 26,
      "speed": 8
     },
     "rocky": {
-     "to_x": 30,
+     "to_x": 36,
      "speed": 9
     },
     "siren": {
-     "to_x": 30,
+     "to_x": 44,
      "speed": 9
     },
     "tilly": {
-     "to_x": 30,
+     "to_x": 52,
      "speed": 8
     }
    },
@@ -139,13 +139,15 @@
    "emote": {
     "siren": "laugh",
     "tilly": "laugh"
-   }
+   },
+   "zoom": 0.42
   },
   {
    "cam": "wide",
    "hold": 4.0,
    "title": "MEGAWHEEL ARENA",
-   "confetti": true
+   "confetti": true,
+   "zoom": 0.42
   }
  ],
  "edge_fade": false

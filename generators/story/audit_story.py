@@ -95,6 +95,7 @@ def audit_scene(path, out):
     name = os.path.basename(path)
     texts = " ".join(ln[1].lower() for sh in sc["shots"] for ln in sh.get("lines", []))
     sfx_all = {x if isinstance(x, str) else x[0] for sh in sc["shots"] for x in sh.get("sfx", [])}
+    sfx_all |= set(sc.get("context", []))                         # established in the previous scene
     notes = " ".join(str(sh.get(k, "")) for sh in sc["shots"] for k in ("note", "caption")).lower()
     props = {p["type"] for p in sc.get("props", [])}
     for kw, (need, kind) in KEYWORDS.items():
