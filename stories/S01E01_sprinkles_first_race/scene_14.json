@@ -15,7 +15,7 @@
   },
   "zippy": {
    "vk": "sports",
-   "x": 30,
+   "x": 30.5,
    "z": 1.2,
    "face": -1,
    "emo": "shy",
@@ -36,11 +36,13 @@
    "hold": 4.4,
    "moves": {
     "sprinkles": {
-     "to_x": 24,
+     "to_x": 25.0,
      "speed": 4
     }
    },
-   "sfx": []
+   "sfx": [
+    "whoosh"
+   ]
   },
   {
    "cam": "wide",
@@ -81,7 +83,7 @@
    "zoom": 1.3,
    "moves": {
     "zippy": {
-     "to_x": 29,
+     "to_x": 30.2,
      "speed": 2
     }
    },
@@ -119,12 +121,12 @@
   {
    "cam": "two",
    "on": "buster",
-   "zoom": 1.0,
+   "zoom": 0.8,
    "music": "hopeful",
    "moves": {
     "buster": {
      "show": true,
-     "x": 15
+     "x": 12
     }
    },
    "lines": [
@@ -134,7 +136,7 @@
      "calm"
     ]
    ],
-   "with": "sprinkles"
+   "with": "zippy"
   },
   {
    "cam": "ecu",

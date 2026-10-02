@@ -86,7 +86,7 @@
    "hold": 2.4,
    "lift": 2.0,
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": 0.2
    },
@@ -113,13 +113,14 @@
    },
    "emote": {
     "zippy": "dizzy"
-   }
+   },
+   "note": "STOMP! Kraggor's giant foot lands on Zippy!"
   },
   {
-   "cam": "close",
+   "cam": "medium",
    "on": "zippy",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -138,13 +139,14 @@
      "Help... somebody... help!",
      "scared"
     ]
-   ]
+   ],
+   "zoom": 1.0
   },
   {
-   "cam": "close",
+   "cam": "medium",
    "on": "nitro",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -160,13 +162,14 @@
      "Every car for himself!",
      "scared"
     ]
-   ]
+   ],
+   "zoom": 1.0
   },
   {
    "cam": "wide",
    "hold": 2.6,
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -191,7 +194,7 @@
    "hold": 3.0,
    "music": "sad",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },

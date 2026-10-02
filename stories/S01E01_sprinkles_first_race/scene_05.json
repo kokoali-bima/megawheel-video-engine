@@ -49,7 +49,7 @@
    "hold": 4.0,
    "caption": "MANY YEARS AGO",
    "sfx": [
-    "whoosh",
+    "memory",
     [
      "engine",
      1.2
@@ -73,7 +73,7 @@
    }
   },
   {
-   "cam": "low",
+   "cam": "two",
    "on": "little_sprinkles",
    "emote": {
     "little_sprinkles": "excited"
@@ -89,7 +89,9 @@
      "Grandpa! Look how fast they go!",
      "excited"
     ]
-   ]
+   ],
+   "zoom": 1.0,
+   "with": "grandpa_cone"
   },
   {
    "cam": "two",

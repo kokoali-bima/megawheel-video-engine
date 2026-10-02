@@ -41,9 +41,7 @@
    "cam": "wide",
    "hold": 2.6,
    "calendar": 7,
-   "sfx": [
-    "whoosh"
-   ]
+   "sfx": []
   },
   {
    "cam": "close",

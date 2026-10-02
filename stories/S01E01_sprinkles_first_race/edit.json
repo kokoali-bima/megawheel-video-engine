@@ -3,7 +3,7 @@
  "transitions": [
   [
    "fade",
-   2.0
+   2.6
   ],
   "fadewhite",
   "smoothleft",

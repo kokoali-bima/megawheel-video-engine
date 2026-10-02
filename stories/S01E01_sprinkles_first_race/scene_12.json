@@ -22,7 +22,8 @@
    "vk": "bus",
    "x": -16,
    "z": 2.9,
-   "emo": "scared"
+   "emo": "scared",
+   "hidden": true
   }
  },
  "shots": [
@@ -30,7 +31,7 @@
    "cam": "ecu",
    "on": "sprinkles",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -52,14 +53,15 @@
     ]
    ],
    "sfx": [
+    "whoosh",
     "heartbeat"
    ]
   },
   {
-   "cam": "wide",
+   "cam": "two",
    "hold": 3.0,
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -76,12 +78,15 @@
      "to_x": 5,
      "speed": 4
     }
-   }
+   },
+   "on": "sprinkles",
+   "zoom": 0.8,
+   "with": "zippy"
   },
   {
-   "cam": "wide",
+   "cam": "two",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -99,13 +104,16 @@
      "surprised"
     ]
    ],
-   "punch": true
+   "punch": true,
+   "on": "sprinkles",
+   "zoom": 0.8,
+   "with": "zippy"
   },
   {
    "cam": "close",
    "on": "buster",
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -113,6 +121,9 @@
     "zippy": {
      "squash": 0.42,
      "dizzy": true
+    },
+    "buster": {
+     "show": true
     }
    },
    "lines": [
@@ -137,7 +148,7 @@
    "on": "sprinkles",
    "hold": 8.6,
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
@@ -161,7 +172,7 @@
    "lift": 3.5,
    "zoom": 0.85,
    "foot": {
-    "x": 12.5,
+    "x": 15.1,
     "z": 1.4,
     "at": -5
    },
