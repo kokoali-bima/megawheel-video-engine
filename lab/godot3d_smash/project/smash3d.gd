@@ -525,6 +525,13 @@ func _physics_process(delta: float) -> void:
 		for w in c["wheels"]:
 			w.flip_h = c["spr"].flip_h
 			w.rotation.z -= v.x * delta / 0.5
+	if OS.get_cmdline_user_args().has("debug") and Engine.get_physics_frames() % 120 == 0:
+		var line = "t=%.1f" % t
+		for c in cars:
+			if is_instance_valid(c["body"]):
+				var bp = c["body"].global_position
+				line += " | %s (%.1f,%.1f,%.1f) v=%.1f hp=%d" % [c["nick"], bp.x, bp.y, bp.z, c["body"].linear_velocity.length(), c["hp"]]
+		print(line)
 	for ch in chaos:
 		if ch[0] > 0 and t >= ch[0] and alive.size() > 1:
 			ch[0] = -1.0
