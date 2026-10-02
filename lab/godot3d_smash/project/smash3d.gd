@@ -253,6 +253,7 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	body.contact_monitor = true
 	body.max_contacts_reported = 4
 	body.continuous_cd = true
+	body.can_sleep = false                               # a sleeping body ignores the drive force
 	var pm = PhysicsMaterial.new()
 	pm.friction = 0.8
 	pm.bounce = 0.25
