@@ -1771,6 +1771,9 @@ def assemble(ep, aspect):
         # low-RAM build: every clip is split into body + head/tail; each transition is rendered from just two short
         # pieces (xfade), then all pieces are joined with the concat demuxer (same codec settings everywhere)
         durs = [dur_of(os.path.join(d, p)) for p in parts]
+        for i, p in enumerate(parts):                              # each part must outlast its two transitions
+            need = (xds[i - 1] if i else 0.0) + (xds[i] if i < len(xds) else 0.0)
+            assert durs[i] > need + 0.1, f"{p}: {durs[i]:.2f}s < transisi {need:.2f}s (perpanjang klip / perpendek transisi)"
         tmp = os.path.join(d, "xf")
         os.makedirs(tmp, exist_ok=True)
         enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
