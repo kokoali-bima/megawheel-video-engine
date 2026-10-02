@@ -60,7 +60,8 @@ def main():
     place(se.tone(990, 0.22, "sine", decay=0.12), 1.2, 0.6)
     bgm = se.synth_bgm(dur + 1, style=se.th_time()["music"])
     bgm = np.pad(bgm, (0, max(0, n - len(bgm))))[:n]
-    mix = se.peak(bgm) * 0.35 + (se.peak(sfx) * 0.9 if np.any(sfx) else 0)
+    mix = se.peak(bgm) * 0.35 + (se.peak(sfx) * 0.9 if np.max(np.abs(sfx)) > 1e-6 else 0)
+    mix = np.nan_to_num(mix)
     mix = np.tanh(1.2 * mix) / np.tanh(1.2)
     mix = mix[:int(dur * se.SR)]
     wav = a.out.replace(".mp4", ".wav")

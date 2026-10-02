@@ -28,6 +28,10 @@ var slow_until = -1.0
 var winner = null
 var chaos = [[6.0, "missile"], [11.5, "kraggor"], [16.5, "missile"], [22.0, "missile"], [27.0, "kraggor"]]
 var rng = RandomNumberGenerator.new()
+var CAM_FOV = 46.0
+var CAM_Y = 11.0
+var CAM_Z = -17.0
+var LOOK_Z = 5.6
 
 
 func vt() -> float:
@@ -39,6 +43,11 @@ func _ready() -> void:
 	var a = OS.get_cmdline_user_args()
 	if a.size() > 0:
 		sprite_dir = a[0]
+	if a.size() > 4:
+		CAM_FOV = float(a[1])
+		CAM_Y = float(a[2])
+		CAM_Z = float(a[3])
+		LOOK_Z = float(a[4])
 	cast = JSON.parse_string(FileAccess.open(sprite_dir + "/cast.json", FileAccess.READ).get_as_text())["cars"]
 	font = FontFile.new()
 	font.load_dynamic_font("/root/.fonts/LuckiestGuy-Regular.ttf")
@@ -63,10 +72,10 @@ func _ready() -> void:
 	for r in roster:
 		cars.append(_car(r[0], r[1], r[2], r[3]))
 	cam = Camera3D.new()
-	cam.fov = 70.0
-	cam.position = Vector3(0, 13.0, -14.0)
+	cam.fov = CAM_FOV
+	cam.position = Vector3(0, CAM_Y, CAM_Z)
 	add_child(cam)
-	cam.look_at(Vector3(0, 0, 4.2), Vector3.UP)
+	cam.look_at(Vector3(0, 0, LOOK_Z), Vector3.UP)
 	cam.make_current()
 	_hud()
 
@@ -86,7 +95,7 @@ func _environment() -> void:
 	env.ambient_light_energy = 0.8
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
-	env.glow_intensity = 0.9
+	env.glow_intensity = 0.45
 	env.glow_bloom = 0.15
 	var we = WorldEnvironment.new()
 	we.environment = env
@@ -144,9 +153,9 @@ void fragment() {
 	vec3 w = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec2 g = abs(fract(w.xz / 1.6) - 0.5);
 	float line = step(0.47, max(g.x, g.y));
-	ALBEDO = mix(vec3(0.48, 0.5, 0.55), vec3(0.32, 0.33, 0.37), line);
-	ROUGHNESS = 0.6;
-	METALLIC = 0.3;
+	ALBEDO = mix(vec3(0.36, 0.37, 0.41), vec3(0.24, 0.25, 0.28), line);
+	ROUGHNESS = 0.8;
+	METALLIC = 0.05;
 }
 """
 	var fm = ShaderMaterial.new()
@@ -218,10 +227,11 @@ func _stands() -> void:
 	var banner = Label3D.new()
 	banner.text = "SMASH ARENA"
 	banner.font = font
-	banner.font_size = 220
+	banner.font_size = 150
 	banner.outline_size = 30
 	banner.modulate = Color(1, 0.86, 0.12)
-	banner.position = Vector3(0, 6.9, 22.6)
+	banner.position = Vector3(0, 4.0, 13.0)
+	banner.rotation_degrees = Vector3(0, 180, 0)
 	banner.pixel_size = 0.012
 	add_child(banner)
 
@@ -335,7 +345,7 @@ func _flash(pos: Vector3, energy: float, rng_m: float, col: Color, fade: float) 
 	o.light_color = col
 	o.light_energy = energy
 	o.omni_range = rng_m
-	o.shadow_enabled = true
+	o.shadow_enabled = energy >= 6.0
 	add_child(o)
 	var tw = create_tween()
 	tw.tween_property(o, "light_energy", 0.0, fade)
@@ -643,10 +653,10 @@ func _process(_d: float) -> void:
 	if xs.size() > 0:
 		var cx = (xs.max() + xs.min()) / 2.0
 		var spread = xs.max() - xs.min() + 8.0
-		var dist = clampf(spread / 26.0, 0.6, 1.0)
-		var want = Vector3(cx * 0.8, 13.0 * dist + 2.0, -14.0 * dist + 2.0)
+		var dist = clampf(spread / 26.0, 0.75, 1.0)
+		var want = Vector3(cx * 0.7, CAM_Y * dist, LOOK_Z + (CAM_Z - LOOK_Z) * dist)
 		cam.position = cam.position.lerp(want, 0.04)
-		cam.look_at(Vector3(cx * 0.8, 0, 4.2), Vector3.UP)
+		cam.look_at(Vector3(cx * 0.7, 0, LOOK_Z), Vector3.UP)
 	shake *= 0.86
 	cam.h_offset = randf_range(-shake, shake)
 	cam.v_offset = randf_range(-shake, shake)
