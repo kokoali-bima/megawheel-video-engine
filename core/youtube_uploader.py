@@ -107,7 +107,8 @@ class YouTubeUploader:
         category_id: str = "1",  # 1: Film & Animation (MegaWheel Arena default)
         privacy_status: str = "unlisted",  # 'unlisted', 'private', 'public'
         made_for_kids: bool = False,  # general-audience channel (BLUEPRINT rule 7)
-        publish_at: Optional[str] = None  # ISO-8601 UTC ("2026-10-01T15:00:00Z"): YouTube publishes it then
+        publish_at: Optional[str] = None,  # ISO-8601 UTC ("2026-10-01T15:00:00Z"): YouTube publishes it then
+        shorts: bool = True  # False for long-form episodes (story15): no #Shorts added
     ) -> Dict[str, Any]:
         """
         Upload a Shorts video to YouTube with resumable chunking.
@@ -117,9 +118,9 @@ class YouTubeUploader:
             raise FileNotFoundError(f"Video file not found: {video_path}")
 
         # Ensure #Shorts is present in title or description
-        if "#Shorts" not in title and "#shorts" not in title:
+        if shorts and "#Shorts" not in title and "#shorts" not in title:
             title = f"{title} #Shorts"
-        if "#Shorts" not in description:
+        if shorts and "#Shorts" not in description:
             description = f"{description}\n\n#Shorts #YouTubeShorts"
 
         tags = tags or ["Shorts", "Car Crash", "Physics Simulation", "MegaWheel Arena"]

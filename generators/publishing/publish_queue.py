@@ -34,6 +34,8 @@ SLOTS = [(11, 0), (15, 0), (19, 0)]      # ET: late morning, after school, eveni
 RACE_SERIES = {"race25d"}
 SMASH_SERIES = {"smash25d"}
 LONG_SERIES = {"story15"}                 # weekly long-form series id (reserved)
+PROMO_SERIES = {"story15_trailer"}        # trailer Short of a long episode: OWN fixed time ("publish_at_et" in the
+                                          # registry entry), extra to the 3 daily slots (user 2026-10-02: Sat 17:00 ET)
 WEEKLY_LONG_SLOT = (6, 13)                # Sunday (weekday 6), 13:00 ET = Monday 00:00 WIB: long-form only
 LONG_HM = (13, 0)
 
@@ -49,11 +51,11 @@ def slot_role(t_utc):
 
 def role_of(series):
     return ("race" if series in RACE_SERIES else "smash" if series in SMASH_SERIES
-            else "long" if series in LONG_SERIES else "short")
+            else "long" if series in LONG_SERIES else "promo" if series in PROMO_SERIES else "short")
 
 
 SLOT_ROLES_OF = {"race": {"race"}, "smash": {"smash"}, "short": {"short"}, "long": {"long"}}
-PLAN_ORDER = {"race": 0, "long": 1, "smash": 2, "short": 3}
+PLAN_ORDER = {"race": 0, "long": 1, "smash": 2, "short": 3, "promo": 4}
 ROLE_NAME = {"short": "CHALLENGE (11:00 ET)", "race": "RACE race25d (15:00 ET)", "smash": "SMASH smash25d (19:00 ET)"}
 STOCK_DAYS = 7
 
@@ -111,7 +113,16 @@ def plan(start):
     start_day = start or now.astimezone(NY).date()
     gens = {r: next_slots(start_day, taken, now, SLOT_ROLES_OF[r]) for r in SLOT_ROLES_OF}
     for e in todo:
-        slot = next(gens[role_of(e.get("series", ""))])
+        if role_of(e.get("series", "")) == "promo":                # fixed extra time, never a regular slot
+            if not e.get("publish_at_et"):
+                print(f"[queue] SKIP Ep. {e['episode']}: trailer tanpa publish_at_et")
+                continue
+            slot = dt.datetime.fromisoformat(e["publish_at_et"]).replace(tzinfo=NY).astimezone(dt.timezone.utc)
+            if slot <= now + dt.timedelta(hours=2) or slot in taken:
+                print(f"[queue] SKIP Ep. {e['episode']}: waktu trailer {e['publish_at_et']} ET lewat/bentrok")
+                continue
+        else:
+            slot = next(gens[role_of(e.get("series", ""))])
         taken.add(slot)
         t = slot.strftime("%Y-%m-%dT%H:%M:%SZ")
         if e["episode"] in old and old[e["episode"]] != t:
@@ -185,7 +196,8 @@ def upload(max_n):
             res = uploader.upload_shorts(video_path=f"{folder}/{e['video_id']}.mp4", title=m["title"],
                                          description=episodes.with_credit(m["description"]), tags=m["tags"],
                                          category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
-                                         made_for_kids=False, publish_at=it["publish_at_utc"])
+                                         made_for_kids=False, publish_at=it["publish_at_utc"],
+                                         shorts=role_of(e.get("series", "")) != "long")
         except Exception as ex:                                  # stop the run; the next run checks YouTube first
             print(f"[queue] STOP: upload Ep. {it['episode']} gagal ({ex}). Item tetap UPLOADING; run berikutnya "
                   f"mengecek channel dulu (tidak upload ulang tanpa cek).", flush=True)

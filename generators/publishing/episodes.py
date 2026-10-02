@@ -97,13 +97,34 @@ def _move(e, new_rel):
     return new_abs
 
 
+STORY_SERIES = {"story15": 1000, "story15_trailer": 1500}   # registry episode = base + story episode number
+STORY_EP_BASE = 1000
+
+
+def _approve_story(e):
+    """Long-form episode (story15) or its trailer Short: episode = 1000/1500 + story number; the title is kept as
+    written (no 'Ep. N' of the Shorts numbering; #Shorts only on the trailer)."""
+    ep = STORY_SERIES[e["series"]] + int(e["story_episode"])
+    if by_episode(ep):
+        raise SystemExit(f"[episodes] STOP: episode {ep} sudah ada")
+    new_rel = f"renders/megawheel_arena/S01/STORY_{ep}_{e.get('render_date', _today())}_{e['series']}"
+    new_abs = _move(e, new_rel)
+    m = _update_manifest(new_abs, e["video_id"], episode=ep, season=1, status="APPROVED", approved_date=_today())
+    registry.update(e["video_id"], status="APPROVED", episode=ep, season=1, folder=new_rel,
+                    audit=f"{new_rel}/{e['video_id']}_audit.md", approved_date=_today(), title=m["title"])
+    print(f"[episodes] APPROVED {e['video_id']} -> story {ep}: {m['title']}")
+    return ep
+
+
 def approve(video_id):
     e = registry.get(video_id)
     if not e:
         raise SystemExit(f"[episodes] STOP: {video_id} tidak ada di registry")
     if e.get("status") != "RENDERED_PENDING_APPROVAL":
         raise SystemExit(f"[episodes] STOP: {video_id} berstatus {e.get('status')}, bukan RENDERED_PENDING_APPROVAL")
-    eps = episodes()
+    if e["series"] in STORY_SERIES:                              # long episode / its trailer: own numbering
+        return _approve_story(e)
+    eps = [x for x in episodes() if x["episode"] < STORY_EP_BASE]  # Shorts numbering stays gap-free
     ep = (eps[-1]["episode"] + 1) if eps else 1
     season = (ep - 1) // SEASON_SIZE + 1
     new_rel = f"renders/megawheel_arena/S{season:02d}/E{ep:03d}_{e.get('render_date', _today())}_{e['series']}"
