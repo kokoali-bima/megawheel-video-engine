@@ -2032,14 +2032,16 @@
         "story15"
       ],
       "duration": null,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-02_story15_e01",
-      "audit": "renders/megawheel_arena/pending/2026-10-02_story15_e01/2026-10-02_story15_e01_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15",
+      "audit": "renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15/2026-10-02_story15_e01_audit.md",
+      "episode": 1001,
+      "season": 1,
       "upload_date": null,
       "youtube_url": null,
-      "story_episode": 1
+      "story_episode": 1,
+      "approved_date": "2026-10-02",
+      "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1"
     },
     {
       "video_id": "2026-10-02_story15_trailer_e01",

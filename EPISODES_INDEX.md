@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-02 15:12) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-02 15:50) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -43,6 +43,7 @@
 | 27 | `SIM_SMASH25D_V4_S012` | smash25d | APPROVED | Wed 2026-10-07 19:00 |  |
 | 28 | `SIM_SMASH25D_V4_S014` | smash25d | APPROVED | Thu 2026-10-08 19:00 |  |
 | 29 | `SIM_SMASH25D_V4_S015` | smash25d | APPROVED | Fri 2026-10-09 19:00 |  |
+| 1001 | `2026-10-02_story15_e01` | story15 | APPROVED | Sun 2026-10-04 13:00 |  |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | APPROVED | Sat 2026-10-03 17:00 |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
@@ -420,6 +421,19 @@
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p4+ring; Level 2: Grizzly (monster2) → win; Level 3 (juara): Nitro (f1) → p3+ring; Level 4: Zippy (sports) → p2+wreck
 - **Status:** APPROVED (approve 2026-10-01)
 - **Antrian:** QUEUED 2026-10-09T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 1001 — `2026-10-02_story15_e01`
+
+- **Judul YouTube:** Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15/2026-10-02_story15_e01.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15/2026-10-02_story15_e01.json` · audit: `renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15/2026-10-02_story15_e01_audit.md`
+- **Season / seri / seed:** S01 / story15 / 1
+- **Tema / narator:**  / 
+- **Durasi:** None s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → story15; Level 2: Zippy (sports) → ; Level 3 (juara): Buster (bus) → ; Level 4: Rocky (monster) → ; Level 5: Siren (police) → ; Level 6: Tilly (taxi) → ; Level 7: Nitro (f1) → 
+- **Status:** APPROVED (approve 2026-10-02)
+- **Antrian:** QUEUED 2026-10-04T17:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1501 — `2026-10-02_story15_trailer_e01`
