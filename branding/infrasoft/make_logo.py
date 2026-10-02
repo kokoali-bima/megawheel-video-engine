@@ -18,7 +18,7 @@ def gear_path(ctx):
     step = 2 * math.pi / N_TEETH
     pts = []
     for i in range(N_TEETH):
-        a = i * step - math.pi / 2
+        a = (i + 0.5) * step                       # a valley at 0 deg: the play tip exits between two teeth
         for da, r in ((-0.27, R_ROOT), (-0.16, R_OUT), (0.16, R_OUT), (0.27, R_ROOT)):
             pts.append((a + da * step, r))
     ctx.move_to(pts[0][1] * math.cos(pts[0][0]), pts[0][1] * math.sin(pts[0][0]))
