@@ -714,6 +714,16 @@
    "gpu_seconds": 46.4,
    "wall_seconds": 77.2,
    "cost_usd": 0.0118
+  },
+  {
+   "date": "2026-10-02",
+   "note": "intro v3 (user lyrics)",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 195.4,
+   "wall_seconds": 220.7,
+   "cost_usd": 0.0499
   }
  ]
 }
