@@ -43,7 +43,8 @@ image = (
                   "sed -i 's/flash_attention_2/sdpa/g' /YuE/inference/infer.py")
     .pip_install("torch==2.5.1", "torchaudio==2.5.1")
     .run_commands("pip install -r /YuE/requirements.txt")
-    .pip_install("faster-whisper", "huggingface_hub", "soundfile")
+    # YuE's requirements pin an old protobuf; Modal's in-container client needs a newer one
+    .pip_install("faster-whisper", "huggingface_hub", "soundfile", "protobuf>=4.25,<6")
     .run_function(_download)
 )
 
