@@ -1,7 +1,7 @@
 #!/bin/bash
 # LAB plan B: render SMASH 3D sample.  bash lab/godot3d_smash/run.sh [frames] [tag] [extra godot user args...]
 cd /root/video-engine
-N=${1:-1260}
+N=${1:-1050}
 TAG=${2:-v2}
 shift 2 2>/dev/null
 GD=/root/tools/godot/Godot_v4.4.1-stable_linux.arm64
