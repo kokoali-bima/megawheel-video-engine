@@ -431,3 +431,19 @@ registry tetap di git. Kredensial: `credentials/drive_client_secret.json` + `dri
   2. deskripsi setiap video: baris `🎬 Produced by Infrasoft Media & Tech` (ditambahkan otomatis saat upload
      oleh `episodes.with_credit()` di `publish_queue.py` / `publish.py`, sebelum baris hashtag).
 - Sumber logo vektor: `branding/infrasoft/make_logo.py` (gear biru + play oranye, font Montserrat OFL).
+
+## 12. Audiens: JALUR A — general audience (keputusan user 2026-10-02)
+
+Channel diatur **"Tidak, bukan untuk anak-anak"** dan isinya harus *benar-benar* untuk semua umur
+(bukan konten balita yang diberi label dewasa). Alasan: komentar tetap aktif, iklan dipersonalisasi,
+dan tidak ada risiko salah deklarasi (COPPA). Aturan produksi wajib:
+
+| Boleh / dianjurkan | Hindari |
+|---|---|
+| humor slapstick, tabrakan kartun, drama, ketegangan, kompetisi, cliffhanger | estetika balita: lagu anak/nursery, huruf/angka/warna edukatif, "learn colors" |
+| narator en-US dewasa (voice C), komentator ala olahraga | suara/gaya bayi, nada mengajar anak kecil |
+| judul berbasis tantangan/pertanyaan ("Can X Survive...?") | kata "kids", "children", "toddler", "baby", "for kids", "nursery" di judul/deskripsi/tag |
+| cerita bermakna yang dinikmati keluarga (gaya Pixar/Bluey: lapisan untuk dewasa) | thumbnail/kostum/latar yang meniru acara prasekolah |
+| thumbnail "WINNER!", aksi, ekspresi kuat | elemen yang membuat YouTube menilai "ditujukan terutama untuk anak" |
+
+Setiap konsep seri/episode baru diperiksa terhadap tabel ini sebelum produksi.
