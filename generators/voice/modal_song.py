@@ -60,6 +60,12 @@ def _finish(path, sg):
         m, _ = sf.read(os.path.join(stem, "no_vocals.wav"), always_2d=True)
         n = min(len(v), len(m))
         x = v[:n] * mix.get("vocals", 1.0) + m[:n] * mix.get("music", 1.0)
+    if sg.get("pitch"):                                            # whole song (voice + band stay in key)
+        r = 2 ** (sg["pitch"] / 12)
+        sf.write("/tmp/pin.wav", x, sr, subtype="PCM_16")
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", "/tmp/pin.wav", "-af",
+                        f"asetrate={int(sr * r)},aresample={sr},atempo={1 / r:.6f}", "/tmp/pout.wav"], check=True)
+        x, sr = sf.read("/tmp/pout.wav", always_2d=True)
     fi, fo = int(sg.get("fade_in", 0) * sr), int(sg.get("fade_out", 0) * sr)
     if fi:
         x[:fi] *= np.linspace(0, 1, fi)[:, None]
@@ -69,6 +75,16 @@ def _finish(path, sg):
     buf = io.BytesIO()
     sf.write(buf, x, sr, format="WAV", subtype="PCM_16")
     return buf.getvalue()
+
+
+def _ending(path):
+    """1.0 = the song ends by itself (quiet last second), 0.0 = cut off at full volume."""
+    import numpy as np
+    import soundfile as sf
+    x, sr = sf.read(path, always_2d=True)
+    m = np.abs(x).mean(axis=1)
+    body = np.median(m[: max(1, len(m) - 3 * sr)]) + 1e-9
+    return float(np.clip(1.0 - (m[-sr:].mean() / body - 0.15) / 0.6, 0.0, 1.0))
 
 
 def _score(want, got):
@@ -103,7 +119,8 @@ def sing(songs: list) -> dict:
                 path = os.path.join("/tmp", cands[-1]) if cands else path
             heard = " ".join(s.text for s in asr.transcribe(path, language="en", beam_size=3)[0])
             sc = _score(sg["lyrics"], heard)
-            takes.append((sc, path, heard, take, seed))
+            end = _ending(path)
+            takes.append((sc + 0.25 * end, path, heard + f" [ending {end:.2f}]", take, seed))
         takes.sort(key=lambda x: -x[0])
         for rank, (sc, path, heard, take, seed) in enumerate(takes[:int(sg.get("keep", 1))]):
             name = sg["name"] if rank == 0 else f"{sg['name']}_alt{rank}"   # "keep": top-N takes for a human pick

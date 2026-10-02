@@ -1,0 +1,18 @@
+[
+ {
+  "name": "intro_lets_go_v4",
+  "duration": 52,
+  "takes": 8,
+  "seed": 135,
+  "keep": 3,
+  "pitch": -1,
+  "fade_in": 0.6,
+  "fade_out": 1.5,
+  "mix": {
+   "vocals": 0.9,
+   "music": 1.2
+  },
+  "tags": "upbeat cartoon theme song, happy pop, catchy, cheerful, warm mid-range male vocal, relaxed singing, female backing vocals, group chorus, acoustic guitar, clean electric guitar, piano, bass, drums, 128 bpm, major key, friendship, instrumental intro, complete ending",
+  "lyrics": "[intro]\n\n[verse]\nWheels are turning, engines humming,\nAll my friends, I hear you coming!\nBig or small or fast or slow,\nTogether, come on, let's go!\n\n[chorus]\nMega-Mega, MegaWheel Arena!\nNever give up, we'll race forever!\nDing-ding-ding, the road is calling,\nGet back up whenever you're falling!\n\n[outro]\nMegaWheel... Arena!"
+ }
+]
