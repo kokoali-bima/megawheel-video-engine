@@ -513,13 +513,13 @@ def nametag(ctx, tag, age, dur):
                  alpha=a, max_w=bw * 0.9)
 
 
-def note(ctx, text, age, dur):
+def note(ctx, text, age, dur, low=False):
     """Short description box at the top (explains what happens: bumps, crashes, numbers...)."""
     a = min(1.0, age / 0.5, max(0.0, (dur - age) / 0.5))
     if a <= 0:
         return
     bw, bh = W * 0.86, H * 0.085
-    y0 = H * 0.105                                                 # below the letterbox bar
+    y0 = H * (0.22 if low else 0.105)                              # below the letterbox bar (and a caption)
     se.rrect(ctx, (W - bw) / 2, y0, bw, bh, bh * 0.3)
     ctx.set_source_rgba(0.05, 0.05, 0.12, 0.62 * a)
     ctx.fill()
@@ -1496,7 +1496,7 @@ def render_scene(ep, num, aspect):
         if sh.get("caption"):
             caption(ctx, sh["caption"], u, sh["t1"] - sh["t0"])
         if sh.get("note"):
-            note(ctx, sh["note"], u, sh["t1"] - sh["t0"])
+            note(ctx, sh["note"], u, sh["t1"] - sh["t0"], low=bool(sh.get("caption")))
         if sh.get("nametag"):
             nametag(ctx, sh["nametag"], u, sh["t1"] - sh["t0"])
         if sh.get("title"):
