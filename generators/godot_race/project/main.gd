@@ -18,6 +18,7 @@ var winner_label: Label
 var winner = ""
 var shake = 0.0
 var slow_until = -1.0
+var slow_used = false
 var events = []
 var sim_t = 0.0
 var meteors_next = 3.0
@@ -144,9 +145,10 @@ func _car(vk: String, pos: Vector2, layer_bit: int, mask: int, power: float, z: 
 	body.mass = 60.0 + bw * 8.0
 	body.collision_layer = layer_bit
 	body.collision_mask = mask
-	body.position = pos + Vector2(0, -ride * PPM)
+	body.position = pos + Vector2(0, -(ride + 0.25) * PPM)
 	body.contact_monitor = true
 	body.max_contacts_reported = 6
+	body.continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 	var cs = CollisionShape2D.new()
 	var rect = RectangleShape2D.new()
 	rect.size = Vector2(bw * PPM, bh * PPM)
@@ -164,6 +166,7 @@ func _car(vk: String, pos: Vector2, layer_bit: int, mask: int, power: float, z: 
 	for wx in m["wheel_x"]:
 		var w = RigidBody2D.new()
 		w.mass = 8.0
+		w.continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 		w.collision_layer = layer_bit
 		w.collision_mask = mask
 		var wm = PhysicsMaterial.new()
@@ -282,11 +285,14 @@ func explode(pos: Vector2, power: float) -> void:
 				n.apply_central_impulse(d.normalized() * (1.0 - dist / (520.0 * power)) * 9000.0 * power
 										+ Vector2(0, -4000.0 * power))
 	shake = max(shake, 38.0 * power)
-	slow_mo(0.9)
+	slow_mo(0.6)
 
 
 func slow_mo(dur: float) -> void:
-	Engine.time_scale = 0.3
+	if slow_used:                                    # research: constant slow-mo reads as a slow video
+		return
+	slow_used = true
+	Engine.time_scale = 0.45
 	slow_until = vt() + dur
 
 
@@ -329,6 +335,7 @@ func fracture(c: Dictionary, impact: Vector2) -> void:
 				uv.append(u)
 			var frag = RigidBody2D.new()
 			frag.mass = 10.0
+			frag.continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 			frag.collision_layer = c["layer"]
 			frag.collision_mask = c["mask"] & 0xFF
 			frag.global_transform = body.global_transform * Transform2D(0, centre)
@@ -368,8 +375,8 @@ func _crash_check(c: Dictionary, threshold: float) -> void:
 		shake = max(shake, clampf(dv / 80.0, 6.0, 30.0))
 		if c["hp"] <= 0.0:
 			var at = body.global_position
-			fracture(c, at + Vector2(0, 30))
-			explode(at, 1.0)
+			call_deferred("fracture", c, at + Vector2(0, 30))
+			call_deferred("explode", at, 1.0)
 
 
 func _drive(c: Dictionary, go: float, cap: float) -> void:
@@ -388,22 +395,22 @@ func _setup_challenge() -> void:
 	var xm = -30.0
 	while xm <= 260.0:
 		var y = BASE_Y
-		for pit in [[60.0, 7.0, 3.2], [130.0, 9.0, 4.5]]:       # x, width, depth (m) - steep walls
+		for pit in [[70.0, 7.0, 3.2], [140.0, 9.0, 4.5]]:       # x, width, depth (m) - steep walls
 			if xm > pit[0] and xm < pit[0] + pit[1]:
 				y += pit[2] * PPM
-		if xm > 52.0 and xm < 60.0:                              # take-off ramp before pit 1
-			y -= (xm - 52.0) / 8.0 * 1.1 * PPM
-		if xm > 122.0 and xm < 130.0:
-			y -= (xm - 122.0) / 8.0 * 1.4 * PPM
+		if xm > 62.0 and xm < 70.0:                              # take-off ramp before pit 1
+			y -= (xm - 62.0) / 8.0 * 1.1 * PPM
+		if xm > 132.0 and xm < 140.0:
+			y -= (xm - 132.0) / 8.0 * 1.4 * PPM
 		pts.append(Vector2(xm * PPM, y))
 		xm += 0.25
 	_ground_poly(pts, 1, Color(0.42, 0.34, 0.26), -5)
-	var roster = [["sports", 1.55, 0.0], ["icecream", 1.0, 2.2], ["monster", 1.25, 4.4]]
-	for r in roster:
-		var c = _car(r[0], Vector2(4.0 * PPM, BASE_Y), 2, 1 | 2, r[1], 20)
+	var roster = [["sports", 1.7, 0.0, 22.0], ["icecream", 1.15, 2.4, 12.0], ["monster", 1.35, 5.2, 2.0]]
+	for r in roster:                                 # staggered grid: no two cars share a spot
+		var c = _car(r[0], Vector2(r[3] * PPM, BASE_Y), 2, 1 | 2, r[1], 20)
 		c["start"] = r[2]
 		cars.append(c)
-	cam.zoom = Vector2(0.7, 0.7)
+	cam.zoom = Vector2(1.05, 1.05)
 
 
 # ================================================================== RACE: 3 lanes, hammer + container
@@ -423,7 +430,7 @@ func _setup_race() -> void:
 			pts.append(Vector2(xm * PPM, y))
 			xm += 0.5
 		_ground_poly(pts, 1 << lane, Color(0.3, 0.3, 0.34).darkened(lane * 0.07), -10 - lane * 4)
-	var roster = [["monster", 2, 1.15], ["sports", 1, 1.35], ["icecream", 0, 1.2]]
+	var roster = [["monster", 2, 1.2], ["sports", 1, 1.35], ["icecream", 0, 1.3]]
 	for r in roster:
 		cars.append(_car(r[0], Vector2(4.0 * PPM, _lane_y(r[1])), 1 << (8 + r[1]), 1 << r[1], r[2], 30 - r[1] * 8))
 	# giant hammer over lane 0 at x = 150 m: kinematic pendulum (pushes the car like a real mass)
@@ -455,7 +462,7 @@ func _setup_race() -> void:
 	hammer_pivot.add_child(arm)
 	hammer_pivot.add_child(hammer_body)
 	hammer_pivot.z_index = 40
-	cam.zoom = Vector2(0.62, 0.62)
+	cam.zoom = Vector2(0.95, 0.95)
 
 
 func _race_physics(go: float) -> void:
@@ -464,9 +471,9 @@ func _race_physics(go: float) -> void:
 	var target_ang = 1.1 * sin(sim_t * 1.6)
 	if ice["alive"]:
 		var dx: float = hammer_pivot.position.x - ice["body"].position.x
-		if dx < 9.0 * PPM and dx > -2.0 * PPM:
-			target_ang = -0.15 + clampf(dx / (9.0 * PPM), 0.0, 1.0) * 1.2
-	hammer_pivot.rotation = lerp_angle(hammer_pivot.rotation, target_ang, 0.25)
+		if dx < 7.0 * PPM and dx > -3.0 * PPM:      # whoosh down onto the truck
+			target_ang = 0.0
+	hammer_pivot.rotation = lerp_angle(hammer_pivot.rotation, target_ang, 0.35 if target_ang == 0.0 else 0.25)
 	# container drops on lane 1 in front of the sports car
 	var sp: Dictionary = cars[1]
 	if not container_done and sp["alive"] and sp["body"].position.x > 200.0 * PPM:
@@ -499,12 +506,37 @@ func _setup_smash() -> void:
 	pts = PackedVector2Array([Vector2(-16 * PPM, BASE_Y - 6 * PPM), Vector2(-14 * PPM, BASE_Y), Vector2(14 * PPM, BASE_Y),
 							  Vector2(16 * PPM, BASE_Y - 6 * PPM)])
 	_ground_poly(pts, 1, Color(0.36, 0.3, 0.28), -5)
+	var stands = Polygon2D.new()                      # crowd stands behind the arena
+	stands.polygon = PackedVector2Array([Vector2(-18 * PPM, BASE_Y - 1.0 * PPM), Vector2(18 * PPM, BASE_Y - 1.0 * PPM),
+										 Vector2(18 * PPM, BASE_Y - 7.0 * PPM), Vector2(-18 * PPM, BASE_Y - 7.0 * PPM)])
+	stands.color = Color(0.3, 0.32, 0.4)
+	stands.z_index = -30
+	add_child(stands)
+	var rng = RandomNumberGenerator.new()
+	rng.seed = 5
+	for i in range(220):                              # crowd heads
+		var head = Polygon2D.new()
+		var hp = PackedVector2Array()
+		for k in range(8):
+			hp.append(Vector2.RIGHT.rotated(TAU * k / 8.0) * 0.32 * PPM)
+		head.polygon = hp
+		head.position = Vector2(rng.randf_range(-17.5, 17.5) * PPM, BASE_Y - rng.randf_range(1.5, 6.6) * PPM)
+		head.color = Color.from_hsv(rng.randf(), 0.55, 0.85)
+		head.z_index = -29
+		add_child(head)
+	for sx in [-14.2, 13.4]:                          # arena barriers
+		var wall = Polygon2D.new()
+		wall.polygon = PackedVector2Array([Vector2(sx * PPM, BASE_Y + 10), Vector2((sx + 0.8) * PPM, BASE_Y + 10),
+										   Vector2((sx + 0.8) * PPM, BASE_Y - 2.2 * PPM), Vector2(sx * PPM, BASE_Y - 2.2 * PPM)])
+		wall.color = Color(0.85, 0.15, 0.15)
+		wall.z_index = 30
+		add_child(wall)
 	var roster = [["sports", -9.0, 1.3, 1], ["police", -3.0, 1.2, 1], ["taxi", 3.0, 1.2, -1], ["monster", 9.0, 1.25, -1]]
 	for r in roster:
 		var c = _car(r[0], Vector2(r[1] * PPM, BASE_Y), 2, 1 | 2, r[2], 20, r[3])
 		cars.append(c)
-	cam.zoom = Vector2(0.62, 0.62)
-	cam.position = Vector2(0, BASE_Y - 600)
+	cam.zoom = Vector2(0.9, 0.9)
+	cam.position = Vector2(0, BASE_Y - 420)
 
 
 func _smash_physics(go: float) -> void:
@@ -555,7 +587,7 @@ func _smash_physics(go: float) -> void:
 			trail.color_ramp = tg
 			m.add_child(trail)
 			m.z_index = 45
-			m.body_entered.connect(func(_b): _meteor_hit(m))
+			m.body_entered.connect(func(_b): call_deferred("_meteor_hit", m))
 			add_child(m)
 			_log("meteor", 1.0)
 
@@ -619,7 +651,17 @@ func _process(_delta: float) -> void:
 				if n is RigidBody2D and (lead == null or n.position.x > lead.position.x):
 					lead = n
 		if lead:
-			cam.position = Vector2(lead.position.x + 2.0 * PPM, BASE_Y - LANE_DY - 330.0)
+			cam.position = Vector2(lead.position.x + 1.5 * PPM, BASE_Y - LANE_DY - 230.0)
+	if MODE == "smash":                              # fit the cars still standing (big on screen)
+		var xs = []
+		for c in cars:
+			if c["alive"]:
+				xs.append(c["body"].position.x)
+		if xs.size() > 0:
+			var span = xs.max() - xs.min() + 9.0 * PPM
+			var z = clampf(1000.0 / span, 0.85, 1.25)
+			cam.zoom = cam.zoom.lerp(Vector2(z, z), 0.05)
+			cam.position = cam.position.lerp(Vector2((xs.max() + xs.min()) / 2.0, BASE_Y - 360.0), 0.08)
 	shake *= 0.88
 	cam.offset = Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
 
