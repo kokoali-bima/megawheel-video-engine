@@ -16,6 +16,6 @@ ffmpeg -loglevel error -y -i $D/s3d.avi -c:v libx264 -pix_fmt yuv420p -crf 19 $D
 cp /tmp/godot_events.json $D/events.json 2>/dev/null || echo '{"events":[]}' > $D/events.json
 venv/bin/python lab/godot_prototype/godot_mix.py --video $D/SMASH3D_v.mp4 --events $D/events.json --out $D/SMASH3D_B_v1.mp4
 python3 -c "import json;e=json.load(open('$D/events.json'))['events'];import collections;print(collections.Counter(x['type'] for x in e))"
-rm -rf $D/sheet && mkdir $D/sheet; i=0; for t in 1 4 7 8.5 12 13 17.5 19 23 26 30 36; do i=$((i+1)); ffmpeg -loglevel error -y -ss $t -i $D/SMASH3D_B_v1.mp4 -frames:v 1 -vf scale=270:-1 $D/sheet/f$(printf %02d $i).jpg 2>/dev/null; done
+rm -rf $D/sheet && mkdir $D/sheet; i=0; for t in 2 5 6.7 7.2 8.4 9 13.5 14.8 15.3 17 20 25; do i=$((i+1)); ffmpeg -loglevel error -y -ss $t -i $D/SMASH3D_B_v1.mp4 -frames:v 1 -vf scale=270:-1 $D/sheet/f$(printf %02d $i).jpg 2>/dev/null; done
 ffmpeg -loglevel error -y -i $D/sheet/f%02d.jpg -vf "tile=6x2:padding=3" -frames:v 1 $D/sheet.jpg
 echo S3D_DONE

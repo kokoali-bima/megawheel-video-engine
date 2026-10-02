@@ -814,6 +814,96 @@
    "gpu_seconds": 38.8,
    "wall_seconds": 77.8,
    "cost_usd": 0.0099
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_potholes_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 68.8,
+   "wall_seconds": 316.9,
+   "cost_usd": 0.0176
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_potholes_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 44.3,
+   "wall_seconds": 407.0,
+   "cost_usd": 0.0113
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_bumps_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.5,
+   "wall_seconds": 364.8,
+   "cost_usd": 0.0101
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_splash_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 6,
+   "gpu_seconds": 52.3,
+   "wall_seconds": 461.1,
+   "cost_usd": 0.0133
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_splash_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 45.2,
+   "wall_seconds": 205.8,
+   "cost_usd": 0.0115
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_lava_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 41.0,
+   "wall_seconds": 316.2,
+   "cost_usd": 0.0105
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_race25d_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 39.9,
+   "wall_seconds": 62.5,
+   "cost_usd": 0.0102
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_race25d_902 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 59.3,
+   "wall_seconds": 87.2,
+   "cost_usd": 0.0151
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator TEST_race25d_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 69.0,
+   "wall_seconds": 101.8,
+   "cost_usd": 0.0176
   }
  ]
 }
