@@ -40,7 +40,7 @@ VOICE_OF = {"narrator": "m1", "announcer": "m1", "announcer2": "f1"}      # othe
 STYLE_OF = {"normal": "calm", "talk": "calm", "laugh": "happy", "cry": "sad", "determined": "proud", "shy": "calm",
             "surprised": "excited", "tease": "excited", "whisper": "calm"}   # face emotion -> voice style
 MOOD_BASE = {"happy": "happy", "laugh": "happy", "proud": "happy", "scared": "scared", "surprised": "whoa",
-             "excited": "happy"}                                                  # emotion -> se.draw_face mood
+             "excited": "happy", "dizzy": "dizzy"}                                                  # emotion -> se.draw_face mood
 SPEAKER_COLOR = {"sprinkles": (1, 0.6, 0.8), "little_sprinkles": (1, 0.7, 0.85), "grandpa_cone": (0.95, 0.85, 0.6),
                  "buster": (1, 0.85, 0.2), "zippy": (1, 0.4, 0.35), "rocky": (0.45, 0.7, 1), "siren": (0.85, 0.9, 1),
                  "narrator": (0.9, 0.9, 0.9), "announcer": (1, 0.86, 0.12), "announcer2": (1, 0.86, 0.12)}
@@ -89,14 +89,58 @@ _orig_face = se.draw_face
 
 
 def story_face(ctx, vk, mood, t):
+    _face_core(ctx, vk, mood, t)
+    if CUR.get("mustache"):                                        # elder: glasses, beard, soft mustache
+        _elder(ctx, se.FACES[vk])
+
+
+def _elder(ctx, f):
+    r, (mx, my), mw = f["r"], f["mouth"], f["mw"]
+    ink = (0.15, 0.12, 0.1)
+    for ex, ey in f["eyes"]:                                       # round glasses
+        ctx.arc(ex, ey, r * 1.55, 0, 2 * math.pi)
+        ctx.set_source_rgba(0.85, 0.95, 1.0, 0.25)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*ink)
+        ctx.set_line_width(r * 0.28)
+        ctx.stroke()
+    (x0, y0), (x1, y1) = f["eyes"][0], f["eyes"][-1]
+    ctx.move_to(x0 + r * 1.55, y0)
+    ctx.line_to(x1 - r * 1.55, y1)
+    ctx.set_line_width(r * 0.25)
+    ctx.stroke()
+    ctx.save()                                                     # white beard under the mouth
+    ctx.translate(mx - mw * 0.05, my - mw * 0.55)
+    ctx.scale(mw * 0.75, mw * 0.55)
+    ctx.arc(0, 0, 1, math.pi * 1.0, math.pi * 2.0)
+    ctx.restore()
+    ctx.close_path()
+    ctx.set_source_rgb(0.97, 0.97, 0.95)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.7, 0.7, 0.7)
+    ctx.set_line_width(mw * 0.04)
+    ctx.stroke()
+    for s_ in (-1, 1):                                             # soft curled mustache
+        ctx.save()
+        ctx.translate(mx + s_ * mw * 0.28, my + mw * 0.22)
+        ctx.rotate(-s_ * 0.25)
+        ctx.scale(mw * 0.34, mw * 0.11)
+        ctx.arc(0, 0, 1, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(0.95, 0.95, 0.93)
+        ctx.fill()
+
+
+def _face_core(ctx, vk, mood, t):
     aid = CUR["aid"] or vk
     emo = EMO.get(aid, "normal")
     talk = TALK.get(aid, 0.0)
     f = se.FACES[vk]
     r, ink = f["r"], (0.05, 0.05, 0.1)
-    blink = (t * 1.0 + sum(map(ord, aid)) % 7 * 0.37) % 3.7 < 0.12 and emo not in ("happy", "laugh")
-    if CUR.get("mustache"):
-        _mustache(ctx, f)
+    blink = (t * 1.0 + sum(map(ord, aid)) % 7 * 0.37) % 3.7 < 0.12 and emo not in ("happy", "laugh", "dizzy")
+    if emo == "dizzy":                                             # squashed / bonked: spiral-cross eyes (Shorts style)
+        _orig_face(ctx, vk, "dizzy", t)
+        return
     if emo in ("happy", "laugh", "proud", "excited", "scared", "surprised") and talk < 0.08 and not blink:
         _orig_face(ctx, vk, MOOD_BASE.get(emo, "normal"), t)
         _brows(ctx, f, emo)
@@ -238,15 +282,19 @@ def make_actor(aid, a):
     return dict(id=aid, key=vk, lane=0, x=float(a.get("x", 0)), z=float(a.get("z", 1.0)),
                 face=1 if a.get("face", 1) >= 0 else -1, h=0.0, land=None, trig=None, finish=None, bump_t=None,
                 rec=[], small=float(a.get("scale", 1.0)), hidden=bool(a.get("hidden", False)),
-                color=tuple(a["color"]) if a.get("color") else None, mustache=bool(a.get("mustache", False)))
+                color=tuple(a["color"]) if a.get("color") else None, mustache=bool(a.get("mustache", False)),
+                accent=tuple(a["accent"]) if a.get("accent") else None, sq=1.0, patched=float(a.get("patched", 0)),
+                h0=float(a.get("h", 0.0)), dizzy=False)
 
 
 def draw_actor(ctx, a, t, camx):
     """race25d.draw_car with per-actor colour / mustache / size (Grandpa Cone, Little Sprinkles share a vehicle)."""
     veh = se.VEHICLES[a["key"]]
-    old = veh["color"]
+    old, old_acc = veh["color"], veh.get("accent")
     if a["color"]:
         veh["color"] = a["color"]
+    if a["accent"]:
+        veh["accent"] = a["accent"]
     CUR["aid"], CUR["mustache"] = a["id"], a["mustache"]
     try:
         if a["small"] != 1.0:
@@ -261,12 +309,16 @@ def draw_actor(ctx, a, t, camx):
             R.draw_car(ctx, a, t, camx)
     finally:
         veh["color"] = old
+        if old_acc is None:
+            veh.pop("accent", None)
+        else:
+            veh["accent"] = old_acc
         CUR["aid"], CUR["mustache"] = None, False
 
 
 def actor_state(a, t):
     yaw = 0.0 if a["face"] > 0 else math.pi
-    st = (a["x"], a["z"], a["h"], yaw, 0.0, a.get("v", 0.0), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    st = (a["x"], a["z"], a["h"], yaw, 0.0, a.get("v", 0.0), a["sq"], 0.0, 0.0, a["patched"], 0.0, 0.0)
     a["rec"] = [st, st]
     return st
 
@@ -340,23 +392,33 @@ def draw_poster(ctx, p, camx):
 
 
 def draw_frame_photo(ctx, p, camx, t):
-    """Old photo on the garage wall: Grandpa Cone (a small ice cream truck) in a wooden frame."""
+    """Old photo on the garage wall: Grandpa Cone (cream truck, glasses, beard) centred in a wooden frame."""
     x, z = p.get("x", -2.0), 3.6
     k = k_of(z)
     sx, gy = pxy(x, z, camx)
-    w, hh = 3.0 * k, 2.2 * k
+    w, hh = 3.2 * k, 2.4 * k
     y0 = gy - 5.0 * k
-    se.rrect(ctx, sx - w / 2 - 0.2 * k, y0 - 0.2 * k, w + 0.4 * k, hh + 0.4 * k, 0.1 * k)
+    se.rrect(ctx, sx - w / 2 - 0.22 * k, y0 - 0.22 * k, w + 0.44 * k, hh + 0.44 * k, 0.1 * k)
     ctx.set_source_rgb(0.45, 0.28, 0.12)
     ctx.fill()
     ctx.rectangle(sx - w / 2, y0, w, hh)
     ctx.set_source_rgb(0.92, 0.84, 0.66)
     ctx.fill()
     ctx.save()
-    ctx.translate(sx, y0 + hh * 0.85)
-    ctx.scale(k * 0.35, -k * 0.35)
+    ctx.rectangle(sx - w / 2, y0, w, hh)
+    ctx.clip()
+    sc = w * 0.78 / 5.6                                   # truck body 5.6 m (+ roof cone) fitted in the frame
+    ctx.translate(sx, y0 + hh * 0.66)
+    ctx.scale(sc, -sc)
     veh = se.VEHICLES["icecream"]
+    old, old_acc = veh["color"], veh.get("accent")
+    veh["color"], veh["accent"] = (0.93, 0.86, 0.70), (0.62, 0.42, 0.25)
     se.draw_body(ctx, "icecream", veh, False, t)
+    veh["color"] = old
+    if old_acc is None:
+        veh.pop("accent", None)
+    else:
+        veh["accent"] = old_acc
     CUR["aid"], CUR["mustache"] = "photo", True
     EMO["photo"], TALK["photo"] = "happy", 0.0
     story_face(ctx, "icecream", "happy", t)
@@ -379,17 +441,57 @@ def draw_lamp(ctx, camx):
 
 
 def draw_desk(ctx, d, camx):
-    x, z = d.get("x", 1.5), 0.6
+    """Registration booth (behind the actors): stage, two poles with the sign board, striped canopy, flags."""
+    x, z = d.get("x", 3.6), d.get("z", 2.6)
     k = k_of(z)
     sx, gy = pxy(x, z, camx)
-    se.rrect(ctx, sx - 2.2 * k, gy - 1.4 * k, 4.4 * k, 1.4 * k, 0.1 * k)
+    w = 9.0 * k
+    se.rrect(ctx, sx - w / 2, gy - 0.7 * k, w, 0.75 * k, 0.1 * k)            # stage
+    ctx.set_source_rgb(*se.lit((0.45, 0.3, 0.2)))
+    ctx.fill()
+    ctx.rectangle(sx - w / 2, gy - 0.78 * k, w, 0.12 * k)
+    ctx.set_source_rgb(*se.lit((0.65, 0.45, 0.3)))
+    ctx.fill()
+    for px in (-3.9, 3.9):                                                      # poles
+        ctx.rectangle(sx + px * k - 0.12 * k, gy - 6.4 * k, 0.24 * k, 5.7 * k)
+        ctx.set_source_rgb(*se.lit((0.55, 0.55, 0.6)))
+        ctx.fill()
+    top, bot = gy - 4.6 * k, gy - 3.7 * k                                       # striped canopy
+    for i in range(10):
+        x0 = sx - 4.2 * k + i * 0.84 * k
+        se.poly(ctx, [(x0, top), (x0 + 0.84 * k, top), (x0 + 0.9 * k, bot), (x0 - 0.06 * k, bot)])
+        ctx.set_source_rgb(*se.lit((0.9, 0.15, 0.2) if i % 2 else (1, 1, 1)))
+        ctx.fill()
+        ctx.arc(x0 + 0.42 * k, bot, 0.42 * k, 0, math.pi)
+        ctx.fill()
+    se.rrect(ctx, sx - 3.6 * k, gy - 6.6 * k, 7.2 * k, 1.5 * k, 0.15 * k)      # sign board on the poles
+    ctx.set_source_rgb(0.15, 0.3, 0.75)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(1, 0.86, 0.12)
+    ctx.set_line_width(0.12 * k)
+    ctx.stroke()
+    se.draw_text(ctx, d.get("text", "RACE REGISTRATION"), sx, gy - 5.85 * k, 0.75 * k, fill=(1, 1, 1),
+                 stroke=(0.1, 0.1, 0.3), sw=2, max_w=6.8 * k)
+    for i in range(12):                                                         # little flags on a string
+        fx = sx - 3.9 * k + i * 0.71 * k
+        fy = gy - 6.75 * k - 0.35 * k * math.sin(math.pi * i / 11)
+        se.poly(ctx, [(fx, fy), (fx + 0.5 * k, fy), (fx + 0.25 * k, fy + 0.5 * k)])
+        ctx.set_source_rgb(*[(1, 0.3, 0.3), (0.3, 0.6, 1), (1, 0.85, 0.2), (0.4, 0.85, 0.4)][i % 4])
+        ctx.fill()
+
+
+def draw_desk_front(ctx, d, camx):
+    """The registration table: drawn after the actors, in front of the official standing behind it."""
+    x, z = d.get("x", 3.6), d.get("table_z", 1.25)
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    se.rrect(ctx, sx - 2.0 * k, gy - 1.25 * k, 4.0 * k, 1.25 * k, 0.08 * k)
     ctx.set_source_rgb(*se.lit((0.55, 0.35, 0.2)))
     ctx.fill()
-    se.rrect(ctx, sx - 2.6 * k, gy - 4.6 * k, 5.2 * k, 1.1 * k, 0.15 * k)
-    ctx.set_source_rgb(0.15, 0.3, 0.75)
+    se.rrect(ctx, sx - 2.15 * k, gy - 1.35 * k, 4.3 * k, 0.55 * k, 0.08 * k)  # table cloth
+    ctx.set_source_rgb(*se.lit((0.97, 0.97, 0.97)))
     ctx.fill()
-    se.draw_text(ctx, d.get("text", "REGISTRATION"), sx, gy - 4.05 * k, 0.6 * k, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.3),
-                 sw=2, max_w=4.8 * k)
+    se.draw_text(ctx, "SIGN UP", sx, gy - 1.07 * k, 0.32 * k, fill=(0.85, 0.15, 0.2), stroke=(1, 1, 1), sw=1)
 
 
 def draw_podium(ctx, camx):
@@ -443,30 +545,99 @@ def stands_top_world():
     return ground_y(zb) - rows * 1.25 * k_of(zb)
 
 
+KR_BODY, KR_DARK = (0.24, 0.55, 0.36), (0.15, 0.34, 0.22)
+
+
+def kraggor_body(ctx, roar):
+    """Kraggor's body in head units (own design): shoulders, metal belly, clawed arms, legs, tail.
+    Origin = neck base used by smash25d.draw_kraggor_head; y grows downwards."""
+    def fill(path_fn, col):
+        path_fn()
+        ctx.set_source_rgb(*se.lit(col))
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*KR_DARK)
+        ctx.set_line_width(0.3)
+        ctx.stroke()
+    fill(lambda: (ctx.move_to(5.5, 9), ctx.curve_to(12, 11, 15, 8, 16, 3), ctx.curve_to(15, 9, 11, 14, 5, 13),
+                  ctx.close_path()), KR_BODY)                                           # tail
+    for lx in (-3.6, 1.2):                                                               # legs + feet
+        fill(lambda lx=lx: se.rrect(ctx, lx, 11, 2.6, 7.5, 0.8), KR_BODY)
+        fill(lambda lx=lx: se.rrect(ctx, lx - 0.8, 17.6, 4.2, 1.6, 0.6), KR_BODY)
+    fill(lambda: se.rrect(ctx, -6.2, -3.6, 12.4, 16.0, 3.5), KR_BODY)                   # torso / shoulders
+    fill(lambda: se.rrect(ctx, -3.6, 0.0, 7.2, 10.5, 1.6), (0.66, 0.68, 0.76))          # metal belly plate
+    for yy in (2.6, 5.2, 7.8):
+        ctx.move_to(-3.3, yy)
+        ctx.line_to(3.3, yy)
+        ctx.set_source_rgb(0.45, 0.46, 0.52)
+        ctx.set_line_width(0.25)
+        ctx.stroke()
+    lift = -6.5 * roar
+    for sgn in (-1, 1):                                                                  # arms with white claws
+        hx, hy = sgn * 9.6, 7.0 + lift
+        fill(lambda sgn=sgn, hx=hx, hy=hy: (ctx.move_to(sgn * 5.2, -1.6), ctx.line_to(hx + sgn * 0.6, hy - 1.2),
+                                           ctx.line_to(hx - sgn * 1.4, hy + 1.0), ctx.line_to(sgn * 4.8, 2.2),
+                                           ctx.close_path()), KR_BODY)
+        for c in range(3):
+            cx = hx - sgn * 0.6 + c * 0.75 * sgn
+            se.poly(ctx, [(cx - 0.3, hy + 0.6), (cx + 0.3, hy + 0.6), (cx, hy + 1.6)])
+            ctx.set_source_rgb(1, 1, 1)
+            ctx.fill()
+
+
+def kraggor_smile(ctx, a):
+    """Happy Kraggor after the ice cream: closed-mouth smile + rosy cheeks, over the head drawing."""
+    ctx.save()
+    ctx.translate(905, 1.2 * 40)
+    ctx.scale(40, 40)
+    se.rrect(ctx, -3.8, -4.6, 7.6, 3.4, 0.9)                                           # cover the angry mouth
+    ctx.set_source_rgb(*se.lit(KR_BODY))
+    ctx.fill()
+    ctx.arc(0, -5.2, 2.6, 0.2 * math.pi, 0.8 * math.pi)                                 # big smile
+    ctx.set_source_rgb(0.1, 0.05, 0.05)
+    ctx.set_line_width(0.45)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    ctx.stroke()
+    for sgn in (-1, 1):
+        ctx.arc(sgn * 3.0, -4.9, 0.8, 0, 2 * math.pi)
+        ctx.set_source_rgba(1, 0.5, 0.55, 0.6)
+        ctx.fill()
+    ctx.restore()
+
+
+def kraggor_mouth(spec, base_y):
+    """Screen point of Kraggor's mouth (target of the ice cream)."""
+    sc = spec.get("scale", 1.0) * (H / 1080)
+    return spec.get("sx", 0.62) * W, base_y + (1.2 - 3.8) * 40 * sc
+
+
 def kraggor_head(ctx, u, spec, stands_top=None):
-    """Kraggor's head in screen space (smash25d design). spec: sx, sy (0..1 of the frame), scale,
-    mode: "rise" (rises then calm), "roar" (rises + roars), "calm" (already there), "munch" (eating ice cream)."""
+    """Kraggor (smash25d head design + our body) in screen space, standing at base_y (stands top / horizon).
+    mode: rise | roar | calm | munch | smile."""
     mode = spec.get("mode", "rise")
     if mode == "roar":
         a = min(u, 2.7)
     elif mode == "rise":
         a = min(u, 0.8)
     elif mode == "munch":
-        a = 0.8 + 0.18 * (1 + math.sin(u * 9))                    # small jaw movements
+        a = 0.8 + 0.18 * (1 + math.sin(u * 9))
     else:
-        a = 3.0                                                   # fully up, mouth closed
-    ctx.save()
+        a = 3.0
+    rise = se.ease_out_back(min(1.0, a / 0.8))
+    roar = max(0.0, math.sin(min(math.pi, max(0.0, a - 0.8) * 1.6))) if mode == "roar" else 0.0
+    base_y = stands_top if stands_top is not None else spec.get("sy", 0.42) * H
     sc = spec.get("scale", 1.0) * (H / 1080)
-    if stands_top is not None and not spec.get("front"):        # rises from behind the stands' top row
-        ctx.translate(spec.get("sx", 0.62) * W, stands_top)
-        ctx.scale(sc, sc)
-        ctx.translate(-905, 0)
-        SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
-    else:
-        ctx.translate(spec.get("sx", 0.62) * W, spec.get("sy", 0.42) * H)
-        ctx.scale(sc, sc)
-        ctx.translate(-905, -400)
-        SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 400)
+    ctx.save()
+    ctx.translate(spec.get("sx", 0.62) * W, base_y)
+    ctx.scale(sc, sc)
+    ctx.translate(-905, 0)
+    ctx.save()
+    ctx.translate(905, 1.2 * 40 + (1 - rise) * 13 * 40)
+    ctx.scale(40, 40)
+    kraggor_body(ctx, roar)
+    ctx.restore()
+    SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
+    if mode == "smile":
+        kraggor_smile(ctx, a)
     ctx.restore()
 
 
@@ -479,16 +650,24 @@ def ice_cream_toss(ctx, u, spec, camx, actors):
     k = k_of(a["z"])
     x0, y0 = pxy(a["x"] + 1.0 * a["face"], a["z"], camx)
     y0 -= 2.6 * k
-    x1, y1 = spec.get("tx", 0.6) * W, spec.get("ty", 0.3) * H
+    x1, y1 = spec.get("target") or (spec.get("tx", 0.6) * W, spec.get("ty", 0.3) * H)
     x = x0 + (x1 - x0) * f
     y = y0 + (y1 - y0) * f - math.sin(math.pi * f) * 0.25 * H
-    s_ = 0.5 * k
-    se.poly(ctx, [(x - s_ * 0.5, y), (x + s_ * 0.5, y), (x, y + s_ * 1.4)])
+    s_ = (1.15 if spec.get("jumbo") else 0.5) * k
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.rotate(f * 6.0)
+    se.poly(ctx, [(-s_ * 0.5, 0), (s_ * 0.5, 0), (0, s_ * 1.5)])
     ctx.set_source_rgb(0.9, 0.7, 0.35)
     ctx.fill()
-    ctx.arc(x, y - s_ * 0.2, s_ * 0.6, 0, 2 * math.pi)
-    ctx.set_source_rgb(1, 0.6, 0.75)
-    ctx.fill()
+    for i, col in enumerate([(1, 0.6, 0.75), (0.98, 0.95, 0.85), (0.55, 0.32, 0.2)][:3 if spec.get("jumbo") else 1]):
+        ctx.arc(0, -s_ * (0.25 + 0.75 * i), s_ * 0.6, 0, 2 * math.pi)                # 3-scoop jumbo cone
+        ctx.set_source_rgb(*col)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.3, 0.15, 0.1)
+        ctx.set_line_width(2)
+        ctx.stroke()
+    ctx.restore()
 
 
 def card(ctx, lines, age, dur):
@@ -536,13 +715,13 @@ def cam_for(shot, actors, t, u):
     fx, fy = se.FACES[on["key"]]["eyes"][0]
     face_x = on["x"] + fx * on["face"] * on["small"]
     ride = veh["wheel_r"] + 0.6 * veh["travel"] + bh / 2
-    face_y = ground_y(on["z"]) - (on["h"] + (ride + fy) * on["small"]) * k
+    face_y = ground_y(on["z"]) - (on["h"] + (ride + fy) * on["small"] * on["sq"]) * k
     if kind == "two":
         other = actors.get(shot.get("with"))
         mid = (on["x"] + other["x"]) / 2 if other else on["x"]
         return mid, shot.get("zoom", 1.25), None
     if kind == "medium":
-        return on["x"] + bw * 0.15 * on["face"], shot.get("zoom", 1.6), ground_y(on["z"]) - 1.4 * k
+        return on["x"] + bw * 0.15 * on["face"], shot.get("zoom", 1.6), ground_y(on["z"]) - (1.9 + on["h"]) * k
     if kind == "close":
         return face_x + 0.6 * on["face"], shot.get("zoom", 2.8), face_y
     if kind == "ecu":
@@ -754,10 +933,15 @@ def build_audio(shots, placed, total, scene):
     talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))
     duck = 1.0 - 0.55 * np.clip(talk * 3, 0, 1)
     mix = se.peak(narr) * 1.0 + se.peak(mus) * 0.32 * duck + se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
-    if scene.get("ambience") == "rain":
+    if scene.get("ambience") == "rain":                            # soft, calming rain (user review: was too loud)
         rng = np.random.default_rng(2)
-        rain = SM.box_avg(rng.normal(0, 1, n), 6) * 0.15
-        mix += rain
+        hiss = SM.box_avg(rng.normal(0, 1, n), 40)
+        hiss = hiss / max(1e-9, np.max(np.abs(hiss))) * 0.035
+        drops = np.zeros(n)
+        tick = np.sin(2 * math.pi * 2600 * np.arange(int(0.012 * se.SR)) / se.SR) * np.exp(-np.linspace(0, 6, int(0.012 * se.SR)))
+        for i in rng.integers(0, max(1, n - len(tick)), int(len(mix) / se.SR * 18)):
+            drops[i:i + len(tick)] += tick * float(rng.uniform(0.004, 0.012))
+        mix += hiss + drops[:len(mix)] if len(mix) <= n else hiss
     mix = np.tanh(1.2 * mix) / np.tanh(1.2)
     mix = mix[:int(total * se.SR)]
     return mix / max(1e-9, np.max(np.abs(mix))) * 0.95
@@ -805,7 +989,8 @@ def render_scene(ep, num, aspect):
         # actor states for this shot (positions persist from earlier shots, then moves are applied)
         for aid, a in actors.items():
             a["x"], a["z"], a["face"] = start[aid]
-            a["h"], a["v"] = 0.0, 0.0
+            a["h"], a["v"], a["sq"], a["dizzy"] = a["h0"], 0.0, 1.0, False
+            a["patched"] = float(scene["actors"][aid].get("patched", 0))
             a["hidden"] = scene["actors"][aid].get("hidden", False)
         for j in range(si + 1):
             s_ = shots[j]
@@ -818,13 +1003,25 @@ def render_scene(ep, num, aspect):
                     a["x"] = mv["x"]
                 if "face" in mv:
                     a["face"] = mv["face"]
-                if "to_x" in mv:
+                if "h" in mv:
+                    a["h"] = mv["h"]
+                if "patched" in mv:
+                    a["patched"] = 1.0 if mv["patched"] else 0.0
+                if mv.get("squash") and j == si:                   # flattened, then BOING back (Shorts style)
+                    a0 = uu - mv.get("at", 0.0)
+                    if a0 >= 0:
+                        a["sq"] = mv["squash"] if a0 < mv.get("hold", 99) else \
+                            mv["squash"] + (1 - mv["squash"]) * se.ease_out_back(min(1.0, (a0 - mv.get("hold", 99)) / 0.4))
+                if mv.get("dizzy") and j == si:
+                    a["dizzy"] = True
+                if "to_x" in mv:                                   # eased: slow -> fast -> slow -> stop
                     sp = mv.get("speed", 3.0)
                     d = mv["to_x"] - a["x"]
-                    dist = min(abs(d), sp * max(0.0, uu - mv.get("delay", 0.0)))
-                    a["x"] += math.copysign(dist, d)
-                    if dist < abs(d) and uu < s_["t1"] - s_["t0"]:
-                        a["v"] = sp
+                    T = abs(d) / max(0.1, sp) * 1.25 + 0.4
+                    pr = min(1.0, max(0.0, (uu - mv.get("delay", 0.0)) / T))
+                    a["x"] += d * pr * pr * (3 - 2 * pr)
+                    if 0 < pr < 1:
+                        a["v"] = abs(d) / T * 6 * pr * (1 - pr)
                     a["face"] = 1 if d >= 0 else -1
                 if mv.get("hop") and j == si:
                     a["h"] = abs(math.sin(uu * 7)) * 0.5
@@ -856,7 +1053,7 @@ def render_scene(ep, num, aspect):
         else:
             camx += (cx - camx) * 0.12
             zoom += (z_ - zoom) * 0.12
-        piv_y = focus_y if focus_y is not None else ground_y(1.0) - 1.2 * k_of(1.0)
+        piv_y = focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)
         piv_y -= sh.get("lift", 0.0) * k_of(1.0)                   # camera tilted up (show the sky: Kraggor)
         # draw
         ctx.save()
@@ -892,6 +1089,21 @@ def render_scene(ep, num, aspect):
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
             draw_actor(ctx, a, t, camx)
+            if a["dizzy"]:
+                sx_, gy_ = pxy(a["x"], a["z"], camx)
+                k_ = k_of(a["z"])
+                for q in range(3):
+                    ang = t * 5 + q * 2.09
+                    se.star(ctx, sx_ + math.cos(ang) * 1.6 * k_, gy_ - (1.6 * a["sq"] + 0.9) * k_ + math.sin(ang) * 0.35 * k_,
+                            0.32 * k_, ang)
+                    ctx.set_source_rgb(1, 0.85, 0.15)
+                    ctx.fill_preserve()
+                    ctx.set_source_rgb(0.4, 0.3, 0)
+                    ctx.set_line_width(2)
+                    ctx.stroke()
+        for prop in scene.get("props", []):
+            if prop["type"] == "desk":
+                draw_desk_front(ctx, prop, camx)
         ft = sh.get("foot")
         if ft:
             uu = u - ft.get("at", 0.0)
@@ -904,9 +1116,13 @@ def render_scene(ep, num, aspect):
         if sh.get("kraggor") and sh["kraggor"].get("front"):      # close-up of Kraggor: in front of everything
             kraggor_head(ctx, u, sh["kraggor"])
         if sh.get("toss"):
-            ice_cream_toss(ctx, u, sh["toss"], camx, actors)
-        if sh.get("speedlines"):
-            se.draw_speed_lines(ctx, 24.0, t)
+            tspec = dict(sh["toss"])
+            if sh.get("kraggor") and not sh["kraggor"].get("front"):
+                tspec["target"] = kraggor_mouth(sh["kraggor"], H / 2 + (stands_top_world() - piv_y) * zoom)
+            ice_cream_toss(ctx, u, tspec, camx, actors)
+        vmax = max([a.get("v", 0.0) for a in actors.values() if not a["hidden"]] + [0.0])
+        if sh.get("speedlines") and vmax > 6:
+            se.draw_speed_lines(ctx, min(26.0, vmax * 1.6), t)
         if sh.get("confetti"):
             se.draw_confetti(ctx, u)
         if sh.get("crown"):
@@ -957,8 +1173,9 @@ def render_scene(ep, num, aspect):
     ff.stdin.close()
     ff.wait()
     out = os.path.join(out_dir, f"scene_{num:02d}_{aspect}.mp4")
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", wav, "-c:v", "copy", "-c:a", "aac",
-                    "-b:a", "192k", "-shortest", out], check=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", wav, "-c:v", "copy",
+                    "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest",
+                    out], check=True)                                # same loudness in every scene (headphones!)
     os.remove(silent)
     print(f"[story] scene {num} ({aspect}): {total:.1f}s, {len(shots)} shots, {len(placed)} lines -> {out}", flush=True)
     return out

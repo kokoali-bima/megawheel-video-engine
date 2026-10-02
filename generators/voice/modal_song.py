@@ -1,0 +1,113 @@
+"""MegaWheel Arena theme songs on Modal GPUs: ACE-Step (open source, Apache-2.0) text+lyrics -> song with vocals.
+Several takes per song; the take whose sung lyrics speech recognition hears best is kept (faster-whisper QA).
+Same monthly budget guard + modal_usage.json ledger as modal_tts.py.
+
+Run on VM 99.3 (cd /root/video-engine):
+  venv-modal/bin/modal run generators/voice/modal_song.py --songs branding/music/songs.json --out branding/music
+  songs.json = [{"name": "intro_lets_go", "duration": 28, "tags": "...", "lyrics": "[verse]...", "takes": 4}, ...]
+"""
+import datetime as dt
+import json
+import os
+import time
+
+import modal
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+LEDGER = os.path.join(ROOT, "modal_usage.json")
+BUDGET_USD = 29.0
+GPU_PRICE = {"L4": 0.000222}
+OVERHEAD = 1.15
+CKPT = "/root/ace_ckpt"
+
+app = modal.App("megawheel-song")
+
+
+def _download():
+    from faster_whisper import WhisperModel
+    from huggingface_hub import snapshot_download
+    snapshot_download("ACE-Step/ACE-Step-v1-3.5B", local_dir=CKPT)
+    WhisperModel("base.en", device="cpu", compute_type="int8")
+
+
+image = (
+    modal.Image.debian_slim(python_version="3.11")
+    .apt_install("ffmpeg", "git", "libsndfile1")
+    .pip_install("git+https://github.com/ace-step/ACE-Step.git", "faster-whisper", "huggingface_hub")
+    .run_function(_download)
+)
+
+
+def _score(want, got):
+    import difflib
+    import re
+    norm = lambda s: " ".join(re.sub(r"[^a-z ]", " ", s.lower()).split())
+    lyr = norm(re.sub(r"\[[^\]]*\]", " ", want))
+    return difflib.SequenceMatcher(None, lyr, norm(got)).ratio()
+
+
+@app.function(image=image, gpu="L4", timeout=1800)
+def sing(songs: list) -> dict:
+    from acestep.pipeline_ace_step import ACEStepPipeline
+    from faster_whisper import WhisperModel
+    t0 = time.time()
+    pipe = ACEStepPipeline(checkpoint_dir=CKPT, dtype="bfloat16", torch_compile=False, cpu_offload=False,
+                           overlapped_decode=False)
+    asr = WhisperModel("base.en", device="cpu", compute_type="int8")
+    out = {}
+    for sg in songs:
+        best = None
+        for take in range(int(sg.get("takes", 3))):
+            path = f"/tmp/{sg['name']}_{take}.wav"
+            seed = int(sg.get("seed", 100)) + take * 17
+            pipe(audio_duration=float(sg["duration"]), prompt=sg["tags"], lyrics=sg["lyrics"], infer_step=60,
+                 guidance_scale=15.0, scheduler_type="euler", cfg_type="apg", omega_scale=10.0,
+                 manual_seeds=str(seed), guidance_interval=0.5, guidance_interval_decay=0.0, min_guidance_scale=3.0,
+                 use_erg_tag=True, use_erg_lyric=True, use_erg_diffusion=True, oss_steps="",
+                 guidance_scale_text=0.0, guidance_scale_lyric=0.0, save_path=path)
+            if not os.path.exists(path):                          # some versions append their own suffix
+                cands = sorted(f for f in os.listdir("/tmp") if f.startswith(f"{sg['name']}_{take}"))
+                path = os.path.join("/tmp", cands[-1]) if cands else path
+            heard = " ".join(s.text for s in asr.transcribe(path, language="en", beam_size=3)[0])
+            sc = _score(sg["lyrics"], heard)
+            with open(path, "rb") as fh:
+                data = fh.read()
+            if best is None or sc > best[0]:
+                best = (sc, data, heard, take, seed)
+        out[sg["name"]] = dict(wav=best[1], score=round(best[0], 2), heard=best[2][:300], take=best[3], seed=best[4])
+    return dict(songs=out, secs=time.time() - t0)
+
+
+def _ledger():
+    if os.path.exists(LEDGER):
+        with open(LEDGER) as fh:
+            return json.load(fh)
+    return {"budget_usd": BUDGET_USD, "runs": []}
+
+
+@app.local_entrypoint()
+def main(songs: str = "branding/music/songs.json", out: str = "branding/music", note: str = "theme songs"):
+    with open(songs) as fh:
+        items = json.load(fh)
+    led = _ledger()
+    month = dt.date.today().strftime("%Y-%m")
+    spent = sum(r["cost_usd"] for r in led["runs"] if r["date"].startswith(month))
+    worst = (300 + 90 * sum(int(s.get("takes", 3)) for s in items)) * GPU_PRICE["L4"] * OVERHEAD
+    print(f"[song] bulan {month}: tercatat ${spent:.2f} / ${BUDGET_USD:.2f}; estimasi terburuk run ini ${worst:.2f}")
+    if spent + worst > BUDGET_USD:
+        raise SystemExit("[song] STOP: budget bulanan akan terlewati. Tidak dijalankan.")
+    t0 = time.time()
+    res = sing.remote(items)
+    os.makedirs(out, exist_ok=True)
+    for name, r in res["songs"].items():
+        with open(os.path.join(out, f"{name}.wav"), "wb") as fh:
+            fh.write(r["wav"])
+        print(f"[song] {name}: lirik terdengar {r['score']:.2f} (take {r['take']}, seed {r['seed']}) -> {out}/{name}.wav")
+        print(f"[song]   heard: {r['heard'][:160]}")
+    cost = res["secs"] * GPU_PRICE["L4"] * OVERHEAD
+    led["runs"].append(dict(date=dt.date.today().isoformat(), note=note, gpu="L4", engine="ace-step-v1-3.5B",
+                            songs=len(items), gpu_seconds=round(res["secs"], 1), wall_seconds=round(time.time() - t0, 1),
+                            cost_usd=round(cost, 4)))
+    with open(LEDGER, "w") as fh:
+        json.dump(led, fh, indent=1)
+    print(f"[song] DONE {len(items)} lagu: GPU {res['secs']:.0f}s ≈${cost:.3f}")

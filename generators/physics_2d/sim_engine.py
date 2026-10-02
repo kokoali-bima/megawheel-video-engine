@@ -2407,10 +2407,19 @@ def draw_body(ctx, vk, v, broken, t=0.0):
         ctx.arc(0, 2.55, 0.12, 0, 2 * math.pi)
         fill_stroke(ctx, (0.9, 0.1, 0.2), lw=0.03)
         rrect(ctx, -2.8, -1.05, 5.6, 2.1, 0.3)
-        fill_stroke(ctx, c, lw=0.08)
-        ctx.rectangle(-2.8, -1.05, 5.6, 0.5)
-        ctx.set_source_rgb(0.6, 0.95, 0.8)
+        ctx.set_source_rgb(*c)
         ctx.fill()
+        ctx.save()                                              # lower stripe follows the rounded body corners
+        rrect(ctx, -2.8, -1.05, 5.6, 2.1, 0.3)
+        ctx.clip()
+        ctx.rectangle(-2.8, -1.05, 5.6, 0.5)
+        ctx.set_source_rgb(*v.get("accent", (0.6, 0.95, 0.8)))
+        ctx.fill()
+        ctx.restore()
+        rrect(ctx, -2.8, -1.05, 5.6, 2.1, 0.3)
+        ctx.set_source_rgb(0.07, 0.07, 0.12)
+        ctx.set_line_width(0.08)
+        ctx.stroke()
         rrect(ctx, -2.0, -0.15, 2.3, 0.8, 0.1)                   # serving window
         fill_stroke(ctx, glass, lw=0.05)
         for i in range(8):                                      # awning

@@ -1,0 +1,18 @@
+[
+ {
+  "name": "intro_lets_go",
+  "duration": 28,
+  "takes": 4,
+  "seed": 101,
+  "tags": "upbeat cartoon theme song, happy pop rock, catchy, energetic, bright female and male vocals, group chorus, electric guitar, drums, 140 bpm, major key, fun, friendship",
+  "lyrics": "[verse]\nWheels are turning, engines humming,\nAll my friends, I hear you coming!\nBig or small or fast or slow,\nTogether, come on, let's go!\n\n[chorus]\nMega-Mega, MegaWheel Arena!\nNever give up, we'll race forever!\nDing-ding-ding, the road is calling,\nGet back up whenever you're falling!\nMegaWheel... Arena!"
+ },
+ {
+  "name": "outro_see_you",
+  "duration": 28,
+  "takes": 4,
+  "seed": 301,
+  "tags": "warm gentle cartoon ending song, soft acoustic ballad, ukulele, piano, heartfelt, sweet female vocal, 88 bpm, major key, goodbye, cozy, hopeful",
+  "lyrics": "[verse]\nThe sun goes down, the road is quiet,\nWe had our race, we had our fun.\nWave goodbye, my wheels are tired,\nBut tomorrow's a brand new run!\n\n[chorus]\nSee you soon at MegaWheel Arena,\nFriends forever, near or far.\nDing-ding, goodnight, sweet dreams, my friend,\nThis is not the end!"
+ }
+]
