@@ -136,6 +136,15 @@
    "with": "sprinkles"
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 3.2,
+   "emote": {
+    "sprinkles": "cry"
+   },
+   "music": "hopeful"
+  },
+  {
    "cam": "wide",
    "music": "tense",
    "lines": [
@@ -144,7 +153,9 @@
      "Sprinkles! Please come to the stage.",
      "proud"
     ]
-   ]
+   ],
+   "punch": true,
+   "freeze": 1.8
   }
  ]
 }

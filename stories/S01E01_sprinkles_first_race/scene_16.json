@@ -45,7 +45,9 @@
      "But who is Kraggor... and why is he so alone?",
      "calm"
     ]
-   ]
+   ],
+   "punch": true,
+   "freeze": 2.0
   },
   {
    "cam": "wide",

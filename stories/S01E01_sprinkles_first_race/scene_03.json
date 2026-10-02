@@ -151,11 +151,14 @@
   {
    "cam": "ecu",
    "on": "sprinkles",
-   "hold": 1.8,
+   "hold": 2.8,
    "emote": {
     "sprinkles": "sad"
    },
-   "music": "sad"
+   "music": "sad",
+   "sfx": [
+    "heartbeat"
+   ]
   },
   {
    "cam": "two",
@@ -189,7 +192,18 @@
      "Thirteen? Unlucky!",
      "laugh"
     ]
-   ]
+   ],
+   "punch": true
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 2.2,
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "music": "sad",
+   "freeze": 1.8
   }
  ]
 }

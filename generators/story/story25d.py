@@ -905,7 +905,8 @@ def build(scene):
             a = announcer.get(*it)
             placed.append(dict(t0=t + u, audio=a, spk=spk, text=text, emo=emo))
             u += len(a) / se.SR + sh.get("gap", 0.3)
-        sh["t1"] = t + max(u + sh.get("tail", 0.4), sh.get("hold", 0.0))
+        sh["t1"] = t + max(u + sh.get("tail", 0.4), sh.get("hold", 0.0), 1.6 if sh.get("triple") else 0.0)
+        sh["t1"] += sh.get("freeze", 0.0)
         t = sh["t1"]
     return scene["shots"], placed, t
 
@@ -961,7 +962,33 @@ def score(mood, dur, seed=1):
     return out
 
 
+def sting():
+    """Drama hit: low boom + dissonant string stab (the drama-China 'DUN!')."""
+    n = int(1.6 * se.SR)
+    t = np.arange(n) / se.SR
+    boom = np.sin(2 * math.pi * (60 - 25 * t) * t) * np.exp(-t * 3.0)
+    stab = sum(np.sign(np.sin(2 * math.pi * f * t)) * 0.5 + np.sin(2 * math.pi * f * 2 * t) * 0.3
+               for f in (220.0, 233.1, 311.1, 466.2)) / 4
+    stab = np.convolve(stab, np.ones(9) / 9, mode="same") * np.exp(-t * 1.6) * np.minimum(1, t / 0.01)
+    return 0.9 * boom + 0.45 * stab
+
+
+def heartbeat(beats=4, bpm=72):
+    gap = 60.0 / bpm
+    out = np.zeros(int((beats * gap + 0.4) * se.SR))
+    for b in range(beats):
+        for off, g in ((0.0, 1.0), (0.22, 0.7)):
+            i0 = int((b * gap + off) * se.SR)
+            L = int(0.18 * se.SR)
+            tt = np.arange(L) / se.SR
+            out[i0:i0 + L] += g * np.sin(2 * math.pi * (55 - 20 * tt) * tt) * np.exp(-tt * 22)
+    return out
+
+
 SFX = {
+    "sting": sting,
+    "heartbeat": heartbeat,
+    "whoosh": lambda: se.synth_whoosh(),
     "ding": lambda: np.concatenate([se.tone(1320, 0.18, "sine", decay=0.12), se.tone(1046, 0.3, "sine", decay=0.18)]),
     "laugh": lambda: SM.cheer(1.6, 0.6, seed=4),
     "cheer": lambda: SM.cheer(3.0, 1.2, seed=5),
@@ -991,6 +1018,15 @@ def build_audio(shots, placed, total, scene):
             name, dt_ = (s, 0.0) if isinstance(s, str) else (s[0], s[1])
             if name in SFX:
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
+    for sh in shots:
+        if sh.get("punch"):
+            place(sfx, se.synth_whoosh(), sh["t0"], 0.6)
+            place(sfx, sting(), sh["t0"] + 0.15, 0.9)
+        if sh.get("triple"):
+            for k in range(3):
+                place(sfx, sting(), sh["t0"] + 0.45 * k, 0.55 + 0.2 * k)
+        if sh.get("freeze"):
+            place(sfx, sting(), sh["t1"] - sh["freeze"], 1.0)
     mus = np.zeros(n)
     if scene.get("song"):
         song = se.read_wav(os.path.join(BASE, scene["song"]))     # theme song (ACE-Step), already mastered
@@ -1063,6 +1099,10 @@ def render_scene(ep, num, aspect):
         t = fi / FPS
         si = max(i for i, sh in enumerate(shots) if sh["t0"] <= t) if any(sh["t0"] <= t for sh in shots) else 0
         sh = shots[si]
+        treal, frz = t, 0.0
+        if sh.get("freeze") and t > sh["t1"] - sh["freeze"]:
+            frz = (t - (sh["t1"] - sh["freeze"])) / sh["freeze"]
+            t = sh["t1"] - sh["freeze"] - 1e-3
         u = t - sh["t0"]
         # actor states for this shot (positions persist from earlier shots, then moves are applied)
         for aid, a in actors.items():
@@ -1131,6 +1171,13 @@ def render_scene(ep, num, aspect):
         else:
             camx += (cx - camx) * 0.12
             zoom += (z_ - zoom) * 0.12
+        zmul = 1.0
+        if sh.get("punch"):                                        # crash zoom onto the face
+            zmul = 1.0 + 0.45 * (1 - (1 - min(1.0, u / 0.25)) ** 3)
+        if sh.get("triple"):                                       # triple-take: 3 hard cuts, closer each time
+            zmul = (1.0, 1.4, 1.9)[min(2, int(u / 0.45))]
+        if frz:
+            zmul *= 1.0 + 0.12 * (1 - (1 - frz) ** 2)
         piv_y = focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)
         piv_y -= sh.get("lift", 0.0) * k_of(1.0)                   # camera tilted up (show the sky: Kraggor)
         # draw
@@ -1139,7 +1186,7 @@ def render_scene(ep, num, aspect):
         if "shake" in sh.get("fx", []):
             shake = 14 * math.sin(t * 60)
         ctx.translate(W / 2 + shake, H * 0.5)
-        ctx.scale(zoom, zoom * (1.12 if sh.get("cam") == "low" else 1.0))
+        ctx.scale(zoom * zmul, zoom * zmul * (1.12 if sh.get("cam") == "low" else 1.0))
         ctx.translate(-CX, -piv_y)
         def behind():
             kr = sh.get("kraggor")
@@ -1238,8 +1285,21 @@ def render_scene(ep, num, aspect):
             caption(ctx, sh["caption"], u, sh["t1"] - sh["t0"])
         if sh.get("title"):
             caption(ctx, sh["title"], u, sh["t1"] - sh["t0"], big=True)
+        if frz:                                                    # freeze-frame: drain the colour, white flash
+            surf.flush()
+            buf = np.ndarray(shape=(H, W, 4), dtype=np.uint8, buffer=surf.get_data())
+            f32 = buf[..., :3].astype(np.float32)
+            grey = f32 @ np.array([0.114, 0.587, 0.299], np.float32)
+            a_ = min(0.85, frz * 2.5)
+            buf[..., :3] = np.clip(f32 * (1 - a_) + grey[..., None] * a_, 0, 255).astype(np.uint8)
+            surf.mark_dirty()
+            if frz < 0.06:
+                ctx.rectangle(0, 0, W, H)
+                ctx.set_source_rgba(1, 1, 1, 0.7 * (1 - frz / 0.06))
+                ctx.fill()
         if scene.get("letterbox", True):
             letterbox(ctx, aspect)
+        t = treal
         if cur is not None:
             subtitle(ctx, cur["spk"], cur["text"], aspect, t - cur["t0"])
         fade = min(1.0, t / 0.4, max(0.0, (total - t) / 0.4))

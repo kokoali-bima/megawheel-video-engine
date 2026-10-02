@@ -66,6 +66,14 @@
    ]
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 2.6,
+   "emote": {
+    "sprinkles": "cry"
+   }
+  },
+  {
    "cam": "wide",
    "hold": 2.0,
    "sfx": [
@@ -180,7 +188,8 @@
    "weather_fx": "rain",
    "sfx": [
     "thunder"
-   ]
+   ],
+   "freeze": 1.8
   }
  ]
 }

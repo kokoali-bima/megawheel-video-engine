@@ -98,6 +98,14 @@
   {
    "cam": "ecu",
    "on": "sprinkles",
+   "hold": 3.0,
+   "emote": {
+    "sprinkles": "cry"
+   }
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
    "hold": 2.0,
    "emote": {
     "sprinkles": "cry"
@@ -119,7 +127,8 @@
      "...and she started to remember.",
      "calm"
     ]
-   ]
+   ],
+   "freeze": 1.6
   }
  ]
 }

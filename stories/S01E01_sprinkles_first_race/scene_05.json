@@ -129,6 +129,14 @@
   {
    "cam": "close",
    "on": "little_sprinkles",
+   "hold": 2.2,
+   "emote": {
+    "little_sprinkles": "surprised"
+   }
+  },
+  {
+   "cam": "close",
+   "on": "little_sprinkles",
    "lines": [
     [
      "little_sprinkles",
@@ -148,6 +156,14 @@
      "calm"
     ]
    ]
+  },
+  {
+   "cam": "two",
+   "on": "grandpa_cone",
+   "with": "little_sprinkles",
+   "zoom": 1.25,
+   "hold": 3.0,
+   "music": "hopeful"
   },
   {
    "cam": "two",
@@ -182,7 +198,8 @@
      "I know you will.",
      "calm"
     ]
-   ]
+   ],
+   "freeze": 2.0
   }
  ]
 }

@@ -50,6 +50,9 @@
      "A champion is the one who stops... to help someone else.",
      "calm"
     ]
+   ],
+   "sfx": [
+    "heartbeat"
    ]
   },
   {
@@ -95,7 +98,8 @@
      "She's... going the wrong way?!",
      "surprised"
     ]
-   ]
+   ],
+   "punch": true
   },
   {
    "cam": "close",
@@ -118,6 +122,15 @@
      "scared"
     ]
    ]
+  },
+  {
+   "cam": "ecu",
+   "on": "buster",
+   "hold": 1.6,
+   "emote": {
+    "buster": "scared"
+   },
+   "triple": true
   },
   {
    "cam": "close",
@@ -170,7 +183,8 @@
     "mode": "calm",
     "sx": 0.42,
     "scale": 0.85
-   }
+   },
+   "freeze": 2.0
   }
  ]
 }

@@ -51,7 +51,17 @@
    ],
    "fx": [
     "shake"
-   ]
+   ],
+   "punch": true
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "triple": true
   },
   {
    "cam": "wide",
@@ -177,7 +187,7 @@
   {
    "cam": "ecu",
    "on": "sprinkles",
-   "hold": 2.4,
+   "hold": 3.0,
    "music": "sad",
    "foot": {
     "x": 12.5,
@@ -192,7 +202,11 @@
      "squash": 0.42,
      "dizzy": true
     }
-   }
+   },
+   "sfx": [
+    "heartbeat"
+   ],
+   "freeze": 2.0
   }
  ]
 }

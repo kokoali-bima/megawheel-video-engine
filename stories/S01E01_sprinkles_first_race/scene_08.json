@@ -65,6 +65,17 @@
    ]
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 3.0,
+   "emote": {
+    "sprinkles": "cry"
+   },
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
    "cam": "wide",
    "hold": 3.0,
    "sfx": [
@@ -110,7 +121,17 @@
      "ding",
      0.5
     ]
-   ]
+   ],
+   "punch": true
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "triple": true
   },
   {
    "cam": "two",
@@ -194,7 +215,8 @@
     "sx": 0.86,
     "sy": 0.28,
     "r": 10
-   }
+   },
+   "freeze": 2.0
   }
  ]
 }

@@ -43,6 +43,17 @@
    ]
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 2.0,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "sfx": [
+    "heartbeat"
+   ]
+  },
+  {
    "cam": "wide",
    "hold": 2.4,
    "lift": 3.5,
@@ -140,7 +151,16 @@
      "sad"
     ]
    ],
-   "with": "sprinkles"
+   "with": "sprinkles",
+   "hold": 3.0
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.2,
+   "emote": {
+    "sprinkles": "happy"
+   }
   },
   {
    "cam": "close",
@@ -191,7 +211,9 @@
      "And the race... is over?",
      "surprised"
     ]
-   ]
+   ],
+   "punch": true,
+   "freeze": 1.8
   }
  ]
 }

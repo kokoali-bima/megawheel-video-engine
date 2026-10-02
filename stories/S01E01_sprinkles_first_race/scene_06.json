@@ -174,7 +174,18 @@
      "Nice speed, grandma!",
      "tease"
     ]
-   ]
+   ],
+   "emote": {
+    "sprinkles": "sad"
+   }
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.2,
+   "emote": {
+    "sprinkles": "sad"
+   }
   },
   {
    "look": {
@@ -192,6 +203,16 @@
      "worried"
     ]
    ]
+  },
+  {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.4,
+   "emote": {
+    "sprinkles": "worried"
+   },
+   "punch": true,
+   "freeze": 1.8
   }
  ]
 }

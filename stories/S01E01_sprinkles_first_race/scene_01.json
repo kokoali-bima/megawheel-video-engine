@@ -97,7 +97,8 @@
      "Not this time.",
      "determined"
     ]
-   ]
+   ],
+   "punch": true
   },
   {
    "cam": "wide",
@@ -127,6 +128,26 @@
    }
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "triple": true
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "hold": 1.6,
+   "emote": {
+    "zippy": "scared"
+   },
+   "sfx": [
+    "gasp"
+   ]
+  },
+  {
    "cam": "wide",
    "music": "hopeful",
    "lines": [
@@ -154,7 +175,8 @@
      "It all started... one month earlier.",
      "calm"
     ]
-   ]
+   ],
+   "freeze": 1.8
   }
  ]
 }

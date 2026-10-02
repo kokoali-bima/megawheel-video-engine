@@ -100,6 +100,10 @@
      "For you, Grandpa.",
      "calm"
     ]
+   ],
+   "hold": 3.0,
+   "sfx": [
+    "heartbeat"
    ]
   },
   {
@@ -111,7 +115,8 @@
      "Ready... set... let's go!",
      "excited"
     ]
-   ]
+   ],
+   "punch": true
   },
   {
    "cam": "track",
@@ -184,7 +189,8 @@
      "I passed someone!",
      "happy"
     ]
-   ]
+   ],
+   "freeze": 1.6
   }
  ]
 }

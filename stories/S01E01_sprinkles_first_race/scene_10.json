@@ -142,8 +142,17 @@
    ]
   },
   {
+   "cam": "ecu",
+   "on": "sprinkles",
+   "hold": 1.6,
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "triple": true
+  },
+  {
    "cam": "wide",
-   "hold": 2.4,
+   "hold": 2.0,
    "music": "tense",
    "fx": [
     "shake"
@@ -159,7 +168,8 @@
     "sprinkles": "scared",
     "zippy": "scared",
     "nitro": "scared"
-   }
+   },
+   "freeze": 2.0
   }
  ]
 }
