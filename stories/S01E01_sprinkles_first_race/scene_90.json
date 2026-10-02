@@ -131,11 +131,11 @@
   },
   {
    "cam": "wide",
-   "hold": 4.0,
+   "hold": 6.2,
    "music": "hopeful",
    "card": [
-    "FULL EPISODE",
-    "THIS SUNDAY"
+    "FULL EPISODE THIS SUNDAY",
+    "1 PM ET \u00b7 10 AM PT"
    ]
   }
  ],
@@ -144,5 +144,5 @@
  "edge_fade": false,
  "chapter": null,
  "trailer": true,
- "end_hold": 0.4
+ "end_hold": 0.8
 }
