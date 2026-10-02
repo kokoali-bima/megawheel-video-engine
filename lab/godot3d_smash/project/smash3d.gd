@@ -773,10 +773,16 @@ func _hud() -> void:
 	cta.position = Vector2(140, 820)
 	cta.size = Vector2(800, 330)
 	cta.visible = false
+	var sb = StyleBoxFlat.new()                              # white rounded card like the cairo end card
+	sb.bg_color = Color(1, 1, 1, 0.97)
+	sb.set_corner_radius_all(36)
+	sb.border_color = Color(1, 0.86, 0.12)
+	sb.set_border_width_all(8)
+	cta.add_theme_stylebox_override("panel", sb)
 	hud.add_child(cta)
 	var cl = Label.new()
 	cl.text = "MEGAWHEEL ARENA\nLIKE  •  SUBSCRIBE"
-	cl.label_settings = _ls(62, Color(1, 1, 1))
+	cl.label_settings = _ls(62, Color(0.9, 0.12, 0.15))
 	cl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cl.size = Vector2(800, 330)
