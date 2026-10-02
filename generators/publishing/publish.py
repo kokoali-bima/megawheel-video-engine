@@ -47,7 +47,7 @@ def main():
         sys.exit("[publish] STOP: YouTube belum terotentikasi (jalankan auth_youtube.py).")
 
     print(f"[publish] Ep. {args.episode} | {m['title']} | privacy={args.privacy}")
-    res = uploader.upload_shorts(video_path=video, title=m["title"], description=m["description"], tags=m["tags"],
+    res = uploader.upload_shorts(video_path=video, title=m["title"], description=episodes.with_credit(m["description"]), tags=m["tags"],
                                  category_id=CATEGORY_FILM_ANIMATION, privacy_status=args.privacy,
                                  made_for_kids=False)
     episodes.mark_uploaded(args.episode, res["url"], args.privacy)

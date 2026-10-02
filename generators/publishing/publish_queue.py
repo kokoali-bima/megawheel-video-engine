@@ -183,7 +183,7 @@ def upload(max_n):
         save(q)                                                  # marker first: a crash can never cause a duplicate
         try:
             res = uploader.upload_shorts(video_path=f"{folder}/{e['video_id']}.mp4", title=m["title"],
-                                         description=m["description"], tags=m["tags"],
+                                         description=episodes.with_credit(m["description"]), tags=m["tags"],
                                          category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
                                          made_for_kids=False, publish_at=it["publish_at_utc"])
         except Exception as ex:                                  # stop the run; the next run checks YouTube first

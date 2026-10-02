@@ -277,3 +277,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+CREDIT = "🎬 Produced by Infrasoft Media & Tech"
+
+
+def with_credit(desc):
+    """Description + production credit (user decision 2026-10-02), placed before the hashtag line."""
+    if CREDIT in desc:
+        return desc
+    head, sep, tags = desc.rpartition("\n\n")
+    if sep and tags.lstrip().startswith("#"):
+        return f"{head}\n\n{CREDIT}\n\n{tags}"
+    return f"{desc}\n\n{CREDIT}"

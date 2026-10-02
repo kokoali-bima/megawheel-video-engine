@@ -420,3 +420,14 @@ registry tetap di git. Kredensial: `credentials/drive_client_secret.json` + `dri
 **Evaluasi:**
 - Setelah 2 minggu, bandingkan views per jam tayang dan persentase penonton yang bertahan di YouTube Analytics per slot.
 - Slot dengan hasil terburuk digeser. Setiap perubahan dicatat di DEV_HISTORY.
+
+## 11. Branding (keputusan user 2026-10-02)
+
+- **Tidak ada watermark permanen** di dalam video (Shorts maupun video panjang).
+- Watermark memakai fitur bawaan **YouTube Studio → Kustomisasi → Branding → Watermark video**
+  (logo channel MegaWheel Arena, bisa diklik untuk subscribe). Diatur user di Studio, bukan oleh engine.
+- **Logo Infrasoft Media & Tech** hanya di:
+  1. ident pembuka video panjang (story15): "INFRASOFT presents" sebelum lagu tema (`stories/<ep>/edit.json` → `ident`);
+  2. deskripsi setiap video: baris `🎬 Produced by Infrasoft Media & Tech` (ditambahkan otomatis saat upload
+     oleh `episodes.with_credit()` di `publish_queue.py` / `publish.py`, sebelum baris hashtag).
+- Sumber logo vektor: `branding/infrasoft/make_logo.py` (gear biru + play oranye, font Montserrat OFL).
