@@ -151,6 +151,7 @@
   }
  ],
  "edge_fade": false,
- "song_stereo": "branding/music/intro_lets_go_v1mix2.wav",
- "chapter": "Theme Song: Let's Go!"
+ "song_stereo": "branding/music/intro_lets_go_v1mix3.wav",
+ "chapter": "Theme Song: Let's Go!",
+ "width": 1.6
 }
