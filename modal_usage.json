@@ -784,6 +784,16 @@
    "gpu_seconds": 12.1,
    "wall_seconds": 51.4,
    "cost_usd": 0.0031
+  },
+  {
+   "date": "2026-10-02",
+   "note": "narrator RACE_V3_TEST r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 98.0,
+   "wall_seconds": 127.1,
+   "cost_usd": 0.025
   }
  ]
 }
