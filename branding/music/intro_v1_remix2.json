@@ -1,0 +1,12 @@
+[
+ {
+  "name": "intro_lets_go_v1mix2",
+  "src": "/tmp/intro_v1.wav",
+  "mix": {
+   "vocals": 0.78,
+   "music": 1.4
+  },
+  "fade_in": 0.6,
+  "fade_out": 2.5
+ }
+]

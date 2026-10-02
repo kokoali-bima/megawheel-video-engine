@@ -150,5 +150,6 @@
    "zoom": 0.42
   }
  ],
- "edge_fade": false
+ "edge_fade": false,
+ "song_stereo": "branding/music/intro_lets_go_v1mix2.wav"
 }

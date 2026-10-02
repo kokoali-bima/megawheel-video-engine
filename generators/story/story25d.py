@@ -1274,6 +1274,9 @@ def build_audio(shots, placed, total, scene):
     for sh in shots:
         pass                                                       # shock moments: picture only (user, v7)
     mus = np.zeros(n)
+    if scene.get("song_stereo"):                                   # stereo song is mixed later by ffmpeg
+        mix = se.peak(narr) * 0.9 + se.peak(sfx) * 0.4 if np.any(narr) or np.any(sfx) else np.zeros(n)
+        return mix[:int(total * se.SR)]
     if scene.get("song"):
         song = se.read_wav(os.path.join(BASE, scene["song"]))     # theme song (ACE-Step), already mastered
         place(mus, song[:n], 0.0, 1.0)
@@ -1328,6 +1331,17 @@ def render_scene(ep, num, aspect):
     os.makedirs(prev, exist_ok=True)
     wav = os.path.join(out_dir, f"scene_{num:02d}_{aspect}.wav")
     se.write_wav(wav, build_audio(shots, placed, total, scene))
+    if scene.get("song_stereo"):                                   # stereo theme song + centred voices / SFX
+        mono = wav.replace(".wav", "_mono.wav")
+        os.replace(wav, mono)
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", mono, "-i", os.path.join(BASE, scene["song_stereo"]),
+                        "-filter_complex",
+                        f"[1:a]aresample=48000,aformat=channel_layouts=stereo,extrastereo=m={scene.get('width', 1.4)},"
+                        f"atrim=0:{total:.3f},apad=whole_dur={total:.3f}[m];"
+                        "[0:a]aresample=48000,pan=stereo|c0=c0|c1=c0[v];"
+                        "[m][v]amix=inputs=2:weights=1 0.9:normalize=0,alimiter=limit=0.95[o]",
+                        "-map", "[o]", "-c:a", "pcm_s16le", wav], check=True)
+        os.remove(mono)
     silent = os.path.join(out_dir, f"scene_{num:02d}_{aspect}_v.mp4")
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],

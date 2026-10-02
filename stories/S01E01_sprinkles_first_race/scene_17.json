@@ -258,5 +258,6 @@
    ]
   }
  ],
- "edge_fade": false
+ "edge_fade": false,
+ "song_stereo": "branding/music/outro_see_you.wav"
 }
