@@ -1,4 +1,4 @@
-# S01E01 — "Sprinkles' First Race" — NASKAH v3 (menunggu persetujuan user)
+# S01E01 — "Sprinkles' First Race" — NASKAH v3 (disetujui user 2026-10-02: naskah, lirik intro, Tilly & Nitro)
 
 > Pengembangan dari v2 (alur, pesan, dan tokoh sama), berdasarkan evaluasi user atas draf kasar v3 (2026-10-02).
 > **Format drama China:** setiap scene = episode mini ±60 detik dengan pembuka, perkembangan, dan **KAIT** di akhir.
@@ -202,14 +202,15 @@ lalu bersembunyi; diakhiri **logo MEGAWHEEL ARENA** dan judul episode.
 - NARRATOR: "But who is Kraggor... and why is he so alone?"
 - **KAIT:** kartu "NEXT SUNDAY — Who is Kraggor?" NARRATOR: "Find out next Sunday, on MegaWheel Arena."
 
-### OUTRO — lagu tema versi hangat (±25 detik)
-Kilas momen terbaik episode, cuplikan minggu depan, end card Like/Subscribe.
+### OUTRO — lagu penutup "See You Next Time" (±25 detik; lagu BERBEDA dari intro, usulan user)
+Senja: tokoh-tokoh pulang satu per satu sambil melambai, kilas momen terbaik episode, cuplikan minggu depan,
+end card Like/Subscribe. Musik pelan dan hangat (piano/ukulele); nada pendek dari lagu intro muncul lagi di ujung.
 
 ---
 
-## Lirik lagu tema "MegaWheel Arena" (draf, ±25 detik)
+## Lirik lagu INTRO "MegaWheel Arena — Let's Go!" (±25 detik, disetujui user)
 
-> Ceria, tempo cepat, mudah dinyanyikan bersama. Dipakai di setiap episode (intro: versi semangat, outro: versi hangat).
+> Ceria, tempo cepat, mudah dinyanyikan bersama. Dipakai di awal setiap episode.
 
 ```
 (Verse)
@@ -224,6 +225,22 @@ Never give up, we'll race forever!
 Ding-ding-ding, the road is calling,
 Get back up whenever you're falling!
 MegaWheel... ARENA!
+```
+
+## Lirik lagu OUTRO "See You Next Time" (±25 detik, usulan, menunggu persetujuan)
+
+> Pelan, hangat, perpisahan ("setiap pertemuan pasti ada perpisahan"). Dipakai di akhir setiap episode.
+
+```
+The sun goes down, the road is quiet,
+We had our race, we had our fun.
+Wave goodbye, my wheels are tired,
+But tomorrow's a brand new run!
+
+See you soon at MegaWheel Arena,
+Friends forever, near or far.
+Ding-ding, goodnight, sweet dreams, my friend,
+This is not the end!
 ```
 
 ## Catatan produksi (perbaikan dari evaluasi draf v3)
