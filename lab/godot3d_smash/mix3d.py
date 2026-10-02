@@ -69,6 +69,8 @@ def sounds_for(ev):
         return [(0.0, bank("whoosh", 0.12), 0.75 if k == "missile" else 0.55)]
     if k == "kraggor":
         return [(0.0, bank("roar", 0.04), 0.9)]
+    if k == "shrink":
+        return [(0.0, bank("debris", 0.1), 0.7), (0.1, bank("stomp", 0.05), 0.45), (0.4, bank("splash"), 0.5)]
     if k == "stomp":
         return [(0.0, bank("stomp"), 1.0)]
     if k == "fall":

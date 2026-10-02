@@ -6,10 +6,46 @@ extends Node3D
 ## A director keeps the fight ~24 s (video 30-40 s, user 2026-10-03): KOs are allowed only from fixed beats (edges are walled until then).
 ##   godot --path project --write-movie out.avi --fixed-fps 30 --quit-after N -- <sprite_dir> [fov y z look_z] [debug]
 
-const ARENA_HX = 10.0                                    # SCALE_STANDARD.md §3: 20 x 24 m
-const ARENA_HZ = 12.0
+# SCALE_STANDARD.md: "classic" = the aired smash25d geometry (26 x 10 m, level camera with lens shift, 60 px/m
+# at the front edge x zoom 1.0-1.45, pans with the cars); "topdown" = lab v3 framing (20 x 24 m, whole arena, 50 px/m).
+var CAM_MODE = "classic"
+var ARENA_HX = 13.0
+var ARENA_HZ = 5.0
 const WATER_Y = -1.2
-const KO_T = [9.0, 16.5, 23.5]                           # earliest time for the 1st / 2nd / final KO
+# win logic copied from smash25d: tyre barriers until 9 s, then a car only leaves the floor when it was PUSHED
+# (<0.8 s ago), the floor shrinks from 18 s every 7 s, last car standing always survives, time limit -> most HP wins.
+# Added (user 2026-10-03): KOs at least KO_GAP apart, never several cars wiped out by one event.
+const BARRIER_DOWN = 9.0
+const PUSH_WINDOW = 0.8
+const KO_GAP = 4.5
+const SHRINK_AT = 18.0
+const SHRINK_EVERY = 7.0
+const SHRINK_STEP = 0.12
+const T_MAX = 27.0                                       # video 30-40 s: winner + replay + end card after this
+# classic camera (smash25d: k(z) = 6000/(100+8z) = 750/(12.5+z) px/m, camera height 20.4 m, horizon y 276 + 20)
+const C_F = 750.0
+const C_H = 20.4
+const C_D = 12.5
+const C_YH = 276.0
+const C_DY = 20.0
+const C_PIV = 1190.0
+var zoom = 1.0
+var OFFSET_SIGN = 1.0
+var cam_f = 750.0
+var cam_yh = 296.0
+var camx = 0.0
+var last_ko_t = -99.0
+var hx_now = 13.0
+var hz_now = 5.0
+var shrink_done = 0
+var floor_shape: BoxShape3D
+var floor_mesh: BoxMesh
+var front_face: MeshInstance3D
+var rims = []
+var water_mat: ShaderMaterial
+var floor_mat: ShaderMaterial
+var win_t_phys = 1e9
+var hop_t = -9.0
 var sprite_dir = "/root/lab/fx/sprites"
 var cast = {}
 var cars = []
@@ -39,14 +75,13 @@ var win_t = 1e9
 # [time, action, ko-index it belongs to] — skipped when that KO already happened
 # One chaos theme per video (user 2026-10-03: meteor one day, Kraggor the next) -> user arg chaos=meteor|kraggor|missile
 var chaos = "meteor"
-var beats = [[5.5, "soft", 0], [9.0, "push_out", 0], [12.5, "kill", 0],
-			 [15.0, "storm", 1], [20.0, "kill", 1], [26.5, "kill", 2]]
+var beats = [[5.0, "soft"], [10.0, "push_weak"], [15.0, "storm"], [20.0, "push_weak"]]   # smash25d CHAOS_AT rhythm
 var rng = RandomNumberGenerator.new()
 var CAM_FOV = 40.0
 var CAM_Y = 30.0
 var CAM_Z = -8.0
 var LOOK_Z = 11.5
-const CARD_TILT = 0.5                                    # cards recline to face the high camera (not squashed)
+var CARD_TILT = 0.0                                      # topdown: 0.5 rad (cards recline to the high camera)
 var cam_base = Vector3.ZERO
 
 
@@ -67,6 +102,14 @@ func _ready() -> void:
 	for arg in a:
 		if str(arg).begins_with("chaos="):
 			chaos = str(arg).substr(6)
+		if str(arg).begins_with("cam="):
+			CAM_MODE = str(arg).substr(4)
+	if CAM_MODE == "topdown":
+		ARENA_HX = 10.0
+		ARENA_HZ = 12.0
+		CARD_TILT = 0.5
+	hx_now = ARENA_HX
+	hz_now = ARENA_HZ
 	cast = JSON.parse_string(FileAccess.open(sprite_dir + "/cast.json", FileAccess.READ).get_as_text())["cars"]
 	font = FontFile.new()
 	font.load_dynamic_font("/root/.fonts/LuckiestGuy-Regular.ttf")
@@ -88,33 +131,69 @@ func _ready() -> void:
 	_arena()
 	_water()
 	_stands()
-	var roster = [["firetruck", Vector3(-6.0, 0, 5.0), "HYDRO", Color(0.9, 0.15, 0.15)],
-				  ["monster2", Vector3(-4.0, 0, 20.0), "GRIZZLY", Color(0.2, 0.75, 0.3)],
-				  ["police", Vector3(5.0, 0, 4.5), "SIREN", Color(0.95, 0.95, 0.95)],
-				  ["f1", Vector3(5.5, 0, 21.0), "NITRO", Color(0.2, 0.55, 1.0)]]
+	var zf = ARENA_HZ / 5.0
+	var xf = ARENA_HX / 13.0
+	var roster = [["firetruck", Vector3(-8.0 * xf, 0, 2.5 * zf), "HYDRO", Color(0.9, 0.15, 0.15)],
+				  ["monster2", Vector3(-3.0 * xf, 0, 7.5 * zf), "GRIZZLY", Color(0.2, 0.75, 0.3)],
+				  ["police", Vector3(3.0 * xf, 0, 2.0 * zf), "SIREN", Color(0.95, 0.95, 0.95)],
+				  ["f1", Vector3(8.0 * xf, 0, 7.0 * zf), "NITRO", Color(0.2, 0.55, 1.0)]]
 	for r in roster:
 		cars.append(_car(r[0], r[1], r[2], r[3]))
 	cam = Camera3D.new()
-	cam.keep_aspect = Camera3D.KEEP_WIDTH                   # portrait: fit the arena WIDTH (whole arena in view)
-	cam.fov = CAM_FOV
-	cam_base = Vector3(0, CAM_Y, CAM_Z)
-	cam.position = cam_base
+	cam.keep_aspect = Camera3D.KEEP_WIDTH                   # portrait: the width is the fixed axis
 	add_child(cam)
-	cam.look_at(Vector3(0, 0, LOOK_Z), Vector3.UP)
+	if CAM_MODE == "classic":
+		cam.projection = Camera3D.PROJECTION_FRUSTUM
+		cam.near = 0.5
+		cam.far = 200.0
+		cam.rotation = Vector3(0, PI, 0)                    # level camera looking down +z (no tilt: cards stay upright)
+		_classic_cam(0.0, 1.0, 0.0)
+	else:
+		cam.fov = CAM_FOV
+		cam_base = Vector3(0, CAM_Y, CAM_Z)
+		cam.position = cam_base
+		cam.look_at(Vector3(0, 0, LOOK_Z), Vector3.UP)
 	cam.make_current()
 	_hud()
 	_scale_report()
 
 
+func _classic_cam(x: float, z: float, punch: float) -> void:
+	## smash25d projection: focal 750 px x zoom, horizon placed so the zoom pivots around screen y 1190
+	var zz = z * (1.0 + punch)
+	var f = C_F * zz
+	var yh = C_PIV + (C_YH - C_PIV) * zz + C_DY
+	cam.position = Vector3(x, C_H, -C_D)
+	cam.size = 1080.0 / f * cam.near                         # KEEP_WIDTH: size = near-plane width (renders right;
+	cam_f = f                                                # unproject_position() is wrong in this mode -> _proj())
+	cam_yh = yh
+	cam.frustum_offset = Vector2(0, -(960.0 - yh) / f * cam.near * OFFSET_SIGN)
+
+
+func _proj(w: Vector3) -> Vector2:
+	## world -> screen px. Classic = the smash25d formula (level camera, lens shift); topdown = Godot's own projection
+	if CAM_MODE != "classic":
+		return cam.unproject_position(w)
+	var d = w.z - cam.position.z
+	return Vector2(540.0 - (w.x - cam.position.x) * cam_f / d, cam_yh + (C_H - w.y) * cam_f / d)
+
+
+func _behind(w: Vector3) -> bool:
+	if CAM_MODE != "classic":
+		return cam.is_position_behind(w)
+	return w.z - cam.position.z < 0.5
+
+
 func _scale_report() -> void:
 	## measured on-screen scale vs SCALE_STANDARD.md (px per metre at the front / back edge, arena box, car sizes)
-	var fl = cam.unproject_position(Vector3(ARENA_HX, 0, 0))
-	var fr = cam.unproject_position(Vector3(-ARENA_HX, 0, 0))
-	var bl = cam.unproject_position(Vector3(ARENA_HX, 0, ARENA_HZ * 2))
-	var br = cam.unproject_position(Vector3(-ARENA_HX, 0, ARENA_HZ * 2))
+	var fl = _proj(Vector3(ARENA_HX, 0, 0))
+	var fr = _proj(Vector3(-ARENA_HX, 0, 0))
+	var bl = _proj(Vector3(ARENA_HX, 0, ARENA_HZ * 2))
+	var br = _proj(Vector3(-ARENA_HX, 0, ARENA_HZ * 2))
 	var r = {"arena_m": [ARENA_HX * 2, ARENA_HZ * 2], "front_px_per_m": absf(fr.x - fl.x) / (ARENA_HX * 2),
 			 "back_px_per_m": absf(br.x - bl.x) / (ARENA_HX * 2), "front_y": fl.y, "back_y": bl.y,
-			 "front_x": [minf(fl.x, fr.x), maxf(fl.x, fr.x)], "cam": [CAM_FOV, CAM_Y, CAM_Z, LOOK_Z]}
+			 "front_x": [minf(fl.x, fr.x), maxf(fl.x, fr.x)], "mode": CAM_MODE,
+			 "cam": [CAM_FOV, CAM_Y, CAM_Z, LOOK_Z] if CAM_MODE != "classic" else [C_F, C_H, C_D, zoom]}
 	for c in cars:
 		r[c["vk"] + "_px_front"] = c["bw"] * r["front_px_per_m"]
 	print("SCALE " + JSON.stringify(r))
@@ -207,10 +286,13 @@ void fragment() {
 """
 	var fm = ShaderMaterial.new()
 	fm.shader = floor_sh
-	_box(Vector3(ARENA_HX * 2, 3.0, ARENA_HZ * 2), Vector3(0, -1.5, ARENA_HZ), fm, true)
-	var side = _mat(Color(0.3, 0.31, 0.33))                 # platform sides going down into the water
+	floor_mat = fm
+	var fb = _box(Vector3(ARENA_HX * 2, 3.0, ARENA_HZ * 2), Vector3(0, -1.5, ARENA_HZ), fm, true)
+	floor_shape = fb.get_child(0).shape
+	floor_mesh = fb.get_child(1).mesh
+	var side = _mat(Color(0.3, 0.31, 0.33))                 # platform front face going down into the water
 	side.metallic = 0.4
-	_box(Vector3(ARENA_HX * 2 + 0.02, 2.6, 0.05), Vector3(0, -1.6, -0.02), side)
+	front_face = _box(Vector3(ARENA_HX * 2 + 0.02, 2.6, 0.05), Vector3(0, -1.6, -0.02), side)
 	var stripe_sh = Shader.new()                           # yellow/black hazard rim
 	stripe_sh.code = """
 shader_type spatial;
@@ -223,11 +305,9 @@ void fragment() {
 """
 	var edge = ShaderMaterial.new()
 	edge.shader = stripe_sh
-	_box(Vector3(ARENA_HX * 2 + 0.5, 0.35, 0.35), Vector3(0, 0.0, -0.05), edge)
-	_box(Vector3(ARENA_HX * 2 + 0.5, 0.35, 0.35), Vector3(0, 0.0, ARENA_HZ * 2 + 0.05), edge)
-	_box(Vector3(0.35, 0.35, ARENA_HZ * 2), Vector3(-ARENA_HX - 0.05, 0.0, ARENA_HZ), edge)
-	_box(Vector3(0.35, 0.35, ARENA_HZ * 2), Vector3(ARENA_HX + 0.05, 0.0, ARENA_HZ), edge)
-	# invisible edge walls (layer 2): on until the director allows the next KO
+	for i in range(4):
+		rims.append(_box(Vector3(1, 0.35, 0.35), Vector3.ZERO, edge))
+	# invisible edge walls (layer 2) = smash25d tyre barrier / "nobody pushed it: drive back in"
 	for wdef in [[Vector3(ARENA_HX * 2 + 2, 5, 0.5), Vector3(0, 2.5, -0.3)],
 				 [Vector3(ARENA_HX * 2 + 2, 5, 0.5), Vector3(0, 2.5, ARENA_HZ * 2 + 0.3)],
 				 [Vector3(0.5, 5, ARENA_HZ * 2 + 2), Vector3(-ARENA_HX - 0.3, 2.5, ARENA_HZ)],
@@ -243,6 +323,48 @@ void fragment() {
 		sb.add_child(cs)
 		add_child(sb)
 		walls.append(sb)
+	_set_bounds(ARENA_HX, ARENA_HZ)
+
+
+func _set_bounds(hx: float, hz: float) -> void:
+	## floor, rim, front face, edge walls and water foam follow the (shrinking) floor; centre stays at z = ARENA_HZ
+	hx_now = hx
+	hz_now = hz
+	var cz = ARENA_HZ
+	floor_shape.size = Vector3(hx * 2, 3.0, hz * 2)
+	floor_mesh.size = Vector3(hx * 2, 3.0, hz * 2)
+	front_face.mesh.size = Vector3(hx * 2 + 0.02, 2.6, 0.05)
+	front_face.position = Vector3(0, -1.6, cz - hz - 0.02)
+	var rdef = [[Vector3(hx * 2 + 0.5, 0.35, 0.35), Vector3(0, 0, cz - hz - 0.05)],
+				[Vector3(hx * 2 + 0.5, 0.35, 0.35), Vector3(0, 0, cz + hz + 0.05)],
+				[Vector3(0.35, 0.35, hz * 2), Vector3(-hx - 0.05, 0, cz)],
+				[Vector3(0.35, 0.35, hz * 2), Vector3(hx + 0.05, 0, cz)]]
+	for i in range(4):
+		rims[i].mesh.size = rdef[i][0]
+		rims[i].position = rdef[i][1]
+	var wdef = [Vector3(0, 2.5, cz - hz - 0.3), Vector3(0, 2.5, cz + hz + 0.3), Vector3(-hx - 0.3, 2.5, cz),
+				Vector3(hx + 0.3, 2.5, cz)]
+	for i in range(4):
+		walls[i].position = wdef[i]
+	if water_mat != null:
+		water_mat.set_shader_parameter("hx", hx)
+		water_mat.set_shader_parameter("hz", hz)
+
+
+func bounds(tt: float) -> Vector2:
+	## smash25d bounds(): eased 12% steps from SHRINK_AT every SHRINK_EVERY, down to 65% x / 72% z
+	var hx = ARENA_HX
+	var hz = ARENA_HZ
+	var sft = minf(tt, win_t_phys) - SHRINK_AT
+	while sft > 0:
+		var p = minf(1.0, sft / 1.2)
+		var e = p * p * (3 - 2 * p)
+		var nhx = maxf(ARENA_HX * 0.654, hx * (1 - SHRINK_STEP))
+		var nhz = maxf(ARENA_HZ * 0.72, hz * (1 - SHRINK_STEP * 0.75))
+		hx = hx + (nhx - hx) * e
+		hz = hz + (nhz - hz) * e
+		sft -= SHRINK_EVERY
+	return Vector2(hx, hz)
 
 
 func _water() -> void:
@@ -251,6 +373,7 @@ func _water() -> void:
 shader_type spatial;
 uniform float hx = 9.5;
 uniform float hz = 7.0;
+uniform float cz = 7.0;
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
 	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
@@ -263,7 +386,7 @@ void fragment() {
 	vec2 p = w.xz * 0.8 + vec2(TIME * 0.07, TIME * 0.05);
 	float v = n(p) * 0.6 + n(p * 2.7 - TIME * 0.12) * 0.4;
 	float caust = smoothstep(0.62, 0.8, n(p * 3.1 + vec2(TIME * 0.2, -TIME * 0.15)));
-	vec2 d = abs(w.xz - vec2(0.0, hz)) - vec2(hx, hz);
+	vec2 d = abs(w.xz - vec2(0.0, cz)) - vec2(hx, hz);
 	float dist = length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 	float foam = smoothstep(1.1, 0.0, dist + (v - 0.5) * 1.3);
 	vec3 col = mix(vec3(0.02, 0.2, 0.38), vec3(0.05, 0.42, 0.6), v) + caust * 0.08;
@@ -280,6 +403,8 @@ void fragment() {
 	m.shader = sh
 	m.set_shader_parameter("hx", ARENA_HX)
 	m.set_shader_parameter("hz", ARENA_HZ)
+	m.set_shader_parameter("cz", ARENA_HZ)
+	water_mat = m
 	var w = MeshInstance3D.new()
 	var pm = PlaneMesh.new()
 	pm.size = Vector2(130, 110)
@@ -310,8 +435,12 @@ void fragment() {
 
 func _stands() -> void:
 	var stand = _mat(Color(0.33, 0.35, 0.42))
-	for row in range(7):
-		_box(Vector3(60, 1.0, 1.7), Vector3(0, 0.5 + row * 1.0 - 0.6, ARENA_HZ * 2 + 7.0 + row * 1.7), stand)
+	# classic: tall stands right behind the arena (smash25d: stands fill the top third); topdown: low and far
+	var rise = 2.2 if CAM_MODE == "classic" else 1.0
+	var z0 = ARENA_HZ * 2 + (3.5 if CAM_MODE == "classic" else 7.0)
+	var rows = 8 if CAM_MODE == "classic" else 7
+	for row in range(rows):
+		_box(Vector3(60, rise, 1.7), Vector3(0, rise / 2.0 + row * rise - 0.6, z0 + row * 1.7), stand)
 	var mm = MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = true
@@ -319,11 +448,12 @@ func _stands() -> void:
 	sp.radius = 0.36
 	sp.height = 0.72
 	mm.mesh = sp
-	mm.instance_count = 520
-	for i in range(520):
-		var row = i % 7
+	mm.instance_count = 600
+	for i in range(600):
+		var row = i % rows
 		var x = rng.randf_range(-29.0, 29.0)
-		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(x, 1.25 + row * 1.0 - 0.6, ARENA_HZ * 2 + 6.9 + row * 1.7)))
+		mm.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ONE * (1.5 if CAM_MODE == "classic" else 1.0)),
+							  Vector3(x, rise + 0.5 + row * rise - 0.6, z0 - 0.1 + row * 1.7)))
 		mm.set_instance_color(i, Color.from_hsv(rng.randf(), 0.55, 0.9))
 	var mmi = MultiMeshInstance3D.new()
 	mmi.multimesh = mm
@@ -332,7 +462,7 @@ func _stands() -> void:
 	mmi.material_override = cm
 	add_child(mmi)
 	var dock = _mat(Color(0.55, 0.42, 0.3))                # wooden dock in front of the stands
-	_box(Vector3(60, 0.4, 2.2), Vector3(0, -0.9, ARENA_HZ * 2 + 5.6), dock)
+	_box(Vector3(60, 0.4, 2.2), Vector3(0, -0.9, z0 - 1.4), dock)
 
 
 func _tex(name: String) -> ImageTexture:
@@ -404,7 +534,7 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	var c = {"vk": vk, "nick": nick, "col": col, "body": body, "spr": spr, "wheels": wheels, "tex": tex,
 			 "bw": bw, "bh": bh, "ride": ride, "hp": 100.0, "alive": true, "out": false, "smoke": smoke, "fire": fire,
 			 "vmax": 9.0 if vk in ["f1", "sports", "police"] else 7.5, "last_hit": -9.0,
-			 "mode": "charge", "mode_t": 0.0, "stall": 0.0}
+			 "mode": "charge", "mode_t": 0.0, "stall": 0.0, "last_push": -9.0}
 	body.body_entered.connect(func(other): call_deferred("_on_hit", c, other))
 	return c
 
@@ -412,8 +542,8 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 # ================================================================== FX helpers
 func _log(type: String, power: float, pos = null) -> void:
 	var e = {"t": vt(), "type": type, "power": power}
-	if pos != null and cam != null and not cam.is_position_behind(pos):
-		var p = cam.unproject_position(pos)
+	if pos != null and cam != null and not _behind(pos):
+		var p = _proj(pos)
 		e["sx"] = p.x
 		e["sy"] = p.y
 	events.append(e)
@@ -637,6 +767,7 @@ func explode(pos: Vector3, power: float, push := true, lethal = null, push_h := 
 				c["body"].apply_central_impulse((Vector3(d.x, 0, d.z).normalized() * push_h + Vector3(0, 8.0, 0))
 												* f * c["body"].mass * power)
 				c["body"].apply_torque_impulse(Vector3(0, 0, rng.randf_range(-1, 1) * 6.0 * c["body"].mass * f))
+				c["last_push"] = t
 				_shards(c, 3, 7.0)
 				_damage(c, 100.0 if c == lethal else 45.0 * f * power, "KABOOM!", c == lethal)
 	if lethal != null and lethal["alive"]:                    # a direct hit always lands
@@ -756,12 +887,13 @@ func _lethal_ok(c) -> bool:
 
 
 func ko_allowed() -> bool:
-	var k = dead_count()
-	return k < KO_T.size() and t >= KO_T[k]
+	## smash25d: no eliminations before the barriers drop; ours: and at least KO_GAP after the previous KO
+	return t >= BARRIER_DOWN and t - last_ko_t >= KO_GAP and cars.filter(func(cc): return cc["alive"]).size() > 1
 
 
 func _ko(c: Dictionary, how: String) -> void:
 	c["alive"] = false
+	last_ko_t = t
 	c["hp"] = 0.0
 	_log("ko", 1.0, c["body"].global_position)
 	_bubble(c["body"].global_position + Vector3(0, c["bh"] + 2.0, 0), "K.O.!", 80)
@@ -792,8 +924,8 @@ func _on_hit(c: Dictionary, other) -> void:
 			c["mode_t"] = t
 			if rel > 3.0:
 				c["last_hit"] = vt()
-				var boost = 2.2 if dead_count() == 2 and ko_allowed() else 1.0
-				var dmg = rel * 1.3 * o["body"].mass / c["body"].mass * boost
+				c["last_push"] = t                         # a pushed car may leave the floor (smash25d last_push)
+				var dmg = rel * 1.3 * o["body"].mass / c["body"].mass
 				var p = clampf(rel / 13.0, 0.2, 1.0)
 				var mid = (c["body"].global_position + o["body"].global_position) / 2.0
 				_log("crash", p, mid)
@@ -880,9 +1012,20 @@ func _physics_process(delta: float) -> void:
 	t += delta
 	var go = clampf((t - 2.5) / 1.0, 0.0, 1.0)              # intro: 4 fighters... 1 survivor
 	var allowed = ko_allowed()
-	for w in walls:
-		w.collision_layer = 0 if allowed else 2
+	var bb = bounds(t)
+	if absf(bb.x - hx_now) > 0.004 or absf(bb.y - hz_now) > 0.004:
+		_set_bounds(bb.x, bb.y)
+	var step = int((t - SHRINK_AT) / SHRINK_EVERY) + 1 if t >= SHRINK_AT else 0
+	if step > shrink_done and winner == null:
+		shrink_done = step
+		var nb = bounds(t + 1.3)
+		if nb.x < hx_now - 0.05:
+			_shrink_fx(hx_now, hz_now, nb.x, nb.y)
+	var ahead = bounds(t + 1.5)                               # drivers see the floor shrinking coming
 	var alive = cars.filter(func(cc): return cc["alive"])
+	for c in alive:                                          # barrier per car: only a freshly pushed car gets through
+		var free_ = allowed and t - c["last_push"] < PUSH_WINDOW
+		c["body"].collision_mask = 1 if free_ else (1 | 2)
 	for c in alive:
 		var b = c["body"]
 		if b.global_position.y < WATER_Y + 0.3 and not c["out"]:   # off the platform -> shark food
@@ -913,10 +1056,13 @@ func _physics_process(delta: float) -> void:
 		if c["mode"] == "back" and t - c["mode_t"] > 0.9:
 			c["mode"] = "charge"
 		var want = to.normalized() * c["vmax"] * go
+		var centre = Vector3(0, 0, ARENA_HZ) - b.global_position
+		centre.y = 0
 		if c["mode"] == "back":
-			var centre = Vector3(0, 0, ARENA_HZ) - b.global_position
-			centre.y = 0
 			want = (-to.normalized() * 0.6 + centre.normalized() * 0.4).normalized() * c["vmax"] * 0.7
+		var bp0 = b.global_position
+		if absf(bp0.x) > ahead.x - 2.0 or absf(bp0.z - ARENA_HZ) > ahead.y - 1.2:
+			want += centre.normalized() * c["vmax"] * 0.6        # scared of the edge
 		var v = b.linear_velocity
 		var dv = Vector3(want.x - v.x, 0, want.z - v.z)
 		if b.global_position.y < c["ride"] + 0.4 and b.global_position.y > c["ride"] - 0.6:
@@ -939,9 +1085,15 @@ func _physics_process(delta: float) -> void:
 				line += " | %s (%.1f,%.1f,%.1f) hp=%d %s" % [c["nick"], bp.x, bp.y, bp.z, c["hp"], "" if c["alive"] else "OUT"]
 		print(line)
 	_director(alive)
+	alive = cars.filter(func(cc): return cc["alive"])
+	if winner != null and is_instance_valid(winner["body"]) and t - hop_t > 1.0 \
+			and winner["body"].global_position.y < winner["ride"] + 0.3:
+		hop_t = t                                             # victory hops (smash25d winner showcase)
+		winner["body"].apply_central_impulse(Vector3(0, 5.5, 0) * winner["body"].mass)
 	if winner == null and alive.size() == 1 and t > 4.0:
 		winner = alive[0]
 		win_t = vt()
+		win_t_phys = t
 		win_lbl.text = winner["nick"] + " WINS!"
 		win_lbl.visible = true
 		_log("win", 1.0, winner["body"].global_position)
@@ -950,61 +1102,92 @@ func _physics_process(delta: float) -> void:
 
 
 func _director(alive: Array) -> void:
-	if alive.size() < 2:
+	if alive.size() < 2 or winner != null:
 		return
-	var k = dead_count()
+	var weakest = alive[0]
+	for c in alive:
+		if c["hp"] < weakest["hp"]:
+			weakest = c
 	for bt in beats:
 		if bt[0] > 0 and t >= bt[0]:
-			var mine = bt[2]
-			var act = bt[1]
 			bt[0] = -1.0
-			var weakest = alive[0]
-			for c in alive:
-				if c["hp"] < weakest["hp"]:
-					weakest = c
-			if mine != k:
-				continue
-			weakest["ko_idx"] = k
+			var act = bt[1]
+			if act == "push_weak" and weakest["hp"] >= 60.0:
+				act = "soft"                                 # smash25d: only a weak car gets dropped off the edge
 			if act == "soft":
 				var spot = alive[rng.randi() % alive.size()]["body"].global_position
 				_chaos_hit(Vector3(spot.x + 1.5, 0, spot.z), null, 7.0)
-			elif act == "kill":
-				_chaos_hit(Vector3(weakest["body"].global_position.x, 0, weakest["body"].global_position.z), weakest, 7.0)
-			elif act == "push_out":
-				var best = null
-				var bd = 1e9
-				var bout = Vector3.ZERO
-				for c in alive:                              # car closest to an edge gets blasted off it
-					var p = c["body"].global_position
-					var opts = [[ARENA_HX - p.x, Vector3(1, 0, 0)], [ARENA_HX + p.x, Vector3(-1, 0, 0)],
-								[p.z, Vector3(0, 0, -1)], [ARENA_HZ * 2 - p.z, Vector3(0, 0, 1)]]
-					for o in opts:
-						if o[0] < bd:
-							bd = o[0]
-							best = c
-							bout = o[1]
-				var bp = best["body"].global_position
-				_chaos_hit(Vector3(bp.x, 0, bp.z) - bout * 3.0, null, 14.0)
+			elif act == "push_weak":
+				var p = weakest["body"].global_position
+				var opts = [[hx_now - p.x, Vector3(1, 0, 0)], [hx_now + p.x, Vector3(-1, 0, 0)],
+							[p.z - (ARENA_HZ - hz_now), Vector3(0, 0, -1)], [(ARENA_HZ + hz_now) - p.z, Vector3(0, 0, 1)]]
+				var bout = opts[0][1]
+				var bd = opts[0][0]
+				for o in opts:
+					if o[0] < bd:
+						bd = o[0]
+						bout = o[1]
+				_chaos_hit(Vector3(p.x, 0, p.z) - bout * 3.0, null, 14.0)
 			elif act == "storm" and chaos == "meteor":
 				_bubble(Vector3(0, 6, ARENA_HZ), "METEOR SHOWER!", 80)
-				for i in range(3):                           # only 3 rocks; at most the last one is a KO
-					var last = i == 2
+				for i in range(3):                           # only 3 rocks, nobody is finished off by a script
 					get_tree().create_timer(0.9 * i, false).timeout.connect(func():
 						var al = cars.filter(func(cc): return cc["alive"])
 						if al.size() < 2:
 							return
-						var tgt = weakest if last and weakest["alive"] else al[rng.randi() % al.size()]
-						var tp = tgt["body"].global_position
-						var off = Vector3.ZERO if last else Vector3(rng.randf_range(-3.0, 3.0), 0, rng.randf_range(-2.0, 2.0))
-						_meteor(Vector3(tp.x, 0, tp.z) + off, tgt if last else null))
+						var tp = al[rng.randi() % al.size()]["body"].global_position
+						_meteor(Vector3(tp.x + rng.randf_range(-3.0, 3.0), 0, tp.z + rng.randf_range(-1.5, 1.5)), null))
 			elif act == "storm":
-				_chaos_hit(Vector3(weakest["body"].global_position.x, 0, weakest["body"].global_position.z), null, 7.0)
-	if t > 28.0 and winner == null:                         # hard stop: never run past the end card
-		var weakest2 = alive[0]
+				_chaos_hit(Vector3(weakest["body"].global_position.x, 0, weakest["body"].global_position.z), null, 9.0)
+	if t >= T_MAX:                                          # smash25d T_MAX: time is up, most HP wins
+		var best = alive[0]
 		for c in alive:
-			if c["hp"] < weakest2["hp"]:
-				weakest2 = c
-		_damage(weakest2, 100.0, "KABOOM!", true)
+			if c["hp"] > best["hp"]:
+				best = c
+		_bubble(Vector3(0, 5, ARENA_HZ), "TIME'S UP!", 90)
+		for c in alive:
+			if c != best:
+				c["alive"] = false
+				c["out"] = true
+				c["spr"].modulate = Color(0.5, 0.5, 0.55)
+				c["smoke"].emitting = true
+				_log("ko", 0.5, c["body"].global_position)
+
+
+func _shrink_fx(hx0: float, hz0: float, hx1: float, hz1: float) -> void:
+	## the outer floor plates break off and sink (smash25d "ARENA SHRINKING!")
+	_log("shrink", 1.0, Vector3(0, 0, ARENA_HZ))
+	_bubble(Vector3(0, 5, ARENA_HZ), "ARENA SHRINKING!", 80)
+	shake = max(shake, 0.25)
+	var cz = ARENA_HZ
+	var slabs = []
+	for sgn in [-1.0, 1.0]:
+		for i in range(3):
+			var l = hz0 * 2 / 3.0
+			slabs.append([Vector3(hx0 - hx1, 0.5, l - 0.1), Vector3(sgn * (hx1 + hx0) / 2.0, -0.25, cz - hz0 + l * (i + 0.5))])
+		for i in range(4):
+			var w = hx1 * 2 / 4.0
+			slabs.append([Vector3(w - 0.1, 0.5, hz0 - hz1), Vector3(-hx1 + w * (i + 0.5), -0.25, cz + sgn * (hz1 + hz0) / 2.0)])
+	for i in range(slabs.size()):
+		var sd = slabs[i]
+		var rb = RigidBody3D.new()
+		rb.collision_layer = 4
+		rb.collision_mask = 0
+		rb.gravity_scale = 0.0
+		var mi = MeshInstance3D.new()
+		var bm = BoxMesh.new()
+		bm.size = sd[0]
+		mi.mesh = bm
+		mi.material_override = floor_mat
+		rb.add_child(mi)
+		rb.position = sd[1]
+		add_child(rb)
+		pieces.append(rb)
+		var delay = 0.05 * i
+		get_tree().create_timer(delay, false).timeout.connect(func():
+			if is_instance_valid(rb):
+				rb.gravity_scale = 1.0
+				rb.angular_velocity = Vector3(rng.randf_range(-1.5, 1.5), 0, rng.randf_range(-1.5, 1.5)))
 
 
 func _missile(spot: Vector3, lethal, push_h := 9.0) -> void:
@@ -1139,6 +1322,7 @@ func _stomp(spot: Vector3, push_h: float, lethal) -> void:
 			var f = 1.0 - dist / 8.0
 			f = maxf(f, 0.45)
 			c["body"].apply_central_impulse((Vector3(d.x, 0, d.z).normalized() * push_h + Vector3(0, 6.0, 0)) * f * c["body"].mass)
+			c["last_push"] = t
 			_shards(c, 2, 6.0)
 			_damage(c, 25.0 * f, "WHOA!")
 
@@ -1150,21 +1334,28 @@ func _process(_d: float) -> void:
 		hitstop_until = -1.0
 	var xs = []
 	for c in cars:
-		if c["alive"] and is_instance_valid(c["body"]):
+		if (c["alive"] or c == winner) and is_instance_valid(c["body"]) and not c["out"]:
 			xs.append(c["body"].global_position.x)
 	var cx = 0.0
 	if xs.size() > 0:
 		cx = (xs.max() + xs.min()) / 2.0
-	cam.position = cam.position.lerp(cam_base + Vector3(-cx * 0.12, 0, 0), 0.03)   # whole arena; only a gentle drift
-	cam.look_at(Vector3(cam.position.x, 0, LOOK_Z), Vector3.UP)
 	shake *= 0.86
 	fov_kick *= 0.84
-	cam.fov = CAM_FOV - fov_kick
+	if CAM_MODE == "classic":                               # smash25d camera: pan to the cars, zoom 1.0-1.45 to fit them
+		var spread = (xs.max() - xs.min() + 6.0) if xs.size() > 0 else 26.0
+		var fit = clampf(1080.0 * 0.95 / (spread * C_F / (C_D + ARENA_HZ - 1.0)), 1.0, 1.45)
+		camx += (cx - camx) * 0.1
+		zoom += (fit - zoom) * 0.1
+		_classic_cam(camx, zoom, fov_kick * 0.025)
+	else:
+		cam.position = cam.position.lerp(cam_base + Vector3(-cx * 0.12, 0, 0), 0.03)   # whole arena; gentle drift
+		cam.look_at(Vector3(cam.position.x, 0, LOOK_Z), Vector3.UP)
+		cam.fov = CAM_FOV - fov_kick
 	cam.h_offset = randf_range(-shake, shake)
 	cam.v_offset = randf_range(-shake, shake)
 	for f in fins:                                          # circling fins (ellipse outside the platform)
 		var a = f["phase"] + t * f["speed"]
-		var p = Vector3(cos(a) * 15.0, WATER_Y + 0.05, ARENA_HZ + sin(a) * 18.0)
+		var p = Vector3(cos(a) * (ARENA_HX + 5.0), WATER_Y + 0.05, ARENA_HZ + sin(a) * (ARENA_HZ + (3.0 if CAM_MODE == "classic" else 6.0)))
 		var n = f["node"]
 		n.flip_h = (p.x - n.position.x) > 0.0
 		n.position = p
@@ -1273,9 +1464,9 @@ func _hud() -> void:
 
 
 func _bubble(world: Vector3, text: String, size := 54) -> void:
-	if cam == null or cam.is_position_behind(world):
+	if cam == null or _behind(world):
 		return
-	var p = cam.unproject_position(world)
+	var p = _proj(world)
 	var l = Label.new()
 	l.text = text
 	var ls = _ls(size, Color(0.9, 0.15, 0.2))

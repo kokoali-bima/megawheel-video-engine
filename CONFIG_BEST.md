@@ -68,8 +68,8 @@
 | Metode A | frame cairo asli + lapisan FX Godot (`lab/godot_fx`), cue posisi dari hook tanpa ubah produksi |
 | SFX | Sonniss GDC di `/root/lab/sfx/` (unduh pakai UA browser + referer); bank `sfx_bank.py` → `/root/lab/sfx/bank/` |
 | Metode A | ❌ ditolak user ("tidak kerasa bedanya") |
-| Metode B (3D) v2 | `lab/godot3d_smash`: arena baja 20×24 m di atas air + hiu, kamera (0,30,-8)→(0,0,11.5) fov 40 KEEP_WIDTH (50 px/m depan, lihat **SCALE_STANDARD.md**), kartu mobil miring 0,5 rad, kerusakan bertahap + POW + hit-stop 3 frame, replay di mix3d |
-| Durasi SMASH 3D | 30–40 dtk (user 2026-10-03): KO tidak boleh sebelum 9 / 16,5 / 23,5 dtk, stop keras 28 dtk |
+| Metode B (3D) v4 | `lab/godot3d_smash`, default `cam=classic`: geometri kamera & arena 26×10 m **identik smash25d** (60 px/m depan, zoom 1,0–1,45, pan), platform baja di atas air + hiu, kerusakan bertahap + POW + hit-stop 3 frame, replay di mix3d; v3 `cam=topdown` 20×24 m sebagai alternatif |
+| Durasi/logika SMASH 3D | video 30–40 dtk (user 2026-10-03); logika menang smash25d (barrier 9 dtk, jatuh hanya bila didorong, lantai menyusut 18/+7 dtk, mobil terakhir selamat, batas waktu 27 dtk → HP terbanyak) + jarak KO ≥ 4,5 dtk — lihat SCALE_STANDARD §6 |
 | Chaos | **satu tema per video** (meteor / kraggor / missile, bergiliran antar episode); hujan meteor = 3 batu, maks 1 KO |
 
 ## 7. Kredensial (lokasi saja — jangan pernah di-commit)
