@@ -88,3 +88,11 @@
 4. Tanpa flash-attn (pakai SDPA) 3 take > 3600 s → timeout, ≈$2.24 terbuang dan **tidak tercatat otomatis** (dicatat manual).
 - Keputusan: YuE ditunda; ACE-Step dipakai (user memilih gaya v3_alt2). Pelajaran: 1 take per pemanggilan + simpan hasil per take,
   dan catat ledger juga saat gagal (try/finally).
+
+## 2026-10-02 — Render S01E01 v7 memakai kode lama (pull VM terhalang)
+- Gejala: render dimulai 08:55 UTC, tapi `git_sync pull` terhalang folder untracked `generators/retro_pixel/`
+  (muncul sementara, bukan dari agent ini) → VM tetap di 34b4af5, 3 perbaikan terakhir tidak ikut ter-render.
+- Ketahuan dari `git reflog` vs waktu file render. Render + assembly dibatalkan, diulang.
+- Pencegahan: skrip render memeriksa `HEAD == origin/main` setelah pull dan **berhenti** bila beda
+  (lihat pola di /tmp/v7c.sh; terapkan di skrip batch lain). Juga: perintah `pgrep -f` di dalam `ssh '...'`
+  bisa mencocokkan baris perintah ssh itu sendiri → tulis skrip stop ke file dulu, lalu jalankan.
