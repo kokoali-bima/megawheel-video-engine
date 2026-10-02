@@ -654,6 +654,46 @@
    "gpu_seconds": 118.5,
    "wall_seconds": 142.4,
    "cost_usd": 0.0303
+  },
+  {
+   "date": "2026-10-02",
+   "note": "S01E01 v4 dialogue r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 56,
+   "gpu_seconds": 353.8,
+   "wall_seconds": 383.8,
+   "cost_usd": 0.0903
+  },
+  {
+   "date": "2026-10-02",
+   "note": "S01E01 v4 dialogue r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 51.4,
+   "wall_seconds": 81.0,
+   "cost_usd": 0.0131
+  },
+  {
+   "date": "2026-10-02",
+   "note": "story S01E01_sprinkles_first_race#3 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 59.4,
+   "wall_seconds": 88.8,
+   "cost_usd": 0.0152
+  },
+  {
+   "date": "2026-10-02",
+   "note": "story S01E01_sprinkles_first_race#3 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 53.8,
+   "wall_seconds": 83.2,
+   "cost_usd": 0.0137
   }
  ]
 }
