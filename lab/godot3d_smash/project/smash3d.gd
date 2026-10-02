@@ -260,9 +260,9 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	body.physics_material_override = pm
 	var cs = CollisionShape3D.new()
 	var bs = BoxShape3D.new()
-	bs.size = Vector3(bw, bh + 2.0 * (ride - bh / 2.0), 1.7)
+	bs.size = Vector3(bw, ride + bh / 2.0, 1.7)           # from the wheel bottom (-ride) to the roof (+bh/2)
 	cs.shape = bs
-	cs.position = Vector3(0, -(ride - bh / 2.0), 0)
+	cs.position = Vector3(0, (bh / 2.0 - ride) / 2.0, 0)
 	body.add_child(cs)
 	var tex = _tex(vk + "_body.png")
 	var spr = Sprite3D.new()
