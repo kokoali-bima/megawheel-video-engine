@@ -129,3 +129,17 @@ stories/S01E01_sprinkles_first_race/
 | 2026-10-01 | Episode pertama: "Sprinkles' First Race" |
 | 2026-10-01 | S01E01: 15 scene penuh; garis waktu = pembuka kilas-maju hari balapan, cerita mulai 30 hari sebelumnya, latihan 4 minggu, kilas balik masa kecil hanya kenangan singkat ("MANY YEARS AGO") |
 | 2026-10-01 | Jadwal video panjang pindah ke **Minggu 13:00 ET** (= Senin 00:00 WIB): waktu keluarga + tambahan 1 hari produksi |
+| 2026-10-02 | Naskah S01E01 v3 disetujui (15 mini-episode + kait, 3 pelajaran latihan, Tilly & Nitro) |
+| 2026-10-02 | Lagu intro **"Let's Go!"** dan outro **"See You Next Time"** berbeda ("setiap pertemuan ada perpisahan"); lirik keduanya disetujui |
+
+## Musik & lisensi model lagu (dicek 2026-10-02)
+
+Channel dimonetisasi, jadi hanya model yang lisensinya mengizinkan pemakaian komersial yang boleh dipakai.
+
+| Model | Lisensi | Boleh dipakai? |
+|---|---|---|
+| **ACE-Step v1 3.5B** (dipakai, `generators/voice/modal_song.py`) | Apache-2.0 | ✅ ya |
+| YuE (HKUST / M-A-P) | Apache-2.0; hasil boleh dimonetisasi, wajib kredit "YuE by HKUST/M-A-P" | ✅ cadangan (tulis kredit di deskripsi) |
+| DiffRhythm | Apache-2.0 | ✅ cadangan |
+| SongGeneration / LeVo (Tencent) | "License Terms of SongGeneration": hanya akademik/riset/pendidikan, **dilarang komersial/produksi** | ❌ jangan |
+| MusicGen (Meta), Stable Audio Open | bobot non-komersial / lisensi terbatas, instrumental saja | ❌ jangan |

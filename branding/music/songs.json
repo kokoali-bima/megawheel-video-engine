@@ -1,18 +1,30 @@
 [
  {
   "name": "intro_lets_go",
-  "duration": 28,
+  "duration": 56,
   "takes": 4,
   "seed": 101,
-  "tags": "upbeat cartoon theme song, happy pop rock, catchy, energetic, bright female and male vocals, group chorus, electric guitar, drums, 140 bpm, major key, fun, friendship",
-  "lyrics": "[verse]\nWheels are turning, engines humming,\nAll my friends, I hear you coming!\nBig or small or fast or slow,\nTogether, come on, let's go!\n\n[chorus]\nMega-Mega, MegaWheel Arena!\nNever give up, we'll race forever!\nDing-ding-ding, the road is calling,\nGet back up whenever you're falling!\nMegaWheel... Arena!"
+  "mix": {
+   "vocals": 0.8,
+   "music": 1.5
+  },
+  "fade_in": 1.2,
+  "fade_out": 4.0,
+  "tags": "upbeat cartoon theme song, happy pop rock, catchy, energetic, full band, rich instrumental arrangement, punchy drums, bass, bright electric guitar riff, synth, bright female and male vocals, group chorus, instrumental intro, big ending, 140 bpm, major key, fun, friendship",
+  "lyrics": "[intro]\n\n[verse]\nWheels are turning, engines humming,\nAll my friends, I hear you coming!\nBig or small or fast or slow,\nTogether, come on, let's go!\n\n[chorus]\nMega-Mega, MegaWheel Arena!\nNever give up, we'll race forever!\nDing-ding-ding, the road is calling,\nGet back up whenever you're falling!\n\n[inst]\n\n[chorus]\nMega-Mega, MegaWheel Arena!\nNever give up, we'll race forever!\nMegaWheel... Arena!\n\n[outro]"
  },
  {
   "name": "outro_see_you",
-  "duration": 28,
+  "duration": 60,
   "takes": 4,
   "seed": 301,
-  "tags": "warm gentle cartoon ending song, soft acoustic ballad, ukulele, piano, heartfelt, sweet female vocal, 88 bpm, major key, goodbye, cozy, hopeful",
-  "lyrics": "[verse]\nThe sun goes down, the road is quiet,\nWe had our race, we had our fun.\nWave goodbye, my wheels are tired,\nBut tomorrow's a brand new run!\n\n[chorus]\nSee you soon at MegaWheel Arena,\nFriends forever, near or far.\nDing-ding, goodnight, sweet dreams, my friend,\nThis is not the end!"
+  "mix": {
+   "vocals": 0.8,
+   "music": 1.5
+  },
+  "fade_in": 1.5,
+  "fade_out": 5.0,
+  "tags": "warm gentle cartoon ending song, soft acoustic ballad, ukulele, piano, soft strings, light percussion, rich warm instrumental, heartfelt, sweet female vocal, instrumental intro, gentle ending, 88 bpm, major key, goodbye, cozy, hopeful",
+  "lyrics": "[intro]\n\n[verse]\nThe sun goes down, the road is quiet,\nWe had our race, we had our fun.\nWave goodbye, my wheels are tired,\nBut tomorrow's a brand new run!\n\n[chorus]\nSee you soon at MegaWheel Arena,\nFriends forever, near or far.\nDing-ding, goodnight, sweet dreams, my friend,\nThis is not the end!\n\n[inst]\n\n[chorus]\nSee you soon at MegaWheel Arena,\nFriends forever, near or far.\nThis is not the end!\n\n[outro]"
  }
 ]

@@ -1,5 +1,6 @@
 """MegaWheel Arena theme songs on Modal GPUs: ACE-Step (open source, Apache-2.0) text+lyrics -> song with vocals.
 Several takes per song; the take whose sung lyrics speech recognition hears best is kept (faster-whisper QA).
+Then optional remix (Demucs, MIT): split vocals / music and rebalance ("mix"), plus fade in / out.
 Same monthly budget guard + modal_usage.json ledger as modal_tts.py.
 
 Run on VM 99.3 (cd /root/video-engine):
@@ -28,6 +29,8 @@ def _download():
     from huggingface_hub import snapshot_download
     snapshot_download("ACE-Step/ACE-Step-v1-3.5B", local_dir=CKPT)
     WhisperModel("base.en", device="cpu", compute_type="int8")
+    from demucs.pretrained import get_model
+    get_model("htdemucs")
 
 
 image = (
@@ -36,9 +39,36 @@ image = (
     # torchaudio >= 2.9 saves through torchcodec (not installed) -> pin the pair ACE-Step was built on
     .pip_install("torch==2.5.1", "torchaudio==2.5.1")
     .pip_install("git+https://github.com/ace-step/ACE-Step.git", "faster-whisper", "huggingface_hub",
-                 "torch==2.5.1", "torchaudio==2.5.1")
+                 "demucs==4.0.1", "soundfile", "torch==2.5.1", "torchaudio==2.5.1")
     .run_function(_download)
 )
+
+
+def _finish(path, sg):
+    """Rebalance vocals vs music (Demucs two-stem split), fade in / out, peak-normalise, 16-bit WAV bytes."""
+    import io
+    import subprocess
+    import numpy as np
+    import soundfile as sf
+    x, sr = sf.read(path, always_2d=True)
+    mix = sg.get("mix")
+    if mix:
+        subprocess.run(["python", "-m", "demucs", "--two-stems", "vocals", "-n", "htdemucs", "-o", "/tmp/sep", path],
+                       check=True, capture_output=True)
+        stem = os.path.join("/tmp/sep", "htdemucs", os.path.splitext(os.path.basename(path))[0])
+        v, sr = sf.read(os.path.join(stem, "vocals.wav"), always_2d=True)
+        m, _ = sf.read(os.path.join(stem, "no_vocals.wav"), always_2d=True)
+        n = min(len(v), len(m))
+        x = v[:n] * mix.get("vocals", 1.0) + m[:n] * mix.get("music", 1.0)
+    fi, fo = int(sg.get("fade_in", 0) * sr), int(sg.get("fade_out", 0) * sr)
+    if fi:
+        x[:fi] *= np.linspace(0, 1, fi)[:, None]
+    if fo:
+        x[-fo:] *= (np.linspace(1, 0, fo) ** 1.5)[:, None]
+    x = x / max(1e-9, np.max(np.abs(x))) * 0.95
+    buf = io.BytesIO()
+    sf.write(buf, x, sr, format="WAV", subtype="PCM_16")
+    return buf.getvalue()
 
 
 def _score(want, got):
@@ -73,10 +103,9 @@ def sing(songs: list) -> dict:
                 path = os.path.join("/tmp", cands[-1]) if cands else path
             heard = " ".join(s.text for s in asr.transcribe(path, language="en", beam_size=3)[0])
             sc = _score(sg["lyrics"], heard)
-            with open(path, "rb") as fh:
-                data = fh.read()
             if best is None or sc > best[0]:
-                best = (sc, data, heard, take, seed)
+                best = (sc, path, heard, take, seed)
+        best = (best[0], _finish(best[1], sg)) + best[2:]
         out[sg["name"]] = dict(wav=best[1], score=round(best[0], 2), heard=best[2][:300], take=best[3], seed=best[4])
     return dict(songs=out, secs=time.time() - t0)
 
