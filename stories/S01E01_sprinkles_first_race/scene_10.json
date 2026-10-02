@@ -8,8 +8,8 @@
  "hill": {
   "x0": 20,
   "x1": 36,
-  "x2": 46,
-  "x3": 60,
+  "x2": 52,
+  "x3": 66,
   "h": 5.0
  },
  "actors": {
@@ -110,15 +110,15 @@
    "hold": 3.0,
    "moves": {
     "zippy": {
-     "to_x": 58,
-     "speed": 6
+     "to_x": 95,
+     "speed": 14
     },
     "nitro": {
-     "to_x": 52,
-     "speed": 6
+     "to_x": 88,
+     "speed": 14
     },
     "tilly": {
-     "to_x": 30,
+     "to_x": 32,
      "speed": 4
     }
    }
@@ -133,7 +133,15 @@
      "Build your speed before the hill... and keep rolling.",
      "calm"
     ]
-   ]
+   ],
+   "moves": {
+    "zippy": {
+     "show": false
+    },
+    "nitro": {
+     "show": false
+    }
+   }
   },
   {
    "cam": "track",
