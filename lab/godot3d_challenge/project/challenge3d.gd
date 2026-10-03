@@ -748,14 +748,7 @@ func _break(x: float, y: float, vk: String, ca: float, ys: float) -> void:
 	# user 2026-10-03: no explosion (fireball / flash / smoke hide the damage) -> the damage itself is the show
 	_burst(Vector3(x, y + 0.3, 0.5), 50, 0.45, Vector2(6, 14), Vector3(0, -15, 0), Vector2(0.05, 0.11),
 		   Color(1, 0.95, 0.6), Color(1, 0.6, 0.2, 0))                                          # short metal sparks
-	var gl = _emitter(40, 0.8, Vector2(3, 8), Vector3(0, -24, 0), Vector2(0.03, 0.06), Color(0.85, 0.97, 1.0, 1.0),
-					  Color(0.75, 0.9, 1.0, 0.8), 55.0, true)
-	gl.mesh.material.albedo_texture = null                  # sharp little chips, not soft blobs
-	gl.position = Vector3(x, y + 0.4, 0.15)
-	gl.one_shot = true
-	gl.explosiveness = 0.95
-	fx_root.add_child(gl)
-	gl.emitting = true                                       # glass chips (fall fast)
+	# (glass chips removed: they rendered as big white squares; the flying panels are mess enough)
 	_pow(Vector3(x + 1.2, y + 3.6, 1.8), 2.8, "CRASH!")                                   # above, clear of the car
 	var n = 22
 	for i in range(n):                                       # panels cut from the car's own artwork
