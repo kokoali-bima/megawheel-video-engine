@@ -265,6 +265,7 @@ uniform vec2 hit = vec2(0.75, 0.5);
 uniform float burn = 0.0;
 uniform float split = 0.0;
 uniform float ice = 0.0;
+uniform float lift = 0.0;
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
 	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
@@ -287,11 +288,13 @@ void fragment() {
 	col = mix(col, vec3(0.08, 0.06, 0.05), burn * (0.55 + 0.35 * n(UV * 14.0)));
 	col = mix(col, vec3(0.7, 0.9, 1.0), ice * 0.55);   // frozen by the ice dragon
 	ALBEDO = col;
+	EMISSION = col * lift;                              // night: the arena floodlights still show the paint
 	ROUGHNESS = 0.6;
 }
 """
 	var mat = ShaderMaterial.new()
 	mat.shader = sh
+	mat.set_shader_parameter("lift", 0.35 if scene["night"] else 0.0)
 	body.material_override = mat
 	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	var pm = PlaneMesh.new()
@@ -316,6 +319,7 @@ void fragment() {
 		w.position = Vector3(float(lx), r, -0.02)
 		flip.add_child(w)
 		wl.append(w)
+	_headlights(flip, float(c["body"][0]) / 2.0, ride, -float(c["body"][0]) / 2.0)
 	var blob = MeshInstance3D.new()
 	var cm = CylinderMesh.new()
 	cm.top_radius = 0.5
@@ -687,3 +691,34 @@ func _fireball3(pos: Vector3, size: float) -> void:
 	tw.tween_property(mi, "position:y", pos.y + size * 0.6, 0.9)
 	tw.tween_property(m, "albedo_color", Color(0.9, 0.2, 0.03, 0.0), 0.9)
 
+
+
+func _headlights(parent: Node3D, front_x: float, y: float, back_x: float) -> void:
+	## night theme: real headlights (a spot on the floor ahead) + glowing lamp + red tail light; inside `flip`,
+	## so they turn with the car. Tilted down more than RACE: the SMASH camera looks from 20 m high.
+	if not scene["night"]:
+		return
+	var sp = SpotLight3D.new()
+	sp.position = Vector3(front_x, y, 0.3)
+	sp.rotation_degrees = Vector3(0, -90, 0)               # along +x (the way the sprite faces)
+	sp.rotate_object_local(Vector3.RIGHT, deg_to_rad(-22))
+	sp.light_color = Color(1, 0.95, 0.75)
+	sp.light_energy = 5.0
+	sp.spot_range = 12.0
+	sp.spot_angle = 28.0
+	parent.add_child(sp)
+	for pr in [[front_x, Color(1, 0.97, 0.8), 0.2], [back_x, Color(1, 0.1, 0.1), 0.13]]:
+		var lamp = MeshInstance3D.new()
+		var sm = SphereMesh.new()
+		sm.radius = pr[2]
+		sm.height = pr[2] * 2
+		lamp.mesh = sm
+		var lm = StandardMaterial3D.new()
+		lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		lm.albedo_color = pr[1]
+		lm.emission_enabled = true
+		lm.emission = pr[1]
+		lm.emission_energy_multiplier = 4.0
+		lamp.material_override = lm
+		lamp.position = Vector3(pr[0], y, 0.12)
+		parent.add_child(lamp)

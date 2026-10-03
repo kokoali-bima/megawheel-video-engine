@@ -39,7 +39,7 @@ def luminance(path, t):
     return sum(px) / max(1, len(px))
 
 
-def audit3d(d, mp4, man_prod):
+def audit3d(d, mp4, man_prod, ref=None):
     items = []
 
     def chk(name, ok, val=""):
@@ -68,8 +68,13 @@ def audit3d(d, mp4, man_prod):
     chk("durasi = versi review (±0.4 s)", abs(float(p["format"]["duration"]) - man_prod["duration"]) <= 0.4,
         f"{float(p['format']['duration']):.2f} vs {man_prod['duration']}")
     dur = float(p["format"]["duration"])
-    lum = [luminance(mp4, 2.0 + (dur - 2.5) * k / 11) for k in range(12)]   # skip the cold-open white flash (~1.5 s)
-    chk("tidak ada frame hitam / putih (12 sampel)", all(25 < v < 235 for v in lum), [round(v) for v in lum])
+    ts = [2.0 + (dur - 2.5) * k / 11 for k in range(12)]                    # skip the cold-open white flash (~1.5 s)
+    lum = [luminance(mp4, t) for t in ts]
+    # a night theme is dark in the aired 2.5D too: a sample passes when it is in range OR as bright as the 2.5D one
+    ref_lum = [luminance(ref, t) for t in ts] if ref and os.path.exists(ref) else [None] * 12
+    okl = [(25 < v < 235) or (r is not None and v < 235 and v >= 0.8 * r) for v, r in zip(lum, ref_lum)]
+    chk("tidak ada frame hitam / putih (12 sampel; malam: >= 80% terang versi 2.5D)", all(okl),
+        [f"{round(v)}/{round(r) if r is not None else '-'}" for v, r in zip(lum, ref_lum)])
     n_hit = sum(1 for e in scene["events"] if e[0] == "hit" and len(e) > 4 and e[4] > 0.5)
     chk("benturan besar -> panel copot (tanpa ledakan)", True, f"{n_hit} benturan besar")
     return items
@@ -95,7 +100,7 @@ def main():
         f"smash3d convert {vid}", "--gpu", "T4", "--project", f"{HERE}/project_d"])
     out = f"{d}/{vid}.mp4"
     sh([f"{BASE}/venv/bin/python", f"{CH}/compose.py", "--dir", d, "--video", g, "--out", out])
-    items = audit3d(d, out, man)
+    items = audit3d(d, out, man, ref=f"{folder}/{vid}.mp4")
     ok3d = all(ok for _, ok, _ in items)
     rep = [f"# Audit 3D: {vid}", "", f"- Hasil: **{'LULUS' if ok3d else 'GAGAL'}**", "", "| Cek | Hasil | Nilai |",
            "|---|---|---|"] + [f"| {n} | {'✅' if ok else '❌'} | {v} |" for n, ok, v in items]
