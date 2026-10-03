@@ -1126,6 +1126,17 @@
    "cpu_container_seconds": 12.6,
    "wall_seconds": 21.0,
    "cost_usd": 0.0034
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S022",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 127.3,
+   "wall_seconds": 67.1,
+   "cost_usd": 0.0343
   }
  ]
 }
