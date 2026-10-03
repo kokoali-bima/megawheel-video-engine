@@ -16,6 +16,7 @@ const WATER_Y = -1.2
 # (<0.8 s ago), the floor shrinks from 18 s every 7 s, last car standing always survives, time limit -> most HP wins.
 # Added (user 2026-10-03): KOs at least KO_GAP apart, never several cars wiped out by one event.
 const BARRIER_DOWN = 9.0
+const GO_T = 4.3                                         # jingle 0-3.8 s, then READY-SET-GO
 const PUSH_WINDOW = 0.8
 const KO_GAP = 4.5
 const SHRINK_AT = 18.0
@@ -557,8 +558,10 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 
 
 # ================================================================== FX helpers
-func _log(type: String, power: float, pos = null) -> void:
+func _log(type: String, power: float, pos = null, who := "") -> void:
 	var e = {"t": vt(), "type": type, "power": power}
+	if who != "":
+		e["who"] = who
 	if pos != null and cam != null and not _behind(pos):
 		var p = _proj(pos)
 		e["sx"] = p.x
@@ -568,7 +571,7 @@ func _log(type: String, power: float, pos = null) -> void:
 
 
 func _emitter(n: int, life: float, vel: Vector2, grav: Vector3, size: Vector2, c0: Color, c1: Color,
-			  spread := 180.0, unshaded := true) -> CPUParticles3D:
+			  spread := 180.0, unshaded := true, additive := false, radius := 0.0, fade_in := false) -> CPUParticles3D:
 	var p = CPUParticles3D.new()
 	var q = QuadMesh.new()
 	q.size = Vector2(1, 1)
@@ -579,6 +582,8 @@ func _emitter(n: int, life: float, vel: Vector2, grav: Vector3, size: Vector2, c
 	m.vertex_color_use_as_albedo = true
 	if unshaded:
 		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	if additive:
+		m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	q.material = m
 	p.mesh = q
 	p.amount = n
@@ -591,9 +596,17 @@ func _emitter(n: int, life: float, vel: Vector2, grav: Vector3, size: Vector2, c
 	p.scale_amount_min = size.x
 	p.scale_amount_max = size.y
 	var g = Gradient.new()
-	g.set_color(0, c0)
-	g.set_color(1, c1)
+	if fade_in:                                          # smoke: grows in softly instead of popping
+		g.set_color(0, Color(c0.r, c0.g, c0.b, 0.0))
+		g.add_point(0.12, c0)
+	else:
+		g.set_color(0, c0)
+	g.add_point(0.55, c0.lerp(c1, 0.6))
+	g.set_color(g.get_point_count() - 1, c1)
 	p.color_ramp = g
+	if radius > 0.0:
+		p.emission_shape = CPUParticles3D.EMISSION_SHAPE_SPHERE
+		p.emission_sphere_radius = radius
 	var cv = Curve.new()
 	cv.add_point(Vector2(0, 0.5))
 	cv.add_point(Vector2(0.25, 1.0))
@@ -604,11 +617,11 @@ func _emitter(n: int, life: float, vel: Vector2, grav: Vector3, size: Vector2, c
 
 
 func _particles(pos: Vector3, n: int, life: float, vel: Vector2, grav: Vector3, size: Vector2, c0: Color, c1: Color,
-				spread := 180.0, unshaded := true) -> void:
-	var p = _emitter(n, life, vel, grav, size, c0, c1, spread, unshaded)
+				spread := 180.0, unshaded := true, additive := false, radius := 0.0, fade_in := false, burst := 0.92) -> void:
+	var p = _emitter(n, life, vel, grav, size, c0, c1, spread, unshaded, additive, radius, fade_in)
 	p.position = pos
 	p.one_shot = true
-	p.explosiveness = 0.92
+	p.explosiveness = burst
 	add_child(p)
 	p.emitting = true
 	get_tree().create_timer(life + 0.5, false).timeout.connect(p.queue_free)
@@ -758,14 +771,15 @@ func explode(pos: Vector3, power: float, push := true, lethal = null, push_h := 
 	_log("explode", power, pos)
 	_flash(pos + Vector3(0, 1.5, 0), 8.0 * power, 13.0 * power, Color(1, 0.6, 0.25), 0.6)
 	var fb = minf(power, 1.4)                                # cap the fireball so it never blobs the screen
-	_particles(pos + Vector3(0, 0.8, 0), int(50 * fb), 0.45, Vector2(3, 8) * fb, Vector3(0, 3, 0),
-			   Vector2(0.6, 1.4) * fb, Color(1, 1, 0.85), Color(1, 0.7, 0.2, 0))                    # white-hot core
-	_particles(pos + Vector3(0, 1.0, 0), int(70 * fb), 0.9, Vector2(4, 10) * fb, Vector3(0, 2.5, 0),
-			   Vector2(0.9, 2.0) * fb, Color(1, 0.75, 0.25), Color(0.85, 0.15, 0.03, 0))            # orange fireball
-	_particles(pos + Vector3(0, 1.4, 0), int(45 * fb), 3.2, Vector2(1, 3.5), Vector3(0, 1.6, 0),
-			   Vector2(1.4, 3.0) * fb, Color(0.13, 0.12, 0.12, 0.9), Color(0.3, 0.3, 0.32, 0), 80.0, false)  # charcoal smoke
-	_particles(pos + Vector3(0, 0.5, 0), int(80 * fb), 1.3, Vector2(9, 22) * fb, Vector3(0, -15, 0),
-			   Vector2(0.08, 0.18), Color(1, 0.92, 0.4), Color(1, 0.4, 0.1, 0))                         # sparks
+	_fireball(pos + Vector3(0, 1.0, 0), 2.4 * fb)                # smooth expanding glow ball
+	_particles(pos + Vector3(0, 0.9, 0), int(70 * fb), 0.55, Vector2(2, 6) * fb, Vector3(0, 3, 0),
+			   Vector2(0.5, 1.2) * fb, Color(1, 0.95, 0.75, 0.9), Color(1, 0.5, 0.1, 0), 180.0, true, true, 0.7 * fb, false, 0.8)
+	_particles(pos + Vector3(0, 1.1, 0), int(90 * fb), 1.0, Vector2(3, 8) * fb, Vector3(0, 2.5, 0),
+			   Vector2(0.7, 1.6) * fb, Color(1, 0.62, 0.18, 0.85), Color(0.7, 0.12, 0.03, 0), 180.0, true, true, 0.9 * fb, false, 0.7)
+	_particles(pos + Vector3(0, 1.4, 0), int(55 * fb), 3.6, Vector2(0.8, 2.6), Vector3(0, 1.4, 0),
+			   Vector2(1.2, 2.8) * fb, Color(0.16, 0.15, 0.15, 0.85), Color(0.32, 0.32, 0.34, 0), 80.0, false, false, 1.0 * fb, true, 0.55)
+	_particles(pos + Vector3(0, 0.5, 0), int(90 * fb), 1.3, Vector2(9, 22) * fb, Vector3(0, -15, 0),
+			   Vector2(0.06, 0.14), Color(1, 0.92, 0.4), Color(1, 0.4, 0.1, 0), 180.0, true, true)       # sparks
 	_ring(pos, 7.0 * power, Color(1, 0.85, 0.5, 0.9), 0.45)
 	_pow(pos + Vector3(0, 1.8, -0.5), 3.6 * fb)
 	_scorch(pos, 1.1 * fb)
@@ -789,6 +803,44 @@ func explode(pos: Vector3, power: float, push := true, lethal = null, push_h := 
 				_damage(c, 100.0 if c == lethal else 45.0 * f * power, "KABOOM!", c == lethal)
 	if lethal != null and lethal["alive"]:                    # a direct hit always lands
 		_damage(lethal, 100.0, "KABOOM!", true)
+
+
+func _fireball(pos: Vector3, size: float) -> void:
+	## additive noisy sphere: grows fast with ease-out, cools from white to orange to red while fading (no hard edges)
+	var mi = MeshInstance3D.new()
+	var sm = SphereMesh.new()
+	sm.radius = 0.5
+	sm.height = 1.0
+	mi.mesh = sm
+	var sh = Shader.new()
+	sh.code = """
+shader_type spatial;
+render_mode unshaded, blend_add, depth_draw_never, cull_back;
+uniform float life = 0.0;
+float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
+	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
+void fragment() {
+	float v = n(UV * vec2(9.0, 5.0) + TIME * 1.7) * 0.6 + n(UV * vec2(19.0, 11.0) - TIME * 2.3) * 0.4;
+	float rim = 1.0 - abs(dot(NORMAL, VIEW));
+	vec3 col = mix(vec3(1.0, 0.96, 0.78), vec3(1.0, 0.55, 0.12), smoothstep(0.0, 0.55, life + v * 0.25));
+	col = mix(col, vec3(0.55, 0.1, 0.03), smoothstep(0.5, 1.0, life + v * 0.2));
+	float a = (1.0 - life) * (1.0 - rim * 0.85) * (0.55 + 0.45 * v);
+	ALBEDO = col * a * 1.6;
+}
+"""
+	var m = ShaderMaterial.new()
+	m.shader = sh
+	mi.material_override = m
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.position = pos
+	mi.scale = Vector3.ONE * size * 0.25
+	add_child(mi)
+	var tw = create_tween().set_parallel(true)
+	tw.tween_property(mi, "scale", Vector3.ONE * size, 0.35).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(mi, "position:y", pos.y + size * 0.35, 0.8).set_ease(Tween.EASE_OUT)
+	tw.tween_method(func(v): m.set_shader_parameter("life", v), 0.0, 1.0, 0.8)
+	tw.chain().tween_callback(mi.queue_free)
 
 
 func _scorch(pos: Vector3, r: float) -> void:
@@ -912,7 +964,7 @@ func _ko(c: Dictionary, how: String) -> void:
 	c["alive"] = false
 	last_ko_t = t
 	c["hp"] = 0.0
-	_log("ko", 1.0, c["body"].global_position)
+	_log("ko", 1.0, c["body"].global_position, c["nick"] + ("|fall" if how == "fall" else "|boom"))
 	_bubble(c["body"].global_position + Vector3(0, c["bh"] + 2.0, 0), "K.O.!", 80)
 
 
@@ -1027,7 +1079,7 @@ func _shark(c: Dictionary) -> void:
 
 func _physics_process(delta: float) -> void:
 	t += delta
-	var go = clampf((t - 2.5) / 1.0, 0.0, 1.0)              # intro: 4 fighters... 1 survivor
+	var go = clampf((t - GO_T) / 0.6, 0.0, 1.0)             # intro: jingle + 4 fighters... 1 survivor
 	var allowed = ko_allowed()
 	var bb = bounds(t)
 	if absf(bb.x - hx_now) > 0.004 or absf(bb.y - hz_now) > 0.004:
@@ -1113,7 +1165,7 @@ func _physics_process(delta: float) -> void:
 		win_t_phys = t
 		win_lbl.text = winner["nick"] + " WINS!"
 		win_lbl.visible = true
-		_log("win", 1.0, winner["body"].global_position)
+		_log("win", 1.0, winner["body"].global_position, winner["nick"])
 		_particles(winner["body"].global_position + Vector3(0, 7, 0), 220, 3.2, Vector2(3, 9), Vector3(0, -4, 0),
 				   Vector2(0.14, 0.3), Color(1, 0.9, 0.2), Color(0.3, 0.6, 1.0, 0.8))
 
@@ -1168,7 +1220,7 @@ func _director(alive: Array) -> void:
 				c["out"] = true
 				c["spr"].modulate = Color(0.5, 0.5, 0.55)
 				c["smoke"].emitting = true
-				_log("ko", 0.5, c["body"].global_position)
+				_log("ko", 0.5, c["body"].global_position, c["nick"] + "|boom")
 
 
 func _shrink_fx(hx0: float, hz0: float, hx1: float, hz1: float) -> void:
@@ -1395,9 +1447,14 @@ func _process(_d: float) -> void:
 			c["smoke"].emitting = c["hp"] < 70.0
 			c["fire"].emitting = c["hp"] < 35.0
 	title_lbl.visible = true
-	sub_lbl.modulate.a = clampf((3.2 - vt()) / 0.4, 0.0, 1.0)
-	cta.visible = winner != null and vt() > win_t + 3.0
-	if winner != null and vt() > win_t + 8.0:              # banner 3 s + end card 5 s, then stop (video 30-40 s)
+	sub_lbl.modulate.a = clampf((GO_T - 0.2 - vt()) / 0.4, 0.0, 1.0)
+	if t < GO_T:                                            # engines revving before the start
+		for i in range(cars.size()):
+			var cc = cars[i]
+			if is_instance_valid(cc["body"]):
+				cc["spr"].scale = Vector3(1.0, 1.0 + 0.035 * sin(t * 19.0 + i * 1.7), 1.0)
+	cta.visible = false                                    # end card = cairo draw_cta overlay (mix3d)
+	if winner != null and vt() > win_t + 9.5:              # banner 3 s + end card 6.5 s (CTA line), then stop
 		get_tree().quit()
 
 

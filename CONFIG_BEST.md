@@ -87,3 +87,6 @@
 8. Sampel/eksperimen wajib mengikuti format tayang (kamera, rasio mobil, HUD) — jangan membuat format baru.
 9. Ukuran jangan ditebak: semua dimensi (mobil, arena, px/m, zona layar) ada di `SCALE_STANDARD.md`; render Godot
    wajib mencetak `SCALE` dan lolos toleransinya.
+10. Cahaya 3D: matahari siang dari sisi kamera (Godot `sun.rotation_degrees = (-55, 140, 0)`), supaya bayangan jatuh
+    menjauhi kamera. Jangan mematikan bayangan untuk menutupi arah cahaya yang salah (kecuali memang adegan sore).
+    Mobil berbentuk kartu tetap diberi bayangan elips di bawahnya, seperti di cairo.
