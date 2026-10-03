@@ -1064,6 +1064,16 @@
    "gpu_seconds": 61.0,
    "wall_seconds": 86.5,
    "cost_usd": 0.0156
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d test splash_s7",
+   "cpu": 16,
+   "engine": "godot-4.4.1-llvmpipe",
+   "parts": 3,
+   "cpu_container_seconds": 229.8,
+   "wall_seconds": 103.3,
+   "cost_usd": 0.0601
   }
  ]
 }
