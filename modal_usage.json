@@ -1466,6 +1466,17 @@
    "cpu_container_seconds": 131.4,
    "wall_seconds": 92.0,
    "cost_usd": 0.0354
+  },
+  {
+   "date": "2026-10-03",
+   "note": "metal shader test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 18.3,
+   "wall_seconds": 23.6,
+   "cost_usd": 0.0049
   }
  ]
 }
