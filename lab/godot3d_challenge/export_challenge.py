@@ -75,7 +75,13 @@ def main():
         orig_theme, orig_story = se.make_theme, se.make_story
         se.make_theme = lambda seed, force=None, used=None: orig_theme(seed, dict(th), used=[])
         voice = man["voice"]
-        se.cb_pick = lambda *x, **k: voice if voice.startswith("chatterbox") else None
+        def forced_cb(*x, **k):                              # same narrator, and switch voice C on like cb_pick
+            if not voice.startswith("chatterbox"):
+                return None
+            who = voice.split(":")[1]
+            se.CB.update(on=True, who=who, edge=se.CB_EDGE[who], missing=[])
+            return voice
+        se.cb_pick = forced_cb
         if not voice.startswith("chatterbox"):
             se.VOICES = [voice]
 
