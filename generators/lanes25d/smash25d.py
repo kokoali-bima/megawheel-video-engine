@@ -40,6 +40,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 import race25d as R  # noqa: E402  (shared drawing: car, bubble, YouTube end card, sounds)
+import props25d as P  # noqa: E402  (shark + fin for the sea arena)
 sys.path.insert(0, os.path.join(HERE, "..", "voice"))
 import announcer  # noqa: E402  (Chatterbox announcer on Modal, cached; Edge TTS fallback)
 
@@ -49,7 +50,8 @@ EDGE_VOICES = {"m1": "en-US-GuyNeural", "f1": "en-US-AriaNeural"}     # Edge fal
 HIT_CALLS_F = ["Oh my goodness! What a hit!", "Ouch! That's gotta hurt!", "Did you see that?"]
 CHAOS_WHO = {"missile": "f1", "ufo": "f1", "kraggor": "m1", "crack": "m1"}
 
-SERIES, ENGINE_VERSION = "smash25d", "v4"             # v4: voice C duo commentators + spoken READY-GO (v3: intros)
+SERIES, ENGINE_VERSION = "smash25d", "v5"             # v5: sea arena + shark, POW + hit-stop, parts fly off, smoke/fire by HP,
+                                                     # cold open, hook title, no music bed (v4: voice C duo + READY-GO)
 W, H, FPS = se.W, se.H, 30
 # perspective: x, z in metres (z = depth). Higher camera than race25d so the floor reads as an arena.
 F_PERSP, D0, DZ = 6000.0, 100.0, 8.0             # k(z) = F / (D0 + DZ*z): front 60 px/m, back (z=8.5) ≈ 36
@@ -79,7 +81,11 @@ ARENAS = {
     "lava": dict(name="the lava", out_line="{n} is out!", bubble="HOT HOT!", grip=0.03),
     "mud":  dict(name="the mud", out_line="{n} is out!", bubble="YUCK!", grip=0.028),
     "ice":  dict(name="the icy water", out_line="{n} is out!", bubble="BRRR!", grip=0.01),
+    # user 2026-10-03: steel platform in the sea, a shark eats whoever falls in
+    "sea":  dict(name="the shark sea", out_line="{n} is out!", bubble="UH OH!", grip=0.03),
 }
+SHARK_UP, SHARK_CHOMP, SHARK_END = 0.45, 0.85, 1.9          # seconds after the ring-out (sea arena)
+HIT_STOP = 8.0                                               # rel. speed (m/s) for POW + a 3-frame freeze
 VMAX = {"f1": 8.4, "sports": 8.2, "police": 7.6, "taxi": 7.4, "monster": 7.2, "monster2": 7.2,
         "icecream": 6.0, "bus": 5.8, "firetruck": 5.8, "bigrig": 5.4}
 TURN = {"f1": 3.2, "sports": 3.0, "police": 2.7, "taxi": 2.6, "monster": 2.4, "monster2": 2.4,
@@ -518,6 +524,8 @@ def simulate(seed):
                 sink = 0.0
                 if c["out_kind"] == "ring" and c["out"] is not None and c["h"] <= 0 and t - c["out"] > 0.3:
                     sink = min(1.0, (t - c["out"] - 0.3) / 1.2)
+                    if ARENA == "sea":                           # bobbing until the shark takes it
+                        sink = 0.15 if t - c["out"] < SHARK_CHOMP else 1.0
                 c["sink_rec"] = c.get("sink_rec", []) + [sink]
                 tilt = 0.22 if c["out_kind"] == "wreck" else (-0.12 * min(1.0, c["vh"] / 4) if c["h"] > 0 else 0.0)
                 sq = 0.88 if c["out_kind"] == "wreck" else 1.0
@@ -563,9 +571,18 @@ def build_timeline(cars, hits, winner):
     slows = sorted([(m[0] - 0.15, m[0] + 0.5) for m in mom[:2]])
     frames, t = [], 0.0
     end = winner["finish"] + 4.2                                 # the winner shows off before the replay
+    stops, last = [], -9.0
+    for h in sorted(hits, key=lambda h: h["t"]):
+        if h["rel"] > HIT_STOP and h["t"] - last > 1.0 and not any(a < h["t"] < b for a, b in slows):
+            stops.append(h["t"])
+            last = h["t"]
     while t < end:
         frames.append(("race", t))
-        t += (0.4 if any(a < t < b for a, b in slows) else 1.0) / FPS
+        dt_ = (0.4 if any(a < t < b for a, b in slows) else 1.0) / FPS
+        if stops and t <= stops[0] < t + dt_:                    # freeze on the impact (comic hit-stop)
+            frames += [("race", t)] * 3
+            stops.pop(0)
+        t += dt_
     replay, star_t, star = None, None, None
     if mom:
         star_t, _, star = mom[0]
@@ -668,6 +685,47 @@ def draw_arena(ctx, camx, t, flash):
             ctx.restore()
             ctx.set_source_rgba(0.25, 0.15, 0.07, 0.7)
             ctx.fill()
+    elif ARENA == "sea":
+        g = cairo.LinearGradient(0, ground_y(ZC + 9), 0, ground_y(ZC - 9))
+        g.add_color_stop_rgb(0, 0.02, 0.24, 0.45)
+        g.add_color_stop_rgb(1, 0.06, 0.45, 0.66)
+        ctx.set_source(g)
+        ctx.fill()
+        ctx.set_line_width(3)
+        rng = np.random.default_rng(8)
+        for _ in range(34):                                      # wave glints
+            bx, bz, ph = float(rng.uniform(-18, 18)), float(rng.uniform(ZC - 8, ZC + 8)), float(rng.uniform(0, 6))
+            if abs(bx) < hx + 0.4 and abs(bz - ZC) < hz + 0.4:
+                continue
+            k = k_of(bz)
+            sx, sy = pxy(bx + 0.3 * math.sin(t * 0.8 + ph), bz, camx)
+            ctx.move_to(sx - 0.5 * k, sy)
+            ctx.curve_to(sx - 0.2 * k, sy - 0.12 * k, sx + 0.2 * k, sy - 0.12 * k, sx + 0.5 * k, sy)
+            ctx.set_source_rgba(1, 1, 1, 0.35 + 0.3 * math.sin(t * 2 + ph))
+            ctx.stroke()
+        fp_ = floor_poly(hx + 0.35, hz + 0.25, camx)              # foam where the sea hits the platform
+        se.poly(ctx, fp_)
+        ctx.set_source_rgba(1, 1, 1, 0.55)
+        ctx.set_line_width(10)
+        ctx.stroke()
+        fin = P.get("fin")
+        for i in range(2):                                       # two sharks circling the arena
+            a = t * (0.35 + 0.06 * i) + i * math.pi + 0.6
+            back = math.sin(a) > 0                                   # behind the arena: stay well clear of the stands
+            fx, fz = math.cos(a) * (hx + 3.0), ZC + math.sin(a) * ((hz + 1.2) if back else (hz + 2.4))
+            k = k_of(fz)
+            sx, sy = pxy(fx, fz, camx)
+            sc = 1.1 * k / 240.0
+            ctx.save()
+            ctx.translate(sx, sy)
+            ctx.scale(-sc if math.sin(a) > 0 else sc, sc)        # fin points along the swim direction
+            ctx.set_source_surface(fin, -120, -190)
+            ctx.paint()
+            ctx.restore()
+            ctx.arc(sx, sy, 0.45 * k, 0, math.pi)
+            ctx.set_source_rgba(1, 1, 1, 0.5)
+            ctx.set_line_width(4)
+            ctx.stroke()
     else:
         g = cairo.LinearGradient(0, ground_y(ZC + 9), 0, ground_y(ZC - 9))
         g.add_color_stop_rgb(0, 0.05, 0.2, 0.4)
@@ -690,10 +748,11 @@ def draw_arena(ctx, camx, t, flash):
     d = 0.5
     front = [fp[0], fp[1], (fp[1][0], fp[1][1] + d * k_of(ZC - hz)), (fp[0][0], fp[0][1] + d * k_of(ZC - hz))]
     se.poly(ctx, front)
-    ctx.set_source_rgb(*se.lit({"lava": (0.25, 0.25, 0.3), "mud": (0.45, 0.32, 0.18), "ice": (0.55, 0.75, 0.9)}[ARENA]))
+    ctx.set_source_rgb(*se.lit({"lava": (0.25, 0.25, 0.3), "mud": (0.45, 0.32, 0.18), "ice": (0.55, 0.75, 0.9),
+                                "sea": (0.25, 0.26, 0.3)}[ARENA]))
     ctx.fill()
     se.poly(ctx, fp)
-    top = {"lava": (0.52, 0.53, 0.58), "mud": (0.72, 0.56, 0.36), "ice": (0.85, 0.94, 1.0)}[ARENA]
+    top = {"lava": (0.52, 0.53, 0.58), "mud": (0.72, 0.56, 0.36), "ice": (0.85, 0.94, 1.0), "sea": (0.55, 0.56, 0.6)}[ARENA]
     g = cairo.LinearGradient(0, fp[2][1], 0, fp[0][1])
     g.add_color_stop_rgb(0, *se.lit(se.shade(top, 0.85)))
     g.add_color_stop_rgb(1, *se.lit(top))
@@ -703,7 +762,7 @@ def draw_arena(ctx, camx, t, flash):
     se.poly(ctx, fp)
     ctx.clip()
     ctx.set_line_width(2)
-    if ARENA == "lava":                                          # steel plates + rivets
+    if ARENA in ("lava", "sea"):                                 # steel plates + rivets
         ctx.set_source_rgba(0.2, 0.2, 0.25, 0.6)
         for gx in np.arange(-HX0, HX0 + 0.1, 2.5):
             a, b = pxy(gx, ZC - HZ0, camx), pxy(gx, ZC + HZ0, camx)
@@ -1175,9 +1234,25 @@ def draw_debris(ctx, ev, t, camx, airborne):
         ctx.translate(sx, sy - hh * k)
         ctx.rotate(age * 9 * (1 if j % 2 else -1) if age < tl else j)
         col = ca if j % 3 == 0 else cb if j % 3 == 1 else (0.75, 0.75, 0.8)
-        ctx.rectangle(-0.25 * k, -0.1 * k, 0.5 * k, 0.2 * k)
-        ctx.set_source_rgba(*se.lit(col), max(0.0, min(1.0, (3.5 - age) / 0.6)))
-        ctx.fill()
+        fade = max(0.0, min(1.0, (3.5 - age) / 0.6))
+        if strength > 0.6 and j == 0:                           # a wheel comes off
+            ctx.arc(0, 0, 0.32 * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.12, 0.12, 0.14, fade)
+            ctx.fill()
+            ctx.arc(0, 0, 0.14 * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.75, 0.75, 0.8, fade)
+            ctx.fill()
+        elif strength > 0.6 and j in (1, 2):                    # bumper / door panel
+            ctx.rectangle(-0.5 * k, -0.18 * k, 1.0 * k, 0.36 * k)
+            ctx.set_source_rgba(*se.lit(col), fade)
+            ctx.fill_preserve()
+            ctx.set_source_rgba(0.1, 0.11, 0.17, fade)
+            ctx.set_line_width(max(2, 0.05 * k))
+            ctx.stroke()
+        else:
+            ctx.rectangle(-0.25 * k, -0.1 * k, 0.5 * k, 0.2 * k)
+            ctx.set_source_rgba(*se.lit(col), fade)
+            ctx.fill()
         ctx.restore()
 
 
@@ -1199,6 +1274,18 @@ def draw_impact(ctx, ev, t, camx):
     se.star(ctx, sx, sy - 1.0 * k, (0.7 + strength) * k * (1 - age / 0.35 * 0.5), age * 6)
     ctx.set_source_rgba(1, 1, 1, 1 - age / 0.35)
     ctx.fill()
+    if strength > HIT_STOP / 13.0:                              # big hit: comic POW burst (lab-3D idea)
+        a = 1 - age / 0.35
+        r = (1.6 + 0.6 * se.ease_out_back(min(1.0, age / 0.12))) * k
+        for rr, col in ((r, (0.9, 0.2, 0.1)), (r * 0.82, (1, 0.86, 0.12)), (r * 0.5, (1, 1, 1))):
+            for i in range(28):
+                ang = i * math.pi / 14 + 0.2
+                q = rr * (1.0 if i % 2 == 0 else 0.62)
+                (ctx.line_to if i else ctx.move_to)(sx + math.cos(ang) * q, sy - 1.6 * k + math.sin(ang) * q * 0.85)
+            ctx.close_path()
+            ctx.set_source_rgba(*col, a)
+            ctx.fill()
+        se.draw_text(ctx, "POW!", sx, sy - 1.6 * k, 0.9 * k, fill=(0.9, 0.15, 0.1), alpha=a)
 
 
 def draw_out_fx(ctx, c, t, camx):
@@ -1213,7 +1300,7 @@ def draw_out_fx(ctx, c, t, camx):
     k = k_of(z)
     if c["out_kind"] == "ring" and 0.3 < age < 2.2:
         a = age - 0.3
-        col = {"lava": (1, 0.6, 0.1), "mud": (0.4, 0.27, 0.14), "ice": (0.85, 0.95, 1.0)}[ARENA]
+        col = {"lava": (1, 0.6, 0.1), "mud": (0.4, 0.27, 0.14), "ice": (0.85, 0.95, 1.0), "sea": (0.92, 0.97, 1.0)}[ARENA]
         for j in range(12):
             ang = math.pi * (0.1 + 0.8 * j / 11)
             r = (1 + a * 5) * k
@@ -1221,12 +1308,80 @@ def draw_out_fx(ctx, c, t, camx):
                     0, 2 * math.pi)
             ctx.set_source_rgba(*col, max(0.0, 1 - a / 1.9))
             ctx.fill()
-    if c["out_kind"] == "wreck" or rec_at(c, "hp_rec", t) < 30:
-        dark = 0.15 if c["out_kind"] == "wreck" and age >= 0 else 0.35
+    if c["out_kind"] == "ring" and ARENA == "sea" and SHARK_UP <= age < SHARK_END:
+        draw_shark(ctx, sx, sy, k, age)
+    if c["out_kind"] == "wreck":
         for j in range(6):
             p = ((t * 0.9) + j / 6) % 1.0
             ctx.arc(sx + (p * 0.8 - 0.3) * k, sy - (2.0 + p * 3.0) * k, (0.35 + p * 0.7) * k, 0, 2 * math.pi)
-            ctx.set_source_rgba(dark, dark, dark + 0.02, 0.55 * (1 - p))
+            ctx.set_source_rgba(0.15, 0.15, 0.17, 0.55 * (1 - p))
+            ctx.fill()
+
+
+def draw_damage(ctx, c, t, camx):
+    """Progressive damage while fighting (lab-3D idea): light smoke < 70 HP, dark smoke < 40, flames < 30."""
+    if c["out"] is not None and t >= c["out"]:
+        return
+    hp = rec_at(c, "hp_rec", t)
+    if hp >= 70:
+        return
+    x, z, h = R.state(c, t)[0], R.state(c, t)[1], R.state(c, t)[2]
+    sx, sy = pxy(x, z, camx)
+    k = k_of(z)
+    sy -= h * k
+    dark = 0.62 if hp >= 40 else 0.22
+    n = 3 if hp >= 40 else 6
+    for j in range(n):
+        p = ((t * 0.9) + j / n) % 1.0
+        ctx.arc(sx + (p * 0.8 - 0.3) * k, sy - (1.8 + p * 2.6) * k, (0.3 + p * 0.6) * k, 0, 2 * math.pi)
+        ctx.set_source_rgba(dark, dark, dark + 0.02, (0.4 if hp >= 40 else 0.55) * (1 - p))
+        ctx.fill()
+    if hp < 30:                                                  # flickering flames on the roof
+        for j in range(3):
+            fl = 0.8 + 0.25 * math.sin(t * 23 + j * 2.1)
+            bx, by = sx + (j - 1) * 0.35 * k, sy - 1.45 * k
+            ctx.move_to(bx - 0.22 * k, by)
+            ctx.curve_to(bx - 0.25 * k, by - 0.5 * k * fl, bx, by - 0.55 * k * fl, bx, by - 0.85 * k * fl)
+            ctx.curve_to(bx + 0.05 * k, by - 0.5 * k * fl, bx + 0.28 * k, by - 0.4 * k * fl, bx + 0.22 * k, by)
+            ctx.close_path()
+            ctx.set_source_rgba(1, 0.55, 0.1, 0.9)
+            ctx.fill_preserve()
+            ctx.set_source_rgba(1, 0.9, 0.3, 0.7)
+            ctx.set_line_width(max(2, 0.05 * k))
+            ctx.stroke()
+
+
+def draw_shark(ctx, sx, sy, k, age):
+    """The shark breaches nose-up under the car, the jaws close on it (CHOMP), it falls back with a splash.
+    Clipped at the water line so it really comes out of the sea."""
+    length = 6.0 * k                                             # shark ~6 m
+    low, at_car, peak = length * 0.95, -0.5 * k, -4.4 * k        # mouth height vs the water line (px, up = negative)
+    if age < SHARK_CHOMP:                                        # comes up under the car, jaws open
+        u = (age - SHARK_UP) / (SHARK_CHOMP - SHARK_UP)
+        y, rot, img = low + (at_car - low) * (1 - (1 - u) ** 2), 0.0, P.get("shark_open")
+    elif age < SHARK_CHOMP + 0.4:                                # CHOMP: keeps leaping with the car inside
+        u = (age - SHARK_CHOMP) / 0.4
+        y, rot, img = at_car + (peak - at_car) * (1 - (1 - u) ** 2), 0.15 * u, P.get("shark_closed")
+    else:                                                        # falls back, turning over
+        u = (age - SHARK_CHOMP - 0.4) / (SHARK_END - SHARK_CHOMP - 0.4)
+        y, rot, img = peak + (low + length * 0.3 - peak) * u * u, 0.15 + 1.0 * u, P.get("shark_closed")
+    sc = length / 960.0
+    ctx.save()
+    ctx.rectangle(0, 0, W, sy + 0.15 * k)
+    ctx.clip()
+    ctx.translate(sx, sy + y)
+    ctx.rotate(-math.pi / 2 + 0.12 + rot)
+    ctx.scale(sc, sc)
+    ctx.set_source_surface(img, -880, -280)                      # mouth (right end) at the pivot
+    ctx.paint()
+    ctx.restore()
+    if SHARK_CHOMP <= age < SHARK_CHOMP + 0.6:                   # CHOMP spray
+        a = (age - SHARK_CHOMP) / 0.6
+        for j in range(10):
+            ang = math.pi * (0.1 + 0.8 * j / 9)
+            r = (0.6 + a * 3.0) * k
+            ctx.arc(sx + math.cos(ang) * r, sy - math.sin(ang) * r - 1.2 * k + a * a * 4 * k, 0.18 * k + 2, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.92, 0.97, 1.0, 1 - a)
             ctx.fill()
 
 
@@ -1422,6 +1577,11 @@ def build_audio(frames, events, winner, star_t, replay, placed, voice, out_of, c
                 place(sfx, se.synth_lava_plunge(), o + 0.3, 0.9)
             elif ARENA == "mud":
                 place(sfx, se.synth_splash(1.0, seed=43, big=True), o + 0.3, 0.9)
+            elif ARENA == "sea":
+                place(sfx, se.synth_splash(1.0, seed=49, big=True), o + 0.3, 0.9)
+                place(sfx, se.synth_splash(0.8, seed=51, big=True), o + SHARK_UP, 0.7)
+                place(sfx, se.synth_impact(1.0, seed=33), o + SHARK_CHOMP, 1.0)        # CHOMP
+                place(sfx, se.synth_splash(1.0, seed=53, big=True), o + SHARK_END - 0.5, 0.8)
             else:
                 place(sfx, se.synth_splash(1.0, seed=47, big=True), o + 0.3, 0.9)
                 place(sfx, se.synth_shatter(seed=5), o + 0.3, 0.4)
@@ -1614,7 +1774,7 @@ def main():
         return len(frames) / FPS
 
     names = [nick(c["key"]) for c in cars]
-    arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink"}[ARENA]
+    arena_word = {"lava": "the lava ring", "mud": "the mud pit", "ice": "the ice rink", "sea": "the shark sea"}[ARENA]
     anchors = [(0.05, ladies, "intro", "m1"),
                (out_of(winner["finish"]) + 0.3, win_line, "call", "m1"),
                (cta_start + 0.2, se.CTA, "norm", "m1")]
@@ -1692,6 +1852,11 @@ def main():
                 if ch["type"] == "ufo" and t >= ch["T"]:
                     focus = ufo_pos(ch, t)[:2]
                 wide = ch["type"] in ("kraggor", "ufo")
+        shark_x = None
+        if ARENA == "sea":                                       # the shark is the show: frame the car in the water
+            for c in cars:
+                if c["out_kind"] == "ring" and c["out"] is not None and 0 <= t - c["out"] < SHARK_END:
+                    focus, wide, shark_x = (st[id(c)][0], st[id(c)][1]), True, st[id(c)][0]
         if mode == "replay" and star is not None:
             focus = (st[id(star)][0], st[id(star)][1])
         if (winner["finish"] is not None and t >= winner["finish"]) or mode == "cta":
@@ -1710,6 +1875,8 @@ def main():
                 want = min(want, 1.1)
             if mode == "intro":
                 target, want = focus[0], 1.55
+            if shark_x is not None and mode == "race":
+                target, want = shark_x, 1.0
         cut = camx is None or (mode != prev_mode and not (prev_mode == "intro" and mode == "race"))
         punch = 1.0
         for e in hit_ev:
@@ -1754,6 +1921,8 @@ def main():
         for c in sorted(cars, key=lambda c: -st[id(c)][1]):
             sink = rec_at(c, "sink_rec", t)
             if sink >= 1.0:
+                if ARENA == "sea":                               # the car is gone, the shark is still leaping
+                    draw_out_fx(ctx, c, t, camx)
                 continue
             if sink > 0:
                 ctx.push_group()
@@ -1768,6 +1937,7 @@ def main():
                 ctx.pop_group_to_source()
                 ctx.paint_with_alpha(1 - sink)
             draw_out_fx(ctx, c, t, camx)
+            draw_damage(ctx, c, t, camx)
             if hd is not None:
                 heads[id(c)] = (540 + (hd[0] - 540) * zoom + shx, PIV_Y + (hd[1] - PIV_Y) * zoom + shy + WORLD_DY,
                                 hd[2], c)
