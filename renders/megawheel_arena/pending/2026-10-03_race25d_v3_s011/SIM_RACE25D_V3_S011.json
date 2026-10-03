@@ -1,0 +1,98 @@
+{
+  "video_id": "SIM_RACE25D_V3_S011",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v3",
+  "series": "race25d",
+  "seed": 11,
+  "fps": 30,
+  "duration": 35.7,
+  "params": {
+    "cast": [
+      "icecream",
+      "monster2",
+      "f1",
+      "police"
+    ],
+    "lanes": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "hazards": [
+      [
+        "pothole",
+        1,
+        112.5
+      ],
+      [
+        "oil",
+        3,
+        206.5
+      ],
+      [
+        "dragon_fire",
+        0,
+        300.1
+      ]
+    ],
+    "finish": 406.6
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "countryside"
+  },
+  "theme_id": "morning-clear-countryside",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p2+bump",
+    "p4+dragon_fire",
+    "p3+oil",
+    "win+dodge_pothole"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Sprinkles Survive the Oil Slick? 🏁",
+  "title": "Can Sprinkles Survive the Oil Slick? 🏁 #Shorts",
+  "description": "Sprinkles, Grizzly, Nitro and Siren race to the finish line! 🏁 Obstacles today: dragon_fire, oil, pothole! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "ice cream truck",
+    "monster truck",
+    "race car",
+    "police car",
+    "dragon_fire",
+    "oil",
+    "pothole"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Sprinkles Survive the Oil Slick? Sprinkles, Grizzly, Nitro and Siren... who will win?",
+    "Nice move! Siren dodges the pothole!",
+    "Oil slick! Nitro spins like a top!",
+    "The dragon breathes fire! Grizzly needs new tires!",
+    "Siren wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s011/SIM_RACE25D_V3_S011.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s011/preview"
+}

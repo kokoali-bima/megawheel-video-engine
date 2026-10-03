@@ -2100,14 +2100,17 @@
         "stuck@obs1",
         "win"
       ],
-      "duration": 49.57,
-      "status": "AUDIT_FAILED",
+      "duration": 51.07,
+      "status": "RENDERED_PENDING_APPROVAL",
       "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s021",
       "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s021/SIM_POTHOLES_V2_S021_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "16q0pYH5t3pAltYa-9_6rCmXLcwqaBRPk",
+      "drive_id": "1Gv2kREKkieGH7nu83I0hy3e3hacTu1Mj",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S021.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S002",
@@ -2139,7 +2142,10 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "1A53dquHC1S6YJIasuYu5GbVnQdTA9gb8",
+      "drive_id": "1-Q1A5Li2Gc2KnQmYW5goMsxoMzUFSpY2",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S002.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S003",
@@ -2171,7 +2177,10 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "1_mff5Q9A_CZnGDx3LyAR3KGo__g5cwE2",
+      "drive_id": "1v8LLGTTgNMDd5N7-vesruvZIGPQbVMUS",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S003.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S022",
@@ -2193,14 +2202,17 @@
         "stuck@obs0",
         "win"
       ],
-      "duration": 46.47,
-      "status": "AUDIT_FAILED",
+      "duration": 47.97,
+      "status": "RENDERED_PENDING_APPROVAL",
       "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s022",
       "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s022/SIM_POTHOLES_V2_S022_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "12zbw1qC1d65oZUrewwc84rO0-6bCpbHh",
+      "drive_id": "1upzZHBmlkUCK4RxDIuXxLmRNpO8XWn3X",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S022.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S004",
@@ -2232,7 +2244,10 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "19UKC6RTz2qay1GewFPC6gQcEkirRRPe5",
+      "drive_id": "17b8FUwSCIxLTlIyQWFqme9NhsllYUVW7",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S004.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S023",
@@ -2254,14 +2269,18 @@
         "stuck@obs0",
         "win"
       ],
-      "duration": 50.47,
-      "status": "AUDIT_FAILED",
-      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s023",
-      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023_audit.md",
+      "duration": 51.97,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-03_potholes_s023",
+      "audit": "renders/megawheel_arena/rejected/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "agent QA: same cast / same lead car as another render in this batch (variety)",
+      "rejected_date": "2026-10-03",
+      "drive_id": "104y8hVk9_s_TRNuzR-e0mkY0RhPeJ0Um",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_POTHOLES_V2_S023.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S024",
@@ -2283,14 +2302,18 @@
         "stuck@obs0",
         "win"
       ],
-      "duration": 46.5,
-      "status": "AUDIT_FAILED",
-      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s024",
-      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s024/SIM_POTHOLES_V2_S024_audit.md",
+      "duration": 48.0,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-03_potholes_s024",
+      "audit": "renders/megawheel_arena/rejected/2026-10-03_potholes_s024/SIM_POTHOLES_V2_S024_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "reject_reason": "agent QA: same cast / same lead car as another render in this batch (variety)",
+      "rejected_date": "2026-10-03",
+      "drive_id": "1Pm5ieYH6pUTRjkBruhAoonVXtXnAWf3T",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_POTHOLES_V2_S024.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S005",
@@ -2322,7 +2345,10 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "1seZhHC-l59NWnMesjiARCPioue2PeJz_",
+      "drive_id": "1iVCKQOl0f_P3nFTzWoxXgFmijH2ZPXs_",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S005.mp4"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S025",
@@ -2383,7 +2409,412 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null
+      "youtube_url": null,
+      "drive_sheet_id": "1J0iDU_6mXj02s-x0ttuqZ3XrhyJUb5nm",
+      "drive_id": "1ACrGkCBTmy15hDTh2B0yflRrnRJBMGG0",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S008.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S009",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 9,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "taxi",
+        "police"
+      ],
+      "track_id": "smash25d_38153053@night-clear-desert",
+      "arena": "ice",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p3+ring",
+        "win",
+        "p4+ring",
+        "p2+ring"
+      ],
+      "duration": 48.4,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/SIM_SMASH25D_V5_S009_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1XCgLOZMkU69RFvxkvIcYIYcjU7B0JN6O",
+      "drive_id": "1mAxeTky5tG3qf3KAH8LIpQRd5MVQ83L1",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S009.mp4"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S027",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 27,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "bus"
+      ],
+      "track_id": "potholes_9095dd50@sunset-clear-beach",
+      "theme": "sunset-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "pit@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 48.7,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s027",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s027/SIM_POTHOLES_V2_S027_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1KL5pXiYtDg8fH8FSMF2DeZFIxDh-MCm3",
+      "drive_id": "10p-2sKVmvKlnesiIWKwwCjf1ul8F96ko",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S027.mp4"
+    },
+    {
+      "video_id": "SIM_LAVA_POTHOLES_V2_S025",
+      "series": "lava_potholes",
+      "engine_version": "v2",
+      "seed": 25,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "f1",
+        "icecream",
+        "taxi"
+      ],
+      "track_id": "lava_potholes_f018885c@noon-clear-volcano",
+      "theme": "noon-clear-volcano",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "pit@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 50.77,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_lava_potholes_s025",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_lava_potholes_s025/SIM_LAVA_POTHOLES_V2_S025_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1bfb9ampZxhmoD613E-opJH2w87WJ_Wss",
+      "drive_id": "1VprgYAbxNe25132mwdDArCsWvErvyqMh",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_LAVA_POTHOLES_V2_S025.mp4"
+    },
+    {
+      "video_id": "SIM_LAVA_POTHOLES_V2_S026",
+      "series": "lava_potholes",
+      "engine_version": "v2",
+      "seed": 26,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "police",
+        "bigrig",
+        "f1"
+      ],
+      "track_id": "lava_potholes_52feb935@morning-clear-volcano",
+      "theme": "morning-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 46.77,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_lava_potholes_s026",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_lava_potholes_s026/SIM_LAVA_POTHOLES_V2_S026_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1AhfMkdesY6AddNraZp5b2DZaTkhCsa_y",
+      "drive_id": "1IjcShvTzinU6xAJpSl1Zuc2b3gHsg7yG",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_LAVA_POTHOLES_V2_S026.mp4"
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S021",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 21,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "sports",
+        "bus",
+        "monster"
+      ],
+      "track_id": "bumps_75aba530@sunset-rain-beach",
+      "theme": "sunset-rain-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "flip@obs2",
+        "flip@obs1+broken",
+        "win"
+      ],
+      "duration": 49.33,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_bumps_s021",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_bumps_s021/SIM_BUMPS_V2_S021_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1hqOH4RppnzUh44IbMcmxMXZhlwLUDG0p",
+      "drive_id": "1_6CLVk9PnEhQOoF7Nblggl2aQiVaLtJI",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_BUMPS_V2_S021.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S011",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 11,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "icecream",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_56bbd3be@morning-clear-countryside",
+      "theme": "morning-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+bump",
+        "p4+dragon_fire",
+        "p3+oil",
+        "win+dodge_pothole"
+      ],
+      "duration": 35.7,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s011",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s011/SIM_RACE25D_V3_S011_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1V3pvg7mJEz8ELWEcYaatEcwCkHUK6-p9",
+      "drive_id": "1eXHbEJ744bCilxFhfvX2XqQOKngyVl9N",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S011.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S012",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 12,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "sports",
+        "taxi"
+      ],
+      "track_id": "race25d_16792d10@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "win",
+        "p4+wall+bump",
+        "p3+oil",
+        "p2+dodge_puddle"
+      ],
+      "duration": 34.05,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s012",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s012/SIM_RACE25D_V3_S012_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1e79s0bGE4EQoxIZoX2CS1rdpBJ1TfNXT",
+      "drive_id": "1OisY70VIa2k9WQ8rkEsWii3Agf0OjDXQ",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S012.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S013",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 13,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_bc2de7e3@sunset-clear-desert",
+      "theme": "sunset-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+puddle",
+        "p4+hammer",
+        "p3+dragon_ice",
+        "win+bump"
+      ],
+      "duration": 37.24,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s013",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s013/SIM_RACE25D_V3_S013_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1RueVGURVjhLanMtZjZcVLC2uNIbTIAFU",
+      "drive_id": "14BhELo_OaB3Bi8wsUSA63I5nsiEhJAV-",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S013.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S014",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 14,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "police",
+        "f1"
+      ],
+      "track_id": "race25d_3a78cfc6@morning-rain-countryside",
+      "theme": "morning-rain-countryside",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2",
+        "p4+dragon_ice",
+        "p3+hammer",
+        "win+dodge_laser"
+      ],
+      "duration": 37.61,
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-03_race25d_v3_s014",
+      "audit": "renders/megawheel_arena/rejected/2026-10-03_race25d_v3_s014/SIM_RACE25D_V3_S014_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "reject_reason": "agent QA: same title as SIM_RACE25D_V3_S013 (Can Hydro Survive the Giant Hammer?)",
+      "rejected_date": "2026-10-03",
+      "drive_id": "1n-yxdovI9Abc0GB5Lxqb3B7zBGQz6JYb",
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V3_S014.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S015",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 15,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_0f301c64@noon-clear-beach",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "win",
+        "p3+wall",
+        "p2+dodge_crusher",
+        "p4+hammer"
+      ],
+      "duration": 36.14,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/SIM_RACE25D_V3_S015_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1WMqhApIdoCTV_1NhaVsEZFQdR6vCJ98z",
+      "drive_id": "1X56Px3Qzo4b3RyRz6BT_NUUorK7y-ypw",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S015.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S016",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 16,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "police",
+        "taxi"
+      ],
+      "track_id": "race25d_a6c74194@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+wall",
+        "p4+hammer",
+        "win",
+        "p2+dodge_laser"
+      ],
+      "duration": 35.15,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s016",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s016/SIM_RACE25D_V3_S016_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Gyyx_DkbGMAUF0725NN-u33ia358u6fB",
+      "drive_id": "1i914PmMcDzdjLS8pCL47fqfDGtWInnV0",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S016.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V3_S017",
+      "series": "race25d",
+      "engine_version": "v3",
+      "seed": 17,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_6b41c8fb@sunset-snow-city",
+      "theme": "sunset-snow-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "win",
+        "p3+meteor",
+        "p2+dodge_puddle",
+        "p4+container"
+      ],
+      "duration": 37.47,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s017",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_race25d_v3_s017/SIM_RACE25D_V3_S017_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1VXnO9s28OkLQXAqbtjuqvzqSWC9HprjV",
+      "drive_id": "16y4Rk5Hkofk6QBh1BFYg98I_YoaWi1zE",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V3_S017.mp4"
     }
   ]
 }
