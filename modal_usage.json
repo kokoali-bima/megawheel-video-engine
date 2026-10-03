@@ -1290,6 +1290,17 @@
    "cpu_container_seconds": 8.6,
    "wall_seconds": 28.2,
    "cost_usd": 0.0023
+  },
+  {
+   "date": "2026-10-03",
+   "note": "smash3d convert SIM_SMASH25D_V5_S002",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 191.0,
+   "wall_seconds": 122.1,
+   "cost_usd": 0.0514
   }
  ]
 }
