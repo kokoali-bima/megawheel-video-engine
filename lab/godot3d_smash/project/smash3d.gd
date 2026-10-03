@@ -222,7 +222,9 @@ func _environment() -> void:
 	we.environment = env
 	add_child(we)
 	var sun = DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-58, -30, 0)
+	# midday sun, high and from behind-left of the camera: shadows fall AWAY from the camera (behind cars and stands).
+	# The old setting lit from behind the stands, so their shadow covered the arena (only plausible near sunset).
+	sun.rotation_degrees = Vector3(-55, 140, 0)
 	sun.light_energy = 1.15
 	sun.light_color = Color(1.0, 0.96, 0.9)
 	sun.shadow_enabled = true
@@ -440,8 +442,7 @@ func _stands() -> void:
 	var z0 = ARENA_HZ * 2 + (3.5 if CAM_MODE == "classic" else 7.0)
 	var rows = 8 if CAM_MODE == "classic" else 7
 	for row in range(rows):
-		var st = _box(Vector3(60, rise, 1.7), Vector3(0, rise / 2.0 + row * rise - 0.6, z0 + row * 1.7), stand)
-		st.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF   # no stand shadow across the arena
+		_box(Vector3(60, rise, 1.7), Vector3(0, rise / 2.0 + row * rise - 0.6, z0 + row * 1.7), stand)
 	var mm = MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = true
@@ -461,7 +462,6 @@ func _stands() -> void:
 	var cm = StandardMaterial3D.new()
 	cm.vertex_color_use_as_albedo = true
 	mmi.material_override = cm
-	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(mmi)
 	var dock = _mat(Color(0.55, 0.42, 0.3))                # wooden dock in front of the stands
 	_box(Vector3(60, 0.4, 2.2), Vector3(0, -0.9, z0 - 1.4), dock)
@@ -533,7 +533,22 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	fire.position = Vector3(bw * 0.15, bh * 0.3, -0.3)
 	body.add_child(fire)
 	add_child(body)
-	var c = {"vk": vk, "nick": nick, "col": col, "body": body, "spr": spr, "wheels": wheels, "tex": tex,
+	var blob = MeshInstance3D.new()                          # contact shadow under the car (like the cairo engine)
+	var bcm = CylinderMesh.new()
+	bcm.top_radius = 0.5
+	bcm.bottom_radius = 0.5
+	bcm.height = 0.01
+	blob.mesh = bcm
+	var bmat = StandardMaterial3D.new()
+	bmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	bmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	bmat.albedo_texture = dot_tex
+	bmat.albedo_color = Color(0, 0, 0, 0.55)
+	blob.material_override = bmat
+	blob.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	blob.scale = Vector3(bw * 1.1, 1, 1.6)
+	add_child(blob)
+	var c = {"vk": vk, "blob": blob, "blob_mat": bmat, "nick": nick, "col": col, "body": body, "spr": spr, "wheels": wheels, "tex": tex,
 			 "bw": bw, "bh": bh, "ride": ride, "hp": 100.0, "alive": true, "out": false, "smoke": smoke, "fire": fire,
 			 "vmax": 9.0 if vk in ["f1", "sports", "police"] else 7.5, "last_hit": -9.0,
 			 "mode": "charge", "mode_t": 0.0, "stall": 0.0, "last_push": -9.0}
@@ -1367,6 +1382,13 @@ func _process(_d: float) -> void:
 		row["bar"].size.x = 150.0 * c["hp"] / 100.0
 		row["bar"].color = Color(0.2, 0.85, 0.3) if c["hp"] > 60 else (Color(1, 0.8, 0.1) if c["hp"] > 30 else Color(0.95, 0.2, 0.15))
 		row["out"].visible = not c["alive"]
+		if is_instance_valid(c["body"]) and not c["out"] and c["body"].visible:   # contact shadow follows the car
+			var bpos = c["body"].global_position
+			c["blob"].visible = bpos.y > -0.5
+			c["blob"].position = Vector3(bpos.x, 0.03, bpos.z)
+			c["blob_mat"].albedo_color.a = 0.55 * clampf(1.0 - (bpos.y - c["ride"]) / 4.0, 0.0, 1.0)
+		else:
+			c["blob"].visible = false
 		if c["alive"] and is_instance_valid(c["body"]):     # progressive damage look
 			var k = 1.0 - c["hp"] / 100.0
 			c["spr"].modulate = Color(1, 1, 1).lerp(Color(0.6, 0.55, 0.55), k * 0.85)
