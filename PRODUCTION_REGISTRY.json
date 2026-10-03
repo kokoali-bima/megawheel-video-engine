@@ -2079,6 +2079,311 @@
       "title": "Sprinkles' First Race 🍦 Full Episode This Sunday!",
       "drive_id": "1qWKqH-pDqgXwqwzAvAncsFK3W4al8pyL",
       "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1501_2026-10-02_story15_trailer_e01.mp4"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S021",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 21,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "police",
+        "bigrig",
+        "sports"
+      ],
+      "track_id": "potholes_3c6546c2@night-rain-city",
+      "theme": "night-rain-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "stuck@obs1",
+        "win"
+      ],
+      "duration": 49.57,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s021",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s021/SIM_POTHOLES_V2_S021_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S002",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 2,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "police",
+        "sports"
+      ],
+      "track_id": "smash25d_14d96bc4@morning-clear-desert",
+      "arena": "sea",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p2+ring",
+        "win",
+        "p3+wreck"
+      ],
+      "duration": 50.08,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s002",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s002/SIM_SMASH25D_V5_S002_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S003",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 3,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "smash25d_e5771cfc@sunset-clear-city",
+      "arena": "sea",
+      "theme": "sunset-clear-city",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p2+wreck",
+        "p4+ring",
+        "p3+wreck"
+      ],
+      "duration": 53.23,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003/SIM_SMASH25D_V5_S003_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S022",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 22,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "taxi",
+        "icecream",
+        "firetruck"
+      ],
+      "track_id": "potholes_af8a2b00@night-clear-mountains",
+      "theme": "night-clear-mountains",
+      "voice": "en-US-EmmaMultilingualNeural",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 46.47,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s022",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s022/SIM_POTHOLES_V2_S022_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S004",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 4,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "smash25d_416bd8c7@night-snow-mountains",
+      "arena": "mud",
+      "theme": "night-snow-mountains",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p4+ring",
+        "p3+wreck",
+        "p2+wreck"
+      ],
+      "duration": 51.61,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s004",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s004/SIM_SMASH25D_V5_S004_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S023",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 23,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "taxi",
+        "icecream",
+        "firetruck"
+      ],
+      "track_id": "potholes_87f344a7@night-clear-mountains",
+      "theme": "night-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 50.47,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s023",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S024",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 24,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "taxi",
+        "icecream",
+        "sports"
+      ],
+      "track_id": "potholes_8c3b02e3@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "rollback@obs1+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 46.5,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s024",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s024/SIM_POTHOLES_V2_S024_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S005",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 5,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "smash25d_f3e62cd9@noon-clear-city",
+      "arena": "sea",
+      "theme": "noon-clear-city",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p2+ring",
+        "win",
+        "p3+wreck",
+        "p4+ring"
+      ],
+      "duration": 50.47,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s005",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s005/SIM_SMASH25D_V5_S005_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S025",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 25,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "police",
+        "icecream",
+        "sports"
+      ],
+      "track_id": "potholes_054ab746@noon-clear-beach",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 49.13,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_potholes_s025",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_potholes_s025/SIM_POTHOLES_V2_S025_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S008",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 8,
+      "created": "2026-10-03",
+      "render_date": "2026-10-03",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "smash25d_e127ba6e@morning-snow-countryside",
+      "arena": "sea",
+      "theme": "morning-snow-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p3+ring",
+        "p2+ring",
+        "win",
+        "p4+ring"
+      ],
+      "duration": 50.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s008",
+      "audit": "renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s008/SIM_SMASH25D_V5_S008_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
