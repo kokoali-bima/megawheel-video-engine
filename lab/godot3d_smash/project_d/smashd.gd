@@ -108,8 +108,9 @@ func _environment() -> void:
 	var sun = DirectionalLight3D.new()                       # from the camera side (CONFIG_BEST lesson 10)
 	sun.rotation_degrees = Vector3(-62, 8, 0)                # high, from the camera side: short shadows behind
 	sun.light_energy = 0.8 * float(scene["light"]) * (0.45 if scene["night"] else 1.0)
-	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 120.0
+	# no sun shadow map: with the lens-shifted SMASH camera it put a big dark wedge on the floor (S008 test);
+	# cars stand on contact blobs, like the aired 2.5D
+	sun.shadow_enabled = false
 	add_child(sun)
 
 
@@ -134,6 +135,7 @@ func _arena() -> void:
 		dz.material_override = lm
 	else:
 		dz.material_override = _mat(Color(0.36, 0.24, 0.13), 0.9)
+	dz.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	dz.position = Vector3(0, -0.6, (depth(zc - 9.0) + depth(zc + 9.0)) / 2.0)
 	dz.scale = Vector3(1, 1, absf(depth(zc + 9.0) - depth(zc - 9.0)) / 30.0)
 	add_child(dz)
@@ -142,7 +144,7 @@ func _arena() -> void:
 	var bm = BoxMesh.new()
 	bm.size = Vector3(1, 0.5, 1)
 	floor_mesh.mesh = bm
-	var top = {"lava": Color(0.52, 0.53, 0.58), "sea": Color(0.55, 0.56, 0.6), "mud": Color(0.72, 0.56, 0.36),
+	var top = {"lava": Color(0.44, 0.45, 0.5), "sea": Color(0.44, 0.45, 0.5), "mud": Color(0.72, 0.56, 0.36),
 			   "ice": Color(0.85, 0.94, 1.0)}.get(ar, Color(0.55, 0.56, 0.6))
 	var fm = _mat(Color(1, 1, 1), 0.55 if ar != "ice" else 0.1)
 	fm.metallic = 0.25 if ar in ["sea", "lava"] else 0.0
@@ -173,6 +175,7 @@ func _arena() -> void:
 			pr.left_to_right = 0.7
 			f.mesh = pr
 			f.material_override = fin_mat
+			f.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			add_child(f)
 			fins.append(f)
 
@@ -233,6 +236,7 @@ func _stands() -> void:
 	var cm = StandardMaterial3D.new()
 	cm.vertex_color_use_as_albedo = true
 	crowd.material_override = cm
+	crowd.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(crowd)
 	var x0 = -96.0
 	while x0 < 96.0:                                         # SMASH ARENA banner on the front wall
@@ -243,6 +247,7 @@ func _stands() -> void:
 		lb.modulate = Color(1, 0.86, 0.12)
 		lb.outline_size = 16
 		lb.outline_modulate = Color(0.12, 0.12, 0.2)
+		lb.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		lb.position = Vector3(x0, 0.45, depth(zb - 0.6) + 0.21)
 		add_child(lb)
 		x0 += 12.0
@@ -348,8 +353,8 @@ func _panels(ci: int, n: int, vel: float) -> void:
 	var tsz = t.get_size()
 	var p = cr["root"].global_position
 	for i in range(n):
-		var fw = rng.randf_range(0.18, 0.34)
-		var fh = rng.randf_range(0.25, 0.5)
+		var fw = minf(rng.randf_range(0.45, 0.85) / bw, 0.34)          # 0.45-0.85 m pieces whatever the car size
+		var fh = minf(rng.randf_range(0.35, 0.65) / bh, 0.5)
 		var rx = rng.randf_range(0.0, 1.0 - fw)
 		var ry = rng.randf_range(0.0, 1.0 - fh)
 		var rb = RigidBody3D.new()
@@ -666,6 +671,7 @@ func _box(size: Vector3, pos: Vector3, mat: Material) -> MeshInstance3D:
 	mi.mesh = bm
 	mi.material_override = mat
 	mi.position = pos
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF   # scenery: no shadow on the floor
 	add_child(mi)
 	return mi
 
