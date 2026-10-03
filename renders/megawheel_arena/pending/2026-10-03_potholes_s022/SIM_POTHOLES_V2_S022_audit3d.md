@@ -15,5 +15,5 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±2) | ✅ | 1439 vs 1439 |
 | durasi = manifest (±0.3 s) | ✅ | 47.97 vs 47.97 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [81, 83, 84, 61, 81, 79, 81, 79, 80, 80, 90, 100] |
+| tidak ada frame hitam / putih (12 sampel) | ✅ | [81, 82, 81, 64, 81, 79, 80, 79, 78, 91, 101, 100] |
 | L1: tabrakan -> panel copot (tanpa ledakan kecuali lava) | ✅ | t=7.33 |

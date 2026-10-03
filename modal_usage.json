@@ -1477,6 +1477,116 @@
    "cpu_container_seconds": 18.3,
    "wall_seconds": 23.6,
    "cost_usd": 0.0049
+  },
+  {
+   "date": "2026-10-03",
+   "note": "metal test R",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 14.4,
+   "wall_seconds": 19.9,
+   "cost_usd": 0.0039
+  },
+  {
+   "date": "2026-10-03",
+   "note": "metal test C2",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 10.7,
+   "wall_seconds": 18.1,
+   "cost_usd": 0.0029
+  },
+  {
+   "date": "2026-10-03",
+   "note": "smash3d convert SIM_SMASH25D_V5_S002",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 137.3,
+   "wall_seconds": 132.3,
+   "cost_usd": 0.037
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S012",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 105.1,
+   "wall_seconds": 67.0,
+   "cost_usd": 0.0283
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S013",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 119.2,
+   "wall_seconds": 96.1,
+   "cost_usd": 0.0321
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S015",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 83.1,
+   "wall_seconds": 99.9,
+   "cost_usd": 0.0224
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S016",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 113.1,
+   "wall_seconds": 98.2,
+   "cost_usd": 0.0304
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S017",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 86.2,
+   "wall_seconds": 99.0,
+   "cost_usd": 0.0232
+  },
+  {
+   "date": "2026-10-03",
+   "note": "smash3d convert SIM_SMASH25D_V5_S008",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 136.5,
+   "wall_seconds": 88.6,
+   "cost_usd": 0.0368
+  },
+  {
+   "date": "2026-10-03",
+   "note": "smash3d convert SIM_SMASH25D_V5_S009",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 134.4,
+   "wall_seconds": 87.4,
+   "cost_usd": 0.0362
   }
  ]
 }

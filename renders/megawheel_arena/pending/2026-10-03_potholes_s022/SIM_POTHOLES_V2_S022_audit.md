@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_POTHOLES_V2_S022
 
-- Tanggal: 2026-10-03 08:17 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 22 · Track: potholes_af8a2b00
+- Tanggal: 2026-10-03 15:57 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 22 · Track: potholes_af8a2b00
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
+- **Hasil: GAGAL** → JANGAN dikirim ke user. Perbaiki / render seed lain.
 
 
 ## 5.1 Analisa fisika
@@ -51,7 +51,7 @@
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
 |---|---|---|
-| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 14 file |
+| PNG preview tersedia (>= 6, termasuk outro) | ❌ | 12 file |
 
 ## 7 Keunikan
 | Cek | Hasil | Nilai |

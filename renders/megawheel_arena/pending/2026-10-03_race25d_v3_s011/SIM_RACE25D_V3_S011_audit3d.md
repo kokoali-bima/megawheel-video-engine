@@ -12,6 +12,6 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±3) | ✅ | 1071 vs 1071 |
 | durasi = versi review (±0.4 s) | ✅ | 35.71 vs 35.7 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [132, 133, 131, 132, 130, 133, 132, 130, 98, 93, 105, 105] |
+| tidak ada frame hitam / putih (12 sampel) | ✅ | [132, 133, 131, 132, 130, 133, 132, 130, 98, 94, 105, 105] |
 | rintangan oil beraksi (3D / overlay) | ✅ | t=10.01 |
 | rintangan dragon_fire beraksi (3D / overlay) | ✅ | t=13.76 |
