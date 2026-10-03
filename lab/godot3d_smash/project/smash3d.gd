@@ -556,7 +556,7 @@ func _car(vk: String, pos: Vector3, nick: String, col: Color) -> Dictionary:
 	var c = {"vk": vk, "blob": blob, "blob_mat": bmat, "nick": nick, "col": col, "body": body, "spr": spr, "wheels": wheels, "tex": tex,
 			 "bw": bw, "bh": bh, "ride": ride, "hp": 100.0, "alive": true, "out": false, "smoke": smoke, "fire": fire,
 			 "vmax": 9.0 if vk in ["f1", "sports", "police"] else 7.5, "last_hit": -9.0,
-			 "mode": "charge", "mode_t": 0.0, "stall": 0.0, "last_push": -9.0}
+			 "mode": "charge", "mode_t": 0.0, "stall": 0.0, "last_push": -9.0, "skid_t": -9.0}
 	body.body_entered.connect(func(other): call_deferred("_on_hit", c, other))
 	return c
 
@@ -1087,6 +1087,8 @@ func _physics_process(delta: float) -> void:
 	if not go_logged and t >= GO_T:
 		go_logged = true
 		_log("go", 1.0)
+		for c in cars:                                      # wheelspin off the line
+			_log("skid", 0.8, c["body"].global_position)
 	var allowed = ko_allowed()
 	var bb = bounds(t)
 	if absf(bb.x - hx_now) > 0.004 or absf(bb.y - hz_now) > 0.004:
@@ -1131,6 +1133,9 @@ func _physics_process(delta: float) -> void:
 				c["stall"] = 0.0
 		if c["mode"] == "back" and t - c["mode_t"] > 0.9:
 			c["mode"] = "charge"
+			if t - c["skid_t"] > 1.5 and b.linear_velocity.length() > 2.0:   # turns around to attack: tyre squeal
+				c["skid_t"] = t
+				_log("skid", clampf(b.linear_velocity.length() / 9.0, 0.3, 1.0), b.global_position)
 		var want = to.normalized() * c["vmax"] * go
 		var centre = Vector3(0, 0, ARENA_HZ) - b.global_position
 		centre.y = 0

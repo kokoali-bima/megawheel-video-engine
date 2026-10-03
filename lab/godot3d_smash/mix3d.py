@@ -84,8 +84,23 @@ def peak(x, target=0.45):
     return x * (target / m) if m > 1e-9 else x
 
 
+def synth_skid(dur=0.7, seed=1):
+    """Tyre squeal (own synthesis): a wobbling 1.0-1.4 kHz tone over band noise, fast attack, tail fade."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * SR)
+    tt = np.arange(n) / SR
+    f = float(rng.uniform(950, 1350)) * (1 + 0.04 * np.sin(2 * np.pi * float(rng.uniform(9, 14)) * tt)) * (1 - 0.08 * tt / dur)
+    tone = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.35 * np.sin(4 * np.pi * np.cumsum(f) / SR)
+    noise = S._band_noise(n, rng, 1200, 5000)
+    noise = noise / max(1e-9, np.max(np.abs(noise)))
+    env = np.minimum(1.0, tt / 0.03) * np.minimum(1.0, (dur - tt) / (0.45 * dur))
+    return (0.55 * tone + 0.45 * noise) * env * (0.8 + 0.2 * np.sin(2 * np.pi * 23 * tt))
+
+
 def sounds_for(ev):
     k, p = ev["type"], float(ev.get("power", 1.0))
+    if k == "skid":
+        return [(0.0, st(synth_skid(0.45 + 0.4 * p, seed=int(ev["t"] * 100) % 97)), 0.18 + 0.2 * p)]
     if k == "crash":
         return [(0.0, bank("crash_heavy" if p > 0.55 else "crash_light"), 0.45 + 0.55 * p)]
     if k == "chunk":
