@@ -146,6 +146,8 @@ def main():
     for k in range(12):
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{dur * (k + 0.5) / 12:.2f}", "-i",
                         f"{folder}/{vid}.mp4", "-frames:v", "1", f"{prev}/f{k:02d}.png"], check=True)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{dur - 1.0:.2f}", "-i", f"{folder}/{vid}.mp4",
+                    "-frames:v", "1", f"{prev}/outro.png"], check=True)   # the production audit wants the end card
     try:
         import drive_sync
         e = registry.get(vid)
