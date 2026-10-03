@@ -102,6 +102,8 @@ def main(dir: str, out: str, note: str = ""):
             if r["errors"]:
                 print(f"[godot3d] part {k} SCRIPT ERRORS: {r['errors']}")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", out], check=True)
+    with open(out + ".render.json", "w") as fh:                  # for audit3d: script errors + frames per part
+        json.dump(dict(errors=[e for r in res for e in r["errors"]], parts=[[r["start"], r["n"]] for r in res]), fh)
     for k in range(len(res)):
         os.remove(os.path.join(dir, f"_part{k}.mp4"))
     secs = sum(r["secs"] for r in res)

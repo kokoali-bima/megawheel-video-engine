@@ -249,10 +249,16 @@ void fragment() {
 				lm.emission_enabled = true
 				lm.emission = Color(1, 0.4, 0.05)
 				lm.emission_energy_multiplier = 2.5
-			else:
-				lm.albedo_color = Color(0.1, 0.45, 0.75, 0.85)
-				lm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			var depth = -p[2] + (1.3 if scene["pit_kind"] == "lava" else p[2] - 0.8)
+			if scene["pit_kind"] == "water":
+				var wm = MeshInstance3D.new()
+				var pl = PlaneMesh.new()
+				pl.size = Vector2(p[1] - p[0], ROAD_HZ * 2)
+				wm.mesh = pl
+				wm.material_override = _water_mat(false)
+				wm.position = Vector3((p[0] + p[1]) / 2, depth, 0)
+				add_child(wm)
+				continue
 			_box(Vector3(p[1] - p[0], 0.05, ROAD_HZ * 2), Vector3((p[0] + p[1]) / 2, depth, 0), lm)
 			if scene["pit_kind"] == "lava":
 				var o = OmniLight3D.new()
@@ -268,6 +274,44 @@ void fragment() {
 	cs.shape = cps
 	sb.add_child(cs)
 	add_child(sb)
+
+
+func _water_mat(alpha_edge: bool) -> ShaderMaterial:
+	## wet, reflective water with ripples; puddles get a ragged natural edge (alpha noise) instead of a rectangle
+	var sh = Shader.new()
+	sh.code = """
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled;
+uniform bool edge = true;
+float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
+	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
+varying vec3 wp;
+void vertex() { wp = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz; }
+void fragment() {
+	float a = 0.85;
+	if (edge) {
+		vec2 c = UV - 0.5;
+		float r = length(c * vec2(1.0, 1.6)) * 2.0 + (n(wp.xz * 1.3) - 0.5) * 0.55 + (n(wp.xz * 4.0) - 0.5) * 0.15;
+		a = smoothstep(1.0, 0.82, r);
+		if (a < 0.02) discard;
+	}
+	float rip = n(wp.xz * 2.2 + vec2(TIME * 0.6, TIME * 0.4)) + n(wp.xz * 5.0 - TIME * 0.9) * 0.5;
+	vec3 deep = vec3(0.05, 0.25, 0.42);
+	vec3 sky = vec3(0.45, 0.65, 0.82);
+	float fres = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), 3.0);
+	ALBEDO = mix(deep, sky, 0.12 + 0.3 * fres + 0.12 * rip);
+	NORMAL = normalize(NORMAL + vec3((rip - 0.75) * 0.25, 0.0, (rip - 0.75) * 0.15));
+	ROUGHNESS = 0.06;
+	METALLIC = 0.15;
+	SPECULAR = 0.6;
+	ALPHA = a;
+}
+"""
+	var m = ShaderMaterial.new()
+	m.shader = sh
+	m.set_shader_parameter("edge", alpha_edge)
+	return m
 
 
 func _box(size: Vector3, pos: Vector3, mat: Material) -> MeshInstance3D:
@@ -412,14 +456,27 @@ func _props() -> void:
 	water.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	water.roughness = 0.05
 	water.metallic = 0.3
-	for pd in scene.get("puddles", []):                      # shiny puddles on the road
+	var wet = _mat(Color(0.12, 0.12, 0.14), 0.25)              # darker wet asphalt under / around the puddles
+	for pd in scene.get("puddles", []):
 		var x0 = float(pd[0])
 		var x1 = float(pd[1])
 		var x = x0
-		while x < x1:
-			var gy = ground_h(x + 0.5)
-			_box(Vector3(1.05, 0.03, ROAD_HZ * 1.7), Vector3(x + 0.5, gy + 0.02, 0), water)
-			x += 1.0
+		while x < x1:                                        # follow the road (slopes) in 2 m patches
+			var seg = minf(2.4, x1 - x)
+			var gy = ground_h(x + seg / 2)
+			var nxt = ground_h(minf(x1, x + seg))
+			var ang = atan2(nxt - ground_h(x), seg)
+			var w = _box(Vector3(seg + 0.6, 0.01, ROAD_HZ * 1.9), Vector3(x + seg / 2, gy + 0.012, 0), wet)
+			w.rotation = Vector3(0, 0, ang)
+			var pm = MeshInstance3D.new()
+			var pl = PlaneMesh.new()
+			pl.size = Vector2(seg + 0.9, ROAD_HZ * 1.7)
+			pm.mesh = pl
+			pm.material_override = _water_mat(true)
+			pm.position = Vector3(x + seg / 2, gy + 0.03, rng.randf_range(-0.3, 0.3))
+			pm.rotation = Vector3(0, 0, ang)
+			add_child(pm)
+			x += seg
 	for v in scene.get("vents", []):                         # lava vents: glowing crack + a fountain that erupts on time
 		var vx = float(v["x"])
 		var gy = ground_h(vx)
@@ -539,8 +596,9 @@ void fragment() {
 	fire.local_coords = false
 	fire.position = Vector3(0.6, 0.3, 0.25)
 	car.add_child(fire)
-	spray = _emitter(40, 0.6, Vector2(2, 5), Vector3(0, -12, 0), Vector2(0.15, 0.4), Color(0.9, 0.96, 1.0, 0.9),
-					 Color(0.8, 0.92, 1.0, 0), 35.0, false)            # water from the tyres on puddles
+	spray = _emitter(140, 0.9, Vector2(4, 9), Vector3(0, -12, 0), Vector2(0.2, 0.55), Color(0.95, 0.98, 1.0, 0.95),
+					 Color(0.8, 0.92, 1.0, 0), 30.0, false)            # rooster tails of water from the tyres
+	spray.direction = Vector3(-0.8, 0.9, 0.25)
 	spray.local_coords = false
 	add_child(spray)
 
@@ -672,16 +730,47 @@ func _impact(x: float, y: float, s: float) -> void:
 
 
 func _lava_blast(x: float, y: float) -> void:
-	## user rule: a car touched by lava may burn and explode (like a real car fire)
-	_flash(Vector3(x, y + 1.2, 2.0), 10.0, 16.0, Color(1, 0.6, 0.25), 0.7)
-	_burst(Vector3(x, y + 0.8, 0.4), 80, 0.8, Vector2(4, 10), Vector3(0, 3, 0), Vector2(0.8, 2.0),
-		   Color(1, 0.85, 0.4), Color(0.9, 0.15, 0.02, 0))                                       # fireball
-	_burst(Vector3(x, y + 1.2, 0.3), 50, 3.2, Vector2(1, 3), Vector3(0, 1.6, 0), Vector2(1.2, 2.8),
-		   Color(0.12, 0.11, 0.11, 0.9), Color(0.3, 0.3, 0.32, 0), 70.0, false)                   # black smoke
-	_burst(Vector3(x, y + 0.5, 0.5), 70, 1.2, Vector2(7, 16), Vector3(0, -12, 0), Vector2(0.08, 0.2),
+	## user rule: a car touched by lava burns and explodes (like a real car fire). The blast starts at the lava
+	## surface but rises ABOVE the pit rim and in front of the dirt wall, so it is never hidden inside the pit.
+	var top = maxf(y, ground_h(x) + 0.5) + 1.0
+	var front = ROAD_HZ + 0.8
+	_flash(Vector3(x, top + 1.0, 3.0), 12.0, 18.0, Color(1, 0.6, 0.25), 0.8)
+	_fireball3(Vector3(x, top + 0.6, front), 3.2)
+	_burst(Vector3(x, top, front), 120, 1.0, Vector2(5, 12), Vector3(0, 4, 0), Vector2(1.0, 2.4),
+		   Color(1, 0.9, 0.45), Color(0.9, 0.18, 0.02, 0), 70.0)                                 # rising fireball
+	_burst(Vector3(x, top + 1.5, front - 0.5), 70, 3.6, Vector2(1.5, 3.5), Vector3(0, 2.0, 0), Vector2(1.4, 3.2),
+		   Color(0.12, 0.11, 0.11, 0.9), Color(0.3, 0.3, 0.32, 0), 60.0, false)                   # black smoke column
+	_burst(Vector3(x, top, front), 90, 1.4, Vector2(8, 18), Vector3(0, -12, 0), Vector2(0.08, 0.22),
 		   Color(1, 0.8, 0.3), Color(1, 0.3, 0.05, 0))                                           # embers
-	_pow(Vector3(x + 1.0, y + 3.6, 1.8), 3.2, "KABOOM!")
-	_bolts(Vector3(x, y + 0.5, 0.3), 10, 9.0)
+	_pow(Vector3(x + 1.2, top + 3.4, front), 3.4, "KABOOM!")
+	_bolts(Vector3(x, top, front - 1.0), 12, 10.0)
+	var flames = _emitter(60, 0.9, Vector2(2, 4.5), Vector3(0, 3.0, 0), Vector2(0.6, 1.5), Color(1, 0.8, 0.3, 0.95),
+						  Color(0.95, 0.2, 0.02, 0), 25.0, true)          # the wreck keeps burning on the lava
+	flames.position = Vector3(x, ground_h(x) + 0.3 if y < ground_h(x) else y, 1.0)
+	fx_root.add_child(flames)
+	flames.emitting = true
+
+
+func _fireball3(pos: Vector3, size: float) -> void:
+	var mi = MeshInstance3D.new()
+	var sm = SphereMesh.new()
+	sm.radius = 0.5
+	sm.height = 1.0
+	mi.mesh = sm
+	var m = StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.albedo_color = Color(1, 0.75, 0.3, 0.9)
+	mi.material_override = m
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.position = pos
+	mi.scale = Vector3.ONE * size * 0.3
+	fx_root.add_child(mi)
+	var tw = create_tween().set_parallel(true)
+	tw.tween_property(mi, "scale", Vector3.ONE * size, 0.35).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(mi, "position:y", pos.y + size * 0.6, 0.9)
+	tw.tween_property(m, "albedo_color", Color(0.9, 0.2, 0.03, 0.0), 0.9)
 
 
 func _water_splash(x: float, y: float, big: float) -> void:
@@ -879,6 +968,10 @@ func _process(_d: float) -> void:
 		if float(pd[0]) <= cx and cx <= float(pd[1]):
 			on_puddle = true
 	spray.emitting = on_puddle and float(f[18]) > 3.0 and float(f[19]) < 0.5
+	if spray.emitting and not fired.has("pd" + str(int(cx / 3.0))):   # entering water: side sheets of spray
+		fired["pd" + str(int(cx / 3.0))] = true
+		_burst(Vector3(cx, ground_h(cx) + 0.2, 0.4), 90, 0.9, Vector2(4, 9), Vector3(0, -13, 0), Vector2(0.18, 0.45),
+			   Color(1, 1, 1, 0.95), Color(0.8, 0.92, 1.0, 0), 75.0, false)
 	if wl.size() > 0:
 		spray.position = Vector3(float(wl[0][0]), float(wl[0][1]) - 0.3, 0.4)
 	for vf in vent_fx:                                      # eruptions on the engine's exact schedule

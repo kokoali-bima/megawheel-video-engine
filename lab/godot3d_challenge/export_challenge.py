@@ -59,9 +59,16 @@ def main():
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--series", default="potholes")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--like", default="", help="pending VIDEO_ID: replay the sim with the registry as it was then")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     name = f"LAB_CH3D_{a.series.upper()}_S{a.seed:03d}"
+    if a.like:                                                   # same cast / theme / voice as that render
+        import registry
+        full = registry.load()
+        idx = next(i for i, e in enumerate(full["videos"]) if e["video_id"] == a.like)
+        snap = dict(full, videos=full["videos"][:idx])
+        registry.load = lambda: snap
     sys.argv = ["sim_engine.py", "--seed", str(a.seed), "--series", a.series, "--preview-only", "--name", name]
     se.main()                                                    # the real engine: sim + timeline + audio + checks
     L0 = se.LEVELS
