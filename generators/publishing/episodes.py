@@ -5,6 +5,7 @@ Usage (cd /root/video-engine):
   ./venv/bin/python generators/publishing/episodes.py list
   ./venv/bin/python generators/publishing/episodes.py approve <VIDEO_ID> [<VIDEO_ID> ...]   # ONLY on the user's explicit approval
   ./venv/bin/python generators/publishing/episodes.py reject <VIDEO_ID> "<reason>"
+  ./venv/bin/python generators/publishing/episodes.py swap <EP> <NEW_VIDEO_ID>   # replace a queued, not-uploaded ep
   ./venv/bin/python generators/publishing/episodes.py set <EP> views=1234 likes=56 retention=71% note="..."
   ./venv/bin/python generators/publishing/episodes.py log                                    # rebuild EPISODE_LOG.md
 
@@ -154,6 +155,49 @@ def reject(video_id, reason):
     _drive(video_id)                                             # Drive: -> archive/rejected/
 
 
+def _role(series):
+    return ("race" if series.startswith("race") else "smash" if series.startswith("smash")
+            else "story" if series in STORY_SERIES else "short")
+
+
+def swap(ep, video_id):
+    """Replace a not-yet-uploaded episode with a newer render (user 2026-10-03: re-render the queue with the new
+    version). The new video takes the old episode number, so the publish plan gives it the same slot; the old one
+    goes to rejected/ as REPLACED. ONLY on the user's explicit approval of the new video."""
+    old, new = by_episode(ep), registry.get(video_id)
+    if not old or old.get("status") != "APPROVED" or old.get("youtube_url"):
+        raise SystemExit(f"[episodes] STOP: Ep. {ep} tidak ada / bukan APPROVED / sudah diupload")
+    if not new or new.get("status") != "RENDERED_PENDING_APPROVAL":
+        raise SystemExit(f"[episodes] STOP: {video_id} tidak sedang menunggu approval")
+    if _role(old["series"]) != _role(new["series"]) or _role(new["series"]) == "story":
+        raise SystemExit(f"[episodes] STOP: peran berbeda ({old['series']} vs {new['series']})")
+    try:
+        with open(f"{CHANNEL_DIR}/PUBLISH_QUEUE.json") as fh:
+            q = json.load(fh)
+        it = next((i for i in q["items"] if i["episode"] == int(ep)), None)
+        if it and it["status"] != "QUEUED":
+            raise SystemExit(f"[episodes] STOP: Ep. {ep} di antrean berstatus {it['status']} (sudah/ sedang diupload)")
+    except FileNotFoundError:
+        pass
+    rej = f"renders/megawheel_arena/rejected/{os.path.basename(old['folder'])}_replaced"
+    rej_abs = _move(old, rej)
+    _update_manifest(rej_abs, old["video_id"], status="REPLACED", replaced_by=video_id)
+    registry.update(old["video_id"], status="REPLACED", episode=None, folder=rej,
+                    audit=f"{rej}/{old['video_id']}_audit.md", replaced_by=video_id, replaced_date=_today())
+    season = old["season"]
+    new_rel = f"renders/megawheel_arena/S{season:02d}/E{int(ep):03d}_{new.get('render_date', _today())}_{new['series']}"
+    new_abs = _move(new, new_rel)
+    m = _update_manifest(new_abs, video_id, episode=int(ep), season=season, status="APPROVED", approved_date=_today(),
+                         replaces=old["video_id"])
+    title = f"{m.get('title_base', m['title'].replace(' #Shorts', ''))} | Ep. {ep} #Shorts"
+    _update_manifest(new_abs, video_id, title=title)
+    registry.update(video_id, status="APPROVED", episode=int(ep), season=season, folder=new_rel,
+                    audit=f"{new_rel}/{video_id}_audit.md", approved_date=_today(), title=title,
+                    replaces=old["video_id"])
+    print(f"[episodes] SWAP Ep. {ep}: {old['video_id']} -> {video_id}: {title}")
+    _drive(video_id)
+
+
 def mark_uploaded(ep, url, privacy):
     e = by_episode(ep)
     status = f"UPLOADED_{privacy.upper()}"
@@ -280,6 +324,8 @@ def main():
     if cmd == "approve":
         for vid in args:
             approve(vid)
+    elif cmd == "swap":
+        swap(int(args[0]), args[1])
     elif cmd == "reject":
         reject(args[0], " ".join(args[1:]) or "no reason given")
     elif cmd == "set":

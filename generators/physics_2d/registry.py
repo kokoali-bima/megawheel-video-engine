@@ -12,7 +12,7 @@ PATH = f"{BASE}/PRODUCTION_REGISTRY.json"
 LOCK = PATH + ".lock"
 ABOUT = ("Registry video MegaWheel Arena: keunikan + episode/season + status upload. Aturan: BLUEPRINT.md bagian 7. "
          "Diisi otomatis oleh engine dan episodes.py; jangan diedit manual, jangan hapus entri lama.")
-IGNORED_STATUS = {"PROTOTYPE_NOT_FOR_UPLOAD", "REJECTED", "AUDIT_FAILED", "SUPERSEDED_REBRAND"}
+IGNORED_STATUS = {"PROTOTYPE_NOT_FOR_UPLOAD", "REJECTED", "AUDIT_FAILED", "SUPERSEDED_REBRAND", "REPLACED"}
 
 
 def fingerprint(e):
