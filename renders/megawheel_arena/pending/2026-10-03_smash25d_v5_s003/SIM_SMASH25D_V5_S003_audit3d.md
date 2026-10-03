@@ -13,5 +13,5 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±3) | ✅ | 1597 vs 1597 |
 | durasi = versi review (±0.4 s) | ✅ | 53.23 vs 53.23 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [112, 49, 52, 99, 95, 96, 102, 103, 59, 81, 89, 91] |
+| tidak ada frame hitam / putih (12 sampel; malam: >= 80% terang versi 2.5D) | ✅ | ['112/94', '55/46', '59/49', '112/95', '108/92', '101/86', '107/86', '106/88', '69/58', '90/80', '92/87', '95/90'] |
 | benturan besar -> panel copot (tanpa ledakan) | ✅ | 10 benturan besar |
