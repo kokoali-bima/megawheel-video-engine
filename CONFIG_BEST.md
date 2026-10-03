@@ -63,6 +63,11 @@
 | Output | chapters otomatis, end screen 14 dtk, trailer 9:16 (kartu jam tayang ditahan 6 dtk) | |
 
 ## 6. Lab (eksperimen — bukan produksi)
+> **Keputusan user 2026-10-04:** produksi = mesin 2.5D lama ("video lama kita udah mateng"). Godot 3D masih uji
+> coba: konversi 2.5D→3D dihentikan (hasil tidak konsisten: mobil melengkung, Kraggor, durasi). 3D berikutnya
+> dibangun dari awal setelah riset, diuji 1 sampel berdampingan dengan 2.5D, dan tidak menyentuh antrian tayang.
+> Ide yang sedang diusulkan: hybrid (mobil/tokoh/HUD tetap 2.5D asli, Godot hanya environment + efek).
+
 | Setelan | Nilai |
 |---|---|
 | Godot | 4.4.1 ARM64 `/root/tools/godot`, `xvfb-run` + `gl_compatibility`, Movie Maker `--fixed-fps 30`, cek parse `--headless` dulu |
