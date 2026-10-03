@@ -1,0 +1,109 @@
+{
+  "video_id": "SIM_SMASH25D_V5_S003",
+  "status": "APPROVED",
+  "engine": "smash25d v5",
+  "series": "smash25d",
+  "seed": 3,
+  "fps": 30,
+  "duration": 53.23,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "f1",
+      "police"
+    ],
+    "arena": "sea",
+    "chaos": [
+      [
+        "missile",
+        5.11
+      ],
+      [
+        "kraggor",
+        10.3
+      ],
+      [
+        "crack",
+        15.57
+      ],
+      [
+        "ufo",
+        19.55
+      ]
+    ]
+  },
+  "arena": "sea",
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "sunset-clear-city",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "win",
+    "p2+wreck",
+    "p4+ring",
+    "p3+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Tiny Nitro Beat a Big Rig? 💥",
+  "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 35 #Shorts",
+  "description": "Titan, Grizzly, Nitro and Siren enter the Smash Arena on the shark sea! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "race car",
+    "police car",
+    "sea",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Titan, the big rig!",
+    "Grizzly, the monster truck!",
+    "Nitro, the race car!",
+    "And... Siren, the police car!",
+    "Ready... Go!",
+    "Incoming missile!",
+    "Oh no... it's Kraggor!",
+    "Barriers down!",
+    "Nitro is out!",
+    "The floor is breaking!",
+    "A UFO! It's got Grizzly!",
+    "The winner is... Titan! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Kaboom! Right on Titan!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E035_2026-10-03_smash25d/SIM_SMASH25D_V5_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E035_2026-10-03_smash25d/preview",
+  "episode": 35,
+  "season": 2,
+  "approved_date": "2026-10-03"
+}
