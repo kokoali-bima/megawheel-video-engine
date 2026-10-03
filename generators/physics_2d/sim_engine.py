@@ -101,6 +101,13 @@ SERIES_DEFS = {
                  yt_title="Cars VS Lava Road! Who Survives? 🌋🔥",
                  tags=["cars", "lava", "volcano", "car crash", "crash test", "physics simulation", "shorts",
                        "MegaWheel Arena"]),
+    # user 2026-10-03: "potholes + lava" mixed -> the potholes track, every pit filled with lava (sink + melt)
+    "lava_potholes": dict(title="CARS VS LAVA POTHOLES!", obst="giant lava potholes", max_fail=20.0, max_win=24.0,
+                          win_pool="any", signature="melt", force_theme=dict(location="volcano", weather="clear"),
+                          fail_lines={"pit": "Oh no! {n} fell into the lava pothole and is melting!"},
+                          yt_title="Cars VS Giant Lava Potholes! Who Survives? 🌋🔥",
+                          tags=["cars", "potholes", "lava", "volcano", "car crash", "crash test",
+                                "physics simulation", "shorts", "MegaWheel Arena"]),
 }
 # Filled by make_track(series, seed). Potholes seed 1 is the reference track.
 SERIES = ""
@@ -133,8 +140,8 @@ def make_track(series, seed):
     SERIES = series
     TITLE = SERIES_DEFS[series]["title"]
     _reset_hazards()
-    {"bumps": make_bumps_track, "splash": make_splash_track, "lava": make_lava_track}.get(
-        series, make_potholes_track)(seed)
+    {"bumps": make_bumps_track, "splash": make_splash_track, "lava": make_lava_track,
+     "lava_potholes": make_lava_potholes_track}.get(series, make_potholes_track)(seed)
     if not OBST_SPANS:
         OBST_SPANS = [(a, b) for a, b, _ in (PITS or BUMPS)]
 
@@ -319,6 +326,13 @@ def make_bumps_track(seed):
     SIGNS = [b[0] - 3 for b in bumps[1::2]]
     TRACK_PARAMS = dict(bumps=bumps)
     TRACK_ID = "bumps_" + hashlib.md5(json.dumps(bumps).encode()).hexdigest()[:8]
+
+
+def make_lava_potholes_track(seed):
+    """Potholes geometry (own seed space), the pits hold lava: touching it = sink + melt (lava series effects)."""
+    global PIT_KIND
+    make_potholes_track(seed + 500)
+    PIT_KIND = "lava"
 
 
 def make_potholes_track(seed):
@@ -1602,7 +1616,7 @@ def synth_whoosh():
 
 
 # auto series mix (user 2026-10-03, RESEARCH_W3: Potholes 872 / 1,280 views vs Bumps 133-796): half of CHALLENGE = potholes
-SERIES_WEIGHT = {"potholes": 3}
+SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2}   # potholes family = 5/8 of CHALLENGE
 COLD_OPEN_S = 1.5   # user 2026-10-03 (RESEARCH_W3): every Short opens on its own biggest moment + a question
 
 
