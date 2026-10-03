@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V3_S014",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "engine": "race25d v3",
   "series": "race25d",
   "seed": 14,
@@ -93,6 +93,7 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s014/SIM_RACE25D_V3_S014.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s014/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-03_race25d_v3_s014/SIM_RACE25D_V3_S014.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-03_race25d_v3_s014/preview",
+  "reject_reason": "agent QA: same title as SIM_RACE25D_V3_S013 (Can Hydro Survive the Giant Hammer?)"
 }
