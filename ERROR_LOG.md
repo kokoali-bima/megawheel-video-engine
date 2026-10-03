@@ -77,6 +77,19 @@
 | 2026-09-30 | Commit dari PC gagal diam-diam: `pathspec 'Claude' did not match`, lalu push tidak mengirim apa-apa dan preview VM jalan tanpa file baru | Pesan commit dalam kutip ganda PowerShell berisi `\$29`: `$` diekspansi dan `\"` merusak kutip argumen git | Pesan commit dari PowerShell SELALU dalam kutip tunggal `'...'`, tanpa `$`. Cek hash di `git show --stat` sebelum lanjut ke VM. |
 | 2026-09-30 | `bash script.sh \| grep -E "a\|b"` lewat ssh: grep error, pipe putus, **script uji ikut mati** setelah percobaan pertama | Sama: kutip dibuang PowerShell; SIGPIPE mematikan script | Script panjang dijalankan dengan `nohup ... > file.out &`, lalu hasilnya dibaca lewat script ringkasan terpisah. Jangan pernah mem-pipe output script lewat argumen ssh. |
 
+## 2026-10-03 — 18 video review 3D tidak memenuhi standar (ditemukan user: "kelihatan terburu-buru")
+Akar masalah: SOP (BLUEPRINT, CONFIG_BEST, SCALE_STANDARD, ERROR_LOG) tidak dibaca ulang sebelum konversi massal,
+dan video tidak dibandingkan dengan versi 2.5D di detik yang sama sebelum dilaporkan.
+
+| Gejala | Penyebab | Pencegahan |
+|---|---|---|
+| Mobil 3D tampak melengkung/plastik sejak benturan pertama (SMASH hampir sepanjang video) | Shader "penyok" menggeser setiap titik bodi dengan noise + kerusakan dasar 22% di seluruh bodi. Produksi 2.5D tidak pernah membengkokkan bodi (BLUEPRINT 4.2: bodi penyok = ⬜ belum ada) | Bodi kaku, deformasi hanya linier di ujung yang ditabrak, besar sebanding benturan. Bandingkan frame mobil rusak 3D vs 2.5D sebelum batch |
+| 7 dari 18 video ≥ 50 dtk (SMASH 50,1–53,2; POTHOLES S021 51,1; LAVA_POTHOLES S025 50,8) | Durasi mengikuti engine 2.5D (CHALLENGE 44–57 dtk) + cold open 1,5 dtk; batas audit malah dinaikkan ke 59,5 dtk | Standar user: ideal 30–40, boleh 41–44, **wajib < 50 dtk**. Audit menolak ≥ 50 dtk |
+| Bayangan matahari SMASH 3D dimatikan untuk menutupi bidang gelap di lantai | Arah matahari (-62, 8, 0) tidak mengikuti CONFIG_BEST pelajaran 10; dicari jalan pintas | Pelajaran 10: perbaiki arah cahaya, jangan matikan bayangan |
+| Folder preview diganti f00–f11 (tanpa L*_start/L*_event/outro) → audit produksi gagal | Format preview BLUEPRINT 5.2 tidak diikuti | Preview 3D memakai nama & detik yang sama dengan preview 2.5D |
+| 3 render paralel di VM 7 GB → ffmpeg OOM (6 video gagal) | Mengulang ERROR_LOG A 2026-10-01 (render berebut sumber daya) | Batch di VM selalu berurutan; paralel hanya di Modal |
+| `pkill -f` di dalam `ssh '...'` memutus sesi sendiri (2×) | Mengulang ERROR_LOG A 2026-10-01 / CONFIG_BEST pelajaran 2 | Skrip stop ditulis ke file, kill per PID |
+
 ## 2026-10-02 — Proses `modal run modal_tts.py` menggantung 18 jam di VM
 - Gejala: proses lokal `modal run ... SIM_SPLASH_V2_S013` masih hidup 18 jam; app Modal-nya sudah `stopped` (tidak ada biaya GPU).
 - Tindakan: `kill` proses. Pencegahan: jalankan modal lewat `timeout` (seperti `modal_song`), cek `pgrep -af "modal run"` sebelum batch.
