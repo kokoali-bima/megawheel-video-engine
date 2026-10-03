@@ -3926,7 +3926,16 @@ def main():
     fails = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] != "win"]
     wins_t = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] == "win"]
     subj0 = next((L["vk"] for L in LEVELS if L["event"]["type"] != "win"), LEVELS[-1]["vk"])
-    add_cold_open(out, (fails or wins_t or [3.0])[0], f"CAN {VEHICLES[subj0]['nick']} SURVIVE?")
+    co = add_cold_open(out, (fails or wins_t or [3.0])[0], f"CAN {VEHICLES[subj0]['nick']} SURVIVE?")
+    # everything after the cold open is co seconds later: keep the manifest (audit sync checks) and registry honest
+    manifest["duration"] = round(total + co, 2)
+    manifest["cold_open_s"] = co
+    for lv in manifest["levels"]:
+        lv["start"] = round(lv["start"] + co, 2)
+        lv["event_out"] = round(lv["event_out"] + co, 2)
+    with open(f"{OUT_DIR}/{name}.json", "w") as fh:
+        json.dump(manifest, fh, indent=2, ensure_ascii=False)
+    entry["duration"] = manifest["duration"]
     print(f"[render] {len(INDEX)} frames in {time.time() - t1:.1f}s -> {out} (+{COLD_OPEN_S}s cold open)", flush=True)
     print(json.dumps(manifest["levels"], indent=1))
 

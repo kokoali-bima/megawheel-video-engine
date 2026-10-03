@@ -101,8 +101,8 @@ def run_audit(video_id, folder=None, write=True):
         items.append(item("6.1 Teknis", "fps", f"Frame rate {fps}", vs.get("r_frame_rate") == f"{fps}/1",
                           vs.get("r_frame_rate")))
         items.append(item("6.1 Teknis", "audio", "Audio AAC ada", aus.get("codec_name") == "aac", aus.get("codec_name")))
-        items.append(item("6.1 Teknis", "duration", "Durasi 40-58 s dan sama dengan manifest (±0.3 s)",
-                          40 <= dur <= 58 and abs(dur - m["duration"]) <= 0.3, f"{dur:.2f} s (manifest {m['duration']})"))
+        items.append(item("6.1 Teknis", "duration", "Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s)",
+                          40 <= dur <= 59.5 and abs(dur - m["duration"]) <= 0.3, f"{dur:.2f} s (manifest {m['duration']})"))
         lo, hi = (8, 20) if fps == 30 else (12, 32)
         items.append(item("6.1 Teknis", "size", f"Ukuran wajar ({lo}-{hi} MB)", lo <= size_mb <= hi,
                           f"{size_mb:.1f} MB", hard=False))
