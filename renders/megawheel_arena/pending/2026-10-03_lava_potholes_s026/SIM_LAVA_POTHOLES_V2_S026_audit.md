@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_LAVA_POTHOLES_V2_S026
 
-- Tanggal: 2026-10-03 05:36 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 26 · Track: lava_potholes_52feb935
+- Tanggal: 2026-10-03 08:27 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 26 · Track: lava_potholes_52feb935
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 46.77 s (manifest 46.77) |
-| Ukuran wajar (8-20 MB) | ✅ | 12.0 MB |
+| Ukuran wajar (8-20 MB) | ✅ | 17.9 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.5 dB |
-| mean_volume -20..-12 dB | ✅ | -14.7 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.3 dB |
+| mean_volume -20..-12 dB | ✅ | -13.8 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 
@@ -46,7 +46,7 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 25.1s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 28.3s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 38.8s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 69% piksel panel @ 46.0s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 67% piksel panel @ 46.0s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
@@ -58,6 +58,6 @@
 |---|---|---|
 | Sidik jari unik di registry | ✅ | lava_potholes|police,bigrig,f1|lava_potholes_52feb935@morning-clear-volcano|rollback@obs2+broken,stuck@obs0,win |
 | Seed belum dipakai video lain | ✅ | seed 26 |
-| Maks 3 video berturut-turut dari seri yang sama | ✅ | 1 video lava_potholes berturut-turut sebelum ini |
+| Maks 3 video berturut-turut dari seri yang sama | ✅ | 0 video lava_potholes berturut-turut sebelum ini |
 
 Keterangan: ❌ = wajib diperbaiki (gagal audit), ⚠️ = peringatan (boleh lanjut).
