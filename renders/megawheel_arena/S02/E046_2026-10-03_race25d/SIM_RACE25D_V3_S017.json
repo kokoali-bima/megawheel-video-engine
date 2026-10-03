@@ -1,0 +1,101 @@
+{
+  "video_id": "SIM_RACE25D_V3_S017",
+  "status": "APPROVED",
+  "engine": "race25d v3",
+  "series": "race25d",
+  "seed": 17,
+  "fps": 30,
+  "duration": 37.47,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "taxi",
+      "police"
+    ],
+    "lanes": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hazards": [
+      [
+        "container",
+        3,
+        110.8
+      ],
+      [
+        "meteor",
+        1,
+        211.8
+      ],
+      [
+        "puddle",
+        2,
+        292.0
+      ]
+    ],
+    "finish": 396.9
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "snow",
+    "location": "city"
+  },
+  "theme_id": "sunset-snow-city",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "win",
+    "p3+meteor",
+    "p2+dodge_puddle",
+    "p4+container"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Titan Survive Falling Containers? 🏁",
+  "title": "Can Titan Survive Falling Containers? 🏁 | Ep. 46 #Shorts",
+  "description": "Titan, Grizzly, Tilly and Siren race to the finish line! 🏁 Obstacles today: container, meteor, puddle! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "taxi",
+    "police car",
+    "container",
+    "meteor",
+    "puddle"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Titan Survive Falling Containers? Titan, Grizzly, Tilly and Siren... who will win?",
+    "A container drops from the sky! Siren crashes right into it!",
+    "Kaboom! A meteor hits Grizzly!",
+    "Nice move! Tilly dodges the puddle!",
+    "Titan wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E046_2026-10-03_race25d/SIM_RACE25D_V3_S017.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E046_2026-10-03_race25d/preview",
+  "episode": 46,
+  "season": 2,
+  "approved_date": "2026-10-03"
+}

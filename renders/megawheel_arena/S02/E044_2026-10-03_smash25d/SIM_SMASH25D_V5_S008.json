@@ -1,0 +1,109 @@
+{
+  "video_id": "SIM_SMASH25D_V5_S008",
+  "status": "APPROVED",
+  "engine": "smash25d v5",
+  "series": "smash25d",
+  "seed": 8,
+  "fps": 30,
+  "duration": 50.17,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster",
+      "taxi",
+      "sports"
+    ],
+    "arena": "sea",
+    "chaos": [
+      [
+        "crack",
+        4.91
+      ],
+      [
+        "ufo",
+        9.95
+      ],
+      [
+        "missile",
+        15.74
+      ],
+      [
+        "kraggor",
+        19.53
+      ]
+    ]
+  },
+  "arena": "sea",
+  "theme": {
+    "time": "morning",
+    "weather": "snow",
+    "location": "countryside"
+  },
+  "theme_id": "morning-snow-countryside",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "p3+ring",
+    "p2+ring",
+    "win",
+    "p4+ring"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Titan, Rocky, Tilly or Zippy? Last Car Standing! 💥",
+  "title": "Titan, Rocky, Tilly or Zippy? Last Car Standing! 💥 | Ep. 44 #Shorts",
+  "description": "Titan, Rocky, Tilly and Zippy enter the Smash Arena on the shark sea! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "taxi",
+    "sports car",
+    "sea",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Titan, the big rig!",
+    "Rocky, the monster truck!",
+    "Tilly, the taxi!",
+    "And... Zippy, the sports car!",
+    "Ready... Go!",
+    "The floor is breaking!",
+    "Did you see that?",
+    "A UFO! It's got Titan!",
+    "Zippy is out!",
+    "Titan is out!",
+    "Incoming missile!",
+    "The winner is... Tilly! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Kaboom! Right on Rocky!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E044_2026-10-03_smash25d/SIM_SMASH25D_V5_S008.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E044_2026-10-03_smash25d/preview",
+  "episode": 44,
+  "season": 2,
+  "approved_date": "2026-10-03"
+}
