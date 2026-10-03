@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-03 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-03 05:25). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -43,7 +43,13 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_POTHOLES_V2_S021 | potholes | Siren, Titan, Zippy | 2026-10-03 | 51.07 s | `renders/megawheel_arena/pending/2026-10-03_potholes_s021` |
+| SIM_SMASH25D_V5_S002 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-10-03 | 50.08 s | `renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s002` |
+| SIM_SMASH25D_V5_S003 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-10-03 | 53.23 s | `renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003` |
+| SIM_POTHOLES_V2_S022 | potholes | Tilly, Sprinkles, Hydro | 2026-10-03 | 47.97 s | `renders/megawheel_arena/pending/2026-10-03_potholes_s022` |
+| SIM_SMASH25D_V5_S004 | smash25d | Hydro, Grizzly, Tilly, Nitro | 2026-10-03 | 51.61 s | `renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s004` |
+| SIM_SMASH25D_V5_S005 | smash25d | Sprinkles, Rocky, Zippy, Siren | 2026-10-03 | 50.47 s | `renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s005` |
+| SIM_SMASH25D_V5_S008 | smash25d | Titan, Rocky, Tilly, Zippy | 2026-10-03 | 50.17 s | `renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s008` |
 
 ## Ditolak
 
@@ -78,3 +84,5 @@
 | SIM_SMASH25D_V3_S009 | superseded by smash25d v4 (voice C duo commentators, spoken READY-GO) | 2026-10-01 |
 | SIM_SMASH25D_V3_S008 | superseded by smash25d v4 (voice C duo commentators, spoken READY-GO) | 2026-10-01 |
 | SIM_SMASH25D_V3_S010 | superseded by smash25d v4 (voice C duo commentators, spoken READY-GO) | 2026-10-01 |
+| SIM_POTHOLES_V2_S023 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |
+| SIM_POTHOLES_V2_S024 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |

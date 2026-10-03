@@ -1,11 +1,11 @@
 {
   "video_id": "SIM_POTHOLES_V2_S021",
-  "status": "AUDIT_FAILED",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 21,
   "fps": 30,
-  "duration": 49.57,
+  "duration": 51.07,
   "track_id": "potholes_3c6546c2",
   "track_params": {
     "p1x": 28.2,
@@ -136,9 +136,9 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 0.0,
+      "start": 1.5,
       "duration": 16.13,
-      "event_out": 9.7,
+      "event_out": 11.2,
       "x_start": 3.0,
       "x_end": 72.3,
       "level_color": [
@@ -161,9 +161,9 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 16.13,
+      "start": 17.63,
       "duration": 13.9,
-      "event_out": 27.47,
+      "event_out": 28.97,
       "x_start": 3.0,
       "x_end": 52.1,
       "level_color": [
@@ -186,9 +186,9 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 30.03,
+      "start": 31.53,
       "duration": 19.53,
-      "event_out": 41.07,
+      "event_out": 42.57,
       "x_start": 3.0,
       "x_end": 134.0,
       "level_color": [
@@ -211,5 +211,6 @@
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s021/SIM_POTHOLES_V2_S021.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s021/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s021/SIM_POTHOLES_V2_S021_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s021/SIM_POTHOLES_V2_S021_audit.md",
+  "cold_open_s": 1.5
 }

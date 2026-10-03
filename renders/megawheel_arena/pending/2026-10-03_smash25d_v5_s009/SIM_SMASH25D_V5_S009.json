@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_SMASH25D_V5_S009",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "smash25d v5",
+  "series": "smash25d",
+  "seed": 9,
+  "fps": 30,
+  "duration": 48.4,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "taxi",
+      "police"
+    ],
+    "arena": "ice",
+    "chaos": [
+      [
+        "missile",
+        4.89
+      ],
+      [
+        "kraggor",
+        10.07
+      ],
+      [
+        "ufo",
+        14.56
+      ],
+      [
+        "crack",
+        20.45
+      ]
+    ]
+  },
+  "arena": "ice",
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "night-clear-desert",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "p3+ring",
+    "win",
+    "p4+ring",
+    "p2+ring"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Tiny Tilly Beat a School Bus? 💥",
+  "title": "Can Tiny Tilly Beat a School Bus? 💥 #Shorts",
+  "description": "Buster, Grizzly, Tilly and Siren enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "taxi",
+    "police car",
+    "ice",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Buster, the school bus!",
+    "Grizzly, the monster truck!",
+    "Tilly, the taxi!",
+    "And... Siren, the police car!",
+    "Ready... Go!",
+    "Incoming missile!",
+    "Oh no... it's Kraggor!",
+    "Barriers down!",
+    "Buster is out!",
+    "Tilly is out!",
+    "A UFO! It's got Siren!",
+    "The winner is... Grizzly! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Kaboom! Right on Buster!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/SIM_SMASH25D_V5_S009.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/preview"
+}

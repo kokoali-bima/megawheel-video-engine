@@ -1,35 +1,35 @@
 {
-  "video_id": "SIM_POTHOLES_V2_S023",
-  "status": "AUDIT_FAILED",
+  "video_id": "SIM_LAVA_POTHOLES_V2_S025",
+  "status": "RENDERED_PENDING_APPROVAL",
   "engine": "sim-prototype v2",
-  "series": "potholes",
-  "seed": 23,
+  "series": "lava_potholes",
+  "seed": 25,
   "fps": 30,
-  "duration": 50.47,
-  "track_id": "potholes_87f344a7",
+  "duration": 50.77,
+  "track_id": "lava_potholes_f018885c",
   "track_params": {
-    "p1x": 28.0,
-    "p1w": 3.7,
-    "p1d": 3.7,
-    "rampx": 46.5,
-    "rampl": 6.6,
-    "ramph": 1.3,
-    "p2w": 6.7,
-    "p2d": 4.5,
-    "p3x": 76.3,
+    "p1x": 29.6,
+    "p1w": 2.9,
+    "p1d": 3.8,
+    "rampx": 43.7,
+    "rampl": 5.2,
+    "ramph": 1.4,
+    "p2w": 8.6,
+    "p2d": 4.6,
+    "p3x": 71.7,
     "p3w": 5.2,
-    "p3d": 3.4
+    "p3d": 3.6
   },
   "theme": {
-    "time": "night",
+    "time": "noon",
     "weather": "clear",
-    "location": "mountains"
+    "location": "volcano"
   },
-  "theme_id": "night-clear-mountains",
+  "theme_id": "noon-clear-volcano",
   "voice": "chatterbox:f1",
-  "fingerprint": "potholes|taxi,icecream,firetruck|potholes_87f344a7@night-clear-mountains|rollback@obs2+broken,stuck@obs0,win",
+  "fingerprint": "lava_potholes|f1,icecream,taxi|lava_potholes_f018885c@noon-clear-volcano|pit@obs2+broken,stuck@obs0,win",
   "outcomes": [
-    "rollback@obs2+broken",
+    "pit@obs2+broken",
     "stuck@obs0",
     "win"
   ],
@@ -38,14 +38,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->78.2 m, 3.0->28.9 m, 3.0->126.0 m",
+      "detail": "3.0->74.2 m, 3.0->30.2 m, 3.0->132.5 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "3 rintangan [pit, pit, pit] (28-82 m), finish 100 m",
+      "detail": "3 rintangan [pit, pit, pit] (30-77 m), finish 100 m",
       "hard": true
     },
     {
@@ -66,7 +66,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "8.2s, 5.9s, 10.1s",
+      "detail": "7.1s, 5.8s, 8.5s",
       "hard": true
     },
     {
@@ -87,46 +87,48 @@
       "id": "duration",
       "desc": "Durasi total 40-58 s",
       "ok": true,
-      "detail": "50.5 s",
+      "detail": "49.3 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
       "ok": true,
-      "detail": "17.3s, 10.8s, 22.3s",
+      "detail": "17.9s, 10.8s, 20.6s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "potholes|taxi,icecream,firetruck|potholes_87f344a7@night-clear-mountains|rollback@obs2+broken,stuck@obs0,win",
+      "detail": "lava_potholes|f1,icecream,taxi|lava_potholes_f018885c@noon-clear-volcano|pit@obs2+broken,stuck@obs0,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Will Tilly the Taxi Survive Giant Potholes? 🚗💥",
-  "title": "Will Tilly the Taxi Survive Giant Potholes? 🚗💥 #Shorts",
-  "description": "Tilly the taxi, Sprinkles the ice cream truck and Hydro the fire truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "title_base": "Race Car vs Giant Lava Potholes! Can Nitro Make It? 🌋🔥",
+  "title": "Race Car vs Giant Lava Potholes! Can Nitro Make It? 🌋🔥 #Shorts",
+  "description": "Nitro the race car, Sprinkles the ice cream truck and Tilly the taxi take on the GIANT LAVA POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "potholes",
-    "monster truck",
+    "lava",
+    "volcano",
+    "car crash",
     "crash test",
     "physics simulation",
     "shorts",
     "MegaWheel Arena",
-    "taxi",
+    "race car",
     "ice cream truck",
-    "fire truck"
+    "taxi"
   ],
   "levels": [
     {
-      "vehicle": "TILLY THE TAXI",
-      "speed": 13.0,
-      "outcome": "rollback",
-      "event_t": 8.23,
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 14.0,
+      "outcome": "pit",
+      "event_t": 7.13,
       "obstacle": 2,
       "broken": true,
       "bullet_time": true,
@@ -136,11 +138,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 0.0,
-      "duration": 17.33,
-      "event_out": 10.53,
+      "start": 1.5,
+      "duration": 17.87,
+      "event_out": 11.07,
       "x_start": 3.0,
-      "x_end": 78.2,
+      "x_end": 74.2,
       "level_color": [
         45,
         183,
@@ -149,9 +151,9 @@
     },
     {
       "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
-      "speed": 6.4,
+      "speed": 6.0,
       "outcome": "stuck",
-      "event_t": 5.87,
+      "event_t": 5.8,
       "obstacle": 0,
       "broken": false,
       "bullet_time": true,
@@ -161,11 +163,11 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 17.33,
-      "duration": 10.83,
-      "event_out": 25.47,
+      "start": 19.37,
+      "duration": 10.8,
+      "event_out": 27.47,
       "x_start": 3.0,
-      "x_end": 28.9,
+      "x_end": 30.2,
       "level_color": [
         255,
         132,
@@ -173,10 +175,10 @@
       ]
     },
     {
-      "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 14.0,
+      "vehicle": "TILLY THE TAXI",
+      "speed": 15.5,
       "outcome": "win",
-      "event_t": 10.13,
+      "event_t": 8.5,
       "obstacle": 2,
       "broken": false,
       "bullet_time": true,
@@ -186,11 +188,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 28.17,
-      "duration": 22.3,
-      "event_out": 41.17,
+      "start": 30.17,
+      "duration": 20.6,
+      "event_out": 41.43,
       "x_start": 3.0,
-      "x_end": 126.0,
+      "x_end": 132.5,
       "level_color": [
         153,
         76,
@@ -199,17 +201,18 @@
     }
   ],
   "narration": [
-    "Ready... Go! Level one! Tilly the taxi! Hop in... can Tilly get past the giant potholes?",
+    "Ready... Go! Level one! Nitro the race car! Super fast... but can Nitro handle the giant lava potholes?",
     "Ready... Go! Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
-    "Ready... Go! Level three! Hydro the fire truck! Long and heavy... can Hydro make it?",
-    "Uh oh! Tilly slid all the way back down!",
+    "Ready... Go! Level three! Tilly the taxi! Hop in... can Tilly get past the giant lava potholes?",
+    "Oh no! Nitro fell into the lava pothole and is melting!",
     "Uh oh... Sprinkles is totally stuck!",
-    "Yes! Hydro made it! We have a winner!",
+    "Yes! Tilly made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s023/preview",
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023_audit.md"
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_lava_potholes_s025/SIM_LAVA_POTHOLES_V2_S025.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_lava_potholes_s025/preview",
+  "cold_open_s": 1.5,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_lava_potholes_s025/SIM_LAVA_POTHOLES_V2_S025_audit.md"
 }

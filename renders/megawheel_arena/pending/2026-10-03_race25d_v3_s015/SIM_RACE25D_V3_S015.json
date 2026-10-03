@@ -1,0 +1,98 @@
+{
+  "video_id": "SIM_RACE25D_V3_S015",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v3",
+  "series": "race25d",
+  "seed": 15,
+  "fps": 30,
+  "duration": 36.14,
+  "params": {
+    "cast": [
+      "bus",
+      "monster",
+      "sports",
+      "f1"
+    ],
+    "lanes": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hazards": [
+      [
+        "wall",
+        1,
+        106.0
+      ],
+      [
+        "crusher",
+        2,
+        197.1
+      ],
+      [
+        "hammer",
+        3,
+        301.2
+      ]
+    ],
+    "finish": 406.8
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "noon-clear-beach",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "win",
+    "p3+wall",
+    "p2+dodge_crusher",
+    "p4+hammer"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Buster Survive the Giant Hammer? 🏁",
+  "title": "Can Buster Survive the Giant Hammer? 🏁 #Shorts",
+  "description": "Buster, Rocky, Zippy and Nitro race to the finish line! 🏁 Obstacles today: crusher, hammer, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "sports car",
+    "race car",
+    "crusher",
+    "hammer",
+    "wall"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Buster Survive the Giant Hammer? Buster, Rocky, Zippy and Nitro... who will win?",
+    "Crash! Rocky slams into the wall!",
+    "Nice move! Zippy dodges the crusher!",
+    "BONK! The giant hammer flattens Nitro!",
+    "Buster wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/SIM_RACE25D_V3_S015.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/preview"
+}

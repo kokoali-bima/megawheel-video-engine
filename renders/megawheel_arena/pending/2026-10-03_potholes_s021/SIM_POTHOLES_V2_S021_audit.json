@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S021",
-  "passed": false,
+  "passed": true,
   "items": [
     {
       "section": "5.1 Analisa fisika",
@@ -117,9 +117,9 @@
     {
       "section": "6.1 Teknis",
       "id": "duration",
-      "desc": "Durasi 40-58 s dan sama dengan manifest (±0.3 s)",
-      "ok": false,
-      "value": "51.07 s (manifest 49.57)",
+      "desc": "Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s)",
+      "ok": true,
+      "value": "51.07 s (manifest 51.07)",
       "hard": true
     },
     {
@@ -167,47 +167,47 @@
       "id": "L1_pill",
       "desc": "L1: badge LEVEL 1 tampil di awal level",
       "ok": true,
-      "value": "59% piksel warna level @ 0.6s",
+      "value": "59% piksel warna level @ 2.1s",
       "hard": true
     },
     {
       "section": "6.3 Sinkron",
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
-      "ok": false,
-      "value": "0% piksel badge @ 10.1s",
+      "ok": true,
+      "value": "48% piksel badge @ 11.6s",
       "hard": true
     },
     {
       "section": "6.3 Sinkron",
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
-      "ok": false,
-      "value": "0% piksel warna level @ 16.7s",
+      "ok": true,
+      "value": "56% piksel warna level @ 18.2s",
       "hard": true
     },
     {
       "section": "6.3 Sinkron",
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
-      "ok": false,
-      "value": "0% piksel badge @ 27.9s",
+      "ok": true,
+      "value": "48% piksel badge @ 29.4s",
       "hard": true
     },
     {
       "section": "6.3 Sinkron",
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
-      "ok": false,
-      "value": "0% piksel warna level @ 30.6s",
+      "ok": true,
+      "value": "56% piksel warna level @ 32.1s",
       "hard": true
     },
     {
       "section": "6.3 Sinkron",
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
-      "ok": false,
-      "value": "0% piksel badge @ 41.5s",
+      "ok": true,
+      "value": "28% piksel badge @ 43.0s",
       "hard": true
     },
     {

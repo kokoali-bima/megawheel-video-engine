@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_POTHOLES_V2_S022
 
-- Tanggal: 2026-10-03 05:14 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 22 · Track: potholes_af8a2b00
+- Tanggal: 2026-10-03 05:24 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 22 · Track: potholes_af8a2b00
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: GAGAL** → JANGAN dikirim ke user. Perbaiki / render seed lain.
+- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
 
 ## 5.1 Analisa fisika
@@ -26,7 +26,7 @@
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
-| Durasi 40-58 s dan sama dengan manifest (±0.3 s) | ❌ | 47.97 s (manifest 46.47) |
+| Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 47.97 s (manifest 47.97) |
 | Ukuran wajar (8-20 MB) | ✅ | 10.9 MB |
 
 ## 6.2 Audio
@@ -40,12 +40,12 @@
 ## 6.3 Sinkron
 | Cek | Hasil | Nilai |
 |---|---|---|
-| L1: badge LEVEL 1 tampil di awal level | ✅ | 59% piksel warna level @ 0.6s |
-| L1: badge FAIL tampil tepat di event | ❌ | 0% piksel badge @ 8.5s |
-| L2: badge LEVEL 2 tampil di awal level | ❌ | 0% piksel warna level @ 15.2s |
-| L2: badge FAIL tampil tepat di event | ❌ | 0% piksel badge @ 22.5s |
-| L3: badge LEVEL 3 tampil di awal level | ❌ | 0% piksel warna level @ 25.4s |
-| L3: badge WINNER tampil tepat di event | ❌ | 0% piksel badge @ 37.6s |
+| L1: badge LEVEL 1 tampil di awal level | ✅ | 59% piksel warna level @ 2.1s |
+| L1: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 10.0s |
+| L2: badge LEVEL 2 tampil di awal level | ✅ | 56% piksel warna level @ 16.7s |
+| L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 24.0s |
+| L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 26.9s |
+| L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 39.1s |
 | Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 69% piksel panel @ 47.2s |
 
 ## 5.2 Preview

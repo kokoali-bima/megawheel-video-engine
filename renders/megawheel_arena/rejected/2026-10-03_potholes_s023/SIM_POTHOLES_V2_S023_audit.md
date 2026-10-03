@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_POTHOLES_V2_S023
 
-- Tanggal: 2026-10-03 05:15 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 23 · Track: potholes_87f344a7
+- Tanggal: 2026-10-03 05:24 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 23 · Track: potholes_87f344a7
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: GAGAL** → JANGAN dikirim ke user. Perbaiki / render seed lain.
+- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
 
 ## 5.1 Analisa fisika
@@ -22,11 +22,11 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/rejected/2026-10-03_potholes_s023/SIM_POTHOLES_V2_S023.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
-| Durasi 40-58 s dan sama dengan manifest (±0.3 s) | ❌ | 51.97 s (manifest 50.47) |
+| Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 51.97 s (manifest 51.97) |
 | Ukuran wajar (8-20 MB) | ✅ | 11.3 MB |
 
 ## 6.2 Audio
@@ -40,12 +40,12 @@
 ## 6.3 Sinkron
 | Cek | Hasil | Nilai |
 |---|---|---|
-| L1: badge LEVEL 1 tampil di awal level | ✅ | 59% piksel warna level @ 0.6s |
-| L1: badge FAIL tampil tepat di event | ❌ | 0% piksel badge @ 10.9s |
-| L2: badge LEVEL 2 tampil di awal level | ❌ | 0% piksel warna level @ 17.9s |
-| L2: badge FAIL tampil tepat di event | ❌ | 0% piksel badge @ 25.9s |
-| L3: badge LEVEL 3 tampil di awal level | ❌ | 0% piksel warna level @ 28.8s |
-| L3: badge WINNER tampil tepat di event | ❌ | 0% piksel badge @ 41.6s |
+| L1: badge LEVEL 1 tampil di awal level | ✅ | 59% piksel warna level @ 2.1s |
+| L1: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 12.4s |
+| L2: badge LEVEL 2 tampil di awal level | ✅ | 56% piksel warna level @ 19.4s |
+| L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 27.4s |
+| L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 30.3s |
+| L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 43.1s |
 | Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 66% piksel panel @ 51.2s |
 
 ## 5.2 Preview
