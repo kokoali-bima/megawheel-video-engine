@@ -2108,9 +2108,10 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "16q0pYH5t3pAltYa-9_6rCmXLcwqaBRPk",
-      "drive_id": "1Gv2kREKkieGH7nu83I0hy3e3hacTu1Mj",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S021.mp4"
+      "drive_sheet_id": "1rkpgQIRtWTP8cHZYvxm1EemObEvq6H7o",
+      "drive_id": "1bkM-tPoWytxwOsLxqSjQ06wiAuLs8fHf",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S021.mp4",
+      "render3d": true
     },
     {
       "video_id": "SIM_SMASH25D_V5_S002",
@@ -2479,7 +2480,8 @@
       "youtube_url": null,
       "drive_sheet_id": "1KL5pXiYtDg8fH8FSMF2DeZFIxDh-MCm3",
       "drive_id": "10p-2sKVmvKlnesiIWKwwCjf1ul8F96ko",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S027.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S027.mp4",
+      "render3d": true
     },
     {
       "video_id": "SIM_LAVA_POTHOLES_V2_S025",

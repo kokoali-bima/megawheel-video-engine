@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_POTHOLES_V2_S027
 
-- Tanggal: 2026-10-03 05:30 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 27 · Track: potholes_9095dd50
+- Tanggal: 2026-10-03 08:13 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 27 · Track: potholes_9095dd50
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
+- **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
 
 ## 5.1 Analisa fisika
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 48.70 s (manifest 48.7) |
-| Ukuran wajar (8-20 MB) | ✅ | 12.8 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 23.4 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.5 dB |
-| mean_volume -20..-12 dB | ✅ | -15.1 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.4 dB |
+| mean_volume -20..-12 dB | ✅ | -13.5 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 
@@ -46,7 +46,7 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 25.5s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 28.6s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 40.0s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 66% piksel panel @ 47.9s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 65% piksel panel @ 47.9s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |

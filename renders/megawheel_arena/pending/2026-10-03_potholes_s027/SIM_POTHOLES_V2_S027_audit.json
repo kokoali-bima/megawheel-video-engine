@@ -126,8 +126,8 @@
       "section": "6.1 Teknis",
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
-      "ok": true,
-      "value": "12.8 MB",
+      "ok": false,
+      "value": "23.4 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-1.4 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-15.1 dB",
+      "value": "-13.5 dB",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "66% piksel panel @ 47.9s",
+      "value": "65% piksel panel @ 47.9s",
       "hard": true
     },
     {
