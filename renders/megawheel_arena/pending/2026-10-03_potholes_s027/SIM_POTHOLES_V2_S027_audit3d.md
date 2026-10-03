@@ -4,6 +4,7 @@
 
 | Cek | Hasil | Nilai |
 |---|---|---|
+| replay tokoh sama dengan versi review | ✅ | ['NITRO THE RACE CAR', 'HYDRO THE FIRE TRUCK', 'BUSTER THE SCHOOL BUS'] |
 | replay outcomes sama dengan versi review | ✅ | ['pit@obs2+broken', 'stuck@obs0', 'win'] vs ['pit@obs2+broken', 'stuck@obs0', 'win'] |
 | replay theme_id sama dengan versi review | ✅ | sunset-clear-beach vs sunset-clear-beach |
 | replay voice sama dengan versi review | ✅ | chatterbox:f1 vs chatterbox:f1 |
@@ -14,5 +15,5 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±2) | ✅ | 1461 vs 1461 |
 | durasi = manifest (±0.3 s) | ✅ | 48.70 vs 48.7 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [140, 139, 141, 122, 142, 141, 138, 144, 148, 146, 142, 144] |
+| tidak ada frame hitam / putih (12 sampel) | ✅ | [144, 144, 146, 131, 146, 144, 142, 147, 148, 149, 151, 150] |
 | L1: tabrakan -> panel copot (tanpa ledakan kecuali lava) | ✅ | t=6.73 |

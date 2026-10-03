@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S027",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "AUDIT_FAILED",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "potholes",
   "seed": 27,
