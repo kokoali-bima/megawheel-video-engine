@@ -93,5 +93,5 @@
 10. Cahaya 3D: matahari siang dari sisi kamera (Godot `sun.rotation_degrees = (-55, 140, 0)`), supaya bayangan jatuh
     menjauhi kamera. Jangan mematikan bayangan untuk menutupi arah cahaya yang salah (kecuali memang adegan sore).
     Mobil berbentuk kartu tetap diberi bayangan elips di bawahnya, seperti di cairo.
-11. Tabrakan/kerusakan: **berantakan boleh, ledakan jangan** (user 2026-10-03). Bola api, kilatan, dan asap tebal
+11. Tabrakan/kerusakan CHALLENGE: **berantakan boleh, ledakan jangan** (user 2026-10-03; SMASH: ledakan misil/chaos tetap boleh). Bola api, kilatan, dan asap tebal
     menutupi kerusakan yang ditunggu penonton. Tunjukkan panel copot, kaca, baut, roda lepas, dan serpihan yang tetap tergeletak.
