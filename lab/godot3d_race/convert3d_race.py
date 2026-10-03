@@ -83,8 +83,9 @@ def main():
     folder = f"{BASE}/{e['folder']}"
     man_path = f"{folder}/{vid}.json"
     man = json.load(open(man_path))
-    if man.get("render3d"):
-        raise SystemExit(f"[convert3d] {vid} sudah 3D")
+    was3d = bool(man.get("render3d"))
+    if was3d and "--redo" not in sys.argv:                      # --redo: re-render a 3D one (2.5D stays _25d.mp4)
+        raise SystemExit(f"[convert3d] {vid} sudah 3D (pakai --redo untuk render ulang)")
     d = f"/root/lab/r3d/conv_{vid}"
     shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d, exist_ok=True)
@@ -104,13 +105,19 @@ def main():
     if not ok3d:
         raise SystemExit(f"[convert3d] audit 3D GAGAL -> {vid} tetap 2.5D ({d}/{vid}_audit3d.md)")
     # swap in: 2.5D kept as backup, production audit must pass on the 3D file
-    os.replace(f"{folder}/{vid}.mp4", f"{folder}/{vid}_25d.mp4")
+    if was3d:
+        os.replace(f"{folder}/{vid}.mp4", f"{folder}/{vid}_3dold.mp4")
+    else:
+        os.replace(f"{folder}/{vid}.mp4", f"{folder}/{vid}_25d.mp4")
     shutil.copy(out, f"{folder}/{vid}.mp4")
     shutil.copy(f"{d}/{vid}_audit3d.md", f"{folder}/{vid}_audit3d.md")
     # RACE has no production audit.py run (its checks live in race25d); the audit3d gate above covers the file
+    if was3d and os.path.exists(f"{folder}/{vid}_3dold.mp4"):
+        os.remove(f"{folder}/{vid}_3dold.mp4")
     man = json.load(open(man_path))
-    man.update(render3d=True, engine=man.get("engine", "") + " + godot3d (lab/godot3d_race)",
-               assets=man.get("assets", "") + "; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)")
+    if not was3d:
+        man.update(render3d=True, engine=man.get("engine", "") + " + godot3d (lab/godot3d_race)",
+                   assets=man.get("assets", "") + "; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)")
     json.dump(man, open(man_path, "w"), indent=2, ensure_ascii=False)
     registry.update(vid, render3d=True)
     prev = f"{folder}/preview"                                   # review sheet from the 3D picture (2.5D kept)

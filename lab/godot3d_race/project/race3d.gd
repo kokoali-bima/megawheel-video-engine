@@ -482,23 +482,42 @@ uniform float ice = 0.0;
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
 	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
-float local(vec2 uv) { vec2 d = uv - hit; return dmg * exp(-dot(d, d) / 0.05) + dmg * 0.22; }
+// rigid metal: the body stays straight; only the struck end crumples, and every move is linear in x / y
+// (straight lines stay straight). Sprite png = (body + 1.6 m) x (body + 3 m) at 60 px/m (export *_png)
+varying float ez;                                   // metres from the struck end of the body (before crushing)
+varying float vy;                                   // local height, metres from the body centre
+float zone_of(float e, float L) { return clamp((L - e) / L, 0.0, 1.0); }
 void vertex() {
-	float d = local(UV);
-	vec2 dir = normalize(UV - hit + vec2(1e-4));
-	VERTEX.x += dir.x * d * 0.45;                       // the impact side is pushed in (crushed)
-	VERTEX.y += (n(UV * 9.0) - 0.5) * d * 0.45;         // wrinkles
-	VERTEX.z += (n(UV * 6.0 + 3.0) - 0.5) * d * 0.9;     // bent out of shape (really 3D)
-	if (split > 0.01) { float side = UV.x > 0.5 ? 1.0 : -1.0; VERTEX.x += side * split * 0.5; VERTEX.y += side * split * 0.15; }
+	vec2 ts = vec2(textureSize(tex, 0)) / 60.0;
+	float bw = max(ts.x - 1.6, 0.5);
+	float bh = max(ts.y - 3.0, 0.5);
+	float s = hit.x > 0.5 ? 1.0 : -1.0;                 // which end was hit
+	float L = 0.3 * bw;                                 // crumple zone = 30% of the body length
+	ez = bw * 0.5 - s * VERTEX.x;
+	vy = VERTEX.y;
+	float dm = clamp(dmg, 0.0, 1.0);
+	float z = zone_of(ez, L);
+	float top = clamp(VERTEX.y / (bh * 0.5), 0.0, 1.0);
+	VERTEX.x -= s * dm * 0.45 * L * z;                  // the end is pushed in: shorter, still straight
+	VERTEX.y -= dm * 0.2 * bh * z * top;                // the roof / hood line drops in a straight slope
+	VERTEX.z += dm * 0.35 * L * z;                      // and folds out of the plane (3D crease)
+	if (split > 0.01) { float side = VERTEX.x > 0.0 ? 1.0 : -1.0; VERTEX.x += side * split * 0.5; }
 }
 void fragment() {
 	vec4 c = texture(tex, UV);
 	if (c.a < 0.5) discard;
-	float d = local(UV);
-	vec3 col = c.rgb * (1.0 - 0.35 * min(d, 1.0));
-	float scratch = step(0.96, fract((UV.x * 1.3 + UV.y) * 38.0 + n(UV * 20.0) * 2.0)) * step(0.3, d);
-	col = mix(col, vec3(0.78, 0.78, 0.8), scratch * 0.8);   // bare metal scratches
-	col = mix(col, vec3(0.08, 0.06, 0.05), burn * (0.55 + 0.35 * n(UV * 14.0)));
+	vec2 ts = vec2(textureSize(tex, 0)) / 60.0;
+	float L = 0.3 * max(ts.x - 1.6, 0.5);
+	float dm = clamp(dmg, 0.0, 1.0);
+	float z = zone_of(ez, L) * step(0.02, dm);
+	vec3 col = c.rgb * (1.0 - 0.08 * dm);               // overall: a little dull, never warped
+	float crease = 1.0 - smoothstep(0.0, 0.035, abs(ez - L)) ;          // the fold line where the crush starts
+	float folds = step(0.88, fract((ez * 1.0 + vy * 0.55) * 3.2)) * z;   // straight diagonal creases in the crushed end
+	col *= 1.0 - (0.3 * folds + 0.35 * crease * step(0.15, dm)) ;
+	col *= 1.0 - 0.22 * z * dm;                         // the crushed panel is in shade
+	float scratch = step(0.965, fract((ez * 1.7 + vy) * 9.0)) * z * step(0.3, dm);
+	col = mix(col, vec3(0.8, 0.8, 0.82), scratch * 0.85);   // bare metal scratches, only where it was hit
+	col = mix(col, vec3(0.09, 0.07, 0.06), burn * (0.6 + 0.2 * n(UV * 3.0)));   // soot, smooth (no speckles)
 	col = mix(col, vec3(0.7, 0.9, 1.0), ice * 0.55);   // frozen by the ice dragon
 	ALBEDO = col;
 	ROUGHNESS = 0.6;
