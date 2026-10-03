@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_BUMPS_V2_S021
 
-- Tanggal: 2026-10-03 05:39 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 21 · Track: bumps_75aba530
+- Tanggal: 2026-10-03 08:31 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 21 · Track: bumps_75aba530
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 49.33 s (manifest 49.33) |
-| Ukuran wajar (8-20 MB) | ⚠️ | 25.2 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 20.8 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.5 dB |
-| mean_volume -20..-12 dB | ✅ | -14.5 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.4 dB |
+| mean_volume -20..-12 dB | ✅ | -13.1 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 
@@ -46,7 +46,7 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 22.5s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 25.5s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 40.7s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 69% piksel panel @ 48.5s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 67% piksel panel @ 48.5s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
