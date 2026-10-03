@@ -15,14 +15,16 @@ const WATER_Y = -1.2
 # win logic copied from smash25d: tyre barriers until 9 s, then a car only leaves the floor when it was PUSHED
 # (<0.8 s ago), the floor shrinks from 18 s every 7 s, last car standing always survives, time limit -> most HP wins.
 # Added (user 2026-10-03): KOs at least KO_GAP apart, never several cars wiped out by one event.
-const BARRIER_DOWN = 9.0
-const GO_T = 4.3                                         # jingle 0-3.8 s, then READY-SET-GO
+const INTRO_T0 = 3.6                                     # sonic logo + title 0-3.6 s, then the fighter intros
+const INTRO_SLOT = 1.9                                   # smash25d: one slot per fighter (spotlight + card + call)
+const GO_T = INTRO_T0 + 4 * INTRO_SLOT + 1.2             # "Ready... set... let's go!" lands GO here (12.4 s)
+const BARRIER_DOWN = GO_T + 4.7                          # fight-relative timings (smash25d rhythm, shorter fight)
 const PUSH_WINDOW = 0.8
-const KO_GAP = 4.5
-const SHRINK_AT = 18.0
-const SHRINK_EVERY = 7.0
+const KO_GAP = 4.0
+const SHRINK_AT = GO_T + 11.0
+const SHRINK_EVERY = 6.0
 const SHRINK_STEP = 0.12
-const T_MAX = 27.0                                       # video 30-40 s: winner + replay + end card after this
+const T_MAX = GO_T + 19.0                                # then winner 3 s + replay + end card
 # classic camera (smash25d: k(z) = 6000/(100+8z) = 750/(12.5+z) px/m, camera height 20.4 m, horizon y 276 + 20)
 const C_F = 750.0
 const C_H = 20.4
@@ -76,7 +78,9 @@ var win_t = 1e9
 # [time, action, ko-index it belongs to] — skipped when that KO already happened
 # One chaos theme per video (user 2026-10-03: meteor one day, Kraggor the next) -> user arg chaos=meteor|kraggor|missile
 var chaos = "meteor"
-var beats = [[5.0, "soft"], [10.0, "push_weak"], [15.0, "storm"], [20.0, "push_weak"]]   # smash25d CHAOS_AT rhythm
+var beats = [[GO_T + 1.5, "soft"], [GO_T + 6.0, "push_weak"], [GO_T + 10.5, "storm"], [GO_T + 15.0, "push_weak"]]
+var intro_logged = -1
+var go_logged = false
 var rng = RandomNumberGenerator.new()
 var CAM_FOV = 40.0
 var CAM_Y = 30.0
@@ -1079,7 +1083,10 @@ func _shark(c: Dictionary) -> void:
 
 func _physics_process(delta: float) -> void:
 	t += delta
-	var go = clampf((t - GO_T) / 0.6, 0.0, 1.0)             # intro: jingle + 4 fighters... 1 survivor
+	var go = clampf((t - GO_T) / 0.6, 0.0, 1.0)             # intro: jingle + fighter intros, then GO
+	if not go_logged and t >= GO_T:
+		go_logged = true
+		_log("go", 1.0)
 	var allowed = ko_allowed()
 	var bb = bounds(t)
 	if absf(bb.x - hx_now) > 0.004 or absf(bb.y - hz_now) > 0.004:
@@ -1410,7 +1417,21 @@ func _process(_d: float) -> void:
 		cx = (xs.max() + xs.min()) / 2.0
 	shake *= 0.86
 	fov_kick *= 0.84
-	if CAM_MODE == "classic":                               # smash25d camera: pan to the cars, zoom 1.0-1.45 to fit them
+	var slot = int(floor((t - INTRO_T0) / INTRO_SLOT)) if t >= INTRO_T0 else -1
+	if CAM_MODE == "classic" and slot >= 0 and slot < cars.size() and t < GO_T - 1.2:
+		var fc = cars[slot]
+		var fp = fc["body"].global_position
+		camx = fp.x                                         # cut (no glide) like smash25d intro shots
+		zoom = 1.55
+		_classic_cam(camx, zoom, 0.0)
+		if intro_logged < slot:
+			intro_logged = slot
+			_log("intro", float(slot), fp + Vector3(0, 0.3, 0), fc["nick"] + "|" + fc["vk"] + ("|last" if slot == cars.size() - 1 else ""))
+	elif CAM_MODE == "classic" and t < GO_T - 1.2 and slot >= cars.size():
+		zoom = 1.0
+		camx = 0.0
+		_classic_cam(camx, zoom, 0.0)
+	elif CAM_MODE == "classic":                             # smash25d camera: pan to the cars, zoom 1.0-1.45 to fit them
 		var spread = (xs.max() - xs.min() + 6.0) if xs.size() > 0 else 26.0
 		var fit = clampf(1080.0 * 0.95 / (spread * C_F / (C_D + ARENA_HZ - 1.0)), 1.0, 1.45)
 		camx += (cx - camx) * 0.1
@@ -1433,7 +1454,7 @@ func _process(_d: float) -> void:
 		var row = hp_rows[i]
 		row["bar"].size.x = 150.0 * c["hp"] / 100.0
 		row["bar"].color = Color(0.2, 0.85, 0.3) if c["hp"] > 60 else (Color(1, 0.8, 0.1) if c["hp"] > 30 else Color(0.95, 0.2, 0.15))
-		row["out"].visible = not c["alive"]
+		row["out"].visible = not c["alive"] and t >= GO_T
 		if is_instance_valid(c["body"]) and not c["out"] and c["body"].visible:   # contact shadow follows the car
 			var bpos = c["body"].global_position
 			c["blob"].visible = bpos.y > -0.5
@@ -1447,7 +1468,10 @@ func _process(_d: float) -> void:
 			c["smoke"].emitting = c["hp"] < 70.0
 			c["fire"].emitting = c["hp"] < 35.0
 	title_lbl.visible = true
-	sub_lbl.modulate.a = clampf((GO_T - 0.2 - vt()) / 0.4, 0.0, 1.0)
+	sub_lbl.modulate.a = clampf((INTRO_T0 - 0.2 - vt()) / 0.4, 0.0, 1.0)
+	for r in hp_rows:                                       # smash25d: no HP panel during the intro
+		for nd in r["nodes"]:
+			nd.visible = t >= GO_T - 0.5
 	if t < GO_T:                                            # engines revving before the start
 		for i in range(cars.size()):
 			var cc = cars[i]
@@ -1518,7 +1542,7 @@ func _hud() -> void:
 		out.position = Vector2(300, y - 24)
 		out.visible = false
 		hud.add_child(out)
-		hp_rows.append({"bar": bar, "out": out})
+		hp_rows.append({"bar": bar, "out": out, "nodes": [bg, dot, nm, back, bar]})
 	win_lbl = Label.new()
 	win_lbl.label_settings = _ls(120)
 	win_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

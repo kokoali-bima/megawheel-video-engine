@@ -2,9 +2,11 @@
 events.json (smash3d.gd: t, type, power, sx, sy, who) ->
   * picture: zoomed INSTANT REPLAY of the final KO (smash25d overlay) + the YouTube end card drawn by the SAME cairo
     function as the aired videos (race25d.draw_cta: LIKE / SUBSCRIBE tapped by a hand, bell)
+  * fighter intros like smash25d: spotlight + fighter card (smash25d.intro_card) + the announcer's call per fighter
   * sound: sonic logo sting at 0 s, voice-C commentators m1 + f1 (cached Chatterbox lines only, no new spend),
-    arena crowd bed + cheers + gasps (smash25d), Sonniss SFX bank (stereo, panned by screen x), shrink horn, CTA taps,
-    music bed ducked under the voices, -14 LUFS.
+    arena crowd bed + cheers + gasps (smash25d), Sonniss SFX bank (stereo, panned by screen x), shrink horn, CTA taps.
+    NO background music (user 2026-10-03: the narrator is enough) - only our theme song, faint, after the win cheer
+    (sim_engine.music_bed, same rule as every Short), -14 LUFS.
 Production modules are imported read-only; nothing in production imports this file.
   venv/bin/python lab/godot3d_smash/mix3d.py --video v.mp4 --events ev.json --out out.mp4"""
 import argparse
@@ -31,7 +33,7 @@ SR = se.SR
 BANK = "/root/lab/sfx/bank"
 REPLAY_LEN = 3.6
 ZOOM = 1.4
-GO_T = 4.3                                                  # smash3d.gd GO_T
+INTRO_SLOT = 1.9                                            # smash3d.gd INTRO_SLOT
 rnd = random.Random(7)
 _cache = {}
 
@@ -130,14 +132,23 @@ def ok_line(text, style, who):
     return A.cached(text, style, who)
 
 
-def commentary(events, out, t_win, cta_start, replay_at):
+def fighter_call(ev):
+    nick, vk = ev["who"].split("|")[:2]
+    last = ev["who"].endswith("|last")
+    return ("And... " if last else "") + f"{nick.title()}, the " + se.VEHICLES[vk]["display"].split(" THE ")[1].lower() + "!"
+
+
+def commentary(events, out, t_win, cta_start, replay_at, go_t):
     S.USE_CB = True                                         # S.say -> announcer.get (cache)
     anchors, extras = [], []
     rsg = (se.READY_SET_GO, "clear", "m1")
     if ok_line(*rsg):
         a = A.get(*rsg)
         onset = max(0.42, se.last_word_onset(a))
-        anchors.append((max(0.0, GO_T - onset), *rsg))
+        anchors.append((max(0.0, go_t - onset), *rsg))
+    for e in events:
+        if e["type"] == "intro" and ok_line(fighter_call(e), "hype", "m1"):
+            anchors.append((e["t"] + 0.2, fighter_call(e), "hype", "m1"))
     win = next((e for e in events if e["type"] == "win"), None)
     if win is not None:
         nick = win.get("who", "").title()
@@ -158,7 +169,7 @@ def commentary(events, out, t_win, cta_start, replay_at):
     hits = ["Oh my goodness! What a hit!", "Ouch! That's gotta hurt!", "Did you see that?"]
     for i, e in enumerate([e for e in events if e["type"] == "chunk"][:3]):
         extras.append((out(e["t"]) + 0.05, 0, hits[i % 3], "hype", 0.6, "f1"))
-    extras.append((out(9.0), 1, "Barriers down!", "hype", 0.6, "m1"))
+    extras.append((out(go_t + 4.7), 1, "Barriers down!", "hype", 0.6, "m1"))
     chaos = {"missile": ("Incoming missile!", "f1"), "kraggor": ("Oh no... it's Kraggor!", "m1"),
              "meteor": ("Meteor shower!", "m1")}
     seen = set()
@@ -203,6 +214,8 @@ def main():
                                capture_output=True, text=True).stdout)
     events = json.load(open(a.events))["events"] if os.path.exists(a.events) else []
     t_win = next((e["t"] for e in events if e["type"] == "win"), None)
+    go_t = next((e["t"] for e in events if e["type"] == "go"), 4.3)
+    intros = [e for e in events if e["type"] == "intro"]
     kos = [e for e in events if e["type"] == "ko"]
     t_ins = (t_win + 3.0) if t_win is not None else None
     replay = bool(kos) and t_ins is not None and t_ins < dur - 1.0
@@ -243,7 +256,11 @@ def main():
     for ev in events:
         for d, sig, g in crowd_for(ev):
             place(crowd, sig, out(ev["t"]) + d, g)
-    place(crowd, S.cheer(1.8, 0.9, seed=70), GO_T, 0.9)
+    place(crowd, S.cheer(1.8, 0.9, seed=70), go_t, 0.9)
+    for q, e in enumerate(intros):                          # smash25d intro: whoosh + thump + the crowd goes wild
+        place(sfx, se.synth_whoosh(), e["t"], 0.6)
+        place(sfx, S.kaiju_step(0.5, seed=80 + q), e["t"] + 0.05, 0.5)
+        place(crowd, S.cheer(1.8, 0.9, seed=70 + q), e["t"] + 0.1, 1.0)
     bed = np.stack([S.crowd_bed(out_dur + 1, seed=5), S.crowd_bed(out_dur + 1, seed=6)], axis=1)
     if cta_start is not None:
         bed[int(cta_start * SR):] *= 0.45
@@ -258,16 +275,14 @@ def main():
         place(logo, load(lp), 0.0, 1.0)
     if t_win is not None:
         place(sfx, se.synth_win(), out(t_win), 0.8)
-    placed = commentary(events, out, t_win, cta_start, out(t_ins) if replay else None)
+    placed = commentary(events, out, t_win, cta_start, out(t_ins) if replay else None, go_t)
     for t0, _, au, _ in placed:
         place(narr, au, t0, 1.0)
-    se.make_theme(3)
-    bgm = se.synth_bgm(out_dur + 1, style=se.th_time()["music"])
-    bgm = st(np.pad(bgm, (0, max(0, n - len(bgm))))[:n])
-    bgm *= np.clip((np.arange(n) / SR - 3.4) / 0.8, 0, 1)[:, None]    # music enters after the jingle
+    song = se.music_bed(out_dur + 1, [out(t_win) + 1.6] if t_win is not None else [])   # no bed; song after hooray
+    bgm = st(np.pad(song, (0, max(0, n - len(song))))[:n])
     talk = S.box_avg((np.abs(narr[:, 0]) > 0.01).astype(float), int(0.25 * SR))
     duck = (1.0 - (1.0 - 10 ** (-se.DUCK_DB / 20)) * np.clip(talk * 3, 0, 1))[:, None]
-    mix = (peak(narr) * se.VOL_NARR + peak(bgm) * 0.55 * duck + peak(logo) * 1.1
+    mix = (peak(narr) * se.VOL_NARR + peak(bgm) * 0.3 * duck + peak(logo) * 1.1
            + peak(sfx) * se.VOL_SFX * (0.7 + 0.3 * duck) + peak(crowd) * se.VOL_SFX * 0.75 * (0.6 + 0.4 * duck))
     mix = np.nan_to_num(np.tanh(1.3 * mix) / np.tanh(1.3))[:int(out_dur * SR)]
     wav = a.out.replace(".mp4", ".wav")
@@ -276,6 +291,23 @@ def main():
     # ---- picture: replay + end card overlays
     cta_mov = os.path.join(work, "_cta.mov")
     rep_mov = os.path.join(work, "_replay.mov")
+    intro_mov = os.path.join(work, "_intro.mov")
+
+    def draw_intro(ctx, tt):
+        for e in intros:
+            age = tt - e["t"]
+            if 0 <= age < INTRO_SLOT:
+                vk = e["who"].split("|")[1]
+                S.spotlight(ctx, e.get("sx", 540), e.get("sy", 1100))
+                S.intro_card(ctx, vk, age, e["who"].endswith("|last"))
+
+    pre = os.path.join(work, "_pre.mp4")
+    if intros:                                              # burn the intro overlay into the source first
+        overlay_mov(intro_mov, go_t, draw_intro)
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", a.video, "-i", intro_mov, "-filter_complex",
+                        "[1:v]setpts=PTS-STARTPTS[o];[0:v][o]overlay=eof_action=pass[v]", "-map", "[v]",
+                        "-c:v", "libx264", "-crf", "16", "-pix_fmt", "yuv420p", pre], check=True)
+        a.video = pre
     tail = dur - t_ins if t_ins is not None else 0.0
     if t_ins is not None and tail > 0.5:
         overlay_mov(cta_mov, tail, lambda ctx, tt: R.draw_cta(ctx, tt))
@@ -300,7 +332,7 @@ def main():
         cmd = ["ffmpeg", "-loglevel", "error", "-y", "-i", a.video, "-i", wav, "-map", "0:v", "-map", "1:a"]
     subprocess.run(cmd + ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-c:a", "aac", "-b:a", "192k",
                           "-af", "loudnorm=I=-14:TP=-1.5", "-shortest", a.out], check=True)
-    for f in (wav, cta_mov, rep_mov):
+    for f in (wav, cta_mov, rep_mov, intro_mov, pre):
         if os.path.exists(f):
             os.remove(f)
     lines = [txt for _, _, _, txt in placed]

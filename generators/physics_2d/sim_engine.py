@@ -60,6 +60,11 @@ REPLAY_LINE = "Let's see that again, in slow motion!"
 
 # Audio balance (from PROJECT_HISTORY_AND_HANDOVER.md, stems normalised to 0.45 peak first)
 VOL_NARR, VOL_ENGINE, VOL_BGM, VOL_SFX = 1.60, 0.85, 0.10, 0.85
+# user 2026-10-03: no background music in Shorts (the narrator is enough); our theme song only, faint, after the
+# win cheer. SHORTS_BGM = True brings the old synth bed back.
+SHORTS_BGM = False
+WIN_SONG = f"{BASE}/branding/music/intro_lets_go_v1mix3.wav"   # approved theme (Ep. 1 remix3)
+WIN_SONG_FROM = 13.5                                            # chorus ("Mega, Mega, MegaWheel")
 
 # ---------------------------------------------------------------- series + track
 ENGINE_VERSION = "v2"
@@ -1594,6 +1599,35 @@ def synth_whoosh():
     x = np.random.default_rng(3).standard_normal(n)
     band = smooth(x, 3) - smooth(x, 30)
     return band * np.sin(np.pi * t / 0.45) ** 2
+
+
+def music_bed(total, wins=(), hold=None, style=None):
+    """Shorts music bus. SHORTS_BGM off: silence, plus the theme song from its chorus at every time in `wins`
+    (0.6 s fade-in; plays to the end, or `hold` seconds then a 1 s fade-out). On: the old synth bed."""
+    n = int(total * SR)
+    if SHORTS_BGM:
+        b = synth_bgm(total, style=style)
+        return b[:n] if len(b) >= n else np.pad(b, (0, n - len(b)))
+    out = np.zeros(n)
+    if not wins or not os.path.exists(WIN_SONG):
+        return out
+    with wave.open(WIN_SONG) as w:                              # stereo theme -> mono (read_wav is mono-only)
+        ch, sr0 = w.getnchannels(), w.getframerate()
+        song = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768.0
+    song = song.reshape(-1, ch).mean(axis=1)
+    if sr0 != SR:
+        song = np.interp(np.arange(0, len(song) - 1, sr0 / SR), np.arange(len(song)), song)
+    song = song[int(WIN_SONG_FROM * SR):]
+    for t0 in wins:
+        i0 = int(t0 * SR)
+        if not 0 <= i0 < n:
+            continue
+        m = min(len(song), n - i0, int(hold * SR) if hold else n)
+        env = np.minimum(1.0, np.arange(m) / (0.6 * SR))
+        if hold:
+            env = env * np.minimum(1.0, (m - np.arange(m)) / (1.0 * SR))
+        out[i0:i0 + m] += song[:m] * env
+    return out
 
 
 def synth_bgm(dur, seed=11, style=None):
@@ -3734,7 +3768,8 @@ def main():
                 place(sfx, stretch(synth_ignite(), 0.6), r0 + (L["burned"] - ta) / REPLAY_SPEED, 0.9)
             if L.get("spun") is not None and ta <= L["spun"] < tb:
                 place(sfx, stretch(synth_spin(1.4, 1), 0.6), r0 + (L["spun"] - ta) / REPLAY_SPEED, 0.7)
-    bgm = synth_bgm(total, style=th_time()["music"])
+    wins = [L["start"] + out_time(L, L["event"]["t"]) + 1.3 for L in LEVELS if L["event"]["type"] == "win"]
+    bgm = music_bed(total, wins, hold=4.5, style=th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     # ducking: engine + music dip while the narrator talks, so every word is easy to catch
     xs = (np.abs(narr) > 0.01).astype(float)                 # O(N) moving average (np.convolve took minutes)

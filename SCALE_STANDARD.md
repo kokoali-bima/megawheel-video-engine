@@ -66,5 +66,8 @@ Terukur 2026-10-03: classic 60,0 / 33,3 px/m, front_y 1520, back_y 976 ✅ · to
 - **Lantai menyusut** mulai 18 dtk, tiap 7 dtk 12% (menyusut sampai 65% × 72%).
 - Mobil terakhir yang masih bertahan **selalu selamat**.
 - **Batas waktu:** HP terbanyak menang. Cairo 40 dtk; 3D 27 dtk karena video 30–40 dtk.
-- Tambahan 3D (user 2026-10-03): jarak antar-KO minimal 4,5 dtk, dan satu kejadian tidak boleh menghabisi beberapa mobil.
+- Tambahan 3D (user 2026-10-03): jarak antar-KO minimal 4 dtk, dan satu kejadian tidak boleh menghabisi beberapa mobil.
+- Urutan 3D v6 (gaya smash25d): sonic logo + judul 0–3,6 dtk → perkenalan 4 petarung (1,9 dtk/petarung: kamera potong
+  ke mobil zoom 1,55, spotlight, kartu nama `intro_card`, panggilan komentator) → "Ready... set... let's go!" (GO 12,4 dtk)
+  → barrier turun GO+4,7 → lantai menyusut GO+11 tiap 6 dtk → batas waktu GO+19 → pemenang 3 dtk → replay → end card.
 - Chaos dengan ritme cairo (sekitar 5 / 10 / 15 / 20 dtk), satu tema per video. "Lempar ke tepi" hanya untuk mobil dengan HP < 60.

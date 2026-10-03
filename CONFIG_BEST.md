@@ -25,7 +25,7 @@
 | Narator | "voice C": Chatterbox (MIT) di Modal L4, ref sintetis m1 (pria) / f1 (wanita), en-US | `generators/voice/` | 2026-10-01 user "paling oke" |
 | QA suara | Whisper base.en, skor huruf ≥ 0,85 (retake ≤ 4), cache ditolak < 0,75 | `modal_tts.py`, `announcer.py` | "GO" → "Geo" dulu |
 | Start | "Ready... set... let's go!" (bukan "GO!") | sim_engine READY_SET_GO | 2026-10-01 |
-| Mix Shorts | VOL narasi 1.60 · mesin 0.85 · musik 0.10 · SFX 0.85, duck 8 dB | sim_engine.py | |
+| Mix Shorts | VOL narasi 1.60 · mesin 0.85 · SFX 0.85, duck 8 dB · **tanpa musik latar** (`SHORTS_BGM = False`); lagu tema remix3 (chorus 13,5 dtk) sayup **setelah sorak menang** (`music_bed`) | sim_engine.py | 2026-10-03 user: narator cukup, backsound bikin ramai |
 | Loudness | -16 LUFS, TP -1.5 (story per scene); stereo untuk lagu tema | story25d | |
 | Lip-sync story | Rhubarb Lip Sync (MIT, build ARM di `/root/tools/rhubarb-lip-sync`), 8 bentuk mulut | story25d `visemes()` | 2026-10-03; fallback mulut volume |
 | Budget Modal | $29/bulan, ledger `modal_usage.json` (catat manual bila run crash) | modal_*.py | |

@@ -1463,7 +1463,8 @@ def build_audio(frames, events, winner, star, replay, lines, voice, out_of, cta_
         place(sfx, se.tone(1300, 0.06, "sine", decay=0.02), cta_start + tap, 0.8)
     place(sfx, se.tone(1760, 0.8, "sine", decay=0.35) + se.tone(2637, 0.8, "sine", decay=0.25) * 0.5,
           cta_start + CTA_SUB_T + 0.05, 0.6)
-    bgm = se.synth_bgm(total + 1, style=se.th_time()["music"])
+    wins = [out_of(winner["finish"]) + 4.4] if winner["finish"] is not None else []   # after hooray + sonic logo
+    bgm = se.music_bed(total + 1, wins, style=se.th_time()["music"])
     bgm = bgm[:n] if len(bgm) >= n else np.pad(bgm, (0, n - len(bgm)))
     talk = box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))   # O(N), was a 40 s np.convolve
     duck = 1.0 - (1.0 - 10 ** (-se.DUCK_DB / 20)) * np.clip(talk * 3, 0, 1)
