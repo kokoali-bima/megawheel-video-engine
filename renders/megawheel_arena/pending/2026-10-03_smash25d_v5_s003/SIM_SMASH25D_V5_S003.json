@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_SMASH25D_V5_S003",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "smash25d v5",
+  "engine": "smash25d v5 + godot3d (lab/godot3d_smash/project_d)",
   "series": "smash25d",
   "seed": 3,
   "fps": 30,
@@ -100,7 +100,8 @@
     "Kaboom! Right on Titan!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003/SIM_SMASH25D_V5_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003/preview"
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s003/preview",
+  "render3d": true
 }
