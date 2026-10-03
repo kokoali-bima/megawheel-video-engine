@@ -1,6 +1,6 @@
 {
   "video_id": "2026-10-02_story15_e01",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-04T17:00:00Z",
   "series": "story15",
   "story_episode": 1,
   "engine": "story25d",
@@ -24,5 +24,7 @@
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), voices Chatterbox TTS (open source) synthetic, theme songs ACE-Step (Apache-2.0)",
   "episode": 1001,
   "season": 1,
-  "approved_date": "2026-10-02"
+  "approved_date": "2026-10-02",
+  "youtube_url": "https://www.youtube.com/shorts/gAVCxOicZyM",
+  "upload_date": "2026-10-03"
 }

@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_LAVA_V2_S003",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-04T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "lava",
   "seed": 3,
@@ -246,5 +246,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E008_2026-09-30_lava/SIM_LAVA_V2_S003_audit.md",
   "episode": 8,
   "season": 1,
-  "approved_date": "2026-09-30"
+  "approved_date": "2026-09-30",
+  "youtube_url": "https://www.youtube.com/shorts/LIP2P98Be6M",
+  "upload_date": "2026-10-03"
 }

@@ -1,6 +1,6 @@
 {
   "video_id": "2026-10-02_story15_trailer_e01",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-03T21:00:00Z",
   "series": "story15_trailer",
   "story_episode": 1,
   "engine": "story25d",
@@ -25,5 +25,7 @@
   "publish_at_et": "2026-10-03T17:00",
   "episode": 1501,
   "season": 1,
-  "approved_date": "2026-10-02"
+  "approved_date": "2026-10-02",
+  "youtube_url": "https://www.youtube.com/shorts/BB8Lr9LwL9g",
+  "upload_date": "2026-10-03"
 }

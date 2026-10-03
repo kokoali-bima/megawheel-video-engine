@@ -88,37 +88,52 @@
   {
    "episode": 1501,
    "video_id": "2026-10-02_story15_trailer_e01",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-03T21:00:00Z",
-   "role": "promo"
+   "role": "promo",
+   "title": "Sprinkles' First Race \ud83c\udf66 Full Episode This Sunday!",
+   "upload_started": "2026-10-03T05:00:06.187685+00:00",
+   "url": "https://www.youtube.com/shorts/BB8Lr9LwL9g"
   },
   {
    "episode": 23,
    "video_id": "SIM_SMASH25D_V4_S003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-03T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Crash Battle! Only One Can Win! \ud83d\udca5 | Ep. 23 #Shorts",
+   "upload_started": "2026-10-03T05:00:13.278770+00:00",
+   "url": "https://www.youtube.com/shorts/ZjUnuZvelKY"
   },
   {
    "episode": 8,
    "video_id": "SIM_LAVA_V2_S003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-04T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Lava Road! Who Survives? \ud83c\udf0b\ud83d\udd25 | Ep. 8 #Shorts",
+   "upload_started": "2026-10-03T05:00:18.093502+00:00",
+   "url": "https://www.youtube.com/shorts/LIP2P98Be6M"
   },
   {
    "episode": 1001,
    "video_id": "2026-10-02_story15_e01",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-04T17:00:00Z",
-   "role": "long"
+   "role": "long",
+   "title": "Sprinkles' First Race \ud83c\udf66\ud83c\udfc1 | MegaWheel Arena Story Ep. 1",
+   "upload_started": "2026-10-03T05:00:23.180287+00:00",
+   "url": "https://www.youtube.com/shorts/gAVCxOicZyM"
   },
   {
    "episode": 11,
    "video_id": "SIM_RACE25D_V2_S003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-04T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Wildest Race Ever! Who Crosses First? \ud83c\udfc1 | Ep. 11 #Shorts",
+   "upload_started": "2026-10-03T05:00:47.499529+00:00",
+   "url": "https://www.youtube.com/shorts/WinoMp1Dmzw"
   },
   {
    "episode": 24,
