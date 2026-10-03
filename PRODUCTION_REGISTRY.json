@@ -356,17 +356,17 @@
         "win"
       ],
       "duration": 46.2,
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-04T15:00:00Z",
       "folder": "renders/megawheel_arena/S01/E008_2026-09-30_lava",
       "audit": "renders/megawheel_arena/S01/E008_2026-09-30_lava/SIM_LAVA_V2_S003_audit.md",
       "episode": 8,
       "season": 1,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-10-03",
+      "youtube_url": "https://www.youtube.com/shorts/LIP2P98Be6M",
       "approved_date": "2026-09-30",
       "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
       "drive_id": "1Lsw3pTVv7xLLt2zEcy6Wcri5GqPFNLcK",
-      "drive_path": "me/ai-develop/ipandu-video/review/approved/E008_SIM_LAVA_V2_S003.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E008_SIM_LAVA_V2_S003.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V1_S001",
@@ -671,17 +671,17 @@
         "win+dodge_lava"
       ],
       "duration": 34.97,
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-04T19:00:00Z",
       "folder": "renders/megawheel_arena/S01/E011_2026-09-30_race25d",
       "audit": "renders/megawheel_arena/S01/E011_2026-09-30_race25d/SIM_RACE25D_V2_S003_audit.md",
       "episode": 11,
       "season": 1,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-10-03",
+      "youtube_url": "https://www.youtube.com/shorts/WinoMp1Dmzw",
       "approved_date": "2026-10-01",
       "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
       "drive_id": "1AkRaUD_hygrk7JNMBmcFo5xhM57uw76Y",
-      "drive_path": "me/ai-develop/ipandu-video/review/approved/E011_SIM_RACE25D_V2_S003.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E011_SIM_RACE25D_V2_S003.mp4"
     },
     {
       "video_id": "SIM_RACE25D_V2_S004",
@@ -1855,17 +1855,17 @@
         "p3+wreck"
       ],
       "duration": 47.2,
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-03T23:00:00Z",
       "folder": "renders/megawheel_arena/S01/E023_2026-10-01_smash25d",
       "audit": "renders/megawheel_arena/S01/E023_2026-10-01_smash25d/SIM_SMASH25D_V4_S003_audit.md",
       "episode": 23,
       "season": 1,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-10-03",
+      "youtube_url": "https://www.youtube.com/shorts/ZjUnuZvelKY",
       "approved_date": "2026-10-01",
       "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
       "drive_id": "1mHUbfb9SdglYq9IN-u4vJsgvesYbR9oB",
-      "drive_path": "me/ai-develop/ipandu-video/review/approved/E023_SIM_SMASH25D_V4_S003.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E023_SIM_SMASH25D_V4_S003.mp4"
     },
     {
       "video_id": "SIM_SMASH25D_V4_S007",
@@ -2032,16 +2032,18 @@
         "story15"
       ],
       "duration": null,
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-04T17:00:00Z",
       "folder": "renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15",
       "audit": "renders/megawheel_arena/S01/STORY_1001_2026-10-02_story15/2026-10-02_story15_e01_audit.md",
       "episode": 1001,
       "season": 1,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-10-03",
+      "youtube_url": "https://www.youtube.com/shorts/gAVCxOicZyM",
       "story_episode": 1,
       "approved_date": "2026-10-02",
-      "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1"
+      "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+      "drive_id": "1IRKxZxqJQi6hBdF_xt3xDSv1zg4HePHU",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1001_2026-10-02_story15_e01.mp4"
     },
     {
       "video_id": "2026-10-02_story15_trailer_e01",
@@ -2064,17 +2066,19 @@
         "story15_trailer"
       ],
       "duration": null,
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-03T21:00:00Z",
       "folder": "renders/megawheel_arena/S01/STORY_1501_2026-10-02_story15_trailer",
       "audit": "renders/megawheel_arena/S01/STORY_1501_2026-10-02_story15_trailer/2026-10-02_story15_trailer_e01_audit.md",
       "episode": 1501,
       "season": 1,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-10-03",
+      "youtube_url": "https://www.youtube.com/shorts/BB8Lr9LwL9g",
       "story_episode": 1,
       "publish_at_et": "2026-10-03T17:00",
       "approved_date": "2026-10-02",
-      "title": "Sprinkles' First Race 🍦 Full Episode This Sunday!"
+      "title": "Sprinkles' First Race 🍦 Full Episode This Sunday!",
+      "drive_id": "1qWKqH-pDqgXwqwzAvAncsFK3W4al8pyL",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1501_2026-10-02_story15_trailer_e01.mp4"
     }
   ]
 }
