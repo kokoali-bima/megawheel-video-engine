@@ -506,7 +506,7 @@ void fragment() {
 	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	body.position = Vector3(0, 0, 0.05)
 	car.add_child(body)
-	for i in range(2):
+	for i in range(6):                                       # up to 6 wheels; the data decides how many show (Titan = 4)
 		var w = Sprite3D.new()
 		w.pixel_size = 1.0 / 60.0
 		w.shaded = true
