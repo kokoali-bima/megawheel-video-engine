@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S022",
-  "passed": false,
+  "passed": true,
   "items": [
     {
       "section": "5.1 Analisa fisika",
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "19.7 MB",
+      "value": "19.8 MB",
       "hard": false
     },
     {
@@ -222,8 +222,8 @@
       "section": "5.2 Preview",
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
-      "ok": false,
-      "value": "12 file",
+      "ok": true,
+      "value": "13 file",
       "hard": true
     },
     {

@@ -1587,6 +1587,94 @@
    "cpu_container_seconds": 134.4,
    "wall_seconds": 87.4,
    "cost_usd": 0.0362
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S021",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 130.0,
+   "wall_seconds": 58.5,
+   "cost_usd": 0.035
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S022",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 130.5,
+   "wall_seconds": 105.1,
+   "cost_usd": 0.0351
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S027",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 118.0,
+   "wall_seconds": 63.2,
+   "cost_usd": 0.0318
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_LAVA_POTHOLES_V2_S025",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 121.0,
+   "wall_seconds": 55.9,
+   "cost_usd": 0.0326
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_LAVA_POTHOLES_V2_S026",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 117.0,
+   "wall_seconds": 77.9,
+   "cost_usd": 0.0315
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_BUMPS_V2_S021",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 112.0,
+   "wall_seconds": 58.6,
+   "cost_usd": 0.0302
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S015",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 88.0,
+   "wall_seconds": 67.2,
+   "cost_usd": 0.0237
+  },
+  {
+   "date": "2026-10-03",
+   "note": "smash3d convert SIM_SMASH25D_V5_S003",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 141.9,
+   "wall_seconds": 91.1,
+   "cost_usd": 0.0382
   }
  ]
 }

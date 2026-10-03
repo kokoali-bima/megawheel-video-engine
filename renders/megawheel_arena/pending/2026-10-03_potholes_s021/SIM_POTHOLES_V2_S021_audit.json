@@ -126,8 +126,8 @@
       "section": "6.1 Teknis",
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
-      "ok": false,
-      "value": "24.8 MB",
+      "ok": true,
+      "value": "17.3 MB",
       "hard": false
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "56% piksel panel @ 50.3s",
+      "value": "55% piksel panel @ 50.3s",
       "hard": true
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "14 file",
+      "value": "13 file",
       "hard": true
     },
     {

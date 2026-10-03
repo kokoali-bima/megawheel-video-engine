@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "64% piksel panel @ 50.0s",
+      "value": "65% piksel panel @ 50.0s",
       "hard": true
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "14 file",
+      "value": "13 file",
       "hard": true
     },
     {

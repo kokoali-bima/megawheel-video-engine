@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_POTHOLES_V2_S021
 
-- Tanggal: 2026-10-03 08:04 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 21 · Track: potholes_3c6546c2
+- Tanggal: 2026-10-03 16:32 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 21 · Track: potholes_3c6546c2
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
+- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
 
 ## 5.1 Analisa fisika
@@ -27,7 +27,7 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 51.07 s (manifest 51.07) |
-| Ukuran wajar (8-20 MB) | ⚠️ | 24.8 MB |
+| Ukuran wajar (8-20 MB) | ✅ | 17.3 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
@@ -46,12 +46,12 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 29.4s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 32.1s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 43.0s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 56% piksel panel @ 50.3s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 55% piksel panel @ 50.3s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
 |---|---|---|
-| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 14 file |
+| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 13 file |
 
 ## 7 Keunikan
 | Cek | Hasil | Nilai |

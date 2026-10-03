@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S027",
-  "passed": false,
+  "passed": true,
   "items": [
     {
       "section": "5.1 Analisa fisika",
@@ -222,8 +222,8 @@
       "section": "5.2 Preview",
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
-      "ok": false,
-      "value": "12 file",
+      "ok": true,
+      "value": "13 file",
       "hard": true
     },
     {

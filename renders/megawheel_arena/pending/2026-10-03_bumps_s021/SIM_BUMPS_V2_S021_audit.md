@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_BUMPS_V2_S021
 
-- Tanggal: 2026-10-03 08:31 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 21 · Track: bumps_75aba530
+- Tanggal: 2026-10-03 16:52 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 21 · Track: bumps_75aba530
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,7 +27,7 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 49.33 s (manifest 49.33) |
-| Ukuran wajar (8-20 MB) | ⚠️ | 20.8 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 20.5 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
@@ -51,7 +51,7 @@
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
 |---|---|---|
-| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 14 file |
+| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 13 file |
 
 ## 7 Keunikan
 | Cek | Hasil | Nilai |

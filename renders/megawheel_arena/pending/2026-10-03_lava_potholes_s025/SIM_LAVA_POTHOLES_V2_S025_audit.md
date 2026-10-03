@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_LAVA_POTHOLES_V2_S025
 
-- Tanggal: 2026-10-03 08:23 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 25 · Track: lava_potholes_f018885c
+- Tanggal: 2026-10-03 16:44 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 25 · Track: lava_potholes_f018885c
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -46,12 +46,12 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 27.9s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 30.8s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 41.8s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 64% piksel panel @ 50.0s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 65% piksel panel @ 50.0s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
 |---|---|---|
-| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 14 file |
+| PNG preview tersedia (>= 6, termasuk outro) | ✅ | 13 file |
 
 ## 7 Keunikan
 | Cek | Hasil | Nilai |

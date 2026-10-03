@@ -12,6 +12,6 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±3) | ✅ | 1084 vs 1084 |
 | durasi = versi review (±0.4 s) | ✅ | 36.13 vs 36.14 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [168, 160, 178, 159, 176, 169, 160, 175, 116, 116, 120, 120] |
+| tidak ada frame hitam / putih (12 sampel) | ✅ | [168, 160, 178, 159, 176, 170, 160, 175, 117, 116, 120, 120] |
 | rintangan wall beraksi (3D / overlay) | ✅ | t=5.35 |
 | rintangan hammer beraksi (3D / overlay) | ✅ | t=14.14 |

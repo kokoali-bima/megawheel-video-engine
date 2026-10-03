@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": false,
-      "value": "20.8 MB",
+      "value": "20.5 MB",
       "hard": false
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "14 file",
+      "value": "13 file",
       "hard": true
     },
     {

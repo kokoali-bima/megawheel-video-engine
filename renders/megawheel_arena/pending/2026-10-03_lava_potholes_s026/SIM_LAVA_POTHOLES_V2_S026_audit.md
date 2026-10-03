@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_LAVA_POTHOLES_V2_S026
 
-- Tanggal: 2026-10-03 08:27 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 26 · Track: lava_potholes_52feb935
+- Tanggal: 2026-10-03 16:48 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 26 · Track: lava_potholes_52feb935
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,7 +27,7 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s) | ✅ | 46.77 s (manifest 46.77) |
-| Ukuran wajar (8-20 MB) | ✅ | 17.9 MB |
+| Ukuran wajar (8-20 MB) | ✅ | 17.5 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
