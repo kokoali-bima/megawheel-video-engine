@@ -1170,6 +1170,28 @@
    "cpu_container_seconds": 9.2,
    "wall_seconds": 14.9,
    "cost_usd": 0.0025
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_BUMPS_V2_S021",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 118.0,
+   "wall_seconds": 71.3,
+   "cost_usd": 0.0318
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d convert SIM_RACE25D_V3_S011",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 77.7,
+   "wall_seconds": 65.2,
+   "cost_usd": 0.0209
   }
  ]
 }
