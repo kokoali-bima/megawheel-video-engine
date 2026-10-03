@@ -1601,7 +1601,23 @@ def synth_whoosh():
     return band * np.sin(np.pi * t / 0.45) ** 2
 
 
+# auto series mix (user 2026-10-03, RESEARCH_W3: Potholes 872 / 1,280 views vs Bumps 133-796): half of CHALLENGE = potholes
+SERIES_WEIGHT = {"potholes": 3}
 COLD_OPEN_S = 1.5   # user 2026-10-03 (RESEARCH_W3): every Short opens on its own biggest moment + a question
+
+
+def kind_of(vk):
+    """'ZIPPY THE SPORTS CAR' -> 'Sports Car'."""
+    return VEHICLES[vk]["display"].split(" THE ")[1].title()
+
+
+def challenge_title(vk, obst, emoji, seed):
+    """Unique CHALLENGE title (RESEARCH_W3): character + challenge + question. vk = the car the video is about."""
+    n, k, o = VEHICLES[vk]["nick"], kind_of(vk), obst.title()
+    pats = [f"Can {n} the {k} Survive {o}? {emoji}",
+            f"{k} vs {o}! Can {n} Make It? {emoji}",
+            f"Will {n} the {k} Survive {o}? {emoji}"]
+    return pats[seed % len(pats)]
 
 
 def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S):
@@ -3545,7 +3561,7 @@ def main():
         for e in active:
             if e.get("engine_version") == ENGINE_VERSION and e["series"] in counts:
                 counts[e["series"]] += 1
-        series = min(SERIES_DEFS, key=lambda s: counts[s])
+        series = min(SERIES_DEFS, key=lambda s: counts[s] / SERIES_WEIGHT.get(s, 1))
     appearances = {}
     for e in active:
         for vk in e.get("vehicles", []):
@@ -3839,14 +3855,17 @@ def main():
     print(f"[preview] {prev_dir}", flush=True)
 
     any_replay = any(L["replay"] for L in LEVELS)
+    subj = next((L["vk"] for L in LEVELS if L["event"]["type"] != "win"), LEVELS[-1]["vk"])
+    emoji = SERIES_DEFS[SERIES]["yt_title"].split("?")[-1].strip()
+    yt_title = challenge_title(subj, SERIES_DEFS[SERIES]["obst"], emoji, args.seed)
     manifest = dict(
         video_id=name, status="ANALYZED" if analysis_ok else "ANALYSIS_FAILED", engine=f"sim-prototype {ENGINE_VERSION}",
         series=SERIES, seed=args.seed, fps=FPS, duration=round(total, 2),
         track_id=TRACK_ID, track_params=TRACK_PARAMS, theme=THEME, theme_id=THEME_ID, voice=VOICE,
         fingerprint=fingerprint, outcomes=entry["outcomes"],
         analysis=analysis, cta=CTA,
-        title_base=SERIES_DEFS[SERIES]["yt_title"],
-        title=f"{SERIES_DEFS[SERIES]['yt_title']} #Shorts",       # episodes.py approve adds "| Ep. N"
+        title_base=yt_title,
+        title=f"{yt_title} #Shorts",                              # episodes.py approve adds "| Ep. N"
         description=video_description(),
         tags=SERIES_DEFS[SERIES]["tags"] + [VEHICLES[vk]["display"].split(" THE ")[1].lower() for vk, _ in STORY],
         levels=[dict(vehicle=L["v"]["display"], speed=round(L["speed"], 2), outcome=L["event"]["type"],
@@ -3892,7 +3911,8 @@ def main():
         os.remove(p)
     fails = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] != "win"]
     wins_t = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] == "win"]
-    add_cold_open(out, (fails or wins_t or [3.0])[0], "WHO SURVIVES?")
+    subj0 = next((L["vk"] for L in LEVELS if L["event"]["type"] != "win"), LEVELS[-1]["vk"])
+    add_cold_open(out, (fails or wins_t or [3.0])[0], f"CAN {VEHICLES[subj0]['nick']} SURVIVE?")
     print(f"[render] {len(INDEX)} frames in {time.time() - t1:.1f}s -> {out} (+{COLD_OPEN_S}s cold open)", flush=True)
     print(json.dumps(manifest["levels"], indent=1))
 

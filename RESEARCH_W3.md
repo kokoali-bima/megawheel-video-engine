@@ -18,6 +18,12 @@
 YouTube Analytics (rinci per video, sumber trafik, retensi) baru tersedia sampai 30/9 (terlambat 1–3 hari).
 Catatan dari data awal: rata-rata ditonton > 100% (ditonton ulang/loop) pada video yang sudah ada datanya.
 
+### YouTube Studio (screenshot user, 28 hari s/d 1/10)
+- Penayangan 1,2 rb · **penayangan tak dilewati 554** · suka 16.
+- **Cara penonton berinteraksi: 46,1% tetap menonton, 53,9% melewati** → target ≥ 75–80% tetap menonton.
+  Hook/pembuka adalah masalah utama (bukan topik) → cold open 1,5 dtk (masuk produksi 2026-10-03).
+- Potholes Ep.5 577 + Ep.3 523 = 90,6% semua penayangan; CTR thumbnail 10,3% (165 tayangan thumbnail).
+
 ## 2. Bacaan
 1. **Tiga video terakhir masih terlalu muda untuk dinilai.** Shorts diuji ke audiens kecil dulu; panduan umum menilai
    setelah 24–48 jam. Cek lagi di laporan Telegram 4–5/10.

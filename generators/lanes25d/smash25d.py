@@ -1867,7 +1867,14 @@ def main():
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}+{c['out_kind']}") for c in cars]
     track_id = "smash25d_" + hashlib.md5(json.dumps(params, sort_keys=True).encode()).hexdigest()[:8] + "@" + se.THEME_ID
-    title = TITLES[opt.seed % len(TITLES)]
+    heavy = max(cars, key=lambda c: se.VEHICLES[c["key"]]["mass"])          # unique title (RESEARCH_W3)
+    light = min(cars, key=lambda c: se.VEHICLES[c["key"]]["mass"])
+    kinds = [se.kind_of(c["key"]) for c in cars]
+    title = [f"Can Tiny {nick(light['key'])} Beat a {se.kind_of(heavy['key'])}? 💥",
+             f"{kinds[0]} vs {kinds[1]} vs {kinds[2]} vs {kinds[3]}! Who Survives? 💥",
+             f"{names[0]}, {names[1]}, {names[2]} or {names[3]}? Last Car Standing! 💥"][opt.seed % 3]
+    if len(title) > 80:
+        title = f"Can Tiny {nick(light['key'])} Beat a {se.kind_of(heavy['key'])}? 💥"
     folder_rel = os.path.relpath(out_dir, se.BASE)
     manifest = dict(
         video_id=name, status="RENDERED_PENDING_APPROVAL" if passed else "CHECKS_FAILED",
