@@ -440,7 +440,8 @@ func _stands() -> void:
 	var z0 = ARENA_HZ * 2 + (3.5 if CAM_MODE == "classic" else 7.0)
 	var rows = 8 if CAM_MODE == "classic" else 7
 	for row in range(rows):
-		_box(Vector3(60, rise, 1.7), Vector3(0, rise / 2.0 + row * rise - 0.6, z0 + row * 1.7), stand)
+		var st = _box(Vector3(60, rise, 1.7), Vector3(0, rise / 2.0 + row * rise - 0.6, z0 + row * 1.7), stand)
+		st.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF   # no stand shadow across the arena
 	var mm = MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = true
@@ -460,6 +461,7 @@ func _stands() -> void:
 	var cm = StandardMaterial3D.new()
 	cm.vertex_color_use_as_albedo = true
 	mmi.material_override = cm
+	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(mmi)
 	var dock = _mat(Color(0.55, 0.42, 0.3))                # wooden dock in front of the stands
 	_box(Vector3(60, 0.4, 2.2), Vector3(0, -0.9, z0 - 1.4), dock)
@@ -1373,6 +1375,8 @@ func _process(_d: float) -> void:
 	title_lbl.visible = true
 	sub_lbl.modulate.a = clampf((3.2 - vt()) / 0.4, 0.0, 1.0)
 	cta.visible = winner != null and vt() > win_t + 3.0
+	if winner != null and vt() > win_t + 8.0:              # banner 3 s + end card 5 s, then stop (video 30-40 s)
+		get_tree().quit()
 
 
 func _ls(size: int, col := Color(1, 0.86, 0.12)) -> LabelSettings:
