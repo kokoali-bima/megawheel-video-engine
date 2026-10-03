@@ -87,9 +87,9 @@ def _ledger():
 
 
 @app.local_entrypoint()
-def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, count: int = 0):
+def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, count: int = 0, project: str = ""):
     frames = json.load(open(os.path.join(dir, "frames.json")))["frames"]
-    parts, s0 = [], 0                                            # one part per level
+    parts, s0 = [], 0                                  # one part per level (CHALLENGE) / per mode (RACE)
     for i in range(1, len(frames) + 1):
         if i == len(frames) or frames[i][0] != frames[s0][0]:
             parts.append((s0, i - s0))
@@ -104,7 +104,9 @@ def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, cou
     print(f"[godot3d] bulan {month}: ${spent:.2f} / ${BUDGET_USD:.2f}; estimasi terburuk ${worst:.2f}; parts {parts}")
     if spent + worst > BUDGET_USD:
         raise SystemExit("[godot3d] STOP: budget bulanan akan terlewati. Tidak dijalankan.")
-    proj = _tar([(os.path.join(HERE, "project", f), f"project/{f}") for f in ("project.godot", "main.tscn", "challenge3d.gd")])
+    pdir = project or os.path.join(HERE, "project")             # CHALLENGE (default) or e.g. lab/godot3d_race/project
+    proj = _tar([(os.path.join(pdir, f), f"project/{f}") for f in sorted(os.listdir(pdir))
+                 if f.endswith((".godot", ".tscn", ".gd"))])
     data = _tar([(os.path.join(dir, f), f"data/{f}") for f in ("scene.json", "frames.json")]
                 + [(os.path.join(dir, "sprites"), "data/sprites")])
     t0 = time.time()

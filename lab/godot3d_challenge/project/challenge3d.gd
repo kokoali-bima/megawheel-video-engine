@@ -615,6 +615,10 @@ void fragment() {
 
 func _body_mesh(vk: String) -> void:
 	var c = cast[vk]
+	for ch in car.get_children():
+		if ch is SpotLight3D or (ch is MeshInstance3D and ch != body and ch.mesh is SphereMesh):
+			ch.queue_free()
+	_headlights(car, float(c["body"][0]) / 2.0, 0.0, -float(c["body"][0]) / 2.0)
 	var pm = PlaneMesh.new()
 	pm.size = Vector2(float(c["w"]) / 60.0, float(c["h"]) / 60.0)
 	pm.orientation = PlaneMesh.FACE_Z
@@ -1041,3 +1045,33 @@ func _set_hit(x: float, y: float, f) -> void:
 	var wm = float(c["w"]) / 60.0
 	var hm = float(c["h"]) / 60.0
 	hit_uv = Vector2(clampf(loc.x / wm + 0.5, 0.15, 0.85), clampf(0.5 - loc.y / hm, 0.2, 0.8))
+
+
+func _headlights(parent: Node3D, front_x: float, y: float, back_x: float) -> void:
+	## night theme: real headlights (a spot that lights the road ahead) + glowing lamp + red tail light
+	if not scene["night"]:
+		return
+	var sp = SpotLight3D.new()
+	sp.position = Vector3(front_x, y, 0.3)
+	sp.rotation_degrees = Vector3(0, -90, 0)               # points along +x (the driving direction)
+	sp.rotate_object_local(Vector3.RIGHT, deg_to_rad(-8))
+	sp.light_color = Color(1, 0.95, 0.75)
+	sp.light_energy = 6.0
+	sp.spot_range = 22.0
+	sp.spot_angle = 24.0
+	parent.add_child(sp)
+	for pr in [[front_x, Color(1, 0.97, 0.8), 0.22], [back_x, Color(1, 0.1, 0.1), 0.14]]:
+		var lamp = MeshInstance3D.new()
+		var sm = SphereMesh.new()
+		sm.radius = pr[2]
+		sm.height = pr[2] * 2
+		lamp.mesh = sm
+		var lm = StandardMaterial3D.new()
+		lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		lm.albedo_color = pr[1]
+		lm.emission_enabled = true
+		lm.emission = pr[1]
+		lm.emission_energy_multiplier = 4.0
+		lamp.material_override = lm
+		lamp.position = Vector3(pr[0], y, 0.12)
+		parent.add_child(lamp)
