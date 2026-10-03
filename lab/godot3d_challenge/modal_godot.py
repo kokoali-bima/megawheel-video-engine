@@ -30,6 +30,7 @@ app = modal.App("megawheel-godot3d")
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("xvfb", "xauth", "wget", "unzip", "ffmpeg", "libgl1", "libgl1-mesa-dri", "libegl1", "libgles2",
+                 "libvulkan1", "mesa-vulkan-drivers",
                  "libxcursor1", "libxinerama1", "libxrandr2", "libxi6", "libfontconfig1", "libxkbcommon0",
                  "libasound2", "libpulse0", "libudev1", "libdbus-1-3")
     .run_commands(f"wget -q {GODOT_URL} -O /tmp/g.zip && unzip -q /tmp/g.zip -d /opt/godot && "
@@ -45,23 +46,37 @@ def _tar(paths):
     return buf.getvalue()
 
 
-@app.function(image=image, cpu=CPUS, memory=MEM_GB * 1024, timeout=1800)
-def render_part(project_tgz: bytes, data_tgz: bytes, start: int, n: int) -> dict:
+GPU_PRICE = {"T4": 0.000164, "L4": 0.000222}                # $/s, plus the container's CPU / memory
+
+
+def _render(project_tgz, data_tgz, start, n, gpu):
     t0 = time.time()
     for blob, dst in ((project_tgz, "/tmp/w"), (data_tgz, "/tmp/w")):
         with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as tf:
             tf.extractall(dst)
     env = dict(os.environ, GODOT_SILENCE_ROOT_WARNING="1", LP_NUM_THREADS=str(CPUS))
-    cmd = ["xvfb-run", "-a", "-s", "-screen 0 1080x1920x24", "/opt/godot/godot", "--path", "/tmp/w/project",
-           "--rendering-driver", "opengl3", "--write-movie", "/tmp/w/part.avi", "--fixed-fps", "30",
-           "--quit-after", str(n), "--", "/tmp/w/data", str(start)]
+    drv = ["--rendering-driver", "vulkan", "--rendering-method", "mobile"] if gpu else ["--rendering-driver", "opengl3"]
+    cmd = ["xvfb-run", "-a", "-s", "-screen 0 1080x1920x24", "/opt/godot/godot", "--path", "/tmp/w/project"] + drv + [
+           "--write-movie", "/tmp/w/part.avi", "--fixed-fps", "30", "--quit-after", str(n), "--", "/tmp/w/data", str(start)]
     r = subprocess.run(cmd, capture_output=True, text=True, env=env)
-    errs = [ln for ln in (r.stdout + r.stderr).splitlines() if "SCRIPT ERROR" in ln][:5]
+    log = r.stdout + r.stderr
+    errs = [ln for ln in log.splitlines() if "SCRIPT ERROR" in ln][:5]
+    dev = next((ln.strip() for ln in log.splitlines() if "Vulkan" in ln and ("NVIDIA" in ln or "llvmpipe" in ln)), "")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", "/tmp/w/part.avi", "-frames:v", str(n), "-c:v", "libx264",
                     "-pix_fmt", "yuv420p", "-crf", "18", "/tmp/w/part.mp4"], check=True)
     with open("/tmp/w/part.mp4", "rb") as fh:
         mp4 = fh.read()
-    return dict(mp4=mp4, secs=time.time() - t0, errors=errs, start=start, n=n)
+    return dict(mp4=mp4, secs=time.time() - t0, errors=errs, start=start, n=n, device=dev)
+
+
+@app.function(image=image, cpu=CPUS, memory=MEM_GB * 1024, timeout=1800)
+def render_part(project_tgz: bytes, data_tgz: bytes, start: int, n: int) -> dict:
+    return _render(project_tgz, data_tgz, start, n, None)
+
+
+@app.function(image=image, gpu="T4", cpu=4, memory=MEM_GB * 1024, timeout=1800)
+def render_part_gpu(project_tgz: bytes, data_tgz: bytes, start: int, n: int) -> dict:
+    return _render(project_tgz, data_tgz, start, n, "T4")
 
 
 def _ledger():
@@ -72,17 +87,19 @@ def _ledger():
 
 
 @app.local_entrypoint()
-def main(dir: str, out: str, note: str = ""):
+def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, count: int = 0):
     frames = json.load(open(os.path.join(dir, "frames.json")))["frames"]
     parts, s0 = [], 0                                            # one part per level
     for i in range(1, len(frames) + 1):
         if i == len(frames) or frames[i][0] != frames[s0][0]:
             parts.append((s0, i - s0))
             s0 = i
+    if count > 0:                                                # test: a few frames only
+        parts = [(max(0, start), count)]
     led = _ledger()
     month = dt.date.today().strftime("%Y-%m")
     spent = sum(r["cost_usd"] for r in led["runs"] if r["date"].startswith(month))
-    per_sec = CPUS * CPU_PRICE + MEM_GB * MEM_PRICE
+    per_sec = (GPU_PRICE[gpu] + 4 * CPU_PRICE if gpu else CPUS * CPU_PRICE) + MEM_GB * MEM_PRICE
     worst = len(parts) * 900 * per_sec * OVERHEAD
     print(f"[godot3d] bulan {month}: ${spent:.2f} / ${BUDGET_USD:.2f}; estimasi terburuk ${worst:.2f}; parts {parts}")
     if spent + worst > BUDGET_USD:
@@ -91,7 +108,9 @@ def main(dir: str, out: str, note: str = ""):
     data = _tar([(os.path.join(dir, f), f"data/{f}") for f in ("scene.json", "frames.json")]
                 + [(os.path.join(dir, "sprites"), "data/sprites")])
     t0 = time.time()
-    res = list(render_part.starmap([(proj, data, a, n) for a, n in parts]))
+    fn = render_part_gpu if gpu else render_part
+    res = list(fn.starmap([(proj, data, a, n) for a, n in parts]))
+    print("[godot3d] devices:", sorted({r.get("device", "") for r in res}))
     lst = os.path.join(dir, "_parts.txt")
     with open(lst, "w") as fh:
         for k, r in enumerate(res):
@@ -109,7 +128,7 @@ def main(dir: str, out: str, note: str = ""):
     secs = sum(r["secs"] for r in res)
     cost = secs * per_sec * OVERHEAD
     led["runs"].append(dict(date=dt.date.today().isoformat(), note=note or f"godot3d {os.path.basename(dir)}",
-                            cpu=CPUS, engine="godot-4.4.1-llvmpipe", parts=len(parts), cpu_container_seconds=round(secs, 1),
+                            cpu=CPUS, gpu=gpu or None, engine="godot-4.4.1-" + ("vulkan-" + gpu if gpu else "llvmpipe"), parts=len(parts), cpu_container_seconds=round(secs, 1),
                             wall_seconds=round(time.time() - t0, 1), cost_usd=round(cost, 4)))
     with open(LEDGER, "w") as fh:
         json.dump(led, fh, indent=1)

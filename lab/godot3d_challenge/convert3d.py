@@ -48,6 +48,8 @@ def audit3d(d, mp4, man_prod, preview_man):
     rep = json.load(open(f"{mp4.replace('.mp4', '')}_g.mp4.render.json")) if os.path.exists(
         f"{mp4.replace('.mp4', '')}_g.mp4.render.json") else {"errors": ["no render report"]}
     # sim replay identical to the reviewed 2.5D render
+    chk("replay tokoh sama dengan versi review", [lv["vehicle"] for lv in preview_man["levels"]]
+        == [lv["vehicle"] for lv in man_prod["levels"]], [lv["vehicle"] for lv in preview_man["levels"]])
     for k in ("outcomes", "theme_id", "voice", "track_id"):
         chk(f"replay {k} sama dengan versi review", preview_man.get(k) == man_prod.get(k),
             f"{preview_man.get(k)} vs {man_prod.get(k)}")
@@ -103,7 +105,7 @@ def main():
     preview_man = json.load(open(f"{BASE}/work/physics_2d/previews/{pname}/{pname}.json"))
     g = f"{d}/{vid}_g.mp4"
     sh([f"{BASE}/venv-modal/bin/modal", "run", f"{HERE}/modal_godot.py", "--dir", d, "--out", g, "--note",
-        f"godot3d convert {vid}"])
+        f"godot3d convert {vid}", "--gpu", "T4"])                # Modal GPU (Vulkan on a T4): faster + cheaper
     out = f"{d}/{vid}.mp4"
     sh([f"{BASE}/venv/bin/python", f"{HERE}/compose.py", "--dir", d, "--video", g, "--out", out])
     items = audit3d(d, out, man, preview_man)

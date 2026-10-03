@@ -79,6 +79,10 @@ func _ready() -> void:
 	cam.make_current()
 
 
+func is_vulkan() -> bool:
+	return RenderingServer.get_current_rendering_driver_name() == "vulkan"
+
+
 func _img(p: String) -> ImageTexture:
 	return ImageTexture.create_from_image(Image.load_from_file(p))
 
@@ -201,7 +205,8 @@ func _track() -> void:
 	var sh = Shader.new()
 	sh.code = """
 shader_type spatial;
-render_mode cull_disabled;
+render_mode cull_disabled, unshaded;   // a cross-section like the 2D art: same colours on GPU (Vulkan) and CPU
+uniform bool lin = false;              // Vulkan: shader colours are linear -> convert the sRGB palette
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 void fragment() {
 	vec3 w = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -212,12 +217,14 @@ void fragment() {
 	vec2 f = fract(w.xy * 1.6) - 0.5;
 	float r = 0.12 + 0.18 * h(cell + 3.0);
 	float pebble = step(0.82, h(cell)) * step(length(f), r);          // round pebbles like the aired art
-	ALBEDO = mix(c, c * 0.72, pebble);
+	vec3 o = mix(c, c * 0.72, pebble);
+	ALBEDO = lin ? pow(o, vec3(2.2)) : o;
 	ROUGHNESS = 0.95;
 }
 """
 	var fm = ShaderMaterial.new()
 	fm.shader = sh
+	fm.set_shader_parameter("lin", is_vulkan())
 	for zz in [ROAD_HZ, -ROAD_HZ]:
 		var st = SurfaceTool.new()
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -283,6 +290,7 @@ func _water_mat(alpha_edge: bool) -> ShaderMaterial:
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled;
 uniform bool edge = true;
+uniform bool lin = false;
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
 	return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
@@ -300,7 +308,8 @@ void fragment() {
 	vec3 deep = vec3(0.05, 0.25, 0.42);
 	vec3 sky = vec3(0.45, 0.65, 0.82);
 	float fres = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), 3.0);
-	ALBEDO = mix(deep, sky, 0.12 + 0.3 * fres + 0.12 * rip);
+	vec3 o = mix(deep, sky, 0.12 + 0.3 * fres + 0.12 * rip);
+	ALBEDO = lin ? pow(o, vec3(2.2)) : o;
 	NORMAL = normalize(NORMAL + vec3((rip - 0.75) * 0.25, 0.0, (rip - 0.75) * 0.15));
 	ROUGHNESS = 0.06;
 	METALLIC = 0.15;
@@ -311,6 +320,7 @@ void fragment() {
 	var m = ShaderMaterial.new()
 	m.shader = sh
 	m.set_shader_parameter("edge", alpha_edge)
+	m.set_shader_parameter("lin", is_vulkan())
 	return m
 
 

@@ -69,6 +69,23 @@ def main():
         idx = next(i for i, e in enumerate(full["videos"]) if e["video_id"] == a.like)
         snap = dict(full, videos=full["videos"][:idx])
         registry.load = lambda: snap
+        ent = full["videos"][idx]                                # and force exactly what that render used
+        man = json.load(open(f"/root/video-engine/{ent['folder']}/{a.like}.json"))
+        th = man["theme"]
+        orig_theme, orig_story = se.make_theme, se.make_story
+        se.make_theme = lambda seed, force=None, used=None: orig_theme(seed, dict(th), used=[])
+        voice = man["voice"]
+        se.cb_pick = lambda *x, **k: voice if voice.startswith("chatterbox") else None
+        if not voice.startswith("chatterbox"):
+            se.VOICES = [voice]
+
+        def story(series, seed, appearances=None, wins=None):
+            orig_story(series, seed, appearances, wins)
+            for li, vk in enumerate(ent["vehicles"]):
+                order = se.ROLE_ORDER[li]
+                se.ROLE_ORDER[li] = [vk] + [o for o in order if o != vk]
+            se.STORY = [(order[0], want) for order, (_, want) in zip(se.ROLE_ORDER, se.ROSTER)]
+        se.make_story = story
     sys.argv = ["sim_engine.py", "--seed", str(a.seed), "--series", a.series, "--preview-only", "--name", name]
     se.main()                                                    # the real engine: sim + timeline + audio + checks
     L0 = se.LEVELS
