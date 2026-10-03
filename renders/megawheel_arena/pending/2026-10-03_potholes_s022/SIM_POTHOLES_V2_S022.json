@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_POTHOLES_V2_S022",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
+  "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 22,
   "fps": 30,
@@ -208,10 +208,9 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)",
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Edge-TTS en-US-EmmaMultilingualNeural",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s022/SIM_POTHOLES_V2_S022.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s022/preview",
   "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_potholes_s022/SIM_POTHOLES_V2_S022_audit.md",
-  "cold_open_s": 1.5,
-  "render3d": true
+  "cold_open_s": 1.5
 }

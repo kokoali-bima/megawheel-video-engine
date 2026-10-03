@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_RACE25D_V3_S015",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "race25d v3 + godot3d (lab/godot3d_race)",
+  "engine": "race25d v3",
   "series": "race25d",
   "seed": 15,
   "fps": 30,
@@ -92,8 +92,7 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/SIM_RACE25D_V3_S015.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/preview",
-  "render3d": true
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_race25d_v3_s015/preview"
 }

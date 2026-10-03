@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_BUMPS_V2_S021",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
+  "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 21,
   "fps": 30,
@@ -219,10 +219,9 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)",
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_bumps_s021/SIM_BUMPS_V2_S021.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_bumps_s021/preview",
   "cold_open_s": 1.5,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_bumps_s021/SIM_BUMPS_V2_S021_audit.md",
-  "render3d": true
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_bumps_s021/SIM_BUMPS_V2_S021_audit.md"
 }

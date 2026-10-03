@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_SMASH25D_V5_S009",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "smash25d v5 + godot3d (lab/godot3d_smash/project_d)",
+  "engine": "smash25d v5",
   "series": "smash25d",
   "seed": 9,
   "fps": 30,
@@ -100,8 +100,7 @@
     "Kaboom! Right on Buster!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal CPU)",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/SIM_SMASH25D_V5_S009.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/preview",
-  "render3d": true
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-03_smash25d_v5_s009/preview"
 }
