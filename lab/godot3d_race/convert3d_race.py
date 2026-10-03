@@ -67,7 +67,7 @@ def audit3d(d, mp4, man_prod):
     chk("durasi = versi review (±0.4 s)", abs(float(p["format"]["duration"]) - man_prod["duration"]) <= 0.4,
         f"{float(p['format']['duration']):.2f} vs {man_prod['duration']}")
     dur = float(p["format"]["duration"])
-    lum = [luminance(mp4, dur * (k + 0.5) / 12) for k in range(12)]
+    lum = [luminance(mp4, 2.0 + (dur - 2.5) * k / 11) for k in range(12)]   # skip the cold-open white flash (~1.5 s)
     chk("tidak ada frame hitam / putih (12 sampel)", all(25 < v < 235 for v in lum), [round(v) for v in lum])
     for h in scene["hazards"]:
         if h["trig"] is not None:
