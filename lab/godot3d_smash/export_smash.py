@@ -145,7 +145,7 @@ def main():
     assert len(cams) == len(frames), (len(cams), len(frames))
     se.write_wav(os.path.join(a.out, "mix.wav"), got["audio"])
     print(f"[s3d] {len(frames)} frames, arena {S.ARENA}", flush=True)
-    json.dump(dict(t_star=got["out_of"](got["star_t"]) if got["star_t"] is not None else 5.0),
+    json.dump(dict(t_star=got["out_of"](got["star_t"] if got["star_t"] is not None else got["winner"]["finish"])),
               open(os.path.join(a.out, "_tmp.json"), "w"))
     got["cams_ok"] = True
     export_rest(a, got, name)
@@ -194,7 +194,7 @@ def export_rest(a, got, name):
                              "mood", "sink", "hp", "out", "out_kind"], frames=rows),
               open(os.path.join(a.out, "frames.json"), "w"))
     t_star = json.load(open(os.path.join(a.out, "_tmp.json")))["t_star"]
-    json.dump(dict(cold_t=t_star, cold_text="WHO SURVIVES?"), open(os.path.join(a.out, "meta.json"), "w"))
+    json.dump(dict(cold_t=t_star, cold_text="WHO SURVIVES?", title=f"{S.ARENA} smash"), open(os.path.join(a.out, "meta.json"), "w"))
     print(f"[s3d] export done -> {a.out}", flush=True)
 
 

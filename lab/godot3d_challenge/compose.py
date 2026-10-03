@@ -22,4 +22,4 @@ subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", a.video, "-i", f"{a.
 meta = json.load(open(f"{a.dir}/meta.json"))
 se.detect_font()
 se.add_cold_open(a.out, meta["cold_t"], meta["cold_text"])                  # same rule as every aired Short
-print(f"[compose] {a.out} | title: {meta['title']}")
+print(f"[compose] {a.out} | title: {meta.get('title', '')}")
