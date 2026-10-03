@@ -1137,6 +1137,39 @@
    "cpu_container_seconds": 127.3,
    "wall_seconds": 67.1,
    "cost_usd": 0.0343
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_LAVA_POTHOLES_V2_S025",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 120.9,
+   "wall_seconds": 60.6,
+   "cost_usd": 0.0325
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_LAVA_POTHOLES_V2_S026",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 106.3,
+   "wall_seconds": 48.2,
+   "cost_usd": 0.0286
+  },
+  {
+   "date": "2026-10-03",
+   "note": "race3d gpu test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 9.2,
+   "wall_seconds": 14.9,
+   "cost_usd": 0.0025
   }
  ]
 }

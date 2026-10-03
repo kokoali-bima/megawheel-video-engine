@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "12.0 MB",
+      "value": "17.9 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-1.3 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-14.7 dB",
+      "value": "-13.8 dB",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "69% piksel panel @ 46.0s",
+      "value": "67% piksel panel @ 46.0s",
       "hard": true
     },
     {
@@ -247,7 +247,7 @@
       "id": "streak",
       "desc": "Maks 3 video berturut-turut dari seri yang sama",
       "ok": true,
-      "value": "1 video lava_potholes berturut-turut sebelum ini",
+      "value": "0 video lava_potholes berturut-turut sebelum ini",
       "hard": false
     }
   ]
