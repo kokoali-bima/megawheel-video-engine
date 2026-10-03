@@ -1,21 +1,61 @@
 {
- "generated": "2026-10-02T17:06:43.925736+00:00",
- "start": "2026-09-04",
- "end": "2026-10-01",
+ "generated": "2026-10-03T06:30:06.660956+00:00",
+ "start": "2026-09-05",
+ "end": "2026-10-02",
  "days": 28,
  "channel": {
-  "views": 31,
-  "minutes": 7,
-  "subs": 2
+  "views": 54,
+  "minutes": 16,
+  "subs": 3
  },
- "series": {},
- "videos": [],
+ "series": {
+  "CHALLENGE": {
+   "videos": 3,
+   "views": 23,
+   "avg_view_pct": 109.4
+  }
+ },
+ "videos": [
+  {
+   "id": "dVBtbf8Bi_Q",
+   "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
+   "series": "CHALLENGE",
+   "views": 11,
+   "minutes": 4,
+   "avg_view_s": 40,
+   "avg_view_pct": 81.27,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "yf0y4R83hto",
+   "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
+   "series": "CHALLENGE",
+   "views": 9,
+   "minutes": 2,
+   "avg_view_s": 54,
+   "avg_view_pct": 116.8,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "nXlV3f6Wux8",
+   "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 6 #Shorts",
+   "series": "CHALLENGE",
+   "views": 3,
+   "minutes": 2,
+   "avg_view_s": 62,
+   "avg_view_pct": 130.09,
+   "likes": 0,
+   "subs": 0
+  }
+ ],
  "upcoming": [
-  "Sat 03/10 02:00 WIB - Ep 9 - SCHEDULED",
-  "Sat 03/10 06:00 WIB - Ep 22 - SCHEDULED",
   "Sat 03/10 22:00 WIB - Ep 7 - SCHEDULED",
   "Sun 04/10 02:00 WIB - Ep 10 - SCHEDULED",
-  "Sun 04/10 04:00 WIB - Ep 1501 - QUEUED",
-  "Sun 04/10 06:00 WIB - Ep 23 - QUEUED"
+  "Sun 04/10 04:00 WIB - Ep 1501 - SCHEDULED",
+  "Sun 04/10 06:00 WIB - Ep 23 - SCHEDULED",
+  "Sun 04/10 22:00 WIB - Ep 8 - SCHEDULED",
+  "Mon 05/10 00:00 WIB - Ep 1001 - SCHEDULED"
  ]
 }

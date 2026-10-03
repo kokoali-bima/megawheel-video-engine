@@ -4,19 +4,68 @@ Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
 ## 2026-10-03
+**🔧 Lain-lain**
+- `abfe6f7` CONFIG_BEST: no-explosion rule is for CHALLENGE crashes; SMASH explosions stay (user)
+- `f52fa4c` Shorts: unique hook titles (character + challenge + question), potholes = half of CHALLENGE
+- `115d5f5` Shorts: 1.5 s cold open (own biggest moment + question) before the normal start
+- `526bd56` RESEARCH_W3: week-1 Shorts data, 2.5D first / 3D optional, cold-open + potholes plan
+- `d4dd29c` Shorts: no background music (narrator only), theme song faint after the win; lab 3d v6 fighter intros
+- `13387d3` SCALE_STANDARD.md + Godot scale report; 3D arena 20x24 m at 50 px/m
+**🕳️ CHALLENGE (sim_engine)**
+- `758980a` CHALLENGE: shift manifest times by the cold open; audit duration bound 58 -> 59.5 s
+- `f406421` CHALLENGE: new series lava_potholes (potholes track, every pit full of lava)
+**📤 Upload / antrean / Drive**
+- `adadaa9` publish: daily run 2026-10-03 [cron daily_publish.sh]
+- `f82dce5` episodes.py swap <EP> <NEW_VIDEO_ID>: replace a queued, not-uploaded episode with a newer render
 **🧪 Lab (eksperimen)**
+- `393a336` lab: 3D CHALLENGE sample driven by the aired sim_engine; crash damage without explosions
+- `cc1108f` lab 3d v6: tyre squeal (own synth) on wheelspin at GO and when a car turns around to attack
+- `c4e73ca` lab 3d smash v5: aired end card + replay overlay, commentators, crowd, sonic logo, smoother explosions
+- `ce44122` lab 3d v4: midday sun from the camera side (stand shadows fall behind the stands), contact shadows under cars
+- `be29dc4` lab 3d v4: stands cast no shadow, stop 8 s after the winner (end card 5 s)
+- `d096aa5` lab 3d smash v4: smash25d camera geometry + smash25d win logic
+- `2301885` lab 3d: no double KO from a late finishing hit, replay concat setsar, smaller scorch marks
+- `48f957a` lab 3d smash v2: bigger/deeper arena, steeper camera, reclined cards, 30-40 s pacing
+- `891d5d7` lab 3d smash v2: water + shark, progressive damage, chaos themes, Sonniss SFX, replay
+- `ac64206` lab 3d: white rounded end card
+- `d947d78` lab 3d: low friction (fast cars), balanced damage, chaos later
+- `e0c080f` lab 3d: ram AI (charge / back off / charge), no pushing stalemate; Kraggor 70 dmg
+- `84c1720` lab 3d: collision box from wheel bottom to roof (cars floated, drive never engaged)
+- `d0118b0` lab 3d: cars never sleep (drive force was ignored)
+- `d8c5884` lab 3d: debug position print
+- `97d359c` lab 3d: framing like smash25d (arena lower in frame), darker floor, no stands banner
+- `4fd9b09` lab 3d: darker floor, banner fixed, camera params, cheaper lights/shadows; mix NaN guard
+- `5fb211c` lab plan B: SMASH ARENA in real 3D (paper cast, lit lava arena, rigid-body battle, missiles, Kraggor foot, fracture, HUD)
+- `9632ecd` lab fx: soft round particles, gentler local lights, subtle shockwave, no FX over end card; runner reuses capture
+- `84a3a4f` lab fx: bigger lava ring-out burst + SFX
 - `64c9f38` lab: method A - Godot FX layer over cairo SMASH frames (capture cues without touching production, explosions, fracture, shockwave)
 - `696048f` lab: move Godot prototype out of generators/ into lab/ (experiments separated from production)
 - `aab4abd` godot: speed-controller drive (reliable pacing), challenge crash threshold for pit landings
 - `a271f63` godot samples v2: single short slow-mo, close/auto-fit camera, CCD, staggered spawns, reliable hammer, deferred fracture, arena stands; godot_mix.py SFX
 - `a9ffd8a` godot: untyped locals (fix type-inference parse errors)
 - `c290925` godot: showcase samples challenge/race/smash (fracture, explosions, slow-mo, real collisions, meteors)
+**💥 SMASH (smash25d)**
+- `a886d64` smash25d v5: sea arena + shark, POW + hit-stop, parts fly off, smoke/fire by HP
 **📚 Dokumen**
+- `d891009` docs: CONFIG_BEST (approved settings, single source) + auto CHANGELOG from git (daily via analytics cron)
 - `5c66ee0` docs: GODOT_PLAYBOOK (techniques, references, production rules, roadmap) + SFX_PLAN (pro SFX bank research)
 **📊 Analytics**
 - `cd00dae` analytics: Telegram text + JSON outputs, daily cron script, agent guide (no credentials in outputs)
+<details><summary>otomatis VM (6)</summary>
+
+- `e9f4045` records before analytics
+- `41bc962` records: batch A+B renders
+- `f9471e9` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `ec8d817` records: batch renders
+- `9c98d12` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `49b12e8` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+
+</details>
 
 ## 2026-10-02
+**🧪 Lab (eksperimen)**
+- `cafc266` lab 3d run.sh sheet times
+- `dd1436f` godot_race: prototype (cairo cast sprites + Godot rigid-body cars, sunset light/shadows, parallax, dust, hook)
 **📊 Analytics**
 - `b5ecea4` analytics: first report
 - `8c37a0b` analytics: yt_analytics.py (own read-only token, weekly report per series/video)
@@ -27,8 +76,6 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `212c565` docs: PRODUCTION_STANDARD (research: retention, environment, transitions, 5-layer sound, gap analysis); S01E02 outline proposal
 - `0a0b069` error log: stale-code render guard
 - `df53f5d` docs: IP protection plan for characters; error log hung modal process
-**🧪 Lab (eksperimen)**
-- `dd1436f` godot_race: prototype (cairo cast sprites + Godot rigid-body cars, sunset light/shadows, parallax, dust, hook)
 **🎵 Musik / lagu tema**
 - `d1e9bf7` music: sonic logo jingle (Mega, Mega, MegaWheel - 3.8 s)
 - `561f668` music: intro remix3 (band x1.7, vocals x0.55, wider stereo) per user
@@ -53,13 +100,13 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `0a4eabb` story: glide settles by mid-shot; scene 10 drives the hill (no roll); foot on Zippy's nose; staging fixes 2/12/14
 - `71e73c5` story: one truck tune in scene 2
 - `20c675a` story: v7 review shot-list fixes (transition sounds per edit.json, poster, flashback, foot, scenes 12/14)
-- `b2b11d9` story: user review v7 â€” signs over trees, hill-aware rolling camera (no rewind), low-shot framing, slower pacing, truck tune instead of ding, no shock hits, cinematic whoosh/memory swell, foot on Zippy's front half, staging scenes 12/14
+- `b2b11d9` story: user review v7 — signs over trees, hill-aware rolling camera (no rewind), low-shot framing, slower pacing, truck tune instead of ding, no shock hits, cinematic whoosh/memory swell, foot on Zippy's front half, staging scenes 12/14
 - `22023a7` story: note sits under a caption when both show
 - `9782d3d` story: note below letterbox, Kraggor feet on the road edge, wink lid on the eye
 - `34b4af5` story: scene 2 Buster face clear
 - `f0e284d` story: roll scrolls the world per shot (cars keep place, wheels spin) instead of moving cars; staging fixes
 - `bdc05f1` story: fix audit findings (echelon staging so faces stay visible, framing, #13, context)
-- `965dec5` story: user review v6 â€” camera glide, whole-vehicle framing, notes, mud, reverse, roll, jingle, softer hits, Kraggor on ground + wink, cast name cards, ident, slower transitions; audit_story.py; song remix mode
+- `965dec5` story: user review v6 — camera glide, whole-vehicle framing, notes, mud, reverse, roll, jingle, softer hits, Kraggor on ground + wink, cast name cards, ident, slower transitions; audit_story.py; song remix mode
 - `a10a6e8` story: low-RAM transition assembly (pairwise xfade pieces + concat); modal_yue pins YuE v1 (Apache) not YuE2 (CC BY-NC); license table
 - `fd6c6e4` story: S01E01 draft v6 (transitions) + intro candidates (ACE v3, YuE) + ledger
 - `31f3dca` story: drama transitions (xfade per edit.json, whoosh), no per-scene black fades; modal_yue.py (YuE on L40S) + intro spec
@@ -92,8 +139,10 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `038611f` branding: no burned-in watermark (YouTube Studio branding), 'Produced by Infrasoft Media & Tech' credit in every description at upload
 - `7fbe5c1` branding: play tip exits between gear teeth
 - `9f56ea3` branding: Infrasoft logo generator (vector gear + play, Montserrat OFL)
-<details><summary>otomatis VM (15)</summary>
+<details><summary>otomatis VM (17)</summary>
 
+- `0cb0626` records before lab fx
+- `9e07d8e` records before lab fx
 - `af3e2c3` analytics: daily report 2026-10-02
 - `bfe572e` records before godot prototype
 - `7596780` queue: Story Ep. 1 approved (story 1001) -> Sun 2026-10-04 13:00 ET
