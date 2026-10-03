@@ -1,0 +1,22 @@
+; LAB: 3D CHALLENGE sample - the aired sim_engine drives everything, Godot re-draws the world in 3D + crash damage.
+config_version=5
+
+[application]
+config/name="MegaWheel Challenge 3D (lab)"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+
+[physics]
+common/physics_ticks_per_second=120
+3d/default_gravity=9.8
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=0
+lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=2

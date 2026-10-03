@@ -68,6 +68,7 @@
 | Godot | 4.4.1 ARM64 `/root/tools/godot`, `xvfb-run` + `gl_compatibility`, Movie Maker `--fixed-fps 30`, cek parse `--headless` dulu |
 | Aturan Godot | slow-mo ≤ 1×/video · zoom ≥ 1.0 · kamera per momen · CCD · `call_deferred` di callback · hindari `:=` dari Variant |
 | Metode A | frame cairo asli + lapisan FX Godot (`lab/godot_fx`), cue posisi dari hook tanpa ubah produksi |
+| 3D CHALLENGE (lab) | `lab/godot3d_challenge`: sim_engine menentukan semuanya (fisika, timeline, kamera 72 px/m × zoom, HUD, audio); Godot hanya menggambar ulang dunia 3D + kerusakan tanpa ledakan. Kamera: KEEP_WIDTH, fov 28°, tilt 7°, D = 1080/(2·tan14°·72·zoom)·cos7° (diverifikasi terhadap frame tayang) |
 | SFX | Sonniss GDC di `/root/lab/sfx/` (unduh pakai UA browser + referer); bank `sfx_bank.py` → `/root/lab/sfx/bank/` |
 | Metode A | ❌ ditolak user ("tidak kerasa bedanya") |
 | Metode B (3D) v4 | `lab/godot3d_smash`, default `cam=classic`: geometri kamera & arena 26×10 m **identik smash25d** (60 px/m depan, zoom 1,0–1,45, pan), platform baja di atas air + hiu, kerusakan bertahap + POW + hit-stop 3 frame, replay di mix3d; v3 `cam=topdown` 20×24 m sebagai alternatif |
@@ -92,3 +93,5 @@
 10. Cahaya 3D: matahari siang dari sisi kamera (Godot `sun.rotation_degrees = (-55, 140, 0)`), supaya bayangan jatuh
     menjauhi kamera. Jangan mematikan bayangan untuk menutupi arah cahaya yang salah (kecuali memang adegan sore).
     Mobil berbentuk kartu tetap diberi bayangan elips di bawahnya, seperti di cairo.
+11. Tabrakan/kerusakan: **berantakan boleh, ledakan jangan** (user 2026-10-03). Bola api, kilatan, dan asap tebal
+    menutupi kerusakan yang ditunggu penonton. Tunjukkan panel copot, kaca, baut, roda lepas, dan serpihan yang tetap tergeletak.
