@@ -1695,6 +1695,8 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", wav, "-c:v", "copy", "-c:a", "aac",
                     "-b:a", "192k", "-movflags", "+faststart", "-shortest", out], check=True)
     os.remove(silent)
+    se.add_cold_open(out, out_of(star["trig"]) if star is not None else out_of(winner["finish"] or 5.0),
+                     QUESTION_TEXT[0] or "WHO WINS?")
     probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type:format=duration", "-of",
                             "json", out], capture_output=True, text=True)
     pj = json.loads(probe.stdout or "{}")

@@ -1601,6 +1601,39 @@ def synth_whoosh():
     return band * np.sin(np.pi * t / 0.45) ** 2
 
 
+COLD_OPEN_S = 1.5   # user 2026-10-03 (RESEARCH_W3): every Short opens on its own biggest moment + a question
+
+
+def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S):
+    """Prepend `dur` s of the video's own biggest moment (picture + sound, around t_star) with a big question on top,
+    then a white flash into the normal start. Shorts are judged on the first 2 seconds (viewed vs swiped away)."""
+    words = text.upper().split()
+    lines = [" ".join(words)]
+    if len(lines[0]) > 16 and len(words) > 1:                # two lines, split near the middle
+        cut = min(range(1, len(words)), key=lambda k: abs(len(" ".join(words[:k])) - len(" ".join(words[k:]))))
+        lines = [" ".join(words[:cut]), " ".join(words[cut:])]
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
+    ctx = cairo.Context(surf)
+    for i, ln in enumerate(lines):
+        draw_text(ctx, ln, W / 2, 760 + i * 125, 112, fill=(1, 0.86, 0.12), max_w=1000)   # mid-screen, clear of the HUD
+    png, tmp = mp4 + ".cold.png", mp4 + ".cold.mp4"
+    surf.write_to_png(png)
+    t0 = max(0.0, t_star - dur * 0.55)
+    # the clip is a separate (seeked) input: reading one input twice would buffer the whole video in RAM
+    fc = (f"[0:v]setpts=PTS-STARTPTS[c0];[c0][1:v]overlay=0:0:shortest=1,"
+          f"fade=t=out:st={dur - 0.12:.3f}:d=0.12:color=white[cv];"
+          f"[0:a]asetpts=PTS-STARTPTS,afade=t=in:d=0.05,afade=t=out:st={dur - 0.15:.3f}:d=0.15[ca];"
+          f"[2:v]setpts=PTS-STARTPTS,fade=t=in:st=0:d=0.15:color=white[mv];[2:a]asetpts=PTS-STARTPTS[ma];"
+          f"[cv][ca][mv][ma]concat=n=2:v=1:a=1[v][a]")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-t", f"{dur:.3f}", "-i", mp4,
+                    "-loop", "1", "-i", png, "-i", mp4, "-filter_complex", fc,
+                    "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19",
+                    "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", tmp], check=True)
+    os.replace(tmp, mp4)
+    os.remove(png)
+    return dur
+
+
 def music_bed(total, wins=(), hold=None, style=None):
     """Shorts music bus. SHORTS_BGM off: silence, plus the theme song from its chorus at every time in `wins`
     (0.6 s fade-in; plays to the end, or `hold` seconds then a 1 s fade-out). On: the old synth bed."""
@@ -3857,7 +3890,10 @@ def main():
                    check=True)
     for _, _, p in parts:
         os.remove(p)
-    print(f"[render] {len(INDEX)} frames in {time.time() - t1:.1f}s -> {out}", flush=True)
+    fails = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] != "win"]
+    wins_t = [L["start"] + out_time(L, L["event"]["t"]) for L in LEVELS if L["event"]["type"] == "win"]
+    add_cold_open(out, (fails or wins_t or [3.0])[0], "WHO SURVIVES?")
+    print(f"[render] {len(INDEX)} frames in {time.time() - t1:.1f}s -> {out} (+{COLD_OPEN_S}s cold open)", flush=True)
     print(json.dumps(manifest["levels"], indent=1))
 
     # automatic audit (BLUEPRINT.md section 6) + registry (section 7)
