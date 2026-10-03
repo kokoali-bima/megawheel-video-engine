@@ -84,7 +84,9 @@ def main():
     th = se.th_time()
     scene = dict(series=se.SERIES, seed=a.seed, track=[list(p) for p in se.TRACK], pits=[list(p) for p in se.PITS],
                  pit_kind=se.PIT_KIND, ramps=[list(r) for r in se.RAMPS], bumps=[list(b) for b in se.BUMPS],
-                 signs=list(se.SIGNS), finish_x=se.FINISH_X, theme=se.THEME, theme_id=se.THEME_ID,
+                 signs=list(se.SIGNS), finish_x=se.FINISH_X,
+                 puddles=[list(p) for p in se.PUDDLES], barriers=[list(b) for b in se.BARRIERS],
+                 vents=[dict(v) for v in se.VENTS], theme=se.THEME, theme_id=se.THEME_ID,
                  sky=[[s_, list(c)] for s_, c in th["sky"]], light=th.get("light", 1.0), night="moon" in th,
                  cloud=list(th.get("cloud", (1, 1, 1))),
                  S=se.S, ground_y=se.GROUND_Y, cast=cast, title=se.TITLE,
