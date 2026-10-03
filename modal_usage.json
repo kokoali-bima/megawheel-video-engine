@@ -1074,6 +1074,58 @@
    "cpu_container_seconds": 229.8,
    "wall_seconds": 103.3,
    "cost_usd": 0.0601
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S021",
+   "cpu": 16,
+   "engine": "godot-4.4.1-llvmpipe",
+   "parts": 3,
+   "cpu_container_seconds": 206.2,
+   "wall_seconds": 78.8,
+   "cost_usd": 0.0539
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S022",
+   "cpu": 16,
+   "engine": "godot-4.4.1-llvmpipe",
+   "parts": 3,
+   "cpu_container_seconds": 188.0,
+   "wall_seconds": 99.8,
+   "cost_usd": 0.0492
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d GPU test splash_s7",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 137.8,
+   "wall_seconds": 63.6,
+   "cost_usd": 0.0371
+  },
+  {
+   "date": "2026-10-03",
+   "note": "godot3d convert SIM_POTHOLES_V2_S027",
+   "cpu": 16,
+   "engine": "godot-4.4.1-llvmpipe",
+   "parts": 3,
+   "cpu_container_seconds": 178.7,
+   "wall_seconds": 81.7,
+   "cost_usd": 0.0467
+  },
+  {
+   "date": "2026-10-03",
+   "note": "gpu colour test 2",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 12.6,
+   "wall_seconds": 21.0,
+   "cost_usd": 0.0034
   }
  ]
 }
