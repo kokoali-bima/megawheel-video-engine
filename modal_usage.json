@@ -1893,6 +1893,16 @@
    "gpu_seconds": 63.7,
    "wall_seconds": 92.0,
    "cost_usd": 0.0163
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_POTHOLES_V2_S029 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 48.8,
+   "wall_seconds": 78.5,
+   "cost_usd": 0.0125
   }
  ]
 }
