@@ -1634,9 +1634,9 @@ def main():
         for c in cars:                                           # a dodge is a highlight too
             if c.get("dodge_t") is not None and -0.8 < t - c["dodge_t"] < 1.4:
                 focus = c
-        for c in hits:
-            if -0.9 < t - c["trig"] < 2.4:
-                focus = c
+        live = [c for c in hits if -0.9 < t - c["trig"] < 2.4]
+        if live:                                                 # overlapping moments: the title's star wins
+            focus = max(live, key=star_key)
         near_finish = st[id(winner)][0] > FIN_X - 30 or (winner["finish"] is not None and t >= winner["finish"])
         if near_finish or mode == "cta":
             focus = winner
