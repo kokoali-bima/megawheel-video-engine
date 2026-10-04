@@ -4168,6 +4168,48 @@
       "approved_date": "2026-10-04",
       "title": "Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
       "replaces": "SIM_RACE25D_V4_S018"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S044",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 44,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "sports"
+      ],
+      "track_id": "race25d_cfdce095@sunset-clear-mountains",
+      "theme": "sunset-clear-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+oil",
+        "p2",
+        "p3+hammer",
+        "win+dodge_lava"
+      ],
+      "duration": 34.56,
+      "plan": {
+        "layout": "stagger",
+        "zone": 190.0,
+        "start": 96.8,
+        "finish_gap": 111.7
+      },
+      "structure": "stagger|hammer,lava,oil",
+      "title_base": "Can Nitro Survive the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s044",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s044/SIM_RACE25D_V4_S044_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Q3zUALbKPIjI8jql7tmQv1q9WNUS0jgy",
+      "drive_id": "1Cd-P9yLigTVce6eT-jJmR40d90hEyJIs",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S044.mp4"
     }
   ]
 }
