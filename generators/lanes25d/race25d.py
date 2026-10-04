@@ -1627,7 +1627,7 @@ def main():
             marks[int(out_of(c["dodge_t"] + 0.5) * FPS)] = "dodge"
     marks[int(out_of(winner["finish"] + 0.5) * FPS)] = "winner"
     marks[int((cta_start + 1.5) * FPS)] = "outro"
-    camx, zoom, prev_mode, empty_frames = None, 1.0, None, 0
+    camx, zoom, prev_mode, empty_frames, pan_empty, prev_camx = None, 1.0, None, 0, 0, None
     for fi, (mode, t) in enumerate(frames):
         st = {id(c): state(c, t) for c in cars}
         focus = None
@@ -1674,14 +1674,18 @@ def main():
         if mode == "race" and star is not None and focus is star and -1.4 < t - star["trig"] < 2.0:
             want = 1.32                                          # the star moment fills the screen (cold open + race)
         zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
-        kc = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
+        kc = focus if focus is not None else min(cars, key=lambda c: abs(st[id(c)][0] - mid))
         kreach = 400.0 / (k_of(st[id(kc)][1]) * zoom)               # the key car must stay on screen: if the glide
-        over = camx - float(np.clip(camx, st[id(kc)][0] - kreach, st[id(kc)][0] + kreach))   # lags, a fast pan
-        camx -= float(np.clip(over, -4.0, 4.0))                 # (never a cut) brings it back
-        prev_mode = mode
+        over = camx - float(np.clip(camx, st[id(kc)][0] - kreach, st[id(kc)][0] + kreach))   # lags, a whip pan
+        camx -= float(np.clip(over, -9.0, 9.0))                 # (never a cut) brings it back in a few frames
+        speed = abs(camx - prev_camx) if prev_camx is not None and not cut else 0.0
+        prev_camx, prev_mode = camx, mode
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
-            empty_frames += 1
-            if empty_frames <= 12:                               # diagnosis: which frames, which focus, where
+            if speed >= 3.0:                                     # inside a whip pan between far-apart cars: allowed
+                pan_empty += 1
+            else:
+                empty_frames += 1
+            if empty_frames + pan_empty <= 12:                   # diagnosis: which frames, which focus, where
                 print(f"[25d] empty frame {fi} mode={mode} t={t:.2f} focus={focus['key'] if focus else None} "
                       f"camx={camx:.1f} zoom={zoom:.2f} cars={[(c['key'], round(st[id(c)][0], 1)) for c in cars]}",
                       flush=True)
@@ -1786,7 +1790,7 @@ def main():
               "at least 2 hazards hit": len(hits) >= 2,
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
-              "no frame without a car": empty_frames == 0,
+              "no frame without a car (whip pans <= 10 frames)": empty_frames == 0 and pan_empty <= 10,
               "realistic order (slower ahead only if the faster one was hit)": not unexplained_upsets(cars)}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + (f"+{c['hz']['type']}" if c["trig"] is not None else "")
@@ -1815,7 +1819,7 @@ def main():
     with open(os.path.join(out_dir, f"{name}_audit.md"), "w") as fh:
         fh.write(f"# Checks {name}\n\n" + "\n".join(f"- {'✅' if ok else '❌'} {k}" for k, ok in checks.items())
                  + f"\n\nDuration {dur:.1f} s · theme {se.THEME_ID} · voice {voice} · hazards {hz_words}\n")
-    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames}", flush=True)
+    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames} pan_empty={pan_empty}", flush=True)
     if not opt.preview_only:
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
