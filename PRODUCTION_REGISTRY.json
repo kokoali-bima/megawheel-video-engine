@@ -2869,6 +2869,63 @@
       "render3d": false,
       "approved_date": "2026-10-03",
       "title": "Can Titan Survive Falling Containers? 🏁 | Ep. 46 #Shorts"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S028",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 28,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "icecream"
+      ],
+      "track_id": "potholes_fbaf774a@morning-clear-countryside",
+      "theme": "morning-clear-countryside",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "pit@obs0+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 47.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "twin_early",
+        "pits": [
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "box",
+            "fill": "bomb"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "narrow_deep",
+            "fill": "rubble"
+          },
+          {
+            "kind": "RP",
+            "size": "L",
+            "shape": "v",
+            "fill": "monster"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "twin_early|box-S-bomb,narrow_deep-S-rubble,v-L-monster",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_potholes_s028",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "16iAwWcCNsGx96gdokugZ9oRvjhKCfHjk",
+      "drive_id": "1kLuPqfVB9jLNdtTgs4Lw78VT-7zoaCY6",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S028.mp4"
     }
   ]
 }
