@@ -2026,7 +2026,7 @@ def main():
     dur = float(pj.get("format", {}).get("duration", 0))
     kinds = [s["codec_type"] for s in pj.get("streams", [])]
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
-              "duration 20-60 s": 20 <= dur <= 60,
+              "duration 20-175 s (not capped; Shorts limit)": 20 <= dur <= 175,
               "one winner, 3 cars out": len(outs) == 3,
               "battle 15-38 s": 15 <= winner["finish"] <= 38,
               "at least 3 chaos events": sum(1 for ch in CHAOS_PLAN if ch.get("done") and not ch.get("skip")) >= 3,

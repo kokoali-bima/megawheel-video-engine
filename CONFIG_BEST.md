@@ -45,7 +45,7 @@
 |---|---|---|
 | CHALLENGE (`sim_engine.py`) | v3.9: durasi 44–57 dtk (cek 40–58), voice C, READY-GO | posisi rintangan acak masih backlog (C13) |
 | CHALLENGE seri (2026-10-03) | campuran otomatis: **potholes 3 · lava_potholes 2** · bumps/splash/lava 1 (`SERIES_WEIGHT`); `lava_potholes` = lintasan potholes, lubang berisi lava | data: potholes 90,6% views; user minta potholes+lava |
-| Pembuka & judul Shorts (2026-10-03) | cold open 1,5 dtk (`add_cold_open`) + judul unik tokoh+tantangan+pertanyaan (`challenge_title`, smash dari cast, race `question_for`) | Studio: 53,9% menggeser → target ≥ 75% tetap menonton |
+| Pembuka & judul Shorts (2026-10-03) | cold open **3 dtk** (`add_cold_open`; 1,5 dtk → 3 dtk atas permintaan user 2026-10-04) + judul unik tokoh+tantangan+pertanyaan (`challenge_title`, smash dari cast, race `question_for`) | Studio: 53,9% menggeser → target ≥ 75% tetap menonton |
 | RACE (`race25d.py`) | **v3** (2026-10-03, render uji lolos, belum dinilai visual): sirkuit melengkung amp 0,9–1,4, palu/kontainer/oli, judul pertanyaan + teks frame 1, sonic logo | v2 = versi tayang minggu 1 |
 | SMASH (`smash25d.py`) | **v5** (2026-10-03): v4 + arena **sea** (platform baja di laut, sirip di air — tidak sampai tribun, hiu menyambar mobil yang jatuh), POW + hit-stop 3 frame (rel > 8 m/s), panel & roda copot, asap/api sesuai HP, cold open, judul dari cast, tanpa musik latar | mobil terakhir tidak pernah tereliminasi di tick yang sama; `props25d.py` = gambar hiu/sirip |
 

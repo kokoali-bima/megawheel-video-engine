@@ -1767,7 +1767,7 @@ def main():
     dur = float(pj.get("format", {}).get("duration", 0))
     kinds = [s["codec_type"] for s in pj.get("streams", [])]
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
-              "duration 20-60 s": 20 <= dur <= 60,
+              "duration 20-175 s (not capped; Shorts limit)": 20 <= dur <= 175,
               "has winner": winner["finish"] is not None,
               "at least 2 hazards hit": len(hits) >= 2,
               "has replay": replay is not None,
