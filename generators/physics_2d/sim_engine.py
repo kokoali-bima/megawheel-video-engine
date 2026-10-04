@@ -1775,7 +1775,7 @@ def challenge_title(vk, obst, emoji, seed):
     return pats[seed % len(pats)]
 
 
-def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S):
+def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S, y0=760, band=False):
     """Prepend `dur` s of the video's own biggest moment (picture + sound, around t_star) with a big question on top,
     then a white flash into the normal start. Shorts are judged on the first 2 seconds (viewed vs swiped away)."""
     words = text.upper().split()
@@ -1785,8 +1785,16 @@ def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S):
         lines = [" ".join(words[:cut]), " ".join(words[cut:])]
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     ctx = cairo.Context(surf)
-    for i, ln in enumerate(lines):
-        draw_text(ctx, ln, W / 2, 760 + i * 125, 112, fill=(1, 0.86, 0.12), max_w=1000)   # mid-screen, clear of the HUD
+    if band:                                                     # dark band so the question reads over the HUD
+        g = cairo.LinearGradient(0, 0, 0, y0 + 125 * len(lines) + 40)
+        g.add_color_stop_rgba(0, 0.03, 0.03, 0.1, 0.8)
+        g.add_color_stop_rgba(0.8, 0.03, 0.03, 0.1, 0.7)
+        g.add_color_stop_rgba(1, 0.03, 0.03, 0.1, 0.0)
+        ctx.rectangle(0, 0, W, y0 + 125 * len(lines) + 40)
+        ctx.set_source(g)
+        ctx.fill()
+    for i, ln in enumerate(lines):                              # default mid-screen (CHALLENGE); RACE passes the top band
+        draw_text(ctx, ln, W / 2, y0 + i * 125, 112, fill=(1, 0.86, 0.12), max_w=1000)
     png, tmp = mp4 + ".cold.png", mp4 + ".cold.mp4"
     surf.write_to_png(png)
     t0 = max(0.0, t_star - dur * 0.55)

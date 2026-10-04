@@ -421,7 +421,7 @@ def build_timeline(cars):
     while t < race_end:
         frames.append(("race", t))
         t += (0.35 if any(a < t < b for a, b in slows) else 1.0) / FPS
-    star = max(hits, key=lambda c: HAZARDS[c["hz"]["type"]]["prio"], default=None)
+    star = max(hits, key=star_key, default=None)               # same moment as the title question (honest hook)
     replay = None
     if star is not None:
         a, b = star["trig"] - 0.6, star["trig"] + 1.9
@@ -1200,12 +1200,18 @@ def bubble(ctx, text, sx, sy, age, k):
 QUESTION_TEXT = [""]
 
 
+def star_key(c):
+    """The video's star moment = the most striking hazard someone really met (new obstacles first, then priority).
+    Title question, cold open and instant replay all use it, so they always show the same car and hazard."""
+    return (c["hz"]["type"] in NEW_HZ, HAZARDS[c["hz"]["type"]]["prio"])
+
+
 def question_for(cars):
     """Hook with an honest payoff (user 2026-10-04): ask about the racer who really meets the most striking hazard.
     (v3 asked about the underdog + the biggest hazard even when they never met: Ep. 31-49 titles did not match.)"""
     hits = [c for c in cars if c["hz"] is not None and c["trig"] is not None]
     if hits:
-        star = max(hits, key=lambda c: (c["hz"]["type"] in NEW_HZ, HAZARDS[c["hz"]["type"]]["prio"]))
+        star = max(hits, key=star_key)
         return f"Can {nick(star['key'])} Survive {QUESTION[star['hz']['type']]}?"
     return "4 Cars, 1 Finish Line! Who Wins?"
 
@@ -1748,7 +1754,7 @@ def main():
                     "-b:a", "192k", "-movflags", "+faststart", "-shortest", out], check=True)
     os.remove(silent)
     se.add_cold_open(out, out_of(star["trig"]) if star is not None else out_of(winner["finish"] or 5.0),
-                     QUESTION_TEXT[0] or "WHO WINS?")
+                     QUESTION_TEXT[0] or "WHO WINS?", y0=170, band=True)
     probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type:format=duration", "-of",
                             "json", out], capture_output=True, text=True)
     pj = json.loads(probe.stdout or "{}")
