@@ -906,7 +906,8 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
             floor_y = min((p[1] for p in TRACK if x0 <= p[0] <= x1), default=-d)
             corners = [ch.local_to_world((sx_ * bw / 2, sy_ * bh / 2)).y for sx_ in (-1, 1) for sy_ in (-1, 1)]
             low = min(corners + [w.position.y - r for w in attached])   # any corner or tyre (nose-dives too)
-            if content is None and kind in ("spikes", "bomb", "monster") and low < floor_y + 1.5:
+            reach = {"spikes": 1.8, "bomb": 2.1, "monster": 1.6}.get(kind, 0.0)   # = the drawn height of each
+            if content is None and kind in ("spikes", "bomb", "monster") and low < floor_y + reach:
                 content = dict(kind=kind, t=t, x=ch.position.x, y=floor_y, pit=pi_)
                 if event is None:
                     event = dict(type="pit", t=max(0.0, t - 0.1))
