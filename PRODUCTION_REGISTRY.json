@@ -3809,6 +3809,48 @@
       "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S035.mp4",
       "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
       "rejected_date": "2026-10-04"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S036",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 36,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_978c8dc1@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+dodge_crusher",
+        "p4+dragon_fire+bump",
+        "win",
+        "p3+oil"
+      ],
+      "duration": 37.04,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 206.5,
+        "start": 108.0,
+        "finish_gap": 90.2
+      },
+      "structure": "early_pair|crusher,dragon_fire,oil",
+      "title_base": "Can Zippy Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036/SIM_RACE25D_V4_S036_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1qiDgNZKgL6Cu9FsrcU-kAwKnIvK-YkiJ",
+      "drive_id": "1fL0CRe39YEMpedaHrvciePGEGoiBLc1k",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S036.mp4"
     }
   ]
 }
