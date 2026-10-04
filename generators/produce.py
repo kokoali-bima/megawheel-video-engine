@@ -165,6 +165,7 @@ def produce_one(fmt, forced_series, dry):
     if dry:
         return None
     os.makedirs(os.path.join(BASE, "work", "produce"), exist_ok=True)
+    failed = []                                                  # renders that failed the engine checks (reported)
     for k in range(MAX_TRIES):
         s = seed + k
         log = os.path.join(BASE, "work", "produce", f"{series}_s{s}.log")
@@ -174,8 +175,10 @@ def produce_one(fmt, forced_series, dry):
             why = (re.findall(r"STOP: .*", text) or ["STOP"])[-1][:160]
             say(f"seed {s}: analisa/registry STOP ({why}) → seed berikutnya")
             continue
-        if code == 5:
-            stop(f"seed {s}: render selesai tapi AUDIT GAGAL → baca {res.get('video_id', '?')}_audit.md, laporkan ke user")
+        if code == 5:                                            # engine checks failed: never sent; try the next seed
+            failed.append(res.get("video_id", f"seed {s}"))
+            say(f"seed {s}: cek engine GAGAL ({res.get('video_id', '?')}_audit.md, status AUDIT_FAILED) → seed berikutnya")
+            continue
         if code != 0:
             stop(f"seed {s}: engine error (exit {code}); lihat {log}")
         vid = res.get("video_id")
@@ -198,6 +201,8 @@ def produce_one(fmt, forced_series, dry):
         say((r.stdout + r.stderr).strip().splitlines()[-1] if (r.stdout + r.stderr).strip() else "git_sync push")
         say(f"SELESAI {vid} · Drive review/{vid}.mp4 · {float(man.get('duration') or 0):.1f} s · "
             f"tokoh {e.get('vehicles')} · tema {man.get('theme_id')} · narator {man.get('voice')} · variasi {plan}")
+        if failed:
+            say(f"(dilewati karena gagal cek engine: {failed})")
         say("Menunggu approval Anda. Belum dijadwalkan dan belum diupload.")
         return vid
     stop(f"{MAX_TRIES} seed berturut-turut STOP di analisa: laporkan ke user (jangan pakai --force)")

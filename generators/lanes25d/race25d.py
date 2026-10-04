@@ -375,7 +375,7 @@ def simulate(seed):
                             events.append(("land", t, c["x"], float(c["lane"])))
                     target *= min(1.0, max(0.0, (a - 2.4) / 1.5))
             if c["land"] is not None and ty == "ramp" and t - c["land"] < 2.5:
-                target *= 1.03
+                target *= 1.0                                    # no ramp bonus: a jump never beats a faster class
             if c["bump_t"] is not None and 0 < t - c["bump_t"] < 1.0:
                 target *= 0.9
             if c["finish"] is not None:
