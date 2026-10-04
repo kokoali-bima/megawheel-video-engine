@@ -3593,6 +3593,208 @@
       "drive_sheet_id": "1iVND9z4yJDx32Kw1pA6U2ZwoLCRWSpPI",
       "drive_id": "1vQBh-L_3diVe593kc2zWE4HXYKXdvn8t",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S030.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S031",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 31,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_f3b83753@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+meteor",
+        "p2",
+        "p3+oil",
+        "win+bump+dodge_crusher"
+      ],
+      "duration": 35.55,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 220.9,
+        "start": 99.8,
+        "finish_gap": 97.8
+      },
+      "structure": "gauntlet|crusher,meteor,oil",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031/SIM_RACE25D_V4_S031_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S032",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 32,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_e8023b3d@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "win+bump",
+        "p2+oil+dodge_wall",
+        "p4+crusher"
+      ],
+      "duration": 37.02,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 179.0,
+        "start": 105.3,
+        "finish_gap": 112.9
+      },
+      "structure": "late_pair|crusher,oil,wall",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "11noTH6m3JVKoYPc8vqhYoFoud7_At6Bd",
+      "drive_id": "1WbrmIO8Yz22FjeOwxVtCRWRRpmRr1lYW",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S032.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S033",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 33,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_85cf93a0@noon-clear-beach",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2",
+        "win",
+        "p4+dragon_ice",
+        "p3+oil+dodge_lava"
+      ],
+      "duration": 34.05,
+      "plan": {
+        "layout": "stagger",
+        "zone": 163.4,
+        "start": 111.7,
+        "finish_gap": 100.1
+      },
+      "structure": "stagger|dragon_ice,lava,oil",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Q8O1sqsqnC8UAhHrD4lb8i_3n_jGBFE0",
+      "drive_id": "1hetcETP3f7o4QFAJjC8Op1TYwpKcDUTN",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S033.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S034",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 34,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_fc52048a@noon-rain-mountains",
+      "theme": "noon-rain-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+pothole",
+        "p2+dodge_oil",
+        "win",
+        "p4+container"
+      ],
+      "duration": 34.3,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 177.5,
+        "start": 96.1,
+        "finish_gap": 111.8
+      },
+      "structure": "gauntlet|container,oil,pothole",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1jv2C-pkaWoR2cV2_4vp8SZzkQYpaUZ6P",
+      "drive_id": "1eNKU2yfUXP3J0RtDYdEP1Czpn4SaUAqE",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S034.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S035",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 35,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_73ee9232@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2+lava",
+        "p3+container",
+        "p4+ufo",
+        "win"
+      ],
+      "duration": 37.2,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 195.5,
+        "start": 109.9,
+        "finish_gap": 112.9
+      },
+      "structure": "early_pair|container,lava,ufo",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1ZPFLfjricrozAFaI5C49gFCPiWOuyxMn",
+      "drive_id": "15FgGg3PUYYTh9PzNiMGcB3C0nmh9sSGa",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S035.mp4"
     }
   ]
 }

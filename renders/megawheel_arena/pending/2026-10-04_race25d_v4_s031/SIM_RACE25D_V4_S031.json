@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S031",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 31,
+  "fps": 30,
+  "duration": 35.55,
+  "params": {
+    "cast": [
+      "bus",
+      "monster",
+      "sports",
+      "police"
+    ],
+    "lanes": [
+      1,
+      3,
+      0,
+      2
+    ],
+    "hazards": [
+      [
+        "meteor",
+        1,
+        155.9
+      ],
+      [
+        "crusher",
+        2,
+        209.6
+      ],
+      [
+        "oil",
+        0,
+        268.9
+      ]
+    ],
+    "finish": 366.7,
+    "plan": {
+      "layout": "gauntlet",
+      "zone": 220.9,
+      "start": 99.8,
+      "finish_gap": 97.8
+    }
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "night-clear-desert",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p4+meteor",
+    "p2",
+    "p3+oil",
+    "win+bump+dodge_crusher"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Zippy Survive the Oil Slick? 🏁",
+  "title": "Can Zippy Survive the Oil Slick? 🏁 #Shorts",
+  "description": "Buster, Rocky, Zippy and Siren race to the finish line! 🏁 Obstacles today: crusher, meteor, oil! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "sports car",
+    "police car",
+    "crusher",
+    "meteor",
+    "oil"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Zippy Survive the Oil Slick? Buster, Rocky, Zippy and Siren... who will win?",
+    "Kaboom! A meteor hits Buster!",
+    "Nice move! Siren dodges the crusher!",
+    "Oil slick! Zippy spins like a top!",
+    "Siren wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031/SIM_RACE25D_V4_S031.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031/preview"
+}
