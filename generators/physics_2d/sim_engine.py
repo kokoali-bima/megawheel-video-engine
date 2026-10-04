@@ -30,6 +30,9 @@ import cairo
 import numpy as np
 import pymunk
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "variety"))
+import variety  # noqa: E402  (variety director: layouts / shapes / contents, user 2026-10-04)
+
 W, H = 1080, 1920
 FPS = 30            # output fps (overridable with --fps)
 SR = 44100
@@ -122,7 +125,13 @@ PUDDLES = []        # (x0, x1) low-grip water on the road
 BARRIERS = []       # (x, width, height) concrete walls
 VENTS = []          # dict(x, period, phase, dur, height) erupting lava vents
 RAMPS = []          # (x0, x1, height) wooden kickers (RAMP = first one, kept for potholes)
-PIT_KIND = "mud"    # "mud" | "lava"
+PIT_KIND = "mud"    # "mud" | "lava" | "water": default content of every pit
+PIT_FILLS = []      # per-pit content (parallel to PITS); empty -> PIT_KIND. rubble|water|lava|spikes|bomb|monster
+PIT_SHAPES = []     # per-pit cross-section (box, narrow_deep, wide_shallow, v, step, crumble)
+PLAN = None         # variety plan used for this track (stored in manifest + registry)
+AUTO_PLAN = True    # False when re-rendering an approved episode: its own plan (or the legacy layout) is kept
+ACTIVE = []         # registry videos that count for variety (set in main)
+_CUR_L = None       # level being drawn (draw_track needs per-level state: bomb blown, monster awake)
 OBST_SPANS = []     # (x0, x1) of every hazard in track order (outcome tags "obs<i>")
 TRACK = []
 TRACK_PARAMS = {}
@@ -130,8 +139,9 @@ TRACK_ID = ""
 
 
 def _reset_hazards():
-    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP
+    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP, PIT_FILLS, PIT_SHAPES
     PUDDLES, BARRIERS, VENTS, RAMPS, PITS, BUMPS = [], [], [], [], [], []
+    PIT_FILLS, PIT_SHAPES = [], []
     PIT_KIND, RAMP = "mud", None
 
 
@@ -330,14 +340,17 @@ def make_bumps_track(seed):
 
 def make_lava_potholes_track(seed):
     """Potholes geometry (own seed space), the pits hold lava: touching it = sink + melt (lava series effects)."""
-    global PIT_KIND
+    global PIT_KIND, PIT_FILLS
     make_potholes_track(seed + 500)
     PIT_KIND = "lava"
+    PIT_FILLS = ["lava"] * len(PITS)
 
 
 def make_potholes_track(seed):
-    global PITS, BUMPS, RAMP, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, FINISH_X
+    global PITS, BUMPS, RAMP, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, FINISH_X, PLAN
     FINISH_X = 100.0
+    if seed != 1 and (PLAN is not None or AUTO_PLAN):
+        return make_planned_potholes(seed)
     if seed == 1:
         p = dict(p1x=30.0, p1w=3.2, p1d=3.2, rampx=48.0, rampl=6.0, ramph=1.4, p2w=8.0, p2d=5.0,
                  p3x=78.0, p3w=5.0, p3d=3.5)
@@ -366,6 +379,63 @@ def make_potholes_track(seed):
     TRACK_PARAMS = p
     TRACK_ID = f"{SERIES}_std" if seed == 1 else \
         f"{SERIES}_" + hashlib.md5(json.dumps(p, sort_keys=True).encode()).hexdigest()[:8]
+
+
+def make_planned_potholes(seed):
+    """Variety director layout: template + per-pit shape / size / content (generators/variety/variety.py)."""
+    global PITS, BUMPS, RAMP, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, PLAN, PIT_FILLS, PIT_SHAPES
+    if PLAN is None:
+        PLAN = variety.plan_potholes(SERIES, ACTIVE, seed)
+    pits, ramps = variety.build_potholes(PLAN, seed)
+    pts = [(-40, 0)]
+    ramp_at = {round(r1, 1): (r0, r1, rh) for r0, r1, rh in ramps}
+    for p in pits:
+        rp = ramp_at.get(round(p["x0"], 1))
+        if rp:                                                   # wooden kicker ending at the pit rim
+            pts += [(rp[0], 0), (rp[1], rp[2]), (rp[1], -p["d"] if p["shape"] in ("box", "narrow_deep",
+                                                                                    "wide_shallow") else 0)]
+            inner = variety.pit_profile(p["x0"], p["x1"], p["d"], p["shape"])
+            pts += [q for q in inner if q[0] > p["x0"] or p["shape"] not in ("box", "narrow_deep", "wide_shallow")]
+        else:
+            pts += [(p["x0"], 0)] + variety.pit_profile(p["x0"], p["x1"], p["d"], p["shape"])
+        pts.append((p["x1"], 0))
+    pts.append((170, 0))
+    clean = [pts[0]]                                             # drop exact duplicates (zero-length segments)
+    for q in pts[1:]:
+        if (round(q[0], 2), round(q[1], 2)) != (round(clean[-1][0], 2), round(clean[-1][1], 2)):
+            clean.append((round(q[0], 2), round(q[1], 2)))
+    TRACK = clean
+    PITS = [(p["x0"], p["x1"], p["d"]) for p in pits]
+    PIT_FILLS = [p["fill"] for p in pits]
+    PIT_SHAPES = [p["shape"] for p in pits]
+    RAMP = tuple(ramps[0]) if ramps else None
+    RAMPS[:] = [tuple(r) for r in ramps]
+    BUMPS = []
+    OBSTACLES = [((a + b) / 2, "pit") for a, b, _ in PITS]
+    DANGER_X = [a for a, _, _ in PITS]
+    SIGNS = [(r[0] - 2.5) if (r := next((rr for rr in ramps if abs(rr[1] - a) < 0.05), None)) else (a - 3)
+             for a, _, _ in PITS]
+    TRACK_PARAMS = dict(plan=PLAN, pits=pits, ramps=ramps)
+    TRACK_ID = f"{SERIES}_" + hashlib.md5(json.dumps(TRACK_PARAMS, sort_keys=True).encode()).hexdigest()[:8]
+
+
+def pit_kind(i):
+    """Content of pit i (per-pit plan, else the track default)."""
+    return PIT_FILLS[i] if i < len(PIT_FILLS) else PIT_KIND
+
+
+def pit_index(x):
+    return next((i for i, (a, b, _) in enumerate(PITS) if a <= x <= b), None)
+
+
+def any_lava():
+    return PIT_KIND == "lava" or "lava" in PIT_FILLS
+
+
+def pit_poly(x0, x1):
+    """The pit's own cross-section from the road polyline (any shape), closed along the road level."""
+    inside = [p for p in TRACK if x0 - 1e-6 <= p[0] <= x1 + 1e-6 and p[1] < -1e-6]
+    return [(x0, 0.05)] + inside + [(x1, 0.05)]
 
 
 # ---------------------------------------------------------------- themes (time of day x weather x location)
@@ -566,6 +636,11 @@ FAIL_LINES = {"pit": "Oh no! {n} fell into the giant pothole!",
               "rollback": "Uh oh! {n} slid all the way back down!",
               "lava": "Yikes! {n} got blasted by the lava!"}
 WIN_LINE = "Yes! {n} made it! We have a winner!"
+CONTENT_LINES = {"spikes": "Ouch! Spikes in the pit! {n}'s tires go pop!",
+                 "bomb": "Boom! A hidden bomb blasts {n} right out of the pit!",
+                 "monster": "Chomp! The Pit Muncher grabs {n}!",
+                 "water": "Splash! {n} sinks into the flooded pothole!",
+                 "lava": "Yikes! {n} sinks into the lava!"}
 LEVEL_COLORS = [(0.18, 0.72, 0.3), (1.0, 0.52, 0.08), (0.6, 0.3, 0.92)]
 
 
@@ -579,9 +654,9 @@ def in_puddle(x):
     return any(x0 <= x <= x1 for x0, x1 in PUDDLES)
 
 
-def pit_surface(d):
+def pit_surface(d, kind=None):
     """y of the liquid surface in a pit of depth d."""
-    fill = PIT_FILL.get(PIT_KIND)
+    fill = PIT_FILL.get(kind or PIT_KIND)
     return -d + fill if fill is not None else -0.8
 
 
@@ -746,6 +821,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
     flip_t = stuck_t = back_t = None
     vent_hit = set()
     slide, slid, spun, sunk, air_since = None, set(), None, None, None
+    sunk_kind, content = None, None                     # what the car met in a pit (per-pit contents)
     prev_v = ch.velocity
     last_imp = -1.0
     i = 0
@@ -817,14 +893,32 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                   and ch.velocity.x > 4.0):
                 slide = start_slide(t, ch.velocity.x, v, rng, kind="wobble")
         air_since = (air_since if air_since is not None else t) if airborne else None
-        for x0, x1, d in PITS:                              # touched the liquid in a pit (lava / water)
-            if sunk is None and PIT_KIND in PIT_FILL and x0 <= ch.position.x <= x1 \
-                    and ch.position.y - bh / 2 < pit_surface(d):
-                sunk = t
-                if PIT_KIND == "lava":
+        for pi_, (x0, x1, d) in enumerate(PITS):            # what is in the pit: liquid / spikes / bomb / monster
+            kind = pit_kind(pi_)
+            if not (x0 <= ch.position.x <= x1):
+                continue
+            if sunk is None and kind in PIT_FILL and ch.position.y - bh / 2 < pit_surface(d, kind):
+                sunk, sunk_kind = t, kind
+                if kind == "lava":
                     burned = burned or t
                 if event is None:                           # touching the liquid is the fail (never "stuck")
                     event = dict(type="pit", t=max(0.0, t - 0.2))
+            floor_y = min((p[1] for p in TRACK if x0 <= p[0] <= x1), default=-d)
+            low = ch.position.y - bh / 2 - r                 # underside of the wheels
+            if content is None and kind in ("spikes", "bomb", "monster") and low < floor_y + 1.1:
+                content = dict(kind=kind, t=t, x=ch.position.x, y=floor_y, pit=pi_)
+                if event is None:
+                    event = dict(type="pit", t=max(0.0, t - 0.1))
+                if kind == "bomb":                           # cartoon blast: thrown up, wrecked, sooty
+                    ch.apply_impulse_at_local_point((v["mass"] * 1.5, v["mass"] * 8.5), (-bw * 0.2, 0))
+                    burned = burned or t
+                if kind in ("spikes", "bomb") and broken is None:
+                    debris = break_car(space, car, v, rng, v["break_dv"] * 2.0, i)
+                    broken = dict(t=t, x=ch.position.x, y=ch.position.y)
+                if kind == "monster":                        # grabbed: the Pit Muncher holds the car down
+                    ch.velocity = (0, 0)
+                    ch.angular_velocity = 0
+                    sunk, sunk_kind = t, "monster"
         if event is not None and event["type"] != "win" and broken is None and dv > v["break_dv"]:
             debris = break_car(space, car, v, rng, dv, i)
             broken = dict(t=t, x=ch.position.x, y=ch.position.y)
@@ -872,7 +966,8 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         raise RuntimeError("car did not move forward, motor sign is wrong")
     meta = [{k: d[k] for k in ("kind", "size", "verts", "color", "spawn")} for d in debris]
     return dict(rec=rec, impacts=impacts, event=event, speed=float(speed), broken=broken, burned=burned,
-                spun=spun, sunk=sunk, debris=deb, debris_meta=meta, detached=car["detached"])
+                spun=spun, sunk=sunk, sunk_kind=sunk_kind, content=content, debris=deb, debris_meta=meta,
+                detached=car["detached"])
 
 
 def bh_car(v):
@@ -895,7 +990,8 @@ def level_cap(L):
 
 def is_spectacular(L):
     """Crash-worthy fail level: broken car, flip, a big bullet-time jump, or the series' signature moment."""
-    return bool(L["broken"] or L["event"]["type"] == "flip" or L.get("bullet") or has_signature(L))
+    return bool(L["broken"] or L["event"]["type"] == "flip" or L.get("bullet") or has_signature(L)
+                or L.get("content"))
 
 
 def has_signature(L):
@@ -904,7 +1000,7 @@ def has_signature(L):
     if sig == "spin":
         return L.get("spun") is not None and L["spun"] < L["event"]["t"] + 0.5
     if sig == "melt":
-        return L.get("sunk") is not None and PIT_KIND == "lava"
+        return L.get("sunk") is not None and L.get("sunk_kind") == "lava"
     return False
 
 
@@ -1046,9 +1142,12 @@ def car_state(L, st):
 
 
 def sink_offset(L, st):
-    """Visual sinking into lava (viscous, slow); the physics body rests on the pit floor."""
-    if PIT_KIND != "lava" or L.get("sunk") is None or st < L["sunk"]:
+    """Visual sinking into lava (viscous, slow) or pulled down by the Pit Muncher; the body rests on the floor."""
+    if L.get("sunk") is None or st < L["sunk"] or L.get("sunk_kind") not in ("lava", "monster"):
         return 0.0
+    if L.get("sunk_kind") == "monster":                          # held, then dragged under after the bite
+        a = st - L["sunk"]
+        return 0.0 if a < 0.5 else min(L["v"]["body"][1] + 1.6, 2.2 * (a - 0.5))
     return min(0.7, 0.4 * (st - L["sunk"]))
 
 
@@ -1591,6 +1690,38 @@ def synth_lava_bed(dur, seed=89):
     return _norm(out + _norm(b) * 0.8)
 
 
+def synth_boom(seed=97):
+    """Cartoon bomb: sharp crack + deep boom + rumble tail."""
+    n = int(2.2 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    crack = rng.standard_normal(n) * np.exp(-t / 0.03)
+    boom = np.sin(2 * np.pi * (55 - 25 * t) * t) * np.exp(-t / 0.5) * 1.6
+    rumble = smooth(rng.standard_normal(n), 60) * np.exp(-t / 0.8) * 3.0
+    return _norm(crack * 0.6 + boom + rumble)
+
+
+def synth_tire_pop(seed=5):
+    """Tyre bursting on a spike: pop + hiss."""
+    n = int(0.9 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    pop = rng.standard_normal(n) * np.exp(-t / 0.012)
+    hiss = rng.standard_normal(n) * np.exp(-t / 0.35) * 0.35
+    return _norm(pop + hiss)
+
+
+def synth_growl(seed=91):
+    """The Pit Muncher waking up: low wobbling growl."""
+    n = int(1.1 * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(seed)
+    f = 70 + 18 * np.sin(2 * np.pi * 7 * t)
+    tone = np.sin(2 * np.pi * np.cumsum(f) / SR) * (0.6 + 0.4 * smooth(rng.standard_normal(n), 400))
+    env = np.minimum(1, t / 0.15) * np.exp(-np.maximum(0, t - 0.6) / 0.3)
+    return _norm(tone * env)
+
+
 def synth_wall_crash(strength=1.0, seed=53):
     """Car into concrete: heavy thud + crunch + metal clang + falling rubble (~1 s)."""
     n = int(1.0 * SR)
@@ -2059,7 +2190,7 @@ def draw_weather(ctx, t):
 def draw_track(ctx, view0, view1, t=0.0):
     gc = lit(th_loc()["ground"])
     for x0, x1, d in PITS:
-        ctx.rectangle(x0, -d, x1 - x0, d)
+        ctx.rectangle(x0, -d, x1 - x0, d)                        # the dark back wall (behind the profile)
         ctx.set_source_rgb(*shade(gc, 0.48))
         ctx.fill()
     poly(ctx, TRACK + [(170, -40), (-40, -40)])
@@ -2081,41 +2212,13 @@ def draw_track(ctx, view0, view1, t=0.0):
             ctx.arc(x, y, r, 0, 2 * math.pi)
             ctx.set_source_rgb(*shade(gc, k))
             ctx.fill()
-    for x0, x1, d in PITS:
-        if PIT_KIND == "lava":                                  # glowing lava pool with bubbles
-            glow = cairo.LinearGradient(0, -d, 0, 0)
-            glow.add_color_stop_rgba(0, 1, 0.45, 0.05, 0.8)
-            glow.add_color_stop_rgba(1, 1, 0.3, 0.0, 0.0)
-            ctx.rectangle(x0, -d, x1 - x0, d)
-            ctx.set_source(glow)
-            ctx.fill()
-            lg = cairo.LinearGradient(0, -d, 0, -d + 1.3)
-            lg.add_color_stop_rgb(0, 0.95, 0.25, 0.02)
-            lg.add_color_stop_rgb(1, 1.0, 0.75, 0.1)
-            ctx.rectangle(x0, -d, x1 - x0, 1.3)
-            ctx.set_source(lg)
-            ctx.fill()
-            for j in range(int((x1 - x0) / 0.7)):
-                ph = (t * 1.3 + j * 0.37) % 1.0
-                ctx.arc(x0 + 0.35 + j * 0.7, -d + 1.3 + ph * 0.25, 0.12 + 0.12 * ph, 0, 2 * math.pi)
-                ctx.set_source_rgba(1, 0.9, 0.3, 1 - ph)
-                ctx.fill()
-            continue
-        if PIT_KIND == "water":                                 # deep pool behind the car
-            sy = pit_surface(d)
-            wg = cairo.LinearGradient(0, -d, 0, sy)
-            wg.add_color_stop_rgb(0, *lit((0.05, 0.2, 0.42)))
-            wg.add_color_stop_rgb(1, *lit((0.2, 0.5, 0.85)))
-            ctx.rectangle(x0, -d, x1 - x0, sy + d)
-            ctx.set_source(wg)
-            ctx.fill()
-            continue
-        ctx.rectangle(x0, -d, x1 - x0, 0.55)
-        ctx.set_source_rgb(*shade(gc, 0.68))
-        ctx.fill()
-        for j in range(int((x1 - x0) / 0.8)):
-            ctx.arc(x0 + 0.4 + j * 0.8, -d + 0.55, 0.22, 0, math.pi)
-            ctx.fill()
+    for pi_, (x0, x1, d) in enumerate(PITS):
+        kind = pit_kind(pi_)
+        ctx.save()
+        poly(ctx, pit_poly(x0, x1))                              # contents stay inside the pit's own shape
+        ctx.clip()
+        draw_pit_content(ctx, pi_, x0, x1, d, kind, t, gc)
+        ctx.restore()
     ramp_x = [(a0, a1) for a0, a1, _ in RAMPS]
     for a, b in zip(TRACK, TRACK[1:]):
         if min(a[1], b[1]) < -0.01 or abs(a[0] - b[0]) < 1e-6:
@@ -2262,6 +2365,177 @@ def draw_track(ctx, view0, view1, t=0.0):
 
 
 # ---------------------------------------------------------------- faces
+MUNCHER = (0.55, 0.3, 0.75)                                      # the Pit Muncher (own design: a purple pit worm)
+
+
+def draw_pit_content(ctx, pi_, x0, x1, d, kind, t, gc):
+    """Inside one pit (clipped to its shape): lava, water, rubble, spikes, a bomb, or the sleeping Pit Muncher."""
+    floor = min((p[1] for p in TRACK if x0 <= p[0] <= x1), default=-d)
+    L, st = _CUR_L if _CUR_L else (None, t)
+    met = L.get("content") if L else None
+    met = met if met and met.get("pit") == pi_ else None
+    if kind == "lava":                                           # glowing lava pool with bubbles
+        glow = cairo.LinearGradient(0, -d, 0, 0)
+        glow.add_color_stop_rgba(0, 1, 0.45, 0.05, 0.8)
+        glow.add_color_stop_rgba(1, 1, 0.3, 0.0, 0.0)
+        ctx.rectangle(x0, -d, x1 - x0, d)
+        ctx.set_source(glow)
+        ctx.fill()
+        lg = cairo.LinearGradient(0, -d, 0, -d + 1.3)
+        lg.add_color_stop_rgb(0, 0.95, 0.25, 0.02)
+        lg.add_color_stop_rgb(1, 1.0, 0.75, 0.1)
+        ctx.rectangle(x0, -d, x1 - x0, 1.3)
+        ctx.set_source(lg)
+        ctx.fill()
+        for j in range(int((x1 - x0) / 0.7)):
+            ph = (t * 1.3 + j * 0.37) % 1.0
+            ctx.arc(x0 + 0.35 + j * 0.7, -d + 1.3 + ph * 0.25, 0.12 + 0.12 * ph, 0, 2 * math.pi)
+            ctx.set_source_rgba(1, 0.9, 0.3, 1 - ph)
+            ctx.fill()
+        return
+    if kind == "water":                                          # deep pool behind the car
+        sy = pit_surface(d, "water")
+        wg = cairo.LinearGradient(0, -d, 0, sy)
+        wg.add_color_stop_rgb(0, *lit((0.05, 0.2, 0.42)))
+        wg.add_color_stop_rgb(1, *lit((0.2, 0.5, 0.85)))
+        ctx.rectangle(x0, -d, x1 - x0, sy + d)
+        ctx.set_source(wg)
+        ctx.fill()
+        return
+    ctx.rectangle(x0, floor, x1 - x0, 0.55)                      # rubble on the floor (every dry pit)
+    ctx.set_source_rgb(*shade(gc, 0.68))
+    ctx.fill()
+    for j in range(int((x1 - x0) / 0.8)):
+        ctx.arc(x0 + 0.4 + j * 0.8, floor + 0.55, 0.22, 0, math.pi)
+        ctx.fill()
+    if kind == "spikes":                                         # a bed of steel spikes
+        n = max(3, int((x1 - x0) / 0.45))
+        for j in range(n):
+            sx = x0 + (j + 0.5) * (x1 - x0) / n
+            poly(ctx, [(sx - 0.17, floor + 0.45), (sx, floor + 1.15), (sx + 0.17, floor + 0.45)])
+            g = cairo.LinearGradient(sx - 0.17, 0, sx + 0.17, 0)
+            g.add_color_stop_rgb(0, *lit((0.45, 0.47, 0.52)))
+            g.add_color_stop_rgb(0.5, *lit((0.92, 0.93, 0.96)))
+            g.add_color_stop_rgb(1, *lit((0.35, 0.36, 0.4)))
+            ctx.set_source(g)
+            ctx.fill_preserve()
+            ctx.set_source_rgb(0.15, 0.15, 0.18)
+            ctx.set_line_width(0.03)
+            ctx.stroke()
+    elif kind == "bomb":                                         # a big cartoon bomb with a fizzing fuse
+        bx, by = (x0 + x1) / 2, floor + 0.55 + 0.75
+        if met is None or st < met["t"]:
+            ctx.arc(bx, by, 0.75, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.12, 0.12, 0.15)
+            ctx.fill()
+            ctx.arc(bx - 0.25, by + 0.25, 0.2, 0, 2 * math.pi)
+            ctx.set_source_rgba(1, 1, 1, 0.35)
+            ctx.fill()
+            rrect(ctx, bx - 0.18, by + 0.62, 0.36, 0.25, 0.05)
+            ctx.set_source_rgb(0.3, 0.3, 0.34)
+            ctx.fill()
+            ctx.move_to(bx, by + 0.87)
+            ctx.curve_to(bx + 0.2, by + 1.2, bx + 0.45, by + 1.0, bx + 0.5, by + 1.25)
+            ctx.set_source_rgb(0.55, 0.42, 0.25)
+            ctx.set_line_width(0.07)
+            ctx.stroke()
+            fl = 0.12 + 0.06 * math.sin(t * 40)                   # fuse spark
+            star(ctx, bx + 0.5, by + 1.27, fl * 1.6, t * 9)
+            ctx.set_source_rgb(1, 0.8, 0.2)
+            ctx.fill()
+        else:                                                    # scorched crater after the blast
+            ctx.save()
+            ctx.translate(bx, floor + 0.55)
+            ctx.scale(1.6, 0.35)
+            ctx.arc(0, 0, 1, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(0.08, 0.06, 0.05, 0.85)
+            ctx.fill()
+    elif kind == "monster":                                      # the Pit Muncher waits in the floor
+        mx = (x0 + x1) / 2
+        awake = met is not None and st >= met["t"] - 0.6
+        if not awake:                                            # sleeping: just the eyes peeking out
+            blink = 0.15 if (t % 2.6) < 0.12 else 1.0
+            for ex in (-0.35, 0.35):
+                ctx.save()
+                ctx.translate(mx + ex, floor + 0.85)
+                ctx.scale(0.22, 0.26 * blink)
+                ctx.arc(0, 0, 1, 0, 2 * math.pi)
+                ctx.restore()
+                ctx.set_source_rgb(1, 0.95, 0.4)
+                ctx.fill()
+                ctx.arc(mx + ex + 0.04, floor + 0.85, 0.08 * blink, 0, 2 * math.pi)
+                ctx.set_source_rgb(0.1, 0.05, 0.12)
+                ctx.fill()
+
+
+def draw_muncher_bite(ctx, L, s, st):
+    """The Pit Muncher rises and bites (in front of the car), then sinks back with it and burps."""
+    met = L.get("content")
+    if not met or met["kind"] != "monster":
+        return
+    a = st - met["t"]
+    if a < -0.6 or a > 3.2:
+        return
+    x0, x1, d = PITS[met["pit"]]
+    mx, floor = s["cx"], met["y"]
+    rise = min(1.0, (a + 0.6) / 0.6) * (1.0 if a < 1.6 else max(0.0, 1 - (a - 1.6) / 1.2))
+    h = (L["v"]["body"][1] + 2.4) * rise
+    w = max(1.6, L["v"]["body"][0] * 0.55)
+    ctx.save()
+    poly(ctx, pit_poly(x0, x1))
+    ctx.clip()
+    ctx.move_to(mx - w, floor)                                   # body
+    ctx.curve_to(mx - w, floor + h * 0.8, mx - w * 0.7, floor + h, mx, floor + h)
+    ctx.curve_to(mx + w * 0.7, floor + h, mx + w, floor + h * 0.8, mx + w, floor)
+    ctx.close_path()
+    ctx.set_source_rgb(*lit(MUNCHER))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.2, 0.08, 0.25)
+    ctx.set_line_width(0.08)
+    ctx.stroke()
+    jaw = 0.9 if a < 0.0 else max(0.0, 0.9 - (a / 0.25))          # mouth open, then CHOMP
+    for side in (-1, 1):                                         # teeth along both jaws
+        for k in range(5):
+            tx = mx - w * 0.8 + k * w * 0.4
+            ty = floor + h * (0.55 + 0.25 * side * jaw)
+            poly(ctx, [(tx - 0.15, ty), (tx, ty - 0.3 * side), (tx + 0.15, ty)])
+            ctx.set_source_rgb(1, 1, 0.95)
+            ctx.fill()
+    for ex in (-0.45, 0.45):                                     # eyes on top
+        ctx.arc(mx + ex, floor + h + 0.15, 0.28, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 0.95, 0.4)
+        ctx.fill()
+        ctx.arc(mx + ex + 0.05, floor + h + 0.15, 0.11, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.1, 0.05, 0.12)
+        ctx.fill()
+    ctx.restore()
+
+
+def draw_bomb_blast(ctx, L, st):
+    """Cartoon blast when a car lands on the bomb: flash ring, fireball, flying soot (user asked for bombs)."""
+    met = L.get("content")
+    if not met or met["kind"] != "bomb":
+        return
+    a = st - met["t"]
+    if a < 0 or a > 1.4:
+        return
+    bx, by = met["x"], met["y"] + 1.0
+    ctx.arc(bx, by, 0.5 + 6.0 * a, 0, 2 * math.pi)               # shock ring
+    ctx.set_source_rgba(1, 1, 0.85, max(0.0, 0.7 - a))
+    ctx.set_line_width(0.25)
+    ctx.stroke()
+    if a < 0.7:
+        r = 0.8 + 3.0 * min(1.0, a / 0.25)
+        g = cairo.RadialGradient(bx, by, 0.1, bx, by, r)
+        g.add_color_stop_rgba(0, 1, 1, 0.8, 0.95 * (1 - a / 0.7))
+        g.add_color_stop_rgba(0.5, 1, 0.6, 0.1, 0.85 * (1 - a / 0.7))
+        g.add_color_stop_rgba(1, 0.9, 0.2, 0.0, 0.0)
+        ctx.arc(bx, by, r, 0, 2 * math.pi)
+        ctx.set_source(g)
+        ctx.fill()
+
+
 def draw_face(ctx, vk, mood, t):
     f = FACES[vk]
     r = f["r"]
@@ -2644,7 +2918,7 @@ def yaw_scale(yaw):
 
 def melt_amount(L, st):
     """0..1 how far the body has melted in a lava pit."""
-    if PIT_KIND != "lava" or L.get("sunk") is None or st < L["sunk"]:
+    if L.get("sunk_kind") != "lava" or L.get("sunk") is None or st < L["sunk"]:
         return 0.0
     return min(1.0, (st - L["sunk"]) / 2.2)
 
@@ -2810,6 +3084,7 @@ def draw_effects(ctx, L, s, st):
     for sp in splash_events(L):
         if 0 <= st - sp["t"] < 1.6:
             (draw_lava_splash if sp["kind"] == "lava" else draw_water_splash)(ctx, sp, st - sp["t"])
+    draw_bomb_blast(ctx, L, st)
     ev = L["event"]
     if ev["type"] != "win" and st >= ev["t"] + 0.4:   # dizzy stars
         top = s["cy"] + L["v"]["body"][1] / 2 + 1.0
@@ -2821,20 +3096,24 @@ def draw_effects(ctx, L, s, st):
 
 def draw_pit_front(ctx, L, s, st):
     """Liquid in front of the car: opaque lava hides the sunk part, water is see-through."""
-    if PIT_KIND not in PIT_FILL:
-        return
-    for x0, x1, d in PITS:
-        sy = pit_surface(d)
+    for pi_, (x0, x1, d) in enumerate(PITS):
+        kind = pit_kind(pi_)
+        if kind not in PIT_FILL:
+            continue
+        sy = pit_surface(d, kind)
+        ctx.save()
+        poly(ctx, pit_poly(x0, x1))
+        ctx.clip()
         ctx.new_path()
         ctx.move_to(x0, -d - 0.1)
         x = x0
         while x <= x1 + 1e-6:
-            wave = 0.06 * math.sin(x * 2.1 + st * (1.6 if PIT_KIND == "lava" else 4.0))
+            wave = 0.06 * math.sin(x * 2.1 + st * (1.6 if kind == "lava" else 4.0))
             ctx.line_to(x, sy + wave)
             x += 0.2
         ctx.line_to(x1, -d - 0.1)
         ctx.close_path()
-        if PIT_KIND == "lava":
+        if kind == "lava":
             g = cairo.LinearGradient(0, -d, 0, sy)
             g.add_color_stop_rgb(0, 0.8, 0.15, 0.02)
             g.add_color_stop_rgb(0.7, 1.0, 0.45, 0.05)
@@ -2858,14 +3137,16 @@ def draw_pit_front(ctx, L, s, st):
             ctx.move_to(x0, sy)
             ctx.line_to(x1, sy)
             ctx.stroke()
-    if L.get("sunk") is None or st < L["sunk"]:
+        ctx.restore()
+    draw_muncher_bite(ctx, L, s, st)
+    if L.get("sunk") is None or st < L["sunk"] or L.get("sunk_kind") not in PIT_FILL:
         return
     age = st - L["sunk"]
     x0, x1, d = next(((a, b, dd) for a, b, dd in PITS if a <= s["cx"] <= b), (None, None, None))
     if x0 is None:
         return
-    sy = pit_surface(d)
-    if PIT_KIND == "lava":                                       # glowing ring where the car meets the lava
+    sy = pit_surface(d, L.get("sunk_kind"))
+    if L.get("sunk_kind") == "lava":                             # glowing ring where the car meets the lava
         rg = cairo.RadialGradient(s["cx"], sy, 0.2, s["cx"], sy, L["v"]["body"][0] * 0.8)
         rg.add_color_stop_rgba(0, 1, 0.95, 0.4, 0.8)
         rg.add_color_stop_rgba(1, 1, 0.5, 0.05, 0.0)
@@ -2915,8 +3196,10 @@ def splash_events(L):
         d = next((dd for a, b, dd in PITS if a <= rec["cx"][i] <= b), 3.0)
         prev = max(0, i - 3)
         vy = abs(rec["cy"][i] - rec["cy"][prev]) * REC_HZ / 3
-        out.append(dict(t=L["sunk"], x=float(rec["cx"][i]), y=pit_surface(d), speed=max(6.0, vy),
-                        kind="lava" if PIT_KIND == "lava" else "water", big=True))
+        if L.get("sunk_kind", PIT_KIND) in PIT_FILL:
+            kd = L.get("sunk_kind") or PIT_KIND
+            out.append(dict(t=L["sunk"], x=float(rec["cx"][i]), y=pit_surface(d, kd), speed=max(6.0, vy),
+                            kind="lava" if kd == "lava" else "water", big=True))
     L["_splashes"] = out
     return out
 
@@ -3061,7 +3344,7 @@ def draw_fire(ctx, L, s, st):
     if L.get("burned") is None or st < L["burned"]:
         return
     age = st - L["burned"]
-    sunk = L.get("sunk") is not None and PIT_KIND == "lava"
+    sunk = L.get("sunk") is not None and L.get("sunk_kind") == "lava"
     size = (1.0 if sunk else 0.7) * min(1.0, age / 0.25)
     v = L["v"]
     bw, bh = v["body"]
@@ -3480,6 +3763,8 @@ def draw_frame(ctx, g):
     z *= zoom_punch(L, st)
     shx, shy = shake_offset(L, st)
     s = car_state(L, st)
+    global _CUR_L
+    _CUR_L = (L, st)
     draw_sky(ctx, camx, camy, z)
     ctx.save()
     ctx.translate(540 + shx, GROUND_Y + shy)
@@ -3588,6 +3873,10 @@ def main():
     if args.theme:
         force.update(zip(("time", "weather", "location"), args.theme.split(",")))
     make_theme(args.seed, force or None, used=[e.get("theme", "") for e in active if e.get("theme")])
+    global ACTIVE, AUTO_PLAN, PLAN
+    ACTIVE = active
+    if replace:                                              # approved episode: its own layout, never a new one
+        AUTO_PLAN, PLAN = False, replace.get("plan")
     make_track(series, args.seed)
     make_story(series, args.seed, appearances, wins)
     if replace:                                              # keep the approved cast
@@ -3645,6 +3934,9 @@ def main():
         et = run["event"]["type"]
         if run.get("spun") and f"{et}_spun" in lines:            # hydroplaned before the fail
             et = f"{et}_spun"
+        met = (run.get("content") or {}).get("kind") or (run.get("sunk_kind") if run.get("sunk") is not None else None)
+        if et != "win" and met in CONTENT_LINES and PIT_FILLS:   # say what was in the pit (planned tracks)
+            return CONTENT_LINES[met].format(n=VEHICLES[vk]["nick"])
         tmpl = WIN_LINE if et == "win" else lines[et]
         return tmpl.format(n=VEHICLES[vk]["nick"])
 
@@ -3694,6 +3986,7 @@ def main():
                  created=render_date, render_date=render_date, vehicles=[vk for vk, _ in STORY],
                  track_id=f"{TRACK_ID}@{THEME_ID}", theme=THEME_ID, voice=VOICE,
                  outcomes=outcome_tags(), duration=round(total, 2), status="ANALYZED",
+                 plan=PLAN, structure=variety.potholes_signature(PLAN) if PLAN else None,
                  folder=folder_rel, audit=f"{folder_rel}/{name}_audit.md",
                  episode=None, season=None, upload_date=None, youtube_url=None)
     fingerprint = registry.fingerprint(entry)
@@ -3763,11 +4056,12 @@ def main():
             turns = max(1, int(round(abs(yaws[max(0, end - 1)]) / (2 * math.pi)))) if end else 1
             o0, o1 = out_time(L, L["spun"]), out_time(L, L["spun"] + end / REC_HZ)
             place(sfx, synth_spin(max(0.3, o1 - o0), turns), st0 + o0, 0.8)
-        if PIT_KIND == "lava" and (PITS or VENTS):              # lava pools bubbling, louder when near
+        if any_lava() and (PITS or VENTS):                       # lava pools bubbling, louder when near
             dur_live = out_time(L, L["live_end"])
             bed = synth_lava_bed(dur_live, seed=89 + li)
             ts = np.arange(0, L["live_end"], 0.1)
-            hz_x = [(a + b) / 2 for a, b, _ in PITS] + [vv["x"] for vv in VENTS]
+            hz_x = [(a + b) / 2 for i_, (a, b, _) in enumerate(PITS) if pit_kind(i_) == "lava"] + \
+                [vv["x"] for vv in VENTS]
             gains = [float(np.clip(1.1 - min(abs(interp(rec["cx"], tt) - hx) for hx in hz_x) / 14, 0.08, 1.0))
                      for tt in ts]
             og = np.interp(np.arange(len(bed)) / SR, [out_time(L, tt) for tt in ts], gains)
@@ -3784,8 +4078,21 @@ def main():
                 cx_then = float(interp(rec["cx"], t_er + 0.35))
                 gain = float(np.clip(1.1 - abs(cx_then - vent["x"]) / 22, 0.15, 1.0))
                 place(sfx, synth_eruption(seed=43 + vi * 7 + k), st0 + out_time(L, t_er), 0.9 * gain)
-        sunk_lava = L.get("sunk") is not None and PIT_KIND == "lava"
-        if L.get("sunk") is not None and PIT_KIND == "water":   # plunge into the water pool + glugging
+        sunk_lava = L.get("sunk") is not None and L.get("sunk_kind") == "lava"
+        met = L.get("content")
+        if met:                                                  # pit contents: spikes / bomb / Pit Muncher
+            o = st0 + out_time(L, met["t"])
+            if met["kind"] == "spikes":
+                place(sfx, synth_impact(1.0, seed=301), o, 1.0)
+                place(sfx, synth_tire_pop(), o + 0.05, 0.9)
+                place(sfx, synth_tire_pop(seed=8), o + 0.22, 0.7)
+            elif met["kind"] == "bomb":
+                place(sfx, synth_boom(), o, 1.0)
+            elif met["kind"] == "monster":
+                place(sfx, synth_growl(), o - 0.6, 0.8)
+                place(sfx, synth_impact(0.8, seed=303), o, 0.9)
+                place(sfx, synth_gurgle(seed=87), o + 1.2, 0.6)
+        if L.get("sunk") is not None and L.get("sunk_kind") == "water":   # plunge into the water pool + glugging
             place(sfx, synth_splash(1.0, seed=45, big=True), st0 + out_time(L, L["sunk"]), 1.0)
             place(sfx, synth_gurgle(), st0 + out_time(L, L["sunk"]) + 0.6, 0.6)
         if sunk_lava:
@@ -3825,7 +4132,7 @@ def main():
             if L["event"]["type"] == "crash" and ta <= L["event"]["t"] < tb:
                 place(sfx, stretch(synth_wall_crash(1.0), 0.5), r0 + (L["event"]["t"] - ta) / REPLAY_SPEED, 1.0)
             if L.get("sunk") is not None and ta <= L["sunk"] < tb:
-                sig = synth_lava_plunge() if PIT_KIND == "lava" else synth_splash(1.0, seed=45, big=True)
+                sig = synth_lava_plunge() if L.get("sunk_kind") == "lava" else synth_splash(1.0, seed=45, big=True)
                 place(sfx, stretch(sig, 0.6), r0 + (L["sunk"] - ta) / REPLAY_SPEED, 1.0)
             elif L.get("burned") is not None and ta <= L["burned"] < tb:
                 place(sfx, stretch(synth_ignite(), 0.6), r0 + (L["burned"] - ta) / REPLAY_SPEED, 0.9)
