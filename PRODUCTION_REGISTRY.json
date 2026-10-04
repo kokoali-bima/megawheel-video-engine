@@ -2636,10 +2636,10 @@
         "win+dodge_pothole"
       ],
       "duration": 35.7,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E031_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E031_2026-10-03_race25d/SIM_RACE25D_V3_S011_audit.md",
-      "episode": 31,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E031_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E031_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S011_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2648,7 +2648,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E031_SIM_RACE25D_V3_S011.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 31 #Shorts"
+      "title": "Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S036",
+      "replaced_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V3_S012",
@@ -2710,10 +2712,10 @@
         "win+bump"
       ],
       "duration": 37.24,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E037_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E037_2026-10-03_race25d/SIM_RACE25D_V3_S013_audit.md",
-      "episode": 37,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E037_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E037_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S013_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2722,7 +2724,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E037_SIM_RACE25D_V3_S013.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Hydro Survive the Giant Hammer? 🏁 | Ep. 37 #Shorts"
+      "title": "Can Hydro Survive the Giant Hammer? 🏁 | Ep. 37 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S040",
+      "replaced_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V3_S014",
@@ -2782,10 +2786,10 @@
         "p4+hammer"
       ],
       "duration": 36.14,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E040_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E040_2026-10-03_race25d/SIM_RACE25D_V3_S015_audit.md",
-      "episode": 40,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E040_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E040_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S015_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2794,7 +2798,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E040_SIM_RACE25D_V3_S015.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Buster Survive the Giant Hammer? 🏁 | Ep. 40 #Shorts"
+      "title": "Can Buster Survive the Giant Hammer? 🏁 | Ep. 40 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S037",
+      "replaced_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V3_S016",
@@ -2961,10 +2967,10 @@
         "finish_gap": 90.2
       },
       "structure": "late_pair|hammer,laser,ramp",
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E049_2026-10-04_race25d",
-      "audit": "renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018_audit.md",
-      "episode": 49,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E049_2026-10-04_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E049_2026-10-04_race25d_replaced/SIM_RACE25D_V4_S018_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2972,7 +2978,9 @@
       "drive_id": "1xeF3_xt73_wBRLKJx850_a9AI2B3pePv",
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E049_SIM_RACE25D_V4_S018.mp4",
       "approved_date": "2026-10-04",
-      "title": "Can Buster Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts"
+      "title": "Can Buster Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S043",
+      "replaced_date": "2026-10-04"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S029",
@@ -3841,16 +3849,19 @@
       },
       "structure": "early_pair|crusher,dragon_fire,oil",
       "title_base": "Can Zippy Survive the Oil Slick? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036/SIM_RACE25D_V4_S036_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E031_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E031_2026-10-04_race25d/SIM_RACE25D_V4_S036_audit.md",
+      "episode": 31,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1qiDgNZKgL6Cu9FsrcU-kAwKnIvK-YkiJ",
+      "drive_sheet_id": null,
       "drive_id": "1fL0CRe39YEMpedaHrvciePGEGoiBLc1k",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S036.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E031_SIM_RACE25D_V4_S036.mp4",
+      "approved_date": "2026-10-04",
+      "title": "Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S011"
     },
     {
       "video_id": "SIM_RACE25D_V4_S037",
@@ -3883,16 +3894,19 @@
       },
       "structure": "gauntlet|dragon_fire,lava,oil",
       "title_base": "Can Siren Survive the Oil Slick? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037/SIM_RACE25D_V4_S037_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E040_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E040_2026-10-04_race25d/SIM_RACE25D_V4_S037_audit.md",
+      "episode": 40,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Ll-NtTAqvsinw2I_kHtHJp9bGsfqHvBy",
+      "drive_sheet_id": null,
       "drive_id": "1SAaPHAlTReTMpBdMh1NHHkur-jFxo5Nz",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S037.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E040_SIM_RACE25D_V4_S037.mp4",
+      "approved_date": "2026-10-04",
+      "title": "Can Siren Survive the Oil Slick? 🏁 | Ep. 40 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S015"
     },
     {
       "video_id": "SIM_RACE25D_V4_S038",
@@ -4009,16 +4023,19 @@
       },
       "structure": "gauntlet|laser,meteor,oil",
       "title_base": "Can Tilly Survive the Meteors? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040/SIM_RACE25D_V4_S040_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E037_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E037_2026-10-04_race25d/SIM_RACE25D_V4_S040_audit.md",
+      "episode": 37,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1TsVmwU8xTNAkaquB22utoAGs3MWlfPoi",
+      "drive_sheet_id": null,
       "drive_id": "1AeXWGClkk6g-c800U7SVs6DvBDMvi4wD",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S040.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E037_SIM_RACE25D_V4_S040.mp4",
+      "approved_date": "2026-10-04",
+      "title": "Can Tilly Survive the Meteors? 🏁 | Ep. 37 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S013"
     },
     {
       "video_id": "SIM_RACE25D_V4_S041",
@@ -4132,16 +4149,19 @@
       },
       "structure": "early_pair|crusher,hammer,ramp",
       "title_base": "Can Siren Survive the Giant Hammer? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043/SIM_RACE25D_V4_S043_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E049_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S043_audit.md",
+      "episode": 49,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1X8Pk_24aRyeg9Po8Iy6JuG8pTBklXSEO",
+      "drive_sheet_id": null,
       "drive_id": "1dsGC2S1jDFsohI_jiETSj0ohl1Hdq1-f",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S043.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E049_SIM_RACE25D_V4_S043.mp4",
+      "approved_date": "2026-10-04",
+      "title": "Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
+      "replaces": "SIM_RACE25D_V4_S018"
     }
   ]
 }

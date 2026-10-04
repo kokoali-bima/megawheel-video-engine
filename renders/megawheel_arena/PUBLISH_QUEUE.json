@@ -250,7 +250,7 @@
   },
   {
    "episode": 31,
-   "video_id": "SIM_RACE25D_V3_S011",
+   "video_id": "SIM_RACE25D_V4_S036",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-09T19:00:00Z",
    "role": "race"
@@ -292,7 +292,7 @@
   },
   {
    "episode": 37,
-   "video_id": "SIM_RACE25D_V3_S013",
+   "video_id": "SIM_RACE25D_V4_S040",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-11T19:00:00Z",
    "role": "race"
@@ -313,7 +313,7 @@
   },
   {
    "episode": 40,
-   "video_id": "SIM_RACE25D_V3_S015",
+   "video_id": "SIM_RACE25D_V4_S037",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-12T19:00:00Z",
    "role": "race"
@@ -376,7 +376,7 @@
   },
   {
    "episode": 49,
-   "video_id": "SIM_RACE25D_V4_S018",
+   "video_id": "SIM_RACE25D_V4_S043",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-15T19:00:00Z",
    "role": "race"

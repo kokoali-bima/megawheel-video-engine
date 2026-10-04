@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S036",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 36,
@@ -69,7 +69,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Zippy Survive the Oil Slick? 🏁",
-  "title": "Can Zippy Survive the Oil Slick? 🏁 #Shorts",
+  "title": "Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
   "description": "Sprinkles, Rocky, Tilly and Zippy race to the finish line! 🏁 Obstacles today: crusher, dragon_fire, oil! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -100,6 +100,10 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036/SIM_RACE25D_V4_S036.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-04_race25d/SIM_RACE25D_V4_S036.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-04_race25d/preview",
+  "episode": 31,
+  "season": 2,
+  "approved_date": "2026-10-04",
+  "replaces": "SIM_RACE25D_V3_S011"
 }

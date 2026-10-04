@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 10:02) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 14:55) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -44,16 +44,16 @@
 | 28 | `SIM_SMASH25D_V4_S014` | smash25d | APPROVED | Thu 2026-10-08 19:00 |  |
 | 29 | `SIM_SMASH25D_V4_S015` | smash25d | APPROVED | Fri 2026-10-09 19:00 |  |
 | 30 | `SIM_POTHOLES_V2_S021` | potholes | APPROVED | Sun 2026-10-11 11:00 |  |
-| 31 | `SIM_RACE25D_V3_S011` | race25d | APPROVED | Fri 2026-10-09 15:00 |  |
+| 31 | `SIM_RACE25D_V4_S036` | race25d | APPROVED | Fri 2026-10-09 15:00 |  |
 | 32 | `SIM_SMASH25D_V5_S002` | smash25d | APPROVED | Sat 2026-10-10 19:00 |  |
 | 33 | `SIM_POTHOLES_V2_S022` | potholes | APPROVED | Mon 2026-10-12 11:00 |  |
 | 34 | `SIM_RACE25D_V3_S012` | race25d | APPROVED | Sat 2026-10-10 15:00 |  |
 | 35 | `SIM_SMASH25D_V5_S003` | smash25d | APPROVED | Sun 2026-10-11 19:00 |  |
 | 36 | `SIM_LAVA_POTHOLES_V2_S025` | lava_potholes | APPROVED | Tue 2026-10-13 11:00 |  |
-| 37 | `SIM_RACE25D_V3_S013` | race25d | APPROVED | Sun 2026-10-11 15:00 |  |
+| 37 | `SIM_RACE25D_V4_S040` | race25d | APPROVED | Sun 2026-10-11 15:00 |  |
 | 38 | `SIM_SMASH25D_V5_S004` | smash25d | APPROVED | Mon 2026-10-12 19:00 |  |
 | 39 | `SIM_POTHOLES_V2_S027` | potholes | APPROVED | Wed 2026-10-14 11:00 |  |
-| 40 | `SIM_RACE25D_V3_S015` | race25d | APPROVED | Mon 2026-10-12 15:00 |  |
+| 40 | `SIM_RACE25D_V4_S037` | race25d | APPROVED | Mon 2026-10-12 15:00 |  |
 | 41 | `SIM_SMASH25D_V5_S005` | smash25d | APPROVED | Tue 2026-10-13 19:00 |  |
 | 42 | `SIM_LAVA_POTHOLES_V2_S026` | lava_potholes | APPROVED | Thu 2026-10-15 11:00 |  |
 | 43 | `SIM_RACE25D_V3_S016` | race25d | APPROVED | Tue 2026-10-13 15:00 |  |
@@ -62,7 +62,7 @@
 | 46 | `SIM_RACE25D_V3_S017` | race25d | APPROVED | Wed 2026-10-14 15:00 |  |
 | 47 | `SIM_SMASH25D_V5_S009` | smash25d | APPROVED | Thu 2026-10-15 19:00 |  |
 | 48 | `SIM_POTHOLES_V2_S031` | potholes | APPROVED | Sat 2026-10-17 11:00 |  |
-| 49 | `SIM_RACE25D_V4_S018` | race25d | APPROVED | Thu 2026-10-15 15:00 |  |
+| 49 | `SIM_RACE25D_V4_S043` | race25d | APPROVED | Thu 2026-10-15 15:00 |  |
 | 50 | `SIM_POTHOLES_V2_S028` | potholes | APPROVED | Sun 2026-10-18 11:00 |  |
 | 51 | `SIM_POTHOLES_V2_S029` | potholes | APPROVED | Mon 2026-10-19 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
@@ -458,16 +458,16 @@
 - **Antrian:** QUEUED 2026-10-11T15:00:00Z
 - **YouTube:** belum diupload
 
-## Ep. 31 — `SIM_RACE25D_V3_S011`
+## Ep. 31 — `SIM_RACE25D_V4_S036`
 
-- **Judul YouTube:** Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 31 #Shorts
-- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-03_race25d/SIM_RACE25D_V3_S011.mp4`
-- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-03_race25d/SIM_RACE25D_V3_S011.json` · audit: `renders/megawheel_arena/S02/E031_2026-10-03_race25d/SIM_RACE25D_V3_S011_audit.md`
-- **Season / seri / seed:** S02 / race25d / 11
-- **Tema / narator:** morning-clear-countryside / chatterbox:f1
-- **Durasi:** 35.7 s
-- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2+bump; Level 2: Grizzly (monster2) → p4+dragon_fire; Level 3 (juara): Nitro (f1) → p3+oil; Level 4: Siren (police) → win+dodge_pothole
-- **Status:** APPROVED (approve 2026-10-03)
+- **Judul YouTube:** Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-04_race25d/SIM_RACE25D_V4_S036.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E031_2026-10-04_race25d/SIM_RACE25D_V4_S036.json` · audit: `renders/megawheel_arena/S02/E031_2026-10-04_race25d/SIM_RACE25D_V4_S036_audit.md`
+- **Season / seri / seed:** S02 / race25d / 36
+- **Tema / narator:** night-clear-countryside / chatterbox:f1
+- **Durasi:** 37.04 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2+dodge_crusher; Level 2: Rocky (monster) → p4+dragon_fire+bump; Level 3 (juara): Tilly (taxi) → win; Level 4: Zippy (sports) → p3+oil
+- **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-09T19:00:00Z
 - **YouTube:** belum diupload
 
@@ -536,16 +536,16 @@
 - **Antrian:** QUEUED 2026-10-13T15:00:00Z
 - **YouTube:** belum diupload
 
-## Ep. 37 — `SIM_RACE25D_V3_S013`
+## Ep. 37 — `SIM_RACE25D_V4_S040`
 
-- **Judul YouTube:** Can Hydro Survive the Giant Hammer? 🏁 | Ep. 37 #Shorts
-- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E037_2026-10-03_race25d/SIM_RACE25D_V3_S013.mp4`
-- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E037_2026-10-03_race25d/SIM_RACE25D_V3_S013.json` · audit: `renders/megawheel_arena/S02/E037_2026-10-03_race25d/SIM_RACE25D_V3_S013_audit.md`
-- **Season / seri / seed:** S02 / race25d / 13
-- **Tema / narator:** sunset-clear-desert / chatterbox:f1
-- **Durasi:** 37.24 s
-- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p2+puddle; Level 2: Grizzly (monster2) → p4+hammer; Level 3 (juara): Tilly (taxi) → p3+dragon_ice; Level 4: Zippy (sports) → win+bump
-- **Status:** APPROVED (approve 2026-10-03)
+- **Judul YouTube:** Can Tilly Survive the Meteors? 🏁 | Ep. 37 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E037_2026-10-04_race25d/SIM_RACE25D_V4_S040.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E037_2026-10-04_race25d/SIM_RACE25D_V4_S040.json` · audit: `renders/megawheel_arena/S02/E037_2026-10-04_race25d/SIM_RACE25D_V4_S040_audit.md`
+- **Season / seri / seed:** S02 / race25d / 40
+- **Tema / narator:** noon-clear-countryside / chatterbox:f1
+- **Durasi:** 35.25 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p4+laser; Level 2: Rocky (monster) → p2+dodge_oil; Level 3 (juara): Tilly (taxi) → p3+meteor; Level 4: Zippy (sports) → win
+- **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-11T19:00:00Z
 - **YouTube:** belum diupload
 
@@ -575,16 +575,16 @@
 - **Antrian:** QUEUED 2026-10-14T15:00:00Z
 - **YouTube:** belum diupload
 
-## Ep. 40 — `SIM_RACE25D_V3_S015`
+## Ep. 40 — `SIM_RACE25D_V4_S037`
 
-- **Judul YouTube:** Can Buster Survive the Giant Hammer? 🏁 | Ep. 40 #Shorts
-- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E040_2026-10-03_race25d/SIM_RACE25D_V3_S015.mp4`
-- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E040_2026-10-03_race25d/SIM_RACE25D_V3_S015.json` · audit: `renders/megawheel_arena/S02/E040_2026-10-03_race25d/SIM_RACE25D_V3_S015_audit.md`
-- **Season / seri / seed:** S02 / race25d / 15
-- **Tema / narator:** noon-clear-beach / chatterbox:f1
-- **Durasi:** 36.14 s
-- **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Rocky (monster) → p3+wall; Level 3 (juara): Zippy (sports) → p2+dodge_crusher; Level 4: Nitro (f1) → p4+hammer
-- **Status:** APPROVED (approve 2026-10-03)
+- **Judul YouTube:** Can Siren Survive the Oil Slick? 🏁 | Ep. 40 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E040_2026-10-04_race25d/SIM_RACE25D_V4_S037.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E040_2026-10-04_race25d/SIM_RACE25D_V4_S037.json` · audit: `renders/megawheel_arena/S02/E040_2026-10-04_race25d/SIM_RACE25D_V4_S037_audit.md`
+- **Season / seri / seed:** S02 / race25d / 37
+- **Tema / narator:** morning-snow-city / chatterbox:f1
+- **Durasi:** 35.79 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p4+dragon_fire; Level 2: Grizzly (monster2) → p2+dodge_lava; Level 3 (juara): Tilly (taxi) → win; Level 4: Siren (police) → p3+oil
+- **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-12T19:00:00Z
 - **YouTube:** belum diupload
 
@@ -692,15 +692,15 @@
 - **Antrian:** QUEUED 2026-10-17T15:00:00Z
 - **YouTube:** belum diupload
 
-## Ep. 49 — `SIM_RACE25D_V4_S018`
+## Ep. 49 — `SIM_RACE25D_V4_S043`
 
-- **Judul YouTube:** Can Buster Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts
-- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018.mp4`
-- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018.json` · audit: `renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018_audit.md`
-- **Season / seri / seed:** S02 / race25d / 18
-- **Tema / narator:** noon-snow-mountains / chatterbox:m1
-- **Durasi:** 35.82 s
-- **Tokoh dan hasil:** Level 1: Buster (bus) → p3+ramp; Level 2: Grizzly (monster2) → p2; Level 3 (juara): Zippy (sports) → win+dodge_laser; Level 4: Nitro (f1) → p4+hammer
+- **Judul YouTube:** Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S043.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S043.json` · audit: `renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S043_audit.md`
+- **Season / seri / seed:** S02 / race25d / 43
+- **Tema / narator:** night-rain-city / chatterbox:f1
+- **Durasi:** 39.04 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p3+dodge_crusher; Level 2: Rocky (monster) → p2; Level 3 (juara): Tilly (taxi) → win+ramp; Level 4: Siren (police) → p4+hammer
 - **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-15T19:00:00Z
 - **YouTube:** belum diupload

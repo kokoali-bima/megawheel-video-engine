@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 10:02). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 14:55). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -37,16 +37,16 @@
 | 28 | S01 | smash25d | Hydro, Rocky, Nitro, Tilly | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 29 | S01 | smash25d | Buster, Grizzly, Nitro, Zippy | 2026-10-01 | 2026-10-01 |  | APPROVED |  |  |  |  |  |
 | 30 | S01 | potholes | Siren, Titan, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 31 | S02 | race25d | Sprinkles, Grizzly, Nitro, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 31 | S02 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 32 | S02 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 33 | S02 | potholes | Tilly, Sprinkles, Hydro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 34 | S02 | race25d | Titan, Rocky, Zippy, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 35 | S02 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 36 | S02 | lava_potholes | Nitro, Sprinkles, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 37 | S02 | race25d | Hydro, Grizzly, Tilly, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 37 | S02 | race25d | Buster, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 38 | S02 | smash25d | Hydro, Grizzly, Tilly, Nitro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 39 | S02 | potholes | Nitro, Hydro, Buster | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 40 | S02 | race25d | Buster, Rocky, Zippy, Nitro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 40 | S02 | race25d | Hydro, Grizzly, Tilly, Siren | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 41 | S02 | smash25d | Sprinkles, Rocky, Zippy, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 42 | S02 | lava_potholes | Siren, Titan, Nitro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 43 | S02 | race25d | Sprinkles, Rocky, Siren, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
@@ -55,7 +55,7 @@
 | 46 | S02 | race25d | Titan, Grizzly, Tilly, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 47 | S02 | smash25d | Buster, Grizzly, Tilly, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 48 | S02 | potholes | Siren, Hydro, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
-| 49 | S02 | race25d | Buster, Grizzly, Zippy, Nitro | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
+| 49 | S02 | race25d | Titan, Rocky, Tilly, Siren | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 50 | S02 | potholes | Nitro, Hydro, Sprinkles | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 51 | S02 | potholes | Siren, Titan, Nitro | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
@@ -65,7 +65,9 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_RACE25D_V4_S038 | race25d | Buster, Rocky, Nitro, Zippy | 2026-10-04 | 34.02 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038` |
+| SIM_RACE25D_V4_S039 | race25d | Titan, Grizzly, Nitro, Siren | 2026-10-04 | 38.41 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039` |
+| SIM_RACE25D_V4_S042 | race25d | Hydro, Grizzly, Nitro, Siren | 2026-10-04 | 36.65 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042` |
 
 ## Ditolak
 
