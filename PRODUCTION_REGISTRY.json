@@ -3024,6 +3024,63 @@
       "drive_sheet_id": "1Hq0NRV8upbTZoMsgsEnPJLopLPhhcsrV",
       "drive_id": "19a3Qh-K20bBpiCFKxodBQVMZuRSNYsob",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S029.mp4"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S031",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 31,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "police",
+        "firetruck",
+        "sports"
+      ],
+      "track_id": "potholes_1983c5c3@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "stuck@obs1+broken",
+        "pit@obs0+broken",
+        "win"
+      ],
+      "duration": 50.03,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "ramp_first",
+        "pits": [
+          {
+            "kind": "RP",
+            "size": "L",
+            "shape": "box",
+            "fill": "rubble"
+          },
+          {
+            "kind": "P",
+            "size": "M",
+            "shape": "v",
+            "fill": "bomb"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "narrow_deep",
+            "fill": "spikes"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "ramp_first|box-L-rubble,v-M-bomb,narrow_deep-S-spikes",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_potholes_s031",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_potholes_s031/SIM_POTHOLES_V2_S031_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1KzduyMh8NJvVleMgJe-vFu1qCzSxchzo",
+      "drive_id": "1ld_S7x7fFGZ7nOu5yLxBpuZs1dryXHE3",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S031.mp4"
     }
   ]
 }
