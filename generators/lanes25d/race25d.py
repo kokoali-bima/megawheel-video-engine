@@ -639,14 +639,17 @@ def draw_props(ctx, camx, z, seed, back=True):
             ctx.fill()
 
 
-SENSOR = {}                                                       # id(hazard) -> [(t, visible px)] near its hit
+SENSOR = {}                                                       # id(hazard) -> {t: visible px (ground + front)}
+VICTIM_SEEN = {}                                                  # id(car) -> {t: car on screen} around its hit
+TRANSIENT = {"meteor", "ufo", "dragon_fire", "dragon_ice", "laser"}   # strike and vanish: judged around the hit (lava erupts after: stays)
 
 
 def sensed(ctx, fn, hz, camx, t, cars, live):
     """Draw a hazard and, around the moment it hits someone, count the pixels it really put on screen (a visual sensor:
     it sees what the viewer sees, so wrong coordinates / off-screen / invisible hazards are caught by the checks)."""
     tr = hz_trig(hz, cars)
-    if not live or tr is None or not -0.15 <= t - tr <= 0.8:
+    lo = -0.6 if hz["type"] in TRANSIENT else 0.0                # objects that stay: after the hit; strikes: around it
+    if not live or tr is None or not lo <= t - tr <= 1.5:
         fn(ctx, hz, camx, t, cars)
         return
     ctx.push_group()
@@ -656,20 +659,35 @@ def sensed(ctx, fn, hz, camx, t, cars, live):
     surf.flush()
     w, h, stride = surf.get_width(), surf.get_height(), surf.get_stride()
     alpha = np.frombuffer(surf.get_data(), np.uint8).reshape(h, stride // 4, 4)[:, :w, 3]
-    SENSOR.setdefault(id(hz), []).append((t, int((alpha > 24).sum())))
+    per_t = SENSOR.setdefault(id(hz), {})                         # both layers of one frame add up
+    per_t[t] = per_t.get(t, 0) + int((alpha >= 200).sum())       # solid pixels only (no dust / shadows)
     ctx.set_source(pat)
     ctx.paint()
 
 
-def unseen_hazards(cars):
-    """Hazards that hit a car but were (almost) not visible on screen at that moment, by the pixel sensor."""
+def unseen_hazards(cars, warn=None):
+    """Pixel sensor verdict (solid pixels the hazard really put on screen):
+    - the star hazard (title / cold open / replay) must be clearly visible: median >= 1500 px over its window
+      (staying objects 0..0.8 s after the hit, strikes -0.6..+0.3 s);
+    - any other hit hazard: if its victim was on screen, the hazard must appear (max >= 1500 px within 1.5 s) -
+      otherwise the viewer sees a car crash into nothing (the invisible-container bug: 0 px);
+    - victim AND hazard both off screen (camera on another moment): only a warning (appended to `warn`)."""
     bad = []
-    for c in cars:
-        if c["hz"] is None or c["trig"] is None:
-            continue
-        px = sorted(v for _, v in SENSOR.get(id(c["hz"]), []))
-        if not px or px[len(px) // 2] < 1500:                     # median visible area < ~40x40 px
-            bad.append((nick(c["key"]), c["hz"]["type"], px[len(px) // 2] if px else 0))
+    hits = [c for c in cars if c["hz"] is not None and c["trig"] is not None]
+    star = max(hits, key=star_key, default=None)
+    for c in hits:
+        per_t = SENSOR.get(id(c["hz"]), {})
+        tr_ = c["trig"]
+        win = (-0.6, 0.3) if c["hz"]["type"] in TRANSIENT else (0.0, 0.8)
+        early = sorted(v for tt, v in per_t.items() if win[0] <= tt - tr_ <= win[1])
+        peak = max(per_t.values(), default=0)
+        seen = any(VICTIM_SEEN.get(id(c), {}).values())
+        if c is star and (not early or early[len(early) // 2] < 1500):
+            bad.append((nick(c["key"]), c["hz"]["type"], "star", early[len(early) // 2] if early else 0))
+        elif peak < 1500 and seen:
+            bad.append((nick(c["key"]), c["hz"]["type"], "car on screen, hazard not", peak))
+        elif peak < 1500 and warn is not None:
+            warn.append((nick(c["key"]), c["hz"]["type"], "off screen"))
     return bad
 
 
@@ -1731,6 +1749,10 @@ def main():
         camx -= float(np.clip(over, -9.0, 9.0))                 # (never a cut) brings it back in a few frames
         speed = abs(camx - prev_camx) if prev_camx is not None and not cut else 0.0
         prev_camx, prev_mode = camx, mode
+        if mode == "race":                                       # sensor: was each victim on screen around its hit
+            for c in hits:
+                if -0.6 <= t - c["trig"] <= 1.5:
+                    VICTIM_SEEN.setdefault(id(c), {})[t] = 60 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W - 60
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
             if speed >= 3.0:                                     # inside a whip pan between far-apart cars: allowed
                 pan_empty += 1
@@ -1837,6 +1859,7 @@ def main():
     pj = json.loads(probe.stdout or "{}")
     dur = float(pj.get("format", {}).get("duration", 0))
     kinds = [s["codec_type"] for s in pj.get("streams", [])]
+    offscreen = []                                               # sensor warnings: hits entirely off screen
     checks = {"video+audio streams": "video" in kinds and "audio" in kinds,
               "duration 20-175 s (not capped; Shorts limit)": 20 <= dur <= 175,
               "has winner": winner["finish"] is not None,
@@ -1845,7 +1868,7 @@ def main():
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
               "no frame without a car (whip pans <= 10 frames)": empty_frames == 0 and pan_empty <= 10,
               "realistic order (slower ahead only if the faster one was hit)": not unexplained_upsets(cars),
-              "every hazard that hits is visible on screen (pixel sensor)": not unseen_hazards(cars)}
+              "every hazard that hits is visible on screen (pixel sensor)": not unseen_hazards(cars, offscreen)}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + (f"+{c['hz']['type']}" if c["trig"] is not None else "")
                 + ("+bump" if c["bump_t"] else "") + (f"+dodge_{c['dodged']}" if c.get("dodge_t") else "")
@@ -1872,8 +1895,10 @@ def main():
         json.dump(manifest, fh, indent=2, ensure_ascii=False)
     with open(os.path.join(out_dir, f"{name}_audit.md"), "w") as fh:
         fh.write(f"# Checks {name}\n\n" + "\n".join(f"- {'✅' if ok else '❌'} {k}" for k, ok in checks.items())
-                 + f"\n\nDuration {dur:.1f} s · theme {se.THEME_ID} · voice {voice} · hazards {hz_words}\n")
-    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames} pan_empty={pan_empty} unseen={unseen_hazards(cars)}", flush=True)
+                 + f"\n\nDuration {dur:.1f} s · theme {se.THEME_ID} · voice {voice} · hazards {hz_words}\n"
+                 + (f"\n⚠️ Off-screen hits (sensor warning, not a fail): {offscreen}\n" if offscreen else ""))
+    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames} pan_empty={pan_empty} unseen={unseen_hazards(cars)} offscreen={offscreen} "
+          f"sensor={ {h['type']: sorted(SENSOR.get(id(h), {}).values())[len(SENSOR.get(id(h), {})) // 2] if SENSOR.get(id(h)) else 0 for h in HZ} }", flush=True)
     if not opt.preview_only:
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
