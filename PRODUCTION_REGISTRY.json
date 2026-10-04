@@ -4058,6 +4058,48 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S042",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 42,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_63f605bf@sunset-clear-beach",
+      "theme": "sunset-clear-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2",
+        "win",
+        "p4+dragon_ice+dodge_wall",
+        "p3+container"
+      ],
+      "duration": 36.65,
+      "plan": {
+        "layout": "stagger",
+        "zone": 209.5,
+        "start": 107.8,
+        "finish_gap": 88.3
+      },
+      "structure": "stagger|container,dragon_ice,wall",
+      "title_base": "Can Siren Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042/SIM_RACE25D_V4_S042_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1OAWEMxp5Vtr0WW6THy3C5LHhwM_74O2W",
+      "drive_id": "1oYXNqa1GoXI7bdf2ImScV3zCM8_3zmDd",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S042.mp4"
     }
   ]
 }
