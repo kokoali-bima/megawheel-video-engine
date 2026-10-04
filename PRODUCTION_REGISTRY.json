@@ -3631,6 +3631,47 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S032",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 32,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_e8023b3d@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "win+bump",
+        "p2+oil+dodge_wall",
+        "p4+crusher"
+      ],
+      "duration": 37.02,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 179.0,
+        "start": 105.3,
+        "finish_gap": 112.9
+      },
+      "structure": "late_pair|crusher,oil,wall",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "11noTH6m3JVKoYPc8vqhYoFoud7_At6Bd",
+      "drive_id": "1WbrmIO8Yz22FjeOwxVtCRWRRpmRr1lYW",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S032.mp4"
     }
   ]
 }
