@@ -1677,6 +1677,10 @@ def main():
         prev_mode = mode
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
             empty_frames += 1
+            if empty_frames <= 12:                               # diagnosis: which frames, which focus, where
+                print(f"[25d] empty frame {fi} mode={mode} t={t:.2f} focus={focus['key'] if focus else None} "
+                      f"camx={camx:.1f} zoom={zoom:.2f} cars={[(c['key'], round(st[id(c)][0], 1)) for c in cars]}",
+                      flush=True)
         shx = shy = 0.0
         for kind, et, ex, ez in events:
             if kind in ("land", "bump", "wall", "crusher", "meteor", "hammer", "container") and 0 <= t - et < 0.45:
