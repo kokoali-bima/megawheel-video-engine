@@ -3672,6 +3672,47 @@
       "drive_sheet_id": "11noTH6m3JVKoYPc8vqhYoFoud7_At6Bd",
       "drive_id": "1WbrmIO8Yz22FjeOwxVtCRWRRpmRr1lYW",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S032.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S033",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 33,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_85cf93a0@noon-clear-beach",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2",
+        "win",
+        "p4+dragon_ice",
+        "p3+oil+dodge_lava"
+      ],
+      "duration": 34.05,
+      "plan": {
+        "layout": "stagger",
+        "zone": 163.4,
+        "start": 111.7,
+        "finish_gap": 100.1
+      },
+      "structure": "stagger|dragon_ice,lava,oil",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Q8O1sqsqnC8UAhHrD4lb8i_3n_jGBFE0",
+      "drive_id": "1hetcETP3f7o4QFAJjC8Op1TYwpKcDUTN",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S033.mp4"
     }
   ]
 }
