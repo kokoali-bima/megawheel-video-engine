@@ -3175,6 +3175,47 @@
       "drive_sheet_id": "1_I-_q4EHGWTvC1BxDr8aZ-PfqkpqdmuN",
       "drive_id": "1rT2uD9JlyghIAKlHxEBBAtHspHpmScfl",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S020.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S021",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 21,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_acc60fda@sunset-rain-countryside",
+      "theme": "sunset-rain-countryside",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+ufo",
+        "p3+crusher",
+        "win",
+        "p2+container"
+      ],
+      "duration": 35.4,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 204.7,
+        "start": 102.5,
+        "finish_gap": 94.2
+      },
+      "structure": "early_pair|container,crusher,ufo",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s021",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s021/SIM_RACE25D_V4_S021_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1h74Subq_-ssJ3x8Aex1e4V0DkF69Q5hZ",
+      "drive_id": "1RWr8Sc1RTG2g0LID0z4F9XsQHRoAZwFx",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S021.mp4"
     }
   ]
 }
