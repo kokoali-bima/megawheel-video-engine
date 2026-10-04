@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 08:59). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -65,13 +65,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_RACE25D_V4_S019 | race25d | Titan, Grizzly, Tilly, Zippy | 2026-10-04 | 34.01 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s019` |
-| SIM_RACE25D_V4_S020 | race25d | Buster, Rocky, Tilly, Siren | 2026-10-04 | 36.28 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s020` |
-| SIM_RACE25D_V4_S021 | race25d | Sprinkles, Grizzly, Nitro, Tilly | 2026-10-04 | 35.4 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s021` |
-| SIM_RACE25D_V4_S022 | race25d | Hydro, Rocky, Zippy, Nitro | 2026-10-04 | 37.12 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s022` |
-| SIM_RACE25D_V4_S023 | race25d | Hydro, Grizzly, Siren, Nitro | 2026-10-04 | 34.61 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s023` |
-| SIM_RACE25D_V4_S024 | race25d | Titan, Rocky, Tilly, Siren | 2026-10-04 | 36.91 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s024` |
-| SIM_RACE25D_V4_S025 | race25d | Buster, Rocky, Zippy, Siren | 2026-10-04 | 37.0 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s025` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
@@ -109,3 +103,10 @@
 | SIM_POTHOLES_V2_S023 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |
 | SIM_POTHOLES_V2_S024 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |
 | SIM_RACE25D_V3_S014 | agent QA: same title as SIM_RACE25D_V3_S013 (Can Hydro Survive the Giant Hammer?) | 2026-10-03 |
+| SIM_RACE25D_V4_S019 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S020 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S021 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S022 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S023 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S024 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S025 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
