@@ -3754,6 +3754,47 @@
       "drive_sheet_id": "1jv2C-pkaWoR2cV2_4vp8SZzkQYpaUZ6P",
       "drive_id": "1eNKU2yfUXP3J0RtDYdEP1Czpn4SaUAqE",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S034.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S035",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 35,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_73ee9232@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2+lava",
+        "p3+container",
+        "p4+ufo",
+        "win"
+      ],
+      "duration": 37.2,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 195.5,
+        "start": 109.9,
+        "finish_gap": 112.9
+      },
+      "structure": "early_pair|container,lava,ufo",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1ZPFLfjricrozAFaI5C49gFCPiWOuyxMn",
+      "drive_id": "15FgGg3PUYYTh9PzNiMGcB3C0nmh9sSGa",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S035.mp4"
     }
   ]
 }
