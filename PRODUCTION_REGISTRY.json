@@ -3713,6 +3713,47 @@
       "drive_sheet_id": "1Q8O1sqsqnC8UAhHrD4lb8i_3n_jGBFE0",
       "drive_id": "1hetcETP3f7o4QFAJjC8Op1TYwpKcDUTN",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S033.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S034",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 34,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_fc52048a@noon-rain-mountains",
+      "theme": "noon-rain-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+pothole",
+        "p2+dodge_oil",
+        "win",
+        "p4+container"
+      ],
+      "duration": 34.3,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 177.5,
+        "start": 96.1,
+        "finish_gap": 111.8
+      },
+      "structure": "gauntlet|container,oil,pothole",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1jv2C-pkaWoR2cV2_4vp8SZzkQYpaUZ6P",
+      "drive_id": "1eNKU2yfUXP3J0RtDYdEP1Czpn4SaUAqE",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S034.mp4"
     }
   ]
 }
