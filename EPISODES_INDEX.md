@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 03:16) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 03:19) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -61,6 +61,8 @@
 | 45 | `SIM_BUMPS_V2_S021` | bumps | APPROVED | Fri 2026-10-16 11:00 |  |
 | 46 | `SIM_RACE25D_V3_S017` | race25d | APPROVED | Wed 2026-10-14 15:00 |  |
 | 47 | `SIM_SMASH25D_V5_S009` | smash25d | APPROVED | Thu 2026-10-15 19:00 |  |
+| 48 | `SIM_POTHOLES_V2_S031` | potholes | APPROVED | Sat 2026-10-17 11:00 |  |
+| 49 | `SIM_RACE25D_V4_S018` | race25d | APPROVED | Thu 2026-10-15 15:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
 
@@ -673,6 +675,32 @@
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p3+ring; Level 2: Grizzly (monster2) → win; Level 3 (juara): Tilly (taxi) → p4+ring; Level 4: Siren (police) → p2+ring
 - **Status:** APPROVED (approve 2026-10-03)
 - **Antrian:** QUEUED 2026-10-15T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 48 — `SIM_POTHOLES_V2_S031`
+
+- **Judul YouTube:** Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E048_2026-10-04_potholes/SIM_POTHOLES_V2_S031.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E048_2026-10-04_potholes/SIM_POTHOLES_V2_S031.json` · audit: `renders/megawheel_arena/S02/E048_2026-10-04_potholes/SIM_POTHOLES_V2_S031_audit.md`
+- **Season / seri / seed:** S02 / potholes / 31
+- **Tema / narator:** morning-clear-desert / chatterbox:m1
+- **Durasi:** 50.03 s
+- **Tokoh dan hasil:** Level 1: Siren (police) → stuck@obs1+broken; Level 2: Hydro (firetruck) → pit@obs0+broken; Level 3 (juara): Zippy (sports) → win
+- **Status:** APPROVED (approve 2026-10-04)
+- **Antrian:** QUEUED 2026-10-17T15:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 49 — `SIM_RACE25D_V4_S018`
+
+- **Judul YouTube:** Can Buster Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018.json` · audit: `renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018_audit.md`
+- **Season / seri / seed:** S02 / race25d / 18
+- **Tema / narator:** noon-snow-mountains / chatterbox:m1
+- **Durasi:** 35.82 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p3+ramp; Level 2: Grizzly (monster2) → p2; Level 3 (juara): Zippy (sports) → win+dodge_laser; Level 4: Nitro (f1) → p4+hammer
+- **Status:** APPROVED (approve 2026-10-04)
+- **Antrian:** QUEUED 2026-10-15T19:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
