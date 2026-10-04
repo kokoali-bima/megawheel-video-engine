@@ -1003,7 +1003,15 @@ def has_signature(L):
         return L.get("spun") is not None and L["spun"] < L["event"]["t"] + 0.5
     if sig == "melt":
         return L.get("sunk") is not None and L.get("sunk_kind") == "lava"
+    if content_required():                                       # planned potholes: a pit's content must be met
+        return bool(L.get("content")) or (L.get("sunk") is not None and L.get("sunk_kind") == "water")
     return False
+
+
+def content_required():
+    """Variety-planned potholes with spikes / bomb / Pit Muncher / water: at least one fail must meet one on screen
+    (otherwise the contents are just decoration). User 2026-10-04: vary what is inside the pits."""
+    return SERIES == "potholes" and any(f in ("spikes", "bomb", "monster", "water") for f in PIT_FILLS)
 
 
 def outcome_vo_t(ev_out, intro_d):
@@ -1113,7 +1121,7 @@ def pick_combo(rng, timed):
             continue                                              # keep at least one slow-mo replay per video
         distinct = len({L["event"]["obstacle"] for L in fails}) == len(fails)
         sig = sum(1 for L in Ls if has_signature(L))              # series signature moment on screen
-        if SERIES_DEFS[SERIES].get("signature") and sig == 0:
+        if (SERIES_DEFS[SERIES].get("signature") or content_required()) and sig == 0:
             continue                                              # mandatory: no spin / melt -> next seed
         score = 2.0 * distinct + 1.0 * (spect - 1) + 1.5 * min(crash, 1) - 0.3 * abs(total - 46.0) \
             + 4.0 * min(sig, 1) + 0.5 * max(0, sig - 1) + 0.8 * replays
