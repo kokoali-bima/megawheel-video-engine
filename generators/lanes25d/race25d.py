@@ -208,6 +208,22 @@ def simulate(seed):
             freeze = False                                       # hazard holds the car still (x not integrated)
             if c["trig"] is None and c["finish"] is None:
                 zl = int(round(c["z"]))
+                # user 2026-10-04: "ketika Siren kena palu, kenapa Rocky di belakangnya tidak kena? harusnya pindah lajur".
+                # A hazard that just got someone keeps its lane blocked (the wreck is still there): swerve or brake.
+                wreck = next((h for h in HZ if h.get("used") and abs(h["lane"] - c["z"]) < 0.6 and 2 < h["x"] - c["x"] < 38
+                              and any(o is not c and o["hz"] is h and o["trig"] is not None and t - o["trig"] < 4.0
+                                      for o in cars)), None)
+                if wreck is not None and abs(c["lane"] - c["z"]) < 0.3:
+                    free = [ln for ln in (zl - 1, zl + 1) if 0 <= ln <= 3
+                            and not any(o is not c and abs(o["z"] - ln) < 0.6 and abs(o["x"] - c["x"]) < 6.0 for o in cars)
+                            and not any(not h2.get("used") and h2["lane"] == ln and -2 < h2["x"] - c["x"] < 30 for h2 in HZ)]
+                    if free:
+                        c["lane"] = free[0]
+                        if c.get("avoid_t") is None:
+                            c["avoid_t"], c["avoided"] = t, next(o["key"] for o in cars if o["hz"] is wreck)
+                            events.append(("avoid", t, c["x"], float(free[0])))
+                    else:
+                        c["seek_t"], c["seek_k"], c["blocked"] = t, 0.55, True   # no gap: brake behind the wreck
                 if not c.get("dodge_t") and dodges[0] < MAX_DODGES:      # see a ground hazard coming -> swerve?
                     ahead = next((h for h in HZ if not h.get("used") and h["lane"] == zl and h["type"] in DODGEABLE
                                   and 9 < h["x"] - c["x"] < 40), None)
@@ -1558,6 +1574,9 @@ def main():
     story = [(c["trig"], HAZARDS[c["hz"]["type"]]["line"].format(n=nick(c["key"]))) for c in hits]
     story += [(c["dodge_t"], f"Nice move! {nick(c['key'])} dodges the {DODGEABLE[c['dodged']]}!")
               for c in cars if c.get("dodge_t") is not None]
+    for c in cars:                                               # swerving around a wreck, if the moment is free
+        if c.get("avoid_t") is not None and all(abs(c["avoid_t"] - tt) > 2.5 for tt, _ in story):
+            story.append((c["avoid_t"], f"Close call! {nick(c['key'])} swerves around {nick(c['avoided'])}!"))
     for tt, txt in sorted(story):
         lines.append((out_of(tt) + 0.15, txt))
     lines.append((out_of(winner["finish"]) + 0.2, f"{nick(winner['key'])} wins the race!"))
@@ -1622,7 +1641,14 @@ def main():
         spread = max(xs) - min(xs) + 9.0
         fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.82, 1.12))
         cut = camx is None or mode != prev_mode
-        camx = target if cut else camx + (target - camx) * (0.3 if mode == "replay" else 0.12)
+        key0 = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
+        reach0 = 380.0 / (k_of(st[id(key0)][1]) * zoom)
+        target = float(np.clip(target, st[id(key0)][0] - reach0, st[id(key0)][0] + reach0))   # keep the key car in frame
+        if cut:
+            camx = target
+        else:                                                    # glide; capped speed = no jump when the focus changes
+            vmax = 2.2 if mode == "replay" else 1.5               # metres per output frame
+            camx += float(np.clip((target - camx) * (0.3 if mode == "replay" else 0.12), -vmax, vmax))
         punch = 1.0
         for kind, et, ex, ez in events:
             if kind in ("land", "bump", "puddle", "crusher", "meteor", "wall", "hammer", "container", "oil") \
@@ -1630,10 +1656,6 @@ def main():
                 punch = max(punch, 1 + 0.09 * math.sin(math.pi * (t - et) / 0.35))
         want = 1.15 if mode == "replay" else min(fit, 1.05 if focus else 1.0)
         zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
-        key = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
-        kx, kz = st[id(key)][0], st[id(key)][1]
-        reach = 380.0 / (k_of(kz) * zoom)
-        camx = float(np.clip(camx, kx - reach, kx + reach))
         prev_mode = mode
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
             empty_frames += 1
