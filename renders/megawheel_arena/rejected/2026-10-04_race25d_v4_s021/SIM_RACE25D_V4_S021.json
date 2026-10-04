@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S021",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 21,
@@ -100,6 +100,7 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s021/SIM_RACE25D_V4_S021.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s021/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s021/SIM_RACE25D_V4_S021.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s021/preview",
+  "reject_reason": "user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru"
 }
