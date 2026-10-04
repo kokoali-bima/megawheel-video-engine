@@ -42,7 +42,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
 
-SERIES, ENGINE_VERSION = "race25d", "v3"             # v3: curved circuit, hammer/container/oil, question hook, jingle
+SERIES, ENGINE_VERSION = "race25d", "v4"             # v4: class speeds (F1 > ... > bus) + realistic-order check; v3: curved circuit
 W, H, FPS = se.W, se.H, 30
 F_PERSP, D0, LANE_D = 9000.0, 100.0, 25.0        # k(z) = F / (D0 + z*LANE_D): front lane 90 px/m, lane 3 ≈ 51
 Y_H, CAM_H = 640.0, 13.0                         # ground_y = Y_H + CAM_H*k
@@ -93,6 +93,13 @@ AGILITY = {"f1": 0.9, "sports": 0.85, "police": 0.75, "taxi": 0.7, "monster": 0.
 DODGEABLE = {"puddle": "puddle", "pothole": "pothole", "lava": "lava vent", "wall": "wall", "crusher": "crusher",
              "laser": "laser", "oil": "oil slick"}
 MAX_DODGES = 1                                   # keeps at least 2 hazard hits per video
+# v4 (user 2026-10-04: "di jalur lurus tanpa rintangan tidak mungkin bus lebih cepat dari mobil balap"):
+# cruise speed (m/s) and pickup per vehicle class. Order agreed with the user:
+# F1 > sports > police > taxi > monster trucks > ice-cream / fire truck > bus / big rig.
+SPEED = {"f1": 24.3, "sports": 24.0, "police": 23.7, "taxi": 23.4, "monster": 23.1, "monster2": 23.1,
+         "icecream": 22.75, "firetruck": 22.7, "bus": 22.4, "bigrig": 22.3}
+PICKUP = {"f1": 0.042, "sports": 0.04, "police": 0.035, "taxi": 0.034, "monster": 0.03, "monster2": 0.03,
+          "icecream": 0.025, "firetruck": 0.025, "bus": 0.022, "bigrig": 0.02}
 
 # per-video parameters (set in setup())
 RACERS, HZ, FIN_X, SECONDS = [], [], 0.0, 0.0     # HZ: list of dict(type, lane, x)
@@ -145,8 +152,8 @@ def setup(seed, appearances, forced=None):
         if len(cast) == 4:
             break
     lanes = [int(v) for v in r.permutation(4)]
-    base = r.uniform(22.6, 23.6, 4)
-    RACERS = [(vk, lanes[i], float(base[i])) for i, vk in enumerate(cast)]
+    jitter = r.uniform(-0.05, 0.05, 4)                           # tiny: never enough to swap two classes
+    RACERS = [(vk, lanes[i], SPEED[vk] + float(jitter[i])) for i, vk in enumerate(cast)]
     names = list(HAZARDS)
     if forced:
         types = forced[:3]
@@ -188,7 +195,7 @@ def simulate(seed):
         t = i * dt
         for c in cars:
             go = min(1.0, t / 1.6)
-            target = c["v0"] * (1 + 0.025 * math.sin(t * 0.7 + c["surge"]))
+            target = c["v0"] * (1 + 0.004 * math.sin(t * 0.7 + c["surge"]))   # tiny breathing, classes never swap
             if c.get("seek_t") is not None and t - c["seek_t"] < 0.05:
                 target *= c["seek_k"]                            # blocked: sprint past / brake behind the neighbour
             a = (t - c["trig"]) if c["trig"] is not None else None
@@ -212,7 +219,9 @@ def simulate(seed):
                             if not free:
                                 near = [o["x"] - c["x"] for o in cars if o is not c and abs(o["x"] - c["x"]) < 5.0
                                         and any(abs(o["z"] - ln) < 0.6 for ln in (zl - 1, zl + 1))]
-                                c["seek_t"], c["seek_k"] = t, (0.8 if near and min(near) > 1.0 else 1.18)
+                                c["seek_t"], c["seek_k"] = t, (0.8 if near and min(near) > 1.0 else 1.03)
+                                if c["seek_k"] < 1:
+                                    c["blocked"] = True                  # boxed in behind a slower car (a fair reason)
                             else:
                                 c["lane"], c["dodge_t"], c["dodged"] = free[0], t, ahead["type"]
                                 dodges[0] += 1
@@ -333,13 +342,13 @@ def simulate(seed):
                             events.append(("land", t, c["x"], float(c["lane"])))
                     target *= min(1.0, max(0.0, (a - 2.4) / 1.5))
             if c["land"] is not None and ty == "ramp" and t - c["land"] < 2.5:
-                target *= 1.1
+                target *= 1.03
             if c["bump_t"] is not None and 0 < t - c["bump_t"] < 1.0:
                 target *= 0.9
             if c["finish"] is not None:
                 target = max(4.0, c["v"] * 0.985)
             if not freeze:
-                c["v"] += (target * go - c["v"]) * 0.03
+                c["v"] += (target * go - c["v"]) * PICKUP.get(c["key"], 0.03)
                 c["x"] += c["v"] * dt
             if c["finish"] is None and c["x"] >= FIN_X:
                 c["finish"] = t
@@ -363,6 +372,16 @@ def simulate(seed):
     for place, c in enumerate(sorted(cars, key=lambda c: c["finish"] if c["finish"] else 1e9), start=1):
         c["place"] = place
     return cars, events
+
+
+def unexplained_upsets(cars):
+    """Pairs where a slower class finished ahead of a faster one that was never hit, bumped or blocked."""
+    bad = []
+    for a in cars:
+        for b in cars:
+            if SPEED[a["key"]] + 0.1 < SPEED[b["key"]] and (a["finish"] or 1e9) < (b["finish"] or 1e9)                     and b["trig"] is None and b["bump_t"] is None and not b.get("blocked"):
+                bad.append((a["key"], b["key"]))
+    return bad
 
 
 def hit_cars(cars):
@@ -1708,7 +1727,8 @@ def main():
               "at least 2 hazards hit": len(hits) >= 2,
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
-              "no frame without a car": empty_frames == 0}
+              "no frame without a car": empty_frames == 0,
+              "realistic order (slower ahead only if the faster one was hit)": not unexplained_upsets(cars)}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + (f"+{c['hz']['type']}" if c["trig"] is not None else "")
                 + ("+bump" if c["bump_t"] else "") + (f"+dodge_{c['dodged']}" if c.get("dodge_t") else "")
