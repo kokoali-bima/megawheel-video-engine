@@ -3593,6 +3593,44 @@
       "drive_sheet_id": "1iVND9z4yJDx32Kw1pA6U2ZwoLCRWSpPI",
       "drive_id": "1vQBh-L_3diVe593kc2zWE4HXYKXdvn8t",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S030.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S031",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 31,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_f3b83753@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+meteor",
+        "p2",
+        "p3+oil",
+        "win+bump+dodge_crusher"
+      ],
+      "duration": 35.55,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 220.9,
+        "start": 99.8,
+        "finish_gap": 97.8
+      },
+      "structure": "gauntlet|crusher,meteor,oil",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s031/SIM_RACE25D_V4_S031_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
