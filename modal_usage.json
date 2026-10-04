@@ -1783,6 +1783,86 @@
    "gpu_seconds": 44.4,
    "wall_seconds": 68.4,
    "cost_usd": 0.0113
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S103 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 64.6,
+   "wall_seconds": 94.4,
+   "cost_usd": 0.0165
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator TEST_potholes_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 62.8,
+   "wall_seconds": 91.3,
+   "cost_usd": 0.016
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S104 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 52.5,
+   "wall_seconds": 80.4,
+   "cost_usd": 0.0134
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S105 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 40.9,
+   "wall_seconds": 67.9,
+   "cost_usd": 0.0104
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S106 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 72.8,
+   "wall_seconds": 161.9,
+   "cost_usd": 0.0186
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S107 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 35.7,
+   "wall_seconds": 59.2,
+   "cost_usd": 0.0091
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator TEST_race25d_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 31.9,
+   "wall_seconds": 55.4,
+   "cost_usd": 0.0081
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_PIT_S41 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 31.2,
+   "wall_seconds": 53.2,
+   "cost_usd": 0.008
   }
  ]
 }
