@@ -1863,6 +1863,26 @@
    "gpu_seconds": 31.2,
    "wall_seconds": 53.2,
    "cost_usd": 0.008
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_PIT_S41 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 55.2,
+   "wall_seconds": 82.6,
+   "cost_usd": 0.0141
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_PIT_S44 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 35.1,
+   "wall_seconds": 59.9,
+   "cost_usd": 0.009
   }
  ]
 }
