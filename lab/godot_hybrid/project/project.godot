@@ -1,0 +1,16 @@
+; LAB: HYBRID - the aired 2.5D video stays; Godot draws only the 3D background world behind it.
+config_version=5
+
+[application]
+config/name="MegaWheel Hybrid Background (lab)"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2

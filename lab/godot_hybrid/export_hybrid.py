@@ -65,7 +65,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--like", required=True, help="the review/approved VIDEO_ID to enhance")
     a = ap.parse_args()
-    os.makedirs(a.out, exist_ok=True)
+    os.makedirs(os.path.join(a.out, "sprites"), exist_ok=True)       # modal_godot packs this folder (unused)
     man = force_like(a.like)
     name = f"LAB_HY_{a.series.upper()}_S{a.seed:03d}"
     sys.argv = ["sim_engine.py", "--seed", str(a.seed), "--series", a.series, "--preview-only", "--name", name]
