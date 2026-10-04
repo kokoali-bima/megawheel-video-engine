@@ -1667,6 +1667,8 @@ def main():
                     and 0 <= t - et < 0.35:
                 punch = max(punch, 1 + 0.09 * math.sin(math.pi * (t - et) / 0.35))
         want = 1.15 if mode == "replay" else min(fit, 1.05 if focus else 1.0)
+        if mode == "race" and star is not None and focus is star and -1.4 < t - star["trig"] < 2.0:
+            want = 1.32                                          # the star moment fills the screen (cold open + race)
         zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
         prev_mode = mode
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
