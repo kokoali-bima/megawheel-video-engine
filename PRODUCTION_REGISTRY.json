@@ -3851,6 +3851,48 @@
       "drive_sheet_id": "1qiDgNZKgL6Cu9FsrcU-kAwKnIvK-YkiJ",
       "drive_id": "1fL0CRe39YEMpedaHrvciePGEGoiBLc1k",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S036.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S037",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 37,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_e03917f9@morning-snow-city",
+      "theme": "morning-snow-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+dragon_fire",
+        "p2+dodge_lava",
+        "win",
+        "p3+oil"
+      ],
+      "duration": 35.79,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 225.6,
+        "start": 108.3,
+        "finish_gap": 96.1
+      },
+      "structure": "gauntlet|dragon_fire,lava,oil",
+      "title_base": "Can Siren Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037/SIM_RACE25D_V4_S037_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Ll-NtTAqvsinw2I_kHtHJp9bGsfqHvBy",
+      "drive_id": "1SAaPHAlTReTMpBdMh1NHHkur-jFxo5Nz",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S037.mp4"
     }
   ]
 }
