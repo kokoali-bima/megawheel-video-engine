@@ -1913,6 +1913,76 @@
    "gpu_seconds": 42.4,
    "wall_seconds": 182.3,
    "cost_usd": 0.0108
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S019 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 63.6,
+   "wall_seconds": 92.7,
+   "cost_usd": 0.0162
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S020 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 44.9,
+   "wall_seconds": 68.9,
+   "cost_usd": 0.0115
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S021 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 60.1,
+   "wall_seconds": 89.6,
+   "cost_usd": 0.0153
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S022 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 54.6,
+   "wall_seconds": 80.0,
+   "cost_usd": 0.0139
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S023 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 63.2,
+   "wall_seconds": 98.8,
+   "cost_usd": 0.0161
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S024 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 63.4,
+   "wall_seconds": 92.6,
+   "cost_usd": 0.0162
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S025 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 70.5,
+   "wall_seconds": 100.5,
+   "cost_usd": 0.018
   }
  ]
 }
