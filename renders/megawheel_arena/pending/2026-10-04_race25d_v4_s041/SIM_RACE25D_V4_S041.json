@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S041",
+  "status": "CHECKS_FAILED",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 41,
+  "fps": 30,
+  "duration": 36.88,
+  "params": {
+    "cast": [
+      "firetruck",
+      "monster2",
+      "f1",
+      "taxi"
+    ],
+    "lanes": [
+      2,
+      0,
+      1,
+      3
+    ],
+    "hazards": [
+      [
+        "container",
+        1,
+        115.0
+      ],
+      [
+        "ramp",
+        0,
+        172.8
+      ],
+      [
+        "laser",
+        2,
+        247.8
+      ]
+    ],
+    "finish": 361.5,
+    "plan": {
+      "layout": "stagger",
+      "zone": 161.0,
+      "start": 117.8,
+      "finish_gap": 113.7
+    }
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "sunset-clear-city",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p3+laser",
+    "win+ramp",
+    "p4+container",
+    "p2"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": false
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Nitro Survive Falling Containers? 🏁",
+  "title": "Can Nitro Survive Falling Containers? 🏁 #Shorts",
+  "description": "Hydro, Grizzly, Nitro and Tilly race to the finish line! 🏁 Obstacles today: container, laser, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "fire truck",
+    "monster truck",
+    "race car",
+    "taxi",
+    "container",
+    "laser",
+    "ramp"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Nitro Survive Falling Containers? Hydro, Grizzly, Nitro and Tilly... who will win?",
+    "A container drops from the sky! Nitro crashes right into it!",
+    "Grizzly takes the ramp... big air!",
+    "Zap! The laser slices Hydro in two!",
+    "Grizzly wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041/SIM_RACE25D_V4_S041.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041/preview"
+}

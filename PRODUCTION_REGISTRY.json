@@ -4019,6 +4019,45 @@
       "drive_sheet_id": "1TsVmwU8xTNAkaquB22utoAGs3MWlfPoi",
       "drive_id": "1AeXWGClkk6g-c800U7SVs6DvBDMvi4wD",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S040.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S041",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 41,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_ace455e4@sunset-clear-city",
+      "theme": "sunset-clear-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+laser",
+        "win+ramp",
+        "p4+container",
+        "p2"
+      ],
+      "duration": 36.88,
+      "plan": {
+        "layout": "stagger",
+        "zone": 161.0,
+        "start": 117.8,
+        "finish_gap": 113.7
+      },
+      "structure": "stagger|container,laser,ramp",
+      "title_base": "Can Nitro Survive Falling Containers? 🏁",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041/SIM_RACE25D_V4_S041_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
