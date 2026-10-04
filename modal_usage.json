@@ -1763,6 +1763,26 @@
    "cpu_container_seconds": 118.0,
    "wall_seconds": 59.2,
    "cost_usd": 0.0318
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S101 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 56.6,
+   "wall_seconds": 114.7,
+   "cost_usd": 0.0145
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_RACE4_S102 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 44.4,
+   "wall_seconds": 68.4,
+   "cost_usd": 0.0113
   }
  ]
 }
