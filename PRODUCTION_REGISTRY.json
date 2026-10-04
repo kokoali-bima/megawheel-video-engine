@@ -4210,6 +4210,48 @@
       "drive_sheet_id": "1Q3zUALbKPIjI8jql7tmQv1q9WNUS0jgy",
       "drive_id": "1Cd-P9yLigTVce6eT-jJmR40d90hEyJIs",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S044.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S045",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 45,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "f1",
+        "sports"
+      ],
+      "track_id": "race25d_748d8e76@noon-clear-beach",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+dodge_oil",
+        "win",
+        "p3+hammer",
+        "p4+dragon_ice"
+      ],
+      "duration": 37.11,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 172.3,
+        "start": 97.6,
+        "finish_gap": 94.3
+      },
+      "structure": "late_pair|dragon_ice,hammer,oil",
+      "title_base": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s045",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s045/SIM_RACE25D_V4_S045_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1-zeWGKiaPuNicq00-yod8cSqFXlj6PjE",
+      "drive_id": "1xixVj2KGyZ-m6TDorcvFOJN-6fBK8j4z",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S045.mp4"
     }
   ]
 }
