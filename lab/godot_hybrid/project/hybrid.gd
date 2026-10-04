@@ -174,19 +174,20 @@ void fragment() {
 	float dist = length(CAMERA_POSITION_WORLD - wpos);
 	float fres = pow(1.0 - clamp(dot(n, v), 0.0, 1.0), 4.0);
 	vec3 col = mix(shallow, deep, clamp((shore_z - wpos.z) / 60.0, 0.0, 1.0));
-	col = mix(col, horizon, clamp(fres * 0.55 + dist / 3500.0, 0.0, 0.85));
+	col = mix(col, horizon * 0.85, clamp(fres * 0.35 + dist / 6000.0, 0.0, 0.6));
 	vec3 r = reflect(-v, n);
 	float sd = max(dot(r, normalize(sun_dir)), 0.0);
 	float sparkle = step(0.82, h(floor(p * 1.7) + floor(t * 8.0)));
-	col += sun_col * (pow(sd, 60.0) * 0.6 + pow(sd, 900.0) * 3.5 * (0.4 + sparkle));   // path of light + glitter
+	float path = exp(-abs(wpos.x - CAMERA_POSITION_WORLD.x - sun_dir.x / max(-sun_dir.z, 0.05) * (CAMERA_POSITION_WORLD.z - wpos.z)) / (6.0 + dist * 0.04));
+	col += sun_col * (pow(sd, 40.0) * 0.35 + path * (0.25 + 1.6 * sparkle * pow(sd, 6.0)));   // sun path + glitter
 	ALBEDO = col;
 }
 """
 	var mat = ShaderMaterial.new()
 	mat.shader = sh
 	var sea_c = _c(scene["hills"][0])
-	mat.set_shader_parameter("deep", sea_c.darkened(0.45))
-	mat.set_shader_parameter("shallow", sea_c.lerp(Color(0.2, 0.75, 0.8), 0.3))
+	mat.set_shader_parameter("deep", sea_c.darkened(0.55).lerp(Color(0.25, 0.15, 0.4), 0.35))
+	mat.set_shader_parameter("shallow", sea_c.darkened(0.2).lerp(Color(0.2, 0.6, 0.75), 0.3))
 	mat.set_shader_parameter("horizon", sky_hor)
 	mat.set_shader_parameter("sun_col", sun_col)
 	mat.set_shader_parameter("sun_dir", sun_dir)
@@ -290,7 +291,8 @@ func _land() -> void:
 			sp.height = sp.radius * 0.55
 			hl.mesh = sp
 			var hm = StandardMaterial3D.new()
-			hm.albedo_color = sky_hor.lerp(Color(0.25, 0.22, 0.35), 0.55)
+			hm.albedo_color = Color(0.36, 0.24, 0.42).lerp(sky_hor, 0.25)
+			hm.disable_fog = true
 			hm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			hl.material_override = hm
 			hl.position = Vector3(hx, -20, -1500 - rng.randf_range(0, 400))
@@ -415,7 +417,7 @@ func _cloud_tex(seed_: int) -> ImageTexture:
 			var fall = clampf(1.0 - (dx * dx + dy * dy), 0.0, 1.0)
 			var n = noise.get_noise_2d(x, y) * 0.5 + 0.5
 			var a = clampf((n * 1.3 - 0.45) * 2.2 * fall + fall * 0.25, 0.0, 1.0)
-			var shade = clampf(1.0 - float(y) / hh * 0.55, 0.0, 1.0)   # lit tops, shaded bellies
+			var shade = clampf(1.0 - float(y) / hh * 0.3, 0.0, 1.0)    # lit tops, slightly shaded bellies
 			img.set_pixel(x, y, Color(shade, shade, shade, a))
 	return ImageTexture.create_from_image(img)
 
@@ -430,7 +432,7 @@ func _clouds() -> void:
 		q.mesh = qm
 		var m = StandardMaterial3D.new()
 		m.albedo_texture = _cloud_tex(100 + i)
-		m.albedo_color = ccol.lerp(sun_col, 0.35)
+		m.albedo_color = ccol.lerp(Color(1, 0.6, 0.55), 0.3).lightened(0.1)
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		m.disable_fog = true
