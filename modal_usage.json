@@ -1675,6 +1675,72 @@
    "cpu_container_seconds": 141.9,
    "wall_seconds": 91.1,
    "cost_usd": 0.0382
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 8.8,
+   "wall_seconds": 15.8,
+   "cost_usd": 0.0024
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 9.8,
+   "wall_seconds": 13.6,
+   "cost_usd": 0.0027
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 9.4,
+   "wall_seconds": 12.8,
+   "cost_usd": 0.0025
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 10.7,
+   "wall_seconds": 16.4,
+   "cost_usd": 0.0029
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 9.7,
+   "wall_seconds": 13.3,
+   "cost_usd": 0.0026
+  },
+  {
+   "date": "2026-10-04",
+   "note": "hybrid test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 10.2,
+   "wall_seconds": 14.1,
+   "cost_usd": 0.0028
   }
  ]
 }
