@@ -3339,6 +3339,47 @@
       "drive_sheet_id": "1y28TeJ-M7uG9pIFwkxCE-rLwT6Cip1Jg",
       "drive_id": "1pM_erBNPUApPgptTH_WOV78wbgOGGNj6",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S024.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S025",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 25,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_d5fe6729@noon-clear-city",
+      "theme": "noon-clear-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+pothole",
+        "win",
+        "p2+container",
+        "p4+dragon_fire"
+      ],
+      "duration": 37.0,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 194.1,
+        "start": 117.3,
+        "finish_gap": 97.8
+      },
+      "structure": "early_pair|container,dragon_fire,pothole",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s025",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s025/SIM_RACE25D_V4_S025_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1SKkXi6AzBBMet3EZPdYilqsybKncG12p",
+      "drive_id": "1qUrb3oZPmzGwMO1B6Wb8TS48hwmPsCNh",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S025.mp4"
     }
   ]
 }
