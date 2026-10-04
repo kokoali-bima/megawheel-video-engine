@@ -3298,6 +3298,47 @@
       "drive_sheet_id": "165gTFtUi0szNfbO7HVvlC4TyTx0a7I6j",
       "drive_id": "1Od7yLlIFy7J2t_uAKnCOnUgy9gzyvLMQ",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S023.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S024",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 24,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_de4fc07a@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+hammer",
+        "p2+ramp",
+        "win",
+        "p4+ufo"
+      ],
+      "duration": 36.91,
+      "plan": {
+        "layout": "stagger",
+        "zone": 217.6,
+        "start": 105.7,
+        "finish_gap": 105.2
+      },
+      "structure": "stagger|hammer,ramp,ufo",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s024",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s024/SIM_RACE25D_V4_S024_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1y28TeJ-M7uG9pIFwkxCE-rLwT6Cip1Jg",
+      "drive_id": "1pM_erBNPUApPgptTH_WOV78wbgOGGNj6",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S024.mp4"
     }
   ]
 }

@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S024",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 24,
+  "fps": 30,
+  "duration": 36.91,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster",
+      "taxi",
+      "police"
+    ],
+    "lanes": [
+      1,
+      2,
+      0,
+      3
+    ],
+    "hazards": [
+      [
+        "ufo",
+        3,
+        103.0
+      ],
+      [
+        "hammer",
+        1,
+        178.5
+      ],
+      [
+        "ramp",
+        2,
+        283.5
+      ]
+    ],
+    "finish": 388.7,
+    "plan": {
+      "layout": "stagger",
+      "zone": 217.6,
+      "start": 105.7,
+      "finish_gap": 105.2
+    }
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "morning-clear-desert",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p3+hammer",
+    "p2+ramp",
+    "win",
+    "p4+ufo"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Titan Survive the Giant Hammer? 🏁",
+  "title": "Can Titan Survive the Giant Hammer? 🏁 #Shorts",
+  "description": "Titan, Rocky, Tilly and Siren race to the finish line! 🏁 Obstacles today: hammer, ramp, ufo! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "taxi",
+    "police car",
+    "hammer",
+    "ramp",
+    "ufo"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Titan Survive the Giant Hammer? Titan, Rocky, Tilly and Siren... who will win?",
+    "Uh oh! A UFO grabs Siren!",
+    "BONK! The giant hammer flattens Titan!",
+    "Rocky takes the ramp... big air!",
+    "Tilly wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s024/SIM_RACE25D_V4_S024.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s024/preview"
+}
