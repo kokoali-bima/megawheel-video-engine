@@ -904,8 +904,9 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 if event is None:                           # touching the liquid is the fail (never "stuck")
                     event = dict(type="pit", t=max(0.0, t - 0.2))
             floor_y = min((p[1] for p in TRACK if x0 <= p[0] <= x1), default=-d)
-            low = ch.position.y - bh / 2 - r                 # underside of the wheels
-            if content is None and kind in ("spikes", "bomb", "monster") and low < floor_y + 1.1:
+            corners = [ch.local_to_world((sx_ * bw / 2, sy_ * bh / 2)).y for sx_ in (-1, 1) for sy_ in (-1, 1)]
+            low = min(corners + [w.position.y - r for w in attached])   # any corner or tyre (nose-dives too)
+            if content is None and kind in ("spikes", "bomb", "monster") and low < floor_y + 1.5:
                 content = dict(kind=kind, t=t, x=ch.position.x, y=floor_y, pit=pi_)
                 if event is None:
                     event = dict(type="pit", t=max(0.0, t - 0.1))
@@ -2409,18 +2410,18 @@ def draw_pit_content(ctx, pi_, x0, x1, d, kind, t, gc):
         ctx.arc(x0 + 0.4 + j * 0.8, floor + 0.55, 0.22, 0, math.pi)
         ctx.fill()
     if kind == "spikes":                                         # a bed of steel spikes
-        n = max(3, int((x1 - x0) / 0.45))
+        n = max(3, int((x1 - x0) / 0.62))                        # big enough to read on a phone
         for j in range(n):
             sx = x0 + (j + 0.5) * (x1 - x0) / n
-            poly(ctx, [(sx - 0.17, floor + 0.45), (sx, floor + 1.15), (sx + 0.17, floor + 0.45)])
-            g = cairo.LinearGradient(sx - 0.17, 0, sx + 0.17, 0)
+            poly(ctx, [(sx - 0.28, floor + 0.4), (sx, floor + 1.75), (sx + 0.28, floor + 0.4)])
+            g = cairo.LinearGradient(sx - 0.28, 0, sx + 0.28, 0)
             g.add_color_stop_rgb(0, *lit((0.45, 0.47, 0.52)))
             g.add_color_stop_rgb(0.5, *lit((0.92, 0.93, 0.96)))
             g.add_color_stop_rgb(1, *lit((0.35, 0.36, 0.4)))
             ctx.set_source(g)
             ctx.fill_preserve()
             ctx.set_source_rgb(0.15, 0.15, 0.18)
-            ctx.set_line_width(0.03)
+            ctx.set_line_width(0.05)
             ctx.stroke()
     elif kind == "bomb":                                         # a big cartoon bomb with a fizzing fuse
         bx, by = (x0 + x1) / 2, floor + 0.55 + 0.75
