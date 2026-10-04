@@ -3893,6 +3893,48 @@
       "drive_sheet_id": "1Ll-NtTAqvsinw2I_kHtHJp9bGsfqHvBy",
       "drive_id": "1SAaPHAlTReTMpBdMh1NHHkur-jFxo5Nz",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S037.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S038",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 38,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "f1",
+        "sports"
+      ],
+      "track_id": "race25d_5520c768@sunset-snow-mountains",
+      "theme": "sunset-snow-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3",
+        "win+bump+dodge_laser",
+        "p2+oil",
+        "p4+container+bump"
+      ],
+      "duration": 34.02,
+      "plan": {
+        "layout": "stagger",
+        "zone": 182.2,
+        "start": 95.3,
+        "finish_gap": 96.9
+      },
+      "structure": "stagger|container,laser,oil",
+      "title_base": "Can Zippy Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038/SIM_RACE25D_V4_S038_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "18iEUMMxeaIDno5JgmioS4AEDhcODUr6M",
+      "drive_id": "1N_E0lSmsJPRs9Cu701eAxp7YkIyRreq_",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S038.mp4"
     }
   ]
 }
