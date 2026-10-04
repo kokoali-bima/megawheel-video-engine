@@ -139,6 +139,20 @@ def nick(vk):
 
 
 # ------------------------------------------------------------------ per-seed setup
+def pick_types(r):
+    """3 different hazards by weight; always one a racer can dodge, always one of the new obstacles."""
+    names = list(HAZARDS)
+    w = np.array([HAZARDS[h]["weight"] for h in names])
+    types = [str(t) for t in r.choice(names, size=3, replace=False, p=w / w.sum())]
+    if not any(t in DODGEABLE for t in types):
+        g = [n for n in names if n in DODGEABLE]
+        gw = np.array([HAZARDS[n]["weight"] for n in g])
+        types[int(r.integers(3))] = str(r.choice(g, p=gw / gw.sum()))
+    if not any(t in NEW_HZ for t in types):
+        types[int(r.integers(3))] = str(r.choice([n for n in NEW_HZ if n not in types]))
+    return types
+
+
 def setup(seed, appearances, forced=None):
     global RACERS, HZ, FIN_X, SECONDS
     r = np.random.default_rng(8000 + seed)
@@ -157,23 +171,20 @@ def setup(seed, appearances, forced=None):
     lanes = [int(v) for v in r.permutation(4)]
     jitter = r.uniform(-0.05, 0.05, 4)                           # tiny: never enough to swap two classes
     RACERS = [(vk, lanes[i], SPEED[vk] + float(jitter[i])) for i, vk in enumerate(cast)]
-    names = list(HAZARDS)
-    if forced:
-        types = forced[:3]
-    else:
-        w = np.array([HAZARDS[h]["weight"] for h in names])
-        types = [str(t) for t in r.choice(names, size=3, replace=False, p=w / w.sum())]
-        if not any(t in DODGEABLE for t in types):               # always one ground hazard a racer can dodge
-            g = [n for n in names if n in DODGEABLE]
-            gw = np.array([HAZARDS[n]["weight"] for n in g])
-            types[int(r.integers(3))] = str(r.choice(g, p=gw / gw.sum()))
-    if not forced and not any(t in NEW_HZ for t in types):    # week 2: every race shows a new obstacle
-        types[int(r.integers(3))] = str(r.choice([n for n in NEW_HZ if n not in types]))
+    global PLAN
+    PLAN = PLAN or variety.plan_race(ACTIVE, seed)               # layout the audience has not seen lately
+    types = forced[:3] if forced else pick_types(r)
+    if not forced:                                               # same layout + same hazards as a recent video: redraw
+        recent = [e.get("structure") for e in reversed(ACTIVE)
+                  if e.get("series") == SERIES and e.get("structure")][:variety.RECENT]
+        rr = np.random.default_rng(8800 + seed)
+        for _ in range(30):
+            if variety.race_signature(PLAN, types) not in recent:
+                break
+            types = pick_types(rr)
     global CURVE
     CURVE = dict(amp=float(r.uniform(0.9, 1.4)), length=float(r.uniform(120, 170)), phase=float(r.uniform(0, 6.28)))
     hz_lanes = [int(v) for v in r.permutation(4)[:3]]
-    global PLAN
-    PLAN = PLAN or variety.plan_race(ACTIVE, seed)               # layout the audience has not seen lately
     fr = variety.RACE_LAYOUTS[PLAN["layout"]]
     xs = [PLAN["start"] + f * PLAN["zone"] + float(r.uniform(-4, 4)) for f in fr]
     HZ = [dict(type=t, lane=hz_lanes[i], x=xs[i]) for i, t in enumerate(types)]
