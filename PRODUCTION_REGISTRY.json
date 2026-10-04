@@ -3470,6 +3470,47 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S028",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 28,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_ac280006@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2",
+        "p3+meteor",
+        "p4+crusher",
+        "win+dodge_oil"
+      ],
+      "duration": 35.72,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 164.2,
+        "start": 101.2,
+        "finish_gap": 105.6
+      },
+      "structure": "gauntlet|crusher,meteor,oil",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "16F3jYKkLgIa3coJNH87aKnFrVxzfaePw",
+      "drive_id": "1JUBa1frgq5wOqrId-vu1Yp5bTdUYSudb",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S028.mp4"
     }
   ]
 }
