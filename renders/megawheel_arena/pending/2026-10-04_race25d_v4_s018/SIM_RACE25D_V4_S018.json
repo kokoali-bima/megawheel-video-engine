@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S018",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 18,
+  "fps": 30,
+  "duration": 35.82,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "sports",
+      "f1"
+    ],
+    "lanes": [
+      3,
+      1,
+      2,
+      0
+    ],
+    "hazards": [
+      [
+        "ramp",
+        3,
+        112.4
+      ],
+      [
+        "hammer",
+        0,
+        260.0
+      ],
+      [
+        "laser",
+        2,
+        291.3
+      ]
+    ],
+    "finish": 381.5,
+    "plan": {
+      "layout": "late_pair",
+      "zone": 175.7,
+      "start": 114.5,
+      "finish_gap": 90.2
+    }
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "snow",
+    "location": "mountains"
+  },
+  "theme_id": "noon-snow-mountains",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p3+ramp",
+    "p2",
+    "win+dodge_laser",
+    "p4+hammer"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-60 s": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Buster Survive the Giant Hammer? 🏁",
+  "title": "Can Buster Survive the Giant Hammer? 🏁 #Shorts",
+  "description": "Buster, Grizzly, Zippy and Nitro race to the finish line! 🏁 Obstacles today: hammer, laser, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "sports car",
+    "race car",
+    "hammer",
+    "laser",
+    "ramp"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Buster Survive the Giant Hammer? Buster, Grizzly, Zippy and Nitro... who will win?",
+    "Buster takes the ramp... big air!",
+    "Nice move! Zippy dodges the laser!",
+    "BONK! The giant hammer flattens Nitro!",
+    "Zippy wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s018/SIM_RACE25D_V4_S018.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s018/preview"
+}

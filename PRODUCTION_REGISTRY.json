@@ -2869,6 +2869,104 @@
       "render3d": false,
       "approved_date": "2026-10-03",
       "title": "Can Titan Survive Falling Containers? 🏁 | Ep. 46 #Shorts"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S028",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 28,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "icecream"
+      ],
+      "track_id": "potholes_fbaf774a@morning-clear-countryside",
+      "theme": "morning-clear-countryside",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "pit@obs0+broken",
+        "stuck@obs0",
+        "win"
+      ],
+      "duration": 47.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "twin_early",
+        "pits": [
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "box",
+            "fill": "bomb"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "narrow_deep",
+            "fill": "rubble"
+          },
+          {
+            "kind": "RP",
+            "size": "L",
+            "shape": "v",
+            "fill": "monster"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "twin_early|box-S-bomb,narrow_deep-S-rubble,v-L-monster",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_potholes_s028",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "16iAwWcCNsGx96gdokugZ9oRvjhKCfHjk",
+      "drive_id": "1kLuPqfVB9jLNdtTgs4Lw78VT-7zoaCY6",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S028.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S018",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 18,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_c5a46887@noon-snow-mountains",
+      "theme": "noon-snow-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+ramp",
+        "p2",
+        "win+dodge_laser",
+        "p4+hammer"
+      ],
+      "duration": 35.82,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 175.7,
+        "start": 114.5,
+        "finish_gap": 90.2
+      },
+      "structure": "late_pair|hammer,laser,ramp",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s018",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s018/SIM_RACE25D_V4_S018_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1ul2JU2DIORwA8Sshxd6I2DVdyfcyUyz4",
+      "drive_id": "1xeF3_xt73_wBRLKJx850_a9AI2B3pePv",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S018.mp4"
     }
   ]
 }

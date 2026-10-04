@@ -8,3 +8,5 @@
 |---|---|---|---|---|---|---|---|---|
 | 2026-09-30 | Claude Code | SIM_SPLASH_V2_S007 | splash | 7 | Tilly → Sprinkles → Titan | 48.4 s | PASS | v2.8, spin di air; approved → Ep. 7 |
 | 2026-09-30 | Claude Code | SIM_LAVA_V2_S003 | lava | 3 | Zippy → Hydro → Titan | 46.2 s | PASS | v2.8, meleleh di lahar; approved → Ep. 8 |
+| 2026-10-04 08:37 | Claude Code Opus | SIM_POTHOLES_V2_S028 | potholes | 28 | Nitro → Hydro → Sprinkles | 47.2 s | PASS | produce.py · morning-clear-countryside · twin_early|box-S-bomb,narrow_deep-S-rubble,v-L-monster |
+| 2026-10-04 08:41 | Claude Code Opus | SIM_RACE25D_V4_S018 | race25d | 18 | Buster → Grizzly → Zippy → Nitro | 35.8 s | PASS | produce.py · noon-snow-mountains · late_pair|hammer,laser,ramp |

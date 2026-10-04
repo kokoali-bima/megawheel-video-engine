@@ -1,0 +1,254 @@
+{
+  "video_id": "SIM_POTHOLES_V2_S028",
+  "passed": true,
+  "items": [
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "value": "3.0->38.6 m, 3.0->29.7 m, 3.0->113.5 m",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "value": "3 rintangan [pit, pit, pit] (29-67 m), finish 100 m",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "value": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "value": "",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "value": "4.6s, 5.3s, 11.3s",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": false,
+      "value": "rintangan [0, 0]",
+      "hard": false
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "value": "",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "value": "45.7 s",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "ok": true,
+      "value": "13.2s, 10.4s, 22.0s",
+      "hard": true
+    },
+    {
+      "section": "5.1 Analisa fisika",
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "value": "potholes|f1,firetruck,icecream|potholes_fbaf774a@morning-clear-countryside|pit@obs0+broken,stuck@obs0,win",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "file",
+      "desc": "File video ada",
+      "ok": true,
+      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028.mp4",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "video",
+      "desc": "H.264 1080x1920",
+      "ok": true,
+      "value": "h264 1080x1920",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "fps",
+      "desc": "Frame rate 30",
+      "ok": true,
+      "value": "30/1",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "audio",
+      "desc": "Audio AAC ada",
+      "ok": true,
+      "value": "aac",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "duration",
+      "desc": "Durasi 40-59.5 s (58 + cold open 1.5) dan sama dengan manifest (±0.3 s)",
+      "ok": true,
+      "value": "47.17 s (manifest 47.17)",
+      "hard": true
+    },
+    {
+      "section": "6.1 Teknis",
+      "id": "size",
+      "desc": "Ukuran wajar (8-20 MB)",
+      "ok": true,
+      "value": "11.5 MB",
+      "hard": false
+    },
+    {
+      "section": "6.2 Audio",
+      "id": "max_volume",
+      "desc": "max_volume -3..-0.1 dB (tidak clipping)",
+      "ok": true,
+      "value": "-0.5 dB",
+      "hard": true
+    },
+    {
+      "section": "6.2 Audio",
+      "id": "mean_volume",
+      "desc": "mean_volume -20..-12 dB",
+      "ok": true,
+      "value": "-14.5 dB",
+      "hard": true
+    },
+    {
+      "section": "6.2 Audio",
+      "id": "cta",
+      "desc": "Narasi terakhir = CTA baku",
+      "ok": true,
+      "value": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a...",
+      "hard": true
+    },
+    {
+      "section": "6.2 Audio",
+      "id": "narration_count",
+      "desc": "Narasi lengkap (intro + hasil tiap level + CTA)",
+      "ok": true,
+      "value": "8 baris",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L1_pill",
+      "desc": "L1: badge LEVEL 1 tampil di awal level",
+      "ok": true,
+      "value": "59% piksel warna level @ 2.1s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L1_badge",
+      "desc": "L1: badge FAIL tampil tepat di event",
+      "ok": true,
+      "value": "48% piksel badge @ 8.4s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L2_pill",
+      "desc": "L2: badge LEVEL 2 tampil di awal level",
+      "ok": true,
+      "value": "56% piksel warna level @ 15.3s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L2_badge",
+      "desc": "L2: badge FAIL tampil tepat di event",
+      "ok": true,
+      "value": "48% piksel badge @ 22.8s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L3_pill",
+      "desc": "L3: badge LEVEL 3 tampil di awal level",
+      "ok": true,
+      "value": "56% piksel warna level @ 25.8s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "L3_badge",
+      "desc": "L3: badge WINNER tampil tepat di event",
+      "ok": true,
+      "value": "28% piksel badge @ 39.0s",
+      "hard": true
+    },
+    {
+      "section": "6.3 Sinkron",
+      "id": "outro",
+      "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
+      "ok": true,
+      "value": "69% piksel panel @ 46.4s",
+      "hard": true
+    },
+    {
+      "section": "5.2 Preview",
+      "id": "previews",
+      "desc": "PNG preview tersedia (>= 6, termasuk outro)",
+      "ok": true,
+      "value": "14 file",
+      "hard": true
+    },
+    {
+      "section": "7 Keunikan",
+      "id": "fingerprint",
+      "desc": "Sidik jari unik di registry",
+      "ok": true,
+      "value": "potholes|f1,firetruck,icecream|potholes_fbaf774a@morning-clear-countryside|pit@obs0+broken,stuck@obs0,win",
+      "hard": true
+    },
+    {
+      "section": "7 Keunikan",
+      "id": "seed",
+      "desc": "Seed belum dipakai video lain",
+      "ok": true,
+      "value": "seed 28",
+      "hard": true
+    },
+    {
+      "section": "7 Keunikan",
+      "id": "streak",
+      "desc": "Maks 3 video berturut-turut dari seri yang sama",
+      "ok": true,
+      "value": "0 video potholes berturut-turut sebelum ini",
+      "hard": false
+    }
+  ]
+}
