@@ -3432,6 +3432,44 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S027",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 27,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_cfd28ace@night-clear-mountains",
+      "theme": "night-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2",
+        "win",
+        "p4+crusher",
+        "p3+container+dodge_laser"
+      ],
+      "duration": 36.79,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 170.8,
+        "start": 95.2,
+        "finish_gap": 99.5
+      },
+      "structure": "early_pair|container,crusher,laser",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s027",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s027/SIM_RACE25D_V4_S027_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
