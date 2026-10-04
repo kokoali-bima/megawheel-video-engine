@@ -3,21 +3,101 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-04
+**📤 Upload / antrean / Drive**
+- `90a5fa8` publish: daily run 2026-10-04 [cron daily_publish.sh]
+- `c657eee` episodes.py unreject: a REJECTED render back to pending (MP4 restored from Drive) when the user changes their mind
+**🏁 RACE (race25d)**
+- `53a7710` race25d: zoom in on the star moment (the asked-about car was often tiny in a back lane)
+- `3a65754` race25d camera: when hazard moments overlap, focus the title's star (S022 test: cold open framed the ice dragon while asking about the hammer)
+- `2437c64` race25d crusher: the press stops on the victim's roof and follows the squash (tall trucks were pierced by the press/rod)
+- `de29f8a` RACE cold open: question in the top band over a dark gradient (not over the action); title, cold open and replay share one star moment
+- `d73348d` race25d: cars swerve around (or brake behind) a fresh wreck in their lane; camera glides with a speed cap instead of jumping
+- `9ecbffa` race25d: title/hook question asks about the racer who really meets the most striking hazard (honest payoff)
+- `9ea2ec7` race25d v4: class speeds F1 > sports > police > taxi > monster > icecream/firetruck > bus/bigrig, pickup per class, realistic-order check
+**🔧 Lain-lain**
+- `ce29c73` cold open 1.5 s -> 3.0 s for every Short (user: opening clip too fast, add 1-2 s); duration checks follow the uncapped-duration rule
+- `970dfca` approve: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04 changed mind) + plan
+- `3d5a8f2` approve: SIM_POTHOLES_V2_S031, SIM_RACE25D_V4_S018 by user 2026-10-04 + plan
+- `a4aaf65` reject: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04)
+- `8cd1793` potholes: a planned pit content (spikes/bomb/Pit Muncher/water) must be met by a failing car on screen
+- `6312200` pits: trigger height per content = its drawn height (a truck touching the bomb must set it off)
+- `f70f682` pits: contents trigger on any body corner / tyre near the floor (nose-dives), bigger spikes
+- `5390778` variety director + potholes v2: 6 layout templates, 6 pit shapes, sizes S/M/L, per-pit contents (rubble, water, lava, spikes, bomb, Pit Muncher)
+- `8d2d719` PROJECT_PROGRESS C13: potholes layout is one template (finding 2026-10-04)
+- `c75a0a7` CONFIG_BEST: production stays 2.5D, Godot 3D lab-only (user 2026-10-04)
+**🕳️ CHALLENGE (sim_engine)**
+- `18b04dd` produce: SIM_RACE25D_V4_S025 (pending review) [Claude Code Opus]
+- `db4a943` produce: SIM_RACE25D_V4_S024 (pending review) [Claude Code Opus]
+- `54d2b75` produce: SIM_RACE25D_V4_S023 (pending review) [Claude Code Opus]
+- `a56100a` produce: SIM_RACE25D_V4_S022 (pending review) [Claude Code Opus]
+- `fe9e0d4` produce: SIM_RACE25D_V4_S021 (pending review) [Claude Code Opus]
+- `2b4948d` produce: SIM_RACE25D_V4_S020 (pending review) [Claude Code Opus]
+- `9d60907` produce: SIM_RACE25D_V4_S019 (pending review) [Claude Code Opus]
+- `ac63241` produce: SIM_POTHOLES_V2_S031 (pending review) [Claude Code Opus]
+- `775cfbf` produce: SIM_POTHOLES_V2_S029 (pending review) [Claude Code Opus]
+- `08e6ed6` produce: SIM_RACE25D_V4_S018 (pending review) [Claude Code Opus]
+- `5a378e7` produce: SIM_POTHOLES_V2_S028 (pending review) [Claude Code Opus]
+- `9b1b3b3` produce.py (standard production command with SOP gates) + race25d hazard layouts from the variety director; duration not capped (user)
+**🧪 Lab (eksperimen)**
+- `2bfc0a1` lab hybrid: upload_sample.py (Drive lab/hybrid)
+- `9a6e738` lab hybrid: darker sea with sun path, purple headlands, brighter clouds
+- `ac6a7b8` lab hybrid: cairo screen-space sky + sun, visible sea, low dunes, fuller palms
+- `4f5ad71` lab hybrid: Godot background project (beach sunset: theme sky, sun glow, waves + glitter, foam, dunes, palms, clouds, gulls)
+- `a2d61b8` lab hybrid: exporter (aired 2.5D frames with transparent background + background camera)
+- `2fe3bf8` lab: revert3d.py (review videos back to the 2.5D engine, user 2026-10-04) + ERROR_LOG for the 3D review batch
+<details><summary>otomatis VM (21)</summary>
+
+- `7a9701d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `006c749` records
+- `2c19b34` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `d5b8ea0` records
+- `d5a788f` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `ceffc17` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `e43110c` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5b450d9` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `3293e89` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `899f33f` records
+- `4844468` records
+- `cc72763` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `f39fb12` records
+- `cb8cabd` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `6eee909` records: hybrid sample
+- `834f290` records
+- `de21c92` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `56ea272` records: modal ledger
+- `16a2e04` records: modal ledger
+- `372971c` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `ed4542b` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+
+</details>
+
 ## 2026-10-03
 **🔧 Lain-lain**
+- `924d955` approve: 18 review videos (2.5D) by user 2026-10-04 + plan
+- `a5ae239` audit3d: brightness samples skip the cold-open white flash (false alarm on RACE S011)
+- `876f213` BENCHMARK_NICHE: top crash channels (content + marketing) vs MegaWheel, action list
 - `abfe6f7` CONFIG_BEST: no-explosion rule is for CHALLENGE crashes; SMASH explosions stay (user)
 - `f52fa4c` Shorts: unique hook titles (character + challenge + question), potholes = half of CHALLENGE
 - `115d5f5` Shorts: 1.5 s cold open (own biggest moment + question) before the normal start
 - `526bd56` RESEARCH_W3: week-1 Shorts data, 2.5D first / 3D optional, cold-open + potholes plan
 - `d4dd29c` Shorts: no background music (narrator only), theme song faint after the win; lab 3d v6 fighter intros
 - `13387d3` SCALE_STANDARD.md + Godot scale report; 3D arena 20x24 m at 50 px/m
-**🕳️ CHALLENGE (sim_engine)**
-- `758980a` CHALLENGE: shift manifest times by the cold open; audit duration bound 58 -> 59.5 s
-- `f406421` CHALLENGE: new series lava_potholes (potholes track, every pit full of lava)
-**📤 Upload / antrean / Drive**
-- `adadaa9` publish: daily run 2026-10-03 [cron daily_publish.sh]
-- `f82dce5` episodes.py swap <EP> <NEW_VIDEO_ID>: replace a queued, not-uploaded episode with a newer render
 **🧪 Lab (eksperimen)**
+- `e9f4369` lab 3D converters: 3D preview sheet includes outro.png (production audit 5.2)
+- `5fb2e92` lab 3D: rigid metal damage for all 3 formats + --redo in every converter
+- `5a5b6fa` lab 3D SMASH: no sun shadow map (dark wedge on the floor with the lens-shifted camera), scenery casts no shadow, debris pieces sized in metres (Titan gave 3 m shards), darker steel floor like the aired one
+- `49fd526` lab 3D SMASH converter: --redo re-renders a 3D video (2.5D _25d.mp4 stays the reference)
+- `8c18d7b` lab 3D SMASH: night headlights + floodlit paint; brightness audit relative to the aired 2.5D (night themes are dark there too)
+- `51b623c` lab 3D SMASH: meta title + cold-open fallback = production (winner finish)
+- `aa9834a` lab 3D SMASH from the aired engine (smash25d v5) + converter
+- `bc9e4a3` lab 3D RACE renderer + converter; night headlights; Modal renderer for any project
+- `25f4e7b` lab 3D: forced narrator switches voice C on (like cb_pick); RACE exporter
+- `38c637d` lab 3D: Modal GPU (Vulkan on a T4), colour parity, exact sim replay for conversions
+- `22536a5` lab 3D CHALLENGE v3 + convert3d: review videos re-drawn in 3D, audit3d gate
+- `f76a3ba` lab 3D: Modal renderer (one 16-vCPU container per level, parallel) + all wheels drawn
+- `c8cd97b` lab 3D CHALLENGE: drop the glass chips (rendered as big white squares)
+- `1ff63a2` lab 3D CHALLENGE v2: dents, lava = fire + explosion, water splash, walls/puddles/lava vents
 - `393a336` lab: 3D CHALLENGE sample driven by the aired sim_engine; crash damage without explosions
 - `cc1108f` lab 3d v6: tyre squeal (own synth) on wheelspin at GO and when a car turns around to attack
 - `c4e73ca` lab 3d smash v5: aired end card + replay overlay, commentators, crowd, sonic logo, smoother explosions
@@ -44,6 +124,12 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `a271f63` godot samples v2: single short slow-mo, close/auto-fit camera, CCD, staggered spawns, reliable hammer, deferred fracture, arena stands; godot_mix.py SFX
 - `a9ffd8a` godot: untyped locals (fix type-inference parse errors)
 - `c290925` godot: showcase samples challenge/race/smash (fracture, explosions, slow-mo, real collisions, meteors)
+**🕳️ CHALLENGE (sim_engine)**
+- `758980a` CHALLENGE: shift manifest times by the cold open; audit duration bound 58 -> 59.5 s
+- `f406421` CHALLENGE: new series lava_potholes (potholes track, every pit full of lava)
+**📤 Upload / antrean / Drive**
+- `adadaa9` publish: daily run 2026-10-03 [cron daily_publish.sh]
+- `f82dce5` episodes.py swap <EP> <NEW_VIDEO_ID>: replace a queued, not-uploaded episode with a newer render
 **💥 SMASH (smash25d)**
 - `a886d64` smash25d v5: sea arena + shark, POW + hit-stop, parts fly off, smoke/fire by HP
 **📚 Dokumen**
@@ -51,8 +137,34 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `5c66ee0` docs: GODOT_PLAYBOOK (techniques, references, production rules, roadmap) + SFX_PLAN (pro SFX bank research)
 **📊 Analytics**
 - `cd00dae` analytics: Telegram text + JSON outputs, daily cron script, agent guide (no credentials in outputs)
-<details><summary>otomatis VM (6)</summary>
+<details><summary>otomatis VM (32)</summary>
 
+- `31ffd83` records: 18 review videos back to 2.5D (user 2026-10-04)
+- `4abffd3` records: 3D redo
+- `767b474` records: 3D redo batch
+- `e3d69d6` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `937c0e7` records
+- `4fa8ae2` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `d765bcc` records: SMASH 3D redo
+- `6ccbbdc` records: SMASH 3D S004
+- `1c0ee98` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `e8fd4e7` records: SMASH 3D batch
+- `50e2593` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `a84e02f` records
+- `eec84a7` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `edddcd7` records
+- `28261bc` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `b676941` records
+- `63e5724` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `0badbb7` records
+- `cb1b85d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `792b807` records
+- `5bcca42` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `e9ffd92` records
+- `0b23381` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `1289ede` records
+- `fd5d3c6` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `33ab47b` analytics: daily report 2026-10-03
 - `e9f4045` records before analytics
 - `41bc962` records: batch A+B renders
 - `f9471e9` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
