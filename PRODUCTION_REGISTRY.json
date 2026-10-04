@@ -4019,6 +4019,129 @@
       "drive_sheet_id": "1TsVmwU8xTNAkaquB22utoAGs3MWlfPoi",
       "drive_id": "1AeXWGClkk6g-c800U7SVs6DvBDMvi4wD",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S040.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S041",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 41,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_ace455e4@sunset-clear-city",
+      "theme": "sunset-clear-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+laser",
+        "win+ramp",
+        "p4+container",
+        "p2"
+      ],
+      "duration": 36.88,
+      "plan": {
+        "layout": "stagger",
+        "zone": 161.0,
+        "start": 117.8,
+        "finish_gap": 113.7
+      },
+      "structure": "stagger|container,laser,ramp",
+      "title_base": "Can Nitro Survive Falling Containers? 🏁",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s041/SIM_RACE25D_V4_S041_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S042",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 42,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_63f605bf@sunset-clear-beach",
+      "theme": "sunset-clear-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p2",
+        "win",
+        "p4+dragon_ice+dodge_wall",
+        "p3+container"
+      ],
+      "duration": 36.65,
+      "plan": {
+        "layout": "stagger",
+        "zone": 209.5,
+        "start": 107.8,
+        "finish_gap": 88.3
+      },
+      "structure": "stagger|container,dragon_ice,wall",
+      "title_base": "Can Siren Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042/SIM_RACE25D_V4_S042_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1OAWEMxp5Vtr0WW6THy3C5LHhwM_74O2W",
+      "drive_id": "1oYXNqa1GoXI7bdf2ImScV3zCM8_3zmDd",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S042.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S043",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 43,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_c8d550c4@night-rain-city",
+      "theme": "night-rain-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+dodge_crusher",
+        "p2",
+        "win+ramp",
+        "p4+hammer"
+      ],
+      "duration": 39.04,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 198.1,
+        "start": 107.5,
+        "finish_gap": 113.5
+      },
+      "structure": "early_pair|crusher,hammer,ramp",
+      "title_base": "Can Siren Survive the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043/SIM_RACE25D_V4_S043_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1X8Pk_24aRyeg9Po8Iy6JuG8pTBklXSEO",
+      "drive_id": "1dsGC2S1jDFsohI_jiETSj0ohl1Hdq1-f",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S043.mp4"
     }
   ]
 }
