@@ -41,6 +41,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "physics_2d"))
 import registry  # noqa: E402
 import sim_engine as se  # noqa: E402
+sys.path.insert(0, os.path.join(HERE, "..", "variety"))
+import variety  # noqa: E402  (hazard layout varies per video, user 2026-10-04)
 
 SERIES, ENGINE_VERSION = "race25d", "v4"             # v4: class speeds (F1 > ... > bus) + realistic-order check; v3: curved circuit
 W, H, FPS = se.W, se.H, 30
@@ -103,6 +105,7 @@ PICKUP = {"f1": 0.042, "sports": 0.04, "police": 0.035, "taxi": 0.034, "monster"
 
 # per-video parameters (set in setup())
 RACERS, HZ, FIN_X, SECONDS = [], [], 0.0, 0.0     # HZ: list of dict(type, lane, x)
+ACTIVE, PLAN = [], None                          # registry history (variety director) and the layout plan used
 CURVE = None                                     # curved circuit (visual depth offset along x), set in setup()
 
 
@@ -169,12 +172,15 @@ def setup(seed, appearances, forced=None):
     global CURVE
     CURVE = dict(amp=float(r.uniform(0.9, 1.4)), length=float(r.uniform(120, 170)), phase=float(r.uniform(0, 6.28)))
     hz_lanes = [int(v) for v in r.permutation(4)[:3]]
-    xs = [110.0 + i * 95.0 + float(r.uniform(-8, 8)) for i in range(3)]
+    global PLAN
+    PLAN = PLAN or variety.plan_race(ACTIVE, seed)               # layout the audience has not seen lately
+    fr = variety.RACE_LAYOUTS[PLAN["layout"]]
+    xs = [PLAN["start"] + f * PLAN["zone"] + float(r.uniform(-4, 4)) for f in fr]
     HZ = [dict(type=t, lane=hz_lanes[i], x=xs[i]) for i, t in enumerate(types)]
-    FIN_X = xs[-1] + float(r.uniform(95, 115))
+    FIN_X = xs[-1] + PLAN["finish_gap"]
     SECONDS = FIN_X / 21.0 + 7.0
     return dict(cast=cast, lanes=lanes, hazards=[[h["type"], h["lane"], round(h["x"], 1)] for h in HZ],
-                finish=round(FIN_X, 1))
+                finish=round(FIN_X, 1), plan=PLAN)
 
 
 # ------------------------------------------------------------------ scripted race (120 Hz kinematics)
@@ -1514,6 +1520,8 @@ def main():
         for vk in e.get("vehicles", []):
             appearances[vk] = appearances.get(vk, 0) + 1
     forced = [h for h in opt.hazards.split(",") if h] or None
+    global ACTIVE
+    ACTIVE = active
     params = setup(opt.seed, appearances, forced)
     se.make_theme(opt.seed, used=[e.get("theme", "") for e in active if e.get("theme")])
     uses = {v: 0 for v in se.VOICES}
@@ -1761,6 +1769,7 @@ def main():
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
                              theme=se.THEME_ID, voice=voice, outcomes=outcomes, duration=round(dur, 2),
+                             plan=PLAN, structure=variety.race_signature(PLAN, [h["type"] for h in HZ]),
                              status="RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED", folder=folder_rel,
                              audit=f"{folder_rel}/{name}_audit.md", episode=None, season=None, upload_date=None,
                              youtube_url=None))

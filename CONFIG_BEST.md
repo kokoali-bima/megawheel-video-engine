@@ -18,6 +18,7 @@
 | Cron upload | 05:00 UTC (12:00 WIB) `daily_publish.sh`, flock, max 5 upload/run | crontab VM 99.3 | 2026-10-01 |
 | Cron analytics | 06:30 UTC (13:30 WIB) `analytics_daily.sh` → ANALYTICS_TELEGRAM.txt / LATEST.json | crontab VM 99.3 | 2026-10-03 user (bot 14:00 WIB) |
 | Stok | 7 hari per tipe | STOCK_DAYS | 2026-10-01 |
+| Durasi Shorts | **tidak dibatasi kaku** — pilih yang paling efisien & efektif ditonton (data retensi per durasi, evaluasi mingguan); gerbang hanya batas teknis Shorts | produce.py (peringatan, bukan tolak) | 2026-10-04 user: "kalau 1 menitan pun penonton suka, gas aja" |
 
 ## 2. Suara
 | Setelan | Nilai | Lokasi | Catatan |
