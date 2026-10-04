@@ -3394,6 +3394,44 @@
       "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S025.mp4",
       "reject_reason": "user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru",
       "rejected_date": "2026-10-04"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S026",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 26,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_f9195d7c@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+lava",
+        "p4+container",
+        "p2",
+        "win+dodge_puddle"
+      ],
+      "duration": 38.27,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 226.3,
+        "start": 108.1,
+        "finish_gap": 110.4
+      },
+      "structure": "early_pair|container,lava,puddle",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s026",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s026/SIM_RACE25D_V4_S026_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
