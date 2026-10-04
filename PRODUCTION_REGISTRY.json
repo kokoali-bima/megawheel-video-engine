@@ -3257,6 +3257,47 @@
       "drive_sheet_id": "1Qsgo3V4sq1JpEvC6pONF3h_loZ3ZjWI0",
       "drive_id": "1SU75Pxw3LwrFBCgR-gYpdOkNmPJHIM0C",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S022.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S023",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 23,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "police",
+        "f1"
+      ],
+      "track_id": "race25d_2937a145@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+container",
+        "p3",
+        "p2+ramp",
+        "win+dodge_pothole"
+      ],
+      "duration": 34.61,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 210.8,
+        "start": 108.5,
+        "finish_gap": 96.3
+      },
+      "structure": "gauntlet|container,pothole,ramp",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s023",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s023/SIM_RACE25D_V4_S023_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "165gTFtUi0szNfbO7HVvlC4TyTx0a7I6j",
+      "drive_id": "1Od7yLlIFy7J2t_uAKnCOnUgy9gzyvLMQ",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S023.mp4"
     }
   ]
 }
