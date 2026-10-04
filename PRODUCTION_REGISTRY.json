@@ -3134,6 +3134,47 @@
       "drive_sheet_id": "1OcAXHgoDXT3vLhC5mximyBnggDEaUrzO",
       "drive_id": "1v45IAhuyg2a1f8JuPJLXv9_unDHhmOum",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S019.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S020",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 20,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_1f5d692f@night-clear-mountains",
+      "theme": "night-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "p2+dodge_laser",
+        "win+ramp",
+        "p4+hammer"
+      ],
+      "duration": 36.28,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 221.2,
+        "start": 104.8,
+        "finish_gap": 105.3
+      },
+      "structure": "gauntlet|hammer,laser,ramp",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s020",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s020/SIM_RACE25D_V4_S020_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1_I-_q4EHGWTvC1BxDr8aZ-PfqkpqdmuN",
+      "drive_id": "1rT2uD9JlyghIAKlHxEBBAtHspHpmScfl",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S020.mp4"
     }
   ]
 }
