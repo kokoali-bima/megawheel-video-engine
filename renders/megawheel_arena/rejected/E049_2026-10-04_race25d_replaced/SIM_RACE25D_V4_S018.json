@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S018",
-  "status": "APPROVED",
+  "status": "REPLACED",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 18,
@@ -100,9 +100,10 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/SIM_RACE25D_V4_S018.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E049_2026-10-04_race25d/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/E049_2026-10-04_race25d_replaced/SIM_RACE25D_V4_S018.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/E049_2026-10-04_race25d_replaced/preview",
   "episode": 49,
   "season": 2,
-  "approved_date": "2026-10-04"
+  "approved_date": "2026-10-04",
+  "replaced_by": "SIM_RACE25D_V4_S043"
 }
