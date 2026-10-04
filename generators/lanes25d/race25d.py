@@ -1670,6 +1670,10 @@ def main():
         if mode == "race" and star is not None and focus is star and -1.4 < t - star["trig"] < 2.0:
             want = 1.32                                          # the star moment fills the screen (cold open + race)
         zoom = want * punch if cut else zoom + (want * punch - zoom) * 0.12
+        kc = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
+        kreach = 400.0 / (k_of(st[id(kc)][1]) * zoom)               # the key car must stay on screen: if the glide
+        over = camx - float(np.clip(camx, st[id(kc)][0] - kreach, st[id(kc)][0] + kreach))   # lags, a fast pan
+        camx -= float(np.clip(over, -4.0, 4.0))                 # (never a cut) brings it back
         prev_mode = mode
         if not any(0 < 540 + (st[id(c)][0] - camx) * k_of(st[id(c)][1]) * zoom < W for c in cars):
             empty_frames += 1
