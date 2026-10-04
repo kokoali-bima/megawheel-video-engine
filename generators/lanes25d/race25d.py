@@ -1227,10 +1227,14 @@ def question_for(cars):
     """Hook with an honest payoff (user 2026-10-04): ask about the racer who really meets the most striking hazard.
     (v3 asked about the underdog + the biggest hazard even when they never met: Ep. 31-49 titles did not match.)"""
     hits = [c for c in cars if c["hz"] is not None and c["trig"] is not None]
-    if hits:
-        star = max(hits, key=star_key)
-        return f"Can {nick(star['key'])} Survive {QUESTION[star['hz']['type']]}?"
-    return "4 Cars, 1 Finish Line! Who Wins?"
+    if not hits:
+        return "4 Cars, 1 Finish Line! Who Wins?"
+    star = max(hits, key=star_key)
+    n, h = nick(star["key"]), QUESTION[star["hz"]["type"]]
+    used = {(e.get("title_base") or e.get("title") or "").split(" 🏁")[0].split(" | Ep.")[0] for e in ACTIVE}
+    forms = [f"Can {n} Survive {h}?", f"{n} vs {h}! Who Wins the Race?", f"Will {n} Make It Past {h}?",
+             f"{n} Meets {h}! Who Wins the Race?"]
+    return next((f for f in forms if f not in used), forms[0])  # never the same title as another video
 
 
 def draw_hud(ctx, cars, t):
@@ -1788,8 +1792,9 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", wav, "-c:v", "copy", "-c:a", "aac",
                     "-b:a", "192k", "-movflags", "+faststart", "-shortest", out], check=True)
     os.remove(silent)
-    se.add_cold_open(out, out_of(star["trig"]) if star is not None else out_of(winner["finish"] or 5.0),
-                     QUESTION_TEXT[0] or "WHO WINS?", y0=170, band=True)
+    se.add_cold_open(out, (out_of(star["trig"] - 0.45) + se.COLD_OPEN_S * 0.55) if star is not None
+                     else out_of(winner["finish"] or 5.0),
+                     QUESTION_TEXT[0] or "WHO WINS?", y0=170, band=True)   # opens ON the star (no pan inside the cold open)
     probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type:format=duration", "-of",
                             "json", out], capture_output=True, text=True)
     pj = json.loads(probe.stdout or "{}")
@@ -1835,7 +1840,7 @@ def main():
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
                              theme=se.THEME_ID, voice=voice, outcomes=outcomes, duration=round(dur, 2),
-                             plan=PLAN, structure=variety.race_signature(PLAN, [h["type"] for h in HZ]),
+                             plan=PLAN, structure=variety.race_signature(PLAN, [h["type"] for h in HZ]), title_base=title,
                              status="RENDERED_PENDING_APPROVAL" if passed else "AUDIT_FAILED", folder=folder_rel,
                              audit=f"{folder_rel}/{name}_audit.md", episode=None, season=None, upload_date=None,
                              youtube_url=None))
