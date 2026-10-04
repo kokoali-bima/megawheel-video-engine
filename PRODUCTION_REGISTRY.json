@@ -3935,6 +3935,48 @@
       "drive_sheet_id": "18iEUMMxeaIDno5JgmioS4AEDhcODUr6M",
       "drive_id": "1N_E0lSmsJPRs9Cu701eAxp7YkIyRreq_",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S038.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S039",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 39,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_c1648c1a@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+ramp",
+        "p4+container",
+        "win",
+        "p2+dodge_crusher"
+      ],
+      "duration": 38.41,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 223.9,
+        "start": 100.8,
+        "finish_gap": 92.3
+      },
+      "structure": "late_pair|container,crusher,ramp",
+      "title_base": "Can Grizzly Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/SIM_RACE25D_V4_S039_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1gi0hMj0Euk6otUDFGy3KQD3f3XSeo1kd",
+      "drive_id": "1rou2XKXF9fZlpZ5KBLvdXGKDMxtPa2vr",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S039.mp4"
     }
   ]
 }

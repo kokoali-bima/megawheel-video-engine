@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S039",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 39,
+  "fps": 30,
+  "duration": 38.41,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "f1",
+      "police"
+    ],
+    "lanes": [
+      2,
+      3,
+      1,
+      0
+    ],
+    "hazards": [
+      [
+        "ramp",
+        2,
+        102.8
+      ],
+      [
+        "crusher",
+        0,
+        286.3
+      ],
+      [
+        "container",
+        3,
+        323.8
+      ]
+    ],
+    "finish": 416.1,
+    "plan": {
+      "layout": "late_pair",
+      "zone": 223.9,
+      "start": 100.8,
+      "finish_gap": 92.3
+    }
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "night-clear-desert",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p3+ramp",
+    "p4+container",
+    "win",
+    "p2+dodge_crusher"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Grizzly Survive Falling Containers? 🏁",
+  "title": "Can Grizzly Survive Falling Containers? 🏁 #Shorts",
+  "description": "Titan, Grizzly, Nitro and Siren race to the finish line! 🏁 Obstacles today: container, crusher, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "race car",
+    "police car",
+    "container",
+    "crusher",
+    "ramp"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Grizzly Survive Falling Containers? Titan, Grizzly, Nitro and Siren... who will win?",
+    "Titan takes the ramp... big air!",
+    "Nice move! Siren dodges the crusher!",
+    "A container drops from the sky! Grizzly crashes right into it!",
+    "Nitro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/SIM_RACE25D_V4_S039.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/preview"
+}
