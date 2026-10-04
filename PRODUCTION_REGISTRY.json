@@ -4100,6 +4100,48 @@
       "drive_sheet_id": "1OAWEMxp5Vtr0WW6THy3C5LHhwM_74O2W",
       "drive_id": "1oYXNqa1GoXI7bdf2ImScV3zCM8_3zmDd",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S042.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S043",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 43,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_c8d550c4@night-rain-city",
+      "theme": "night-rain-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+dodge_crusher",
+        "p2",
+        "win+ramp",
+        "p4+hammer"
+      ],
+      "duration": 39.04,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 198.1,
+        "start": 107.5,
+        "finish_gap": 113.5
+      },
+      "structure": "early_pair|crusher,hammer,ramp",
+      "title_base": "Can Siren Survive the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s043/SIM_RACE25D_V4_S043_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1X8Pk_24aRyeg9Po8Iy6JuG8pTBklXSEO",
+      "drive_id": "1dsGC2S1jDFsohI_jiETSj0ohl1Hdq1-f",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S043.mp4"
     }
   ]
 }
