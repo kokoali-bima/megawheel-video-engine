@@ -3977,6 +3977,48 @@
       "drive_sheet_id": "1gi0hMj0Euk6otUDFGy3KQD3f3XSeo1kd",
       "drive_id": "1rou2XKXF9fZlpZ5KBLvdXGKDMxtPa2vr",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S039.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S040",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 40,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_fb6a5ca9@noon-clear-countryside",
+      "theme": "noon-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+laser",
+        "p2+dodge_oil",
+        "p3+meteor",
+        "win"
+      ],
+      "duration": 35.25,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 206.0,
+        "start": 105.2,
+        "finish_gap": 94.2
+      },
+      "structure": "gauntlet|laser,meteor,oil",
+      "title_base": "Can Tilly Survive the Meteors? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040/SIM_RACE25D_V4_S040_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1TsVmwU8xTNAkaquB22utoAGs3MWlfPoi",
+      "drive_id": "1AeXWGClkk6g-c800U7SVs6DvBDMvi4wD",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S040.mp4"
     }
   ]
 }

@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S040",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 40,
+  "fps": 30,
+  "duration": 35.25,
+  "params": {
+    "cast": [
+      "bus",
+      "monster",
+      "taxi",
+      "sports"
+    ],
+    "lanes": [
+      3,
+      1,
+      0,
+      2
+    ],
+    "hazards": [
+      [
+        "laser",
+        3,
+        155.3
+      ],
+      [
+        "meteor",
+        0,
+        211.1
+      ],
+      [
+        "oil",
+        1,
+        262.5
+      ]
+    ],
+    "finish": 356.7,
+    "plan": {
+      "layout": "gauntlet",
+      "zone": 206.0,
+      "start": 105.2,
+      "finish_gap": 94.2
+    }
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "countryside"
+  },
+  "theme_id": "noon-clear-countryside",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p4+laser",
+    "p2+dodge_oil",
+    "p3+meteor",
+    "win"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Tilly Survive the Meteors? 🏁",
+  "title": "Can Tilly Survive the Meteors? 🏁 #Shorts",
+  "description": "Buster, Rocky, Tilly and Zippy race to the finish line! 🏁 Obstacles today: laser, meteor, oil! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "taxi",
+    "sports car",
+    "laser",
+    "meteor",
+    "oil"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Tilly Survive the Meteors? Buster, Rocky, Tilly and Zippy... who will win?",
+    "Zap! The laser slices Buster in two!",
+    "Kaboom! A meteor hits Tilly!",
+    "Nice move! Rocky dodges the oil slick!",
+    "Zippy wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040/SIM_RACE25D_V4_S040.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040/preview"
+}
