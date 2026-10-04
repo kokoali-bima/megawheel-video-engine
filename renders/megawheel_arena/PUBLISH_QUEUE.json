@@ -138,37 +138,52 @@
   {
    "episode": 24,
    "video_id": "SIM_SMASH25D_V4_S007",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-04T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Crash Battle! Only One Can Win! \ud83d\udca5 | Ep. 24 #Shorts",
+   "upload_started": "2026-10-04T05:00:05.557704+00:00",
+   "url": "https://www.youtube.com/shorts/RCBE3lgA2uo"
   },
   {
    "episode": 16,
    "video_id": "SIM_SPLASH_V2_S011",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-05T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Slippery Splash Zone! Who Survives? \ud83d\udca6\ud83d\ude97 | Ep. 16 #Shorts",
+   "upload_started": "2026-10-04T05:00:12.628285+00:00",
+   "url": "https://www.youtube.com/shorts/_lZj6d402lU"
   },
   {
    "episode": 12,
    "video_id": "SIM_RACE25D_V2_S004",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-05T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "4 Cars, 1 Finish Line! Who Wins? \ud83c\udfc1 | Ep. 12 #Shorts",
+   "upload_started": "2026-10-04T05:00:16.879233+00:00",
+   "url": "https://www.youtube.com/shorts/ABojeEOuK4M"
   },
   {
    "episode": 25,
    "video_id": "SIM_SMASH25D_V4_S008",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-05T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "4 Cars Enter, 1 Survives! \ud83d\udca5 Smash Arena | Ep. 25 #Shorts",
+   "upload_started": "2026-10-04T05:00:22.066127+00:00",
+   "url": "https://www.youtube.com/shorts/5ljCNw1Hnlg"
   },
   {
    "episode": 17,
    "video_id": "SIM_POTHOLES_V2_S007",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-06T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Giant Potholes! Who Survives? \ud83d\ude97\ud83d\udca5 | Ep. 17 #Shorts",
+   "upload_started": "2026-10-04T05:00:26.687067+00:00",
+   "url": "https://www.youtube.com/shorts/15-W4OJNtt4"
   },
   {
    "episode": 13,
