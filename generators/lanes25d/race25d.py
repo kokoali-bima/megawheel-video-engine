@@ -639,6 +639,40 @@ def draw_props(ctx, camx, z, seed, back=True):
             ctx.fill()
 
 
+SENSOR = {}                                                       # id(hazard) -> [(t, visible px)] near its hit
+
+
+def sensed(ctx, fn, hz, camx, t, cars, live):
+    """Draw a hazard and, around the moment it hits someone, count the pixels it really put on screen (a visual sensor:
+    it sees what the viewer sees, so wrong coordinates / off-screen / invisible hazards are caught by the checks)."""
+    tr = hz_trig(hz, cars)
+    if not live or tr is None or not -0.15 <= t - tr <= 0.8:
+        fn(ctx, hz, camx, t, cars)
+        return
+    ctx.push_group()
+    fn(ctx, hz, camx, t, cars)
+    pat = ctx.pop_group()
+    surf = pat.get_surface()[1] if isinstance(pat.get_surface(), tuple) else pat.get_surface()
+    surf.flush()
+    w, h, stride = surf.get_width(), surf.get_height(), surf.get_stride()
+    alpha = np.frombuffer(surf.get_data(), np.uint8).reshape(h, stride // 4, 4)[:, :w, 3]
+    SENSOR.setdefault(id(hz), []).append((t, int((alpha > 24).sum())))
+    ctx.set_source(pat)
+    ctx.paint()
+
+
+def unseen_hazards(cars):
+    """Hazards that hit a car but were (almost) not visible on screen at that moment, by the pixel sensor."""
+    bad = []
+    for c in cars:
+        if c["hz"] is None or c["trig"] is None:
+            continue
+        px = sorted(v for _, v in SENSOR.get(id(c["hz"]), []))
+        if not px or px[len(px) // 2] < 1500:                     # median visible area < ~40x40 px
+            bad.append((nick(c["key"]), c["hz"]["type"], px[len(px) // 2] if px else 0))
+    return bad
+
+
 def hz_trig(hz, cars):
     return next((c["trig"] for c in cars if c["hz"] is hz), None)
 
@@ -958,7 +992,9 @@ def draw_container(ctx, sx, y, k, t, tr, hz):
     a = t - tr
     if a < -0.45:
         return
-    drop = 1.0 if a >= -0.05 else 1 - ((a + 0.45) / 0.4) ** 2
+    # height above the road: 1 = up in the sky, 0 = landed. (Bug until 2026-10-04: after landing it was set back to 1,
+    # so the container flew 22 m up off-screen and cars crashed into nothing - user found it in S038/S039.)
+    drop = 0.0 if a >= -0.05 else 1 - ((a + 0.45) / 0.4) ** 2
     yb = y - drop * 22 * k
     col = [(0.9, 0.45, 0.1), (0.15, 0.45, 0.8), (0.75, 0.15, 0.15)][int(hz["x"]) % 3]
     se.poly(ctx, [(sx - 0.1 * k, yb), (sx + 3.2 * k, yb), (sx + 3.2 * k, yb - 2.6 * k), (sx - 0.1 * k, yb - 2.6 * k)])
@@ -1718,20 +1754,21 @@ def main():
         draw_props(ctx, camx, 5.2, 11 + opt.seed, back=True)
         draw_props(ctx, camx, 4.3, 12 + opt.seed, back=True)
         draw_ground(ctx, camx)
+        live = mode == "race"
         for hz in sorted(HZ, key=lambda h: -h["lane"]):
-            draw_hazard_ground(ctx, hz, camx, t, cars)
+            sensed(ctx, draw_hazard_ground, hz, camx, t, cars, live)
         heads = {}
         for c in sorted(cars, key=lambda c: -st[id(c)][1]):
             for hz in HZ:                                        # towering hazards of farther lanes go behind nearer cars
                 if hz["lane"] > st[id(c)][1] + 0.5 and not hz.get("_drawn"):
-                    draw_hazard_front(ctx, hz, camx, t, cars)
+                    sensed(ctx, draw_hazard_front, hz, camx, t, cars, live)
                     hz["_drawn"] = True
             hd = draw_car(ctx, c, t, camx)
             heads[id(c)] = None if hd is None else (540 + (hd[0] - 540) * zoom + shx,
                                                    1520 + (hd[1] - 1520) * zoom + shy + WORLD_DY, hd[2])
         for hz in HZ:
             if not hz.pop("_drawn", False):
-                draw_hazard_front(ctx, hz, camx, t, cars)
+                sensed(ctx, draw_hazard_front, hz, camx, t, cars, live)
         for kind, et, ex, ez in events:
             age = t - et
             if kind in ("puddle", "oil") and 0 <= age < 1.6:
@@ -1807,7 +1844,8 @@ def main():
               "has replay": replay is not None,
               "previews": all(os.path.exists(os.path.join(prev, f"{m}.png")) for m in ("winner", "outro")),
               "no frame without a car (whip pans <= 10 frames)": empty_frames == 0 and pan_empty <= 10,
-              "realistic order (slower ahead only if the faster one was hit)": not unexplained_upsets(cars)}
+              "realistic order (slower ahead only if the faster one was hit)": not unexplained_upsets(cars),
+              "every hazard that hits is visible on screen (pixel sensor)": not unseen_hazards(cars)}
     passed = all(checks.values())
     outcomes = [("win" if c is winner else f"p{c['place']}") + (f"+{c['hz']['type']}" if c["trig"] is not None else "")
                 + ("+bump" if c["bump_t"] else "") + (f"+dodge_{c['dodged']}" if c.get("dodge_t") else "")
@@ -1835,7 +1873,7 @@ def main():
     with open(os.path.join(out_dir, f"{name}_audit.md"), "w") as fh:
         fh.write(f"# Checks {name}\n\n" + "\n".join(f"- {'✅' if ok else '❌'} {k}" for k, ok in checks.items())
                  + f"\n\nDuration {dur:.1f} s · theme {se.THEME_ID} · voice {voice} · hazards {hz_words}\n")
-    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames} pan_empty={pan_empty}", flush=True)
+    print(f"[25d] checks {'PASS' if passed else 'FAIL'} {checks} empty_frames={empty_frames} pan_empty={pan_empty} unseen={unseen_hazards(cars)}", flush=True)
     if not opt.preview_only:
         registry.upsert(dict(video_id=name, series=SERIES, engine_version=ENGINE_VERSION, seed=opt.seed, created=date,
                              render_date=date, vehicles=[c["key"] for c in cars], track_id=track_id,
