@@ -786,6 +786,12 @@ def draw_hazard_front(ctx, hz, camx, t, cars):
         if tr is not None and -0.25 < t - tr < 0:                # slam starts just before contact
             drop = (t - tr + 0.25) / 0.25 * 0.9
         block_bottom = top + 1.2 * k + drop * (7.5 * k - 1.2 * k - 0.5 * k)
+        victim = next((c for c in cars if c["hz"] is hz and c["trig"] is not None), None)
+        if victim is not None:                                   # the press stops ON the roof (tall trucks too),
+            vs = state(victim, t)                                # then follows the body down as it is squashed
+            vv = se.VEHICLES[victim["key"]]
+            roof = y - (max(0.0, vs[2]) + (2 * vv["wheel_r"] + vv["body"][1] + 0.35) * vs[6]) * k
+            block_bottom = min(block_bottom, roof)
         ctx.set_source_rgb(*se.lit((0.35, 0.35, 0.4)))
         ctx.rectangle(sx - 0.25 * k, top, 0.5 * k, block_bottom - top - 1.0 * k)
         ctx.fill()
