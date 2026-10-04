@@ -3511,6 +3511,47 @@
       "drive_sheet_id": "16F3jYKkLgIa3coJNH87aKnFrVxzfaePw",
       "drive_id": "1JUBa1frgq5wOqrId-vu1Yp5bTdUYSudb",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S028.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S029",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 29,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "race25d_6f3cf35b@sunset-clear-city",
+      "theme": "sunset-clear-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+ramp",
+        "p4+container",
+        "p2",
+        "win+dodge_oil"
+      ],
+      "duration": 37.74,
+      "plan": {
+        "layout": "stagger",
+        "zone": 211.4,
+        "start": 114.1,
+        "finish_gap": 113.0
+      },
+      "structure": "stagger|container,oil,ramp",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Ba5AaMpvZ9zmbYxL-j7RKJrajurfTRHB",
+      "drive_id": "1-VtC-k49Q-aubKwsKZnOgFenfl0N62tQ",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S029.mp4"
     }
   ]
 }
