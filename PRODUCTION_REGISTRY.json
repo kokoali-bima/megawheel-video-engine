@@ -3093,6 +3093,47 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E048_SIM_POTHOLES_V2_S031.mp4",
       "approved_date": "2026-10-04",
       "title": "Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S019",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 19,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_3425e706@night-clear-city",
+      "theme": "night-clear-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+dragon_fire",
+        "p2+dodge_puddle",
+        "win",
+        "p3+oil"
+      ],
+      "duration": 34.01,
+      "plan": {
+        "layout": "stagger",
+        "zone": 207.5,
+        "start": 116.5,
+        "finish_gap": 85.9
+      },
+      "structure": "stagger|dragon_fire,oil,puddle",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s019",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s019/SIM_RACE25D_V4_S019_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1OcAXHgoDXT3vLhC5mximyBnggDEaUrzO",
+      "drive_id": "1v45IAhuyg2a1f8JuPJLXv9_unDHhmOum",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S019.mp4"
     }
   ]
 }
