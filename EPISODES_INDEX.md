@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 03:19) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 03:24) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -63,6 +63,8 @@
 | 47 | `SIM_SMASH25D_V5_S009` | smash25d | APPROVED | Thu 2026-10-15 19:00 |  |
 | 48 | `SIM_POTHOLES_V2_S031` | potholes | APPROVED | Sat 2026-10-17 11:00 |  |
 | 49 | `SIM_RACE25D_V4_S018` | race25d | APPROVED | Thu 2026-10-15 15:00 |  |
+| 50 | `SIM_POTHOLES_V2_S028` | potholes | APPROVED | Sun 2026-10-18 11:00 |  |
+| 51 | `SIM_POTHOLES_V2_S029` | potholes | APPROVED | Mon 2026-10-19 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
 
@@ -701,6 +703,32 @@
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p3+ramp; Level 2: Grizzly (monster2) → p2; Level 3 (juara): Zippy (sports) → win+dodge_laser; Level 4: Nitro (f1) → p4+hammer
 - **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-15T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 50 — `SIM_POTHOLES_V2_S028`
+
+- **Judul YouTube:** Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 | Ep. 50 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E050_2026-10-04_potholes/SIM_POTHOLES_V2_S028.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E050_2026-10-04_potholes/SIM_POTHOLES_V2_S028.json` · audit: `renders/megawheel_arena/S02/E050_2026-10-04_potholes/SIM_POTHOLES_V2_S028_audit.md`
+- **Season / seri / seed:** S02 / potholes / 28
+- **Tema / narator:** morning-clear-countryside / chatterbox:m1
+- **Durasi:** 47.17 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → pit@obs0+broken; Level 2: Hydro (firetruck) → stuck@obs0; Level 3 (juara): Sprinkles (icecream) → win
+- **Status:** APPROVED (approve 2026-10-04)
+- **Antrian:** QUEUED 2026-10-18T15:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 51 — `SIM_POTHOLES_V2_S029`
+
+- **Judul YouTube:** Will Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 51 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E051_2026-10-04_potholes/SIM_POTHOLES_V2_S029.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E051_2026-10-04_potholes/SIM_POTHOLES_V2_S029.json` · audit: `renders/megawheel_arena/S02/E051_2026-10-04_potholes/SIM_POTHOLES_V2_S029_audit.md`
+- **Season / seri / seed:** S02 / potholes / 29
+- **Tema / narator:** sunset-clear-beach / chatterbox:f1
+- **Durasi:** 50.0 s
+- **Tokoh dan hasil:** Level 1: Siren (police) → flip@obs0; Level 2: Titan (bigrig) → stuck@obs0; Level 3 (juara): Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-10-04)
+- **Antrian:** QUEUED 2026-10-19T15:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
