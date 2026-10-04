@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-03 17:52). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 03:16). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -61,7 +61,8 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_RACE25D_V4_S018 | race25d | Buster, Grizzly, Zippy, Nitro | 2026-10-04 | 35.82 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s018` |
+| SIM_POTHOLES_V2_S031 | potholes | Siren, Hydro, Zippy | 2026-10-04 | 50.03 s | `renders/megawheel_arena/pending/2026-10-04_potholes_s031` |
 
 ## Ditolak
 
@@ -99,3 +100,5 @@
 | SIM_POTHOLES_V2_S023 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |
 | SIM_POTHOLES_V2_S024 | agent QA: same cast / same lead car as another render in this batch (variety) | 2026-10-03 |
 | SIM_RACE25D_V3_S014 | agent QA: same title as SIM_RACE25D_V3_S013 (Can Hydro Survive the Giant Hammer?) | 2026-10-03 |
+| SIM_POTHOLES_V2_S028 | user 2026-10-04: bom tidak meledak saat diinjak (cacat pemicu, sudah diperbaiki) | 2026-10-04 |
+| SIM_POTHOLES_V2_S029 | user 2026-10-04: isi lubang (duri, Pit Muncher) tidak terpakai | 2026-10-04 |

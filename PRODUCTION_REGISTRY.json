@@ -2891,7 +2891,7 @@
         "win"
       ],
       "duration": 47.17,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": {
         "template": "twin_early",
         "pits": [
@@ -2917,15 +2917,17 @@
         "attempt": 0
       },
       "structure": "twin_early|box-S-bomb,narrow_deep-S-rubble,v-L-monster",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_potholes_s028",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_potholes_s028",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "16iAwWcCNsGx96gdokugZ9oRvjhKCfHjk",
+      "drive_sheet_id": null,
       "drive_id": "1kLuPqfVB9jLNdtTgs4Lw78VT-7zoaCY6",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S028.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_POTHOLES_V2_S028.mp4",
+      "reject_reason": "user 2026-10-04: bom tidak meledak saat diinjak (cacat pemicu, sudah diperbaiki)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S018",
@@ -2989,7 +2991,7 @@
         "win"
       ],
       "duration": 50.0,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": {
         "template": "late_gauntlet",
         "pits": [
@@ -3015,15 +3017,17 @@
         "attempt": 0
       },
       "structure": "late_gauntlet|step-M-water,box-L-spikes,crumble-S-monster",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_potholes_s029",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_potholes_s029/SIM_POTHOLES_V2_S029_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_potholes_s029",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_potholes_s029/SIM_POTHOLES_V2_S029_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Hq0NRV8upbTZoMsgsEnPJLopLPhhcsrV",
+      "drive_sheet_id": null,
       "drive_id": "19a3Qh-K20bBpiCFKxodBQVMZuRSNYsob",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S029.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_POTHOLES_V2_S029.mp4",
+      "reject_reason": "user 2026-10-04: isi lubang (duri, Pit Muncher) tidak terpakai",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S031",
