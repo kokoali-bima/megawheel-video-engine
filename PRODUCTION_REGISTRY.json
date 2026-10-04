@@ -3501,16 +3501,18 @@
         "finish_gap": 105.6
       },
       "structure": "gauntlet|crusher,meteor,oil",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s028",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "16F3jYKkLgIa3coJNH87aKnFrVxzfaePw",
+      "drive_sheet_id": null,
       "drive_id": "1JUBa1frgq5wOqrId-vu1Yp5bTdUYSudb",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S028.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S028.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S029",
@@ -3542,16 +3544,18 @@
         "finish_gap": 113.0
       },
       "structure": "stagger|container,oil,ramp",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s029",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Ba5AaMpvZ9zmbYxL-j7RKJrajurfTRHB",
+      "drive_sheet_id": null,
       "drive_id": "1-VtC-k49Q-aubKwsKZnOgFenfl0N62tQ",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S029.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S029.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S030",
@@ -3583,16 +3587,18 @@
         "finish_gap": 102.7
       },
       "structure": "early_pair|container,crusher,ufo",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s030",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s030/SIM_RACE25D_V4_S030_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s030",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s030/SIM_RACE25D_V4_S030_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1iVND9z4yJDx32Kw1pA6U2ZwoLCRWSpPI",
+      "drive_sheet_id": null,
       "drive_id": "1vQBh-L_3diVe593kc2zWE4HXYKXdvn8t",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S030.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S030.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S031",
@@ -3662,16 +3668,18 @@
         "finish_gap": 112.9
       },
       "structure": "late_pair|crusher,oil,wall",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "11noTH6m3JVKoYPc8vqhYoFoud7_At6Bd",
+      "drive_sheet_id": null,
       "drive_id": "1WbrmIO8Yz22FjeOwxVtCRWRRpmRr1lYW",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S032.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S032.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S033",
@@ -3703,16 +3711,18 @@
         "finish_gap": 100.1
       },
       "structure": "stagger|dragon_ice,lava,oil",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s033",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Q8O1sqsqnC8UAhHrD4lb8i_3n_jGBFE0",
+      "drive_sheet_id": null,
       "drive_id": "1hetcETP3f7o4QFAJjC8Op1TYwpKcDUTN",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S033.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S033.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S034",
@@ -3744,16 +3754,18 @@
         "finish_gap": 111.8
       },
       "structure": "gauntlet|container,oil,pothole",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s034",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1jv2C-pkaWoR2cV2_4vp8SZzkQYpaUZ6P",
+      "drive_sheet_id": null,
       "drive_id": "1eNKU2yfUXP3J0RtDYdEP1Czpn4SaUAqE",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S034.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S034.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S035",
@@ -3785,16 +3797,228 @@
         "finish_gap": 112.9
       },
       "structure": "early_pair|container,lava,ufo",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1ZPFLfjricrozAFaI5C49gFCPiWOuyxMn",
+      "drive_sheet_id": null,
       "drive_id": "15FgGg3PUYYTh9PzNiMGcB3C0nmh9sSGa",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S035.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S035.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S036",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 36,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_978c8dc1@night-clear-countryside",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+dodge_crusher",
+        "p4+dragon_fire+bump",
+        "win",
+        "p3+oil"
+      ],
+      "duration": 37.04,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 206.5,
+        "start": 108.0,
+        "finish_gap": 90.2
+      },
+      "structure": "early_pair|crusher,dragon_fire,oil",
+      "title_base": "Can Zippy Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s036/SIM_RACE25D_V4_S036_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1qiDgNZKgL6Cu9FsrcU-kAwKnIvK-YkiJ",
+      "drive_id": "1fL0CRe39YEMpedaHrvciePGEGoiBLc1k",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S036.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S037",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 37,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_e03917f9@morning-snow-city",
+      "theme": "morning-snow-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+dragon_fire",
+        "p2+dodge_lava",
+        "win",
+        "p3+oil"
+      ],
+      "duration": 35.79,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 225.6,
+        "start": 108.3,
+        "finish_gap": 96.1
+      },
+      "structure": "gauntlet|dragon_fire,lava,oil",
+      "title_base": "Can Siren Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s037/SIM_RACE25D_V4_S037_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Ll-NtTAqvsinw2I_kHtHJp9bGsfqHvBy",
+      "drive_id": "1SAaPHAlTReTMpBdMh1NHHkur-jFxo5Nz",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S037.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S038",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 38,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "f1",
+        "sports"
+      ],
+      "track_id": "race25d_5520c768@sunset-snow-mountains",
+      "theme": "sunset-snow-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3",
+        "win+bump+dodge_laser",
+        "p2+oil",
+        "p4+container+bump"
+      ],
+      "duration": 34.02,
+      "plan": {
+        "layout": "stagger",
+        "zone": 182.2,
+        "start": 95.3,
+        "finish_gap": 96.9
+      },
+      "structure": "stagger|container,laser,oil",
+      "title_base": "Can Zippy Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038/SIM_RACE25D_V4_S038_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "18iEUMMxeaIDno5JgmioS4AEDhcODUr6M",
+      "drive_id": "1N_E0lSmsJPRs9Cu701eAxp7YkIyRreq_",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S038.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S039",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 39,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_c1648c1a@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+ramp",
+        "p4+container",
+        "win",
+        "p2+dodge_crusher"
+      ],
+      "duration": 38.41,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 223.9,
+        "start": 100.8,
+        "finish_gap": 92.3
+      },
+      "structure": "late_pair|container,crusher,ramp",
+      "title_base": "Can Grizzly Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/SIM_RACE25D_V4_S039_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1gi0hMj0Euk6otUDFGy3KQD3f3XSeo1kd",
+      "drive_id": "1rou2XKXF9fZlpZ5KBLvdXGKDMxtPa2vr",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S039.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S040",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 40,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_fb6a5ca9@noon-clear-countryside",
+      "theme": "noon-clear-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+laser",
+        "p2+dodge_oil",
+        "p3+meteor",
+        "win"
+      ],
+      "duration": 35.25,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 206.0,
+        "start": 105.2,
+        "finish_gap": 94.2
+      },
+      "structure": "gauntlet|laser,meteor,oil",
+      "title_base": "Can Tilly Survive the Meteors? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s040/SIM_RACE25D_V4_S040_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1TsVmwU8xTNAkaquB22utoAGs3MWlfPoi",
+      "drive_id": "1AeXWGClkk6g-c800U7SVs6DvBDMvi4wD",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S040.mp4"
     }
   ]
 }

@@ -1,0 +1,105 @@
+{
+  "video_id": "SIM_RACE25D_V4_S038",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 38,
+  "fps": 30,
+  "duration": 34.02,
+  "params": {
+    "cast": [
+      "bus",
+      "monster",
+      "f1",
+      "sports"
+    ],
+    "lanes": [
+      0,
+      3,
+      2,
+      1
+    ],
+    "hazards": [
+      [
+        "laser",
+        3,
+        97.7
+      ],
+      [
+        "oil",
+        2,
+        156.5
+      ],
+      [
+        "container",
+        1,
+        237.1
+      ]
+    ],
+    "finish": 334.0,
+    "plan": {
+      "layout": "stagger",
+      "zone": 182.2,
+      "start": 95.3,
+      "finish_gap": 96.9
+    }
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "snow",
+    "location": "mountains"
+  },
+  "theme_id": "sunset-snow-mountains",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p3",
+    "win+bump+dodge_laser",
+    "p2+oil",
+    "p4+container+bump"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Zippy Survive Falling Containers? 🏁",
+  "title": "Can Zippy Survive Falling Containers? 🏁 #Shorts",
+  "description": "Buster, Rocky, Nitro and Zippy race to the finish line! 🏁 Obstacles today: container, laser, oil! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "race car",
+    "sports car",
+    "container",
+    "laser",
+    "oil"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Zippy Survive Falling Containers? Buster, Rocky, Nitro and Zippy... who will win?",
+    "Nice move! Rocky dodges the laser!",
+    "Oil slick! Nitro spins like a top!",
+    "A container drops from the sky! Zippy crashes right into it!",
+    "Rocky wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038/SIM_RACE25D_V4_S038.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038/preview"
+}

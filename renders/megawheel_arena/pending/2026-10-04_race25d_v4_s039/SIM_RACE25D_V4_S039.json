@@ -1,61 +1,61 @@
 {
-  "video_id": "SIM_RACE25D_V4_S029",
+  "video_id": "SIM_RACE25D_V4_S039",
   "status": "RENDERED_PENDING_APPROVAL",
   "engine": "race25d v4",
   "series": "race25d",
-  "seed": 29,
+  "seed": 39,
   "fps": 30,
-  "duration": 37.74,
+  "duration": 38.41,
   "params": {
     "cast": [
-      "icecream",
+      "bigrig",
       "monster2",
-      "taxi",
-      "f1"
+      "f1",
+      "police"
     ],
     "lanes": [
-      3,
-      0,
       2,
-      1
+      3,
+      1,
+      0
     ],
     "hazards": [
       [
-        "container",
-        0,
-        117.9
-      ],
-      [
-        "oil",
-        1,
-        192.1
-      ],
-      [
         "ramp",
+        2,
+        102.8
+      ],
+      [
+        "crusher",
+        0,
+        286.3
+      ],
+      [
+        "container",
         3,
-        285.9
+        323.8
       ]
     ],
-    "finish": 398.9,
+    "finish": 416.1,
     "plan": {
-      "layout": "stagger",
-      "zone": 211.4,
-      "start": 114.1,
-      "finish_gap": 113.0
+      "layout": "late_pair",
+      "zone": 223.9,
+      "start": 100.8,
+      "finish_gap": 92.3
     }
   },
   "theme": {
-    "time": "sunset",
+    "time": "night",
     "weather": "clear",
-    "location": "city"
+    "location": "desert"
   },
-  "theme_id": "sunset-clear-city",
+  "theme_id": "night-clear-desert",
   "voice": "chatterbox:m1",
   "outcomes": [
     "p3+ramp",
     "p4+container",
-    "p2",
-    "win+dodge_oil"
+    "win",
+    "p2+dodge_crusher"
   ],
   "checks": {
     "video+audio streams": true,
@@ -70,7 +70,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Grizzly Survive Falling Containers? 🏁",
   "title": "Can Grizzly Survive Falling Containers? 🏁 #Shorts",
-  "description": "Sprinkles, Grizzly, Tilly and Nitro race to the finish line! 🏁 Obstacles today: container, oil, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "description": "Titan, Grizzly, Nitro and Siren race to the finish line! 🏁 Obstacles today: container, crusher, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
     "car race",
@@ -81,25 +81,25 @@
     "obstacle race",
     "shorts",
     "MegaWheel Arena",
-    "ice cream truck",
+    "big rig",
     "monster truck",
-    "taxi",
     "race car",
+    "police car",
     "container",
-    "oil",
+    "crusher",
     "ramp"
   ],
   "narration": [
     "Ready... Go!",
-    "Can Grizzly Survive Falling Containers? Sprinkles, Grizzly, Tilly and Nitro... who will win?",
+    "Can Grizzly Survive Falling Containers? Titan, Grizzly, Nitro and Siren... who will win?",
+    "Titan takes the ramp... big air!",
+    "Nice move! Siren dodges the crusher!",
     "A container drops from the sky! Grizzly crashes right into it!",
-    "Nice move! Nitro dodges the oil slick!",
-    "Sprinkles takes the ramp... big air!",
     "Nitro wins the race!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/SIM_RACE25D_V4_S039.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039/preview"
 }
