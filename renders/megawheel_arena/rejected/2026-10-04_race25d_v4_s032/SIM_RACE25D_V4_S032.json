@@ -1,47 +1,47 @@
 {
-  "video_id": "SIM_RACE25D_V4_S028",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_RACE25D_V4_S032",
+  "status": "REJECTED",
   "engine": "race25d v4",
   "series": "race25d",
-  "seed": 28,
+  "seed": 32,
   "fps": 30,
-  "duration": 35.72,
+  "duration": 37.02,
   "params": {
     "cast": [
-      "firetruck",
+      "bus",
       "monster",
-      "taxi",
+      "sports",
       "police"
     ],
     "lanes": [
       0,
-      3,
+      1,
       2,
-      1
+      3
     ],
     "hazards": [
       [
+        "wall",
+        2,
+        103.5
+      ],
+      [
         "oil",
         1,
-        138.7
+        254.4
       ],
       [
         "crusher",
-        2,
-        183.5
-      ],
-      [
-        "meteor",
         3,
-        227.1
+        287.6
       ]
     ],
-    "finish": 332.7,
+    "finish": 400.5,
     "plan": {
-      "layout": "gauntlet",
-      "zone": 164.2,
-      "start": 101.2,
-      "finish_gap": 105.6
+      "layout": "late_pair",
+      "zone": 179.0,
+      "start": 105.3,
+      "finish_gap": 112.9
     }
   },
   "theme": {
@@ -52,10 +52,10 @@
   "theme_id": "night-clear-countryside",
   "voice": "chatterbox:f1",
   "outcomes": [
-    "p2",
-    "p3+meteor",
-    "p4+crusher",
-    "win+dodge_oil"
+    "p3",
+    "win+bump",
+    "p2+oil+dodge_wall",
+    "p4+crusher"
   ],
   "checks": {
     "video+audio streams": true,
@@ -68,9 +68,9 @@
     "realistic order (slower ahead only if the faster one was hit)": true
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Can Rocky Survive the Meteors? 🏁",
-  "title": "Can Rocky Survive the Meteors? 🏁 #Shorts",
-  "description": "Hydro, Rocky, Tilly and Siren race to the finish line! 🏁 Obstacles today: crusher, meteor, oil! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "title_base": "Can Zippy Survive the Oil Slick? 🏁",
+  "title": "Can Zippy Survive the Oil Slick? 🏁 #Shorts",
+  "description": "Buster, Rocky, Zippy and Siren race to the finish line! 🏁 Obstacles today: crusher, oil, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
     "car race",
@@ -81,25 +81,26 @@
     "obstacle race",
     "shorts",
     "MegaWheel Arena",
-    "fire truck",
+    "school bus",
     "monster truck",
-    "taxi",
+    "sports car",
     "police car",
     "crusher",
-    "meteor",
-    "oil"
+    "oil",
+    "wall"
   ],
   "narration": [
     "Ready... Go!",
-    "Can Rocky Survive the Meteors? Hydro, Rocky, Tilly and Siren... who will win?",
-    "Nice move! Siren dodges the oil slick!",
-    "Splat! Tilly gets squashed flat!",
-    "Kaboom! A meteor hits Rocky!",
-    "Siren wins the race!",
+    "Can Zippy Survive the Oil Slick? Buster, Rocky, Zippy and Siren... who will win?",
+    "Nice move! Zippy dodges the wall!",
+    "Oil slick! Zippy spins like a top!",
+    "Splat! Siren gets squashed flat!",
+    "Rocky wins the race!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032/preview",
+  "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)"
 }

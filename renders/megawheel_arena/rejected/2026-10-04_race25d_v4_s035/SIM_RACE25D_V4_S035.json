@@ -1,61 +1,61 @@
 {
-  "video_id": "SIM_RACE25D_V4_S029",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_RACE25D_V4_S035",
+  "status": "REJECTED",
   "engine": "race25d v4",
   "series": "race25d",
-  "seed": 29,
+  "seed": 35,
   "fps": 30,
-  "duration": 37.74,
+  "duration": 37.2,
   "params": {
     "cast": [
-      "icecream",
+      "bus",
       "monster2",
-      "taxi",
-      "f1"
+      "f1",
+      "taxi"
     ],
     "lanes": [
-      3,
       0,
-      2,
-      1
+      3,
+      1,
+      2
     ],
     "hazards": [
       [
-        "container",
+        "lava",
         0,
-        117.9
+        110.6
       ],
       [
-        "oil",
+        "ufo",
         1,
-        192.1
+        141.8
       ],
       [
-        "ramp",
+        "container",
         3,
-        285.9
+        304.5
       ]
     ],
-    "finish": 398.9,
+    "finish": 417.4,
     "plan": {
-      "layout": "stagger",
-      "zone": 211.4,
-      "start": 114.1,
-      "finish_gap": 113.0
+      "layout": "early_pair",
+      "zone": 195.5,
+      "start": 109.9,
+      "finish_gap": 112.9
     }
   },
   "theme": {
-    "time": "sunset",
+    "time": "night",
     "weather": "clear",
-    "location": "city"
+    "location": "desert"
   },
-  "theme_id": "sunset-clear-city",
+  "theme_id": "night-clear-desert",
   "voice": "chatterbox:m1",
   "outcomes": [
-    "p3+ramp",
-    "p4+container",
-    "p2",
-    "win+dodge_oil"
+    "p2+lava",
+    "p3+container",
+    "p4+ufo",
+    "win"
   ],
   "checks": {
     "video+audio streams": true,
@@ -70,7 +70,7 @@
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Grizzly Survive Falling Containers? 🏁",
   "title": "Can Grizzly Survive Falling Containers? 🏁 #Shorts",
-  "description": "Sprinkles, Grizzly, Tilly and Nitro race to the finish line! 🏁 Obstacles today: container, oil, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "description": "Buster, Grizzly, Nitro and Tilly race to the finish line! 🏁 Obstacles today: container, lava, ufo! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
     "car race",
@@ -81,25 +81,26 @@
     "obstacle race",
     "shorts",
     "MegaWheel Arena",
-    "ice cream truck",
+    "school bus",
     "monster truck",
-    "taxi",
     "race car",
+    "taxi",
     "container",
-    "oil",
-    "ramp"
+    "lava",
+    "ufo"
   ],
   "narration": [
     "Ready... Go!",
-    "Can Grizzly Survive Falling Containers? Sprinkles, Grizzly, Tilly and Nitro... who will win?",
+    "Can Grizzly Survive Falling Containers? Buster, Grizzly, Nitro and Tilly... who will win?",
+    "Lava! Buster gets blasted!",
+    "Uh oh! A UFO grabs Nitro!",
     "A container drops from the sky! Grizzly crashes right into it!",
-    "Nice move! Nitro dodges the oil slick!",
-    "Sprinkles takes the ramp... big air!",
-    "Nitro wins the race!",
+    "Tilly wins the race!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035/preview",
+  "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)"
 }

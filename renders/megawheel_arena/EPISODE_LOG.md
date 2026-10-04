@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 08:59). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 10:02). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -110,3 +110,10 @@
 | SIM_RACE25D_V4_S023 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
 | SIM_RACE25D_V4_S024 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
 | SIM_RACE25D_V4_S025 | user 2026-10-04: dibuat sebelum perbaikan kamera/cold open/pres/menghindar; diganti versi baru | 2026-10-04 |
+| SIM_RACE25D_V4_S028 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S029 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S030 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S032 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S033 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S034 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S035 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |

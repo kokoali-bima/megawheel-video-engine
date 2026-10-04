@@ -3501,16 +3501,18 @@
         "finish_gap": 105.6
       },
       "structure": "gauntlet|crusher,meteor,oil",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s028",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s028/SIM_RACE25D_V4_S028_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "16F3jYKkLgIa3coJNH87aKnFrVxzfaePw",
+      "drive_sheet_id": null,
       "drive_id": "1JUBa1frgq5wOqrId-vu1Yp5bTdUYSudb",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S028.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S028.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S029",
@@ -3542,16 +3544,18 @@
         "finish_gap": 113.0
       },
       "structure": "stagger|container,oil,ramp",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s029",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s029/SIM_RACE25D_V4_S029_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Ba5AaMpvZ9zmbYxL-j7RKJrajurfTRHB",
+      "drive_sheet_id": null,
       "drive_id": "1-VtC-k49Q-aubKwsKZnOgFenfl0N62tQ",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S029.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S029.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S030",
@@ -3583,16 +3587,18 @@
         "finish_gap": 102.7
       },
       "structure": "early_pair|container,crusher,ufo",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s030",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s030/SIM_RACE25D_V4_S030_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s030",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s030/SIM_RACE25D_V4_S030_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1iVND9z4yJDx32Kw1pA6U2ZwoLCRWSpPI",
+      "drive_sheet_id": null,
       "drive_id": "1vQBh-L_3diVe593kc2zWE4HXYKXdvn8t",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S030.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S030.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S031",
@@ -3662,16 +3668,18 @@
         "finish_gap": 112.9
       },
       "structure": "late_pair|crusher,oil,wall",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s032/SIM_RACE25D_V4_S032_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "11noTH6m3JVKoYPc8vqhYoFoud7_At6Bd",
+      "drive_sheet_id": null,
       "drive_id": "1WbrmIO8Yz22FjeOwxVtCRWRRpmRr1lYW",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S032.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S032.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S033",
@@ -3703,16 +3711,18 @@
         "finish_gap": 100.1
       },
       "structure": "stagger|dragon_ice,lava,oil",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s033",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s033/SIM_RACE25D_V4_S033_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Q8O1sqsqnC8UAhHrD4lb8i_3n_jGBFE0",
+      "drive_sheet_id": null,
       "drive_id": "1hetcETP3f7o4QFAJjC8Op1TYwpKcDUTN",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S033.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S033.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S034",
@@ -3744,16 +3754,18 @@
         "finish_gap": 111.8
       },
       "structure": "gauntlet|container,oil,pothole",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s034",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s034/SIM_RACE25D_V4_S034_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1jv2C-pkaWoR2cV2_4vp8SZzkQYpaUZ6P",
+      "drive_sheet_id": null,
       "drive_id": "1eNKU2yfUXP3J0RtDYdEP1Czpn4SaUAqE",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S034.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S034.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     },
     {
       "video_id": "SIM_RACE25D_V4_S035",
@@ -3785,16 +3797,18 @@
         "finish_gap": 112.9
       },
       "structure": "early_pair|container,lava,ufo",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035",
+      "audit": "renders/megawheel_arena/rejected/2026-10-04_race25d_v4_s035/SIM_RACE25D_V4_S035_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1ZPFLfjricrozAFaI5C49gFCPiWOuyxMn",
+      "drive_sheet_id": null,
       "drive_id": "15FgGg3PUYYTh9PzNiMGcB3C0nmh9sSGa",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S035.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S035.mp4",
+      "reject_reason": "user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera)",
+      "rejected_date": "2026-10-04"
     }
   ]
 }
