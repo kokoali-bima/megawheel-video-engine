@@ -1643,14 +1643,18 @@ def main():
         if mode == "replay":
             focus = star
         xs = [st[id(c)][0] for c in cars]
-        mid = (max(xs) + min(xs)) / 2
+        # no highlight: follow the biggest group (front-most on a tie), never the empty road between a straggler and
+        # the pack (v4 class speeds spread the field; S027 test framed the gap -> frames without a car)
+        groups = [[x for x in xs if abs(x - x0) <= 7.0] for x0 in xs]
+        best = max(groups, key=lambda g: (len(g), max(g)))
+        mid = sum(best) / len(best)
         wgt = 0.85 if focus is not None else 0.55
         target = wgt * (st[id(focus)][0] + 2) + (1 - wgt) * mid if focus else mid + 1.5
         if mode == "replay":
             target = st[id(star)][0] + 1
         if focus is not None and focus["hz"] is not None and focus["hz"]["type"].startswith("dragon")                 and focus is not winner:
             target = st[id(focus)][0] + 2.2                     # frame the car AND the dragon hovering ahead of it
-        spread = max(xs) - min(xs) + 9.0
+        spread = max(best) - min(best) + 9.0                     # zoom for the group on screen, not the straggler
         fit = float(np.clip(W * 0.92 / (spread * k_of(0.0)), 0.82, 1.12))
         cut = camx is None or mode != prev_mode
         key0 = focus if focus is not None else max(cars, key=lambda c: st[id(c)][0])
