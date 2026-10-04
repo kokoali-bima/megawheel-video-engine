@@ -2003,6 +2003,26 @@
    "gpu_seconds": 56.1,
    "wall_seconds": 82.5,
    "cost_usd": 0.0143
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_CAM2_S21 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 46.6,
+   "wall_seconds": 71.9,
+   "cost_usd": 0.0119
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_CAM2_S22 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 42.3,
+   "wall_seconds": 63.7,
+   "cost_usd": 0.0108
   }
  ]
 }
