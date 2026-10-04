@@ -360,6 +360,13 @@
    "role": "short"
   },
   {
+   "episode": 49,
+   "video_id": "SIM_RACE25D_V4_S018",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-15T19:00:00Z",
+   "role": "race"
+  },
+  {
    "episode": 47,
    "video_id": "SIM_SMASH25D_V5_S009",
    "status": "QUEUED",
@@ -371,6 +378,13 @@
    "video_id": "SIM_BUMPS_V2_S021",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-16T15:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 48,
+   "video_id": "SIM_POTHOLES_V2_S031",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-17T15:00:00Z",
    "role": "short"
   }
  ]

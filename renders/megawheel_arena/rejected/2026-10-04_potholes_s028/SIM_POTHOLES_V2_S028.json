@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S028",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 28,
@@ -255,8 +255,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_potholes_s028/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_potholes_s028/preview",
   "cold_open_s": 1.5,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-04_potholes_s028/SIM_POTHOLES_V2_S028_audit.md",
+  "reject_reason": "user 2026-10-04: bom tidak meledak saat diinjak (cacat pemicu, sudah diperbaiki)"
 }
