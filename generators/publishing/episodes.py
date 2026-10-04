@@ -155,6 +155,28 @@ def reject(video_id, reason):
     _drive(video_id)                                             # Drive: -> archive/rejected/
 
 
+def unreject(video_id):
+    """The user changed their mind (2026-10-04: "S028 dan S029 approved, gpp missed sedikit"): a REJECTED render goes
+    back to pending; its MP4 is downloaded again from Drive (archive/rejected/). Then approve as usual."""
+    e = registry.get(video_id)
+    if not e or e.get("status") != "REJECTED":
+        raise SystemExit(f"[episodes] STOP: {video_id} tidak berstatus REJECTED")
+    base = os.path.basename(e["folder"])
+    if base.endswith("_" + video_id):
+        base = base[: -len(video_id) - 1]
+    new_rel = f"renders/megawheel_arena/pending/{base}"
+    new_abs = _move(e, new_rel)
+    _update_manifest(new_abs, video_id, status="RENDERED_PENDING_APPROVAL", reject_reason=None)
+    registry.update(video_id, status="RENDERED_PENDING_APPROVAL", folder=new_rel, audit=f"{new_rel}/{video_id}_audit.md",
+                    reject_reason=None, rejected_date=None)
+    local = f"{new_abs}/{video_id}.mp4"
+    if not os.path.exists(local):
+        import drive_sync
+        drive_sync.fetch(video_id, dest=local)
+    print(f"[episodes] UNREJECTED {video_id} -> pending")
+    _drive(video_id)                                             # Drive: archive/rejected/ -> review/
+
+
 def _role(series):
     return ("race" if series.startswith("race") else "smash" if series.startswith("smash")
             else "story" if series in STORY_SERIES else "short")
@@ -326,6 +348,9 @@ def main():
             approve(vid)
     elif cmd == "swap":
         swap(int(args[0]), args[1])
+    elif cmd == "unreject":
+        for vid in args:
+            unreject(vid)
     elif cmd == "reject":
         reject(args[0], " ".join(args[1:]) or "no reason given")
     elif cmd == "set":
