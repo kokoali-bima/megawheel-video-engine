@@ -1185,10 +1185,13 @@ QUESTION_TEXT = [""]
 
 
 def question_for(cars):
-    """Hook: the underdog (biggest / least agile racer) + the most striking hazard, as a question."""
-    under = min(cars, key=lambda c: AGILITY.get(c["key"], 0.55))
-    star_hz = max(HZ, key=lambda h: (h["type"] in NEW_HZ, HAZARDS[h["type"]]["prio"]))
-    return f"Can {nick(under['key'])} Survive {QUESTION[star_hz['type']]}?"
+    """Hook with an honest payoff (user 2026-10-04): ask about the racer who really meets the most striking hazard.
+    (v3 asked about the underdog + the biggest hazard even when they never met: Ep. 31-49 titles did not match.)"""
+    hits = [c for c in cars if c["hz"] is not None and c["trig"] is not None]
+    if hits:
+        star = max(hits, key=lambda c: (c["hz"]["type"] in NEW_HZ, HAZARDS[c["hz"]["type"]]["prio"]))
+        return f"Can {nick(star['key'])} Survive {QUESTION[star['hz']['type']]}?"
+    return "4 Cars, 1 Finish Line! Who Wins?"
 
 
 def draw_hud(ctx, cars, t):
