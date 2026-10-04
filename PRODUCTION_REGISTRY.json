@@ -4252,6 +4252,48 @@
       "drive_sheet_id": "1-zeWGKiaPuNicq00-yod8cSqFXlj6PjE",
       "drive_id": "1xixVj2KGyZ-m6TDorcvFOJN-6fBK8j4z",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S045.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S046",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 46,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_18c5973c@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3",
+        "p2+dodge_oil",
+        "win+meteor",
+        "p4+wall"
+      ],
+      "duration": 35.67,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 170.7,
+        "start": 105.8,
+        "finish_gap": 88.8
+      },
+      "structure": "early_pair|meteor,oil,wall",
+      "title_base": "Can Nitro Survive the Meteors? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s046",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s046/SIM_RACE25D_V4_S046_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1RQx_j0SAqUXuiDK6OuokPFXjRCj20F_Q",
+      "drive_id": "1e1YmogJX1IFkMkJ6J2x74YZjMKgc2IaP",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S046.mp4"
     }
   ]
 }
