@@ -2063,6 +2063,16 @@
    "gpu_seconds": 41.8,
    "wall_seconds": 67.1,
    "cost_usd": 0.0107
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S030 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 61.0,
+   "wall_seconds": 87.9,
+   "cost_usd": 0.0156
   }
  ]
 }

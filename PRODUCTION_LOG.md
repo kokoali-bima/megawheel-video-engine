@@ -21,3 +21,4 @@
 | 2026-10-04 10:56 | Claude Code Opus | SIM_RACE25D_V4_S025 | race25d | 25 | Buster → Rocky → Zippy → Siren | 37.0 s | PASS | produce.py · noon-clear-city · early_pair|container,dragon_fire,pothole |
 | 2026-10-04 16:22 | Claude Code Opus | SIM_RACE25D_V4_S028 | race25d | 28 | Hydro → Rocky → Tilly → Siren | 35.7 s | PASS | produce.py · night-clear-countryside · gauntlet|crusher,meteor,oil |
 | 2026-10-04 16:24 | Claude Code Opus | SIM_RACE25D_V4_S029 | race25d | 29 | Sprinkles → Grizzly → Tilly → Nitro | 37.7 s | PASS | produce.py · sunset-clear-city · stagger|container,oil,ramp |
+| 2026-10-04 16:27 | Claude Code Opus | SIM_RACE25D_V4_S030 | race25d | 30 | Titan → Grizzly → Zippy → Nitro | 38.1 s | PASS | produce.py · morning-rain-mountains · early_pair|container,crusher,ufo |
