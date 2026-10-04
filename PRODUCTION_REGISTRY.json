@@ -3216,6 +3216,47 @@
       "drive_sheet_id": "1h74Subq_-ssJ3x8Aex1e4V0DkF69Q5hZ",
       "drive_id": "1RWr8Sc1RTG2g0LID0z4F9XsQHRoAZwFx",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S021.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S022",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 22,
+      "created": "2026-10-04",
+      "render_date": "2026-10-04",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_01f842b3@morning-clear-beach",
+      "theme": "morning-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+hammer",
+        "win",
+        "p4+ufo",
+        "p2+dragon_ice"
+      ],
+      "duration": 37.12,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 181.1,
+        "start": 117.0,
+        "finish_gap": 100.6
+      },
+      "structure": "late_pair|dragon_ice,hammer,ufo",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s022",
+      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s022/SIM_RACE25D_V4_S022_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Qsgo3V4sq1JpEvC6pONF3h_loZ3ZjWI0",
+      "drive_id": "1SU75Pxw3LwrFBCgR-gYpdOkNmPJHIM0C",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S022.mp4"
     }
   ]
 }
