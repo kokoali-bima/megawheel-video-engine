@@ -7,7 +7,7 @@ extends Node3D
 ##   godot --path project --write-movie out.avi --fixed-fps 30 --quit-after N -- <export_dir> [start_frame]
 
 const D = 18.0                                           # camera distance to the car plane (sets 3D parallax)
-const SHORE_Z = -30.0                                    # sand from the road back to here, then the sea
+const SHORE_Z = -16.0                                    # sand from the road back to here, then the sea
 var dir = "/root/lab/hy/s27"
 var scene = {}
 var frames = []
@@ -80,37 +80,42 @@ func _environment() -> void:
 	var f0 = frames[0]
 	var fpx0 = float(scene["S"]) * float(f0[5]) * D
 	var yh0 = float(f0[6])
-	var sh = Shader.new()                                    # the theme's own gradient, mapped by elevation angle
+	var sh = Shader.new()                                    # the theme's own screen gradient + sun, exactly as cairo
 	sh.code = """
 shader_type sky;
 uniform vec3 c0 : source_color; uniform vec3 c1 : source_color; uniform vec3 c2 : source_color; uniform vec3 c3 : source_color;
-uniform float e0; uniform float e1; uniform float e2; uniform float e3;
-uniform vec3 sun_dir; uniform vec3 sun_col : source_color; uniform float sun_size = 0.035; uniform float night = 0.0;
+uniform float s0; uniform float s1; uniform float s2; uniform float s3;
+uniform vec2 sun_px; uniform float sun_r = 100.0; uniform vec3 sun_col : source_color; uniform float has_sun = 1.0;
 void sky() {
-	float e = asin(clamp(EYEDIR.y, -1.0, 1.0));
-	vec3 col = c3;
-	if (e > e2) col = mix(c2, c3, clamp((e - e2) / max(e3 - e2, 1e-4), 0.0, 1.0));
-	if (e > e1) col = mix(c1, c2, clamp((e - e1) / max(e2 - e1, 1e-4), 0.0, 1.0));
-	if (e > e0) col = mix(c0, c1, clamp((e - e0) / max(e1 - e0, 1e-4), 0.0, 1.0));
-	if (e < e3) col = c3;
-	if (e > e0) col = c0;
-	float d = acos(clamp(dot(EYEDIR, normalize(sun_dir)), -1.0, 1.0));
-	col += sun_col * (0.55 * exp(-d * 9.0) + 0.25 * exp(-d * 2.5)) * (1.0 - 0.6 * night);   // glow around the sun
-	col = mix(col, sun_col * 1.6 + vec3(0.2), smoothstep(sun_size, sun_size * 0.8, d));      // the disc
+	float y = SCREEN_UV.y;
+	vec3 col = c0;
+	col = mix(col, c1, smoothstep(s0, s1, y));
+	col = mix(col, c2, smoothstep(s1, s2, y));
+	col = mix(col, c3, smoothstep(s2, s3, y));
+	vec2 p = SCREEN_UV * vec2(1080.0, 1920.0);
+	float d = length(p - sun_px) / sun_r;
+	col = mix(col, sun_col, has_sun * 0.9 * clamp(1.0 - (d - 0.6) / 2.2, 0.0, 1.0) * clamp(1.0 - (d - 0.6) / 2.2, 0.0, 1.0));
+	col += has_sun * sun_col * 0.35 * exp(-d * 0.45);         // wide atmospheric glow
+	col = mix(col, sun_col * 1.25 + vec3(0.25, 0.2, 0.1), has_sun * smoothstep(1.02, 0.97, d));   // the disc
 	COLOR = col;
 }
 """
 	var mat = ShaderMaterial.new()
 	mat.shader = sh
 	var n = sky.size()
-	for k in range(4):                                       # cairo stop s -> screen y s*1920 -> elevation angle
-		var idx = mini(int(round(float(k) * (n - 1) / 3.0)), n - 1)
-		var st = sky[idx]
-		mat.set_shader_parameter("c" + str(k), _c(st[1]))
-		mat.set_shader_parameter("e" + str(k), atan((yh0 - float(st[0]) * 1920.0) / fpx0))
-	mat.set_shader_parameter("sun_dir", sun_dir)
+	for k in range(4):
+		var idx = mini(k, n - 1)
+		mat.set_shader_parameter("c" + str(k), _c(sky[idx][1]))
+		mat.set_shader_parameter("s" + str(k), float(sky[idx][0]) + 0.0001 * k)
+	if scene["sun"] != null:
+		mat.set_shader_parameter("sun_px", Vector2(float(scene["sun"][0]), float(scene["sun"][1])))
+		mat.set_shader_parameter("sun_r", float(scene["sun"][2]))
+	elif scene["moon"] != null:
+		mat.set_shader_parameter("sun_px", Vector2(float(scene["moon"][0]), float(scene["moon"][1])))
+		mat.set_shader_parameter("sun_r", float(scene["moon"][2]))
+	else:
+		mat.set_shader_parameter("has_sun", 0.0)
 	mat.set_shader_parameter("sun_col", sun_col)
-	mat.set_shader_parameter("night", 1.0 if bool(scene["night"]) else 0.0)
 	var sk = Sky.new()
 	sk.sky_material = mat
 	var env = Environment.new()
@@ -169,7 +174,7 @@ void fragment() {
 	float dist = length(CAMERA_POSITION_WORLD - wpos);
 	float fres = pow(1.0 - clamp(dot(n, v), 0.0, 1.0), 4.0);
 	vec3 col = mix(shallow, deep, clamp((shore_z - wpos.z) / 60.0, 0.0, 1.0));
-	col = mix(col, horizon, clamp(fres * 0.9 + dist / 2600.0, 0.0, 1.0));
+	col = mix(col, horizon, clamp(fres * 0.55 + dist / 3500.0, 0.0, 0.85));
 	vec3 r = reflect(-v, n);
 	float sd = max(dot(r, normalize(sun_dir)), 0.0);
 	float sparkle = step(0.82, h(floor(p * 1.7) + floor(t * 8.0)));
@@ -180,8 +185,8 @@ void fragment() {
 	var mat = ShaderMaterial.new()
 	mat.shader = sh
 	var sea_c = _c(scene["hills"][0])
-	mat.set_shader_parameter("deep", sea_c.darkened(0.35))
-	mat.set_shader_parameter("shallow", sea_c.lightened(0.15).lerp(Color(0.3, 0.8, 0.8), 0.25))
+	mat.set_shader_parameter("deep", sea_c.darkened(0.45))
+	mat.set_shader_parameter("shallow", sea_c.lerp(Color(0.2, 0.75, 0.8), 0.3))
 	mat.set_shader_parameter("horizon", sky_hor)
 	mat.set_shader_parameter("sun_col", sun_col)
 	mat.set_shader_parameter("sun_dir", sun_dir)
@@ -193,7 +198,7 @@ void fragment() {
 	pm.subdivide_depth = 96
 	near.mesh = pm
 	near.material_override = mat
-	near.position = Vector3(120, -0.35, SHORE_Z - 120)
+	near.position = Vector3(120, -0.4, SHORE_Z - 119)
 	add_child(near)
 	var far = MeshInstance3D.new()
 	var fm = PlaneMesh.new()
@@ -252,7 +257,7 @@ func _land() -> void:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var x0 = -200.0
 	var x1 = 520.0
-	var zs = [-0.2, -3.0, -7.0, -12.0, -18.0, -24.0, SHORE_Z + 0.5]
+	var zs = [-0.2, -2.0, -4.5, -7.5, -10.5, -13.5, SHORE_Z + 0.5]
 	var nx = 240
 	for i in range(nx):
 		for k in range(zs.size() - 1):
@@ -290,22 +295,12 @@ func _land() -> void:
 			hl.material_override = hm
 			hl.position = Vector3(hx, -20, -1500 - rng.randf_range(0, 400))
 			add_child(hl)
-	for i in range(28):                                      # beach grass tufts and rocks between road and shore
-		var gx = rng.randf_range(-150, 480)
-		var gz = rng.randf_range(-3.0, SHORE_Z + 4.0)
-		var rk = MeshInstance3D.new()
-		var rs = SphereMesh.new()
-		rs.radius = rng.randf_range(0.3, 0.9)
-		rs.height = rs.radius * 1.1
-		rk.mesh = rs
-		rk.material_override = _mat(col.darkened(0.35).lerp(Color(0.45, 0.42, 0.4), 0.5))
-		rk.position = Vector3(gx, _dune(gx, gz) + 0.1, gz)
-		add_child(rk)
 
 
 func _dune(x: float, z: float) -> float:
-	var back = clampf(-z / 26.0, 0.0, 1.0)                   # flat next to the road, dunes further back
-	return (sin(x * 0.07) * 0.9 + sin(x * 0.19 + 1.3) * 0.4 + 0.8) * back * (1.0 - smoothstep(0.85, 1.0, back) * 0.7)
+	var back = clampf(-z / 9.0, 0.0, 1.0)                    # low dunes, the beach slopes down to the water
+	var shore = clampf((z - SHORE_Z) / 4.0, 0.0, 1.0)
+	return (sin(x * 0.07) * 0.22 + sin(x * 0.19 + 1.3) * 0.1 + 0.25) * back * shore - 0.3 * (1.0 - shore)
 
 
 func _mat(col: Color, rough := 0.85) -> StandardMaterial3D:
@@ -346,7 +341,7 @@ func _palms() -> void:
 	var tm = _mat(Color(0.5, 0.36, 0.22))
 	var x = -150.0
 	while x < 480.0:
-		var z = rng.randf_range(-4.0, -20.0)
+		var z = rng.randf_range(-3.0, -11.0)
 		_palm(Vector3(x, _dune(x, z), z), rng.randf_range(0.85, 1.25), lm, tm)
 		x += rng.randf_range(7.0, 16.0)
 
@@ -378,16 +373,16 @@ func _palm(base: Vector3, s: float, lm: Material, tm: Material) -> void:
 	crown.position = p
 	root.add_child(crown)
 	sway.append([crown, rng.randf_range(0, TAU), rng.randf_range(0.04, 0.08)])
-	for k in range(9):                                       # fronds: arching leaves around the top
+	for k in range(13):                                      # fronds: arching leaves around the top
 		var piv = Node3D.new()
-		piv.rotation = Vector3(0, k * TAU / 9.0 + rng.randf_range(-0.2, 0.2), 0)
+		piv.rotation = Vector3(0, k * TAU / 13.0 + rng.randf_range(-0.2, 0.2), 0)
 		crown.add_child(piv)
 		var tilt = Node3D.new()
 		tilt.rotation = Vector3(0, 0, -rng.randf_range(0.35, 0.75))   # droop
 		piv.add_child(tilt)
 		var lf = MeshInstance3D.new()
 		var qm = QuadMesh.new()
-		qm.size = Vector2(3.6 * s, 1.0 * s)
+		qm.size = Vector2(3.8 * s, 1.35 * s)
 		lf.mesh = qm
 		lf.material_override = lm
 		lf.position = Vector3(1.8 * s, 0, 0)
