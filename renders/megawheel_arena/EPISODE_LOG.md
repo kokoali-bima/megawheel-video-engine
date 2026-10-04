@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 14:55). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-04 14:56). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -65,9 +65,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_RACE25D_V4_S038 | race25d | Buster, Rocky, Nitro, Zippy | 2026-10-04 | 34.02 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s038` |
-| SIM_RACE25D_V4_S039 | race25d | Titan, Grizzly, Nitro, Siren | 2026-10-04 | 38.41 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s039` |
-| SIM_RACE25D_V4_S042 | race25d | Hydro, Grizzly, Nitro, Siren | 2026-10-04 | 36.65 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s042` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
@@ -119,3 +117,6 @@
 | SIM_RACE25D_V4_S033 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
 | SIM_RACE25D_V4_S034 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
 | SIM_RACE25D_V4_S035 | user 2026-10-04: buat ulang dengan engine terbaru (judul unik, cold open tanpa perpindahan kamera) | 2026-10-04 |
+| SIM_RACE25D_V4_S038 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
+| SIM_RACE25D_V4_S039 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
+| SIM_RACE25D_V4_S042 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
