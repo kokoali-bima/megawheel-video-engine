@@ -2293,6 +2293,16 @@
    "gpu_seconds": 32.9,
    "wall_seconds": 57.8,
    "cost_usd": 0.0084
+  },
+  {
+   "date": "2026-10-05",
+   "note": "S01E02 cue library",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 10,
+   "gpu_seconds": 293.5,
+   "wall_seconds": 319.8,
+   "cost_usd": 0.0749
   }
  ]
 }
