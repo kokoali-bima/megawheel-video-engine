@@ -2333,6 +2333,39 @@
    "gpu_seconds": 45.8,
    "wall_seconds": 75.4,
    "cost_usd": 0.0117
+  },
+  {
+   "date": "2026-10-05",
+   "note": "pilot C test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 19.7,
+   "wall_seconds": 25.6,
+   "cost_usd": 0.0053
+  },
+  {
+   "date": "2026-10-05",
+   "note": "pilot C test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 19.1,
+   "wall_seconds": 24.4,
+   "cost_usd": 0.0052
+  },
+  {
+   "date": "2026-10-05",
+   "note": "pilot C test",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 1,
+   "cpu_container_seconds": 31.4,
+   "wall_seconds": 37.0,
+   "cost_usd": 0.0085
   }
  ]
 }
