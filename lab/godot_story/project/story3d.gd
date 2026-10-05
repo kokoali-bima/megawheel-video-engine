@@ -25,6 +25,7 @@ var kfar_cam = 0.0
 var keyes = []                     # [MeshInstance3D] his two glowing eyes
 var keye_light: OmniLight3D
 var krw = 1.0                      # eye radius in metres
+var knodes = []                    # sprite + haze: shown ONLY in his shot (v7: he was visible from shot 3 on)
 
 
 func _ready() -> void:
@@ -340,7 +341,9 @@ func _kraggor_far() -> void:
 	q.mesh = qm
 	q.material_override = m
 	q.position = Vector3(kx, hu / 2 * mpu, -kd)
+	q.visible = false
 	add_child(q)
+	knodes.append(q)
 	var bg = MeshInstance3D.new()                            # city haze lit behind him: the shape reads at night
 	var bq = QuadMesh.new()
 	bq.size = Vector2(qm.size.x * 2.6, qm.size.y * 1.6)
@@ -360,7 +363,9 @@ func _kraggor_far() -> void:
 	bg.mesh = bq
 	bg.material_override = bm
 	bg.position = Vector3(kx, hu * 0.72 * mpu, -kd - 6.0)
+	bg.visible = false
 	add_child(bg)
+	knodes.append(bg)
 	var em = StandardMaterial3D.new()
 	em.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	em.albedo_color = Color(1.0, 0.85, 0.2)
@@ -541,6 +546,8 @@ func _process(_d: float) -> void:
 	# far Kraggor: his eyes open a beat after the cut, slow blink
 	if keyes.size() > 0:
 		var kf = f.get("kfar")
+		for nd in knodes:
+			nd.visible = kf != null
 		var op = 0.0
 		if kf != null:
 			op = 1.0
