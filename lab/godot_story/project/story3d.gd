@@ -109,8 +109,9 @@ func _environment() -> void:
 	var moon = DirectionalLight3D.new()                      # cool moonlight from the camera side, soft shadows
 	moon.rotation_degrees = Vector3(-38, 150, 0)
 	moon.light_color = Color(0.62, 0.7, 1.0)
-	moon.light_energy = 0.35
-	moon.shadow_enabled = true
+	moon.light_energy = 0.3
+	moon.shadow_enabled = false                              # user 2026-10-05: no building shadows at night (moonlight
+	                                                         # is too weak); shadows only from lamps and headlights
 	moon.light_volumetric_fog_energy = 0.4
 	add_child(moon)
 	var md = MeshInstance3D.new()                            # the moon disc, far away, glowing

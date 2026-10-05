@@ -841,17 +841,18 @@ def draw_hill(ctx, camx):
 def glow_eyes(ctx, t, spec):
     """A pair of giant yellow eyes glowing in the dark (Kraggor, far away)."""
     sx, sy, r = spec.get("sx", 0.8) * W, spec.get("sy", 0.3) * H, spec.get("r", 14) * H / 1080
-    if spec.get("silhouette"):                                     # a giant head shape barely visible in the fog
-        ctx.save()
-        ctx.translate(sx, sy + r * 3)
-        ctx.scale(r * 11, r * 9)
-        ctx.arc(0, 0, 1, math.pi, 2 * math.pi)
-        ctx.line_to(1.1, 2.5)
-        ctx.line_to(-1.1, 2.5)
-        ctx.close_path()
-        ctx.restore()
-        ctx.set_source_rgba(0.04, 0.05, 0.08, spec.get("silhouette", 0.55))
+    if spec.get("silhouette"):                                     # Kraggor's REAL head (horns, spikes), almost black
+        ksc = spec.get("kscale", 0.5)                              # in the fog; the eyes glow in its own eye spots
+        base = sy - ksc * (H / 1080) * (1.2 * 40 + 40 * KR_EYES[0][1])
+        ctx.push_group()
+        kraggor_head(ctx, 3.0, dict(mode="calm", sx=sx / W, sy=base / H, scale=ksc))
+        ctx.set_operator(cairo.OPERATOR_ATOP)
+        ctx.rectangle(0, 0, W, H)
+        ctx.set_source_rgb(0.03, 0.035, 0.06)
         ctx.fill()
+        ctx.pop_group_to_source()
+        ctx.paint_with_alpha(spec.get("silhouette", 0.6))
+        r = (KR_EYES[1][0] - KR_EYES[0][0]) * 40 / 4.8 * ksc * (H / 1080)   # glow pair spacing = Kraggor's eyes
     if spec.get("open") is not None:                               # eyes opening slowly (0..1 given by the shot)
         r *= max(0.05, min(1.0, spec["open"]))
     if (t * 0.6) % 3.0 < 0.12:                                     # slow blink
@@ -1232,7 +1233,10 @@ def build(scene):
     """Shot timing from the real voice lengths. Returns (shots with t0/t1, placed lines)."""
     items = []
     for sh in scene["shots"]:
-        for spk, text, emo in sh.get("lines", []):
+        for ln in sh.get("lines", []):
+            spk, text, emo = ln[:3]
+            if len(ln) > 3:                                        # sung line: its own audio file, no TTS
+                continue
             items.append((text, line_style(emo), speaker_voice(spk), "studio"))
     ok = announcer.prefetch(items, note=f"story {scene.get('id', '')}")
     if not ok:
@@ -1242,7 +1246,17 @@ def build(scene):
     for sh in scene["shots"]:
         sh["t0"] = t
         u = sh.get("lead", 0.35)
-        for spk, text, emo in sh.get("lines", []):
+        for ln in sh.get("lines", []):
+            spk, text, emo = ln[:3]
+            if len(ln) > 3:                                        # sung (e.g. Tilly singing to chase her fear away),
+                a = load_cue(os.path.join(BASE, ln[3]))             # optionally cut off at a beat (the lamp dies)
+                if len(ln) > 4:
+                    a = a[:int(float(ln[4]) * se.SR)]
+                    f = int(0.05 * se.SR)
+                    a[-f:] *= np.linspace(1, 0, f)
+                placed.append(dict(t0=t + u, audio=a, spk=spk, text=text, emo=emo))
+                u += len(a) / se.SR + sh.get("gap", scene.get("gap", 0.3))
+                continue
             it = (text, line_style(emo), speaker_voice(spk), "studio")
             if not announcer.cached(*it):
                 continue
@@ -1553,7 +1567,37 @@ SFX = {
     "engine": lambda: cine_whoosh(0.9, peak=0.5, lo=120.0, hi=1400.0, seed=21),
     "splat": lambda: se.synth_splash(0.8, seed=12),
     "lamp_off": lambda: lamp_off(),
+    "steps_far": lambda: steps_far(),
+    "stomp_near": lambda: stomp_near(),
 }
+
+
+def steps_far():
+    """Four giant footsteps coming closer: each a deep thud + ground rumble, louder and brighter as it nears."""
+    sr = se.SR
+    out = np.zeros(int(3.6 * sr))
+    for k in range(4):
+        st = SM.kaiju_step(1.4)
+        g = 0.25 + 0.25 * k
+        if k < 2:                                                  # far: muffled (low-passed)
+            st = SM.box_avg(st, 30 - 10 * k)
+        i = int(k * 0.85 * sr)
+        L = min(len(st), len(out) - i)
+        out[i:i + L] += st[:L] * g
+    return out
+
+
+def stomp_near():
+    """One huge step right here: thud + crack + rattling debris."""
+    sr = se.SR
+    st = SM.kaiju_step(1.4) * 1.0
+    rng = np.random.default_rng(17)
+    t = np.arange(int(0.9 * sr)) / sr
+    rattle = rng.normal(0, 1, len(t)) * np.exp(-t * 5) * (np.sin(2 * math.pi * 31 * t) > 0) * 0.25
+    out = np.zeros(max(len(st), len(t)))
+    out[:len(st)] += st
+    out[:len(t)] += rattle
+    return out
 
 
 def lamp_off():
@@ -1590,6 +1634,18 @@ def amb_night(n, rng):
     return trill * SM.box_avg(gate, int(0.05 * se.SR)) * 0.25 + SM.box_avg(rng.normal(0, 1, n), 200) * 0.3
 
 
+def amb_city_night(n, rng):
+    """City at night (no crickets - user 2026-10-05): distant traffic hum, soft wind, a far car passing now and then."""
+    hum = SM.box_avg(SM.box_avg(rng.normal(0, 1, n), 300), 300) * 2.0      # very low rumble of the far city
+    wind = SM.box_avg(rng.normal(0, 1, n), 90) * 0.25 * (0.6 + 0.4 * np.sin(np.arange(n) / se.SR * 0.3))
+    out = hum + wind
+    for i in rng.integers(0, max(1, n - 3 * se.SR), max(1, int(n / se.SR / 9))):   # a car passing far away
+        L = int(2.5 * se.SR)
+        env = np.sin(np.linspace(0, math.pi, L)) ** 2
+        out[i:i + L] += SM.box_avg(rng.normal(0, 1, L), 40) * env * 0.5
+    return out
+
+
 def amb_room(n, rng):
     """Garage room tone: low hum + air."""
     tt = np.arange(n) / se.SR
@@ -1602,13 +1658,17 @@ def ambience_bed(scene, n):
     loc, time_ = scene.get("location", "town"), scene.get("time", "morning")
     if kind is None:
         kind = "room" if loc == "garage" else "crowd" if loc in ("arena", "podium") else             "night" if time_ == "night" else "birds" if loc in ("town", "country", "trackside") else None
+    if kind == "night" and loc in ("town", "arena", "podium", "city"):   # crickets only where nature is (not in town)
+        kind = "city_night"
     rng = np.random.default_rng(9)
     if kind == "crowd":
         x, g = SM.crowd_bed(n / se.SR + 0.1, seed=7)[:n], 0.05
     elif kind == "birds":
         x, g = amb_birds(n, rng), 0.035
     elif kind == "night":
-        x, g = amb_night(n, rng), 0.03
+        x, g = amb_night(n, rng), 0.018                            # countryside crickets, felt not heard
+    elif kind == "city_night":
+        x, g = amb_city_night(n, rng), 0.03
     elif kind == "room":
         x, g = amb_room(n, rng), 0.03
     else:
