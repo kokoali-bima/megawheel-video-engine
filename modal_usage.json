@@ -2213,6 +2213,86 @@
    "gpu_seconds": 61.8,
    "wall_seconds": 91.1,
    "cost_usd": 0.0158
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_S3_race25d_502 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 59.2,
+   "wall_seconds": 90.2,
+   "cost_usd": 0.0151
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_S3_race25d_503 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 60.0,
+   "wall_seconds": 94.3,
+   "cost_usd": 0.0153
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_S3_race25d_504 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 55.0,
+   "wall_seconds": 84.5,
+   "cost_usd": 0.014
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_S3_race25d_505 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 38.9,
+   "wall_seconds": 63.4,
+   "cost_usd": 0.0099
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator LAB_S3_race25d_bug_501 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 54.1,
+   "wall_seconds": 81.3,
+   "cost_usd": 0.0138
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S044 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.3,
+   "wall_seconds": 75.4,
+   "cost_usd": 0.0121
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S045 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 49.7,
+   "wall_seconds": 75.7,
+   "cost_usd": 0.0127
+  },
+  {
+   "date": "2026-10-04",
+   "note": "narrator SIM_RACE25D_V4_S046 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 32.9,
+   "wall_seconds": 57.8,
+   "cost_usd": 0.0084
   }
  ]
 }

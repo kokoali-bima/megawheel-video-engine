@@ -3,30 +3,29 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-10-04
+## 2026-10-05
 **📤 Upload / antrean / Drive**
-- `90a5fa8` publish: daily run 2026-10-04 [cron daily_publish.sh]
-- `c657eee` episodes.py unreject: a REJECTED render back to pending (MP4 restored from Drive) when the user changes their mind
-**🏁 RACE (race25d)**
-- `53a7710` race25d: zoom in on the star moment (the asked-about car was often tiny in a back lane)
-- `3a65754` race25d camera: when hazard moments overlap, focus the title's star (S022 test: cold open framed the ice dragon while asking about the hammer)
-- `2437c64` race25d crusher: the press stops on the victim's roof and follows the squash (tall trucks were pierced by the press/rod)
-- `de29f8a` RACE cold open: question in the top band over a dark gradient (not over the action); title, cold open and replay share one star moment
-- `d73348d` race25d: cars swerve around (or brake behind) a fresh wreck in their lane; camera glides with a speed cap instead of jumping
-- `9ecbffa` race25d: title/hook question asks about the racer who really meets the most striking hazard (honest payoff)
-- `9ea2ec7` race25d v4: class speeds F1 > sports > police > taxi > monster > icecream/firetruck > bus/bigrig, pickup per class, realistic-order check
-**🔧 Lain-lain**
-- `ce29c73` cold open 1.5 s -> 3.0 s for every Short (user: opening clip too fast, add 1-2 s); duration checks follow the uncapped-duration rule
-- `970dfca` approve: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04 changed mind) + plan
-- `3d5a8f2` approve: SIM_POTHOLES_V2_S031, SIM_RACE25D_V4_S018 by user 2026-10-04 + plan
-- `a4aaf65` reject: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04)
-- `8cd1793` potholes: a planned pit content (spikes/bomb/Pit Muncher/water) must be met by a failing car on screen
-- `6312200` pits: trigger height per content = its drawn height (a truck touching the bomb must set it off)
-- `f70f682` pits: contents trigger on any body corner / tyre near the floor (nose-dives), bigger spikes
-- `5390778` variety director + potholes v2: 6 layout templates, 6 pit shapes, sizes S/M/L, per-pit contents (rubble, water, lava, spikes, bomb, Pit Muncher)
-- `8d2d719` PROJECT_PROGRESS C13: potholes layout is one template (finding 2026-10-04)
-- `c75a0a7` CONFIG_BEST: production stays 2.5D, Godot 3D lab-only (user 2026-10-04)
+- `3cac47d` publish: daily run 2026-10-05 [cron daily_publish.sh]
+
+## 2026-10-04
 **🕳️ CHALLENGE (sim_engine)**
+- `576b4eb` produce: SIM_RACE25D_V4_S046 (pending review) [Claude Code Opus]
+- `a101cb6` produce: SIM_RACE25D_V4_S045 (pending review) [Claude Code Opus]
+- `b6e995d` produce: SIM_RACE25D_V4_S044 (pending review) [Claude Code Opus]
+- `35d0c97` produce: SIM_RACE25D_V4_S043 (pending review) [Claude Code Opus]
+- `ae4e638` produce: SIM_RACE25D_V4_S042 (pending review) [Claude Code Opus]
+- `dffdaee` produce: SIM_RACE25D_V4_S040 (pending review) [Claude Code Opus]
+- `0943553` produce: SIM_RACE25D_V4_S039 (pending review) [Claude Code Opus]
+- `3073109` produce: SIM_RACE25D_V4_S038 (pending review) [Claude Code Opus]
+- `fc9f82f` produce: SIM_RACE25D_V4_S037 (pending review) [Claude Code Opus]
+- `697bef3` produce: SIM_RACE25D_V4_S036 (pending review) [Claude Code Opus]
+- `61512be` produce: SIM_RACE25D_V4_S035 (pending review) [Claude Code Opus]
+- `b266b5e` produce: SIM_RACE25D_V4_S034 (pending review) [Claude Code Opus]
+- `8cded33` produce: SIM_RACE25D_V4_S033 (pending review) [Claude Code Opus]
+- `0a0ea4b` produce: SIM_RACE25D_V4_S032 (pending review) [Claude Code Opus]
+- `7ca3a3b` produce: SIM_RACE25D_V4_S030 (pending review) [Claude Code Opus]
+- `e161375` produce: SIM_RACE25D_V4_S029 (pending review) [Claude Code Opus]
+- `aeb57ba` produce: SIM_RACE25D_V4_S028 (pending review) [Claude Code Opus]
 - `18b04dd` produce: SIM_RACE25D_V4_S025 (pending review) [Claude Code Opus]
 - `db4a943` produce: SIM_RACE25D_V4_S024 (pending review) [Claude Code Opus]
 - `54d2b75` produce: SIM_RACE25D_V4_S023 (pending review) [Claude Code Opus]
@@ -39,6 +38,41 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `08e6ed6` produce: SIM_RACE25D_V4_S018 (pending review) [Claude Code Opus]
 - `5a378e7` produce: SIM_POTHOLES_V2_S028 (pending review) [Claude Code Opus]
 - `9b1b3b3` produce.py (standard production command with SOP gates) + race25d hazard layouts from the variety director; duration not capped (user)
+**🏁 RACE (race25d)**
+- `cd7b0e5` race25d pixel sensor v4 (validated): star hazard clearly visible; car on screen + hazard invisible = fail; fully off-screen hits = warning
+- `b0cda9b` race25d: container stays on the road after landing (it flew 22 m up off-screen since v3); pixel sensor check: every hazard that hits must be visible on screen; QA_DEFECT_TRACKER.md
+- `717042c` race25d: no speed bonus after a ramp (a monster truck beat an unhit taxi, S041); produce.py tries the next seed after an engine-check failure
+- `3c7af6b` race25d: cold open starts 0.45 s before the star (camera already on it, no pan inside); 4 title forms, never a title another video has
+- `d073a40` race25d: redraw the hazard set when layout + hazards equal one of the last 10 RACE videos
+- `5485fe5` race25d camera: whip pan (up to 9 m/frame) between far-apart cars; check allows <= 10 empty frames inside a whip, none while the camera rests
+- `fe8859e` race25d camera: without a highlight follow the biggest group (zoom for that group), not the midpoint of the whole field
+- `52d6b51` race25d: log the first empty frames (mode, focus, camera, car positions) for diagnosis
+- `b6d1bd3` race25d camera: soft keep-in-frame (fast pan up to 4 m/frame) when the capped glide lags behind the key car
+- `53a7710` race25d: zoom in on the star moment (the asked-about car was often tiny in a back lane)
+- `3a65754` race25d camera: when hazard moments overlap, focus the title's star (S022 test: cold open framed the ice dragon while asking about the hammer)
+- `2437c64` race25d crusher: the press stops on the victim's roof and follows the squash (tall trucks were pierced by the press/rod)
+- `de29f8a` RACE cold open: question in the top band over a dark gradient (not over the action); title, cold open and replay share one star moment
+- `d73348d` race25d: cars swerve around (or brake behind) a fresh wreck in their lane; camera glides with a speed cap instead of jumping
+- `9ecbffa` race25d: title/hook question asks about the racer who really meets the most striking hazard (honest payoff)
+- `9ea2ec7` race25d v4: class speeds F1 > sports > police > taxi > monster > icecream/firetruck > bus/bigrig, pickup per class, realistic-order check
+**🔧 Lain-lain**
+- `21cf459` reject: SIM_RACE25D_V4_S038, S039, S042 (container invisible, user 2026-10-04)
+- `420c2f1` swap: Ep. 31/37/40/49 <- RACE v4 S036/S040/S037/S043 (user 2026-10-04 approved)
+- `588e535` reject: SIM_RACE25D_V4_S028-S035 (user 2026-10-04: remake with unique titles + cold open on the star)
+- `14d14c0` reject: SIM_RACE25D_V4_S019-S025 (user 2026-10-04: remake with camera/cold-open fixes)
+- `ce29c73` cold open 1.5 s -> 3.0 s for every Short (user: opening clip too fast, add 1-2 s); duration checks follow the uncapped-duration rule
+- `970dfca` approve: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04 changed mind) + plan
+- `3d5a8f2` approve: SIM_POTHOLES_V2_S031, SIM_RACE25D_V4_S018 by user 2026-10-04 + plan
+- `a4aaf65` reject: SIM_POTHOLES_V2_S028, S029 (user 2026-10-04)
+- `8cd1793` potholes: a planned pit content (spikes/bomb/Pit Muncher/water) must be met by a failing car on screen
+- `6312200` pits: trigger height per content = its drawn height (a truck touching the bomb must set it off)
+- `f70f682` pits: contents trigger on any body corner / tyre near the floor (nose-dives), bigger spikes
+- `5390778` variety director + potholes v2: 6 layout templates, 6 pit shapes, sizes S/M/L, per-pit contents (rubble, water, lava, spikes, bomb, Pit Muncher)
+- `8d2d719` PROJECT_PROGRESS C13: potholes layout is one template (finding 2026-10-04)
+- `c75a0a7` CONFIG_BEST: production stays 2.5D, Godot 3D lab-only (user 2026-10-04)
+**📤 Upload / antrean / Drive**
+- `90a5fa8` publish: daily run 2026-10-04 [cron daily_publish.sh]
+- `c657eee` episodes.py unreject: a REJECTED render back to pending (MP4 restored from Drive) when the user changes their mind
 **🧪 Lab (eksperimen)**
 - `2bfc0a1` lab hybrid: upload_sample.py (Drive lab/hybrid)
 - `9a6e738` lab hybrid: darker sea with sun path, purple headlands, brighter clouds
@@ -46,8 +80,22 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `4f5ad71` lab hybrid: Godot background project (beach sunset: theme sky, sun glow, waves + glitter, foam, dunes, palms, clouds, gulls)
 - `a2d61b8` lab hybrid: exporter (aired 2.5D frames with transparent background + background camera)
 - `2fe3bf8` lab: revert3d.py (review videos back to the 2.5D engine, user 2026-10-04) + ERROR_LOG for the 3D review batch
-<details><summary>otomatis VM (21)</summary>
+<details><summary>otomatis VM (35)</summary>
 
+- `a0a3d49` records
+- `e236b91` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5f1914e` records
+- `d3cffc4` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5f6edfd` records: S041 audit failed
+- `fc57c6a` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `05358b1` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `055847d` records: S031 structure repeat
+- `a71825d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `54ed3a5` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `2bf2ab5` records: S027 audit failed
+- `f96f524` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `7692a2a` records: S026 audit failed
+- `f617ef4` analytics: daily report 2026-10-04
 - `7a9701d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
 - `006c749` records
 - `2c19b34` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
