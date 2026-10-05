@@ -58,8 +58,11 @@ def main():
                                            veh["wheel_r"], bool(flicker)])
     ST.draw_beam = beam
 
-    def eyes(ctx, t, spec):                                        # Kraggor's eyes -> emissive eyes in the 3D fog
-        frames[cur["i"]]["eyes"] = dict(spec)
+    real_eyes = ST.glow_eyes
+
+    def eyes(ctx, t, spec):                                        # Kraggor (real head silhouette + eyes) stays the
+        frames[cur["i"]]["eyes"] = dict(spec)                      # cairo drawing (same design everywhere); Godot only
+        real_eyes(ctx, t, spec)                                    # adds the eyes' glow in the fog
     ST.glow_eyes = eyes
     for name in ("draw_props_layer", "draw_streetlamps", "draw_footprints", "draw_fog", "draw_lamp", "draw_hill"):
         setattr(ST, name, lambda *x, **k: None)

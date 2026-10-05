@@ -452,12 +452,14 @@ func _process(_d: float) -> void:
 		var sep = 2.4 * r * depth / focal
 		var er = 0.9 * r * depth / focal
 		var blink = 0.08 if fmod(t * 0.6, 3.0) < 0.12 else 1.0
+		eye_l.visible = false                                # the eyes + head are drawn by story25d (overlay)
+		eye_r.visible = false
 		eye_l.position = Vector3(-sep, 0, 0)
 		eye_r.position = Vector3(sep, 0, 0)
 		eye_l.scale = Vector3(er, er * blink, er)
 		eye_r.scale = Vector3(er, er * blink, er)
 		eye_glow.omni_range = sep * 5.0
 		var sil = float(ey.get("silhouette", 0.0))
-		head_sil.visible = sil > 0.0
+		head_sil.visible = false                             # (sil kept for reference: the overlay draws the head)
 		head_sil.position = Vector3(0, sep * 0.8, -sep * 1.5)
 		head_sil.scale = Vector3(sep * 4.5, sep * 4.0, sep * 3.0)

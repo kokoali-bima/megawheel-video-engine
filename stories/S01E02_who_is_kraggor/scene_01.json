@@ -5,49 +5,251 @@
   "theme_location": "city",
   "time": "night",
   "weather": "clear",
-  "ambience": "night",
+  "ambience": "city_night",
   "fog": 0.45,
   "letterbox": true,
   "gap": 0.5,
   "tail": 1.0,
   "edge_fade": false,
   "actors": {
-    "tilly": {"vk": "taxi", "x": -26, "z": 1.0, "emo": "normal"}
+    "tilly": {
+      "vk": "taxi",
+      "x": -26,
+      "z": 1.0,
+      "emo": "normal"
+    }
   },
   "props": [
-    {"type": "streetlamps", "z": 3.4, "xs": [-34, -24, -14, -4, 6, 16, 26],
-     "off": [10.2, 13.6, 14.3, 15.0, 15.6, 16.1, 16.5]},
-    {"type": "footprints", "z": 1.0, "xs": [11, 21, 31], "steam": true, "size": 1.6}
+    {
+      "type": "streetlamps",
+      "z": 3.4,
+      "xs": [
+        -34,
+        -24,
+        -14,
+        -4,
+        6,
+        16,
+        26
+      ],
+      "off": [
+        12.9,
+        16.6,
+        17.3,
+        18.0,
+        18.6,
+        19.1,
+        19.5
+      ]
+    },
+    {
+      "type": "footprints",
+      "z": 1.0,
+      "xs": [
+        11,
+        21,
+        31
+      ],
+      "steam": true,
+      "size": 1.6
+    }
   ],
   "score": [
-    {"cue": "cue_mystery_night", "from": 0, "to": 5, "vol": 0.85, "fade": 1.5},
-    {"sting": "cue_kraggor_motif", "shot": 7, "at": 0.15, "vol": 1.0}
+    {
+      "cue": "cue_mystery_night",
+      "from": 0,
+      "to": 0,
+      "vol": 0.5,
+      "fade": 1.0
+    },
+    {
+      "cue": "cue_mystery_night",
+      "from": 2,
+      "to": 5,
+      "vol": 0.85,
+      "start": 8.0,
+      "fade": 1.2
+    },
+    {
+      "sting": "cue_kraggor_motif",
+      "shot": 7,
+      "at": 0.15,
+      "vol": 1.0
+    }
   ],
   "shots": [
-    {"cam": "wide", "zoom": 0.55, "hold": 4.0, "lift": 1.5, "cut": "hard",
-     "move": {"push": 0.18, "crane": -1.5},
-     "caption": "MegaWheel Town. Midnight."},
-    {"cam": "track", "on": "tilly", "dx": 1.5, "zoom": 1.15,
-     "move": {"handheld": 3},
-     "moves": {"tilly": {"to_x": 1, "speed": 3.6}},
-     "lines": [["tilly", "La la la... nothing to be scared of. Nothing at all...", "scared"]]},
-    {"cam": "close", "on": "tilly", "hold": 2.6, "emote": {"tilly": "surprised"},
-     "move": {"push": 0.25},
-     "lines": [["tilly", "Huh? What was that?", "surprised"]], "sfx": ["lamp_off"]},
-    {"cam": "wide", "zoom": 0.62, "hold": 4.6, "dx": 6, "emote": {"tilly": "scared"},
-     "move": {"pan": -10, "dutch": 4},
-     "sfx": ["lamp_off", "lamp_off"]},
-    {"cam": "wide", "zoom": 0.8, "dx": 9, "lift": 0.3, "hold": 4.6, "emote": {"tilly": "scared"},
-     "move": {"pull": 0.8},
-     "sfx": ["heartbeat"]},
-    {"cam": "ecu", "on": "tilly", "hold": 2.4, "emote": {"tilly": "scared"},
-     "move": {"dutch": 7, "handheld": 6},
-     "lines": [["tilly", "Those... are footprints.", "whisper"]]},
-    {"cam": "wide", "zoom": 0.6, "hold": 1.2, "cut": "hard", "emote": {"tilly": "scared"}},
-    {"cam": "wide", "zoom": 0.6, "hold": 3.4, "cut": "hard", "emote": {"tilly": "scared"},
-     "eyes": {"sx": 0.66, "sy": 0.34, "r": 30, "silhouette": 0.5}, "move": {"push": 0.12, "handheld": 2},
-     "flicker": ["tilly"]},
-    {"cam": "close", "on": "tilly", "hold": 2.6, "punch": true, "cut": "hard", "emote": {"tilly": "scared"},
-     "lines": [["tilly", "It's... BACK!", "scared"]], "fx": ["shake"], "flicker": ["tilly"]}
+    {
+      "cam": "wide",
+      "zoom": 0.55,
+      "hold": 4.0,
+      "lift": 1.5,
+      "cut": "hard",
+      "move": {
+        "push": 0.18,
+        "crane": -1.5
+      },
+      "caption": "MegaWheel Town. Midnight."
+    },
+    {
+      "cam": "track",
+      "on": "tilly",
+      "dx": 1.5,
+      "zoom": 1.15,
+      "move": {
+        "handheld": 3
+      },
+      "moves": {
+        "tilly": {
+          "to_x": 1,
+          "speed": 3.6
+        }
+      },
+      "lines": [
+        [
+          "tilly",
+          "La la la, the night is fine, street lamps glowing in a line, nothing scary, nothing there...",
+          "happy",
+          "branding/music/cues/tilly_sing.wav",
+          8.6
+        ]
+      ],
+      "emote": {
+        "tilly": "happy"
+      }
+    },
+    {
+      "cam": "close",
+      "on": "tilly",
+      "hold": 2.6,
+      "emote": {
+        "tilly": "surprised"
+      },
+      "move": {
+        "push": 0.25
+      },
+      "lines": [
+        [
+          "tilly",
+          "Huh? What was that?",
+          "surprised"
+        ]
+      ],
+      "sfx": [
+        "lamp_off"
+      ]
+    },
+    {
+      "cam": "wide",
+      "zoom": 0.62,
+      "hold": 4.6,
+      "dx": 6,
+      "emote": {
+        "tilly": "scared"
+      },
+      "move": {
+        "pan": -10,
+        "dutch": 4
+      },
+      "sfx": [
+        "lamp_off",
+        "lamp_off"
+      ]
+    },
+    {
+      "cam": "wide",
+      "zoom": 0.8,
+      "dx": 9,
+      "lift": 0.3,
+      "hold": 4.6,
+      "emote": {
+        "tilly": "scared"
+      },
+      "move": {
+        "pull": 0.8
+      },
+      "sfx": [
+        "heartbeat"
+      ]
+    },
+    {
+      "cam": "ecu",
+      "on": "tilly",
+      "hold": 2.4,
+      "emote": {
+        "tilly": "scared"
+      },
+      "move": {
+        "dutch": 7,
+        "handheld": 6
+      },
+      "lines": [
+        [
+          "tilly",
+          "Those... are footprints.",
+          "whisper"
+        ]
+      ]
+    },
+    {
+      "cam": "wide",
+      "zoom": 0.6,
+      "hold": 2.7,
+      "cut": "hard",
+      "emote": {
+        "tilly": "scared"
+      },
+      "sfx": [
+        "steps_far"
+      ]
+    },
+    {
+      "cam": "wide",
+      "zoom": 0.6,
+      "hold": 3.4,
+      "cut": "hard",
+      "emote": {
+        "tilly": "scared"
+      },
+      "eyes": {
+        "sx": 0.66,
+        "sy": 0.34,
+        "r": 30,
+        "silhouette": 0.5,
+        "kscale": 0.55
+      },
+      "move": {
+        "push": 0.12,
+        "handheld": 2
+      },
+      "flicker": [
+        "tilly"
+      ]
+    },
+    {
+      "cam": "close",
+      "on": "tilly",
+      "hold": 2.6,
+      "punch": true,
+      "cut": "hard",
+      "emote": {
+        "tilly": "scared"
+      },
+      "lines": [
+        [
+          "tilly",
+          "It's... BACK!",
+          "scared"
+        ]
+      ],
+      "fx": [
+        "shake"
+      ],
+      "flicker": [
+        "tilly"
+      ],
+      "sfx": [
+        "stomp_near"
+      ]
+    }
   ]
 }
