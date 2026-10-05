@@ -39,7 +39,7 @@ FPS = 30
 ASPECTS = {"h": (1920, 1080), "v": (1080, 1920)}
 VOICE_OF = {"narrator": "m1", "announcer": "m1", "announcer2": "f1"}      # others: actor id == voice key
 STYLE_OF = {"normal": "calm", "talk": "calm", "laugh": "happy", "cry": "sad", "determined": "proud", "shy": "calm",
-            "surprised": "excited", "tease": "excited", "whisper": "calm"}   # face emotion -> voice style
+            "surprised": "excited", "tease": "excited", "whisper": "calm", "scared": "scared", "angry": "angry"}
 MOOD_BASE = {"happy": "happy", "laugh": "happy", "proud": "happy", "scared": "scared", "surprised": "whoa",
              "excited": "happy", "dizzy": "dizzy"}                                                  # emotion -> se.draw_face mood
 SPEAKER_COLOR = {"sprinkles": (1, 0.6, 0.8), "little_sprinkles": (1, 0.7, 0.85), "grandpa_cone": (0.95, 0.85, 0.6),
@@ -1247,6 +1247,55 @@ def envelope(a):
 
 
 # ------------------------------------------------------------------ audio
+CUE_DIR = os.path.join(BASE, "branding", "music", "cues")
+
+
+def load_cue(path):
+    """Any wav (ACE-Step writes stereo, 44.1/48 kHz) -> mono float at se.SR."""
+    import wave as _wave
+    with _wave.open(path) as w:
+        ch, rate, width = w.getnchannels(), w.getframerate(), w.getsampwidth()
+        raw = w.readframes(w.getnframes())
+    dt_ = {2: np.int16, 4: np.int32}[width]
+    x = np.frombuffer(raw, dtype=dt_).astype(np.float64) / float(np.iinfo(dt_).max)
+    if ch > 1:
+        x = x.reshape(-1, ch).mean(axis=1)
+    if rate != se.SR:
+        n = int(len(x) * se.SR / rate)
+        x = np.interp(np.linspace(0, len(x) - 1, n), np.arange(len(x)), x)
+    return x
+
+
+def place_score(mus, spec, shots, place):
+    """Spotting sheet (user 2026-10-05: backsound was monotonous - the same everywhere). Music only where it helps:
+      {"cue": "cue_mystery_night", "from": 0, "to": 3, "vol": 0.9, "start": 0.0, "fade": 1.2}  shots from..to (incl.)
+      {"sting": "cue_kraggor_motif", "shot": 4, "at": 0.3, "vol": 1.0}                       a hit on a beat
+    Anything not covered stays silent (ambience + effects carry it)."""
+    sr = se.SR
+    for c in spec:
+        name = c.get("cue") or c.get("sting")
+        path = os.path.join(CUE_DIR, name + ".wav")
+        if not os.path.exists(path):
+            print(f"[story] WARN cue missing: {path}", flush=True)
+            continue
+        sig = load_cue(path)
+        if "sting" in c:
+            t0 = shots[c["shot"]]["t0"] + c.get("at", 0.0)
+            place(mus, sig * c.get("vol", 1.0), t0, 1.0)
+            continue
+        t0, t1 = shots[c["from"]]["t0"], shots[min(c.get("to", c["from"]), len(shots) - 1)]["t1"]
+        seg = sig[int(c.get("start", 0.0) * sr):]
+        n = int((t1 - t0 + c.get("tail", 1.0)) * sr)
+        if len(seg) < n:                                           # loop gently if the cue is shorter than the span
+            seg = np.concatenate([seg] * (n // max(1, len(seg)) + 1))
+        seg = seg[:n].copy()
+        f = int(c.get("fade", 1.2) * sr)
+        if f > 0 and len(seg) > 2 * f:
+            seg[:f] *= np.linspace(0, 1, f)
+            seg[-f:] *= np.linspace(1, 0, f)
+        place(mus, seg * c.get("vol", 0.9), t0, 1.0)
+
+
 def score(mood, dur, seed=1):
     """Simple emotional music bed (pads + soft arpeggio), own synthesis."""
     sr = se.SR
@@ -1440,7 +1489,20 @@ SFX = {
     "thunder": lambda: se.synth_impact(1.0, seed=3) * 0.8,
     "engine": lambda: cine_whoosh(0.9, peak=0.5, lo=120.0, hi=1400.0, seed=21),
     "splat": lambda: se.synth_splash(0.8, seed=12),
+    "lamp_off": lambda: lamp_off(),
 }
+
+
+def lamp_off():
+    """A street lamp dying: electric buzz that stutters, then a dull click."""
+    sr = se.SR
+    t = np.arange(int(0.55 * sr)) / sr
+    buzz = (np.sin(2 * math.pi * 120 * t) + 0.5 * np.sin(2 * math.pi * 240 * t)) * 0.25
+    gate = (np.sin(2 * math.pi * 23 * t) > -0.2).astype(float) * np.exp(-t * 2.5)
+    click = np.zeros_like(t)
+    k = int(0.45 * sr)
+    click[k:k + int(0.03 * sr)] = np.random.default_rng(5).normal(0, 1, int(0.03 * sr)) * np.exp(-np.linspace(0, 8, int(0.03 * sr)))
+    return (buzz * gate + click * 0.6) * 0.7
 
 
 def amb_birds(n, rng):
@@ -1522,10 +1584,13 @@ def build_audio(shots, placed, total, scene):
         mix = np.tanh(1.1 * mix) / np.tanh(1.1)
         mix = mix[:int(total * se.SR)]
         return mix / max(1e-9, np.max(np.abs(mix))) * 0.95
-    for sh in shots:                                               # music per shot mood (crossfaded by the pads)
-        m = sh.get("music", scene.get("music", "warm"))
-        seg = score(m, sh["t1"] - sh["t0"] + 1.0, seed=3)
-        place(mus, seg, sh["t0"], 1.0)
+    if scene.get("score"):                                         # film score from the cue library (S01E02+)
+        place_score(mus, scene["score"], shots, place)
+    else:
+        for sh in shots:                                           # Ep. 1: music per shot mood (synth pads)
+            m = sh.get("music", scene.get("music", "warm"))
+            seg = score(m, sh["t1"] - sh["t0"] + 1.0, seed=3)
+            place(mus, seg, sh["t0"], 1.0)
     talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))
     duck = 1.0 - 0.55 * np.clip(talk * 3, 0, 1)
     mix = se.peak(narr) * 1.0 + se.peak(mus) * 0.32 * duck + se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
