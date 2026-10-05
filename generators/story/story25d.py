@@ -603,6 +603,82 @@ def draw_lamp(ctx, camx):
     ctx.fill()
 
 
+def draw_streetlamps(ctx, prop, camx, t):
+    """Street lamps along the far pavement; each can flicker and die at its own scene time ("off": [t, ...]) -
+    S01E02 cold open: the lights go out one by one towards the camera before Kraggor's eyes open."""
+    z = prop.get("z", 3.4)
+    k = k_of(z)
+    offs = prop.get("off", [])
+    for i, x in enumerate(prop.get("xs", [])):
+        sx, gy = pxy(x, z, camx)
+        if not -400 < sx < CX * 2 + 400:
+            continue
+        ctx.rectangle(sx - 0.09 * k, gy - 5.2 * k, 0.18 * k, 5.2 * k)          # pole + arm
+        ctx.set_source_rgb(*se.lit((0.25, 0.26, 0.3)))
+        ctx.fill()
+        ctx.rectangle(sx, gy - 5.2 * k, 0.9 * k, 0.12 * k)
+        ctx.fill()
+        off_t = offs[i] if i < len(offs) else None
+        on = 1.0
+        if off_t is not None and t > off_t - 0.5:                  # flicker for half a second, then dark
+            on = 0.0 if t >= off_t else (1.0 if int((t - off_t) * 23) % 3 else 0.15)
+        hx, hy = sx + 0.9 * k, gy - 5.0 * k
+        se.rrect(ctx, hx - 0.28 * k, hy - 0.12 * k, 0.56 * k, 0.22 * k, 0.06 * k)
+        ctx.set_source_rgb(*((1.0, 0.92, 0.6) if on > 0.5 else (0.3, 0.3, 0.32)))
+        ctx.fill()
+        if on > 0.0:                                               # warm pool of light on the road
+            g = cairo.RadialGradient(hx, gy, 0.2 * k, hx, gy - 1.5 * k, 4.2 * k)
+            g.add_color_stop_rgba(0, 1, 0.85, 0.5, 0.42 * on)
+            g.add_color_stop_rgba(1, 1, 0.85, 0.5, 0.0)
+            se.poly(ctx, [(hx - 0.3 * k, hy), (hx + 0.3 * k, hy), (hx + 2.6 * k, gy + 0.6 * k), (hx - 2.6 * k, gy + 0.6 * k)])
+            ctx.set_source(g)
+            ctx.fill()
+
+
+def draw_footprints(ctx, prop, camx, t):
+    """Giant three-toed footprints pressed into the road, still steaming (Kraggor walked here)."""
+    z = prop.get("z", 1.0)
+    k = k_of(z)
+    for n, x in enumerate(prop.get("xs", [])):
+        sx, gy = pxy(x, z, camx)
+        if not -500 < sx < CX * 2 + 500:
+            continue
+        ctx.save()
+        ctx.translate(sx, gy + 0.15 * k)
+        ctx.scale(1.0, 0.32)                                       # seen at a low angle: flattened on the road
+        ctx.arc(0, 0, 1.15 * k, 0, 2 * math.pi)                    # heel pad
+        for dx, dy in ((-1.25, -1.5), (0.0, -1.9), (1.25, -1.5)):   # three toes with claws
+            ctx.new_sub_path()
+            ctx.arc(dx * k, dy * k, 0.48 * k, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgba(0.06, 0.05, 0.05, 0.75)
+        ctx.fill()
+        if prop.get("steam", True):                                # thin wisps rising and fading
+            for j in range(4):
+                ph = (t * 0.45 + j * 0.25 + n * 0.17) % 1.0
+                wx = sx + (j - 1.5) * 0.5 * k + math.sin(t * 1.3 + j) * 0.2 * k
+                wy = gy - ph * 2.6 * k
+                ctx.arc(wx, wy, (0.25 + 0.5 * ph) * k, 0, 2 * math.pi)
+                ctx.set_source_rgba(0.85, 0.87, 0.9, 0.22 * (1 - ph))
+                ctx.fill()
+
+
+def draw_fog(ctx, t, density):
+    """Night fog drifting across the frame in soft layers (screen space, after the world)."""
+    d = 0.6 if density is True else float(density)
+    for j in range(5):
+        y = H * (0.45 + 0.1 * j)
+        x0 = ((t * (12 + 6 * j)) % (W * 0.8)) - W * 0.4
+        for rep_ in range(3):
+            cx_ = x0 + rep_ * W * 0.8
+            g = cairo.RadialGradient(cx_, y, 0, cx_, y, W * 0.45)
+            g.add_color_stop_rgba(0, 0.75, 0.78, 0.85, 0.16 * d)
+            g.add_color_stop_rgba(1, 0.75, 0.78, 0.85, 0.0)
+            ctx.rectangle(0, 0, W, H)
+            ctx.set_source(g)
+            ctx.fill()
+
+
 def draw_desk(ctx, d, camx):
     """Registration booth (behind the actors): stage, two poles with the sign board, striped canopy, flags."""
     x, z = d.get("x", 3.6), d.get("z", 2.6)
@@ -1639,17 +1715,36 @@ def render_scene(ep, num, aspect):
         if frz:
             zmul *= 1.0 + 0.12 * (1 - (1 - frz) ** 2)
         piv_y = piv
+        # camera moves inside a shot (S01E02, user 2026-10-05: "cara pengambilan view kamera belum optimal"):
+        #   "move": {"push": 0.3, "pull": 0.6, "pan": 6, "crane": 3, "dutch": 6, "handheld": 8}
+        #   push = slow push-in (+30 % over the shot) · pull = starts close and opens up (reveal) · pan = metres across ·
+        #   crane = metres up over the shot · dutch = degrees of tilt (unease) · handheld = px of organic shake (panic)
+        mv = sh.get("move") or {}
+        pan_off, tilt, hh_x, hh_y = 0.0, 0.0, 0.0, 0.0
+        if mv:
+            pp = min(1.0, u / max(0.01, sh["t1"] - sh["t0"]))
+            pp = pp * pp * (3 - 2 * pp)                            # eased: starts and ends softly
+            zmul *= (1.0 + mv.get("push", 0.0) * pp) * (1.0 + mv.get("pull", 0.0) * (1 - pp))
+            pan_off = mv.get("pan", 0.0) * (pp - 0.5)
+            piv_y = piv - mv.get("crane", 0.0) * k_of(1.0) * (pp - 0.5)
+            tilt = math.radians(mv.get("dutch", 0.0))
+            zmul *= 1.0 + 0.9 * abs(tilt)                          # a little closer: no empty corners when tilted
+            a_ = mv.get("handheld", 0.0)                           # sum of slow sines = organic, not a vibration
+            hh_x = a_ * (math.sin(t * 2.3) * 0.6 + math.sin(t * 5.1 + 1.0) * 0.4)
+            hh_y = a_ * (math.sin(t * 1.9 + 2.0) * 0.6 + math.sin(t * 4.3) * 0.4)
         # draw. "roll": the world scrolls past (per shot) while the cars keep their place on screen and their
         # wheels turn (drawn at x + off with the camera at camx + off -> same screen spot, spinning wheels)
         camx_real = camx
-        camx = camx + off
+        camx = camx + off + pan_off
         for a in actors.values():
             a["x"] += off
         ctx.save()
         shake = 0.0
         if "shake" in sh.get("fx", []):
             shake = 14 * math.sin(t * 60)
-        ctx.translate(W / 2 + shake, H * 0.5)
+        ctx.translate(W / 2 + shake + hh_x, H * 0.5 + hh_y)
+        if tilt:
+            ctx.rotate(tilt)
         ctx.scale(zoom * zmul, zoom * zmul * (1.12 if sh.get("cam") == "low" else 1.0))
         ctx.translate(-CX, -piv_y)
         def behind():
@@ -1676,10 +1771,14 @@ def render_scene(ep, num, aspect):
                 draw_desk(ctx, prop, camx)
             elif prop["type"] == "podium":
                 draw_podium(ctx, camx)
+            elif prop["type"] == "streetlamps":
+                draw_streetlamps(ctx, prop, camx, t)
         draw_hill(ctx, camx)
         for prop in scene.get("props", []):
             if prop["type"] == "mud":
                 draw_mud(ctx, prop, camx, t)
+            elif prop["type"] == "footprints":
+                draw_footprints(ctx, prop, camx, t)
         if "finish" in scene:
             draw_finish(ctx, scene["finish"], camx)
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
@@ -1737,6 +1836,8 @@ def render_scene(ep, num, aspect):
             px_ = W / 2 + (sx_ - CX) * zoom
             py_ = H / 2 + (gy_ - 3.6 * k_ - piv_y) * zoom
             SM.crown(ctx, px_, py_ - 8 * math.sin(t * 4), 0.9 * k_ * zoom)
+        if scene.get("fog") or sh.get("fog"):
+            draw_fog(ctx, t, sh.get("fog", scene.get("fog")))
         se.draw_weather(ctx, t)
         if "lightning" in sh.get("fx", []) and int(u * 10) in (3, 4, 9):
             ctx.rectangle(0, 0, W, H)
