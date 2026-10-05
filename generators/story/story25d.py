@@ -1717,7 +1717,9 @@ def steps_far():
 def stomp_near():
     """One huge step right here: thud + crack + rattling debris."""
     sr = se.SR
-    st = phone_step(1.0, seed=47) + SM.kaiju_step(1.4) * 0.5
+    st, ks = phone_step(1.0, seed=47), SM.kaiju_step(1.4) * 0.5
+    st = np.pad(st, (0, max(0, len(ks) - len(st))))
+    st[:len(ks)] += ks
     rng = np.random.default_rng(17)
     t = np.arange(int(0.9 * sr)) / sr
     rattle = rng.normal(0, 1, len(t)) * np.exp(-t * 5) * (np.sin(2 * math.pi * 31 * t) > 0) * 0.25
@@ -1752,7 +1754,7 @@ def phone_step(near, seed):
     body = np.tanh(body / max(1e-9, np.abs(body).max()) * 2.2)          # a little drive: harmonics phones hear
     crunch = fft_band(rng.normal(0, 1, n), 1600, 5200) * np.exp(-np.maximum(0, t - 0.01) * 26) * (t > 0.01)
     deb = fft_band(rng.normal(0, 1, n), 900, 4000) * np.exp(-t * 4) * (np.sin(2 * math.pi * 17 * t) > 0.2)
-    out = (sub * 0.9 + body * 0.55 + crunch / max(1e-9, np.abs(crunch).max()) * 0.35 * near ** 1.5
+    out = (sub * 0.8 + body * 0.8 + crunch / max(1e-9, np.abs(crunch).max()) * 0.35 * near ** 1.5
            + deb / max(1e-9, np.abs(deb).max()) * 0.12 * near ** 2)
     return out / max(1e-9, np.abs(out).max())
 
