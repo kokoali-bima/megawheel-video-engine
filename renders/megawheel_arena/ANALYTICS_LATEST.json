@@ -1,18 +1,23 @@
 {
- "generated": "2026-10-04T06:30:06.345765+00:00",
- "start": "2026-09-06",
- "end": "2026-10-03",
+ "generated": "2026-10-05T06:30:05.961361+00:00",
+ "start": "2026-09-07",
+ "end": "2026-10-04",
  "days": 28,
  "channel": {
-  "views": 1180,
-  "minutes": 254,
-  "subs": 6
+  "views": 3438,
+  "minutes": 804,
+  "subs": 14
  },
  "series": {
   "CHALLENGE": {
-   "videos": 5,
-   "views": 1149,
-   "avg_view_pct": 61.0
+   "videos": 7,
+   "views": 3389,
+   "avg_view_pct": 54.0
+  },
+  "RACE": {
+   "videos": 1,
+   "views": 18,
+   "avg_view_pct": 55.6
   }
  },
  "videos": [
@@ -20,63 +25,95 @@
    "id": "xEWas3W61QU",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 5 #Shorts",
    "series": "CHALLENGE",
-   "views": 557,
-   "minutes": 106,
-   "avg_view_s": 23,
-   "avg_view_pct": 48.65,
-   "likes": 5,
-   "subs": 0
+   "views": 1293,
+   "minutes": 275,
+   "avg_view_s": 25,
+   "avg_view_pct": 52.5,
+   "likes": 14,
+   "subs": 1
   },
   {
    "id": "yf0y4R83hto",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
    "series": "CHALLENGE",
-   "views": 509,
-   "minutes": 113,
-   "avg_view_s": 27,
-   "avg_view_pct": 58.599999999999994,
-   "likes": 6,
-   "subs": 0
+   "views": 879,
+   "minutes": 206,
+   "avg_view_s": 28,
+   "avg_view_pct": 60.27,
+   "likes": 15,
+   "subs": 2
   },
   {
    "id": "nXlV3f6Wux8",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 6 #Shorts",
    "series": "CHALLENGE",
-   "views": 41,
-   "minutes": 13,
-   "avg_view_s": 38,
-   "avg_view_pct": 79.57,
-   "likes": 1,
-   "subs": 0
-  },
-  {
-   "id": "dVBtbf8Bi_Q",
-   "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
-   "series": "CHALLENGE",
-   "views": 21,
-   "minutes": 8,
-   "avg_view_s": 32,
-   "avg_view_pct": 64.48,
-   "likes": 0,
-   "subs": 0
+   "views": 806,
+   "minutes": 200,
+   "avg_view_s": 29,
+   "avg_view_pct": 61.22,
+   "likes": 19,
+   "subs": 2
   },
   {
    "id": "3CfgGpkOx3Q",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 4 #Shorts",
    "series": "CHALLENGE",
-   "views": 21,
-   "minutes": 5,
-   "avg_view_s": 26,
-   "avg_view_pct": 53.64,
-   "likes": 1,
+   "views": 242,
+   "minutes": 66,
+   "avg_view_s": 27,
+   "avg_view_pct": 55.66,
+   "likes": 9,
+   "subs": 1
+  },
+  {
+   "id": "dVBtbf8Bi_Q",
+   "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
+   "series": "CHALLENGE",
+   "views": 140,
+   "minutes": 38,
+   "avg_view_s": 24,
+   "avg_view_pct": 48.82,
+   "likes": 3,
+   "subs": 0
+  },
+  {
+   "id": "PwlO0ptmi-c",
+   "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 1 #Shorts",
+   "series": "CHALLENGE",
+   "views": 19,
+   "minutes": 3,
+   "avg_view_s": 19,
+   "avg_view_pct": 42.77,
+   "likes": 4,
+   "subs": 0
+  },
+  {
+   "id": "lA92He_9FeQ",
+   "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
+   "series": "RACE",
+   "views": 18,
+   "minutes": 3,
+   "avg_view_s": 16,
+   "avg_view_pct": 55.64,
+   "likes": 4,
+   "subs": 0
+  },
+  {
+   "id": "Q-7067tL0A8",
+   "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts",
+   "series": "CHALLENGE",
+   "views": 10,
+   "minutes": 3,
+   "avg_view_s": 28,
+   "avg_view_pct": 56.879999999999995,
+   "likes": 3,
    "subs": 0
   }
  ],
  "upcoming": [
-  "Sun 04/10 22:00 WIB - Ep 8 - SCHEDULED",
-  "Mon 05/10 00:00 WIB - Ep 1001 - SCHEDULED",
-  "Mon 05/10 02:00 WIB - Ep 11 - SCHEDULED",
-  "Mon 05/10 06:00 WIB - Ep 24 - SCHEDULED",
-  "Mon 05/10 22:00 WIB - Ep 16 - SCHEDULED"
+  "Mon 05/10 22:00 WIB - Ep 16 - SCHEDULED",
+  "Tue 06/10 02:00 WIB - Ep 12 - SCHEDULED",
+  "Tue 06/10 06:00 WIB - Ep 25 - SCHEDULED",
+  "Tue 06/10 22:00 WIB - Ep 17 - SCHEDULED"
  ]
 }
