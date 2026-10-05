@@ -6,7 +6,7 @@
   "time": "night",
   "weather": "clear",
   "ambience": "night",
-  "fog": 0.7,
+  "fog": 0.45,
   "letterbox": true,
   "gap": 0.5,
   "tail": 1.0,
@@ -17,7 +17,7 @@
   "props": [
     {"type": "streetlamps", "z": 3.4, "xs": [-34, -24, -14, -4, 6, 16, 26],
      "off": [10.2, 13.6, 14.3, 15.0, 15.6, 16.1, 16.5]},
-    {"type": "footprints", "z": 1.0, "xs": [10, 18, 26], "steam": true}
+    {"type": "footprints", "z": 1.0, "xs": [12, 22, 32], "steam": true, "size": 1.6}
   ],
   "score": [
     {"cue": "cue_mystery_night", "from": 0, "to": 5, "vol": 0.85, "fade": 1.5},
@@ -33,19 +33,19 @@
      "lines": [["tilly", "La la la... nothing to be scared of. Nothing at all...", "scared"]]},
     {"cam": "close", "on": "tilly", "hold": 2.6, "emote": {"tilly": "surprised"},
      "move": {"push": 0.25},
-     "lines": [["tilly", "Huh?", "surprised"]], "sfx": ["lamp_off"]},
+     "lines": [["tilly", "Huh? What was that?", "surprised"]], "sfx": ["lamp_off"]},
     {"cam": "wide", "zoom": 0.62, "hold": 4.6, "dx": 6, "emote": {"tilly": "scared"},
      "move": {"pan": -10, "dutch": 4},
      "sfx": ["lamp_off", "lamp_off"]},
-    {"cam": "low", "on": "tilly", "dx": 14, "hold": 4.2, "emote": {"tilly": "scared"},
-     "move": {"pull": 0.7},
+    {"cam": "wide", "zoom": 0.85, "dx": 22, "lift": 0.3, "hold": 4.6, "emote": {"tilly": "scared"},
+     "move": {"pull": 0.8},
      "sfx": ["heartbeat"]},
     {"cam": "ecu", "on": "tilly", "hold": 2.4, "emote": {"tilly": "scared"},
      "move": {"dutch": 7, "handheld": 6},
      "lines": [["tilly", "Those... are footprints.", "whisper"]]},
     {"cam": "wide", "zoom": 0.6, "hold": 1.2, "cut": "hard", "emote": {"tilly": "scared"}},
     {"cam": "wide", "zoom": 0.6, "hold": 3.4, "cut": "hard", "emote": {"tilly": "scared"},
-     "eyes": {"sx": 0.72, "sy": 0.36, "r": 16}, "move": {"push": 0.12, "handheld": 2}},
+     "eyes": {"sx": 0.66, "sy": 0.34, "r": 30, "silhouette": 0.5}, "move": {"push": 0.12, "handheld": 2}},
     {"cam": "close", "on": "tilly", "hold": 2.6, "punch": true, "cut": "hard", "emote": {"tilly": "scared"},
      "lines": [["tilly", "It's... BACK!", "scared"]], "fx": ["shake"]}
   ]

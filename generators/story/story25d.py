@@ -643,23 +643,36 @@ def draw_footprints(ctx, prop, camx, t):
         sx, gy = pxy(x, z, camx)
         if not -500 < sx < CX * 2 + 500:
             continue
-        ctx.save()
-        ctx.translate(sx, gy + 0.15 * k)
-        ctx.scale(1.0, 0.32)                                       # seen at a low angle: flattened on the road
-        ctx.arc(0, 0, 1.15 * k, 0, 2 * math.pi)                    # heel pad
-        for dx, dy in ((-1.25, -1.5), (0.0, -1.9), (1.25, -1.5)):   # three toes with claws
-            ctx.new_sub_path()
-            ctx.arc(dx * k, dy * k, 0.48 * k, 0, 2 * math.pi)
-        ctx.restore()
-        ctx.set_source_rgba(0.06, 0.05, 0.05, 0.75)
+        sc = prop.get("size", 1.5)                                 # pilot A: dark-on-dark at night was invisible ->
+        def foot_path(grow):                                       # bigger, crushed-asphalt rim catching moonlight
+            ctx.save()
+            ctx.translate(sx, gy + 0.15 * k)
+            ctx.scale(1.0, 0.34)
+            ctx.arc(0, 0, (1.15 + grow) * sc * k, 0, 2 * math.pi)
+            for dx, dy in ((-1.25, -1.5), (0.0, -1.9), (1.25, -1.5)):
+                ctx.new_sub_path()
+                ctx.arc(dx * sc * k, dy * sc * k, (0.48 + grow) * sc * k, 0, 2 * math.pi)
+            ctx.restore()
+        foot_path(0.22)
+        ctx.set_source_rgba(0.62, 0.64, 0.7, 0.85)                 # cracked, lighter rim
         ctx.fill()
+        foot_path(0.0)
+        ctx.set_source_rgba(0.03, 0.03, 0.04, 0.95)                # deep print
+        ctx.fill()
+        for q in range(7):                                         # cracks radiating out
+            ang = q * 0.9 + n
+            ctx.move_to(sx + math.cos(ang) * 1.4 * sc * k, gy + 0.15 * k + math.sin(ang) * 0.45 * sc * k)
+            ctx.line_to(sx + math.cos(ang) * 2.3 * sc * k, gy + 0.15 * k + math.sin(ang) * 0.75 * sc * k)
+        ctx.set_source_rgba(0.55, 0.57, 0.62, 0.7)
+        ctx.set_line_width(max(1.5, 0.06 * k))
+        ctx.stroke()
         if prop.get("steam", True):                                # thin wisps rising and fading
             for j in range(4):
                 ph = (t * 0.45 + j * 0.25 + n * 0.17) % 1.0
                 wx = sx + (j - 1.5) * 0.5 * k + math.sin(t * 1.3 + j) * 0.2 * k
                 wy = gy - ph * 2.6 * k
                 ctx.arc(wx, wy, (0.25 + 0.5 * ph) * k, 0, 2 * math.pi)
-                ctx.set_source_rgba(0.85, 0.87, 0.9, 0.22 * (1 - ph))
+                ctx.set_source_rgba(0.88, 0.9, 0.95, 0.38 * (1 - ph))
                 ctx.fill()
 
 
@@ -791,6 +804,19 @@ def draw_hill(ctx, camx):
 def glow_eyes(ctx, t, spec):
     """A pair of giant yellow eyes glowing in the dark (Kraggor, far away)."""
     sx, sy, r = spec.get("sx", 0.8) * W, spec.get("sy", 0.3) * H, spec.get("r", 14) * H / 1080
+    if spec.get("silhouette"):                                     # a giant head shape barely visible in the fog
+        ctx.save()
+        ctx.translate(sx, sy + r * 3)
+        ctx.scale(r * 11, r * 9)
+        ctx.arc(0, 0, 1, math.pi, 2 * math.pi)
+        ctx.line_to(1.1, 2.5)
+        ctx.line_to(-1.1, 2.5)
+        ctx.close_path()
+        ctx.restore()
+        ctx.set_source_rgba(0.04, 0.05, 0.08, spec.get("silhouette", 0.55))
+        ctx.fill()
+    if spec.get("open") is not None:                               # eyes opening slowly (0..1 given by the shot)
+        r *= max(0.05, min(1.0, spec["open"]))
     if (t * 0.6) % 3.0 < 0.12:                                     # slow blink
         return
     for d in (-1, 1):
