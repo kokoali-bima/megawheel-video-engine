@@ -147,3 +147,11 @@ dipakai: ia mensintesis ulang dari token ucapan, kontur nada nyanyi hilang. (lab
 cairo menggambar setelah langit (kota, pohon, tanah menutupi kakinya); Godot menaruh sprite gambar Kraggor yang sama
 di antara baris gedung 1 dan 2, gedung di depannya direndahkan hanya di garis pandang, haze kota di belakangnya,
 mata menyala membuka 0.4 s setelah cut.
+
+**v6 hasil & pelajaran (2026-10-06):** Drive lab/story_pilot: PILOT_A_v6 (2.5D, 42.9 s) + PILOT_C_v6_godot.
+- Exporter Godot yang mengganti draw_set WAJIB tetap memanggil after_sky (kalau tidak, semua yang "di belakang kota"
+  hilang diam-diam: sprite Kraggor tidak dibuat). Cek: folder sprites/ tidak boleh kosong bila shot punya kraggor_far.
+- Objek jauh (>40 m) di Godot dengan volumetric fog density ~0.05 tertelan kabut (transmisi ~2 % di 78 m) ->
+  material siluet / mata / haze: disable_fog, kesan jauh diatur lewat alpha.
+- 2.5D: cakrawala rendah & jarang -> kaki Kraggor diturunkan (sink 0.3) agar yang terlihat badan atas + kepala.
+- Biaya v6: lagu ACE-Step $0.019, Seed-VC $0.029 (+ 1 run gagal deserialisasi, tak tercatat), Godot ~$0.04 x3.
