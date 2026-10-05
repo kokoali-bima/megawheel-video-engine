@@ -97,16 +97,17 @@
       "moves": {
         "tilly": {
           "to_x": 1,
-          "speed": 3.6
+          "speed": 2.5
         }
       },
       "lines": [
         [
           "tilly",
-          "Doo-doo-doo! Here comes Tilly down the street, shiny wheels and a happy beat, who's afraid of the dark? Not me!",
+          "Doo-doo-doo! Here comes Tilly down the street, shiny wheels and a happy beat. Who's afraid of the dark? Not me!",
           "happy",
-          "branding/music/cues/tilly_sing2.wav",
-          9.0
+          "branding/music/cues/tilly_sing2_alt1_vc0.wav",
+          14.1,
+          2.9
         ]
       ],
       "emote": {

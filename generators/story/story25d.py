@@ -1360,8 +1360,9 @@ def build(scene):
                     a = a[:int(float(ln[4]) * se.SR)]
                     f = int(0.05 * se.SR)
                     a[-f:] *= np.linspace(1, 0, f)
-                placed.append(dict(t0=t + u, audio=a, spk=spk, text=text, emo=emo))
-                u += len(a) / se.SR + sh.get("gap", scene.get("gap", 0.3))
+                pre = float(ln[5]) if len(ln) > 5 else 0.0          # lead-in heard over the previous shot
+                placed.append(dict(t0=t + u - pre, audio=a, spk=spk, text=text, emo=emo))   # (humming from off-screen)
+                u += len(a) / se.SR - pre + sh.get("gap", scene.get("gap", 0.3))
                 continue
             it = (text, line_style(emo), speaker_voice(spk), "studio")
             if not announcer.cached(*it):
