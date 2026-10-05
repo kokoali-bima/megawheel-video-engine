@@ -108,3 +108,14 @@ Resep hook Ep. 2 (dan pola tetap seri):
 - Kamera: [Cinematography language in animation](https://quizzly.ai/play/cinematography-language-in-animation) · [How to tell a story with camera](https://23014835.myblog.arts.ac.uk/?p=18)
 - Hook & retensi: [Retention benchmarks for animated YouTube videos](https://longstories.ai/blog/retention-benchmarks-animated-youtube-videos) ·
   [YouTube hooks & retention](https://outlierkit.com/resources/youtube-hooks-and-retention/) · [How Pixar hooks audiences](https://scottdikkers.substack.com/p/how-pixar-hooks-audiences-before)
+
+## 8. Pilot C (Godot) — analisa dari pelajaran 3–4 Okt agar hasilnya jauh lebih baik & konsisten
+| Pelajaran kemarin (QA_DEFECT_TRACKER / ERROR_LOG) | Aturan untuk pilot C |
+|---|---|
+| Konversi mobil ke 3D → bodi melengkung, Kraggor aneh, tidak konsisten | **Tokoh tidak digambar ulang**: mobil, wajah, subtitle, letterbox = gambar asli story25d (overlay alpha). Godot hanya dunia, cahaya, kabut, jejak kaki, mata Kraggor (gaya hybrid, sampel pantai S027). |
+| Kamera tebakan → salah skala / posisi | **Kamera dari data**: matriks kamera story25d per frame (zoom, pan, dutch, handheld, push) dibaca langsung dari cairo; proyeksi story = pinhole (k = F/(D0+DZ·z), horizon Y_H, tinggi CAM_H) → kamera Godot setara (fokus, roll, lens shift). Diverifikasi frame-per-frame terhadap overlay sebelum render penuh. |
+| Warna pucat di Vulkan; matahari/bayangan salah; bayangan dimatikan untuk menutupi | Warna lewat `source_color`; cahaya malam dirancang (bulan + lampu jalan + lampu mobil), bayangan tidak dimatikan. Mode **Forward+** (kabut volumetrik butuh ini). |
+| Gaya 3D realistis vs tokoh kartun datar = terlihat tempelan | **Toon shading** (diffuse/specular toon), palet warna sama dengan set cairo, garis siluet sederhana; 3D dipakai untuk **cahaya, kedalaman, kabut**, bukan realisme. Malam: tokoh diberi tint malam yang sama (hanya pada piksel tokoh). |
+| Bug tak terlihat lolos review (kontainer) | **Sensor**: jejak kaki & mata Kraggor wajib terlihat (piksel) di shot-nya; lampu padam sesuai jadwal; cek otomatis sebelum dikirim. |
+| Batch/paralel di VM → OOM, kode lama | Render di Modal T4 (per bagian), compose ringan di VM, satu proses, cek HEAD. |
+Yang dibuat lebih baik oleh 3D (alasan memakai Godot di adegan ini): sorotan lampu mobil **menyinari kabut sungguhan** (volumetrik), genangan cahaya lampu jalan nyata yang **padam satu per satu**, jejak kaki sebagai decal yang **terungkap saat tersorot**, mata Kraggor yang **memancarkan cahaya di kabut**, kedalaman kota (gedung berlapis, jendela menyala).

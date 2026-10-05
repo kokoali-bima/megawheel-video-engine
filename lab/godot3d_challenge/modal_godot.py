@@ -55,7 +55,9 @@ def _render(project_tgz, data_tgz, start, n, gpu):
         with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as tf:
             tf.extractall(dst)
     env = dict(os.environ, GODOT_SILENCE_ROOT_WARNING="1", LP_NUM_THREADS=str(CPUS))
-    drv = ["--rendering-driver", "vulkan", "--rendering-method", "mobile"] if gpu else ["--rendering-driver", "opengl3"]
+    pg = open("/tmp/w/project/project.godot").read()              # a project may ask for Forward+ (volumetric fog)
+    method = "forward_plus" if 'rendering_method="forward_plus"' in pg else "mobile"
+    drv = ["--rendering-driver", "vulkan", "--rendering-method", method] if gpu else ["--rendering-driver", "opengl3"]
     cmd = ["xvfb-run", "-a", "-s", "-screen 0 1080x1920x24", "/opt/godot/godot", "--path", "/tmp/w/project"] + drv + [
            "--write-movie", "/tmp/w/part.avi", "--fixed-fps", "30", "--quit-after", str(n), "--", "/tmp/w/data", str(start)]
     r = subprocess.run(cmd, capture_output=True, text=True, env=env)
