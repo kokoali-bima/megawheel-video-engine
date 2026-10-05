@@ -335,6 +335,7 @@ func _kraggor_far() -> void:
 	m.albedo_texture = ImageTexture.create_from_image(img)
 	m.albedo_color = Color(1, 1, 1, float(kfar.get("silhouette", 0.92)))
 	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.disable_fog = true                                     # 78 m of volumetric fog left 2 % of him (v6 render):
 	var q = MeshInstance3D.new()
 	q.mesh = qm
 	q.material_override = m
@@ -355,6 +356,7 @@ func _kraggor_far() -> void:
 	gt.fill_from = Vector2(0.5, 0.5)
 	gt.fill_to = Vector2(1.0, 0.5)
 	bm.albedo_texture = gt
+	bm.disable_fog = true                                    # the shape reads by alpha, not by the fog
 	bg.mesh = bq
 	bg.material_override = bm
 	bg.position = Vector3(kx, hu * 0.72 * mpu, -kd - 6.0)
@@ -365,6 +367,7 @@ func _kraggor_far() -> void:
 	em.emission_enabled = true
 	em.emission = Color(1.0, 0.8, 0.15)
 	em.emission_energy_multiplier = 8.0
+	em.disable_fog = true
 	krw = 32.0 * mpu
 	var cxu = float(ext[0]) + float(ext[2]) / 2
 	for e in meta["eyes"]:
