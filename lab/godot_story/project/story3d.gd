@@ -488,10 +488,14 @@ func _process(_d: float) -> void:
 	var roll = atan2(yx, xx)
 	var px = xx * float(S["CX"]) + xy * float(S["Y_H"]) + x0      # where the optical axis lands on screen
 	var py = yx * float(S["CX"]) + yy * float(S["Y_H"]) + y0
-	var v = Vector2(px - Wd / 2, py - Hd / 2).rotated(-roll)
+	# v7 fix (user 2026-10-06, car "floating" in the dutch shot): the roll sign was flipped, so the road tilted one
+	# way and the cairo car the other. Derivation: Godot view = Rz(-roll)^-1 applied to the world; for a world offset
+	# (dx, dy) at depth d it gives screen (dx cos + dy sin, dx sin - dy cos) f/d = cairo rotate(tilt). The lens shift
+	# is applied after the roll, i.e. directly in screen axes.
+	var v = Vector2(px - Wd / 2, py - Hd / 2)
 	var focal = fpx * sc
 	cam.position = Vector3(float(f["camx"]), float(S["CAM_H"]), 0)
-	cam.rotation = Vector3(0, 0, -roll)
+	cam.rotation = Vector3(0, 0, roll)
 	cam.size = Wd / focal * cam.near
 	cam.frustum_offset = Vector2(-v.x / focal * cam.near, v.y / focal * cam.near)
 	# street lamps: flicker for half a second, then dark (same schedule as the cairo version)

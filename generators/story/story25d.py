@@ -1260,7 +1260,26 @@ def letterbox(ctx, aspect):
         ctx.fill()
 
 
-def subtitle(ctx, speaker, text, aspect, age):
+def sub_pages(text, maxc):
+    """Text -> pages of at most 2 wrapped lines. '|' forces a page break (e.g. song phrases)."""
+    pages = []
+    for part in text.split("|"):
+        words, line, lines = part.split(), "", []
+        for w_ in words:
+            if len(line) + len(w_) + 1 > maxc:
+                lines.append(line)
+                line = w_
+            else:
+                line = (line + " " + w_).strip()
+        lines.append(line)
+        pages += [lines[i:i + 2] for i in range(0, len(lines), 2)]
+    return [pg for pg in pages if any(pg)]
+
+
+def subtitle(ctx, speaker, text, aspect, age, dur=None, pages_at=None):
+    """Bottom subtitle. Long lines are paged (bug until 2026-10-06: only the LAST two lines were shown, so the
+    start of a long line - e.g. the first words of Tilly's song - never appeared). Page timing: pages_at (seconds
+    into the line) when given, else proportional to the characters of each page."""
     if not text:
         return
     a = min(1.0, age / 0.15)
@@ -1268,16 +1287,18 @@ def subtitle(ctx, speaker, text, aspect, age):
     y = H * (0.86 if aspect == "h" else 0.80)
     name = {"narrator": "", "announcer": "ANNOUNCER", "announcer2": "ANNOUNCER"}.get(
         speaker, speaker.replace("_", " ").upper())
-    words, line, lines = text.split(), "", []
-    maxc = 52 if aspect == "h" else 30
-    for w_ in words:
-        if len(line) + len(w_) + 1 > maxc:
-            lines.append(line)
-            line = w_
-        else:
-            line = (line + " " + w_).strip()
-    lines.append(line)
-    for i, ln in enumerate(lines[-2:]):
+    pages = sub_pages(text, 52 if aspect == "h" else 30)
+    k = 0
+    if len(pages) > 1:
+        if pages_at:
+            k = max([i for i, t0 in enumerate(pages_at[:len(pages)]) if age >= t0] + [0])
+            if k > 0:
+                a = min(1.0, (age - pages_at[k]) / 0.12)
+        elif dur:
+            cs = np.cumsum([sum(len(x) for x in pg) for pg in pages], dtype=float)
+            k = int(min(len(pages) - 1, np.searchsorted(cs / cs[-1], min(0.999, age / dur), side="right")))
+    lines = pages[k]
+    for i, ln in enumerate(lines):
         se.draw_text(ctx, ln, W / 2, y + i * size * 1.25, size, fill=(1, 1, 1), stroke=(0, 0, 0), sw=5, alpha=a,
                      max_w=W * 0.92)
     if name:
@@ -1361,7 +1382,8 @@ def build(scene):
                     f = int(0.05 * se.SR)
                     a[-f:] *= np.linspace(1, 0, f)
                 pre = float(ln[5]) if len(ln) > 5 else 0.0          # lead-in heard over the previous shot
-                placed.append(dict(t0=t + u - pre, audio=a, spk=spk, text=text, emo=emo))   # (humming from off-screen)
+                placed.append(dict(t0=t + u - pre, audio=a, spk=spk, text=text, emo=emo,      # (humming from off-screen)
+                                   pages=ln[6] if len(ln) > 6 else None))          # subtitle page times in the song
                 u += len(a) / se.SR - pre + sh.get("gap", scene.get("gap", 0.3))
                 continue
             it = (text, line_style(emo), speaker_voice(spk), "studio")
@@ -1682,12 +1704,10 @@ SFX = {
 def steps_far():
     """Four giant footsteps coming closer: each a deep thud + ground rumble, louder and brighter as it nears."""
     sr = se.SR
-    out = np.zeros(int(3.6 * sr))
+    out = np.zeros(int(4.0 * sr))
     for k in range(4):
-        st = SM.kaiju_step(1.4)
-        g = 0.25 + 0.25 * k
-        if k < 2:                                                  # far: muffled (low-passed)
-            st = SM.box_avg(st, 30 - 10 * k)
+        st = phone_step(0.15 + 0.25 * k, seed=40 + k)
+        g = 0.35 + 0.22 * k
         i = int(k * 0.85 * sr)
         L = min(len(st), len(out) - i)
         out[i:i + L] += st[:L] * g
@@ -1697,7 +1717,7 @@ def steps_far():
 def stomp_near():
     """One huge step right here: thud + crack + rattling debris."""
     sr = se.SR
-    st = SM.kaiju_step(1.4) * 1.0
+    st = phone_step(1.0, seed=47) + SM.kaiju_step(1.4) * 0.5
     rng = np.random.default_rng(17)
     t = np.arange(int(0.9 * sr)) / sr
     rattle = rng.normal(0, 1, len(t)) * np.exp(-t * 5) * (np.sin(2 * math.pi * 31 * t) > 0) * 0.25
@@ -1707,16 +1727,50 @@ def stomp_near():
     return out
 
 
-def lamp_off():
-    """A street lamp dying: electric buzz that stutters, then a dull click."""
+def fft_band(x, lo, hi):
+    """Band-limit a signal in the frequency domain (no scipy on the VM): smooth edges, no leaking hiss."""
+    X = np.fft.rfft(x)
+    f = np.fft.rfftfreq(len(x), 1.0 / se.SR)
+    g = np.ones_like(f)
+    if lo > 0:
+        g *= 1.0 / (1.0 + (lo / np.maximum(f, 1e-3)) ** 4)
+    if hi:
+        g *= 1.0 / (1.0 + (f / hi) ** 4)
+    return np.fft.irfft(X * g, len(x))
+
+
+def phone_step(near, seed):
+    """A giant footstep that also reads on PHONE speakers (user 2026-10-06: the steps were all < 200 Hz, so on a
+    phone they vanished and only the hiss was left). Layers: sub thud + 220-900 Hz boom body (the part a phone
+    plays) + asphalt crunch and debris that grow as he comes nearer. near: 0 (far) .. 1 (right here)."""
     sr = se.SR
-    t = np.arange(int(0.55 * sr)) / sr
-    buzz = (np.sin(2 * math.pi * 120 * t) + 0.5 * np.sin(2 * math.pi * 240 * t)) * 0.25
-    gate = (np.sin(2 * math.pi * 23 * t) > -0.2).astype(float) * np.exp(-t * 2.5)
-    click = np.zeros_like(t)
-    k = int(0.45 * sr)
-    click[k:k + int(0.03 * sr)] = np.random.default_rng(5).normal(0, 1, int(0.03 * sr)) * np.exp(-np.linspace(0, 8, int(0.03 * sr)))
-    return (buzz * gate + click * 0.6) * 0.7
+    rng = np.random.default_rng(seed)
+    n = int(1.5 * sr)
+    t = np.arange(n) / sr
+    sub = np.sin(2 * math.pi * (62 - 22 * t) * t) * np.exp(-t * 5.5)
+    body = fft_band(rng.normal(0, 1, n), 220, 900 if near > 0.4 else 520) * np.exp(-t * (9 - 3 * near))
+    body = np.tanh(body / max(1e-9, np.abs(body).max()) * 2.2)          # a little drive: harmonics phones hear
+    crunch = fft_band(rng.normal(0, 1, n), 1600, 5200) * np.exp(-np.maximum(0, t - 0.01) * 26) * (t > 0.01)
+    deb = fft_band(rng.normal(0, 1, n), 900, 4000) * np.exp(-t * 4) * (np.sin(2 * math.pi * 17 * t) > 0.2)
+    out = (sub * 0.9 + body * 0.55 + crunch / max(1e-9, np.abs(crunch).max()) * 0.35 * near ** 1.5
+           + deb / max(1e-9, np.abs(deb).max()) * 0.12 * near ** 2)
+    return out / max(1e-9, np.abs(out).max())
+
+
+def lamp_off():
+    """A street lamp dying: a soft electric hum that stutters, then a dull relay tunk (v6 was a raspy square buzz
+    + white-noise click: unpleasant, user 2026-10-06)."""
+    sr = se.SR
+    t = np.arange(int(0.7 * sr)) / sr
+    hum = sum(np.sin(2 * math.pi * 100 * h * t) / h for h in (1, 2, 3, 5)) * 0.22
+    flick = SM.box_avg((np.sin(2 * math.pi * 11 * t + 3 * np.sin(2 * math.pi * 3 * t)) > -0.1).astype(float),
+                       int(0.006 * sr))
+    hum = fft_band(hum * flick * np.clip(1.6 - t / 0.35, 0, 1), 90, 1200)
+    k = int(0.5 * sr)
+    tt = np.arange(len(t) - k) / sr
+    tunk = np.zeros_like(t)
+    tunk[k:] = (np.sin(2 * math.pi * 170 * tt) + 0.4 * np.sin(2 * math.pi * 620 * tt)) * np.exp(-tt * 38)
+    return (hum + tunk * 0.5) * 0.6
 
 
 def amb_birds(n, rng):
@@ -1743,13 +1797,19 @@ def amb_night(n, rng):
 
 def amb_city_night(n, rng):
     """City at night (no crickets - user 2026-10-05): distant traffic hum, soft wind, a far car passing now and then."""
-    hum = SM.box_avg(SM.box_avg(rng.normal(0, 1, n), 300), 300) * 2.0      # very low rumble of the far city
-    wind = SM.box_avg(rng.normal(0, 1, n), 90) * 0.25 * (0.6 + 0.4 * np.sin(np.arange(n) / se.SR * 0.3))
-    out = hum + wind
+    # v6 was mostly 1-2 kHz hiss (box filters leak): exposed once the song stopped it sounded like noise
+    # (user 2026-10-06). Now band-limited: rumble + a soft traffic wash, nothing above ~1 kHz.
+    tt = np.arange(n) / se.SR
+    hum = fft_band(rng.normal(0, 1, n), 30, 140)
+    hum /= max(1e-9, np.abs(hum).max())
+    wash = fft_band(rng.normal(0, 1, n), 160, 700) * (0.55 + 0.45 * np.sin(2 * math.pi * tt / 11.0) ** 2)
+    wash /= max(1e-9, np.abs(wash).max())
+    out = hum * 0.8 + wash * 0.25
     for i in rng.integers(0, max(1, n - 3 * se.SR), max(1, int(n / se.SR / 9))):   # a car passing far away
-        L = int(2.5 * se.SR)
+        L = int(3.0 * se.SR)
         env = np.sin(np.linspace(0, math.pi, L)) ** 2
-        out[i:i + L] += SM.box_avg(rng.normal(0, 1, L), 40) * env * 0.5
+        car = fft_band(rng.normal(0, 1, L), 180, 900)
+        out[i:i + L] += car / max(1e-9, np.abs(car).max()) * env * 0.3
     return out
 
 
@@ -2186,7 +2246,7 @@ def render_scene(ep, num, aspect):
             letterbox(ctx, aspect)
         t = treal
         if cur is not None:
-            subtitle(ctx, cur["spk"], cur["text"], aspect, t - cur["t0"])
+            subtitle(ctx, cur["spk"], cur["text"], aspect, t - cur["t0"], len(cur["audio"]) / se.SR, cur.get("pages"))
         fade = min(1.0, t / 0.4, max(0.0, (total - t) / 0.4)) if scene.get("edge_fade", True) else 1.0
         if fade < 1.0:
             ctx.rectangle(0, 0, W, H)
