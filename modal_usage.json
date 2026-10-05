@@ -2450,6 +2450,17 @@
    "cpu_container_seconds": 131.2,
    "wall_seconds": 57.2,
    "cost_usd": 0.0353
+  },
+  {
+   "date": "2026-10-05",
+   "note": "pilot C v6b S01E02 scene 1",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 139.5,
+   "wall_seconds": 116.9,
+   "cost_usd": 0.0376
   }
  ]
 }
