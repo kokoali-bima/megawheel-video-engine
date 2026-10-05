@@ -1,5 +1,5 @@
 {
-  "title": "Scene 1 - Footprints (PILOT A: camera moves + film score + iconic hook)",
+  "title": "Scene 1 - Footprints (PILOT A v6: happy song -> silence -> score only at the footprints; far Kraggor behind the town)",
   "chapter": "Cold Open: Footprints",
   "location": "town",
   "theme_location": "city",
@@ -44,31 +44,27 @@
     },
     {
       "type": "footprints",
-      "z": 1.0,
+      "z": 1.3,
       "xs": [
         11,
         21,
         31
       ],
-      "steam": true,
-      "size": 1.6
+      "size": 1.0,
+      "dir": 1,
+      "stagger": 0.45,
+      "steam": true
     }
   ],
   "score": [
     {
       "cue": "cue_mystery_night",
-      "from": 0,
-      "to": 0,
-      "vol": 0.5,
-      "fade": 1.0
-    },
-    {
-      "cue": "cue_mystery_night",
-      "from": 2,
-      "to": 5,
+      "from": 4,
+      "to": 8,
       "vol": 0.85,
       "start": 8.0,
-      "fade": 1.2
+      "fade": 1.0,
+      "tail": 1.0
     },
     {
       "sting": "cue_kraggor_motif",
@@ -107,10 +103,10 @@
       "lines": [
         [
           "tilly",
-          "La la la, the night is fine, street lamps glowing in a line, nothing scary, nothing there...",
+          "Doo-doo-doo! Here comes Tilly down the street, shiny wheels and a happy beat, who's afraid of the dark? Not me!",
           "happy",
-          "branding/music/cues/tilly_sing.wav",
-          8.6
+          "branding/music/cues/tilly_sing2.wav",
+          9.0
         ]
       ],
       "emote": {
@@ -210,20 +206,20 @@
       "emote": {
         "tilly": "scared"
       },
-      "eyes": {
-        "sx": 0.66,
-        "sy": 0.34,
-        "r": 30,
-        "silhouette": 0.5,
-        "kscale": 0.55
-      },
       "move": {
         "push": 0.12,
         "handheld": 2
       },
       "flicker": [
         "tilly"
-      ]
+      ],
+      "kraggor_far": {
+        "x": 38,
+        "dist": 78,
+        "height": 34,
+        "silhouette": 0.94,
+        "eyes_at": 0.4
+      }
     },
     {
       "cam": "close",

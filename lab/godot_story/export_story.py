@@ -41,7 +41,7 @@ def main():
     def no_world(ctx, loc, camx, t, after_sky=None):               # draw_set: record the camera, draw nothing
         m = ctx.get_matrix()
         cur.clear()
-        cur.update(t=round(t, 4), camx=round(camx, 4), m=[round(v, 6) for v in m], actors=[], eyes=None)
+        cur.update(t=round(t, 4), camx=round(camx, 4), m=[round(v, 6) for v in m], actors=[], eyes=None, kfar=None)
         frames.append(cur.copy())
         cur["i"] = len(frames) - 1
         ctx.save()
@@ -64,6 +64,9 @@ def main():
         frames[cur["i"]]["eyes"] = dict(spec)                      # cairo drawing (same design everywhere); Godot only
         real_eyes(ctx, t, spec)                                    # adds the eyes' glow in the fog
     ST.glow_eyes = eyes
+    def kfar(ctx, t, u, spec, camx):                               # far Kraggor -> a sprite of his real drawing
+        frames[cur["i"]]["kfar"] = dict(spec, u=round(u, 3))       # standing in the Godot city (between the rows)
+    ST.kraggor_far = kfar
     for name in ("draw_props_layer", "draw_streetlamps", "draw_footprints", "draw_fog", "draw_lamp", "draw_hill"):
         setattr(ST, name, lambda *x, **k: None)
 
@@ -107,10 +110,26 @@ def main():
 
     with open(os.path.join(ROOT, "stories", a.episode, f"scene_{a.scene:02d}.json")) as fh:
         scene = json.load(fh)
+    kmeta = None
+    spec = next((f["kfar"] for f in frames if f.get("kfar")), None)
+    if spec:                                                       # one PNG of the whole Kraggor, almost black
+        x0, y0, w, h = ST.kraggor_ext()
+        pad, spx = 24, 1400.0 / h
+        iw, ih = int(w * spx + 2 * pad), int(h * spx + 2 * pad)
+        img = cairo.ImageSurface(cairo.FORMAT_ARGB32, iw, ih)
+        c = cairo.Context(img)
+        ST.kraggor_head(c, 3.0, dict(mode="calm", sx=(pad - x0 * spx) / ST.W, scale=spx * 1080.0 / ST.H),
+                        stands_top=pad - y0 * spx)
+        c.set_operator(cairo.OPERATOR_ATOP)
+        c.rectangle(0, 0, iw, ih)
+        c.set_source_rgb(*spec.get("tint", (0.025, 0.03, 0.055)))
+        c.fill()
+        img.write_to_png(os.path.join(a.out, "sprites", "kraggor_far.png"))
+        kmeta = dict(ext=[x0, y0, w, h], pad=pad, spx=spx, eyes=ST.KR_EYE_UNIT)
     rows = [[i // 450, f] for i, f in enumerate(frames)]           # [part, frame]: modal_godot renders parts in parallel
     json.dump(dict(fps=ST.FPS, frames=rows), open(os.path.join(a.out, "frames.json"), "w"))
     json.dump(dict(scene=scene, theme=se.THEME, W=ST.W, H=ST.H, F=ST.F_PERSP, D0=ST.D0, DZ=ST.DZ, Y_H=ST.Y_H,
-                   CAM_H=ST.CAM_H, CX=ST.CX), open(os.path.join(a.out, "scene.json"), "w"))
+                   CAM_H=ST.CAM_H, CX=ST.CX, kfar=kmeta), open(os.path.join(a.out, "scene.json"), "w"))
     print(f"[story3d] {len(frames)} frames exported -> {a.out}", flush=True)
 
 

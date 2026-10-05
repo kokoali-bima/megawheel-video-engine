@@ -672,45 +672,88 @@ def draw_streetlamps(ctx, prop, camx, t):
             ctx.fill()
 
 
-def draw_footprints(ctx, prop, camx, t):
-    """Giant three-toed footprints pressed into the road, still steaming (Kraggor walked here)."""
-    z = prop.get("z", 1.0)
-    k = k_of(z)
+FOOT_PADS = [(-1.25, 0.0, 1.2, 0.95), (1.55, -0.95, 0.62, 0.42), (1.95, 0.0, 0.62, 0.42), (1.55, 0.95, 0.62, 0.42)]
+# heel + 3 toes on the GROUND plane (along-road m, across-road m, radius along, radius across) for size 1.0:
+# a 5.5 m x 3 m print. User 2026-10-05 (Godot pilot): a print standing on end looked bigger than the road and
+# came out in front of the car, so the car seemed to float -> prints lie flat along the road, as Kraggor walked.
+
+
+def foot_pads(prop):
+    """World-space pads of every print: [(n, cx, cz, rx, rz)], left/right feet staggered across the road."""
+    sc, d = prop.get("size", 1.0), prop.get("dir", 1)
+    z0, stag = prop.get("z", 1.3), prop.get("stagger", 0.45)
+    out = []
     for n, x in enumerate(prop.get("xs", [])):
-        sx, gy = pxy(x, z, camx)
-        if not -500 < sx < CX * 2 + 500:
-            continue
-        sc = prop.get("size", 1.5)                                 # pilot A: dark-on-dark at night was invisible ->
-        def foot_path(grow):                                       # bigger, crushed-asphalt rim catching moonlight
-            ctx.save()
-            ctx.translate(sx, gy + 0.15 * k)
-            ctx.scale(1.0, 0.34)
-            ctx.arc(0, 0, (1.15 + grow) * sc * k, 0, 2 * math.pi)
-            for dx, dy in ((-1.25, -1.5), (0.0, -1.9), (1.25, -1.5)):
-                ctx.new_sub_path()
-                ctx.arc(dx * sc * k, dy * sc * k, (0.48 + grow) * sc * k, 0, 2 * math.pi)
-            ctx.restore()
-        foot_path(0.22)
-        ctx.set_source_rgba(0.62, 0.64, 0.7, 0.85)                 # cracked, lighter rim
+        zc = z0 + (stag if n % 2 else -stag)
+        for px, pz, rx, rz in FOOT_PADS:
+            out.append((n, x + d * px * sc, zc + pz * sc, rx * sc, rz * sc))
+    return out
+
+
+def ground_ellipse(ctx, x, z, rx, rz, camx, grow=0.0):
+    """Path of an ellipse lying on the road (correct depth squash for its distance)."""
+    sx, gy = pxy(x, z, camx)
+    ry = abs(ground_y(z - rz - grow) - ground_y(z + rz + grow)) / 2
+    ctx.save()
+    ctx.translate(sx, gy)
+    ctx.scale(max(0.01, (rx + grow) * k_of(z)), max(0.01, ry))
+    ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+    ctx.restore()
+
+
+def draw_footprints(ctx, prop, camx, t):
+    """Giant three-toed footprints pressed into the road along Kraggor's path, still steaming."""
+    pads = foot_pads(prop)
+    for grow, col in ((0.28, (0.62, 0.64, 0.7, 0.85)), (0.0, (0.03, 0.03, 0.04, 0.95))):   # crushed rim, deep print
+        for n, x, z, rx, rz in pads:
+            ctx.new_sub_path()
+            ground_ellipse(ctx, x, z, rx, rz, camx, grow)
+        ctx.set_source_rgba(*col)
         ctx.fill()
-        foot_path(0.0)
-        ctx.set_source_rgba(0.03, 0.03, 0.04, 0.95)                # deep print
-        ctx.fill()
-        for q in range(7):                                         # cracks radiating out
+    sc, d = prop.get("size", 1.0), prop.get("dir", 1)
+    for n, x in enumerate(prop.get("xs", [])):
+        zc = prop.get("z", 1.3) + (prop.get("stagger", 0.45) if n % 2 else -prop.get("stagger", 0.45))
+        hx = x - d * 1.25 * sc
+        for q in range(7):                                         # cracks radiating out from the heel
             ang = q * 0.9 + n
-            ctx.move_to(sx + math.cos(ang) * 1.4 * sc * k, gy + 0.15 * k + math.sin(ang) * 0.45 * sc * k)
-            ctx.line_to(sx + math.cos(ang) * 2.3 * sc * k, gy + 0.15 * k + math.sin(ang) * 0.75 * sc * k)
+            ctx.move_to(*pxy(hx + math.cos(ang) * 1.5 * sc, zc + math.sin(ang) * 1.15 * sc, camx))
+            ctx.line_to(*pxy(hx + math.cos(ang) * 2.5 * sc, zc + math.sin(ang) * 1.75 * sc, camx))
         ctx.set_source_rgba(0.55, 0.57, 0.62, 0.7)
-        ctx.set_line_width(max(1.5, 0.06 * k))
+        ctx.set_line_width(max(1.5, 0.06 * k_of(zc)))
         ctx.stroke()
         if prop.get("steam", True):                                # thin wisps rising and fading
+            k = k_of(zc)
+            sx, gy = pxy(x, zc, camx)
             for j in range(4):
                 ph = (t * 0.45 + j * 0.25 + n * 0.17) % 1.0
-                wx = sx + (j - 1.5) * 0.5 * k + math.sin(t * 1.3 + j) * 0.2 * k
+                wx = sx + (j - 1.5) * 0.8 * k + math.sin(t * 1.3 + j) * 0.2 * k
                 wy = gy - ph * 2.6 * k
                 ctx.arc(wx, wy, (0.25 + 0.5 * ph) * k, 0, 2 * math.pi)
                 ctx.set_source_rgba(0.88, 0.9, 0.95, 0.38 * (1 - ph))
                 ctx.fill()
+
+
+def draw_contact(ctx, a, camx):
+    """Soft contact shadow where the tyres meet the road: without it a flat car over a 3D road reads as floating
+    (Godot pilot, user 2026-10-05). Fades as the car leaves the ground."""
+    veh = se.VEHICLES[a["key"]]
+    k = k_of(a["z"]) * a["small"]
+    sx, gy = pxy(a["x"], a["z"], camx)
+    al = 0.42 * max(0.0, 1.0 - a["h"] / 2.5)
+    if al <= 0.01:
+        return
+    rx, ry = veh["body"][0] * 0.56 * k, 0.32 * k
+    g = cairo.RadialGradient(0, 0, 0.0, 0, 0, 1.0)
+    g.add_color_stop_rgba(0, 0, 0, 0, al)
+    g.add_color_stop_rgba(0.7, 0, 0, 0, al * 0.6)
+    g.add_color_stop_rgba(1, 0, 0, 0, 0.0)
+    ctx.save()
+    ctx.translate(sx, gy + 0.08 * k)
+    ctx.scale(rx, ry)
+    ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+    ctx.set_source(g)
+    ctx.fill()
+    ctx.restore()
 
 
 def draw_fog(ctx, t, density):
@@ -866,6 +909,69 @@ def glow_eyes(ctx, t, spec):
         ctx.set_source(g)
         ctx.fill()
         ctx.arc(sx + d * r * 2.4, sy, r * 0.35, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.85, 0.15, 0.05)
+        ctx.fill()
+
+
+_KR_EXT = {}
+
+
+def kraggor_ext():
+    """Ink box of the whole Kraggor (calm, head + body) at unit drawing scale, origin = kraggor_head anchor."""
+    if not _KR_EXT:
+        rs = cairo.RecordingSurface(cairo.CONTENT_COLOR_ALPHA, None)
+        c = cairo.Context(rs)
+        kraggor_head(c, 3.0, dict(mode="calm", sx=0.0, scale=1080.0 / H), stands_top=0.0)
+        _KR_EXT["box"] = rs.ink_extents()
+    return _KR_EXT["box"]
+
+
+KR_EYE_UNIT = [(-76.0, -240.0), (76.0, -240.0)]                 # eye centres at unit scale (same spots glow_eyes uses)
+
+
+def kraggor_far_geom(spec, camx, ground_hide=True):
+    """Where the distant Kraggor stands, in pre-camera px: (sx_px, base_y, unit->px scale).
+    spec: x (world m), dist (m from camera), height (m). True perspective size; in 2.5D the feet are pushed down
+    behind the far ground edge so he stands BEHIND the town (the cairo world has no real ground out there)."""
+    x0, y0, w, h = kraggor_ext()
+    kd = F_PERSP / (DZ * spec.get("dist", 78.0))
+    s = spec.get("height", 34.0) * kd / h
+    gx = CX + (spec.get("x", 30.0) - camx) * kd
+    feet = Y_H + CAM_H * kd
+    if ground_hide:
+        feet = max(feet, ground_y(6.5))
+    return gx - s * (x0 + w / 2), feet - s * (y0 + h), s
+
+
+def kraggor_far(ctx, t, u, spec, camx):
+    """Kraggor far away and tall, behind the town: an almost-black silhouette with glowing eyes (user 2026-10-05:
+    'jauh dan tinggi, badan + kepala di balik gedung', size matching the footprints). Drawn right after the sky,
+    so the town, trees and ground cover his legs."""
+    sxp, base, s = kraggor_far_geom(spec, camx)
+    ctx.push_group()
+    kraggor_head(ctx, 3.0, dict(mode="calm", sx=sxp / W, scale=s * 1080.0 / H), stands_top=base)
+    ctx.set_operator(cairo.OPERATOR_ATOP)
+    ctx.rectangle(-W, -H, 3 * W, 3 * H)
+    ctx.set_source_rgb(*spec.get("tint", (0.025, 0.03, 0.055)))
+    ctx.fill()
+    ctx.pop_group_to_source()
+    ctx.paint_with_alpha(spec.get("silhouette", 0.92))
+    op = 1.0
+    if spec.get("eyes_at") is not None:                            # eyes open a beat after the cut
+        op = max(0.0, min(1.0, (u - spec["eyes_at"]) / 0.5))
+    if op <= 0.0 or (t * 0.6) % 3.0 < 0.12:
+        return
+    r = max(3.0, 32.0 * s) * (0.3 + 0.7 * op)
+    for ex, ey in KR_EYE_UNIT:
+        px, py = sxp + ex * s, base + ey * s
+        g = cairo.RadialGradient(px, py, 0, px, py, r * 3)
+        g.add_color_stop_rgba(0, 1, 0.9, 0.2, 0.95 * op)
+        g.add_color_stop_rgba(0.35, 1, 0.8, 0.1, 0.6 * op)
+        g.add_color_stop_rgba(1, 1, 0.8, 0.1, 0.0)
+        ctx.arc(px, py, r * 3, 0, 2 * math.pi)
+        ctx.set_source(g)
+        ctx.fill()
+        ctx.arc(px, py, r * 0.35, 0, 2 * math.pi)
         ctx.set_source_rgb(0.85, 0.15, 0.05)
         ctx.fill()
 
@@ -1936,6 +2042,8 @@ def render_scene(ep, num, aspect):
         ctx.scale(zoom * zmul, zoom * zmul * (1.12 if sh.get("cam") == "low" else 1.0))
         ctx.translate(-CX, -piv_y)
         def behind():
+            if sh.get("kraggor_far"):
+                kraggor_far(ctx, t, u, sh["kraggor_far"], camx)
             kr = sh.get("kraggor")
             if kr and not kr.get("front"):
                 st_screen = H / 2 + (stands_top_world() - piv_y) * zoom
@@ -1975,6 +2083,8 @@ def render_scene(ep, num, aspect):
                     draw_beam(ctx, a, t, camx, flicker=a["id"] in sh.get("flicker", []))
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
+            if scene.get("contact_shadow", True):
+                draw_contact(ctx, a, camx)
             draw_actor(ctx, a, t, camx)
             if a.get("stuck"):
                 mud_spray(ctx, a, t, camx)

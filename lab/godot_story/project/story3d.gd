@@ -20,6 +20,11 @@ var eye_r: MeshInstance3D
 var eye_glow: OmniLight3D
 var head_sil: MeshInstance3D
 var steam = []
+var kfar = null                    # far Kraggor spec (story25d kraggor_far) + the camera x when he appears
+var kfar_cam = 0.0
+var keyes = []                     # [MeshInstance3D] his two glowing eyes
+var keye_light: OmniLight3D
+var krw = 1.0                      # eye radius in metres
 
 
 func _ready() -> void:
@@ -31,12 +36,18 @@ func _ready() -> void:
 	S = JSON.parse_string(FileAccess.open(dir + "/scene.json", FileAccess.READ).get_as_text())
 	frames = JSON.parse_string(FileAccess.open(dir + "/frames.json", FileAccess.READ).get_as_text())["frames"]
 	rng.seed = 5
+	for fr in frames:
+		if fr[1].get("kfar") != null:
+			kfar = fr[1]["kfar"]
+			kfar_cam = float(fr[1]["camx"])
+			break
 	_environment()
 	_ground()
 	_buildings()
 	_trees()
 	_props()
 	_eyes()
+	_kraggor_far()
 	cam = Camera3D.new()
 	cam.projection = Camera3D.PROJECTION_FRUSTUM
 	cam.keep_aspect = Camera3D.KEEP_WIDTH
@@ -181,6 +192,13 @@ func _buildings() -> void:
 			var w = rng.randf_range(9, 18)
 			var h = rng.randf_range(14, 30) + row * 10.0
 			var d = rng.randf_range(8, 12)
+			if kfar != null and dist(z) + d < float(kfar["dist"]):   # in front of far Kraggor: low enough that
+				var kd = float(kfar["dist"])                         # his chest + head stand clear (user 05-10)
+				var dep = dist(z) + d / 2
+				var lx = kfar_cam + (float(kfar["x"]) - kfar_cam) * dep / kd
+				var half = (0.32 * float(kfar["height"]) + 3.0) * dep / kd
+				if absf(x + w / 2 - lx) < half + w / 2:
+					h = minf(h, float(S["CAM_H"]) + (0.42 * float(kfar["height"]) - float(S["CAM_H"])) * dep / kd)
 			var bpos = Vector3(x + w / 2, h / 2, -dist(z) - d / 2)
 			box(Vector3(w, h, d), bpos, toon(cols[rng.randi() % cols.size()].darkened(row * 0.12)))
 			var wy = 2.0
@@ -253,40 +271,120 @@ func _props() -> void:
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
 		elif str(p["type"]) == "footprints":
 			var tex = _foot_tex()
-			for x in p["xs"]:
-				var dc = Decal.new()                          # pressed into the asphalt; seen only where light falls
-				var sz = float(p.get("size", 1.5))
-				dc.size = Vector3(4.2 * sz, 1.0, 4.6 * sz)
+			var sz = float(p.get("size", 1.0))
+			var dr = float(p.get("dir", 1))
+			var xs = p["xs"]
+			for n in range(xs.size()):
+				var zc = float(p.get("z", 1.3)) + (float(p.get("stagger", 0.45)) * (1.0 if n % 2 == 1 else -1.0))
+				var dc = Decal.new()                          # flat on the asphalt, toes pointing the way he walked
+				dc.size = Vector3(5.6 * sz, 1.0, 3.2 * sz)
 				dc.texture_albedo = tex
 				dc.albedo_mix = 1.0
-				dc.position = wp(float(x), float(p.get("z", 1.0)), 0.2)
+				dc.position = wp(float(xs[n]) + dr * 0.06 * sz, zc, 0.2)
+				if dr < 0:
+					dc.rotation_degrees = Vector3(0, 180, 0)
 				add_child(dc)
-				var em = _steam(wp(float(x), float(p.get("z", 1.0)), 0.1))
-				steam.append(em)
+				steam.append(_steam(wp(float(xs[n]), zc, 0.1)))
 
 
 func _foot_tex() -> ImageTexture:
-	var n = 256
-	var img = Image.create(n, n, false, Image.FORMAT_RGBA8)
+	# story25d FOOT_PADS (along-road m, across m, radius along, radius across) on a 5.6 x 3.2 m decal;
+	# u runs along +X (toes at +X), v along +Z (towards the camera)
+	var pads = [[-1.25, 0.0, 1.2, 0.95], [1.55, -0.95, 0.62, 0.42], [1.95, 0.0, 0.62, 0.42], [1.55, 0.95, 0.62, 0.42]]
+	var nu = 448
+	var nv = 256
+	var img = Image.create(nu, nv, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
-	var parts = [[0.5, 0.68, 0.22], [0.26, 0.32, 0.1], [0.5, 0.22, 0.1], [0.74, 0.32, 0.1]]   # heel + 3 toes (u, v, r)
-	for y in range(n):
-		for x in range(n):
-			var u = float(x) / n
-			var v = float(y) / n
-			var inside = 0.0
+	for y in range(nv):
+		for x in range(nu):
+			var px = (float(x) / nu - 0.5) * 5.6 - 0.06
+			var pz = (float(y) / nv - 0.5) * 3.2
+			var inside = false
 			var rim = 0.0
-			for pr in parts:
-				var d = Vector2(u - pr[0], v - pr[1]).length() / pr[2]
+			for pr in pads:
+				var d = Vector2((px - pr[0]) / pr[2], (pz - pr[1]) / pr[3]).length()
+				var dg = Vector2((px - pr[0]) / (pr[2] + 0.28), (pz - pr[1]) / (pr[3] + 0.28)).length()
 				if d < 1.0:
-					inside = 1.0
-				elif d < 1.22:
-					rim = max(rim, 1.0 - (d - 1.0) / 0.22)
-			if inside > 0.0:
+					inside = true
+				elif dg < 1.0:
+					rim = maxf(rim, 0.6 + 0.4 * (1.0 - dg))
+			if inside:
 				img.set_pixel(x, y, Color(0.02, 0.02, 0.03, 0.95))
 			elif rim > 0.0:
 				img.set_pixel(x, y, Color(0.55, 0.57, 0.62, 0.8 * rim))     # crushed, lighter asphalt rim
 	return ImageTexture.create_from_image(img)
+
+
+func _kraggor_far() -> void:
+	# the sprite of story25d's own Kraggor drawing (sprites/kraggor_far.png), standing between the building rows
+	if kfar == null or S.get("kfar") == null:
+		return
+	var meta = S["kfar"]
+	var ext = meta["ext"]
+	var hu = float(ext[3])
+	var mpu = float(kfar["height"]) / hu                     # metres per drawing unit
+	var padu = float(meta["pad"]) / float(meta["spx"])
+	var kx = float(kfar["x"])
+	var kd = float(kfar["dist"])
+	var img = Image.load_from_file(dir + "/sprites/kraggor_far.png")
+	var qm = QuadMesh.new()
+	qm.size = Vector2((float(ext[2]) + 2 * padu) * mpu, (hu + 2 * padu) * mpu)
+	var m = StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.albedo_texture = ImageTexture.create_from_image(img)
+	m.albedo_color = Color(1, 1, 1, float(kfar.get("silhouette", 0.92)))
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var q = MeshInstance3D.new()
+	q.mesh = qm
+	q.material_override = m
+	q.position = Vector3(kx, hu / 2 * mpu, -kd)
+	add_child(q)
+	var bg = MeshInstance3D.new()                            # city haze lit behind him: the shape reads at night
+	var bq = QuadMesh.new()
+	bq.size = Vector2(qm.size.x * 2.6, qm.size.y * 1.6)
+	var bm = StandardMaterial3D.new()
+	bm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	bm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	var g = Gradient.new()
+	g.set_color(0, Color(0.42, 0.48, 0.66, 0.55))
+	g.set_color(1, Color(0.42, 0.48, 0.66, 0.0))
+	var gt = GradientTexture2D.new()
+	gt.gradient = g
+	gt.fill = GradientTexture2D.FILL_RADIAL
+	gt.fill_from = Vector2(0.5, 0.5)
+	gt.fill_to = Vector2(1.0, 0.5)
+	bm.albedo_texture = gt
+	bg.mesh = bq
+	bg.material_override = bm
+	bg.position = Vector3(kx, hu * 0.72 * mpu, -kd - 6.0)
+	add_child(bg)
+	var em = StandardMaterial3D.new()
+	em.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	em.albedo_color = Color(1.0, 0.85, 0.2)
+	em.emission_enabled = true
+	em.emission = Color(1.0, 0.8, 0.15)
+	em.emission_energy_multiplier = 8.0
+	krw = 32.0 * mpu
+	var cxu = float(ext[0]) + float(ext[2]) / 2
+	for e in meta["eyes"]:
+		var s = MeshInstance3D.new()
+		var sp = SphereMesh.new()
+		sp.radius = 1.0
+		sp.height = 2.0
+		s.mesh = sp
+		s.material_override = em
+		s.position = Vector3(kx + (float(e[0]) - cxu) * mpu, (float(ext[1]) + hu - float(e[1])) * mpu, -kd + 1.0)
+		s.visible = false
+		add_child(s)
+		keyes.append(s)
+	keye_light = OmniLight3D.new()
+	keye_light.light_color = Color(1.0, 0.75, 0.2)
+	keye_light.light_volumetric_fog_energy = 4.0
+	keye_light.omni_range = krw * 10.0
+	keye_light.position = (keyes[0].position + keyes[1].position) / 2 + Vector3(0, 0, 2.0)
+	keye_light.visible = false
+	add_child(keye_light)
 
 
 func _steam(pos: Vector3) -> CPUParticles3D:
@@ -433,6 +531,21 @@ func _process(_d: float) -> void:
 	for aid in heads:
 		if not seen.has(aid):
 			heads[aid].visible = false
+	# far Kraggor: his eyes open a beat after the cut, slow blink
+	if keyes.size() > 0:
+		var kf = f.get("kfar")
+		var op = 0.0
+		if kf != null:
+			op = 1.0
+			if kf.get("eyes_at") != null:
+				op = clampf((float(kf["u"]) - float(kf["eyes_at"])) / 0.5, 0.0, 1.0)
+			if fmod(t * 0.6, 3.0) < 0.12:
+				op = 0.0
+		for e in keyes:
+			e.visible = op > 0.0
+			e.scale = Vector3(krw * 0.45, krw * 0.45 * maxf(0.08, op), krw * 0.45)
+		keye_light.visible = op > 0.0
+		keye_light.light_energy = 3.0 * op
 	# Kraggor's eyes: given in screen space by the shot -> placed deep in the fog on that screen spot
 	var ey = f.get("eyes")
 	eyes_root.visible = ey != null

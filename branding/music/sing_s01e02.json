@@ -1,5 +1,5 @@
 [
-  {"name": "tilly_sing", "duration": 16, "takes": 4, "keep": 2, "seed": 811, "fade_in": 0.2, "fade_out": 0.6,
-   "tags": "cheerful cartoon girl singing a silly little song to herself to stay brave, bright playful female vocal, solo ukulele strumming, light shaker, simple catchy melody, a bit nervous but happy, children's animated movie, 112 bpm, major key, short",
-   "lyrics": "[verse]\nLa la la, the night is fine,\nStreet lamps glowing in a line,\nNothing scary, nothing there,\nJust my song up in the air!\n\n[outro]\nLa la la..."}
+  {"name": "tilly_sing2", "duration": 15, "takes": 5, "keep": 3, "seed": 1207, "fade_in": 0.1, "fade_out": 0.5,
+   "tags": "bouncy carefree cartoon theme, young woman singing softly to herself, sweet light playful female vocal, close mic, humming and doo doo doo scat, finger snaps, ukulele, glockenspiel, whistle, walking groove, 104 bpm, C major, cheerful and a little cheeky, animated movie",
+   "lyrics": "[intro]\nDoo-doo-doo, doo-doo!\n\n[verse]\nHere comes Tilly down the street,\nShiny wheels and a happy beat,\nWho's afraid of the dark? Not me!\n\n[outro]\nDoo-doo-doo, doo-doo-doo..."}
 ]
