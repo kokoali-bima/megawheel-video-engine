@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-05 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-05 10:21). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -40,7 +40,7 @@
 | 31 | S02 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 32 | S02 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 33 | S02 | potholes | Tilly, Sprinkles, Hydro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 34 | S02 | race25d | Titan, Rocky, Zippy, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 34 | S02 | race25d | Hydro, Grizzly, Nitro, Zippy | 2026-10-04 | 2026-10-05 |  | APPROVED |  |  |  |  |  |
 | 35 | S02 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 36 | S02 | lava_potholes | Nitro, Sprinkles, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 37 | S02 | race25d | Buster, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
@@ -49,10 +49,10 @@
 | 40 | S02 | race25d | Hydro, Grizzly, Tilly, Siren | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 41 | S02 | smash25d | Sprinkles, Rocky, Zippy, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 42 | S02 | lava_potholes | Siren, Titan, Nitro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 43 | S02 | race25d | Sprinkles, Rocky, Siren, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 43 | S02 | race25d | Buster, Grizzly, Nitro, Zippy | 2026-10-04 | 2026-10-05 |  | APPROVED |  |  |  |  |  |
 | 44 | S02 | smash25d | Titan, Rocky, Tilly, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 45 | S02 | bumps | Zippy, Buster, Rocky | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 46 | S02 | race25d | Titan, Grizzly, Tilly, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 46 | S02 | race25d | Buster, Grizzly, Nitro, Siren | 2026-10-04 | 2026-10-05 |  | APPROVED |  |  |  |  |  |
 | 47 | S02 | smash25d | Buster, Grizzly, Tilly, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 48 | S02 | potholes | Siren, Hydro, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 49 | S02 | race25d | Titan, Rocky, Tilly, Siren | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
@@ -65,9 +65,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_RACE25D_V4_S044 | race25d | Buster, Grizzly, Nitro, Zippy | 2026-10-04 | 34.56 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s044` |
-| SIM_RACE25D_V4_S045 | race25d | Hydro, Grizzly, Nitro, Zippy | 2026-10-04 | 37.11 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s045` |
-| SIM_RACE25D_V4_S046 | race25d | Buster, Grizzly, Nitro, Siren | 2026-10-04 | 35.67 s | `renders/megawheel_arena/pending/2026-10-04_race25d_v4_s046` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 

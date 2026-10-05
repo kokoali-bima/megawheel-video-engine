@@ -2675,10 +2675,10 @@
         "p2+dodge_puddle"
       ],
       "duration": 34.05,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E034_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E034_2026-10-03_race25d/SIM_RACE25D_V3_S012_audit.md",
-      "episode": 34,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E034_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E034_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S012_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2687,7 +2687,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E034_SIM_RACE25D_V3_S012.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Titan Survive the Oil Slick? 🏁 | Ep. 34 #Shorts"
+      "title": "Can Titan Survive the Oil Slick? 🏁 | Ep. 34 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S045",
+      "replaced_date": "2026-10-05"
     },
     {
       "video_id": "SIM_RACE25D_V3_S013",
@@ -2825,10 +2827,10 @@
         "p2+dodge_laser"
       ],
       "duration": 35.15,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E043_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E043_2026-10-03_race25d/SIM_RACE25D_V3_S016_audit.md",
-      "episode": 43,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E043_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E043_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S016_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2837,7 +2839,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E043_SIM_RACE25D_V3_S016.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Sprinkles Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts"
+      "title": "Can Sprinkles Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S044",
+      "replaced_date": "2026-10-05"
     },
     {
       "video_id": "SIM_RACE25D_V3_S017",
@@ -2862,10 +2866,10 @@
         "p4+container"
       ],
       "duration": 37.47,
-      "status": "APPROVED",
-      "folder": "renders/megawheel_arena/S02/E046_2026-10-03_race25d",
-      "audit": "renders/megawheel_arena/S02/E046_2026-10-03_race25d/SIM_RACE25D_V3_S017_audit.md",
-      "episode": 46,
+      "status": "REPLACED",
+      "folder": "renders/megawheel_arena/rejected/E046_2026-10-03_race25d_replaced",
+      "audit": "renders/megawheel_arena/rejected/E046_2026-10-03_race25d_replaced/SIM_RACE25D_V3_S017_audit.md",
+      "episode": null,
       "season": 2,
       "upload_date": null,
       "youtube_url": null,
@@ -2874,7 +2878,9 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E046_SIM_RACE25D_V3_S017.mp4",
       "render3d": false,
       "approved_date": "2026-10-03",
-      "title": "Can Titan Survive Falling Containers? 🏁 | Ep. 46 #Shorts"
+      "title": "Can Titan Survive Falling Containers? 🏁 | Ep. 46 #Shorts",
+      "replaced_by": "SIM_RACE25D_V4_S046",
+      "replaced_date": "2026-10-05"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S028",
@@ -4200,16 +4206,19 @@
       },
       "structure": "stagger|hammer,lava,oil",
       "title_base": "Can Nitro Survive the Giant Hammer? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s044",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s044/SIM_RACE25D_V4_S044_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E043_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E043_2026-10-04_race25d/SIM_RACE25D_V4_S044_audit.md",
+      "episode": 43,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Q3zUALbKPIjI8jql7tmQv1q9WNUS0jgy",
+      "drive_sheet_id": null,
       "drive_id": "1Cd-P9yLigTVce6eT-jJmR40d90hEyJIs",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S044.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E043_SIM_RACE25D_V4_S044.mp4",
+      "approved_date": "2026-10-05",
+      "title": "Can Nitro Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S016"
     },
     {
       "video_id": "SIM_RACE25D_V4_S045",
@@ -4242,16 +4251,19 @@
       },
       "structure": "late_pair|dragon_ice,hammer,oil",
       "title_base": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s045",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s045/SIM_RACE25D_V4_S045_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E034_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E034_2026-10-04_race25d/SIM_RACE25D_V4_S045_audit.md",
+      "episode": 34,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1-zeWGKiaPuNicq00-yod8cSqFXlj6PjE",
+      "drive_sheet_id": null,
       "drive_id": "1xixVj2KGyZ-m6TDorcvFOJN-6fBK8j4z",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S045.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E034_SIM_RACE25D_V4_S045.mp4",
+      "approved_date": "2026-10-05",
+      "title": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 34 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S012"
     },
     {
       "video_id": "SIM_RACE25D_V4_S046",
@@ -4284,16 +4296,19 @@
       },
       "structure": "early_pair|meteor,oil,wall",
       "title_base": "Can Nitro Survive the Meteors? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s046",
-      "audit": "renders/megawheel_arena/pending/2026-10-04_race25d_v4_s046/SIM_RACE25D_V4_S046_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S02/E046_2026-10-04_race25d",
+      "audit": "renders/megawheel_arena/S02/E046_2026-10-04_race25d/SIM_RACE25D_V4_S046_audit.md",
+      "episode": 46,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1RQx_j0SAqUXuiDK6OuokPFXjRCj20F_Q",
+      "drive_sheet_id": null,
       "drive_id": "1e1YmogJX1IFkMkJ6J2x74YZjMKgc2IaP",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S046.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E046_SIM_RACE25D_V4_S046.mp4",
+      "approved_date": "2026-10-05",
+      "title": "Can Nitro Survive the Meteors? 🏁 | Ep. 46 #Shorts",
+      "replaces": "SIM_RACE25D_V3_S017"
     }
   ]
 }
