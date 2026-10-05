@@ -85,9 +85,10 @@ def convert(songs: dict, ref: bytes, shifts: list, steps: int = 40, vox_gain: fl
             path = f"/tmp/mix_{name}_{sh}.wav"
             sf.write(path, mix, sr)
             segs = asr.transcribe(path, language="en", beam_size=3, word_timestamps=True)[0]
-            words = [[w.word.strip(), round(w.start, 2), round(w.end, 2)] for s in segs for w in (s.words or [])]
+            words = [[str(w.word).strip(), round(float(w.start), 2), round(float(w.end), 2)]   # plain types:
+                     for s in segs for w in (s.words or [])]                         # no numpy locally
             out[f"{name}_vc{sh}"] = dict(wav=_wav16(mix, sr), vox=_wav16(v[:n], sr), words=words)
-    return dict(out=out, secs=time.time() - t0)
+    return dict(out=out, secs=float(time.time() - t0))
 
 
 def _ledger():
