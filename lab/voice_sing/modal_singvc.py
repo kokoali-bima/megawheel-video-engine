@@ -32,6 +32,8 @@ image = (
                  "soundfile==0.12.1", "modelscope==1.18.1", "funasr==1.1.5", "numpy==1.26.4", "hydra-core==1.3.2",
                  "pyyaml", "python-dotenv", "accelerate", "demucs==4.0.1", "faster-whisper",
                  "torch==2.4.0", "torchaudio==2.4.0")
+    # modelscope/funasr pull an old protobuf; the Modal runtime itself needs >= 4.25 (container crash-loop otherwise)
+    .pip_install("protobuf>=4.25,<6")
 )
 
 
