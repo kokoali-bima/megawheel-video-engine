@@ -2323,6 +2323,16 @@
    "gpu_seconds": 52.8,
    "wall_seconds": 81.2,
    "cost_usd": 0.0135
+  },
+  {
+   "date": "2026-10-05",
+   "note": "story S01E02_who_is_kraggor#1 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 45.8,
+   "wall_seconds": 75.4,
+   "cost_usd": 0.0117
   }
  ]
 }
