@@ -2399,6 +2399,16 @@
    "cpu_container_seconds": 16.2,
    "wall_seconds": 23.7,
    "cost_usd": 0.0044
+  },
+  {
+   "date": "2026-10-05",
+   "note": "Tilly sings (S01E02)",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 60.3,
+   "wall_seconds": 188.9,
+   "cost_usd": 0.0154
   }
  ]
 }
