@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_BUMPS_V2_S010",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-07T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 10,
@@ -225,5 +225,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E018_2026-10-01_bumps/SIM_BUMPS_V2_S010_audit.md",
   "episode": 18,
   "season": 1,
-  "approved_date": "2026-10-01"
+  "approved_date": "2026-10-01",
+  "youtube_url": "https://www.youtube.com/shorts/dO6mPkPhO70",
+  "upload_date": "2026-10-05"
 }

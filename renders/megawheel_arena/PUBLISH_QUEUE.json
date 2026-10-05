@@ -188,37 +188,52 @@
   {
    "episode": 13,
    "video_id": "SIM_RACE25D_V2_S005",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-06T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Crazy Obstacle Race! Who Survives? \ud83c\udfc1\ud83d\udca5 | Ep. 13 #Shorts",
+   "upload_started": "2026-10-05T05:00:05.211924+00:00",
+   "url": "https://www.youtube.com/shorts/qePl8AzQ9Rw"
   },
   {
    "episode": 26,
    "video_id": "SIM_SMASH25D_V4_S011",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-06T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Crash Battle! Only One Can Win! \ud83d\udca5 | Ep. 26 #Shorts",
+   "upload_started": "2026-10-05T05:00:11.988645+00:00",
+   "url": "https://www.youtube.com/shorts/eQQzWYXAda8"
   },
   {
    "episode": 18,
    "video_id": "SIM_BUMPS_V2_S010",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-07T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Giant Speed Bumps! Who Survives? \ud83d\ude97\ud83d\udca5 | Ep. 18 #Shorts",
+   "upload_started": "2026-10-05T05:00:16.988867+00:00",
+   "url": "https://www.youtube.com/shorts/dO6mPkPhO70"
   },
   {
    "episode": 14,
    "video_id": "SIM_RACE25D_V2_S006",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-07T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Meteors, Lasers & Lava! Who Wins the Race? \ud83c\udfc1 | Ep. 14 #Shorts",
+   "upload_started": "2026-10-05T05:00:22.422717+00:00",
+   "url": "https://www.youtube.com/shorts/_CL0pzpWPTg"
   },
   {
    "episode": 27,
    "video_id": "SIM_SMASH25D_V4_S012",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-07T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "4 Cars Enter, 1 Survives! \ud83d\udca5 Smash Arena | Ep. 27 #Shorts",
+   "upload_started": "2026-10-05T05:00:27.286151+00:00",
+   "url": "https://www.youtube.com/shorts/pjx_weAS40w"
   },
   {
    "episode": 19,
