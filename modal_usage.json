@@ -2430,6 +2430,15 @@
    "gpu_seconds": 72.7,
    "wall_seconds": 100.5,
    "cost_usd": 0.0186
+  },
+  {
+   "date": "2026-10-05",
+   "note": "Ep2 Tilly song VC",
+   "gpu": "L4",
+   "engine": "demucs+seed-vc",
+   "gpu_seconds": 113.6,
+   "wall_seconds": 122.8,
+   "cost_usd": 0.029
   }
  ]
 }
