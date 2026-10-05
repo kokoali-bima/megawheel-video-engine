@@ -119,3 +119,31 @@ Resep hook Ep. 2 (dan pola tetap seri):
 | Bug tak terlihat lolos review (kontainer) | **Sensor**: jejak kaki & mata Kraggor wajib terlihat (piksel) di shot-nya; lampu padam sesuai jadwal; cek otomatis sebelum dikirim. |
 | Batch/paralel di VM → OOM, kode lama | Render di Modal T4 (per bagian), compose ringan di VM, satu proses, cek HEAD. |
 Yang dibuat lebih baik oleh 3D (alasan memakai Godot di adegan ini): sorotan lampu mobil **menyinari kabut sungguhan** (volumetrik), genangan cahaya lampu jalan nyata yang **padam satu per satu**, jejak kaki sebagai decal yang **terungkap saat tersorot**, mata Kraggor yang **memancarkan cahaya di kabut**, kedalaman kota (gedung berlapis, jendela menyala).
+
+## 9. Review pilot A v5 / C (2026-10-05) -> v6
+User: kota Godot lebih hidup; mobil seperti melayang di adegan footprint; musik seram hanya saat melihat footprint;
+nyanyian harus suara asli Tilly + nada/lirik lebih seru; siluet Kraggor jauh & tinggi di balik gedung.
+
+**Mobil melayang (akar masalah, diukur dari frame):** decal footprint Godot 6.7 x 7.4 m berdiri "tegak" ke arah
+kamera (tumit di z -0.3 s/d -1.9, melewati tepi jalan dekat) -> jejak tampil DI DEPAN mobil yang rodanya di garis
+z 1.0, dan mobil 2D tanpa bayangan kontak di atas jalan 3D -> terbaca mengambang. Fix: jejak rebah sejajar jalan
+(5.5 x 3 m, kiri/kanan selang-seling, arah jalan Kraggor), bentuk sama di cairo & Godot (FOOT_PADS); bayangan kontak
+lembut di bawah ban (story25d draw_contact, ikut overlay -> sama di 2.5D dan Godot).
+
+**Senandung ceria saat jalan sendirian (riset singkat):** trope "whistling in the dark" — tokoh bernyanyi/bersenandung
+untuk menenangkan diri. Yang membuatnya bekerja: (1) lagu DIEGETIK dari tokoh, bukan score; score diam total;
+(2) lirik bicara ke diri sendiri + sedikit sok berani ("Who's afraid of the dark? Not me!") = setup ironi;
+(3) melodi sederhana 2 frasa, ritme jalan santai ~100-110 bpm, mayor, alat kecil (ukulele, finger snap, glockenspiel,
+siul), scat "doo-doo"; (4) payoff: lagu diputus TEPAT oleh ancaman (lampu mati) -> sunyi -> baru score seram masuk
+saat bukti (footprint) terlihat. Score spotting v6: shot 0-3 tanpa musik (ambience kota + lagu Tilly + buzz lampu),
+cue_mystery_night mulai shot 4 (reveal), sting motif di shot 7.
+
+**Suara nyanyi = suara asli Tilly:** ACE-Step (Apache-2.0) membuat lagu -> Demucs (MIT) pisah vokal/iringan ->
+Seed-VC mode singing (f0-conditioned: melodi tetap, timbre = ref Chatterbox Tilly; GPL-3.0 dijalankan sebagai
+program terpisah, audio output milik kita) -> vokal hasil konversi dicampur lagi ke iringan. Chatterbox VC tidak
+dipakai: ia mensintesis ulang dari token ucapan, kontur nada nyanyi hilang. (lab/voice_sing/modal_singvc.py)
+
+**Siluet Kraggor:** kraggor_far di koordinat dunia (x 38, jarak 78 m, tinggi 34 m — skala cocok dengan jejak 5.5 m):
+cairo menggambar setelah langit (kota, pohon, tanah menutupi kakinya); Godot menaruh sprite gambar Kraggor yang sama
+di antara baris gedung 1 dan 2, gedung di depannya direndahkan hanya di garis pandang, haze kota di belakangnya,
+mata menyala membuka 0.4 s setelah cut.
