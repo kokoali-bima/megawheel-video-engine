@@ -383,6 +383,43 @@ def draw_actor(ctx, a, t, camx):
         CUR["aid"], CUR["mustache"] = None, False
 
 
+def draw_beam(ctx, a, t, camx, flicker=False):
+    """Night: real headlight beams - a cone of light along the road ahead of the car + a pool where it lands.
+    User 2026-10-05: not only lit lamps, the beam itself. Story use: the beam REVEALS things (footprints) and
+    flickers when Kraggor is near (shot "flicker": [actor ids]) - a danger sign the audience learns."""
+    veh = se.VEHICLES[a["key"]]
+    bw, bh = veh["body"]
+    k = k_of(a["z"]) * a["small"]
+    sx, gy = pxy(a["x"], a["z"], camx)
+    on = 1.0
+    if flicker:                                                    # stutter: mostly on, sudden drops
+        ph = (t * 7.3) % 1.0
+        on = 0.12 if ph < 0.22 or 0.5 < ph < 0.58 else 1.0
+    d = a["face"]
+    fx = sx + d * bw * 0.48 * k                                    # front of the body
+    hy = gy - (veh["wheel_r"] + bh * 0.35 + a["h"]) * k            # headlight height
+    reach = 13.0 * k
+    tip = fx + d * reach
+    g = cairo.LinearGradient(fx, 0, tip, 0)
+    g.add_color_stop_rgba(0, 1, 0.95, 0.75, 0.42 * on)
+    g.add_color_stop_rgba(0.6, 1, 0.95, 0.75, 0.16 * on)
+    g.add_color_stop_rgba(1, 1, 0.95, 0.75, 0.0)
+    se.poly(ctx, [(fx, hy - 0.12 * k), (fx, hy + 0.12 * k), (tip, gy + 0.55 * k), (tip, gy - 1.6 * k)])   # air cone
+    ctx.set_source(g)
+    ctx.fill()
+    pool = cairo.RadialGradient(fx + d * reach * 0.55, gy + 0.1 * k, 0.3 * k, fx + d * reach * 0.55, gy + 0.1 * k, reach * 0.55)
+    pool.add_color_stop_rgba(0, 1, 0.95, 0.8, 0.32 * on)
+    pool.add_color_stop_rgba(1, 1, 0.95, 0.8, 0.0)
+    ctx.save()
+    ctx.translate(0, gy + 0.1 * k)
+    ctx.scale(1.0, 0.22)                                           # the pool lies flat on the road
+    ctx.translate(0, -(gy + 0.1 * k))
+    ctx.arc(fx + d * reach * 0.55, gy + 0.1 * k, reach * 0.55, 0, 2 * math.pi)
+    ctx.restore()
+    ctx.set_source(pool)
+    ctx.fill()
+
+
 def actor_state(a, t):
     yaw = 0.0 if a["face"] > 0 else math.pi
     hh, slope = hill_h(a["x"])
@@ -1872,6 +1909,10 @@ def render_scene(ep, num, aspect):
                 draw_footprints(ctx, prop, camx, t)
         if "finish" in scene:
             draw_finish(ctx, scene["finish"], camx)
+        if scene.get("time") == "night" and scene.get("headlights", True):   # beams first: cars drawn over them
+            for a in actors.values():
+                if not a["hidden"]:
+                    draw_beam(ctx, a, t, camx, flicker=a["id"] in sh.get("flicker", []))
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
             draw_actor(ctx, a, t, camx)

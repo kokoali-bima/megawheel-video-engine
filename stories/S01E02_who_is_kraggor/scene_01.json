@@ -45,8 +45,9 @@
      "lines": [["tilly", "Those... are footprints.", "whisper"]]},
     {"cam": "wide", "zoom": 0.6, "hold": 1.2, "cut": "hard", "emote": {"tilly": "scared"}},
     {"cam": "wide", "zoom": 0.6, "hold": 3.4, "cut": "hard", "emote": {"tilly": "scared"},
-     "eyes": {"sx": 0.66, "sy": 0.34, "r": 30, "silhouette": 0.5}, "move": {"push": 0.12, "handheld": 2}},
+     "eyes": {"sx": 0.66, "sy": 0.34, "r": 30, "silhouette": 0.5}, "move": {"push": 0.12, "handheld": 2},
+     "flicker": ["tilly"]},
     {"cam": "close", "on": "tilly", "hold": 2.6, "punch": true, "cut": "hard", "emote": {"tilly": "scared"},
-     "lines": [["tilly", "It's... BACK!", "scared"]], "fx": ["shake"]}
+     "lines": [["tilly", "It's... BACK!", "scared"]], "fx": ["shake"], "flicker": ["tilly"]}
   ]
 }
