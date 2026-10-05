@@ -97,7 +97,7 @@ func _environment() -> void:
 	env.glow_intensity = 0.6
 	env.glow_bloom = 0.08
 	env.volumetric_fog_enabled = true                        # light beams become visible in the fog
-	env.volumetric_fog_density = 0.012 + 0.03 * fog
+	env.volumetric_fog_density = 0.025 + 0.055 * fog
 	env.volumetric_fog_albedo = Color(0.7, 0.74, 0.85)
 	env.volumetric_fog_emission = Color(0.03, 0.04, 0.08)
 	env.volumetric_fog_emission_energy = 0.6
@@ -171,25 +171,26 @@ func _buildings() -> void:
 	win_on.albedo_color = Color(1.0, 0.85, 0.45)
 	win_on.emission_enabled = true
 	win_on.emission = Color(1.0, 0.8, 0.4)
-	win_on.emission_energy_multiplier = 2.2
+	win_on.emission_energy_multiplier = 1.2
 	var win_off = toon(Color(0.12, 0.13, 0.2))
-	for row in range(3):                                     # three layers of buildings = depth when the camera moves
-		var z = 7.0 + row * 9.0
-		var x = -220.0 + rng.randf_range(0, 6)
-		while x < 300.0:
-			var w = rng.randf_range(6, 12)
-			var h = rng.randf_range(7, 16) + row * 5.0
-			var d = rng.randf_range(5, 8)
+	for row in range(3):                                     # three layers far back: a skyline, not walls (test 1)
+		var z = [45.0, 75.0, 115.0][row]
+		var x = -320.0 + rng.randf_range(0, 6)
+		while x < 420.0:
+			var w = rng.randf_range(9, 18)
+			var h = rng.randf_range(14, 30) + row * 10.0
+			var d = rng.randf_range(8, 12)
 			var bpos = Vector3(x + w / 2, h / 2, -dist(z) - d / 2)
 			box(Vector3(w, h, d), bpos, toon(cols[rng.randi() % cols.size()].darkened(row * 0.12)))
 			var wy = 2.0
 			while wy < h - 1.0:                              # windows on the facade facing the street
 				var wx = x + 1.0
 				while wx < x + w - 1.0:
-					var lit = rng.randf() < 0.32
-					box(Vector3(0.8, 1.0, 0.05), Vector3(wx + 0.4, wy, -dist(z) + 0.03), win_on if lit else win_off)
-					wx += 1.8
-				wy += 2.4
+					var lit = rng.randf() < 0.18
+					if lit:
+						box(Vector3(1.0, 1.4, 0.05), Vector3(wx + 0.5, wy, -dist(z) + 0.03), win_on)
+					wx += 3.0
+				wy += 3.6
 			x += w + rng.randf_range(1.0, 4.0)
 
 
@@ -198,7 +199,7 @@ func _trees() -> void:
 	var leaf = toon(Color(0.12, 0.3, 0.18))
 	var x = -200.0
 	while x < 260.0:
-		var z = rng.randf_range(4.6, 6.0)
+		var z = rng.randf_range(7.0, 10.0)                  # behind the lamps, not under them
 		var s = rng.randf_range(0.9, 1.4)
 		var tr = MeshInstance3D.new()
 		var cy = CylinderMesh.new()
@@ -241,11 +242,11 @@ func _props() -> void:
 				sl.position = wp(x + 0.9, z, 4.95)
 				sl.rotation_degrees = Vector3(-90, 0, 0)
 				sl.light_color = Color(1.0, 0.82, 0.52)
-				sl.light_energy = 6.0
-				sl.spot_range = 9.0
-				sl.spot_angle = 38.0
-				sl.spot_attenuation = 0.8
-				sl.light_volumetric_fog_energy = 2.0
+				sl.light_energy = 12.0
+				sl.spot_range = 10.0
+				sl.spot_angle = 45.0
+				sl.spot_attenuation = 0.7
+				sl.light_volumetric_fog_energy = 5.0
 				sl.shadow_enabled = true
 				add_child(sl)
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
@@ -397,7 +398,7 @@ func _process(_d: float) -> void:
 		var off_t = float(L[2])
 		if off_t >= 0.0 and t > off_t - 0.5:
 			on = 0.0 if t >= off_t else (1.0 if int((t - off_t) * 23) % 3 != 0 else 0.15)
-		L[0].light_energy = 6.0 * on
+		L[0].light_energy = 12.0 * on
 		L[1].emission_energy_multiplier = 3.0 * on + 0.05
 	# headlights: one spot per car, at the front, aimed down the road; flicker = Kraggor is near
 	var seen = {}
@@ -410,7 +411,7 @@ func _process(_d: float) -> void:
 			sl.spot_range = 22.0
 			sl.spot_angle = 24.0
 			sl.spot_attenuation = 0.6
-			sl.light_volumetric_fog_energy = 3.0
+			sl.light_volumetric_fog_energy = 7.0
 			sl.shadow_enabled = true
 			add_child(sl)
 			heads[aid] = sl
@@ -435,7 +436,7 @@ func _process(_d: float) -> void:
 	var ey = f.get("eyes")
 	eyes_root.visible = ey != null
 	if ey != null:
-		var depth = 42.0
+		var depth = 36.0                                     # in front of the skyline, deep in the fog
 		var ex = float(ey.get("sx", 0.8)) * Wd
 		var eyy = float(ey.get("sy", 0.3)) * Hd
 		var r = float(ey.get("r", 14)) * Hd / 1080.0
