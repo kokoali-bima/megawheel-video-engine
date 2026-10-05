@@ -49,6 +49,8 @@ def main():
         ctx.identity_matrix()
         ctx.paint()
         ctx.restore()
+        if after_sky:                                              # v6 bug: never called -> far Kraggor not recorded
+            after_sky()
     ST.draw_set = no_world
 
     def beam(ctx, act, t, camx, flicker=False):                    # headlights -> real 3D spot lights in Godot

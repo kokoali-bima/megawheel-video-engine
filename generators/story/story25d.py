@@ -938,8 +938,8 @@ def kraggor_far_geom(spec, camx, ground_hide=True):
     s = spec.get("height", 34.0) * kd / h
     gx = CX + (spec.get("x", 30.0) - camx) * kd
     feet = Y_H + CAM_H * kd
-    if ground_hide:
-        feet = max(feet, ground_y(6.5))
+    if ground_hide:                                                # + sink: the 2.5D skyline is low and sparse, so his
+        feet = max(feet, ground_y(6.5)) + spec.get("sink", 0.3) * spec.get("height", 34.0) * kd   # legs go below it
     return gx - s * (x0 + w / 2), feet - s * (y0 + h), s
 
 
