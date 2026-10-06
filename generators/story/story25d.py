@@ -616,21 +616,22 @@ def draw_frame_photo(ctx, p, camx, t):
         ctx.close_path()
         ctx.set_source_rgb(0.2, 0.14, 0.08)                        # the dark frame backing shows where it is torn
         ctx.fill()
-        ctx.move_to(ex, y0 + hh * 0.66)                            # a slim curling tail with little spikes
-        ctx.curve_to(ex - 0.5 * k, y0 + hh * 0.6, ex - 0.85 * k, y0 + hh * 0.78, ex - 0.62 * k, y0 + hh * 0.9)
-        ctx.curve_to(ex - 0.5 * k, y0 + hh * 0.96, ex - 0.36 * k, y0 + hh * 0.9, ex - 0.42 * k, y0 + hh * 0.84)
-        ctx.curve_to(ex - 0.56 * k, y0 + hh * 0.8, ex - 0.4 * k, y0 + hh * 0.7, ex, y0 + hh * 0.74)
+        kt = k * 0.42 * p.get("scale", 1.0)                         # tail sized to the print (was a big blob)
+        ctx.move_to(ex, y0 + hh * 0.8)                            # a slim curling tail with little spikes
+        ctx.curve_to(ex - 0.5 * kt, y0 + hh * 0.76, ex - 0.85 * kt, y0 + hh * 0.86, ex - 0.62 * kt, y0 + hh * 0.94)
+        ctx.curve_to(ex - 0.5 * kt, y0 + hh * 0.98, ex - 0.36 * kt, y0 + hh * 0.9, ex - 0.42 * kt, y0 + hh * 0.9)
+        ctx.curve_to(ex - 0.56 * kt, y0 + hh * 0.8, ex - 0.4 * kt, y0 + hh * 0.82, ex, y0 + hh * 0.86)
         ctx.close_path()
         ctx.set_source_rgb(*KR_BODY)
         ctx.fill_preserve()
         ctx.set_source_rgb(*KR_DARK)
-        ctx.set_line_width(max(1.0, 0.035 * k))
+        ctx.set_line_width(max(1.0, 0.035 * kt))
         ctx.stroke()
-        for q, (fx, fy) in enumerate(((0.32, 0.625), (0.6, 0.68), (0.78, 0.8))):   # spikes along the back of the tail
-            px, py = ex - fx * k, y0 + hh * fy
-            ctx.move_to(px - 0.07 * k, py)
-            ctx.line_to(px, py - 0.13 * k)
-            ctx.line_to(px + 0.07 * k, py)
+        for q, (fx, fy) in enumerate(((0.32, 0.79), (0.6, 0.81), (0.78, 0.87))):   # spikes along the back of the tail
+            px, py = ex - fx * kt, y0 + hh * fy
+            ctx.move_to(px - 0.07 * kt, py)
+            ctx.line_to(px, py - 0.13 * kt)
+            ctx.line_to(px + 0.07 * kt, py)
             ctx.close_path()
             ctx.set_source_rgb(*KR_DARK)
             ctx.fill()

@@ -208,7 +208,8 @@ def run(episode, scene_no, aspect, out):
         c.fill()
         img.write_to_png(os.path.join(out, "sprites", "kraggor_far.png"))
         kmeta = dict(ext=[x0, y0, w, h], pad=pad, spx=spx, eyes=ST.KR_EYE_UNIT)
-    shots = [dict(i=i, t0=round(s["t0"], 3), t1=round(s["t1"], 3), cam=s.get("cam", "wide"), on=s.get("on"),
+    shots = [dict(i=i, t0=round(s["t0"], 3), t1=round(s["t1"], 3),
+                  cam="insert" if "look" in s else s.get("cam", "wide"), on=s.get("on"),
                   move=s.get("move") or {}, cut=s.get("cut", "soft"), lines=len(s.get("lines", [])),
                   sfx=[x if isinstance(x, str) else x[0] for x in s.get("sfx", [])], fx=s.get("fx", []),
                   caption=bool(s.get("caption")))

@@ -307,7 +307,7 @@ def audit_scene(d, mp4):
                         fail.append(f"staging shot {sh['i']}: {a[0]} & {b[0]} menempel (jarak {gap:.1f} m) [C02/C08]")
 
     # --- variety / monotony of picture
-    cams = [s["cam"] for s in shots]
+    cams = [s["cam"] for s in shots if s["cam"] != "insert"]       # inserts (look at a prop) are not shot sizes
     moves = set(k for s in shots for k in s["move"])
     metrics.update(shot_sizes=sorted(set(cams)), moves=sorted(moves))
     run = 1
