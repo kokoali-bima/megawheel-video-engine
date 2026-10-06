@@ -13,6 +13,8 @@ Writes <out>/<ep>_episode[_<order>].mp4, _chapters.txt, _joins.json; exit 5 if a
 import json
 import os
 
+CONTRACT = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "STYLE_CONTRACT.json"),
+                          encoding="utf-8"))["joins"]
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 FPS = 30
 JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2)   # (mirrored in modal_story3d)
@@ -24,9 +26,12 @@ def plan_joins(ep, order, overrides):
         sa = json.load(open(os.path.join(ROOT, "stories", ep, f"scene_{a:02d}.json"), encoding="utf-8"))
         sb = json.load(open(os.path.join(ROOT, "stories", ep, f"scene_{b:02d}.json"), encoding="utf-8"))
         change = (sa.get("time") != sb.get("time")) or (sa.get("location") != sb.get("location"))
-        kind, dur = ("fadeblack", 1.0) if change else ("dissolve", 0.6)
+        tj, sp = CONTRACT["time_jump"], CONTRACT["same_place"]     # J01: never rushed across a time jump
+        j = (dict(kind=tj["kind"], dur=tj["out"], hold=tj["hold"], din=tj["in"]) if change else
+             dict(kind=sp["kind"], dur=sp["dur"], hold=0.0, din=0.0))
         ov = overrides.get(f"{a}-{b}")
         if ov:
-            kind, dur = ov[0], float(ov[1])
-        joins.append(dict(a=a, b=b, kind=kind, dur=dur, why="waktu/lokasi berubah" if change else "tempat sama"))
+            j.update(kind=ov[0], dur=float(ov[1]), hold=float(ov[2]) if len(ov) > 2 else 0.0,
+                     din=float(ov[3]) if len(ov) > 3 else 0.0)
+        joins.append(dict(a=a, b=b, why="waktu/lokasi berubah" if change else "tempat sama", **j))
     return joins

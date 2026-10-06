@@ -30,6 +30,12 @@
 | Standards | `BLUEPRINT.md`, `CONFIG_BEST.md`, `PRODUCTION_STANDARD.md`, `SCALE_STANDARD.md` |
 | Defects & sensors | `QA_DEFECT_TRACKER.md`, `ERROR_LOG.md` |
 
+## 2b. The style contract (fix once, never again)
+`generators/story3d/STYLE_CONTRACT.json` holds EVERY lesson from owner reviews as a numbered rule (C01 talking heads,
+C02 bumper-to-bumper, C04 J-cuts, J01 rushed transitions, A01 empty silence, …) with the numbers the linter, the QA
+sensors and the assembler use. A new owner note = a new rule there + a tracker row, never a one-off hand fix.
+`golden` scenes are re-linted on every produce run (regression).
+
 ## 3. Making a story scene (story3d) — the only allowed procedure
 ```
 # on the VM

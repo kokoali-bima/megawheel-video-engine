@@ -176,8 +176,10 @@ def run(episode, scene_no, aspect, out):
                 return subprocess.CompletedProcess(cmd, 0)
             return real_run(cmd, **kw)
     ST.subprocess = SP
-    ST.CUT_RULE, ST.ISO_CAMERA = "auto", True                      # real 3D camera: clean cuts, no fake stretch
-    se.TEXT_UNMIRROR = True                                        # "SCHOOL BUS" not mirrored on a left-facing bus
+    eng = json.load(open(os.path.join(HERE, "STYLE_CONTRACT.json"), encoding="utf-8"))["engine"]   # one source
+    ST.CUT_RULE, ST.ISO_CAMERA = eng["cut_rule"], eng["iso_camera"]  # real 3D camera: clean cuts, no fake stretch
+    ST.JCUT = eng["jcut_s"]                                        # C04: voice leads the picture across cuts
+    se.TEXT_UNMIRROR = eng["text_unmirror"]                        # "SCHOOL BUS" not mirrored on a left-facing bus
     ST.STEMS = {}
     ST.render_scene(episode, scene_no, aspect)
     import numpy as np                                             # stems for the audio sensors (16 kHz, float16)

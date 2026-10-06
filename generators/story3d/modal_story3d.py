@@ -208,7 +208,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
 def assemble_remote(ep: str, order: list, joins: list) -> dict:
     import numpy as np
     FPS = 30
-    JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2)
+    JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2, hole_hold_s=2.0)
     t0 = time.time()
     vol.reload()
     fd = f"/vol/final/{ep}"
@@ -222,10 +222,30 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
                            capture_output=True, text=True)
         return float(r.stdout.strip())
 
-    durs = [dur(p) for p in parts]
-    xd = [j["dur"] for j in joins]
     tmp = "/tmp/asm"
     os.makedirs(tmp, exist_ok=True)
+    seq, sj = [parts[0]], []                                       # a join with a hold becomes: A -fade out-> BLACK
+    for i, j in enumerate(joins):                                  # (silent) -fade in-> B   (dracin style, J01)
+        if j.get("hold", 0) > 0:
+            blk = f"{tmp}/black{i}.mp4"
+            L = j["dur"] + j["hold"] + j["din"]
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"color=black:s=1920x1080:r={FPS}",
+                            "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", f"{L:.3f}", "-c:v", "libx264",
+                            "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", blk], check=True)
+            seq += [blk, parts[i + 1]]
+            sj += [dict(j, kind="fadeblack", dur=j["dur"]), dict(j, kind="fade", dur=j["din"])]
+        else:
+            seq.append(parts[i + 1])
+            sj.append(j)
+    parts, joins_in = seq, joins
+    joins = sj
+    durs = [dur(p) for p in parts]
+    xd = [j["dur"] for j in joins]
+    starts, tpos = [], 0.0                                         # where each real scene starts (chapters)
+    for k, p_ in enumerate(parts):
+        if p_.startswith(fd):
+            starts.append(round(tpos + (xd[k - 1] / 2 if k else 0.0), 2))
+        tpos += durs[k] - (xd[k] if k < len(xd) else 0.0)
     enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
            "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"]
     pieces = []
@@ -261,10 +281,13 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
     rep, tcur = [], 0.0
     for i, j in enumerate(joins):
         tcur += durs[i] - xd[i]                                    # join starts here in the episode timeline
+        if j["kind"] == "fade" and j.get("hold", 0) > 0:           # the fade-in half of a held join: measured
+            continue                                               # together with its fade-out half
+        span = xd[i] + (j.get("hold", 0) + j.get("din", 0) if j.get("hold", 0) > 0 else 0.0)
         a0, a1 = tcur - 1.0, tcur
-        b0, b1 = tcur + xd[i], tcur + xd[i] + 1.0
+        b0, b1 = tcur + span, tcur + span + 1.0                     # after the black hold: B fully in
         la, lb = db(x[int(a0 * sr):int(a1 * sr)]), db(x[int(b0 * sr):int(b1 * sr)])
-        win = x[int((tcur - 0.6) * sr):int((tcur + xd[i] + 0.6) * sr)]
+        win = x[int((tcur - 0.6) * sr):int((tcur + span + 0.6) * sr)]
         hole, run_, longest = 0, 0.0, 0.0
         for q in range(0, len(win) - 800, 800):                    # 50 ms windows
             if db(win[q:q + 800]) < -55:
@@ -282,14 +305,15 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             fails.append(f"lompatan volume {step:.1f} dB di tempat yang sama")
         elif step > JOIN["step_fade_db"]:
             warns.append(f"beda level {step:.1f} dB antar scene (cek: kontras disengaja?)")
-        if longest >= JOIN["hole_s"]:
+        if longest >= (JOIN["hole_hold_s"] if j.get("hold", 0) > 0 else JOIN["hole_s"]):
             fails.append(f"sunyi bolong {longest:.1f}s")
         rep.append(dict(join=f"{j['a']}->{j['b']}", kind=j["kind"], dur=j["dur"], at=round(tcur, 2),
                         level_before=round(float(la), 1), level_after=round(float(lb), 1), silence=round(float(longest), 2), fail=fails,
                         warn=warns, drop=round(float(drop), 1)))
     vol.commit()
     data = open(out, "rb").read()
-    return dict(ok=True, mp4=data, joins=rep, durs=durs, secs=time.time() - t0)
+    return dict(ok=True, mp4=data, joins=rep, durs=durs, scene_starts=starts,
+                secs=time.time() - t0)
 
 
 @app.local_entrypoint()
@@ -302,7 +326,8 @@ def assemble(episode: str, order: str = "", out: str = "work/story3d"):
     nums = [int(v) for v in order.split(",") if v] if order else ed.get("order", [])
     joins = plan_joins(episode, nums, ed.get("joins", {}))
     for j in joins:
-        print(f"[assemble] {j['a']:02d}->{j['b']:02d}: {j['kind']} {j['dur']}s ({j['why']})")
+        print(f"[assemble] {j['a']:02d}->{j['b']:02d}: {j['kind']} {j['dur']}s"
+              + (f" + hitam {j['hold']}s + fade in {j['din']}s" if j.get("hold") else "") + f" ({j['why']})")
     r = assemble_remote.remote(episode, nums, joins)
     if not r["ok"]:
         raise SystemExit(f"[assemble] STOP: {r['error']}")
@@ -310,13 +335,12 @@ def assemble(episode: str, order: str = "", out: str = "work/story3d"):
     tag = "" if not order else "_" + "-".join(f"{n:02d}" for n in nums)
     path = os.path.join(out, f"{episode}_episode{tag}.mp4")
     open(path, "wb").write(r["mp4"])
-    chap, t = [], 0.0                                              # YouTube chapters at the middle of each join
+    chap = []                                                      # YouTube chapters (start of each scene)
     for i, n in enumerate(nums):
         sc = json.load(open(os.path.join(ROOT, "stories", episode, f"scene_{n:02d}.json"), encoding="utf-8"))
-        start = 0.0 if i == 0 else t + joins[i - 1]["dur"] / 2
+        start = 0.0 if i == 0 else r["scene_starts"][i]
         if sc.get("chapter"):
             chap.append(f"{int(start // 60)}:{int(start % 60):02d} {sc['chapter']}")
-        t += r["durs"][i] - (joins[i]["dur"] if i < len(joins) else 0.0)
     open(path.replace(".mp4", "_chapters.txt"), "w").write("\n".join(chap) + "\n")
     json.dump(r["joins"], open(path.replace(".mp4", "_joins.json"), "w"), indent=1)
     bad = [j for j in r["joins"] if j["fail"]]

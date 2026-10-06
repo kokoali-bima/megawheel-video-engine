@@ -1386,9 +1386,12 @@ def build(scene):
         missing = [it for it in items if not announcer.cached(*it)]
         print(f"[story] PERINGATAN: {len(missing)} kalimat gagal QA/tidak tersedia: {[m[0][:30] for m in missing]}")
     t, placed = 0.0, []
-    for sh in scene["shots"]:
+    last_end = 0.0
+    for si_, sh in enumerate(scene["shots"]):
         sh["t0"] = t
         u = sh.get("lead", 0.35)
+        jc = float(sh.get("jcut", scene.get("jcut", JCUT))) if si_ > 0 else 0.0
+        first = True
         for ln in sh.get("lines", []):
             spk, text, emo = ln[:3]
             if len(ln) > 3:                                        # sung (e.g. Tilly singing to chase her fear away),
@@ -1400,14 +1403,21 @@ def build(scene):
                 pre = float(ln[5]) if len(ln) > 5 else 0.0          # lead-in heard over the previous shot
                 placed.append(dict(t0=t + u - pre, audio=a, spk=spk, text=text, emo=emo,      # (humming from off-screen)
                                    pages=ln[6] if len(ln) > 6 else None))          # subtitle page times in the song
+                last_end = t + u - pre + len(a) / se.SR
                 u += len(a) / se.SR - pre + sh.get("gap", scene.get("gap", 0.3))
+                first = False
                 continue
             it = (text, line_style(emo), speaker_voice(spk), "studio")
             if not announcer.cached(*it):
                 continue
             a = announcer.get(*it)
-            placed.append(dict(t0=t + u, audio=a, spk=spk, text=text, emo=emo))
-            u += len(a) / se.SR + sh.get("gap", scene.get("gap", 0.3))
+            pull = 0.0
+            if first and jc > 0:                                   # J-cut: voice leads the picture, never over a line
+                pull = max(0.0, min(jc + u, t + u - last_end - 0.15))
+            placed.append(dict(t0=t + u - pull, audio=a, spk=spk, text=text, emo=emo))
+            last_end = t + u - pull + len(a) / se.SR
+            u += len(a) / se.SR - pull + sh.get("gap", scene.get("gap", 0.3))
+            first = False
         sh["t1"] = t + max(u + sh.get("tail", scene.get("tail", 0.4)), sh.get("hold", 0.0), 1.6 if sh.get("triple") else 0.0)
         sh["t1"] += sh.get("freeze", 0.0)
         t = sh["t1"]
@@ -1417,6 +1427,8 @@ def build(scene):
 STEMS = None              # story3d QA: dict to receive the audio stems of the next render
 CUT_RULE = "soft"         # "soft" (2.5D, aired): glide to every new shot. "auto" (story3d, 2026-10-06 QA): a big
                           # change of framing = clean cut, a small reframe = slow glide (no 20 m swoops in 1 s)
+JCUT = 0.0                # story3d (contract C04): the next shot's first line starts this many seconds BEFORE the
+                          # picture cut (J-cut) - straight cuts on every exchange feel like tennis
 ISO_CAMERA = False        # story3d: no anisotropic "low" stretch (a real 3D camera cannot match it: 283 px QA error)
 PREPARE_ONLY = False      # story3d: stop after voices + visemes are cached (frames are rendered on Modal)
 PREPARED = {}             # what the last prepare produced (lines, viseme counts, duration)
@@ -1726,6 +1738,7 @@ SFX = {
     "splat": lambda: se.synth_splash(0.8, seed=12),
     "lamp_off": lambda: lamp_off(),
     "honk": lambda: honk(2),
+    "thud_far": lambda: phone_step(0.3, seed=52) * 0.7,
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
@@ -1801,6 +1814,23 @@ def honk(n=2):
         i = int(k * 0.32 * sr)
         out[i:i + L] += fft_band(tone * env, 300, 2200) * 0.5
     return out
+
+
+def drone(dur=4.0, rise=True):
+    """Tension bed (contract A01, research: horror quiet = low drone + off-screen steps, never empty). A low cluster
+    with harmonics up to ~900 Hz (phone-audible), slowly swelling, a faint beating between detuned tones."""
+    sr = se.SR
+    n = int(max(1.0, dur) * sr)
+    tt = np.arange(n) / sr
+    base = 55.0
+    tone = sum(np.sin(2 * math.pi * f * tt + p) / (1 + k * 0.6)
+               for k, (f, p) in enumerate(((base, 0), (base * 1.005, 1.3), (base * 2, 0.4), (base * 3.01, 2.1),
+                                            (base * 4, 0.9), (base * 6.02, 1.7), (base * 8, 0.2))))
+    air = fft_band(np.random.default_rng(23).normal(0, 1, n), 180, 900)
+    sig = tone / 3.0 + air / max(1e-9, np.abs(air).max()) * 0.15
+    env = (tt / tt[-1]) ** 1.4 * 0.75 + 0.25 if rise else np.ones(n) * 0.6
+    env *= np.clip(tt / 0.6, 0, 1) * np.clip((tt[-1] - tt) / 0.4, 0, 1)
+    return np.tanh(sig * env * 1.4) * 0.55
 
 
 def lamp_off():
@@ -1913,7 +1943,10 @@ def build_audio(shots, placed, total, scene):
             name, dt_ = (s, 0.0) if isinstance(s, str) else (s[0], s[1])
             if isinstance(dt_, str) and dt_.startswith("end"):    # after the line, not over it (QA masking)
                 dt_ = (max(ends) - sh["t0"] if ends else 0.0) + float(dt_[3:] or 0.0)
-            if name in SFX:
+            if name == "drone":                                    # lasts to the end of its shot
+                place(sfx, drone(sh["t1"] - sh["t0"] - dt_ + 0.6), sh["t0"] + dt_, 0.8)
+                SFX_AT.append((name, round(sh["t0"] + dt_, 3)))
+            elif name in SFX:
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
                 SFX_AT.append((name, round(sh["t0"] + dt_, 3)))
     for sh in shots:

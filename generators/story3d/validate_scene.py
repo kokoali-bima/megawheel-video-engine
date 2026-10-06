@@ -13,15 +13,18 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+CONTRACT = json.load(open(os.path.join(HERE, "STYLE_CONTRACT.json"), encoding="utf-8"))
+LN = CONTRACT["lint"]                                          # every number below comes from the style contract
 
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note"}
+              "tint", "note", "jcut"}
 SHOT_KEYS = {"cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
-             "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean"}
+             "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
+             "jcut"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
 MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
 ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
@@ -30,7 +33,8 @@ CAMS = {"wide", "two", "group", "medium", "close", "ecu", "low", "track"}
 SINGLE = {"close", "ecu", "medium", "low"}                     # one-character framings
 # film coverage rules (owner 2026-10-06: "tiap ngobrol di-zoom ke yang bicara ... seperti film per pemeran"):
 # establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
-COVER = dict(pingpong=3, single_share=0.5, group_lines=2)
+COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
+SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
 LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage"}
 TIMES = {"morning", "day", "noon", "evening", "dusk", "dawn", "night"}
 AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
@@ -39,17 +43,17 @@ EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "sur
 LINE_EMOS = EMOTES | {"calm"}
 PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
-MAX_LINE = 140
+MAX_LINE = LN["max_line"]
 
 
 def sfx_names():
     sys.path.insert(0, os.path.join(ROOT, "generators", "story"))
     try:
         import story25d as ST
-        return set(ST.SFX)
+        return set(ST.SFX) | {"drone"}
     except Exception:                                              # noqa: BLE001 (lint still runs without cairo)
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
-                "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near"}
+                "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far"}
 
 
 def vehicles():
@@ -178,14 +182,14 @@ def lint(ep, n):
                 (ka, (xa, za, _)), (kb, (xb, zb, _)) = vis[q], vis[r]
                 if abs(za - zb) < 0.9 and (sh.get("lines") or sh.get("cam") in ("group", "two")):
                     gap = abs(xa - xb) - (body_len(actors[ka]["vk"]) + body_len(actors[kb]["vk"])) / 2
-                    if gap < 1.2:
-                        err.append(f"{tag}: {ka} dan {kb} menempel (jarak {gap:.1f} m < 1.2) - beri jarak atau beda z")
+                    if gap < LN["bumper_gap"]:
+                        err.append(f"{tag}: {ka} dan {kb} menempel (jarak {gap:.1f} m < {LN['bumper_gap']}) [C02]")
         # cars must not stand inside a solid prop (barricade spans the whole road)
         for pr in sc.get("props", []):
             if pr.get("type") != "barricade" or not (pr.get("from_shot", 0) <= i <= pr.get("to_shot", 9999)):
                 continue
-            bx0 = pr.get("x", 12) - pr.get("skew", 2.6) / 2 - 0.3
-            bx1 = pr.get("x", 12) + pr.get("skew", 2.6) / 2 + 0.3
+            bx0 = pr.get("x", 12) - pr.get("skew", 2.6) / 2 - LN["prop_margin"]
+            bx1 = pr.get("x", 12) + pr.get("skew", 2.6) / 2 + LN["prop_margin"]
             for k, (xk, zk, hk) in pos.items():
                 half = body_len(actors[k]["vk"]) / 2
                 if not hk and xk + half > bx0 and xk - half < bx1:
@@ -209,12 +213,20 @@ def lint(ep, n):
     run = 1
     for i in range(1, len(cams)):
         run = run + 1 if cams[i] == cams[i - 1] else 1
-        if run >= 3:
-            err.append(f"variasi: {run} shot '{cams[i]}' berturut-turut")
-    if len(shots) >= 5 and len(set(cams)) < 3:
-        err.append(f"variasi: hanya {len(set(cams))} ukuran shot (min 3)")
+        if run >= LN["same_cam_run"]:
+            err.append(f"variasi: {run} shot '{cams[i]}' berturut-turut [V01]")
+    if len(shots) >= 5 and len(set(cams)) < LN["min_sizes"]:
+        err.append(f"variasi: hanya {len(set(cams))} ukuran shot (min {LN['min_sizes']}) [V01]")
     moves = {k for s in shots for k in s.get("move", {})}
-    if len(shots) >= 5 and len(moves) < 2:
+    for i in range(1, len(shots)):                                 # C06 jump cut: same subject, same size, cut
+        a_, b_ = shots[i - 1], shots[i]
+        if a_.get("on") and a_.get("on") == b_.get("on") and \
+                abs(SIZE_RANK.get(a_.get("cam", "wide"), 0) - SIZE_RANK.get(b_.get("cam", "wide"), 0)) < 1:
+            err.append(f"shot {i}: jump cut (subjek '{b_['on']}' & ukuran sama dengan shot sebelumnya) [C06]")
+    speakers = {ln[0] for s in shots for ln in s.get("lines", []) if ln and ln[0] in actors}
+    if len(speakers) >= 2 and float(sc.get("jcut", CONTRACT["engine"]["jcut_s"])) < LN["jcut_min"]:
+        err.append(f"jcut {sc.get('jcut')} < {LN['jcut_min']}: dialog banyak pembicara wajib J-cut [C04]")
+    if len(shots) >= 5 and len(moves) < LN["min_moves"]:
         err.append(f"variasi: gerak kamera {sorted(moves)} (min 2 jenis)")
     if shots and not ({"push", "punch", "low"} & ({k for k in shots[-1].get("move", {})} |
                                                    ({"punch"} if shots[-1].get("punch") else set()) |

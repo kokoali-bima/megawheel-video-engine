@@ -137,7 +137,11 @@
         ]
       ],
       "sfx": [
-        "lamp_off"
+        "lamp_off",
+        [
+          "drone",
+          0.8
+        ]
       ]
     },
     {
@@ -154,7 +158,18 @@
       },
       "sfx": [
         "lamp_off",
-        "lamp_off"
+        [
+          "lamp_off",
+          1.4
+        ],
+        [
+          "drone",
+          0.0
+        ],
+        [
+          "thud_far",
+          2.2
+        ]
       ]
     },
     {
@@ -170,7 +185,19 @@
         "pull": 0.8
       },
       "sfx": [
-        "heartbeat"
+        "heartbeat",
+        [
+          "drone",
+          0.0
+        ],
+        [
+          "thud_far",
+          0.35
+        ],
+        [
+          "thud_far",
+          2.9
+        ]
       ]
     },
     {
@@ -253,5 +280,6 @@
         "stomp_near"
       ]
     }
-  ]
+  ],
+  "jcut": 0.0
 }

@@ -28,6 +28,11 @@ venv/bin/python generators/story3d/produce_story3d.py --episode <ep> --scenes 2,
 Hasil: `work/story3d/<ep>/<ep>_scene_NN.mp4`, `..._qa.json`, `QA_<job>.md`. `--upload` → Drive
 `ipandu-video/story3d/<ep>/` untuk review user. Biaya tercatat otomatis di `modal_usage.json` (budget $29/bulan).
 
+## 1b. Kontrak gaya (perbaiki sekali, tidak terulang)
+`STYLE_CONTRACT.json` = semua pelajaran review user sebagai aturan bernomor + angka ambang, dibaca linter, sensor QA,
+perakit, dan engine (J-cut 0,45 dtk, aturan cut). Catatan review baru → aturan baru di sana + baris tracker. Scene emas
+(`golden`) dicek ulang otomatis setiap produce (regresi).
+
 ## 2. Arsitektur (jangan diubah tanpa persetujuan user)
 1. **prepare (VM sebagai pengendali)** — semua kalimat → Chatterbox (Modal GPU, cache + QA speech-recognition).
    Lip-sync dibuat di container Modal (rhubarb x86 1.13.0, versi sama dengan build VM; cache di volume Modal

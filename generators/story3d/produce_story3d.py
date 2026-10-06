@@ -41,6 +41,12 @@ def preflight(ep, nums):
         return False
     import validate_scene as V                                     # the scene linter: same rules for every agent/model
     bad = 0
+    for g in V.CONTRACT.get("golden", []):                         # regression: approved scenes must still pass
+        gep, gn = g.split(":")
+        gerr, _ = V.lint(gep, int(gn))
+        if gerr:
+            log(f"STOP regresi: scene emas {g} tidak lolos aturan sekarang: {gerr[:3]}")
+            bad += len(gerr)
     for n in nums:
         err, warn = V.lint(ep, n)
         log(f"lint scene {n:02d}: {len(err)} error, {len(warn)} peringatan")

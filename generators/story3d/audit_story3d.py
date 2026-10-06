@@ -43,6 +43,10 @@ THRESH = dict(
     cue_share=0.85,           # one music cue covering more than this of a scene > 40 s = monotonous
     lufs=(-17.5, -14.5),
 )
+_C = os.path.join(os.path.dirname(os.path.abspath(__file__)), "STYLE_CONTRACT.json")
+if os.path.exists(_C):                                         # the style contract is the single source of numbers
+    THRESH.update(json.load(open(_C, encoding="utf-8"))["qa"])
+    THRESH["lufs"] = tuple(THRESH["lufs"])
 SAMPLE_W, SAMPLE_H = 480, 270
 
 
@@ -239,6 +243,26 @@ def audit_scene(d, mp4):
                 if ov > THRESH["sub_overlap"]:
                     warn.append(f"framing shot {sh['i']}: subtitle menutupi {aid} {ov:.0%}")
 
+    # --- continuity of a dialogue scene (C04 J-cuts, C05 cut rate)
+    talk_shots = [s for s in shots if s["lines"]]
+    spk = {ln[0] for ln in lines}
+    if len(spk) >= 2 and len(talk_shots) >= 3:
+        dur = shots[-1]["t1"] - shots[0]["t0"]
+        asl = dur / max(1, len(shots))
+        cpm = (len(shots) - 1) / max(0.1, dur / 60)
+        metrics.update(asl_s=round(asl, 2), cuts_per_min=round(cpm, 1))
+        if asl < THRESH["asl_dialog_s"]:
+            warn.append(f"kesinambungan: rata-rata shot {asl:.1f}s (< {THRESH['asl_dialog_s']}s) - terlalu banyak cut [C05]")
+        if cpm > THRESH["cuts_per_min"]:
+            warn.append(f"kesinambungan: {cpm:.0f} cut/menit (> {THRESH['cuts_per_min']}) [C05]")
+        cuts = [s for s in shots[1:] if s["lines"]]
+        led = sum(1 for s in cuts if any(s["t0"] - 0.1 > ln[1] >= s["t0"] - 1.5 for ln in lines))
+        share = led / max(1, len(cuts))
+        metrics["jcut_share"] = round(share, 2)
+        if share < THRESH["jcut_min_share"]:
+            fail.append(f"kesinambungan: hanya {share:.0%} potongan dialog memakai J-cut (min "
+                        f"{THRESH['jcut_min_share']:.0%}) - adegan terasa terputus [C04]")
+
     # --- variety / monotony of picture
     cams = [s["cam"] for s in shots]
     moves = set(k for s in shots for k in s["move"])
@@ -328,6 +352,19 @@ def audit_scene(d, mp4):
                 if hi > THRESH["hiss_ratio"] and flat > THRESH["hiss_flat"]:
                     quiet_hiss.append(round(q * 0.5, 1))
         metrics.update(hiss_windows=len(quiet_hiss), longest_silence_s=longest)
+        empty, run_e, worst_e, at_e = [], 0.0, 0.0, 0.0             # A01: quiet with nothing meaningful in it
+        for q in range(n):
+            seg = slice(q * win, (q + 1) * win)
+            if db(V[seg]) < -45 and db(M[seg]) < -42 and db(X[seg]) < -42:
+                run_e += 0.5
+                if run_e > worst_e:
+                    worst_e, at_e = run_e, (q + 1) * 0.5 - run_e
+            else:
+                run_e = 0.0
+        metrics["empty_quiet_s"] = worst_e
+        if worst_e > THRESH["empty_quiet_s"]:
+            fail.append(f"audio: {worst_e:.1f}s sunyi tanpa makna mulai t={at_e:.1f}s (tanpa suara/musik/efek) - "
+                        f"isi dengan dengung tegang/langkah off-screen/ambience bermakna [A01]")
         if quiet_hiss:
             fail.append(f"audio: desis/noise di bagian sepi (t={quiet_hiss[:5]})")
         if longest >= THRESH["dead_air_s"]:
