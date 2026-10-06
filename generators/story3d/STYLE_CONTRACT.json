@@ -219,6 +219,13 @@
     "banned_sfx",
     "sfx_flat"
    ]
+  },
+  {
+   "id": "A08",
+   "date": "2026-10-06",
+   "note": "Sorakan klakson terlalu banyak nada = melodi 'om telolet om'; cukup 1-2 jenis klakson yang diramaikan",
+   "check": "engine",
+   "keys": []
   }
  ],
  "lint": {

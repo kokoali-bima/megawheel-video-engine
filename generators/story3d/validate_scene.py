@@ -36,12 +36,12 @@ SINGLE = {"close", "ecu", "medium", "low"}                     # one-character f
 COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
 LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage"}
-TIMES = {"morning", "day", "noon", "evening", "dusk", "dawn", "night"}
+TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
 AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
-PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud"}
+PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 

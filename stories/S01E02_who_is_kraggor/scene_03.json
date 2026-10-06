@@ -1,0 +1,327 @@
+{
+ "title": "Scene 3 - The Town Meeting",
+ "chapter": "The Town Meeting",
+ "location": "arena",
+ "theme_location": "city",
+ "time": "sunset",
+ "weather": "clear",
+ "ambience": "birds",
+ "fog": 0.0,
+ "letterbox": true,
+ "stands_text": "MEGAWHEEL RACEWAY",
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "actors": {
+  "siren": {
+   "vk": "police",
+   "x": 8,
+   "z": 2.7,
+   "h": 0.75,
+   "face": -1,
+   "emo": "determined"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -6,
+   "z": 1.0,
+   "face": 1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 0,
+   "z": 1.7,
+   "face": 1,
+   "emo": "normal"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -13,
+   "z": 1.9,
+   "face": 1,
+   "emo": "scared"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 18,
+   "z": 1.5,
+   "face": -1,
+   "emo": "normal"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 27,
+   "z": 1.0,
+   "face": -1,
+   "emo": "worried"
+  }
+ },
+ "props": [
+  {
+   "type": "stage",
+   "x": 8,
+   "z": 2.7,
+   "w": 7.0,
+   "h": 0.75,
+   "text": "TOWN MEETING"
+  },
+  {
+   "type": "spotlight",
+   "x": 9.5,
+   "z": 1.0,
+   "from_shot": 9,
+   "dim_world": true
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_town_panic",
+   "from": 0,
+   "to": 3,
+   "vol": 0.45,
+   "start": 20.0,
+   "fade": 1.0,
+   "tail": 0.6
+  },
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 5,
+   "to": 7,
+   "vol": 0.55,
+   "start": 0.0,
+   "fade": 1.2,
+   "tail": 0.6
+  },
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 8,
+   "to": 9,
+   "vol": 0.6,
+   "start": 0.0,
+   "fade": 1.5,
+   "tail": 1.2
+  },
+  {
+   "sting": "cue_kraggor_motif",
+   "shot": 9,
+   "at": 3.0,
+   "vol": 0.55
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "hold": 3.4,
+   "lift": 1.4,
+   "cut": "hard",
+   "move": {
+    "crane": 1.4,
+    "push": 0.06
+   },
+   "caption": "That afternoon. MegaWheel Raceway."
+  },
+  {
+   "cam": "low",
+   "on": "siren",
+   "move": {
+    "push": 0.1
+   },
+   "lines": [
+    [
+     "siren",
+     "Order! Order! One at a time, please!",
+     "angry"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "nitro",
+   "with": "zippy",
+   "zoom": 1.2,
+   "move": {
+    "pan": 1.5
+   },
+   "emote": {
+    "nitro": "determined",
+    "zippy": "excited"
+   },
+   "lines": [
+    [
+     "nitro",
+     "Simple. We build a wall. The monster stays out.",
+     "calm"
+    ],
+    [
+     "zippy",
+     "A wall? Boring! We chase it! Full speed! Vroom!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "tilly",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "tilly": "scared"
+   },
+   "lines": [
+    [
+     "tilly",
+     "Chase it? You chase it! I'll cheer... from very, very far away.",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": 4,
+   "hold": 3.0,
+   "move": {
+    "pan": 3
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 9.5,
+     "speed": 3
+    }
+   },
+   "emote": {
+    "sprinkles": "worried"
+   }
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "shy"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Um... has anyone asked... why he keeps coming here?",
+     "shy"
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "nitro",
+    "zippy",
+    "tilly"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "emote": {
+    "nitro": "normal",
+    "zippy": "laugh",
+    "tilly": "laugh"
+   },
+   "lines": [
+    [
+     "nitro",
+     "Monsters don't have reasons.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "with": "buster",
+   "zoom": 1.15,
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "sprinkles": "determined",
+    "buster": "proud"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Everyone has a reason.",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "hold": 3.6,
+   "move": {
+    "pull": 0.25
+   },
+   "moves": {
+    "nitro": {
+     "to_x": -40,
+     "speed": 7
+    },
+    "zippy": {
+     "to_x": -34,
+     "speed": 7
+    },
+    "tilly": {
+     "to_x": -44,
+     "speed": 6
+    },
+    "siren": {
+     "to_x": -12,
+     "speed": 4
+    },
+    "buster": {
+     "to_x": 44,
+     "speed": 4
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "hold": 4.6,
+   "lift": 0.8,
+   "move": {
+    "push": 0.12,
+    "crane": 0.6
+   },
+   "moves": {
+    "nitro": {
+     "show": false
+    },
+    "zippy": {
+     "show": false
+    },
+    "tilly": {
+     "show": false
+    },
+    "siren": {
+     "show": false
+    },
+    "buster": {
+     "show": false
+    }
+   },
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Nobody even asked why he comes.",
+     "whisper"
+    ]
+   ]
+  }
+ ]
+}

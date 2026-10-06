@@ -30,6 +30,9 @@ var NIGHT = true                   # scene time: night = moon/fog/lamps; anythin
 var WARM = 0.0                     # 0 day .. 1 evening (warmer, lower sun)
 var timed = []                     # [Node3D, from_shot, to_shot]: props that appear with a shot (e.g. Siren's barricade)
 var blinkers = []                  # [material, phase]: amber warning lights
+var dimmers = []                   # [from_shot, to_shot]: the world light goes down (a lonely spotlight moment)
+var world_env: Environment
+var sun_light: DirectionalLight3D
 
 
 func _ready() -> void:
@@ -51,10 +54,14 @@ func _ready() -> void:
 			break
 	_environment()
 	_ground()
-	_buildings()
-	if bool(S["scene"].get("shops", not NIGHT)):
-		_shops()
-	_trees()
+	var loc = str(S["scene"].get("location", "town"))
+	if loc == "arena":
+		_arena()
+	else:
+		_buildings()
+		if bool(S["scene"].get("shops", not NIGHT)):
+			_shops()
+		_trees()
 	_props()
 	_eyes()
 	_kraggor_far()
@@ -194,7 +201,9 @@ func _environment_day() -> void:
 	var we = WorldEnvironment.new()
 	we.environment = env
 	add_child(we)
+	world_env = env
 	var sun = DirectionalLight3D.new()
+	sun_light = sun
 	sun.rotation_degrees = Vector3(-52 + 30 * WARM, -28, 0)  # from behind-left of the camera
 	sun.light_color = Color(1.0, 0.96, 0.88).lerp(Color(1.0, 0.72, 0.48), WARM)
 	sun.light_energy = 1.25 - 0.35 * WARM
@@ -321,6 +330,83 @@ func _shops() -> void:
 		k += 1
 
 
+func _arena() -> void:
+	# MegaWheel Raceway (scene 3 town meeting): stepped grandstand with coloured seats and a roof behind the track,
+	# catch fence, a banner, floodlight towers (lit at dusk / night, no shadows: contract L01), far skyline.
+	var seat_cols = [Color(0.9, 0.25, 0.25), Color(0.95, 0.8, 0.2), Color(0.25, 0.55, 0.95), Color(0.95, 0.95, 0.95)]
+	var concrete = toon(Color(0.72, 0.72, 0.76) if not NIGHT else Color(0.3, 0.3, 0.36))
+	var z0 = 6.5
+	for r in range(7):                                       # tiers
+		var z = z0 + r * 1.1
+		var h = 0.9 + r * 0.95
+		box(Vector3(260, h, 1.6), Vector3(20, h / 2, -dist(z)), concrete)
+		var x = -110.0
+		var k = 0
+		while x < 150.0:                                     # seat blocks
+			var c = seat_cols[(k + r) % seat_cols.size()]
+			box(Vector3(5.6, 0.45, 0.7), Vector3(x + 2.8, h + 0.22, -dist(z) + 0.3), toon(c if not NIGHT else c.darkened(0.5)))
+			x += 6.0
+			k += 1
+	var top = 0.9 + 6 * 0.95
+	var roof = box(Vector3(260, 0.35, 9.0), Vector3(20, top + 4.2, -dist(z0 + 3.5)), toon(Color(0.85, 0.85, 0.9)))
+	roof.rotation_degrees = Vector3(6, 0, 0)
+	var x2 = -100.0
+	while x2 < 140.0:                                        # roof pillars
+		box(Vector3(0.35, top + 4.2, 0.35), Vector3(x2, (top + 4.2) / 2, -dist(z0 + 7.0)), toon(Color(0.6, 0.6, 0.66)))
+		x2 += 24.0
+	var fence = StandardMaterial3D.new()                     # catch fence along the far edge of the track
+	fence.albedo_color = Color(0.85, 0.88, 0.9, 0.35)
+	fence.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	box(Vector3(260, 1.8, 0.05), Vector3(20, 0.9, -dist(4.6)), fence)
+	var x3 = -110.0
+	while x3 < 150.0:
+		box(Vector3(0.08, 1.9, 0.08), Vector3(x3, 0.95, -dist(4.6)), toon(Color(0.5, 0.5, 0.55)))
+		x3 += 4.0
+	var banner = box(Vector3(40, 2.2, 0.1), Vector3(10, top + 1.4, -dist(z0 + 6.5) + 0.2), toon(Color(0.12, 0.2, 0.55)))
+	var lb = Label3D.new()
+	lb.text = str(S["scene"].get("stands_text", "MEGAWHEEL RACEWAY"))
+	lb.font_size = 200
+	lb.pixel_size = 0.012
+	lb.modulate = Color(1, 0.85, 0.2)
+	lb.outline_size = 24
+	lb.outline_modulate = Color(0.05, 0.05, 0.2)
+	lb.position = banner.position + Vector3(0, 0, 0.08)
+	add_child(lb)
+	var lit = NIGHT or WARM > 0.6
+	for tx in [-60.0, -20.0, 20.0, 60.0, 100.0]:             # floodlight towers
+		var tz = z0 + 8.5
+		box(Vector3(0.5, 26, 0.5), Vector3(tx, 13, -dist(tz)), toon(Color(0.55, 0.55, 0.6)))
+		var hm = StandardMaterial3D.new()
+		hm.albedo_color = Color(1, 1, 0.92)
+		hm.emission_enabled = lit
+		hm.emission = Color(1, 0.97, 0.85)
+		hm.emission_energy_multiplier = 4.0
+		box(Vector3(4.0, 2.2, 0.4), Vector3(tx, 26.5, -dist(tz) + 0.3), hm)
+		if lit:
+			var sl = SpotLight3D.new()
+			sl.position = Vector3(tx, 26, -dist(tz) + 1.0)
+			sl.look_at_from_position(sl.position, Vector3(tx, 0, -dist(1.3)))
+			sl.light_color = Color(1, 0.96, 0.85)
+			sl.light_energy = 6.0
+			sl.spot_range = 70.0
+			sl.spot_angle = 32.0
+			sl.shadow_enabled = false                        # L01: no messy floodlight shadows
+			add_child(sl)
+	_buildings_far()
+
+
+func _buildings_far() -> void:
+	# the town's skyline far behind the arena (one row, low, hazy)
+	var cols = [Color(0.85, 0.7, 0.6), Color(0.65, 0.72, 0.85), Color(0.8, 0.75, 0.65)]
+	var x = -260.0
+	while x < 320.0:
+		var w = rng.randf_range(12, 22)
+		var h = rng.randf_range(14, 32)
+		var c = cols[rng.randi() % cols.size()]
+		box(Vector3(w, h, 10), Vector3(x + w / 2, h / 2, -dist(150.0)), toon(c if not NIGHT else c.darkened(0.7)))
+		x += w + rng.randf_range(2, 8)
+
+
 func _trees() -> void:
 	var trunk = toon(Color(0.28, 0.18, 0.12) if NIGHT else Color(0.45, 0.3, 0.2))
 	var leaf = toon(Color(0.12, 0.3, 0.18) if NIGHT else Color(0.3, 0.62, 0.3))
@@ -380,6 +466,10 @@ func _props() -> void:
 				sl.shadow_enabled = true
 				add_child(sl)
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
+		elif str(p["type"]) == "stage":
+			_stage(p)
+		elif str(p["type"]) == "spotlight":
+			_spot(p)
 		elif str(p["type"]) == "barricade":
 			_barricade(p)
 		elif str(p["type"]) == "footprints":
@@ -398,6 +488,50 @@ func _props() -> void:
 					dc.rotation_degrees = Vector3(0, 180, 0)
 				add_child(dc)
 				steam.append(_steam(wp(float(xs[n]), zc, 0.1)))
+
+
+func _stage(p) -> void:
+	# a low stage for the one who leads (actor "h" = its height in story25d), skirt + sign
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 2.6))
+	var w = float(p.get("w", 7.0))
+	var h = float(p.get("h", 0.75))
+	var d = 2.6
+	box(Vector3(w, h, d), Vector3(x, h / 2, -dist(z)), toon(Color(0.55, 0.32, 0.2)))
+	box(Vector3(w + 0.1, 0.12, d + 0.1), Vector3(x, h + 0.06, -dist(z)), toon(Color(0.75, 0.5, 0.3)))
+	box(Vector3(w, h * 0.7, 0.04), Vector3(x, h * 0.45, -dist(z) + d / 2 + 0.03), toon(Color(0.8, 0.15, 0.15)))
+	if p.get("text"):
+		var pole_l = box(Vector3(0.1, 3.2, 0.1), Vector3(x - w * 0.45, 1.6, -dist(z) - d / 2), toon(Color(0.4, 0.4, 0.45)))
+		var pole_r = box(Vector3(0.1, 3.2, 0.1), Vector3(x + w * 0.45, 1.6, -dist(z) - d / 2), toon(Color(0.4, 0.4, 0.45)))
+		box(Vector3(w * 0.92, 0.8, 0.05), Vector3(x, 3.0, -dist(z) - d / 2), toon(Color(1, 0.95, 0.85)))
+		var lb = Label3D.new()
+		lb.text = str(p["text"])
+		lb.font_size = 72
+		lb.pixel_size = 0.008
+		lb.modulate = Color(0.75, 0.1, 0.1)
+		lb.outline_size = 0
+		lb.position = Vector3(x, 3.0, -dist(z) - d / 2 + 0.04)
+		add_child(lb)
+
+
+func _spot(p) -> void:
+	# a single spotlight pool on one place (e.g. Sprinkles alone in the empty arena); appears with its shot
+	var holder = Node3D.new()
+	add_child(holder)
+	var sl = SpotLight3D.new()
+	var tgt = wp(float(p.get("x", 0.0)), float(p.get("z", 1.0)), 0.0)
+	sl.position = tgt + Vector3(0, 18, -6)
+	sl.look_at_from_position(sl.position, tgt)
+	sl.light_color = Color(1, 0.95, 0.8)
+	sl.light_energy = float(p.get("energy", 14.0))
+	sl.spot_range = 40.0
+	sl.spot_angle = float(p.get("angle", 9.0))
+	sl.light_volumetric_fog_energy = 3.0
+	sl.shadow_enabled = false
+	holder.add_child(sl)
+	timed.append([holder, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
+	if bool(p.get("dim_world", false)):                      # the rest of the arena goes dark in that shot
+		dimmers.append([int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
 
 
 func _barricade(p) -> void:
@@ -701,6 +835,14 @@ func _process(_d: float) -> void:
 	cam.size = Wd / focal * cam.near
 	cam.frustum_offset = Vector2(-v.x / focal * cam.near, v.y / focal * cam.near)
 	var shot = int(f.get("shot", 0))
+	if sun_light != null:                                    # dim the world for a spotlight moment (eased)
+		var dim = false
+		for dm in dimmers:
+			if shot >= int(dm[0]) and shot <= int(dm[1]):
+				dim = true
+		var target = 0.25 if dim else 1.0
+		sun_light.light_energy = lerpf(sun_light.light_energy, (1.25 - 0.35 * WARM) * target, 0.06)
+		world_env.ambient_light_energy = lerpf(world_env.ambient_light_energy, 0.75 * target, 0.06)
 	for tp in timed:
 		tp[0].visible = shot >= int(tp[1]) and shot <= int(tp[2])
 	for bl in blinkers:

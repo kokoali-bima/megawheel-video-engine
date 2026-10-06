@@ -1837,19 +1837,21 @@ def drone(dur=4.0, rise=True):
 
 
 def honk_cheer():
-    """The town cheers - cars cheer by honking (contract A07, owner 2026-10-06: the noise-based crowd 'cheer' sounded
-    like hiss on headphones). Six cars, different horn pitches, overlapping 'beep-beep!' over ~1.8 s. Clean tones."""
+    """The town cheers - cars cheer by honking (contract A07: the noise-based crowd 'cheer' sounded like hiss on
+    headphones). Seven cars with only TWO horn types honk 'beep-beep!' together (A08: many pitches = a melody)."""
     sr = se.SR
     out = np.zeros(int(2.3 * sr))
     rng = np.random.default_rng(61)
-    pairs = [(415, 523), (370, 466), (466, 587), (330, 415), (523, 659), (392, 494)]
+    horns = [(415, 523), (349, 440)]                               # owner 2026-10-06: only two horn types, many
+    pairs = [horns[k % 2] for k in range(7)]                       # cars - not a melody ("om telolet om")
     for k, (f1, f2) in enumerate(pairs):
-        for b in range(2 if k % 2 == 0 else 3):
+        f1, f2 = f1 * rng.uniform(0.985, 1.015), f2 * rng.uniform(0.985, 1.015)   # same horn, tiny car-to-car detune
+        for b in range(2):
             L = int(rng.uniform(0.12, 0.2) * sr)
             tt = np.arange(L) / sr
             tone = (np.sign(np.sin(2 * math.pi * f1 * tt)) + np.sign(np.sin(2 * math.pi * f2 * tt))) * 0.5
             env = np.clip(tt / 0.008, 0, 1) * np.clip((tt[-1] - tt) / 0.02, 0, 1)
-            i = int((k * 0.22 + b * 0.24 + rng.uniform(0, 0.05)) * sr)
+            i = int((k * 0.12 + b * 0.26 + rng.uniform(0, 0.06)) * sr)
             out[i:i + L] += fft_band(tone * env, 280, 2400) * rng.uniform(0.28, 0.42)
     return out / max(1e-9, np.abs(out).max()) * 0.8
 
