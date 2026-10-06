@@ -49,6 +49,8 @@ SPEAKER_COLOR = {"sprinkles": (1, 0.6, 0.8), "little_sprinkles": (1, 0.7, 0.85),
 W, H = ASPECTS["h"]
 EMO, TALK = {}, {}                                   # per ACTOR id (several actors can share a vehicle key)
 CUR = {"aid": None, "mustache": False}               # actor being drawn right now (read by story_face)
+GAZE = {}                 # actor id -> +1 look forward / -1 look back (listeners look at the speaker, 2026-10-06)
+SPEAKING = {"aid": None}  # who is talking this frame (the group camera leans toward them)
 SCENE = {}
 
 
@@ -172,6 +174,8 @@ def _face_core(ctx, vk, mood, t):
         ctx.restore()
         se.fill_stroke(ctx, (1, 1, 1), lw=r * 0.25)
         look = {"shy": (-0.35, -0.25), "sad": (0.1, -0.35), "cry": (0.1, -0.35)}.get(emo, (0.35, 0.1))
+        if aid in GAZE and emo not in ("shy",):                    # listening: eyes on whoever is talking
+            look = (0.38 * GAZE[aid], look[1])
         pr = 0.5 if emo not in ("surprised", "scared") else 0.32
         ctx.arc(ex + rr * look[0], ey + rr * look[1], rr * pr, 0, 2 * math.pi)
         ctx.set_source_rgb(*ink)
@@ -1213,6 +1217,18 @@ def cam_for(shot, actors, t, u):
             zm = 0.8 * W / (lk["fit"] * k_of(z0))
         hh, _ = hill_h(lk["x"]) if lk.get("on_hill") else (0.0, 0.0)
         return lk["x"], zm * (1 + 0.02 * u), ground_y(z0) - (lk.get("y", 0.0) + hh) * k_of(z0)
+    if kind == "group":                                            # film coverage (2026-10-06): one frame for the
+        ids = shot.get("group") or [k for k, a in actors.items() if not a["hidden"]]   # whole exchange, no cut per line
+        grp = [actors[k] for k in ids if k in actors and not actors[k]["hidden"]] or list(actors.values())
+        lo = min(a["x"] - se.VEHICLES[a["key"]]["body"][0] * 0.6 * a["small"] for a in grp)
+        hi = max(a["x"] + se.VEHICLES[a["key"]]["body"][0] * 0.6 * a["small"] for a in grp)
+        zm = sum(a["z"] for a in grp) / len(grp)
+        mid = (lo + hi) / 2 + shot.get("dx", 0.0)
+        spk = actors.get(SPEAKING["aid"])
+        if spk is not None and spk in grp:
+            mid += shot.get("lean", 0.22) * (spk["x"] - mid)
+        fit = 0.86 * W / max(4.0, (hi - lo) * k_of(zm))
+        return mid, min(shot.get("zoom", 2.2), fit), hill_focus(mid)
     on = actors.get(shot.get("on"))
     if on is None:
         vis = [a for a in actors.values() if not a["hidden"]]
@@ -2066,6 +2082,8 @@ def render_scene(ep, num, aspect):
         EMO.clear()
         TALK.clear()
         VIS.clear()
+        GAZE.clear()
+        SPEAKING["aid"] = None
         for aid in actors:
             EMO[aid] = scene["actors"][aid].get("emo", "normal")
         for j in range(si + 1):
@@ -2079,6 +2097,7 @@ def render_scene(ep, num, aspect):
                     if p["emo"] not in ("talk", "whisper"):
                         EMO[p["spk"]] = p["emo"]
                     TALK[p["spk"]] = float(env[min(len(env) - 1, int((t - p["t0"]) * FPS))])
+                    SPEAKING["aid"] = p["spk"]
                     VIS[p["spk"]] = shape_at(p["vis"], t - p["t0"]) if p.get("vis") else None
                     if p["spk"] in actors and TALK[p["spk"]] > 0.55:      # stressed syllable: tiny body bounce
                         actors[p["spk"]]["h"] += 0.05 * (TALK[p["spk"]] - 0.55)
@@ -2089,6 +2108,14 @@ def render_scene(ep, num, aspect):
         off = sum(s_.get("roll", 0.0) * (s_["t1"] - s_["t0"]) for s_ in shots[:si]) + sh.get("roll", 0.0) * u
         for a in actors.values():                                  # camera sees the rolled positions (hill!)
             a["x"] += off
+        spk_a = actors.get(SPEAKING["aid"])
+        if spk_a is not None and not spk_a["hidden"]:
+            vis_ = [a for a in actors.values() if not a["hidden"] and a is not spk_a]
+            for a in vis_:
+                GAZE[a["id"]] = 1 if (spk_a["x"] - a["x"]) * a["face"] > 0 else -1
+            if vis_:
+                near = min(vis_, key=lambda a: abs(a["x"] - spk_a["x"]))
+                GAZE[spk_a["id"]] = 1 if (near["x"] - spk_a["x"]) * spk_a["face"] > 0 else -1
         cx, z_, focus_y = cam_for(sh, actors, t, u)
         for a in actors.values():
             a["x"] -= off
@@ -2114,9 +2141,10 @@ def render_scene(ep, num, aspect):
             if e >= 1.0:
                 glide = None
         else:
-            camx += (cx - camx) * 0.12
-            zoom += (z_ - zoom) * 0.12
-            piv += (pv - piv) * 0.12
+            rate = sh.get("follow", 0.035 if sh.get("cam") == "group" else 0.12)
+            camx += (cx - camx) * rate
+            zoom += (z_ - zoom) * rate
+            piv += (pv - piv) * rate
         zmul = 1.0
         if sh.get("punch"):                                        # crash zoom onto the face
             zmul = 1.0 + 0.45 * (1 - (1 - min(1.0, u / 0.25)) ** 3)

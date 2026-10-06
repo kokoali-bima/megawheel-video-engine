@@ -48,7 +48,12 @@ Drive link — in Indonesian, short.
 ## 4. Writing scene JSON (what models get wrong)
 - Start from the **golden examples**: `stories/S01E02_who_is_kraggor/scene_01.json` (night, song, reveal) and
   `scene_02.json` (day, ensemble dialogue). Same keys, same style. Unknown keys are rejected by the linter.
-- Vocabulary (exact strings): cam `wide|medium|close|ecu|low|two|track`; camera `move` keys
+- **Film coverage, not talking heads** (owner 2026-10-06): establish the group, play exchanges in `group` / `two`
+  shots (several lines in ONE shot; the group camera leans toward the speaker, listeners look at them), use single
+  close-ups only for an emotional / comic beat or a reaction. The linter rejects ≥ 3 close-ups in a row switching
+  speaker, > 50 % of lines in single close-ups, and a 3+ character dialogue without a group/two shot carrying ≥ 2 lines.
+  Let characters move while talking (walk-and-talk) and add silent reaction shots.
+- Vocabulary (exact strings): cam `wide|group|two|medium|close|ecu|low|track` (`group` takes `"group": [ids]`); camera `move` keys
   `push|pull|pan|crane|dutch|handheld|whip`; emotions `normal|happy|laugh|proud|excited|scared|surprised|sad|cry|
   angry|worried|determined|shy|whisper` (+ `calm` for lines); effects = names in `story25d.SFX`; music = cue files.
 - A line is `[speaker, "text", emotion]` — short spoken English (≤ 140 chars, one emotion, "..." for pauses).

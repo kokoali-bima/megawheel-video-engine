@@ -57,7 +57,7 @@
    "z": 2.7,
    "w": 3.6,
    "text": "DANGER - ROAD CLOSED",
-   "from_shot": 7
+   "from_shot": 6
   }
  ],
  "score": [
@@ -73,7 +73,7 @@
   {
    "cue": "cue_town_panic",
    "from": 1,
-   "to": 6,
+   "to": 5,
    "vol": 0.6,
    "start": 0.0,
    "fade": 0.8,
@@ -81,8 +81,8 @@
   },
   {
    "cue": "cue_kraggor_tender",
-   "from": 8,
-   "to": 8,
+   "from": 7,
+   "to": 7,
    "vol": 0.7,
    "start": 2.0,
    "fade": 1.0,
@@ -90,8 +90,8 @@
   },
   {
    "cue": "cue_town_panic",
-   "from": 9,
-   "to": 9,
+   "from": 8,
+   "to": 8,
    "vol": 0.75,
    "start": 14.0,
    "fade": 0.5,
@@ -99,7 +99,7 @@
   },
   {
    "sting": "cue_kraggor_motif",
-   "shot": 9,
+   "shot": 8,
    "at": 2.4,
    "vol": 0.8
   }
@@ -127,7 +127,7 @@
    },
    "moves": {
     "tilly": {
-     "to_x": -1.5,
+     "to_x": 2,
      "speed": 9
     }
    },
@@ -143,31 +143,19 @@
    ]
   },
   {
-   "cam": "close",
-   "on": "buster",
+   "cam": "group",
+   "group": [
+    "tilly",
+    "buster",
+    "sprinkles"
+   ],
    "move": {
-    "push": 0.12
+    "push": 0.05
    },
    "emote": {
-    "buster": "normal"
-   },
-   "lines": [
-    [
-     "buster",
-     "Whoa, whoa. Slow down, Tilly. Breathe.",
-     "calm"
-    ]
-   ]
-  },
-  {
-   "cam": "medium",
-   "on": "tilly",
-   "move": {
-    "dutch": 5,
-    "handheld": 2
-   },
-   "emote": {
-    "tilly": "scared"
+    "tilly": "scared",
+    "buster": "normal",
+    "sprinkles": "worried"
    },
    "sfx": [
     [
@@ -177,6 +165,11 @@
    ],
    "lines": [
     [
+     "buster",
+     "Whoa, whoa. Slow down, Tilly. Breathe.",
+     "calm"
+    ],
+    [
      "tilly",
      "I can't breathe! I'm a taxi! I just... honk when I'm nervous!",
      "excited"
@@ -185,28 +178,17 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.85,
-   "hold": 2.6,
-   "dx": 6,
+   "zoom": 0.8,
+   "dx": 5,
    "move": {
-    "pan": 5
+    "pan": 4
    },
    "moves": {
     "zippy": {
      "show": true,
      "to_x": 20,
-     "speed": 10
+     "speed": 8
     }
-   },
-   "emote": {
-    "zippy": "normal"
-   }
-  },
-  {
-   "cam": "close",
-   "on": "zippy",
-   "move": {
-    "pull": 0.15
    },
    "emote": {
     "zippy": "proud"
@@ -233,6 +215,17 @@
      "scared"
     ]
    ]
+  },
+  {
+   "cam": "medium",
+   "on": "tilly",
+   "hold": 1.6,
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "tilly": "scared"
+   }
   },
   {
    "cam": "low",

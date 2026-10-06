@@ -21,12 +21,16 @@ SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather
 SHOT_KEYS = {"cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
-             "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint"}
+             "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
 MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
 ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
                    "at", "hold", "patched"}
-CAMS = {"wide", "two", "medium", "close", "ecu", "low", "track"}
+CAMS = {"wide", "two", "group", "medium", "close", "ecu", "low", "track"}
+SINGLE = {"close", "ecu", "medium", "low"}                     # one-character framings
+# film coverage rules (owner 2026-10-06: "tiap ngobrol di-zoom ke yang bicara ... seperti film per pemeran"):
+# establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
+COVER = dict(pingpong=3, single_share=0.5, group_lines=2)
 LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage"}
 TIMES = {"morning", "day", "noon", "evening", "dusk", "dawn", "night"}
 AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
@@ -196,6 +200,29 @@ def lint(ep, n):
                                                    ({"punch"} if shots[-1].get("punch") else set()) |
                                                    {shots[-1].get("cam", "")})):
         warn.append("kait akhir: shot terakhir tanpa push / low / punch")
+    # coverage: no talking-heads ping-pong
+    talkers = [a for a in actors if a not in NARRATORS]
+    dlg = [(i, s.get("cam", "wide"), [ln[0] for ln in s.get("lines", []) if ln and ln[0] in actors and len(ln) <= 3])
+           for i, s in enumerate(shots)]
+    dlg = [d for d in dlg if d[2]]
+    run, last = 0, None
+    for i, cam, spk in dlg:
+        if cam in SINGLE and len(spk) == 1 and spk[0] != last:
+            run += 1
+            if run >= COVER["pingpong"]:
+                err.append(f"coverage: {run} close-up berturut-turut pindah pembicara (s/d shot {i}) - pola 'film per "
+                           f"pemeran'; tahan two/group shot dan potong hanya pada emosi/reaksi")
+        else:
+            run = 0 if not (cam in SINGLE and len(spk) == 1) else run
+        last = spk[-1] if spk else last
+    n_lines = sum(len(d[2]) for d in dlg)
+    single_lines = sum(len(d[2]) for d in dlg if d[1] in SINGLE)
+    if len(set(talkers)) >= 2 and n_lines >= 4 and single_lines / n_lines > COVER["single_share"]:
+        err.append(f"coverage: {single_lines}/{n_lines} kalimat diucapkan di close-up tunggal (maks "
+                   f"{COVER['single_share']:.0%}) - pakai cam 'group'/'two'/'wide' untuk percakapan")
+    if len(actors) >= 3 and n_lines >= 4 and not any(d[1] in ("group", "two", "wide") and len(d[2]) >= COVER["group_lines"]
+                                                      for d in dlg):
+        err.append("coverage: tidak ada shot grup/two yang membawa >= 2 kalimat - percakapan harus terlihat bersama")
     # music spotting
     score = sc.get("score", [])
     if not score and len(shots) >= 6:

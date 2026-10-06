@@ -40,6 +40,11 @@ Repo di-mount di `/root/video-engine` dalam container (path sama dengan VM). Fon
 
 ## 3. Aturan menulis scene JSON (agar hasil konsisten)
 - **Tokoh tidak pernah digambar ulang di 3D.** Dunia saja yang 3D.
+- **Coverage film, bukan 'film per pemeran'** (user 2026-10-06; riset: master/two-shot + reaksi, potong karena emosi
+  — Murch Rule of Six; blocking & walk-and-talk): percakapan dimainkan di `cam: group` / `two` (beberapa kalimat
+  dalam SATU shot, kamera bergeser pelan ke yang bicara, pendengar melirik), close-up tunggal hanya untuk emosi/
+  lelucon/reaksi. Linter: ≥3 close-up berturut-turut ganti pembicara = error; >50% kalimat di close-up = error;
+  dialog 3+ tokoh wajib punya shot group/two dengan ≥2 kalimat. Tambahkan shot reaksi tanpa kalimat.
 - **Variasi gambar** (sensor `variasi`): ≥3 ukuran shot per scene (wide / medium / close / ecu / low / two / track);
   maks 2 ukuran sama berturut-turut; ≥2 jenis gerak kamera (`push`, `pull`, `pan`, `crane`, `dutch`, `handheld`);
   shot >7 dtk wajib ada gerak kamera atau mobil bergerak. Kait akhir scene: `push`/`low`/`punch`.
