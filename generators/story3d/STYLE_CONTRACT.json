@@ -1,6 +1,6 @@
 {
  "about": "THE style contract of story3d. Every owner review note becomes a rule here (with a number the machine checks) so the same mistake is fixed once and never comes back (owner 2026-10-06). validate_scene.py, audit_story3d.py, modal_story3d.py (assembly) and export_overlay.py (engine defaults) read this file. Changing a number = owner decision; add the rule id to QA_DEFECT_TRACKER.md.",
- "version": 4,
+ "version": 5,
  "rules": [
   {
    "id": "C01",
@@ -287,6 +287,34 @@
     "label",
     "hold"
    ]
+  },
+  {
+   "id": "A09",
+   "date": "2026-10-06",
+   "note": "Badai/gua: hujan, angin, guntur, longsor, tetes air dibuat dari NADA / pita < 1,2 kHz (bukan noise); petir = [shot, detik] karena panjang shot ikut suara; guntur menyusul kilat 0,5-1 dtk dan tidak menimpa kalimat (gain sfx = elemen ke-3, mis. [\"thunder_roll\", 1.5, 0.6])",
+   "check": "lint+qa",
+   "keys": [
+    "sfx_flat",
+    "phone_band",
+    "mask_db"
+   ]
+  },
+  {
+   "id": "L02",
+   "date": "2026-10-06",
+   "note": "Lokasi malam non-kota (hutan/gunung/gua) terlalu gelap & tokoh menyatu dengan latar: ambient minimum dinaikkan (hutan/gunung 0,62; gua 0,45); badai menyembunyikan bulan & bintang; gunung latar harus lebih tinggi dari gedung dan tanpa kabut",
+   "check": "qa",
+   "keys": [
+    "luma_min",
+    "contrast_min"
+   ]
+  },
+  {
+   "id": "K02",
+   "date": "2026-10-06",
+   "note": "Kraggor kecil = gambar asli Kraggor (kepala bayi, desain sama) sebagai prop berpijak di dunia (kraggor_small), bukan tokoh baru; sama dipakai lagi di scene 13",
+   "check": "lint",
+   "keys": []
   }
  ],
  "lint": {

@@ -69,7 +69,7 @@ func _ready() -> void:
 		_environment_interior()
 		_garage()
 	elif loc0 == "cave":
-		_environment_interior(Color(0.25, 0.32, 0.45), 0.22)
+		_environment_interior(Color(0.3, 0.38, 0.55), 0.45)
 		_cave()
 	else:
 		_environment()
@@ -157,7 +157,7 @@ func _environment() -> void:
 	env.sky = sk
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.32, 0.38, 0.62)
-	env.ambient_light_energy = 0.35
+	env.ambient_light_energy = 0.62 if str(S["scene"].get("location", "town")) in ["forest", "mountain"] else 0.35
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
 	env.glow_intensity = 0.6
@@ -196,7 +196,7 @@ func _environment() -> void:
 	md.material_override = mm
 	md.position = Vector3(40, 70, -320)
 	var storm = bool(S["scene"].get("rain", false))          # a storm hides the moon and the stars (clouds)
-	md.visible = not storm
+	md.visible = not storm and str(S["scene"].get("location", "town")) != "mountain"
 	add_child(md)
 	for i in range(0 if storm else 160):                     # stars
 		var st = MeshInstance3D.new()
@@ -806,7 +806,7 @@ func _sign(p) -> void:
 	var lb = Label3D.new()
 	lb.text = str(p.get("text", "GRANDPA CONE'S ICE CREAM\nDing-ding!"))
 	lb.font_size = 90
-	lb.pixel_size = 0.0042
+	lb.pixel_size = 0.0028
 	lb.modulate = Color(0.6, 0.25, 0.3)
 	lb.outline_size = 0
 	lb.position = wp(x, z, 1.95) + Vector3(0, 0, 0.09)

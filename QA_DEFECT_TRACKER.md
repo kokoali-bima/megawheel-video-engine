@@ -51,6 +51,10 @@
 | 32 | 2026-10-06 | scene 4 | Render macet 3x / crash di cloud (suara narator, stroke=None) | Modal client menggantung; kode gambar baru tak diuji | watchdog + SMOKE preflight + mount branding/voice | produce_story3d (otomatis) | ✅ |
 | 33 | 2026-10-06 | sambungan | Transisi antar scene seperti drama China panjang | Fade polos | Kartu "PART N + judul" + lonceng | STYLE_CONTRACT J03 | ✅ |
 
+| 34 | 2026-10-06 | scene 5-8 r1 (review sendiri) | Kerucut Kraggor kecil tersembunyi di balik kepala; hutan/gunung/gua terlalu gelap, tokoh menyatu dengan latar; titik putih (bulan) di gunung; teks papan Grandpa meluber; Sprinkles terpotong tepi di shot grup | Posisi kerucut di belakang kepala; ambient rendah; bulan terlihat lewat batu; fon papan besar; dx grup 0 | kerucut digambar di depan; ambient 0,62/0,45; bulan disembunyikan di gunung; fon 0,0028; dx 1,6 | STYLE_CONTRACT L02 + sensor cahaya/kontras (sudah ada) + lembar kontak wajib (tools/contact_sheet.py) | ✅ |
+| 35 | 2026-10-06 | scene 5-7 r1 | Guntur/bisikan/mesin menutupi kalimat (masking 4 titik) | Efek & musik terlalu keras di dekat kalimat | gain efek (elemen ke-3), musik 0,38-0,42, jeda | STYLE_CONTRACT A09 (sensor masking A04) | ✅ |
+| 36 | 2026-10-06 | scene 5,6 r1 | WARN "lompatan gambar" tiap kilat petir | Kilat = lonjakan kecerahan disengaja | didokumentasikan: lompatan tepat di waktu kilat adalah wajar | audit `lompatan` (WARN, dilaporkan ke user) | ✅ catat |
+
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
 |---|---|---|

@@ -126,8 +126,9 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.7,
-   "dx": 4,
+   "on": "buster",
+   "zoom": 0.62,
+   "dx": 2,
    "hold": 4.4,
    "move": {
     "pan": 2
@@ -156,6 +157,7 @@
     "buster",
     "zippy"
    ],
+   "dx": 1.6,
    "move": {
     "push": 0.05
    },
@@ -200,6 +202,7 @@
     "buster",
     "zippy"
    ],
+   "dx": 1.6,
    "move": {
     "push": 0.04
    },

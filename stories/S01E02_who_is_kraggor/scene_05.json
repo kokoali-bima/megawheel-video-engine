@@ -112,7 +112,7 @@
    "cue": "cue_grandpa_memory",
    "from": 0,
    "to": 1,
-   "vol": 0.5,
+   "vol": 0.38,
    "start": 0.0,
    "fade": 1.2,
    "tail": 0.8
@@ -121,7 +121,7 @@
    "cue": "cue_kraggor_tender",
    "from": 2,
    "to": 7,
-   "vol": 0.55,
+   "vol": 0.42,
    "start": 0.0,
    "fade": 1.5,
    "tail": 1.0
@@ -130,7 +130,7 @@
    "cue": "cue_grandpa_memory",
    "from": 8,
    "to": 9,
-   "vol": 0.55,
+   "vol": 0.4,
    "start": 22.0,
    "fade": 1.2,
    "tail": 1.5
@@ -156,11 +156,13 @@
    "sfx": [
     [
      "thunder_roll",
-     1.5
+     1.5,
+     0.7
     ],
     [
      "whimper",
-     4.5
+     3.7,
+     0.6
     ]
    ]
   },
@@ -262,7 +264,8 @@
     ],
     [
      "thunder_roll",
-     1.9
+     1.2,
+     0.6
     ]
    ]
   },
@@ -336,7 +339,8 @@
    "sfx": [
     [
      "thunder_roll",
-     "end+0.8"
+     "end+0.8",
+     0.6
     ]
    ],
    "lines": [
