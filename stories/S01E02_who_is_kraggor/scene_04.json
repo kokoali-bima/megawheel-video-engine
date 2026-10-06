@@ -24,7 +24,8 @@
    "type": "lamp",
    "x": 2.0,
    "z": 2.0,
-   "energy": 9.0
+   "energy": 9.0,
+   "drop": 1.6
   },
   {
    "type": "crate",
@@ -36,20 +37,20 @@
   },
   {
    "type": "sketch",
-   "x": 7.4,
+   "x": 12.0,
    "z": 2.9,
    "y": 2.2,
    "from_shot": 4
   },
   {
    "type": "photo",
-   "x": 10.6,
+   "x": 15.0,
    "z": 2.9,
    "y": 2.4,
    "scale": 0.8,
    "torn": true,
    "glow": true,
-   "from_shot": 6
+   "from_shot": 5
   }
  ],
  "score": [
@@ -65,7 +66,7 @@
   {
    "cue": "cue_grandpa_memory",
    "from": 3,
-   "to": 7,
+   "to": 6,
    "vol": 0.6,
    "start": 0.0,
    "fade": 1.2,
@@ -155,7 +156,7 @@
   },
   {
    "look": {
-    "x": 7.4,
+    "x": 12.0,
     "z": 2.9,
     "y": 1.35,
     "fit": 3.4
@@ -174,19 +175,8 @@
    ]
   },
   {
-   "cam": "medium",
-   "on": "sprinkles",
-   "hold": 1.8,
-   "move": {
-    "push": 0.08
-   },
-   "emote": {
-    "sprinkles": "surprised"
-   }
-  },
-  {
    "look": {
-    "x": 10.6,
+    "x": 15.0,
     "z": 2.9,
     "y": 1.45,
     "fit": 3.6
@@ -209,10 +199,10 @@
    "look": {
     "x": 2.0,
     "z": 2.0,
-    "y": 4.7,
-    "zoom": 2.0
+    "y": 5.4,
+    "zoom": 2.6
    },
-   "hold": 4.0,
+   "hold": 3.4,
    "move": {
     "push": 0.15
    },
@@ -221,6 +211,12 @@
      "narrator",
      "Many years ago... on a stormy night...",
      "calm"
+    ]
+   ],
+   "sfx": [
+    [
+     "memory",
+     0.4
     ]
    ]
   }
