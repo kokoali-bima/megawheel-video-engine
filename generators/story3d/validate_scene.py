@@ -53,7 +53,8 @@ def sfx_names():
         return set(ST.SFX) | {"drone"}
     except Exception:                                              # noqa: BLE001 (lint still runs without cairo)
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
-                "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far"}
+                "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
+                "honk_cheer"}
 
 
 def vehicles():
@@ -147,6 +148,8 @@ def lint(ep, n):
                 err.append(f"{tag}: emote '{e}' tidak dikenal")
         for s in sh.get("sfx", []):
             name, dt = (s, 0.0) if isinstance(s, str) else (s[0], s[1] if len(s) > 1 else 0.0)
+            if name in LN.get("banned_sfx", []):
+                err.append(f"{tag}: efek '{name}' dilarang (noise di headphone) - pakai 'honk_cheer' untuk sorakan [A07]")
             if name not in sfxs:
                 err.append(f"{tag}: efek '{name}' tidak ada {sorted(sfxs)}")
             if isinstance(dt, str):

@@ -1,46 +1,298 @@
 {
  "about": "THE style contract of story3d. Every owner review note becomes a rule here (with a number the machine checks) so the same mistake is fixed once and never comes back (owner 2026-10-06). validate_scene.py, audit_story3d.py, modal_story3d.py (assembly) and export_overlay.py (engine defaults) read this file. Changing a number = owner decision; add the rule id to QA_DEFECT_TRACKER.md.",
- "version": 2,
+ "version": 3,
  "rules": [
-  {"id": "C01", "date": "2026-10-06", "note": "Tiap ngobrol di-zoom ke yang bicara = film per pemeran", "check": "lint", "keys": ["pingpong", "single_share", "group_lines"]},
-  {"id": "C02", "date": "2026-10-06", "note": "Mobil berbaris menempel = antrean macet, bukan ngobrol", "check": "lint", "keys": ["bumper_gap"]},
-  {"id": "C03", "date": "2026-10-06", "note": "Mobil menembus palang", "check": "lint", "keys": ["prop_margin"]},
-  {"id": "C04", "date": "2026-10-06", "note": "Adegan terasa terpisah-pisah: potongan lurus tiap giliran bicara (riset J/L-cut ~0,5 dtk)", "check": "engine+qa", "keys": ["jcut_s", "jcut_min_share"]},
-  {"id": "C05", "date": "2026-10-06", "note": "Terlalu banyak cut di adegan dialog", "check": "qa", "keys": ["asl_dialog_s", "cuts_per_min"]},
-  {"id": "C06", "date": "2026-10-06", "note": "Jump cut: subjek sama, ukuran sama berturut-turut", "check": "lint", "keys": []},
-  {"id": "C07", "date": "2026-10-06", "note": "Kamera swoosh 20 m dalam 1 dtk antar shot", "check": "engine+qa", "keys": ["cut_rule", "speed_px", "jerk_px"]},
-  {"id": "V01", "date": "2026-10-06", "note": "Variasi shot (ukuran & gerak) agar tidak monoton", "check": "lint", "keys": ["same_cam_run", "min_sizes", "min_moves"]},
-  {"id": "A01", "date": "2026-10-06", "note": "Sunyi tanpa makna sebelum footprint (ketegangan hilang); riset: sunyi horor = dengung rendah + langkah off-screen", "check": "qa", "keys": ["empty_quiet_s"]},
-  {"id": "A02", "date": "2026-10-06", "note": "Desis/noise di bagian sepi", "check": "qa", "keys": ["hiss_ratio", "hiss_flat", "hiss_level_db"]},
-  {"id": "A03", "date": "2026-10-06", "note": "Langkah/detak < 200 Hz hilang di speaker HP", "check": "qa", "keys": ["phone_band"]},
-  {"id": "A04", "date": "2026-10-06", "note": "Klakson/sorakan/musik menutupi suara tokoh", "check": "qa", "keys": ["mask_db"]},
-  {"id": "A05", "date": "2026-10-05", "note": "Musik monoton satu cue sepanjang scene; musik seram hanya saat ancaman terlihat", "check": "lint+qa", "keys": ["cue_share"]},
-  {"id": "A06", "date": "2026-10-06", "note": "Loudness -16 LUFS konsisten", "check": "qa", "keys": ["lufs"]},
-  {"id": "J01", "date": "2026-10-06", "note": "Transisi ke scene berikut terburu-buru; harus fade out lalu fade in (gaya dracin)", "check": "assembly", "keys": ["time_jump", "same_place"]},
-  {"id": "J02", "date": "2026-10-06", "note": "Akhir scene keras lalu awal scene sunyi = suara mati", "check": "assembly", "keys": ["drop_db", "step_db", "step_fade_db", "hole_s"]},
-  {"id": "G01", "date": "2026-10-06", "note": "Mobil melayang (jejak menjorok, tanpa bayangan kontak, roll terbalik, low-cam stretch)", "check": "qa", "keys": ["reproj_px"]},
-  {"id": "G02", "date": "2026-10-06", "note": "Tokoh fokus tertutup mobil lain / subtitle", "check": "lint+qa", "keys": ["occlude", "sub_overlap", "focus_visible"]},
-  {"id": "G03", "date": "2026-10-06", "note": "Objek kejutan terlihat sebelum shot-nya", "check": "qa", "keys": []},
-  {"id": "L01", "date": "2026-10-05", "note": "Malam tanpa bayangan gedung; siang bayangan lembut ke belakang", "check": "engine+qa", "keys": ["shadow_patch"]},
-  {"id": "T01", "date": "2026-10-06", "note": "Tulisan mobil terbalik (cermin)", "check": "engine", "keys": []},
-  {"id": "S01", "date": "2026-10-06", "note": "Subtitle kalimat panjang hanya 2 baris terakhir", "check": "engine", "keys": ["max_line"]}
+  {
+   "id": "C01",
+   "date": "2026-10-06",
+   "note": "Tiap ngobrol di-zoom ke yang bicara = film per pemeran",
+   "check": "lint",
+   "keys": [
+    "pingpong",
+    "single_share",
+    "group_lines"
+   ]
+  },
+  {
+   "id": "C02",
+   "date": "2026-10-06",
+   "note": "Mobil berbaris menempel = antrean macet, bukan ngobrol",
+   "check": "lint",
+   "keys": [
+    "bumper_gap"
+   ]
+  },
+  {
+   "id": "C03",
+   "date": "2026-10-06",
+   "note": "Mobil menembus palang",
+   "check": "lint",
+   "keys": [
+    "prop_margin"
+   ]
+  },
+  {
+   "id": "C04",
+   "date": "2026-10-06",
+   "note": "Adegan terasa terpisah-pisah: potongan lurus tiap giliran bicara (riset J/L-cut ~0,5 dtk)",
+   "check": "engine+qa",
+   "keys": [
+    "jcut_s",
+    "jcut_min_share"
+   ]
+  },
+  {
+   "id": "C05",
+   "date": "2026-10-06",
+   "note": "Terlalu banyak cut di adegan dialog",
+   "check": "qa",
+   "keys": [
+    "asl_dialog_s",
+    "cuts_per_min"
+   ]
+  },
+  {
+   "id": "C06",
+   "date": "2026-10-06",
+   "note": "Jump cut: subjek sama, ukuran sama berturut-turut",
+   "check": "lint",
+   "keys": []
+  },
+  {
+   "id": "C07",
+   "date": "2026-10-06",
+   "note": "Kamera swoosh 20 m dalam 1 dtk antar shot",
+   "check": "engine+qa",
+   "keys": [
+    "cut_rule",
+    "speed_px",
+    "jerk_px"
+   ]
+  },
+  {
+   "id": "V01",
+   "date": "2026-10-06",
+   "note": "Variasi shot (ukuran & gerak) agar tidak monoton",
+   "check": "lint",
+   "keys": [
+    "same_cam_run",
+    "min_sizes",
+    "min_moves"
+   ]
+  },
+  {
+   "id": "A01",
+   "date": "2026-10-06",
+   "note": "Sunyi tanpa makna sebelum footprint (ketegangan hilang); riset: sunyi horor = dengung rendah + langkah off-screen",
+   "check": "qa",
+   "keys": [
+    "empty_quiet_s"
+   ]
+  },
+  {
+   "id": "A02",
+   "date": "2026-10-06",
+   "note": "Desis/noise di bagian sepi",
+   "check": "qa",
+   "keys": [
+    "hiss_ratio",
+    "hiss_flat",
+    "hiss_level_db"
+   ]
+  },
+  {
+   "id": "A03",
+   "date": "2026-10-06",
+   "note": "Langkah/detak < 200 Hz hilang di speaker HP",
+   "check": "qa",
+   "keys": [
+    "phone_band"
+   ]
+  },
+  {
+   "id": "A04",
+   "date": "2026-10-06",
+   "note": "Klakson/sorakan/musik menutupi suara tokoh",
+   "check": "qa",
+   "keys": [
+    "mask_db"
+   ]
+  },
+  {
+   "id": "A05",
+   "date": "2026-10-05",
+   "note": "Musik monoton satu cue sepanjang scene; musik seram hanya saat ancaman terlihat",
+   "check": "lint+qa",
+   "keys": [
+    "cue_share"
+   ]
+  },
+  {
+   "id": "A06",
+   "date": "2026-10-06",
+   "note": "Loudness -16 LUFS konsisten",
+   "check": "qa",
+   "keys": [
+    "lufs"
+   ]
+  },
+  {
+   "id": "J01",
+   "date": "2026-10-06",
+   "note": "Transisi ke scene berikut terburu-buru; harus fade out lalu fade in (gaya dracin)",
+   "check": "assembly",
+   "keys": [
+    "time_jump",
+    "same_place"
+   ]
+  },
+  {
+   "id": "J02",
+   "date": "2026-10-06",
+   "note": "Akhir scene keras lalu awal scene sunyi = suara mati",
+   "check": "assembly",
+   "keys": [
+    "drop_db",
+    "step_db",
+    "step_fade_db",
+    "hole_s"
+   ]
+  },
+  {
+   "id": "G01",
+   "date": "2026-10-06",
+   "note": "Mobil melayang (jejak menjorok, tanpa bayangan kontak, roll terbalik, low-cam stretch)",
+   "check": "qa",
+   "keys": [
+    "reproj_px"
+   ]
+  },
+  {
+   "id": "G02",
+   "date": "2026-10-06",
+   "note": "Tokoh fokus tertutup mobil lain / subtitle",
+   "check": "lint+qa",
+   "keys": [
+    "occlude",
+    "sub_overlap",
+    "focus_visible"
+   ]
+  },
+  {
+   "id": "G03",
+   "date": "2026-10-06",
+   "note": "Objek kejutan terlihat sebelum shot-nya",
+   "check": "qa",
+   "keys": []
+  },
+  {
+   "id": "L01",
+   "date": "2026-10-05",
+   "note": "Malam tanpa bayangan gedung; siang bayangan lembut ke belakang",
+   "check": "engine+qa",
+   "keys": [
+    "shadow_patch"
+   ]
+  },
+  {
+   "id": "T01",
+   "date": "2026-10-06",
+   "note": "Tulisan mobil terbalik (cermin)",
+   "check": "engine",
+   "keys": []
+  },
+  {
+   "id": "S01",
+   "date": "2026-10-06",
+   "note": "Subtitle kalimat panjang hanya 2 baris terakhir",
+   "check": "engine",
+   "keys": [
+    "max_line"
+   ]
+  },
+  {
+   "id": "A07",
+   "date": "2026-10-06",
+   "note": "Sorakan sintetis (noise) di akhir scene 2 terdengar seperti desis di headphone; suara harus jelas maknanya (Kraggor = auman/motif, warga = klakson bersorak)",
+   "check": "lint+qa",
+   "keys": [
+    "banned_sfx",
+    "sfx_flat"
+   ]
+  }
  ],
  "lint": {
-  "pingpong": 3, "single_share": 0.5, "group_lines": 2, "bumper_gap": 1.2, "prop_margin": 0.3, "max_line": 140,
-  "same_cam_run": 3, "min_sizes": 3, "min_moves": 2, "jcut_min": 0.3
+  "pingpong": 3,
+  "single_share": 0.5,
+  "group_lines": 2,
+  "bumper_gap": 1.2,
+  "prop_margin": 0.3,
+  "max_line": 140,
+  "same_cam_run": 3,
+  "min_sizes": 3,
+  "min_moves": 2,
+  "jcut_min": 0.3,
+  "banned_sfx": [
+   "cheer",
+   "laugh"
+  ]
  },
- "engine": {"cut_rule": "auto", "jcut_s": 0.45, "iso_camera": true, "text_unmirror": true},
+ "engine": {
+  "cut_rule": "auto",
+  "jcut_s": 0.45,
+  "iso_camera": true,
+  "text_unmirror": true
+ },
  "qa": {
-  "reproj_px": 2.0, "speed_px": 70.0, "jerk_px": 22.0, "diff_spike": 5.0, "focus_visible": 0.80, "occlude": 0.30,
-  "sub_overlap": 0.35, "static_s": 7.0, "same_cam_run": 3, "luma_min": 28.0, "luma_max": 215.0, "contrast_min": 1.15,
-  "shadow_patch": 0.22, "hiss_ratio": 0.30, "hiss_level_db": -46.0, "hiss_flat": 0.35, "dead_air_s": 1.6,
-  "mask_db": 6.0, "phone_band": 0.25, "cue_share": 0.85, "lufs": [-17.5, -14.5],
-  "empty_quiet_s": 2.2, "asl_dialog_s": 3.0, "cuts_per_min": 16, "jcut_min_share": 0.5
+  "reproj_px": 2.0,
+  "speed_px": 70.0,
+  "jerk_px": 22.0,
+  "diff_spike": 5.0,
+  "focus_visible": 0.8,
+  "occlude": 0.3,
+  "sub_overlap": 0.35,
+  "static_s": 7.0,
+  "same_cam_run": 3,
+  "luma_min": 28.0,
+  "luma_max": 215.0,
+  "contrast_min": 1.15,
+  "shadow_patch": 0.22,
+  "hiss_ratio": 0.3,
+  "hiss_level_db": -46.0,
+  "hiss_flat": 0.35,
+  "dead_air_s": 1.6,
+  "mask_db": 6.0,
+  "phone_band": 0.25,
+  "cue_share": 0.85,
+  "lufs": [
+   -17.5,
+   -14.5
+  ],
+  "empty_quiet_s": 2.2,
+  "asl_dialog_s": 3.0,
+  "cuts_per_min": 16,
+  "jcut_min_share": 0.5,
+  "sfx_flat": 0.12
  },
  "joins": {
-  "time_jump": {"out": 1.0, "hold": 0.5, "in": 1.3, "kind": "fadeblack"},
-  "same_place": {"dur": 0.6, "kind": "dissolve"},
-  "drop_db": 14.0, "step_db": 8.0, "step_fade_db": 14.0, "hole_s": 1.2, "hole_hold_s": 2.0
+  "time_jump": {
+   "out": 1.0,
+   "hold": 0.5,
+   "in": 1.3,
+   "kind": "fadeblack"
+  },
+  "same_place": {
+   "dur": 0.6,
+   "kind": "dissolve"
+  },
+  "drop_db": 14.0,
+  "step_db": 8.0,
+  "step_fade_db": 14.0,
+  "hole_s": 1.2,
+  "hole_hold_s": 2.0
  },
- "golden": ["S01E02_who_is_kraggor:1", "S01E02_who_is_kraggor:2"]
+ "golden": [
+  "S01E02_who_is_kraggor:1",
+  "S01E02_who_is_kraggor:2"
+ ]
 }

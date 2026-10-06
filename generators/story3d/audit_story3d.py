@@ -388,6 +388,19 @@ def audit_scene(d, mp4):
                 weak.append(f"{name}@{t0:.1f}({band:.0%})")
         if weak:
             warn.append(f"audio: efek tidak terdengar di speaker HP {weak[:4]}")
+        noisy = []                                                 # A07: an effect that is mostly broadband noise
+        for name, t0 in ev.get("sfx", []):
+            seg = X[int(t0 * sr):int((t0 + 1.5) * sr)]
+            if len(seg) < sr or db(seg) < -45:
+                continue
+            spec = np.abs(np.fft.rfft(seg)) ** 2 + 1e-12
+            fq = np.fft.rfftfreq(len(seg), 1 / sr)
+            b_ = spec[(fq > 200) & (fq < 6000)]
+            flat = float(np.exp(np.mean(np.log(b_))) / np.mean(b_))
+            if flat > THRESH["sfx_flat"]:
+                noisy.append(f"{name}@{t0:.1f}({flat:.2f})")
+        if noisy:
+            warn.append(f"audio: efek terdengar seperti noise di headphone {noisy[:4]} [A07]")
         total = len(mix) / sr
         cues = [c for c in sc.get("score", []) if "cue" in c]
         if total > 40 and cues:

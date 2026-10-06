@@ -1739,6 +1739,7 @@ SFX = {
     "lamp_off": lambda: lamp_off(),
     "honk": lambda: honk(2),
     "thud_far": lambda: phone_step(0.45, seed=52) * 0.7,
+    "honk_cheer": honk_cheer,
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
@@ -1765,7 +1766,8 @@ def stomp_near():
     st[:len(ks)] += ks
     rng = np.random.default_rng(17)
     t = np.arange(int(0.9 * sr)) / sr
-    rattle = rng.normal(0, 1, len(t)) * np.exp(-t * 5) * (np.sin(2 * math.pi * 31 * t) > 0) * 0.25
+    rattle = fft_band(rng.normal(0, 1, len(t)), 700, 2600) * np.exp(-t * 7) * (np.sin(2 * math.pi * 31 * t) > 0)
+    rattle = rattle / max(1e-9, np.abs(rattle).max()) * 0.1             # debris: short, band-limited (A07 headphones)
     out = np.zeros(max(len(st), len(t)))
     out[:len(st)] += st
     out[:len(t)] += rattle
@@ -1832,6 +1834,24 @@ def drone(dur=4.0, rise=True):
     env = (tt / tt[-1]) ** 1.4 * 0.75 + 0.25 if rise else np.ones(n) * 0.6
     env *= np.clip(tt / 0.6, 0, 1) * np.clip((tt[-1] - tt) / 0.4, 0, 1)
     return np.tanh(sig * env * 1.4) * 0.55
+
+
+def honk_cheer():
+    """The town cheers - cars cheer by honking (contract A07, owner 2026-10-06: the noise-based crowd 'cheer' sounded
+    like hiss on headphones). Six cars, different horn pitches, overlapping 'beep-beep!' over ~1.8 s. Clean tones."""
+    sr = se.SR
+    out = np.zeros(int(2.3 * sr))
+    rng = np.random.default_rng(61)
+    pairs = [(415, 523), (370, 466), (466, 587), (330, 415), (523, 659), (392, 494)]
+    for k, (f1, f2) in enumerate(pairs):
+        for b in range(2 if k % 2 == 0 else 3):
+            L = int(rng.uniform(0.12, 0.2) * sr)
+            tt = np.arange(L) / sr
+            tone = (np.sign(np.sin(2 * math.pi * f1 * tt)) + np.sign(np.sin(2 * math.pi * f2 * tt))) * 0.5
+            env = np.clip(tt / 0.008, 0, 1) * np.clip((tt[-1] - tt) / 0.02, 0, 1)
+            i = int((k * 0.22 + b * 0.24 + rng.uniform(0, 0.05)) * sr)
+            out[i:i + L] += fft_band(tone * env, 280, 2400) * rng.uniform(0.28, 0.42)
+    return out / max(1e-9, np.abs(out).max()) * 0.8
 
 
 def lamp_off():
