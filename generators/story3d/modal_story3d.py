@@ -229,7 +229,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         if j.get("hold", 0) > 0:
             blk = f"{tmp}/black{i}.mp4"
             L = j["dur"] + j["hold"] + j["din"]
-            a0, a1, fd = j["dur"], j["dur"] + j["hold"], 0.35         # card visible a0..a1, soft fade 0.35 s
+            a0, a1, cf = j["dur"], j["dur"] + j["hold"], 0.35         # card visible a0..a1, soft fade 0.35 s
             vf = "null"
             ain = ["-f", "lavfi", "-i", "anoisesrc=r=48000:color=brown:amplitude=0.02,lowpass=f=180,volume=0.5,"
                    "aformat=channel_layouts=stereo"]                   # soft room tone, never digital silence
@@ -237,7 +237,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             if j.get("card"):                                          # J03: 'PART N' + chapter title, with a chime
                 open(f"{tmp}/c{i}a.txt", "w").write(f"{j.get('label', 'PART')} {j['num']}")
                 open(f"{tmp}/c{i}b.txt", "w").write(str(j.get("title", "")))
-                al = f"if(lt(t,{a0}),0,if(lt(t,{a0 + fd}),(t-{a0})/{fd},if(lt(t,{a1 - fd}),1,max(0,({a1}-t)/{fd}))))"
+                al = f"if(lt(t,{a0}),0,if(lt(t,{a0 + cf}),(t-{a0})/{cf},if(lt(t,{a1 - cf}),1,max(0,({a1}-t)/{cf}))))"
                 dt = ("drawtext=fontfile={f}:textfile={t}:fontcolor={c}:fontsize={s}:x=(w-text_w)/2:y={y}:alpha='{al}'")
                 v1 = dt.format(f=FONT, t=f"{tmp}/c{i}a.txt", c="0xFFD21F", s=150, y="h*0.34", al=al)
                 v2 = dt.format(f=FONT, t=f"{tmp}/c{i}b.txt", c="white", s=72, y="h*0.56", al=al)
