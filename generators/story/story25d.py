@@ -651,6 +651,25 @@ def draw_print(ctx, kind, x0, y0, w, h, t, tear=None, side="left"):
         kraggor_head(ctx, 3.0, dict(mode="smile", sx=(kx - s_ * (x0e + ew / 2)) / W, scale=s_ * 1080.0 / H),
                      stands_top=ground + ih * 0.04 - s_ * (y0e + eh))
         ctx.restore()
+        tx = ix + iw * 0.5                                          # his tail sweeps left past the tear: its tip is
+        ty = ground - ih * 0.08                                     # the green hint on the album side (sc.4), the rest
+        ctx.move_to(kx - iw * 0.06, ty - ih * 0.06)                # joins him on the missing piece (sc.13)
+        ctx.curve_to(kx - iw * 0.14, ty - ih * 0.02, tx + iw * 0.06, ty + ih * 0.02, tx, ty - ih * 0.05)
+        ctx.curve_to(tx + iw * 0.05, ty + ih * 0.05, kx - iw * 0.12, ty + ih * 0.06, kx - iw * 0.05, ty + ih * 0.02)
+        ctx.close_path()
+        ctx.set_source_rgb(*KR_BODY)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*KR_DARK)
+        ctx.set_line_width(max(1.0, iw * 0.006))
+        ctx.stroke()
+        for fx in (0.08, 0.15):                                     # back spikes along the tail
+            px_ = tx + iw * fx
+            ctx.move_to(px_ - iw * 0.012, ty - ih * 0.03)
+            ctx.line_to(px_, ty - ih * 0.07)
+            ctx.line_to(px_ + iw * 0.012, ty - ih * 0.03)
+            ctx.close_path()
+            ctx.set_source_rgb(*KR_DARK)
+            ctx.fill()
     elif kind == "little":                                         # Grandpa and Little Sprinkles in the park
         ctx.rectangle(ix, iy, iw, ih)
         ctx.set_source_rgb(0.7, 0.86, 0.95)
