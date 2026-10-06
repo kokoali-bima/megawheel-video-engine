@@ -71,12 +71,13 @@ def voices():
     return {f[:-4] for f in os.listdir(d) if f.endswith(".wav")} if os.path.isdir(d) else set()
 
 
+BODY = {"sports": 4.2, "police": 4.4, "bus": 7.4, "firetruck": 6.4, "monster": 4.3, "monster2": 4.3, "f1": 4.6,
+        "taxi": 4.3, "bigrig": 9.6, "icecream": 5.6}           # exact sim_engine.VEHICLES body lengths (2026-10-06):
+                                                               # the same numbers on every machine (no engine import)
+
+
 def body_len(vk):
-    try:
-        import sim_engine as se
-        return se.VEHICLES[vk]["body"][0]
-    except Exception:                                              # noqa: BLE001
-        return {"bus": 8.0, "bigrig": 9.0, "icecream": 5.2, "firetruck": 7.0}.get(vk, 4.4)
+    return BODY.get(vk, 4.4)
 
 
 def lint(ep, n):
@@ -141,7 +142,7 @@ def lint(ep, n):
                 hid = not mv["show"]
             if "to_x" in mv and sh.get("hold") and not sh.get("lines"):   # C08: a move must END inside its shot
                 d_ = abs(float(mv["to_x"]) - float(mv.get("x", x)))
-                need = d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))
+                need = 1.5 * d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))   # eased
                 leaves = i + 1 < len(shots) and shots[i + 1].get("moves", {}).get(aid, {}).get("show") is False
                 if need > float(sh["hold"]) - 0.2 and not hid and not leaves:   # (an exit that is hidden next: ok)
                     err.append(f"{tag}: {aid} butuh {need:.1f}s untuk sampai, shot hanya {sh['hold']}s - percepat "

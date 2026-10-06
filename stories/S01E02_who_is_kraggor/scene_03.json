@@ -184,14 +184,14 @@
    "cam": "wide",
    "zoom": 0.7,
    "dx": 4,
-   "hold": 3.0,
+   "hold": 3.4,
    "move": {
     "pan": 3
    },
    "moves": {
     "sprinkles": {
      "to_x": 9.5,
-     "speed": 7
+     "speed": 9
     }
    },
    "emote": {
