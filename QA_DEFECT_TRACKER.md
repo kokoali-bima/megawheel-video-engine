@@ -45,6 +45,12 @@
 | 27 | 2026-10-06 | story3d scene 1 | Sunyi tanpa makna sebelum footprint | Tidak ada lapisan tegang | `drone` + `thud_far` | STYLE_CONTRACT A01 (sensor ≤ 2,2 dtk) | ✅ |
 | 28 | 2026-10-06 | sambungan 1→2 | Transisi terburu-buru; suara terpotong ke hitam | Fade 1 dtk; crossfade ke klip hitam memotong suara | fade out 1,0 + hitam 0,5 (room tone) + fade in 1,3; afade qsin eksplisit | STYLE_CONTRACT J01/J02 (sensor sambungan, diukur) | ✅ |
 
+| 29 | 2026-10-06 | scene 3 | Mobil polisi melayang setelah turun dari panggung | Ketinggian tetap h=0.75 | `platform_h` (panggung + ramp) | STYLE_CONTRACT G04 (linter + sensor) | ✅ |
+| 30 | 2026-10-06 | scene 2-3 | Terlalu banyak zoom-in | Close-up potong tiap momen | Push-in, maks 2 close-up bertanda | STYLE_CONTRACT C09-C11 | ✅ |
+| 31 | 2026-10-06 | scene 4 | Foto Ep.1 dipakai untuk sobekan (Ep.1 tidak ada Kraggor) | Kesinambungan antar episode | Album + foto gunung baru, seed sobekan | STYLE_CONTRACT K01 (linter) | ✅ |
+| 32 | 2026-10-06 | scene 4 | Render macet 3x / crash di cloud (suara narator, stroke=None) | Modal client menggantung; kode gambar baru tak diuji | watchdog + SMOKE preflight + mount branding/voice | produce_story3d (otomatis) | ✅ |
+| 33 | 2026-10-06 | sambungan | Transisi antar scene seperti drama China panjang | Fade polos | Kartu "PART N + judul" + lonceng | STYLE_CONTRACT J03 | ✅ |
+
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
 |---|---|---|
