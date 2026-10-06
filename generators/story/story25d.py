@@ -643,7 +643,7 @@ def draw_print(ctx, kind, x0, y0, w, h, t, tear=None, side="left"):
                      ((0.95, 0.9, 0.78), (0.62, 0.42, 0.25)), False, t)
         x0e, y0e, ew, eh = kraggor_ext()                           # little Kraggor: the real drawing, mirrored so
         s_ = ih * 0.62 / eh                                        # his tail reaches left across the tear
-        kx = ix + iw * 0.8
+        kx = ix + iw * 0.74                                       # close to the tear: the tail tip crosses it
         ctx.save()
         ctx.translate(kx, 0)
         ctx.scale(-1, 1)
