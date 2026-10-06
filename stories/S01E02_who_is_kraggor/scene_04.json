@@ -43,13 +43,11 @@
    "from_shot": 4
   },
   {
-   "type": "photo",
+   "type": "album",
    "x": 15.0,
    "z": 2.9,
-   "y": 2.4,
-   "scale": 0.8,
-   "torn": true,
-   "glow": true,
+   "y": 2.8,
+   "tear": 7,
    "from_shot": 5
   }
  ],
@@ -178,19 +176,19 @@
    "look": {
     "x": 15.0,
     "z": 2.9,
-    "y": 1.45,
-    "fit": 3.6
+    "y": 1.5,
+    "fit": 5.4
    },
    "hold": 3.6,
    "beat": "reveal",
    "move": {
-    "push": 0.08
+    "pan": 1.2,
+    "push": 0.25
    },
-   "photo_glow": true,
    "lines": [
     [
      "sprinkles",
-     "Grandpa... what did you find?",
+     "Grandpa's old album... and this one... it's torn. Grandpa... what did you find?",
      "whisper"
     ]
    ]

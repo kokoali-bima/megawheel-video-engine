@@ -269,6 +269,13 @@
    "note": "Mobil polisi melayang setelah turun dari panggung",
    "check": "engine+lint+qa",
    "keys": []
+  },
+  {
+   "id": "K01",
+   "date": "2026-10-06",
+   "note": "Kesinambungan antar episode: foto dinding Grandpa (pantai) dari Ep.1 tidak ada Kraggor; foto sobek = foto BARU di album (jalan gunung); potongan sc.13 memakai seed sobekan yang sama agar pas",
+   "check": "lint",
+   "keys": []
   }
  ],
  "lint": {

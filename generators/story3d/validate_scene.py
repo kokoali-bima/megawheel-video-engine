@@ -41,7 +41,7 @@ AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
-PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp"}
+PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -113,6 +113,10 @@ def lint(ep, n):
     for p in sc.get("props", []):
         if p.get("type") not in PROPS:
             err.append(f"prop '{p.get('type')}' tidak dikenal {sorted(PROPS)}")
+    for pr in sc.get("props", []):                                 # K01 continuity with aired episodes
+        if pr.get("type") == "photo" and (pr.get("torn") or pr.get("tail")):
+            err.append("prop 'photo' = foto dinding Grandpa di pantai dari Ep.1 (tanpa Kraggor); tidak boleh sobek/"
+                       "berekor - pakai 'album' (foto gunung yang sobek) [K01]")
     sfxs = sfx_names()
     shots = sc.get("shots", [])
     if not shots:

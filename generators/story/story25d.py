@@ -554,6 +554,192 @@ def draw_sketch(ctx, p, camx, t):
     ctx.restore()
 
 
+def _photo_truck(ctx, cx, ground, length, vk, colors, mustache, t, face=1):
+    """A character's vehicle inside an old photo (the real vehicle drawing, small)."""
+    sc = length / 5.6
+    ctx.save()
+    ctx.translate(cx, ground - 1.81 * sc)
+    ctx.scale(sc * face, -sc)
+    for lx in (-1.9, 1.9):
+        se.draw_wheel(ctx, lx, 0.5 - 1.81, 0.0, 0.5, False)
+    veh = se.VEHICLES[vk]
+    old, old_acc = veh["color"], veh.get("accent")
+    veh["color"], veh["accent"] = colors
+    se.draw_body(ctx, vk, veh, False, t)
+    veh["color"] = old
+    if old_acc is None:
+        veh.pop("accent", None)
+    else:
+        veh["accent"] = old_acc
+    CUR["aid"], CUR["mustache"] = "photo", mustache
+    EMO["photo"], TALK["photo"] = "happy", 0.0
+    story_face(ctx, vk, "happy", t)
+    CUR["aid"], CUR["mustache"] = None, False
+    ctx.restore()
+
+
+def tear_edge(x0, y0, w, h, seed):
+    """The jagged tear line of a torn print - deterministic from its seed, so the piece found later (scene 13)
+    fits exactly (owner 2026-10-06: 'sobekannya harus nyambung')."""
+    rng = np.random.default_rng(seed)
+    n = 11
+    xs = x0 + w * (0.6 + rng.uniform(-0.035, 0.035, n + 1))
+    return [(float(xs[q]), y0 + h * q / n) for q in range(n + 1)]
+
+
+def draw_print(ctx, kind, x0, y0, w, h, t, tear=None, side="left"):
+    """An old photo print (white border). kind: town | little | mountain. tear=seed: only one side of the tear."""
+    b = min(w, h) * 0.05
+    ctx.save()
+    if tear is not None:                                           # keep one side of the tear (border included)
+        e = tear_edge(x0, y0, w, h, tear)
+        if side == "left":
+            ctx.move_to(x0, y0)
+            for pt in e:
+                ctx.line_to(*pt)
+            ctx.line_to(x0, y0 + h)
+        else:
+            ctx.move_to(x0 + w, y0)
+            for pt in e:
+                ctx.line_to(*pt)
+            ctx.line_to(x0 + w, y0 + h)
+        ctx.close_path()
+        ctx.clip()
+    ctx.rectangle(x0, y0, w, h)
+    ctx.set_source_rgb(0.97, 0.95, 0.9)
+    ctx.fill()
+    ix, iy, iw, ih = x0 + b, y0 + b, w - 2 * b, h - 2 * b
+    ctx.save()
+    ctx.rectangle(ix, iy, iw, ih)
+    ctx.clip()
+    ground = iy + ih * 0.86
+    if kind == "mountain":                                         # young Grandpa on a mountain road at dusk, and
+        g = cairo.LinearGradient(0, iy, 0, iy + ih)                # (right of the tear) little Kraggor, smiling
+        g.add_color_stop_rgb(0, 0.55, 0.42, 0.62)
+        g.add_color_stop_rgb(0.6, 0.98, 0.7, 0.45)
+        ctx.rectangle(ix, iy, iw, ih)
+        ctx.set_source(g)
+        ctx.fill()
+        for mx, mh, col in ((0.15, 0.55, (0.42, 0.35, 0.5)), (0.55, 0.7, (0.36, 0.3, 0.45)), (0.9, 0.5, (0.42, 0.35, 0.5))):
+            ctx.move_to(ix + iw * (mx - 0.3), ground)
+            ctx.line_to(ix + iw * mx, ground - ih * mh)
+            ctx.line_to(ix + iw * (mx + 0.3), ground)
+            ctx.close_path()
+            ctx.set_source_rgb(*col)
+            ctx.fill()
+        for q in range(9):                                         # pines
+            px = ix + iw * (0.04 + q * 0.12)
+            ph = ih * (0.16 + 0.05 * (q % 3))
+            ctx.move_to(px - ph * 0.3, ground)
+            ctx.line_to(px, ground - ph)
+            ctx.line_to(px + ph * 0.3, ground)
+            ctx.close_path()
+            ctx.set_source_rgb(0.2, 0.32, 0.25)
+            ctx.fill()
+        ctx.rectangle(ix, ground, iw, ih * 0.14)
+        ctx.set_source_rgb(0.4, 0.36, 0.34)
+        ctx.fill()
+        _photo_truck(ctx, ix + iw * 0.3, ground + ih * 0.04, iw * 0.42, "icecream",
+                     ((0.95, 0.9, 0.78), (0.62, 0.42, 0.25)), False, t)
+        x0e, y0e, ew, eh = kraggor_ext()                           # little Kraggor: the real drawing, mirrored so
+        s_ = ih * 0.62 / eh                                        # his tail reaches left across the tear
+        kx = ix + iw * 0.8
+        ctx.save()
+        ctx.translate(kx, 0)
+        ctx.scale(-1, 1)
+        ctx.translate(-kx, 0)
+        kraggor_head(ctx, 3.0, dict(mode="smile", sx=(kx - s_ * (x0e + ew / 2)) / W, scale=s_ * 1080.0 / H),
+                     stands_top=ground + ih * 0.04 - s_ * (y0e + eh))
+        ctx.restore()
+    elif kind == "little":                                         # Grandpa and Little Sprinkles in the park
+        ctx.rectangle(ix, iy, iw, ih)
+        ctx.set_source_rgb(0.7, 0.86, 0.95)
+        ctx.fill()
+        ctx.rectangle(ix, iy + ih * 0.62, iw, ih * 0.38)
+        ctx.set_source_rgb(0.55, 0.78, 0.45)
+        ctx.fill()
+        ctx.arc(ix + iw * 0.82, iy + ih * 0.2, ih * 0.1, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 0.9, 0.5)
+        ctx.fill()
+        _photo_truck(ctx, ix + iw * 0.33, ground, iw * 0.5, "icecream", ((0.93, 0.86, 0.7), (0.62, 0.42, 0.25)), True, t)
+        _photo_truck(ctx, ix + iw * 0.76, ground, iw * 0.3, "icecream", ((1.0, 0.6, 0.76), (0.6, 0.9, 0.8)), False, t, -1)
+    else:                                                          # town: Grandpa's truck on Main Street
+        ctx.rectangle(ix, iy, iw, ih)
+        ctx.set_source_rgb(0.75, 0.86, 0.95)
+        ctx.fill()
+        for q, col in enumerate(((0.95, 0.75, 0.6), (0.7, 0.8, 0.92), (0.95, 0.88, 0.65), (0.82, 0.72, 0.9))):
+            ctx.rectangle(ix + iw * q * 0.26, iy + ih * (0.25 + 0.05 * (q % 2)), iw * 0.24, ih * 0.5)
+            ctx.set_source_rgb(*col)
+            ctx.fill()
+        ctx.rectangle(ix, ground, iw, ih * 0.14)
+        ctx.set_source_rgb(0.45, 0.45, 0.48)
+        ctx.fill()
+        _photo_truck(ctx, ix + iw * 0.5, ground + ih * 0.03, iw * 0.55, "icecream",
+                     ((0.93, 0.86, 0.7), (0.62, 0.42, 0.25)), True, t)
+    ctx.restore()
+    ctx.rectangle(ix, iy, iw, ih)                                   # old, faded print
+    ctx.set_source_rgba(0.95, 0.82, 0.6, 0.28)
+    ctx.fill()
+    ctx.restore()
+    if tear is not None:                                           # the torn paper fibres along the edge
+        e = tear_edge(x0, y0, w, h, tear)
+        ctx.move_to(*e[0])
+        for pt in e[1:]:
+            ctx.line_to(*pt)
+        ctx.set_source_rgba(1, 1, 1, 0.9)
+        ctx.set_line_width(max(1.0, w * 0.012))
+        ctx.stroke()
+
+
+def draw_album(ctx, p, camx, t):
+    """Grandpa's photo album, open (S01E02 sc.4): two cream pages with photo corners; the right page holds the torn
+    mountain photo (a NEW photo - the Ep.1 wall photo never had Kraggor in it, continuity K01)."""
+    x, z = p.get("x", 0.0), p.get("z", 2.9)
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    W_, H_ = 4.8 * k, 2.6 * k
+    top = gy - p.get("y", 2.8) * k
+    x0 = sx - W_ / 2
+    se.rrect(ctx, x0 - 0.12 * k, top - 0.12 * k, W_ + 0.24 * k, H_ + 0.24 * k, 0.12 * k)   # cover
+    ctx.set_source_rgb(0.42, 0.18, 0.14)
+    ctx.fill()
+    for q in range(2):                                             # pages
+        ctx.rectangle(x0 + q * W_ / 2 + (0.03 * k if q else 0), top, W_ / 2 - 0.03 * k, H_)
+        ctx.set_source_rgb(0.96, 0.92, 0.82)
+        ctx.fill()
+    g = cairo.LinearGradient(sx - 0.25 * k, 0, sx + 0.25 * k, 0)   # spine shadow
+    g.add_color_stop_rgba(0, 0, 0, 0, 0)
+    g.add_color_stop_rgba(0.5, 0, 0, 0, 0.35)
+    g.add_color_stop_rgba(1, 0, 0, 0, 0)
+    ctx.rectangle(sx - 0.25 * k, top, 0.5 * k, H_)
+    ctx.set_source(g)
+    ctx.fill()
+    pw, ph = 1.5 * k, 1.05 * k                                     # left page: two small photos
+    draw_print(ctx, "town", x0 + 0.35 * k, top + 0.2 * k, pw, ph, t)
+    draw_print(ctx, "little", x0 + 0.7 * k, top + 1.38 * k, pw, ph, t)
+    bw, bh = 2.0 * k, 1.5 * k                                      # right page: the torn one, bigger
+    draw_print(ctx, "mountain", sx + 0.2 * k, top + 0.45 * k, bw, bh, t, tear=p.get("tear", 7), side="left")
+    se.draw_text(ctx, "Mountain Road", sx + 0.2 * k + bw * 0.32, top + 0.45 * k + bh + 0.22 * k, 0.17 * k,
+                 fill=(0.35, 0.25, 0.18), stroke=(0.96, 0.92, 0.82), sw=1)
+    for (cx_, cy_) in ((sx + 0.2 * k, top + 0.45 * k), (sx + 0.2 * k, top + 0.45 * k + bh)):   # photo corners
+        ctx.move_to(cx_ - 0.12 * k, cy_)
+        ctx.line_to(cx_ + 0.18 * k, cy_)
+        ctx.line_to(cx_, cy_ + (0.18 * k if cy_ < top + H_ / 2 else -0.18 * k))
+        ctx.close_path()
+        ctx.set_source_rgb(0.2, 0.15, 0.12)
+        ctx.fill()
+
+
+def draw_photo_piece(ctx, p, camx, t):
+    """The missing right part of the mountain photo (scene 13 payoff): same tear seed -> the edges fit."""
+    x, z = p.get("x", 0.0), p.get("z", 2.9)
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    bw, bh = 2.0 * k * p.get("scale", 1.0), 1.5 * k * p.get("scale", 1.0)
+    draw_print(ctx, "mountain", sx - bw / 2, gy - p.get("y", 2.0) * k, bw, bh, t, tear=p.get("tear", 7),
+               side=p.get("side", "right"))
+
+
 def draw_frame_photo(ctx, p, camx, t):
     """Old photo on the garage wall: Grandpa Cone (cream truck, glasses, beard) centred in a wooden frame."""
     x, z = p.get("x", -2.0), p.get("z", 3.6)
@@ -605,36 +791,6 @@ def draw_frame_photo(ctx, p, camx, t):
     ctx.rectangle(sx - w / 2, y0, w, hh)                            # faded print
     ctx.set_source_rgba(0.95, 0.85, 0.65, 0.25)
     ctx.fill()
-    if p.get("torn"):                                              # S01E02 sc.4: the right part is torn away; at the
-        ex = sx + w * 0.28                                         # tear, the tip of a little green tail pokes in
-        ctx.move_to(sx + w / 2 + 0.25 * k, y0 - 0.25 * k)          # (payoff sc.13: the missing piece = little Kraggor)
-        n_ = 9
-        for q in range(n_ + 1):
-            yy = y0 + hh * q / n_
-            ctx.line_to(ex + (0.12 if q % 2 else -0.1) * k, yy)
-        ctx.line_to(sx + w / 2 + 0.25 * k, y0 + hh + 0.25 * k)
-        ctx.close_path()
-        ctx.set_source_rgb(0.2, 0.14, 0.08)                        # the dark frame backing shows where it is torn
-        ctx.fill()
-        kt = k * 0.42 * p.get("scale", 1.0)                         # tail sized to the print (was a big blob)
-        ctx.move_to(ex, y0 + hh * 0.8)                            # a slim curling tail with little spikes
-        ctx.curve_to(ex - 0.5 * kt, y0 + hh * 0.76, ex - 0.85 * kt, y0 + hh * 0.86, ex - 0.62 * kt, y0 + hh * 0.94)
-        ctx.curve_to(ex - 0.5 * kt, y0 + hh * 0.98, ex - 0.36 * kt, y0 + hh * 0.9, ex - 0.42 * kt, y0 + hh * 0.9)
-        ctx.curve_to(ex - 0.56 * kt, y0 + hh * 0.8, ex - 0.4 * kt, y0 + hh * 0.82, ex, y0 + hh * 0.86)
-        ctx.close_path()
-        ctx.set_source_rgb(*KR_BODY)
-        ctx.fill_preserve()
-        ctx.set_source_rgb(*KR_DARK)
-        ctx.set_line_width(max(1.0, 0.035 * kt))
-        ctx.stroke()
-        for q, (fx, fy) in enumerate(((0.32, 0.79), (0.6, 0.81), (0.78, 0.87))):   # spikes along the back of the tail
-            px, py = ex - fx * kt, y0 + hh * fy
-            ctx.move_to(px - 0.07 * kt, py)
-            ctx.line_to(px, py - 0.13 * kt)
-            ctx.line_to(px + 0.07 * kt, py)
-            ctx.close_path()
-            ctx.set_source_rgb(*KR_DARK)
-            ctx.fill()
     if p.get("glow"):
         ctx.rectangle(sx - w / 2, y0, w, hh)
         ctx.set_source_rgba(1, 0.9, 0.6, 0.25)
@@ -2390,6 +2546,10 @@ def render_scene(ep, num, aspect):
                 draw_poster(ctx, prop, camx)
             elif prop["type"] == "sketch":
                 draw_sketch(ctx, prop, camx, t)
+            elif prop["type"] == "album":
+                draw_album(ctx, prop, camx, t)
+            elif prop["type"] == "photo_piece":
+                draw_photo_piece(ctx, prop, camx, t)
             elif prop["type"] == "photo":
                 draw_frame_photo(ctx, dict(prop, glow=sh.get("photo_glow")), camx, t)
             elif prop["type"] == "desk":
