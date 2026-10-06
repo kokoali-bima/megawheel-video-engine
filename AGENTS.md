@@ -11,6 +11,7 @@
    (`daily_publish.sh`) after the owner approves. You may upload review copies to Google Drive.
 2. **Never commit or print secrets**: `credentials/`, `modal.txt`, tokens. Never open `modal.txt`.
 3. Git author is always `kokoali-bima <mu.aliwardana@gmail.com>`. On the VM sync ONLY with `bash git_sync.sh pull|push`.
+   The Modal usage ledger (`modal_usage.json`) is dirty after every run: `git_sync.sh status` prints `ledger: BERSIH|KOTOR`, `pull` commits+pushes a dirty ledger itself (loud `!! LEDGER ... KOTOR` line) and produce_story3d commits it when it ends. Never `git checkout -- modal_usage.json` (deletes cost records). If `status` says behind or the ledger is dirty, run `pull` BEFORE any render.
 4. **Production never imports `lab/`.** Experiments live in `lab/` (PC) / `/root/lab` (VM).
 5. **Never re-draw characters in 3D.** Characters come from story25d / sim_engine exactly as aired.
 6. Run renders on the VM **one at a time** (OOM). Heavy work goes to Modal through the scripts below.
@@ -50,6 +51,9 @@ venv/bin/python generators/story3d/produce_story3d.py --episode <ep> --scenes NN
 Exit codes of produce_story3d: 0 ok · 2 lint/preflight · 3 voices · 4 Modal render · 5 **QA FAIL** (never upload a
 FAIL; fix with the playbook in SOP_STORY3D §5 and run again). Report to the owner: scene, QA verdict, warnings, cost,
 Drive link — in Indonesian, short.
+
+## 3b. Episode bookends (owner 2026-10-07)
+The whole episode = cold open (scene 1) -> ident + theme song (aired Ep.1 clips, scene 0) -> "Previously" recap (scene 21) -> scenes 2..N -> outro (scene 20). `venv/bin/python generators/story3d/tools/make_bookends.py --episode <ep>` builds 0/21/20 into the Modal volume; then `assemble --order 1,0,21,2,...,N,20`. Scene JSON with `"no_card": true` gets no PART card.
 
 ## 4. Writing scene JSON (what models get wrong)
 - Start from the **golden examples**: `stories/S01E02_who_is_kraggor/scene_01.json` (night, song, reveal) and

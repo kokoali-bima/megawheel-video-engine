@@ -47,7 +47,8 @@
 | 15 The Old Key (speedway gate at dawn, opens) | QA PASS |
 | episode_01..15.mp4 | assembled (10.4 min), all 14 joins pass; every join has a PART card (J03/J04 every_join) |
 Owner approved the A10 mix on 2026-10-07 ("versi ini lebih baik"). Deviations: Tilly speaks (not sings) the Kraggor callback; no "back to the present" shot at the end of scene 5.
-Open: owner review of 9-15; outro/ident/"Previously" (Ep.1 assets) still to be assembled around the 15 scenes; the Drive working tree on the PC lags origin/main (CRLF noise) - work from a clean clone.
+Owner notes 2026-10-07 applied: net fitted to Kraggor and behind the cars (`net.over: kraggor`), translucent Kraggor silhouette (`kraggor.ghost`), Kraggor's own hum voice for his story (kraggor_hum_*; cave_dry ambience), bookends built (ident+theme, Previously, outro with the Forgotten Speedway teaser), full episode assembled: `..._episode_01-00-21-02-...-15-20.mp4` (12.5 min, 17 joins pass, A/V in sync). Assembler now keeps lossless (pcm/mkv) pieces (AAC drift fix, tracker #40).
+Open: owner review of the full episode; outro/ident/"Previously" (Ep.1 assets) still to be assembled around the 15 scenes; the Drive working tree on the PC lags origin/main (CRLF noise) - work from a clean clone.
 New engine since 5-8: claw (arm pointing / handing a key), chalk drawings, net (screen-space rope net), grown-up crying Kraggor (mode sad), SFX kraggor_giggle/moan, net_drop, gate_creak, key_click, arm_slide, wind ambience, Godot towers / partylights / speedgate / ruins location, prop to_shot.
 
 ## How to run (VM 192.168.99.3, SSH -p 22022 root@2.28.128.77, key from the owner)
