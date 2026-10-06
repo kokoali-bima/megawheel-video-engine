@@ -3011,7 +3011,7 @@ def ambience_bed(scene, n):
     elif kind == "cave":
         x, g = amb_cave(n, rng), 0.045
     elif kind == "wind":
-        x, g = amb_wind(n, rng), 0.05
+        x, g = amb_wind(n, rng), 0.09
     else:
         return np.zeros(n)
     x = np.pad(x, (0, max(0, n - len(x))))[:n]
