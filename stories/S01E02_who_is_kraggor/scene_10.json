@@ -176,8 +176,15 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "One stormy night, a little monster was lost... and a kind ice cream truck found him.",
+     "calm"
     ]
    ]
   },
@@ -201,8 +208,15 @@
    "sfx": [
     [
      "kraggor_hum_joy",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "The truck shared its ice cream, and played a song. For the first time, the little monster smiled.",
+     "calm"
     ]
    ]
   },
@@ -226,8 +240,15 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "But the truck had to drive away... and the little monster waved goodbye.",
+     "calm"
     ]
    ]
   },
@@ -251,8 +272,15 @@
    "sfx": [
     [
      "kraggor_hum_grow",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "The monster grew... and grew... and GREW.",
+     "calm"
     ]
    ]
   },
@@ -276,8 +304,15 @@
    "sfx": [
     [
      "kraggor_hum_fear",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "And everyone who saw him ran away, afraid.",
+     "calm"
     ]
    ]
   },
@@ -301,8 +336,15 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     0.4,
-     0.8
+     "end+0.15",
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "narrator",
+     "So every night, he watched the town from the mountain... waiting for his only friend.",
+     "calm"
     ]
    ]
   },
