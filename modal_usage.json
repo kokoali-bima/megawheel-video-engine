@@ -2975,6 +2975,16 @@
    "gpu_seconds": 0,
    "wall_seconds": 0,
    "cost_usd": 0.0
+  },
+  {
+   "date": "2026-10-07",
+   "note": "TEST dirty ledger (heal check)",
+   "engine": "test",
+   "scenes": 0,
+   "cpu_seconds": 0,
+   "gpu_seconds": 0,
+   "wall_seconds": 0,
+   "cost_usd": 0.0
   }
  ]
 }
