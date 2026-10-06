@@ -1,0 +1,159 @@
+{
+ "title": "INTRO - MegaWheel Arena, Let's Go!",
+ "location": "town",
+ "theme_location": "city",
+ "time": "morning",
+ "letterbox": false,
+ "song": "branding/music/intro_lets_go_mono.wav",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -52,
+   "z": 0.5,
+   "emo": "happy"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -34,
+   "z": 1.6,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -24,
+   "z": 2.4,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -44,
+   "z": 1.1,
+   "emo": "tease"
+  },
+  "siren": {
+   "vk": "police",
+   "x": -16,
+   "z": 2.9,
+   "emo": "happy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -8,
+   "z": 3.2,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "track",
+   "on": "rocky",
+   "dx": 4,
+   "hold": 4.5,
+   "speedlines": true,
+   "moves": {
+    "zippy": {
+     "to_x": 16,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": 8,
+     "speed": 9
+    },
+    "buster": {
+     "to_x": 26,
+     "speed": 8
+    },
+    "rocky": {
+     "to_x": 36,
+     "speed": 9
+    },
+    "siren": {
+     "to_x": 44,
+     "speed": 9
+    },
+    "tilly": {
+     "to_x": 52,
+     "speed": 8
+    }
+   },
+   "sfx": []
+  },
+  {
+   "cam": "medium",
+   "on": "zippy",
+   "hold": 2.2,
+   "emote": {
+    "zippy": "laugh"
+   },
+   "moves": {
+    "zippy": {
+     "hop": true
+    }
+   }
+  },
+  {
+   "cam": "two",
+   "on": "rocky",
+   "zoom": 1.0,
+   "hold": 2.6,
+   "emote": {
+    "rocky": "laugh"
+   },
+   "moves": {
+    "rocky": {
+     "hop": true
+    },
+    "buster": {
+     "hop": true
+    }
+   },
+   "with": "buster"
+  },
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 2.4,
+   "emote": {
+    "sprinkles": "laugh"
+   },
+   "sfx": [
+    "ding"
+   ],
+   "moves": {
+    "sprinkles": {
+     "hop": true
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 3.0,
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.86,
+    "sy": 0.62,
+    "scale": 0.35,
+    "stand": true,
+    "gz": 7
+   },
+   "emote": {
+    "siren": "laugh",
+    "tilly": "laugh"
+   },
+   "zoom": 0.42
+  },
+  {
+   "cam": "wide",
+   "hold": 4.0,
+   "title": "MEGAWHEEL ARENA",
+   "confetti": true,
+   "zoom": 0.42
+  }
+ ],
+ "edge_fade": false,
+ "song_stereo": "branding/music/intro_lets_go_v1mix3.wav",
+ "chapter": "Theme Song: Let's Go!",
+ "width": 1.6,
+ "no_card": true,
+ "note": "Theme song: the AIRED Ep.1 clips (ident + theme) are reused unchanged (tools/make_bookends.py); this file only describes the scene to the assembler"
+}

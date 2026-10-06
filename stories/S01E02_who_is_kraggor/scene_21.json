@@ -1,0 +1,8 @@
+{
+ "title": "Previously on MegaWheel Arena",
+ "chapter": "Previously on MegaWheel Arena",
+ "location": "arena",
+ "time": "sunset",
+ "no_card": true,
+ "note": "Recap built from aired Ep.1 clips by tools/make_bookends.py (CLIPS / VO tables)"
+}

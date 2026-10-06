@@ -1,0 +1,272 @@
+{
+ "title": "OUTRO - See You Next Time (S01E02)",
+ "location": "town",
+ "theme_location": "city",
+ "time": "sunset",
+ "letterbox": false,
+ "song": "branding/music/outro_see_you_mono.wav",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -36,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -24,
+   "z": 0.8,
+   "emo": "happy",
+   "patched": 1
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -12,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 0,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 12,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 24,
+   "z": 0.8,
+   "emo": "happy"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 36,
+   "z": 0.8,
+   "emo": "happy"
+  }
+ },
+ "shots": [
+  {
+   "cam": "close",
+   "on": "sprinkles",
+   "hold": 4.2,
+   "emote": {
+    "sprinkles": "laugh"
+   },
+   "moves": {
+    "sprinkles": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "SPRINKLES",
+    "role": "The ice cream truck with a big heart",
+    "color": [
+     1.0,
+     0.6,
+     0.76
+    ]
+   },
+   "sfx": []
+  },
+  {
+   "cam": "close",
+   "on": "zippy",
+   "hold": 4.2,
+   "emote": {
+    "zippy": "laugh"
+   },
+   "moves": {
+    "zippy": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "ZIPPY",
+    "role": "The fastest show-off in town",
+    "color": [
+     0.95,
+     0.25,
+     0.25
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "buster",
+   "hold": 4.2,
+   "emote": {
+    "buster": "laugh"
+   },
+   "moves": {
+    "buster": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "BUSTER",
+    "role": "The wise old school bus",
+    "color": [
+     1.0,
+     0.8,
+     0.1
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "rocky",
+   "hold": 4.2,
+   "emote": {
+    "rocky": "laugh"
+   },
+   "moves": {
+    "rocky": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "ROCKY",
+    "role": "The gentle monster truck",
+    "color": [
+     0.3,
+     0.6,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "siren",
+   "hold": 4.2,
+   "emote": {
+    "siren": "laugh"
+   },
+   "moves": {
+    "siren": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "SIREN",
+    "role": "The fair-play police car",
+    "color": [
+     0.75,
+     0.85,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "tilly",
+   "hold": 4.2,
+   "emote": {
+    "tilly": "laugh"
+   },
+   "moves": {
+    "tilly": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "TILLY",
+    "role": "The taxi who knows everything",
+    "color": [
+     1.0,
+     0.85,
+     0.2
+    ]
+   }
+  },
+  {
+   "cam": "close",
+   "on": "nitro",
+   "hold": 4.2,
+   "emote": {
+    "nitro": "laugh"
+   },
+   "moves": {
+    "nitro": {
+     "hop": true
+    }
+   },
+   "nametag": {
+    "name": "NITRO",
+    "role": "The cool, focused race car",
+    "color": [
+     0.35,
+     0.7,
+     1.0
+    ]
+   }
+  },
+  {
+   "cam": "wide",
+   "hold": 4.2,
+   "kraggor": {
+    "mode": "smile",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.2,
+    "wink": 2.6
+   },
+   "nametag": {
+    "name": "KRAGGOR",
+    "role": "Big, scary... and secretly sweet",
+    "color": [
+     0.4,
+     0.85,
+     0.5
+    ]
+   }
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.42,
+   "hold": 3.0,
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.42,
+   "hold": 3.5,
+   "card": [
+    "NEXT SUNDAY",
+    "The Forgotten Speedway"
+   ]
+  },
+  {
+   "cam": "wide",
+   "endcard": true,
+   "hold": 6.0,
+   "lines": [
+    [
+     "narrator",
+     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "endscreen": true,
+   "cam": "wide",
+   "zoom": 0.42,
+   "hold": 14.0,
+   "caption": "Thanks for watching!"
+  }
+ ],
+ "edge_fade": false,
+ "song_stereo": "branding/music/outro_see_you.wav",
+ "chapter": "Meet the Racers",
+ "no_card": true
+}
