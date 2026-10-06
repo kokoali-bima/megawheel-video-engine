@@ -35,7 +35,20 @@
 - SFX: thunder_roll, rockslide, munch, whimper, snore, drip, key_glint, breath_big; sfx entry may carry a 3rd element = gain, e.g. ["thunder_roll", 1.5, 0.6]. Ambience: `storm`, `cave`.
 - Sepia: scene `"tint":"sepia"` (applied once in compose). Test tool for new Godot code: `modal_story3d.py::smoke --scenes N` (run with the branch checked out BEFORE merging); `tools/contact_sheet.py` for the self-review sheet.
 
-## Next: scenes 9-15 (see script.md). Needs: big Kraggor in the cave (scenes 9,10: face to face, chalk wall drawings), gate + crane net (11-13), party plaza (14), old speedway gate at dawn (15).
+## Scenes 9-15 (2026-10-07) - all written, rendered, delivered
+| Scene | State |
+|---|---|
+| 9 Face to Face (cave, claw points at the sign) | delivered, QA WARN (night contrast only) |
+| 10 Kraggor's Story (6 chalk drawings, sad Kraggor) | delivered, WARN (night contrast) |
+| 11 Meanwhile in Town (towers, hanging net, far silhouette) | delivered, WARN (yellow dot before the reveal) |
+| 12 The Trap (net drops, Kraggor cries) | delivered, WARN (contrast) |
+| 13 Stand Up (torn photo + matching piece, net cut) | delivered, WARN (1 masking line, flash jump) |
+| 14 A Friend for Kraggor (party lights, toss, key via claw) | delivered, WARN (contrast) |
+| 15 The Old Key (speedway gate at dawn, opens) | QA PASS |
+| episode_01..15.mp4 | assembled (10.4 min), all 14 joins pass; every join has a PART card (J03/J04 every_join) |
+Owner approved the A10 mix on 2026-10-07 ("versi ini lebih baik"). Deviations: Tilly speaks (not sings) the Kraggor callback; no "back to the present" shot at the end of scene 5.
+Open: owner review of 9-15; outro/ident/"Previously" (Ep.1 assets) still to be assembled around the 15 scenes; the Drive working tree on the PC lags origin/main (CRLF noise) - work from a clean clone.
+New engine since 5-8: claw (arm pointing / handing a key), chalk drawings, net (screen-space rope net), grown-up crying Kraggor (mode sad), SFX kraggor_giggle/moan, net_drop, gate_creak, key_click, arm_slide, wind ambience, Godot towers / partylights / speedgate / ruins location, prop to_shot.
 
 ## How to run (VM 192.168.99.3, SSH -p 22022 root@2.28.128.77, key from the owner)
 ```
@@ -50,7 +63,10 @@ PC repo: `F:\drive-aliwardana\My Drive\me\ai-develop\ipandu-video\megawheel-vide
 (Drive touches file stats: `git checkout -- modal_usage.json` before merging), never rebase (it sticks here).
 After PC push: on the VM `bash git_sync.sh push "records"` if dirty, then `bash git_sync.sh pull`.
 
-## Known pitfalls (already fixed — do not reintroduce)
+## Known pitfalls
+- Before `git_sync.sh pull` on the VM run `git status --porcelain`; a dirty modal_usage.json blocks the pull and a produce run then starts on OLD code. Never `git checkout -- modal_usage.json` (it deletes cost records) - use `git_sync.sh push "records"`.
+- Never copy scene files from a stale working tree into a clean clone; run validate_scene on all scenes before pushing (golden regression catches it).
+ (already fixed — do not reintroduce)
 - Modal client can hang after "Created objects" → produce_story3d has a 6-min watchdog + unbuffered log.
 - New drawing code must pass the SMOKE preflight (story25d `SMOKE`) — produce runs it automatically on the VM.
 - Narrator voice needs `branding/voice/announcer_ref.wav` → the whole `branding/voice` is mounted on Modal.
