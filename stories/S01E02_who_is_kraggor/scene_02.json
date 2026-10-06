@@ -22,14 +22,14 @@
   "buster": {
    "vk": "bus",
    "x": 7,
-   "z": 1.9,
+   "z": 1.6,
    "face": -1,
    "emo": "normal"
   },
   "sprinkles": {
    "vk": "icecream",
-   "x": 13,
-   "z": 1.0,
+   "x": 15.5,
+   "z": 2.2,
    "face": -1,
    "emo": "normal"
   },
@@ -127,7 +127,7 @@
    },
    "moves": {
     "tilly": {
-     "to_x": 2,
+     "to_x": -2.5,
      "speed": 9
     }
    },
@@ -186,7 +186,7 @@
    "moves": {
     "zippy": {
      "show": true,
-     "to_x": 20,
+     "to_x": 22.5,
      "speed": 8
     }
    },

@@ -170,6 +170,16 @@ def lint(ep, n):
                 warn.append(f"{tag}: {spk} bicara tapi masih tersembunyi (hidden)")
             if spk in actors and sh.get("on") and sh["on"] != spk and cam in ("close", "ecu", "medium", "low"):
                 warn.append(f"{tag}: close-up pada {sh['on']} padahal {spk} yang bicara (reaksi? sengaja?)")
+        # bumper to bumper: cars in nearly the same lane need air between them (a line of cars reads as a traffic
+        # jam, not a conversation - owner review scene 2, 2026-10-06)
+        vis = [(k, v) for k, v in pos.items() if not v[2]]
+        for q in range(len(vis)):
+            for r in range(q + 1, len(vis)):
+                (ka, (xa, za, _)), (kb, (xb, zb, _)) = vis[q], vis[r]
+                if abs(za - zb) < 0.9 and (sh.get("lines") or sh.get("cam") in ("group", "two")):
+                    gap = abs(xa - xb) - (body_len(actors[ka]["vk"]) + body_len(actors[kb]["vk"])) / 2
+                    if gap < 1.2:
+                        err.append(f"{tag}: {ka} dan {kb} menempel (jarak {gap:.1f} m < 1.2) - beri jarak atau beda z")
         # parked in front of the focus / speaker (nearer car covers a farther one)
         want = {sh.get("on")} | {ln[0] for ln in sh.get("lines", []) if ln and ln[0] in actors}
         for aid in [w for w in want if w and w in actors]:
