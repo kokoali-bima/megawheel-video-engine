@@ -2685,6 +2685,26 @@
    "gpu_seconds": 141.9,
    "wall_seconds": 116.6,
    "cost_usd": 0.0433
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#3 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 8,
+   "gpu_seconds": 79.6,
+   "wall_seconds": 110.8,
+   "cost_usd": 0.0203
+  },
+  {
+   "date": "2026-10-06",
+   "note": "scene 3 arena + scene 2 honk",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 2,
+   "cpu_seconds": 1101.6,
+   "gpu_seconds": 320.1,
+   "wall_seconds": 193.7,
+   "cost_usd": 0.1056
   }
  ]
 }
