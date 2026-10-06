@@ -1398,6 +1398,10 @@ def build(scene):
     return scene["shots"], placed, t
 
 
+STEMS = None              # story3d QA: dict to receive the audio stems of the next render
+PREPARE_ONLY = False      # story3d: stop after voices + visemes are cached (frames are rendered on Modal)
+PREPARED = {}             # what the last prepare produced (lines, viseme counts, duration)
+
 RHUBARB = os.environ.get("RHUBARB", "/root/tools/rhubarb-lip-sync/build/rhubarb/rhubarb")
 VIS_CACHE = os.path.join(BASE, "work", "voice", "visemes")
 VIS = {}                                                         # actor id -> current mouth shape (A..H, X)
@@ -1696,6 +1700,7 @@ SFX = {
     "engine": lambda: cine_whoosh(0.9, peak=0.5, lo=120.0, hi=1400.0, seed=21),
     "splat": lambda: se.synth_splash(0.8, seed=12),
     "lamp_off": lambda: lamp_off(),
+    "honk": lambda: honk(2),
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
@@ -1757,6 +1762,20 @@ def phone_step(near, seed):
     out = (sub * 0.8 + body * 0.8 + crunch / max(1e-9, np.abs(crunch).max()) * 0.35 * near ** 1.5
            + deb / max(1e-9, np.abs(deb).max()) * 0.12 * near ** 2)
     return out / max(1e-9, np.abs(out).max())
+
+
+def honk(n=2):
+    """A taxi horn (nervous double honk): two detuned tones with harmonics, 400-2000 Hz, phone-audible."""
+    sr = se.SR
+    out = np.zeros(int((0.32 * n + 0.1) * sr))
+    for k in range(n):
+        L = int(0.22 * sr)
+        tt = np.arange(L) / sr
+        tone = sum(np.sign(np.sin(2 * math.pi * f * tt)) * 0.5 for f in (415.0, 523.0))
+        env = np.clip(tt / 0.01, 0, 1) * np.clip((tt[-1] - tt) / 0.03, 0, 1)
+        i = int(k * 0.32 * sr)
+        out[i:i + L] += fft_band(tone * env, 300, 2200) * 0.5
+    return out
 
 
 def lamp_off():
@@ -1885,9 +1904,16 @@ def build_audio(shots, placed, total, scene):
             place(mus, seg, sh["t0"], 1.0)
     talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))
     duck = 1.0 - 0.55 * np.clip(talk * 3, 0, 1)
-    mix = se.peak(narr) * 1.0 + se.peak(mus) * 0.32 * duck + se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
+    st_v, st_m, st_s = se.peak(narr) * 1.0, se.peak(mus) * 0.32 * duck, se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
+    st_a = np.zeros_like(st_v)
     if scene.get("ambience") != "rain" and scene.get("ambience") != "none":
-        mix = mix + ambience_bed(scene, len(mix)) * (0.7 + 0.3 * duck)
+        st_a = ambience_bed(scene, len(st_v)) * (0.7 + 0.3 * duck)
+    mix = st_v + st_m + st_s + st_a
+    if STEMS is not None:                                          # story3d QA: voice / music / effects / ambience
+        STEMS.update(voice=st_v, music=st_m, sfx=st_s, amb=st_a, sr=se.SR,
+                     lines=[(p["spk"], round(p["t0"], 3), round(len(p["audio"]) / se.SR, 3)) for p in placed],
+                     sfx_events=[(s if isinstance(s, str) else s[0], round(sh["t0"] + (0 if isinstance(s, str) else s[1]), 3))
+                                 for sh in shots for s in sh.get("sfx", [])])
     if scene.get("ambience") == "rain":                            # soft, calming rain (user review: was too loud)
         rng = np.random.default_rng(2)
         hiss = SM.box_avg(rng.normal(0, 1, n), 40)
@@ -1925,6 +1951,12 @@ def render_scene(ep, num, aspect):
     envs = [(p, envelope(p["audio"])) for p in placed]
     for p in placed:
         p["vis"] = visemes(p["audio"], p["text"])
+    if PREPARE_ONLY:
+        PREPARED.clear()
+        PREPARED.update(total=total, shots=len(shots),
+                        lines=[dict(spk=p["spk"], text=p["text"], t0=round(p["t0"], 3), dur=round(len(p["audio"]) / se.SR, 3),
+                                    visemes=len(p["vis"])) for p in placed])
+        return None
     out_dir = os.path.join(BASE, "work", "story", ep)
     prev = os.path.join(out_dir, f"preview_{num:02d}_{aspect}")
     os.makedirs(prev, exist_ok=True)
