@@ -1,0 +1,228 @@
+{
+ "title": "Scene 4 - Grandpa's Old Box",
+ "chapter": "Grandpa's Old Box",
+ "location": "garage",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "room",
+ "fog": 0.0,
+ "letterbox": true,
+ "gap": 0.5,
+ "tail": 1.0,
+ "edge_fade": false,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -3,
+   "z": 1.2,
+   "emo": "normal"
+  }
+ },
+ "props": [
+  {
+   "type": "lamp",
+   "x": 2.0,
+   "z": 2.0,
+   "energy": 9.0
+  },
+  {
+   "type": "crate",
+   "x": 9.0,
+   "z": 4.2,
+   "shelf_h": 2.4,
+   "floor_z": 3.0,
+   "fall_shot": 2
+  },
+  {
+   "type": "sketch",
+   "x": 7.4,
+   "z": 2.9,
+   "y": 2.2,
+   "from_shot": 4
+  },
+  {
+   "type": "photo",
+   "x": 10.6,
+   "z": 2.9,
+   "y": 2.4,
+   "scale": 0.8,
+   "torn": true,
+   "glow": true,
+   "from_shot": 6
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 0,
+   "to": 1,
+   "vol": 0.4,
+   "start": 4.0,
+   "fade": 1.0,
+   "tail": 0.5
+  },
+  {
+   "cue": "cue_grandpa_memory",
+   "from": 3,
+   "to": 7,
+   "vol": 0.6,
+   "start": 0.0,
+   "fade": 1.2,
+   "tail": 1.2
+  },
+  {
+   "sting": "cue_kraggor_motif",
+   "shot": 4,
+   "at": 0.6,
+   "vol": 0.45
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.62,
+   "hold": 3.4,
+   "lift": 0.8,
+   "cut": "hard",
+   "move": {
+    "push": 0.06
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 0.5,
+     "speed": 2.0
+    }
+   },
+   "caption": "That night. Sprinkles' garage."
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "move": {
+    "pan": 1.0
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 3.5,
+     "speed": 1.2
+    }
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Spare bell... spare bell... where did I put you?",
+     "normal"
+    ]
+   ],
+   "dx": 1.0,
+   "zoom": 1.0
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.72,
+   "dx": 4,
+   "hold": 3.2,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "sprinkles": "surprised"
+   },
+   "sfx": [
+    [
+     "box_drop",
+     1.1
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "sad"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Grandpa's box... I haven't opened this since...",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 7.4,
+    "z": 2.9,
+    "y": 1.35,
+    "fit": 3.4
+   },
+   "hold": 3.0,
+   "beat": "reveal",
+   "move": {
+    "push": 0.06
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "K? ...Who's K?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "hold": 1.8,
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "sprinkles": "surprised"
+   }
+  },
+  {
+   "look": {
+    "x": 10.6,
+    "z": 2.9,
+    "y": 1.45,
+    "fit": 3.6
+   },
+   "hold": 3.6,
+   "beat": "reveal",
+   "move": {
+    "push": 0.08
+   },
+   "photo_glow": true,
+   "lines": [
+    [
+     "sprinkles",
+     "Grandpa... what did you find?",
+     "whisper"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 2.0,
+    "z": 2.0,
+    "y": 4.7,
+    "zoom": 2.0
+   },
+   "hold": 4.0,
+   "move": {
+    "push": 0.15
+   },
+   "lines": [
+    [
+     "narrator",
+     "Many years ago... on a stormy night...",
+     "calm"
+    ]
+   ]
+  }
+ ]
+}

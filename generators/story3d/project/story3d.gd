@@ -32,6 +32,9 @@ var timed = []                     # [Node3D, from_shot, to_shot]: props that ap
 var blinkers = []                  # [material, phase]: amber warning lights
 var dimmers = []                   # [from_shot, to_shot]: the world light goes down (a lonely spotlight moment)
 var world_env: Environment
+var shot_t0 = {}                   # shot index -> its first frame time (props that act inside a shot)
+var crates = []                    # [node, shelf_h, floor_h, fall_shot, dust emitter, landed]
+var swing_lamps = []               # [pivot node] hanging lamps that sway a little
 var sun_light: DirectionalLight3D
 
 
@@ -44,6 +47,10 @@ func _ready() -> void:
 	S = JSON.parse_string(FileAccess.open(dir + "/scene.json", FileAccess.READ).get_as_text())
 	frames = JSON.parse_string(FileAccess.open(dir + "/frames.json", FileAccess.READ).get_as_text())["frames"]
 	rng.seed = 5
+	for fr in frames:
+		var si_ = int(fr[1].get("shot", 0))
+		if not shot_t0.has(si_):
+			shot_t0[si_] = float(fr[1]["t"])
 	var tm = str(S["theme"].get("time", S["scene"].get("time", "night")))
 	NIGHT = tm == "night"
 	WARM = 1.0 if tm in ["evening", "dusk", "sunset"] else (0.35 if tm in ["dawn", "morning"] else 0.0)
@@ -52,10 +59,16 @@ func _ready() -> void:
 			kfar = fr[1]["kfar"]
 			kfar_cam = float(fr[1]["camx"])
 			break
-	_environment()
-	_ground()
+	if str(S["scene"].get("location", "town")) == "garage":
+		_environment_interior()
+		_garage()
+	else:
+		_environment()
+		_ground()
 	var loc = str(S["scene"].get("location", "town"))
-	if loc == "arena":
+	if loc == "garage":
+		pass
+	elif loc == "arena":
 		_arena()
 	else:
 		_buildings()
@@ -330,6 +343,196 @@ func _shops() -> void:
 		k += 1
 
 
+func _environment_interior() -> void:
+	# a room at night: no sky, warm low ambient, a little volumetric haze so the hanging lamp draws a cone
+	var env = Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.03, 0.025, 0.02)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(0.55, 0.45, 0.35)
+	env.ambient_light_energy = 0.32
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.glow_enabled = true
+	env.glow_intensity = 0.5
+	env.volumetric_fog_enabled = true
+	env.volumetric_fog_density = 0.018
+	env.volumetric_fog_albedo = Color(0.9, 0.85, 0.75)
+	env.volumetric_fog_length = 40.0
+	var we = WorldEnvironment.new()
+	we.environment = env
+	add_child(we)
+	world_env = env
+
+
+func _garage() -> void:
+	# Sprinkles' garage (S01E02 sc.4): plank walls, concrete floor, shelves with cans and boxes, a workbench with a
+	# pegboard, a night window, a hanging lamp (prop "lamp"). Everything warm and a bit dusty.
+	var back_z = float(S["scene"].get("wall_z", 4.6))
+	box(Vector3(120, 0.1, dist(back_z) - dist(-0.6) + 4), Vector3(4, -0.05, -(dist(back_z) + dist(-0.6) - 4) / 2),
+		toon(Color(0.42, 0.4, 0.37)))                         # floor
+	var x = -50.0
+	var k = 0
+	while x < 60.0:                                          # plank wall
+		var c = Color(0.55, 0.36, 0.22) if k % 2 == 0 else Color(0.5, 0.32, 0.2)
+		box(Vector3(0.62, 7.0, 0.2), Vector3(x + 0.31, 3.5, -dist(back_z) - 0.1), toon(c.lerp(Color(0.6, 0.4, 0.25), rng.randf() * 0.3)))
+		x += 0.64
+		k += 1
+	box(Vector3(120, 0.3, 12), Vector3(4, 7.1, -dist(back_z) + 5), toon(Color(0.2, 0.15, 0.1)))   # ceiling
+	var cans = [Color(0.85, 0.2, 0.2), Color(0.2, 0.45, 0.85), Color(0.95, 0.8, 0.2), Color(0.3, 0.7, 0.35), Color(0.9, 0.9, 0.9)]
+	for sx in [-14.0, 9.0, 18.0]:                            # shelves
+		for hh in [1.3, 2.4, 3.5]:
+			box(Vector3(5.0, 0.12, 0.8), Vector3(sx, hh, -dist(back_z) + 0.45), toon(Color(0.45, 0.3, 0.18)))
+			var cx = sx - 2.2
+			while cx < sx + 2.2:
+				if rng.randf() < 0.6:
+					var ch = rng.randf_range(0.3, 0.7)
+					box(Vector3(rng.randf_range(0.3, 0.7), ch, 0.5), Vector3(cx, hh + 0.06 + ch / 2, -dist(back_z) + 0.45),
+						toon(cans[rng.randi() % cans.size()]) if rng.randf() < 0.5 else toon(Color(0.62, 0.48, 0.32)))
+				cx += rng.randf_range(0.6, 1.1)
+		for sgn in [-1.0, 1.0]:
+			box(Vector3(0.1, 3.7, 0.8), Vector3(sx + sgn * 2.5, 1.85, -dist(back_z) + 0.45), toon(Color(0.4, 0.26, 0.16)))
+	box(Vector3(4.2, 0.18, 1.2), Vector3(-4.0, 1.05, -dist(back_z) + 0.7), toon(Color(0.5, 0.33, 0.2)))   # workbench
+	for lx in [-5.9, -2.1]:
+		box(Vector3(0.14, 1.0, 0.14), Vector3(lx, 0.5, -dist(back_z) + 0.7), toon(Color(0.4, 0.26, 0.16)))
+	box(Vector3(3.6, 1.8, 0.05), Vector3(-4.0, 2.4, -dist(back_z) + 0.02), toon(Color(0.7, 0.6, 0.45)))   # pegboard
+	for q in range(7):
+		box(Vector3(0.08, rng.randf_range(0.4, 0.8), 0.06), Vector3(-5.5 + q * 0.5, 2.4, -dist(back_z) + 0.06),
+			toon(Color(0.35, 0.35, 0.4)))
+	var win = StandardMaterial3D.new()                       # night window
+	win.albedo_color = Color(0.15, 0.25, 0.5)
+	win.emission_enabled = true
+	win.emission = Color(0.2, 0.3, 0.6)
+	win.emission_energy_multiplier = 0.6
+	box(Vector3(2.6, 1.8, 0.05), Vector3(3.0, 3.6, -dist(back_z) + 0.02), win)
+	box(Vector3(2.8, 0.12, 0.08), Vector3(3.0, 3.6, -dist(back_z) + 0.05), toon(Color(0.35, 0.22, 0.12)))
+	box(Vector3(0.12, 2.0, 0.08), Vector3(3.0, 3.6, -dist(back_z) + 0.05), toon(Color(0.35, 0.22, 0.12)))
+
+
+func _hanging_lamp(p) -> void:
+	# a bulb under a tin shade on a cord, swaying a little; warm cone of light + dust motes floating in it
+	var pivot = Node3D.new()
+	pivot.position = wp(float(p.get("x", 2.0)), float(p.get("z", 2.0)), 7.0)
+	add_child(pivot)
+	var L = float(p.get("drop", 2.2))
+	var cord = MeshInstance3D.new()
+	var cm = BoxMesh.new()
+	cm.size = Vector3(0.03, L, 0.03)
+	cord.mesh = cm
+	cord.material_override = toon(Color(0.1, 0.1, 0.1))
+	cord.position = Vector3(0, -L / 2, 0)
+	pivot.add_child(cord)
+	var shade = MeshInstance3D.new()
+	var sm = CylinderMesh.new()
+	sm.top_radius = 0.12
+	sm.bottom_radius = 0.55
+	sm.height = 0.4
+	shade.mesh = sm
+	shade.material_override = toon(Color(0.25, 0.4, 0.3))
+	shade.position = Vector3(0, -L - 0.1, 0)
+	pivot.add_child(shade)
+	var bulb = MeshInstance3D.new()
+	var bm = SphereMesh.new()
+	bm.radius = 0.14
+	bm.height = 0.28
+	bulb.mesh = bm
+	var em = StandardMaterial3D.new()
+	em.albedo_color = Color(1, 0.9, 0.6)
+	em.emission_enabled = true
+	em.emission = Color(1, 0.85, 0.5)
+	em.emission_energy_multiplier = 6.0
+	bulb.material_override = em
+	bulb.position = Vector3(0, -L - 0.3, 0)
+	pivot.add_child(bulb)
+	var sl = SpotLight3D.new()
+	sl.position = Vector3(0, -L - 0.3, 0)
+	sl.rotation_degrees = Vector3(-90, 0, 0)
+	sl.light_color = Color(1, 0.85, 0.55)
+	sl.light_energy = float(p.get("energy", 9.0))
+	sl.spot_range = 9.0
+	sl.spot_angle = 48.0
+	sl.spot_attenuation = 0.8
+	sl.light_volumetric_fog_energy = 3.0
+	sl.shadow_enabled = true
+	pivot.add_child(sl)
+	var fill = OmniLight3D.new()                             # bounce from the bulb: the room is not black
+	fill.position = Vector3(0, -L - 0.4, 0)
+	fill.light_color = Color(1, 0.8, 0.55)
+	fill.light_energy = 1.2
+	fill.omni_range = 14.0
+	pivot.add_child(fill)
+	var dust = CPUParticles3D.new()                          # motes in the light
+	dust.position = Vector3(0, -L - 2.2, 0)
+	dust.amount = 70
+	dust.lifetime = 6.0
+	dust.preprocess = 6.0
+	dust.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	dust.emission_box_extents = Vector3(1.6, 1.8, 1.0)
+	dust.direction = Vector3(0.2, 1, 0)
+	dust.spread = 180.0
+	dust.initial_velocity_min = 0.02
+	dust.initial_velocity_max = 0.08
+	dust.gravity = Vector3(0, -0.01, 0)
+	var qm = QuadMesh.new()
+	qm.size = Vector2(0.035, 0.035)
+	var dm = StandardMaterial3D.new()
+	dm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	dm.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	dm.albedo_color = Color(1, 0.95, 0.8, 0.8)
+	dm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	qm.material = dm
+	dust.mesh = qm
+	pivot.add_child(dust)
+	swing_lamps.append(pivot)
+
+
+func _crate(p) -> void:
+	# Grandpa's wooden box: on a shelf until its shot, then it falls, bounces and puffs dust
+	var node = Node3D.new()
+	var x = float(p.get("x", 9.0))
+	var z = float(p.get("z", 4.2))
+	var shelf = float(p.get("shelf_h", 2.4))
+	node.position = wp(x, z, shelf + 0.06)
+	add_child(node)
+	var body = MeshInstance3D.new()
+	var bm = BoxMesh.new()
+	bm.size = Vector3(1.1, 0.7, 0.8)
+	body.mesh = bm
+	body.material_override = toon(Color(0.55, 0.36, 0.2))
+	body.position = Vector3(0, 0.35, 0)
+	node.add_child(body)
+	for yy in [0.15, 0.55]:
+		var band = MeshInstance3D.new()
+		var bb = BoxMesh.new()
+		bb.size = Vector3(1.12, 0.06, 0.82)
+		band.mesh = bb
+		band.material_override = toon(Color(0.3, 0.2, 0.1))
+		band.position = Vector3(0, yy, 0)
+		node.add_child(band)
+	var dust = CPUParticles3D.new()
+	dust.emitting = false
+	dust.one_shot = true
+	dust.amount = 60
+	dust.lifetime = 2.2
+	dust.explosiveness = 0.9
+	dust.direction = Vector3(0, 1, 0)
+	dust.spread = 80.0
+	dust.initial_velocity_min = 0.6
+	dust.initial_velocity_max = 1.6
+	dust.gravity = Vector3(0, -0.4, 0)
+	var qm = QuadMesh.new()
+	qm.size = Vector2(0.35, 0.35)
+	var dmat = StandardMaterial3D.new()
+	dmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	dmat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	dmat.albedo_color = Color(0.85, 0.78, 0.65, 0.4)
+	dmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	qm.material = dmat
+	dust.mesh = qm
+	dust.position = wp(x, z, 0.2)
+	add_child(dust)
+	crates.append([node, shelf, float(p.get("floor_z", z)), int(p.get("fall_shot", 1)), dust, false, x])
+
+
 func _arena() -> void:
 	# MegaWheel Raceway (scene 3 town meeting): stepped grandstand with coloured seats and a roof behind the track,
 	# catch fence, a banner, floodlight towers (lit at dusk / night, no shadows: contract L01), far skyline.
@@ -466,6 +669,10 @@ func _props() -> void:
 				sl.shadow_enabled = true
 				add_child(sl)
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
+		elif str(p["type"]) == "lamp":
+			_hanging_lamp(p)
+		elif str(p["type"]) == "crate":
+			_crate(p)
 		elif str(p["type"]) == "stage":
 			_stage(p)
 		elif str(p["type"]) == "spotlight":
@@ -851,6 +1058,30 @@ func _process(_d: float) -> void:
 		world_env.ambient_light_energy = lerpf(world_env.ambient_light_energy, 0.75 * target, 0.06)
 	for tp in timed:
 		tp[0].visible = shot >= int(tp[1]) and shot <= int(tp[2])
+	for lp in swing_lamps:                                   # a gentle sway
+		lp.rotation.z = 0.05 * sin(t * 1.1)
+		lp.rotation.x = 0.03 * sin(t * 0.8 + 1.0)
+	for cr in crates:                                        # fall: g = 9.8, a small bounce, then rests
+		var fs = int(cr[3])
+		if shot < fs or not shot_t0.has(fs):
+			continue
+		var u = t - float(shot_t0[fs]) - 0.4
+		var y = float(cr[1])
+		if u > 0:
+			var tf = sqrt(2.0 * y / 9.8)
+			if u < tf:
+				y = y - 4.9 * u * u
+				cr[0].rotation.z = -0.9 * u / tf
+			else:
+				var ub = u - tf
+				y = maxf(0.0, 0.35 * sin(minf(ub / 0.35, 1.0) * PI)) if ub < 0.35 else 0.0
+				cr[0].rotation.z = -0.25
+				if not cr[5]:
+					cr[4].restart()
+					cr[4].emitting = true
+					cr[5] = true
+		cr[0].position.y = y + 0.06 * float(y > 0.0)
+		cr[0].position.z = -dist(float(cr[2])) if u > 0 else cr[0].position.z
 	for bl in blinkers:
 		bl[0].emission_energy_multiplier = 3.0 if fmod(t * 1.5 + float(bl[1]), 1.0) < 0.5 else 0.2
 	# street lamps: flicker for half a second, then dark (same schedule as the cairo version)

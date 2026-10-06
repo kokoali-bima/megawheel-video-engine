@@ -142,11 +142,12 @@ def run(episode, scene_no, aspect, out):
     def night_tint(ctx, t):                                        # the aired night tint, on character pixels only
         if se.THEME.get("time") != "night":
             return
+        indoor = ST.SCENE.get("location") == "garage"              # lit by a warm bulb indoors, not by the moon
         ctx.save()
         ctx.identity_matrix()
         ctx.set_operator(cairo.OPERATOR_ATOP)
         ctx.rectangle(0, 0, ST.W, ST.H)
-        ctx.set_source_rgba(0.03, 0.05, 0.16, 0.38)
+        ctx.set_source_rgba(*((0.35, 0.2, 0.05, 0.14) if indoor else (0.03, 0.05, 0.16, 0.38)))
         ctx.fill()
         ctx.restore()
     se.draw_weather = night_tint

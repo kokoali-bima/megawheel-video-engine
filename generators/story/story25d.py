@@ -518,13 +518,49 @@ def draw_poster(ctx, p, camx):
                      fill=(0.85, 0.12, 0.12) if i == 0 else (0.1, 0.1, 0.2), stroke=(1, 1, 1), sw=2, max_w=w * 0.9)
 
 
-def draw_frame_photo(ctx, p, camx, t):
-    """Old photo on the garage wall: Grandpa Cone (cream truck, glasses, beard) centred in a wooden frame."""
-    x, z = p.get("x", -2.0), 3.6
+def draw_sketch(ctx, p, camx, t):
+    """A child-like pencil sketch of a little green creature with a tail, signed 'K.' (Grandpa's box, S01E02 sc.4).
+    The creature is Kraggor's own drawing, small, in pencil lines - never a new character design."""
+    x, z = p.get("x", 0.0), p.get("z", 3.0)
     k = k_of(z)
     sx, gy = pxy(x, z, camx)
-    w, hh = 3.2 * k, 2.4 * k
-    y0 = gy - 5.0 * k
+    w, hh = 2.2 * k * p.get("scale", 1.0), 1.7 * k * p.get("scale", 1.0)
+    y0 = gy - p.get("y", 1.6) * k
+    ctx.save()
+    ctx.translate(sx, y0 + hh / 2)
+    ctx.rotate(p.get("tilt", -0.05))
+    ctx.rectangle(-w / 2, -hh / 2, w, hh)                          # yellowed paper
+    ctx.set_source_rgb(0.96, 0.92, 0.8)
+    ctx.fill_preserve()
+    ctx.set_source_rgba(0.55, 0.45, 0.3, 0.8)
+    ctx.set_line_width(max(1.0, 0.03 * k))
+    ctx.stroke()
+    ctx.save()
+    ctx.rectangle(-w / 2, -hh / 2, w, hh)
+    ctx.clip()
+    ctx.push_group()
+    x0_, y0_, ew, eh = kraggor_ext()
+    s_ = 0.82 * hh / eh
+    kraggor_head(ctx, 3.0, dict(mode="smile", sx=(-s_ * (x0_ + ew / 2) - w * 0.08) / W, scale=s_ * 1080.0 / H),
+                 stands_top=-hh / 2 + 0.08 * hh - s_ * y0_)
+    ctx.set_operator(cairo.OPERATOR_ATOP)                          # green pencil: keep the shape, soften the colour
+    ctx.rectangle(-w, -hh, 2 * w, 2 * hh)
+    ctx.set_source_rgba(0.35, 0.6, 0.35, 0.55)
+    ctx.fill()
+    ctx.pop_group_to_source()
+    ctx.paint_with_alpha(0.85)
+    ctx.restore()
+    se.draw_text(ctx, "K.", w * 0.32, hh * 0.32, 0.32 * k, fill=(0.25, 0.2, 0.15), stroke=None, sw=0)
+    ctx.restore()
+
+
+def draw_frame_photo(ctx, p, camx, t):
+    """Old photo on the garage wall: Grandpa Cone (cream truck, glasses, beard) centred in a wooden frame."""
+    x, z = p.get("x", -2.0), p.get("z", 3.6)
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    w, hh = 3.2 * k * p.get("scale", 1.0), 2.4 * k * p.get("scale", 1.0)
+    y0 = gy - p.get("y", 5.0) * k
     se.rrect(ctx, sx - w / 2 - 0.22 * k, y0 - 0.22 * k, w + 0.44 * k, hh + 0.44 * k, 0.1 * k)
     ctx.set_source_rgb(0.45, 0.28, 0.12)
     ctx.fill()
@@ -569,6 +605,26 @@ def draw_frame_photo(ctx, p, camx, t):
     ctx.rectangle(sx - w / 2, y0, w, hh)                            # faded print
     ctx.set_source_rgba(0.95, 0.85, 0.65, 0.25)
     ctx.fill()
+    if p.get("torn"):                                              # S01E02 sc.4: the right part is torn away; at the
+        ex = sx + w * 0.28                                         # tear, the tip of a little green tail pokes in
+        ctx.move_to(sx + w / 2 + 0.25 * k, y0 - 0.25 * k)          # (payoff sc.13: the missing piece = little Kraggor)
+        n_ = 9
+        for q in range(n_ + 1):
+            yy = y0 + hh * q / n_
+            ctx.line_to(ex + (0.12 if q % 2 else -0.1) * k, yy)
+        ctx.line_to(sx + w / 2 + 0.25 * k, y0 + hh + 0.25 * k)
+        ctx.close_path()
+        ctx.set_source_rgb(0.2, 0.14, 0.08)                        # the dark frame backing shows where it is torn
+        ctx.fill()
+        ctx.move_to(ex - 0.02 * k, y0 + hh * 0.72)
+        ctx.curve_to(ex - 0.45 * k, y0 + hh * 0.62, ex - 0.55 * k, y0 + hh * 0.8, ex - 0.32 * k, y0 + hh * 0.86)
+        ctx.curve_to(ex - 0.2 * k, y0 + hh * 0.84, ex - 0.12 * k, y0 + hh * 0.8, ex - 0.02 * k, y0 + hh * 0.8)
+        ctx.close_path()
+        ctx.set_source_rgb(*KR_BODY)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*KR_DARK)
+        ctx.set_line_width(max(1.0, 0.04 * k))
+        ctx.stroke()
     if p.get("glow"):
         ctx.rectangle(sx - w / 2, y0, w, hh)
         ctx.set_source_rgba(1, 0.9, 0.6, 0.25)
@@ -1756,6 +1812,7 @@ SFX = {
     "honk": lambda: honk(2),
     "thud_far": lambda: phone_step(0.45, seed=52) * 0.7,
     "honk_cheer": lambda: honk_cheer(),
+    "box_drop": lambda: box_drop(),
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
@@ -1872,6 +1929,24 @@ def honk_cheer():
     return out / max(1e-9, np.abs(out).max()) * 0.8
 
 
+def box_drop():
+    """A wooden box falls off a shelf: a hollow wooden knock (180-900 Hz, phone-audible) + small objects rattling
+    inside (short tonal clicks, not noise - A07)."""
+    sr = se.SR
+    n = int(1.3 * sr)
+    t = np.arange(n) / sr
+    rng = np.random.default_rng(71)
+    knock = sum(np.sin(2 * math.pi * f * t) * w for f, w in ((190, 1.0), (310, 0.7), (520, 0.45), (860, 0.25)))
+    out = knock * np.exp(-t * 14) * 0.6
+    for q in range(9):                                             # spoons, a bell, a book corner
+        i = int((0.04 + q * 0.07 + rng.uniform(0, 0.05)) * sr)
+        L = int(0.06 * sr)
+        tt = np.arange(L) / sr
+        f = rng.uniform(1400, 3200)
+        out[i:i + L] += np.sin(2 * math.pi * f * tt) * np.exp(-tt * 70) * rng.uniform(0.08, 0.18)
+    return out / max(1e-9, np.abs(out).max()) * 0.8
+
+
 def lamp_off():
     """A street lamp dying: a soft electric hum that stutters, then a dull relay tunk (v6 was a raspy square buzz
     + white-noise click: unpleasant, user 2026-10-06)."""
@@ -1931,8 +2006,10 @@ def amb_city_night(n, rng):
 
 def amb_room(n, rng):
     """Garage room tone: low hum + air."""
-    tt = np.arange(n) / se.SR
-    return np.sin(2 * math.pi * 60 * tt) * 0.15 + SM.box_avg(rng.normal(0, 1, n), 60) * 0.35
+    tt = np.arange(n) / se.SR                                      # A02: band-limited, no hiss; a fridge-like hum
+    air = fft_band(rng.normal(0, 1, n), 40, 300)                   # with harmonics a phone can play
+    hum = sum(np.sin(2 * math.pi * f * tt) * w for f, w in ((120, 0.5), (240, 0.3), (360, 0.15)))
+    return air / max(1e-9, np.abs(air).max()) * 0.6 + hum * 0.12
 
 
 def ambience_bed(scene, n):
@@ -2278,8 +2355,12 @@ def render_scene(ep, num, aspect):
             draw_lamp(ctx, camx)
         draw_props_layer(ctx, loc, camx, 11, back=True)            # trees first, signs in front of them
         for prop in scene.get("props", []):
+            if prop.get("from_shot", 0) > si:                      # props that appear later (e.g. what falls out of a box)
+                continue
             if prop["type"] == "poster":
                 draw_poster(ctx, prop, camx)
+            elif prop["type"] == "sketch":
+                draw_sketch(ctx, prop, camx, t)
             elif prop["type"] == "photo":
                 draw_frame_photo(ctx, dict(prop, glow=sh.get("photo_glow")), camx, t)
             elif prop["type"] == "desk":
