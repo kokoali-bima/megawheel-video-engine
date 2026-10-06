@@ -401,10 +401,20 @@ func _props() -> void:
 
 
 func _barricade(p) -> void:
-	# Siren's road block: striped board on two posts, a DANGER sign, blinking amber lamps. Appears with its shot.
+	# Siren's road block ACROSS the road (user 2026-10-06: "garis merahnya harus menyeberangi jalan"): a striped board
+	# from the near kerb to the far kerb, a little diagonal so the stripes still read from the side camera, posts at
+	# both ends + middle, blinking amber lamps, and the DANGER sign on the far end facing the camera. Appears with its shot.
+	var x0 = float(p.get("x", 12.0))
+	var skew = float(p.get("skew", 2.6))                     # metres the far end sits further along the road
+	var a = Vector3(x0 - skew / 2, 0, -dist(-0.45))          # near kerb
+	var b = Vector3(x0 + skew / 2, 0, -dist(3.05))           # far kerb
+	var holder = Node3D.new()
+	add_child(holder)
 	var root = Node3D.new()
-	root.position = wp(float(p.get("x", 12.0)), float(p.get("z", 2.4)), 0.0)
-	add_child(root)
+	root.position = (a + b) / 2
+	root.rotation.y = atan2(a.z - b.z, b.x - a.x)            # local +X runs from the near to the far kerb
+	holder.add_child(root)
+	var L = a.distance_to(b)
 	var n = 64
 	var img = Image.create(n, 8, false, Image.FORMAT_RGBA8)
 	for xx in range(n):
@@ -413,53 +423,66 @@ func _barricade(p) -> void:
 	var stripe = StandardMaterial3D.new()
 	stripe.albedo_texture = ImageTexture.create_from_image(img)
 	stripe.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	var w = float(p.get("w", 3.6))
-	for sx in [-1, 1]:
+	stripe.uv1_scale = Vector3(L / 3.6, 1, 1)
+	stripe.cull_mode = BaseMaterial3D.CULL_DISABLED
+	for f in [-0.5, 0.0, 0.5]:
 		var post = MeshInstance3D.new()
 		var pm = BoxMesh.new()
 		pm.size = Vector3(0.14, 1.3, 0.14)
 		post.mesh = pm
 		post.material_override = toon(Color(0.95, 0.95, 0.95))
-		post.position = Vector3(sx * w * 0.45, 0.65, 0)
+		post.position = Vector3(f * L * 0.96, 0.65, 0)
 		root.add_child(post)
-		var lamp = MeshInstance3D.new()
-		var lm = SphereMesh.new()
-		lm.radius = 0.12
-		lm.height = 0.24
-		lamp.mesh = lm
-		var am = StandardMaterial3D.new()
-		am.albedo_color = Color(1.0, 0.65, 0.1)
-		am.emission_enabled = true
-		am.emission = Color(1.0, 0.6, 0.1)
-		lamp.material_override = am
-		lamp.position = Vector3(sx * w * 0.45, 1.4, 0)
-		root.add_child(lamp)
-		blinkers.append([am, 0.0 if sx < 0 else 0.5])
-	var board = MeshInstance3D.new()
-	var bm = BoxMesh.new()
-	bm.size = Vector3(w, 0.42, 0.06)
-	board.mesh = bm
-	board.material_override = stripe
-	board.position = Vector3(0, 0.95, 0.02)
-	root.add_child(board)
+		if f != 0.0:
+			var lamp = MeshInstance3D.new()
+			var lm = SphereMesh.new()
+			lm.radius = 0.13
+			lm.height = 0.26
+			lamp.mesh = lm
+			var am = StandardMaterial3D.new()
+			am.albedo_color = Color(1.0, 0.65, 0.1)
+			am.emission_enabled = true
+			am.emission = Color(1.0, 0.6, 0.1)
+			lamp.material_override = am
+			lamp.position = Vector3(f * L * 0.96, 1.4, 0)
+			root.add_child(lamp)
+			blinkers.append([am, 0.0 if f < 0 else 0.5])
+	for hgt in [0.95, 0.45]:                                 # two striped rails, kerb to kerb
+		var board = MeshInstance3D.new()
+		var bm = BoxMesh.new()
+		bm.size = Vector3(L, 0.34 if hgt > 0.5 else 0.22, 0.06)
+		board.mesh = bm
+		board.material_override = stripe
+		board.position = Vector3(0, hgt, 0)
+		root.add_child(board)
+	var sign_root = Node3D.new()                             # DANGER sign on the far end, facing the camera
+	sign_root.position = b + Vector3(0.6, 0, -0.4)
+	holder.add_child(sign_root)
+	var spole = MeshInstance3D.new()
+	var spm = BoxMesh.new()
+	spm.size = Vector3(0.12, 2.0, 0.12)
+	spole.mesh = spm
+	spole.material_override = toon(Color(0.9, 0.9, 0.9))
+	spole.position = Vector3(0, 1.0, 0)
+	sign_root.add_child(spole)
 	var sboard = MeshInstance3D.new()
 	var sgm = BoxMesh.new()
-	sgm.size = Vector3(w * 0.86, 0.78, 0.05)
+	sgm.size = Vector3(2.6, 0.9, 0.05)
 	sboard.mesh = sgm
 	sboard.material_override = toon(Color(1.0, 0.92, 0.2))
-	sboard.position = Vector3(0, 1.7, 0.02)
-	root.add_child(sboard)
+	sboard.position = Vector3(0, 2.15, 0.02)
+	sign_root.add_child(sboard)
 	var lb = Label3D.new()
 	lb.text = str(p.get("text", "DANGER - ROAD CLOSED"))
 	lb.font_size = 64
-	lb.pixel_size = 0.0052                                   # two lines fit inside the sign (scene 2 review)
+	lb.pixel_size = 0.0052
 	lb.modulate = Color(0.1, 0.05, 0.05)
 	lb.outline_size = 0
-	lb.width = 600
+	lb.width = 460
 	lb.autowrap_mode = TextServer.AUTOWRAP_WORD
-	lb.position = Vector3(0, 1.7, 0.06)
-	root.add_child(lb)
-	timed.append([root, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
+	lb.position = Vector3(0, 2.15, 0.06)
+	sign_root.add_child(lb)
+	timed.append([holder, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
 
 
 func _foot_tex() -> ImageTexture:
