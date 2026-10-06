@@ -177,6 +177,7 @@ def run(episode, scene_no, aspect, out):
             return real_run(cmd, **kw)
     ST.subprocess = SP
     ST.CUT_RULE, ST.ISO_CAMERA = "auto", True                      # real 3D camera: clean cuts, no fake stretch
+    se.TEXT_UNMIRROR = True                                        # "SCHOOL BUS" not mirrored on a left-facing bus
     ST.STEMS = {}
     ST.render_scene(episode, scene_no, aspect)
     import numpy as np                                             # stems for the audio sensors (16 kHz, float16)

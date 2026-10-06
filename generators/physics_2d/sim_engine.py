@@ -2655,10 +2655,17 @@ def draw_face(ctx, vk, mood, t):
         ctx.stroke()
 
 
+TEXT_UNMIRROR = False     # story3d (2026-10-06): car lettering readable when the car faces left (Shorts unchanged)
+
+
 def local_text(ctx, s, x, y, size, color):
     ctx.save()
     ctx.translate(x, y)
     ctx.scale(1, -1)
+    if TEXT_UNMIRROR:
+        m = ctx.get_matrix()
+        if m.xx * m.yy - m.xy * m.yx < 0:                          # mirrored car: un-mirror the lettering only
+            ctx.scale(-1, 1)
     set_font(ctx, size)
     ext = ctx.text_extents(s)
     ctx.move_to(-ext.width / 2 - ext.x_bearing, -ext.height / 2 - ext.y_bearing)
