@@ -180,6 +180,16 @@ def lint(ep, n):
                     gap = abs(xa - xb) - (body_len(actors[ka]["vk"]) + body_len(actors[kb]["vk"])) / 2
                     if gap < 1.2:
                         err.append(f"{tag}: {ka} dan {kb} menempel (jarak {gap:.1f} m < 1.2) - beri jarak atau beda z")
+        # cars must not stand inside a solid prop (barricade spans the whole road)
+        for pr in sc.get("props", []):
+            if pr.get("type") != "barricade" or not (pr.get("from_shot", 0) <= i <= pr.get("to_shot", 9999)):
+                continue
+            bx0 = pr.get("x", 12) - pr.get("skew", 2.6) / 2 - 0.3
+            bx1 = pr.get("x", 12) + pr.get("skew", 2.6) / 2 + 0.3
+            for k, (xk, zk, hk) in pos.items():
+                half = body_len(actors[k]["vk"]) / 2
+                if not hk and xk + half > bx0 and xk - half < bx1:
+                    err.append(f"{tag}: {k} (x={xk:g}) menembus palang di x {bx0:.1f}..{bx1:.1f}")
         # parked in front of the focus / speaker (nearer car covers a farther one)
         want = {sh.get("on")} | {ln[0] for ln in sh.get("lines", []) if ln and ln[0] in actors}
         for aid in [w for w in want if w and w in actors]:
