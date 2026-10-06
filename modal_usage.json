@@ -2625,6 +2625,16 @@
    "gpu_seconds": 164.1,
    "wall_seconds": 148.1,
    "cost_usd": 0.053
+  },
+  {
+   "date": "2026-10-06",
+   "note": "scene 2 coverage",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 419.3,
+   "gpu_seconds": 204.6,
+   "wall_seconds": 149.4,
+   "cost_usd": 0.0625
   }
  ]
 }
