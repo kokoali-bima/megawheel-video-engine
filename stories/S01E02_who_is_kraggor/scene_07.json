@@ -1,0 +1,339 @@
+{
+ "title": "Scene 7 - Into the Mountains",
+ "chapter": "Into the Mountains",
+ "location": "mountain",
+ "theme_location": "countryside",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "night",
+ "fog": 0.45,
+ "letterbox": true,
+ "mountains": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -14,
+   "z": 1.0,
+   "face": 1,
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -23,
+   "z": 2.0,
+   "face": 1,
+   "emo": "scared"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -33,
+   "z": 2.8,
+   "face": 1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -22,
+   "z": 0.1,
+   "face": 1,
+   "emo": "normal",
+   "hidden": true
+  }
+ },
+ "props": [
+  {
+   "type": "mud",
+   "x": 9.0,
+   "w": 7.0
+  },
+  {
+   "type": "rockslide",
+   "x": -22.0,
+   "n": 10,
+   "from_shot": 7
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_mystery_night",
+   "from": 0,
+   "to": 2,
+   "vol": 0.5,
+   "start": 0.0,
+   "fade": 1.2,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_heroic_stand",
+   "from": 3,
+   "to": 6,
+   "vol": 0.55,
+   "start": 0.0,
+   "fade": 1.2,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_dark",
+   "from": 7,
+   "to": 8,
+   "vol": 0.55,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.5
+  },
+  {
+   "sting": "cue_kraggor_motif",
+   "shot": 8,
+   "at": 2.6,
+   "vol": 0.6
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "hold": 5.2,
+   "lift": 0.8,
+   "cut": "hard",
+   "move": {
+    "push": 0.05,
+    "pan": 2
+   },
+   "caption": "The mountain road. Midnight.",
+   "moves": {
+    "sprinkles": {
+     "to_x": -2,
+     "speed": 5
+    },
+    "zippy": {
+     "to_x": -11,
+     "speed": 5.2
+    },
+    "buster": {
+     "to_x": -20,
+     "speed": 5.5
+    }
+   }
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "buster"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 4,
+     "speed": 1.3
+    },
+    "zippy": {
+     "to_x": -5,
+     "speed": 1.3
+    },
+    "buster": {
+     "to_x": -14,
+     "speed": 1.3
+    }
+   },
+   "emote": {
+    "zippy": "scared",
+    "buster": "normal",
+    "sprinkles": "worried"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Is it me, or is the fog... looking at us?",
+     "scared"
+    ],
+    [
+     "buster",
+     "It's fog, Zippy. Fog doesn't look.",
+     "calm"
+    ],
+    [
+     "zippy",
+     "That's exactly what a looking fog would say.",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": 2.5,
+   "zoom": 1.05,
+   "move": {
+    "handheld": 5
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 8.5,
+     "speed": 3.5,
+     "stuck": true
+    }
+   },
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2
+    ]
+   ],
+   "lines": [
+    [
+     "sprinkles",
+     "I'm stuck! I'm stuck!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": 1,
+   "hold": 4.4,
+   "move": {
+    "pan": 2
+   },
+   "moves": {
+    "rocky": {
+     "show": true,
+     "to_x": 3.45,
+     "speed": 10
+    }
+   },
+   "emote": {
+    "sprinkles": "worried"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "rocky",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "rocky": "normal"
+   },
+   "lines": [
+    [
+     "rocky",
+     "Easy. Everybody gets stuck sometimes.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "rocky",
+   "with": "sprinkles",
+   "zoom": 1.1,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "rocky": {
+     "to_x": 8.0,
+     "speed": 2.5
+    },
+    "sprinkles": {
+     "to_x": 13.0,
+     "speed": 2.5
+    }
+   },
+   "emote": {
+    "sprinkles": "happy",
+    "rocky": "normal"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.5
+    ]
+   ],
+   "lines": [
+    [
+     "rocky",
+     "Heard you were going monster-hunting. Thought you could use... a monster truck.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "zippy",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "zippy": "laugh"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Ha! Okay, THAT was cool.",
+     "laugh"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": -3,
+   "hold": 4.4,
+   "move": {
+    "handheld": 8
+   },
+   "moves": {
+    "buster": {
+     "face": -1
+    }
+   },
+   "emote": {
+    "sprinkles": "scared",
+    "zippy": "scared",
+    "buster": "scared",
+    "rocky": "worried"
+   },
+   "sfx": [
+    [
+     "rockslide",
+     0.2
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "buster",
+   "move": {
+    "push": 0.12
+   },
+   "emote": {
+    "buster": "worried"
+   },
+   "lines": [
+    [
+     "buster",
+     "...No way back now.",
+     "worried"
+    ]
+   ]
+  }
+ ]
+}

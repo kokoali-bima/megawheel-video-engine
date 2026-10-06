@@ -1,0 +1,248 @@
+{
+ "title": "Scene 6 - The Plan",
+ "chapter": "The Plan",
+ "location": "town",
+ "theme_location": "city",
+ "time": "morning",
+ "weather": "clear",
+ "ambience": "birds",
+ "fog": 0.5,
+ "letterbox": true,
+ "shops": true,
+ "mountains": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "lightning": [
+  [
+   6,
+   2.3
+  ]
+ ],
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 7,
+   "z": 1.3,
+   "face": 1,
+   "emo": "determined"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -1.5,
+   "z": 2.2,
+   "face": 1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -34,
+   "z": 2.6,
+   "face": 1,
+   "emo": "normal",
+   "hidden": true
+  }
+ },
+ "props": [],
+ "score": [
+  {
+   "cue": "cue_wonder",
+   "from": 0,
+   "to": 1,
+   "vol": 0.5,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 2,
+   "to": 5,
+   "vol": 0.5,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_mystery_night",
+   "from": 6,
+   "to": 6,
+   "vol": 0.5,
+   "start": 10.0,
+   "fade": 1.0,
+   "tail": 1.5
+  },
+  {
+   "sting": "cue_kraggor_motif",
+   "shot": 6,
+   "at": 2.9,
+   "vol": 0.6
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "hold": 4.0,
+   "lift": 1.0,
+   "cut": "hard",
+   "move": {
+    "crane": 1.0,
+    "push": 0.06
+   },
+   "caption": "The next morning."
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "buster"
+   ],
+   "dx": 1.0,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "sprinkles": "determined",
+    "buster": "worried"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Buster, I have to go up the mountain. I have to talk to him.",
+     "determined"
+    ],
+    [
+     "buster",
+     "Talk? To a monster the size of a building?",
+     "worried"
+    ],
+    [
+     "sprinkles",
+     "Grandpa did.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": 4,
+   "hold": 4.4,
+   "move": {
+    "pan": 2
+   },
+   "moves": {
+    "zippy": {
+     "show": true,
+     "to_x": -12,
+     "speed": 9
+    }
+   },
+   "emote": {
+    "zippy": "shy"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "buster",
+    "zippy"
+   ],
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "zippy": "worried",
+    "sprinkles": "surprised"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Okay, this is the worst idea ever... I'm in.",
+     "worried"
+    ],
+    [
+     "sprinkles",
+     "Zippy? You're... coming?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "zippy",
+   "move": {
+    "push": 0.12
+   },
+   "emote": {
+    "zippy": "shy"
+   },
+   "lines": [
+    [
+     "zippy",
+     "You helped me in the race. Plus... somebody fast has to drive us out of there. Screaming.",
+     "shy"
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "buster",
+    "zippy"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "emote": {
+    "buster": "normal",
+    "sprinkles": "happy",
+    "zippy": "normal"
+   },
+   "lines": [
+    [
+     "buster",
+     "Fine. But we stay together. Always.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 2,
+   "lift": 1.6,
+   "hold": 6.0,
+   "move": {
+    "push": 0.18
+   },
+   "emote": {
+    "buster": "worried",
+    "sprinkles": "worried",
+    "zippy": "scared"
+   },
+   "sfx": [
+    [
+     "thunder_roll",
+     "end+0.8"
+    ]
+   ],
+   "lines": [
+    [
+     "buster",
+     "If this goes wrong...",
+     "worried"
+    ]
+   ]
+  }
+ ]
+}

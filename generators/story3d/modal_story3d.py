@@ -80,8 +80,7 @@ def overlay(job: str, episode: str, num: int, aspect: str) -> dict:
     return dict(num=num, ok=ok, frames=n, secs=time.time() - t0, log=(r.stdout + r.stderr)[-3000:])
 
 
-@app.function(image=gpu_img, gpu="T4", cpu=4, memory=8192, timeout=1800, volumes={"/vol": vol})
-def world(job: str, num: int, start: int, n: int) -> dict:
+def _world(job: str, num: int, start: int, n: int) -> dict:
     t0 = time.time()
     vol.reload()
     d = f"/vol/{job}/s{num:02d}"
@@ -103,6 +102,42 @@ def world(job: str, num: int, start: int, n: int) -> dict:
                         "-pix_fmt", "yuv420p", "-crf", "16", mp4], check=True)
     vol.commit()
     return dict(num=num, start=start, n=n, ok=os.path.exists(mp4), errors=errs, device=dev, secs=time.time() - t0)
+
+
+@app.function(image=gpu_img, gpu="T4", cpu=4, memory=8192, timeout=1800, volumes={"/vol": vol})
+def world(job: str, num: int, start: int, n: int) -> dict:
+    return _world(job, num, start, n)
+
+
+@app.function(image=gpu_img, gpu="T4", cpu=4, memory=8192, timeout=900, volumes={"/vol": vol})
+def world_smoke(job: str, num: int, start: int, n: int) -> dict:
+    """A short Godot render (n frames from `start`) for testing new world code: returns the Godot errors and the
+    first / middle / last frame as JPEG (nothing is composed or uploaded)."""
+    r = _world(job, num, start, n)
+    pics = []
+    mp4 = f"/vol/{job}/s{num:02d}/world_{start:06d}.mp4"
+    if r["ok"]:
+        for k, fr in enumerate((0, n // 2, max(0, n - 1))):
+            jpg = f"/tmp/f{start}_{k}.jpg"
+            subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", mp4, "-vf", "select=eq(n\\,%d)" % fr, "-frames:v", "1",
+                            "-q:v", "3", jpg], check=True)
+            pics.append((fr, open(jpg, "rb").read()))
+    r["pics"] = pics
+    return r
+
+
+@app.function(image=cpu_img, cpu=2, memory=4096, timeout=600, volumes={"/vol": vol})
+def smoke_pick(job: str, num: int) -> dict:
+    """Which frames a short test should look at: the first, the middle shot and the last shot of the scene."""
+    vol.reload()
+    d = f"/vol/{job}/s{num:02d}"
+    sc = json.load(open(f"{d}/scene.json"))
+    nfr = len(json.load(open(f"{d}/frames.json"))["frames"])
+    shots, fps = sc["shots"], sc["fps"]
+    picks = {0}
+    for i in sorted({len(shots) // 2, len(shots) - 1}):
+        picks.add(min(nfr - 1, int((shots[i]["t0"] + 1.0) * fps)))
+    return dict(num=num, starts=sorted(picks), frames=nfr)
 
 
 @app.function(image=cpu_img, cpu=4, memory=8192, timeout=1800, volumes={"/vol": vol})
@@ -148,6 +183,42 @@ def _ledger():
         with open(LEDGER) as fh:
             return json.load(fh)
     return {"budget_usd": BUDGET_USD, "runs": []}
+
+
+@app.local_entrypoint()
+def smoke(episode: str, scenes: str, n: int = 8, out: str = "work/story3d/smoke", aspect: str = "h"):
+    """Short Godot test of new world code (run it with the branch checked out BEFORE merging to main):
+    characters overlay (needed for the camera), then n Godot frames at three places per scene -> Godot errors + JPEGs."""
+    nums = [int(x) for x in scenes.split(",") if x]
+    job = f"{episode}_smoke{int(time.time())}"
+    t0 = time.time()
+    ov = list(overlay.starmap([(job, episode, k, aspect) for k in nums]))
+    cpu_s = sum(r["secs"] * 8 for r in ov)
+    for r in ov:
+        print(f"[smoke] overlay s{r['num']:02d}: {'OK' if r['ok'] else 'GAGAL'} {r['frames']} frames {r['secs']:.0f}s")
+        if not r["ok"]:
+            print(r["log"])
+    good = [r["num"] for r in ov if r["ok"]]
+    picks = list(smoke_pick.starmap([(job, k) for k in good]))
+    jobs = [(job, p["num"], st, n) for p in picks for st in p["starts"]]
+    wr = list(world_smoke.starmap(jobs))
+    os.makedirs(out, exist_ok=True)
+    gpu_s = 0.0
+    for r in wr:
+        gpu_s += r["secs"]
+        print(f"[smoke] world s{r['num']:02d}@{r['start']}: ok={r['ok']} errors={r['errors']} {r['device'][:40]}")
+        for fr, jpg in r["pics"]:
+            with open(os.path.join(out, f"s{r['num']:02d}_f{r['start'] + fr:05d}.jpg"), "wb") as fh:
+                fh.write(jpg)
+    cost = (cpu_s * (CPU_PRICE + 1 * MEM_PRICE) + gpu_s * (T4_PRICE + 4 * CPU_PRICE + 8 * MEM_PRICE)) * OVERHEAD
+    led = _ledger()
+    led["runs"].append(dict(date=dt.date.today().isoformat(), note=f"story3d SMOKE {episode} {scenes}",
+                            engine="story3d (smoke)", scenes=len(nums), cpu_seconds=round(cpu_s, 1),
+                            gpu_seconds=round(gpu_s, 1), wall_seconds=round(time.time() - t0, 1), cost_usd=round(cost, 4)))
+    with open(LEDGER, "w") as fh:
+        json.dump(led, fh, indent=1)
+    bad = [r for r in wr if not r["ok"] or r["errors"]]
+    print(f"[smoke] DONE {len(wr) - len(bad)}/{len(wr)} bursts clean in {time.time() - t0:.0f}s wall ≈${cost:.3f} -> {out}")
 
 
 @app.local_entrypoint()

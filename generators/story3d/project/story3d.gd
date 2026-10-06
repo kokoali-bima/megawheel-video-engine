@@ -92,6 +92,7 @@ func _ready() -> void:
 		_mountain_backdrop()
 	if bool(S["scene"].get("rain", false)):
 		_rain()
+	_lightning()
 	_props()
 	_eyes()
 	_kraggor_far()
@@ -878,8 +879,16 @@ func _rain() -> void:
 	qm.material = m
 	e.mesh = qm
 	rain_node.add_child(e)
+
+
+func _lightning() -> void:
+	# lightning flashes: scene "lightning": [[shot, seconds into that shot], ...] -> absolute times via the shot table
 	for ft in S["scene"].get("lightning", []):
-		flashes.append(float(ft))
+		var si = int(ft[0])
+		if shot_t0.has(si):
+			flashes.append(float(shot_t0[si]) + float(ft[1]))
+	if flashes.size() == 0:
+		return
 	flash_light = DirectionalLight3D.new()
 	flash_light.rotation_degrees = Vector3(-60, 20, 0)
 	flash_light.light_color = Color(0.85, 0.9, 1.0)
@@ -1423,6 +1432,7 @@ func _process(_d: float) -> void:
 		tp[0].visible = shot >= int(tp[1]) and shot <= int(tp[2])
 	if rain_node != null:
 		rain_node.position.x = float(f["camx"])
+	if flash_light != null:
 		var fl = 0.0
 		for ft in flashes:
 			var d = t - float(ft)
@@ -1442,7 +1452,7 @@ func _process(_d: float) -> void:
 					var fall = 40.0 - 4.9 * ud * ud * 4.0
 					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
 	for gm_ in glints:
-		gm_.emission_energy_multiplier = 0.4 + 3.5 * maxf(0.0, sin(t * 2.3)) ** 8
+		gm_.emission_energy_multiplier = 0.4 + 3.5 * pow(maxf(0.0, sin(t * 2.3)), 8.0)
 	for lp in swing_lamps:                                   # a gentle sway
 		lp.rotation.z = 0.05 * sin(t * 1.1)
 		lp.rotation.x = 0.03 * sin(t * 0.8 + 1.0)

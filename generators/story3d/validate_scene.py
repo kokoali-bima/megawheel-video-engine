@@ -225,6 +225,17 @@ def lint(ep, n):
                 cov = max(0.0, min(x + half, ox + oh_) - max(x - half, ox - oh_)) / (2 * half)
                 if cov > 0.3:
                     err.append(f"{tag}: {aid} (x={x:g}) tertutup {oid} (x={ox:g}, lebih dekat kamera) {cov:.0%} - geser x")
+    for lt in sc.get("lightning", []):                              # [shot, seconds into that shot]
+        if not (isinstance(lt, list) and len(lt) == 2 and isinstance(lt[0], int) and 0 <= lt[0] < len(shots)):
+            err.append(f"lightning {lt}: harus [nomor shot, detik di dalam shot] (panjang shot ikut suara, jadi bukan detik mutlak)")
+    for pr in sc.get("props", []):                                 # little Kraggor: a world-anchored prop
+        if pr.get("type") == "kraggor_small":
+            if pr.get("mode", "calm") not in {"calm", "scared", "munch", "smile", "sleep"}:
+                err.append(f"kraggor_small: mode '{pr.get('mode')}' tidak dikenal (calm|scared|munch|smile|sleep)")
+            if not 0 <= int(pr.get("from_shot", 0)) <= int(pr.get("to_shot", len(shots) - 1)) < len(shots):
+                err.append("kraggor_small: from_shot/to_shot di luar rentang shot")
+            if not 0.5 <= float(pr.get("z", 3.4)) <= 5.0:
+                err.append("kraggor_small: z harus 0.5..5 (di jalan atau tepi hutan)")
     # variety (same rules as the QA sensors, before rendering)
     cams = [s.get("cam", "wide") for s in shots if "look" not in s]
     run = 1

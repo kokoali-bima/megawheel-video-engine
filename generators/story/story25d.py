@@ -1586,6 +1586,8 @@ def draw_kraggor_small(ctx, p, camx, t, shots):
     ctx.save()
     ctx.translate(gx + shiver, gy)
     ctx.scale(face * breath, breath)
+    if p.get("sway"):                                              # swaying to the music (smile mode)
+        ctx.rotate(0.06 * math.sin(t * 3.4))
     kraggor_head(ctx, t, dict(mode=mode, baby=True, cone_r=cone_r, sx=-s * (x0 + w / 2) / W, scale=s * 1080.0 / H),
                  stands_top=-s * (y0 + h))
     ctx.restore()
