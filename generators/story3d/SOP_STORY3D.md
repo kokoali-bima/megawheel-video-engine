@@ -9,6 +9,10 @@ BLUEPRINT, CONFIG_BEST, PRODUCTION_STANDARD, CHARACTERS.md, ERROR_LOG, QA_DEFECT
 (`stories/<ep>/script.md`, harus sudah disetujui user), file ini.
 
 ## 1. Satu perintah baku (di VM 99.3)
+Sebelum render: `venv/bin/python generators/story3d/validate_scene.py --episode <ep> --scenes NN` (linter; gratis;
+wajib 0 error — produce_story3d juga menjalankannya dan menolak render bila gagal). Manual semua agen: `AGENTS.md`;
+prompt siap-tempel untuk model mana pun: `generators/story3d/TASK_CARD.md`.
+
 ```
 cd /root/video-engine && bash git_sync.sh pull
 venv/bin/python generators/story3d/produce_story3d.py --episode <ep> --scenes 2,3,4 [--upload]

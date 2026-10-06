@@ -29,6 +29,17 @@
 | 13 | 2026-10-04 | S041 | Monster truck menyalip taksi tanpa sebab | Bonus kecepatan 3% setelah ramp | Bonus dihapus | Cek "realistic order" (menangkapnya) | ✅ |
 | 14 | 2026-10-04 | **S038, S039 (semua kontainer)** | **Kontainer tidak terlihat, mobil menabrak "udara kosong"** | `draw_container`: setelah mendarat posisi diset kembali "di langit" (22 m ke atas, keluar layar) — sejak v3 | `drop = 0.0` setelah mendarat | **Sensor piksel** (piksel pekat yang benar-benar tergambar): rintangan bintang wajib jelas terlihat (median ≥ 1500 px; menetap 0–0,8 dtk setelah tabrakan, sesaat −0,6…+0,3); rintangan lain: bila mobil korban terlihat, rintangan wajib muncul (maks ≥ 1500 px dalam 1,5 dtk) — kalau tidak → GAGAL; kejadian sepenuhnya di luar layar = peringatan. Divalidasi: versi bug kontainer tertangkap (0 px), 15 jenis rintangan normal lolos | ✅ |
 
+| 15 | 2026-10-05 | Ep.2 pilot C v5 | Mobil melayang di adegan footprint (Godot) | Decal jejak 6,7×7,4 m menjorok ke depan mobil; tanpa bayangan kontak | Jejak rebah sejajar jalan 5,5×3 m; `draw_contact` | story3d `grounding` | ✅ |
+| 16 | 2026-10-06 | Ep.2 pilot C v6 | Mobil melayang di shot miring (dutch) | Tanda roll kamera Godot terbalik | Rumus kamera diturunkan ulang (roll +, lens shift di sumbu layar) | story3d `roll/proyeksi` (Godot vs cairo ≤ 2 px) | ✅ |
+| 17 | 2026-10-06 | Ep.2 pilot v6 | Noise saat adegan sepi; langkah Kraggor tak terdengar | Ambience = desis 1–2 kHz; langkah < 200 Hz (HP tak bisa memutar) | `fft_band`, `phone_step`, heartbeat knock | story3d `audio` (desis + `phone_band`) | ✅ |
+| 18 | 2026-10-06 | Ep.2 pilot v6 (+Ep.1) | Awal lirik / kalimat panjang tidak tampil | Subtitle hanya 2 baris terakhir | Subtitle berhalaman (`|`, waktu halaman) | — (kode) | ✅ |
+| 19 | 2026-10-06 | Ep.2 pilot C v7 | Siluet Kraggor terlihat sejak shot 3 | Sprite dipasang statis | Tampil hanya di frame `kfar` | story3d `reveal` | ✅ |
+| 20 | 2026-10-06 | story3d scene 2 r1 | Dunia meleset 283 px di shot low | Regangan y 1,12 cam "low" (2.5D) tak bisa ditiru kamera 3D | `ISO_CAMERA` | story3d `roll/proyeksi` | ✅ |
+| 21 | 2026-10-06 | story3d scene 1–2 r1 | Kamera "swoosh" antar shot (20 m / 1 dtk) — kesan lompat | Glide 1,1–1,4 dtk ke setiap shot | `CUT_RULE="auto"`: perubahan besar = cut, kecil = glide pelan | story3d `kamera` (gerak bidang tokoh ≤ 70 px/f) | ✅ |
+| 22 | 2026-10-06 | story3d scene 2 r1 | Zippy tertutup Sprinkles 46% | Posisi parkir bertumpuk | Posisi digeser | story3d `framing` (tertutup > 30% = FAIL) | ✅ |
+| 23 | 2026-10-06 | story3d scene 2 r1 | Klakson/sorakan menimpa kalimat; musik menutupi | Efek di detik tetap; cue terlalu keras | sfx `"end+0.1"`; vol cue | story3d `audio` masking (≥ 6 dB) | ✅ |
+| 24 | 2026-10-06 | story3d scene 2 r2 | Tulisan "SCHOOL BUS"/"POLICE" terbalik (cermin) | Mobil menghadap kiri dicerminkan beserta tulisan | `TEXT_UNMIRROR` (story3d) | — (visual; Shorts belum diubah) | ✅ story3d |
+
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
 |---|---|---|
@@ -38,6 +49,7 @@
 | Struktur variasi | produce.py | tata letak + rintangan berulang (10 video terakhir) |
 | Isi lubang dipakai | sim_engine `content_required()` | duri/bom/monster cuma hiasan |
 | Piksel badge FAIL/WINNER, outro | audit.py (CHALLENGE) | badge/outro tidak tampil di detik kejadian |
+| story3d: roll/proyeksi, grounding, kamera, lompatan, framing, variasi, cahaya/kontras/bayangan, audio (desis, sunyi, masking, HP, monoton, LUFS), reveal | generators/story3d/audit_story3d.py | semua cacat #15–23 (ambang tetap, lihat SOP_STORY3D §4) |
 
 ## Belum ada (berikutnya)
 - Sensor tumpang-tindih: rintangan menutupi wajah/bodi mobil secara janggal (kasus #9).

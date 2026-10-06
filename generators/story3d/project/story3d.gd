@@ -444,20 +444,20 @@ func _barricade(p) -> void:
 	root.add_child(board)
 	var sboard = MeshInstance3D.new()
 	var sgm = BoxMesh.new()
-	sgm.size = Vector3(w * 0.8, 0.62, 0.05)
+	sgm.size = Vector3(w * 0.86, 0.78, 0.05)
 	sboard.mesh = sgm
 	sboard.material_override = toon(Color(1.0, 0.92, 0.2))
-	sboard.position = Vector3(0, 1.62, 0.02)
+	sboard.position = Vector3(0, 1.7, 0.02)
 	root.add_child(sboard)
 	var lb = Label3D.new()
 	lb.text = str(p.get("text", "DANGER - ROAD CLOSED"))
 	lb.font_size = 64
-	lb.pixel_size = 0.0068
+	lb.pixel_size = 0.0052                                   # two lines fit inside the sign (scene 2 review)
 	lb.modulate = Color(0.1, 0.05, 0.05)
 	lb.outline_size = 0
 	lb.width = 600
 	lb.autowrap_mode = TextServer.AUTOWRAP_WORD
-	lb.position = Vector3(0, 1.62, 0.06)
+	lb.position = Vector3(0, 1.7, 0.06)
 	root.add_child(lb)
 	timed.append([root, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
 

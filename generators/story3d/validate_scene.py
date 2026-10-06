@@ -1,0 +1,239 @@
+"""Scene JSON linter for story3d - runs BEFORE any render money is spent (user 2026-10-06: "standar agar Gemini, OpenAI,
+DeepSeek, bahkan Kimi bisa membuat video yang sama kualitasnya"). Any agent / model writes the scene; this file decides
+whether it is allowed to render. It rejects what weaker models typically get wrong:
+  invented keys or values (a typo silently does nothing), unknown camera / move / effect / music / emotion names,
+  speakers without a voice, cars parked in front of the one who talks, monotonous shot lists, one music cue for the
+  whole scene, crickets in town, lines too long for a subtitle, timing strings that do not parse.
+  venv/bin/python generators/story3d/validate_scene.py --episode S01E02_who_is_kraggor --scenes 2,3
+Exit 0 = OK (warnings allowed), 1 = errors (fix the JSON; produce_story3d refuses to render)."""
+import argparse
+import json
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+
+SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
+              "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
+              "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
+              "tint", "note"}
+SHOT_KEYS = {"cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
+             "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
+             "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
+             "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint"}
+ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
+MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
+ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
+                   "at", "hold", "patched"}
+CAMS = {"wide", "two", "medium", "close", "ecu", "low", "track"}
+LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage"}
+TIMES = {"morning", "day", "noon", "evening", "dusk", "dawn", "night"}
+AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
+EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
+          "worried", "determined", "shy", "dizzy", "whisper"}
+LINE_EMOS = EMOTES | {"calm"}
+PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud"}
+NARRATORS = {"narrator", "announcer", "announcer2"}
+MAX_LINE = 140
+
+
+def sfx_names():
+    sys.path.insert(0, os.path.join(ROOT, "generators", "story"))
+    try:
+        import story25d as ST
+        return set(ST.SFX)
+    except Exception:                                              # noqa: BLE001 (lint still runs without cairo)
+        return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
+                "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near"}
+
+
+def vehicles():
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "generators", "physics_2d"))
+        import sim_engine as se
+        return set(se.VEHICLES)
+    except Exception:                                              # noqa: BLE001
+        return {"icecream", "bus", "sports", "monster", "police", "f1", "taxi", "firetruck", "monster2", "bigrig"}
+
+
+def voices():
+    d = os.path.join(ROOT, "branding", "voice", "characters")
+    return {f[:-4] for f in os.listdir(d) if f.endswith(".wav")} if os.path.isdir(d) else set()
+
+
+def body_len(vk):
+    try:
+        import sim_engine as se
+        return se.VEHICLES[vk]["body"][0]
+    except Exception:                                              # noqa: BLE001
+        return {"bus": 8.0, "bigrig": 9.0, "icecream": 5.2, "firetruck": 7.0}.get(vk, 4.4)
+
+
+def lint(ep, n):
+    path = os.path.join(ROOT, "stories", ep, f"scene_{n:02d}.json")
+    err, warn = [], []
+    try:
+        sc = json.load(open(path, encoding="utf-8"))
+    except Exception as e:                                         # noqa: BLE001
+        return [f"tidak bisa dibaca: {e}"], []
+    for k in set(sc) - SCENE_KEYS:
+        err.append(f"kunci scene tidak dikenal: '{k}'")
+    if sc.get("location", "town") not in LOCATIONS:
+        err.append(f"location '{sc.get('location')}' tidak dikenal {sorted(LOCATIONS)}")
+    tm = sc.get("time", "morning")
+    if tm not in TIMES:
+        err.append(f"time '{tm}' tidak dikenal {sorted(TIMES)}")
+    amb = sc.get("ambience")
+    if amb is not None and amb not in AMBIENCE:
+        err.append(f"ambience '{amb}' tidak dikenal {sorted(AMBIENCE)}")
+    if amb == "night" and sc.get("location", "town") in ("town", "arena", "podium"):
+        err.append("ambience 'night' (jangkrik) di kota - pakai 'city_night' (keputusan user 2026-10-05)")
+    actors = sc.get("actors", {})
+    vks, vcs = vehicles(), voices()
+    for aid, a in actors.items():
+        for k in set(a) - ACTOR_KEYS:
+            err.append(f"aktor {aid}: kunci tidak dikenal '{k}'")
+        if a.get("vk") not in vks:
+            err.append(f"aktor {aid}: kendaraan '{a.get('vk')}' tidak ada")
+        if not -0.6 <= float(a.get("z", 1.0)) <= 3.2:
+            err.append(f"aktor {aid}: z={a.get('z')} di luar jalan (-0.6..3.2)")
+        if a.get("emo", "normal") not in EMOTES:
+            err.append(f"aktor {aid}: emo '{a.get('emo')}' tidak dikenal")
+    for p in sc.get("props", []):
+        if p.get("type") not in PROPS:
+            err.append(f"prop '{p.get('type')}' tidak dikenal {sorted(PROPS)}")
+    sfxs = sfx_names()
+    shots = sc.get("shots", [])
+    if not shots:
+        err.append("tidak ada shot")
+    pos = {aid: (float(a.get("x", 0)), float(a.get("z", 1.0)), bool(a.get("hidden", False))) for aid, a in actors.items()}
+    for i, sh in enumerate(shots):
+        tag = f"shot {i}"
+        for k in set(sh) - SHOT_KEYS:
+            err.append(f"{tag}: kunci tidak dikenal '{k}'")
+        cam = sh.get("cam", "wide")
+        if "look" not in sh and cam not in CAMS:
+            err.append(f"{tag}: cam '{cam}' tidak dikenal {sorted(CAMS)}")
+        if sh.get("on") and sh["on"] not in actors:
+            err.append(f"{tag}: on='{sh['on']}' bukan aktor scene")
+        if cam == "two" and sh.get("with") not in actors:
+            err.append(f"{tag}: cam 'two' butuh with=<aktor>")
+        for k in set(sh.get("move", {})) - MOVE_KEYS:
+            err.append(f"{tag}: gerak kamera tidak dikenal '{k}' {sorted(MOVE_KEYS)}")
+        for aid, mv in sh.get("moves", {}).items():
+            if aid not in actors:
+                err.append(f"{tag}: moves untuk '{aid}' yang bukan aktor")
+                continue
+            for k in set(mv) - ACTOR_MOVE_KEYS:
+                err.append(f"{tag}: gerak aktor {aid} tidak dikenal '{k}'")
+            x, z, hid = pos[aid]
+            if "show" in mv:
+                hid = not mv["show"]
+            x = float(mv.get("to_x", mv.get("x", x)))
+            pos[aid] = (x, z, hid)
+        for aid, e in sh.get("emote", {}).items():
+            if aid not in actors:
+                err.append(f"{tag}: emote untuk '{aid}' yang bukan aktor")
+            elif e not in EMOTES:
+                err.append(f"{tag}: emote '{e}' tidak dikenal")
+        for s in sh.get("sfx", []):
+            name, dt = (s, 0.0) if isinstance(s, str) else (s[0], s[1] if len(s) > 1 else 0.0)
+            if name not in sfxs:
+                err.append(f"{tag}: efek '{name}' tidak ada {sorted(sfxs)}")
+            if isinstance(dt, str):
+                try:
+                    assert dt.startswith("end")
+                    float(dt[3:] or 0.0)
+                except Exception:                                  # noqa: BLE001
+                    err.append(f"{tag}: waktu efek '{dt}' (pakai angka detik atau 'end+0.1')")
+        for ln in sh.get("lines", []):
+            if len(ln) < 3:
+                err.append(f"{tag}: baris dialog harus [spk, teks, emosi]")
+                continue
+            spk, text, emo = ln[:3]
+            if spk not in actors and spk not in NARRATORS:
+                err.append(f"{tag}: pembicara '{spk}' bukan aktor scene")
+            if spk not in NARRATORS and spk not in vcs:
+                err.append(f"{tag}: tidak ada suara branding/voice/characters/{spk}.wav")
+            if emo not in LINE_EMOS:
+                err.append(f"{tag}: emosi kalimat '{emo}' tidak dikenal")
+            if len(ln) > 3 and not os.path.exists(os.path.join(ROOT, ln[3])):
+                err.append(f"{tag}: file nyanyian tidak ada: {ln[3]}")
+            if len(ln) <= 3 and len(text) > MAX_LINE:
+                err.append(f"{tag}: kalimat {len(text)} huruf (maks {MAX_LINE}) - pecah jadi dua shot")
+            if spk in actors and pos[spk][2] and cam != "wide":
+                warn.append(f"{tag}: {spk} bicara tapi masih tersembunyi (hidden)")
+            if spk in actors and sh.get("on") and sh["on"] != spk and cam in ("close", "ecu", "medium", "low"):
+                warn.append(f"{tag}: close-up pada {sh['on']} padahal {spk} yang bicara (reaksi? sengaja?)")
+        # parked in front of the focus / speaker (nearer car covers a farther one)
+        want = {sh.get("on")} | {ln[0] for ln in sh.get("lines", []) if ln and ln[0] in actors}
+        for aid in [w for w in want if w and w in actors]:
+            x, z, hid = pos[aid]
+            if hid:
+                continue
+            half = body_len(actors[aid]["vk"]) / 2
+            for oid, (ox, oz, oh) in pos.items():
+                if oid == aid or oh or oz >= z - 0.05:
+                    continue
+                oh_ = body_len(actors[oid]["vk"]) / 2
+                cov = max(0.0, min(x + half, ox + oh_) - max(x - half, ox - oh_)) / (2 * half)
+                if cov > 0.3:
+                    err.append(f"{tag}: {aid} (x={x:g}) tertutup {oid} (x={ox:g}, lebih dekat kamera) {cov:.0%} - geser x")
+    # variety (same rules as the QA sensors, before rendering)
+    cams = [s.get("cam", "wide") for s in shots if "look" not in s]
+    run = 1
+    for i in range(1, len(cams)):
+        run = run + 1 if cams[i] == cams[i - 1] else 1
+        if run >= 3:
+            err.append(f"variasi: {run} shot '{cams[i]}' berturut-turut")
+    if len(shots) >= 5 and len(set(cams)) < 3:
+        err.append(f"variasi: hanya {len(set(cams))} ukuran shot (min 3)")
+    moves = {k for s in shots for k in s.get("move", {})}
+    if len(shots) >= 5 and len(moves) < 2:
+        err.append(f"variasi: gerak kamera {sorted(moves)} (min 2 jenis)")
+    if shots and not ({"push", "punch", "low"} & ({k for k in shots[-1].get("move", {})} |
+                                                   ({"punch"} if shots[-1].get("punch") else set()) |
+                                                   {shots[-1].get("cam", "")})):
+        warn.append("kait akhir: shot terakhir tanpa push / low / punch")
+    # music spotting
+    score = sc.get("score", [])
+    if not score and len(shots) >= 6:
+        warn.append("tidak ada spotting musik (score)")
+    cue_dir = os.path.join(ROOT, "branding", "music", "cues")
+    covered = {}
+    for c in score:
+        name = c.get("cue") or c.get("sting")
+        if not name or not os.path.exists(os.path.join(cue_dir, name + ".wav")):
+            err.append(f"score: cue '{name}' tidak ada di branding/music/cues")
+        if "cue" in c:
+            a, b = int(c.get("from", 0)), int(c.get("to", c.get("from", 0)))
+            if not (0 <= a <= b < len(shots)):
+                err.append(f"score: rentang shot {a}..{b} di luar 0..{len(shots) - 1}")
+            covered[name] = covered.get(name, 0) + (b - a + 1)
+        elif not 0 <= int(c.get("shot", 0)) < len(shots):
+            err.append(f"score: sting di shot {c.get('shot')} di luar rentang")
+    if len(shots) >= 8 and covered and len(covered) == 1 and max(covered.values()) >= 0.85 * len(shots):
+        err.append("score: satu cue menutupi hampir seluruh scene (monoton) - spotting per momen")
+    return err, warn
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--episode", required=True)
+    ap.add_argument("--scenes", required=True)
+    a = ap.parse_args()
+    bad = 0
+    for n in [int(x) for x in a.scenes.split(",") if x]:
+        err, warn = lint(a.episode, n)
+        print(f"[lint] scene {n:02d}: {'OK' if not err else 'GAGAL'} ({len(err)} error, {len(warn)} peringatan)")
+        for e in err:
+            print(f"  ERROR {e}")
+        for w in warn:
+            print(f"  WARN  {w}")
+        bad += len(err)
+    sys.exit(1 if bad else 0)
+
+
+if __name__ == "__main__":
+    main()

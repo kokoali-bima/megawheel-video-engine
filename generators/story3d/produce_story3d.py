@@ -3,7 +3,7 @@ same because every step is fixed: pinned Godot 4.4.1 + fonts, seeded worlds, cac
   cd /root/video-engine && venv/bin/python generators/story3d/produce_story3d.py --episode S01E02_who_is_kraggor \
        --scenes 2[,3,...] [--upload]
 Steps (stop at the first hard failure):
-  1. preflight   VM code == GitHub (git_sync), Modal CLI present, scene files exist and parse
+  1. preflight   VM code == GitHub (git_sync), Modal CLI present, scene JSON passes validate_scene (the linter)
   2. prepare     every voice line (Chatterbox on Modal, cached + speech-recognition QA); a line that is not
                  cached afterwards stops the render (lip-sync is made in the Modal container, rhubarb x86)
   3. render      Modal: characters (CPU) + Godot world (T4 GPU) + compose, all scenes / parts in parallel
@@ -39,13 +39,19 @@ def preflight(ep, nums):
     if not os.path.exists(os.path.join(ROOT, "venv-modal", "bin", "modal")):
         log("STOP: venv-modal/bin/modal tidak ada")
         return False
+    import validate_scene as V                                     # the scene linter: same rules for every agent/model
+    bad = 0
     for n in nums:
-        p = os.path.join(ROOT, "stories", ep, f"scene_{n:02d}.json")
-        try:
-            json.load(open(p))
-        except Exception as e:                                     # noqa: BLE001
-            log(f"STOP: {p}: {e}")
-            return False
+        err, warn = V.lint(ep, n)
+        log(f"lint scene {n:02d}: {len(err)} error, {len(warn)} peringatan")
+        for e in err:
+            log(f"  ERROR {e}")
+        for w in warn:
+            log(f"  WARN  {w}")
+        bad += len(err)
+    if bad:
+        log("STOP: scene JSON tidak lolos validate_scene (perbaiki dulu; tidak ada biaya render terpakai)")
+        return False
     return True
 
 
