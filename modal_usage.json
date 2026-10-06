@@ -2545,6 +2545,16 @@
    "gpu_seconds": 72.5,
    "wall_seconds": 105.2,
    "cost_usd": 0.0185
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story3d test scene 1",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 373.0,
+   "gpu_seconds": 161.4,
+   "wall_seconds": 133.8,
+   "cost_usd": 0.05
   }
  ]
 }
