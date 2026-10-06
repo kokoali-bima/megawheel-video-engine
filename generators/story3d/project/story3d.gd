@@ -35,6 +35,11 @@ var world_env: Environment
 var shot_t0 = {}                   # shot index -> its first frame time (props that act inside a shot)
 var crates = []                    # [node, shelf_h, floor_h, fall_shot, dust emitter, landed]
 var swing_lamps = []               # [pivot node] hanging lamps that sway a little
+var rain_node: Node3D              # storm: rain follows the camera
+var flashes = []                   # storm: lightning times (s)
+var flash_light: DirectionalLight3D
+var slides = []                    # [rocks[], from_shot, x] rockslides
+var glints = []                    # [material] things that sparkle (the old key)
 var sun_light: DirectionalLight3D
 
 
@@ -59,15 +64,23 @@ func _ready() -> void:
 			kfar = fr[1]["kfar"]
 			kfar_cam = float(fr[1]["camx"])
 			break
-	if str(S["scene"].get("location", "town")) == "garage":
+	var loc0 = str(S["scene"].get("location", "town"))
+	if loc0 == "garage":
 		_environment_interior()
 		_garage()
+	elif loc0 == "cave":
+		_environment_interior(Color(0.25, 0.32, 0.45), 0.22)
+		_cave()
 	else:
 		_environment()
 		_ground()
 	var loc = str(S["scene"].get("location", "town"))
-	if loc == "garage":
+	if loc == "garage" or loc == "cave":
 		pass
+	elif loc == "forest":
+		_forest()
+	elif loc == "mountain":
+		_mountain_road()
 	elif loc == "arena":
 		_arena()
 	else:
@@ -75,6 +88,10 @@ func _ready() -> void:
 		if bool(S["scene"].get("shops", not NIGHT)):
 			_shops()
 		_trees()
+	if bool(S["scene"].get("mountains", false)):
+		_mountain_backdrop()
+	if bool(S["scene"].get("rain", false)):
+		_rain()
 	_props()
 	_eyes()
 	_kraggor_far()
@@ -150,6 +167,7 @@ func _environment() -> void:
 	var we = WorldEnvironment.new()
 	we.environment = env
 	add_child(we)
+	world_env = env
 	var moon = DirectionalLight3D.new()                      # cool moonlight from the camera side, soft shadows
 	moon.rotation_degrees = Vector3(-38, 150, 0)
 	moon.light_color = Color(0.62, 0.7, 1.0)
@@ -343,14 +361,14 @@ func _shops() -> void:
 		k += 1
 
 
-func _environment_interior() -> void:
+func _environment_interior(amb := Color(0.55, 0.45, 0.35), energy := 0.32) -> void:
 	# a room at night: no sky, warm low ambient, a little volumetric haze so the hanging lamp draws a cone
 	var env = Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.03, 0.025, 0.02)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(0.55, 0.45, 0.35)
-	env.ambient_light_energy = 0.32
+	env.ambient_light_color = amb
+	env.ambient_light_energy = energy
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
 	env.glow_intensity = 0.5
@@ -533,6 +551,343 @@ func _crate(p) -> void:
 	crates.append([node, shelf, float(p.get("floor_z", z)), int(p.get("fall_shot", 1)), dust, false, x])
 
 
+func _mountain_backdrop() -> void:
+	# big blue-grey mountains far behind the town (scene 6: the place they are going)
+	var cols = [Color(0.55, 0.62, 0.75), Color(0.48, 0.55, 0.7), Color(0.6, 0.66, 0.78)]
+	var x = -320.0
+	while x < 420.0:
+		var w = rng.randf_range(90, 160)
+		var h = rng.randf_range(60, 120)
+		var m = MeshInstance3D.new()
+		var pm = PrismMesh.new()
+		pm.size = Vector3(w, h, 40)
+		m.mesh = pm
+		m.material_override = toon(cols[rng.randi() % cols.size()] if not NIGHT else Color(0.12, 0.14, 0.22))
+		m.position = Vector3(x + w / 2, h / 2 - 2, -260 - rng.randf_range(0, 60))
+		add_child(m)
+		var snow = MeshInstance3D.new()                      # snow cap
+		var sp = PrismMesh.new()
+		sp.size = Vector3(w * 0.22, h * 0.22, 40.5)
+		snow.mesh = sp
+		snow.material_override = toon(Color(0.96, 0.97, 1.0) if not NIGHT else Color(0.5, 0.55, 0.65))
+		snow.position = m.position + Vector3(0, h * 0.39, 0)
+		add_child(snow)
+		x += w * 0.7
+
+
+func _forest() -> void:
+	# a country road through a dark forest, years ago (scene 5 flashback, storm): dirt verges, dense trees, bushes
+	var trunk = toon(Color(0.25, 0.17, 0.11))
+	var leafs = [Color(0.12, 0.25, 0.15), Color(0.1, 0.2, 0.13), Color(0.15, 0.28, 0.16)]
+	var x = -150.0
+	while x < 220.0:
+		for row in range(3):
+			var z = 6.0 + row * 4.5 + rng.randf_range(-1.0, 1.0)
+			var s = rng.randf_range(1.0, 1.8) * (1.0 + row * 0.25)
+			if rng.randf() < 0.55:                           # pine
+				var p = MeshInstance3D.new()
+				var cm = CylinderMesh.new()
+				cm.top_radius = 0.0
+				cm.bottom_radius = 1.4 * s
+				cm.height = 5.5 * s
+				p.mesh = cm
+				p.material_override = toon(leafs[rng.randi() % 3])
+				p.position = Vector3(x + rng.randf_range(-2, 2), 2.75 * s + 0.6, -dist(z))
+				add_child(p)
+				box(Vector3(0.3 * s, 1.2, 0.3 * s), Vector3(p.position.x, 0.6, -dist(z)), trunk)
+			else:                                            # round tree
+				box(Vector3(0.35 * s, 2.4 * s, 0.35 * s), Vector3(x, 1.2 * s, -dist(z)), trunk)
+				var c = MeshInstance3D.new()
+				var sm = SphereMesh.new()
+				sm.radius = 1.6 * s
+				sm.height = 3.0 * s
+				c.mesh = sm
+				c.material_override = toon(leafs[rng.randi() % 3])
+				c.position = Vector3(x, 3.4 * s, -dist(z))
+				add_child(c)
+		x += rng.randf_range(3.5, 6.5)
+	var bx = -120.0
+	while bx < 200.0:                                        # bushes along the far roadside
+		var b = MeshInstance3D.new()
+		var bm = SphereMesh.new()
+		bm.radius = rng.randf_range(0.7, 1.3)
+		bm.height = bm.radius * 1.4
+		b.mesh = bm
+		b.material_override = toon(Color(0.14, 0.3, 0.16))
+		b.position = Vector3(bx, bm.radius * 0.5, -dist(rng.randf_range(4.2, 5.2)))
+		add_child(b)
+		bx += rng.randf_range(1.5, 3.5)
+
+
+func _mountain_road() -> void:
+	# a narrow road cut into a mountainside at night (scene 7): rock wall + boulders behind, pines, a drop in front
+	var rock_cols = [Color(0.36, 0.38, 0.45), Color(0.3, 0.32, 0.4), Color(0.42, 0.42, 0.48)]
+	var x = -160.0
+	while x < 240.0:                                         # the rock wall (jagged prisms)
+		var w = rng.randf_range(4, 9)
+		var h = rng.randf_range(9, 22)
+		var r = MeshInstance3D.new()
+		var pm = PrismMesh.new()
+		pm.size = Vector3(w, h, 6)
+		pm.left_to_right = rng.randf_range(0.2, 0.8)
+		r.mesh = pm
+		r.material_override = toon(rock_cols[rng.randi() % 3] if NIGHT else rock_cols[rng.randi() % 3].lightened(0.4))
+		r.position = Vector3(x + w / 2, h / 2, -dist(rng.randf_range(5.5, 8.0)))
+		add_child(r)
+		x += w * 0.75
+	var px = -150.0
+	while px < 230.0:                                        # pines higher up on the slope
+		var s = rng.randf_range(1.2, 2.2)
+		var p = MeshInstance3D.new()
+		var cm = CylinderMesh.new()
+		cm.top_radius = 0.0
+		cm.bottom_radius = 1.3 * s
+		cm.height = 5.0 * s
+		p.mesh = cm
+		p.material_override = toon(Color(0.1, 0.2, 0.15))
+		p.position = Vector3(px, 2.5 * s + rng.randf_range(10, 18), -dist(rng.randf_range(9, 14)))
+		add_child(p)
+		px += rng.randf_range(4, 9)
+	var bx = -150.0
+	while bx < 230.0:                                        # boulders along the road edge
+		var b = MeshInstance3D.new()
+		var sm = SphereMesh.new()
+		sm.radius = rng.randf_range(0.4, 1.0)
+		sm.height = sm.radius * 1.5
+		b.mesh = sm
+		b.material_override = toon(rock_cols[rng.randi() % 3])
+		b.position = Vector3(bx, sm.radius * 0.6, -dist(rng.randf_range(3.6, 4.6)))
+		add_child(b)
+		bx += rng.randf_range(3, 8)
+
+
+func _cave() -> void:
+	# Kraggor's cave (scene 8): rock floor and walls, stalactites, glowing crystals, his treasure piles, Grandpa's old
+	# sign, a moonbeam through a crack, the old key on a rock (it glints)
+	var back = float(S["scene"].get("wall_z", 5.0))
+	box(Vector3(160, 0.2, dist(back) - dist(-0.6) + 6), Vector3(10, -0.1, -(dist(back) + dist(-0.6) - 6) / 2),
+		toon(Color(0.3, 0.27, 0.26)))
+	var x = -70.0
+	while x < 90.0:                                          # bumpy back wall
+		var r = MeshInstance3D.new()
+		var sm = SphereMesh.new()
+		sm.radius = rng.randf_range(2.5, 4.5)
+		sm.height = sm.radius * 2.2
+		r.mesh = sm
+		r.material_override = toon(Color(0.24, 0.24, 0.3).lerp(Color(0.32, 0.28, 0.3), rng.randf()))
+		r.position = Vector3(x, rng.randf_range(2.0, 6.0), -dist(back) - 2.5)
+		add_child(r)
+		x += rng.randf_range(2.0, 3.5)
+	box(Vector3(160, 1.0, 20), Vector3(10, 9.5, -dist(back) + 4), toon(Color(0.16, 0.16, 0.2)))   # ceiling
+	var sx = -60.0
+	while sx < 80.0:                                         # stalactites
+		var st = MeshInstance3D.new()
+		var cm = CylinderMesh.new()
+		cm.top_radius = rng.randf_range(0.3, 0.7)
+		cm.bottom_radius = 0.0
+		cm.height = rng.randf_range(1.5, 3.5)
+		st.mesh = cm
+		st.material_override = toon(Color(0.26, 0.26, 0.32))
+		st.position = Vector3(sx, 9.0 - cm.height / 2, -dist(rng.randf_range(back - 2.0, back + 0.5)))
+		add_child(st)
+		sx += rng.randf_range(2.5, 6.0)
+	var crys = [Color(0.35, 0.9, 1.0), Color(0.75, 0.45, 1.0), Color(0.4, 1.0, 0.7)]
+	for q in range(12):                                      # glowing crystals (soft light, no shadows)
+		var cx = -40.0 + q * 9.0 + rng.randf_range(-2, 2)
+		var c = crys[q % 3]
+		var cm2 = StandardMaterial3D.new()
+		cm2.albedo_color = c
+		cm2.emission_enabled = true
+		cm2.emission = c
+		cm2.emission_energy_multiplier = 2.5
+		for k in range(3):
+			var cr = MeshInstance3D.new()
+			var pm = PrismMesh.new()
+			pm.size = Vector3(0.35, rng.randf_range(0.8, 1.8), 0.35)
+			cr.mesh = pm
+			cr.material_override = cm2
+			cr.position = Vector3(cx + k * 0.35, pm.size.y / 2, -dist(back) + 0.8)
+			cr.rotation_degrees = Vector3(0, 0, rng.randf_range(-20, 20))
+			add_child(cr)
+		var ol = OmniLight3D.new()
+		ol.light_color = c
+		ol.light_energy = 1.2
+		ol.omni_range = 6.0
+		ol.position = Vector3(cx, 1.0, -dist(back) + 1.5)
+		add_child(ol)
+	var beam = SpotLight3D.new()                             # moonbeam through a crack in the roof
+	var bx = float(S["scene"].get("beam_x", 10.0))
+	beam.position = Vector3(bx, 9.0, -dist(2.0))
+	beam.look_at_from_position(beam.position, Vector3(bx + 1.0, 0, -dist(2.0)))
+	beam.light_color = Color(0.7, 0.8, 1.0)
+	beam.light_energy = 6.0
+	beam.spot_angle = 14.0
+	beam.spot_range = 14.0
+	beam.light_volumetric_fog_energy = 5.0
+	beam.shadow_enabled = false
+	add_child(beam)
+
+
+func _treasure(p) -> void:
+	# Kraggor's treasures, neatly arranged: old ice cream cones, tyres, racing flags, traffic cones
+	var x0 = float(p.get("x", 0.0))
+	var z = float(p.get("z", 4.2))
+	var n = int(p.get("n", 10))
+	for q in range(n):
+		var x = x0 + q * 1.1 - n * 0.55
+		var kind = q % 4
+		if kind == 0:                                        # stacked cones
+			for st in range(rng.randi_range(2, 4)):
+				var c = MeshInstance3D.new()
+				var cm = CylinderMesh.new()
+				cm.top_radius = 0.28
+				cm.bottom_radius = 0.05
+				cm.height = 0.55
+				c.mesh = cm
+				c.material_override = toon(Color(0.85, 0.65, 0.35))
+				c.position = wp(x, z, 0.28 + st * 0.22)
+				add_child(c)
+			var sc = MeshInstance3D.new()
+			var sp = SphereMesh.new()
+			sp.radius = 0.28
+			sp.height = 0.5
+			sc.mesh = sp
+			sc.material_override = toon(Color(1.0, 0.7, 0.8))
+			sc.position = wp(x, z, 1.0)
+			add_child(sc)
+		elif kind == 1:                                      # a tyre
+			var t = MeshInstance3D.new()
+			var tm = TorusMesh.new()
+			tm.inner_radius = 0.25
+			tm.outer_radius = 0.5
+			t.mesh = tm
+			t.material_override = toon(Color(0.12, 0.12, 0.13))
+			t.rotation_degrees = Vector3(90, 0, 0)
+			t.position = wp(x, z, 0.5)
+			add_child(t)
+		elif kind == 2:                                      # a checkered flag
+			box(Vector3(0.06, 1.8, 0.06), wp(x, z, 0.9), toon(Color(0.6, 0.6, 0.65)))
+			for i in range(3):
+				for j in range(2):
+					box(Vector3(0.25, 0.25, 0.03), wp(x + 0.15 + i * 0.25, z, 1.6 - j * 0.25),
+						toon(Color(1, 1, 1) if (i + j) % 2 == 0 else Color(0.05, 0.05, 0.05)))
+		else:                                                # a traffic cone
+			var tc = MeshInstance3D.new()
+			var cc = CylinderMesh.new()
+			cc.top_radius = 0.05
+			cc.bottom_radius = 0.3
+			cc.height = 0.8
+			tc.mesh = cc
+			tc.material_override = toon(Color(1.0, 0.45, 0.1))
+			tc.position = wp(x, z, 0.4)
+			add_child(tc)
+
+
+func _sign(p) -> void:
+	# Grandpa's old shop sign, faded, propped against the cave wall
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 4.4))
+	box(Vector3(5.2, 2.2, 0.15), wp(x, z, 1.9), toon(Color(0.85, 0.75, 0.6)))
+	box(Vector3(5.4, 0.15, 0.2), wp(x, z, 3.0), toon(Color(0.55, 0.35, 0.2)))
+	box(Vector3(5.4, 0.15, 0.2), wp(x, z, 0.8), toon(Color(0.55, 0.35, 0.2)))
+	for sx in [-2.3, 2.3]:
+		box(Vector3(0.15, 2.0, 0.15), wp(x + sx, z, 1.0), toon(Color(0.45, 0.3, 0.18)))
+	var lb = Label3D.new()
+	lb.text = str(p.get("text", "GRANDPA CONE'S ICE CREAM\nDing-ding!"))
+	lb.font_size = 90
+	lb.pixel_size = 0.009
+	lb.modulate = Color(0.6, 0.25, 0.3)
+	lb.outline_size = 0
+	lb.position = wp(x, z, 1.95) + Vector3(0, 0, 0.09)
+	add_child(lb)
+
+
+func _key(p) -> void:
+	# the old key with "MEGAWHEEL" engraved, lying on a rock; it glints now and then
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 3.6))
+	var rock = MeshInstance3D.new()
+	var sm = SphereMesh.new()
+	sm.radius = 0.7
+	sm.height = 0.9
+	rock.mesh = sm
+	rock.material_override = toon(Color(0.35, 0.33, 0.36))
+	rock.position = wp(x, z, 0.35)
+	add_child(rock)
+	var gm = StandardMaterial3D.new()
+	gm.albedo_color = Color(1.0, 0.82, 0.3)
+	gm.metallic = 1.0
+	gm.roughness = 0.3
+	gm.emission_enabled = true
+	gm.emission = Color(1.0, 0.85, 0.4)
+	box(Vector3(0.5, 0.06, 0.12), wp(x, z, 0.82), gm)
+	var ring = MeshInstance3D.new()
+	var tm = TorusMesh.new()
+	tm.inner_radius = 0.06
+	tm.outer_radius = 0.12
+	ring.mesh = tm
+	ring.material_override = gm
+	ring.rotation_degrees = Vector3(90, 0, 0)
+	ring.position = wp(x - 0.3, z, 0.82)
+	add_child(ring)
+	glints.append(gm)
+
+
+func _rockslide(p) -> void:
+	# boulders that crash down onto the road behind them at the start of their shot and stay there
+	var rocks = []
+	var x0 = float(p.get("x", -10.0))
+	for q in range(int(p.get("n", 9))):
+		var r = MeshInstance3D.new()
+		var sm = SphereMesh.new()
+		sm.radius = rng.randf_range(0.6, 1.4)
+		sm.height = sm.radius * 1.6
+		r.mesh = sm
+		r.material_override = toon(Color(0.38, 0.36, 0.4))
+		var rest = wp(x0 + rng.randf_range(-3.0, 3.0), rng.randf_range(0.2, 2.8), sm.radius * 0.6)
+		r.position = rest + Vector3(0, 40, 0)
+		r.visible = false
+		add_child(r)
+		rocks.append([r, rest, rng.randf_range(0.0, 0.9)])
+	slides.append([rocks, int(p.get("from_shot", 0))])
+
+
+func _rain() -> void:
+	# a storm: rain streaks around the camera + lightning flashes at the scene's times
+	rain_node = Node3D.new()
+	add_child(rain_node)
+	var e = CPUParticles3D.new()
+	e.amount = 2600
+	e.lifetime = 0.9
+	e.preprocess = 1.0
+	e.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	e.emission_box_extents = Vector3(30, 2, 14)
+	e.position = Vector3(0, 16, -14)
+	e.direction = Vector3(0.15, -1, 0)
+	e.spread = 3.0
+	e.initial_velocity_min = 22.0
+	e.initial_velocity_max = 28.0
+	e.gravity = Vector3(0, -9.8, 0)
+	var qm = QuadMesh.new()
+	qm.size = Vector2(0.025, 0.7)
+	var m = StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_FIXED_Y
+	m.albedo_color = Color(0.75, 0.82, 0.95, 0.45)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	qm.material = m
+	e.mesh = qm
+	rain_node.add_child(e)
+	for ft in S["scene"].get("lightning", []):
+		flashes.append(float(ft))
+	flash_light = DirectionalLight3D.new()
+	flash_light.rotation_degrees = Vector3(-60, 20, 0)
+	flash_light.light_color = Color(0.85, 0.9, 1.0)
+	flash_light.light_energy = 0.0
+	flash_light.shadow_enabled = false
+	add_child(flash_light)
+
+
 func _arena() -> void:
 	# MegaWheel Raceway (scene 3 town meeting): stepped grandstand with coloured seats and a roof behind the track,
 	# catch fence, a banner, floodlight towers (lit at dusk / night, no shadows: contract L01), far skyline.
@@ -669,6 +1024,14 @@ func _props() -> void:
 				sl.shadow_enabled = true
 				add_child(sl)
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
+		elif str(p["type"]) == "treasure":
+			_treasure(p)
+		elif str(p["type"]) == "sign":
+			_sign(p)
+		elif str(p["type"]) == "key":
+			_key(p)
+		elif str(p["type"]) == "rockslide":
+			_rockslide(p)
 		elif str(p["type"]) == "lamp":
 			_hanging_lamp(p)
 		elif str(p["type"]) == "crate":
@@ -1058,6 +1421,28 @@ func _process(_d: float) -> void:
 		world_env.ambient_light_energy = lerpf(world_env.ambient_light_energy, 0.75 * target, 0.06)
 	for tp in timed:
 		tp[0].visible = shot >= int(tp[1]) and shot <= int(tp[2])
+	if rain_node != null:
+		rain_node.position.x = float(f["camx"])
+		var fl = 0.0
+		for ft in flashes:
+			var d = t - float(ft)
+			if d >= 0.0 and d < 0.5:
+				fl = maxf(fl, (1.0 if d < 0.08 or (d > 0.18 and d < 0.26) else 0.25) * (1.0 - d / 0.5))
+		flash_light.light_energy = 3.5 * fl
+		if world_env != null:
+			world_env.background_energy_multiplier = 1.0 + 3.0 * fl
+	for sl_ in slides:
+		var fs = int(sl_[1])
+		if shot >= fs and shot_t0.has(fs):
+			var u2 = t - float(shot_t0[fs])
+			for rk in sl_[0]:
+				var ud = u2 - float(rk[2])
+				rk[0].visible = ud > 0.0
+				if ud > 0.0:
+					var fall = 40.0 - 4.9 * ud * ud * 4.0
+					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
+	for gm_ in glints:
+		gm_.emission_energy_multiplier = 0.4 + 3.5 * maxf(0.0, sin(t * 2.3)) ** 8
 	for lp in swing_lamps:                                   # a gentle sway
 		lp.rotation.z = 0.05 * sin(t * 1.1)
 		lp.rotation.x = 0.03 * sin(t * 0.8 + 1.0)
