@@ -217,7 +217,7 @@ def audit_scene(d, mp4):
     sub_band = (0, H * 0.78, W, H)
     for sh in shots:
         js = shot_frames(sh["i"])
-        if not js:
+        if not js or sh["cam"] == "insert":                        # an insert: the speaker talks off-screen (V.O.)
             continue
         f = fr[js[len(js) // 2]]
         talk = [ln for ln in lines if ln[1] <= f["t"] <= ln[1] + ln[2]]
