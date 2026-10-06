@@ -1739,7 +1739,7 @@ SFX = {
     "lamp_off": lambda: lamp_off(),
     "honk": lambda: honk(2),
     "thud_far": lambda: phone_step(0.45, seed=52) * 0.7,
-    "honk_cheer": honk_cheer,
+    "honk_cheer": lambda: honk_cheer(),
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
