@@ -22,7 +22,7 @@ SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather
               "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
-             "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
+             "look", "claw", "net", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
              "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
              "jcut"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
@@ -35,14 +35,14 @@ SINGLE = {"close", "ecu", "medium", "low"}                     # one-character f
 # establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
 COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
-LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave"}
+LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins"}
 TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
-AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "none"}
+AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "wind", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
 PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece",
-         "treasure", "sign", "key", "rockslide", "kraggor_small"}
+         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -56,7 +56,7 @@ def sfx_names():
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
                 "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
-                "breath_big"}
+                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click"}
 
 
 def vehicles():
@@ -320,6 +320,14 @@ def lint(ep, n):
             covered[name] = covered.get(name, 0) + (b - a + 1)
         elif not 0 <= int(c.get("shot", 0)) < len(shots):
             err.append(f"score: sting di shot {c.get('shot')} di luar rentang")
+    if len(shots) >= 5 and score:                                  # A10: silence is part of the score
+        cov = set()
+        for c in score:
+            if "cue" in c:
+                cov |= set(range(int(c.get("from", 0)), int(c.get("to", c.get("from", 0))) + 1))
+        if len(cov) / len(shots) > LN["music_share_max"]:
+            err.append(f"musik menutupi {len(cov)}/{len(shots)} shot (maks {LN['music_share_max']:.0%}) - backsound terlalu "
+                       f"ramai; biarkan dialog biasa tanpa musik, pasang musik hanya di momen emosi/pengungkapan [A10]")
     if len(shots) >= 8 and covered and len(covered) == 1 and max(covered.values()) >= 0.85 * len(shots):
         err.append("score: satu cue menutupi hampir seluruh scene (monoton) - spotting per momen")
     return err, warn

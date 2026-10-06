@@ -181,6 +181,10 @@ def run(episode, scene_no, aspect, out):
     ST.subprocess = SP
     eng = json.load(open(os.path.join(HERE, "STYLE_CONTRACT.json"), encoding="utf-8"))["engine"]   # one source
     ST.CUT_RULE, ST.ISO_CAMERA = eng["cut_rule"], eng["iso_camera"]  # real 3D camera: clean cuts, no fake stretch
+    mix = eng.get("mix", {})                                       # A10: dialogue is the anchor, music sits under it
+    ST.MUSIC_GAIN = mix.get("music_gain", ST.MUSIC_GAIN)
+    ST.DUCK_DEPTH = mix.get("duck_depth", ST.DUCK_DEPTH)
+    ST.DUCK_SMOOTH = mix.get("duck_smooth_s", ST.DUCK_SMOOTH)
     ST.JCUT = eng["jcut_s"]                                        # C04: voice leads the picture across cuts
     se.TEXT_UNMIRROR = eng["text_unmirror"]                        # "SCHOOL BUS" not mirrored on a left-facing bus
     ST.STEMS = {}

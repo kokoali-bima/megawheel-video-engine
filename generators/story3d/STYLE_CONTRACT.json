@@ -1,6 +1,6 @@
 {
  "about": "THE style contract of story3d. Every owner review note becomes a rule here (with a number the machine checks) so the same mistake is fixed once and never comes back (owner 2026-10-06). validate_scene.py, audit_story3d.py, modal_story3d.py (assembly) and export_overlay.py (engine defaults) read this file. Changing a number = owner decision; add the rule id to QA_DEFECT_TRACKER.md.",
- "version": 5,
+ "version": 6,
  "rules": [
   {
    "id": "C01",
@@ -315,6 +315,17 @@
    "note": "Kraggor kecil = gambar asli Kraggor (kepala bayi, desain sama) sebagai prop berpijak di dunia (kraggor_small), bukan tokoh baru; sama dipakai lagi di scene 13",
    "check": "lint",
    "keys": []
+  },
+  {
+   "id": "A10",
+   "date": "2026-10-06",
+   "note": "Backsound terlalu berisik & ada terus sepanjang film (owner). Riset film animasi/sinema: dialog = jangkar mix, musik diturunkan 12-20 dB di bawah suara dan hanya dipasang per momen (spotting) dengan diam yang disengaja (sunyi + ambience + efek membawa dialog biasa); musik masuk pada emosi/pengungkapan/transisi. Angka: musik menutupi maks 60% shot & maks 30 dtk menerus; musik >= 12 dB di bawah suara saat bicara; duck 0,75, gain 0,24.",
+   "check": "lint+qa",
+   "keys": [
+    "music_share_max",
+    "music_gap_db",
+    "music_run_max_s"
+   ]
   }
  ],
  "lint": {
@@ -333,13 +344,19 @@
    "laugh"
   ],
   "max_closeups": 2,
-  "max_size_jump": 3
+  "max_size_jump": 3,
+  "music_share_max": 0.6
  },
  "engine": {
   "cut_rule": "auto",
   "jcut_s": 0.45,
   "iso_camera": true,
-  "text_unmirror": true
+  "text_unmirror": true,
+  "mix": {
+   "music_gain": 0.24,
+   "duck_depth": 0.75,
+   "duck_smooth_s": 0.6
+  }
  },
  "qa": {
   "reproj_px": 2.0,
@@ -371,7 +388,10 @@
   "cuts_per_min": 16,
   "jcut_min_share": 0.5,
   "sfx_flat": 0.12,
-  "wide_share_min": 0.6
+  "wide_share_min": 0.6,
+  "music_share_max": 0.6,
+  "music_gap_db": 12.0,
+  "music_run_max_s": 30.0
  },
  "joins": {
   "time_jump": {

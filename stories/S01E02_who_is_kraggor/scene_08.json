@@ -63,20 +63,20 @@
  ],
  "score": [
   {
-   "cue": "cue_tension_cave",
-   "from": 0,
-   "to": 3,
-   "vol": 0.5,
-   "start": 0.0,
-   "fade": 1.2,
+   "cue": "cue_wonder",
+   "from": 2,
+   "to": 2,
+   "vol": 0.42,
+   "start": 4.0,
+   "fade": 1.0,
    "tail": 0.8
   },
   {
    "cue": "cue_wonder",
    "from": 4,
-   "to": 5,
-   "vol": 0.5,
-   "start": 4.0,
+   "to": 4,
+   "vol": 0.42,
+   "start": 10.0,
    "fade": 1.0,
    "tail": 0.8
   },
@@ -84,7 +84,7 @@
    "cue": "cue_tension_cave",
    "from": 6,
    "to": 7,
-   "vol": 0.55,
+   "vol": 0.5,
    "start": 22.0,
    "fade": 1.0,
    "tail": 1.5
@@ -108,6 +108,16 @@
     "pan": 2
    },
    "caption": "Kraggor's cave.",
+   "sfx": [
+    [
+     "drip",
+     0.8
+    ],
+    [
+     "drip",
+     3.4
+    ]
+   ],
    "moves": {
     "sprinkles": {
      "to_x": -4,
@@ -247,8 +257,12 @@
    },
    "sfx": [
     [
+     "drip",
+     0.0
+    ],
+    [
      "key_glint",
-     0.7
+     1.3
     ]
    ]
   },

@@ -58,19 +58,10 @@
  ],
  "score": [
   {
-   "cue": "cue_mystery_night",
-   "from": 0,
-   "to": 2,
-   "vol": 0.5,
-   "start": 0.0,
-   "fade": 1.2,
-   "tail": 0.8
-  },
-  {
    "cue": "cue_heroic_stand",
    "from": 3,
-   "to": 6,
-   "vol": 0.55,
+   "to": 5,
+   "vol": 0.45,
    "start": 0.0,
    "fade": 1.2,
    "tail": 0.8
@@ -79,7 +70,7 @@
    "cue": "cue_kraggor_dark",
    "from": 7,
    "to": 8,
-   "vol": 0.55,
+   "vol": 0.5,
    "start": 0.0,
    "fade": 1.0,
    "tail": 1.5
@@ -103,6 +94,13 @@
     "pan": 2
    },
    "caption": "The mountain road. Midnight.",
+   "sfx": [
+    [
+     "drone",
+     0.0,
+     0.5
+    ]
+   ],
    "moves": {
     "sprinkles": {
      "to_x": -2,

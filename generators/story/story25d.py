@@ -19,6 +19,7 @@ import json
 import shutil
 import math
 import os
+import random
 import subprocess
 import sys
 
@@ -1364,6 +1365,324 @@ def kraggor_mouth(spec, base_y):
     return spec.get("sx", 0.62) * W, base_y + (1.2 - 3.8) * 40 * sc
 
 
+def kraggor_sad(ctx, t):
+    """Grown-up Kraggor crying (S01E02 scenes 10, 12): the angry mouth and brows are painted over - a trembling
+    frown, worried brows, shining eyes and tears. Same frame as kraggor_smile (origin = neck base, 40 px units)."""
+    body, metal = KR_BODY, (0.66, 0.68, 0.76)
+    ctx.save()
+    ctx.translate(905, 1.2 * 40)
+    ctx.scale(40, 40)
+    se.rrect(ctx, -3.8, -4.6, 7.6, 3.4, 0.9)                   # cover the angry mouth
+    ctx.set_source_rgb(*se.lit(body))
+    ctx.fill()
+    ctx.arc(0, -1.4 + 0.05 * math.sin(t * 14), 2.4, 1.15 * math.pi, 1.85 * math.pi)       # a trembling frown
+    ctx.set_source_rgb(0.1, 0.05, 0.05)
+    ctx.set_line_width(0.45)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    ctx.stroke()
+    for sgn in (-1, 1):
+        ex = sgn * 1.9
+        se.rrect(ctx, ex - 1.45, -8.98, 2.9, 0.8, 0.1)         # repaint the metal brow plate (angry brows off)
+        ctx.set_source_rgb(*se.lit(metal))
+        ctx.fill()
+        se.rrect(ctx, ex - 1.45, -8.2, 2.9, 0.42, 0.1)
+        ctx.set_source_rgb(*se.lit(body))
+        ctx.fill()
+    for bx in (-3.3, -1.1, 1.1, 3.3):                          # ...and its bolts
+        ctx.arc(bx, -8.9, 0.25, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.35, 0.35, 0.42)
+        ctx.fill()
+    for sgn in (-1, 1):
+        ex = sgn * 1.9
+        ctx.arc(ex, -7.0, 1.0, 0, 2 * math.pi)                 # eyes again, wet and shining
+        ctx.set_source_rgb(1, 0.88, 0.15)
+        ctx.fill()
+        ctx.arc(ex + sgn * 0.1, -6.8, 0.5, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.75, 0.12, 0.05)
+        ctx.fill()
+        ctx.arc(ex - sgn * 0.3, -7.4, 0.26, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+        ctx.move_to(ex + sgn * 1.25, -7.95)                    # worried brows: inner ends up
+        ctx.line_to(ex - sgn * 1.15, -8.75)
+        ctx.set_source_rgb(*se.shade(body, 0.55))
+        ctx.set_line_width(0.34)
+        ctx.stroke()
+        for k in range(2):                                     # tears
+            ph = (t * 0.9 + k * 0.5 + (0.0 if sgn < 0 else 0.25)) % 1.0
+            ctx.save()
+            ctx.translate(ex + sgn * 0.55, -6.1 + ph * 5.0)
+            ctx.scale(0.3, 0.5)
+            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(0.6, 0.82, 1.0, 1.0 - ph * 0.8)
+            ctx.fill()
+    ctx.restore()
+
+
+def draw_claw(ctx, c, camx, u):
+    """Kraggor's giant arm reaching in from the right to point at (x, y) in the world - or to hand something over
+    (holds: "key"). Drawn in world space, so it stays on its target while the camera pushes in."""
+    f = min(1.0, max(0.0, (u - c.get("at", 0.0)) / c.get("dur", 1.1)))
+    f = f * f * (3 - 2 * f)
+    z = c.get("z", 2.0)
+    k = k_of(z)
+    tx, ty = pxy(c["x"], z, camx)
+    ty -= c.get("y", 1.8) * k
+    bx, by = tx + c.get("from_dx", 17.0) * k, ty - c.get("from_dy", 4.5) * k
+    cx_, cy_ = bx + (tx - bx) * f, by + (ty - by) * f
+    ang = math.atan2(cy_ - by, cx_ - bx)
+    nx, ny = -math.sin(ang), math.cos(ang)
+    w0, w1 = 3.2 * k, 1.1 * k
+    pts = [(bx + nx * w0 / 2, by + ny * w0 / 2), (cx_ + nx * w1 / 2, cy_ + ny * w1 / 2),
+           (cx_ - nx * w1 / 2, cy_ - ny * w1 / 2), (bx - nx * w0 / 2, by - ny * w0 / 2)]
+    se.poly(ctx, pts)
+    ctx.set_source_rgb(*se.lit(KR_BODY))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*KR_DARK)
+    ctx.set_line_width(0.07 * k)
+    ctx.stroke()
+    ctx.arc(cx_, cy_, 0.8 * k, 0, 2 * math.pi)                 # the paw
+    ctx.set_source_rgb(*se.lit(KR_BODY))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*KR_DARK)
+    ctx.stroke()
+    ux, uy = math.cos(ang), math.sin(ang)
+    if c.get("holds") == "key":                                # an old key between the claws
+        kx, ky = cx_ + ux * 0.9 * k, cy_ + uy * 0.9 * k
+        ctx.arc(kx + ux * 0.9 * k, ky + uy * 0.9 * k, 0.42 * k, 0, 2 * math.pi)
+        ctx.set_source_rgb(1.0, 0.82, 0.3)
+        ctx.set_line_width(0.14 * k)
+        ctx.stroke()
+        ctx.move_to(kx, ky)
+        ctx.line_to(kx - ux * 1.1 * k, ky - uy * 1.1 * k)
+        ctx.set_line_width(0.2 * k)
+        ctx.stroke()
+        return
+    for i in (-1, 0, 1):                                       # three white claws pointing at the target
+        px_, py_ = cx_ + nx * i * 0.42 * k + ux * 0.6 * k, cy_ + ny * i * 0.42 * k + uy * 0.6 * k
+        se.poly(ctx, [(px_ + nx * 0.17 * k, py_ + ny * 0.17 * k), (px_ - nx * 0.17 * k, py_ - ny * 0.17 * k),
+                      (px_ + ux * 0.75 * k, py_ + uy * 0.75 * k)])
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+
+
+def _chalk_monster(ctx, cx, cy, s, mood="calm", lean=1):
+    """Kraggor as a child would draw him in chalk: a blob, horns, tail, two big eyes (centre cx, feet cy, size s)."""
+    ctx.save()
+    ctx.translate(cx, cy)
+    ctx.scale(s * lean, s)
+    ctx.move_to(-1.0, 0)                                        # body
+    ctx.curve_to(-1.2, -1.6, -0.7, -2.6, 0, -2.6)
+    ctx.curve_to(0.7, -2.6, 1.2, -1.6, 1.0, 0)
+    ctx.close_path()
+    ctx.set_source_rgba(0.45, 0.85, 0.6, 0.35)
+    ctx.fill_preserve()
+    ctx.set_source_rgba(0.96, 0.95, 0.9, 0.95)
+    ctx.set_line_width(0.14)
+    ctx.stroke()
+    for sg in (-1, 1):                                          # horns + eyes
+        ctx.move_to(sg * 0.55, -2.5)
+        ctx.line_to(sg * 0.8, -3.1)
+        ctx.line_to(sg * 0.25, -2.65)
+        ctx.stroke()
+        ctx.arc(sg * 0.38, -1.95, 0.2 if mood != "happy" else 0.14, 0, 2 * math.pi)
+        ctx.set_source_rgba(1, 0.92, 0.35, 1)
+        ctx.fill()
+    ctx.move_to(-0.35, -1.35)                                   # mouth
+    if mood == "sad":
+        ctx.curve_to(-0.1, -1.6, 0.1, -1.6, 0.35, -1.35)
+    else:
+        ctx.curve_to(-0.1, -1.1, 0.1, -1.1, 0.35, -1.35)
+    ctx.set_source_rgba(0.96, 0.95, 0.9, 0.95)
+    ctx.set_line_width(0.1)
+    ctx.stroke()
+    ctx.move_to(1.0, -0.4)                                      # tail
+    ctx.curve_to(1.8, -0.5, 2.0, -1.0, 2.3, -0.6)
+    ctx.stroke()
+    ctx.restore()
+
+
+def _chalk_truck(ctx, x, y, s):
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.scale(s, s)
+    ctx.set_source_rgba(0.96, 0.7, 0.8, 0.4)
+    se.rrect(ctx, -2.0, -2.0, 4.0, 1.7, 0.3)
+    ctx.fill_preserve()
+    ctx.set_source_rgba(0.96, 0.95, 0.9, 0.95)
+    ctx.set_line_width(0.12)
+    ctx.stroke()
+    for wx in (-1.1, 1.1):
+        ctx.arc(wx, -0.2, 0.42, 0, 2 * math.pi)
+        ctx.stroke()
+    se.poly(ctx, [(-0.35, -2.0), (0.35, -2.0), (0, -3.0)])      # the cone on the roof
+    ctx.stroke()
+    ctx.arc(0, -3.25, 0.38, 0, 2 * math.pi)
+    ctx.set_source_rgba(1, 0.6, 0.75, 0.9)
+    ctx.fill()
+    ctx.restore()
+
+
+def draw_chalk(ctx, p, camx, t):
+    """Kraggor's chalk drawings on the cave wall (scene 10: he tells his story without words). kind 1..6:
+    1 truck + little monster in the rain · 2 ice cream, music, smile · 3 the truck waves goodbye · 4 the monster grows
+    and grows · 5 the cars run away · 6 alone on the mountain, looking at the town."""
+    x, z, w = p.get("x", 0.0), p.get("z", 4.6), p.get("w", 5.0)
+    k = k_of(z)
+    sx, gy = pxy(x, z, camx)
+    cy = gy - p.get("y", 2.2) * k
+    sc = k * w / 10.0                                           # panel units: 10 across
+    ctx.save()
+    ctx.translate(sx, cy)
+    ctx.scale(sc, sc)
+    se.rrect(ctx, -5.0, -3.6, 10.0, 7.2, 0.5)                   # the dark slate + a worn frame
+    ctx.set_source_rgba(0.1, 0.11, 0.15, 0.97)
+    ctx.fill_preserve()
+    ctx.set_source_rgba(0.55, 0.5, 0.42, 1)
+    ctx.set_line_width(0.18)
+    ctx.stroke()
+    rng = random.Random(int(p.get("kind", 1)) * 7 + 3)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    ctx.set_line_join(cairo.LINE_JOIN_ROUND)
+    kind = int(p.get("kind", 1))
+    chalk = (0.96, 0.95, 0.9, 0.95)
+    if kind == 1:
+        for _ in range(26):                                     # rain
+            rx, ry = rng.uniform(-4.6, 4.6), rng.uniform(-3.3, 2.6)
+            ctx.move_to(rx, ry)
+            ctx.line_to(rx - 0.25, ry + 0.7)
+            ctx.set_source_rgba(0.6, 0.78, 1.0, 0.7)
+            ctx.set_line_width(0.07)
+            ctx.stroke()
+        _chalk_truck(ctx, -2.2, 2.7, 0.9)
+        _chalk_monster(ctx, 2.6, 2.8, 0.85, "sad", -1)
+    elif kind == 2:
+        _chalk_monster(ctx, 2.4, 2.8, 1.0, "happy", -1)
+        se.poly(ctx, [(-3.1, -0.3), (-1.9, -0.3), (-2.5, 1.9)])          # a cone with a scoop
+        ctx.set_source_rgba(0.9, 0.7, 0.35, 0.5)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(*chalk)
+        ctx.set_line_width(0.12)
+        ctx.stroke()
+        ctx.arc(-2.5, -0.9, 0.85, 0, 2 * math.pi)
+        ctx.set_source_rgba(1, 0.6, 0.75, 0.6)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(*chalk)
+        ctx.stroke()
+        for i in range(3):                                      # music notes
+            nx_, ny_ = -0.2 + i * 1.1, -1.9 + 0.5 * math.sin(i * 1.7)
+            ctx.arc(nx_, ny_ + 1.0, 0.22, 0, 2 * math.pi)
+            ctx.set_source_rgba(*chalk)
+            ctx.fill()
+            ctx.move_to(nx_ + 0.2, ny_ + 1.0)
+            ctx.line_to(nx_ + 0.2, ny_ - 0.2)
+            ctx.line_to(nx_ + 0.65, ny_ + 0.15)
+            ctx.set_line_width(0.1)
+            ctx.stroke()
+    elif kind == 3:
+        _chalk_truck(ctx, -2.6, 2.7, 0.9)
+        for i in range(3):                                      # it drives away: speed lines
+            ctx.move_to(-4.6, 0.9 + i * 0.6)
+            ctx.line_to(-3.6, 0.9 + i * 0.6)
+            ctx.set_source_rgba(*chalk)
+            ctx.set_line_width(0.09)
+            ctx.stroke()
+        ctx.move_to(-0.1, 0.0)                                  # a waving hand out of the window
+        ctx.line_to(0.5, -0.9)
+        ctx.line_to(0.9, -0.2)
+        ctx.stroke()
+        _chalk_monster(ctx, 2.9, 2.8, 0.85, "sad", -1)
+    elif kind == 4:
+        for i, (sx2, ss) in enumerate(((-3.2, 0.5), (-0.6, 0.9), (2.6, 1.5))):
+            _chalk_monster(ctx, sx2, 3.0, ss, "calm", 1)
+        for i in range(2):                                      # arrows: bigger, bigger
+            ctx.move_to(-2.4 + i * 2.6, 2.0 - i * 0.9)
+            ctx.line_to(-1.2 + i * 2.6, 1.3 - i * 1.1)
+            ctx.set_source_rgba(1.0, 0.85, 0.4, 0.9)
+            ctx.set_line_width(0.11)
+            ctx.stroke()
+    elif kind == 5:
+        _chalk_monster(ctx, -2.8, 3.0, 1.35, "calm", 1)
+        for i in range(3):                                      # three little cars running away
+            cx2 = 0.6 + i * 1.5
+            se.rrect(ctx, cx2, 2.0 - 0.0, 1.2, 0.7, 0.2)
+            ctx.set_source_rgba(0.9, 0.5, 0.5, 0.4)
+            ctx.fill_preserve()
+            ctx.set_source_rgba(*chalk)
+            ctx.set_line_width(0.1)
+            ctx.stroke()
+            ctx.move_to(cx2 - 0.5, 2.3)
+            ctx.line_to(cx2 - 0.1, 2.3)
+            ctx.stroke()
+            ctx.move_to(cx2 + 0.5, 1.2)                          # "!"
+            ctx.line_to(cx2 + 0.5, 1.7)
+            ctx.stroke()
+    else:
+        ctx.move_to(-5.0, 3.6)                                  # a mountain, the monster alone on top, the moon, a town
+        ctx.line_to(-1.4, -0.6)
+        ctx.line_to(2.0, 3.6)
+        ctx.set_source_rgba(0.5, 0.5, 0.6, 0.3)
+        ctx.fill_preserve()
+        ctx.set_source_rgba(*chalk)
+        ctx.set_line_width(0.12)
+        ctx.stroke()
+        _chalk_monster(ctx, -1.4, -0.2, 0.55, "sad", 1)
+        ctx.arc(3.2, -2.1, 0.8, 0.5, 2 * math.pi - 0.5)
+        ctx.set_source_rgba(1.0, 0.95, 0.6, 0.95)
+        ctx.set_line_width(0.14)
+        ctx.stroke()
+        for i in range(6):                                      # the town's lit windows
+            bx_ = 2.6 + (i % 3) * 0.75
+            by_ = 2.0 + (i // 3) * 0.8
+            se.rrect(ctx, bx_, by_, 0.55, 0.6, 0.08)
+            ctx.set_source_rgba(1.0, 0.9, 0.45, 0.8)
+            ctx.fill()
+    ctx.restore()
+
+
+def draw_net(ctx, n, u):
+    """A big rope net in screen space (S01E02 scenes 11-13). {"x0","x1": 0..1 across, "y1": how far down it hangs (0..1),
+    "drop_at"/"dur": it falls from above, "gone_at": it is cut: it slides off and fades}."""
+    x0, x1 = n.get("x0", 0.3) * W, n.get("x1", 1.0) * W
+    ybot = n.get("y1", 0.8) * H
+    if n.get("drop_at") is not None:
+        f = min(1.0, max(0.0, (u - n["drop_at"]) / n.get("dur", 0.7)))
+        f = 1 - (1 - f) ** 3
+        ybot = -0.15 * H + f * (ybot + 0.15 * H)
+    alpha = 1.0
+    if n.get("gone_at") is not None and u > n["gone_at"]:
+        g = min(1.0, (u - n["gone_at"]) / 0.9)
+        alpha, ybot = 1.0 - g, ybot - g * 0.25 * H
+    if ybot <= 0 or alpha <= 0.01:
+        return
+    sag = 0.09 * H
+
+    def bottom(x):
+        return ybot + sag * math.sin(math.pi * (x - x0) / max(1.0, x1 - x0))
+    ctx.save()
+    ctx.move_to(x0, -20)
+    ctx.line_to(x1, -20)
+    for q in range(25):
+        x = x1 - (x1 - x0) * q / 24.0
+        ctx.line_to(x, bottom(x))
+    ctx.close_path()
+    ctx.clip()
+    cell = n.get("cell", 64)
+    for col, wd, al in (((0.05, 0.04, 0.03), 5.5, 0.35), ((0.88, 0.82, 0.62), 2.8, 0.95)):    # rope + its shadow
+        ctx.set_source_rgba(*col, al * alpha)
+        ctx.set_line_width(wd)
+        span = int((x1 - x0 + 2 * H) / cell) + 2
+        for i in range(-span, span):
+            xa = x0 + i * cell
+            ctx.move_to(xa, -20)
+            ctx.line_to(xa + (H + 40), H + 20)
+            ctx.move_to(xa + (H + 40), -20)
+            ctx.line_to(xa, H + 20)
+        ctx.stroke()
+    ctx.restore()
+
+
 def kraggor_baby_head(ctx, mood, t, cone_r=0.0):
     """LITTLE Kraggor (S01E02 scene 5 flashback, scene 13 photo): the same design as the grown-up - green dino-robot,
     silver spikes, glowing eyes - but young: a big head, soft brows, a muzzle, no angry teeth. Local frame = the one
@@ -1549,6 +1868,8 @@ def kraggor_head(ctx, u, spec, stands_top=None):
         kraggor_baby_head(ctx, mode, u, spec.get("cone_r", 0.0))
     else:
         SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
+    if mode == "sad" and not spec.get("baby"):                     # grown-up Kraggor crying
+        kraggor_sad(ctx, u)
     if mode == "smile" and not spec.get("baby"):
         kraggor_smile(ctx, a)
         w0 = spec.get("wink")
@@ -1879,6 +2200,7 @@ def build(scene):
 STEMS = None              # story3d QA: dict to receive the audio stems of the next render
 CUT_RULE = "soft"         # "soft" (2.5D, aired): glide to every new shot. "auto" (story3d, 2026-10-06 QA): a big
                           # change of framing = clean cut, a small reframe = slow glide (no 20 m swoops in 1 s)
+MUSIC_GAIN, DUCK_DEPTH, DUCK_SMOOTH = 0.32, 0.55, 0.25     # the aired Ep.1 mix; story3d overrides (contract A10)
 JCUT = 0.0                # story3d (contract C04): the next shot's first line starts this many seconds BEFORE the
                           # picture cut (J-cut) - straight cuts on every exchange feel like tennis
 ISO_CAMERA = False        # story3d: no anisotropic "low" stretch (a real 3D camera cannot match it: 283 px QA error)
@@ -2205,6 +2527,11 @@ SFX = {
     "drip": lambda: drip(),
     "key_glint": lambda: key_glint(),
     "breath_big": lambda: breath_big(),
+    "kraggor_giggle": lambda: kraggor_giggle(),
+    "kraggor_moan": lambda: kraggor_moan(),
+    "net_drop": lambda: net_drop(),
+    "gate_creak": lambda: gate_creak(),
+    "key_click": lambda: key_click(),
 }
 
 
@@ -2507,6 +2834,96 @@ def amb_cave(n, rng):
     return out
 
 
+def kraggor_giggle():
+    """Kraggor laughing: a small, funny rumble - four short bouncy tones (150-330 Hz) with overtones."""
+    sr = se.SR
+    out = np.zeros(int(1.5 * sr))
+    for k in range(4):
+        L = int(0.2 * sr)
+        t = np.arange(L) / sr
+        f = 150 + 90 * np.sin(np.pi * t / 0.2) + k * 8
+        ph = 2 * math.pi * np.cumsum(f) / sr
+        tone = (np.sin(ph) + 0.7 * np.sin(2 * ph) + 0.5 * np.sin(3 * ph) + 0.3 * np.sin(4 * ph)) * np.sin(np.pi * t / 0.2) ** 1.5
+        i = int(k * 0.24 * sr)
+        out[i:i + L] += tone
+    return out / max(1e-9, np.abs(out).max()) * 0.6
+
+
+def kraggor_moan():
+    """Kraggor crying in the net: a long falling moan with a wobble, overtones up to ~700 Hz (phone-audible)."""
+    sr = se.SR
+    n = int(2.4 * sr)
+    t = np.arange(n) / sr
+    f = 165 - 60 * (t / 2.4) + 6 * np.sin(2 * math.pi * 5.0 * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.9), (3, 0.7), (4, 0.5), (5, 0.35), (6, 0.2)))
+    env = np.sin(math.pi * np.minimum(1.0, t / 2.4)) ** 1.2 * np.clip((2.4 - t) / 0.3, 0, 1)
+    out = tone * env
+    return out / max(1e-9, np.abs(out).max()) * 0.7
+
+
+def net_drop():
+    """A heavy net falls: a falling whoosh of tones, rope twangs, then a soft thud."""
+    sr = se.SR
+    n = int(1.6 * sr)
+    t = np.arange(n) / sr
+    m = t < 0.75
+    f = 1500 - 1000 * np.minimum(t / 0.75, 1.0)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    whoosh = (np.sin(ph) + 0.5 * np.sin(1.5 * ph)) * np.sin(np.pi * np.minimum(t / 0.75, 1.0)) * m * 0.45
+    out = whoosh
+    rng = np.random.default_rng(33)
+    for q in range(5):                                          # twangs of the ropes
+        i = int((0.7 + q * 0.06) * sr)
+        L = int(0.25 * sr)
+        tt = np.arange(L) / sr
+        f0 = rng.uniform(420, 900)
+        out[i:i + L] += np.sin(2 * math.pi * f0 * tt) * np.exp(-tt * 18) * 0.2
+    th = phone_step(0.55, seed=33)
+    i = int(0.72 * sr)
+    out[i:i + len(th)] += th[:max(0, min(len(th), n - i))] * 0.8
+    return out / max(1e-9, np.abs(out).max()) * 0.85
+
+
+def gate_creak(dur=3.2):
+    """A rusty iron gate creaking open: a slow wobbling glide with a bright formant (500-900 Hz) and a tremor,
+    all tones - never noise."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    f = 95 + 40 * (t / dur) + 14 * np.sin(2 * math.pi * 0.8 * t) + 6 * np.sin(2 * math.pi * 3.3 * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph + h) * np.exp(-((h * f.mean() - 700.0) / 500.0) ** 2) for h in range(1, 14))
+    trem = 0.65 + 0.35 * np.sin(2 * math.pi * 11 * t + 1.0)
+    env = np.clip(t / 0.4, 0, 1) * np.clip((dur - t) / 0.6, 0, 1)
+    out = tone * trem * env
+    return out / max(1e-9, np.abs(out).max()) * 0.6
+
+
+def key_click():
+    """A key turning in an old lock: two sharp metallic clicks and a dull clunk."""
+    sr = se.SR
+    out = np.zeros(int(0.9 * sr))
+    for at, f1, f2 in ((0.0, 1900.0, 2900.0), (0.18, 1500.0, 2300.0)):
+        i = int(at * sr)
+        L = int(0.12 * sr)
+        tt = np.arange(L) / sr
+        out[i:i + L] += (np.sin(2 * math.pi * f1 * tt) + 0.6 * np.sin(2 * math.pi * f2 * tt)) * np.exp(-tt * 60) * 0.5
+    i = int(0.4 * sr)
+    L = int(0.4 * sr)
+    tt = np.arange(L) / sr
+    out[i:i + L] += (np.sin(2 * math.pi * 140 * tt) + 0.5 * np.sin(2 * math.pi * 420 * tt)) * np.exp(-tt * 14) * 0.9
+    return out / max(1e-9, np.abs(out).max()) * 0.8
+
+
+def amb_wind(n, rng):
+    """Dawn on a hill: wind in slow swells (below ~400 Hz) and now and then a bird (tonal)."""
+    tt = np.arange(n) / se.SR
+    wind = fft_band(rng.normal(0, 1, n), 50, 380)
+    wind = wind / max(1e-9, np.abs(wind).max()) * (0.5 + 0.5 * np.sin(2 * math.pi * tt / 9.0) ** 2)
+    return wind * 0.8 + amb_birds(n, rng) * 0.5
+
+
 def amb_birds(n, rng):
     """Daytime outdoors: soft birdsong (short frequency-swept chirps) over a faint breeze."""
     br = fft_band(rng.normal(0, 1, n), 40, 420)                    # breeze, no hiss (2026-10-06 QA)
@@ -2579,6 +2996,8 @@ def ambience_bed(scene, n):
         x, g = amb_storm(n, rng), 0.07                             # wind + rain wash, nothing above ~1.2 kHz
     elif kind == "cave":
         x, g = amb_cave(n, rng), 0.045
+    elif kind == "wind":
+        x, g = amb_wind(n, rng), 0.05
     else:
         return np.zeros(n)
     x = np.pad(x, (0, max(0, n - len(x))))[:n]
@@ -2634,9 +3053,9 @@ def build_audio(shots, placed, total, scene):
             m = sh.get("music", scene.get("music", "warm"))
             seg = score(m, sh["t1"] - sh["t0"] + 1.0, seed=3)
             place(mus, seg, sh["t0"], 1.0)
-    talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(0.25 * se.SR))
-    duck = 1.0 - 0.55 * np.clip(talk * 3, 0, 1)
-    st_v, st_m, st_s = se.peak(narr) * 1.0, se.peak(mus) * 0.32 * duck, se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
+    talk = SM.box_avg((np.abs(narr) > 0.01).astype(float), int(DUCK_SMOOTH * se.SR))
+    duck = 1.0 - DUCK_DEPTH * np.clip(talk * 3, 0, 1)
+    st_v, st_m, st_s = se.peak(narr) * 1.0, se.peak(mus) * MUSIC_GAIN * duck, se.peak(sfx) * 0.7 * (0.6 + 0.4 * duck)
     st_a = np.zeros_like(st_v)
     if scene.get("ambience") != "rain" and scene.get("ambience") != "none":
         st_a = ambience_bed(scene, len(st_v)) * (0.7 + 0.3 * duck)
@@ -2931,6 +3350,8 @@ def render_scene(ep, num, aspect):
                 draw_album(ctx, prop, camx, t)
             elif prop["type"] == "photo_piece":
                 draw_photo_piece(ctx, prop, camx, t)
+            elif prop["type"] == "chalk" and si <= prop.get("to_shot", 9999):
+                draw_chalk(ctx, prop, camx, t)
             elif prop["type"] == "kraggor_small" and si <= prop.get("to_shot", 9999):
                 draw_kraggor_small(ctx, prop, camx, t, shots)
             elif prop["type"] == "photo":
@@ -2982,6 +3403,8 @@ def render_scene(ep, num, aspect):
                                                                  min(1.0, (uu - ft.get("stay", 99)) / 0.6) ** 2)
             if uu >= 0:
                 draw_foot(ctx, ft["x"], ft.get("z", 1.0), camx, drop)
+        if sh.get("claw"):
+            draw_claw(ctx, sh["claw"], camx, u)
         draw_props_layer(ctx, loc, camx, 13, back=False)
         ctx.restore()
         for a in actors.values():
@@ -2994,6 +3417,8 @@ def render_scene(ep, num, aspect):
             if sh.get("kraggor") and not sh["kraggor"].get("front"):
                 tspec["target"] = kraggor_mouth(sh["kraggor"], H / 2 + (stands_top_world() - piv_y) * zoom)
             ice_cream_toss(ctx, u, tspec, camx, actors)
+        if sh.get("net"):                                          # rope net over everything (screen space)
+            draw_net(ctx, sh["net"], u)
         vmax = max([a.get("v", 0.0) for a in actors.values() if not a["hidden"]] + [0.0])
         if sh.get("eyes"):
             glow_eyes(ctx, t, sh["eyes"])

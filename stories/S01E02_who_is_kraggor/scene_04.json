@@ -55,7 +55,7 @@
   {
    "cue": "cue_sprinkles_theme",
    "from": 0,
-   "to": 1,
+   "to": 0,
    "vol": 0.4,
    "start": 4.0,
    "fade": 1.0,
@@ -63,9 +63,9 @@
   },
   {
    "cue": "cue_grandpa_memory",
-   "from": 3,
+   "from": 4,
    "to": 6,
-   "vol": 0.6,
+   "vol": 0.5,
    "start": 0.0,
    "fade": 1.2,
    "tail": 1.2

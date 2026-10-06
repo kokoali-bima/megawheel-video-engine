@@ -55,6 +55,7 @@
 | 35 | 2026-10-06 | scene 5-7 r1 | Guntur/bisikan/mesin menutupi kalimat (masking 4 titik) | Efek & musik terlalu keras di dekat kalimat | gain efek (elemen ke-3), musik 0,38-0,42, jeda | STYLE_CONTRACT A09 (sensor masking A04) | ✅ |
 | 36 | 2026-10-06 | scene 5,6 r1 | WARN "lompatan gambar" tiap kilat petir | Kilat = lonjakan kecerahan disengaja | didokumentasikan: lompatan tepat di waktu kilat adalah wajar | audit `lompatan` (WARN, dilaporkan ke user) | ✅ catat |
 | 37 | 2026-10-06 | sambungan 5->6 | Suara terpotong (turun 14,6 dB/0,1 dtk): guntur akhir scene masih keras saat fade-out | Ambience badai keras + kurva qsin berhenti curam di skala dB | guntur selesai sebelum fade (hold 6,8; end+0,3) + kurva fade-out sambungan qsin -> cub (diukur pada audio nyata: qsin 22 dB, cub 7,6 dB per 0,1 dtk) | sensor sambungan J02 (drop_db 14) | ✅ |
+| 38 | 2026-10-06 | seluruh film (scene 1-8) | Backsound berisik dan ada terus sepanjang film | Musik menutupi ~85-100% shot, gain 0,32 + duck hanya -7 dB | Riset (dialog = jangkar, musik 12-20 dB di bawah suara, spotting + diam disengaja): musik maks 60% shot & 30 dtk menerus, gain 0,24, duck 0,75 (smooth 0,6 dtk); scene 2-8 di-spotting ulang (scene 1 sudah 56%) | STYLE_CONTRACT A10: linter (maks 60% shot bermusik, ERROR) + sensor QA (share musik, run terpanjang, selisih dB di bawah suara, WARN) | ✅ |
 
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
@@ -65,6 +66,7 @@
 | Struktur variasi | produce.py | tata letak + rintangan berulang (10 video terakhir) |
 | Isi lubang dipakai | sim_engine `content_required()` | duri/bom/monster cuma hiasan |
 | Piksel badge FAIL/WINNER, outro | audit.py (CHALLENGE) | badge/outro tidak tampil di detik kejadian |
+| story3d (A10): porsi musik, run musik terpanjang, musik vs suara | audit_story3d.py | backsound terlalu ramai (#38) |
 | story3d: roll/proyeksi, grounding, kamera, lompatan, framing, variasi, cahaya/kontras/bayangan, audio (desis, sunyi, masking, HP, monoton, LUFS), reveal | generators/story3d/audit_story3d.py | semua cacat #15–23 (ambang tetap, lihat SOP_STORY3D §4) |
 
 ## Belum ada (berikutnya)

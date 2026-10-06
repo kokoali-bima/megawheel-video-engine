@@ -40,6 +40,7 @@ var flashes = []                   # storm: lightning times (s)
 var flash_light: DirectionalLight3D
 var slides = []                    # [rocks[], from_shot, x] rockslides
 var glints = []                    # [material] things that sparkle (the old key)
+var gates = []                     # [left pivot, right pivot, open shot, dt, dur] the speedway gate leaves
 var sun_light: DirectionalLight3D
 
 
@@ -81,6 +82,8 @@ func _ready() -> void:
 		_forest()
 	elif loc == "mountain":
 		_mountain_road()
+	elif loc == "ruins":
+		_ruins()
 	elif loc == "arena":
 		_arena()
 	else:
@@ -907,6 +910,175 @@ func _lightning() -> void:
 	add_child(flash_light)
 
 
+func _ruins() -> void:
+	# a forgotten place at dawn (scene 15): dead trees, broken fence posts, a collapsed grandstand far away
+	var wood = toon(Color(0.33, 0.27, 0.22))
+	var x = -120.0
+	while x < 170.0:
+		var z = rng.randf_range(5.0, 14.0)
+		var h = rng.randf_range(4.0, 9.0)
+		box(Vector3(0.35, h, 0.35), Vector3(x, h / 2, -dist(z)), wood)
+		for b in range(3):
+			var ln = rng.randf_range(1.5, 3.2)
+			var sgn = 1.0 if b % 2 == 0 else -1.0
+			var br = box(Vector3(ln, 0.15, 0.15), Vector3(x + sgn * ln / 2.2, h * (0.55 + 0.15 * b), -dist(z)), wood)
+			br.rotation_degrees.z = rng.randf_range(-25, 25)
+		x += rng.randf_range(5, 12)
+	var fx = -100.0
+	while fx < 150.0:
+		var ph = rng.randf_range(1.0, 1.8)
+		var fp = box(Vector3(0.18, ph, 0.18), Vector3(fx, ph / 2, -dist(3.6)), wood)
+		fp.rotation_degrees.z = rng.randf_range(-14, 14)
+		fx += rng.randf_range(2.2, 4.5)
+	var rust = toon(Color(0.4, 0.3, 0.26))
+	for tier in range(5):                                    # the old grandstand, half fallen, in the haze
+		var tx = 40.0
+		while tx < 130.0:
+			if rng.randf() < 0.82:
+				var tb = box(Vector3(rng.randf_range(5, 9), 1.2, 3.0),
+					Vector3(tx, 2.0 + tier * 1.9 + rng.randf_range(-0.2, 0.2), -dist(15.0 + tier * 1.2)), rust)
+				tb.rotation_degrees.z = rng.randf_range(-6, 6)
+			tx += 8.0
+	for fl in [52.0, 98.0, 126.0]:                           # tilted floodlight poles
+		var pole = box(Vector3(0.5, 22.0, 0.5), Vector3(fl, 10.0, -dist(14.0)), rust)
+		pole.rotation_degrees.z = rng.randf_range(-12, 12)
+
+
+func _speedgate(p) -> void:
+	# MEGAWHEEL SPEEDWAY: a huge rusty iron gate with stone pillars, vines and a sign; the two leaves swing open when the key turns
+	var x = float(p.get("x", 30.0))
+	var z = float(p.get("z", 1.3))
+	var rust = toon(Color(0.42, 0.24, 0.16))
+	var stone = toon(Color(0.45, 0.43, 0.4))
+	var half = float(p.get("half", 6.4))
+	for sgn in [-1.0, 1.0]:
+		box(Vector3(1.6, 10.0, 1.6), wp(x + sgn * (half + 0.8), z, 5.0), stone)
+		box(Vector3(2.0, 0.6, 2.0), wp(x + sgn * (half + 0.8), z, 10.2), stone)
+		for v in range(7):                                    # vines
+			var vm = MeshInstance3D.new()
+			var sp = SphereMesh.new()
+			sp.radius = rng.randf_range(0.35, 0.7)
+			sp.height = sp.radius * 1.6
+			vm.mesh = sp
+			vm.material_override = toon(Color(0.2, 0.42, 0.2))
+			vm.position = wp(x + sgn * (half + 0.8) + rng.randf_range(-0.9, 0.9), z + 0.8, 1.2 + v * 1.3)
+			add_child(vm)
+	box(Vector3(2 * half + 3.6, 0.5, 0.6), wp(x, z, 10.6), rust)           # the top bar + the sign
+	var lb = Label3D.new()
+	lb.text = str(p.get("text", "MEGAWHEEL SPEEDWAY\nEST. 1962"))
+	lb.font_size = 96
+	lb.pixel_size = 0.0075
+	lb.modulate = Color(0.85, 0.7, 0.35)
+	lb.outline_size = 0
+	lb.position = wp(x, z, 12.2) + Vector3(0, 0, 0.5)
+	add_child(lb)
+	box(Vector3(2 * half + 1.0, 2.6, 0.25), wp(x, z, 12.2), toon(Color(0.2, 0.17, 0.15)))
+	var pivots = []
+	for sgn in [-1.0, 1.0]:                                 # the two leaves, each on a hinge at its pillar
+		var pv = Node3D.new()
+		pv.position = wp(x + sgn * half, z, 0.0)
+		add_child(pv)
+		var leaf_w = half
+		for bi in range(9):
+			var bxo = -sgn * (0.3 + bi * (leaf_w - 0.4) / 8.0)
+			var bar = MeshInstance3D.new()
+			var bm = BoxMesh.new()
+			bm.size = Vector3(0.14, 7.2, 0.14)
+			bar.mesh = bm
+			bar.material_override = rust
+			bar.position = Vector3(bxo, 3.8, 0)
+			pv.add_child(bar)
+		for hb in [1.0, 3.8, 6.6]:
+			var rail = MeshInstance3D.new()
+			var rm = BoxMesh.new()
+			rm.size = Vector3(leaf_w, 0.2, 0.2)
+			rail.mesh = rm
+			rail.material_override = rust
+			rail.position = Vector3(-sgn * leaf_w / 2, hb, 0)
+			pv.add_child(rail)
+		pivots.append(pv)
+	gates.append([pivots[0], pivots[1], int(p.get("open_shot", 9999)), float(p.get("open_dt", 0.0)), float(p.get("open_dur", 3.0))])
+
+
+func _towers(p) -> void:
+	# two crane towers either side of the town gate (scene 11-13), lattice legs, a jib each and a red light on top
+	var xs = p.get("xs", [-14.0, 22.0])
+	var z = float(p.get("z", 4.4))
+	var h = float(p.get("h", 20.0))
+	var steel = toon(Color(0.78, 0.62, 0.15))
+	var lm = StandardMaterial3D.new()
+	lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	lm.albedo_color = Color(1.0, 0.15, 0.1)
+	lm.emission_enabled = true
+	lm.emission = Color(1.0, 0.1, 0.05)
+	lm.emission_energy_multiplier = 4.0
+	var side = 0
+	for tx in xs:
+		for lx in [-1.0, 1.0]:
+			for lz in [-0.8, 0.8]:
+				box(Vector3(0.35, h, 0.35), Vector3(float(tx) + lx * 1.2, h / 2, -dist(z) + lz), steel)
+		var yy = 2.5
+		while yy < h:
+			box(Vector3(2.6, 0.18, 0.18), Vector3(float(tx), yy, -dist(z) + 0.8), steel)
+			box(Vector3(2.6, 0.18, 0.18), Vector3(float(tx), yy, -dist(z) - 0.8), steel)
+			var dg = box(Vector3(0.14, 3.2, 0.14), Vector3(float(tx), yy + 1.5, -dist(z) + 0.8), steel)
+			dg.rotation_degrees.z = 38.0 if (int(yy) % 2 == 0) else -38.0
+			yy += 3.0
+		var jx = 1.0 if side == 0 else -1.0
+		box(Vector3(9.0, 0.5, 0.6), Vector3(float(tx) + jx * 4.0, h + 0.6, -dist(z)), steel)
+		box(Vector3(2.0, 1.2, 1.8), Vector3(float(tx), h + 0.9, -dist(z)), toon(Color(0.9, 0.85, 0.7)))
+		var lamp = MeshInstance3D.new()
+		var sp = SphereMesh.new()
+		sp.radius = 0.4
+		sp.height = 0.8
+		lamp.mesh = sp
+		lamp.material_override = lm
+		lamp.position = Vector3(float(tx), h + 2.0, -dist(z))
+		add_child(lamp)
+		side += 1
+
+
+func _partylights(p) -> void:
+	# strings of coloured bulbs between poles over the square (scene 14), a few of them really light the cars
+	var xs = p.get("xs", [-40.0, -20.0, 0.0, 20.0, 40.0])
+	var z = float(p.get("z", 3.6))
+	var cols = [Color(1.0, 0.3, 0.35), Color(1.0, 0.8, 0.2), Color(0.3, 0.9, 0.5), Color(0.35, 0.6, 1.0), Color(0.9, 0.4, 1.0)]
+	var wood = toon(Color(0.3, 0.22, 0.16))
+	for xi in xs:
+		box(Vector3(0.3, 7.5, 0.3), Vector3(float(xi), 3.75, -dist(z)), wood)
+	var li = 0
+	for q in range(xs.size() - 1):
+		var xa = float(xs[q])
+		var xb = float(xs[q + 1])
+		for b in range(15):
+			var u = float(b) / 14.0
+			var bx = xa + (xb - xa) * u
+			var by = 7.2 - 1.4 * sin(PI * u)
+			var c = cols[(b + q) % cols.size()]
+			var bm = StandardMaterial3D.new()
+			bm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			bm.albedo_color = c
+			bm.emission_enabled = true
+			bm.emission = c
+			bm.emission_energy_multiplier = 3.0
+			var bu = MeshInstance3D.new()
+			var sp = SphereMesh.new()
+			sp.radius = 0.2
+			sp.height = 0.4
+			bu.mesh = sp
+			bu.material_override = bm
+			bu.position = Vector3(bx, by, -dist(z))
+			add_child(bu)
+			if b % 5 == 2:
+				var ol = OmniLight3D.new()
+				ol.light_color = c
+				ol.light_energy = 2.2
+				ol.omni_range = 11.0
+				ol.position = Vector3(bx, by - 0.3, -dist(z) + 1.5)
+				add_child(ol)
+				li += 1
+
+
 func _arena() -> void:
 	# MegaWheel Raceway (scene 3 town meeting): stepped grandstand with coloured seats and a roof behind the track,
 	# catch fence, a banner, floodlight towers (lit at dusk / night, no shadows: contract L01), far skyline.
@@ -1051,6 +1223,12 @@ func _props() -> void:
 			_key(p)
 		elif str(p["type"]) == "rockslide":
 			_rockslide(p)
+		elif str(p["type"]) == "speedgate":
+			_speedgate(p)
+		elif str(p["type"]) == "towers":
+			_towers(p)
+		elif str(p["type"]) == "partylights":
+			_partylights(p)
 		elif str(p["type"]) == "lamp":
 			_hanging_lamp(p)
 		elif str(p["type"]) == "crate":
@@ -1461,6 +1639,11 @@ func _process(_d: float) -> void:
 				if ud > 0.0:
 					var fall = 40.0 - 4.9 * ud * ud * 4.0
 					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
+	for gt in gates:                                         # the speedway gate swings open (ease in-out)
+		var u3 = clampf((t - float(shot_t0.get(int(gt[2]), 1.0e9)) - float(gt[3])) / float(gt[4]), 0.0, 1.0)
+		var e3 = u3 * u3 * (3.0 - 2.0 * u3)
+		gt[0].rotation_degrees.y = 82.0 * e3
+		gt[1].rotation_degrees.y = -82.0 * e3
 	for gm_ in glints:
 		gm_.emission_energy_multiplier = 0.4 + 3.5 * pow(maxf(0.0, sin(t * 2.3)), 8.0)
 	for lp in swing_lamps:                                   # a gentle sway

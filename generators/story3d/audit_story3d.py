@@ -446,6 +446,24 @@ def audit_scene(d, mp4):
         if noisy:
             warn.append(f"audio: efek terdengar seperti noise di headphone {noisy[:4]} [A07]")
         total = len(mix) / sr
+        mus = [db(M[q * win:(q + 1) * win]) > -50 for q in range(n)]      # A10: how much of the film carries music
+        share = sum(mus) / max(1, n)
+        run_, best_ = 0, 0
+        for on_ in mus:
+            run_ = run_ + 1 if on_ else 0
+            best_ = max(best_, run_)
+        metrics.update(music_share=round(share, 2), music_longest_s=best_ * 0.5)
+        if total > 20 and share > THRESH["music_share_max"]:
+            warn.append(f"audio: musik ada di {share:.0%} scene (maks {THRESH['music_share_max']:.0%}) - backsound terlalu ramai [A10]")
+        if best_ * 0.5 > THRESH["music_run_max_s"]:
+            warn.append(f"audio: musik menerus {best_ * 0.5:.0f}s tanpa jeda (maks {THRESH['music_run_max_s']:.0f}s) [A10]")
+        loud = []
+        for spk, t0, du in lines:
+            seg = slice(int(t0 * sr), int((t0 + du) * sr))
+            if db(M[seg]) > -60 and db(V[seg]) - db(M[seg]) < THRESH["music_gap_db"]:
+                loud.append(f"{spk}@{t0:.1f}")
+        if len(loud) > max(2, len(lines) // 3):
+            warn.append(f"audio: musik kurang dari {THRESH['music_gap_db']:.0f} dB di bawah suara di {len(loud)} kalimat {loud[:4]} [A10]")
         cues = [c for c in sc.get("score", []) if "cue" in c]
         if total > 40 and cues:
             span = {}
