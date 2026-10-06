@@ -39,7 +39,7 @@ vol = modal.Volume.from_name("megawheel-story3d", create_if_missing=True)
 
 def _mounts(img):
     """Only what a render reads, mounted (not baked) so every run sees the current code / caches."""
-    for sub in ("generators", "cast", "branding/music", "branding/voice/characters", "branding/infrasoft",
+    for sub in ("generators", "cast", "branding/music", "branding/voice", "branding/infrasoft",
                 "work/voice/cache", "work/voice/visemes", "stories"):
         if os.path.isdir(os.path.join(ROOT, sub)):
             img = img.add_local_dir(os.path.join(ROOT, sub), f"{REMOTE}/{sub}",
