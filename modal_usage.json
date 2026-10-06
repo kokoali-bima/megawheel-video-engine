@@ -2825,6 +2825,16 @@
    "gpu_seconds": 72.6,
    "wall_seconds": 77.2,
    "cost_usd": 0.024
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story3d S01E02_who_is_kraggor 1,2,3,4,5,6,7,8",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 8,
+   "cpu_seconds": 2928.8,
+   "gpu_seconds": 878.5,
+   "wall_seconds": 242.1,
+   "cost_usd": 0.2882
   }
  ]
 }
