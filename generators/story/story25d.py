@@ -424,6 +424,22 @@ def draw_beam(ctx, a, t, camx, flicker=False):
     ctx.fill()
 
 
+def platform_h(x, z):
+    """Height of whatever is under (x, z): a 'stage' prop with a ramp at each end (contract G04, owner 2026-10-06:
+    Siren drove off the stage and stayed in the air). 0 = the road."""
+    best = 0.0
+    for p in SCENE.get("props", []):
+        if p.get("type") != "stage" or abs(z - p.get("z", 2.6)) > 1.0:
+            continue
+        half, ramp, hgt = p.get("w", 7.0) / 2, p.get("ramp", 1.8), p.get("h", 0.75)
+        dx = abs(x - p.get("x", 0.0))
+        if dx <= half:
+            best = max(best, hgt)
+        elif dx <= half + ramp:
+            best = max(best, hgt * (1 - (dx - half) / ramp))
+    return best
+
+
 def actor_state(a, t):
     yaw = 0.0 if a["face"] > 0 else math.pi
     hh, slope = hill_h(a["x"])
@@ -2134,6 +2150,9 @@ def render_scene(ep, num, aspect):
                     a["stuck"] = True
                 if mv.get("hop") and j == si:
                     a["h"] = abs(math.sin(uu * 7)) * 0.5
+        for a in actors.values():                                  # G04: stand on what is below (stage / ramp / road)
+            if not a["hidden"]:
+                a["h"] += platform_h(a["x"], a["z"])
         # emotions + talking
         EMO.clear()
         TALK.clear()

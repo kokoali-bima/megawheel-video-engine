@@ -17,7 +17,7 @@
    "vk": "police",
    "x": 8,
    "z": 2.7,
-   "h": 0.75,
+   "h": 0,
    "face": -1,
    "emo": "determined"
   },
@@ -199,10 +199,10 @@
    }
   },
   {
-   "cam": "close",
+   "cam": "medium",
    "on": "sprinkles",
    "move": {
-    "push": 0.1
+    "push": 0.2
    },
    "emote": {
     "sprinkles": "shy"

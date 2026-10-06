@@ -20,7 +20,7 @@ SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
               "tint", "note", "jcut"}
-SHOT_KEYS = {"cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
+SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
              "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
@@ -243,6 +243,26 @@ def lint(ep, n):
                                                    ({"punch"} if shots[-1].get("punch") else set()) |
                                                    {shots[-1].get("cam", "")})):
         warn.append("kait akhir: shot terakhir tanpa push / low / punch")
+    # C09 / C10: close-ups are rare, marked beats; never jump from a wide straight into a close-up
+    if len(speakers) >= 2:
+        closes = [i for i, s in enumerate(shots) if s.get("cam") in ("close", "ecu")]
+        if len(closes) > LN["max_closeups"]:
+            err.append(f"close-up {len(closes)} kali (maks {LN['max_closeups']}) - film terasa zoom-in terus; pakai "
+                       f"two/group/medium + push pelan [C09]")
+        for i in closes:
+            if not shots[i].get("beat"):
+                err.append(f"shot {i}: close-up tanpa 'beat' (tandai momen kuncinya: emotion/reveal/comic) [C09]")
+        for i in range(1, len(shots)):
+            ra = SIZE_RANK.get(shots[i - 1].get("cam", "wide"), 0)
+            rb = SIZE_RANK.get(shots[i].get("cam", "wide"), 0)
+            if abs(ra - rb) > LN["max_size_jump"] and not shots[i].get("beat"):
+                err.append(f"shot {i}: lompat ukuran {shots[i - 1].get('cam')} -> {shots[i].get('cam')} (terasa zoom-in "
+                           f"mendadak) - sisipkan ukuran tengah atau pakai push [C10]")
+    # G04: nothing floats - an actor height needs a stage under it
+    for aid, a in actors.items():
+        if float(a.get("h", 0)) > 0.05:
+            err.append(f"aktor {aid}: h={a['h']} - ketinggian diberikan otomatis oleh prop 'stage' di bawahnya; "
+                       f"set h 0 (kalau tidak, ia melayang saat pergi) [G04]")
     # coverage: no talking-heads ping-pong
     talkers = [a for a in actors if a not in NARRATORS]
     dlg = [(i, s.get("cam", "wide"), [ln[0] for ln in s.get("lines", []) if ln and ln[0] in actors and len(ln) <= 3])

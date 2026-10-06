@@ -263,6 +263,34 @@ def audit_scene(d, mp4):
             fail.append(f"kesinambungan: hanya {share:.0%} potongan dialog memakai J-cut (min "
                         f"{THRESH['jcut_min_share']:.0%}) - adegan terasa terputus [C04]")
 
+    # --- G04 nothing floats: a raised car needs a stage under it (or a jump / hop in that shot)
+    stages = [p for p in sc.get("props", []) if p.get("type") == "stage"]
+
+    def plat(x, z):
+        best = 0.0
+        for p in stages:
+            if abs(z - p.get("z", 2.6)) > 1.0:
+                continue
+            half, ramp, hgt = p.get("w", 7.0) / 2, p.get("ramp", 1.8), p.get("h", 0.75)
+            dx = abs(x - p.get("x", 0.0))
+            best = max(best, hgt if dx <= half else hgt * (1 - (dx - half) / ramp) if dx <= half + ramp else 0.0)
+        return best
+    flo = set()
+    for f in fr[::6]:
+        sh_ = shots[f["shot"]] if f["shot"] < len(shots) else None
+        for a in f["actors"]:
+            if a[4] - plat(a[1], a[2]) > 0.25 and sh_ is not None and not set(sh_["fx"]) & {"shake", "punch"}:
+                flo.add((a[0], f["shot"]))
+    for aid, si in sorted(flo):
+        fail.append(f"melayang shot {si}: {aid} di udara tanpa pijakan [G04]")
+    # --- C11 staging in depth: most of a dialogue scene in wide / group / two / track
+    if len({ln[0] for ln in lines}) >= 2:
+        tot = shots[-1]["t1"] - shots[0]["t0"]
+        wide_t = sum(s["t1"] - s["t0"] for s in shots if s["cam"] in ("wide", "group", "two", "track"))
+        metrics["wide_share"] = round(wide_t / max(0.1, tot), 2)
+        if wide_t / max(0.1, tot) < THRESH["wide_share_min"]:
+            warn.append(f"staging: hanya {wide_t / tot:.0%} waktu di shot lebar/grup/two (min "
+                        f"{THRESH['wide_share_min']:.0%}) - terasa zoom-in terus [C11]")
     # --- C02/C08 on the REAL positions (a move that did not finish leaves cars bumper to bumper)
     for sh in shots:
         js = shot_frames(sh["i"])

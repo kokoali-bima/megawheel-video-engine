@@ -500,6 +500,12 @@ func _stage(p) -> void:
 	box(Vector3(w, h, d), Vector3(x, h / 2, -dist(z)), toon(Color(0.55, 0.32, 0.2)))
 	box(Vector3(w + 0.1, 0.12, d + 0.1), Vector3(x, h + 0.06, -dist(z)), toon(Color(0.75, 0.5, 0.3)))
 	box(Vector3(w, h * 0.7, 0.04), Vector3(x, h * 0.45, -dist(z) + d / 2 + 0.03), toon(Color(0.8, 0.15, 0.15)))
+	var ramp = float(p.get("ramp", 1.8))                     # ramps: cars drive on and off (G04)
+	var rl = sqrt(ramp * ramp + h * h)
+	for sgn in [-1.0, 1.0]:
+		var rp = box(Vector3(rl, 0.12, d * 0.9), Vector3(x + sgn * (w / 2 + ramp / 2), h / 2, -dist(z)),
+			toon(Color(0.6, 0.38, 0.24)))
+		rp.rotation.z = sgn * -atan2(h, ramp)
 	if p.get("text"):
 		var pole_l = box(Vector3(0.1, 3.2, 0.1), Vector3(x - w * 0.45, 1.6, -dist(z) - d / 2), toon(Color(0.4, 0.4, 0.45)))
 		var pole_r = box(Vector3(0.1, 3.2, 0.1), Vector3(x + w * 0.45, 1.6, -dist(z) - d / 2), toon(Color(0.4, 0.4, 0.45)))

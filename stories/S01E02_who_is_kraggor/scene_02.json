@@ -202,9 +202,11 @@
    ]
   },
   {
-   "cam": "ecu",
+   "cam": "medium",
    "on": "zippy",
-   "zoom": 4.2,
+   "move": {
+    "push": 0.18
+   },
    "emote": {
     "zippy": "scared"
    },
@@ -217,14 +219,20 @@
    ]
   },
   {
-   "cam": "medium",
-   "on": "tilly",
-   "hold": 1.6,
+   "cam": "group",
+   "group": [
+    "tilly",
+    "buster",
+    "sprinkles"
+   ],
+   "hold": 1.8,
    "move": {
-    "push": 0.08
+    "push": 0.04
    },
    "emote": {
-    "tilly": "scared"
+    "tilly": "scared",
+    "buster": "worried",
+    "sprinkles": "worried"
    }
   },
   {
