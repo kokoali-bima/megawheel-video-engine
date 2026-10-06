@@ -355,7 +355,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             d_ = xd[i]
             held = joins[i].get("hold", 0) > 0
             if held and joins[i]["kind"] == "fadeblack":           # into black: the old scene's sound fades out
-                af = f"[0:a]afade=t=out:st=0:d={d_}:curve=qsin,apad=whole_dur={d_}[a]"
+                af = f"[0:a]afade=t=out:st=0:d={d_}:curve=cub,apad=whole_dur={d_}[a]"      # cub: measured 7.6 dB/0.1 s on a loud storm, qsin 22
             elif held:                                             # out of black: the new scene's sound fades in
                 af = f"[1:a]afade=t=in:st=0:d={d_}:curve=qsin,apad=whole_dur={d_}[a]"
             else:
