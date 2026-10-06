@@ -1738,7 +1738,7 @@ SFX = {
     "splat": lambda: se.synth_splash(0.8, seed=12),
     "lamp_off": lambda: lamp_off(),
     "honk": lambda: honk(2),
-    "thud_far": lambda: phone_step(0.3, seed=52) * 0.7,
+    "thud_far": lambda: phone_step(0.45, seed=52) * 0.7,
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
 }
@@ -1793,7 +1793,7 @@ def phone_step(near, seed):
     n = int(1.5 * sr)
     t = np.arange(n) / sr
     sub = np.sin(2 * math.pi * (62 - 22 * t) * t) * np.exp(-t * 5.5)
-    body = fft_band(rng.normal(0, 1, n), 220, 900 if near > 0.4 else 520) * np.exp(-t * (9 - 3 * near))
+    body = fft_band(rng.normal(0, 1, n), 220, 900 if near > 0.4 else 750) * np.exp(-t * (9 - 3 * near))
     body = np.tanh(body / max(1e-9, np.abs(body).max()) * 2.2)          # a little drive: harmonics phones hear
     crunch = fft_band(rng.normal(0, 1, n), 1600, 5200) * np.exp(-np.maximum(0, t - 0.01) * 26) * (t > 0.01)
     deb = fft_band(rng.normal(0, 1, n), 900, 4000) * np.exp(-t * 4) * (np.sin(2 * math.pi * 17 * t) > 0.2)
@@ -1822,12 +1822,13 @@ def drone(dur=4.0, rise=True):
     sr = se.SR
     n = int(max(1.0, dur) * sr)
     tt = np.arange(n) / sr
-    base = 55.0
-    tone = sum(np.sin(2 * math.pi * f * tt + p) / (1 + k * 0.6)
-               for k, (f, p) in enumerate(((base, 0), (base * 1.005, 1.3), (base * 2, 0.4), (base * 3.01, 2.1),
-                                            (base * 4, 0.9), (base * 6.02, 1.7), (base * 8, 0.2))))
-    air = fft_band(np.random.default_rng(23).normal(0, 1, n), 180, 900)
-    sig = tone / 3.0 + air / max(1e-9, np.abs(air).max()) * 0.15
+    base = 55.0                                                    # QA 2026-10-06: 8 % in the phone band -> the cluster
+    tone = sum(np.sin(2 * math.pi * f * tt + p) * w                # now carries its weight at 220-1300 Hz
+               for f, p, w in ((base, 0, 0.5), (base * 1.005, 1.3, 0.4), (base * 4, 0.4, 0.8), (base * 6.02, 2.1, 0.8),
+                               (base * 8, 0.9, 0.9), (base * 12.03, 1.7, 0.7), (base * 16, 0.2, 0.55),
+                               (base * 24.05, 2.6, 0.35)))
+    air = fft_band(np.random.default_rng(23).normal(0, 1, n), 250, 1300)
+    sig = tone / 3.0 + air / max(1e-9, np.abs(air).max()) * 0.3
     env = (tt / tt[-1]) ** 1.4 * 0.75 + 0.25 if rise else np.ones(n) * 0.6
     env *= np.clip(tt / 0.6, 0, 1) * np.clip((tt[-1] - tt) / 0.4, 0, 1)
     return np.tanh(sig * env * 1.4) * 0.55
@@ -1838,10 +1839,10 @@ def lamp_off():
     + white-noise click: unpleasant, user 2026-10-06)."""
     sr = se.SR
     t = np.arange(int(0.7 * sr)) / sr
-    hum = sum(np.sin(2 * math.pi * 100 * h * t) / h for h in (1, 2, 3, 5)) * 0.22
+    hum = sum(np.sin(2 * math.pi * 100 * h * t) * w for h, w in ((1, 0.5), (3, 0.7), (5, 0.6), (7, 0.45), (11, 0.3))) * 0.22
     flick = SM.box_avg((np.sin(2 * math.pi * 11 * t + 3 * np.sin(2 * math.pi * 3 * t)) > -0.1).astype(float),
                        int(0.006 * sr))
-    hum = fft_band(hum * flick * np.clip(1.6 - t / 0.35, 0, 1), 90, 1200)
+    hum = fft_band(hum * flick * np.clip(1.6 - t / 0.35, 0, 1), 200, 1600)
     k = int(0.5 * sr)
     tt = np.arange(len(t) - k) / sr
     tunk = np.zeros_like(t)

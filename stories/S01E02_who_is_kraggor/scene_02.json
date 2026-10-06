@@ -92,7 +92,7 @@
    "cue": "cue_town_panic",
    "from": 8,
    "to": 8,
-   "vol": 0.75,
+   "vol": 0.55,
    "start": 14.0,
    "fade": 0.5,
    "tail": 1.2

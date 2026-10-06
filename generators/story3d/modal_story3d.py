@@ -230,7 +230,9 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             blk = f"{tmp}/black{i}.mp4"
             L = j["dur"] + j["hold"] + j["din"]
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"color=black:s=1920x1080:r={FPS}",
-                            "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", f"{L:.3f}", "-c:v", "libx264",
+                            "-f", "lavfi", "-i", "anoisesrc=r=48000:color=brown:amplitude=0.02,lowpass=f=180,volume=0.5,"
+                            "aformat=channel_layouts=stereo",          # soft room tone, never digital silence
+                            "-t", f"{L:.3f}", "-c:v", "libx264",
                             "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", blk], check=True)
             seq += [blk, parts[i + 1]]
             sj += [dict(j, kind="fadeblack", dur=j["dur"]), dict(j, kind="fade", dur=j["din"])]
@@ -297,7 +299,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
                 run_ = 0.0
         step = abs(la - lb)
         fails, warns = [], []
-        lv = [db(win[q:q + 1600]) for q in range(0, max(0, len(win) - 1600), 1600)]   # 100 ms levels
+        lv = [max(-62.0, db(win[q:q + 1600])) for q in range(0, max(0, len(win) - 1600), 1600)]   # 100 ms, audible floor
         drop = max([lv[q] - lv[q + 1] for q in range(len(lv) - 1) if lv[q] > -40] + [0.0])
         if drop > JOIN["drop_db"]:
             fails.append(f"suara terpotong mendadak (turun {drop:.0f} dB dalam 0,1 dtk)")
