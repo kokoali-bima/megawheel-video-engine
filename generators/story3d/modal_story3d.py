@@ -262,9 +262,16 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         ff(["-ss", f"{head:.3f}", "-t", f"{durs[i] - head - tail:.3f}", "-i", p], f"{tmp}/b{i:02d}.mp4")
         if i < len(joins):
             d_ = xd[i]
+            held = joins[i].get("hold", 0) > 0
+            if held and joins[i]["kind"] == "fadeblack":           # into black: the old scene's sound fades out
+                af = f"[0:a]afade=t=out:st=0:d={d_}:curve=qsin,apad=whole_dur={d_}[a]"
+            elif held:                                             # out of black: the new scene's sound fades in
+                af = f"[1:a]afade=t=in:st=0:d={d_}:curve=qsin,apad=whole_dur={d_}[a]"
+            else:
+                af = f"[0:a][1:a]acrossfade=d={d_}:c1=tri:c2=tri[a]"
             ff(["-ss", f"{durs[i] - d_:.3f}", "-t", f"{d_:.3f}", "-i", p, "-t", f"{d_:.3f}", "-i", parts[i + 1],
-                "-filter_complex", f"[0:v][1:v]xfade=transition={joins[i]['kind']}:duration={d_}:offset=0[v];"
-                                   f"[0:a][1:a]acrossfade=d={d_}:c1=tri:c2=tri[a]", "-map", "[v]", "-map", "[a]"],
+                "-filter_complex", f"[0:v][1:v]xfade=transition={joins[i]['kind']}:duration={d_}:offset=0[v];" + af,
+                "-map", "[v]", "-map", "[a]", "-t", f"{d_:.3f}"],
                f"{tmp}/x{i:02d}.mp4")
     with open(f"{tmp}/list.txt", "w") as fh:
         fh.writelines(f"file '{q}'\n" for q in pieces)
