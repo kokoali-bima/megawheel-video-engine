@@ -550,7 +550,7 @@ def draw_sketch(ctx, p, camx, t):
     ctx.pop_group_to_source()
     ctx.paint_with_alpha(0.85)
     ctx.restore()
-    se.draw_text(ctx, "K.", w * 0.32, hh * 0.32, 0.32 * k, fill=(0.25, 0.2, 0.15), stroke=None, sw=0)
+    se.draw_text(ctx, "K.", w * 0.32, hh * 0.32, 0.32 * k, fill=(0.25, 0.2, 0.15), stroke=(0.96, 0.92, 0.8), sw=1)
     ctx.restore()
 
 
@@ -1502,6 +1502,8 @@ CUT_RULE = "soft"         # "soft" (2.5D, aired): glide to every new shot. "auto
 JCUT = 0.0                # story3d (contract C04): the next shot's first line starts this many seconds BEFORE the
                           # picture cut (J-cut) - straight cuts on every exchange feel like tennis
 ISO_CAMERA = False        # story3d: no anisotropic "low" stretch (a real 3D camera cannot match it: 283 px QA error)
+SMOKE = False             # story3d preflight: draw ~3 frames/s + every shot in memory, no encode (catches crashes
+                          # in new drawing code on the VM in seconds, before any cloud render - 2026-10-06)
 PREPARE_ONLY = False      # story3d: stop after voices + visemes are cached (frames are rendered on Modal)
 PREPARED = {}             # what the last prepare produced (lines, viseme counts, duration)
 
@@ -2156,9 +2158,24 @@ def render_scene(ep, num, aspect):
                         "-map", "[o]", "-c:a", "pcm_s16le", wav], check=True)
         os.remove(mono)
     silent = os.path.join(out_dir, f"scene_{num:02d}_{aspect}_v.mp4")
-    ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
-                           "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
-                          stdin=subprocess.PIPE)
+    if SMOKE:
+        class _Null:
+            def write(self, b):
+                return len(b)
+
+            def close(self):
+                pass
+
+        class _FF:
+            stdin = _Null()
+
+            def wait(self):
+                return 0
+        ff = _FF()
+    else:
+        ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
+                               "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "19", silent],
+                              stdin=subprocess.PIPE)
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     ctx = cairo.Context(surf)
     nfr = int(total * FPS)
@@ -2169,6 +2186,8 @@ def render_scene(ep, num, aspect):
     camx = zoom = piv = glide = None
     prev_si = -1
     for fi in range(nfr):
+        if SMOKE and fi % 10 and fi not in marks:
+            continue
         t = fi / FPS
         si = max(i for i, sh in enumerate(shots) if sh["t0"] <= t) if any(sh["t0"] <= t for sh in shots) else 0
         sh = shots[si]
@@ -2497,6 +2516,9 @@ def render_scene(ep, num, aspect):
             surf.write_to_png(os.path.join(prev, f"{marks[fi]}.png"))
     ff.stdin.close()
     ff.wait()
+    if SMOKE:
+        print(f"[story] smoke scene {num}: {nfr // 10 + len(marks)} frames drawn OK", flush=True)
+        return None
     out = os.path.join(out_dir, f"scene_{num:02d}_{aspect}.mp4")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", wav, "-c:v", "copy",
                     "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest",

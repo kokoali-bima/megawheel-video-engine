@@ -73,6 +73,15 @@ def prepare(ep, nums, aspect):
         P = ST.PREPARED
         log(f"prepare scene {n:02d}: {len(P['lines'])} kalimat, {P['shots']} shot, {P['total']:.1f}s")
     ST.PREPARE_ONLY = False
+    ST.SMOKE = True                                                # smoke: every drawing path once, on the VM, free
+    for n in nums:
+        try:
+            ST.render_scene(ep, n, aspect)
+        except Exception as e:                                     # noqa: BLE001
+            import traceback
+            log(f"STOP smoke scene {n:02d}: {type(e).__name__}: {e} | " + traceback.format_exc()[-1200:])
+            ok = False
+    ST.SMOKE = False
     return ok
 
 
