@@ -97,8 +97,28 @@ def main():
            "--note", a.note or f"story3d {a.episode} {a.scenes}"]
     mlog = os.path.join(out, f"modal_{dt.datetime.now():%Y%m%d_%H%M%S}.log")     # live log: a stuck run is visible
     log(f"render Modal -> log {mlog}")
-    with open(mlog, "w") as fh:
-        r = subprocess.run(cmd, cwd=ROOT, stdout=fh, stderr=subprocess.STDOUT, text=True, timeout=5400)
+    import time as _t
+    env = dict(os.environ, PYTHONUNBUFFERED="1")                   # live log
+    rc = None
+    for attempt in (1, 2):                                         # watchdog: the Modal client sometimes hangs after
+        with open(mlog, "w") as fh:                                # "Created objects" with no container started
+            pr = subprocess.Popen(cmd, cwd=ROOT, stdout=fh, stderr=subprocess.STDOUT, text=True, env=env)
+            t0, started = _t.time(), False
+            while pr.poll() is None:
+                _t.sleep(10)
+                if not started and "[story3d] overlay" in open(mlog).read():
+                    started = True
+                if not started and _t.time() - t0 > 360:
+                    pr.kill()
+                    log(f"watchdog: tidak ada kemajuan 6 menit (percobaan {attempt}) -> dihentikan")
+                    break
+                if _t.time() - t0 > 5400:
+                    pr.kill()
+                    break
+            rc = pr.wait()
+        if started:
+            break
+    r = subprocess.CompletedProcess(cmd, rc)
     text = open(mlog).read()
     tail = "\n".join(ln for ln in text.splitlines() if "[story3d]" in ln)
     print(tail, flush=True)
