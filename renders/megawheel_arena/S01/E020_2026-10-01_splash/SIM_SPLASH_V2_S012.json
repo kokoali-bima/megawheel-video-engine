@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SPLASH_V2_S012",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-09T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "splash",
   "seed": 12,
@@ -240,5 +240,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S01/E020_2026-10-01_splash/SIM_SPLASH_V2_S012_audit.md",
   "episode": 20,
   "season": 1,
-  "approved_date": "2026-10-01"
+  "approved_date": "2026-10-01",
+  "youtube_url": "https://www.youtube.com/shorts/16KM8XY8BCA",
+  "upload_date": "2026-10-06"
 }
