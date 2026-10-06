@@ -71,7 +71,9 @@
    "x": 9.5,
    "z": 1.0,
    "from_shot": 9,
-   "dim_world": true
+   "dim_world": true,
+   "energy": 30.0,
+   "angle": 12.0
   }
  ],
  "score": [
@@ -86,7 +88,7 @@
   },
   {
    "cue": "cue_sprinkles_theme",
-   "from": 5,
+   "from": 4,
    "to": 7,
    "vol": 0.55,
    "start": 0.0,
@@ -189,7 +191,7 @@
    "moves": {
     "sprinkles": {
      "to_x": 9.5,
-     "speed": 3
+     "speed": 7
     }
    },
    "emote": {

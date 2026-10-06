@@ -226,6 +226,15 @@
    "note": "Sorakan klakson terlalu banyak nada = melodi 'om telolet om'; cukup 1-2 jenis klakson yang diramaikan",
    "check": "engine",
    "keys": []
+  },
+  {
+   "id": "C08",
+   "date": "2026-10-06",
+   "note": "Gerak tokoh belum selesai saat shot berganti -> menempel mobil lain di shot berikutnya (scene 3 r1)",
+   "check": "lint+qa",
+   "keys": [
+    "bumper_gap"
+   ]
   }
  ],
  "lint": {

@@ -139,6 +139,13 @@ def lint(ep, n):
             x, z, hid = pos[aid]
             if "show" in mv:
                 hid = not mv["show"]
+            if "to_x" in mv and sh.get("hold") and not sh.get("lines"):   # C08: a move must END inside its shot
+                d_ = abs(float(mv["to_x"]) - float(mv.get("x", x)))
+                need = d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))
+                leaves = i + 1 < len(shots) and shots[i + 1].get("moves", {}).get(aid, {}).get("show") is False
+                if need > float(sh["hold"]) - 0.2 and not hid and not leaves:   # (an exit that is hidden next: ok)
+                    err.append(f"{tag}: {aid} butuh {need:.1f}s untuk sampai, shot hanya {sh['hold']}s - percepat "
+                               f"(speed) atau perpanjang hold; kalau tidak ia masih di jalan saat shot berikutnya [C08]")
             x = float(mv.get("to_x", mv.get("x", x)))
             pos[aid] = (x, z, hid)
         for aid, e in sh.get("emote", {}).items():

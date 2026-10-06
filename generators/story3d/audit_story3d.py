@@ -263,6 +263,21 @@ def audit_scene(d, mp4):
             fail.append(f"kesinambungan: hanya {share:.0%} potongan dialog memakai J-cut (min "
                         f"{THRESH['jcut_min_share']:.0%}) - adegan terasa terputus [C04]")
 
+    # --- C02/C08 on the REAL positions (a move that did not finish leaves cars bumper to bumper)
+    for sh in shots:
+        js = shot_frames(sh["i"])
+        if not js or not (sh["lines"] or sh["cam"] in ("group", "two")):
+            continue
+        f = fr[js[len(js) // 2]]
+        A_ = f["actors"]
+        for q in range(len(A_)):
+            for r_ in range(q + 1, len(A_)):
+                a, b = A_[q], A_[r_]
+                if abs(a[2] - b[2]) < 0.9:
+                    gap = abs(a[1] - b[1]) - (a[6] * a[5] + b[6] * b[5]) / 2
+                    if gap < 1.0:
+                        fail.append(f"staging shot {sh['i']}: {a[0]} & {b[0]} menempel (jarak {gap:.1f} m) [C02/C08]")
+
     # --- variety / monotony of picture
     cams = [s["cam"] for s in shots]
     moves = set(k for s in shots for k in s["move"])
