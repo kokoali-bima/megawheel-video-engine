@@ -145,6 +145,10 @@ func _environment() -> void:
 	sky_m.sky_top_color = Color(0.02, 0.03, 0.10)
 	sky_m.sky_horizon_color = Color(0.09, 0.10, 0.22)
 	sky_m.ground_horizon_color = Color(0.09, 0.10, 0.22)
+	if bool(S["scene"].get("rain", false)):                  # storm clouds: a heavy grey-blue sky
+		sky_m.sky_top_color = Color(0.05, 0.06, 0.1)
+		sky_m.sky_horizon_color = Color(0.13, 0.15, 0.22)
+		sky_m.ground_horizon_color = Color(0.13, 0.15, 0.22)
 	sky_m.ground_bottom_color = Color(0.02, 0.03, 0.10)
 	sky_m.sun_angle_max = 0.0
 	var sk = Sky.new()
@@ -191,8 +195,10 @@ func _environment() -> void:
 	mm.disable_fog = true
 	md.material_override = mm
 	md.position = Vector3(40, 70, -320)
+	var storm = bool(S["scene"].get("rain", false))          # a storm hides the moon and the stars (clouds)
+	md.visible = not storm
 	add_child(md)
-	for i in range(160):                                     # stars
+	for i in range(0 if storm else 160):                     # stars
 		var st = MeshInstance3D.new()
 		var q = SphereMesh.new()
 		q.radius = rng.randf_range(0.25, 0.6)
@@ -555,22 +561,26 @@ func _crate(p) -> void:
 func _mountain_backdrop() -> void:
 	# big blue-grey mountains far behind the town (scene 6: the place they are going)
 	var cols = [Color(0.55, 0.62, 0.75), Color(0.48, 0.55, 0.7), Color(0.6, 0.66, 0.78)]
-	var x = -320.0
-	while x < 420.0:
-		var w = rng.randf_range(90, 160)
-		var h = rng.randf_range(60, 120)
+	var x = -520.0
+	while x < 620.0:
+		var w = rng.randf_range(200, 340)
+		var h = rng.randf_range(190, 300)
 		var m = MeshInstance3D.new()
 		var pm = PrismMesh.new()
 		pm.size = Vector3(w, h, 40)
 		m.mesh = pm
-		m.material_override = toon(cols[rng.randi() % cols.size()] if not NIGHT else Color(0.12, 0.14, 0.22))
-		m.position = Vector3(x + w / 2, h / 2 - 2, -260 - rng.randf_range(0, 60))
+		var mmat = toon(cols[rng.randi() % cols.size()] if not NIGHT else Color(0.12, 0.14, 0.22))
+		mmat.disable_fog = true                              # the day haze would melt them into the sky
+		m.material_override = mmat
+		m.position = Vector3(x + w / 2, h / 2 - 2, -330 - rng.randf_range(0, 60))
 		add_child(m)
 		var snow = MeshInstance3D.new()                      # snow cap
 		var sp = PrismMesh.new()
 		sp.size = Vector3(w * 0.22, h * 0.22, 40.5)
 		snow.mesh = sp
-		snow.material_override = toon(Color(0.96, 0.97, 1.0) if not NIGHT else Color(0.5, 0.55, 0.65))
+		var smat2 = toon(Color(0.96, 0.97, 1.0) if not NIGHT else Color(0.5, 0.55, 0.65))
+		smat2.disable_fog = true
+		snow.material_override = smat2
 		snow.position = m.position + Vector3(0, h * 0.39, 0)
 		add_child(snow)
 		x += w * 0.7
@@ -796,7 +806,7 @@ func _sign(p) -> void:
 	var lb = Label3D.new()
 	lb.text = str(p.get("text", "GRANDPA CONE'S ICE CREAM\nDing-ding!"))
 	lb.font_size = 90
-	lb.pixel_size = 0.009
+	lb.pixel_size = 0.0042
 	lb.modulate = Color(0.6, 0.25, 0.3)
 	lb.outline_size = 0
 	lb.position = wp(x, z, 1.95) + Vector3(0, 0, 0.09)
