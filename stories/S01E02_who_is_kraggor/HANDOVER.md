@@ -21,23 +21,21 @@
 ## Done (Drive: ipandu-video/story3d/S01E02_who_is_kraggor/)
 | Scene | State |
 |---|---|
-| 1 Cold open "Footprints" (town night) | approved ("perfect"), tension bed added before the footprints |
-| 2 Town Panic (town day) | approved after coverage/staging/honk fixes |
-| 3 Town Meeting (arena sunset) | approved after Siren-floating + zoom-in fixes (stage ramps, G04) |
-| 4 Grandpa's Old Box (garage night) | delivered: album + torn Mountain Road photo; awaiting owner review |
-| episode_01-02-03-04.mp4 | assembled with episode-card joins (PART 2/3/4), all joins pass the sensor |
+| 1-3 | approved |
+| 4 Grandpa's Old Box | delivered, awaiting owner review |
+| 5 Flashback "The Little Monster" (sepia storm, little Kraggor) | delivered 2026-10-06, QA WARN (flash jumps = lightning, dark night luma, 2 light masking) |
+| 6 The Plan (town + giant mountains) | delivered, QA WARN (lightning jump only) |
+| 7 Into the Mountains (mud, Rocky, rockslide) | delivered, QA WARN (night contrast) |
+| 8 The Cave (crystals, treasure, Grandpa's sign, key, eyes) | delivered, QA WARN (dark cave) |
+| episode_01..08.mp4 | assembled, all 7 joins pass (cub fade-out curve) |
 
-## In progress (not committed yet when this was written)
-Scenes 5-8 in one batch to save tokens:
-- **Branch `wip-scenes-5-8` (pushed to GitHub; main does NOT have it)**: `generators/story3d/project/story3d.gd` with NEW locations written but UNTESTED — `forest` (storm), `mountain` (night road,
-  rockslide prop), `cave` (crystals, `treasure`, `sign`, `key` props, moonbeam), `mountains: true` backdrop, `rain: true`
-  + `lightning: [t...]`. Test with a short Godot render (modal_godot --count 20) BEFORE merging the branch into main (a GDScript parse error breaks EVERY scene): `git checkout wip-scenes-5-8` / merge only after it passes.
-- Still to do: little Kraggor as a world-anchored prop (real drawing, small; modes scared/munch/smile/sleep), sepia grade in
-  compose (scene `grade: "sepia"`, disable story25d `sepia()` in the exporter to avoid double), `storm` ambience + tonal
-  thunder + `rockslide` SFX (phone-audible, not noise), scene JSONs 5-8, validator PROPS for the new props, render all 4 in
-  one run, review sheets, fix once, upload, assemble 1-8.
-- Young Grandpa in the flashback: `vk icecream`, color [0.93,0.86,0.7], accent [0.62,0.42,0.25], mustache false (Ep.1 used
-  mustache true for the older Grandpa).
+## Engine added for 5-8 (all on main, tested)
+- Godot locations `forest` (storm: `rain`, `lightning:[[shot,sec]]`), `mountain` (+`rockslide` prop), `cave` (+`treasure`, `sign`, `key`, `beam_x`, `wall_z`), scene key `mountains:true`.
+- Little Kraggor: prop `kraggor_small` (x,z,face,height,mode scared|munch|smile|sleep|calm, `cone:{from,secs}`, `sway`, from_shot/to_shot) = baby head of the real Kraggor drawing (story25d `kraggor_baby_head`). Reuse in scene 13 (photo piece / net).
+- SFX: thunder_roll, rockslide, munch, whimper, snore, drip, key_glint, breath_big; sfx entry may carry a 3rd element = gain, e.g. ["thunder_roll", 1.5, 0.6]. Ambience: `storm`, `cave`.
+- Sepia: scene `"tint":"sepia"` (applied once in compose). Test tool for new Godot code: `modal_story3d.py::smoke --scenes N` (run with the branch checked out BEFORE merging); `tools/contact_sheet.py` for the self-review sheet.
+
+## Next: scenes 9-15 (see script.md). Needs: big Kraggor in the cave (scenes 9,10: face to face, chalk wall drawings), gate + crane net (11-13), party plaza (14), old speedway gate at dawn (15).
 
 ## How to run (VM 192.168.99.3, SSH -p 22022 root@2.28.128.77, key from the owner)
 ```
