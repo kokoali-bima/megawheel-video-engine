@@ -91,3 +91,17 @@ Mengubah ambang = keputusan user (catat di QA_DEFECT_TRACKER).
 - Dunia Godot memakai seed tetap (`rng.seed = 5`): kota yang sama setiap render.
 - Jangan render tokoh/dunia di luar pipeline ini; jangan menyunting mp4 hasil secara manual.
 - Setiap temuan baru dari review user → tambahkan sensor + baris di QA_DEFECT_TRACKER, lalu perbarui SOP ini.
+
+## 7. Merakit episode (sambungan halus)
+```
+venv-modal/bin/modal run generators/story3d/modal_story3d.py::assemble --episode <ep> [--order 1,2,3] --out work/story3d/<ep>
+```
+- Sumber: hasil terakhir tiap scene di volume Modal (`/vol/final/<ep>/scene_NN.mp4`, ditulis otomatis oleh compose).
+- Aturan transisi (tetap): waktu/lokasi berubah → `fadeblack` 1,0 dtk; tempat & waktu sama → `dissolve` 0,6 dtk;
+  ganti per sambungan di `stories/<ep>/edit.json` → `{"story3d": {"order": [...], "joins": {"1-2": ["fadeblack", 1.2]}}}`.
+- Audio di-crossfade. Sensor sambungan: FAIL = suara terpotong mendadak (turun > 14 dB dalam 0,1 dtk), sunyi bolong
+  ≥ 1,2 dtk, lompatan > 8 dB di tempat yang sama; WARN = beda level > 14 dB antar waktu. Exit 5 bila FAIL.
+- Pelajaran 2026-10-06: scene yang dibuka sunyi setelah scene yang ditutup keras terasa "suara mati" → buka scene
+  dengan ambience + cue lembut (mis. `cue_wonder` untuk pagi), jangan hanya sunyi.
+- Keluaran: `<ep>_episode[_order].mp4`, `_chapters.txt` (chapter YouTube), `_joins.json`.
+
