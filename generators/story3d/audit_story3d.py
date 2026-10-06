@@ -284,8 +284,9 @@ def audit_scene(d, mp4):
     for aid, si in sorted(flo):
         fail.append(f"melayang shot {si}: {aid} di udara tanpa pijakan [G04]")
     # --- C11 staging in depth: most of a dialogue scene in wide / group / two / track
-    if len({ln[0] for ln in lines}) >= 2:
-        tot = shots[-1]["t1"] - shots[0]["t0"]
+    cast_spk = {ln[0] for ln in lines} - {"narrator", "announcer", "announcer2"}
+    if len(cast_spk) >= 2:                                         # dialogue between characters only (C11)
+        tot = sum(s["t1"] - s["t0"] for s in shots if s["cam"] != "insert")
         wide_t = sum(s["t1"] - s["t0"] for s in shots if s["cam"] in ("wide", "group", "two", "track"))
         metrics["wide_share"] = round(wide_t / max(0.1, tot), 2)
         if wide_t / max(0.1, tot) < THRESH["wide_share_min"]:
