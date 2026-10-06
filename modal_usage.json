@@ -2815,6 +2815,16 @@
    "gpu_seconds": 0,
    "wall_seconds": 0,
    "cost_usd": 0.79
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story3d SMOKE S01E02_who_is_kraggor 8",
+   "engine": "story3d (smoke)",
+   "scenes": 1,
+   "cpu_seconds": 253.8,
+   "gpu_seconds": 72.6,
+   "wall_seconds": 77.2,
+   "cost_usd": 0.024
   }
  ]
 }
