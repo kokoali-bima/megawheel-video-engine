@@ -1364,6 +1364,156 @@ def kraggor_mouth(spec, base_y):
     return spec.get("sx", 0.62) * W, base_y + (1.2 - 3.8) * 40 * sc
 
 
+def kraggor_baby_head(ctx, mood, t, cone_r=0.0):
+    """LITTLE Kraggor (S01E02 scene 5 flashback, scene 13 photo): the same design as the grown-up - green dino-robot,
+    silver spikes, glowing eyes - but young: a big head, soft brows, a muzzle, no angry teeth. Local frame = the one
+    kraggor_smile uses (origin at the neck base, 1 unit = 40 px). mood: calm | scared | munch | smile | sleep.
+    cone_r > 0: he holds a strawberry cone (scoop radius in units) up to his mouth."""
+    body, metal = KR_BODY, (0.66, 0.68, 0.76)
+    dark = se.shade(body, 0.62)
+    ctx.save()
+    ctx.translate(905, 1.2 * 40)
+    ctx.scale(40, 40)
+    if cone_r > 0:                                             # the arm + paw + cone (before the head: partly behind it)
+        ctx.move_to(5.4, 1.0)
+        ctx.line_to(5.0, -2.6)
+        ctx.set_source_rgb(*se.lit(body))
+        ctx.set_line_width(2.1)
+        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        ctx.stroke()
+        se.poly(ctx, [(4.0, -4.4), (6.0, -4.4), (5.0, -1.6)])
+        ctx.set_source_rgb(0.9, 0.7, 0.35)
+        ctx.fill()
+        ctx.arc(5.0, -4.7, cone_r, 0, 2 * math.pi)
+        ctx.set_source_rgb(1.0, 0.55, 0.7)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.5, 0.2, 0.3)
+        ctx.set_line_width(0.16)
+        ctx.stroke()
+        ctx.arc(5.0, -2.6, 1.0, 0, 2 * math.pi)                # the paw closes round the cone
+        ctx.set_source_rgb(*se.lit(body))
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*dark)
+        ctx.set_line_width(0.2)
+        ctx.stroke()
+    ctx.translate(0, -2.6)                                     # a baby's head is big: grow it around the neck
+    ctx.scale(1.28, 1.28)
+    ctx.translate(0, 2.6)
+    se.rrect(ctx, -3.0, -3, 6.0, 12, 1.4)                      # neck
+    ctx.set_source_rgb(*se.lit(dark))
+    ctx.fill()
+    for bx in (-2.2, 0.0, 2.2):                                # three small silver back spikes
+        se.poly(ctx, [(bx - 0.6, -9.6), (bx, -11.4), (bx + 0.6, -9.6)])
+        ctx.set_source_rgb(*se.lit(metal))
+        ctx.fill()
+    se.rrect(ctx, -4.6, -10.2, 9.2, 7.6, 2.6)                  # head
+    ctx.set_source_rgb(*se.lit(body))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*dark)
+    ctx.set_line_width(0.28)
+    ctx.stroke()
+    for sgn in (-1, 1):                                        # two little horn nubs
+        se.poly(ctx, [(sgn * 3.6 - 0.5, -9.9), (sgn * 3.2, -11.5), (sgn * 2.5 + 0.2, -9.9)])
+        ctx.set_source_rgb(*se.lit(metal))
+        ctx.fill()
+    se.rrect(ctx, -3.3, -5.7, 6.6, 3.3, 1.5)                   # muzzle, a little lighter
+    ctx.set_source_rgb(*se.lit((0.34, 0.66, 0.46)))
+    ctx.fill_preserve()
+    ctx.set_source_rgb(*dark)
+    ctx.set_line_width(0.2)
+    ctx.stroke()
+    for sgn in (-1, 1):
+        ctx.arc(sgn * 0.9, -5.0, 0.22, 0, 2 * math.pi)
+        ctx.set_source_rgb(*dark)
+        ctx.fill()
+    for sgn in (-1, 1):                                        # eyes
+        ex = sgn * 1.9
+        if mood == "sleep":                                    # closed, curved like a sleeping face
+            ctx.arc(ex, -7.3, 0.95, 0.12 * math.pi, 0.88 * math.pi)
+            ctx.set_source_rgb(0.1, 0.05, 0.05)
+            ctx.set_line_width(0.36)
+            ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+            ctx.stroke()
+            continue
+        ctx.arc(ex, -7.0, 1.55, 0, 2 * math.pi)                # soft glow
+        ctx.set_source_rgba(1, 0.9, 0.2, 0.28)
+        ctx.fill()
+        ctx.arc(ex, -7.0, 1.2, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 0.9, 0.3)
+        ctx.fill()
+        pr = {"scared": 0.38, "smile": 0.62, "munch": 0.6}.get(mood, 0.5)
+        ctx.arc(ex + sgn * 0.1, -6.9, pr, 0, 2 * math.pi)
+        ctx.set_source_rgb(0.75, 0.12, 0.05)
+        ctx.fill()
+        ctx.arc(ex - sgn * 0.3, -7.45, 0.26, 0, 2 * math.pi)   # a sparkle: the eyes shine
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+        if mood == "scared":                                   # worried brows (inner ends up)
+            ctx.move_to(ex + sgn * 1.2, -8.2)
+            ctx.line_to(ex - sgn * 1.2, -8.85)
+        elif mood in ("smile", "munch"):
+            ctx.arc(ex, -7.4, 1.5, 1.2 * math.pi, 1.8 * math.pi)
+        else:
+            ctx.move_to(ex - sgn * 1.2, -8.5)
+            ctx.line_to(ex + sgn * 1.2, -8.3)
+        ctx.set_source_rgb(*dark)
+        ctx.set_line_width(0.34)
+        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        ctx.stroke()
+    ctx.set_source_rgb(0.1, 0.05, 0.05)
+    ctx.set_line_width(0.34)
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    if mood == "scared":                                       # a wobbling frown + trembling tears
+        ctx.arc(0, -2.9 + 0.06 * math.sin(t * 30), 1.4, 1.12 * math.pi, 1.88 * math.pi)
+        ctx.stroke()
+        for k in range(2):
+            ph = (t * 1.5 + k * 0.5) % 1.0
+            ctx.save()
+            ctx.translate((1.9 + 1.0) * (-1 if k == 0 else 1), -6.0 + ph * 2.4)
+            ctx.scale(0.28, 0.42)
+            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(0.55, 0.8, 1.0, 1.0 - ph)
+            ctx.fill()
+    elif mood == "munch":                                      # chewing: the mouth opens and shuts, cheeks puffed
+        for sgn in (-1, 1):
+            ctx.arc(sgn * 2.9, -4.2, 0.9, 0, 2 * math.pi)
+            ctx.set_source_rgba(1, 0.5, 0.55, 0.55)
+            ctx.fill()
+        hh = 0.25 + 0.7 * abs(math.sin(t * 9))
+        ctx.save()
+        ctx.translate(0, -3.7)
+        ctx.scale(1.5, hh)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(0.5, 0.1, 0.14)
+        ctx.fill()
+    elif mood == "smile":                                      # a big happy smile and rosy cheeks
+        ctx.arc(0, -4.7, 2.0, 0.14 * math.pi, 0.86 * math.pi)
+        ctx.stroke()
+        for sgn in (-1, 1):
+            ctx.arc(sgn * 3.0, -4.7, 0.8, 0, 2 * math.pi)
+            ctx.set_source_rgba(1, 0.5, 0.55, 0.6)
+            ctx.fill()
+    elif mood == "sleep":                                      # a tiny smile, floating Z's
+        ctx.arc(0, -4.4, 1.0, 0.2 * math.pi, 0.8 * math.pi)
+        ctx.stroke()
+        for k in range(3):
+            ph = (t * 0.5 + k / 3.0) % 1.0
+            zs, zx, zy = 0.45 + 0.45 * ph, 4.0 + ph * 1.8, -9.4 - ph * 3.2
+            ctx.move_to(zx, zy)
+            ctx.line_to(zx + zs, zy)
+            ctx.line_to(zx, zy + zs)
+            ctx.line_to(zx + zs, zy + zs)
+            ctx.set_source_rgba(0.85, 0.9, 1.0, math.sin(math.pi * ph))
+            ctx.set_line_width(0.2)
+            ctx.stroke()
+    else:
+        ctx.arc(0, -4.3, 1.0, 0.2 * math.pi, 0.8 * math.pi)
+        ctx.stroke()
+    ctx.restore()
+
+
 def kraggor_head(ctx, u, spec, stands_top=None):
     """Kraggor (smash25d head design + our body) in screen space, standing at base_y (stands top / horizon).
     mode: rise | roar | calm | munch | smile."""
@@ -1392,12 +1542,52 @@ def kraggor_head(ctx, u, spec, stands_top=None):
     ctx.scale(40, 40)
     kraggor_body(ctx, roar)
     ctx.restore()
-    SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
-    if mode == "smile":
+    if spec.get("baby"):                                           # little Kraggor: young head, soft face (S01E02 sc.5)
+        kraggor_baby_head(ctx, mode, u, spec.get("cone_r", 0.0))
+    else:
+        SM.draw_kraggor_head(ctx, {"T": 2.4, "warn": 2.4}, a, 0)
+    if mode == "smile" and not spec.get("baby"):
         kraggor_smile(ctx, a)
         w0 = spec.get("wink")
         if w0 is not None and w0 <= u < w0 + 0.6:                  # a friendly wink (one eye closes)
             kraggor_wink(ctx, spec.get("wink_eye", KR_EYES[0]))
+    ctx.restore()
+
+
+def draw_kraggor_small(ctx, p, camx, t, shots):
+    """Little Kraggor as a prop standing IN the world at (x, z) (his real drawing, small - never a new character):
+    a contact shadow, then kraggor_head(baby) anchored with its feet on the ground. modes: calm | scared | munch |
+    smile | sleep. "cone": {"from": shot, "secs": s} = a strawberry cone he holds up and eats over s seconds."""
+    x0, y0, w, h = kraggor_ext()
+    z = p.get("z", 3.4)
+    k = k_of(z)
+    s = p.get("height", 3.0) * k / h
+    gx, gy = pxy(p["x"], z, camx)
+    mode = p.get("mode", "calm")
+    face = -1 if p.get("face", 1) < 0 else 1
+    ctx.save()
+    ctx.translate(gx, gy + 0.08 * k)
+    ctx.scale(0.75 * p.get("height", 3.0) * k, 0.4 * k)
+    g = cairo.RadialGradient(0, 0, 0.0, 0, 0, 1.0)
+    g.add_color_stop_rgba(0, 0, 0, 0, 0.42)
+    g.add_color_stop_rgba(0.7, 0, 0, 0, 0.25)
+    g.add_color_stop_rgba(1, 0, 0, 0, 0.0)
+    ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+    ctx.set_source(g)
+    ctx.fill()
+    ctx.restore()
+    cone_r = 0.0
+    cn = p.get("cone")
+    if cn:
+        f = min(1.0, max(0.0, (t - shots[min(cn.get("from", 0), len(shots) - 1)]["t0"]) / max(0.1, cn.get("secs", 6.0))))
+        cone_r = 1.1 - 0.7 * f if f < 1.0 else 0.0
+    breath = 1.0 + (0.014 * math.sin(t * 1.8) if mode == "sleep" else 0.0)
+    shiver = 0.05 * k * math.sin(t * 41) if mode == "scared" else 0.0
+    ctx.save()
+    ctx.translate(gx + shiver, gy)
+    ctx.scale(face * breath, breath)
+    kraggor_head(ctx, t, dict(mode=mode, baby=True, cone_r=cone_r, sx=-s * (x0 + w / 2) / W, scale=s * 1080.0 / H),
+                 stands_top=-s * (y0 + h))
     ctx.restore()
 
 
@@ -2002,6 +2192,14 @@ SFX = {
     "box_drop": lambda: box_drop(),
     "steps_far": lambda: steps_far(),
     "stomp_near": lambda: stomp_near(),
+    "thunder_roll": lambda: thunder_roll(),
+    "rockslide": lambda: rockslide(),
+    "munch": lambda: munch(),
+    "whimper": lambda: whimper(),
+    "snore": lambda: snore(),
+    "drip": lambda: drip(),
+    "key_glint": lambda: key_glint(),
+    "breath_big": lambda: breath_big(),
 }
 
 
@@ -2150,6 +2348,160 @@ def lamp_off():
     return (hum + tunk * 0.5) * 0.6
 
 
+def thunder_roll(dur=3.4):
+    """Thunder made of TONES, not noise (A02 / A07, S01E02 scenes 5-7): a bright cracking cluster (230-1200 Hz, what a
+    phone plays), a deep boom, and a rolling rumble of detuned partials whose slow beating makes it 'roll'."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    rng = np.random.default_rng(81)
+    crack = sum(np.sin(2 * math.pi * f * t + p) * w for f, p, w in
+                ((230, 0.0, 1.0), (340, 1.1, 0.9), (510, 2.0, 0.8), (770, 0.4, 0.6), (1180, 1.7, 0.4), (1650, 0.9, 0.25)))
+    crack = crack * np.exp(-t * 6.0) * np.clip(t / 0.004, 0, 1)
+    boom = np.sin(2 * math.pi * (95 - 28 * np.minimum(t / 2.0, 1.0)) * t) * np.exp(-t * 1.6)
+    boom += 0.6 * np.sin(2 * math.pi * 2 * (95 - 28 * np.minimum(t / 2.0, 1.0)) * t) * np.exp(-t * 1.8)      # 2nd harmonic
+    roll = np.zeros(n)
+    for f in (66, 83, 104, 131, 166, 210, 265, 330, 415):
+        lfo = 0.5 + 0.5 * np.sin(2 * math.pi * rng.uniform(0.6, 1.7) * t + rng.uniform(0, 6.28))
+        roll += np.sin(2 * math.pi * f * t + rng.uniform(0, 6.28)) * lfo
+    roll *= np.exp(-t * 0.8) * np.clip(t / 0.2, 0, 1)
+    out = crack / 3.2 + boom * 0.45 + roll / 5.0
+    out *= np.clip((dur - t) / 0.6, 0, 1)
+    return out / max(1e-9, np.abs(out).max()) * 0.85
+
+
+def rockslide(dur=3.6):
+    """Boulders crashing down a slope: many pitched knocks (a falling-pitch thud + a stony clack each), thickest in the
+    first two seconds, over a low rolling rumble. Tonal impacts, never white noise (A02 / A07)."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    rng = np.random.default_rng(91)
+    out = np.zeros(n)
+    for q in range(46):
+        at = (dur * 0.62) * rng.random() ** 1.5                        # more at the start, fewer later
+        i = int(at * sr)
+        L = int(rng.uniform(0.18, 0.5) * sr)
+        tt = np.arange(L) / sr
+        f0 = rng.uniform(140, 380)
+        thud = np.sin(2 * math.pi * (f0 - 70 * np.minimum(tt / 0.15, 1.0)) * tt) * np.exp(-tt * rng.uniform(9, 16))
+        fc = rng.uniform(520, 1900)
+        clack = (np.sin(2 * math.pi * fc * tt) + 0.5 * np.sin(2 * math.pi * fc * 1.52 * tt)) * np.exp(-tt * rng.uniform(35, 70))
+        out[i:i + L] += (thud + 0.35 * clack)[:max(0, min(L, n - i))] * rng.uniform(0.25, 1.0)
+    rum = sum(np.sin(2 * math.pi * f * t + rng.uniform(0, 6.28)) *
+              (0.5 + 0.5 * np.sin(2 * math.pi * rng.uniform(0.8, 2.2) * t + rng.uniform(0, 6.28)))
+              for f in (58, 73, 96, 125, 168, 220, 290))
+    env = np.clip(t / 0.25, 0, 1) * np.exp(-np.maximum(0.0, t - 1.4) * 1.1)
+    out = out / max(1e-9, np.abs(out).max()) * 0.8 + rum / 7.0 * env * 0.9
+    out *= np.clip((dur - t) / 0.5, 0, 1)
+    return out / max(1e-9, np.abs(out).max()) * 0.85
+
+
+def munch(n=5):
+    """Little Kraggor munching an ice cream: soft chomps (a hollow 200-400 Hz 'nom' + a tiny crunch tone)."""
+    sr = se.SR
+    out = np.zeros(int((0.3 * n + 0.4) * sr))
+    for k in range(n):
+        L = int(0.22 * sr)
+        tt = np.arange(L) / sr
+        nom = np.sin(2 * math.pi * (330 - 150 * np.minimum(tt / 0.12, 1.0)) * tt) * np.exp(-tt * 15)
+        nom += 0.5 * np.sin(2 * math.pi * (660 - 300 * np.minimum(tt / 0.12, 1.0)) * tt) * np.exp(-tt * 20)
+        crunch = np.sin(2 * math.pi * 1250 * tt) * np.exp(-tt * 60) * 0.25
+        i = int(k * 0.3 * sr)
+        out[i:i + L] += (nom + crunch) * (0.8 + 0.2 * (k % 2))
+    return out / max(1e-9, np.abs(out).max()) * 0.6
+
+
+def whimper(dur=1.3):
+    """A small creature crying: two falling sighs of a wobbly tone with soft overtones (350-1100 Hz)."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    out = np.zeros(n)
+    for start, f0, ln in ((0.0, 690.0, 0.62), (0.68, 610.0, 0.6)):
+        m = (t >= start) & (t < start + ln)
+        tt = t[m] - start
+        f = f0 - 190 * (tt / ln) + 18 * np.sin(2 * math.pi * 7.5 * tt)
+        ph = 2 * math.pi * np.cumsum(f) / sr
+        env = np.sin(np.pi * tt / ln) ** 1.3
+        out[m] += (np.sin(ph) + 0.4 * np.sin(2 * ph) + 0.18 * np.sin(3 * ph)) * env
+    return out / max(1e-9, np.abs(out).max()) * 0.5
+
+
+def snore(dur=3.0):
+    """A sleeping little monster: slow breaths, a soft low tone with overtones (so phones can play it)."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    f = 118 + 6 * np.sin(2 * math.pi * 0.45 * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.8), (3, 0.6), (4, 0.4), (6, 0.2)))
+    env = np.sin(math.pi * (t / 1.5 % 1.0)) ** 2 * np.clip(t / 0.3, 0, 1) * np.clip((dur - t) / 0.4, 0, 1)
+    return tone * env / 3.0 * 0.5
+
+
+def drip(n=3):
+    """Water drops in a cave: a round 'plink' and its echoes, tonal."""
+    sr = se.SR
+    out = np.zeros(int((0.55 * n + 1.2) * sr))
+    for k, f in enumerate((1180, 1480, 980)[:n]):
+        i = int(k * 0.55 * sr)
+        L = int(0.5 * sr)
+        tt = np.arange(L) / sr
+        pl = np.sin(2 * math.pi * (f + 260 * np.exp(-tt * 40)) * tt) * np.exp(-tt * 14)
+        for e, g in ((0, 1.0), (0.23, 0.4), (0.46, 0.16)):
+            j = i + int(e * sr)
+            out[j:j + L] += pl[:max(0, min(L, len(out) - j))] * g * 0.5
+    return out
+
+
+def key_glint():
+    """The old key catches the light: a soft two-tone chime."""
+    sr = se.SR
+    tt = np.arange(int(1.4 * sr)) / sr
+    out = (np.sin(2 * math.pi * 1760 * tt) + 0.6 * np.sin(2 * math.pi * 2637 * tt) + 0.3 * np.sin(2 * math.pi * 3520 * tt)) * np.exp(-tt * 3.2)
+    return out * np.clip(tt / 0.004, 0, 1) * 0.3
+
+
+def breath_big(dur=3.4):
+    """Something huge breathing right behind you: two slow bellows-like breaths (a low tone with a stack of overtones
+    up to ~700 Hz, a slow growl in it). Kraggor is never noise (A07)."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    f = 58 + 5 * np.sin(2 * math.pi * 0.6 * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph + h) * w for h, w in ((1, 0.9), (2, 0.8), (3, 0.9), (4, 0.8), (6, 0.7), (8, 0.55), (12, 0.35)))
+    growl = 0.65 + 0.35 * np.sin(2 * math.pi * 23 * t)
+    env = np.sin(math.pi * (t / (dur / 2) % 1.0)) ** 1.5 * np.clip(t / 0.4, 0, 1) * np.clip((dur - t) / 0.5, 0, 1)
+    out = tone * growl * env
+    return out / max(1e-9, np.abs(out).max()) * 0.8
+
+
+def amb_storm(n, rng):
+    """A night storm: wind in swells and a steady rain wash, ALL below ~1.2 kHz (the old noise rain was hiss on
+    headphones, contract A02). Thunder is an effect on the lightning beats, not part of the bed."""
+    tt = np.arange(n) / se.SR
+    wind = fft_band(rng.normal(0, 1, n), 50, 380)
+    wind = wind / max(1e-9, np.abs(wind).max()) * (0.55 + 0.45 * np.sin(2 * math.pi * tt / 7.3) ** 2)
+    rain = fft_band(rng.normal(0, 1, n), 260, 1150)
+    rain = rain / max(1e-9, np.abs(rain).max()) * (0.5 + 0.18 * np.sin(2 * math.pi * tt / 3.1))
+    return wind * 0.7 + rain * 0.5
+
+
+def amb_cave(n, rng):
+    """Inside a cave: a deep hum (two beating tones), soft airflow and an occasional drip."""
+    tt = np.arange(n) / se.SR
+    hum = np.sin(2 * math.pi * 62 * tt) * 0.5 + np.sin(2 * math.pi * 63.4 * tt) * 0.45 + np.sin(2 * math.pi * 124.5 * tt) * 0.25
+    air = fft_band(rng.normal(0, 1, n), 60, 420)
+    out = hum * 0.7 + air / max(1e-9, np.abs(air).max()) * 0.4
+    for i in rng.integers(0, max(1, n - se.SR), max(1, int(n / se.SR / 4.0))):
+        pl = drip(1)
+        j = min(len(pl), n - i)
+        out[i:i + j] += pl[:j] * 0.5
+    return out
+
+
 def amb_birds(n, rng):
     """Daytime outdoors: soft birdsong (short frequency-swept chirps) over a faint breeze."""
     br = fft_band(rng.normal(0, 1, n), 40, 420)                    # breeze, no hiss (2026-10-06 QA)
@@ -2204,7 +2556,7 @@ def ambience_bed(scene, n):
     kind = scene.get("ambience")
     loc, time_ = scene.get("location", "town"), scene.get("time", "morning")
     if kind is None:
-        kind = "room" if loc == "garage" else "crowd" if loc in ("arena", "podium") else             "night" if time_ == "night" else "birds" if loc in ("town", "country", "trackside") else None
+        kind = "room" if loc == "garage" else "cave" if loc == "cave" else "crowd" if loc in ("arena", "podium") else             "night" if time_ == "night" else "birds" if loc in ("town", "country", "trackside") else None
     if kind == "night" and loc in ("town", "arena", "podium", "city"):   # crickets only where nature is (not in town)
         kind = "city_night"
     rng = np.random.default_rng(9)
@@ -2218,6 +2570,10 @@ def ambience_bed(scene, n):
         x, g = amb_city_night(n, rng), 0.03
     elif kind == "room":
         x, g = amb_room(n, rng), 0.03
+    elif kind == "storm":
+        x, g = amb_storm(n, rng), 0.07                             # wind + rain wash, nothing above ~1.2 kHz
+    elif kind == "cave":
+        x, g = amb_cave(n, rng), 0.045
     else:
         return np.zeros(n)
     x = np.pad(x, (0, max(0, n - len(x))))[:n]
@@ -2569,6 +2925,8 @@ def render_scene(ep, num, aspect):
                 draw_album(ctx, prop, camx, t)
             elif prop["type"] == "photo_piece":
                 draw_photo_piece(ctx, prop, camx, t)
+            elif prop["type"] == "kraggor_small" and si <= prop.get("to_shot", 9999):
+                draw_kraggor_small(ctx, prop, camx, t, shots)
             elif prop["type"] == "photo":
                 draw_frame_photo(ctx, dict(prop, glow=sh.get("photo_glow")), camx, t)
             elif prop["type"] == "desk":

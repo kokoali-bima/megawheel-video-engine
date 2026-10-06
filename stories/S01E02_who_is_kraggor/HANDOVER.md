@@ -16,7 +16,7 @@
   banned → `honk_cheer`, only 2 horn types A08), Kraggor = roar/motif, never noise.
 - Continuity K01: the Ep.1 wall photo (Grandpa at the beach) never contains Kraggor. The torn photo is a NEW album photo
   "Mountain Road" (tear seed 7); the scene 13 piece = `photo_piece` with the same seed (edges + tail match).
-- Ad-break idea (dracin-style mid-roll gaps after scenes 3/7/10) proposed; owner did not confirm yet.
+- Ads: none for now (owner 2026-10-06). But every scene join has a dracin-style episode card (J03): fade out 1.0 + black hold 1.8 with "PART N" + chapter title + soft bell + fade in 1.2 (contract `joins.time_jump`). That card is also where mid-roll ads can go later.
 
 ## Done (Drive: ipandu-video/story3d/S01E02_who_is_kraggor/)
 | Scene | State |
@@ -25,13 +25,13 @@
 | 2 Town Panic (town day) | approved after coverage/staging/honk fixes |
 | 3 Town Meeting (arena sunset) | approved after Siren-floating + zoom-in fixes (stage ramps, G04) |
 | 4 Grandpa's Old Box (garage night) | delivered: album + torn Mountain Road photo; awaiting owner review |
-| episode_01-02-03-04.mp4 | assembled with smooth joins |
+| episode_01-02-03-04.mp4 | assembled with episode-card joins (PART 2/3/4), all joins pass the sensor |
 
 ## In progress (not committed yet when this was written)
 Scenes 5-8 in one batch to save tokens:
-- `generators/story3d/project/story3d.gd`: NEW locations written but UNTESTED — `forest` (storm), `mountain` (night road,
+- **Branch `wip-scenes-5-8` (pushed to GitHub; main does NOT have it)**: `generators/story3d/project/story3d.gd` with NEW locations written but UNTESTED — `forest` (storm), `mountain` (night road,
   rockslide prop), `cave` (crystals, `treasure`, `sign`, `key` props, moonbeam), `mountains: true` backdrop, `rain: true`
-  + `lightning: [t...]`. Test with a short Godot render before committing (a GDScript parse error breaks EVERY scene).
+  + `lightning: [t...]`. Test with a short Godot render (modal_godot --count 20) BEFORE merging the branch into main (a GDScript parse error breaks EVERY scene): `git checkout wip-scenes-5-8` / merge only after it passes.
 - Still to do: little Kraggor as a world-anchored prop (real drawing, small; modes scared/munch/smile/sleep), sepia grade in
   compose (scene `grade: "sepia"`, disable story25d `sepia()` in the exporter to avoid double), `storm` ambience + tonal
   thunder + `rockslide` SFX (phone-audible, not noise), scene JSONs 5-8, validator PROPS for the new props, render all 4 in

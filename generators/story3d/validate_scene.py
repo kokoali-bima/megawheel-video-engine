@@ -19,7 +19,7 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
@@ -35,13 +35,14 @@ SINGLE = {"close", "ecu", "medium", "low"}                     # one-character f
 # establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
 COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
-LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage"}
+LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave"}
 TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
-AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "none"}
+AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
-PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece"}
+PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece",
+         "treasure", "sign", "key", "rockslide", "kraggor_small"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -54,7 +55,8 @@ def sfx_names():
     except Exception:                                              # noqa: BLE001 (lint still runs without cairo)
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
-                "honk_cheer", "box_drop"}
+                "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
+                "breath_big"}
 
 
 def vehicles():

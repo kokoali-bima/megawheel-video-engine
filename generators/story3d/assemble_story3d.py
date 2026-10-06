@@ -33,5 +33,8 @@ def plan_joins(ep, order, overrides):
         if ov:
             j.update(kind=ov[0], dur=float(ov[1]), hold=float(ov[2]) if len(ov) > 2 else 0.0,
                      din=float(ov[3]) if len(ov) > 3 else 0.0)
+        if change and tj.get("card"):                              # J03: episode card (dracin style)
+            j.update(card=True, label=tj.get("label", "PART"), chime=tj.get("chime", True), num=b,
+                     title=sb.get("chapter") or sb.get("title", ""))
         joins.append(dict(a=a, b=b, why="waktu/lokasi berubah" if change else "tempat sama", **j))
     return joins
