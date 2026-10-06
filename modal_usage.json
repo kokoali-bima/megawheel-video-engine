@@ -2494,6 +2494,57 @@
    "cpu_container_seconds": 135.4,
    "wall_seconds": 55.7,
    "cost_usd": 0.0364
+  },
+  {
+   "date": "2026-10-05",
+   "note": "pilot C v7 S01E02 scene 1",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 131.3,
+   "wall_seconds": 193.4,
+   "cost_usd": 0.0354
+  },
+  {
+   "date": "2026-10-06",
+   "note": "narrator TEST_potholes_902 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 67.3,
+   "wall_seconds": 96.2,
+   "cost_usd": 0.0172
+  },
+  {
+   "date": "2026-10-06",
+   "note": "narrator TEST_potholes_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.8,
+   "wall_seconds": 81.5,
+   "cost_usd": 0.0122
+  },
+  {
+   "date": "2026-10-06",
+   "note": "narrator TEST_bumps_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 33.8,
+   "wall_seconds": 63.7,
+   "cost_usd": 0.0086
+  },
+  {
+   "date": "2026-10-06",
+   "note": "narrator TEST_splash_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 7,
+   "gpu_seconds": 72.5,
+   "wall_seconds": 105.2,
+   "cost_usd": 0.0185
   }
  ]
 }
