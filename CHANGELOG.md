@@ -3,9 +3,137 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-06
+**🔧 Lain-lain**
+- `e9829af` Merge remote-tracking branch 'origin/main'
+- `d74513c` linter: exact vehicle body table (same on every machine) and eased move timing (x1.5) - the QA real-position check found a 1.0 m gap the linter had estimated at 1.9 m; scene 3 Sprinkles arrives in time
+- `15fc511` Merge remote-tracking branch 'origin/main'
+- `3c51afb` C08: a car's move must end inside its shot (linter; exits hidden next are fine) + QA bumper check on the real per-frame positions; scene 3: Sprinkles arrives in time, her theme covers the hush, brighter spotlight
+- `97a3973` Merge remote-tracking branch 'origin/main'
+- `86232c3` story3d arena location (stepped grandstand, roof, catch fence, banner, floodlights lit at sunset without shadows, far skyline), stage + spotlight props (world dims for a lonely spotlight moment); honk_cheer with only two horn types (A08); S01E02 scene 3 'The Town Meeting'; linter times = engine themes
+- `11a5c8a` scene 1: tension drone enters after 'Huh? What was that?' (QA masking warning from the previous pass)
+- `6009c28` honk_cheer registered lazily (defined after the SFX table)
+- `f32a9e3` Merge remote-tracking branch 'origin/main'
+- `b6dd9ce` A07: no noise-based crowd effects in story3d (cheer/laugh banned by the linter; QA warns on any noise-like effect); town cheers with 'honk_cheer' (cars honking, clean tones); near-stomp debris band-limited
+- `870d2af` Merge remote-tracking branch 'origin/main'
+- `40ca4fb` tracker #25-28 linked to STYLE_CONTRACT rules
+- `486d7af` Merge remote-tracking branch 'origin/main'
+- `198e8d0` held joins: explicit qsin fade-out of the old scene's sound into the black and fade-in of the new one (the crossfade into the black clip cut the sound: -20 -> -57 dB in 0.1 s, measured)
+- `408690f` Merge remote-tracking branch 'origin/main'
+- `bb1d095` self-review fixes: drone/lamp/far-thud carry phone-band energy, black hold has soft room tone (no digital silence), join drop measured at the audible floor; scene 2 hook cue under Zippy
+- `b4085a4` Merge remote-tracking branch 'origin/main'
+- `f6ba38e` STYLE_CONTRACT: one numbered rule book from every owner review (linter, QA, assembler and engine read it; golden scenes re-linted every run). J-cuts 0.45 s in dialogue (C04), jump-cut rule (C06), cut-rate/ASL sensor (C05), empty-silence sensor (A01) + drone/thud_far tension SFX, time-jump joins = fade out / hold on black / fade in (J01); scene 1 tension bed before the footprints; scene 2 music bed without holes
+- `23b550f` Merge remote-tracking branch 'origin/main'
+- `516f1e5` linter: a car inside the barricade is rejected; scene 2 staging tightened (gaps kept), barricade/Siren moved clear of Zippy
+- `fbe3dc7` Merge remote-tracking branch 'origin/main'
+- `40ab8dd` linter: cars bumper-to-bumper in a talking shot are rejected (reads as a traffic jam); scene 2 re-staged with gaps and depth
+- `752efd2` film coverage instead of talking heads (owner 2026-10-06): cam 'group' frames the exchange and leans slowly toward the speaker, several lines per shot, listeners' eyes follow the speaker; linter rules (no close-up ping-pong, <=50% lines in single close-ups, group/two shot with >=2 lines); scene 2 re-blocked (three-shot exchange, walk-and-talk entrance, comic ECU + silent reaction); AGENTS/SOP updated
+- `625c8b4` SOP_STORY3D §7: episode assembly, join rule, join sensors, lesson (quiet scene openings)
+- `b58ce8b` joins: FAIL on abrupt sound cuts / holes / same-place steps, WARN on big steps across a time jump; scene 2 opens on a soft morning cue (wonder) that hands over to the panic cue
+- `31d25c1` Merge remote-tracking branch 'origin/main'
+- `7c8a16b` assemble: plain floats in the join report (no numpy in the local modal env)
+- `dbf5693` story3d: smooth episode assembly on Modal (assemble entrypoint): join rule from scene JSON (time/location change = fade through black 1.0 s, same place = dissolve 0.6 s, edit.json overrides), audio cross-fade, join sensors (loudness step, silence hole), chapters; compose keeps the latest final of every scene in the volume
+- `ea7947d` Merge remote-tracking branch 'origin/main'
+- `c3c0d6f` story3d barricade spans ACROSS the road (kerb to kerb, slightly diagonal, two striped rails, 3 posts, blinking lamps) with the DANGER sign on the far end facing the camera (owner review scene 2)
+- `423d86f` Merge remote-tracking branch 'origin/main'
+- `05b3df1` model-agnostic standard: AGENTS.md (one manual for Claude/Gemini/OpenAI/DeepSeek/Kimi; GEMINI.md + CLAUDE.md point to it), validate_scene linter (invented keys/values, unknown cams/moves/sfx/cues/emotions, voiceless speakers, occluded speaker, variety, monotonous score, crickets in town, long lines) wired into produce_story3d preflight, TASK_CARD paste-in prompt; tracker #15-24; barricade sign text fits
+- `28d41de` Merge remote-tracking branch 'origin/main'
+- `db53646` car lettering readable on left-facing cars (story3d only, flag TEXT_UNMIRROR; Shorts unchanged)
+- `f8e985b` story3d QA round 2: auto cut rule (big reframe = clean cut, small = slow glide; the 1 s 20 m swoops), no anisotropic low-cam stretch in 3D (283 px), sfx timed after the line ('end+0.1'), day breeze without hiss, hiss sensor = noise-like high band (flatness) not birdsong, jumps measured on the world layer; scene 2: Zippy/Siren/barricade spaced so nobody is parked in front of the speaker, panic cue under the voices
+- `cfe92eb` Merge remote-tracking branch 'origin/main'
+- `ae88d26` produce_story3d: live Modal log file + 90 min timeout
+- `bc6336a` story3d calibration on the approved scene 1: camera sensor measures on-screen motion of the actor plane (shake/punch exempt), contrast threshold 1.15, two-pass loudnorm (was -18.3 LUFS), benign headless Vulkan lines filtered; heartbeat gets a phone-audible knock, near stomp less sub
+- `e8fc276` story3d: lip-sync in the cloud - rhubarb 1.13.0 x86 (official release, same version as the VM build) in the Modal render image, cache in the Modal volume; prepare on the VM = voices only (the VM no longer needs x86)
+- `f337a0b` Merge remote-tracking branch 'origin/main'
+- `9a1d5f4` story3d: day look (sky, sun behind camera with soft short shadows, pastel town, shop row with signs, lamps/headlights off by day), timed props (from_shot/to_shot), barricade prop with blinking lamps; S01E02 scene 2 'Town Panic' shot list; SOP_STORY3D (standard command, scene rules, sensors, fix playbook)
+- `8f23418` fix(upload): add en-US defaultLanguage to force US audience
+- `25d515e` story3d: production package for option C (promoted from lab/godot_story): export_overlay (characters, shot table, all-actor records, cloud gates: voices/lip-sync/font must be prepared), modal_story3d (overlay CPU + Godot T4 + compose, all scenes/parts parallel, volume), audit_story3d (camera smoothness, Godot/cairo reprojection, grounding, focus occlusion, variety, light/contrast/shadow, hiss/dead air/masking/phone band/music monotony, LUFS, reveal), produce_story3d (standard command + exit codes); story25d: prepare-only mode, audio stems for QA, honk SFX
+- `523b81f` Merge remote-tracking branch 'origin/main'
+- `1f4c1de` S01E02 script v1 (draft for user review): 15 scenes, setups/payoffs, ad-break points, Godot location list, Modal render plan
+- `8699c31` Merge remote-tracking branch 'origin/main'
+- `ef0c7f6` stomp_near: pad layers to the same length; stronger boom body
+- `aea9945` Ep.2 pilot v7: Godot roll sign fixed (car floated in the dutch shot: road and car tilted opposite ways); subtitles page long lines (only the last 2 lines showed - the song's first words never appeared; '|' + page times for songs); city-night bed without hiss, softer lamp-off, Kraggor steps audible on phone speakers (boom body + crunch, not only < 200 Hz)
+- `ec41b0a` Merge remote-tracking branch 'origin/main'
+- `87d045f` Ep.2 research: v6 results + lessons (after_sky in exporters, fog-free distant silhouettes, 2.5D sink)
+- `76b2e27` Merge remote-tracking branch 'origin/main'
+- `77c6da5` far Kraggor: 2.5D sinks his legs below the low skyline (upper body + head over the town); exporter calls after_sky so Godot gets the far-Kraggor sprite
+- `e17e7ab` Merge remote-tracking branch 'origin/main'
+- `89dfc22` Ep.2 research §9: floating-car root cause, whistling-in-the-dark song research, score spotting, singing VC, far Kraggor
+- `c95e60d` Merge remote-tracking branch 'origin/main'
+**📤 Upload / antrean / Drive**
+- `a2e5328` publish: daily run 2026-10-06 [cron daily_publish.sh]
+**🧪 Lab (eksperimen)**
+- `21ef9aa` Godot far Kraggor: visible only in the frames of his shot (was standing behind the town from shot 3 on, spoiling the reveal)
+- `a4bbb3d` Godot far Kraggor: fog-free materials (78 m of volumetric fog hid him completely)
+- `ac6a492` lab singvc: return plain floats (local modal env has no numpy)
+- `67e055e` lab singvc: pin protobuf >= 4.25 last (Modal runtime crash-loop with the funasr/modelscope protobuf)
+**🎬 Story / episode panjang**
+- `ec128d0` story25d: sung line lead-in (6th field: seconds heard over the previous shot); Ep.2 cold open uses Tilly's song in her own voice (Seed-VC take alt1: doo-doo intro under the establishing shot, cut after 'Not me!')
+<details><summary>otomatis VM (17)</summary>
+
+- `9eae5e5` records before analytics
+- `f9df5fd` records
+- `09843e5` records
+- `59802bb` records
+- `737f894` records
+- `c678c59` records
+- `5ef4bdb` records
+- `be9125d` records
+- `fbf354e` records
+- `e2d0cc0` records
+- `ceecec6` records
+- `a001132` records
+- `e98adab` records
+- `db472ff` records
+- `f2cf38d` records
+- `2c67116` records
+- `5f5d925` records
+
+</details>
+
 ## 2026-10-05
+**🔧 Lain-lain**
+- `d823526` Merge remote-tracking branch 'origin/main'
+- `8fda0c5` Ep.2 pilot v6: footprints flat along the road (5.5x3 m, staggered) + car contact shadow (the car looked like floating over the Godot road); far Kraggor silhouette in world space behind the town (kraggor_far: cairo after the sky, Godot sprite of the real drawing between building rows + glowing eyes + haze); score only from the footprint reveal; new Tilly song spec + lab Seed-VC singing conversion to her real voice
+- `1740527` pilot A v5: Tilly sings (ACE-Step, ukulele) and the song cuts on the first dying lamp; city-night ambience; far footsteps in the dark before the eyes, near stomp at the end; real Kraggor head silhouette; pilot C: Kraggor drawn by story25d, Godot adds the glow
+- `93a3611` pilot C test 2: skyline pushed back (55-130 m), sparser dimmer windows, thicker volumetric fog, stronger lamp/headlight fog energy, trees away from lamps, eyes in front of the skyline
+- `09c7ebc` upload_sample.py: --folder= for Drive lab subfolders
+- `91c3f91` pilot A v4: Tilly stops so her headlight pool lands on the first footprint; reveal frames car + prints
+- `ddd45df` pilot A v2: footprints readable at night (cracked moonlit rim, bigger, stronger steam), Kraggor eyes bigger with a head silhouette, lighter fog, reveal shot frames the prints
+- `49323e9` S01E02 research & production plan: music cue library + spotting, camera moves, expressive voice (Chatterbox-Turbo / Dia), 3D cost path, legendary hook recipe
+- `9c71599` swap: Ep. 34/43/46 <- RACE v4 S045/S044/S046 (user 2026-10-05 approved)
+**🎬 Story / episode panjang**
+- `20aa03a` story25d: city-night ambience (no crickets in town, quieter crickets in the country), Kraggor footsteps (far steps closing in + near stomp), Kraggor's real head as the dark fog silhouette, sung lines from a wav (cut on a beat); Tilly song spec; Godot: no moon shadows at night
+- `7336281` story25d: night headlight beams (air cone + road pool), flicker per shot as Kraggor's danger sign; pilot A uses them (beam reveals the footprints, flicker when the eyes open)
+- `92219be` story25d: cue-library score with spotting (silence allowed, stings), lamp_off sfx, scared/angry voice styles; S01E02 scene 1 cold open (pilot A)
+- `fa9dd2c` story25d: in-shot camera moves (push, pull reveal, pan, crane, dutch, handheld), street lamps that die one by one, steaming footprints, night fog; S01E02 cue library spec (ACE-Step instrumental)
+**🧪 Lab (eksperimen)**
+- `a0c9fc7` lab pilot C: story scene world in Godot 3D (Forward+, volumetric fog, real lamp/headlight lights, footprint decals, Kraggor eyes) behind the original story25d characters; exporter reads the cairo camera matrix per frame; modal_godot picks Forward+ from project.godot
 **📤 Upload / antrean / Drive**
 - `3cac47d` publish: daily run 2026-10-05 [cron daily_publish.sh]
+<details><summary>otomatis VM (19)</summary>
+
+- `978e558` records
+- `5081031` records
+- `19a2127` records
+- `7f59d31` records: Tilly song v2 + VC takes
+- `037b7ca` records: Tilly song v2 + VC takes
+- `0d07965` records: modal usage
+- `1dd1446` records: modal usage
+- `2b7df45` records
+- `5cb1603` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `555c0b9` records
+- `72fb163` records
+- `2f17484` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `8036414` records
+- `6fac18c` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `eb4e5bf` records
+- `bd5891e` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5bdeb91` records: S01E02 cues
+- `f29e60a` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5918524` analytics: daily report 2026-10-05
+
+</details>
 
 ## 2026-10-04
 **🕳️ CHALLENGE (sim_engine)**
