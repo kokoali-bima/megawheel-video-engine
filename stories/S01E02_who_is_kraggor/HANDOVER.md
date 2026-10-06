@@ -29,9 +29,9 @@
 
 ## In progress (not committed yet when this was written)
 Scenes 5-8 in one batch to save tokens:
-- `generators/story3d/project/story3d.gd`: NEW locations written but UNTESTED — `forest` (storm), `mountain` (night road,
+- **Branch `wip-scenes-5-8` (pushed to GitHub; main does NOT have it)**: `generators/story3d/project/story3d.gd` with NEW locations written but UNTESTED — `forest` (storm), `mountain` (night road,
   rockslide prop), `cave` (crystals, `treasure`, `sign`, `key` props, moonbeam), `mountains: true` backdrop, `rain: true`
-  + `lightning: [t...]`. Test with a short Godot render before committing (a GDScript parse error breaks EVERY scene).
+  + `lightning: [t...]`. Test with a short Godot render (modal_godot --count 20) BEFORE merging the branch into main (a GDScript parse error breaks EVERY scene): `git checkout wip-scenes-5-8` / merge only after it passes.
 - Still to do: little Kraggor as a world-anchored prop (real drawing, small; modes scared/munch/smile/sleep), sepia grade in
   compose (scene `grade: "sepia"`, disable story25d `sepia()` in the exporter to avoid double), `storm` ambience + tonal
   thunder + `rockslide` SFX (phone-audible, not noise), scene JSONs 5-8, validator PROPS for the new props, render all 4 in
