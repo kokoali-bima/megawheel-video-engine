@@ -36,6 +36,7 @@ THRESH = dict(
     shadow_patch=0.22,        # share of the road band much darker than the road median (day only)
     hiss_ratio=0.30,          # energy above 3 kHz in quiet parts (no voice, no effect)
     hiss_level_db=-46.0,      # ...only when the quiet part is louder than this
+    hiss_flat=0.35,           # ...and noise-like (spectral flatness 3-8 kHz); birdsong is tonal, hiss is flat
     dead_air_s=1.6,           # silence (< -58 dBFS) this long
     mask_db=6.0,              # voice must be this much louder than music + effects while talking
     phone_band=0.25,          # share of an effect's energy in 200-4000 Hz (phone speakers)
@@ -188,7 +189,8 @@ def audit_scene(d, mp4):
     metrics.update(cam_speed_px=round(worst_v, 1), cam_jerk_px=round(worst_j, 1))
     fail.extend(b for b in bad_v if "kamera" in b)
     warn.extend(b for b in bad_v if "kamera" not in b)
-    g = read_gray(mp4)
+    wld_mp4 = os.path.join(d, "world.mp4")
+    g = read_gray(wld_mp4 if os.path.exists(wld_mp4) else mp4)
     if len(g) > 2:
         dif = np.abs(np.diff(g, axis=0)).mean(axis=(1, 2))
         spikes = []
@@ -320,8 +322,10 @@ def audit_scene(d, mp4):
             if db(V[seg]) < -45 and db(X[seg]) < -45 and lv > THRESH["hiss_level_db"]:
                 spec = np.abs(np.fft.rfft(mix[seg])) ** 2
                 fq = np.fft.rfftfreq(win, 1 / sr)
-                hi = spec[fq > 3000].sum() / max(1e-12, spec.sum())
-                if hi > THRESH["hiss_ratio"]:
+                hb = spec[(fq > 3000) & (fq < 7800)]
+                hi = hb.sum() / max(1e-12, spec.sum())
+                flat = float(np.exp(np.mean(np.log(hb + 1e-12))) / max(1e-12, np.mean(hb))) if len(hb) else 0.0
+                if hi > THRESH["hiss_ratio"] and flat > THRESH["hiss_flat"]:
                     quiet_hiss.append(round(q * 0.5, 1))
         metrics.update(hiss_windows=len(quiet_hiss), longest_silence_s=longest)
         if quiet_hiss:

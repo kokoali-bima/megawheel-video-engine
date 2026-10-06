@@ -1399,6 +1399,9 @@ def build(scene):
 
 
 STEMS = None              # story3d QA: dict to receive the audio stems of the next render
+CUT_RULE = "soft"         # "soft" (2.5D, aired): glide to every new shot. "auto" (story3d, 2026-10-06 QA): a big
+                          # change of framing = clean cut, a small reframe = slow glide (no 20 m swoops in 1 s)
+ISO_CAMERA = False        # story3d: no anisotropic "low" stretch (a real 3D camera cannot match it: 283 px QA error)
 PREPARE_ONLY = False      # story3d: stop after voices + visemes are cached (frames are rendered on Modal)
 PREPARED = {}             # what the last prepare produced (lines, viseme counts, duration)
 
@@ -1802,7 +1805,8 @@ def lamp_off():
 
 def amb_birds(n, rng):
     """Daytime outdoors: soft birdsong (short frequency-swept chirps) over a faint breeze."""
-    out = SM.box_avg(rng.normal(0, 1, n), 120) * 0.25
+    br = fft_band(rng.normal(0, 1, n), 40, 420)                    # breeze, no hiss (2026-10-06 QA)
+    out = br / max(1e-9, np.abs(br).max()) * 0.25
     for i in rng.integers(0, max(1, n - se.SR), max(1, int(n / se.SR * 1.6))):
         f0 = rng.uniform(2800, 4800)
         for k in range(int(rng.integers(2, 5))):
@@ -1871,7 +1875,11 @@ def ambience_bed(scene, n):
     return x / max(1e-9, np.max(np.abs(x))) * g
 
 
+SFX_AT = []
+
+
 def build_audio(shots, placed, total, scene):
+    SFX_AT.clear()
     n = int(total * se.SR) + se.SR
     narr, sfx = np.zeros(n), np.zeros(n)
 
@@ -1884,10 +1892,14 @@ def build_audio(shots, placed, total, scene):
     for p in placed:
         place(narr, p["audio"], p["t0"])
     for sh in shots:
+        ends = [p["t0"] + len(p["audio"]) / se.SR for p in placed if sh["t0"] <= p["t0"] < sh["t1"]]
         for s in sh.get("sfx", []):
             name, dt_ = (s, 0.0) if isinstance(s, str) else (s[0], s[1])
+            if isinstance(dt_, str) and dt_.startswith("end"):    # after the line, not over it (QA masking)
+                dt_ = (max(ends) - sh["t0"] if ends else 0.0) + float(dt_[3:] or 0.0)
             if name in SFX:
                 place(sfx, SFX[name](), sh["t0"] + dt_, 0.8)
+                SFX_AT.append((name, round(sh["t0"] + dt_, 3)))
     for sh in shots:
         pass                                                       # shock moments: picture only (user, v7)
     mus = np.zeros(n)
@@ -1918,8 +1930,7 @@ def build_audio(shots, placed, total, scene):
     if STEMS is not None:                                          # story3d QA: voice / music / effects / ambience
         STEMS.update(voice=st_v, music=st_m, sfx=st_s, amb=st_a, sr=se.SR,
                      lines=[(p["spk"], round(p["t0"], 3), round(len(p["audio"]) / se.SR, 3)) for p in placed],
-                     sfx_events=[(s if isinstance(s, str) else s[0], round(sh["t0"] + (0 if isinstance(s, str) else s[1]), 3))
-                                 for sh in shots for s in sh.get("sfx", [])])
+                     sfx_events=SFX_AT[:])
     if scene.get("ambience") == "rain":                            # soft, calming rain (user review: was too loud)
         rng = np.random.default_rng(2)
         hiss = SM.box_avg(rng.normal(0, 1, n), 40)
@@ -2085,6 +2096,10 @@ def render_scene(ep, num, aspect):
         pv = (focus_y if focus_y is not None else ground_y(1.0) - 2.3 * k_of(1.0)) - sh.get("lift", 0.0) * k_of(1.0)
         if si != prev_si:                                          # new shot: glide the camera there (no rushed
             hard = camx is None or sh.get("punch") or sh.get("triple") or sh.get("cut") == "hard"   # cuts)
+            if not hard and CUT_RULE == "auto" and sh.get("cut") != "glide":
+                ratio = max(z_ / zoom, zoom / z_)
+                pan = abs(cx - camx) * k_of(1.0) * max(zoom, z_) / W
+                hard = ratio > 1.3 or pan > 0.3 or abs(pv - piv) * max(zoom, z_) > 0.3 * H
             glide = None if hard else (camx, zoom, piv, sh["t0"],      # slow, but settled before mid-shot
                                        min(sh.get("glide", scene.get("glide", 1.8)), 0.45 * (sh["t1"] - sh["t0"])))
             if hard:
@@ -2140,7 +2155,7 @@ def render_scene(ep, num, aspect):
         ctx.translate(W / 2 + shake + hh_x, H * 0.5 + hh_y)
         if tilt:
             ctx.rotate(tilt)
-        ctx.scale(zoom * zmul, zoom * zmul * (1.12 if sh.get("cam") == "low" else 1.0))
+        ctx.scale(zoom * zmul, zoom * zmul * (1.12 if sh.get("cam") == "low" and not ISO_CAMERA else 1.0))
         ctx.translate(-CX, -piv_y)
         def behind():
             if sh.get("kraggor_far"):

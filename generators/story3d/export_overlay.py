@@ -176,6 +176,7 @@ def run(episode, scene_no, aspect, out):
                 return subprocess.CompletedProcess(cmd, 0)
             return real_run(cmd, **kw)
     ST.subprocess = SP
+    ST.CUT_RULE, ST.ISO_CAMERA = "auto", True                      # real 3D camera: clean cuts, no fake stretch
     ST.STEMS = {}
     ST.render_scene(episode, scene_no, aspect)
     import numpy as np                                             # stems for the audio sensors (16 kHz, float16)
