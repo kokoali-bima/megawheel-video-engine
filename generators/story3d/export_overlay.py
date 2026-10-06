@@ -142,12 +142,14 @@ def run(episode, scene_no, aspect, out):
     def night_tint(ctx, t):                                        # the aired night tint, on character pixels only
         if se.THEME.get("time") != "night":
             return
-        indoor = ST.SCENE.get("location") == "garage"              # lit by a warm bulb indoors, not by the moon
+        loc = ST.SCENE.get("location")
+        indoor = loc == "garage"                                   # lit by a warm bulb indoors, not by the moon
+        tint = (0.35, 0.2, 0.05, 0.14) if indoor else (0.04, 0.09, 0.2, 0.22) if loc == "cave" else (0.03, 0.05, 0.16, 0.38)
         ctx.save()
         ctx.identity_matrix()
         ctx.set_operator(cairo.OPERATOR_ATOP)
         ctx.rectangle(0, 0, ST.W, ST.H)
-        ctx.set_source_rgba(*((0.35, 0.2, 0.05, 0.14) if indoor else (0.03, 0.05, 0.16, 0.38)))
+        ctx.set_source_rgba(*tint)
         ctx.fill()
         ctx.restore()
     se.draw_weather = night_tint
@@ -182,7 +184,8 @@ def run(episode, scene_no, aspect, out):
     ST.JCUT = eng["jcut_s"]                                        # C04: voice leads the picture across cuts
     se.TEXT_UNMIRROR = eng["text_unmirror"]                        # "SCHOOL BUS" not mirrored on a left-facing bus
     ST.STEMS = {}
-    ST.render_scene(episode, scene_no, aspect)
+    ST.sepia = lambda surf: None                                   # flashback grade is applied ONCE, on the finished
+    ST.render_scene(episode, scene_no, aspect)                     # picture in compose (world + characters together)
     import numpy as np                                             # stems for the audio sensors (16 kHz, float16)
     stm = ST.STEMS
     k = max(1, int(stm["sr"] // 16000))

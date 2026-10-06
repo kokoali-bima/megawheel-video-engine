@@ -124,9 +124,11 @@ def compose(job: str, num: int) -> dict:
     js = json.loads(r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1])
     ln = (f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={js['input_i']}:measured_TP={js['input_tp']}:"
           f"measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}:linear=true")
+    grade = json.load(open(f"{d}/scene.json"))["scene"].get("tint")      # "sepia": a flashback (the engine's own matrix)
+    sep = (",colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131:0" if grade == "sepia" else "")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f"{d}/world.mp4", "-i", f"{d}/overlay.mov",
                     "-i", f"{d}/audio.wav", "-filter_complex",
-                    "[1:v]setpts=PTS-STARTPTS[o];[0:v]setpts=PTS-STARTPTS[g];[g][o]overlay=eof_action=pass[v]",
+                    f"[1:v]setpts=PTS-STARTPTS[o];[0:v]setpts=PTS-STARTPTS[g];[g][o]overlay=eof_action=pass{sep}[v]",
                     "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18",
                     "-af", ln, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", final], check=True)
     sys.path.insert(0, f"{REMOTE}/generators/story3d")
