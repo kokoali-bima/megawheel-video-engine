@@ -26,6 +26,10 @@ var keyes = []                     # [MeshInstance3D] his two glowing eyes
 var keye_light: OmniLight3D
 var krw = 1.0                      # eye radius in metres
 var knodes = []                    # sprite + haze: shown ONLY in his shot (v7: he was visible from shot 3 on)
+var NIGHT = true                   # scene time: night = moon/fog/lamps; anything else = day look (sun, sky, pastel town)
+var WARM = 0.0                     # 0 day .. 1 evening (warmer, lower sun)
+var timed = []                     # [Node3D, from_shot, to_shot]: props that appear with a shot (e.g. Siren's barricade)
+var blinkers = []                  # [material, phase]: amber warning lights
 
 
 func _ready() -> void:
@@ -37,6 +41,9 @@ func _ready() -> void:
 	S = JSON.parse_string(FileAccess.open(dir + "/scene.json", FileAccess.READ).get_as_text())
 	frames = JSON.parse_string(FileAccess.open(dir + "/frames.json", FileAccess.READ).get_as_text())["frames"]
 	rng.seed = 5
+	var tm = str(S["theme"].get("time", S["scene"].get("time", "night")))
+	NIGHT = tm == "night"
+	WARM = 1.0 if tm in ["evening", "dusk", "sunset"] else (0.35 if tm in ["dawn", "morning"] else 0.0)
 	for fr in frames:
 		if fr[1].get("kfar") != null:
 			kfar = fr[1]["kfar"]
@@ -45,6 +52,8 @@ func _ready() -> void:
 	_environment()
 	_ground()
 	_buildings()
+	if bool(S["scene"].get("shops", not NIGHT)):
+		_shops()
 	_trees()
 	_props()
 	_eyes()
@@ -89,6 +98,9 @@ func box(size: Vector3, pos: Vector3, mat: Material) -> MeshInstance3D:
 
 # ------------------------------------------------------------------ world
 func _environment() -> void:
+	if not NIGHT:
+		_environment_day()
+		return
 	var fog = float(S["scene"].get("fog", 0.5))
 	var env = Environment.new()
 	var sky_m = ProceduralSkyMaterial.new()
@@ -156,16 +168,69 @@ func _environment() -> void:
 		add_child(st)
 
 
+func _environment_day() -> void:
+	# Sun BEHIND the camera (light travels away from it): shadows fall behind the objects, never as dark wedges across
+	# the road in front of the cars (user 2026-10-05/06: shadows must not disturb). Soft, short, toon-friendly.
+	var env = Environment.new()
+	var sky_m = ProceduralSkyMaterial.new()
+	sky_m.sky_top_color = Color(0.28, 0.52, 0.90).lerp(Color(0.32, 0.36, 0.70), WARM)
+	sky_m.sky_horizon_color = Color(0.74, 0.85, 0.96).lerp(Color(1.0, 0.72, 0.52), WARM)
+	sky_m.ground_horizon_color = sky_m.sky_horizon_color
+	sky_m.ground_bottom_color = Color(0.45, 0.5, 0.45)
+	var sk = Sky.new()
+	sk.sky_material = sky_m
+	env.background_mode = Environment.BG_SKY
+	env.sky = sk
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	env.ambient_light_energy = 0.75
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.tonemap_exposure = 1.05
+	env.glow_enabled = true
+	env.glow_intensity = 0.25
+	env.fog_enabled = true                                   # light aerial haze: depth without hiding things
+	env.fog_light_color = sky_m.sky_horizon_color
+	env.fog_density = 0.0016 + 0.004 * float(S["scene"].get("fog", 0.0))
+	env.fog_aerial_perspective = 0.4
+	var we = WorldEnvironment.new()
+	we.environment = env
+	add_child(we)
+	var sun = DirectionalLight3D.new()
+	sun.rotation_degrees = Vector3(-52 + 30 * WARM, -28, 0)  # from behind-left of the camera
+	sun.light_color = Color(1.0, 0.96, 0.88).lerp(Color(1.0, 0.72, 0.48), WARM)
+	sun.light_energy = 1.25 - 0.35 * WARM
+	sun.shadow_enabled = true
+	sun.shadow_blur = 2.0
+	sun.shadow_opacity = 0.55                                # soft: shapes read, nothing goes black
+	sun.directional_shadow_max_distance = 140.0
+	add_child(sun)
+	for i in range(14):                                      # a few soft cartoon clouds far away
+		var c = MeshInstance3D.new()
+		var sp = SphereMesh.new()
+		sp.radius = 1.0
+		sp.height = 2.0
+		c.mesh = sp
+		var cm = StandardMaterial3D.new()
+		cm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		cm.albedo_color = Color(1, 1, 1, 0.92).lerp(Color(1.0, 0.85, 0.75, 0.92), WARM)
+		cm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		cm.disable_fog = true
+		c.material_override = cm
+		var w = rng.randf_range(14, 30)
+		c.scale = Vector3(w, w * 0.32, 4)
+		c.position = Vector3(rng.randf_range(-300, 420), rng.randf_range(70, 130), -rng.randf_range(330, 420))
+		add_child(c)
+
+
 func _ground() -> void:
-	var road = toon(Color(0.17, 0.17, 0.2))
+	var road = toon(Color(0.17, 0.17, 0.2) if NIGHT else Color(0.36, 0.36, 0.4))
 	var far_z = dist(3.2)
 	var near_z = dist(-0.6)
 	var cx = 40.0
 	box(Vector3(700, 0.1, far_z - near_z), Vector3(cx, -0.05, -(near_z + far_z) / 2), road)   # asphalt
-	var walk = toon(Color(0.33, 0.33, 0.37))
+	var walk = toon(Color(0.33, 0.33, 0.37) if NIGHT else Color(0.66, 0.63, 0.6))
 	box(Vector3(700, 0.25, dist(5.0) - far_z), Vector3(cx, 0.07, -(far_z + dist(5.0)) / 2), walk)   # far pavement
 	box(Vector3(700, 0.12, near_z - 2.0), Vector3(cx, -0.04, -(near_z + 2.0) / 2), walk)             # near pavement
-	var grass = toon(Color(0.08, 0.13, 0.1))
+	var grass = toon(Color(0.08, 0.13, 0.1) if NIGHT else Color(0.38, 0.62, 0.32))
 	box(Vector3(900, 0.1, 400), Vector3(cx, -0.06, -dist(5.0) - 200), grass)
 	var dash = StandardMaterial3D.new()                      # lane dashes at z = 1.3 every 4 m (as the cairo road)
 	dash.albedo_color = Color(0.9, 0.9, 0.85)
@@ -174,15 +239,18 @@ func _ground() -> void:
 	while x < 380.0:
 		box(Vector3(1.6, 0.02, 0.22), Vector3(x + 0.8, 0.005, -dist(1.3)), dash)
 		x += 4.0
-	var curb = toon(Color(0.5, 0.5, 0.55))
+	var curb = toon(Color(0.5, 0.5, 0.55) if NIGHT else Color(0.85, 0.85, 0.85))
 	box(Vector3(700, 0.3, 0.25), Vector3(cx, 0.1, -far_z), curb)
 
 
 func _buildings() -> void:
 	var cols = [Color(0.18, 0.2, 0.34), Color(0.22, 0.2, 0.32), Color(0.16, 0.22, 0.3), Color(0.25, 0.23, 0.36)]
+	if not NIGHT:                                            # pastel town by day
+		cols = [Color(0.93, 0.78, 0.62), Color(0.72, 0.84, 0.93), Color(0.95, 0.88, 0.7), Color(0.8, 0.74, 0.9),
+				Color(0.7, 0.88, 0.78), Color(0.96, 0.7, 0.66)]
 	var win_on = StandardMaterial3D.new()
 	win_on.albedo_color = Color(1.0, 0.85, 0.45)
-	win_on.emission_enabled = true
+	win_on.emission_enabled = NIGHT                          # by day: glass, no glow
 	win_on.emission = Color(1.0, 0.8, 0.4)
 	win_on.emission_energy_multiplier = 1.2
 	var win_off = toon(Color(0.12, 0.13, 0.2))
@@ -201,22 +269,61 @@ func _buildings() -> void:
 				if absf(x + w / 2 - lx) < half + w / 2:
 					h = minf(h, float(S["CAM_H"]) + (0.42 * float(kfar["height"]) - float(S["CAM_H"])) * dep / kd)
 			var bpos = Vector3(x + w / 2, h / 2, -dist(z) - d / 2)
-			box(Vector3(w, h, d), bpos, toon(cols[rng.randi() % cols.size()].darkened(row * 0.12)))
+			box(Vector3(w, h, d), bpos, toon(cols[rng.randi() % cols.size()].darkened(row * (0.12 if NIGHT else 0.07))))
 			var wy = 2.0
 			while wy < h - 1.0:                              # windows on the facade facing the street
 				var wx = x + 1.0
 				while wx < x + w - 1.0:
-					var lit = rng.randf() < 0.18
-					if lit:
+					var lit = rng.randf() < (0.18 if NIGHT else 0.5)
+					if lit and not NIGHT:
+						box(Vector3(1.0, 1.4, 0.05), Vector3(wx + 0.5, wy, -dist(z) + 0.03), toon(Color(0.55, 0.72, 0.88)))
+					elif lit:
 						box(Vector3(1.0, 1.4, 0.05), Vector3(wx + 0.5, wy, -dist(z) + 0.03), win_on)
 					wx += 3.0
 				wy += 3.6
 			x += w + rng.randf_range(1.0, 4.0)
 
 
+func _shops() -> void:
+	# A row of small, colourful shops close behind the far pavement: the town feels lived-in (not a wall of towers).
+	var names = ["BAKERY", "GARAGE", "FLOWERS", "DINER", "TOYS", "BOOKS", "CAFE", "TIRES", "MARKET", "PHARMACY"]
+	var cols = [Color(0.95, 0.55, 0.45), Color(0.45, 0.7, 0.95), Color(0.98, 0.82, 0.4), Color(0.6, 0.85, 0.55),
+				Color(0.85, 0.6, 0.9), Color(0.98, 0.65, 0.3)]
+	var z = float(S["scene"].get("shops_z", 13.0))
+	var x = -150.0
+	var k = 0
+	while x < 260.0:
+		var w = rng.randf_range(7, 11)
+		var h = rng.randf_range(5.5, 8.5)
+		var c = cols[rng.randi() % cols.size()]
+		var front = -dist(z)
+		box(Vector3(w, h, 6.0), Vector3(x + w / 2, h / 2, front - 3.0), toon(c if not NIGHT else c.darkened(0.6)))
+		var glass = StandardMaterial3D.new()                 # shop window: lit at night
+		glass.albedo_color = Color(0.6, 0.78, 0.9) if not NIGHT else Color(1.0, 0.85, 0.5)
+		glass.emission_enabled = NIGHT
+		glass.emission = Color(1.0, 0.8, 0.45)
+		glass.emission_energy_multiplier = 0.9
+		box(Vector3(w * 0.55, 1.8, 0.08), Vector3(x + w * 0.38, 1.6, front + 0.05), glass)
+		box(Vector3(1.2, 2.3, 0.08), Vector3(x + w * 0.82, 1.15, front + 0.05), toon(c.darkened(0.45)))   # door
+		var aw = toon(Color(1, 1, 1) if k % 2 == 0 else c.lightened(0.35))   # awning
+		var awn = box(Vector3(w * 0.95, 0.12, 1.4), Vector3(x + w / 2, 2.95, front + 0.6), aw)
+		awn.rotation_degrees = Vector3(-14, 0, 0)
+		var lb = Label3D.new()                               # the shop sign
+		lb.text = names[k % names.size()]
+		lb.font_size = 96
+		lb.pixel_size = 0.012
+		lb.modulate = Color(1, 1, 1) if not NIGHT else Color(1.0, 0.9, 0.6)
+		lb.outline_size = 18
+		lb.outline_modulate = c.darkened(0.6)
+		lb.position = Vector3(x + w / 2, h - 1.2, front + 0.06)
+		add_child(lb)
+		x += w + rng.randf_range(0.4, 1.5)
+		k += 1
+
+
 func _trees() -> void:
-	var trunk = toon(Color(0.28, 0.18, 0.12))
-	var leaf = toon(Color(0.12, 0.3, 0.18))
+	var trunk = toon(Color(0.28, 0.18, 0.12) if NIGHT else Color(0.45, 0.3, 0.2))
+	var leaf = toon(Color(0.12, 0.3, 0.18) if NIGHT else Color(0.3, 0.62, 0.3))
 	var x = -200.0
 	while x < 260.0:
 		var z = rng.randf_range(7.0, 10.0)                  # behind the lamps, not under them
@@ -258,6 +365,9 @@ func _props() -> void:
 				hm.emission = Color(1.0, 0.85, 0.5)
 				hm.emission_energy_multiplier = 3.0
 				box(Vector3(0.55, 0.2, 0.3), wp(x + 0.9, z, 5.05), hm)
+				if not NIGHT:
+					hm.emission_enabled = false
+					continue
 				var sl = SpotLight3D.new()                   # a real pool of light on the road + a cone in the fog
 				sl.position = wp(x + 0.9, z, 4.95)
 				sl.rotation_degrees = Vector3(-90, 0, 0)
@@ -270,6 +380,8 @@ func _props() -> void:
 				sl.shadow_enabled = true
 				add_child(sl)
 				lamps.append([sl, hm, float(offs[i]) if i < offs.size() else -1.0])
+		elif str(p["type"]) == "barricade":
+			_barricade(p)
 		elif str(p["type"]) == "footprints":
 			var tex = _foot_tex()
 			var sz = float(p.get("size", 1.0))
@@ -286,6 +398,68 @@ func _props() -> void:
 					dc.rotation_degrees = Vector3(0, 180, 0)
 				add_child(dc)
 				steam.append(_steam(wp(float(xs[n]), zc, 0.1)))
+
+
+func _barricade(p) -> void:
+	# Siren's road block: striped board on two posts, a DANGER sign, blinking amber lamps. Appears with its shot.
+	var root = Node3D.new()
+	root.position = wp(float(p.get("x", 12.0)), float(p.get("z", 2.4)), 0.0)
+	add_child(root)
+	var n = 64
+	var img = Image.create(n, 8, false, Image.FORMAT_RGBA8)
+	for xx in range(n):
+		for yy in range(8):
+			img.set_pixel(xx, yy, Color(0.92, 0.12, 0.1) if int((xx + yy * 1.0) / 8) % 2 == 0 else Color(1, 1, 1))
+	var stripe = StandardMaterial3D.new()
+	stripe.albedo_texture = ImageTexture.create_from_image(img)
+	stripe.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	var w = float(p.get("w", 3.6))
+	for sx in [-1, 1]:
+		var post = MeshInstance3D.new()
+		var pm = BoxMesh.new()
+		pm.size = Vector3(0.14, 1.3, 0.14)
+		post.mesh = pm
+		post.material_override = toon(Color(0.95, 0.95, 0.95))
+		post.position = Vector3(sx * w * 0.45, 0.65, 0)
+		root.add_child(post)
+		var lamp = MeshInstance3D.new()
+		var lm = SphereMesh.new()
+		lm.radius = 0.12
+		lm.height = 0.24
+		lamp.mesh = lm
+		var am = StandardMaterial3D.new()
+		am.albedo_color = Color(1.0, 0.65, 0.1)
+		am.emission_enabled = true
+		am.emission = Color(1.0, 0.6, 0.1)
+		lamp.material_override = am
+		lamp.position = Vector3(sx * w * 0.45, 1.4, 0)
+		root.add_child(lamp)
+		blinkers.append([am, 0.0 if sx < 0 else 0.5])
+	var board = MeshInstance3D.new()
+	var bm = BoxMesh.new()
+	bm.size = Vector3(w, 0.42, 0.06)
+	board.mesh = bm
+	board.material_override = stripe
+	board.position = Vector3(0, 0.95, 0.02)
+	root.add_child(board)
+	var sboard = MeshInstance3D.new()
+	var sgm = BoxMesh.new()
+	sgm.size = Vector3(w * 0.8, 0.62, 0.05)
+	sboard.mesh = sgm
+	sboard.material_override = toon(Color(1.0, 0.92, 0.2))
+	sboard.position = Vector3(0, 1.62, 0.02)
+	root.add_child(sboard)
+	var lb = Label3D.new()
+	lb.text = str(p.get("text", "DANGER - ROAD CLOSED"))
+	lb.font_size = 64
+	lb.pixel_size = 0.0068
+	lb.modulate = Color(0.1, 0.05, 0.05)
+	lb.outline_size = 0
+	lb.width = 600
+	lb.autowrap_mode = TextServer.AUTOWRAP_WORD
+	lb.position = Vector3(0, 1.62, 0.06)
+	root.add_child(lb)
+	timed.append([root, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
 
 
 func _foot_tex() -> ImageTexture:
@@ -503,6 +677,11 @@ func _process(_d: float) -> void:
 	cam.rotation = Vector3(0, 0, roll)
 	cam.size = Wd / focal * cam.near
 	cam.frustum_offset = Vector2(-v.x / focal * cam.near, v.y / focal * cam.near)
+	var shot = int(f.get("shot", 0))
+	for tp in timed:
+		tp[0].visible = shot >= int(tp[1]) and shot <= int(tp[2])
+	for bl in blinkers:
+		bl[0].emission_energy_multiplier = 3.0 if fmod(t * 1.5 + float(bl[1]), 1.0) < 0.5 else 0.2
 	# street lamps: flicker for half a second, then dark (same schedule as the cairo version)
 	for L in lamps:
 		var on = 1.0
@@ -532,7 +711,7 @@ func _process(_d: float) -> void:
 		var bh = float(a[7])
 		var wr = float(a[8])
 		var hl = heads[aid]
-		hl.visible = true
+		hl.visible = NIGHT                                       # by day no headlight beams
 		hl.position = wp(float(a[1]) + face * bw * 0.5 * small, float(a[2]), (wr + bh * 0.35 + float(a[4])) * small)
 		hl.rotation = Vector3(deg_to_rad(-6), deg_to_rad(-90 if face > 0 else 90), 0)
 		var on2 = 1.0
