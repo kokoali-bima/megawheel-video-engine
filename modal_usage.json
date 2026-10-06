@@ -2855,6 +2855,86 @@
    "gpu_seconds": 526.3,
    "wall_seconds": 222.6,
    "cost_usd": 0.1693
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#9 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 45.5,
+   "wall_seconds": 78.8,
+   "cost_usd": 0.0116
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#10 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 42.6,
+   "wall_seconds": 127.1,
+   "cost_usd": 0.0109
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#11 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 6,
+   "gpu_seconds": 90.3,
+   "wall_seconds": 696.1,
+   "cost_usd": 0.0231
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#12 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 6,
+   "gpu_seconds": 50.1,
+   "wall_seconds": 88.7,
+   "cost_usd": 0.0128
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#13 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 6,
+   "gpu_seconds": 51.6,
+   "wall_seconds": 409.6,
+   "cost_usd": 0.0132
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#14 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 66.8,
+   "wall_seconds": 112.7,
+   "cost_usd": 0.017
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story S01E02_who_is_kraggor#15 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 56.1,
+   "wall_seconds": 89.2,
+   "cost_usd": 0.0143
+  },
+  {
+   "date": "2026-10-06",
+   "note": "story3d S01E02_who_is_kraggor 9,10,11,12,13,14,15",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 7,
+   "cpu_seconds": 3880.6,
+   "gpu_seconds": 794.1,
+   "wall_seconds": 229.8,
+   "cost_usd": 0.2822
   }
  ]
 }
