@@ -2995,6 +2995,16 @@
    "gpu_seconds": 535.4,
    "wall_seconds": 190.5,
    "cost_usd": 0.168
+  },
+  {
+   "date": "2026-10-06",
+   "note": "bookends recap r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 54.2,
+   "wall_seconds": 167.8,
+   "cost_usd": 0.0138
   }
  ]
 }
