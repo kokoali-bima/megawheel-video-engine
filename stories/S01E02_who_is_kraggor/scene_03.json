@@ -78,28 +78,28 @@
  ],
  "score": [
   {
-   "cue": "cue_wonder",
+   "cue": "cue_town_panic",
    "from": 0,
-   "to": 0,
-   "vol": 0.4,
-   "start": 2.0,
+   "to": 3,
+   "vol": 0.45,
+   "start": 20.0,
    "fade": 1.0,
-   "tail": 0.8
+   "tail": 0.6
   },
   {
    "cue": "cue_sprinkles_theme",
-   "from": 4,
-   "to": 5,
-   "vol": 0.5,
+   "from": 3,
+   "to": 7,
+   "vol": 0.55,
    "start": 0.0,
-   "fade": 1.2,
-   "tail": 0.8
+   "fade": 0.6,
+   "tail": 0.6
   },
   {
    "cue": "cue_kraggor_tender",
    "from": 8,
    "to": 9,
-   "vol": 0.55,
+   "vol": 0.6,
    "start": 0.0,
    "fade": 1.5,
    "tail": 1.2
