@@ -83,12 +83,16 @@ def main():
     cmd = [os.path.join(ROOT, "venv-modal", "bin", "modal"), "run", "generators/story3d/modal_story3d.py",
            "--episode", a.episode, "--scenes", a.scenes, "--out", out, "--aspect", a.aspect,
            "--note", a.note or f"story3d {a.episode} {a.scenes}"]
-    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    tail = "\n".join(ln for ln in (r.stdout + r.stderr).splitlines() if "[story3d]" in ln)
+    mlog = os.path.join(out, f"modal_{dt.datetime.now():%Y%m%d_%H%M%S}.log")     # live log: a stuck run is visible
+    log(f"render Modal -> log {mlog}")
+    with open(mlog, "w") as fh:
+        r = subprocess.run(cmd, cwd=ROOT, stdout=fh, stderr=subprocess.STDOUT, text=True, timeout=5400)
+    text = open(mlog).read()
+    tail = "\n".join(ln for ln in text.splitlines() if "[story3d]" in ln)
     print(tail, flush=True)
     job = next((ln.split("job=")[1].strip() for ln in tail.splitlines() if "job=" in ln), None)
     if r.returncode != 0 or not job:
-        log("STOP: render Modal gagal\n" + (r.stdout + r.stderr)[-2500:])
+        log("STOP: render Modal gagal\n" + text[-2500:])
         sys.exit(4)
     import audit_story3d as A
     res = json.load(open(os.path.join(out, f"{job}.json")))["reports"]
