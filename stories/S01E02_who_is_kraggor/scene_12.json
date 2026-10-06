@@ -122,12 +122,10 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
+    "over": "kraggor",
     "drop_at": 0.6,
     "dur": 0.7,
-    "cell": 96
+    "cell": 56
    },
    "emote": {
     "sprinkles": "surprised",
@@ -168,10 +166,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "emote": {
     "zippy": "angry",
@@ -275,10 +271,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "moves": {
     "sprinkles": {
@@ -315,10 +309,8 @@
     "sprinkles": "determined"
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "kraggor": {
     "mode": "sad",

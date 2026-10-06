@@ -37,7 +37,7 @@ COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lin
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
 LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins"}
 TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
-AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "wind", "none"}
+AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "cave_dry", "wind", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
@@ -56,7 +56,7 @@ def sfx_names():
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
                 "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
-                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide"}
+                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide", "kraggor_hum", "kraggor_hum_joy", "kraggor_hum_sad", "kraggor_hum_grow", "kraggor_hum_fear"}
 
 
 def vehicles():

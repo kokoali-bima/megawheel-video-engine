@@ -28,9 +28,21 @@ def log(msg):
     print(f"[produce3d] {msg}", flush=True)
 
 
+def record_ledger():
+    """The Modal usage ledger is dirty after every run: commit + push it (owner 2026-10-07), so the next pull is clean."""
+    r = subprocess.run(["bash", "git_sync.sh", "push", "records: modal usage"], cwd=ROOT, capture_output=True, text=True)
+    log("ledger -> GitHub: " + ((r.stdout + r.stderr).strip().splitlines() or ["?"])[-1])
+
+
 def preflight(ep, nums):
     r = subprocess.run(["bash", "git_sync.sh", "status"], cwd=ROOT, capture_output=True, text=True)
     st = r.stdout + r.stderr
+    if "ledger (modal_usage.json): KOTOR" in st or "ahead/behind: 0/0" not in st:     # self-heal, loudly
+        log("INDIKATOR: ledger kotor atau VM tertinggal -> git_sync.sh pull otomatis")
+        p = subprocess.run(["bash", "git_sync.sh", "pull"], cwd=ROOT, capture_output=True, text=True)
+        log((p.stdout + p.stderr).strip().replace("\n", " | ")[-300:])
+        r = subprocess.run(["bash", "git_sync.sh", "status"], cwd=ROOT, capture_output=True, text=True)
+        st = r.stdout + r.stderr
     log(st.strip().splitlines()[0] if st.strip() else "git_sync status: kosong")
     ab = st.split("ahead/behind:")[-1].split()[0] if "ahead/behind:" in st else "?/?"
     if "STOP" in st or ab.split("/")[-1] not in ("0",):
@@ -96,6 +108,8 @@ def main():
     nums = [int(x) for x in a.scenes.split(",") if x]
     out = os.path.join(ROOT, "work", "story3d", a.episode)
     os.makedirs(out, exist_ok=True)
+    import atexit
+    atexit.register(record_ledger)                                 # even after a QA FAIL / render error
     if not preflight(a.episode, nums):
         sys.exit(2)
     if not prepare(a.episode, nums, a.aspect):

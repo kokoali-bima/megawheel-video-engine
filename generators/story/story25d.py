@@ -1641,44 +1641,64 @@ def draw_chalk(ctx, p, camx, t):
     ctx.restore()
 
 
-def draw_net(ctx, n, u):
-    """A big rope net in screen space (S01E02 scenes 11-13). {"x0","x1": 0..1 across, "y1": how far down it hangs (0..1),
-    "drop_at"/"dur": it falls from above, "gone_at": it is cut: it slides off and fades}."""
-    x0, x1 = n.get("x0", 0.3) * W, n.get("x1", 1.0) * W
-    ybot = n.get("y1", 0.8) * H
+def draw_net(ctx, n, u, rect=None):
+    """A big rope net (S01E02 scenes 11-13). Screen-space band: {"x0","x1": 0..1 across, "y1": how far down it hangs,
+    "drop_at"/"dur": it falls from above, "gone_at": it is cut: slides off and fades}. With rect=(x0, x1, ytop, ybot) in px
+    (owner 2026-10-07: "yang terkena jaring hanya area Kraggor") the net is a draped shape fitted to Kraggor, drawn BEHIND the
+    cars; it falls in as one piece."""
+    alpha, dy = 1.0, 0.0
+    if rect is None:
+        x0, x1 = n.get("x0", 0.3) * W, n.get("x1", 1.0) * W
+        ytop, ybot = -20.0, n.get("y1", 0.8) * H
+    else:
+        x0, x1, ytop, ybot = rect
     if n.get("drop_at") is not None:
         f = min(1.0, max(0.0, (u - n["drop_at"]) / n.get("dur", 0.7)))
         f = 1 - (1 - f) ** 3
-        ybot = -0.15 * H + f * (ybot + 0.15 * H)
-    alpha = 1.0
+        dy = -(1 - f) * (ybot - ytop + 0.2 * H)
     if n.get("gone_at") is not None and u > n["gone_at"]:
         g = min(1.0, (u - n["gone_at"]) / 0.9)
-        alpha, ybot = 1.0 - g, ybot - g * 0.25 * H
-    if ybot <= 0 or alpha <= 0.01:
+        alpha, dy = 1.0 - g, dy - g * 0.25 * H
+    if alpha <= 0.01 or ybot + dy <= 0:
         return
-    sag = 0.09 * H
-
-    def bottom(x):
-        return ybot + sag * math.sin(math.pi * (x - x0) / max(1.0, x1 - x0))
+    w, h = x1 - x0, ybot - ytop
     ctx.save()
-    ctx.move_to(x0, -20)
-    ctx.line_to(x1, -20)
-    for q in range(25):
-        x = x1 - (x1 - x0) * q / 24.0
-        ctx.line_to(x, bottom(x))
-    ctx.close_path()
+    ctx.translate(0, dy)
+    if rect is None:                                           # the band across the top (hanging between the towers)
+        sag = 0.09 * H
+        ctx.move_to(x0, ytop)
+        ctx.line_to(x1, ytop)
+        for q in range(25):
+            x = x1 - w * q / 24.0
+            ctx.line_to(x, ybot + sag * math.sin(math.pi * (x - x0) / max(1.0, w)))
+        ctx.close_path()
+    else:                                                      # draped over a shape: narrow at the top, round below
+        ins = 0.2 * w
+        ctx.move_to(x0 + ins, ytop)
+        ctx.line_to(x1 - ins, ytop)
+        ctx.curve_to(x1, ytop + 0.15 * h, x1 + 0.02 * w, ytop + 0.6 * h, x1 - 0.12 * w, ytop + 0.9 * h)
+        ctx.curve_to(x1 - 0.3 * w, ytop + 1.04 * h, x0 + 0.3 * w, ytop + 1.04 * h, x0 + 0.12 * w, ytop + 0.9 * h)
+        ctx.curve_to(x0 - 0.02 * w, ytop + 0.6 * h, x0, ytop + 0.15 * h, x0 + ins, ytop)
+        ctx.close_path()
+    outline = ctx.copy_path()
     ctx.clip()
     cell = n.get("cell", 64)
     for col, wd, al in (((0.05, 0.04, 0.03), 8.0, 0.4), ((0.88, 0.8, 0.55), 4.6, 0.97)):    # rope + its shadow
         ctx.set_source_rgba(*col, al * alpha)
         ctx.set_line_width(wd)
-        span = int((x1 - x0 + 2 * H) / cell) + 2
+        span = int((w + 2 * h) / cell) + 3
         for i in range(-span, span):
             xa = x0 + i * cell
-            ctx.move_to(xa, -20)
-            ctx.line_to(xa + (H + 40), H + 20)
-            ctx.move_to(xa + (H + 40), -20)
-            ctx.line_to(xa, H + 20)
+            ctx.move_to(xa, ytop - 20)
+            ctx.line_to(xa + (h + 40), ybot + 20)
+            ctx.move_to(xa + (h + 40), ytop - 20)
+            ctx.line_to(xa, ybot + 20)
+        ctx.stroke()
+    ctx.reset_clip()
+    if rect is not None:                                       # a heavier rope round the edge
+        ctx.append_path(outline)
+        ctx.set_source_rgba(0.88, 0.8, 0.55, 0.97 * alpha)
+        ctx.set_line_width(7.0)
         ctx.stroke()
     ctx.restore()
 
@@ -2529,6 +2549,11 @@ SFX = {
     "breath_big": lambda: breath_big(),
     "kraggor_giggle": lambda: kraggor_giggle(),
     "arm_slide": lambda: arm_slide(),
+    "kraggor_hum": lambda: kraggor_hum(),
+    "kraggor_hum_joy": lambda: kraggor_hum_joy(),
+    "kraggor_hum_sad": lambda: kraggor_hum_sad(),
+    "kraggor_hum_grow": lambda: kraggor_hum_grow(),
+    "kraggor_hum_fear": lambda: kraggor_hum_fear(),
     "kraggor_moan": lambda: kraggor_moan(),
     "net_drop": lambda: net_drop(),
     "gate_creak": lambda: gate_creak(),
@@ -2822,16 +2847,16 @@ def amb_storm(n, rng):
     return wind * 0.7 + rain * 0.5
 
 
-def amb_cave(n, rng):
+def amb_cave(n, rng, drips=True):
     """Inside a cave: a deep hum (two beating tones), soft airflow and an occasional drip."""
     tt = np.arange(n) / se.SR
     hum = np.sin(2 * math.pi * 62 * tt) * 0.5 + np.sin(2 * math.pi * 63.4 * tt) * 0.45 + np.sin(2 * math.pi * 124.5 * tt) * 0.25
     air = fft_band(rng.normal(0, 1, n), 60, 420)
     out = hum * 0.7 + air / max(1e-9, np.abs(air).max()) * 0.4
-    for i in rng.integers(0, max(1, n - se.SR), max(1, int(n / se.SR / 4.0))):
+    for i in (rng.integers(0, max(1, n - se.SR), max(1, int(n / se.SR / 9.0))) if drips else []):   # rare, soft drops
         pl = drip(1)
         j = min(len(pl), n - i)
-        out[i:i + j] += pl[:j] * 0.5
+        out[i:i + j] += pl[:j] * 0.3
     return out
 
 
@@ -2938,6 +2963,45 @@ def amb_wind(n, rng):
     return wind * 0.8 + amb_birds(n, rng) * 0.5
 
 
+def _kraggor_hum(contour, dur=2.0, vib=5.5, growl=0.0, seed=3):
+    """Kraggor telling his story without words: a soft low vocal hum (a voice, never a bell) - a fundamental near
+    100-140 Hz with a vowel-like spread of overtones (500 / 900 Hz regions), slow vibrato, gentle attack. contour:
+    pitch factor over 0..1."""
+    sr = se.SR
+    n = int(dur * sr)
+    t = np.arange(n) / sr
+    u = t / dur
+    f = 112 * contour(u) + 4 * np.sin(2 * math.pi * vib * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph + 0.3 * h) * w for h, w in ((1, 1.0), (2, 0.9), (3, 0.8), (4, 1.0), (5, 0.9), (6, 0.5),
+                                                          (7, 0.35), (8, 0.3)))
+    if growl:
+        tone = tone * (1.0 - growl + growl * (0.5 + 0.5 * np.sin(2 * math.pi * 26 * t)))
+    env = np.sin(math.pi * np.minimum(1.0, u)) ** 1.3 * np.clip(t / 0.25, 0, 1)
+    out = tone * env
+    return out / max(1e-9, np.abs(out).max()) * 0.6
+
+
+def kraggor_hum():
+    return _kraggor_hum(lambda u: 1.0 + 0.03 * np.sin(2 * math.pi * u))
+
+
+def kraggor_hum_joy():
+    return _kraggor_hum(lambda u: 0.95 + 0.22 * u, dur=1.8, vib=6.5)
+
+
+def kraggor_hum_sad():
+    return _kraggor_hum(lambda u: 1.12 - 0.3 * u, dur=2.4, vib=4.5)
+
+
+def kraggor_hum_grow():
+    return _kraggor_hum(lambda u: 0.85 + 0.5 * u ** 1.5, dur=2.4, vib=5.0, growl=0.4)
+
+
+def kraggor_hum_fear():
+    return _kraggor_hum(lambda u: 1.05 + 0.05 * np.sin(12 * u), dur=1.8, vib=9.0)
+
+
 def amb_birds(n, rng):
     """Daytime outdoors: soft birdsong (short frequency-swept chirps) over a faint breeze."""
     br = fft_band(rng.normal(0, 1, n), 40, 420)                    # breeze, no hiss (2026-10-06 QA)
@@ -3010,6 +3074,8 @@ def ambience_bed(scene, n):
         x, g = amb_storm(n, rng), 0.07                             # wind + rain wash, nothing above ~1.2 kHz
     elif kind == "cave":
         x, g = amb_cave(n, rng), 0.045
+    elif kind == "cave_dry":                                       # no drips at all (scene 10: Kraggor's own voice leads)
+        x, g = amb_cave(n, rng, drips=False), 0.045
     elif kind == "wind":
         x, g = amb_wind(n, rng), 0.09
     else:
@@ -3347,7 +3413,22 @@ def render_scene(ep, num, aspect):
                     st_screen = H / 2 + (ground_y(kr.get("gz", 7.0)) - piv_y) * zoom - (1.2 + 19.2) * 40 * sc_
                 ctx.save()
                 ctx.identity_matrix()
+                if kr.get("ghost"):                                # a translucent dark silhouette (owner 2026-10-07)
+                    ctx.push_group()
                 kraggor_head(ctx, u, kr, stands_top=st_screen)
+                if kr.get("ghost"):
+                    ctx.set_operator(cairo.OPERATOR_ATOP)
+                    ctx.rectangle(-W, -H, 3 * W, 3 * H)
+                    ctx.set_source_rgb(*kr.get("tint", (0.1, 0.13, 0.22)))
+                    ctx.fill()
+                    ctx.set_operator(cairo.OPERATOR_OVER)
+                    ctx.pop_group_to_source()
+                    ctx.paint_with_alpha(float(kr["ghost"]))
+                nt = sh.get("net")
+                if nt and nt.get("over") == "kraggor" and kr.get("stand"):      # the net covers ONLY Kraggor, behind the cars
+                    sc_n, cx_n = kr.get("scale", 1.0) * (H / 1080), kr.get("sx", 0.62) * W
+                    draw_net(ctx, nt, u, rect=(cx_n - 450 * sc_n, cx_n + 560 * sc_n, st_screen - 480 * sc_n,
+                                               st_screen + 830 * sc_n))
                 ctx.restore()
         draw_set(ctx, loc, camx, t, after_sky=behind)
         if loc == "garage":
@@ -3431,7 +3512,7 @@ def render_scene(ep, num, aspect):
             if sh.get("kraggor") and not sh["kraggor"].get("front"):
                 tspec["target"] = kraggor_mouth(sh["kraggor"], H / 2 + (stands_top_world() - piv_y) * zoom)
             ice_cream_toss(ctx, u, tspec, camx, actors)
-        if sh.get("net"):                                          # rope net over everything (screen space)
+        if sh.get("net") and sh["net"].get("over") != "kraggor":   # rope net over everything (screen space)
             draw_net(ctx, sh["net"], u)
         vmax = max([a.get("v", 0.0) for a in actors.values() if not a["hidden"]] + [0.0])
         if sh.get("eyes"):

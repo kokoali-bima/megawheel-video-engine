@@ -146,10 +146,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "move": {
     "pan": 2
@@ -195,10 +193,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "emote": {
     "zippy": "angry",
@@ -231,10 +227,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "moves": {
     "rocky": {
@@ -278,10 +272,8 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
-    "cell": 96
+    "over": "kraggor",
+    "cell": 56
    },
    "lines": [
     [
@@ -401,11 +393,9 @@
     "gz": 5.2
    },
    "net": {
-    "x0": 0.45,
-    "x1": 0.99,
-    "y1": 0.92,
+    "over": "kraggor",
     "gone_at": 0.8,
-    "cell": 96
+    "cell": 56
    },
    "emote": {
     "siren": "happy",

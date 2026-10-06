@@ -3,7 +3,7 @@
  "theme_location": "city",
  "time": "night",
  "weather": "clear",
- "ambience": "cave",
+ "ambience": "cave_dry",
  "fog": 0.2,
  "letterbox": true,
  "wall_z": 5.0,
@@ -112,15 +112,6 @@
  "score": [
   {
    "cue": "cue_kraggor_tender",
-   "from": 1,
-   "to": 3,
-   "vol": 0.4,
-   "start": 0.0,
-   "fade": 1.0,
-   "tail": 0.8
-  },
-  {
-   "cue": "cue_kraggor_tender",
    "from": 8,
    "to": 8,
    "vol": 0.4,
@@ -159,7 +150,7 @@
    },
    "sfx": [
     [
-     "drip",
+     "kraggor_hum",
      0.8,
      0.6
     ]
@@ -184,14 +175,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_sad",
+     0.4,
+     0.8
     ]
    ]
   },
@@ -214,14 +200,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_joy",
+     0.4,
+     0.8
     ]
    ]
   },
@@ -244,14 +225,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_sad",
+     0.4,
+     0.8
     ]
    ]
   },
@@ -274,14 +250,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_grow",
+     0.4,
+     0.8
     ]
    ]
   },
@@ -304,14 +275,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_fear",
+     0.4,
+     0.8
     ]
    ]
   },
@@ -334,14 +300,9 @@
    },
    "sfx": [
     [
-     "arm_slide",
-     0.3,
-     0.5
-    ],
-    [
-     "drip",
-     2.3,
-     0.5
+     "kraggor_hum_sad",
+     0.4,
+     0.8
     ]
    ]
   },

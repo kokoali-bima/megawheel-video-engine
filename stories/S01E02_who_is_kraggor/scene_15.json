@@ -97,11 +97,12 @@
    "caption": "Beyond the mountain. Dawn.",
    "kraggor": {
     "mode": "smile",
-    "sx": 0.88,
+    "sx": 0.13,
     "sy": 0.62,
-    "scale": 0.55,
+    "scale": 0.5,
     "stand": true,
-    "gz": 7
+    "gz": 7,
+    "ghost": 0.5
    },
    "moves": {
     "sprinkles": {
