@@ -339,8 +339,11 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         if p_.startswith(fd):
             starts.append(round(tpos + (xd[k - 1] / 2 if k else 0.0), 2))
         tpos += durs[k] - (xd[k] if k < len(xd) else 0.0)
+    # intermediate pieces carry LOSSLESS audio (pcm in mkv): AAC pieces each add encoder padding, which left tiny gaps at
+    # every piece boundary and made the audio drift further from the picture with every join (found 2026-10-07 on the
+    # 17-scene assembly: join sensor windows slid by ~0.7 s, "sound cut" FAILs at random joins). AAC only once, at the end.
     enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
-           "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"]
+           "-c:a", "pcm_s16le", "-ar", "48000", "-ac", "2"]
     pieces = []
 
     def ff(args, out):
@@ -350,7 +353,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
     for i, p in enumerate(parts):                                  # body of each scene + one short piece per join
         head = xd[i - 1] if i > 0 else 0.0
         tail = xd[i] if i < len(joins) else 0.0
-        ff(["-ss", f"{head:.3f}", "-t", f"{durs[i] - head - tail:.3f}", "-i", p], f"{tmp}/b{i:02d}.mp4")
+        ff(["-ss", f"{head:.3f}", "-t", f"{durs[i] - head - tail:.3f}", "-i", p], f"{tmp}/b{i:02d}.mkv")
         if i < len(joins):
             d_ = xd[i]
             held = joins[i].get("hold", 0) > 0
@@ -363,12 +366,15 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             ff(["-ss", f"{durs[i] - d_:.3f}", "-t", f"{d_:.3f}", "-i", p, "-t", f"{d_:.3f}", "-i", parts[i + 1],
                 "-filter_complex", f"[0:v][1:v]xfade=transition={joins[i]['kind']}:duration={d_}:offset=0[v];" + af,
                 "-map", "[v]", "-map", "[a]", "-t", f"{d_:.3f}"],
-               f"{tmp}/x{i:02d}.mp4")
+               f"{tmp}/x{i:02d}.mkv")
     with open(f"{tmp}/list.txt", "w") as fh:
         fh.writelines(f"file '{q}'\n" for q in pieces)
-    out = f"{tmp}/episode.mp4"
+    joined = f"{tmp}/episode.mkv"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
-                    "-c", "copy", out], check=True)
+                    "-c", "copy", joined], check=True)
+    out = f"{tmp}/episode.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", joined, "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                    "-ar", "48000", "-ac", "2", out], check=True)
     # --- join sensors on the final audio
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", out, "-ac", "1", "-ar", "16000", "-f", "s16le", "-"],
                          capture_output=True).stdout
