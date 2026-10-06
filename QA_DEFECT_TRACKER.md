@@ -40,6 +40,11 @@
 | 23 | 2026-10-06 | story3d scene 2 r1 | Klakson/sorakan menimpa kalimat; musik menutupi | Efek di detik tetap; cue terlalu keras | sfx `"end+0.1"`; vol cue | story3d `audio` masking (≥ 6 dB) | ✅ |
 | 24 | 2026-10-06 | story3d scene 2 r2 | Tulisan "SCHOOL BUS"/"POLICE" terbalik (cermin) | Mobil menghadap kiri dicerminkan beserta tulisan | `TEXT_UNMIRROR` (story3d) | — (visual; Shorts belum diubah) | ✅ story3d |
 
+| 25 | 2026-10-06 | story3d scene 2 | Adegan terasa per pemeran (zoom ke tiap yang bicara) | Close-up tiap kalimat | cam `group`, pendengar melirik, J-cut | STYLE_CONTRACT C01/C04 (linter + sensor J-cut ≥ 50%) | ✅ |
+| 26 | 2026-10-06 | story3d scene 2 | Mobil berbaris menempel / menembus palang | Posisi tanpa jarak | Staging ulang | STYLE_CONTRACT C02/C03 (linter) | ✅ |
+| 27 | 2026-10-06 | story3d scene 1 | Sunyi tanpa makna sebelum footprint | Tidak ada lapisan tegang | `drone` + `thud_far` | STYLE_CONTRACT A01 (sensor ≤ 2,2 dtk) | ✅ |
+| 28 | 2026-10-06 | sambungan 1→2 | Transisi terburu-buru; suara terpotong ke hitam | Fade 1 dtk; crossfade ke klip hitam memotong suara | fade out 1,0 + hitam 0,5 (room tone) + fade in 1,3; afade qsin eksplisit | STYLE_CONTRACT J01/J02 (sensor sambungan, diukur) | ✅ |
+
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
 |---|---|---|
