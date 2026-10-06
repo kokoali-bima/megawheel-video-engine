@@ -256,7 +256,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
     sr = 16000
 
     def db(seg):
-        return 20 * np.log10(max(1e-9, float(np.sqrt(np.mean(seg ** 2))) if len(seg) else 1e-9))
+        return float(20 * np.log10(max(1e-9, float(np.sqrt(np.mean(seg ** 2))) if len(seg) else 1e-9)))   # plain float
 
     rep, tcur = [], 0.0
     for i, j in enumerate(joins):
@@ -279,7 +279,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         if longest >= JOIN["hole_s"]:
             fails.append(f"sunyi bolong {longest:.1f}s")
         rep.append(dict(join=f"{j['a']}->{j['b']}", kind=j["kind"], dur=j["dur"], at=round(tcur, 2),
-                        level_before=round(la, 1), level_after=round(lb, 1), silence=round(longest, 2), fail=fails))
+                        level_before=round(float(la), 1), level_after=round(float(lb), 1), silence=round(float(longest), 2), fail=fails))
     vol.commit()
     data = open(out, "rb").read()
     return dict(ok=True, mp4=data, joins=rep, durs=durs, secs=time.time() - t0)
