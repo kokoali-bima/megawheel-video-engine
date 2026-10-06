@@ -106,7 +106,7 @@
     "mode": "smile",
     "sx": 0.8,
     "sy": 0.62,
-    "scale": 0.7,
+    "scale": 0.45,
     "stand": true,
     "gz": 5.2
    },
@@ -146,7 +146,7 @@
     "mode": "smile",
     "sx": 0.8,
     "sy": 0.62,
-    "scale": 0.7,
+    "scale": 0.45,
     "stand": true,
     "gz": 5.2
    },
@@ -214,7 +214,7 @@
     "mode": "smile",
     "sx": 0.8,
     "sy": 0.62,
-    "scale": 0.7,
+    "scale": 0.45,
     "stand": true,
     "gz": 5.2
    },
@@ -243,7 +243,7 @@
     "mode": "smile",
     "sx": 0.8,
     "sy": 0.62,
-    "scale": 0.7,
+    "scale": 0.45,
     "stand": true,
     "gz": 5.2
    },
@@ -294,7 +294,7 @@
     "mode": "calm",
     "sx": 0.25,
     "sy": 0.62,
-    "scale": 0.7,
+    "scale": 0.42,
     "stand": true,
     "gz": 5.2
    },

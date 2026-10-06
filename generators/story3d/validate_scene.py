@@ -56,7 +56,7 @@ def sfx_names():
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
                 "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
-                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click"}
+                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide"}
 
 
 def vehicles():

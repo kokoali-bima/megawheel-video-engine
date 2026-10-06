@@ -1669,7 +1669,7 @@ def draw_net(ctx, n, u):
     ctx.close_path()
     ctx.clip()
     cell = n.get("cell", 64)
-    for col, wd, al in (((0.05, 0.04, 0.03), 5.5, 0.35), ((0.88, 0.82, 0.62), 2.8, 0.95)):    # rope + its shadow
+    for col, wd, al in (((0.05, 0.04, 0.03), 8.0, 0.4), ((0.88, 0.8, 0.55), 4.6, 0.97)):    # rope + its shadow
         ctx.set_source_rgba(*col, al * alpha)
         ctx.set_line_width(wd)
         span = int((x1 - x0 + 2 * H) / cell) + 2
@@ -2528,6 +2528,7 @@ SFX = {
     "key_glint": lambda: key_glint(),
     "breath_big": lambda: breath_big(),
     "kraggor_giggle": lambda: kraggor_giggle(),
+    "arm_slide": lambda: arm_slide(),
     "kraggor_moan": lambda: kraggor_moan(),
     "net_drop": lambda: net_drop(),
     "gate_creak": lambda: gate_creak(),
@@ -2914,6 +2915,19 @@ def key_click():
     tt = np.arange(L) / sr
     out[i:i + L] += (np.sin(2 * math.pi * 140 * tt) + 0.5 * np.sin(2 * math.pi * 420 * tt)) * np.exp(-tt * 14) * 0.9
     return out / max(1e-9, np.abs(out).max()) * 0.8
+
+
+def arm_slide():
+    """Kraggor's giant arm sliding across the cave wall: a low, slow glide of tones (90 -> 150 Hz) with overtones up
+    to ~600 Hz - the noise-based whoosh was flagged as noise on headphones (A07)."""
+    sr = se.SR
+    n = int(1.2 * sr)
+    t = np.arange(n) / sr
+    f = 90 + 60 * (t / 1.2)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.8), (3, 0.6), (4, 0.4), (6, 0.2)))
+    env = np.sin(math.pi * t / 1.2) ** 1.5
+    return tone * env / 3.0 * 0.6
 
 
 def amb_wind(n, rng):

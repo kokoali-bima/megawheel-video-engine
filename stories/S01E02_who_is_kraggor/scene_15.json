@@ -123,8 +123,10 @@
    }
   },
   {
-   "cam": "medium",
+   "cam": "two",
    "on": "buster",
+   "with": "zippy",
+   "zoom": 0.9,
    "move": {
     "push": 0.1
    },
@@ -143,8 +145,8 @@
    "look": {
     "x": 30.0,
     "z": 1.3,
-    "y": 6.0,
-    "fit": 18.0
+    "y": 8.5,
+    "fit": 20.0
    },
    "hold": 4.4,
    "move": {
@@ -206,8 +208,8 @@
    "look": {
     "x": 30.0,
     "z": 1.3,
-    "y": 5.0,
-    "fit": 22.0
+    "y": 6.5,
+    "fit": 24.0
    },
    "hold": 6.0,
    "move": {
@@ -221,8 +223,10 @@
    ]
   },
   {
-   "cam": "medium",
+   "cam": "two",
    "on": "zippy",
+   "with": "sprinkles",
+   "zoom": 0.9,
    "move": {
     "push": 0.1
    },
