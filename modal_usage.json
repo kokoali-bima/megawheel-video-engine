@@ -2675,6 +2675,16 @@
    "gpu_seconds": 294.3,
    "wall_seconds": 141.0,
    "cost_usd": 0.0922
+  },
+  {
+   "date": "2026-10-06",
+   "note": "contract batch: jcut, tension, joins",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 289.3,
+   "gpu_seconds": 141.9,
+   "wall_seconds": 116.6,
+   "cost_usd": 0.0433
   }
  ]
 }
