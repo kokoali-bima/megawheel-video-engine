@@ -10,7 +10,7 @@
 | Ditanam di | Benih | Terbayar di |
 |---|---|---|
 | Scene 1 | Tilly menyanyi "Who's afraid of the dark? Not me!" lalu lari ketakutan | Scene 14: "Who's afraid of Kraggor? Not me!" |
-| Scene 4 | Foto lama Grandpa dengan **ekor hijau kecil** di tepi foto (sobek) | Scene 13: potongan foto yang hilang ditemukan di gua → Kraggor kecil |
+| Scene 4 | **Album foto** Grandpa di dalam kotak: foto BARU "Mountain Road" (Grandpa muda, senja) yang sobek; **ujung ekor hijau** menyembul di tepi sobekan. (Foto dinding pantai Ep. 1 TIDAK diubah — di Ep. 1 tidak ada Kraggor; aturan K01) | Scene 13: potongan kanan ditemukan di gua → Kraggor kecil tersenyum; garis sobekan **identik** (seed `tear: 7`), ekor menyambung |
 | Scene 5 | Lagu truk es krim Grandpa menenangkan Kraggor kecil | Scene 9: Sprinkles memainkan lagu yang sama → Kraggor menunduk |
 | Scene 7 | Rocky: "Everybody gets stuck sometimes." (lumpur) | Scene 13: Rocky mengulanginya untuk Kraggor di jaring |
 | Ep. 1 | Siren: "Rules are rules." | Scene 13: "...and the first rule is: protect anyone who needs help." |
