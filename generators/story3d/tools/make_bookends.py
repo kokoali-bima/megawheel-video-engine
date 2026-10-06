@@ -109,7 +109,10 @@ def recap(ep, out):
     fc.append(f"[{cur}]{dt},fade=t=in:d=0.5,fade=t=out:st={total - 0.8:.3f}:d=0.8[v]")
     n = len(CLIPS)
     st_at = int(VO[2][1] * 1000)
-    fc.append(f"[{n}:a]atrim=0:{total:.2f},volume=0.5,afade=t=in:d=1.0,afade=t=out:st={total - 1.5:.2f}:d=1.5[m]")      # score, A10: quiet
+    # the cue opens with ~1.6 s of silence and is recorded quiet (~-40 dB): skip the silence and lift it so the narrator's
+    # breaths never fall into digital silence (the join sensor read a pause as "sound cut"); still >= 12 dB under the voice (A10)
+    fc.append(f"[{n}:a]atrim=start=1.6:end={1.6 + total:.2f},asetpts=PTS-STARTPTS,volume=2.2,afade=t=in:d=0.8,"
+              f"afade=t=out:st={total - 1.5:.2f}:d=1.5[m]")
     fc.append(f"[{n + 1}:a]adelay={st_at}|{st_at},volume=0.35[s]")
     fc.append(f"[{n + 2}:a]aformat=channel_layouts=stereo[vo]")
     fc.append("[m]aformat=channel_layouts=stereo[m2];[s]aformat=channel_layouts=stereo[s2];"
