@@ -85,8 +85,8 @@ def recap(ep, out):
     inputs, fc, last, off = [], [], None, 0.0
     for i, (f, ss, d) in enumerate(CLIPS):
         inputs += ["-ss", f"{ss}", "-t", f"{d}", "-i", os.path.join(EP1, f)]
-        # crop clear of the aired subtitle band (bottom) and note box (top), keep 16:9, back to full size
-        fc.append(f"[{i}:v]crop=1458:820:231:108,scale=1920:1080,setsar=1,fps=30[c{i}]")
+        # crop clear of the aired subtitle band (it sits ~86-93 % down) and note box (top), keep 16:9, back to full size
+        fc.append(f"[{i}:v]crop=1369:770:275:80,scale=1920:1080,setsar=1,fps=30[c{i}]")
     cur = "c0"
     t = CLIPS[0][2]
     for i in range(1, len(CLIPS)):
