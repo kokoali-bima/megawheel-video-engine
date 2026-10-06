@@ -53,7 +53,7 @@ def intro(ep, out):
     return p
 
 
-CLIPS = [("scene_09_h.mp4", 0.0, 4.4), ("scene_11_h.mp4", 6.0, 4.4), ("scene_13_h.mp4", 0.2, 4.0),
+CLIPS = [("scene_09_h.mp4", 0.0, 4.4), ("scene_11_h.mp4", 0.0, 4.4), ("scene_13_h.mp4", 0.2, 4.0),
          ("scene_13_h.mp4", 10.6, 3.6), ("scene_16_h.mp4", 0.0, 7.4)]
 VO = [("Previously, on MegaWheel Arena...", 0.5),
       ("A little ice cream truck. A giant monster. And a song that changed everything.", 5.0),
