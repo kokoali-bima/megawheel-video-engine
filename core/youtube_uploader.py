@@ -132,7 +132,9 @@ class YouTubeUploader:
                 "title": title[:100],  # YouTube title cap is 100 chars
                 "description": description[:5000],
                 "tags": tags,
-                "categoryId": category_id
+                "categoryId": category_id,
+                "defaultLanguage": "en-US",
+                "defaultAudioLanguage": "en-US"
             },
             "status": {
                 "privacyStatus": privacy_status,
