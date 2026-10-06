@@ -1,0 +1,316 @@
+{
+ "location": "town",
+ "theme_location": "city",
+ "ambience": "city_night",
+ "letterbox": true,
+ "shops": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "weather": "clear",
+ "title": "Scene 11 - Meanwhile in Town",
+ "chapter": "Meanwhile in Town",
+ "time": "sunset",
+ "fog": 0.1,
+ "actors": {
+  "siren": {
+   "vk": "police",
+   "x": -4,
+   "z": 1.6,
+   "face": 1,
+   "emo": "determined"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -15,
+   "z": 2.6,
+   "face": 1,
+   "emo": "normal"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 8,
+   "z": 2.2,
+   "face": 1,
+   "emo": "scared"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 52,
+   "z": 1.2,
+   "face": -1,
+   "emo": "happy",
+   "hidden": true
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 62,
+   "z": 2.2,
+   "face": -1,
+   "emo": "happy",
+   "hidden": true
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 72,
+   "z": 2.8,
+   "face": -1,
+   "emo": "normal",
+   "hidden": true
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 82,
+   "z": 0.6,
+   "face": -1,
+   "emo": "happy",
+   "hidden": true
+  }
+ },
+ "props": [
+  {
+   "type": "towers",
+   "xs": [
+    -18.0,
+    24.0
+   ],
+   "z": 4.4,
+   "h": 20.0
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_mystery_night",
+   "from": 0,
+   "to": 0,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_dark",
+   "from": 5,
+   "to": 7,
+   "vol": 0.45,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.5
+  },
+  {
+   "sting": "cue_kraggor_motif",
+   "shot": 5,
+   "at": 0.5,
+   "vol": 0.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "lift": 0.8,
+   "hold": 4.2,
+   "cut": "hard",
+   "move": {
+    "crane": 1.0,
+    "push": 0.05
+   },
+   "caption": "Meanwhile, at the town gate.",
+   "net": {
+    "x0": 0.14,
+    "x1": 0.86,
+    "y1": 0.17,
+    "cell": 56
+   }
+  },
+  {
+   "cam": "group",
+   "group": [
+    "siren",
+    "nitro",
+    "tilly"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "net": {
+    "x0": 0.14,
+    "x1": 0.86,
+    "y1": 0.17,
+    "cell": 56
+   },
+   "emote": {
+    "siren": "determined",
+    "nitro": "normal",
+    "tilly": "scared"
+   },
+   "lines": [
+    [
+     "siren",
+     "Operation Big Net. When it comes down that road... we drop the net.",
+     "determined"
+    ],
+    [
+     "nitro",
+     "Calculated drop time: two point four seconds. It can't escape.",
+     "calm"
+    ],
+    [
+     "tilly",
+     "Great! Wonderful! I'll be... in the back... behind the tower... behind the other tower...",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "tilly",
+   "hold": 2.4,
+   "move": {
+    "push": 0.06
+   },
+   "emote": {
+    "tilly": "scared"
+   },
+   "sfx": [
+    [
+     "honk",
+     0.5,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 16,
+   "hold": 4.8,
+   "move": {
+    "pan": 3
+   },
+   "net": {
+    "x0": 0.14,
+    "x1": 0.86,
+    "y1": 0.17,
+    "cell": 56
+   },
+   "emote": {
+    "tilly": "surprised"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.4
+    ],
+    [
+     "engine",
+     3.0,
+     0.4
+    ]
+   ],
+   "moves": {
+    "sprinkles": {
+     "show": true,
+     "x": 52,
+     "to_x": 42,
+     "speed": 3.5
+    },
+    "zippy": {
+     "show": true,
+     "x": 62,
+     "to_x": 52,
+     "speed": 3.5
+    },
+    "buster": {
+     "show": true,
+     "x": 72,
+     "to_x": 62,
+     "speed": 3.5
+    },
+    "rocky": {
+     "show": true,
+     "x": 82,
+     "to_x": 72,
+     "speed": 3.5
+    }
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "tilly",
+   "move": {
+    "push": 0.12
+   },
+   "emote": {
+    "tilly": "surprised"
+   },
+   "lines": [
+    [
+     "tilly",
+     "Wait... lights? Headlights! It's Sprinkles! And Buster! And... and...",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 16,
+   "hold": 3.6,
+   "net": {
+    "x0": 0.14,
+    "x1": 0.86,
+    "y1": 0.17,
+    "cell": 56
+   },
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "tilly": "scared"
+   },
+   "kraggor_far": {
+    "x": 60,
+    "dist": 70,
+    "height": 36,
+    "silhouette": 0.9,
+    "eyes_at": 0.4
+   }
+  },
+  {
+   "cam": "low",
+   "on": "tilly",
+   "move": {
+    "handheld": 5
+   },
+   "emote": {
+    "tilly": "scared"
+   },
+   "lines": [
+    [
+     "tilly",
+     "IT'S FOLLOWING THEM!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "siren",
+   "move": {
+    "push": 0.15
+   },
+   "emote": {
+    "siren": "angry"
+   },
+   "lines": [
+    [
+     "siren",
+     "Get ready... NOW!",
+     "angry"
+    ]
+   ]
+  }
+ ]
+}

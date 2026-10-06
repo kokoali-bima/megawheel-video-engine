@@ -1,0 +1,436 @@
+{
+ "location": "cave",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "cave",
+ "fog": 0.2,
+ "letterbox": true,
+ "wall_z": 5.0,
+ "beam_x": 10.0,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "title": "Scene 10 - Kraggor's Story",
+ "chapter": "Kraggor's Story",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 28,
+   "z": 1.4,
+   "face": 1,
+   "emo": "sad"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 19,
+   "z": 2.4,
+   "face": 1,
+   "emo": "sad"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 10,
+   "z": 2.8,
+   "face": 1,
+   "emo": "sad"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 1,
+   "z": 0.6,
+   "face": 1,
+   "emo": "sad"
+  }
+ },
+ "props": [
+  {
+   "type": "treasure",
+   "x": 13.5,
+   "z": 4.2,
+   "n": 10
+  },
+  {
+   "type": "sign",
+   "x": 30.0,
+   "z": 4.4
+  },
+  {
+   "type": "key",
+   "x": 24.0,
+   "z": 3.6
+  },
+  {
+   "type": "chalk",
+   "kind": 1,
+   "x": 38.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  },
+  {
+   "type": "chalk",
+   "kind": 2,
+   "x": 44.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  },
+  {
+   "type": "chalk",
+   "kind": 3,
+   "x": 50.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  },
+  {
+   "type": "chalk",
+   "kind": 4,
+   "x": 56.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  },
+  {
+   "type": "chalk",
+   "kind": 5,
+   "x": 62.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  },
+  {
+   "type": "chalk",
+   "kind": 6,
+   "x": 68.0,
+   "z": 4.6,
+   "y": 2.4,
+   "w": 5.0
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 1,
+   "to": 3,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 8,
+   "to": 8,
+   "vol": 0.4,
+   "start": 20.0,
+   "fade": 1.0,
+   "tail": 1.5
+  },
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 9,
+   "to": 9,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 14,
+   "hold": 3.6,
+   "cut": "hard",
+   "move": {
+    "push": 0.04,
+    "pan": 2
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.76,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "sfx": [
+    [
+     "drip",
+     0.8,
+     0.6
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 38.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 39.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 44.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 45.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 50.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 51.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 56.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 57.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 62.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 63.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 68.0,
+    "z": 4.6,
+    "y": 2.4,
+    "fit": 5.8
+   },
+   "hold": 3.8,
+   "move": {
+    "push": 0.06
+   },
+   "claw": {
+    "x": 69.5,
+    "z": 4.6,
+    "y": 1.0,
+    "at": 0.5
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.3,
+     0.3
+    ],
+    [
+     "drip",
+     2.3,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "buster",
+    "zippy",
+    "rocky"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.8,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "sprinkles": "sad",
+    "buster": "sad",
+    "zippy": "sad",
+    "rocky": "sad"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Every night... you came down... looking for him.",
+     "sad"
+    ],
+    [
+     "buster",
+     "He's been waiting for Grandpa... all these years.",
+     "sad"
+    ],
+    [
+     "sprinkles",
+     "Grandpa's gone, Kraggor. I'm... I'm so sorry.",
+     "cry"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 5.0,
+   "kraggor": {
+    "mode": "sad",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.3
+   },
+   "sfx": [
+    [
+     "kraggor_moan",
+     0.3,
+     0.7
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.12
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.9,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "But you're not alone anymore. Come with us.",
+     "determined"
+    ]
+   ]
+  }
+ ]
+}

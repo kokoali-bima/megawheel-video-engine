@@ -1,0 +1,310 @@
+{
+ "location": "town",
+ "theme_location": "city",
+ "ambience": "city_night",
+ "letterbox": true,
+ "shops": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "weather": "clear",
+ "title": "Scene 14 - A Friend for Kraggor",
+ "chapter": "A Friend for Kraggor",
+ "time": "night",
+ "fog": 0.1,
+ "mountains": true,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 8,
+   "z": 1.4,
+   "face": 1,
+   "emo": "happy"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -10,
+   "z": 2.4,
+   "face": 1,
+   "emo": "shy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -24,
+   "z": 1.6,
+   "face": 1,
+   "emo": "happy"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -40,
+   "z": 2.2,
+   "face": 1,
+   "emo": "happy"
+  }
+ },
+ "props": [
+  {
+   "type": "partylights",
+   "xs": [
+    -44.0,
+    -22.0,
+    0.0,
+    22.0,
+    44.0
+   ],
+   "z": 3.6
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 0,
+   "to": 0,
+   "vol": 0.42,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 3,
+   "to": 3,
+   "vol": 0.42,
+   "start": 10.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_wonder",
+   "from": 5,
+   "to": 5,
+   "vol": 0.42,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_wonder",
+   "from": 7,
+   "to": 7,
+   "vol": 0.42,
+   "start": 12.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "hold": 4.8,
+   "cut": "hard",
+   "caption": "Party night in the town square.",
+   "confetti": true,
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "move": {
+    "push": 0.04,
+    "pan": 2
+   },
+   "toss": {
+    "from": "sprinkles",
+    "at": 1.0,
+    "dur": 1.3,
+    "jumbo": true
+   },
+   "sfx": [
+    [
+     "ding",
+     0.4
+    ],
+    [
+     "honk_cheer",
+     2.8,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "nitro",
+    "tilly",
+    "sprinkles"
+   ],
+   "move": {
+    "push": 0.04
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "nitro": "shy",
+    "tilly": "happy",
+    "sprinkles": "happy"
+   },
+   "lines": [
+    [
+     "nitro",
+     "...I may have miscalculated. Sorry, big guy.",
+     "shy"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "tilly",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "tilly": "happy"
+   },
+   "lines": [
+    [
+     "tilly",
+     "Who's afraid of Kraggor? ...Not me!",
+     "happy"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 3.8,
+   "kraggor": {
+    "mode": "smile",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.2,
+    "wink": 1.6
+   },
+   "sfx": [
+    [
+     "kraggor_giggle",
+     0.4,
+     0.8
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "tilly",
+    "sprinkles"
+   ],
+   "dx": 3,
+   "move": {
+    "push": 0.05
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "tilly": "excited",
+    "sprinkles": "laugh"
+   },
+   "lines": [
+    [
+     "tilly",
+     "I'm his number one fan! Number ONE!",
+     "excited"
+    ],
+    [
+     "sprinkles",
+     "Ha! I think he likes you, Tilly.",
+     "laugh"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "hold": 4.4,
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "move": {
+    "push": 0.05
+   },
+   "claw": {
+    "x": 8.0,
+    "z": 1.4,
+    "y": 2.6,
+    "at": 0.6,
+    "holds": "key"
+   },
+   "sfx": [
+    [
+     "key_glint",
+     1.4,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "surprised"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "For me? ...What does it open?",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "lift": 1.4,
+   "hold": 5.0,
+   "move": {
+    "push": 0.15
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.25,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "sfx": [
+    [
+     "breath_big",
+     0.5,
+     0.4
+    ]
+   ]
+  }
+ ]
+}

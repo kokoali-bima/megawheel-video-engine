@@ -1,0 +1,426 @@
+{
+ "location": "town",
+ "theme_location": "city",
+ "ambience": "city_night",
+ "letterbox": true,
+ "shops": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "weather": "clear",
+ "title": "Scene 13 - Stand Up",
+ "chapter": "Stand Up",
+ "time": "night",
+ "fog": 0.3,
+ "actors": {
+  "siren": {
+   "vk": "police",
+   "x": -24,
+   "z": 1.8,
+   "face": 1,
+   "emo": "determined"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -34,
+   "z": 2.4,
+   "face": 1,
+   "emo": "normal"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": -43,
+   "z": 2.9,
+   "face": 1,
+   "emo": "scared"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -8,
+   "z": 1.2,
+   "face": -1,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 9,
+   "z": 2.4,
+   "face": -1,
+   "emo": "worried"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 21,
+   "z": 2.8,
+   "face": -1,
+   "emo": "worried"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 30,
+   "z": 0.5,
+   "face": -1,
+   "emo": "worried"
+  }
+ },
+ "props": [
+  {
+   "type": "towers",
+   "xs": [
+    -18.0,
+    24.0
+   ],
+   "z": 4.4,
+   "h": 20.0
+  },
+  {
+   "type": "album",
+   "x": 30.0,
+   "z": 2.9,
+   "y": 2.8,
+   "tear": 7,
+   "from_shot": 4,
+   "to_shot": 6
+  },
+  {
+   "type": "photo_piece",
+   "x": 31.75,
+   "z": 2.9,
+   "y": 2.3499999999999996,
+   "tear": 7,
+   "from_shot": 5,
+   "to_shot": 5
+  },
+  {
+   "type": "photo_piece",
+   "x": 31.2,
+   "z": 2.9,
+   "y": 2.3499999999999996,
+   "tear": 7,
+   "from_shot": 6,
+   "to_shot": 6
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_heroic_stand",
+   "from": 2,
+   "to": 2,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_grandpa_memory",
+   "from": 4,
+   "to": 6,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.2
+  },
+  {
+   "cue": "cue_heroic_stand",
+   "from": 9,
+   "to": 9,
+   "vol": 0.45,
+   "start": 14.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 5,
+   "hold": 3.8,
+   "cut": "hard",
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.85,
+    "sy": 0.62,
+    "scale": 0.6,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "move": {
+    "pan": 2
+   },
+   "moves": {
+    "zippy": {
+     "to_x": -1,
+     "speed": 6
+    }
+   },
+   "emote": {
+    "zippy": "determined"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2,
+     0.4
+    ],
+    [
+     "engine",
+     2.4,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy"
+   ],
+   "dx": 1,
+   "move": {
+    "push": 0.05
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.85,
+    "sy": 0.62,
+    "scale": 0.6,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "emote": {
+    "zippy": "angry",
+    "sprinkles": "shy"
+   },
+   "lines": [
+    [
+     "zippy",
+     "If you want him... you go through the fastest car in town.",
+     "angry"
+    ],
+    [
+     "sprinkles",
+     "Zippy... thank you.",
+     "shy"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 6,
+   "hold": 5.3,
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.85,
+    "sy": 0.62,
+    "scale": 0.6,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "moves": {
+    "rocky": {
+     "to_x": 7,
+     "speed": 7
+    },
+    "buster": {
+     "to_x": 15,
+     "speed": 5
+    }
+   },
+   "emote": {
+    "rocky": "determined",
+    "buster": "determined"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.5
+    ],
+    [
+     "engine",
+     3.5,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "rocky",
+   "move": {
+    "push": 0.08
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.8,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "lines": [
+    [
+     "rocky",
+     "Everybody gets stuck sometimes. Even him.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 30.6,
+    "z": 2.9,
+    "y": 1.5,
+    "fit": 5.4
+   },
+   "hold": 3.4,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "memory",
+     0.3
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 31.0,
+    "z": 2.9,
+    "y": 1.5,
+    "fit": 6.0
+   },
+   "hold": 3.0,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "key_glint",
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 30.8,
+    "z": 2.9,
+    "y": 1.5,
+    "fit": 5.6
+   },
+   "move": {
+    "push": 0.08
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Grandpa was his friend. He's not a monster. He's lonely.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": -12,
+   "hold": 2.4,
+   "emote": {
+    "siren": "worried"
+   },
+   "sfx": [
+    [
+     "drone",
+     0.0,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "siren",
+   "move": {
+    "push": 0.12
+   },
+   "emote": {
+    "siren": "normal"
+   },
+   "lines": [
+    [
+     "siren",
+     "Rules are rules...",
+     "calm"
+    ],
+    [
+     "siren",
+     "...and the first rule is: protect anyone who needs help.",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 4,
+   "hold": 4.6,
+   "move": {
+    "push": 0.15
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.85,
+    "sy": 0.62,
+    "scale": 0.6,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "gone_at": 0.8,
+    "cell": 64
+   },
+   "emote": {
+    "siren": "happy",
+    "zippy": "happy",
+    "sprinkles": "happy",
+    "rocky": "happy",
+    "buster": "happy"
+   },
+   "sfx": [
+    [
+     "whoosh",
+     0.8,
+     0.5
+    ]
+   ]
+  }
+ ]
+}

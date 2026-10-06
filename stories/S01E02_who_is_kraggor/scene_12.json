@@ -1,0 +1,345 @@
+{
+ "location": "town",
+ "theme_location": "city",
+ "ambience": "city_night",
+ "letterbox": true,
+ "shops": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "weather": "clear",
+ "title": "Scene 12 - The Trap",
+ "chapter": "The Trap",
+ "time": "night",
+ "fog": 0.3,
+ "actors": {
+  "tilly": {
+   "vk": "taxi",
+   "x": -43,
+   "z": 2.9,
+   "face": 1,
+   "emo": "normal"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -34,
+   "z": 2.4,
+   "face": 1,
+   "emo": "normal"
+  },
+  "siren": {
+   "vk": "police",
+   "x": -24,
+   "z": 1.8,
+   "face": 1,
+   "emo": "determined"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 4,
+   "z": 1.2,
+   "face": -1,
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 9,
+   "z": 2.4,
+   "face": -1,
+   "emo": "worried"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 21,
+   "z": 2.8,
+   "face": -1,
+   "emo": "worried"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 30,
+   "z": 0.5,
+   "face": -1,
+   "emo": "worried"
+  }
+ },
+ "props": [
+  {
+   "type": "towers",
+   "xs": [
+    -18.0,
+    24.0
+   ],
+   "z": 4.4,
+   "h": 20.0
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_kraggor_dark",
+   "from": 0,
+   "to": 0,
+   "vol": 0.45,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 3,
+   "to": 4,
+   "vol": 0.45,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.2
+  },
+  {
+   "cue": "cue_heroic_stand",
+   "from": 6,
+   "to": 6,
+   "vol": 0.45,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 8,
+   "hold": 5.0,
+   "cut": "hard",
+   "move": {
+    "handheld": 6
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "drop_at": 0.6,
+    "dur": 0.7,
+    "cell": 64
+   },
+   "emote": {
+    "sprinkles": "surprised",
+    "zippy": "surprised",
+    "buster": "surprised",
+    "rocky": "surprised"
+   },
+   "sfx": [
+    [
+     "net_drop",
+     0.6
+    ],
+    [
+     "roar",
+     1.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "zippy",
+    "buster",
+    "rocky",
+    "sprinkles"
+   ],
+   "dx": 2,
+   "move": {
+    "push": 0.04
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.82,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "emote": {
+    "zippy": "angry",
+    "sprinkles": "worried",
+    "buster": "worried",
+    "rocky": "worried"
+   },
+   "sfx": [
+    [
+     "honk_cheer",
+     "end+0.2",
+     0.5
+    ]
+   ],
+   "lines": [
+    [
+     "zippy",
+     "No, no, NO! Stop!",
+     "angry"
+    ],
+    [
+     "sprinkles",
+     "Please... don't hurt him!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "nitro",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "nitro": "normal"
+   },
+   "lines": [
+    [
+     "nitro",
+     "Target captured.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 4.4,
+   "kraggor": {
+    "mode": "sad",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.3
+   },
+   "net": {
+    "x0": 0.18,
+    "x1": 0.82,
+    "y1": 1.0,
+    "cell": 64
+   },
+   "sfx": [
+    [
+     "kraggor_moan",
+     0.3,
+     0.7
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "cry"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "He came because I asked him to... He trusted me!",
+     "cry"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": -6,
+   "hold": 4.0,
+   "move": {
+    "pan": -3
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.85,
+    "sy": 0.62,
+    "scale": 0.6,
+    "stand": true,
+    "gz": 5.2
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": -6,
+     "speed": 5
+    }
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.1,
+     0.5
+    ],
+    [
+     "engine",
+     2.6,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "siren",
+   "with": "sprinkles",
+   "zoom": 0.7,
+   "move": {
+    "push": 0.2
+   },
+   "emote": {
+    "siren": "angry",
+    "sprinkles": "determined"
+   },
+   "net": {
+    "x0": 0.45,
+    "x1": 0.99,
+    "y1": 0.92,
+    "cell": 64
+   },
+   "kraggor": {
+    "mode": "sad",
+    "sx": 0.88,
+    "sy": 0.62,
+    "scale": 0.5,
+    "stand": true,
+    "gz": 5.2
+   },
+   "lines": [
+    [
+     "siren",
+     "Sprinkles. Step aside.",
+     "angry"
+    ],
+    [
+     "sprinkles",
+     "No.",
+     "determined"
+    ]
+   ]
+  }
+ ]
+}

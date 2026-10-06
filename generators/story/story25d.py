@@ -3340,7 +3340,7 @@ def render_scene(ep, num, aspect):
             draw_lamp(ctx, camx)
         draw_props_layer(ctx, loc, camx, 11, back=True)            # trees first, signs in front of them
         for prop in scene.get("props", []):
-            if prop.get("from_shot", 0) > si:                      # props that appear later (e.g. what falls out of a box)
+            if prop.get("from_shot", 0) > si or prop.get("to_shot", 9999) < si:   # props that appear later / leave (to_shot)
                 continue
             if prop["type"] == "poster":
                 draw_poster(ctx, prop, camx)

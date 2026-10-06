@@ -1,0 +1,291 @@
+{
+ "title": "Scene 15 - The Old Key",
+ "chapter": "The Old Key",
+ "location": "ruins",
+ "theme_location": "countryside",
+ "time": "morning",
+ "weather": "clear",
+ "ambience": "wind",
+ "fog": 0.7,
+ "letterbox": true,
+ "mountains": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 4,
+   "z": 1.4,
+   "face": 1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -5,
+   "z": 2.4,
+   "face": 1,
+   "emo": "normal"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -14,
+   "z": 2.8,
+   "face": 1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -23,
+   "z": 0.6,
+   "face": 1,
+   "emo": "normal"
+  }
+ },
+ "props": [
+  {
+   "type": "speedgate",
+   "x": 30.0,
+   "z": 1.3,
+   "half": 6.4,
+   "open_shot": 4,
+   "open_dt": 0.3,
+   "open_dur": 3.2
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_wonder",
+   "from": 0,
+   "to": 0,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_wonder",
+   "from": 2,
+   "to": 2,
+   "vol": 0.4,
+   "start": 14.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 6,
+   "to": 7,
+   "vol": 0.4,
+   "start": 8.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 17,
+   "lift": 1.4,
+   "hold": 4.6,
+   "cut": "hard",
+   "move": {
+    "pan": 3,
+    "push": 0.04
+   },
+   "caption": "Beyond the mountain. Dawn.",
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.88,
+    "sy": 0.62,
+    "scale": 0.55,
+    "stand": true,
+    "gz": 7
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 12,
+     "speed": 4
+    },
+    "zippy": {
+     "to_x": 3,
+     "speed": 4
+    },
+    "buster": {
+     "to_x": -6,
+     "speed": 4
+    },
+    "rocky": {
+     "to_x": -15,
+     "speed": 4
+    }
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "buster",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "buster": "surprised"
+   },
+   "lines": [
+    [
+     "buster",
+     "I thought this was just a legend...",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 30.0,
+    "z": 1.3,
+    "y": 6.0,
+    "fit": 18.0
+   },
+   "hold": 4.4,
+   "move": {
+    "push": 0.1
+   }
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "buster",
+    "rocky"
+   ],
+   "dx": 8,
+   "hold": 4.2,
+   "move": {
+    "push": 0.04
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 21,
+     "speed": 4
+    },
+    "zippy": {
+     "to_x": 12,
+     "speed": 4
+    },
+    "buster": {
+     "to_x": 3,
+     "speed": 4
+    },
+    "rocky": {
+     "to_x": -6,
+     "speed": 4
+    }
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2,
+     0.4
+    ],
+    [
+     "engine",
+     1.4,
+     0.4
+    ],
+    [
+     "key_click",
+     2.6
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 30.0,
+    "z": 1.3,
+    "y": 5.0,
+    "fit": 22.0
+   },
+   "hold": 6.0,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "gate_creak",
+     0.2
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "zippy",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "zippy": "surprised"
+   },
+   "lines": [
+    [
+     "zippy",
+     "A racetrack... a REAL one.",
+     "whisper"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 12,
+   "move": {
+    "pan": 3
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 36,
+     "speed": 4
+    },
+    "zippy": {
+     "to_x": 27,
+     "speed": 4
+    },
+    "buster": {
+     "to_x": 18,
+     "speed": 4
+    },
+    "rocky": {
+     "to_x": 9,
+     "speed": 4
+    }
+   },
+   "lines": [
+    [
+     "narrator",
+     "Some roads are forgotten... until someone brave enough finds the key.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.2
+   },
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "lines": [
+    [
+     "narrator",
+     "Next Sunday... on MegaWheel Arena: The Forgotten Speedway.",
+     "calm"
+    ]
+   ]
+  }
+ ]
+}

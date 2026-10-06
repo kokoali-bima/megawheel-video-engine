@@ -1,0 +1,306 @@
+{
+ "location": "cave",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "cave",
+ "fog": 0.2,
+ "letterbox": true,
+ "wall_z": 5.0,
+ "beam_x": 10.0,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "title": "Scene 9 - Face to Face",
+ "chapter": "Face to Face",
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 5,
+   "z": 1.4,
+   "face": 1,
+   "emo": "scared"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -4,
+   "z": 2.4,
+   "face": 1,
+   "emo": "scared"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -13,
+   "z": 2.8,
+   "face": 1,
+   "emo": "worried"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -22,
+   "z": 0.6,
+   "face": 1,
+   "emo": "worried"
+  }
+ },
+ "props": [
+  {
+   "type": "treasure",
+   "x": 13.5,
+   "z": 4.2,
+   "n": 10
+  },
+  {
+   "type": "sign",
+   "x": 30.0,
+   "z": 4.4
+  },
+  {
+   "type": "key",
+   "x": 24.0,
+   "z": 3.6
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_tension_cave",
+   "from": 0,
+   "to": 0,
+   "vol": 0.45,
+   "start": 10.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_tension_cave",
+   "from": 3,
+   "to": 3,
+   "vol": 0.45,
+   "start": 24.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 5,
+   "to": 5,
+   "vol": 0.45,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  },
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 7,
+   "to": 7,
+   "vol": 0.45,
+   "start": 14.0,
+   "fade": 1.0,
+   "tail": 1.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 6,
+   "hold": 4.4,
+   "lift": 0.4,
+   "cut": "hard",
+   "move": {
+    "push": 0.04,
+    "pan": 2
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.76,
+    "sy": 0.62,
+    "scale": 0.7,
+    "stand": true,
+    "gz": 5.2
+   },
+   "sfx": [
+    [
+     "breath_big",
+     0.3,
+     0.7
+    ],
+    [
+     "roar",
+     1.6,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "zippy",
+    "buster",
+    "sprinkles"
+   ],
+   "dx": 1.5,
+   "move": {
+    "push": 0.04
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.8,
+    "sy": 0.62,
+    "scale": 0.75,
+    "stand": true,
+    "gz": 5.2
+   },
+   "lines": [
+    [
+     "zippy",
+     "Nobody... is faster than me... nobody is faster than me...",
+     "scared"
+    ],
+    [
+     "buster",
+     "Sprinkles... back up. Slowly.",
+     "worried"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "push": 0.08
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.78,
+    "sy": 0.62,
+    "scale": 1.0,
+    "stand": true,
+    "gz": 5.2
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 9,
+     "speed": 1.5
+    }
+   },
+   "emote": {
+    "sprinkles": "scared"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "H-hi. I'm Sprinkles. I think... you knew my grandpa.",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 4.4,
+   "kraggor": {
+    "mode": "calm",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.25
+   },
+   "sfx": [
+    [
+     "heartbeat",
+     0.3,
+     0.8
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "hold": 3.8,
+   "move": {
+    "push": 0.08
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.78,
+    "sy": 0.62,
+    "scale": 1.0,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "sfx": [
+    [
+     "ding",
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "hold": 4.4,
+   "kraggor": {
+    "mode": "smile",
+    "front": true,
+    "sx": 0.5,
+    "sy": 0.62,
+    "scale": 0.9,
+    "push": 0.2,
+    "wink": 2.4
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "rocky",
+   "move": {
+    "push": 0.08
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.78,
+    "sy": 0.62,
+    "scale": 0.9,
+    "stand": true,
+    "gz": 5.2
+   },
+   "emote": {
+    "rocky": "surprised"
+   },
+   "sfx": [
+    [
+     "breath_big",
+     0.2,
+     0.4
+    ]
+   ],
+   "lines": [
+    [
+     "rocky",
+     "...He remembers.",
+     "whisper"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 30.0,
+    "z": 4.4,
+    "y": 1.9,
+    "fit": 7.5
+   },
+   "hold": 4.6,
+   "move": {
+    "push": 0.15
+   },
+   "claw": {
+    "x": 30.0,
+    "z": 4.4,
+    "y": 1.9,
+    "at": 0.7
+   }
+  }
+ ]
+}
