@@ -2715,6 +2715,16 @@
    "gpu_seconds": 159.2,
    "wall_seconds": 172.7,
    "cost_usd": 0.0502
+  },
+  {
+   "date": "2026-10-06",
+   "note": "scene 3 arena + scene 2 honk",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 357.5,
+   "gpu_seconds": 141.9,
+   "wall_seconds": 129.2,
+   "cost_usd": 0.0445
   }
  ]
 }
