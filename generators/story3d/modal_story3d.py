@@ -208,7 +208,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
 def assemble_remote(ep: str, order: list, joins: list) -> dict:
     import numpy as np
     FPS = 30
-    JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2, hole_hold_s=2.0)
+    JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2, hole_hold_s=3.0)
     t0 = time.time()
     vol.reload()
     fd = f"/vol/final/{ep}"
@@ -229,11 +229,29 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         if j.get("hold", 0) > 0:
             blk = f"{tmp}/black{i}.mp4"
             L = j["dur"] + j["hold"] + j["din"]
-            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"color=black:s=1920x1080:r={FPS}",
-                            "-f", "lavfi", "-i", "anoisesrc=r=48000:color=brown:amplitude=0.02,lowpass=f=180,volume=0.5,"
-                            "aformat=channel_layouts=stereo",          # soft room tone, never digital silence
-                            "-t", f"{L:.3f}", "-c:v", "libx264",
-                            "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", blk], check=True)
+            a0, a1, fd = j["dur"], j["dur"] + j["hold"], 0.35         # card visible a0..a1, soft fade 0.35 s
+            vf = "null"
+            ain = ["-f", "lavfi", "-i", "anoisesrc=r=48000:color=brown:amplitude=0.02,lowpass=f=180,volume=0.5,"
+                   "aformat=channel_layouts=stereo"]                   # soft room tone, never digital silence
+            fc = None
+            if j.get("card"):                                          # J03: 'PART N' + chapter title, with a chime
+                open(f"{tmp}/c{i}a.txt", "w").write(f"{j.get('label', 'PART')} {j['num']}")
+                open(f"{tmp}/c{i}b.txt", "w").write(str(j.get("title", "")))
+                al = f"if(lt(t,{a0}),0,if(lt(t,{a0 + fd}),(t-{a0})/{fd},if(lt(t,{a1 - fd}),1,max(0,({a1}-t)/{fd}))))"
+                dt = ("drawtext=fontfile={f}:textfile={t}:fontcolor={c}:fontsize={s}:x=(w-text_w)/2:y={y}:alpha='{al}'")
+                v1 = dt.format(f=FONT, t=f"{tmp}/c{i}a.txt", c="0xFFD21F", s=150, y="h*0.34", al=al)
+                v2 = dt.format(f=FONT, t=f"{tmp}/c{i}b.txt", c="white", s=72, y="h*0.56", al=al)
+                ms = int((a0 + 0.12) * 1000)
+                fc = (f"[0:v]{v1},{v2}[v];"
+                      f"[2:a]adelay={ms}|{ms},aformat=channel_layouts=stereo[ch];"
+                      f"[1:a]aformat=channel_layouts=stereo[rt];[rt][ch]amix=inputs=2:normalize=0[a]")
+            cmd_ = ["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"color=black:s=1920x1080:r={FPS}"] + ain
+            if fc:                                                     # a soft bell: two tones, tonal (not noise)
+                cmd_ += ["-f", "lavfi", "-i", "aevalsrc='0.22*sin(2*PI*880*t)*exp(-2.6*t)+0.13*sin(2*PI*1320*t)*exp(-3.4*t)"
+                         "+0.07*sin(2*PI*1760*t)*exp(-4.5*t)':s=48000:d=1.6", "-filter_complex", fc,
+                         "-map", "[v]", "-map", "[a]"]
+            cmd_ += ["-t", f"{L:.3f}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", blk]
+            subprocess.run(cmd_, check=True)
             seq += [blk, parts[i + 1]]
             sj += [dict(j, kind="fadeblack", dur=j["dur"]), dict(j, kind="fade", dur=j["din"])]
         else:
