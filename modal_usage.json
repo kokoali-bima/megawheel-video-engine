@@ -2745,6 +2745,16 @@
    "gpu_seconds": 67.5,
    "wall_seconds": 95.1,
    "cost_usd": 0.0172
+  },
+  {
+   "date": "2026-10-06",
+   "note": "scene 4 garage",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 279.6,
+   "gpu_seconds": 89.1,
+   "wall_seconds": 132.4,
+   "cost_usd": 0.0289
   }
  ]
 }
