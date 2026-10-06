@@ -176,8 +176,8 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
@@ -208,8 +208,8 @@
    "sfx": [
     [
      "kraggor_hum_joy",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
@@ -240,8 +240,8 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
@@ -272,8 +272,8 @@
    "sfx": [
     [
      "kraggor_hum_grow",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
@@ -304,8 +304,8 @@
    "sfx": [
     [
      "kraggor_hum_fear",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
@@ -336,8 +336,8 @@
    "sfx": [
     [
      "kraggor_hum_sad",
-     "end+0.15",
-     0.7
+     "end+0.1",
+     0.28
     ]
    ],
    "lines": [
