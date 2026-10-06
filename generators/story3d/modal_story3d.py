@@ -208,7 +208,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
 def assemble_remote(ep: str, order: list, joins: list) -> dict:
     import numpy as np
     FPS = 30
-    JOIN = dict(step_db=8.0, hole_s=1.2)
+    JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2)
     t0 = time.time()
     vol.reload()
     fd = f"/vol/final/{ep}"
@@ -273,13 +273,20 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
             else:
                 run_ = 0.0
         step = abs(la - lb)
-        fails = []
-        if step > JOIN["step_db"]:
-            fails.append(f"lompatan volume {step:.1f} dB")
+        fails, warns = [], []
+        lv = [db(win[q:q + 1600]) for q in range(0, max(0, len(win) - 1600), 1600)]   # 100 ms levels
+        drop = max([lv[q] - lv[q + 1] for q in range(len(lv) - 1) if lv[q] > -40] + [0.0])
+        if drop > JOIN["drop_db"]:
+            fails.append(f"suara terpotong mendadak (turun {drop:.0f} dB dalam 0,1 dtk)")
+        if j["kind"] == "dissolve" and step > JOIN["step_db"]:
+            fails.append(f"lompatan volume {step:.1f} dB di tempat yang sama")
+        elif step > JOIN["step_fade_db"]:
+            warns.append(f"beda level {step:.1f} dB antar scene (cek: kontras disengaja?)")
         if longest >= JOIN["hole_s"]:
             fails.append(f"sunyi bolong {longest:.1f}s")
         rep.append(dict(join=f"{j['a']}->{j['b']}", kind=j["kind"], dur=j["dur"], at=round(tcur, 2),
-                        level_before=round(float(la), 1), level_after=round(float(lb), 1), silence=round(float(longest), 2), fail=fails))
+                        level_before=round(float(la), 1), level_after=round(float(lb), 1), silence=round(float(longest), 2), fail=fails,
+                        warn=warns, drop=round(float(drop), 1)))
     vol.commit()
     data = open(out, "rb").read()
     return dict(ok=True, mp4=data, joins=rep, durs=durs, secs=time.time() - t0)
@@ -315,7 +322,8 @@ def assemble(episode: str, order: str = "", out: str = "work/story3d"):
     bad = [j for j in r["joins"] if j["fail"]]
     for j in r["joins"]:
         print(f"[assemble] sambungan {j['join']} @ {j['at']}s {j['kind']}: {j['level_before']} -> {j['level_after']} dB, "
-              f"sunyi {j['silence']}s {'GAGAL ' + str(j['fail']) if j['fail'] else 'OK'}")
+              f"sunyi {j['silence']}s turun-mendadak {j['drop']}dB {'GAGAL ' + str(j['fail']) if j['fail'] else 'OK'}"
+              + (f" | {j['warn']}" if j['warn'] else ""))
     print(f"[assemble] -> {path} ({sum(r['durs']) / 60:.2f} menit bahan, {r['secs']:.0f}s)")
     if bad:
         raise SystemExit(5)

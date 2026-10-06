@@ -4,8 +4,8 @@ chosen by a fixed rule from the two scenes' JSON, the audio is cross-faded, and 
   rule   time of day or location changes  -> fade through black (1.0 s; audio dips with it)
          same place, same time            -> dissolve (0.6 s; audio cross-fade)
          override per join in stories/<ep>/edit.json: {"story3d": {"order": [1, 2, 3], "joins": {"1-2": ["fadeblack", 1.2]}}}
-  sensor per join: loudness step (1 s before vs after, outside the transition) <= 8 dB, no silence hole >= 1.2 s,
-         a scene's music must not be cut hard (its last 0.3 s must be quieter than its last 1.5 s or silent)
+  sensor per join: FAIL = sound cut abruptly (a > 14 dB drop within 100 ms in the join window), a silence hole
+         >= 1.2 s, or a loudness step > 8 dB inside one place (dissolve); WARN = step > 14 dB across a time jump
 Runs on Modal (CPU 16) from the final scene files kept in the volume (/vol/final/<ep>/scene_NN.mp4):
   venv-modal/bin/modal run generators/story3d/assemble_story3d.py --episode S01E02_who_is_kraggor --order 1,2 \
       --out work/story3d/S01E02_who_is_kraggor
@@ -15,7 +15,7 @@ import os
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 FPS = 30
-JOIN = dict(step_db=8.0, hole_s=1.2)
+JOIN = dict(step_db=8.0, step_fade_db=14.0, drop_db=14.0, hole_s=1.2)   # (mirrored in modal_story3d)
 
 
 def plan_joins(ep, order, overrides):
