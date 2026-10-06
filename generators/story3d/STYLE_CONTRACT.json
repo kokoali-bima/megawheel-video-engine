@@ -326,6 +326,15 @@
     "music_gap_db",
     "music_run_max_s"
    ]
+  },
+  {
+   "id": "J04",
+   "date": "2026-10-07",
+   "note": "Sambungan same-place (dissolve) melompat level 12 dB (13->14) dan tidak punya kartu; J03 berlaku di SETIAP sambungan scene (every_join) agar level & kartu konsisten",
+   "check": "assembly",
+   "keys": [
+    "every_join"
+   ]
   }
  ],
  "lint": {
@@ -401,7 +410,8 @@
    "kind": "fadeblack",
    "card": true,
    "label": "PART",
-   "chime": true
+   "chime": true,
+   "every_join": true
   },
   "same_place": {
    "dur": 0.6,

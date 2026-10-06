@@ -304,6 +304,7 @@
    "emote": {
     "siren": "angry"
    },
+   "hold": 4.4,
    "lines": [
     [
      "siren",

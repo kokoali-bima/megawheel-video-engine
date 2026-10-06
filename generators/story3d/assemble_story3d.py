@@ -25,8 +25,8 @@ def plan_joins(ep, order, overrides):
     for a, b in zip(order[:-1], order[1:]):
         sa = json.load(open(os.path.join(ROOT, "stories", ep, f"scene_{a:02d}.json"), encoding="utf-8"))
         sb = json.load(open(os.path.join(ROOT, "stories", ep, f"scene_{b:02d}.json"), encoding="utf-8"))
-        change = (sa.get("time") != sb.get("time")) or (sa.get("location") != sb.get("location"))
         tj, sp = CONTRACT["time_jump"], CONTRACT["same_place"]     # J01: never rushed across a time jump
+        change = (sa.get("time") != sb.get("time")) or (sa.get("location") != sb.get("location")) or             bool(tj.get("every_join"))                             # J03: EVERY scene join is an episode card
         j = (dict(kind=tj["kind"], dur=tj["out"], hold=tj["hold"], din=tj["in"]) if change else
              dict(kind=sp["kind"], dur=sp["dur"], hold=0.0, din=0.0))
         ov = overrides.get(f"{a}-{b}")
