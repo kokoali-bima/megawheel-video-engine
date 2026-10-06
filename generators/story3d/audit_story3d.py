@@ -23,8 +23,8 @@ import numpy as np
 
 THRESH = dict(
     reproj_px=2.0,            # Godot vs cairo projection of road points (px @1080p): above = road tilts / floats
-    speed_px=70.0,            # camera anchor speed per frame inside a shot (px @1080p) - whips must be marked
-    jerk_px=22.0,             # change of that speed between frames: a visible jolt
+    speed_px=70.0,            # on-screen motion of the actor plane per frame inside a shot (px @1080p)
+    jerk_px=22.0,             # change of that motion between frames: a visible jolt (shake / punch shots exempt)
     diff_spike=5.0,           # frame difference vs the shot median (x): a jump inside a shot
     focus_visible=0.80,       # share of the focus actor box inside the picture
     occlude=0.30,             # share of the focus box covered by a nearer car
@@ -32,7 +32,7 @@ THRESH = dict(
     static_s=7.0,             # a shot longer than this with no camera move and no car moving
     same_cam_run=3,           # this many identical shot sizes in a row
     luma_min=28.0, luma_max=215.0,
-    contrast_min=1.35,        # character vs the background behind it (luma ratio)
+    contrast_min=1.15,        # character vs the background behind it (luma ratio; approved night scene 1 = 1.20)
     shadow_patch=0.22,        # share of the road band much darker than the road median (day only)
     hiss_ratio=0.30,          # energy above 3 kHz in quiet parts (no voice, no effect)
     hiss_level_db=-46.0,      # ...only when the quiet part is louder than this
@@ -70,6 +70,25 @@ def godot_px(S, f, X, Yh, z):
     c, s = math.cos(roll), math.sin(roll)
     xc, yc = c * dx + s * dy, -s * dx + c * dy
     return W / 2 + vx + focal * xc / d, H / 2 + vy - focal * yc / d
+
+
+def screen_motion(S, fa, fb, W, H):
+    """Max on-screen displacement (px) between two frames of the points the viewer looks at: a grid over the central
+    60 % of the picture, taken on the actor plane (lane z = 1). Off-screen points are ignored (calibration 2026-10-06:
+    anchors far outside an ECU flew thousands of px while the picture moved little)."""
+    xx, yx, xy, yy, x0, y0 = fa["m"]
+    det = xx * yy - xy * yx
+    k = S["F"] / (S["D0"] + S["DZ"] * 1.0)
+    out = 0.0
+    for gx in (0.2, 0.35, 0.5, 0.65, 0.8):
+        for gy in (0.3, 0.5, 0.7):
+            qx, qy = gx * W - x0, gy * H - y0
+            px, py = (yy * qx - xy * qy) / det, (-yx * qx + xx * qy) / det
+            X = fa["camx"] + (px - S["CX"]) / k
+            Yh = S["CAM_H"] - (py - S["Y_H"]) / k
+            bx, by = cairo_px(S, fb, X, Yh, 1.0)
+            out = max(out, math.hypot(bx - gx * W, by - gy * H))
+    return out
 
 
 def actor_box(S, f, a):
@@ -155,12 +174,9 @@ def audit_scene(d, mp4):
         js = shot_frames(sh["i"])[2:]
         if len(js) < 4:
             continue
-        f0 = fr[js[0]]
-        anchors = [(f0["camx"] + dx, 0.0, 1.0) for dx in (-6, 0, 6)]
-        pos = np.array([[cairo_px(S, fr[j], *an) for an in anchors] for j in js]) * k1080
-        v = np.linalg.norm(np.diff(pos, axis=0), axis=2).max(axis=1)
+        v = np.array([screen_motion(S, fr[a], fr[b], W, H) for a, b in zip(js[:-1], js[1:])]) * k1080
         jk = np.abs(np.diff(v))
-        whip = bool(sh["move"].get("whip"))
+        whip = bool(sh["move"].get("whip")) or bool({"shake", "punch"} & set(sh["fx"]))
         if len(v):
             worst_v = max(worst_v, float(v.max()))
         if len(jk):

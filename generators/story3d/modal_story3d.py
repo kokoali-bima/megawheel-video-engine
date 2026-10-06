@@ -93,8 +93,10 @@ def world(job: str, num: int, start: int, n: int) -> dict:
            "--write-movie", avi, "--fixed-fps", "30", "--quit-after", str(n), "--", d, str(start)]
     r = subprocess.run(cmd, capture_output=True, text=True, env=env)
     log = r.stdout + r.stderr
-    errs = [ln for ln in log.splitlines() if "SCRIPT ERROR" in ln or "ERROR:" in ln][:8]
-    dev = next((ln.strip() for ln in log.splitlines() if "Vulkan" in ln and "NVIDIA" in ln), "")
+    benign = ('err != VK_SUCCESS',)                             # headless swapchain probe; picture verified OK
+    errs = [ln for ln in log.splitlines() if ("SCRIPT ERROR" in ln or "ERROR:" in ln)
+            and not any(b in ln for b in benign)][:8]
+    dev = next((ln.strip() for ln in log.splitlines() if "Using Device" in ln), "")
     mp4 = f"{d}/world_{start:06d}.mp4"
     if os.path.exists(avi):
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", avi, "-frames:v", str(n), "-c:v", "libx264",
@@ -115,12 +117,18 @@ def compose(job: str, num: int) -> dict:
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{d}/parts.txt",
                     "-c", "copy", f"{d}/world.mp4"], check=True)
     final = f"{d}/scene.mp4"
+    # two-pass loudness (one pass landed at -18.3 LUFS on a scene with long quiet parts, calibration 2026-10-06)
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", f"{d}/audio.wav", "-af",
+                        "loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"],
+                       capture_output=True, text=True)
+    js = json.loads(r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1])
+    ln = (f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={js['input_i']}:measured_TP={js['input_tp']}:"
+          f"measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}:linear=true")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f"{d}/world.mp4", "-i", f"{d}/overlay.mov",
                     "-i", f"{d}/audio.wav", "-filter_complex",
                     "[1:v]setpts=PTS-STARTPTS[o];[0:v]setpts=PTS-STARTPTS[g];[g][o]overlay=eof_action=pass[v]",
                     "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18",
-                    "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
-                    "-shortest", final], check=True)
+                    "-af", ln, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", final], check=True)
     sys.path.insert(0, f"{REMOTE}/generators/story3d")
     import audit_story3d as A
     report = A.audit_scene(d, final)

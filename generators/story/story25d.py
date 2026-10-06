@@ -1673,14 +1673,20 @@ def truck_tune():
 
 
 def heartbeat(beats=4, bpm=72):
+    """lub-dub. 2026-10-06 QA: the 55 Hz thump had 0 % energy in the phone band (inaudible on a phone) -> plus a
+    soft 150-700 Hz knock with harmonics on every beat."""
     gap = 60.0 / bpm
     out = np.zeros(int((beats * gap + 0.4) * se.SR))
+    rng = np.random.default_rng(31)
     for b in range(beats):
         for off, g in ((0.0, 1.0), (0.22, 0.7)):
             i0 = int((b * gap + off) * se.SR)
             L = int(0.18 * se.SR)
             tt = np.arange(L) / se.SR
-            out[i0:i0 + L] += g * np.sin(2 * math.pi * (55 - 20 * tt) * tt) * np.exp(-tt * 22)
+            sub = np.sin(2 * math.pi * (55 - 20 * tt) * tt) * np.exp(-tt * 22)
+            knock = fft_band(rng.normal(0, 1, L), 150, 700) * np.exp(-tt * 40)
+            knock = np.tanh(knock / max(1e-9, np.abs(knock).max()) * 2.0)
+            out[i0:i0 + L] += g * (sub * 0.75 + knock * 0.6)
     return out
 
 
@@ -1722,7 +1728,7 @@ def steps_far():
 def stomp_near():
     """One huge step right here: thud + crack + rattling debris."""
     sr = se.SR
-    st, ks = phone_step(1.0, seed=47), SM.kaiju_step(1.4) * 0.5
+    st, ks = phone_step(1.0, seed=47), SM.kaiju_step(1.4) * 0.25
     st = np.pad(st, (0, max(0, len(ks) - len(st))))
     st[:len(ks)] += ks
     rng = np.random.default_rng(17)
