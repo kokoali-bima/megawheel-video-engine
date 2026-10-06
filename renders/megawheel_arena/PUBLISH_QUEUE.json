@@ -238,37 +238,52 @@
   {
    "episode": 19,
    "video_id": "SIM_LAVA_V2_S021",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-08T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Lava Road! Who Survives? \ud83c\udf0b\ud83d\udd25 | Ep. 19 #Shorts",
+   "upload_started": "2026-10-06T05:00:06.096689+00:00",
+   "url": "https://www.youtube.com/shorts/6YB8aBiEn_o"
   },
   {
    "episode": 15,
    "video_id": "SIM_RACE25D_V2_S007",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-08T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Wildest Race Ever! Who Crosses First? \ud83c\udfc1 | Ep. 15 #Shorts",
+   "upload_started": "2026-10-06T05:00:12.558354+00:00",
+   "url": "https://www.youtube.com/shorts/grvQnQ1E94k"
   },
   {
    "episode": 28,
    "video_id": "SIM_SMASH25D_V4_S014",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-08T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Who Survives the Smash Arena? \ud83d\udca5 | Ep. 28 #Shorts",
+   "upload_started": "2026-10-06T05:00:17.057151+00:00",
+   "url": "https://www.youtube.com/shorts/ZXEi9fG7RZA"
   },
   {
    "episode": 20,
    "video_id": "SIM_SPLASH_V2_S012",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-09T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Slippery Splash Zone! Who Survives? \ud83d\udca6\ud83d\ude97 | Ep. 20 #Shorts",
+   "upload_started": "2026-10-06T05:00:22.372172+00:00",
+   "url": "https://www.youtube.com/shorts/16KM8XY8BCA"
   },
   {
    "episode": 31,
    "video_id": "SIM_RACE25D_V4_S036",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-09T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Zippy Survive the Oil Slick? \ud83c\udfc1 | Ep. 31 #Shorts",
+   "upload_started": "2026-10-06T05:00:27.577821+00:00",
+   "url": "https://www.youtube.com/shorts/vZFKVw21xA8"
   },
   {
    "episode": 29,
