@@ -4,8 +4,8 @@ same because every step is fixed: pinned Godot 4.4.1 + fonts, seeded worlds, cac
        --scenes 2[,3,...] [--upload]
 Steps (stop at the first hard failure):
   1. preflight   VM code == GitHub (git_sync), Modal CLI present, scene files exist and parse
-  2. prepare     VM: every voice line (Chatterbox on Modal, cached + speech-recognition QA) and its lip-sync
-                 (rhubarb, VM only) -> caches; a line without lip-sync stops the run
+  2. prepare     every voice line (Chatterbox on Modal, cached + speech-recognition QA); a line that is not
+                 cached afterwards stops the render (lip-sync is made in the Modal container, rhubarb x86)
   3. render      Modal: characters (CPU) + Godot world (T4 GPU) + compose, all scenes / parts in parallel
   4. QA          sensor report per scene (audit_story3d): PASS / WARN / FAIL -> work/story3d/<ep>/QA_<job>.md
                  FAIL -> exit 5: the agent fixes the scene JSON / engine and runs again (never upload a FAIL)
@@ -50,16 +50,16 @@ def preflight(ep, nums):
 
 
 def prepare(ep, nums, aspect):
+    """Voices only (Chatterbox on Modal, cached, speech-recognition QA). Lip-sync is made in the Modal render
+    container (rhubarb x86, user 2026-10-06), so nothing here depends on the VM's CPU architecture."""
     import story25d as ST
     ST.PREPARE_ONLY = True
+    ST.visemes = lambda audio, text: [(0.0, "X")]                 # mouths are made in the cloud
     ok = True
     for n in nums:
         ST.render_scene(ep, n, aspect)
         P = ST.PREPARED
-        miss = [ln["text"][:40] for ln in P["lines"] if ln["visemes"] == 0]
-        log(f"prepare scene {n:02d}: {len(P['lines'])} kalimat, {P['shots']} shot, {P['total']:.1f}s"
-            + (f", TANPA lip-sync: {miss}" if miss else ""))
-        ok = ok and not miss
+        log(f"prepare scene {n:02d}: {len(P['lines'])} kalimat, {P['shots']} shot, {P['total']:.1f}s")
     ST.PREPARE_ONLY = False
     return ok
 

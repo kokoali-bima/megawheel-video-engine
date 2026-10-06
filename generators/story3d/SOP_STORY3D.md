@@ -17,7 +17,7 @@ venv/bin/python generators/story3d/produce_story3d.py --episode <ep> --scenes 2,
 |---|---|---|
 | 0 | selesai, QA PASS/WARN | baca laporan QA; WARN boleh lanjut tapi catat |
 | 2 | preflight (kode VM ≠ GitHub, file scene rusak) | `git_sync.sh pull` / perbaiki JSON |
-| 3 | suara / lip-sync belum siap | cek log Chatterbox (QA ucapan), ulangi |
+| 3 | suara belum siap | cek log Chatterbox (QA ucapan), ulangi |
 | 4 | render Modal gagal | baca log overlay/world; jangan render di VM sebagai gantinya |
 | 5 | QA FAIL | perbaiki sesuai §5, jalankan lagi. **Jangan pernah unggah FAIL** |
 
@@ -25,8 +25,9 @@ Hasil: `work/story3d/<ep>/<ep>_scene_NN.mp4`, `..._qa.json`, `QA_<job>.md`. `--u
 `ipandu-video/story3d/<ep>/` untuk review user. Biaya tercatat otomatis di `modal_usage.json` (budget $29/bulan).
 
 ## 2. Arsitektur (jangan diubah tanpa persetujuan user)
-1. **prepare (VM)** — semua kalimat → Chatterbox (Modal, cache + QA speech-recognition) → lip-sync rhubarb (VM ARM,
-   cache). Container Modal x86 tidak punya rhubarb; tanpa cache render **berhenti** (tidak turun kualitas diam-diam).
+1. **prepare (VM sebagai pengendali)** — semua kalimat → Chatterbox (Modal GPU, cache + QA speech-recognition).
+   Lip-sync dibuat di container Modal (rhubarb x86 1.13.0, versi sama dengan build VM; cache di volume Modal
+   `/vol/visemes`) — keputusan user 2026-10-06, ±$0,01/episode. VM tidak perlu x86.
 2. **overlay (Modal CPU)** — story25d menggambar tokoh, wajah, mulut, subtitle, caption, letterbox persis seperti
    yang tayang; dunia dihapus; kamera cairo per frame dicatat (`frames.json`).
 3. **world (Modal T4)** — Godot 4.4.1 Forward+ menggambar dunia dari matriks kamera tiap frame (bagian 450 frame paralel).

@@ -28,6 +28,10 @@ OVERHEAD = 1.15
 GODOT_URL = "https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip"
 PART = 450
 FONT = "/root/.fonts/LuckiestGuy-Regular.ttf"
+RHUBARB_URL = ("https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/"
+               "Rhubarb-Lip-Sync-1.13.0-Linux.zip")               # same version as the VM build (1.13.0)
+RHUBARB = "/opt/rhubarb/Rhubarb-Lip-Sync-1.13.0-Linux/rhubarb"
+VIS_VOL = "/vol/visemes"                                       # lip-sync cache shared by all runs (Modal volume)
 
 app = modal.App("megawheel-story3d")
 vol = modal.Volume.from_name("megawheel-story3d", create_if_missing=True)
@@ -45,7 +49,9 @@ def _mounts(img):
 
 cpu_img = _mounts(
     modal.Image.debian_slim(python_version="3.12")
-    .apt_install("ffmpeg", "libcairo2-dev", "pkg-config", "gcc", "fontconfig", "wget")
+    .apt_install("ffmpeg", "libcairo2-dev", "pkg-config", "gcc", "fontconfig", "wget", "unzip")
+    .run_commands(f"wget -q {RHUBARB_URL} -O /tmp/rh.zip && unzip -q /tmp/rh.zip -d /opt/rhubarb && "
+                  f"{RHUBARB} --version")                        # lip-sync in the cloud (user 2026-10-06)
     .pip_install("pycairo>=1.27", "numpy>=2.2,<3", "pymunk>=7", "pillow", "edge-tts")
     .add_local_file(FONT, "/root/.fonts/LuckiestGuy-Regular.ttf", copy=True)   # the aired caption / subtitle font
     .run_commands("fc-cache -f")
@@ -65,7 +71,7 @@ def overlay(job: str, episode: str, num: int, aspect: str) -> dict:
     t0 = time.time()
     out = f"/vol/{job}/s{num:02d}"
     os.makedirs(out, exist_ok=True)
-    env = dict(os.environ, S3D_REMOTE="1", PYTHONUNBUFFERED="1")
+    env = dict(os.environ, S3D_REMOTE="1", PYTHONUNBUFFERED="1", RHUBARB=RHUBARB, S3D_VIS_CACHE=VIS_VOL)
     r = subprocess.run(["python", f"{REMOTE}/generators/story3d/export_overlay.py", "--episode", episode,
                         "--scene", str(num), "--aspect", aspect, "--out", out], capture_output=True, text=True, env=env)
     vol.commit()

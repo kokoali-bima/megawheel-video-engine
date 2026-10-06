@@ -10,7 +10,8 @@ Writes to <out>/:
   scene.json    the scene, the shot table (t0, t1, cam, focus actor, moves), projection constants, theme
   audio.wav     the scene audio (voices, cue-library score, effects, ambience)
   sprites/      kraggor_far.png when a shot has kraggor_far
-Runs on the VM or in a Modal container (S3D_REMOTE=1: voices + visemes MUST already be cached, nothing degrades).
+Runs on the VM or in a Modal container (S3D_REMOTE=1: voices MUST already be cached; lip-sync is made here with
+rhubarb x86 and cached in the Modal volume; nothing degrades silently - a missing voice / mouth / font stops it).
   python generators/story3d/export_overlay.py --episode S01E02_who_is_kraggor --scene 2 --out /tmp/s3d/s02"""
 import argparse
 import json
@@ -55,12 +56,20 @@ def run(episode, scene_no, aspect, out):
                 raise SystemExit(f"[story3d] STOP: {len(miss)} voice line(s) not prepared: {[m[0][:40] for m in miss]}")
             return True
         ST.announcer.prefetch = prefetch
+        vc = os.environ.get("S3D_VIS_CACHE")                    # lip-sync runs here (rhubarb x86, user 2026-10-06);
+        if vc:                                                     # cache in the Modal volume, seeded from the repo
+            os.makedirs(vc, exist_ok=True)
+            seed = os.path.join(ROOT, "work", "voice", "visemes")
+            for fn in (os.listdir(seed) if os.path.isdir(seed) else []):
+                if fn.endswith(".json") and not os.path.exists(os.path.join(vc, fn)):
+                    shutil.copy(os.path.join(seed, fn), os.path.join(vc, fn))
+            ST.VIS_CACHE = vc
         real_vis = ST.visemes
 
         def vis(audio, text):
             r = real_vis(audio, text)
             if not r:
-                raise SystemExit(f"[story3d] STOP: lip-sync not prepared for: {text[:50]}")
+                raise SystemExit(f"[story3d] STOP: lip-sync failed for: {text[:50]} (rhubarb {ST.RHUBARB})")
             return r
         ST.visemes = vis
         del real_prefetch
