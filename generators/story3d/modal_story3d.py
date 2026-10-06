@@ -132,6 +132,9 @@ def compose(job: str, num: int) -> dict:
     sys.path.insert(0, f"{REMOTE}/generators/story3d")
     import audit_story3d as A
     report = A.audit_scene(d, final)
+    ep = job.rsplit("_", 1)[0]                                     # latest render of each scene, for the assembler
+    os.makedirs(f"/vol/final/{ep}", exist_ok=True)
+    subprocess.run(["cp", final, f"/vol/final/{ep}/scene_{num:02d}.mp4"], check=True)
     vol.commit()
     with open(final, "rb") as fh:
         mp4 = fh.read()
@@ -198,3 +201,121 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
     with open(os.path.join(out, f"{job}.json"), "w") as fh:
         json.dump(dict(job=job, reports=reports), fh, indent=1)
     print(f"[story3d] DONE {len(cr)}/{len(nums)} scene(s) in {time.time() - t0:.0f}s wall ≈${cost:.3f} job={job}")
+
+
+# ------------------------------------------------------------------ episode assembly (smooth joins)
+@app.function(image=cpu_img, cpu=16, memory=16384, timeout=3600, volumes={"/vol": vol})
+def assemble_remote(ep: str, order: list, joins: list) -> dict:
+    import numpy as np
+    FPS = 30
+    JOIN = dict(step_db=8.0, hole_s=1.2)
+    t0 = time.time()
+    vol.reload()
+    fd = f"/vol/final/{ep}"
+    parts = [f"{fd}/scene_{n:02d}.mp4" for n in order]
+    miss = [p for p in parts if not os.path.exists(p)]
+    if miss:
+        return dict(ok=False, error=f"scene belum dirender: {miss}")
+
+    def dur(p):
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", p],
+                           capture_output=True, text=True)
+        return float(r.stdout.strip())
+
+    durs = [dur(p) for p in parts]
+    xd = [j["dur"] for j in joins]
+    tmp = "/tmp/asm"
+    os.makedirs(tmp, exist_ok=True)
+    enc = ["-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-r", str(FPS),
+           "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"]
+    pieces = []
+
+    def ff(args, out):
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error"] + args + enc + [out], check=True)
+        pieces.append(out)
+
+    for i, p in enumerate(parts):                                  # body of each scene + one short piece per join
+        head = xd[i - 1] if i > 0 else 0.0
+        tail = xd[i] if i < len(joins) else 0.0
+        ff(["-ss", f"{head:.3f}", "-t", f"{durs[i] - head - tail:.3f}", "-i", p], f"{tmp}/b{i:02d}.mp4")
+        if i < len(joins):
+            d_ = xd[i]
+            ff(["-ss", f"{durs[i] - d_:.3f}", "-t", f"{d_:.3f}", "-i", p, "-t", f"{d_:.3f}", "-i", parts[i + 1],
+                "-filter_complex", f"[0:v][1:v]xfade=transition={joins[i]['kind']}:duration={d_}:offset=0[v];"
+                                   f"[0:a][1:a]acrossfade=d={d_}:c1=tri:c2=tri[a]", "-map", "[v]", "-map", "[a]"],
+               f"{tmp}/x{i:02d}.mp4")
+    with open(f"{tmp}/list.txt", "w") as fh:
+        fh.writelines(f"file '{q}'\n" for q in pieces)
+    out = f"{tmp}/episode.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt",
+                    "-c", "copy", out], check=True)
+    # --- join sensors on the final audio
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", out, "-ac", "1", "-ar", "16000", "-f", "s16le", "-"],
+                         capture_output=True).stdout
+    x = np.frombuffer(raw, np.int16).astype(np.float32) / 32768.0
+    sr = 16000
+
+    def db(seg):
+        return 20 * np.log10(max(1e-9, float(np.sqrt(np.mean(seg ** 2))) if len(seg) else 1e-9))
+
+    rep, tcur = [], 0.0
+    for i, j in enumerate(joins):
+        tcur += durs[i] - xd[i]                                    # join starts here in the episode timeline
+        a0, a1 = tcur - 1.0, tcur
+        b0, b1 = tcur + xd[i], tcur + xd[i] + 1.0
+        la, lb = db(x[int(a0 * sr):int(a1 * sr)]), db(x[int(b0 * sr):int(b1 * sr)])
+        win = x[int((tcur - 0.6) * sr):int((tcur + xd[i] + 0.6) * sr)]
+        hole, run_, longest = 0, 0.0, 0.0
+        for q in range(0, len(win) - 800, 800):                    # 50 ms windows
+            if db(win[q:q + 800]) < -55:
+                run_ += 0.05
+                longest = max(longest, run_)
+            else:
+                run_ = 0.0
+        step = abs(la - lb)
+        fails = []
+        if step > JOIN["step_db"]:
+            fails.append(f"lompatan volume {step:.1f} dB")
+        if longest >= JOIN["hole_s"]:
+            fails.append(f"sunyi bolong {longest:.1f}s")
+        rep.append(dict(join=f"{j['a']}->{j['b']}", kind=j["kind"], dur=j["dur"], at=round(tcur, 2),
+                        level_before=round(la, 1), level_after=round(lb, 1), silence=round(longest, 2), fail=fails))
+    vol.commit()
+    data = open(out, "rb").read()
+    return dict(ok=True, mp4=data, joins=rep, durs=durs, secs=time.time() - t0)
+
+
+@app.local_entrypoint()
+def assemble(episode: str, order: str = "", out: str = "work/story3d"):
+    import sys
+    sys.path.insert(0, HERE)
+    from assemble_story3d import plan_joins
+    ed_p = os.path.join(ROOT, "stories", episode, "edit.json")
+    ed = json.load(open(ed_p, encoding="utf-8")).get("story3d", {}) if os.path.exists(ed_p) else {}
+    nums = [int(v) for v in order.split(",") if v] if order else ed.get("order", [])
+    joins = plan_joins(episode, nums, ed.get("joins", {}))
+    for j in joins:
+        print(f"[assemble] {j['a']:02d}->{j['b']:02d}: {j['kind']} {j['dur']}s ({j['why']})")
+    r = assemble_remote.remote(episode, nums, joins)
+    if not r["ok"]:
+        raise SystemExit(f"[assemble] STOP: {r['error']}")
+    os.makedirs(out, exist_ok=True)
+    tag = "" if not order else "_" + "-".join(f"{n:02d}" for n in nums)
+    path = os.path.join(out, f"{episode}_episode{tag}.mp4")
+    open(path, "wb").write(r["mp4"])
+    chap, t = [], 0.0                                              # YouTube chapters at the middle of each join
+    for i, n in enumerate(nums):
+        sc = json.load(open(os.path.join(ROOT, "stories", episode, f"scene_{n:02d}.json"), encoding="utf-8"))
+        start = 0.0 if i == 0 else t + joins[i - 1]["dur"] / 2
+        if sc.get("chapter"):
+            chap.append(f"{int(start // 60)}:{int(start % 60):02d} {sc['chapter']}")
+        t += r["durs"][i] - (joins[i]["dur"] if i < len(joins) else 0.0)
+    open(path.replace(".mp4", "_chapters.txt"), "w").write("\n".join(chap) + "\n")
+    json.dump(r["joins"], open(path.replace(".mp4", "_joins.json"), "w"), indent=1)
+    bad = [j for j in r["joins"] if j["fail"]]
+    for j in r["joins"]:
+        print(f"[assemble] sambungan {j['join']} @ {j['at']}s {j['kind']}: {j['level_before']} -> {j['level_after']} dB, "
+              f"sunyi {j['silence']}s {'GAGAL ' + str(j['fail']) if j['fail'] else 'OK'}")
+    print(f"[assemble] -> {path} ({sum(r['durs']) / 60:.2f} menit bahan, {r['secs']:.0f}s)")
+    if bad:
+        raise SystemExit(5)

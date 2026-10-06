@@ -86,7 +86,7 @@ def main():
     if not prepare(a.episode, nums, a.aspect):
         log("STOP: persiapan suara / lip-sync belum lengkap")
         sys.exit(3)
-    cmd = [os.path.join(ROOT, "venv-modal", "bin", "modal"), "run", "generators/story3d/modal_story3d.py",
+    cmd = [os.path.join(ROOT, "venv-modal", "bin", "modal"), "run", "generators/story3d/modal_story3d.py::main",
            "--episode", a.episode, "--scenes", a.scenes, "--out", out, "--aspect", a.aspect,
            "--note", a.note or f"story3d {a.episode} {a.scenes}"]
     mlog = os.path.join(out, f"modal_{dt.datetime.now():%Y%m%d_%H%M%S}.log")     # live log: a stuck run is visible
