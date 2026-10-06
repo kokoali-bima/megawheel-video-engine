@@ -2805,6 +2805,16 @@
    "gpu_seconds": 75.9,
    "wall_seconds": 99.6,
    "cost_usd": 0.0247
+  },
+  {
+   "date": "2026-10-06",
+   "note": "RECONSTRUCTED from logs (ledger lines were discarded by a git checkout): S01E02 scenes 5-8 smoke x2 (0.151), render x3 (0.408), voices (~0.08), assemble x3 (~0.15)",
+   "engine": "story3d",
+   "scenes": 0,
+   "cpu_seconds": 0,
+   "gpu_seconds": 0,
+   "wall_seconds": 0,
+   "cost_usd": 0.79
   }
  ]
 }
