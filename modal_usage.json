@@ -3215,6 +3215,26 @@
    "gpu_seconds": 261.4,
    "wall_seconds": 203.0,
    "cost_usd": 0.0828
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_DUNGEON_V2_S005 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 76.9,
+   "wall_seconds": 168.6,
+   "cost_usd": 0.0196
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_DUNGEON_V2_S005 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 42.1,
+   "wall_seconds": 70.4,
+   "cost_usd": 0.0108
   }
  ]
 }
