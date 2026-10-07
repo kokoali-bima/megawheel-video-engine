@@ -4341,6 +4341,37 @@
       "story_episode": 2,
       "approved_date": "2026-10-07",
       "title": "Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2"
+    },
+    {
+      "video_id": "2026-10-07_story15_trailer_e02",
+      "series": "story15_trailer",
+      "engine_version": "story3d",
+      "seed": 2,
+      "created": "2026-10-07",
+      "render_date": "2026-10-07",
+      "vehicles": [
+        "icecream",
+        "sports",
+        "bus",
+        "monster",
+        "police",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "story_e02",
+      "outcomes": [
+        "story15_trailer"
+      ],
+      "duration": null,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02",
+      "audit": "renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02/2026-10-07_story15_trailer_e02_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "story_episode": 2,
+      "publish_at_et": "2026-10-10T17:00"
     }
   ]
 }

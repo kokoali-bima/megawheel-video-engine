@@ -1,0 +1,33 @@
+{
+  "video_id": "2026-10-07_story15_trailer_e02",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "series": "story15_trailer",
+  "story_episode": 2,
+  "engine": "story3d",
+  "title_base": "Who Is Kraggor? 🦖 Full Episode This Sunday!",
+  "title": "Who Is Kraggor? 🦖 Full Episode This Sunday!",
+  "description": "A giant footprint. Yellow eyes in the fog. The whole town is afraid... but Sprinkles remembers a smile. 🦖🍦\nThe full story episode premieres this Sunday on MegaWheel Arena. Turn on notifications! 🔔\n\n#MegaWheelArena #CartoonCars",
+  "tags": [
+    "MegaWheel Arena",
+    "cartoon cars",
+    "animated story",
+    "car cartoon",
+    "ice cream truck",
+    "monster truck",
+    "kaiju",
+    "Kraggor",
+    "Sprinkles",
+    "Grandpa Cone",
+    "school bus",
+    "police car",
+    "cartoon monster",
+    "animated adventure",
+    "friendship story",
+    "animation",
+    "Who is Kraggor"
+  ],
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02/2026-10-07_story15_trailer_e02.mp4",
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), voices Chatterbox TTS (open source) synthetic, theme songs ACE-Step (Apache-2.0)",
+  "publish_at_et": "2026-10-10T17:00",
+  "language": "en-US"
+}
