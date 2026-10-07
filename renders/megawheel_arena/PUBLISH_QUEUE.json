@@ -307,6 +307,13 @@
    "role": "race"
   },
   {
+   "episode": 1502,
+   "video_id": "2026-10-07_story15_trailer_e02",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-10T21:00:00Z",
+   "role": "promo"
+  },
+  {
    "episode": 32,
    "video_id": "SIM_SMASH25D_V5_S002",
    "status": "QUEUED",

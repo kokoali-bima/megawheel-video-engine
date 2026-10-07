@@ -1,6 +1,6 @@
 {
   "video_id": "2026-10-07_story15_trailer_e02",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "series": "story15_trailer",
   "story_episode": 2,
   "engine": "story3d",
@@ -26,8 +26,11 @@
     "animation",
     "Who is Kraggor"
   ],
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02/2026-10-07_story15_trailer_e02.mp4",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/STORY_1502_2026-10-07_story15_trailer/2026-10-07_story15_trailer_e02.mp4",
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), voices Chatterbox TTS (open source) synthetic, theme songs ACE-Step (Apache-2.0)",
   "publish_at_et": "2026-10-10T17:00",
-  "language": "en-US"
+  "language": "en-US",
+  "episode": 1502,
+  "season": 1,
+  "approved_date": "2026-10-07"
 }

@@ -4363,15 +4363,17 @@
         "story15_trailer"
       ],
       "duration": null,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02",
-      "audit": "renders/megawheel_arena/pending/2026-10-07_story15_trailer_e02/2026-10-07_story15_trailer_e02_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/STORY_1502_2026-10-07_story15_trailer",
+      "audit": "renders/megawheel_arena/S01/STORY_1502_2026-10-07_story15_trailer/2026-10-07_story15_trailer_e02_audit.md",
+      "episode": 1502,
+      "season": 1,
       "upload_date": null,
       "youtube_url": null,
       "story_episode": 2,
-      "publish_at_et": "2026-10-10T17:00"
+      "publish_at_et": "2026-10-10T17:00",
+      "approved_date": "2026-10-07",
+      "title": "Who Is Kraggor? 🦖 Full Episode This Sunday!"
     }
   ]
 }
