@@ -1399,45 +1399,52 @@ def draw_chop(ctx, p, camx, t, ref):
         by = gy - bot * k                                          # the cutting edge
         ty = by - 1.7 * k                                          # the top of the head
         ctx.save()
-        iron = (0.36, 0.34, 0.4)
-        ctx.set_line_width(0.07 * k)
-        yy = ty - 0.5 * k                                          # chain up to the ceiling (off the top of the frame)
-        n = 0
-        while yy > -0.6 * k:
-            ctx.save()
-            ctx.translate(sx, yy)
-            ctx.scale(0.2 * k if n % 2 == 0 else 0.1 * k, 0.28 * k)
-            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
-            ctx.restore()
-            ctx.set_source_rgb(*iron)
-            ctx.stroke()
-            yy -= 0.42 * k
-            n += 1
-        se.rrect(ctx, sx - 0.5 * k, ty - 0.55 * k, 1.0 * k, 0.6 * k, 0.1 * k)      # the iron cap on top of the head
-        ctx.set_source_rgb(0.24, 0.22, 0.28)
+        k2 = k * 1.35                                              # a big axe: readable on a phone
+        ty = by - 2.3 * k2                                         # the top of the head
+        haft_top = -0.6 * k
+        se.rrect(ctx, sx - 0.17 * k2, haft_top, 0.34 * k2, ty + 0.6 * k2 - haft_top, 0.08 * k2)   # the wooden haft up to the ceiling
+        hg = cairo.LinearGradient(sx - 0.17 * k2, 0, sx + 0.17 * k2, 0)
+        hg.add_color_stop_rgb(0, 0.36, 0.22, 0.12)
+        hg.add_color_stop_rgb(0.5, 0.62, 0.42, 0.24)
+        hg.add_color_stop_rgb(1, 0.3, 0.18, 0.1)
+        ctx.set_source(hg)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.12, 0.07, 0.04)
+        ctx.set_line_width(0.05 * k2)
+        ctx.stroke()
+        yb = ty - 0.2 * k2
+        while yb > haft_top:                                       # iron bands round the haft
+            ctx.rectangle(sx - 0.2 * k2, yb, 0.4 * k2, 0.1 * k2)
+            ctx.set_source_rgb(0.22, 0.22, 0.3)
+            ctx.fill()
+            yb -= 1.1 * k2
+        se.rrect(ctx, sx - 0.55 * k2, ty - 0.1 * k2, 1.1 * k2, 0.75 * k2, 0.12 * k2)   # the iron hub the blade is forged on
+        ctx.set_source_rgb(0.2, 0.2, 0.28)
         ctx.fill()
-        ctx.move_to(sx - 0.62 * k, ty)                             # the head: narrow at the top, a wide curved edge below
-        ctx.line_to(sx + 0.62 * k, ty)
-        ctx.line_to(sx + 1.2 * k, by - 0.05 * k)
-        ctx.curve_to(sx + 0.6 * k, by + 0.26 * k, sx - 0.6 * k, by + 0.26 * k, sx - 1.2 * k, by - 0.05 * k)
+        ctx.move_to(sx - 0.55 * k2, ty + 0.5 * k2)                 # the crescent blade: wide, horned tips, a curved edge
+        ctx.line_to(sx - 1.55 * k2, by - 0.45 * k2)
+        ctx.line_to(sx - 1.2 * k2, by + 0.1 * k2)                  # left horn
+        ctx.curve_to(sx - 0.6 * k2, by - 0.5 * k2, sx + 0.6 * k2, by - 0.5 * k2, sx + 1.2 * k2, by + 0.1 * k2)
+        ctx.line_to(sx + 1.55 * k2, by - 0.45 * k2)                # right horn
+        ctx.line_to(sx + 0.55 * k2, ty + 0.5 * k2)
         ctx.close_path()
-        g = cairo.LinearGradient(sx - 1.2 * k, 0, sx + 1.2 * k, 0)
+        g = cairo.LinearGradient(sx - 1.5 * k2, 0, sx + 1.5 * k2, 0)
         g.add_color_stop_rgb(0, 0.5, 0.55, 0.63)
-        g.add_color_stop_rgb(0.45, 0.88, 0.9, 0.95)
+        g.add_color_stop_rgb(0.45, 0.9, 0.92, 0.97)
         g.add_color_stop_rgb(1, 0.46, 0.5, 0.58)
         ctx.set_source(g)
         ctx.fill_preserve()
         ctx.set_source_rgb(0.07, 0.07, 0.14)
-        ctx.set_line_width(0.08 * k)
+        ctx.set_line_width(0.08 * k2)
         ctx.stroke()
-        ctx.move_to(sx - 1.1 * k, by + 0.0 * k)                    # a bright edge and two rivets
-        ctx.curve_to(sx - 0.55 * k, by + 0.2 * k, sx + 0.55 * k, by + 0.2 * k, sx + 1.1 * k, by + 0.0 * k)
+        ctx.move_to(sx - 1.15 * k2, by + 0.02 * k2)                # bright edge along the cutting curve
+        ctx.curve_to(sx - 0.6 * k2, by - 0.42 * k2, sx + 0.6 * k2, by - 0.42 * k2, sx + 1.15 * k2, by + 0.02 * k2)
         ctx.set_source_rgb(1, 1, 1)
-        ctx.set_line_width(0.06 * k)
+        ctx.set_line_width(0.07 * k2)
         ctx.stroke()
-        for rx in (-0.28, 0.28):
-            ctx.arc(sx + rx * k, ty + 0.4 * k, 0.07 * k, 0, 2 * math.pi)
-            ctx.set_source_rgb(0.2, 0.2, 0.28)
+        for rx in (-0.3, 0.3):
+            ctx.arc(sx + rx * k2, ty + 0.3 * k2, 0.07 * k2, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.7, 0.7, 0.78)
             ctx.fill()
         a_ = (tau - c["up"] - c["fall"]) / 0.35                    # dust when it lands
         if 0 <= a_ < 1:

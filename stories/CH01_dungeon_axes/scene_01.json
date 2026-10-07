@@ -129,15 +129,6 @@
  "score": [
   {
    "cue": "cue_tension_cave",
-   "from": 0,
-   "to": 0,
-   "vol": 0.38,
-   "start": 6.0,
-   "fade": 0.5,
-   "tail": 0.6
-  },
-  {
-   "cue": "cue_tension_cave",
    "from": 2,
    "to": 2,
    "vol": 0.38,
@@ -151,15 +142,6 @@
    "to": 5,
    "vol": 0.38,
    "start": 11.0,
-   "fade": 0.4,
-   "tail": 0.5
-  },
-  {
-   "cue": "cue_tension_cave",
-   "from": 8,
-   "to": 8,
-   "vol": 0.38,
-   "start": 16.0,
    "fade": 0.4,
    "tail": 0.5
   },

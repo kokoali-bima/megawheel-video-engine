@@ -74,7 +74,7 @@ func _ready() -> void:
 		_environment_interior(Color(0.3, 0.38, 0.55), 0.45)
 		_cave()
 	elif loc0 == "dungeon":
-		_environment_interior(Color(0.5, 0.44, 0.55), 0.55)
+		_environment_interior(Color(0.62, 0.55, 0.68), 0.85)
 		_dungeon()
 	else:
 		_environment()
@@ -950,7 +950,7 @@ func _dungeon() -> void:
 	var back = float(S["scene"].get("wall_z", 5.2))
 	var zf = dist(back)
 	var zn = dist(-0.6)
-	box(Vector3(360, 0.3, zf - zn + 8), Vector3(40, -0.15, -(zf + zn) / 2),
+	box(Vector3(360, 0.3, zf + 14.0), Vector3(40, -0.15, (14.0 - zf) / 2),        # far wall .. behind the camera (9:16 looks steeply down)
 		_tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 90.0, 6.0, 4))                   # the floor
 	box(Vector3(360, 16, 0.6), Vector3(40, 8, -zf - 0.3),
 		_tiled(Color(0.38, 0.32, 0.3), Color(0.14, 0.12, 0.12), 90.0, 8.0, 9))                    # the brick wall
@@ -986,8 +986,8 @@ func _dungeon() -> void:
 		add_child(fl)
 		var ol = OmniLight3D.new()
 		ol.light_color = Color(1.0, 0.62, 0.28)
-		ol.light_energy = 2.4
-		ol.omni_range = 11.0
+		ol.light_energy = 3.4
+		ol.omni_range = 13.0
 		ol.position = Vector3(x, 3.9, -zf + 1.6)
 		add_child(ol)
 		torches.append([ol, float(q) * 1.7])
@@ -1753,7 +1753,7 @@ func _process(_d: float) -> void:
 					var fall = 40.0 - 4.9 * ud * ud * 4.0
 					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
 	for tq in torches:                                       # dungeon torches flicker
-		tq[0].light_energy = 2.3 + 0.5 * sin(t * 13.0 + float(tq[1])) + 0.3 * sin(t * 29.0 + float(tq[1]) * 2.0)
+		tq[0].light_energy = 3.2 + 0.6 * sin(t * 13.0 + float(tq[1])) + 0.4 * sin(t * 29.0 + float(tq[1]) * 2.0)
 	for gt in gates:                                         # the speedway gate swings open (ease in-out)
 		var u3 = clampf((t - float(shot_t0.get(int(gt[2]), 1.0e9)) - float(gt[3])) / float(gt[4]), 0.0, 1.0)
 		var e3 = u3 * u3 * (3.0 - 2.0 * u3)

@@ -116,7 +116,7 @@ def build(cast):
     # a decorative axe rhythm in the cold open (own prop, its rhythm measured from shot 0)
     props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": 0, "to_shot": 0, "ref_shot": 0})
     # A10 (new sound style): music only on the tense runs and the win - a low pulsing dungeon cue, never a carpet
-    score = [{"cue": "cue_tension_cave", "from": 0, "to": 0, "vol": 0.38, "start": 6.0, "fade": 0.5, "tail": 0.6}]
+    score = []
     for lv, (vk, (sp, delay, hit)) in enumerate(zip(cast, runs)):
         b = len(shots)
         col = LEVEL_COLORS[lv]
@@ -157,8 +157,9 @@ def build(cast):
         shots.append(res)
         props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": b, "to_shot": b + 2,
                       "ref_shot": b + 1})
-        score.append({"cue": "cue_tension_cave", "from": b + 1, "to": b + 1, "vol": 0.38, "start": 6.0 + 5.0 * lv,
-                      "fade": 0.4, "tail": 0.5})                    # the run: a pulsing low cue builds the tension
+        if hit:                                                     # a fail run: a pulsing low cue builds the tension
+            score.append({"cue": "cue_tension_cave", "from": b + 1, "to": b + 1, "vol": 0.38, "start": 6.0 + 5.0 * lv,
+                          "fade": 0.4, "tail": 0.5})
         if not hit:                                                 # the win: the heroic cue under the badge and the CTA
             score.append({"cue": "cue_heroic_stand", "from": b + 2, "to": b + 2, "vol": 0.45, "start": 0.0, "fade": 0.4,
                           "tail": 0.8})
