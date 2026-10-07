@@ -971,6 +971,12 @@ func _process(_d: float) -> void:
 		dmg = 0.0
 		dmg_target = 0.0
 		burn = 0.0
+		smoke.emitting = false                                # clear the soot / fire left over from the previous level:
+		smoke.restart()                                       # their particles follow the car and showed as a black dot
+		smoke.emitting = false
+		fire.emitting = false
+		fire.restart()
+		fire.emitting = false
 		for a_ in axe_fx:
 			a_["slam"] = -1
 		for o_ in ogre_fx:
