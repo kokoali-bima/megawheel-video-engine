@@ -3065,6 +3065,16 @@
    "gpu_seconds": 74.4,
    "wall_seconds": 103.8,
    "cost_usd": 0.019
+  },
+  {
+   "date": "2026-10-07",
+   "note": "story3d SMOKE CH01_dungeon_axes 1",
+   "engine": "story3d (smoke)",
+   "scenes": 1,
+   "cpu_seconds": 604.5,
+   "gpu_seconds": 67.3,
+   "wall_seconds": 122.0,
+   "cost_usd": 0.0288
   }
  ]
 }
