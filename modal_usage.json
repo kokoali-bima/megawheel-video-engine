@@ -3055,6 +3055,16 @@
    "gpu_seconds": 50.6,
    "wall_seconds": 214.3,
    "cost_usd": 0.0129
+  },
+  {
+   "date": "2026-10-07",
+   "note": "story CH01_dungeon_axes#1 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 7,
+   "gpu_seconds": 74.4,
+   "wall_seconds": 103.8,
+   "cost_usd": 0.019
   }
  ]
 }
