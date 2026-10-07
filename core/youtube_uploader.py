@@ -108,7 +108,8 @@ class YouTubeUploader:
         privacy_status: str = "unlisted",  # 'unlisted', 'private', 'public'
         made_for_kids: bool = False,  # general-audience channel (BLUEPRINT rule 7)
         publish_at: Optional[str] = None,  # ISO-8601 UTC ("2026-10-01T15:00:00Z"): YouTube publishes it then
-        shorts: bool = True  # False for long-form episodes (story15): no #Shorts added
+        shorts: bool = True,  # False for long-form episodes (story15): no #Shorts added
+        thumbnail_path: Optional[str] = None  # custom thumbnail (jpg/png < 2 MB); never fails the upload
     ) -> Dict[str, Any]:
         """
         Upload a Shorts video to YouTube with resumable chunking.
@@ -170,6 +171,14 @@ class YouTubeUploader:
                 logger.info(f"Uploaded {int(status.progress() * 100)}%")
 
         video_id = response.get("id")
+        if thumbnail_path and os.path.exists(thumbnail_path):
+            try:
+                ext = os.path.splitext(thumbnail_path)[1].lower()
+                youtube.thumbnails().set(videoId=video_id, media_body=MediaFileUpload(
+                    thumbnail_path, mimetype="image/png" if ext == ".png" else "image/jpeg")).execute()
+                logger.info("Custom thumbnail set")
+            except Exception as ex:           # needs a verified channel: report, never fail the upload
+                logger.warning(f"Thumbnail NOT set ({ex}); set it by hand in YouTube Studio")
         video_url = f"https://www.youtube.com/shorts/{video_id}"
         logger.info(f"Upload successful! Video ID: {video_id} -> {video_url}")
 

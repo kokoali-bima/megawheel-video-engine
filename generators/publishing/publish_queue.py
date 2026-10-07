@@ -197,7 +197,8 @@ def upload(max_n):
                                          description=episodes.with_credit(m["description"]), tags=m["tags"],
                                          category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
                                          made_for_kids=False, publish_at=it["publish_at_utc"],
-                                         shorts=role_of(e.get("series", "")) != "long")
+                                         shorts=role_of(e.get("series", "")) != "long",
+                                         thumbnail_path=m.get("thumbnail"))
         except Exception as ex:                                  # stop the run; the next run checks YouTube first
             print(f"[queue] STOP: upload Ep. {it['episode']} gagal ({ex}). Item tetap UPLOADING; run berikutnya "
                   f"mengecek channel dulu (tidak upload ulang tanpa cek).", flush=True)

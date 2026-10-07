@@ -43,7 +43,7 @@ def meta_trailer(story_ep):
     return title, desc
 
 
-def register(series, story_ep, video, title, desc, extra):
+def register(series, story_ep, video, title, desc, extra, tags=None, engine="story25d"):
     date = time.strftime("%Y-%m-%d")
     name = f"{date}_{series}_e{story_ep:02d}"
     folder_rel = f"renders/megawheel_arena/pending/{name}"
@@ -54,7 +54,7 @@ def register(series, story_ep, video, title, desc, extra):
     out = f"{folder}/{name}.mp4"
     shutil.copy2(video, out)
     manifest = dict(video_id=name, status="RENDERED_PENDING_APPROVAL", series=series, story_episode=story_ep,
-                    engine="story25d", title_base=title, title=title, description=desc, tags=TAGS,
+                    engine=engine, title_base=title, title=title, description=desc, tags=tags or TAGS,
                     video_path=out, assets="100% procedurally generated (cairo 2.5D render + synthesized audio), "
                     "voices Chatterbox TTS (open source) synthetic, theme songs ACE-Step (Apache-2.0)", **extra)
     with open(f"{folder}/{name}.json", "w") as fh:
@@ -62,7 +62,7 @@ def register(series, story_ep, video, title, desc, extra):
     with open(f"{folder}/{name}_audit.md", "w") as fh:
         fh.write(f"# {name}\n\nStory episode {story_ep} ({series}). Audit: generators/story/audit_story.py (0 ERROR "
                  f"before render). Review drafts on Drive review/story_S01E{story_ep:02d}/.\n")
-    registry.upsert(dict(video_id=name, series=series, engine_version="story25d", seed=story_ep, created=date,
+    registry.upsert(dict(video_id=name, series=series, engine_version=engine, seed=story_ep, created=date,
                          render_date=date, vehicles=["icecream", "sports", "bus", "monster", "police", "taxi", "f1"],
                          track_id=f"story_e{story_ep:02d}", outcomes=[series], duration=None,
                          status="RENDERED_PENDING_APPROVAL", folder=folder_rel, audit=f"{folder_rel}/{name}_audit.md",
@@ -77,7 +77,27 @@ def main():
     ap.add_argument("--episode", required=True)
     ap.add_argument("--story-ep", type=int, required=True)
     ap.add_argument("--trailer-at", help="ET, e.g. 2026-10-03T17:00 (extra fixed slot)")
+    ap.add_argument("--meta", help="story3d episodes: stories/<ep>/publish.json (title, description with {chapters}, tags, "
+                                   "language) - needs --video and --chapters")
+    ap.add_argument("--video", help="the final episode mp4 (story3d)")
+    ap.add_argument("--chapters", help="the assembler's _chapters.txt (story3d)")
+    ap.add_argument("--thumb", help="thumbnail jpg/png (< 2 MB), copied next to the video and set on upload")
     a = ap.parse_args()
+    if a.meta:                                                    # story3d (S01E02+): everything from publish.json
+        pub = json.load(open(os.path.join(BASE, a.meta) if not os.path.isabs(a.meta) else a.meta, encoding="utf-8"))
+        chapters = open(a.chapters, encoding="utf-8").read().strip()
+        extra = {"language": pub.get("language", "en-US")}
+        name = register("story15", a.story_ep, a.video, pub["title"], pub["description"].replace("{chapters}", chapters),
+                        extra, tags=pub["tags"], engine="story3d")
+        if a.thumb:
+            dst = f"{BASE}/renders/megawheel_arena/pending/{name}/{name}_thumb{os.path.splitext(a.thumb)[1]}"
+            shutil.copy2(a.thumb, dst)
+            mp = f"{BASE}/renders/megawheel_arena/pending/{name}/{name}.json"
+            m = json.load(open(mp, encoding="utf-8"))
+            m["thumbnail"] = dst
+            json.dump(m, open(mp, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+            print(f"[story] thumbnail -> {dst}")
+        return
     wd = f"{BASE}/work/story/{a.episode}"
     with open(f"{wd}/{a.episode}_h_chapters.txt") as fh:
         chapters = fh.read()
