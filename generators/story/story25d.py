@@ -1474,6 +1474,9 @@ def ballistic(tau, vx, vy, g, turns, h0=0.0):
     return dx + vx * 0.4 * tl2 + vx * 0.15 * min(t2 - tl2, 0.5), 0.0, 2 * math.pi * turns
 
 
+_draw_actor_raw = draw_actor                                         # unpatched: the 2nd (clipped) pass must not be recorded twice
+
+
 def draw_actor_fx(ctx, a, t, camx):
     """A tumbling car (rot) and/or a crumpled end: the struck end telescopes in straight lines (rigid metal, owner rule),
     a dark crease + scratches mark the dent. crumple = {"end": +1|-1 (world +x end), "amt": 0..1}."""
@@ -1503,7 +1506,9 @@ def draw_actor_fx(ctx, a, t, camx):
                 ctx.translate(bnd, 0)
                 ctx.scale(1 - 0.55 * amt, 1)
                 ctx.translate(-bnd, 0)
-            draw_actor(ctx, a, t, camx)
+                _draw_actor_raw(ctx, a, t, camx)
+            else:
+                draw_actor(ctx, a, t, camx)
             ctx.restore()
         z0 = gy - (a["h"] + 0.35) * k                               # the crease: straight zig-zag across the body
         pts = [(bnd, z0 - 1.9 * k), (bnd + e * 0.35 * amt * k, z0 - 1.4 * k), (bnd - e * 0.15 * k, z0 - 0.9 * k),
