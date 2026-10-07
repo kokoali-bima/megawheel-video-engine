@@ -1531,7 +1531,7 @@ def draw_actor_fx(ctx, a, t, camx):
     ctx.restore()
 
 
-LAVA_NEAR_Z, LAVA_FAR_Z = 0.5, 2.4                                  # the pit stripe in the floor (Godot reads scene "lava_z")
+LAVA_NEAR_Z, LAVA_FAR_Z = -0.2, 3.6                                 # the pit stripe in the floor (Godot reads scene "lava_z")
 
 
 def draw_lava(ctx, p, camx, t):

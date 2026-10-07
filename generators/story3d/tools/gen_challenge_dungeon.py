@@ -137,7 +137,7 @@ def build(cast):
                   "hud": {"title": "CARS VS THE DUNGEON!", "tag": "NEW 3D GRAPHICS!"}, "sfx": [["chain_rattle", 0.2, 0.7]],
                   "lines": [L("announcer", "An axe, a lava pit and an angry ogre! Who will survive the dungeon?")]})
     props.append({"type": "lava", "pits": [list(PIT)], "z": 1.4, "from_shot": 0, "to_shot": 99})
-    props.append({"type": "ogre", "x": OGRE_X, "z": 0.7, "face": -1, "scale": 1.0, "slams": [], "from_shot": 0, "to_shot": 0,
+    props.append({"type": "ogre", "x": OGRE_X, "z": 0.7, "face": -1, "scale": 1.35, "slams": [], "from_shot": 0, "to_shot": 0,
                   "ref_shot": 0})
     props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": 0, "to_shot": 0, "ref_shot": 0})
     for lv, (vk, (sp, delay, hit)) in enumerate(zip(cast, runs)):
@@ -149,7 +149,7 @@ def build(cast):
         if prev:
             intro_moves[prev] = {"show": False}
         trap = ["Watch out for the axe!", "Lava ahead!", "The ogre is awake!", "Axe, lava and the ogre!"][lv]
-        shots.append({"cam": "wide", "zoom": 0.55, "dx": 12, "hold": 2.6, "cut": "hard", "moves": intro_moves, "move": {"pan": 2},
+        shots.append({"cam": "wide", "zoom": 0.8, "dx": 9, "hold": 2.6, "cut": "hard", "moves": intro_moves, "move": {"pan": 2},
                       "hud": dict(hud, who="WHO WILL MAKE IT?") if lv == 0 else hud, "sfx": [["engine", 0.3, 0.5]],
                       "lines": [L("announcer2", (f"Level {LV[lv]}! " if lv < 3 else "Final level! ") +
                                   f"{NICK[vk]} the {KIND[vk]}! {trap}")]})
@@ -183,7 +183,7 @@ def build(cast):
             main = hit is not None and i == hit[0] and abs(t - hit[1]) < 0.45
             sfx.append(["chop_slam", max(0.0, t), 0.9 if main else 0.35])
             sfx.append(["chop_whoosh", max(0.0, t - 0.2), 0.3])
-        shots.append({"cam": "track", "on": vk, "dx": 5.0, "zoom": 1.05, "hold": round(t_end, 2), "interrupt": True,
+        shots.append({"cam": "track", "on": vk, "dx": 4.5, "zoom": 1.35, "hold": round(t_end, 2), "interrupt": True,
                       "speedlines": True, "move": {"push": 0.05}, "moves": {vk: moves}, "hud": hud, "sfx": sfx})
         res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 3.8, "move": {"push": 0.06}}
         if lv == 0:                                                  # the axe squashes the bus
@@ -204,7 +204,7 @@ def build(cast):
             res["impacts"] = [{"at": 0.45, "x": fall_x, "h": 0.0, "kind": "splash", "word": "SPLASH!", "size": 1.1, "shake": 16},
                               {"at": pop + tl, "x": land_x, "h": 0.3, "kind": "land", "shake": 12}]
             res["hud"] = dict(hud, badge="fail", badge_at=0.5, bubbles=[[pop + tl, "HOT HOT HOT!", vk]])
-            res["sfx"] = [["fall_whistle", 0.0, 0.8], ["lava_splash", 0.4, 1.0], ["car_boing", pop + tl, 0.8]]
+            res["sfx"] = [["fall_whistle", 0.0, 0.5], ["lava_splash", 0.4, 0.6], ["car_boing", pop + tl, 0.8]]
             res["lines"] = [L("announcer", f"Splash! {NICK[vk]} fell into the lava!")]
         elif lv == 2:                                                # smashed up into the air
             vx, vy, g = -2.2, 13.0, 24.0
@@ -228,7 +228,7 @@ def build(cast):
         shots.append(res)
         props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": b, "to_shot": b + 2,
                       "ref_shot": b + 1})
-        props.append({"type": "ogre", "x": OGRE_X, "z": 0.7, "face": -1, "scale": 1.0,
+        props.append({"type": "ogre", "x": OGRE_X, "z": 0.7, "face": -1, "scale": 1.35,
                       "slams": [round(slam_ogre, 3)] if slam_ogre is not None else [], "from_shot": b, "to_shot": b + 2,
                       "ref_shot": b + 1})
         if lv in (1, 2):                                             # A10: music only on tense fail runs and the win
@@ -241,7 +241,7 @@ def build(cast):
         "title": "CHALLENGE - Cars VS The Dungeon", "chapter": "Cars VS The Dungeon", "location": "dungeon",
         "theme_location": "city", "time": "night", "weather": "clear", "ambience": "cave", "fog": 0.15, "letterbox": False,
         "edge_fade": False, "gap": 0.35, "tail": 0.6, "wall_z": 5.2, "exit_x": FINISH_X + 6.0, "finish": FINISH_X,
-        "lava": [list(PIT)], "lava_z": [0.5, 2.4], "actors": actors, "props": props, "score": score, "shots": shots}
+        "lava": [list(PIT)], "lava_z": [-0.2, 3.6], "actors": actors, "props": props, "score": score, "shots": shots}
 
 
 def main():

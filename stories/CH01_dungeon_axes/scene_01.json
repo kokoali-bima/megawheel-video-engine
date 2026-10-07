@@ -21,8 +21,8 @@
   ]
  ],
  "lava_z": [
-  0.5,
-  2.4
+  -0.2,
+  3.6
  ],
  "actors": {
   "bus": {
@@ -76,7 +76,7 @@
    "x": 48.0,
    "z": 0.7,
    "face": -1,
-   "scale": 1.0,
+   "scale": 1.35,
    "slams": [],
    "from_shot": 0,
    "to_shot": 0,
@@ -113,7 +113,7 @@
    "x": 48.0,
    "z": 0.7,
    "face": -1,
-   "scale": 1.0,
+   "scale": 1.35,
    "slams": [],
    "from_shot": 1,
    "to_shot": 3,
@@ -137,7 +137,7 @@
    "x": 48.0,
    "z": 0.7,
    "face": -1,
-   "scale": 1.0,
+   "scale": 1.35,
    "slams": [],
    "from_shot": 4,
    "to_shot": 6,
@@ -161,7 +161,7 @@
    "x": 48.0,
    "z": 0.7,
    "face": -1,
-   "scale": 1.0,
+   "scale": 1.35,
    "slams": [
     3.952
    ],
@@ -187,7 +187,7 @@
    "x": 48.0,
    "z": 0.7,
    "face": -1,
-   "scale": 1.0,
+   "scale": 1.35,
    "slams": [
     4.158
    ],
@@ -256,8 +256,8 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.55,
-   "dx": 12,
+   "zoom": 0.8,
+   "dx": 9,
    "hold": 2.6,
    "cut": "hard",
    "moves": {
@@ -306,8 +306,8 @@
   {
    "cam": "track",
    "on": "bus",
-   "dx": 5.0,
-   "zoom": 1.05,
+   "dx": 4.5,
+   "zoom": 1.35,
    "hold": 1.22,
    "interrupt": true,
    "speedlines": true,
@@ -453,8 +453,8 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.55,
-   "dx": 12,
+   "zoom": 0.8,
+   "dx": 9,
    "hold": 2.6,
    "cut": "hard",
    "moves": {
@@ -505,8 +505,8 @@
   {
    "cam": "track",
    "on": "sports",
-   "dx": 5.0,
-   "zoom": 1.05,
+   "dx": 4.5,
+   "zoom": 1.35,
    "hold": 2.99,
    "interrupt": true,
    "speedlines": true,
@@ -631,12 +631,12 @@
     [
      "fall_whistle",
      0.0,
-     0.8
+     0.5
     ],
     [
      "lava_splash",
      0.4,
-     1.0
+     0.6
     ],
     [
      "car_boing",
@@ -654,8 +654,8 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.55,
-   "dx": 12,
+   "zoom": 0.8,
+   "dx": 9,
    "hold": 2.6,
    "cut": "hard",
    "moves": {
@@ -706,8 +706,8 @@
   {
    "cam": "track",
    "on": "firetruck",
-   "dx": 5.0,
-   "zoom": 1.05,
+   "dx": 4.5,
+   "zoom": 1.35,
    "hold": 3.95,
    "interrupt": true,
    "speedlines": true,
@@ -893,8 +893,8 @@
   },
   {
    "cam": "wide",
-   "zoom": 0.55,
-   "dx": 12,
+   "zoom": 0.8,
+   "dx": 9,
    "hold": 2.6,
    "cut": "hard",
    "moves": {
@@ -945,8 +945,8 @@
   {
    "cam": "track",
    "on": "f1",
-   "dx": 5.0,
-   "zoom": 1.05,
+   "dx": 4.5,
+   "zoom": 1.35,
    "hold": 5.53,
    "interrupt": true,
    "speedlines": true,
