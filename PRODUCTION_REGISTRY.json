@@ -4376,6 +4376,41 @@
       "title": "Who Is Kraggor? 🦖 Full Episode This Sunday!",
       "drive_id": "1x_eUZ_GL8ES-ynyf-WEKrvbnTQAoJ-uv",
       "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1502_2026-10-07_story15_trailer_e02.mp4"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S015",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 15,
+      "created": "2026-10-07",
+      "render_date": "2026-10-07",
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "police"
+      ],
+      "track_id": "dungeon_498bf7de@noon-clear-volcano",
+      "theme": "noon-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs1+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 49.3,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-07_dungeon_s015",
+      "audit": "renders/megawheel_arena/pending/2026-10-07_dungeon_s015/SIM_DUNGEON_V2_S015_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "render3d": true,
+      "drive_id": "1oOXe7uVV25jRrEqtnmKlakkdRdofTync",
+      "drive_sheet_id": "12sx-_O0dfcebEIVAMB5-rjJyBbj5A7x3",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S015.mp4"
     }
   ]
 }
