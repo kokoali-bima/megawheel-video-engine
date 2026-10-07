@@ -114,7 +114,7 @@ SERIES_DEFS = {
     # user 2026-10-07: a NEW obstacle type (never used before) in the lava format: giant dungeon axes + an angry ogre
     # + a launch ramp over a lava pit; same 3-level story, same slow-mo, same narration (graphics come from godot3d)
     "dungeon": dict(title="CARS VS THE DUNGEON!", obst="deadly dungeon traps", max_fail=20.0, max_win=26.0,
-                    win_pool="any", signature="dungeon", force_theme=dict(location="volcano", weather="clear"),
+                    win_pool="any", signature="melt", force_theme=dict(location="volcano", weather="clear"),
                     fail_lines={"chop": "Chop! {n} got squashed by a giant axe!",
                                 "smash": "Smash! The ogre sent {n} flying!",
                                 "pit": "Oh no! {n} fell into the lava and is melting!"},
@@ -344,13 +344,13 @@ def axe_bottom(ax, t):
 
 def make_dungeon_track(seed):
     """Dungeon road (lava format: 5 hazards of rising difficulty, first one after the intro narration, finish ~100 m):
-    axe -> ogre -> axe -> launch ramp + wide lava pit -> axe."""
+    axe -> ogre -> launch ramp + wide lava pit -> axe -> axe."""
     global AXES, OGRES, RAMPS, RAMP, PITS, PIT_KIND, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, \
         FINISH_X, OBST_SPANS
     r = np.random.default_rng(9000 + seed)
     PIT_KIND = "lava"
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(40, 45)))                        # first hazard after the intro narration (events need >= ~6 s)
+    tb.flat(float(r.uniform(36, 41)))                        # first hazard after the intro narration (events need >= ~6 s)
     spans, obst, danger = [], [], []
 
     def axe():
@@ -387,10 +387,10 @@ def make_dungeon_track(seed):
     axe()
     tb.flat(float(r.uniform(8, 10)))
     ogre()
-    tb.flat(float(r.uniform(8, 10)))
-    axe()
-    tb.flat(float(r.uniform(9, 11)))
+    tb.flat(float(r.uniform(7, 9)))
     pit(round(float(r.uniform(6.5, 8.5)), 1), 4.5, ramp=(round(float(r.uniform(5, 6.5)), 1), round(float(r.uniform(1.2, 1.6)), 2)))
+    tb.flat(float(r.uniform(9, 11)))
+    axe()
     tb.flat(float(r.uniform(9, 11)))
     axe()
     tb.flat(12.0)
