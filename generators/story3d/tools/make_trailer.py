@@ -86,7 +86,7 @@ def main():
     # end card: dark gradient + text, appended with a fade
     card = (f"color=c=0x120a2a:s=1080x1920:r=30:d={END_HOLD},format=yuv420p,setsar=1,"
             f"drawtext=fontfile={FONT}:text='WHO IS':fontcolor=0xFFD21F:fontsize=150:borderw=8:bordercolor=black:x=(w-text_w)/2:y=520,"
-            f"drawtext=fontfile={FONT}:text='KRAGGOR?':fontcolor=white:fontsize=210:borderw=10:bordercolor=black:x=(w-text_w)/2:y=690,"
+            f"drawtext=fontfile={FONT}:text='KRAGGOR?':fontcolor=white:fontsize=185:borderw=10:bordercolor=black:x=(w-text_w)/2:y=690,"
             f"drawtext=fontfile={FONT}:text='STORY EP. 2':fontcolor=0xFF8A1F:fontsize=96:borderw=6:bordercolor=black:x=(w-text_w)/2:y=1000,"
             f"drawtext=fontfile={FONT}:text='FULL EPISODE THIS SUNDAY':fontcolor=white:fontsize=72:borderw=5:bordercolor=black:x=(w-text_w)/2:y=1220,"
             f"drawtext=fontfile={FONT}:text='1 PM ET · 10 AM PT':fontcolor=0xFFD21F:fontsize=78:borderw=5:bordercolor=black:x=(w-text_w)/2:y=1330,"
@@ -99,7 +99,8 @@ def main():
     for _, _, d, cap in CLIPS:
         tf = os.path.join(out, f"cap_{len(dt)}.txt")
         open(tf, "w", encoding="utf-8").write(cap.replace("'", "’"))
-        dt.append(f"drawtext=fontfile={FONT}:textfile={tf}:fontcolor=white:fontsize=78:borderw=7:bordercolor=black:"
+        fs = min(78, int(960 / (0.58 * len(cap))))                  # Luckiest Guy ~0.58 em per letter: fit 960 px
+        dt.append(f"drawtext=fontfile={FONT}:textfile={tf}:fontcolor=white:fontsize={fs}:borderw=7:bordercolor=black:"
                   f"x=(w-text_w)/2:y=1330:enable='between(t,{t + 0.15:.2f},{t + d - 0.1:.2f})'")
         t += d
     head = (f"drawtext=fontfile={FONT}:text='NEW STORY EPISODE':fontcolor=0xFFD21F:fontsize=64:borderw=5:bordercolor=black:"
