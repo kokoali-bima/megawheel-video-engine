@@ -3075,6 +3075,16 @@
    "gpu_seconds": 67.3,
    "wall_seconds": 122.0,
    "cost_usd": 0.0288
+  },
+  {
+   "date": "2026-10-07",
+   "note": "story3d CH01_dungeon_axes 1",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 515.0,
+   "gpu_seconds": 200.2,
+   "wall_seconds": 166.7,
+   "cost_usd": 0.063
   }
  ]
 }
