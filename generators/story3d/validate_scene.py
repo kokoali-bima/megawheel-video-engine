@@ -19,16 +19,16 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
-             "look", "claw", "net", "hud", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
+             "look", "claw", "net", "hud", "impacts", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
              "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
              "jcut"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
 MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
 ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
-                   "at", "hold", "patched"}
+                   "at", "hold", "patched", "jump", "sink", "fling", "crumple"}
 CAMS = {"wide", "two", "group", "medium", "close", "ecu", "low", "track"}
 SINGLE = {"close", "ecu", "medium", "low"}                     # one-character framings
 # film coverage rules (owner 2026-10-06: "tiap ngobrol di-zoom ke yang bicara ... seperti film per pemeran"):
@@ -42,7 +42,7 @@ EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "sur
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
 PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece",
-         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate", "chop"}
+         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate", "chop", "ogre", "lava"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -56,7 +56,7 @@ def sfx_names():
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
                 "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
-                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide", "chop_slam", "chop_whoosh", "car_boing", "chain_rattle", "kraggor_hum", "kraggor_hum_joy", "kraggor_hum_sad", "kraggor_hum_grow", "kraggor_hum_fear"}
+                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide", "chop_slam", "crash_big", "ogre_swing", "lava_splash", "fall_whistle", "chop_whoosh", "car_boing", "chain_rattle", "kraggor_hum", "kraggor_hum_joy", "kraggor_hum_sad", "kraggor_hum_grow", "kraggor_hum_fear"}
 
 
 def vehicles():

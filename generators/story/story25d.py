@@ -1459,6 +1459,377 @@ def draw_chop(ctx, p, camx, t, ref):
         ctx.restore()
 
 
+def ballistic(tau, vx, vy, g, turns, h0=0.0):
+    """A launched car: (dx, h, rot) after tau s. One bounce at 40 %, whole turns of spin, lands upright (BeamNG-style crash)."""
+    tl = (vy + math.sqrt(vy * vy + 2 * g * h0)) / g
+    if tau < tl:
+        return vx * tau, h0 + vy * tau - 0.5 * g * tau * tau, 2 * math.pi * turns * tau / tl
+    vimp = abs(vy - g * tl)
+    vy2 = vimp * 0.4
+    tl2 = 2 * vy2 / g
+    t2 = tau - tl
+    dx = vx * tl
+    if t2 < tl2:
+        return dx + vx * 0.4 * t2, vy2 * t2 - 0.5 * g * t2 * t2, 2 * math.pi * turns
+    return dx + vx * 0.4 * tl2 + vx * 0.15 * min(t2 - tl2, 0.5), 0.0, 2 * math.pi * turns
+
+
+def draw_actor_fx(ctx, a, t, camx):
+    """A tumbling car (rot) and/or a crumpled end: the struck end telescopes in straight lines (rigid metal, owner rule),
+    a dark crease + scratches mark the dent. crumple = {"end": +1|-1 (world +x end), "amt": 0..1}."""
+    sx, gy = pxy(a["x"], a["z"], camx)
+    k = k_of(a["z"]) * a["small"]
+    cy_ = gy - (a["h"] + 1.2) * k
+    ctx.save()
+    if a.get("rot"):
+        ctx.translate(sx, cy_)
+        ctx.rotate(a["rot"])
+        ctx.translate(-sx, -cy_)
+    cr = a.get("crumple")
+    if not cr:
+        draw_actor(ctx, a, t, camx)
+    else:
+        bw = se.VEHICLES[a["key"]]["body"][0]
+        e, amt = cr["end"], cr["amt"]
+        bnd = sx + e * bw * 0.16 * k
+        for struck in (False, True):
+            ctx.save()
+            if (e > 0) == struck:
+                ctx.rectangle(bnd, -9000, 20000, 30000)
+            else:
+                ctx.rectangle(bnd - 20000, -9000, 20000, 30000)
+            ctx.clip()
+            if struck:
+                ctx.translate(bnd, 0)
+                ctx.scale(1 - 0.55 * amt, 1)
+                ctx.translate(-bnd, 0)
+            draw_actor(ctx, a, t, camx)
+            ctx.restore()
+        z0 = gy - (a["h"] + 0.35) * k                               # the crease: straight zig-zag across the body
+        pts = [(bnd, z0 - 1.9 * k), (bnd + e * 0.35 * amt * k, z0 - 1.4 * k), (bnd - e * 0.15 * k, z0 - 0.9 * k),
+               (bnd + e * 0.4 * amt * k, z0 - 0.45 * k), (bnd, z0)]
+        ctx.move_to(*pts[0])
+        for p_ in pts[1:]:
+            ctx.line_to(*p_)
+        ctx.set_source_rgba(0.08, 0.05, 0.05, 0.7 * amt)
+        ctx.set_line_width(0.1 * k)
+        ctx.stroke()
+        for off_, ln_ in ((0.3, 0.9), (0.55, 0.6), (0.75, 1.1)):    # scratches
+            ctx.move_to(bnd + e * off_ * 0.6 * k, z0 - 1.6 * k + ln_ * 0.3 * k)
+            ctx.line_to(bnd + e * (off_ * 0.6 + 0.35) * k, z0 - 1.6 * k - ln_ * 0.4 * k)
+            ctx.set_source_rgba(1, 1, 1, 0.55 * amt)
+            ctx.set_line_width(0.05 * k)
+            ctx.stroke()
+    ctx.restore()
+
+
+def draw_lava(ctx, p, camx, t):
+    """Lava pits (CHALLENGE dungeon): the glowing surface drawn over the lane so a falling car sinks into it, with
+    flame tongues, bubbles and a bright lip. pits = [[x0, x1], ...] (the Godot floor has the same gaps)."""
+    z = p.get("z", 1.4)
+    k = k_of(z)
+    for x0, x1 in p["pits"]:
+        sx0, gy = pxy(x0, z, camx)
+        sx1, _ = pxy(x1, z, camx)
+        if sx1 < -300 or sx0 > W + 300:
+            continue
+        top = gy - 0.05 * k
+        g = cairo.LinearGradient(0, top, 0, gy + 3.6 * k)
+        g.add_color_stop_rgb(0, 1.0, 0.82, 0.2)
+        g.add_color_stop_rgb(0.25, 1.0, 0.45, 0.08)
+        g.add_color_stop_rgb(1, 0.55, 0.08, 0.04)
+        n = 14
+        ctx.move_to(sx0, top + 3.6 * k)
+        for i in range(n + 1):
+            ctx.line_to(sx0 + (sx1 - sx0) * i / n, top + 0.1 * k * math.sin(t * 3.0 + i * 1.3))
+        ctx.line_to(sx1, top + 3.6 * k)
+        ctx.close_path()
+        ctx.set_source(g)
+        ctx.fill()
+        for q in range(8):                                          # bubbles
+            ph = (t * 0.7 + q * 0.311) % 1.0
+            bx = sx0 + (sx1 - sx0) * ((q * 0.137 + 0.08) % 1.0)
+            ctx.arc(bx, top + (1.6 - 1.5 * ph) * k, (0.1 + 0.18 * ph) * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(1, 0.9, 0.4, 0.8 * (1 - ph))
+            ctx.fill()
+        for q in range(9):                                          # flame tongues (short, translucent)
+            fx_ = sx0 + (sx1 - sx0) * (q + 0.5) / 9
+            fh = (0.55 + 0.4 * math.sin(t * 6 + q * 1.9)) * k
+            se.poly(ctx, [(fx_ - 0.35 * k, top + 0.05 * k), (fx_ + 0.05 * k * math.sin(t * 9 + q), top - fh),
+                          (fx_ + 0.35 * k, top + 0.05 * k)])
+            ctx.set_source_rgba(1, 0.55, 0.1, 0.65)
+            ctx.fill()
+        for sx_ in (sx0, sx1):                                      # glowing lip of stone
+            ctx.rectangle(sx_ - 0.14 * k, top - 0.05 * k, 0.28 * k, 0.28 * k)
+            ctx.set_source_rgb(0.2, 0.17, 0.2)
+            ctx.fill()
+
+
+def ogre_arm(p, t, ref):
+    """Arm angle (0 = straight down, + = forward), body bob. Wind-up 0.9 s, fast slam, held, then raised again."""
+    tr = t - ref
+    th, bob = -1.9, 0.05 * math.sin(t * 2.4)
+    for ts in p.get("slams", []):
+        d = tr - ts
+        if -0.9 <= d < -0.08:
+            e = (d + 0.9) / 0.82
+            th = -1.9 - 0.8 * e * e * (3 - 2 * e)
+        elif -0.08 <= d < 0.08:
+            e = (d + 0.08) / 0.16
+            th = -2.7 + 3.42 * e * e
+        elif 0.08 <= d < 1.0:
+            th = 0.72
+            bob -= 0.12 * math.exp(-(d - 0.08) * 7)
+        elif 1.0 <= d < 1.9:
+            e = (d - 1.0) / 0.9
+            th = 0.72 - 2.62 * e * e * (3 - 2 * e)
+    return th, bob
+
+
+def draw_ogre(ctx, p, camx, t, ref, layer):
+    """The dungeon ogre (CHALLENGE): body + arm BEHIND the cars (layer 'body'), the spiked club IN FRONT ('club').
+    p: x, z, face (-1 looks toward -x, the cars come from there), scale, slams [s from ref-shot start]."""
+    z = p.get("z", 0.7)
+    k = k_of(z) * p.get("scale", 1.0)
+    f = p.get("face", -1)
+    sx, gy = pxy(p["x"], z, camx)
+    th, bob = ogre_arm(p, t, ref)
+    if sx < -500 or sx > W + 500:
+        return
+
+    def X(lx):
+        return sx + f * lx * k
+
+    def Y(ly):
+        return gy - (ly + bob) * k
+    S = (0.9, 3.7)
+    L1, L2 = 1.5, 3.4
+    ux, uy = math.sin(th), -math.cos(th)
+    hand = (S[0] + ux * L1, S[1] + uy * L1)
+    tip = (S[0] + ux * (L1 + L2), S[1] + uy * (L1 + L2))
+    if layer == "body":
+        skin, dark, edge = (0.42, 0.58, 0.3), (0.28, 0.4, 0.21), (0.1, 0.14, 0.07)
+        ctx.save()
+        ctx.translate(sx, gy)
+        ctx.scale(1.0, 0.2)
+        ctx.arc(0, 0, 2.2 * k, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgba(0, 0, 0, 0.35)
+        ctx.fill()
+        for lx in (-0.65, 0.65):                                    # legs + boots
+            se.rrect(ctx, X(lx) - 0.45 * k, Y(1.9), 0.9 * k, 1.9 * k, 0.2 * k)
+            ctx.set_source_rgb(*dark)
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.07 * k)
+            ctx.stroke()
+            se.rrect(ctx, X(lx) - 0.6 * k, Y(0.55), 1.2 * k, 0.55 * k, 0.15 * k)
+            ctx.set_source_rgb(0.3, 0.2, 0.12)
+            ctx.fill()
+        se.rrect(ctx, X(-1.05) - 0.4 * k, Y(3.5), 0.8 * k, 1.9 * k, 0.3 * k)   # the idle arm
+        ctx.set_source_rgb(*dark)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.stroke()
+        ctx.save()
+        ctx.translate(X(0), Y(2.9))
+        ctx.scale(1.6 * k, 1.5 * k)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*skin)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.08 * k)
+        ctx.stroke()
+        ctx.save()
+        ctx.translate(X(0.2), Y(2.5))
+        ctx.scale(1.0 * k, 0.95 * k)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(0.62, 0.74, 0.45)
+        ctx.fill()
+        se.rrect(ctx, X(0) - 1.55 * k, Y(2.1), 3.1 * k, 0.45 * k, 0.1 * k)  # belt + gold buckle
+        ctx.set_source_rgb(0.32, 0.2, 0.1)
+        ctx.fill()
+        ctx.rectangle(X(0.3) - 0.3 * k, Y(2.15), 0.6 * k, 0.55 * k)
+        ctx.set_source_rgb(0.95, 0.75, 0.2)
+        ctx.fill()
+        hx, hy = X(0.35), Y(4.6)                                    # head
+        for sg in (-1, 1):
+            se.poly(ctx, [(hx + sg * 0.5 * k, hy - 0.5 * k), (hx + sg * 0.95 * k, hy - 1.35 * k), (hx + sg * 0.8 * k, hy - 0.35 * k)])
+            ctx.set_source_rgb(0.9, 0.88, 0.8)                      # horns
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.05 * k)
+            ctx.stroke()
+        ctx.save()
+        ctx.translate(hx, hy)
+        ctx.scale(1.0 * k, 0.88 * k)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*skin)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.08 * k)
+        ctx.stroke()
+        for sg in (-1, 1):                                          # angry yellow eyes + brows
+            ex = hx + f * 0.1 * k + sg * 0.42 * k
+            ctx.arc(ex, hy - 0.12 * k, 0.2 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(1, 0.9, 0.2)
+            ctx.fill()
+            ctx.arc(ex + f * 0.05 * k, hy - 0.1 * k, 0.08 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.1, 0.05, 0.02)
+            ctx.fill()
+            ctx.move_to(ex - 0.3 * k, hy - 0.45 * k - sg * f * 0.0)
+            ctx.line_to(ex + 0.3 * k, hy - 0.25 * k + (0.2 * k if sg * f > 0 else -0.2 * k))
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.1 * k)
+            ctx.stroke()
+        se.rrect(ctx, hx - 0.55 * k, hy + 0.2 * k, 1.1 * k, 0.32 * k, 0.1 * k)   # mouth + tusks
+        ctx.set_source_rgb(0.25, 0.05, 0.05)
+        ctx.fill()
+        for sg in (-1, 1):
+            se.poly(ctx, [(hx + sg * 0.4 * k, hy + 0.2 * k), (hx + sg * 0.55 * k, hy - 0.3 * k), (hx + sg * 0.22 * k, hy + 0.2 * k)])
+            ctx.set_source_rgb(1, 1, 0.9)
+            ctx.fill()
+        ctx.move_to(X(S[0]), Y(S[1]))                               # the club arm
+        ctx.line_to(X(hand[0]), Y(hand[1]))
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.95 * k)
+        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        ctx.stroke_preserve()
+        ctx.set_source_rgb(*skin)
+        ctx.set_line_width(0.75 * k)
+        ctx.stroke()
+        ctx.set_line_cap(cairo.LINE_CAP_BUTT)
+    else:
+        px, py = -uy, ux                                            # club: a tapering wooden bat with iron spikes
+        w0, w1 = 0.2, 0.55
+        a_, b_ = (hand[0] + ux * 0.0, hand[1] + uy * 0.0), tip
+        poly = [(X(a_[0] + px * w0), Y(a_[1] + py * w0)), (X(b_[0] + px * w1), Y(b_[1] + py * w1)),
+                (X(b_[0] - px * w1), Y(b_[1] - py * w1)), (X(a_[0] - px * w0), Y(a_[1] - py * w0))]
+        se.poly(ctx, poly)
+        ctx.set_source_rgb(0.5, 0.33, 0.18)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.15, 0.08, 0.04)
+        ctx.set_line_width(0.08 * k)
+        ctx.stroke()
+        for q in range(5):                                          # spikes along the head
+            e = 0.45 + 0.1 * q
+            cx_, cy_ = hand[0] + ux * (L1 + 0.0) * 0 + (tip[0] - hand[0]) * e, hand[1] + (tip[1] - hand[1]) * e
+            side = 1 if q % 2 == 0 else -1
+            wq = w0 + (w1 - w0) * e
+            se.poly(ctx, [(X(cx_ + px * wq * side), Y(cy_ + py * wq * side)),
+                          (X(cx_ + px * (wq + 0.45) * side + ux * 0.1), Y(cy_ + py * (wq + 0.45) * side + uy * 0.1)),
+                          (X(cx_ + px * wq * side + ux * 0.3), Y(cy_ + py * wq * side + uy * 0.3))])
+            ctx.set_source_rgb(0.75, 0.77, 0.85)
+            ctx.fill()
+
+
+def draw_impact(ctx, im, age, camx, z=1.4):
+    """Crash effects: comic starburst, sparks, flying debris (wheel, bumper, shards), smoke, lava droplets, a pop-up word.
+    im: at, x, h, kind (hit | splash | land), word, size, debris [..], shake."""
+    if not 0 <= age < 1.8:
+        return
+    k = k_of(z)
+    sx, gy = pxy(im["x"], z, camx)
+    sy = gy - im.get("h", 1.0) * k
+    kind = im.get("kind", "hit")
+    big = im.get("size", 1.0)
+    rnd = random.Random(int(im["at"] * 100) + 11)
+    if age < 0.4 and kind == "hit":                                 # the starburst
+        r = (0.6 + 2.2 * min(1.0, age / 0.1)) * k * big * (1 - max(0.0, age - 0.22) / 0.18)
+        pts = []
+        for i in range(24):
+            rr = r if i % 2 == 0 else r * 0.5
+            ang = i * math.pi / 12 + 0.2
+            pts.append((sx + math.cos(ang) * rr, sy + math.sin(ang) * rr))
+        se.poly(ctx, pts)
+        ctx.set_source_rgb(1, 0.9, 0.25)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.9, 0.2, 0.1)
+        ctx.set_line_width(0.1 * k)
+        ctx.stroke()
+        ctx.arc(sx, sy, r * 0.38, 0, 2 * math.pi)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill()
+    if age < 0.7 and kind in ("hit", "land"):                       # sparks
+        for q in range(18 if kind == "hit" else 8):
+            ang = rnd.uniform(-math.pi, 0.2)
+            sp = rnd.uniform(4, 11) * big
+            d0 = sp * age
+            ln = rnd.uniform(0.4, 1.1) * k
+            x1_, y1_ = sx + math.cos(ang) * d0 * k, sy + math.sin(ang) * d0 * k + 9 * age * age * k
+            ctx.move_to(x1_, y1_)
+            ctx.line_to(x1_ - math.cos(ang) * ln * 0.5, y1_ - math.sin(ang) * ln * 0.5)
+            ctx.set_source_rgba(1, rnd.uniform(0.7, 1.0), 0.3, 1 - age / 0.7)
+            ctx.set_line_width(0.07 * k)
+            ctx.stroke()
+    for i, dk in enumerate(im.get("debris", [])):                   # flying parts
+        vx = rnd.uniform(-9, 9)
+        vy = rnd.uniform(5, 12)
+        px_ = sx + vx * age * k
+        py_ = sy - (vy * age - 11 * age * age) * k
+        py_ = min(py_, gy - 0.1 * k)
+        ctx.save()
+        ctx.translate(px_, py_)
+        ctx.rotate(age * rnd.uniform(-9, 9))
+        if dk == "wheel":
+            ctx.arc(0, 0, 0.55 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.08, 0.08, 0.1)
+            ctx.fill()
+            ctx.arc(0, 0, 0.26 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.7, 0.72, 0.78)
+            ctx.fill()
+        elif dk == "bumper":
+            ctx.rectangle(-0.7 * k, -0.14 * k, 1.4 * k, 0.28 * k)
+            ctx.set_source_rgb(0.75, 0.77, 0.82)
+            ctx.fill()
+        elif dk == "light":
+            ctx.arc(0, 0, 0.2 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(1, 0.95, 0.5)
+            ctx.fill()
+        else:
+            se.poly(ctx, [(-0.25 * k, 0.2 * k), (0.3 * k, 0.1 * k), (0.0, -0.3 * k)])
+            ctx.set_source_rgb(0.55, 0.75, 0.9)
+            ctx.fill()
+        ctx.restore()
+    if kind == "splash":                                            # lava droplets + a fire burst
+        for q in range(22):
+            vx = rnd.uniform(-6, 6)
+            vy = rnd.uniform(6, 15)
+            px_ = sx + vx * age * k
+            py_ = gy - (vy * age - 12 * age * age) * k
+            if py_ < gy + 0.4 * k:
+                ctx.arc(px_, py_, rnd.uniform(0.1, 0.24) * k, 0, 2 * math.pi)
+                ctx.set_source_rgba(1, rnd.uniform(0.4, 0.85), 0.1, max(0.0, 1 - age / 1.3))
+                ctx.fill()
+        if age < 0.6:
+            for q in range(6):
+                fx_ = sx + (q - 2.5) * 0.5 * k
+                fh = (1.8 + 0.5 * math.sin(q * 2.1)) * k * (1 - age / 0.6)
+                se.poly(ctx, [(fx_ - 0.3 * k, gy), (fx_ + 0.04 * k * math.sin(q * 3 + age * 20), gy - fh), (fx_ + 0.3 * k, gy)])
+                ctx.set_source_rgba(1, 0.5 + 0.08 * q, 0.1, 0.8)
+                ctx.fill()
+    if age > 0.12:                                                  # smoke puffs
+        for q in range(5):
+            ag = age - 0.12 - q * 0.05
+            if ag < 0:
+                continue
+            ctx.arc(sx + (q - 2) * 0.5 * k + 0.3 * k * math.sin(ag * 3 + q), sy - (0.4 + ag * 1.8) * k, (0.35 + ag * 0.7) * k, 0, 2 * math.pi)
+            ctx.set_source_rgba(0.28, 0.27, 0.3, max(0.0, 0.55 * (1 - ag / 1.4)))
+            ctx.fill()
+    if im.get("word") and age < 1.1:                                # BAM!
+        s = se.ease_out_back(age / 0.14)
+        a_ = 1.0 if age < 0.8 else max(0.0, (1.1 - age) / 0.3)
+        ctx.save()
+        ctx.translate(sx, sy - 2.6 * k * big)
+        ctx.rotate(-0.12)
+        ctx.scale(s, s)
+        se.draw_text(ctx, im["word"], 0, 0, int(1.7 * k * big), fill=(1, 0.9, 0.2), stroke=(0.65, 0.05, 0.05), sw=6, alpha=a_)
+        ctx.restore()
+
+
 def draw_challenge_hud(ctx, hud, u, scr, actors):
     """The CHALLENGE look of the Shorts (title banner, level pill, name, progress bar, FAIL / WINNER badge, confetti,
     speech bubbles, LIKE / SUBSCRIBE card), drawn over the finished picture with the same helpers as sim_engine.
@@ -2781,6 +3152,10 @@ SFX = {
     "kraggor_giggle": lambda: kraggor_giggle(),
     "arm_slide": lambda: arm_slide(),
     "chop_slam": lambda: chop_slam(),
+    "crash_big": lambda: crash_big(),
+    "ogre_swing": lambda: ogre_swing(),
+    "lava_splash": lambda: lava_splash(),
+    "fall_whistle": lambda: fall_whistle(),
     "chop_whoosh": lambda: chop_whoosh(),
     "car_boing": lambda: car_boing(),
     "chain_rattle": lambda: chain_rattle(),
@@ -3240,6 +3615,68 @@ def chain_rattle():
     return out / max(1e-9, np.abs(out).max()) * 0.35
 
 
+def crash_big():
+    """A heavy car crash: a deep thud (110 -> 40 Hz), a long inharmonic metal clang and a handful of tonal 'crunch' pings
+    at random times (no noise: A07)."""
+    sr = se.SR
+    n = int(1.4 * sr)
+    t = np.arange(n) / sr
+    thud = np.sin(2 * math.pi * (110 - 70 * np.minimum(t / 0.2, 1.0)) * t) * np.exp(-t * 6)
+    thud += 0.6 * np.sin(2 * math.pi * 2 * (110 - 70 * np.minimum(t / 0.2, 1.0)) * t) * np.exp(-t * 9)
+    clang = sum(np.sin(2 * math.pi * f * t) * w for f, w in ((233, 1.0), (361, 0.9), (587, 0.7), (944, 0.5), (1530, 0.3)))
+    clang = clang * np.exp(-t * 5) * np.clip(t / 0.002, 0, 1)
+    rng = np.random.default_rng(31)
+    ping = np.zeros(n)
+    for q in range(9):
+        t0 = 0.04 + q * 0.05 + rng.uniform(0, 0.03)
+        f = rng.uniform(500, 1900)
+        m = np.clip(t - t0, 0, None)
+        ping += np.sin(2 * math.pi * f * m) * np.exp(-m * 45) * (t >= t0) * 0.35
+    out = thud * 1.0 + clang * 0.3 + ping
+    return out / max(1e-9, np.abs(out).max()) * 0.95
+
+
+def ogre_swing():
+    """The ogre's club swinging down: a tonal descending glide (300 -> 70 Hz) with overtones."""
+    sr = se.SR
+    n = int(0.6 * sr)
+    t = np.arange(n) / sr
+    f = 300 - 230 * np.minimum(t / 0.5, 1.0) ** 0.7
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.7), (3, 0.5), (5, 0.2)))
+    env = np.sin(math.pi * np.minimum(t / 0.6, 1.0)) ** 1.2
+    return tone * env / 2.6 * 0.7
+
+
+def lava_splash():
+    """A car falling into lava: a falling whistle, then bubbling pops (sine blips) over a low blub."""
+    sr = se.SR
+    n = int(1.6 * sr)
+    t = np.arange(n) / sr
+    f = 1300 - 900 * np.minimum(t / 0.7, 1.0)
+    whistle = np.sin(2 * math.pi * np.cumsum(f) / sr) * np.exp(-t * 3.0) * (t < 0.8) * 0.35
+    rng = np.random.default_rng(17)
+    pops = np.zeros(n)
+    for q in range(14):
+        t0 = 0.55 + q * 0.07 + rng.uniform(0, 0.04)
+        m = np.clip(t - t0, 0, None)
+        fq = rng.uniform(280, 700) * (1 + 1.5 * m)
+        pops += np.sin(2 * math.pi * fq * m) * np.exp(-m * 30) * (t >= t0) * 0.5
+    blub = np.sin(2 * math.pi * (70 + 20 * np.sin(t * 9)) * t) * np.exp(-t * 2.2) * (t > 0.5) * 0.5
+    out = whistle + pops + blub
+    return out / max(1e-9, np.abs(out).max()) * 0.9
+
+
+def fall_whistle():
+    """A cartoon fall: a falling tone."""
+    sr = se.SR
+    n = int(0.9 * sr)
+    t = np.arange(n) / sr
+    f = 1500 - 1100 * (t / 0.9)
+    out = np.sin(2 * math.pi * np.cumsum(f) / sr) * np.sin(math.pi * t / 0.9) ** 0.5
+    return out * 0.45
+
+
 def amb_wind(n, rng):
     """Dawn on a hill: wind in slow swells (below ~400 Hz) and now and then a bird (tonal)."""
     tt = np.arange(n) / se.SR
@@ -3531,6 +3968,7 @@ def render_scene(ep, num, aspect):
         for aid, a in actors.items():
             a["x"], a["z"], a["face"] = start[aid]
             a["h"], a["v"], a["sq"], a["dizzy"] = a["h0"], 0.0, 1.0, False
+            a["rot"], a["crumple"] = 0.0, None
             a["patched"] = float(scene["actors"][aid].get("patched", 0))
             a["hidden"] = scene["actors"][aid].get("hidden", False)
         for a in actors.values():
@@ -3577,6 +4015,36 @@ def render_scene(ep, num, aspect):
                     a["stuck"] = True
                 if mv.get("hop") and j == si:
                     a["h"] = abs(math.sin(uu * 7)) * 0.5
+                if mv.get("jump"):                                 # Mario jump over a pit: arc + nose up -> nose down
+                    jp = mv["jump"]
+                    pj = (uu - jp["at"]) / jp["dur"]
+                    if 0 < pj < 1:
+                        a["h"] += jp["peak"] * 4 * pj * (1 - pj)
+                        a["rot"] = -0.28 * (1 - 2 * pj)
+                if mv.get("sink") and j == si:                     # falls into the lava: nose down, gone below the surface
+                    sk = mv["sink"]
+                    tk = uu - sk["at"]
+                    if tk > 0:
+                        pk = min(1.0, tk / sk["dur"])
+                        a["h"] -= sk["depth"] * pk * pk
+                        a["rot"] = sk.get("tilt", 0.7) * pk
+                        a["v"] = 0.0
+                if mv.get("crumple") and j == si:                  # the struck end telescopes in (rigid, straight lines)
+                    cm = mv["crumple"]
+                    tc = uu - cm["at"]
+                    if tc > 0:
+                        a["crumple"] = {"end": cm["end"], "amt": cm["amt"] * min(1.0, tc / 0.1)}
+                if mv.get("fling") and j == si:                    # launched: ballistic, spinning, one bounce, lands upright
+                    fl = mv["fling"]
+                    tf = uu - fl["at"]
+                    if tf > 0:
+                        dx_, hh_, rt_ = ballistic(tf, fl["vx"], fl["vy"], fl.get("g", 24.0), fl.get("turns", 2), fl.get("h0", 0.0))
+                        a["x"] += dx_
+                        a["h"] = a["h0"] + hh_
+                        a["rot"] = rt_
+                        a["v"] = 0.0
+                        if tf > 2 * fl["vy"] / fl.get("g", 24.0) + 0.3:
+                            a["dizzy"] = True
         for a in actors.values():                                  # G04: stand on what is below (stage / ramp / road)
             if not a["hidden"]:
                 a["h"] += platform_h(a["x"], a["z"])
@@ -3682,6 +4150,10 @@ def render_scene(ep, num, aspect):
         shake = 0.0
         if "shake" in sh.get("fx", []):
             shake = 14 * math.sin(t * 60)
+        for im_ in sh.get("impacts", []):                          # every impact kicks the camera, decaying
+            ag_ = u - im_["at"]
+            if 0 <= ag_ < 0.5:
+                shake += im_.get("shake", 20) * (1 - ag_ / 0.5) ** 2 * math.sin(ag_ * 70)
         _Z, _OX, _OY = zoom * zmul, W / 2 + shake + hh_x, H * 0.5 + hh_y     # screen = O + (p - (CX, piv_y)) * Z
         SCR.clear()
         ctx.translate(W / 2 + shake + hh_x, H * 0.5 + hh_y)
@@ -3756,13 +4228,19 @@ def render_scene(ep, num, aspect):
             for a in actors.values():
                 if not a["hidden"]:
                     draw_beam(ctx, a, t, camx, flicker=a["id"] in sh.get("flicker", []))
+        for prop in scene.get("props", []):
+            if prop["type"] == "ogre" and prop.get("from_shot", 0) <= si <= prop.get("to_shot", 9999):
+                draw_ogre(ctx, prop, camx, t, shots[prop.get("ref_shot", prop.get("from_shot", 0))]["t0"], "body")
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
             _sx, _gy = pxy(a["x"], a["z"], camx)
             SCR[a["id"]] = (_OX + (_sx - CX) * _Z, _OY + (_gy - piv_y) * _Z)
             if scene.get("contact_shadow", True):
                 draw_contact(ctx, a, camx)
-            draw_actor(ctx, a, t, camx)
+            if a.get("rot") or a.get("crumple"):
+                draw_actor_fx(ctx, a, t, camx)
+            else:
+                draw_actor(ctx, a, t, camx)
             if a.get("stuck"):
                 mud_spray(ctx, a, t, camx)
             if a["dizzy"]:
@@ -3780,8 +4258,14 @@ def render_scene(ep, num, aspect):
         for prop in scene.get("props", []):
             if prop["type"] == "desk":
                 draw_desk_front(ctx, prop, camx)
+            elif prop["type"] == "lava":
+                draw_lava(ctx, prop, camx, t)
+            elif prop["type"] == "ogre" and prop.get("from_shot", 0) <= si <= prop.get("to_shot", 9999):
+                draw_ogre(ctx, prop, camx, t, shots[prop.get("ref_shot", prop.get("from_shot", 0))]["t0"], "club")
             elif prop["type"] == "chop" and prop.get("from_shot", 0) <= si <= prop.get("to_shot", 9999):
                 draw_chop(ctx, prop, camx, t, shots[prop.get("ref_shot", prop.get("from_shot", 0))]["t0"])
+        for im_ in sh.get("impacts", []):
+            draw_impact(ctx, im_, u - im_["at"], camx)
         ft = sh.get("foot")
         if ft:
             uu = u - ft.get("at", 0.0)

@@ -950,8 +950,38 @@ func _dungeon() -> void:
 	var back = float(S["scene"].get("wall_z", 5.2))
 	var zf = dist(back)
 	var zn = dist(-0.6)
-	box(Vector3(360, 0.3, zf + 14.0), Vector3(40, -0.15, (14.0 - zf) / 2),        # far wall .. behind the camera (9:16 looks steeply down)
-		_tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 90.0, 6.0, 4))                   # the floor
+	var fmat = _tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 90.0, 6.0, 4)
+	var pits = S["scene"].get("lava", [])
+	var edges = [-140.0]
+	for pit in pits:
+		edges.append(float(pit[0]))
+		edges.append(float(pit[1]))
+	edges.append(220.0)
+	var zlen = zf + 14.0
+	var zmid = (14.0 - zf) / 2
+	for qi in range(0, edges.size(), 2):                     # the floor in pieces, with gaps for the lava pits
+		var xa = float(edges[qi])
+		var xb = float(edges[qi + 1])
+		box(Vector3(xb - xa, 0.3, zlen), Vector3((xa + xb) / 2, -0.15, zmid), fmat)
+	var lavam = StandardMaterial3D.new()
+	lavam.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	lavam.albedo_color = Color(1.0, 0.45, 0.08)
+	lavam.emission_enabled = true
+	lavam.emission = Color(1.0, 0.4, 0.05)
+	lavam.emission_energy_multiplier = 2.2
+	for pit in pits:
+		var px0 = float(pit[0])
+		var px1 = float(pit[1])
+		box(Vector3(px1 - px0, 0.2, zlen), Vector3((px0 + px1) / 2, -1.5, zmid), lavam)               # the lava
+		box(Vector3(0.3, 1.6, zlen), Vector3(px0 - 0.15, -0.8, zmid), toon(Color(0.12, 0.1, 0.12)))   # the pit walls
+		box(Vector3(0.3, 1.6, zlen), Vector3(px1 + 0.15, -0.8, zmid), toon(Color(0.12, 0.1, 0.12)))
+		var pl = OmniLight3D.new()
+		pl.light_color = Color(1.0, 0.45, 0.12)
+		pl.light_energy = 6.0
+		pl.omni_range = 16.0
+		pl.position = Vector3((px0 + px1) / 2, 1.0, -dist(1.4))
+		add_child(pl)
+		torches.append([pl, float(px0)])
 	box(Vector3(360, 16, 0.6), Vector3(40, 8, -zf - 0.3),
 		_tiled(Color(0.38, 0.32, 0.3), Color(0.14, 0.12, 0.12), 90.0, 8.0, 9))                    # the brick wall
 	box(Vector3(360, 0.6, zf - zn + 10), Vector3(40, 10.3, -(zf + zn) / 2), toon(Color(0.1, 0.09, 0.12)))   # ceiling
