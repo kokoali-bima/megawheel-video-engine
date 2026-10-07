@@ -191,7 +191,7 @@ def build(cast):
                                  "reverse": True, "crumple": {"at": 0.0, "end": 1, "amt": 0.5}}}
             res["impacts"] = [{"at": 0.0, "x": hit[2] + 0.5, "h": 2.0, "kind": "hit", "word": "CLANG!", "size": 1.1,
                                "shake": 26, "debris": ["wheel", "bumper", "light", "shard", "shard"]}]
-            res["hud"] = dict(hud, badge="fail", badge_at=0.3, bubbles=[[0.15, "OUCH!", vk]])
+            res["hud"] = dict(hud, badge="fail", badge_at=1.1, bubbles=[[0.15, "OUCH!", vk]])
             res["sfx"] = [["chop_slam", 0.0, 1.0], ["crash_big", 0.03, 0.9], ["car_boing", 1.0, 0.8]]
             res["lines"] = [L("announcer", f"Chop! {NICK[vk]} got squashed by the axe!")]
         elif lv == 1:                                                # into the lava, then spat out
@@ -203,7 +203,7 @@ def build(cast):
             land_x = fall_x + vx * tl
             res["impacts"] = [{"at": 0.45, "x": fall_x, "h": 0.0, "kind": "splash", "word": "SPLASH!", "size": 1.1, "shake": 16},
                               {"at": pop + tl, "x": land_x, "h": 0.3, "kind": "land", "shake": 12}]
-            res["hud"] = dict(hud, badge="fail", badge_at=0.5, bubbles=[[pop + tl, "HOT HOT HOT!", vk]])
+            res["hud"] = dict(hud, badge="fail", badge_at=1.3, bubbles=[[pop + tl, "HOT HOT HOT!", vk]])
             res["sfx"] = [["fall_whistle", 0.0, 0.5], ["lava_splash", 0.4, 0.6], ["car_boing", pop + tl, 0.8]]
             res["lines"] = [L("announcer", f"Splash! {NICK[vk]} fell into the lava!")]
         elif lv == 2:                                                # smashed up into the air
@@ -216,7 +216,7 @@ def build(cast):
                                "debris": ["wheel", "bumper", "light", "shard", "shard", "shard"]},
                               {"at": 0.06 + tl, "x": cx - 1.7 - BODY[vk][0] / 2 + vx * tl, "h": 0.3, "kind": "land", "word": "CRASH!",
                                "size": 1.0, "shake": 20}]
-            res["hud"] = dict(hud, badge="fail", badge_at=0.4, bubbles=[[0.5, "WAAAH!", vk]])
+            res["hud"] = dict(hud, badge="fail", badge_at=1.1, bubbles=[[0.5, "WAAAH!", vk]])
             res["sfx"] = [["crash_big", 0.0, 1.0], ["car_boing", 0.06 + tl, 0.8], ["chop_slam", 0.06 + tl, 0.6]]
             res["lines"] = [L("announcer", f"Smash! The ogre sent {NICK[vk]} flying!")]
         else:
