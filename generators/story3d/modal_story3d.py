@@ -87,8 +87,12 @@ def _world(job: str, num: int, start: int, n: int) -> dict:
     env = dict(os.environ, GODOT_SILENCE_ROOT_WARNING="1")
     avi = f"/tmp/p{start}.avi"
     subprocess.run(["cp", "-r", f"{REMOTE}/generators/story3d/project", "/tmp/proj"], check=True)   # Godot writes
-    cmd = ["xvfb-run", "-a", "-s", "-screen 0 1920x1080x24", "/opt/godot/godot", "--path",          # .godot/ here
+    sc_ = json.load(open(f"{d}/scene.json"))                    # the picture size comes from the scene (9:16 Shorts too)
+    vw, vh = int(sc_["W"]), int(sc_["H"])
+    side = max(vw, vh, 1080)
+    cmd = ["xvfb-run", "-a", "-s", f"-screen 0 {side}x{side}x24", "/opt/godot/godot", "--path",     # .godot/ here
            "/tmp/proj", "--rendering-driver", "vulkan", "--rendering-method", "forward_plus",
+           "--resolution", f"{vw}x{vh}",
            "--write-movie", avi, "--fixed-fps", "30", "--quit-after", str(n), "--", d, str(start)]
     r = subprocess.run(cmd, capture_output=True, text=True, env=env)
     log = r.stdout + r.stderr

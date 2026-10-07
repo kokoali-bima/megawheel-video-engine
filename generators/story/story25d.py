@@ -86,6 +86,7 @@ def pxy(x, z, camx):
 
 
 EMO_MOOD = {}
+SCR = {}                                                           # actor id -> its screen position this frame (HUD bubbles)
 
 
 # ------------------------------------------------------------------ faces: drama emotions, talking mouth, blink, tears
@@ -1365,6 +1366,216 @@ def kraggor_mouth(spec, base_y):
     return spec.get("sx", 0.62) * W, base_y + (1.2 - 3.8) * 40 * sc
 
 
+CHOP = dict(P=2.6, up=1.0, fall=0.18, down=0.40, h_up=5.2, h_dn=0.15)      # one chop cycle (shared with the generator)
+
+
+def chop_bottom(p, tau):
+    """Height of the axe's cutting edge (m) at cycle time tau: hangs up, falls fast, stays down, rises slowly."""
+    c = {**CHOP, **{k: p[k] for k in CHOP if k in p}}
+    rise = c["P"] - c["up"] - c["fall"] - c["down"]
+    tau %= c["P"]
+    if tau < c["up"]:
+        return c["h_up"]
+    tau -= c["up"]
+    if tau < c["fall"]:
+        return c["h_up"] + (c["h_dn"] - c["h_up"]) * (tau / c["fall"]) ** 2
+    tau -= c["fall"]
+    if tau < c["down"]:
+        return c["h_dn"]
+    tau -= c["down"]
+    return c["h_dn"] + (c["h_up"] - c["h_dn"]) * min(1.0, tau / rise)
+
+
+def draw_chop(ctx, p, camx, t, ref):
+    """Giant dungeon axes that chop down on the road (S01 CHALLENGE 'axes', 2026-10-07). Drawn IN FRONT of the cars (they
+    fall in the near lane), on a fixed rhythm measured from the start of shot `ref_shot`: axes = [[x, phase_s], ...]."""
+    c = {**CHOP, **{k: p[k] for k in CHOP if k in p}}
+    z = p.get("z", 0.3)
+    k = k_of(z)
+    for x, ph in p["axes"]:
+        tau = (t - ref + ph) % c["P"]
+        bot = chop_bottom(p, t - ref + ph)
+        sx, gy = pxy(x, z, camx)
+        by = gy - bot * k                                          # the cutting edge
+        ty = by - 1.7 * k                                          # the top of the head
+        ctx.save()
+        iron = (0.36, 0.34, 0.4)
+        ctx.set_line_width(0.07 * k)
+        yy = ty - 0.5 * k                                          # chain up to the ceiling (off the top of the frame)
+        n = 0
+        while yy > -0.6 * k:
+            ctx.save()
+            ctx.translate(sx, yy)
+            ctx.scale(0.2 * k if n % 2 == 0 else 0.1 * k, 0.28 * k)
+            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgb(*iron)
+            ctx.stroke()
+            yy -= 0.42 * k
+            n += 1
+        se.rrect(ctx, sx - 0.5 * k, ty - 0.55 * k, 1.0 * k, 0.6 * k, 0.1 * k)      # the iron cap on top of the head
+        ctx.set_source_rgb(0.24, 0.22, 0.28)
+        ctx.fill()
+        ctx.move_to(sx - 0.62 * k, ty)                             # the head: narrow at the top, a wide curved edge below
+        ctx.line_to(sx + 0.62 * k, ty)
+        ctx.line_to(sx + 1.2 * k, by - 0.05 * k)
+        ctx.curve_to(sx + 0.6 * k, by + 0.26 * k, sx - 0.6 * k, by + 0.26 * k, sx - 1.2 * k, by - 0.05 * k)
+        ctx.close_path()
+        g = cairo.LinearGradient(sx - 1.2 * k, 0, sx + 1.2 * k, 0)
+        g.add_color_stop_rgb(0, 0.5, 0.55, 0.63)
+        g.add_color_stop_rgb(0.45, 0.88, 0.9, 0.95)
+        g.add_color_stop_rgb(1, 0.46, 0.5, 0.58)
+        ctx.set_source(g)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.07, 0.07, 0.14)
+        ctx.set_line_width(0.08 * k)
+        ctx.stroke()
+        ctx.move_to(sx - 1.1 * k, by + 0.0 * k)                    # a bright edge and two rivets
+        ctx.curve_to(sx - 0.55 * k, by + 0.2 * k, sx + 0.55 * k, by + 0.2 * k, sx + 1.1 * k, by + 0.0 * k)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.set_line_width(0.06 * k)
+        ctx.stroke()
+        for rx in (-0.28, 0.28):
+            ctx.arc(sx + rx * k, ty + 0.4 * k, 0.07 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.2, 0.2, 0.28)
+            ctx.fill()
+        a_ = (tau - c["up"] - c["fall"]) / 0.35                    # dust when it lands
+        if 0 <= a_ < 1:
+            for sg in (-1, 1):
+                ctx.save()
+                ctx.translate(sx + sg * (0.9 + 1.4 * a_) * k, gy - 0.2 * k)
+                ctx.scale((0.7 + 0.8 * a_) * k, (0.35 + 0.35 * a_) * k)
+                ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+                ctx.restore()
+                ctx.set_source_rgba(0.75, 0.72, 0.68, 0.55 * (1 - a_))
+                ctx.fill()
+        ctx.restore()
+
+
+def draw_challenge_hud(ctx, hud, u, scr, actors):
+    """The CHALLENGE look of the Shorts (title banner, level pill, name, progress bar, FAIL / WINNER badge, confetti,
+    speech bubbles, LIKE / SUBSCRIBE card), drawn over the finished picture with the same helpers as sim_engine.
+    hud keys: title, level, name, color, actor + x0/x1/marks (progress), who (bool), badge (win|fail) + badge_at,
+    outro_at, bubbles [[at, text, actor]]."""
+    col = tuple(hud.get("color", (0.2, 0.8, 0.3)))
+    if hud.get("title"):
+        ts = 1.0 + 0.25 * (1 - se.ease_out_back(u / 0.5)) if u < 0.5 else 1.0
+        ctx.save()
+        ctx.translate(540, 215)
+        ctx.scale(ts, ts)
+        se.draw_text(ctx, hud["title"], 0, 0, 84, fill=(1, 0.86, 0.12), max_w=980)
+        ctx.restore()
+    if hud.get("level"):
+        s = se.ease_out_back(u / 0.35)
+        ctx.save()
+        ctx.translate(540, 335)
+        ctx.scale(s, s)
+        se.rrect(ctx, -170, -48, 340, 96, 48)
+        ctx.set_source_rgb(*col)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.set_line_width(7)
+        ctx.stroke()
+        se.draw_text(ctx, f"LEVEL {hud['level']}", 0, 0, 62)
+        ctx.restore()
+        se.draw_text(ctx, hud.get("name", ""), 540, 440, 56, max_w=950, alpha=min(1.0, u / 0.3))
+    if hud.get("who") and u < 2.6:
+        pulse = 1 + 0.06 * math.sin(u * 9)
+        ctx.save()
+        ctx.translate(540, 640)
+        ctx.scale(pulse, pulse)
+        se.draw_text(ctx, hud["who"], 0, 0, 70, fill=(1, 1, 1), stroke=(0.85, 0.1, 0.2), alpha=min(1.0, (2.6 - u) / 0.3))
+        ctx.restore()
+    if hud.get("actor") and hud["actor"] in actors:                # progress bar (start .. finish, the axes as red marks)
+        ax = actors[hud["actor"]]["x"]
+        a0, a1 = hud.get("x0", 0.0), hud.get("x1", 60.0)
+        frac = min(1.0, max(0.0, (ax - a0) / (a1 - a0)))
+        x0, x1, y = 110, 960, 540
+        se.rrect(ctx, x0 - 10, y - 18, x1 - x0 + 20, 36, 18)
+        ctx.set_source_rgba(0.05, 0.05, 0.15, 0.55)
+        ctx.fill()
+        se.rrect(ctx, x0, y - 9, max(18, (x1 - x0) * frac), 18, 9)
+        ctx.set_source_rgb(*col)
+        ctx.fill()
+        for m in hud.get("marks", []):
+            px = x0 + (x1 - x0) * (m - a0) / (a1 - a0)
+            se.poly(ctx, [(px, y - 30), (px - 14, y - 52), (px + 14, y - 52)])
+            ctx.set_source_rgb(0.95, 0.2, 0.2)
+            ctx.fill()
+        for i in range(4):
+            for j in range(4):
+                ctx.rectangle(x1 + 8 + i * 9, y - 48 + j * 9, 9, 9)
+                ctx.set_source_rgb(*(((0.05,) * 3) if (i + j) % 2 else (1, 1, 1)))
+                ctx.fill()
+        ctx.arc(x0 + (x1 - x0) * frac, y, 20, 0, 2 * math.pi)
+        ctx.set_source_rgb(*col)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.set_line_width(5)
+        ctx.stroke()
+    for bt, text, who in hud.get("bubbles", []):                    # speech bubbles above the car
+        age = u - bt
+        if not 0 <= age < 1.3:
+            continue
+        sx_, sy_ = scr.get(who, (540, 1250))
+        s = se.ease_out_back(age / 0.2)
+        bx, by = min(880, max(200, sx_ + 120)), min(1350, max(820, sy_ - 330))
+        ctx.save()
+        ctx.translate(bx, by)
+        ctx.scale(s, s)
+        se.set_font(ctx, 62)
+        w = ctx.text_extents(text).width + 70
+        se.poly(ctx, [(-w * 0.25, 40), (-w * 0.25 - 40, 105), (-w * 0.05, 40)])
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.1, 0.1, 0.25)
+        ctx.set_line_width(6)
+        ctx.stroke()
+        se.rrect(ctx, -w / 2, -55, w, 110, 40)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.1, 0.1, 0.25)
+        ctx.set_line_width(6)
+        ctx.stroke()
+        se.draw_text(ctx, text, 0, 0, 62, fill=(0.9, 0.15, 0.2), stroke=(1, 1, 1), sw=2)
+        ctx.restore()
+    bt = hud.get("badge_at")
+    out = hud.get("outro_at")
+    if hud.get("badge") and bt is not None and u >= bt:
+        if hud["badge"] == "win":
+            se.draw_confetti(ctx, u - bt)
+        ctx.push_group()
+        se.draw_badge(ctx, hud["badge"], u - bt)
+        ctx.pop_group_to_source()
+        ctx.paint_with_alpha(1.0 if out is None else max(0.0, min(1.0, (out + 0.3 - u) / 0.3)))
+    if out is not None and u >= out:
+        a = u - out
+        s = se.ease_out_back(a / 0.4)
+        ctx.save()
+        ctx.translate(540, 820)
+        ctx.scale(s, s)
+        se.rrect(ctx, -440, -210, 880, 420, 50)
+        ctx.set_source_rgba(1, 1, 1, 0.94)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.1, 0.1, 0.25)
+        ctx.set_line_width(8)
+        ctx.stroke()
+        se.draw_text(ctx, "DID YOU ENJOY IT?", 0, -135, 62, fill=(1, 0.86, 0.12), max_w=800)
+        for bx, label, colr, ph in ((-215, "LIKE", (0.15, 0.5, 1.0), 0), (190, "SUBSCRIBE", (0.9, 0.1, 0.15), 1.5)):
+            ctx.save()
+            ctx.translate(bx, 10)
+            q = 1 + 0.07 * math.sin(a * 7 + ph)
+            ctx.scale(q, q)
+            w = 330 if label == "LIKE" else 420
+            se.rrect(ctx, -w / 2, -58, w, 116, 58)
+            ctx.set_source_rgb(*colr)
+            ctx.fill()
+            se.draw_text(ctx, label, 0, 0, 64, max_w=w - 50)
+            ctx.restore()
+        se.draw_text(ctx, "MEGAWHEEL ARENA", 0, 140, 58, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.3))
+        ctx.restore()
+
+
 def kraggor_sad(ctx, t):
     """Grown-up Kraggor crying (S01E02 scenes 10, 12): the angry mouth and brows are painted over - a trembling
     frown, worried brows, shining eyes and tears. Same frame as kraggor_smile (origin = neck base, 40 px units)."""
@@ -2549,6 +2760,10 @@ SFX = {
     "breath_big": lambda: breath_big(),
     "kraggor_giggle": lambda: kraggor_giggle(),
     "arm_slide": lambda: arm_slide(),
+    "chop_slam": lambda: chop_slam(),
+    "chop_whoosh": lambda: chop_whoosh(),
+    "car_boing": lambda: car_boing(),
+    "chain_rattle": lambda: chain_rattle(),
     "kraggor_hum": lambda: kraggor_hum(),
     "kraggor_hum_joy": lambda: kraggor_hum_joy(),
     "kraggor_hum_sad": lambda: kraggor_hum_sad(),
@@ -2953,6 +3168,56 @@ def arm_slide():
     tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.8), (3, 0.6), (4, 0.4), (6, 0.2)))
     env = np.sin(math.pi * t / 1.2) ** 1.5
     return tone * env / 3.0 * 0.6
+
+
+def chop_slam():
+    """A giant axe hits the stone floor: a deep thud (phone-audible body 150-400 Hz) and a short metallic clang made of a
+    few inharmonic partials that die quickly (tonal, not noise)."""
+    sr = se.SR
+    n = int(1.0 * sr)
+    t = np.arange(n) / sr
+    thud = np.sin(2 * math.pi * (140 - 70 * np.minimum(t / 0.12, 1.0)) * t) * np.exp(-t * 11)
+    thud += 0.5 * np.sin(2 * math.pi * 2 * (140 - 70 * np.minimum(t / 0.12, 1.0)) * t) * np.exp(-t * 14)
+    clang = sum(np.sin(2 * math.pi * f * t) * w for f, w in ((412, 1.0), (671, 0.8), (1089, 0.55), (1747, 0.35)))
+    clang = clang * np.exp(-t * 9) * np.clip(t / 0.003, 0, 1)
+    out = thud * 0.9 + clang * 0.28
+    return out / max(1e-9, np.abs(out).max()) * 0.9
+
+
+def chop_whoosh():
+    """The axe drops: a quick falling tone (1100 -> 260 Hz) with a little body."""
+    sr = se.SR
+    n = int(0.32 * sr)
+    t = np.arange(n) / sr
+    f = 1100 - 840 * (t / 0.32)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    out = (np.sin(ph) + 0.4 * np.sin(2 * ph)) * np.sin(math.pi * t / 0.32) ** 0.8
+    return out / max(1e-9, np.abs(out).max()) * 0.5
+
+
+def car_boing():
+    """A squashed car springing back: a wobbling rising tone."""
+    sr = se.SR
+    n = int(0.9 * sr)
+    t = np.arange(n) / sr
+    f = 220 + 380 * (1 - np.exp(-t * 5)) + 40 * np.sin(2 * math.pi * 11 * t)
+    ph = 2 * math.pi * np.cumsum(f) / sr
+    out = (np.sin(ph) + 0.35 * np.sin(2 * ph)) * np.exp(-t * 3.2) * np.clip(t / 0.01, 0, 1)
+    return out / max(1e-9, np.abs(out).max()) * 0.6
+
+
+def chain_rattle():
+    """Chains rattling in the ceiling: a handful of short, bright tonal ticks."""
+    sr = se.SR
+    out = np.zeros(int(0.9 * sr))
+    rng = np.random.default_rng(14)
+    for q in range(11):
+        i = int((q * 0.07 + rng.uniform(0, 0.03)) * sr)
+        L = int(0.05 * sr)
+        tt = np.arange(L) / sr
+        f = rng.uniform(900, 2200)
+        out[i:i + L] += np.sin(2 * math.pi * f * tt) * np.exp(-tt * 70) * rng.uniform(0.2, 0.5)
+    return out / max(1e-9, np.abs(out).max()) * 0.35
 
 
 def amb_wind(n, rng):
@@ -3397,6 +3662,8 @@ def render_scene(ep, num, aspect):
         shake = 0.0
         if "shake" in sh.get("fx", []):
             shake = 14 * math.sin(t * 60)
+        _Z, _OX, _OY = zoom * zmul, W / 2 + shake + hh_x, H * 0.5 + hh_y     # screen = O + (p - (CX, piv_y)) * Z
+        SCR.clear()
         ctx.translate(W / 2 + shake + hh_x, H * 0.5 + hh_y)
         if tilt:
             ctx.rotate(tilt)
@@ -3471,6 +3738,8 @@ def render_scene(ep, num, aspect):
                     draw_beam(ctx, a, t, camx, flicker=a["id"] in sh.get("flicker", []))
         for a in sorted((a for a in actors.values() if not a["hidden"]), key=lambda a: -a["z"]):
             actor_state(a, t)
+            _sx, _gy = pxy(a["x"], a["z"], camx)
+            SCR[a["id"]] = (_OX + (_sx - CX) * _Z, _OY + (_gy - piv_y) * _Z)
             if scene.get("contact_shadow", True):
                 draw_contact(ctx, a, camx)
             draw_actor(ctx, a, t, camx)
@@ -3491,6 +3760,8 @@ def render_scene(ep, num, aspect):
         for prop in scene.get("props", []):
             if prop["type"] == "desk":
                 draw_desk_front(ctx, prop, camx)
+            elif prop["type"] == "chop" and prop.get("from_shot", 0) <= si <= prop.get("to_shot", 9999):
+                draw_chop(ctx, prop, camx, t, shots[prop.get("ref_shot", prop.get("from_shot", 0))]["t0"])
         ft = sh.get("foot")
         if ft:
             uu = u - ft.get("at", 0.0)
@@ -3573,6 +3844,8 @@ def render_scene(ep, num, aspect):
                 ctx.rectangle(0, 0, W, H)
                 ctx.set_source_rgba(1, 1, 1, 0.7 * (1 - frz / 0.06))
                 ctx.fill()
+        if sh.get("hud"):                                          # CHALLENGE HUD (title, level, progress, badges, bubbles)
+            draw_challenge_hud(ctx, sh["hud"], u, SCR, actors)
         if scene.get("letterbox", True):
             letterbox(ctx, aspect)
         t = treal

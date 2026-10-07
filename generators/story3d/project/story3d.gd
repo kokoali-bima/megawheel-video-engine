@@ -41,6 +41,7 @@ var flash_light: DirectionalLight3D
 var slides = []                    # [rocks[], from_shot, x] rockslides
 var glints = []                    # [material] things that sparkle (the old key)
 var gates = []                     # [left pivot, right pivot, open shot, dt, dur] the speedway gate leaves
+var torches = []                   # [OmniLight3D, phase] dungeon torches that flicker
 var sun_light: DirectionalLight3D
 
 
@@ -72,11 +73,14 @@ func _ready() -> void:
 	elif loc0 == "cave":
 		_environment_interior(Color(0.3, 0.38, 0.55), 0.45)
 		_cave()
+	elif loc0 == "dungeon":
+		_environment_interior(Color(0.5, 0.44, 0.55), 0.55)
+		_dungeon()
 	else:
 		_environment()
 		_ground()
 	var loc = str(S["scene"].get("location", "town"))
-	if loc == "garage" or loc == "cave":
+	if loc == "garage" or loc == "cave" or loc == "dungeon":
 		pass
 	elif loc == "forest":
 		_forest()
@@ -911,6 +915,114 @@ func _lightning() -> void:
 	add_child(flash_light)
 
 
+func _brick_tex(base: Color, mortar: Color, seed_v: int) -> ImageTexture:
+	# a 256x256 brick pattern (8 rows of 60x28 px bricks with mortar), each brick a little different in tone
+	var img = Image.create(256, 256, false, Image.FORMAT_RGB8)
+	img.fill(mortar)
+	var r = RandomNumberGenerator.new()
+	r.seed = seed_v
+	for row in range(8):
+		var off = 0 if row % 2 == 0 else 32
+		for col in range(-1, 5):
+			var x0 = col * 64 + off + 2
+			var y0 = row * 32 + 2
+			var sh = r.randf_range(-0.07, 0.07)
+			var c = Color(clampf(base.r + sh, 0.0, 1.0), clampf(base.g + sh, 0.0, 1.0), clampf(base.b + sh, 0.0, 1.0))
+			for yy in range(y0, y0 + 28):
+				for xx in range(x0, x0 + 60):
+					if xx >= 0 and xx < 256 and yy >= 0 and yy < 256:
+						img.set_pixel(xx, yy, c)
+	return ImageTexture.create_from_image(img)
+
+
+func _tiled(base: Color, mortar: Color, sx: float, sy: float, seed_v: int) -> StandardMaterial3D:
+	var m = StandardMaterial3D.new()
+	m.albedo_texture = _brick_tex(base, mortar, seed_v)
+	m.uv1_scale = Vector3(sx, sy, 1.0)
+	m.diffuse_mode = BaseMaterial3D.DIFFUSE_TOON
+	m.roughness = 1.0
+	return m
+
+
+func _dungeon() -> void:
+	# a stone dungeon corridor (CHALLENGE 'axes'): brick back wall, flagstone floor, dark ceiling with beams, columns,
+	# flickering torches (real orange lights), and at the far end the exit door with a glowing treasure chest
+	var back = float(S["scene"].get("wall_z", 5.2))
+	var zf = dist(back)
+	var zn = dist(-0.6)
+	box(Vector3(360, 0.3, zf - zn + 8), Vector3(40, -0.15, -(zf + zn) / 2),
+		_tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 90.0, 6.0, 4))                   # the floor
+	box(Vector3(360, 16, 0.6), Vector3(40, 8, -zf - 0.3),
+		_tiled(Color(0.38, 0.32, 0.3), Color(0.14, 0.12, 0.12), 90.0, 8.0, 9))                    # the brick wall
+	box(Vector3(360, 0.6, zf - zn + 10), Vector3(40, 10.3, -(zf + zn) / 2), toon(Color(0.1, 0.09, 0.12)))   # ceiling
+	var wood = toon(Color(0.2, 0.13, 0.09))
+	var x = -60.0
+	while x < 150.0:                                         # ceiling beams
+		box(Vector3(0.7, 0.7, zf - zn + 10), Vector3(x, 9.7, -(zf + zn) / 2), wood)
+		x += 7.0
+	var stone = toon(Color(0.3, 0.29, 0.34))
+	x = -56.0
+	while x < 150.0:                                         # columns along the back wall
+		box(Vector3(1.4, 10, 1.4), Vector3(x, 5.0, -zf + 0.7), stone)
+		box(Vector3(2.0, 0.5, 2.0), Vector3(x, 0.25, -zf + 0.7), stone)
+		x += 28.0
+	var fm = StandardMaterial3D.new()
+	fm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fm.albedo_color = Color(1.0, 0.62, 0.15)
+	fm.emission_enabled = true
+	fm.emission = Color(1.0, 0.55, 0.1)
+	fm.emission_energy_multiplier = 3.5
+	x = -50.0
+	var q = 0
+	while x < 150.0:                                         # torches
+		box(Vector3(0.18, 0.7, 0.18), Vector3(x, 3.3, -zf + 0.35), wood)
+		var fl = MeshInstance3D.new()
+		var sp = SphereMesh.new()
+		sp.radius = 0.3
+		sp.height = 0.7
+		fl.mesh = sp
+		fl.material_override = fm
+		fl.position = Vector3(x, 4.0, -zf + 0.35)
+		add_child(fl)
+		var ol = OmniLight3D.new()
+		ol.light_color = Color(1.0, 0.62, 0.28)
+		ol.light_energy = 2.4
+		ol.omni_range = 11.0
+		ol.position = Vector3(x, 3.9, -zf + 1.6)
+		add_child(ol)
+		torches.append([ol, float(q) * 1.7])
+		x += 14.0
+		q += 1
+	var fx = float(S["scene"].get("exit_x", 62.0))           # the exit: a heavy door, light behind it, a treasure chest
+	box(Vector3(5.0, 7.0, 0.5), Vector3(fx, 3.5, -zf + 0.3), toon(Color(0.28, 0.17, 0.1)))
+	for hb in [1.2, 3.5, 5.8]:
+		box(Vector3(5.2, 0.25, 0.6), Vector3(fx, hb, -zf + 0.3), toon(Color(0.15, 0.15, 0.2)))
+	var gl = OmniLight3D.new()
+	gl.light_color = Color(1.0, 0.82, 0.35)
+	gl.light_energy = 3.5
+	gl.omni_range = 14.0
+	gl.position = Vector3(fx, 2.5, -zf + 2.5)
+	add_child(gl)
+	var gold = StandardMaterial3D.new()
+	gold.albedo_color = Color(1.0, 0.8, 0.2)
+	gold.metallic = 0.8
+	gold.roughness = 0.35
+	gold.emission_enabled = true
+	gold.emission = Color(1.0, 0.7, 0.1)
+	gold.emission_energy_multiplier = 1.4
+	box(Vector3(2.4, 1.2, 1.4), wp(fx + 5.5, 4.2, 0.6), toon(Color(0.4, 0.22, 0.1)))
+	box(Vector3(2.5, 0.5, 1.5), wp(fx + 5.5, 4.2, 1.45), gold)
+	for qq in range(7):
+		var cn = MeshInstance3D.new()
+		var cs = SphereMesh.new()
+		cs.radius = 0.28
+		cs.height = 0.2
+		cn.mesh = cs
+		cn.material_override = gold
+		cn.position = wp(fx + 3.6 + qq * 0.55, 3.6 + (qq % 2) * 0.35, 0.12)
+		add_child(cn)
+
+
 func _ruins() -> void:
 	# a forgotten place at dawn (scene 15): dead trees, broken fence posts, a collapsed grandstand far away
 	var wood = toon(Color(0.33, 0.27, 0.22))
@@ -1640,6 +1752,8 @@ func _process(_d: float) -> void:
 				if ud > 0.0:
 					var fall = 40.0 - 4.9 * ud * ud * 4.0
 					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
+	for tq in torches:                                       # dungeon torches flicker
+		tq[0].light_energy = 2.3 + 0.5 * sin(t * 13.0 + float(tq[1])) + 0.3 * sin(t * 29.0 + float(tq[1]) * 2.0)
 	for gt in gates:                                         # the speedway gate swings open (ease in-out)
 		var u3 = clampf((t - float(shot_t0.get(int(gt[2]), 1.0e9)) - float(gt[3])) / float(gt[4]), 0.0, 1.0)
 		var e3 = u3 * u3 * (3.0 - 2.0 * u3)

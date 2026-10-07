@@ -19,10 +19,10 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
-             "look", "claw", "net", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
+             "look", "claw", "net", "hud", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
              "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
              "jcut"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
@@ -35,14 +35,14 @@ SINGLE = {"close", "ecu", "medium", "low"}                     # one-character f
 # establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
 COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
-LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins"}
+LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins", "dungeon"}
 TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
 AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "cave_dry", "wind", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
 PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece",
-         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate"}
+         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate", "chop"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -56,7 +56,7 @@ def sfx_names():
         return {"sting", "jingle", "heartbeat", "whoosh", "memory", "ding", "laugh", "cheer", "gasp", "roar", "stomp",
                 "thunder", "engine", "splat", "lamp_off", "honk", "steps_far", "stomp_near", "drone", "thud_far",
                 "honk_cheer", "box_drop", "thunder_roll", "rockslide", "munch", "whimper", "snore", "drip", "key_glint",
-                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide", "kraggor_hum", "kraggor_hum_joy", "kraggor_hum_sad", "kraggor_hum_grow", "kraggor_hum_fear"}
+                "breath_big", "kraggor_giggle", "kraggor_moan", "net_drop", "gate_creak", "key_click", "arm_slide", "chop_slam", "chop_whoosh", "car_boing", "chain_rattle", "kraggor_hum", "kraggor_hum_joy", "kraggor_hum_sad", "kraggor_hum_grow", "kraggor_hum_fear"}
 
 
 def vehicles():
@@ -146,7 +146,7 @@ def lint(ep, n):
             x, z, hid = pos[aid]
             if "show" in mv:
                 hid = not mv["show"]
-            if "to_x" in mv and sh.get("hold") and not sh.get("lines"):   # C08: a move must END inside its shot
+            if "to_x" in mv and sh.get("hold") and not sh.get("lines") and not sh.get("interrupt"):   # C08: a move must END inside its shot (unless the cut interrupts it on purpose)
                 d_ = abs(float(mv["to_x"]) - float(mv.get("x", x)))
                 need = 1.5 * d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))   # eased
                 leaves = i + 1 < len(shots) and shots[i + 1].get("moves", {}).get(aid, {}).get("show") is False

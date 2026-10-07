@@ -1,0 +1,945 @@
+{
+ "title": "CHALLENGE - Cars VS Dungeon Axes",
+ "chapter": "Cars VS Dungeon Axes",
+ "location": "dungeon",
+ "theme_location": "city",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "cave",
+ "fog": 0.15,
+ "letterbox": false,
+ "edge_fade": false,
+ "gap": 0.35,
+ "tail": 0.6,
+ "wall_z": 5.2,
+ "exit_x": 62.0,
+ "finish": 56.0,
+ "actors": {
+  "police": {
+   "vk": "police",
+   "x": 2.0,
+   "z": 1.4,
+   "face": 1,
+   "emo": "normal",
+   "hidden": true
+  },
+  "monster": {
+   "vk": "monster",
+   "x": 2.0,
+   "z": 1.4,
+   "face": 1,
+   "emo": "normal",
+   "hidden": true
+  },
+  "monster2": {
+   "vk": "monster2",
+   "x": 2.0,
+   "z": 1.4,
+   "face": 1,
+   "emo": "normal",
+   "hidden": true
+  }
+ },
+ "props": [
+  {
+   "type": "chop",
+   "axes": [
+    [
+     16.0,
+     0.0
+    ],
+    [
+     28.0,
+     0.9
+    ],
+    [
+     40.0,
+     1.7
+    ]
+   ],
+   "z": 0.3,
+   "from_shot": 0,
+   "to_shot": 0,
+   "ref_shot": 0
+  },
+  {
+   "type": "chop",
+   "axes": [
+    [
+     16.0,
+     0.0
+    ],
+    [
+     28.0,
+     0.9
+    ],
+    [
+     40.0,
+     1.7
+    ]
+   ],
+   "z": 0.3,
+   "from_shot": 1,
+   "to_shot": 3,
+   "ref_shot": 2
+  },
+  {
+   "type": "chop",
+   "axes": [
+    [
+     16.0,
+     0.0
+    ],
+    [
+     28.0,
+     0.9
+    ],
+    [
+     40.0,
+     1.7
+    ]
+   ],
+   "z": 0.3,
+   "from_shot": 4,
+   "to_shot": 6,
+   "ref_shot": 5
+  },
+  {
+   "type": "chop",
+   "axes": [
+    [
+     16.0,
+     0.0
+    ],
+    [
+     28.0,
+     0.9
+    ],
+    [
+     40.0,
+     1.7
+    ]
+   ],
+   "z": 0.3,
+   "from_shot": 7,
+   "to_shot": 9,
+   "ref_shot": 8
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_town_panic",
+   "from": 0,
+   "to": 0,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 0.5,
+   "tail": 0.6
+  },
+  {
+   "cue": "cue_town_panic",
+   "from": 2,
+   "to": 2,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 0.4,
+   "tail": 0.5
+  },
+  {
+   "cue": "cue_town_panic",
+   "from": 5,
+   "to": 5,
+   "vol": 0.4,
+   "start": 4.0,
+   "fade": 0.4,
+   "tail": 0.5
+  },
+  {
+   "cue": "cue_heroic_stand",
+   "from": 9,
+   "to": 9,
+   "vol": 0.5,
+   "start": 8.0,
+   "fade": 0.4,
+   "tail": 0.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 20,
+   "hold": 3.0,
+   "cut": "hard",
+   "move": {
+    "push": 0.05
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!"
+   },
+   "sfx": [
+    [
+     "chain_rattle",
+     0.2,
+     0.7
+    ]
+   ],
+   "lines": [
+    [
+     "announcer",
+     "Three drivers. Three giant dungeon axes. Who will survive?",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 12,
+   "hold": 2.2,
+   "cut": "hard",
+   "moves": {
+    "police": {
+     "show": true,
+     "x": 2.0
+    }
+   },
+   "move": {
+    "pan": 2
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 1,
+    "name": "SIREN THE POLICE CAR",
+    "color": [
+     0.18,
+     0.72,
+     0.3
+    ],
+    "actor": "police",
+    "who": "WHO WILL MAKE IT?"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.5
+    ]
+   ],
+   "lines": [
+    [
+     "announcer2",
+     "Level one! Siren the police car!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "police",
+   "dx": 3.5,
+   "zoom": 1.25,
+   "hold": 3.84,
+   "interrupt": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "police": {
+     "to_x": 60.0,
+     "speed": 7.0,
+     "delay": 0.0
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 1,
+    "name": "SIREN THE POLICE CAR",
+    "color": [
+     0.18,
+     0.72,
+     0.3
+    ],
+    "actor": "police"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ],
+    [
+     "chop_slam",
+     0.28,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.08000000000000002,
+     0.3
+    ],
+    [
+     "chop_slam",
+     1.18,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.98,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.08,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     1.8800000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.88,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     2.6799999999999997,
+     0.3
+    ],
+    [
+     "chop_slam",
+     3.78,
+     1.0
+    ],
+    [
+     "chop_whoosh",
+     3.5799999999999996,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "police",
+   "zoom": 1.1,
+   "hold": 3.6,
+   "move": {
+    "push": 0.08
+   },
+   "moves": {
+    "police": {
+     "squash": 0.42,
+     "at": 0.0,
+     "hold": 1.0,
+     "dizzy": true,
+     "to_x": 14.16,
+     "speed": 5.0,
+     "reverse": true
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 1,
+    "name": "SIREN THE POLICE CAR",
+    "color": [
+     0.18,
+     0.72,
+     0.3
+    ],
+    "actor": "police",
+    "badge": "fail",
+    "badge_at": 0.2,
+    "bubbles": [
+     [
+      0.1,
+      "OUCH!",
+      "police"
+     ]
+    ]
+   },
+   "sfx": [
+    [
+     "car_boing",
+     1.0,
+     0.8
+    ]
+   ],
+   "lines": [
+    [
+     "announcer",
+     "Chop! Siren got hit by axe number one!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 12,
+   "hold": 2.2,
+   "cut": "hard",
+   "moves": {
+    "monster": {
+     "show": true,
+     "x": 2.0
+    },
+    "police": {
+     "show": false
+    }
+   },
+   "move": {
+    "pan": 2
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 2,
+    "name": "ROCKY THE MONSTER TRUCK",
+    "color": [
+     1.0,
+     0.52,
+     0.08
+    ],
+    "actor": "monster"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.5
+    ]
+   ],
+   "lines": [
+    [
+     "announcer2",
+     "Level two! Rocky the monster truck!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "monster",
+   "dx": 3.5,
+   "zoom": 1.25,
+   "hold": 6.44,
+   "interrupt": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "monster": {
+     "to_x": 60.0,
+     "speed": 8.5,
+     "delay": 2.5
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 2,
+    "name": "ROCKY THE MONSTER TRUCK",
+    "color": [
+     1.0,
+     0.52,
+     0.08
+    ],
+    "actor": "monster"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ],
+    [
+     "chop_slam",
+     0.28,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.08000000000000002,
+     0.3
+    ],
+    [
+     "chop_slam",
+     1.18,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.98,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.08,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     1.8800000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.88,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     2.6799999999999997,
+     0.3
+    ],
+    [
+     "chop_slam",
+     3.78,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     3.5799999999999996,
+     0.3
+    ],
+    [
+     "chop_slam",
+     4.68,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     4.4799999999999995,
+     0.3
+    ],
+    [
+     "chop_slam",
+     5.48,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     5.28,
+     0.3
+    ],
+    [
+     "chop_slam",
+     6.38,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     6.18,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "monster",
+   "zoom": 1.1,
+   "hold": 3.6,
+   "move": {
+    "push": 0.08
+   },
+   "moves": {
+    "monster": {
+     "squash": 0.42,
+     "at": 0.0,
+     "hold": 1.0,
+     "dizzy": true,
+     "to_x": 20.95,
+     "speed": 5.0,
+     "reverse": true
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 2,
+    "name": "ROCKY THE MONSTER TRUCK",
+    "color": [
+     1.0,
+     0.52,
+     0.08
+    ],
+    "actor": "monster",
+    "badge": "fail",
+    "badge_at": 0.2,
+    "bubbles": [
+     [
+      0.1,
+      "OUCH!",
+      "monster"
+     ]
+    ]
+   },
+   "sfx": [
+    [
+     "car_boing",
+     1.0,
+     0.8
+    ]
+   ],
+   "lines": [
+    [
+     "announcer",
+     "Chop! Rocky got hit by axe number two!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 12,
+   "hold": 2.2,
+   "cut": "hard",
+   "moves": {
+    "monster2": {
+     "show": true,
+     "x": 2.0
+    },
+    "monster": {
+     "show": false
+    }
+   },
+   "move": {
+    "pan": 2
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 3,
+    "name": "GRIZZLY THE MONSTER TRUCK",
+    "color": [
+     0.6,
+     0.3,
+     0.92
+    ],
+    "actor": "monster2"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.5
+    ]
+   ],
+   "lines": [
+    [
+     "announcer2",
+     "Level three! Grizzly the monster truck!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "monster2",
+   "dx": 3.5,
+   "zoom": 1.25,
+   "hold": 13.36,
+   "interrupt": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "monster2": {
+     "to_x": 60.0,
+     "speed": 7.0,
+     "delay": 2.3000000000000003
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 3,
+    "name": "GRIZZLY THE MONSTER TRUCK",
+    "color": [
+     0.6,
+     0.3,
+     0.92
+    ],
+    "actor": "monster2"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ],
+    [
+     "chop_slam",
+     0.28,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.08000000000000002,
+     0.3
+    ],
+    [
+     "chop_slam",
+     1.18,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     0.98,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.08,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     1.8800000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     2.88,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     2.6799999999999997,
+     0.3
+    ],
+    [
+     "chop_slam",
+     3.78,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     3.5799999999999996,
+     0.3
+    ],
+    [
+     "chop_slam",
+     4.68,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     4.4799999999999995,
+     0.3
+    ],
+    [
+     "chop_slam",
+     5.48,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     5.28,
+     0.3
+    ],
+    [
+     "chop_slam",
+     6.38,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     6.18,
+     0.3
+    ],
+    [
+     "chop_slam",
+     7.28,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     7.08,
+     0.3
+    ],
+    [
+     "chop_slam",
+     8.08,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     7.88,
+     0.3
+    ],
+    [
+     "chop_slam",
+     8.98,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     8.780000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     9.88,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     9.680000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     10.68,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     10.48,
+     0.3
+    ],
+    [
+     "chop_slam",
+     11.58,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     11.38,
+     0.3
+    ],
+    [
+     "chop_slam",
+     12.48,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     12.280000000000001,
+     0.3
+    ],
+    [
+     "chop_slam",
+     13.28,
+     0.4
+    ],
+    [
+     "chop_whoosh",
+     13.08,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "monster2",
+   "zoom": 1.1,
+   "hold": 6.0,
+   "move": {
+    "push": 0.08
+   },
+   "moves": {
+    "monster2": {
+     "to_x": 58.0,
+     "speed": 3.0
+    }
+   },
+   "hud": {
+    "title": "CARS VS DUNGEON AXES!",
+    "x0": 2.0,
+    "x1": 56.0,
+    "marks": [
+     16.0,
+     28.0,
+     40.0
+    ],
+    "level": 3,
+    "name": "GRIZZLY THE MONSTER TRUCK",
+    "color": [
+     0.6,
+     0.3,
+     0.92
+    ],
+    "actor": "monster2",
+    "badge": "win",
+    "badge_at": 0.4,
+    "outro_at": 3.0,
+    "bubbles": [
+     [
+      0.2,
+      "YES!",
+      "monster2"
+     ]
+    ]
+   },
+   "sfx": [
+    [
+     "jingle",
+     0.4,
+     0.8
+    ]
+   ],
+   "lines": [
+    [
+     "announcer",
+     "Perfect timing! Grizzly survives all three axes!",
+     "excited"
+    ]
+   ]
+  }
+ ]
+}

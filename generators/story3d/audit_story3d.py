@@ -122,7 +122,8 @@ def read_gray(mp4, w=320, h=180):
     return np.frombuffer(raw, np.uint8).reshape(-1, h, w).astype(np.float32)
 
 
-def grab(mp4, t, w=SAMPLE_W, h=SAMPLE_H, fmt="rgb24"):
+def grab(mp4, t, w=None, h=None, fmt="rgb24"):
+    w, h = (w or SAMPLE_W), (h or SAMPLE_H)                          # resolved per scene (audit_scene)
     ch = 4 if fmt == "rgba" else 3
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", f"{t:.3f}", "-i", mp4, "-frames:v", "1", "-vf",
                           f"scale={w}:{h}", "-f", "rawvideo", "-pix_fmt", fmt, "-"], capture_output=True).stdout
@@ -141,7 +142,9 @@ def db(x):
 
 # ------------------------------------------------------------------ the audit
 def audit_scene(d, mp4):
+    global SAMPLE_W, SAMPLE_H
     S = json.load(open(os.path.join(d, "scene.json")))
+    SAMPLE_W, SAMPLE_H = (270, 480) if S["H"] > S["W"] else (480, 270)       # vertical Shorts keep their aspect
     fr = [f for _, f in json.load(open(os.path.join(d, "frames.json")))["frames"]]
     shots = S["shots"]
     sc = S["scene"]
