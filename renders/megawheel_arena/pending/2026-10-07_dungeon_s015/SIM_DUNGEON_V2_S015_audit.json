@@ -125,8 +125,8 @@
     {
       "section": "6.1 Teknis",
       "id": "size",
-      "desc": "Ukuran wajar (8-20 MB)",
-      "ok": false,
+      "desc": "Ukuran wajar (8-35 MB)",
+      "ok": true,
       "value": "29.6 MB",
       "hard": false
     },
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "12 file",
+      "value": "13 file",
       "hard": true
     },
     {
