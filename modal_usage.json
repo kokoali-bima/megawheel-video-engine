@@ -3095,6 +3095,26 @@
    "gpu_seconds": 166.8,
    "wall_seconds": 146.8,
    "cost_usd": 0.0539
+  },
+  {
+   "date": "2026-10-07",
+   "note": "story CH01_dungeon_axes#1 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 9,
+   "gpu_seconds": 80.6,
+   "wall_seconds": 113.6,
+   "cost_usd": 0.0206
+  },
+  {
+   "date": "2026-10-07",
+   "note": "story3d CH01_dungeon_axes 1",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 996.4,
+   "gpu_seconds": 167.7,
+   "wall_seconds": 217.6,
+   "cost_usd": 0.0627
   }
  ]
 }
