@@ -474,6 +474,13 @@
    "status": "QUEUED",
    "publish_at_utc": "2026-10-19T15:00:00Z",
    "role": "short"
+  },
+  {
+   "episode": 52,
+   "video_id": "SIM_DUNGEON_V2_S015",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-20T15:00:00Z",
+   "role": "short"
   }
  ]
 }

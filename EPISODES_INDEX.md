@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-07 07:15) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-07 13:20) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -65,6 +65,7 @@
 | 49 | `SIM_RACE25D_V4_S043` | race25d | APPROVED | Thu 2026-10-15 15:00 |  |
 | 50 | `SIM_POTHOLES_V2_S028` | potholes | APPROVED | Sun 2026-10-18 11:00 |  |
 | 51 | `SIM_POTHOLES_V2_S029` | potholes | APPROVED | Mon 2026-10-19 11:00 |  |
+| 52 | `SIM_DUNGEON_V2_S015` | dungeon | APPROVED | Tue 2026-10-20 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | APPROVED | Sun 2026-10-11 13:00 |  |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -731,6 +732,19 @@
 - **Tokoh dan hasil:** Level 1: Siren (police) → flip@obs0; Level 2: Titan (bigrig) → stuck@obs0; Level 3 (juara): Nitro (f1) → win
 - **Status:** APPROVED (approve 2026-10-04)
 - **Antrian:** QUEUED 2026-10-19T15:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 52 — `SIM_DUNGEON_V2_S015`
+
+- **Judul YouTube:** Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 52 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E052_2026-10-07_dungeon/SIM_DUNGEON_V2_S015.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E052_2026-10-07_dungeon/SIM_DUNGEON_V2_S015.json` · audit: `renders/megawheel_arena/S02/E052_2026-10-07_dungeon/SIM_DUNGEON_V2_S015_audit.md`
+- **Season / seri / seed:** S02 / dungeon / 15
+- **Tema / narator:** noon-clear-volcano / chatterbox:m1
+- **Durasi:** 49.3 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → smash@obs1+broken; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Siren (police) → win
+- **Status:** APPROVED (approve 2026-10-07)
+- **Antrian:** QUEUED 2026-10-20T15:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`

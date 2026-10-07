@@ -4398,19 +4398,21 @@
         "win"
       ],
       "duration": 49.3,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-07_dungeon_s015",
-      "audit": "renders/megawheel_arena/pending/2026-10-07_dungeon_s015/SIM_DUNGEON_V2_S015_audit.md",
-      "episode": null,
-      "season": null,
+      "folder": "renders/megawheel_arena/S02/E052_2026-10-07_dungeon",
+      "audit": "renders/megawheel_arena/S02/E052_2026-10-07_dungeon/SIM_DUNGEON_V2_S015_audit.md",
+      "episode": 52,
+      "season": 2,
       "upload_date": null,
       "youtube_url": null,
       "render3d": true,
       "drive_id": "12rzsMRfzJ2rk8YzZTk8wil_N6v8wLTIO",
-      "drive_sheet_id": "1RUs0LAQqK4NU7U2ZFmLcW2ODD69TOBUv",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S015.mp4"
+      "drive_sheet_id": null,
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E052_SIM_DUNGEON_V2_S015.mp4",
+      "approved_date": "2026-10-07",
+      "title": "Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 52 #Shorts"
     }
   ]
 }
