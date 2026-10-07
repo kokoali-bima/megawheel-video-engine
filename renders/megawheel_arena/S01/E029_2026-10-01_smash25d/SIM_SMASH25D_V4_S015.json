@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V4_S015",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-09T23:00:00Z",
   "engine": "smash25d v4",
   "series": "smash25d",
   "seed": 15,
@@ -104,5 +104,7 @@
   "preview_dir": "/root/video-engine/renders/megawheel_arena/S01/E029_2026-10-01_smash25d/preview",
   "episode": 29,
   "season": 1,
-  "approved_date": "2026-10-01"
+  "approved_date": "2026-10-01",
+  "youtube_url": "https://www.youtube.com/shorts/AbvICeQ1lPE",
+  "upload_date": "2026-10-07"
 }
