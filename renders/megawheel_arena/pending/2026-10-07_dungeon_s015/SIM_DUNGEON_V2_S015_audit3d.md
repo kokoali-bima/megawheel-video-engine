@@ -15,7 +15,7 @@
 | 1080x1920 30 fps + audio | ✅ | 1080x1920 30/1 audio=True |
 | jumlah frame = timeline + cold open (±2) | ✅ | 1479 vs 1479 |
 | durasi = manifest (±0.3 s) | ✅ | 49.30 vs 49.3 |
-| tidak ada frame hitam / putih (12 sampel) | ✅ | [91, 78, 81, 76, 81, 76, 78, 86, 79, 84, 101, 102] |
+| tidak ada frame hitam / putih (12 sampel) | ✅ | [91, 78, 81, 76, 81, 76, 78, 86, 80, 84, 101, 102] |
 | L1: kontak lava -> ledakan terjadwal | ✅ | t=7.83 |
 | L1: tabrakan -> panel copot (tanpa ledakan kecuali lava) | ✅ | t=5.17 |
 | L2: tabrakan -> panel copot (tanpa ledakan kecuali lava) | ✅ | t=5.93 |
