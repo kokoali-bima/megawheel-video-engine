@@ -208,11 +208,12 @@
   {
    "episode": 1502,
    "video_id": "2026-10-07_story15_trailer_e02",
-   "status": "UPLOADING",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-07T12:00:00Z",
    "role": "promo",
    "title": "Who Is Kraggor? \ud83e\udd96 Full Episode This Sunday!",
-   "upload_started": "2026-10-07T05:00:05.735693+00:00"
+   "upload_started": "2026-10-07T07:14:46.813486+00:00",
+   "url": "https://www.youtube.com/shorts/v4oErNoDW64"
   },
   {
    "episode": 18,
@@ -297,30 +298,42 @@
   {
    "episode": 29,
    "video_id": "SIM_SMASH25D_V4_S015",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-09T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Crash Battle! Only One Can Win! \ud83d\udca5 | Ep. 29 #Shorts",
+   "upload_started": "2026-10-07T07:14:54.342168+00:00",
+   "url": "https://www.youtube.com/shorts/AbvICeQ1lPE"
   },
   {
    "episode": 21,
    "video_id": "SIM_POTHOLES_V2_S008",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-10T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Giant Potholes! Who Survives? \ud83d\ude97\ud83d\udca5 | Ep. 21 #Shorts",
+   "upload_started": "2026-10-07T07:15:00.013523+00:00",
+   "url": "https://www.youtube.com/shorts/ggvN5p10cfQ"
   },
   {
    "episode": 34,
    "video_id": "SIM_RACE25D_V4_S045",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-10T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Nitro vs the Giant Hammer! Who Wins the Race? \ud83c\udfc1 | Ep. 34 #Shorts",
+   "upload_started": "2026-10-07T07:15:04.591131+00:00",
+   "url": "https://www.youtube.com/shorts/nYMwvHZvwmY"
   },
   {
    "episode": 32,
    "video_id": "SIM_SMASH25D_V5_S002",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-10T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Hydro, Grizzly, Siren or Zippy? Last Car Standing! \ud83d\udca5 | Ep. 32 #Shorts",
+   "upload_started": "2026-10-07T07:15:11.208275+00:00",
+   "url": "https://www.youtube.com/shorts/k9fMTUKrdeA"
   },
   {
    "episode": 30,
