@@ -117,11 +117,14 @@ def main():
               f"afade=t=in:d=1.0,afade=t=out:st={total - 18.0 - 2.0:.2f}:d=2.0,adelay=18000|18000[m2]")      # fades BEFORE the delay
     endt = int(sum(c[2] for c in CLIPS) * 1000)                   # the end card starts here: second sting
     fc.append(f"[{k + 2}:a]asplit=2[sa][sb];[sa]adelay=5500|5500,volume=0.5[st1];[sb]adelay={endt}|{endt},volume=0.6[st2]")
-    fc.append(f"[{k + 3}:a]aformat=channel_layouts=stereo[vo]")
+    fc.append(f"[{k + 3}:a]aformat=channel_layouts=stereo,asplit=2[vo][vosc]")
     fc.append(f"[{k + 4}:a]aformat=channel_layouts=stereo[fx]")
     fc.append("[m1]aformat=channel_layouts=stereo[m1s];[m2]aformat=channel_layouts=stereo[m2s];"
               "[st1]aformat=channel_layouts=stereo[s1s];[st2]aformat=channel_layouts=stereo[s2s];"
-              "[m1s][m2s][s1s][s2s][vo][fx]amix=inputs=6:normalize=0:duration=longest,"
+              "[m1s][m2s][s1s][s2s]amix=inputs=4:normalize=0:duration=longest[mus];"
+              # A10: the narrator is the anchor - the score ducks ~14 dB whenever she speaks
+              "[mus][vosc]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=450:makeup=1[musd];"
+              "[musd][vo][fx]amix=inputs=3:normalize=0:duration=longest,"
               f"loudnorm=I=-15:TP=-1.5:LRA=11,atrim=0:{total:.2f}[a]")
     inputs += ["-i", os.path.join(cues, "cue_kraggor_dark.wav"), "-i", os.path.join(cues, "cue_kraggor_tender.wav"),
                "-i", os.path.join(cues, "cue_kraggor_motif.wav"), "-i", wvo, "-i", wfx]
