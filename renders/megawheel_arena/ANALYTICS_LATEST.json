@@ -1,28 +1,28 @@
 {
- "generated": "2026-10-06T06:30:07.039367+00:00",
- "start": "2026-09-08",
- "end": "2026-10-05",
+ "generated": "2026-10-07T06:30:07.239914+00:00",
+ "start": "2026-09-09",
+ "end": "2026-10-06",
  "days": 28,
  "channel": {
-  "views": 3541,
-  "minutes": 857,
-  "subs": 14
+  "views": 3840,
+  "minutes": 935,
+  "subs": 18
  },
  "series": {
   "CHALLENGE": {
-   "videos": 9,
-   "views": 3479,
-   "avg_view_pct": 58.8
+   "videos": 11,
+   "views": 3666,
+   "avg_view_pct": 51.0
   },
   "RACE": {
-   "videos": 2,
-   "views": 29,
-   "avg_view_pct": 85.3
+   "videos": 3,
+   "views": 61,
+   "avg_view_pct": 36.1
   },
   "STORY": {
-   "videos": 1,
-   "views": 2,
-   "avg_view_pct": 178.7
+   "videos": 2,
+   "views": 71,
+   "avg_view_pct": 28.8
   }
  },
  "videos": [
@@ -30,54 +30,54 @@
    "id": "xEWas3W61QU",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 5 #Shorts",
    "series": "CHALLENGE",
-   "views": 1316,
-   "minutes": 280,
-   "avg_view_s": 25,
-   "avg_view_pct": 52.27,
-   "likes": 14,
+   "views": 1332,
+   "minutes": 286,
+   "avg_view_s": 24,
+   "avg_view_pct": 51.9,
+   "likes": 16,
    "subs": 1
   },
   {
    "id": "yf0y4R83hto",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
    "series": "CHALLENGE",
-   "views": 904,
-   "minutes": 215,
-   "avg_view_s": 28,
-   "avg_view_pct": 60.25,
-   "likes": 16,
+   "views": 917,
+   "minutes": 218,
+   "avg_view_s": 27,
+   "avg_view_pct": 59.45,
+   "likes": 15,
    "subs": 2
   },
   {
    "id": "nXlV3f6Wux8",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 6 #Shorts",
    "series": "CHALLENGE",
-   "views": 823,
-   "minutes": 229,
-   "avg_view_s": 33,
-   "avg_view_pct": 68.95,
-   "likes": 19,
+   "views": 884,
+   "minutes": 248,
+   "avg_view_s": 32,
+   "avg_view_pct": 68.3,
+   "likes": 22,
    "subs": 2
   },
   {
    "id": "3CfgGpkOx3Q",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 4 #Shorts",
    "series": "CHALLENGE",
-   "views": 245,
-   "minutes": 66,
+   "views": 254,
+   "minutes": 67,
    "avg_view_s": 27,
-   "avg_view_pct": 55.47,
-   "likes": 9,
+   "avg_view_pct": 54.28000000000001,
+   "likes": 10,
    "subs": 1
   },
   {
    "id": "dVBtbf8Bi_Q",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
    "series": "CHALLENGE",
-   "views": 141,
-   "minutes": 39,
-   "avg_view_s": 24,
-   "avg_view_pct": 49.04,
+   "views": 151,
+   "minutes": 41,
+   "avg_view_s": 23,
+   "avg_view_pct": 47.59,
    "likes": 3,
    "subs": 0
   },
@@ -85,10 +85,54 @@
    "id": "lA92He_9FeQ",
    "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
    "series": "RACE",
-   "views": 27,
-   "minutes": 5,
+   "views": 38,
+   "minutes": 6,
+   "avg_view_s": 17,
+   "avg_view_pct": 58.32999999999999,
+   "likes": 4,
+   "subs": 0
+  },
+  {
+   "id": "BB8Lr9LwL9g",
+   "title": "Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts",
+   "series": "STORY",
+   "views": 36,
+   "minutes": 3,
+   "avg_view_s": 14,
+   "avg_view_pct": 49.63,
+   "likes": 3,
+   "subs": 0
+  },
+  {
+   "id": "gAVCxOicZyM",
+   "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+   "series": "STORY",
+   "views": 35,
+   "minutes": 31,
+   "avg_view_s": 54,
+   "avg_view_pct": 8.03,
+   "likes": 2,
+   "subs": 1
+  },
+  {
+   "id": "ZjUnuZvelKY",
+   "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
+   "series": "CHALLENGE",
+   "views": 32,
+   "minutes": 4,
    "avg_view_s": 20,
-   "avg_view_pct": 67.71,
+   "avg_view_pct": 43.58,
+   "likes": 3,
+   "subs": 0
+  },
+  {
+   "id": "Q-7067tL0A8",
+   "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts",
+   "series": "CHALLENGE",
+   "views": 31,
+   "minutes": 8,
+   "avg_view_s": 24,
+   "avg_view_pct": 49.38,
    "likes": 4,
    "subs": 0
   },
@@ -96,73 +140,74 @@
    "id": "PwlO0ptmi-c",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 1 #Shorts",
    "series": "CHALLENGE",
-   "views": 22,
-   "minutes": 4,
+   "views": 28,
+   "minutes": 5,
    "avg_view_s": 19,
-   "avg_view_pct": 43.07,
+   "avg_view_pct": 43.22,
    "likes": 4,
-   "subs": 0
-  },
-  {
-   "id": "Q-7067tL0A8",
-   "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts",
-   "series": "CHALLENGE",
-   "views": 18,
-   "minutes": 6,
-   "avg_view_s": 33,
-   "avg_view_pct": 66.89,
-   "likes": 4,
-   "subs": 0
-  },
-  {
-   "id": "0FEC9QmNYw0",
-   "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
-   "series": "CHALLENGE",
-   "views": 8,
-   "minutes": 1,
-   "avg_view_s": 29,
-   "avg_view_pct": 60.75000000000001,
-   "likes": 1,
-   "subs": 0
-  },
-  {
-   "id": "ZjUnuZvelKY",
-   "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
-   "series": "CHALLENGE",
-   "views": 2,
-   "minutes": 1,
-   "avg_view_s": 34,
-   "avg_view_pct": 72.9,
-   "likes": 1,
    "subs": 0
   },
   {
    "id": "0o6TY6tXF_c",
    "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts",
    "series": "RACE",
-   "views": 2,
-   "minutes": 0,
-   "avg_view_s": 33,
-   "avg_view_pct": 102.8,
-   "likes": 1,
+   "views": 22,
+   "minutes": 2,
+   "avg_view_s": 12,
+   "avg_view_pct": 38.09,
+   "likes": 2,
    "subs": 0
   },
   {
-   "id": "BB8Lr9LwL9g",
-   "title": "Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts",
-   "series": "STORY",
-   "views": 2,
+   "id": "0FEC9QmNYw0",
+   "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
+   "series": "CHALLENGE",
+   "views": 19,
+   "minutes": 3,
+   "avg_view_s": 20,
+   "avg_view_pct": 41.94,
+   "likes": 2,
+   "subs": 0
+  },
+  {
+   "id": "LIP2P98Be6M",
+   "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
+   "series": "CHALLENGE",
+   "views": 13,
+   "minutes": 2,
+   "avg_view_s": 18,
+   "avg_view_pct": 40.33,
+   "likes": 5,
+   "subs": 0
+  },
+  {
+   "id": "RCBE3lgA2uo",
+   "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts",
+   "series": "CHALLENGE",
+   "views": 5,
+   "minutes": 1,
+   "avg_view_s": 30,
+   "avg_view_pct": 61.33,
+   "likes": 2,
+   "subs": 0
+  },
+  {
+   "id": "WinoMp1Dmzw",
+   "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
+   "series": "RACE",
+   "views": 1,
    "minutes": 0,
-   "avg_view_s": 51,
-   "avg_view_pct": 178.71,
-   "likes": 1,
+   "avg_view_s": 4,
+   "avg_view_pct": 11.76,
+   "likes": 0,
    "subs": 0
   }
  ],
  "upcoming": [
-  "Tue 06/10 22:00 WIB - Ep 17 - SCHEDULED",
-  "Wed 07/10 02:00 WIB - Ep 13 - SCHEDULED",
-  "Wed 07/10 06:00 WIB - Ep 26 - SCHEDULED",
-  "Wed 07/10 22:00 WIB - Ep 18 - SCHEDULED"
+  "Wed 07/10 19:00 WIB - Ep 1502 - UPLOADING",
+  "Wed 07/10 22:00 WIB - Ep 18 - SCHEDULED",
+  "Thu 08/10 02:00 WIB - Ep 14 - SCHEDULED",
+  "Thu 08/10 06:00 WIB - Ep 27 - SCHEDULED",
+  "Thu 08/10 22:00 WIB - Ep 19 - SCHEDULED"
  ]
 }

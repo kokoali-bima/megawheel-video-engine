@@ -3,8 +3,125 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-07
+**🔧 Lain-lain**
+- `18d5e98` Handover: CH01 v3
+- `629100f` Crumple pass recorded once; G04 allows intentional jump/fling/sink
+- `981fed2` Save history/tracking: challenge handover, tracker #42-47, error log, contract H01, resume prompt
+- `3d778e8` register_story: --only-trailer
+- `6aa88f3` Trailer metadata + register_story --trailer-video (pending)
+- `c12bfc9` trailer: duck the score under the narrator (sidechain)
+- `d310482` trailer: fade the second cue before delaying it (it faded out the moment it started)
+- `b572e2e` trailer: audible score bed
+- `3f3c380` trailer: captions fit the width
+- `ba9c01e` trailer: setsar=1 (concat refused a 5120:5121 SAR)
+- `7a48558` thumbnail art: open eyes
+- `6712a91` thumbnail art: layout
+- `dd6aef9` Thumbnail artwork tool (drawn with the real character drawings)
+- `6af38f7` Trailer Short tool (9:16, cut from the finished scenes)
+- `b31fc00` S01E02 publishing pack (US English)
+- `fb38f3f` thumbnail: crop the letterbox, badge position, Kraggor face frame
+- `c336c6d` S01E02 publish metadata (US English) + thumbnail tool
+- `cb4ede7` Scene 10: quieter Kraggor hum after each narrated sentence (masking)
+- `e3bea95` Scene 10: the narrator tells what Kraggor's chalk drawings show (voice + subtitle), Kraggor's hum as the reaction after each sentence
+- `008c7b2` AGENTS/HANDOVER: ledger self-heal indicator, bookends procedure, 2026-10-07 owner notes
+- `b222cb9` bookends: audible, silence-free score bed under the recap narration
+- `1954ac9` assemble: lossless (pcm/mkv) intermediate pieces, AAC once at the end (no piece-boundary gaps, no cumulative A/V drift), tracker #40
+- `13c8651` bookends: recap clip B without the aired caption box
+- `a4dbed7` bookends: crop the recap clear of the aired subtitles
+- `27fc1c0` Bookends: ident + theme (aired Ep.1), Previously recap, outro with the S01E02 teaser; assembler skips the PART card for scenes marked no_card
+- `9037086` Owner notes 2026-10-07: net fitted to Kraggor and drawn behind the cars, Kraggor silhouette option (ghost), Kraggor's own hum voice for his story (no bell tones), dry cave air; git_sync ledger self-heal + indicator, produce commits the ledger
+- `abedd17` HANDOVER: scenes 9-15 delivered, engine added, pitfalls
+- `338071c` Scene 15: audible wind ambience and a quicker music entry (opening was -39 dB after the party)
+- `97f6de2` Join card on every scene join (J04), longer tail on scene 11's last line, tracker #39
+- `1738723` Scenes 9-15 review fixes: tonal arm_slide instead of whoosh (A07), Kraggor head visible in wide shots, rope net, sign visible on the speedgate, two-shots in scene 15 (C11), A01 gap in scene 9
+- `89fbf2c` S01E02 scenes 9-15 (face to face, Kraggor's story, town gate, trap, stand up, party, old key) + props to_shot
+**🕳️ CHALLENGE (sim_engine)**
+- `6e7def9` CHALLENGE: fail badge after the impact word; tracker rows 48-51
+- `58594e5` CHALLENGE: wider lava stripe, bigger ogre, closer run camera
+- `a796629` CHALLENGE: lava pit as a floor stripe, car sinks behind the near rim, hop allowed in G04
+- `50fd1a5` CHALLENGE v3: Mario-style gauntlet (axe, lava pit, ogre), fast cars, BeamNG-style crumple/debris/launch, impacts + shake
+- `3274df7` CHALLENGE axes: floor under the 9:16 camera, axe that reads as an axe, brighter dungeon, music on the fail runs + win only
+- `160f907` CHALLENGE: NEW 3D GRAPHICS tag in the cold open; music spotted on the runs and the win only (A10)
+- `451d155` CHALLENGE Short on story3d (vertical): dungeon location, chopping axes (cairo, simulated outcomes), CHALLENGE HUD, new SFX, vertical Godot resolution + QA sample aspect; scene generator for 'Cars VS Dungeon Axes'
+**📤 Upload / antrean / Drive**
+- `0f733f2` publish: trailer Ep. 1502 moved to Wed 2026-10-07 08:00 ET (owner: it should air right away) [Claude Sonnet 5.5]
+- `97709e8` publish: Ep. 1002 thumbnail swapped to the custom artwork; trailer Ep. 1502 approved by the owner 2026-10-07 and queued [Claude Sonnet 5.5]
+- `e3c444f` publish: Ep. 2 trailer Short registered as PENDING (review), thumbnail artwork ready [Claude Sonnet 5.5]
+- `efb8757` publish: Ep. 1002 (Who Is Kraggor?) approved by the owner 2026-10-07 and queued for Sun 2026-10-11 13:00 ET [Claude Sonnet 5.5]
+- `ba22cab` Publishing: register story3d episodes from publish.json (title/description/tags/language/thumbnail), optional custom thumbnail on upload (never fails the upload)
+**🧪 Lab (eksperimen)**
+- `697be65` Godot: no z-fighting snow caps, bigger stars (sparkling peaks / shimmering night sky), tracker #41
+<details><summary>otomatis VM (25)</summary>
+
+- `2c12a82` records before analytics
+- `3151544` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `2808823` records: modal usage
+- `25d844d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `5cbcc77` records: modal usage
+- `fbd9fe7` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `ed4bbe3` records: modal usage
+- `baffaf1` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `e5744b4` records: modal usage
+- `ca54771` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `13330c4` records: modal usage
+- `d07ee56` records: modal usage
+- `27d1744` records: modal usage
+- `50edf78` records: modal usage (auto)
+- `0c901f3` records: modal usage (auto)
+- `fd4d869` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `3116683` records: modal usage (auto)
+- `480e30f` records: modal usage
+- `1da145d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `23e5ef4` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `80bdeef` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `acbe52e` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `036d8a3` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `b59d70a` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `44aa02b` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+
+</details>
+
 ## 2026-10-06
 **🔧 Lain-lain**
+- `196e190` Scenes 2,3,5,7: fill the A01 gap in scene 3, move the sting off the line, lower memory/drone levels
+- `f0e71e9` Scenes 2-3: re-apply the A10 spotting (an earlier copy restored the old scores) + A01 gap fixes
+- `879a956` Scenes 2,3,5,7: fix A01 gaps after the A10 respot (nervous honk, theme cue from shot 3) and masking levels
+- `15067d2` A10 music standard (silence is part of the score: <=60% of shots, gain 0.24, duck 0.75, sensors + lint), scenes 2-8 respotted; engine for scenes 9-15 (claw, chalk, net, sad Kraggor, SFX, wind, Godot towers/party lights/speedgate/ruins) UNTESTED on Godot
+- `dbd79d6` HANDOVER: scenes 5-8 delivered, engine added, next 9-15
+- `1cf43d7` assemble: join fade-out curve cub (qsin ends too steeply in dB on loud ambience), tracker #37
+- `6ee5e0b` Scene 5: let the final thunder end before the fade-out (join 5->6 drop sensor), tracker #37
+- `30c795e` Scenes 5-8 review fixes: cone in front of the baby head, brighter forest/mountain/cave, no moon dot on the mountain road, sign text fit, scene 6 framing, sfx gain + music levels; contract A09/L02/K02, tracker #34-36
+- `4d09629` S01E02 scenes 5-8 (flashback, plan, mountain road, cave) + shot-relative lightning + modal smoke test (short Godot render of new world code)
+- `9bb582d` Merge main into wip-scenes-5-8
+- `05f2c99` story3d engine for scenes 5-8: little Kraggor (baby head, world-anchored prop), tonal thunder/rockslide/munch/whimper/snore/drip/key/breath SFX, storm + cave ambience, one-shot sepia grade in compose, cave tint, linter vocabulary
+- `4ae6b57` RESUME_PROMPT.md (paste-in prompt for a new session), tracker #29-33, HANDOVER: episode cards instead of ads
+- `a7e3f06` Merge remote-tracking branch 'origin/main'
+- `e7ac2ca` assemble: do not shadow the scenes folder variable with the card fade width
+- `afa2936` J03: dracin-style episode card on every time-jump join (fade out 1.0, black hold 1.8 with 'PART N' + chapter title and a soft bell, fade in 1.2); contract-driven (label, hold, chime) so it is also where mid-roll ads can go later
+- `e6afe3d` HANDOVER: scenes 5-8 Godot code lives on branch wip-scenes-5-8 (untested)
+- `ffbeebe` WIP (untested): story3d Godot locations for scenes 5-8 - forest storm (rain, lightning), mountain road + rockslide, cave (crystals, treasure, sign, key, moonbeam), mountain backdrop. Kept off main until a short Godot render passes.
+- `d28c050` Merge remote-tracking branch 'origin/main'
+- `66288c3` S01E02 HANDOVER.md (resume point for a new session: decisions, status, in-progress, commands, pitfalls) + safe stop script in the repo
+- `adf86ad` scene 4 album insert pushes in on the torn photo; framing sensor skips inserts (off-screen voice)
+- `b901a0e` script: album + torn mountain photo continuity (K01, tear seed 7)
+- `45a1d4d` mountain photo: little Kraggor's tail sweeps past the tear (tip = the hint on the album side, rest on the sc.13 piece)
+- `8aeb26b` Merge remote-tracking branch 'origin/main'
+- `fa5f536` mountain photo: little Kraggor stands closer to the tear so his tail tip shows on the album side
+- `a9bf69c` continuity K01: the Ep.1 wall photo stays as aired (no tear/tail; linter guards it); Grandpa's album with old prints (town, with Little Sprinkles) and a NEW torn mountain photo whose tear comes from a seed - the scene 13 piece (photo_piece, little Kraggor from his real drawing, mirrored so his tail crosses the tear) fits exactly; scene 4 uses the album
+- `63ece83` Merge remote-tracking branch 'origin/main'
+- `b665545` C11 counts character dialogue only (narrator excluded) and leaves inserts out of the time base
+- `b944a92` Merge remote-tracking branch 'origin/main'
+- `1b0988e` scene 4: tail sized to the photo and tucked at the tear, lamp shot framed higher; inserts are their own shot type (sensor = linter)
+- `2d00e6e` scene 4 self-review: inserts clear of Sprinkles, slim spiked green tail on the torn photo, lamp shot framed above her roof sign, memory swell bridges into the flashback, silent reaction removed (cut rate)
+- `2379921` smoke preflight: story25d SMOKE draws ~3 frames/s + every shot in memory without encoding; produce_story3d runs it on the VM after prepare (a crash in new drawing code now stops in seconds, not in the cloud); sketch text stroke fixed
+- `d977efb` Merge remote-tracking branch 'origin/main'
+- `13ea84c` story3d Modal mounts all of branding/voice (the narrator's announcer_ref.wav was missing: scene 4 overlay crashed on the first narrator line)
+- `931c1dd` Merge remote-tracking branch 'origin/main'
+- `772cee3` produce_story3d: unbuffered live Modal log + watchdog (no overlay progress in 6 min = kill and retry once; the Modal client hung three times after 'Created objects')
+- `e2dd61f` story3d garage interior (plank walls, shelves, workbench, night window, warm interior light), hanging lamp with sway + light cone + dust motes, falling crate with dust puff, torn photo with a green tail (sc.13 payoff), pencil sketch of little Kraggor signed K., box_drop SFX, room tone without hiss, props with from_shot, warm indoor tint; S01E02 scene 4
+- `3f9e214` Merge remote-tracking branch 'origin/main'
+- `4ca0540` C09-C11 (research: close-ups sparingly, staging in depth): max 2 marked close-ups per dialogue scene, no wide->close jumps (push in instead), QA wide-share; G04 nothing floats: platform_h (stage + ramps) lifts cars automatically, linter forbids fixed h, QA flags cars in the air; Godot stage ramps; scenes 2-3 re-cut without cut-in close-ups
 - `e9829af` Merge remote-tracking branch 'origin/main'
 - `d74513c` linter: exact vehicle body table (same on every machine) and eased move timing (x1.5) - the QA real-position check found a 1.0 m gap the linter had estimated at 1.9 m; scene 3 Sprinkles arrives in time
 - `15fc511` Merge remote-tracking branch 'origin/main'
@@ -60,17 +177,41 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `e17e7ab` Merge remote-tracking branch 'origin/main'
 - `89dfc22` Ep.2 research §9: floating-car root cause, whistling-in-the-dark song research, score spotting, singing VC, far Kraggor
 - `c95e60d` Merge remote-tracking branch 'origin/main'
-**📤 Upload / antrean / Drive**
-- `a2e5328` publish: daily run 2026-10-06 [cron daily_publish.sh]
 **🧪 Lab (eksperimen)**
+- `2d0f00a` Godot: giant fog-free mountains (visible over the town), storm hides moon/stars, smaller Grandpa sign text; contact_sheet tool
 - `21ef9aa` Godot far Kraggor: visible only in the frames of his shot (was standing behind the town from shot 3 on, spoiling the reveal)
 - `a4bbb3d` Godot far Kraggor: fog-free materials (78 m of volumetric fog hid him completely)
 - `ac6a492` lab singvc: return plain floats (local modal env has no numpy)
 - `67e055e` lab singvc: pin protobuf >= 4.25 last (Modal runtime crash-loop with the funasr/modelscope protobuf)
+**📤 Upload / antrean / Drive**
+- `a2e5328` publish: daily run 2026-10-06 [cron daily_publish.sh]
 **🎬 Story / episode panjang**
 - `ec128d0` story25d: sung line lead-in (6th field: seconds heard over the previous shot); Ep.2 cold open uses Tilly's song in her own voice (Seed-VC take alt1: doo-doo intro under the establishing shot, cut after 'Not me!')
-<details><summary>otomatis VM (17)</summary>
+<details><summary>otomatis VM (40)</summary>
 
+- `bd9b0df` records: modal usage
+- `6542c6e` records: modal usage
+- `336b82c` records: modal usage (auto)
+- `19e1bf5` records: modal usage
+- `294915e` records: modal usage (auto)
+- `446574f` records: modal usage
+- `2f9104a` records: modal usage
+- `c194112` records: modal usage
+- `d648975` records: modal usage
+- `f41a439` records: modal usage
+- `9962c52` records: modal usage
+- `e5f51f9` records: modal usage
+- `5ced06d` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `b237160` records: modal usage (smoke)
+- `00f8fed` records: modal usage S01E02 scenes 5-8 (reconstructed)
+- `7a88507` records
+- `af80a3a` records
+- `790bdf4` records
+- `8339306` records
+- `93c1249` records
+- `4de8ba5` records
+- `a6508d9` records
+- `f568d78` analytics: daily report 2026-10-06
 - `9eae5e5` records before analytics
 - `f9df5fd` records
 - `09843e5` records
