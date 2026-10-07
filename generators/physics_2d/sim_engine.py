@@ -354,7 +354,7 @@ def make_dungeon_track(seed):
     spans, obst, danger = [], [], []
 
     def axe():
-        a = dict(x=round(tb.x + 1.0, 2), period=round(float(r.uniform(2.3, 2.9)), 2), phase=round(float(r.uniform(0, 2.4)), 2))
+        a = dict(x=round(tb.x + 1.0, 2), period=round(float(r.uniform(2.9, 3.5)), 2), phase=round(float(r.uniform(0, 3.0)), 2))
         AXES.append(a)
         spans.append((a["x"] - 1.6, a["x"] + 1.6))
         obst.append((a["x"], "axe"))
@@ -362,7 +362,7 @@ def make_dungeon_track(seed):
         tb.flat(2.0)
 
     def ogre():
-        o = dict(x=round(tb.x + 5.0, 2), period=round(float(r.uniform(3.3, 4.0)), 2), phase=round(float(r.uniform(0, 3.0)), 2))
+        o = dict(x=round(tb.x + 5.0, 2), period=round(float(r.uniform(3.6, 4.4)), 2), phase=round(float(r.uniform(0, 3.6)), 2))
         OGRES.append(o)
         cx = o["x"] - OGRE_REACH
         spans.append((cx - 2.0, cx + 2.0))
@@ -983,7 +983,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
         for ai, ax in enumerate(AXES):                      # a giant axe crushes a car under its blade
             if ai in axe_hit or event is not None:
                 continue
-            if axe_bottom(ax, t) < ch.position.y + car_top + 0.25 and abs(ch.position.x - ax["x"]) < 0.9 + 0.38 * bw:
+            if axe_bottom(ax, t) < ch.position.y + car_top - 0.1 and abs(ch.position.x - ax["x"]) < 0.7 + 0.3 * bw:
                 axe_hit.add(ai)
                 ch.velocity = (ch.velocity.x * 0.1, min(ch.velocity.y, 0.0) - 2.5)
                 ch.angular_velocity *= 0.3
@@ -999,7 +999,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
             if kk < 1 or tau >= 1.0 / 30 + 1e-6 or (oi, int(kk)) in ogre_hit:
                 continue
             ogre_hit.add((oi, int(kk)))
-            if event is None and abs(ch.position.x - (og["x"] - OGRE_REACH)) < 1.5 + 0.45 * bw:
+            if event is None and abs(ch.position.x - (og["x"] - OGRE_REACH)) < 1.3 + 0.4 * bw:
                 m_tot = v["mass"]
                 ch.apply_impulse_at_local_point((-m_tot * 2.0, m_tot * 8.5), (bw * 0.3, 0))
                 smashed = smashed or t
