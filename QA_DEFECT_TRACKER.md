@@ -70,6 +70,7 @@
 | 50 | 2026-10-07 | CH01 v3 | badge FAIL menutupi kata SPLASH/BAM | badge muncul 0.3-0.5 s, kata komik 0.45 s | badge fail muncul di 1.1-1.3 s | tinjau frame kejadian | OK |
 | 51 | 2026-10-07 | story25d | mobil tercatat dua kali di frames.json -> sensor "menempel" palsu | lintasan crumple menggambar mobil 2x lewat draw_actor yang di-patch | lintasan kedua pakai _draw_actor_raw | sensor C02 | OK |
 | 52 | 2026-10-07 | CH01 v4 (skrip tangan) | Format menyimpang dari challenge lama (4 level, tanpa slow-mo, musik latar, fisika buatan) | agent tidak membaca BLUEPRINT/Aturan Nol sebelum membangun generator sendiri | seri `dungeon` di sim_engine + grafis lewat convert3d; BACA BLUEPRINT.md, PRODUCTION_STANDARD.md, AGENTS.md DULU sebelum membuat format baru | audit.py (3 level, durasi, badge, CTA) + audit3d | OK |
+| 53 | 2026-10-07 | dungeon 3D (lab godot3d_challenge) | Titik hitam bulat + cahaya kuning di truk saat awal level | emitter asap/api/cipratan CPUParticles3D yang `emitting=false` tetap menggambar partikelnya di posisi emitter (renderer compat) | `smoke/fire/spray.visible` mengikuti kondisi emisi + bersihkan di awal level | cek frame awal tiap level (kontak lembar) | OK |
 
 ## Sensor yang ada sekarang
 | Sensor / cek | Di mana | Menangkap |
