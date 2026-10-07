@@ -13,12 +13,14 @@ import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 CHOP = dict(P=2.6, up=1.0, fall=0.18, down=0.40, h_up=5.2, h_dn=0.15)        # = story25d.CHOP
-AXES = [(14.0, 0.0)]
-PIT = (26.0, 36.0)
-JUMP_FROM, JUMP_TO = 22.5, 38.5                                               # take off / land (car centre)
-OGRE_X = 48.0
-CLUB_X = OGRE_X - 3.6                                                         # where the club lands
-START_X, FINISH_X, RUN_TO = 2.0, 58.0, 60.0
+AXES = [(20.0, 0.0), (96.0, 0.9), (108.0, 1.7)]                               # the first one stops level 1; two more near the end
+RAMP = (34.0, 42.0, 1.7)                                                     # launch ramp: x0, lip x1, height at the lip
+PIT = (42.0, 56.0)                                                           # the lava pit starts at the lip of the ramp
+LAND_X = 60.5                                                                # winners land here (car centre)
+SHORT_X = 49.0                                                               # a car that is too slow lands in the pit here
+OGRE_X = 80.0
+CLUB_X = OGRE_X - 3.6                                                        # where the club lands
+START_X, FINISH_X, RUN_TO = 2.0, 126.0, 129.0
 BODY = {"police": (4.4, 2.3), "monster": (4.3, 3.1), "monster2": (4.3, 3.1), "sports": (4.2, 1.5), "bus": (7.4, 3.0),
         "firetruck": (6.4, 3.2), "f1": (4.6, 1.2), "taxi": (4.3, 1.9), "bigrig": (9.6, 3.6), "icecream": (5.6, 2.9)}
 DISPLAY = {"sports": "ZIPPY THE SPORTS CAR", "police": "SIREN THE POLICE CAR", "bus": "BUSTER THE SCHOOL BUS",
@@ -69,12 +71,14 @@ def t_at(X, speed, delay):
     return (lo + hi) / 2
 
 
-def first_hit(vk, speed, delay, dt=0.004):
+def first_hit(vk, speed, delay, dt=0.004, xmax=1e9):
     half, h = BODY[vk][0] / 2, BODY[vk][1]
     _, T = x_at(0, speed, delay)
     u = 0.0
     while u < delay + T + 0.2:
         x, _ = x_at(u, speed, delay)
+        if x > xmax:
+            return None
         for i, (xp, ph) in enumerate(AXES):
             if abs(xp - x) < half + 0.9 and bottom(u + ph) < h:
                 return i, round(u, 3), round(x, 2)
@@ -82,20 +86,20 @@ def first_hit(vk, speed, delay, dt=0.004):
     return None
 
 
-def robust(vk, speed, delay, want):
+def robust(vk, speed, delay, want, xmax=1e9):
     for dd in (-0.12, 0.0, 0.12):
-        r = first_hit(vk, speed, max(0.0, delay + dd))
+        r = first_hit(vk, speed, max(0.0, delay + dd), xmax=xmax)
         if (None if r is None else r[0]) != want:
             return False
     return True
 
 
-def find_run(vk, want, speeds=(18.0, 19.0, 17.0, 20.0, 16.0)):
+def find_run(vk, want, xmax=1e9, speeds=(18.0, 19.0, 17.0, 20.0, 16.0)):
     for sp in speeds:
         for d10 in range(0, 40):
             delay = d10 * 0.1
-            if robust(vk, sp, delay, want):
-                return sp, delay, first_hit(vk, sp, delay)
+            if robust(vk, sp, delay, want, xmax):
+                return sp, delay, first_hit(vk, sp, delay, xmax=xmax)
     raise SystemExit(f"no run found for {vk} want={want}")
 
 
@@ -127,15 +131,16 @@ def L(spk, text, emo="excited"):
 
 def build(cast):
     wants = [0, None, None, None]
-    runs = [find_run(vk, w) for vk, w in zip(cast, wants)]
+    xmaxes = [1e9, SHORT_X + 3, OGRE_X, 1e9]                          # only the axes a car really reaches count
+    runs = [find_run(vk, w, xm) for vk, w, xm in zip(cast, wants, xmaxes)]
     for vk, w, r in zip(cast, wants, runs):
         print(f"[dungeon] {NICK[vk]:8s} want={w} speed={r[0]} delay={r[1]} hit={r[2]}")
     actors = {vk: {"vk": vk, "x": START_X, "z": 1.4, "face": 1, "emo": "normal", "hidden": True} for vk in cast}
-    HUD0 = {"title": "CARS VS THE DUNGEON!", "x0": START_X, "x1": FINISH_X, "marks": [AXES[0][0], PIT[0] + 5.0, OGRE_X]}
+    HUD0 = {"title": "CARS VS THE DUNGEON!", "x0": START_X, "x1": FINISH_X, "marks": [AXES[0][0], (PIT[0] + PIT[1]) / 2, OGRE_X, AXES[1][0], AXES[2][0]]}
     shots, props, score = [], [], []
     shots.append({"cam": "wide", "zoom": 0.5, "dx": 28, "hold": 3.2, "cut": "hard", "move": {"push": 0.05},
                   "hud": {"title": "CARS VS THE DUNGEON!", "tag": "NEW 3D GRAPHICS!"}, "sfx": [["chain_rattle", 0.2, 0.7]],
-                  "lines": [L("announcer", "An axe, a lava pit and an angry ogre! Who will survive the dungeon?")]})
+                  "lines": [L("announcer", "Axes, a lava pit and an angry ogre! Who will survive the dungeon?")]})
     props.append({"type": "lava", "pits": [list(PIT)], "z": 1.4, "from_shot": 0, "to_shot": 99})
     props.append({"type": "ogre", "x": OGRE_X, "z": 0.7, "face": -1, "scale": 1.35, "slams": [], "from_shot": 0, "to_shot": 0,
                   "ref_shot": 0})
@@ -148,40 +153,44 @@ def build(cast):
         intro_moves = {vk: {"show": True, "x": START_X}}
         if prev:
             intro_moves[prev] = {"show": False}
-        trap = ["Watch out for the axe!", "Lava ahead!", "The ogre is awake!", "Axe, lava and the ogre!"][lv]
+        trap = ["Watch out for the axe!", "Jump the lava pit!", "The ogre is awake!", "Axes, lava and the ogre!"][lv]
         shots.append({"cam": "wide", "zoom": 0.8, "dx": 9, "hold": 2.6, "cut": "hard", "moves": intro_moves, "move": {"pan": 2},
                       "hud": dict(hud, who="WHO WILL MAKE IT?") if lv == 0 else hud, "sfx": [["engine", 0.3, 0.5]],
                       "lines": [L("announcer2", (f"Level {LV[lv]}! " if lv < 3 else "Final level! ") +
                                   f"{NICK[vk]} the {KIND[vk]}! {trap}")]})
         T = x_at(0, sp, delay)[1]
-        t_pit = t_at(JUMP_FROM, sp, delay)
-        t_land = t_at(JUMP_TO, sp, delay)
+        t_ramp0 = t_at(RAMP[0], sp, delay)
+        t_lip = t_at(RAMP[1] - 0.5, sp, delay)
+        t_land = t_at(LAND_X, sp, delay)
         moves = {"to_x": RUN_TO, "speed": sp, "delay": delay}
         sfx = [["engine", 0.0, 0.6]]
         slam_ogre = None
-        if lv == 1:                                                  # falls into the lava: cut when the front wheels drop
-            half = BODY[vk][0] / 2
-            fall_x = PIT[0] + half + 0.4
-            t_end = t_at(fall_x, sp, delay)
-        elif hit:
+        half = BODY[vk][0] / 2
+        if lv >= 1:
+            moves["ramp"] = {"x0": RAMP[0], "x1": RAMP[1], "h": RAMP[2]}
+        if lv == 1:                                                  # too slow: a short hop, drops into the lava
+            t_short = t_at(SHORT_X, sp, delay)
+            moves["jump"] = {"at": t_lip, "dur": t_short - t_lip, "peak": 1.0, "h0": RAMP[2]}
+            fall_x = SHORT_X
+            t_end = t_short
+        elif lv >= 2:
+            moves["jump"] = {"at": t_lip, "dur": t_land - t_lip, "peak": 3.2, "h0": RAMP[2]}
+        if lv == 0:
             t_end = hit[1] + 0.1
         elif lv == 2:                                                # the club lands on the hood
-            half = BODY[vk][0] / 2
             slam_ogre = t_at(CLUB_X - 1.7 - half, sp, delay)
             t_end = slam_ogre
-        else:
+        elif lv == 3:
             slam_ogre = t_at(OGRE_X + 2.0, sp, delay)               # the club lands well behind the winner
             t_end = delay + T + 0.2
         if lv >= 2:
-            moves["jump"] = {"at": t_pit, "dur": t_land - t_pit, "peak": 3.0}
-            if t_end > t_land:
-                sfx.append(["car_boing", t_land, 0.5])
+            sfx.append(["car_boing", t_land, 0.5])
         if slam_ogre is not None:
             sfx.append(["ogre_swing", max(0.0, slam_ogre - 0.55), 0.9])
             sfx.append(["chop_slam", slam_ogre + 0.02, 0.7 if lv == 3 else 0.9])
         for i, t in slams(t_end):
             main = hit is not None and i == hit[0] and abs(t - hit[1]) < 0.45
-            sfx.append(["chop_slam", max(0.0, t), 0.9 if main else 0.35])
+            sfx.append(["chop_slam", max(0.0, t), 0.9 if main else 0.3])
             sfx.append(["chop_whoosh", max(0.0, t - 0.2), 0.3])
         shots.append({"cam": "track", "on": vk, "dx": 4.5, "zoom": 1.35, "hold": round(t_end, 2), "interrupt": True,
                       "speedlines": True, "move": {"push": 0.05}, "moves": {vk: moves}, "hud": hud, "sfx": sfx})
@@ -195,7 +204,7 @@ def build(cast):
             res["sfx"] = [["chop_slam", 0.0, 1.0], ["crash_big", 0.03, 0.9], ["car_boing", 1.0, 0.8]]
             res["lines"] = [L("announcer", f"Chop! {NICK[vk]} got squashed by the axe!")]
         elif lv == 1:                                                # into the lava, then spat out
-            vx, vy, g, h0 = -4.5, 13.0, 24.0, -3.2
+            vx, vy, g, h0 = 11.0, 14.5, 24.0, -3.8
             tl, dxl = ballistic(0, vx, vy, g, h0)
             pop = 1.0
             res["moves"] = {vk: {"sink": {"at": 0.0, "dur": 0.7, "depth": 3.8, "tilt": 0.8},
@@ -241,7 +250,7 @@ def build(cast):
         "title": "CHALLENGE - Cars VS The Dungeon", "chapter": "Cars VS The Dungeon", "location": "dungeon",
         "theme_location": "city", "time": "night", "weather": "clear", "ambience": "cave", "fog": 0.15, "letterbox": False,
         "edge_fade": False, "gap": 0.35, "tail": 0.6, "wall_z": 5.2, "exit_x": FINISH_X + 6.0, "finish": FINISH_X,
-        "lava": [list(PIT)], "lava_z": [-0.2, 3.6], "actors": actors, "props": props, "score": score, "shots": shots}
+        "lava": [list(PIT)], "lava_z": [-0.2, 3.6], "ramps": [list(RAMP)], "actors": actors, "props": props, "score": score, "shots": shots}
 
 
 def main():

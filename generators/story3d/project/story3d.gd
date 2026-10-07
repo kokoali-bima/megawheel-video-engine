@@ -988,6 +988,19 @@ func _dungeon() -> void:
 		pl.position = Vector3(pc, 1.0, -dist(1.4))
 		add_child(pl)
 		torches.append([pl, float(px0)])
+	var rmat = toon(Color(0.95, 0.72, 0.1))
+	for rp in S["scene"].get("ramps", []):                   # launch ramps: a solid wedge rising toward +x
+		var rx0 = float(rp[0])
+		var rx1 = float(rp[1])
+		var rh = float(rp[2])
+		var wmi = MeshInstance3D.new()
+		var pm = PrismMesh.new()
+		pm.size = Vector3(rx1 - rx0, rh, za - zb)
+		pm.left_to_right = 1.0
+		wmi.mesh = pm
+		wmi.material_override = rmat
+		wmi.position = Vector3((rx0 + rx1) / 2, rh / 2, (za + zb) / 2)
+		add_child(wmi)
 	box(Vector3(360, 16, 0.6), Vector3(40, 8, -zf - 0.3),
 		_tiled(Color(0.38, 0.32, 0.3), Color(0.14, 0.12, 0.12), 90.0, 8.0, 9))                    # the brick wall
 	box(Vector3(360, 0.6, zf - zn + 10), Vector3(40, 10.3, -(zf + zn) / 2), toon(Color(0.1, 0.09, 0.12)))   # ceiling

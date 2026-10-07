@@ -19,7 +19,7 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava", "lava_z"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava", "lava_z", "ramps"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "claw", "net", "hud", "impacts", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
@@ -28,7 +28,7 @@ SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", 
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
 MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
 ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
-                   "at", "hold", "patched", "jump", "sink", "fling", "crumple"}
+                   "at", "hold", "patched", "jump", "sink", "fling", "crumple", "ramp"}
 CAMS = {"wide", "two", "group", "medium", "close", "ecu", "low", "track"}
 SINGLE = {"close", "ecu", "medium", "low"}                     # one-character framings
 # film coverage rules (owner 2026-10-06: "tiap ngobrol di-zoom ke yang bicara ... seperti film per pemeran"):

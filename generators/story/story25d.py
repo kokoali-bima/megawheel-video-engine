@@ -4024,9 +4024,14 @@ def render_scene(ep, num, aspect):
                 if mv.get("jump"):                                 # Mario jump over a pit: arc + nose up -> nose down
                     jp = mv["jump"]
                     pj = (uu - jp["at"]) / jp["dur"]
-                    if 0 < pj < 1:
-                        a["h"] += jp["peak"] * 4 * pj * (1 - pj)
+                    if 0 < pj < 1:                                 # h0: the height of the launch ramp's lip, fading to 0
+                        a["h"] += jp.get("h0", 0.0) * (1 - pj) + jp["peak"] * 4 * pj * (1 - pj)
                         a["rot"] = -0.28 * (1 - 2 * pj)
+                if mv.get("ramp"):                                 # driving up a launch ramp: climbs, nose up
+                    rp = mv["ramp"]
+                    if rp["x0"] < a["x"] < rp["x1"]:
+                        a["h"] += rp["h"] * (a["x"] - rp["x0"]) / (rp["x1"] - rp["x0"])
+                        a["rot"] = -math.atan2(rp["h"], rp["x1"] - rp["x0"])
                 if mv.get("sink") and j == si:                     # falls into the lava: nose down, gone below the surface
                     sk = mv["sink"]
                     tk = uu - sk["at"]
