@@ -26,11 +26,11 @@ def main():
     open(top, "w", encoding="utf-8").write(th["top"])
     badge = os.path.join(os.path.dirname(a.out) or ".", "thumb_badge.txt")
     open(badge, "w", encoding="utf-8").write(th["badge"])
-    vf = ("scale=1280:720,eq=saturation=1.25:contrast=1.08,"
+    vf = ("crop=1920:896:0:92,scale=-2:720,crop=1280:720:(iw-1280)/2:0,eq=saturation=1.25:contrast=1.08,"      # no letterbox bars
           "drawbox=x=0:y=ih*0.52:w=iw:h=ih*0.48:color=black@0.38:t=fill,"          # a dark band so the lettering reads
           f"drawtext=fontfile={FONT}:textfile={top}:fontcolor=0xFFD21F:fontsize=92:borderw=8:bordercolor=black:x=48:y=h*0.55,"
           f"drawtext=fontfile={FONT}:textfile={big}:fontcolor=white:fontsize=170:borderw=10:bordercolor=black:x=40:y=h*0.64,"
-          f"drawbox=x=w-250:y=28:w=222:h=92:color=0xFF6A00@0.95:t=fill,"
+          f"drawbox=x=iw-250:y=28:w=222:h=92:color=0xFF6A00@0.95:t=fill,"
           f"drawtext=fontfile={FONT}:textfile={badge}:fontcolor=white:fontsize=64:borderw=4:bordercolor=black:x=w-232:y=44")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(th["at"]), "-i", src, "-frames:v", "1", "-vf", vf,
                     "-q:v", "2", a.out], check=True)
