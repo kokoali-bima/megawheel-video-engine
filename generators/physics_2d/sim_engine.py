@@ -350,7 +350,7 @@ def make_dungeon_track(seed):
     r = np.random.default_rng(9000 + seed)
     PIT_KIND = "lava"
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(31, 35)))                        # first hazard after the intro narration
+    tb.flat(float(r.uniform(40, 45)))                        # first hazard after the intro narration (events need >= ~6 s)
     spans, obst, danger = [], [], []
 
     def axe():
