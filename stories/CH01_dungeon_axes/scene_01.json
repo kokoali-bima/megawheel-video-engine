@@ -422,8 +422,8 @@
    "cam": "medium",
    "on": "bus",
    "zoom": 0.95,
-   "hold": 4.4,
-   "lead": 1.4,
+   "hold": 5.0,
+   "lead": 2.4,
    "move": {
     "push": 0.06
    },
@@ -679,8 +679,8 @@
    "cam": "medium",
    "on": "sports",
    "zoom": 0.95,
-   "hold": 4.4,
-   "lead": 1.4,
+   "hold": 5.0,
+   "lead": 2.4,
    "move": {
     "push": 0.06
    },
@@ -963,8 +963,8 @@
    "cam": "medium",
    "on": "firetruck",
    "zoom": 0.95,
-   "hold": 4.4,
-   "lead": 1.4,
+   "hold": 5.0,
+   "lead": 2.4,
    "move": {
     "push": 0.06
    },
@@ -1326,7 +1326,7 @@
    "on": "f1",
    "zoom": 0.95,
    "hold": 6.2,
-   "lead": 1.4,
+   "lead": 2.4,
    "move": {
     "push": 0.06
    },

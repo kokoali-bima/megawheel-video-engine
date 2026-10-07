@@ -194,7 +194,7 @@ def build(cast):
             sfx.append(["chop_whoosh", max(0.0, t - 0.2), 0.3])
         shots.append({"cam": "track", "on": vk, "dx": 4.5, "zoom": 1.35, "hold": round(t_end, 2), "interrupt": True,
                       "speedlines": True, "move": {"push": 0.05}, "moves": {vk: moves}, "hud": hud, "sfx": sfx})
-        res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 4.4, "lead": 1.4, "move": {"push": 0.06}}
+        res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 5.0, "lead": 2.4, "move": {"push": 0.06}}
         if lv == 0:                                                  # the axe squashes the bus
             res["moves"] = {vk: {"squash": 0.4, "at": 0.0, "hold": 1.0, "dizzy": True, "to_x": hit[2] - 5.0, "speed": 4.0,
                                  "reverse": True, "crumple": {"at": 0.0, "end": 1, "amt": 0.5}}}
