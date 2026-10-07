@@ -3235,6 +3235,46 @@
    "gpu_seconds": 42.1,
    "wall_seconds": 70.4,
    "cost_usd": 0.0108
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_DUNGEON_V2_S002 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 42.4,
+   "wall_seconds": 69.6,
+   "cost_usd": 0.0108
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_DUNGEON_V2_S009 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 47.6,
+   "wall_seconds": 105.5,
+   "cost_usd": 0.0121
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_LAVA_V2_S021 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 66.3,
+   "wall_seconds": 110.3,
+   "cost_usd": 0.0169
+  },
+  {
+   "date": "2026-10-07",
+   "note": "narrator SIM_POTHOLES_V2_S007 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 55.8,
+   "wall_seconds": 147.7,
+   "cost_usd": 0.0143
   }
  ]
 }
