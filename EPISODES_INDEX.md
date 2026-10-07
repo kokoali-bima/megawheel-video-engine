@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-07 02:45) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-07 02:49) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -68,7 +68,7 @@
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | APPROVED | Sun 2026-10-11 13:00 |  |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
-| 1502 | `2026-10-07_story15_trailer_e02` | story15_trailer | APPROVED | Sat 2026-10-10 17:00 |  |
+| 1502 | `2026-10-07_story15_trailer_e02` | story15_trailer | APPROVED | Wed 2026-10-07 08:00 |  |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
 
@@ -782,5 +782,5 @@
 - **Durasi:** None s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → story15_trailer; Level 2: Zippy (sports) → ; Level 3 (juara): Buster (bus) → ; Level 4: Rocky (monster) → ; Level 5: Siren (police) → ; Level 6: Tilly (taxi) → ; Level 7: Nitro (f1) → 
 - **Status:** APPROVED (approve 2026-10-07)
-- **Antrian:** QUEUED 2026-10-10T21:00:00Z
+- **Antrian:** QUEUED 2026-10-07T12:00:00Z
 - **YouTube:** belum diupload

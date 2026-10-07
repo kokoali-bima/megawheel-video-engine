@@ -206,6 +206,13 @@
    "url": "https://www.youtube.com/shorts/eQQzWYXAda8"
   },
   {
+   "episode": 1502,
+   "video_id": "2026-10-07_story15_trailer_e02",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-07T12:00:00Z",
+   "role": "promo"
+  },
+  {
    "episode": 18,
    "video_id": "SIM_BUMPS_V2_S010",
    "status": "SCHEDULED",
@@ -305,13 +312,6 @@
    "status": "QUEUED",
    "publish_at_utc": "2026-10-10T19:00:00Z",
    "role": "race"
-  },
-  {
-   "episode": 1502,
-   "video_id": "2026-10-07_story15_trailer_e02",
-   "status": "QUEUED",
-   "publish_at_utc": "2026-10-10T21:00:00Z",
-   "role": "promo"
   },
   {
    "episode": 32,
