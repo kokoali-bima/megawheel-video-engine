@@ -128,29 +128,38 @@
  ],
  "score": [
   {
-   "cue": "cue_town_panic",
+   "cue": "cue_tension_cave",
    "from": 0,
    "to": 0,
-   "vol": 0.4,
-   "start": 0.0,
+   "vol": 0.38,
+   "start": 6.0,
    "fade": 0.5,
    "tail": 0.6
   },
   {
-   "cue": "cue_town_panic",
+   "cue": "cue_tension_cave",
    "from": 2,
    "to": 2,
-   "vol": 0.4,
-   "start": 0.0,
+   "vol": 0.38,
+   "start": 6.0,
    "fade": 0.4,
    "tail": 0.5
   },
   {
-   "cue": "cue_town_panic",
+   "cue": "cue_tension_cave",
    "from": 5,
    "to": 5,
-   "vol": 0.4,
-   "start": 4.0,
+   "vol": 0.38,
+   "start": 11.0,
+   "fade": 0.4,
+   "tail": 0.5
+  },
+  {
+   "cue": "cue_tension_cave",
+   "from": 8,
+   "to": 8,
+   "vol": 0.38,
+   "start": 16.0,
    "fade": 0.4,
    "tail": 0.5
   },
@@ -158,10 +167,10 @@
    "cue": "cue_heroic_stand",
    "from": 9,
    "to": 9,
-   "vol": 0.5,
-   "start": 8.0,
+   "vol": 0.45,
+   "start": 0.0,
    "fade": 0.4,
-   "tail": 0.5
+   "tail": 0.8
   }
  ],
  "shots": [
@@ -175,7 +184,8 @@
     "push": 0.05
    },
    "hud": {
-    "title": "CARS VS DUNGEON AXES!"
+    "title": "CARS VS DUNGEON AXES!",
+    "tag": "NEW 3D GRAPHICS!"
    },
    "sfx": [
     [

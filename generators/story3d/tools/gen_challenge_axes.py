@@ -111,11 +111,12 @@ def build(cast):
     HUD0 = {"title": "CARS VS DUNGEON AXES!", "x0": START_X, "x1": FINISH_X, "marks": marks}
     shots, props = [], []
     shots.append({"cam": "wide", "zoom": 0.5, "dx": 20, "hold": 3.0, "cut": "hard", "move": {"push": 0.05},
-                  "hud": {"title": "CARS VS DUNGEON AXES!"}, "sfx": [["chain_rattle", 0.2, 0.7]],
+                  "hud": {"title": "CARS VS DUNGEON AXES!", "tag": "NEW 3D GRAPHICS!"}, "sfx": [["chain_rattle", 0.2, 0.7]],
                   "lines": [L("announcer", "Three drivers. Three giant dungeon axes. Who will survive?")]})
     # a decorative axe rhythm in the cold open (own prop, its rhythm measured from shot 0)
     props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": 0, "to_shot": 0, "ref_shot": 0})
-    score = [{"cue": "cue_town_panic", "from": 0, "to": 0, "vol": 0.4, "start": 0.0, "fade": 0.5, "tail": 0.6}]
+    # A10 (new sound style): music only on the tense runs and the win - a low pulsing dungeon cue, never a carpet
+    score = [{"cue": "cue_tension_cave", "from": 0, "to": 0, "vol": 0.38, "start": 6.0, "fade": 0.5, "tail": 0.6}]
     for lv, (vk, (sp, delay, hit)) in enumerate(zip(cast, runs)):
         b = len(shots)
         col = LEVEL_COLORS[lv]
@@ -156,8 +157,11 @@ def build(cast):
         shots.append(res)
         props.append({"type": "chop", "axes": [[x, ph] for x, ph in AXES], "z": 0.3, "from_shot": b, "to_shot": b + 2,
                       "ref_shot": b + 1})
-        score.append({"cue": "cue_town_panic" if hit else "cue_heroic_stand", "from": b + 1 if hit else b + 2,
-                      "to": b + 1 if hit else b + 2, "vol": 0.4 if hit else 0.5, "start": 4.0 * lv, "fade": 0.4, "tail": 0.5})
+        score.append({"cue": "cue_tension_cave", "from": b + 1, "to": b + 1, "vol": 0.38, "start": 6.0 + 5.0 * lv,
+                      "fade": 0.4, "tail": 0.5})                    # the run: a pulsing low cue builds the tension
+        if not hit:                                                 # the win: the heroic cue under the badge and the CTA
+            score.append({"cue": "cue_heroic_stand", "from": b + 2, "to": b + 2, "vol": 0.45, "start": 0.0, "fade": 0.4,
+                          "tail": 0.8})
     scene = {
         "title": "CHALLENGE - Cars VS Dungeon Axes", "chapter": "Cars VS Dungeon Axes", "location": "dungeon",
         "theme_location": "city", "time": "night", "weather": "clear", "ambience": "cave", "fog": 0.15, "letterbox": False,
