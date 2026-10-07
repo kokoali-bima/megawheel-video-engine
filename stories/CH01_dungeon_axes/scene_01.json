@@ -20,6 +20,10 @@
    36.0
   ]
  ],
+ "lava_z": [
+  0.5,
+  2.4
+ ],
  "actors": {
   "bus": {
    "vk": "bus",
@@ -356,7 +360,7 @@
   {
    "cam": "medium",
    "on": "bus",
-   "zoom": 0.8,
+   "zoom": 0.95,
    "hold": 3.8,
    "move": {
     "push": 0.06
@@ -555,7 +559,7 @@
   {
    "cam": "medium",
    "on": "sports",
-   "zoom": 0.8,
+   "zoom": 0.95,
    "hold": 3.8,
    "move": {
     "push": 0.06
@@ -565,7 +569,7 @@
      "sink": {
       "at": 0.0,
       "dur": 0.7,
-      "depth": 3.2,
+      "depth": 3.8,
       "tilt": 0.8
      },
      "fling": {
@@ -786,7 +790,7 @@
   {
    "cam": "medium",
    "on": "firetruck",
-   "zoom": 0.8,
+   "zoom": 0.95,
    "hold": 3.8,
    "move": {
     "push": 0.06
@@ -1025,7 +1029,7 @@
   {
    "cam": "medium",
    "on": "f1",
-   "zoom": 0.8,
+   "zoom": 0.95,
    "hold": 6.2,
    "move": {
     "push": 0.06

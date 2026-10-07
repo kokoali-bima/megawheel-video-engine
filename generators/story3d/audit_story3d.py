@@ -283,7 +283,7 @@ def audit_scene(d, mp4):
         sh_ = shots[f["shot"]] if f["shot"] < len(shots) else None
         for a in f["actors"]:
             mv_ = sc["shots"][f["shot"]].get("moves", {}) if f["shot"] < len(sc["shots"]) else {}
-            air_ = any(set(m_) & {"jump", "fling", "sink"} for m_ in mv_.values())      # a crash / a pit jump on purpose
+            air_ = any(set(m_) & {"jump", "fling", "sink", "hop"} for m_ in mv_.values())      # a crash / a pit jump on purpose
             if a[4] - plat(a[1], a[2]) > 0.25 and sh_ is not None and not set(sh_["fx"]) & {"shake", "punch"} and not air_:
                 flo.add((a[0], f["shot"]))
     for aid, si in sorted(flo):

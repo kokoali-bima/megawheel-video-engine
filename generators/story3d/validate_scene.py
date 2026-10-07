@@ -19,7 +19,7 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava", "lava_z"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "claw", "net", "hud", "impacts", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",

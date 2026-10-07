@@ -1484,6 +1484,9 @@ def draw_actor_fx(ctx, a, t, camx):
     k = k_of(a["z"]) * a["small"]
     cy_ = gy - (a["h"] + 1.2) * k
     ctx.save()
+    if a["h"] < -0.02:                                              # sinking into a pit: hidden behind the near rim
+        ctx.rectangle(-9000, -9000, 30000, 9000 + ground_y(LAVA_NEAR_Z))
+        ctx.clip()
     if a.get("rot"):
         ctx.translate(sx, cy_)
         ctx.rotate(a["rot"])
@@ -1528,9 +1531,12 @@ def draw_actor_fx(ctx, a, t, camx):
     ctx.restore()
 
 
+LAVA_NEAR_Z, LAVA_FAR_Z = 0.5, 2.4                                  # the pit stripe in the floor (Godot reads scene "lava_z")
+
+
 def draw_lava(ctx, p, camx, t):
-    """Lava pits (CHALLENGE dungeon): the glowing surface drawn over the lane so a falling car sinks into it, with
-    flame tongues, bubbles and a bright lip. pits = [[x0, x1], ...] (the Godot floor has the same gaps)."""
+    """Lava pits (CHALLENGE dungeon): the NEAR half of the pit surface drawn over the lane so a falling car sinks behind it
+    (a car is clipped at the pit's near rim), plus flame tongues and bubbles. pits = [[x0, x1], ...]."""
     z = p.get("z", 1.4)
     k = k_of(z)
     for x0, x1 in p["pits"]:
@@ -1538,23 +1544,22 @@ def draw_lava(ctx, p, camx, t):
         sx1, _ = pxy(x1, z, camx)
         if sx1 < -300 or sx0 > W + 300:
             continue
-        top = gy - 0.05 * k
-        g = cairo.LinearGradient(0, top, 0, gy + 3.6 * k)
-        g.add_color_stop_rgb(0, 1.0, 0.82, 0.2)
-        g.add_color_stop_rgb(0.25, 1.0, 0.45, 0.08)
-        g.add_color_stop_rgb(1, 0.55, 0.08, 0.04)
+        top, bot = gy + 0.05 * k, ground_y(LAVA_NEAR_Z)
+        g = cairo.LinearGradient(0, top, 0, bot)
+        g.add_color_stop_rgb(0, 1.0, 0.8, 0.2)
+        g.add_color_stop_rgb(1, 0.95, 0.35, 0.06)
         n = 14
-        ctx.move_to(sx0, top + 3.6 * k)
+        ctx.move_to(sx0, bot)
         for i in range(n + 1):
-            ctx.line_to(sx0 + (sx1 - sx0) * i / n, top + 0.1 * k * math.sin(t * 3.0 + i * 1.3))
-        ctx.line_to(sx1, top + 3.6 * k)
+            ctx.line_to(sx0 + (sx1 - sx0) * i / n, top + 0.08 * k * math.sin(t * 3.0 + i * 1.3))
+        ctx.line_to(sx1, bot)
         ctx.close_path()
         ctx.set_source(g)
         ctx.fill()
         for q in range(8):                                          # bubbles
             ph = (t * 0.7 + q * 0.311) % 1.0
             bx = sx0 + (sx1 - sx0) * ((q * 0.137 + 0.08) % 1.0)
-            ctx.arc(bx, top + (1.6 - 1.5 * ph) * k, (0.1 + 0.18 * ph) * k, 0, 2 * math.pi)
+            ctx.arc(bx, top + (0.5 - 0.4 * ph) * (bot - top), (0.06 + 0.12 * ph) * k, 0, 2 * math.pi)
             ctx.set_source_rgba(1, 0.9, 0.4, 0.8 * (1 - ph))
             ctx.fill()
         for q in range(9):                                          # flame tongues (short, translucent)
@@ -1563,10 +1568,6 @@ def draw_lava(ctx, p, camx, t):
             se.poly(ctx, [(fx_ - 0.35 * k, top + 0.05 * k), (fx_ + 0.05 * k * math.sin(t * 9 + q), top - fh),
                           (fx_ + 0.35 * k, top + 0.05 * k)])
             ctx.set_source_rgba(1, 0.55, 0.1, 0.65)
-            ctx.fill()
-        for sx_ in (sx0, sx1):                                      # glowing lip of stone
-            ctx.rectangle(sx_ - 0.14 * k, top - 0.05 * k, 0.28 * k, 0.28 * k)
-            ctx.set_source_rgb(0.2, 0.17, 0.2)
             ctx.fill()
 
 
@@ -4242,7 +4243,7 @@ def render_scene(ep, num, aspect):
             SCR[a["id"]] = (_OX + (_sx - CX) * _Z, _OY + (_gy - piv_y) * _Z)
             if scene.get("contact_shadow", True):
                 draw_contact(ctx, a, camx)
-            if a.get("rot") or a.get("crumple"):
+            if a.get("rot") or a.get("crumple") or a["h"] < -0.02:
                 draw_actor_fx(ctx, a, t, camx)
             else:
                 draw_actor(ctx, a, t, camx)

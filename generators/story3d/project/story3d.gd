@@ -952,6 +952,9 @@ func _dungeon() -> void:
 	var zn = dist(-0.6)
 	var fmat = _tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 90.0, 6.0, 4)
 	var pits = S["scene"].get("lava", [])
+	var lz = S["scene"].get("lava_z", [0.5, 2.4])
+	var za = -dist(float(lz[0]))                              # near edge of the pit stripe (world z)
+	var zb = -dist(float(lz[1]))                              # far edge
 	var edges = [-140.0]
 	for pit in pits:
 		edges.append(float(pit[0]))
@@ -969,17 +972,20 @@ func _dungeon() -> void:
 	lavam.emission_enabled = true
 	lavam.emission = Color(1.0, 0.4, 0.05)
 	lavam.emission_energy_multiplier = 2.2
+	var rim = toon(Color(0.14, 0.12, 0.14))
 	for pit in pits:
 		var px0 = float(pit[0])
 		var px1 = float(pit[1])
-		box(Vector3(px1 - px0, 0.2, zlen), Vector3((px0 + px1) / 2, -1.5, zmid), lavam)               # the lava
-		box(Vector3(0.3, 1.6, zlen), Vector3(px0 - 0.15, -0.8, zmid), toon(Color(0.12, 0.1, 0.12)))   # the pit walls
-		box(Vector3(0.3, 1.6, zlen), Vector3(px1 + 0.15, -0.8, zmid), toon(Color(0.12, 0.1, 0.12)))
+		var pw = px1 - px0
+		var pc = (px0 + px1) / 2
+		box(Vector3(pw, 0.35, za - zb), Vector3(pc, -0.4, (za + zb) / 2), lavam)                  # the lava (just below the floor)
+		box(Vector3(pw, 0.4, 14.0 - za), Vector3(pc, -0.2, (14.0 + za) / 2), fmat)                 # floor in front of the pit
+		box(Vector3(pw, 0.4, zb + zf), Vector3(pc, -0.2, (-zf + zb) / 2), fmat)                    # floor behind the pit
 		var pl = OmniLight3D.new()
 		pl.light_color = Color(1.0, 0.45, 0.12)
 		pl.light_energy = 6.0
 		pl.omni_range = 16.0
-		pl.position = Vector3((px0 + px1) / 2, 1.0, -dist(1.4))
+		pl.position = Vector3(pc, 1.0, -dist(1.4))
 		add_child(pl)
 		torches.append([pl, float(px0)])
 	box(Vector3(360, 16, 0.6), Vector3(40, 8, -zf - 0.3),

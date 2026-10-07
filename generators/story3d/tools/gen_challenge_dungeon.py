@@ -185,7 +185,7 @@ def build(cast):
             sfx.append(["chop_whoosh", max(0.0, t - 0.2), 0.3])
         shots.append({"cam": "track", "on": vk, "dx": 5.0, "zoom": 1.05, "hold": round(t_end, 2), "interrupt": True,
                       "speedlines": True, "move": {"push": 0.05}, "moves": {vk: moves}, "hud": hud, "sfx": sfx})
-        res = {"cam": "medium", "on": vk, "zoom": 0.8, "hold": 3.8, "move": {"push": 0.06}}
+        res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 3.8, "move": {"push": 0.06}}
         if lv == 0:                                                  # the axe squashes the bus
             res["moves"] = {vk: {"squash": 0.4, "at": 0.0, "hold": 1.0, "dizzy": True, "to_x": hit[2] - 5.0, "speed": 4.0,
                                  "reverse": True, "crumple": {"at": 0.0, "end": 1, "amt": 0.5}}}
@@ -198,7 +198,7 @@ def build(cast):
             vx, vy, g, h0 = -4.5, 13.0, 24.0, -3.2
             tl, dxl = ballistic(0, vx, vy, g, h0)
             pop = 1.0
-            res["moves"] = {vk: {"sink": {"at": 0.0, "dur": 0.7, "depth": 3.2, "tilt": 0.8},
+            res["moves"] = {vk: {"sink": {"at": 0.0, "dur": 0.7, "depth": 3.8, "tilt": 0.8},
                                  "fling": {"at": pop, "vx": vx, "vy": vy, "g": g, "turns": 1, "h0": h0}}}
             land_x = fall_x + vx * tl
             res["impacts"] = [{"at": 0.45, "x": fall_x, "h": 0.0, "kind": "splash", "word": "SPLASH!", "size": 1.1, "shake": 16},
@@ -241,7 +241,7 @@ def build(cast):
         "title": "CHALLENGE - Cars VS The Dungeon", "chapter": "Cars VS The Dungeon", "location": "dungeon",
         "theme_location": "city", "time": "night", "weather": "clear", "ambience": "cave", "fog": 0.15, "letterbox": False,
         "edge_fade": False, "gap": 0.35, "tail": 0.6, "wall_z": 5.2, "exit_x": FINISH_X + 6.0, "finish": FINISH_X,
-        "lava": [list(PIT)], "actors": actors, "props": props, "score": score, "shots": shots}
+        "lava": [list(PIT)], "lava_z": [0.5, 2.4], "actors": actors, "props": props, "score": score, "shots": shots}
 
 
 def main():
