@@ -105,6 +105,8 @@ def run_audit(video_id, folder=None, write=True):
                           "dan sama dengan manifest (±0.3 s)",
                           20 <= dur <= 175 and abs(dur - m["duration"]) <= 0.3, f"{dur:.2f} s (manifest {m['duration']})"))
         lo, hi = (8, 20) if fps == 30 else (12, 32)
+        if m.get("render3d"):                                   # 3D Godot picture (CRF 18) is bigger; owner 2026-10-07: allow up to 35 MB
+            lo, hi = (8, 35) if fps == 30 else (12, 50)
         items.append(item("6.1 Teknis", "size", f"Ukuran wajar ({lo}-{hi} MB)", lo <= size_mb <= hi,
                           f"{size_mb:.1f} MB", hard=False))
 
