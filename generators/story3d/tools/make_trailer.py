@@ -80,11 +80,11 @@ def main():
         fc.append(f"[{i}:v]crop=1280:720:320:150,fps=30,split[f{i}][b{i}];"
                   f"[b{i}]scale=-2:1920,crop=1080:1920,boxblur=28:6,eq=brightness=-0.22:saturation=1.1[bg{i}];"
                   f"[f{i}]scale=1080:608,setsar=1[fg{i}];"
-                  f"[bg{i}][fg{i}]overlay=0:(H-h)/2-80[c{i}]")
+                  f"[bg{i}][fg{i}]overlay=0:(H-h)/2-80,setsar=1[c{i}]")
     n = len(CLIPS)
     fc.append("".join(f"[c{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=0[v0]")
     # end card: dark gradient + text, appended with a fade
-    card = (f"color=c=0x120a2a:s=1080x1920:r=30:d={END_HOLD},format=yuv420p,"
+    card = (f"color=c=0x120a2a:s=1080x1920:r=30:d={END_HOLD},format=yuv420p,setsar=1,"
             f"drawtext=fontfile={FONT}:text='WHO IS':fontcolor=0xFFD21F:fontsize=150:borderw=8:bordercolor=black:x=(w-text_w)/2:y=520,"
             f"drawtext=fontfile={FONT}:text='KRAGGOR?':fontcolor=white:fontsize=210:borderw=10:bordercolor=black:x=(w-text_w)/2:y=690,"
             f"drawtext=fontfile={FONT}:text='STORY EP. 2':fontcolor=0xFF8A1F:fontsize=96:borderw=6:bordercolor=black:x=(w-text_w)/2:y=1000,"
