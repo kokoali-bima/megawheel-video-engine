@@ -114,7 +114,7 @@ SERIES_DEFS = {
     # user 2026-10-07: a NEW obstacle type (never used before) in the lava format: giant dungeon axes + an angry ogre
     # + a launch ramp over a lava pit; same 3-level story, same slow-mo, same narration (graphics come from godot3d)
     "dungeon": dict(title="CARS VS THE DUNGEON!", obst="deadly dungeon traps", max_fail=20.0, max_win=26.0,
-                    win_pool="any", signature="melt", force_theme=dict(location="volcano", weather="clear"),
+                    win_pool="any", signature="dungeon", force_theme=dict(location="volcano", weather="clear"),
                     fail_lines={"chop": "Chop! {n} got squashed by a giant axe!",
                                 "smash": "Smash! The ogre sent {n} flying!",
                                 "pit": "Oh no! {n} fell into the lava and is melting!"},
@@ -1132,6 +1132,8 @@ def has_signature(L):
         return L.get("spun") is not None and L["spun"] < L["event"]["t"] + 0.5
     if sig == "melt":
         return L.get("sunk") is not None and L.get("sunk_kind") == "lava"
+    if sig == "dungeon":                                         # an axe / ogre crash or a plunge into the lava
+        return L["event"]["type"] in ("chop", "smash") or (L.get("sunk") is not None and L.get("sunk_kind") == "lava")
     if content_required():                                       # planned potholes: a pit's content must be met
         return bool(L.get("content")) or (L.get("sunk") is not None and L.get("sunk_kind") == "water")
     return False
