@@ -111,6 +111,17 @@ SERIES_DEFS = {
                           yt_title="Cars VS Giant Lava Potholes! Who Survives? 🌋🔥",
                           tags=["cars", "potholes", "lava", "volcano", "car crash", "crash test",
                                 "physics simulation", "shorts", "MegaWheel Arena"]),
+    # user 2026-10-07: a NEW obstacle type (never used before) in the lava format: giant dungeon axes + an angry ogre
+    # + a launch ramp over a lava pit; same 3-level story, same slow-mo, same narration (graphics come from godot3d)
+    "dungeon": dict(title="CARS VS THE DUNGEON!", obst="deadly dungeon traps", max_fail=20.0, max_win=26.0,
+                    win_pool="any", signature="melt", force_theme=dict(location="volcano", weather="clear"),
+                    fail_lines={"chop": "Chop! {n} got squashed by a giant axe!",
+                                "smash": "Smash! The ogre sent {n} flying!",
+                                "pit": "Oh no! {n} fell into the lava and is melting!"},
+                    title_notice="NEW 3D Graphics",
+                    yt_title="Cars VS The Dungeon! Who Survives? 🪓🌋",
+                    tags=["cars", "dungeon", "axe", "ogre", "lava", "car crash", "crash test", "physics simulation",
+                          "3D graphics", "shorts", "MegaWheel Arena"]),
 }
 # Filled by make_track(series, seed). Potholes seed 1 is the reference track.
 SERIES = ""
@@ -124,6 +135,8 @@ SIGNS = []          # x of warning signs
 PUDDLES = []        # (x0, x1) low-grip water on the road
 BARRIERS = []       # (x, width, height) concrete walls
 VENTS = []          # dict(x, period, phase, dur, height) erupting lava vents
+AXES = []           # dict(x, period, phase) giant dungeon axes chopping down on a fixed rhythm (series dungeon)
+OGRES = []          # dict(x, period, phase) ogres whose club slams the road at x - OGRE_REACH (series dungeon)
 RAMPS = []          # (x0, x1, height) wooden kickers (RAMP = first one, kept for potholes)
 PIT_KIND = "mud"    # "mud" | "lava" | "water": default content of every pit
 PIT_FILLS = []      # per-pit content (parallel to PITS); empty -> PIT_KIND. rubble|water|lava|spikes|bomb|monster
@@ -139,8 +152,9 @@ TRACK_ID = ""
 
 
 def _reset_hazards():
-    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP, PIT_FILLS, PIT_SHAPES
+    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP, PIT_FILLS, PIT_SHAPES, AXES, OGRES
     PUDDLES, BARRIERS, VENTS, RAMPS, PITS, BUMPS = [], [], [], [], [], []
+    AXES, OGRES = [], []
     PIT_FILLS, PIT_SHAPES = [], []
     PIT_KIND, RAMP = "mud", None
 
@@ -151,7 +165,7 @@ def make_track(series, seed):
     TITLE = SERIES_DEFS[series]["title"]
     _reset_hazards()
     {"bumps": make_bumps_track, "splash": make_splash_track, "lava": make_lava_track,
-     "lava_potholes": make_lava_potholes_track}.get(series, make_potholes_track)(seed)
+     "lava_potholes": make_lava_potholes_track, "dungeon": make_dungeon_track}.get(series, make_potholes_track)(seed)
     if not OBST_SPANS:
         OBST_SPANS = [(a, b) for a, b, _ in (PITS or BUMPS)]
 
@@ -305,6 +319,89 @@ def make_lava_track(seed):
 # Speed-bump generator knobs (tuned with tune_bumps.py; see DEV_HISTORY)
 BUMP_CFG = dict(n=(4, 5), x_first=(40.0, 44.0), gap=(6.5, 8.5), h0=0.6, dh=(0.6, 0.75), w0=2.0, wk=(0.85, 1.1),
                 h_max=2.7)
+
+
+CHOP = dict(up=1.0, fall=0.18, down=0.40, h_up=5.4, h_dn=0.15)   # one axe cycle (period per axe)
+OGRE_REACH = 3.6        # the club lands this far in FRONT (toward -x, the cars come from there) of the ogre
+OGRE_WINDUP = 0.9
+
+
+def axe_bottom(ax, t):
+    """Height (m) of the axe's cutting edge: hangs up, falls fast, stays down, rises slowly."""
+    c = CHOP
+    rise = ax["period"] - c["up"] - c["fall"] - c["down"]
+    tau = (t + ax["phase"]) % ax["period"]
+    if tau < c["up"]:
+        return c["h_up"]
+    tau -= c["up"]
+    if tau < c["fall"]:
+        return c["h_up"] + (c["h_dn"] - c["h_up"]) * (tau / c["fall"]) ** 2
+    tau -= c["fall"]
+    if tau < c["down"]:
+        return c["h_dn"]
+    return c["h_dn"] + (c["h_up"] - c["h_dn"]) * min(1.0, (tau - c["down"]) / rise)
+
+
+def make_dungeon_track(seed):
+    """Dungeon road (lava format: 5 hazards of rising difficulty, first one after the intro narration, finish ~100 m):
+    axe -> ogre -> axe -> launch ramp + wide lava pit -> axe."""
+    global AXES, OGRES, RAMPS, RAMP, PITS, PIT_KIND, OBSTACLES, DANGER_X, SIGNS, TRACK, TRACK_PARAMS, TRACK_ID, \
+        FINISH_X, OBST_SPANS
+    r = np.random.default_rng(9000 + seed)
+    PIT_KIND = "lava"
+    tb = _TB(0.0)
+    tb.flat(float(r.uniform(31, 35)))                        # first hazard after the intro narration
+    spans, obst, danger = [], [], []
+
+    def axe():
+        a = dict(x=round(tb.x + 1.0, 2), period=round(float(r.uniform(2.3, 2.9)), 2), phase=round(float(r.uniform(0, 2.4)), 2))
+        AXES.append(a)
+        spans.append((a["x"] - 1.6, a["x"] + 1.6))
+        obst.append((a["x"], "axe"))
+        danger.append(a["x"] - 4.0)
+        tb.flat(2.0)
+
+    def ogre():
+        o = dict(x=round(tb.x + 5.0, 2), period=round(float(r.uniform(3.3, 4.0)), 2), phase=round(float(r.uniform(0, 3.0)), 2))
+        OGRES.append(o)
+        cx = o["x"] - OGRE_REACH
+        spans.append((cx - 2.0, cx + 2.0))
+        obst.append((cx, "ogre"))
+        danger.append(cx - 7.0)
+        tb.flat(6.5)
+
+    def pit(w, d, ramp=None):
+        if ramp:
+            x0 = tb.x
+            tb.to(ramp[0], ramp[1])
+            RAMPS.append((x0, tb.x, ramp[1]))
+        tb.drop(-d)
+        px0 = tb.x
+        tb.flat(w)
+        tb.drop(0.0)
+        PITS.append((px0, tb.x, d))
+        spans.append((px0, tb.x))
+        obst.append(((px0 + tb.x) / 2, "lava"))
+        danger.append(px0 - (ramp[0] if ramp else 0))
+
+    axe()
+    tb.flat(float(r.uniform(8, 10)))
+    ogre()
+    tb.flat(float(r.uniform(8, 10)))
+    axe()
+    tb.flat(float(r.uniform(9, 11)))
+    pit(round(float(r.uniform(6.5, 8.5)), 1), 4.5, ramp=(round(float(r.uniform(5, 6.5)), 1), round(float(r.uniform(1.2, 1.6)), 2)))
+    tb.flat(float(r.uniform(9, 11)))
+    axe()
+    tb.flat(12.0)
+    FINISH_X = round(tb.x - 2.0, 1)
+    tb.pts.append((FINISH_X + 80, 0))
+    TRACK = tb.pts
+    RAMP = RAMPS[0] if RAMPS else None
+    TRACK_PARAMS = dict(axes=AXES, ogres=OGRES, pits=PITS, ramps=RAMPS)
+    TRACK_ID = "dungeon_" + hashlib.md5(json.dumps(TRACK_PARAMS).encode()).hexdigest()[:8]
+    OBST_SPANS, OBSTACLES, DANGER_X = spans, obst, danger
+    SIGNS = [d - 3 for d in danger]
 
 
 def make_bumps_track(seed):
@@ -634,7 +731,9 @@ FAIL_LINES = {"pit": "Oh no! {n} fell into the giant pothole!",
               "stuck": "Uh oh... {n} is totally stuck!",
               "crash": "Crash! {n} slammed into the wall!",
               "rollback": "Uh oh! {n} slid all the way back down!",
-              "lava": "Yikes! {n} got blasted by the lava!"}
+              "lava": "Yikes! {n} got blasted by the lava!",
+              "chop": "Chop! {n} got squashed by a giant axe!",
+              "smash": "Smash! The ogre sent {n} flying!"}
 WIN_LINE = "Yes! {n} made it! We have a winner!"
 CONTENT_LINES = {"spikes": "Ouch! Spikes in the pit! {n}'s tires go pop!",
                  "bomb": "Boom! A hidden bomb blasts {n} right out of the pit!",
@@ -820,6 +919,8 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
     impacts, event, broken, burned = [], None, None, None
     flip_t = stuck_t = back_t = None
     vent_hit = set()
+    axe_hit, ogre_hit, crushed, smashed = set(), set(), None, None
+    car_top = max([p_[1] for p_ in (v["cabin"] or [])] + [bh / 2])           # roof height above the chassis centre
     slide, slid, spun, sunk, air_since = None, set(), None, None, None
     sunk_kind, content = None, None                     # what the car met in a pit (per-pit contents)
     prev_v = ch.velocity
@@ -879,6 +980,33 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                 burned = burned or t
                 if event is None:
                     event = dict(type="lava", t=t)
+        for ai, ax in enumerate(AXES):                      # a giant axe crushes a car under its blade
+            if ai in axe_hit or event is not None:
+                continue
+            if axe_bottom(ax, t) < ch.position.y + car_top + 0.25 and abs(ch.position.x - ax["x"]) < 0.9 + 0.38 * bw:
+                axe_hit.add(ai)
+                ch.velocity = (ch.velocity.x * 0.1, min(ch.velocity.y, 0.0) - 2.5)
+                ch.angular_velocity *= 0.3
+                for w_ in wheels:
+                    w_.velocity = (w_.velocity.x * 0.1, w_.velocity.y)
+                crushed = crushed or t
+                event = dict(type="chop", t=t)
+                if broken is None:
+                    debris = break_car(space, car, v, rng, v["break_dv"] * 2.0, i)
+                    broken = dict(t=t, x=ch.position.x, y=ch.position.y)
+        for oi, og in enumerate(OGRES):                     # the ogre's club slams the road: whoever is there is launched
+            kk, tau = divmod(t + og["phase"], og["period"])
+            if kk < 1 or tau >= 1.0 / 30 + 1e-6 or (oi, int(kk)) in ogre_hit:
+                continue
+            ogre_hit.add((oi, int(kk)))
+            if event is None and abs(ch.position.x - (og["x"] - OGRE_REACH)) < 1.5 + 0.45 * bw:
+                m_tot = v["mass"]
+                ch.apply_impulse_at_local_point((-m_tot * 2.0, m_tot * 8.5), (bw * 0.3, 0))
+                smashed = smashed or t
+                event = dict(type="smash", t=t)
+                if broken is None:
+                    debris = break_car(space, car, v, rng, v["break_dv"] * 2.0, i)
+                    broken = dict(t=t, x=ch.position.x, y=ch.position.y)
         # hydroplaning: each puddle once; snow: fishtail after a hard landing
         airborne = bool(rec["air"][-1])
         if event is None and (slide is None or t > slide["t0"] + slide["dur"]):
@@ -969,6 +1097,7 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
     meta = [{k: d[k] for k in ("kind", "size", "verts", "color", "spawn")} for d in debris]
     return dict(rec=rec, impacts=impacts, event=event, speed=float(speed), broken=broken, burned=burned,
                 spun=spun, sunk=sunk, sunk_kind=sunk_kind, content=content, debris=deb, debris_meta=meta,
+                crushed=crushed, smashed=smashed,
                 detached=car["detached"])
 
 
@@ -1746,6 +1875,28 @@ def synth_wall_crash(strength=1.0, seed=53):
         m = int(0.02 * SR)
         rubble[i0:i0 + m] += smooth(rng.standard_normal(min(m, n - i0)), 3) * np.exp(-np.arange(min(m, n - i0)) / SR / 0.006) * 0.7
     return (thud + crunch + clang + rubble) * (0.6 + 0.4 * strength)
+
+
+def synth_chop_slam(seed=0):
+    """A giant axe hits the stone road: a deep thud + a short inharmonic metal clang (tonal, no noise)."""
+    n = int(1.0 * SR)
+    t = np.arange(n) / SR
+    thud = np.sin(2 * math.pi * (140 - 70 * np.minimum(t / 0.12, 1.0)) * t) * np.exp(-t * 11)
+    thud += 0.5 * np.sin(2 * math.pi * 2 * (140 - 70 * np.minimum(t / 0.12, 1.0)) * t) * np.exp(-t * 14)
+    clang = sum(np.sin(2 * math.pi * f * t) * w for f, w in ((412, 1.0), (671, 0.8), (1089, 0.55), (1747, 0.35)))
+    clang = clang * np.exp(-t * 9) * np.clip(t / 0.003, 0, 1)
+    out = thud * 0.9 + clang * 0.28
+    return out / max(1e-9, np.abs(out).max()) * 0.9
+
+
+def synth_ogre_swing():
+    """The ogre's club coming down: a tonal descending glide (300 -> 70 Hz) with overtones."""
+    n = int(0.6 * SR)
+    t = np.arange(n) / SR
+    f = 300 - 230 * np.minimum(t / 0.5, 1.0) ** 0.7
+    ph = 2 * math.pi * np.cumsum(f) / SR
+    tone = sum(np.sin(h * ph) * w for h, w in ((1, 1.0), (2, 0.7), (3, 0.5), (5, 0.2)))
+    return tone * np.sin(math.pi * np.minimum(t / 0.6, 1.0)) ** 1.2 / 2.6 * 0.7
 
 
 def synth_whoosh():
@@ -2999,6 +3150,11 @@ def draw_car(ctx, L, s, mood, st):
         ctx.translate(0, -bh / 2)
         ctx.scale(1 + 0.08 * melt, 1 - 0.32 * melt)
         ctx.translate(0, bh / 2)
+    crush = crush_amount(L, st)
+    if crush > 0:                                                # flattened under the axe (rigid squash, straight lines)
+        ctx.translate(0, -bh / 2)
+        ctx.scale(1 + 0.2 * crush, 1 - 0.5 * crush)
+        ctx.translate(0, bh / 2)
     ctx.push_group()
     draw_body(ctx, vk, v, broken, st)
     draw_face(ctx, vk, mood, st)
@@ -3440,6 +3596,235 @@ def draw_eruptions(ctx, st):
                 ctx.fill()
 
 
+def ogre_arm(og, t):
+    """Arm angle (0 = straight down, + toward the cars), body bob: wind-up 0.9 s, slam, hold, raise."""
+    th, bob = -1.9, 0.05 * math.sin(t * 2.4)
+    kk, tau = divmod(t + og["phase"], og["period"])
+    d = tau if tau < og["period"] / 2 else tau - og["period"]          # seconds from the slam (negative = before it)
+    if -OGRE_WINDUP <= d < -0.08:
+        e = (d + OGRE_WINDUP) / (OGRE_WINDUP - 0.08)
+        th = -1.9 - 0.8 * e * e * (3 - 2 * e)
+    elif -0.08 <= d < 0.08:
+        e = (d + 0.08) / 0.16
+        th = -2.7 + 3.42 * e * e
+    elif 0.08 <= d < 1.0:
+        th = 0.72
+        bob -= 0.12 * math.exp(-(d - 0.08) * 7)
+    elif 1.0 <= d < 1.9:
+        e = (d - 1.0) / 0.9
+        th = 0.72 - 2.62 * e * e * (3 - 2 * e)
+    return th, bob
+
+
+def _ogre_pts(og, t):
+    th, bob = ogre_arm(og, t)
+    S_ = (0.9, 3.7)
+    ux, uy = math.sin(th), math.cos(th)                                 # y up: forward = -x, so lx is mirrored below
+    hand = (S_[0] + ux * 1.5, S_[1] - uy * 1.5)
+    tip = (S_[0] + ux * 4.9, S_[1] - uy * 4.9)
+    return th, bob, S_, hand, tip, ux, uy
+
+
+def draw_ogres(ctx, st):
+    """The dungeon ogre's body + arm (behind the cars); the club is drawn in front by draw_ogre_clubs."""
+    for og in OGRES:
+        th, bob, S_, hand, tip, ux, uy = _ogre_pts(og, st)
+        ox, f = og["x"], -1.0
+
+        def X(lx):
+            return ox + f * lx
+
+        def Y(ly):
+            return ly + bob
+        skin, dark, edge = (0.42, 0.58, 0.3), (0.28, 0.4, 0.21), (0.1, 0.14, 0.07)
+        ctx.save()
+        ctx.translate(ox, 0.0)
+        ctx.scale(2.2, 0.35)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgba(0, 0, 0, 0.35)
+        ctx.fill()
+        for lx in (-0.65, 0.65):                                          # legs + boots
+            rrect(ctx, X(lx) - 0.45, 0.0, 0.9, 1.9, 0.2)
+            ctx.set_source_rgb(*dark)
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.07)
+            ctx.stroke()
+            rrect(ctx, X(lx) - 0.6, 0.0, 1.2, 0.55, 0.15)
+            ctx.set_source_rgb(0.3, 0.2, 0.12)
+            ctx.fill()
+        rrect(ctx, X(-1.05) - 0.4, Y(1.6), 0.8, 1.9, 0.3)                  # the idle arm
+        ctx.set_source_rgb(*dark)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.stroke()
+        ctx.save()
+        ctx.translate(X(0), Y(2.9))
+        ctx.scale(1.6, 1.5)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*skin)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.08)
+        ctx.stroke()
+        ctx.save()
+        ctx.translate(X(0.2), Y(2.5))
+        ctx.scale(1.0, 0.95)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(0.62, 0.74, 0.45)
+        ctx.fill()
+        rrect(ctx, X(0) - 1.55, Y(1.9), 3.1, 0.45, 0.1)                    # belt + buckle
+        ctx.set_source_rgb(0.32, 0.2, 0.1)
+        ctx.fill()
+        ctx.rectangle(X(0.3) - 0.3, Y(1.85), 0.6, 0.55)
+        ctx.set_source_rgb(0.95, 0.75, 0.2)
+        ctx.fill()
+        hx, hy = X(0.35), Y(4.6)                                           # head
+        for sg in (-1, 1):
+            poly(ctx, [(hx + sg * 0.5, hy + 0.5), (hx + sg * 0.95, hy + 1.35), (hx + sg * 0.8, hy + 0.35)])
+            ctx.set_source_rgb(0.9, 0.88, 0.8)
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.05)
+            ctx.stroke()
+        ctx.save()
+        ctx.translate(hx, hy)
+        ctx.scale(1.0, 0.88)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*skin)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.08)
+        ctx.stroke()
+        for sg in (-1, 1):                                                 # angry yellow eyes
+            ex = hx + f * 0.1 + sg * 0.42
+            ctx.arc(ex, hy + 0.12, 0.2, 0, 2 * math.pi)
+            ctx.set_source_rgb(1, 0.9, 0.2)
+            ctx.fill()
+            ctx.arc(ex + f * 0.05, hy + 0.1, 0.08, 0, 2 * math.pi)
+            ctx.set_source_rgb(0.1, 0.05, 0.02)
+            ctx.fill()
+            ctx.move_to(ex - 0.3, hy + 0.45 + (0.2 if sg * f > 0 else 0.0))
+            ctx.line_to(ex + 0.3, hy + 0.25 + (0.0 if sg * f > 0 else 0.2))
+            ctx.set_source_rgb(*edge)
+            ctx.set_line_width(0.1)
+            ctx.stroke()
+        rrect(ctx, hx - 0.55, hy - 0.52, 1.1, 0.32, 0.1)                   # mouth + tusks
+        ctx.set_source_rgb(0.25, 0.05, 0.05)
+        ctx.fill()
+        for sg in (-1, 1):
+            poly(ctx, [(hx + sg * 0.4, hy - 0.2), (hx + sg * 0.55, hy + 0.3), (hx + sg * 0.22, hy - 0.2)])
+            ctx.set_source_rgb(1, 1, 0.9)
+            ctx.fill()
+        ctx.move_to(X(S_[0]), Y(S_[1]))                                    # the club arm
+        ctx.line_to(X(hand[0]), Y(hand[1]))
+        ctx.set_source_rgb(*edge)
+        ctx.set_line_width(0.95)
+        ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+        ctx.stroke_preserve()
+        ctx.set_source_rgb(*skin)
+        ctx.set_line_width(0.75)
+        ctx.stroke()
+        ctx.set_line_cap(cairo.LINE_CAP_BUTT)
+
+
+def draw_ogre_clubs(ctx, st):
+    for og in OGRES:
+        th, bob, S_, hand, tip, ux, uy = _ogre_pts(og, st)
+        ox, f = og["x"], -1.0
+        dx_, dy_ = ux, -uy                                                 # club direction (lx, y)
+        nx_, ny_ = uy, ux                                                  # its normal
+
+        def W(lx, ly):
+            return ox + f * lx, ly + bob
+        x0_, y0_, x1_, y1_, w0, w1 = hand[0], hand[1], tip[0], tip[1], 0.2, 0.55
+        poly(ctx, [W(x0_ + nx_ * w0, y0_ + ny_ * w0), W(x1_ + nx_ * w1, y1_ + ny_ * w1),
+                   W(x1_ - nx_ * w1, y1_ - ny_ * w1), W(x0_ - nx_ * w0, y0_ - ny_ * w0)])
+        ctx.set_source_rgb(0.5, 0.33, 0.18)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.15, 0.08, 0.04)
+        ctx.set_line_width(0.08)
+        ctx.stroke()
+        for q in range(5):                                                 # iron spikes along the head
+            e = 0.45 + 0.1 * q
+            cx_, cy_ = x0_ + (x1_ - x0_) * e, y0_ + (y1_ - y0_) * e
+            sd = 1 if q % 2 == 0 else -1
+            wq = w0 + (w1 - w0) * e
+            bx_, by_ = cx_ + nx_ * wq * sd, cy_ + ny_ * wq * sd
+            poly(ctx, [W(bx_, by_), W(bx_ + nx_ * 0.45 * sd + dx_ * 0.1, by_ + ny_ * 0.45 * sd + dy_ * 0.1),
+                       W(bx_ + dx_ * 0.3, by_ + dy_ * 0.3)])
+            ctx.set_source_rgb(0.75, 0.77, 0.85)
+            ctx.fill()
+
+
+def draw_axes(ctx, st):
+    """Giant dungeon axes (in front of the cars): chain + haft up to the ceiling, an iron hub and a crescent blade."""
+    for ax in AXES:
+        x, b = ax["x"], axe_bottom(ax, st)
+        yb = b + 3.3
+        while yb < 14.0:                                                   # chain up off the top
+            ctx.save()
+            ctx.translate(x, yb)
+            ctx.scale(0.2 if int(yb * 2.4) % 2 == 0 else 0.1, 0.28)
+            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgb(0.36, 0.34, 0.4)
+            ctx.set_line_width(0.07)
+            ctx.stroke()
+            yb += 0.42
+        rrect(ctx, x - 0.17, b + 1.7, 0.34, 3.1, 0.08)                     # wooden haft
+        ctx.set_source_rgb(0.62, 0.42, 0.24)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.12, 0.07, 0.04)
+        ctx.set_line_width(0.05)
+        ctx.stroke()
+        rrect(ctx, x - 0.55, b + 1.2, 1.1, 0.75, 0.12)                      # iron hub
+        ctx.set_source_rgb(0.2, 0.2, 0.28)
+        ctx.fill()
+        ctx.move_to(x - 0.55, b + 1.5)                                     # crescent blade, horned
+        ctx.line_to(x - 1.55, b + 0.95)
+        ctx.line_to(x - 1.2, b + 0.0)
+        ctx.curve_to(x - 0.6, b + 0.6, x + 0.6, b + 0.6, x + 1.2, b + 0.0)
+        ctx.line_to(x + 1.55, b + 0.95)
+        ctx.line_to(x + 0.55, b + 1.5)
+        ctx.close_path()
+        g = cairo.LinearGradient(x - 1.5, 0, x + 1.5, 0)
+        g.add_color_stop_rgb(0, 0.5, 0.55, 0.63)
+        g.add_color_stop_rgb(0.45, 0.9, 0.92, 0.97)
+        g.add_color_stop_rgb(1, 0.46, 0.5, 0.58)
+        ctx.set_source(g)
+        ctx.fill_preserve()
+        ctx.set_source_rgb(0.07, 0.07, 0.14)
+        ctx.set_line_width(0.08)
+        ctx.stroke()
+        ctx.move_to(x - 1.15, b + 0.08)
+        ctx.curve_to(x - 0.6, b + 0.66, x + 0.6, b + 0.66, x + 1.15, b + 0.08)
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.set_line_width(0.07)
+        ctx.stroke()
+        a_ = ((st + ax["phase"]) % ax["period"] - CHOP["up"] - CHOP["fall"]) / 0.35      # dust when it lands
+        if 0 <= a_ < 1:
+            for sg in (-1, 1):
+                ctx.save()
+                ctx.translate(x + sg * (0.9 + 1.4 * a_), 0.2)
+                ctx.scale(0.7 + 0.8 * a_, 0.35 + 0.35 * a_)
+                ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+                ctx.restore()
+                ctx.set_source_rgba(0.75, 0.72, 0.68, 0.55 * (1 - a_))
+                ctx.fill()
+
+
+def crush_amount(L, st):
+    """0..1 how flat the car is after an axe came down on it."""
+    if L.get("crushed") is None or st < L["crushed"]:
+        return 0.0
+    return min(1.0, (st - L["crushed"]) / 0.08) * 0.85
+
+
 def draw_dust(ctx, impacts, t):
     for ti, s, x, y in impacts:
         p = (t - ti) / 0.7
@@ -3797,6 +4182,7 @@ def draw_frame(ctx, g):
     ctx.translate(-camx, -camy)
     half = 540 / (S * z) + 2
     draw_track(ctx, camx - half, camx + half, st)
+    draw_ogres(ctx, st)
     draw_shadow(ctx, L, s)
     draw_dust(ctx, L["impacts"], st)
     draw_debris(ctx, L, st)
@@ -3804,6 +4190,8 @@ def draw_frame(ctx, g):
     draw_pit_front(ctx, L, s, st)
     draw_fire(ctx, L, s, st)
     draw_eruptions(ctx, st)
+    draw_axes(ctx, st)
+    draw_ogre_clubs(ctx, st)
     draw_effects(ctx, L, s, st)
     ctx.restore()
     draw_weather(ctx, g / FPS)                                  # rain/snow + time-of-day tint
@@ -4103,6 +4491,29 @@ def main():
                 cx_then = float(interp(rec["cx"], t_er + 0.35))
                 gain = float(np.clip(1.1 - abs(cx_then - vent["x"]) / 22, 0.15, 1.0))
                 place(sfx, synth_eruption(seed=43 + vi * 7 + k), st0 + out_time(L, t_er), 0.9 * gain)
+        for ai, ax in enumerate(AXES):                           # every slam of every axe; louder when the car is near
+            k = -2
+            while True:
+                t_s = k * ax["period"] - ax["phase"] + CHOP["up"] + CHOP["fall"]
+                k += 1
+                if t_s < 0.1:
+                    continue
+                if t_s > L["live_end"]:
+                    break
+                gain = float(np.clip(1.1 - abs(float(interp(rec["cx"], t_s)) - ax["x"]) / 20, 0.12, 1.0))
+                place(sfx, synth_chop_slam(), st0 + out_time(L, t_s), 0.95 * gain)
+        for oi, og in enumerate(OGRES):                          # the ogre: wind-up glide, then the slam
+            k = 1
+            while True:
+                t_s = k * og["period"] - og["phase"]
+                k += 1
+                if t_s - 0.55 < 0.1:
+                    continue
+                if t_s > L["live_end"]:
+                    break
+                gain = float(np.clip(1.1 - abs(float(interp(rec["cx"], t_s)) - og["x"]) / 20, 0.12, 1.0))
+                place(sfx, synth_ogre_swing(), st0 + out_time(L, t_s - 0.55), 0.8 * gain)
+                place(sfx, synth_impact(0.9, seed=311 + oi), st0 + out_time(L, t_s), 0.9 * gain)
         sunk_lava = L.get("sunk") is not None and L.get("sunk_kind") == "lava"
         met = L.get("content")
         if met:                                                  # pit contents: spikes / bomb / Pit Muncher
@@ -4131,6 +4542,8 @@ def main():
                 place(sfx, synth_fire(f1 - f0, seed=71 + li), st0 + f0, 0.55)
         if L["event"]["type"] == "crash":
             place(sfx, synth_wall_crash(1.0), st0 + out_time(L, L["event"]["t"]), 1.0)
+        if L["event"]["type"] in ("chop", "smash"):              # metal crunch + glass on top of the slam
+            place(sfx, synth_wall_crash(1.0, seed=57), st0 + out_time(L, L["event"]["t"]), 0.8)
         for bt, text in L["bubbles"]:
             place(sfx, pop, st0 + out_time(L, bt), 0.6)
             if text == "UH OH!":
@@ -4154,6 +4567,8 @@ def main():
                     place(sfx, stretch(synth_impact(s, seed=200 + j), 0.45), r0 + (ti - ta) / REPLAY_SPEED, 1.0)
             if L["broken"] and ta <= L["broken"]["t"] < tb:
                 place(sfx, stretch(synth_shatter(), 0.5), r0 + (L["broken"]["t"] - ta) / REPLAY_SPEED, 0.7)
+            if L["event"]["type"] in ("chop", "smash") and ta <= L["event"]["t"] < tb:
+                place(sfx, stretch(synth_wall_crash(1.0, seed=57), 0.5), r0 + (L["event"]["t"] - ta) / REPLAY_SPEED, 0.9)
             if L["event"]["type"] == "crash" and ta <= L["event"]["t"] < tb:
                 place(sfx, stretch(synth_wall_crash(1.0), 0.5), r0 + (L["event"]["t"] - ta) / REPLAY_SPEED, 1.0)
             if L.get("sunk") is not None and ta <= L["sunk"] < tb:
@@ -4204,6 +4619,8 @@ def main():
     subj = next((L["vk"] for L in LEVELS if L["event"]["type"] != "win"), LEVELS[-1]["vk"])
     emoji = SERIES_DEFS[SERIES]["yt_title"].split("?")[-1].strip()
     yt_title = challenge_title(subj, SERIES_DEFS[SERIES]["obst"], emoji, args.seed)
+    if SERIES_DEFS[SERIES].get("title_notice") and len(yt_title) + len(SERIES_DEFS[SERIES]["title_notice"]) < 84:
+        yt_title = f"{yt_title} {SERIES_DEFS[SERIES]['title_notice']}"          # e.g. "NEW 3D Graphics" (owner 2026-10-07)
     manifest = dict(
         video_id=name, status="ANALYZED" if analysis_ok else "ANALYSIS_FAILED", engine=f"sim-prototype {ENGINE_VERSION}",
         series=SERIES, seed=args.seed, fps=FPS, duration=round(total, 2),
