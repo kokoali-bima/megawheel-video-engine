@@ -3045,6 +3045,16 @@
    "gpu_seconds": 745.0,
    "wall_seconds": 169.5,
    "cost_usd": 0.2393
+  },
+  {
+   "date": "2026-10-07",
+   "note": "trailer r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 7,
+   "gpu_seconds": 50.6,
+   "wall_seconds": 214.3,
+   "cost_usd": 0.0129
   }
  ]
 }
