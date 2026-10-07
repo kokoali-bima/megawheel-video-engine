@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-06 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-07 02:06) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -66,6 +66,7 @@
 | 50 | `SIM_POTHOLES_V2_S028` | potholes | APPROVED | Sun 2026-10-18 11:00 |  |
 | 51 | `SIM_POTHOLES_V2_S029` | potholes | APPROVED | Mon 2026-10-19 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
+| 1002 | `2026-10-07_story15_e02` | story15 | APPROVED | Sun 2026-10-11 13:00 |  |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
 
 ## Ep. 1 — `SIM_POTHOLES_V2_S001`
@@ -743,6 +744,19 @@
 - **Status:** UPLOADED_SCHEDULED 2026-10-04T17:00:00Z (approve 2026-10-02)
 - **Antrian:** SCHEDULED 2026-10-04T17:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/gAVCxOicZyM
+
+## Ep. 1002 — `2026-10-07_story15_e02`
+
+- **Judul YouTube:** Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15/2026-10-07_story15_e02.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15/2026-10-07_story15_e02.json` · audit: `renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15/2026-10-07_story15_e02_audit.md`
+- **Season / seri / seed:** S01 / story15 / 2
+- **Tema / narator:**  / 
+- **Durasi:** None s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → story15; Level 2: Zippy (sports) → ; Level 3 (juara): Buster (bus) → ; Level 4: Rocky (monster) → ; Level 5: Siren (police) → ; Level 6: Tilly (taxi) → ; Level 7: Nitro (f1) → 
+- **Status:** APPROVED (approve 2026-10-07)
+- **Antrian:** QUEUED 2026-10-11T17:00:00Z
+- **YouTube:** belum diupload
 
 ## Ep. 1501 — `2026-10-02_story15_trailer_e01`
 

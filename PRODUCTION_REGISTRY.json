@@ -4309,6 +4309,38 @@
       "approved_date": "2026-10-05",
       "title": "Can Nitro Survive the Meteors? 🏁 | Ep. 46 #Shorts",
       "replaces": "SIM_RACE25D_V3_S017"
+    },
+    {
+      "video_id": "2026-10-07_story15_e02",
+      "series": "story15",
+      "engine_version": "story3d",
+      "seed": 2,
+      "created": "2026-10-07",
+      "render_date": "2026-10-07",
+      "vehicles": [
+        "icecream",
+        "sports",
+        "bus",
+        "monster",
+        "police",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "story_e02",
+      "outcomes": [
+        "story15"
+      ],
+      "duration": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15",
+      "audit": "renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15/2026-10-07_story15_e02_audit.md",
+      "episode": 1002,
+      "season": 1,
+      "upload_date": null,
+      "youtube_url": null,
+      "story_episode": 2,
+      "approved_date": "2026-10-07",
+      "title": "Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2"
     }
   ]
 }

@@ -321,6 +321,13 @@
    "role": "short"
   },
   {
+   "episode": 1002,
+   "video_id": "2026-10-07_story15_e02",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-11T17:00:00Z",
+   "role": "long"
+  },
+  {
    "episode": 37,
    "video_id": "SIM_RACE25D_V4_S040",
    "status": "QUEUED",
