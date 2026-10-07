@@ -93,11 +93,11 @@ def main():
     act = ST.make_actor("sprinkles", {"vk": "icecream", "x": 0.0, "z": 0.2, "face": 1, "scale": 1.0})
     ST.EMO["sprinkles"] = "surprised"
     ST.EMO_MOOD["sprinkles"] = ST.MOOD_BASE.get("surprised", "normal")
-    ST.actor_state(act, 0.0)
+    ST.actor_state(act, 1.7)
     ctx.save()
     ctx.translate(W * 0.27 - ST.CX, H * 0.95 - ST.ground_y(0.2))        # the truck's ground point -> (22 %, 90 %)
     ST.draw_contact(ctx, act, 0.0)
-    ST.draw_actor(ctx, act, 0.0, 0.0)
+    ST.draw_actor(ctx, act, 1.7, 0.0)
     ctx.restore()
     # ---- vignette + lettering + badge
     vg = cairo.RadialGradient(W / 2, H / 2, H * 0.45, W / 2, H / 2, H * 1.0)
