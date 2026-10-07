@@ -113,8 +113,8 @@ def main():
     k = n
     # score: dark cue first, tender cue for the second half; both quiet (A10), the voice is the anchor
     fc.append(f"[{k}:a]atrim=start=6.0:end={6.0 + 19.0},asetpts=PTS-STARTPTS,volume=3.0,afade=t=in:d=0.5,afade=t=out:st=17.5:d=1.5[m1]")
-    fc.append(f"[{k + 1}:a]atrim=start=8.0:end={8.0 + total - 18.0},asetpts=PTS-STARTPTS,volume=4.0,adelay=18000|18000,"
-              f"afade=t=in:d=1.0,afade=t=out:st={total - 18.0 - 2.0:.2f}:d=2.0[m2]")
+    fc.append(f"[{k + 1}:a]atrim=start=8.0:end={8.0 + total - 18.0},asetpts=PTS-STARTPTS,volume=4.0,"
+              f"afade=t=in:d=1.0,afade=t=out:st={total - 18.0 - 2.0:.2f}:d=2.0,adelay=18000|18000[m2]")      # fades BEFORE the delay
     endt = int(sum(c[2] for c in CLIPS) * 1000)                   # the end card starts here: second sting
     fc.append(f"[{k + 2}:a]asplit=2[sa][sb];[sa]adelay=5500|5500,volume=0.5[st1];[sb]adelay={endt}|{endt},volume=0.6[st2]")
     fc.append(f"[{k + 3}:a]aformat=channel_layouts=stereo[vo]")
