@@ -13,14 +13,14 @@ import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 CHOP = dict(P=2.6, up=1.0, fall=0.18, down=0.40, h_up=5.2, h_dn=0.15)        # = story25d.CHOP
-AXES = [(20.0, 0.0), (96.0, 0.9), (108.0, 1.7)]                               # the first one stops level 1; two more near the end
-RAMP = (34.0, 42.0, 1.7)                                                     # launch ramp: x0, lip x1, height at the lip
-PIT = (42.0, 56.0)                                                           # the lava pit starts at the lip of the ramp
-LAND_X = 60.5                                                                # winners land here (car centre)
-SHORT_X = 49.0                                                               # a car that is too slow lands in the pit here
-OGRE_X = 80.0
+AXES = [(30.0, 0.0), (102.0, 0.9), (110.0, 1.7)]                               # the first one stops level 1; two more near the end
+RAMP = (52.0, 58.0, 1.4)                                                     # launch ramp: x0, lip x1, height at the lip
+PIT = (58.0, 66.0)                                                           # the lava pit starts at the lip of the ramp
+LAND_X = 70.0                                                                # winners land here (car centre)
+SHORT_X = 62.0                                                               # a car that is too slow lands in the pit here
+OGRE_X = 86.0
 CLUB_X = OGRE_X - 3.6                                                        # where the club lands
-START_X, FINISH_X, RUN_TO = 2.0, 126.0, 129.0
+START_X, FINISH_X, RUN_TO = 3.0, 120.0, 123.0
 BODY = {"police": (4.4, 2.3), "monster": (4.3, 3.1), "monster2": (4.3, 3.1), "sports": (4.2, 1.5), "bus": (7.4, 3.0),
         "firetruck": (6.4, 3.2), "f1": (4.6, 1.2), "taxi": (4.3, 1.9), "bigrig": (9.6, 3.6), "icecream": (5.6, 2.9)}
 DISPLAY = {"sports": "ZIPPY THE SPORTS CAR", "police": "SIREN THE POLICE CAR", "bus": "BUSTER THE SCHOOL BUS",
@@ -174,7 +174,7 @@ def build(cast):
             fall_x = SHORT_X
             t_end = t_short
         elif lv >= 2:
-            moves["jump"] = {"at": t_lip, "dur": t_land - t_lip, "peak": 3.2, "h0": RAMP[2]}
+            moves["jump"] = {"at": t_lip, "dur": t_land - t_lip, "peak": 2.8, "h0": RAMP[2]}
         if lv == 0:
             t_end = hit[1] + 0.1
         elif lv == 2:                                                # the club lands on the hood
@@ -194,7 +194,7 @@ def build(cast):
             sfx.append(["chop_whoosh", max(0.0, t - 0.2), 0.3])
         shots.append({"cam": "track", "on": vk, "dx": 4.5, "zoom": 1.35, "hold": round(t_end, 2), "interrupt": True,
                       "speedlines": True, "move": {"push": 0.05}, "moves": {vk: moves}, "hud": hud, "sfx": sfx})
-        res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 5.0, "lead": 2.4, "move": {"push": 0.06}}
+        res = {"cam": "medium", "on": vk, "zoom": 0.95, "hold": 4.6, "lead": 1.5, "jcut": 0.0, "move": {"push": 0.06}}
         if lv == 0:                                                  # the axe squashes the bus
             res["moves"] = {vk: {"squash": 0.4, "at": 0.0, "hold": 1.0, "dizzy": True, "to_x": hit[2] - 5.0, "speed": 4.0,
                                  "reverse": True, "crumple": {"at": 0.0, "end": 1, "amt": 0.5}}}
@@ -204,7 +204,7 @@ def build(cast):
             res["sfx"] = [["chop_slam", 0.0, 1.0], ["crash_big", 0.03, 0.9], ["car_boing", 1.0, 0.8]]
             res["lines"] = [L("announcer", f"Chop! {NICK[vk]} got squashed by the axe!")]
         elif lv == 1:                                                # into the lava, then spat out
-            vx, vy, g, h0 = 11.0, 14.5, 24.0, -3.8
+            vx, vy, g, h0 = 10.0, 14.5, 24.0, -3.8
             tl, dxl = ballistic(0, vx, vy, g, h0)
             pop = 1.0
             res["moves"] = {vk: {"sink": {"at": 0.0, "dur": 0.7, "depth": 3.8, "tilt": 0.8},
