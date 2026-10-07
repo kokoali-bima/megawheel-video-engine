@@ -116,7 +116,8 @@ def main():
                  pit_kind=se.PIT_KIND, ramps=[list(r) for r in se.RAMPS], bumps=[list(b) for b in se.BUMPS],
                  signs=list(se.SIGNS), finish_x=se.FINISH_X,
                  puddles=[list(p) for p in se.PUDDLES], barriers=[list(b) for b in se.BARRIERS],
-                 vents=[dict(v) for v in se.VENTS], theme=se.THEME, theme_id=se.THEME_ID,
+                 vents=[dict(v) for v in se.VENTS], axes=[dict(a) for a in se.AXES], ogres=[dict(o) for o in se.OGRES],
+                 chop=dict(se.CHOP), ogre_windup=se.OGRE_WINDUP, theme=se.THEME, theme_id=se.THEME_ID,
                  sky=[[s_, list(c)] for s_, c in th["sky"]], light=th.get("light", 1.0), night="moon" in th,
                  cloud=list(th.get("cloud", (1, 1, 1))),
                  S=se.S, ground_y=se.GROUND_Y, cast=cast, title=se.TITLE,
@@ -144,9 +145,9 @@ def main():
                                                                     for x, y, an in s["wheels"]], det,
                        se.mood_at(L, st, s), bool(L["broken"] is not None and st >= L["broken"]["t"]),
                        round(se.melt_amount(L, st), 3), bool(L.get("burned") is not None and st >= L["burned"]),
-                       round(s["speed"], 2), round(s["air"], 2)])
+                       round(s["speed"], 2), round(s["air"], 2), round(se.crush_amount(L, st), 3)])
     json.dump(dict(fps=se.FPS, keys=["li", "mode", "st", "camx", "camy", "z", "shx", "shy", "cx", "cy", "ca", "ys",
-                                     "wheels", "det", "mood", "broken", "melt", "burned", "speed", "air"],
+                                     "wheels", "det", "mood", "broken", "melt", "burned", "speed", "air", "crush"],
                    frames=frames), open(os.path.join(a.out, "frames.json"), "w"))
 
     # ---- overlay: the engine's own screen-space layer (HUD, bubbles, READY-GO, replay, speed lines)

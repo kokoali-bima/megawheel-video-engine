@@ -37,6 +37,9 @@ var hit_uv = Vector2(0.75, 0.5)
 var burn = 0.0
 var spray: CPUParticles3D
 var vent_fx = []
+var torches = []                                         # dungeon torches that flicker
+var axe_fx = []                                          # dungeon axes (series dungeon)
+var ogre_fx = []                                         # dungeon ogres
 
 
 func _ready() -> void:
@@ -68,6 +71,9 @@ func _ready() -> void:
 	_track()
 	_landscape()
 	_props()
+	if _is_dungeon():
+		_axes()
+		_ogres()
 	_car()
 	fx_root = Node3D.new()
 	add_child(fx_root)
@@ -131,6 +137,13 @@ func _environment() -> void:
 	env.fog_light_color = Color(hor[0], hor[1], hor[2])
 	env.fog_density = 0.0012
 	env.fog_sky_affect = 0.0
+	if _is_dungeon():                                        # a torch-lit hall: no sky, warm ambient light
+		env.background_mode = Environment.BG_COLOR
+		env.background_color = Color(0.05, 0.04, 0.06)
+		env.ambient_light_color = Color(0.9, 0.72, 0.66)
+		env.ambient_light_energy = 0.9
+		env.fog_light_color = Color(0.1, 0.06, 0.07)
+		env.fog_density = 0.003
 	var we = WorldEnvironment.new()
 	we.environment = env
 	add_child(we)
@@ -140,7 +153,7 @@ func _environment() -> void:
 							"sunset": Vector3(-18, 125, 0), "night": Vector3(-45, 150, 0)}.get(tm, Vector3(-55, 150, 0))
 	sun.light_color = {"morning": Color(1, 0.9, 0.78), "noon": Color(1, 0.98, 0.94), "sunset": Color(1, 0.72, 0.5),
 					   "night": Color(0.6, 0.7, 1.0)}.get(tm, Color(1, 1, 1))
-	sun.light_energy = 1.15 * float(scene["light"]) * (0.45 if scene["night"] else 1.0)
+	sun.light_energy = 1.15 * float(scene["light"]) * (0.45 if scene["night"] else 1.0) * (0.35 if _is_dungeon() else 1.0)
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 90.0
 	add_child(sun)
@@ -187,7 +200,7 @@ func _track() -> void:
 		_quad(target, a, b, c, d, n)
 		for p in [a, b, c, a, c, d]:
 			shape_faces.append(p)
-	var tops = [[top, _mat(Color(0.22, 0.22, 0.25), 0.8)], [dirt, _mat(Color(0.3, 0.2, 0.15))],
+	var tops = [[top, _mat(Color(0.33, 0.31, 0.37) if _is_dungeon() else Color(0.22, 0.22, 0.25), 0.8)], [dirt, _mat(Color(0.26, 0.2, 0.2) if _is_dungeon() else Color(0.3, 0.2, 0.15))],
 				[wood, _mat(Color(0.62, 0.42, 0.22))]]
 	for pair in tops:
 		pair[1].cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -336,6 +349,9 @@ func _box(size: Vector3, pos: Vector3, mat: Material) -> MeshInstance3D:
 
 
 func _landscape() -> void:
+	if _is_dungeon():
+		_dungeon_hall()
+		return
 	var loc = scene["theme"]["location"]
 	var grass_col = {"desert": Color(0.86, 0.72, 0.45), "beach": Color(0.9, 0.82, 0.6), "volcano": Color(0.3, 0.24, 0.22),
 					 "city": Color(0.45, 0.5, 0.42), "snow": Color(0.92, 0.95, 1.0)}.get(loc, Color(0.24, 0.38, 0.25))
@@ -944,6 +960,10 @@ func _process(_d: float) -> void:
 		dmg = 0.0
 		dmg_target = 0.0
 		burn = 0.0
+		for a_ in axe_fx:
+			a_["slam"] = -1
+		for o_ in ogre_fx:
+			o_["slam"] = -1
 		if li != last_li or st < last_st - 0.02:
 			last_st = st - 0.001
 	var dst = st - last_st
@@ -970,7 +990,8 @@ func _process(_d: float) -> void:
 	car.position = Vector3(float(f[8]), float(f[9]), 0)
 	car.rotation = Vector3(0, 0, float(f[10]))
 	var melt = float(f[16])
-	body.scale = Vector3(ys, 1.0 - 0.32 * melt, 1.0)
+	var crush = float(f[20]) if f.size() > 20 else 0.0     # an axe came down on the car: flat, a little wider
+	body.scale = Vector3(ys * (1.0 + 0.2 * crush), (1.0 - 0.32 * melt) * (1.0 - 0.5 * crush), 1.0)
 	dmg += (dmg_target - dmg) * 0.35                        # dents appear fast but not in one frame
 	body_mat.set_shader_parameter("dmg", dmg)
 	body_mat.set_shader_parameter("hit", hit_uv)
@@ -1024,6 +1045,8 @@ func _process(_d: float) -> void:
 		vf["drops"].emitting = top > 0.5
 		vf["light"].position = Vector3(float(v["x"]), vf["gy"] + 1.5, 1.0)
 		vf["light"].light_energy = 0.6 + 3.0 * clampf(top / 4.0, 0.0, 1.0)
+	if _is_dungeon():
+		_dungeon_update(st, last_st)
 	# events (fire once per pass; a replay pass fires them again)
 	var k2 = 0
 	for im in lv["impacts"]:
@@ -1055,6 +1078,341 @@ func _process(_d: float) -> void:
 		_lava_blast(float(f[8]), float(f[9]))
 	last_li = li
 	last_st = st
+
+
+func _is_dungeon() -> bool:
+	return str(scene.get("series", "")) == "dungeon"
+
+
+func _brick_tex(base: Color, mortar: Color, seed_v: int) -> ImageTexture:
+	# a 256x256 brick pattern (8 rows of 60x28 px bricks with mortar), each brick a little different in tone
+	var img = Image.create(256, 256, false, Image.FORMAT_RGB8)
+	img.fill(mortar)
+	var r = RandomNumberGenerator.new()
+	r.seed = seed_v
+	for row in range(8):
+		var off = 0 if row % 2 == 0 else 32
+		for col in range(-1, 5):
+			var x0 = col * 64 + off + 2
+			var y0 = row * 32 + 2
+			var sh = r.randf_range(-0.07, 0.07)
+			var c = Color(clampf(base.r + sh, 0.0, 1.0), clampf(base.g + sh, 0.0, 1.0), clampf(base.b + sh, 0.0, 1.0))
+			for yy in range(y0, y0 + 28):
+				for xx in range(x0, x0 + 60):
+					if xx >= 0 and xx < 256 and yy >= 0 and yy < 256:
+						img.set_pixel(xx, yy, c)
+	return ImageTexture.create_from_image(img)
+
+
+func _tiled(base: Color, mortar: Color, sx: float, sy: float, seed_v: int) -> StandardMaterial3D:
+	var m = StandardMaterial3D.new()
+	m.albedo_texture = _brick_tex(base, mortar, seed_v)
+	m.uv1_scale = Vector3(sx, sy, 1.0)
+	m.roughness = 1.0
+	return m
+
+
+func _dungeon_hall() -> void:
+	## the dungeon behind the road (series dungeon): a brick back wall, a stone floor, beams, columns, flickering torches
+	var wz = -ROAD_HZ - 14.0
+	_box(Vector3(420, 30, 0.6), Vector3(70, 14, wz), _tiled(Color(0.4, 0.33, 0.3), Color(0.14, 0.12, 0.12), 110.0, 9.0, 9))
+	var fl = _box(Vector3(420, 0.3, 40), Vector3(70, -0.16, -ROAD_HZ - 20), _tiled(Color(0.34, 0.33, 0.38), Color(0.12, 0.12, 0.15), 100.0, 8.0, 4))
+	_box(Vector3(420, 0.6, 60), Vector3(70, 30.0, wz + 30), _mat(Color(0.1, 0.09, 0.12)))
+	var wood = _mat(Color(0.2, 0.13, 0.09))
+	var x = -70.0
+	while x < 230.0:                                         # ceiling beams, columns
+		_box(Vector3(0.8, 0.8, 50), Vector3(x, 16.0, wz + 25), wood)
+		x += 8.0
+	var stone = _mat(Color(0.3, 0.29, 0.34))
+	x = -66.0
+	while x < 230.0:
+		_box(Vector3(1.6, 30, 1.6), Vector3(x, 14, wz + 0.9), stone)
+		_box(Vector3(2.2, 0.5, 2.2), Vector3(x, 0.25, wz + 0.9), stone)
+		x += 24.0
+	var fm = StandardMaterial3D.new()
+	fm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fm.albedo_color = Color(1.0, 0.62, 0.15)
+	x = -60.0
+	var q = 0
+	while x < 230.0:                                         # torches (real orange lights)
+		_box(Vector3(0.2, 0.8, 0.2), Vector3(x, 5.2, wz + 0.5), wood)
+		var flm = MeshInstance3D.new()
+		var sp = SphereMesh.new()
+		sp.radius = 0.34
+		sp.height = 0.8
+		flm.mesh = sp
+		flm.material_override = fm
+		flm.position = Vector3(x, 6.0, wz + 0.5)
+		add_child(flm)
+		var ol = OmniLight3D.new()
+		ol.light_color = Color(1.0, 0.62, 0.28)
+		ol.light_energy = 3.0
+		ol.omni_range = 16.0
+		ol.position = Vector3(x, 6.0, wz + 2.5)
+		add_child(ol)
+		torches.append([ol, float(q) * 1.7])
+		x += 14.0
+		q += 1
+	var fx = float(scene["finish_x"])                        # the exit: a heavy door and a glowing treasure chest
+	_box(Vector3(6.0, 8.0, 0.5), Vector3(fx + 4.0, 4.0, wz + 0.4), _mat(Color(0.28, 0.17, 0.1)))
+	for hb in [1.4, 4.0, 6.6]:
+		_box(Vector3(6.2, 0.3, 0.6), Vector3(fx + 4.0, hb, wz + 0.45), _mat(Color(0.15, 0.15, 0.2)))
+	var gold = StandardMaterial3D.new()
+	gold.albedo_color = Color(1.0, 0.8, 0.2)
+	gold.metallic = 0.8
+	gold.roughness = 0.35
+	gold.emission_enabled = true
+	gold.emission = Color(1.0, 0.7, 0.1)
+	gold.emission_energy_multiplier = 1.4
+	_box(Vector3(2.6, 1.3, 1.6), Vector3(fx + 11.0, 0.65, -ROAD_HZ - 2.0), _mat(Color(0.4, 0.22, 0.1)))
+	_box(Vector3(2.7, 0.5, 1.7), Vector3(fx + 11.0, 1.4, -ROAD_HZ - 2.0), gold)
+	var gl = OmniLight3D.new()
+	gl.light_color = Color(1.0, 0.82, 0.35)
+	gl.light_energy = 3.5
+	gl.omni_range = 14.0
+	gl.position = Vector3(fx + 9.0, 3.0, -ROAD_HZ)
+	add_child(gl)
+
+
+func _axe_bottom(ax: Dictionary, t: float) -> float:
+	var c = scene["chop"]
+	var P = float(ax["period"])
+	var up = float(c["up"])
+	var fall = float(c["fall"])
+	var down = float(c["down"])
+	var h_up = float(c["h_up"])
+	var h_dn = float(c["h_dn"])
+	var rise = P - up - fall - down
+	var tau = fmod(t + float(ax["phase"]), P)
+	if tau < up:
+		return h_up
+	tau -= up
+	if tau < fall:
+		return h_up + (h_dn - h_up) * pow(tau / fall, 2.0)
+	tau -= fall
+	if tau < down:
+		return h_dn
+	return h_dn + (h_up - h_dn) * minf(1.0, (tau - down) / rise)
+
+
+func _blade_mesh() -> ArrayMesh:
+	## the crescent axe blade (x,y outline) extruded in z: horned tips, curved cutting edge
+	var pts = [Vector2(-0.55, 1.5), Vector2(-1.55, 0.95), Vector2(-1.2, 0.0)]
+	for k in range(1, 10):                                   # the curved cutting edge: a bezier from the left to the right horn
+		var u = float(k) / 10.0
+		var a = Vector2(-1.2, 0.0)
+		var b = Vector2(-0.6, 0.6)
+		var c = Vector2(0.6, 0.6)
+		var d = Vector2(1.2, 0.0)
+		pts.append(a * pow(1 - u, 3.0) + b * 3.0 * u * pow(1 - u, 2.0) + c * 3.0 * u * u * (1 - u) + d * pow(u, 3.0))
+	pts.append(Vector2(1.2, 0.0))
+	pts.append(Vector2(1.55, 0.95))
+	pts.append(Vector2(0.55, 1.5))
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var zt = 0.25
+	var n = pts.size()
+	var ctr = Vector2(0.0, 0.8)
+	for i in range(n):
+		var p0 = pts[i]
+		var p1 = pts[(i + 1) % n]
+		st.add_vertex(Vector3(ctr.x, ctr.y, zt))
+		st.add_vertex(Vector3(p0.x, p0.y, zt))
+		st.add_vertex(Vector3(p1.x, p1.y, zt))
+		st.add_vertex(Vector3(ctr.x, ctr.y, -zt))
+		st.add_vertex(Vector3(p1.x, p1.y, -zt))
+		st.add_vertex(Vector3(p0.x, p0.y, -zt))
+		st.add_vertex(Vector3(p0.x, p0.y, zt))
+		st.add_vertex(Vector3(p0.x, p0.y, -zt))
+		st.add_vertex(Vector3(p1.x, p1.y, -zt))
+		st.add_vertex(Vector3(p0.x, p0.y, zt))
+		st.add_vertex(Vector3(p1.x, p1.y, -zt))
+		st.add_vertex(Vector3(p1.x, p1.y, zt))
+	st.generate_normals()
+	return st.commit()
+
+
+func _axes() -> void:
+	## giant dungeon axes (in front of the car plane): chain + haft up to the ceiling, an iron hub, a crescent blade
+	var steel = StandardMaterial3D.new()
+	steel.albedo_color = Color(0.78, 0.8, 0.88)
+	steel.metallic = 0.85
+	steel.roughness = 0.3
+	steel.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var iron = _mat(Color(0.22, 0.22, 0.3), 0.5)
+	var wood = _mat(Color(0.5, 0.33, 0.18))
+	var bm = _blade_mesh()
+	for ax in scene.get("axes", []):
+		var root = Node3D.new()
+		add_child(root)
+		var blade = MeshInstance3D.new()
+		blade.mesh = bm
+		blade.material_override = steel
+		root.add_child(blade)
+		var hub = MeshInstance3D.new()
+		var hb = BoxMesh.new()
+		hb.size = Vector3(1.1, 0.75, 0.7)
+		hub.mesh = hb
+		hub.material_override = iron
+		hub.position = Vector3(0, 1.55, 0)
+		root.add_child(hub)
+		var haft = MeshInstance3D.new()
+		var hf = BoxMesh.new()
+		hf.size = Vector3(0.34, 30.0, 0.34)
+		haft.mesh = hf
+		haft.material_override = wood
+		haft.position = Vector3(0, 1.9 + 15.0, 0)
+		root.add_child(haft)
+		for bi in range(6):                                  # iron bands on the haft
+			var band = MeshInstance3D.new()
+			var bb = BoxMesh.new()
+			bb.size = Vector3(0.44, 0.1, 0.44)
+			band.mesh = bb
+			band.material_override = iron
+			band.position = Vector3(0, 2.8 + bi * 1.4, 0)
+			root.add_child(band)
+		axe_fx.append({"ax": ax, "root": root, "slam": -1})
+
+
+func _ogre_arm(og: Dictionary, t: float) -> Array:
+	var th = -1.9
+	var bob = 0.05 * sin(t * 2.4)
+	var P = float(og["period"])
+	var tau = fmod(t + float(og["phase"]), P)
+	var d = tau if tau < P / 2.0 else tau - P
+	var wu = float(scene["ogre_windup"])
+	if d >= -wu and d < -0.08:
+		var e = (d + wu) / (wu - 0.08)
+		th = -1.9 - 0.8 * e * e * (3.0 - 2.0 * e)
+	elif d >= -0.08 and d < 0.08:
+		var e2 = (d + 0.08) / 0.16
+		th = -2.7 + 3.42 * e2 * e2
+	elif d >= 0.08 and d < 1.0:
+		th = 0.72
+		bob -= 0.12 * exp(-(d - 0.08) * 7.0)
+	elif d >= 1.0 and d < 1.9:
+		var e3 = (d - 1.0) / 0.9
+		th = 0.72 - 2.62 * e3 * e3 * (3.0 - 2.0 * e3)
+	return [th, bob]
+
+
+func _part(parent: Node3D, mesh: Mesh, mat: Material, pos: Vector3, scl := Vector3.ONE) -> MeshInstance3D:
+	var mi = MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = pos
+	mi.scale = scl
+	parent.add_child(mi)
+	return mi
+
+
+func _sphere(r: float) -> SphereMesh:
+	var s = SphereMesh.new()
+	s.radius = r
+	s.height = 2.0 * r
+	return s
+
+
+func _cone(r: float, h: float) -> CylinderMesh:
+	var c = CylinderMesh.new()
+	c.top_radius = 0.0
+	c.bottom_radius = r
+	c.height = h
+	return c
+
+
+func _ogres() -> void:
+	## the dungeon ogre: built from primitives, the club arm swings on the engine's exact schedule
+	var skin = _mat(Color(0.42, 0.58, 0.3), 0.8)
+	var dark = _mat(Color(0.28, 0.4, 0.21), 0.8)
+	var light = _mat(Color(0.62, 0.74, 0.45), 0.8)
+	var leather = _mat(Color(0.3, 0.2, 0.12), 0.9)
+	var bone = _mat(Color(0.92, 0.9, 0.82), 0.6)
+	var club = _mat(Color(0.5, 0.33, 0.18), 0.85)
+	var iron = _mat(Color(0.75, 0.77, 0.85), 0.35)
+	var eye = StandardMaterial3D.new()
+	eye.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	eye.albedo_color = Color(1, 0.9, 0.2)
+	for og in scene.get("ogres", []):
+		var f = -1.0
+		var root = Node3D.new()
+		root.position = Vector3(float(og["x"]), 0.0, -1.6)
+		add_child(root)
+		var body = Node3D.new()
+		root.add_child(body)
+		for lx in [-0.65, 0.65]:
+			var cap = CapsuleMesh.new()
+			cap.radius = 0.5
+			cap.height = 1.9
+			_part(body, cap, dark, Vector3(lx, 1.0, 0))
+			var boot = BoxMesh.new()
+			boot.size = Vector3(1.3, 0.55, 1.2)
+			_part(body, boot, leather, Vector3(lx + f * 0.15, 0.28, 0.1))
+		_part(body, _sphere(1.0), skin, Vector3(0, 2.9, 0), Vector3(1.6, 1.5, 1.2))
+		_part(body, _sphere(1.0), light, Vector3(f * 0.2, 2.5, 0.55), Vector3(1.0, 0.95, 0.7))
+		var belt = BoxMesh.new()
+		belt.size = Vector3(3.1, 0.45, 2.5)
+		_part(body, belt, leather, Vector3(0, 1.95, 0))
+		var head = Node3D.new()
+		head.position = Vector3(f * 0.35, 4.6, 0.1)
+		body.add_child(head)
+		_part(head, _sphere(1.0), skin, Vector3.ZERO, Vector3(1.0, 0.88, 0.95))
+		for sg in [-1.0, 1.0]:
+			_part(head, _cone(0.22, 0.9), bone, Vector3(sg * 0.75, 0.9, 0), Vector3(1, 1, 1)).rotation = Vector3(0, 0, -sg * 0.35)
+			_part(head, _sphere(0.2), eye, Vector3(sg * 0.42 + f * 0.1, 0.12, 0.85))
+			_part(head, _cone(0.14, 0.5), bone, Vector3(sg * 0.4, -0.45, 0.8), Vector3(1, 1, 1)).rotation = Vector3(PI, 0, 0)
+		var jaw = BoxMesh.new()
+		jaw.size = Vector3(1.1, 0.3, 0.5)
+		_part(head, jaw, _mat(Color(0.25, 0.05, 0.05)), Vector3(0, -0.4, 0.78))
+		var idle = CapsuleMesh.new()
+		idle.radius = 0.4
+		idle.height = 1.9
+		_part(body, idle, dark, Vector3(-f * 1.05, 2.7, 0))
+		var sh = Node3D.new()                                # the club arm: pivots at the shoulder, in the plane just behind the cars
+		sh.position = Vector3(f * 0.9, 3.7, 1.0)
+		root.add_child(sh)
+		var arm = CapsuleMesh.new()
+		arm.radius = 0.4
+		arm.height = 1.9
+		_part(sh, arm, skin, Vector3(0, -0.75, 0))
+		var cl = CylinderMesh.new()
+		cl.top_radius = 0.2
+		cl.bottom_radius = 0.55
+		cl.height = 3.4
+		_part(sh, cl, club, Vector3(0, -3.2, 0))
+		for q in range(5):
+			var sp = _part(sh, _cone(0.14, 0.45), iron, Vector3(0.5 * (1.0 if q % 2 == 0 else -1.0), -2.4 - 0.4 * q, 0.0))
+			sp.rotation = Vector3(0, 0, -1.57 * (1.0 if q % 2 == 0 else -1.0))
+		ogre_fx.append({"og": og, "root": root, "body": body, "sh": sh, "f": f, "slam": -1})
+
+
+func _dungeon_update(st: float, last: float) -> void:
+	for tq in torches:                                       # torches flicker
+		tq[0].light_energy = 3.0 + 0.6 * sin(st * 13.0 + float(tq[1])) + 0.4 * sin(st * 29.0 + float(tq[1]) * 2.0)
+	var c = scene["chop"]
+	for af in axe_fx:
+		var ax = af["ax"]
+		var b = _axe_bottom(ax, st)
+		af["root"].position = Vector3(float(ax["x"]), b, 0.55)
+		var P = float(ax["period"])
+		var kk = floor((st + float(ax["phase"]) - float(c["up"]) - float(c["fall"])) / P)
+		if kk != af["slam"]:
+			if af["slam"] != -1 and st > last:                # the edge just landed: dust rolls out both ways
+				_burst(Vector3(float(ax["x"]), 0.3, 0.9), 26, 0.9, Vector2(2, 5), Vector3(0, -3, 0), Vector2(0.4, 1.1),
+					   Color(0.8, 0.76, 0.7, 0.8), Color(0.6, 0.58, 0.55, 0), 80.0, false)
+			af["slam"] = kk
+	for oz in ogre_fx:
+		var r = _ogre_arm(oz["og"], st)
+		oz["sh"].rotation = Vector3(0, 0, float(oz["f"]) * float(r[0]))
+		oz["body"].position = Vector3(0, float(r[1]), 0)
+		oz["sh"].position = Vector3(float(oz["f"]) * 0.9, 3.7 + float(r[1]), 1.0)
+		var P = float(oz["og"]["period"])
+		var kk = floor((st + float(oz["og"]["phase"])) / P)
+		if kk != oz["slam"]:
+			if oz["slam"] != -1 and kk >= 1.0 and st > last:
+				_burst(Vector3(float(oz["og"]["x"]) - 3.6, 0.3, 0.9), 30, 1.0, Vector2(2, 6), Vector3(0, -4, 0), Vector2(0.5, 1.3),
+					   Color(0.78, 0.72, 0.64, 0.85), Color(0.55, 0.5, 0.46, 0), 80.0, false)
+			oz["slam"] = kk
 
 
 func _set_hit(x: float, y: float, f) -> void:
