@@ -99,3 +99,9 @@ Rotate the 10 characters (least used first), never reuse an obstacle, title carr
 A10 music (fail runs + win only), outcome simulated in the generator. Details: stories/CH01_dungeon_axes/HANDOVER_CHALLENGE.md.
 Git/VM pitfalls (never repeat): never `git checkout -- modal_usage.json`; merge/push from a fresh clone of origin/main (Drive CRLF
 noise); validate ALL scenes before pushing; stop VM processes only via stop_story3d.sh; read ERROR_LOG.md section Z.
+
+## 9. CHALLENGE Shorts = sim_engine (owner 2026-10-07)
+A new CHALLENGE type is a NEW SERIES in `generators/physics_2d/sim_engine.py` (SERIES_DEFS + track maker + hazard in `simulate`), never a hand-scripted
+generator. Format fixed by the aired engine: 3 levels (fail/fail/win), 3-5 hazards of rising difficulty, no music bed, bullet-time + 0.4x instant replay
+(owner: slow motion is our strength - never change), voice-C narration, standard CTA, Ep. numbering global. New graphics = `lab/godot3d_challenge/convert3d.py`.
+Tune with `tune_<series>.py` + `find_seeds.sh`. Example: series `dungeon` (axes, ogre, ramp + lava pit).

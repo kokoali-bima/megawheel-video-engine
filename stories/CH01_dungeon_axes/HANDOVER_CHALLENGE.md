@@ -62,3 +62,15 @@ RENCANA (rekomendasi, belum dikerjakan):
 3. Grafis baru: pakai jalur lab/godot3d_challenge (export_challenge.py: sim_engine memutuskan SEMUA, Godot hanya menggambar ulang dunia 3D + overlay.mov HUD + mix.wav) -> tambah tema dungeon (porting _dungeon/obor/lahar dari generators/story3d/project/story3d.gd) + kapak/ogre 3D; kerusakan mobil gaya BeamNG dari data physics (roda copot, remuk di ujung kena), selaras aturan "mobil logam kaku, garis lurus".
 4. Daftar pending (episode 52), review pemilik, baru antri. Jangan upload sebelum review.
 Efek yang SUDAH dibuat di story25d/story3d (draw_impact, crumple, ballistic, draw_ogre, draw_lava, ramp prism Godot) boleh dipakai ulang di langkah 3.
+
+## STATUS 2026-10-07 (malam) - SELESAI mengikuti format lama
+- Seri baru `dungeon` ditambahkan ke `generators/physics_2d/sim_engine.py` (jangan tulis engine baru - BLUEPRINT Aturan Nol): kapak bertimer (AXES, `axe_bottom`),
+  ogre bergada (OGRES, `ogre_arm`), ramp + pit lahar (pakai yang lama), 5 rintangan [axe, ogre, ramp+lava, axe, axe], 3 level fail/fail/win, slow-mo
+  + bullet-time + replay warisan engine, narasi/judul/deskripsi/audit warisan ("NEW 3D Graphics" lewat `title_notice`). Penyetel: `tune_dungeon.py`,
+  `find_seeds.sh dungeon 1 40` (lolos ~55%; seed lolos: 2 6 8 10 11 12 14 15 16 17 18 19 21 26 28 29 30 32 33 36).
+- Grafis 3D: `lab/godot3d_challenge/` (export_challenge.py + project/challenge3d.gd): aula dungeon bata + obor, kapak 3D, ogre 3D, mobil gepeng
+  (frame key `crush`), penampang batu. Konversi resmi: `venv/bin/python lab/godot3d_challenge/convert3d.py <VIDEO_ID>` (audit 3D + audit produksi + Drive).
+- Video: **SIM_DUNGEON_V2_S015** (Tilly: smash@ogre -> jatuh ke lahar, Titan: chop@kapak, Siren: menang lompat ramp) status RENDERED_PENDING_APPROVAL,
+  3D + kedua audit LULUS, di Drive `ipandu-video/review/SIM_DUNGEON_V2_S015.mp4` (+ `_sheet.png`), 2.5D disimpan `_25d.mp4` di folder pending VM.
+- Berikutnya: pemilik review -> `episodes.py approve SIM_DUNGEON_V2_S015` (HANYA setelah "approved" eksplisit; jadi **Ep. 52**) -> `publish_queue.py plan`.
+- CH01 v4 (skrip tangan story3d, folder story3d/CH01_dungeon_axes) = prototipe, JANGAN dipakai/diunggah.
