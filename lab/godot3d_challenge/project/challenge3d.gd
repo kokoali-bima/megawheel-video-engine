@@ -220,6 +220,7 @@ func _track() -> void:
 shader_type spatial;
 render_mode cull_disabled, unshaded;   // a cross-section like the 2D art: same colours on GPU (Vulkan) and CPU
 uniform bool lin = false;              // Vulkan: shader colours are linear -> convert the sRGB palette
+uniform bool stone = false;            // dungeon: the cross-section is stone bricks, not dirt strata
 float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 void fragment() {
 	vec3 w = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -230,6 +231,15 @@ void fragment() {
 	vec2 f = fract(w.xy * 1.6) - 0.5;
 	float r = 0.12 + 0.18 * h(cell + 3.0);
 	float pebble = step(0.82, h(cell)) * step(length(f), r);          // round pebbles like the aired art
+	if (stone) {
+		float row = floor(w.y * 0.8);
+		vec2 bc = vec2(w.x * 0.35 + mod(row, 2.0) * 0.5, w.y * 0.8);
+		vec2 fc = fract(bc);
+		float mortar = clamp(step(fc.x, 0.06) + step(fc.y, 0.1), 0.0, 1.0);
+		c = mix(vec3(0.36, 0.33, 0.39) * (0.85 + 0.3 * h(floor(bc))), vec3(0.12, 0.11, 0.14), mortar);
+		c = mix(c, vec3(0.15, 0.13, 0.17), smoothstep(-6.0, -12.0, w.y));
+		pebble = 0.0;
+	}
 	vec3 o = mix(c, c * 0.72, pebble);
 	ALBEDO = lin ? pow(o, vec3(2.2)) : o;
 	ROUGHNESS = 0.95;
@@ -238,6 +248,7 @@ void fragment() {
 	var fm = ShaderMaterial.new()
 	fm.shader = sh
 	fm.set_shader_parameter("lin", is_vulkan())
+	fm.set_shader_parameter("stone", _is_dungeon())
 	for zz in [ROAD_HZ, -ROAD_HZ]:
 		var st = SurfaceTool.new()
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -265,10 +276,10 @@ void fragment() {
 		for p in scene["pits"]:
 			var lm = StandardMaterial3D.new()
 			if scene["pit_kind"] == "lava":
-				lm.albedo_color = Color(1, 0.45, 0.05)
+				lm.albedo_color = Color(0.95, 0.3, 0.03) if _is_dungeon() else Color(1, 0.45, 0.05)
 				lm.emission_enabled = true
-				lm.emission = Color(1, 0.4, 0.05)
-				lm.emission_energy_multiplier = 2.5
+				lm.emission = Color(1, 0.28, 0.02) if _is_dungeon() else Color(1, 0.4, 0.05)
+				lm.emission_energy_multiplier = 1.2 if _is_dungeon() else 2.5
 			var depth = -p[2] + (1.3 if scene["pit_kind"] == "lava" else p[2] - 0.8)
 			if scene["pit_kind"] == "water":
 				var wm = MeshInstance3D.new()
@@ -1235,9 +1246,12 @@ func _blade_mesh() -> ArrayMesh:
 func _axes() -> void:
 	## giant dungeon axes (in front of the car plane): chain + haft up to the ceiling, an iron hub, a crescent blade
 	var steel = StandardMaterial3D.new()
-	steel.albedo_color = Color(0.78, 0.8, 0.88)
-	steel.metallic = 0.85
-	steel.roughness = 0.3
+	steel.albedo_color = Color(0.86, 0.88, 0.96)
+	steel.metallic = 0.2
+	steel.roughness = 0.35
+	steel.emission_enabled = true
+	steel.emission = Color(0.3, 0.32, 0.4)
+	steel.emission_energy_multiplier = 0.7
 	steel.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var iron = _mat(Color(0.22, 0.22, 0.3), 0.5)
 	var wood = _mat(Color(0.5, 0.33, 0.18))
