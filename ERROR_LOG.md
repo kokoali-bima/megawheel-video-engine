@@ -109,3 +109,18 @@ dan video tidak dibandingkan dengan versi 2.5D di detik yang sama sebelum dilapo
 - Pencegahan: skrip render memeriksa `HEAD == origin/main` setelah pull dan **berhenti** bila beda
   (lihat pola di /tmp/v7c.sh; terapkan di skrip batch lain). Juga: perintah `pgrep -f` di dalam `ssh '...'`
   bisa mencocokkan baris perintah ssh itu sendiri → tulis skrip stop ke file dulu, lalu jalankan.
+
+## Z. Sesi 2026-10-07 (S01E02 + CHALLENGE CH01) - JANGAN DIULANG
+
+| Tanggal | Gejala | Penyebab | Pencegahan |
+|---|---|---|---|
+| 2026-10-07 | Render jalan di kode lama (3x) | `git_sync.sh pull` gagal diam-diam karena modal_usage.json kotor | cek indikator ledger; produce preflight self-heal; jangan `git checkout -- modal_usage.json` (menghapus biaya) |
+| 2026-10-07 | Perbaikan A10 hilang dari main | salinan scene lama dari working tree PC menimpa main | kerja di clone bersih origin/main; jalankan validate_scene SEMUA scene sebelum push |
+| 2026-10-07 | merge/stash gagal di PC | Drive membuat CRLF stat noise di working tree | merge + push selalu dari clone baru (`git clone` ke scratchpad); `git reset --hard` ditolak harness |
+| 2026-10-07 | "Suara terpotong" di sambungan | potongan AAC (celah, drift) | potongan perantara pcm/mkv, AAC sekali di akhir |
+| 2026-10-07 | trailer: concat gagal / musik hilang / terlalu keras | SAR beda; fade setelah adelay; tanpa ducking | `setsar=1`; fade SEBELUM adelay; sidechaincompress |
+| 2026-10-07 | Kraggor terpotong | mode stand skala >=0.7 | skala <=0.45 di shot lebar |
+| 2026-10-07 | Godot error `**` | GDScript tidak punya operator `**` | pakai `pow()` |
+| 2026-10-07 | Puncak/langit berkilau | z-fighting salju + bintang <1 px | puncak lebih gemuk; bintang >=2 px |
+| 2026-10-07 | kapak pendulum selalu kena | zona bahaya terlalu lebar | kapak vertikal + simulasi tabrakan di generator |
+| 2026-10-07 | heredoc python di bash rusak (escape) | quoting | tulis skrip dengan tool Write lalu jalankan |

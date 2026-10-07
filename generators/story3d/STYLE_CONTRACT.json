@@ -335,6 +335,15 @@
    "keys": [
     "every_join"
    ]
+  },
+  {
+   "id": "H01",
+   "date": "2026-10-07",
+   "note": "CHALLENGE Short (engine baru): rotasi 10 tokoh (paling jarang dulu), rintangan TIDAK PERNAH sama dengan Short lama, hasil tiap level disimulasi, judul memuat \"NEW 3D Graphics\" selama grafis baru, musik A10 (hanya run gagal + menang)",
+   "check": "manual",
+   "keys": [
+    "challenge"
+   ]
   }
  ],
  "lint": {

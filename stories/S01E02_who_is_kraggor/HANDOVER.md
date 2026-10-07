@@ -75,3 +75,6 @@ After PC push: on the VM `bash git_sync.sh push "records"` if dirty, then `bash 
 - Returned values from Modal functions must be plain Python types (no numpy) — the local modal env has no numpy.
 - Linter body lengths = exact `BODY` table (not estimates); moves are eased (x1.5 time).
 - Budget: Modal $29/month (≈ $8.4 used by 2026-10-06); ±$0.05 per scene render.
+
+## Sesi 2026-10-07 lanjutan
+- Ep.2 SELESAI + disetujui + antri (Ep.1002); trailer Short Ep.1502 antri. Short CHALLENGE engine baru: lihat stories/CH01_dungeon_axes/HANDOVER_CHALLENGE.md. Pitfall baru: ERROR_LOG.md bagian Z.

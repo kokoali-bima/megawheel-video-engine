@@ -93,3 +93,9 @@ every agent. Pinned: Godot 4.4.1, rhubarb 1.13.0, Luckiest Guy font, seeded worl
 ## 7. Shorts (CHALLENGE / RACE / SMASH)
 Use `generators/produce.py` exactly as documented in `AGENT_VIDEO_PRODUCER.md` (variety director, SOP gates,
 registry). Do not touch Shorts engines for story work.
+
+## 8. Challenge Shorts on story3d (owner 2026-10-07)
+Rotate the 10 characters (least used first), never reuse an obstacle, title carries "NEW 3D Graphics" while the graphics are new,
+A10 music (fail runs + win only), outcome simulated in the generator. Details: stories/CH01_dungeon_axes/HANDOVER_CHALLENGE.md.
+Git/VM pitfalls (never repeat): never `git checkout -- modal_usage.json`; merge/push from a fresh clone of origin/main (Drive CRLF
+noise); validate ALL scenes before pushing; stop VM processes only via stop_story3d.sh; read ERROR_LOG.md section Z.
