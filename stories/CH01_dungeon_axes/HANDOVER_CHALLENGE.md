@@ -29,7 +29,7 @@ Biaya render ~USD 0.06. Kode: story25d.py (draw_chop, chop_bottom, draw_challeng
 story3d.gd `_dungeon()`, validate_scene (location dungeon, prop chop, shot key hud/interrupt), STYLE_CONTRACT.
 
 ## Status CH01 (akhir sesi)
-- Render v2 (lantai, kapak baru, dungeon terang, musik hanya fail+win) berjalan di VM; hasil QA dilaporkan pemilik.
+- v3 (gauntlet kapak+lahar+ogre, tabrakan BeamNG-style) QA PASS, di Drive; generator = gen_challenge_dungeon.py (gen_challenge_axes.py = versi lama).
 - BELUM: kirim ke Drive untuk review, daftarkan sebagai video PENDING (register_story.py, seri baru -> peran "short" 11:00 ET),
   judul contoh `Cars VS Dungeon Axes! Who Survives? NEW 3D Graphics | Ep. N #Shorts`.
 - Publikasi Ep.2 (1002, Min 2026-10-11 13:00 ET) dan trailer (1502, Rab 2026-10-07 08:00 ET) sudah antri; cek
