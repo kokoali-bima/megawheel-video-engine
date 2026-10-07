@@ -81,6 +81,7 @@ def main():
                                    "language) - needs --video and --chapters")
     ap.add_argument("--video", help="the final episode mp4 (story3d)")
     ap.add_argument("--chapters", help="the assembler's _chapters.txt (story3d)")
+    ap.add_argument("--trailer-video", help="the trailer Short mp4 (story3d); registered as story15_trailer, pending")
     ap.add_argument("--thumb", help="thumbnail jpg/png (< 2 MB), copied next to the video and set on upload")
     a = ap.parse_args()
     if a.meta:                                                    # story3d (S01E02+): everything from publish.json
@@ -89,6 +90,11 @@ def main():
         extra = {"language": pub.get("language", "en-US")}
         name = register("story15", a.story_ep, a.video, pub["title"], pub["description"].replace("{chapters}", chapters),
                         extra, tags=pub["tags"], engine="story3d")
+        if a.trailer_video:                                           # the trailer Short: PENDING too (own fixed time)
+            tr = pub["trailer"]
+            register("story15_trailer", a.story_ep, a.trailer_video, tr["title"], tr["description"],
+                     {"publish_at_et": a.trailer_at or tr["publish_at_et"], "language": pub.get("language", "en-US")},
+                     tags=pub["tags"], engine="story3d")
         if a.thumb:
             dst = f"{BASE}/renders/megawheel_arena/pending/{name}/{name}_thumb{os.path.splitext(a.thumb)[1]}"
             shutil.copy2(a.thumb, dst)

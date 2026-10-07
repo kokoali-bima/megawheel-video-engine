@@ -125,7 +125,7 @@ def main():
               # A10: the narrator is the anchor - the score ducks ~14 dB whenever she speaks
               "[mus][vosc]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=450:makeup=1[musd];"
               "[musd][vo][fx]amix=inputs=3:normalize=0:duration=longest,"
-              f"loudnorm=I=-15:TP=-1.5:LRA=11,atrim=0:{total:.2f}[a]")
+              f"loudnorm=I=-16:TP=-1.5:LRA=11,atrim=0:{total:.2f}[a]")
     inputs += ["-i", os.path.join(cues, "cue_kraggor_dark.wav"), "-i", os.path.join(cues, "cue_kraggor_tender.wav"),
                "-i", os.path.join(cues, "cue_kraggor_motif.wav"), "-i", wvo, "-i", wfx]
     dst = os.path.join(out, "trailer_v.mp4")
