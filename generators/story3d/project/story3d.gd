@@ -204,7 +204,7 @@ func _environment() -> void:
 	for i in range(0 if storm else 160):                     # stars
 		var st = MeshInstance3D.new()
 		var q = SphereMesh.new()
-		q.radius = rng.randf_range(0.25, 0.6)
+		q.radius = rng.randf_range(0.9, 1.5)                 # >= 2 px at that distance: smaller stars shimmer (alias) as the camera moves
 		q.height = q.radius * 2
 		st.mesh = q
 		var smat = StandardMaterial3D.new()
@@ -579,12 +579,13 @@ func _mountain_backdrop() -> void:
 		add_child(m)
 		var snow = MeshInstance3D.new()                      # snow cap
 		var sp = PrismMesh.new()
-		sp.size = Vector3(w * 0.22, h * 0.22, 40.5)
+		sp.size = Vector3(w * 0.245, h * 0.22, 41.0)           # fatter than the mountain's own slope: its faces lie OUTSIDE
+		                                                       # it (same slope = coplanar = z-fighting = sparkling peaks)
 		snow.mesh = sp
 		var smat2 = toon(Color(0.96, 0.97, 1.0) if not NIGHT else Color(0.5, 0.55, 0.65))
 		smat2.disable_fog = true
 		snow.material_override = smat2
-		snow.position = m.position + Vector3(0, h * 0.39, 0)
+		snow.position = m.position + Vector3(0, h * 0.39 + 0.3, 0)
 		add_child(snow)
 		x += w * 0.7
 
