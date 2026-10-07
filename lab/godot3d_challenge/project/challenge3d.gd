@@ -1033,12 +1033,15 @@ func _process(_d: float) -> void:
 	lava_hit = lava_hit or (lv["burned"] != null and st >= float(lv["burned"]))
 	smoke.emitting = lava_hit                               # only a lava-touched car burns (user rule)
 	fire.emitting = lava_hit
+	smoke.visible = lava_hit                                # an idle emitter must not draw its parked particles
+	fire.visible = lava_hit                                 # (they showed as black discs / a yellow glow on the car)
 	var cx = float(f[8])
 	var on_puddle = false
 	for pd in scene.get("puddles", []):
 		if float(pd[0]) <= cx and cx <= float(pd[1]):
 			on_puddle = true
 	spray.emitting = on_puddle and float(f[18]) > 3.0 and float(f[19]) < 0.5
+	spray.visible = spray.emitting
 	if spray.emitting and not fired.has("pd" + str(int(cx / 3.0))):   # entering water: side sheets of spray
 		fired["pd" + str(int(cx / 3.0))] = true
 		_burst(Vector3(cx, ground_h(cx) + 0.2, 0.4), 90, 0.9, Vector2(4, 9), Vector3(0, -13, 0), Vector2(0.18, 0.45),
