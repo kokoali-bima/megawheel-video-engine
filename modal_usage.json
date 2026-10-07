@@ -3308,6 +3308,17 @@
    "cpu_container_seconds": 132.1,
    "wall_seconds": 72.4,
    "cost_usd": 0.0356
+  },
+  {
+   "date": "2026-10-07",
+   "note": "godot3d convert SIM_DUNGEON_V2_S015",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 127.1,
+   "wall_seconds": 69.9,
+   "cost_usd": 0.0342
   }
  ]
 }

@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_DUNGEON_V2_S015
 
-- Tanggal: 2026-10-07 10:18 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 15 · Track: dungeon_498bf7de
+- Tanggal: 2026-10-07 10:29 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 15 · Track: dungeon_498bf7de
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,7 +27,7 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s) | ✅ | 49.30 s (manifest 49.3) |
-| Ukuran wajar (8-35 MB) | ✅ | 29.6 MB |
+| Ukuran wajar (8-35 MB) | ✅ | 29.5 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
