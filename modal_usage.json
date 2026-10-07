@@ -3275,6 +3275,17 @@
    "gpu_seconds": 55.8,
    "wall_seconds": 147.7,
    "cost_usd": 0.0143
+  },
+  {
+   "date": "2026-10-07",
+   "note": "godot3d d6",
+   "cpu": 16,
+   "gpu": null,
+   "engine": "godot-4.4.1-llvmpipe",
+   "parts": 3,
+   "cpu_container_seconds": 240.7,
+   "wall_seconds": 141.5,
+   "cost_usd": 0.0629
   }
  ]
 }
