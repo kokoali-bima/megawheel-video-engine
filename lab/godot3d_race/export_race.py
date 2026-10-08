@@ -103,7 +103,9 @@ def main():
         se.cb_finish(f"narrator {name}")                         # missing voice-C lines -> Modal (cached after)
         raise Caught()
     R.simulate, R.build_audio = sim, audio
-    sys.argv = ["race25d.py", "--seed", str(a.seed), "--preview-only", "--name", name]
+    # cb_finish may re-exec after it fills the voice cache. Restart this exporter
+    # with its real arguments, not the borrowed race25d filename.
+    sys.argv = [os.path.abspath(__file__), "--seed", str(a.seed), "--out", a.out, "--like", a.like]
     try:
         R.main()
     except Caught:

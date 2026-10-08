@@ -436,3 +436,7 @@ Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
 - Reason: an orphan `modal run` client for `SIM_RACE25D_V4_S027` survived for about four days after its runner disconnected, even though Modal had no active app.
 - Validation: `python3 -m py_compile generators/voice/announcer.py` and `git diff --check` passed; no Modal GPU call was made for this validation.
 - Changed `git_sync.sh`: full physics smoke test now runs only when a physics/race engine changes; an announcer watchdog change uses compile plus timeout self-test without invoking Modal GPU.
+## 2026-10-08 - Race 3D exporter restart
+
+- Changed `lab/godot3d_race/export_race.py`: its post-TTS re-exec now restarts the exporter with `--seed`, `--out`, and `--like`, rather than attempting to open a nonexistent root-level `race25d.py`.
+- Validation: exporter compiled; first S047 pass filled one missing TTS cache line, then stopped before Modal Godot rendering.
