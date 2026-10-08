@@ -1,28 +1,33 @@
 {
- "generated": "2026-10-07T06:30:07.239914+00:00",
- "start": "2026-09-09",
- "end": "2026-10-06",
+ "generated": "2026-10-08T06:30:05.613826+00:00",
+ "start": "2026-09-10",
+ "end": "2026-10-07",
  "days": 28,
  "channel": {
-  "views": 3840,
-  "minutes": 935,
-  "subs": 18
+  "views": 5197,
+  "minutes": 1210,
+  "subs": 22
  },
  "series": {
   "CHALLENGE": {
-   "videos": 11,
-   "views": 3666,
-   "avg_view_pct": 51.0
+   "videos": 12,
+   "views": 4820,
+   "avg_view_pct": 50.2
   },
   "RACE": {
-   "videos": 3,
-   "views": 61,
-   "avg_view_pct": 36.1
+   "videos": 4,
+   "views": 219,
+   "avg_view_pct": 46.6
   },
   "STORY": {
    "videos": 2,
-   "views": 71,
-   "avg_view_pct": 28.8
+   "views": 77,
+   "avg_view_pct": 30.3
+  },
+  "SMASH": {
+   "videos": 1,
+   "views": 38,
+   "avg_view_pct": 52.0
   }
  },
  "videos": [
@@ -38,13 +43,24 @@
    "subs": 1
   },
   {
+   "id": "_lZj6d402lU",
+   "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 16 #Shorts",
+   "series": "CHALLENGE",
+   "views": 1113,
+   "minutes": 223,
+   "avg_view_s": 23,
+   "avg_view_pct": 41.35,
+   "likes": 17,
+   "subs": 1
+  },
+  {
    "id": "yf0y4R83hto",
    "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 3 #Shorts",
    "series": "CHALLENGE",
-   "views": 917,
+   "views": 916,
    "minutes": 218,
    "avg_view_s": 27,
-   "avg_view_pct": 59.45,
+   "avg_view_pct": 59.540000000000006,
    "likes": 15,
    "subs": 2
   },
@@ -52,12 +68,12 @@
    "id": "nXlV3f6Wux8",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 6 #Shorts",
    "series": "CHALLENGE",
-   "views": 884,
-   "minutes": 248,
+   "views": 909,
+   "minutes": 258,
    "avg_view_s": 32,
-   "avg_view_pct": 68.3,
-   "likes": 22,
-   "subs": 2
+   "avg_view_pct": 68.12,
+   "likes": 23,
+   "subs": 5
   },
   {
    "id": "3CfgGpkOx3Q",
@@ -74,54 +90,76 @@
    "id": "dVBtbf8Bi_Q",
    "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 2 #Shorts",
    "series": "CHALLENGE",
-   "views": 151,
+   "views": 152,
    "minutes": 41,
    "avg_view_s": 23,
-   "avg_view_pct": 47.59,
+   "avg_view_pct": 47.63,
    "likes": 3,
+   "subs": 0
+  },
+  {
+   "id": "ABojeEOuK4M",
+   "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts",
+   "series": "RACE",
+   "views": 145,
+   "minutes": 7,
+   "avg_view_s": 12,
+   "avg_view_pct": 35.42,
+   "likes": 1,
    "subs": 0
   },
   {
    "id": "lA92He_9FeQ",
    "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
    "series": "RACE",
-   "views": 38,
+   "views": 41,
    "minutes": 6,
    "avg_view_s": 17,
-   "avg_view_pct": 58.32999999999999,
+   "avg_view_pct": 57.28,
    "likes": 4,
-   "subs": 0
-  },
-  {
-   "id": "BB8Lr9LwL9g",
-   "title": "Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts",
-   "series": "STORY",
-   "views": 36,
-   "minutes": 3,
-   "avg_view_s": 14,
-   "avg_view_pct": 49.63,
-   "likes": 3,
    "subs": 0
   },
   {
    "id": "gAVCxOicZyM",
    "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
    "series": "STORY",
-   "views": 35,
-   "minutes": 31,
-   "avg_view_s": 54,
-   "avg_view_pct": 8.03,
+   "views": 40,
+   "minutes": 54,
+   "avg_view_s": 84,
+   "avg_view_pct": 12.31,
    "likes": 2,
    "subs": 1
+  },
+  {
+   "id": "5ljCNw1Hnlg",
+   "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
+   "series": "SMASH",
+   "views": 38,
+   "minutes": 4,
+   "avg_view_s": 23,
+   "avg_view_pct": 52,
+   "likes": 1,
+   "subs": 0
+  },
+  {
+   "id": "BB8Lr9LwL9g",
+   "title": "Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts",
+   "series": "STORY",
+   "views": 37,
+   "minutes": 4,
+   "avg_view_s": 14,
+   "avg_view_pct": 48.29,
+   "likes": 3,
+   "subs": 0
   },
   {
    "id": "ZjUnuZvelKY",
    "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
    "series": "CHALLENGE",
-   "views": 32,
+   "views": 34,
    "minutes": 4,
-   "avg_view_s": 20,
-   "avg_view_pct": 43.58,
+   "avg_view_s": 19,
+   "avg_view_pct": 40.22,
    "likes": 3,
    "subs": 0
   },
@@ -151,10 +189,10 @@
    "id": "0o6TY6tXF_c",
    "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts",
    "series": "RACE",
-   "views": 22,
-   "minutes": 2,
-   "avg_view_s": 12,
-   "avg_view_pct": 38.09,
+   "views": 23,
+   "minutes": 3,
+   "avg_view_s": 13,
+   "avg_view_pct": 42.33,
    "likes": 2,
    "subs": 0
   },
@@ -162,7 +200,7 @@
    "id": "0FEC9QmNYw0",
    "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
    "series": "CHALLENGE",
-   "views": 19,
+   "views": 20,
    "minutes": 3,
    "avg_view_s": 20,
    "avg_view_pct": 41.94,
@@ -173,10 +211,10 @@
    "id": "LIP2P98Be6M",
    "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
    "series": "CHALLENGE",
-   "views": 13,
-   "minutes": 2,
-   "avg_view_s": 18,
-   "avg_view_pct": 40.33,
+   "views": 18,
+   "minutes": 3,
+   "avg_view_s": 20,
+   "avg_view_pct": 44.02,
    "likes": 5,
    "subs": 0
   },
@@ -184,10 +222,10 @@
    "id": "RCBE3lgA2uo",
    "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts",
    "series": "CHALLENGE",
-   "views": 5,
-   "minutes": 1,
-   "avg_view_s": 30,
-   "avg_view_pct": 61.33,
+   "views": 13,
+   "minutes": 4,
+   "avg_view_s": 29,
+   "avg_view_pct": 61.14999999999999,
    "likes": 2,
    "subs": 0
   },
@@ -195,19 +233,18 @@
    "id": "WinoMp1Dmzw",
    "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
    "series": "RACE",
-   "views": 1,
-   "minutes": 0,
-   "avg_view_s": 4,
-   "avg_view_pct": 11.76,
+   "views": 10,
+   "minutes": 1,
+   "avg_view_s": 17,
+   "avg_view_pct": 51.2,
    "likes": 0,
    "subs": 0
   }
  ],
  "upcoming": [
-  "Wed 07/10 19:00 WIB - Ep 1502 - UPLOADING",
-  "Wed 07/10 22:00 WIB - Ep 18 - SCHEDULED",
-  "Thu 08/10 02:00 WIB - Ep 14 - SCHEDULED",
-  "Thu 08/10 06:00 WIB - Ep 27 - SCHEDULED",
-  "Thu 08/10 22:00 WIB - Ep 19 - SCHEDULED"
+  "Thu 08/10 22:00 WIB - Ep 19 - SCHEDULED",
+  "Fri 09/10 02:00 WIB - Ep 15 - SCHEDULED",
+  "Fri 09/10 06:00 WIB - Ep 28 - SCHEDULED",
+  "Fri 09/10 22:00 WIB - Ep 20 - SCHEDULED"
  ]
 }

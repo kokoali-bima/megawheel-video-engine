@@ -3,8 +3,27 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-08
+**📤 Upload / antrean / Drive**
+- `9a32ff0` publish: daily run 2026-10-08 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `7334860` auto: records left uncommitted before daily run
+- `19df8ac` ops: refresh episode indexes
+
 ## 2026-10-07
 **🔧 Lain-lain**
+- `a34f805` approve Ep. 52 dungeon + queue plan
+- `7fd3bbd` tracker #53 black dot
+- `78febd3` godot3d: hide idle smoke/fire/spray emitters (parked particles drew a black disc on the car)
+- `b822710` godot3d: clear smoke/fire particles on a new level (black dot on the next car)
+- `7f552a3` audit: size window 8-35 MB for 3D (render3d) videos
+- `e481521` Handover: dungeon series done, S015 pending review; tracker #52; AGENTS section 9
+- `f89db9a` godot3d dungeon: stone cross-section, darker lava, brighter axe blade
+- `fadb04d` dungeon: ramp+lava pit earlier (melt signature mandatory like the lava series)
+- `d1a8813` dungeon: signature = axe/ogre crash or lava plunge
+- `ddf0a59` dungeon: first hazard later
+- `2ca5e1f` dungeon: less lethal axes/ogre windows
+- `c050558` tune_dungeon.py
 - `18d5e98` Handover: CH01 v3
 - `629100f` Crumple pass recorded once; G04 allows intentional jump/fling/sink
 - `981fed2` Save history/tracking: challenge handover, tracker #42-47, error log, contract H01, resume prompt
@@ -36,7 +55,16 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `97f6de2` Join card on every scene join (J04), longer tail on scene 11's last line, tracker #39
 - `1738723` Scenes 9-15 review fixes: tonal arm_slide instead of whoosh (A07), Kraggor head visible in wide shots, rope net, sign visible on the speedgate, two-shots in scene 15 (C11), A01 gap in scene 9
 - `89fbf2c` S01E02 scenes 9-15 (face to face, Kraggor's story, town gate, trap, stand up, party, old key) + props to_shot
+**🧪 Lab (eksperimen)**
+- `4be98fb` lab godot3d_challenge: dungeon hall, 3D axes, ogre, crushed car; exporter sends axes/ogres/crush
+- `697be65` Godot: no z-fighting snow caps, bigger stars (sparkling peaks / shimmering night sky), tracker #41
 **🕳️ CHALLENGE (sim_engine)**
+- `393c821` sim_engine: new CHALLENGE series 'dungeon' (axes, ogre, ramp + lava pit) with physics, drawing and sounds
+- `b77946d` Challenge handover: new direction (follow aired sim_engine format), evaluation + plan
+- `fbaa432` CHALLENGE: course like earlier challenges (ramp 6 m / pit 8 m, ~120 m), no J-cut over the crash
+- `e0105c3` CHALLENGE: announcer after the crash sounds settle
+- `ecdd2f8` CHALLENGE: result lines lead after the crash; longer cold open
+- `3984cac` CHALLENGE v4: 124 m course, launch ramp + jump over the lava pit, three axes, ogre
 - `6e7def9` CHALLENGE: fail badge after the impact word; tracker rows 48-51
 - `58594e5` CHALLENGE: wider lava stripe, bigger ogre, closer run camera
 - `a796629` CHALLENGE: lava pit as a floor stripe, car sinks behind the near rim, hop allowed in G04
@@ -50,10 +78,25 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `e3c444f` publish: Ep. 2 trailer Short registered as PENDING (review), thumbnail artwork ready [Claude Sonnet 5.5]
 - `efb8757` publish: Ep. 1002 (Who Is Kraggor?) approved by the owner 2026-10-07 and queued for Sun 2026-10-11 13:00 ET [Claude Sonnet 5.5]
 - `ba22cab` Publishing: register story3d episodes from publish.json (title/description/tags/language/thumbnail), optional custom thumbnail on upload (never fails the upload)
-**🧪 Lab (eksperimen)**
-- `697be65` Godot: no z-fighting snow caps, bigger stars (sparkling peaks / shimmering night sky), tracker #41
-<details><summary>otomatis VM (25)</summary>
+<details><summary>otomatis VM (42)</summary>
 
+- `06d413f` records: modal usage
+- `6af5dc7` records: dungeon S015 3D redo (no black dot)
+- `3f7ede8` records: dungeon S015 convert redo
+- `d577d35` records: dungeon S015 audit (3D size window)
+- `7610697` records: dungeon S015 (pending) + 3D convert
+- `fdbe5e1` records: modal usage (auto)
+- `16c04a3` records: modal usage (auto)
+- `0f869e5` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `c6c1f46` records: modal usage (auto)
+- `f1f6637` records: modal usage
+- `f6591b2` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `a65bbd7` records: modal usage
+- `b060492` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `8689a22` records: modal usage
+- `3a463bb` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `3ca22fb` records: modal usage
+- `f32a768` analytics: daily report 2026-10-07
 - `2c12a82` records before analytics
 - `3151544` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
 - `2808823` records: modal usage
