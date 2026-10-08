@@ -3480,6 +3480,17 @@
    "gpu_seconds": 55.2,
    "wall_seconds": 89.7,
    "cost_usd": 0.0141
+  },
+  {
+   "date": "2026-10-08",
+   "note": "race3d convert SIM_RACE25D_V4_S047",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 2,
+   "cpu_container_seconds": 92.9,
+   "wall_seconds": 78.9,
+   "cost_usd": 0.025
   }
  ]
 }

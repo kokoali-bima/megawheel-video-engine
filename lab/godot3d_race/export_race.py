@@ -75,10 +75,28 @@ def main():
         man = json.load(open(f"{ROOT}/{ent['folder']}/{a.like}.json"))
         cast = man["params"]["cast"]
         orig_setup, orig_theme = R.setup, se.make_theme
-        R.setup = lambda seed, app, forced=None: orig_setup(
-            seed, {vk: (-10 + cast.index(vk) if vk in cast else 99) for vk in R.POOL}, forced)
+
+        def replay_setup(seed, _appearances, forced=None):
+            # Keep deterministic speed jitter/curve from the seed, but pin every
+            # editorial parameter to the production manifest (not today's registry).
+            saved_plan = R.variety.plan_race
+            R.variety.plan_race = lambda _active, _seed: dict(man["params"]["plan"])
+            try:
+                orig_setup(seed, {vk: (-10 + cast.index(vk) if vk in cast else 99) for vk in R.POOL}, None)
+            finally:
+                R.variety.plan_race = saved_plan
+            p = man["params"]
+            R.RACERS = [(vk, int(p["lanes"][i]), speed) for i, (vk, _lane, speed) in enumerate(R.RACERS)]
+            R.HZ = [dict(type=kind, lane=int(lane), x=float(x)) for kind, lane, x in p["hazards"]]
+            R.FIN_X = float(p["finish"])
+            R.SECONDS = R.FIN_X / 21.0 + 7.0
+            R.PLAN = dict(p["plan"])
+            return p
+
+        R.setup = replay_setup
         se.make_theme = lambda seed, force=None, used=None: orig_theme(seed, dict(man["theme"]), used=[])
         voice = man["voice"]
+        R.question_for = lambda _cars: man["title_base"].removesuffix(" 🏁")
         def forced_cb(*x, **k):                              # same narrator, and switch voice C on like cb_pick
             if not voice.startswith("chatterbox"):
                 return None

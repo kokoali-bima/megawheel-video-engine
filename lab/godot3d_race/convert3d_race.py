@@ -62,7 +62,7 @@ def audit3d(d, mp4, man_prod):
     au = [s for s in p["streams"] if s["codec_type"] == "audio"]
     chk("1080x1920 30 fps + audio", vs["width"] == 1080 and vs["height"] == 1920 and vs["r_frame_rate"] == "30/1" and au,
         f"{vs['width']}x{vs['height']} {vs['r_frame_rate']} audio={bool(au)}")
-    want = len(frames) + 45
+    want = len(frames) + 90   # compose.py prepends a 3.0-second cold open at 30 fps
     chk("jumlah frame = timeline + cold open (±3)", abs(int(vs["nb_read_frames"]) - want) <= 3, f"{vs['nb_read_frames']} vs {want}")
     chk("durasi = versi review (±0.4 s)", abs(float(p["format"]["duration"]) - man_prod["duration"]) <= 0.4,
         f"{float(p['format']['duration']):.2f} vs {man_prod['duration']}")
