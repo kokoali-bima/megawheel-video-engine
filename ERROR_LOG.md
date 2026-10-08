@@ -124,3 +124,4 @@ dan video tidak dibandingkan dengan versi 2.5D di detik yang sama sebelum dilapo
 | 2026-10-07 | Puncak/langit berkilau | z-fighting salju + bintang <1 px | puncak lebih gemuk; bintang >=2 px |
 | 2026-10-07 | kapak pendulum selalu kena | zona bahaya terlalu lebar | kapak vertikal + simulasi tabrakan di generator |
 | 2026-10-07 | heredoc python di bash rusak (escape) | quoting | tulis skrip dengan tool Write lalu jalankan |
+| 2026-10-08 | Modal TTS CLI orphaned after its runner disconnected | Python timeout lived only in the dead parent process | Wrap `modal run` in GNU `timeout --signal=TERM --kill-after=30s 1500s`; verify `pgrep` and `modal app list` before GPU work |

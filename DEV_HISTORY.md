@@ -430,3 +430,9 @@ Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
 **Uji:** sandbox `/tmp` untuk episodes.py (approve → Ep.1, reject, approve → Ep.2 tanpa bolong, path diperbarui, metrik, mark_uploaded, re-approve ditolak) LOLOS. `publish.py` menolak episode yang belum di-approve.
 
 **Pembersihan permanen (disetujui user, 2026-09-30):** dihapus `/root/local_videos` (325 MB footage BeamNG), `/root/sim-prototype.MIGRATED` (183 MB), dan 6 draft render di root `/root/renders` (V4–V7, FINAL_MASTERPIECE, VIDEO_02_POLICE). **Dipertahankan:** 8 MP4 di `/root/renders/youtube_shorts_batch/` karena masih dirujuk `VIDEO_PUBLISHING_TRACKER.json` (tracker berisi 9 entri: 3 sudah tayang + draft; `VIDEO_03_SUV_POLICE_TURBO_COUPE.mp4` sudah tidak ada sejak sebelum pembersihan). Backup `/root/backups/pre-merge-20260930.tar.gz` tetap ada.
+## 2026-10-08 - Modal TTS orphan watchdog
+
+- Changed `generators/voice/announcer.py`: each Modal TTS CLI call now runs under an external 1500-second GNU timeout with a 30-second forced-kill grace period; Python retains a 1560-second second guard.
+- Reason: an orphan `modal run` client for `SIM_RACE25D_V4_S027` survived for about four days after its runner disconnected, even though Modal had no active app.
+- Validation: `python3 -m py_compile generators/voice/announcer.py` and `git diff --check` passed; no Modal GPU call was made for this validation.
+- Changed `git_sync.sh`: full physics smoke test now runs only when a physics/race engine changes; an announcer watchdog change uses compile plus timeout self-test without invoking Modal GPU.

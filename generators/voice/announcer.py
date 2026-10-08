@@ -83,11 +83,16 @@ def _generate(todo, items, note):
         with open(os.path.join(BATCH, "lines.json"), "w") as fh:
             json.dump(lines, fh, indent=1)
         try:
-            r = subprocess.run([MODAL, "run", "generators/voice/modal_tts.py", "--lines", os.path.join(BATCH, "lines.json"),
+            # External watchdog survives a disconnected renderer/SSH runner.
+            # It terminates a stuck Modal CLI even after its Python parent is gone.
+            r = subprocess.run(["timeout", "--signal=TERM", "--kill-after=30s", "1500s",
+                                MODAL, "run", "generators/voice/modal_tts.py", "--lines", os.path.join(BATCH, "lines.json"),
                                 "--out", BATCH, "--refs", ",".join(f"{k}={REFS[k]}" for k in sorted({w for _, _, w, _ in todo})),
                                 "--note", note],
                                cwd=ROOT, capture_output=True, text=True,
-                               timeout=1500)
+                               timeout=1560)
+            if r.returncode == 124:
+                print("[voice] Modal timeout after 1500s -> Edge TTS", flush=True)
             for ln in (r.stdout + r.stderr).splitlines():
                 if ln.startswith("[tts] DONE") or ln.startswith("[tts] QA:") or ln.startswith("[tts] STOP"):
                     print(ln.split(" license=")[0], flush=True)

@@ -74,13 +74,23 @@ case "${1:-status}" in
   push)
     msg="${2:-}"
     [ -z "$msg" ] && { echo "[git_sync] STOP: pesan commit wajib: bash git_sync.sh push \"<pesan>\""; exit 1; }
-    if git status --porcelain | grep -qE '\.py$|\.sh$'; then
-      echo "[git_sync] kode berubah -> smoke test dulu (generators/physics_2d/test_all.sh)"
+    changed=$(git diff --name-only)
+    if printf '%s\n' "$changed" | grep -qE '^(generators/physics_2d/|generators/lanes25d/)'; then
+      echo "[git_sync] engine fisika berubah -> smoke test dulu (generators/physics_2d/test_all.sh)"
       bash generators/physics_2d/test_all.sh > work/git_sync_test.log 2>&1 < /dev/null
       tail -n 12 work/git_sync_test.log
       if ! grep -q "TEST_ALL_DONE bad=0" work/git_sync_test.log; then
         echo "[git_sync] STOP: smoke test gagal. Tidak di-commit. Log: work/git_sync_test.log"; exit 1
       fi
+    elif printf '%s\n' "$changed" | grep -qx 'generators/voice/announcer.py'; then
+      echo "[git_sync] watchdog voice berubah -> compile + timeout self-test (tanpa Modal GPU)"
+      python3 -m py_compile generators/voice/announcer.py || exit 1
+      timeout --signal=TERM --kill-after=1s 1s sleep 3
+      rc=$?
+      if [ "$rc" -ne 124 ]; then
+        echo "[git_sync] STOP: timeout watchdog self-test gagal (exit $rc)."; exit 1
+      fi
+      echo "[git_sync] watchdog self-test PASS"
     fi
     git add -A
     echo "[git_sync] file yang akan di-commit:"; git diff --cached --stat | tail -n 25
