@@ -3329,6 +3329,47 @@
    "gpu_seconds": 237.4,
    "wall_seconds": 204.3,
    "cost_usd": 0.0765
+  },
+  {
+   "date": "2026-10-08",
+   "note": "narrator SIM_DUNGEON_V2_S016 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 52.5,
+   "wall_seconds": 109.2,
+   "cost_usd": 0.0134
+  },
+  {
+   "date": "2026-10-08",
+   "note": "narrator SIM_DUNGEON_V2_S016 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 43.0,
+   "wall_seconds": 101.1,
+   "cost_usd": 0.011
+  },
+  {
+   "date": "2026-10-08",
+   "note": "narrator SIM_DUNGEON_V2_S019 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 5,
+   "gpu_seconds": 77.9,
+   "wall_seconds": 107.3,
+   "cost_usd": 0.0199
+  },
+  {
+   "date": "2026-10-08",
+   "note": "godot3d convert SIM_DUNGEON_V2_S016",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 125.9,
+   "wall_seconds": 66.5,
+   "cost_usd": 0.0339
   }
  ]
 }

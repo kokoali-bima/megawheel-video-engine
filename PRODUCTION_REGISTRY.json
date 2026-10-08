@@ -4413,6 +4413,41 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E052_SIM_DUNGEON_V2_S015.mp4",
       "approved_date": "2026-10-07",
       "title": "Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 52 #Shorts"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S016",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 16,
+      "created": "2026-10-08",
+      "render_date": "2026-10-08",
+      "vehicles": [
+        "f1",
+        "bigrig",
+        "icecream"
+      ],
+      "track_id": "dungeon_03484fac@sunset-clear-volcano",
+      "theme": "sunset-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs1+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 50.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-08_dungeon_s016",
+      "audit": "renders/megawheel_arena/pending/2026-10-08_dungeon_s016/SIM_DUNGEON_V2_S016_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "render3d": true,
+      "drive_id": "1g8zOWjq13mA9aoEmJqXScvn5OaUnX5V6",
+      "drive_sheet_id": "10iIRZGSoWNjHMDMPizShtD_AChZsXeQh",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S016.mp4"
     }
   ]
 }

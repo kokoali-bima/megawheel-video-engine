@@ -37,3 +37,4 @@
 | 2026-10-04 22:34 | Claude Code Opus | SIM_RACE25D_V4_S044 | race25d | 44 | Buster → Grizzly → Nitro → Zippy | 34.6 s | PASS | produce.py · sunset-clear-mountains · stagger|hammer,lava,oil |
 | 2026-10-04 22:37 | Claude Code Opus | SIM_RACE25D_V4_S045 | race25d | 45 | Hydro → Grizzly → Nitro → Zippy | 37.1 s | PASS | produce.py · noon-clear-beach · late_pair|dragon_ice,hammer,oil |
 | 2026-10-04 22:40 | Claude Code Opus | SIM_RACE25D_V4_S046 | race25d | 46 | Buster → Grizzly → Nitro → Siren | 35.7 s | PASS | produce.py · morning-clear-desert · early_pair|meteor,oil,wall |
+| 2026-10-08 WIB | Codex | SIM_DUNGEON_V2_S016 | dungeon | 16 | Nitro -> Titan -> Sprinkles | 50.17 s | PASS + audit3D PASS | 3D Modal T4; contoh lokal, belum approved |
