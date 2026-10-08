@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-08 02:41) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-08 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -43,14 +43,14 @@
 | 27 | `SIM_SMASH25D_V4_S012` | smash25d | UPLOADED_SCHEDULED 2026-10-07T23:00:00Z | Wed 2026-10-07 19:00 | https://www.youtube.com/shorts/pjx_weAS40w |
 | 28 | `SIM_SMASH25D_V4_S014` | smash25d | UPLOADED_SCHEDULED 2026-10-08T23:00:00Z | Thu 2026-10-08 19:00 | https://www.youtube.com/shorts/ZXEi9fG7RZA |
 | 29 | `SIM_SMASH25D_V4_S015` | smash25d | UPLOADED_SCHEDULED 2026-10-09T23:00:00Z | Fri 2026-10-09 19:00 | https://www.youtube.com/shorts/AbvICeQ1lPE |
-| 30 | `SIM_POTHOLES_V2_S021` | potholes | APPROVED | Sun 2026-10-11 11:00 |  |
+| 30 | `SIM_POTHOLES_V2_S021` | potholes | UPLOADED_SCHEDULED 2026-10-11T15:00:00Z | Sun 2026-10-11 11:00 | https://www.youtube.com/shorts/S1t8T9lwAMs |
 | 31 | `SIM_RACE25D_V4_S036` | race25d | UPLOADED_SCHEDULED 2026-10-09T19:00:00Z | Fri 2026-10-09 15:00 | https://www.youtube.com/shorts/vZFKVw21xA8 |
 | 32 | `SIM_SMASH25D_V5_S002` | smash25d | UPLOADED_SCHEDULED 2026-10-10T23:00:00Z | Sat 2026-10-10 19:00 | https://www.youtube.com/shorts/k9fMTUKrdeA |
-| 33 | `SIM_POTHOLES_V2_S022` | potholes | APPROVED | Mon 2026-10-12 11:00 |  |
+| 33 | `SIM_POTHOLES_V2_S022` | potholes | UPLOADED_SCHEDULED 2026-10-12T15:00:00Z | Mon 2026-10-12 11:00 | https://www.youtube.com/shorts/hBNWKl7lX6I |
 | 34 | `SIM_RACE25D_V4_S045` | race25d | UPLOADED_SCHEDULED 2026-10-10T19:00:00Z | Sat 2026-10-10 15:00 | https://www.youtube.com/shorts/nYMwvHZvwmY |
-| 35 | `SIM_SMASH25D_V5_S003` | smash25d | APPROVED | Sun 2026-10-11 19:00 |  |
+| 35 | `SIM_SMASH25D_V5_S003` | smash25d | UPLOADED_SCHEDULED 2026-10-11T23:00:00Z | Sun 2026-10-11 19:00 | https://www.youtube.com/shorts/etUL6wxoccA |
 | 36 | `SIM_LAVA_POTHOLES_V2_S025` | lava_potholes | APPROVED | Tue 2026-10-13 11:00 |  |
-| 37 | `SIM_RACE25D_V4_S040` | race25d | APPROVED | Sun 2026-10-11 15:00 |  |
+| 37 | `SIM_RACE25D_V4_S040` | race25d | UPLOADED_SCHEDULED 2026-10-11T19:00:00Z | Sun 2026-10-11 15:00 | https://www.youtube.com/shorts/1aa8NVWoMhQ |
 | 38 | `SIM_SMASH25D_V5_S004` | smash25d | APPROVED | Mon 2026-10-12 19:00 |  |
 | 39 | `SIM_POTHOLES_V2_S027` | potholes | APPROVED | Wed 2026-10-14 11:00 |  |
 | 40 | `SIM_RACE25D_V4_S037` | race25d | APPROVED | Mon 2026-10-12 15:00 |  |
@@ -67,7 +67,7 @@
 | 51 | `SIM_POTHOLES_V2_S029` | potholes | APPROVED | Mon 2026-10-19 11:00 |  |
 | 52 | `SIM_DUNGEON_V2_S015` | dungeon | APPROVED | Tue 2026-10-20 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
-| 1002 | `2026-10-07_story15_e02` | story15 | APPROVED | Sun 2026-10-11 13:00 |  |
+| 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
 | 1502 | `2026-10-07_story15_trailer_e02` | story15_trailer | UPLOADED_SCHEDULED 2026-10-07T12:00:00Z | Wed 2026-10-07 08:00 | https://www.youtube.com/shorts/v4oErNoDW64 |
 
@@ -457,9 +457,9 @@
 - **Tema / narator:** night-rain-city / chatterbox:m1
 - **Durasi:** 51.07 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → rollback@obs2+broken; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Zippy (sports) → win
-- **Status:** APPROVED (approve 2026-10-03)
-- **Antrian:** QUEUED 2026-10-11T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-11T15:00:00Z (approve 2026-10-03)
+- **Antrian:** SCHEDULED 2026-10-11T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/S1t8T9lwAMs
 
 ## Ep. 31 — `SIM_RACE25D_V4_S036`
 
@@ -496,9 +496,9 @@
 - **Tema / narator:** night-clear-mountains / en-US-EmmaMultilingualNeural
 - **Durasi:** 47.97 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs2+broken; Level 2: Sprinkles (icecream) → stuck@obs0; Level 3 (juara): Hydro (firetruck) → win
-- **Status:** APPROVED (approve 2026-10-03)
-- **Antrian:** QUEUED 2026-10-12T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-12T15:00:00Z (approve 2026-10-03)
+- **Antrian:** SCHEDULED 2026-10-12T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/hBNWKl7lX6I
 
 ## Ep. 34 — `SIM_RACE25D_V4_S045`
 
@@ -522,9 +522,9 @@
 - **Tema / narator:** sunset-clear-city / chatterbox:mw-announcers-m1f1
 - **Durasi:** 53.23 s
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → win; Level 2: Grizzly (monster2) → p2+wreck; Level 3 (juara): Nitro (f1) → p4+ring; Level 4: Siren (police) → p3+wreck
-- **Status:** APPROVED (approve 2026-10-03)
-- **Antrian:** QUEUED 2026-10-11T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-11T23:00:00Z (approve 2026-10-03)
+- **Antrian:** SCHEDULED 2026-10-11T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/etUL6wxoccA
 
 ## Ep. 36 — `SIM_LAVA_POTHOLES_V2_S025`
 
@@ -548,9 +548,9 @@
 - **Tema / narator:** noon-clear-countryside / chatterbox:f1
 - **Durasi:** 35.25 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p4+laser; Level 2: Rocky (monster) → p2+dodge_oil; Level 3 (juara): Tilly (taxi) → p3+meteor; Level 4: Zippy (sports) → win
-- **Status:** APPROVED (approve 2026-10-04)
-- **Antrian:** QUEUED 2026-10-11T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-11T19:00:00Z (approve 2026-10-04)
+- **Antrian:** SCHEDULED 2026-10-11T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/1aa8NVWoMhQ
 
 ## Ep. 38 — `SIM_SMASH25D_V5_S004`
 
@@ -769,9 +769,9 @@
 - **Tema / narator:**  / 
 - **Durasi:** None s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → story15; Level 2: Zippy (sports) → ; Level 3 (juara): Buster (bus) → ; Level 4: Rocky (monster) → ; Level 5: Siren (police) → ; Level 6: Tilly (taxi) → ; Level 7: Nitro (f1) → 
-- **Status:** APPROVED (approve 2026-10-07)
-- **Antrian:** QUEUED 2026-10-11T17:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-11T17:00:00Z (approve 2026-10-07)
+- **Antrian:** SCHEDULED 2026-10-11T17:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/SdByNtxACP4
 
 ## Ep. 1501 — `2026-10-02_story15_trailer_e01`
 

@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-08 02:41). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-08 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -36,14 +36,14 @@
 | 27 | S01 | smash25d | Titan, Grizzly, Tilly, Zippy | 2026-10-01 | 2026-10-01 | 2026-10-05 | UPLOADED_SCHEDULED 2026-10-07T23:00:00Z | https://www.youtube.com/shorts/pjx_weAS40w |  |  |  |  |
 | 28 | S01 | smash25d | Hydro, Rocky, Nitro, Tilly | 2026-10-01 | 2026-10-01 | 2026-10-06 | UPLOADED_SCHEDULED 2026-10-08T23:00:00Z | https://www.youtube.com/shorts/ZXEi9fG7RZA |  |  |  |  |
 | 29 | S01 | smash25d | Buster, Grizzly, Nitro, Zippy | 2026-10-01 | 2026-10-01 | 2026-10-07 | UPLOADED_SCHEDULED 2026-10-09T23:00:00Z | https://www.youtube.com/shorts/AbvICeQ1lPE |  |  |  |  |
-| 30 | S01 | potholes | Siren, Titan, Zippy | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 30 | S01 | potholes | Siren, Titan, Zippy | 2026-10-03 | 2026-10-03 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T15:00:00Z | https://www.youtube.com/shorts/S1t8T9lwAMs |  |  |  |  |
 | 31 | S02 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 | 2026-10-06 | UPLOADED_SCHEDULED 2026-10-09T19:00:00Z | https://www.youtube.com/shorts/vZFKVw21xA8 |  |  |  |  |
 | 32 | S02 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-10-03 | 2026-10-03 | 2026-10-07 | UPLOADED_SCHEDULED 2026-10-10T23:00:00Z | https://www.youtube.com/shorts/k9fMTUKrdeA |  |  |  |  |
-| 33 | S02 | potholes | Tilly, Sprinkles, Hydro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 33 | S02 | potholes | Tilly, Sprinkles, Hydro | 2026-10-03 | 2026-10-03 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-12T15:00:00Z | https://www.youtube.com/shorts/hBNWKl7lX6I |  |  |  |  |
 | 34 | S02 | race25d | Hydro, Grizzly, Nitro, Zippy | 2026-10-04 | 2026-10-05 | 2026-10-07 | UPLOADED_SCHEDULED 2026-10-10T19:00:00Z | https://www.youtube.com/shorts/nYMwvHZvwmY |  |  |  |  |
-| 35 | S02 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
+| 35 | S02 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-10-03 | 2026-10-03 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T23:00:00Z | https://www.youtube.com/shorts/etUL6wxoccA |  |  |  |  |
 | 36 | S02 | lava_potholes | Nitro, Sprinkles, Tilly | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
-| 37 | S02 | race25d | Buster, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
+| 37 | S02 | race25d | Buster, Rocky, Tilly, Zippy | 2026-10-04 | 2026-10-04 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T19:00:00Z | https://www.youtube.com/shorts/1aa8NVWoMhQ |  |  |  |  |
 | 38 | S02 | smash25d | Hydro, Grizzly, Tilly, Nitro | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 39 | S02 | potholes | Nitro, Hydro, Buster | 2026-10-03 | 2026-10-03 |  | APPROVED |  |  |  |  |  |
 | 40 | S02 | race25d | Hydro, Grizzly, Tilly, Siren | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
@@ -60,7 +60,7 @@
 | 51 | S02 | potholes | Siren, Titan, Nitro | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 52 | S02 | dungeon | Tilly, Titan, Siren | 2026-10-07 | 2026-10-07 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
-| 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 |  | APPROVED |  |  |  |  |  |
+| 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1501 | S01 | story15_trailer | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | https://www.youtube.com/shorts/BB8Lr9LwL9g |  |  |  |  |
 | 1502 | S01 | story15_trailer | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-07 | UPLOADED_SCHEDULED 2026-10-07T12:00:00Z | https://www.youtube.com/shorts/v4oErNoDW64 |  |  |  |  |
 
@@ -68,7 +68,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_DUNGEON_V2_S016 | dungeon | Nitro, Titan, Sprinkles | 2026-10-08 | 50.17 s | `renders/megawheel_arena/pending/2026-10-08_dungeon_s016` |
 
 ## Ditolak
 

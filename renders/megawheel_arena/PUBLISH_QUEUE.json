@@ -338,37 +338,52 @@
   {
    "episode": 30,
    "video_id": "SIM_POTHOLES_V2_S021",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-11T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Siren the Police Car Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 | Ep. 30 #Shorts",
+   "upload_started": "2026-10-08T05:00:05.948945+00:00",
+   "url": "https://www.youtube.com/shorts/S1t8T9lwAMs"
   },
   {
    "episode": 1002,
    "video_id": "2026-10-07_story15_e02",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-11T17:00:00Z",
-   "role": "long"
+   "role": "long",
+   "title": "Who Is Kraggor? \ud83e\udd96\ud83c\udf66 | MegaWheel Arena Story Ep. 2",
+   "upload_started": "2026-10-08T05:00:13.190552+00:00",
+   "url": "https://www.youtube.com/shorts/SdByNtxACP4"
   },
   {
    "episode": 37,
    "video_id": "SIM_RACE25D_V4_S040",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-11T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Tilly Survive the Meteors? \ud83c\udfc1 | Ep. 37 #Shorts",
+   "upload_started": "2026-10-08T05:00:40.979456+00:00",
+   "url": "https://www.youtube.com/shorts/1aa8NVWoMhQ"
   },
   {
    "episode": 35,
    "video_id": "SIM_SMASH25D_V5_S003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-11T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Nitro Beat a Big Rig? \ud83d\udca5 | Ep. 35 #Shorts",
+   "upload_started": "2026-10-08T05:00:47.618675+00:00",
+   "url": "https://www.youtube.com/shorts/etUL6wxoccA"
   },
   {
    "episode": 33,
    "video_id": "SIM_POTHOLES_V2_S022",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-12T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs Giant Potholes! Can Tilly Make It? \ud83d\ude97\ud83d\udca5 | Ep. 33 #Shorts",
+   "upload_started": "2026-10-08T05:00:52.913053+00:00",
+   "url": "https://www.youtube.com/shorts/hBNWKl7lX6I"
   },
   {
    "episode": 40,

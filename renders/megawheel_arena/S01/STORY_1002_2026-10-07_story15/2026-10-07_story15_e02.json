@@ -1,6 +1,6 @@
 {
   "video_id": "2026-10-07_story15_e02",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-11T17:00:00Z",
   "series": "story15",
   "story_episode": 2,
   "engine": "story3d",
@@ -32,5 +32,7 @@
   "thumbnail": "/root/video-engine/renders/megawheel_arena/S01/STORY_1002_2026-10-07_story15/2026-10-07_story15_e02_thumb.jpg",
   "episode": 1002,
   "season": 1,
-  "approved_date": "2026-10-07"
+  "approved_date": "2026-10-07",
+  "youtube_url": "https://www.youtube.com/shorts/SdByNtxACP4",
+  "upload_date": "2026-10-08"
 }
