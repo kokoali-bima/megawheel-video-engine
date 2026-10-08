@@ -4450,6 +4450,48 @@
       "drive_id": "1g8zOWjq13mA9aoEmJqXScvn5OaUnX5V6",
       "drive_sheet_id": "10iIRZGSoWNjHMDMPizShtD_AChZsXeQh",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S016.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S047",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 47,
+      "created": "2026-10-08",
+      "render_date": "2026-10-08",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "sports",
+        "taxi"
+      ],
+      "track_id": "race25d_7864414d@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+meteor",
+        "p2+dodge_puddle",
+        "p4+container",
+        "win"
+      ],
+      "duration": 38.55,
+      "plan": {
+        "layout": "stagger",
+        "zone": 217.9,
+        "start": 100.9,
+        "finish_gap": 114.4
+      },
+      "structure": "stagger|container,meteor,puddle",
+      "title_base": "Can Zippy Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-08_race25d_v4_s047",
+      "audit": "renders/megawheel_arena/pending/2026-10-08_race25d_v4_s047/SIM_RACE25D_V4_S047_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1wYf8p1A9_hSKN2mBq568-BfITdVHqdM6",
+      "drive_id": "1OOs_8sQ29V7T-YtxhLRu_CspUVFOHApW",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S047.mp4"
     }
   ]
 }
