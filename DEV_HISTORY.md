@@ -440,3 +440,5 @@ Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
 
 - Changed `lab/godot3d_race/export_race.py`: its post-TTS re-exec now restarts the exporter with `--seed`, `--out`, and `--like`, rather than attempting to open a nonexistent root-level `race25d.py`.
 - Validation: exporter compiled; first S047 pass filled one missing TTS cache line, then stopped before Modal Godot rendering.
+- Follow-up: intercepted the internal voice-cache re-exec so Race keeps race-only argv while the exporter restarts itself only after the cache is filled.
+- Validation: `python3 -m py_compile lab/godot3d_race/export_race.py` passed; no Modal Godot render was attempted during the failed argument handoff.

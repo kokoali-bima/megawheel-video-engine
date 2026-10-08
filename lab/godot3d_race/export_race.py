@@ -103,13 +103,25 @@ def main():
         se.cb_finish(f"narrator {name}")                         # missing voice-C lines -> Modal (cached after)
         raise Caught()
     R.simulate, R.build_audio = sim, audio
-    # cb_finish may re-exec after it fills the voice cache. Restart this exporter
-    # with its real arguments, not the borrowed race25d filename.
-    sys.argv = [os.path.abspath(__file__), "--seed", str(a.seed), "--out", a.out, "--like", a.like]
+    # cb_finish re-execs after it fills the voice cache. Race itself needs its
+    # own argv, so intercept that re-exec and restart this exporter afterwards.
+    real_execv, restart = os.execv, [False]
+
+    def restart_exporter(_exe, _argv):
+        restart[0] = True
+        raise Caught()
+
+    os.execv = restart_exporter
+    sys.argv = ["race25d.py", "--seed", str(a.seed), "--preview-only", "--name", name]
     try:
         R.main()
     except Caught:
         pass
+    finally:
+        os.execv = real_execv
+    if restart[0]:
+        real_execv(sys.executable, [sys.executable, os.path.abspath(__file__), "--seed", str(a.seed),
+                                    "--out", a.out, "--like", a.like])
     cars, events, frames = got["cars"], got["events"], got["frames"]
     winner, star, replay, cta_start = got["winner"], got["star"], got["replay"], got["cta_start"]
     se.write_wav(os.path.join(a.out, "mix.wav"), got["audio"])
