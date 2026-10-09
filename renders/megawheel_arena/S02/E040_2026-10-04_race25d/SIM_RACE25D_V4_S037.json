@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S037",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-12T19:00:00Z",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 37,
@@ -105,5 +105,7 @@
   "episode": 40,
   "season": 2,
   "approved_date": "2026-10-04",
-  "replaces": "SIM_RACE25D_V3_S015"
+  "replaces": "SIM_RACE25D_V3_S015",
+  "youtube_url": "https://www.youtube.com/shorts/Gp7yvNydnKs",
+  "upload_date": "2026-10-09"
 }
