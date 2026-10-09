@@ -3,12 +3,30 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-10-08
+## 2026-10-09
 **📤 Upload / antrean / Drive**
-- `9a32ff0` publish: daily run 2026-10-08 [cron daily_publish.sh]
+- `a084217` publish: daily run 2026-10-09 [cron daily_publish.sh]
+
+## 2026-10-08
 **🔧 Lain-lain**
+- `bfd0498` RESEARCH_CHANNEL2: niche scan + recommendation (3D engineering explainers, US)
+- `9369f08` niche_scan.py: read-only niche research (demand, competition, young/small-channel outliers)
+- `cf857f0` feat: record audited Race 3D review
+- `feaed78` fix: replay Race 3D from manifest timeline
+- `a6522f8` fix: preserve Race 3D voice cache restart args
+- `878e54b` fix: resume Race 3D exporter after voice cache
+- `94233d9` fix: watchdog Modal TTS and targeted smoke tests
 - `7334860` auto: records left uncommitted before daily run
 - `19df8ac` ops: refresh episode indexes
+**🕳️ CHALLENGE (sim_engine)**
+- `ddaba80` produce: SIM_RACE25D_V4_S047 (pending review) [Claude Code Opus]
+**📤 Upload / antrean / Drive**
+- `9a32ff0` publish: daily run 2026-10-08 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `fc41fdd` analytics: daily report 2026-10-08
+
+</details>
 
 ## 2026-10-07
 **🔧 Lain-lain**
