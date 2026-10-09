@@ -23,7 +23,8 @@ logger = logging.getLogger("youtube-uploader")
 
 SCOPES = [
     "https://www.googleapis.com/auth/youtube.upload",
-    "https://www.googleapis.com/auth/youtube.readonly"
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/youtube.force-ssl"
 ]
 
 CREDENTIALS_DIR = os.path.expanduser("/root/video-engine/credentials")
