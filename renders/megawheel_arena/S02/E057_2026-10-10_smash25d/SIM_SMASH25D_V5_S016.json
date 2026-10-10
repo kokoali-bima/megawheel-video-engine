@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V5_S016",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "smash25d v5",
   "series": "smash25d",
   "seed": 16,
@@ -60,7 +60,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥",
-  "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 #Shorts",
+  "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 | Ep. 57 #Shorts",
   "description": "Titan, Grizzly, Nitro and Tilly enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
@@ -99,6 +99,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-10_smash25d_v5_s016/SIM_SMASH25D_V5_S016.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-10_smash25d_v5_s016/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E057_2026-10-10_smash25d/SIM_SMASH25D_V5_S016.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E057_2026-10-10_smash25d/preview",
+  "episode": 57,
+  "season": 2,
+  "approved_date": "2026-10-10"
 }

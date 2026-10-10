@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S055",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 55,
@@ -70,7 +70,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Siren vs Falling Containers! Who Wins the Race? 🏁",
-  "title": "Siren vs Falling Containers! Who Wins the Race? 🏁 #Shorts",
+  "title": "Siren vs Falling Containers! Who Wins the Race? 🏁 | Ep. 55 #Shorts",
   "description": "Sprinkles, Grizzly, Zippy and Siren race to the finish line! 🏁 Obstacles today: container, pothole, ramp! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -101,6 +101,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-10_race25d_v4_s055/SIM_RACE25D_V4_S055.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-10_race25d_v4_s055/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S02/E055_2026-10-10_race25d/SIM_RACE25D_V4_S055.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E055_2026-10-10_race25d/preview",
+  "episode": 55,
+  "season": 2,
+  "approved_date": "2026-10-10"
 }
