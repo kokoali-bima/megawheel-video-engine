@@ -4724,6 +4724,48 @@
       "drive_sheet_id": "1V8KFhlm4ZvWZRlMu1eL0Cwpro8y7PaLh",
       "drive_id": "190Wx2RiWXgzfM5XeSnVH_qfI66l6Ygkc",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S018.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S056",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 56,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "track_id": "race25d_c3b0453f@morning-snow-city",
+      "theme": "morning-snow-city",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2",
+        "win+dodge_lava",
+        "p4+ufo",
+        "p3+oil"
+      ],
+      "duration": 36.25,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 194.0,
+        "start": 108.0,
+        "finish_gap": 109.3
+      },
+      "structure": "late_pair|lava,oil,ufo",
+      "title_base": "Zippy vs the Oil Slick! Who Wins the Race? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s056",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s056/SIM_RACE25D_V4_S056_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1aGm1s8CLJibBViH7DdbUujP5yUvp0u_2",
+      "drive_id": "1Sg12sTXDlPkBLnxZbti9Y_p8HrXUQbuH",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S056.mp4"
     }
   ]
 }
