@@ -248,11 +248,11 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
                 if dist < BUMP_R + 0.62 * bw:
                     bump_last[bi2] = t
                     ux = ddx / max(dist, 1e-6) + float(rng.uniform(0.9, 2.0))      # forward bias, random per bounce
-                    uy = ddy / max(dist, 1e-6) + float(rng.uniform(0.3, 0.9))
+                    uy = ddy / max(dist, 1e-6) + float(rng.uniform(0.0, 0.5))
                     un = math.hypot(ux, uy)
-                    sp_ = max(ch.velocity.length * 0.95, 9.0) + 2.0
+                    sp_ = min(max(ch.velocity.length * 0.85, 7.0) + 1.0, 12.0)
                     ch.velocity = (ux / un * sp_, uy / un * sp_)
-                    ch.angular_velocity = ch.angular_velocity * 0.2 + float(rng.uniform(-1.0, 1.0))
+                    ch.angular_velocity = ch.angular_velocity * 0.1
                     bump_log.append((t, bi2, sp_))
         # hydroplaning: each puddle once; snow: fishtail after a hard landing
 ''')
