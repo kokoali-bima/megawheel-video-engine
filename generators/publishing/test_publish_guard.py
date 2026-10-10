@@ -45,6 +45,18 @@ alert.ok()
 check("alert: ok() marks OK", status_text().startswith("STATUS: OK"))
 check("alert: history log has all 3 events", len(open(os.environ["MW_ALERT_LOG"]).read().splitlines()) == 3)
 
+alert.send("WARN", "sticky1", "Drive mati", "detail", sticky=True)
+alert.ok()
+check("alert: sticky problem stays visible after a clean run (status WARN, listed)",
+      status_text().startswith("STATUS: WARN") and "Drive mati" in status_text())
+alert.send("ALERT", "sticky2", "Video ditolak", "d2", sticky=True)
+alert.ok()
+check("alert: highest open level wins", status_text().startswith("STATUS: ALERT"))
+alert.resolve("sticky1")
+alert.resolve("sticky2")
+alert.ok()
+check("alert: once resolved, ok() reports OK again", status_text().startswith("STATUS: OK"))
+
 # ---------------------------------------------------------------- token age
 tok = f"{TMP}/tok.json"
 json.dump({"refresh_token": "abc", "client_id": "c"}, open(tok, "w"))

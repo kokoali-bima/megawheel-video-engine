@@ -118,10 +118,13 @@ def run(token_path, with_drive=True):
     print("[preflight]", msg)
     if state == "alert":
         alert.send("ALERT", "upload_token_age", "Token upload hampir mati (umur token)", msg + "\nOtorisasi ulang sekarang, "
-                   "atau Publish app OAuth ke 'In production' agar tidak mati lagi.")
+                   "atau Publish app OAuth ke 'In production' agar tidak mati lagi.", sticky=True)
     elif state == "warn":
         alert.send("WARN", "upload_token_age", "Token upload mendekati 7 hari", msg + "\nPublish app OAuth ke "
-                   "'In production' (Google Cloud Console > OAuth consent screen) agar permanen.")
+                   "'In production' (Google Cloud Console > OAuth consent screen) agar permanen.", sticky=True)
+    else:
+        alert.resolve("upload_token_age")
+    alert.resolve("upload_token_dead")
     free_gb = shutil.disk_usage(BASE).free / 2 ** 30
     if free_gb < 3:
         alert.send("WARN", "disk_low", "Disk VM hampir penuh", f"Sisa {free_gb:.1f} GB di {BASE}")
@@ -131,13 +134,14 @@ def run(token_path, with_drive=True):
             import drive_sync
             drive_sync.service()
             print("[preflight] token Drive HIDUP")
+            alert.resolve("drive_token_dead")
         except Exception as ex:
             kind = "MATI" if type(ex).__name__ == "DriveDead" else f"tidak bisa dicek ({type(ex).__name__})"
             print(f"[preflight] token Drive {kind}: sinkron Drive dilewati (upload YouTube tidak terpengaruh)")
             if type(ex).__name__ == "DriveDead":
                 alert.send("WARN", "drive_token_dead", "Token Drive mati - arsip ke Drive berhenti",
                            "Upload YouTube tetap jalan. Perbaiki: jalankan 'drive_sync.py auth' (tunnel SSH).\n"
-                           "Video tetap aman di VM sampai Drive pulih (file lokal tidak dihapus).")
+                           "Video tetap aman di VM sampai Drive pulih (file lokal tidak dihapus).", sticky=True)
     return 0
 
 

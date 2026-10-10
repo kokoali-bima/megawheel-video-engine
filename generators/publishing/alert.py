@@ -7,6 +7,8 @@ Every alert goes to three places:
                                                     can forward it, same pattern as ANALYTICS_TELEGRAM.txt)
   3. Telegram, ONLY if credentials/telegram.env exists with BOT_TOKEN= and CHAT_ID= (optional, never committed)
 The same alert key is sent once per UTC day (a dead token would otherwise repeat every run).
+STICKY alerts (sticky=True: dead Drive token, token age, parked UPLOAD_FAILED video) stay "open" in the status file at
+the end of every clean run until resolve(key) is called - a clean run must never hide a problem that still exists.
 
   python generators/publishing/alert.py ok            # mark the latest status OK (end of a clean run)
   python generators/publishing/alert.py test          # send a harmless test alert
@@ -50,30 +52,57 @@ def _telegram(text):
         return False
 
 
-def send(level, key, title, body):
+def _state():
+    try:
+        return json.load(open(STATE_FILE, encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _save_state(state):
+    _write(STATE_FILE, json.dumps(state, indent=1))
+
+
+def resolve(key):
+    """The problem behind a sticky alert is gone (token alive again, video re-queued, ...)."""
+    state = _state()
+    if state.get("open", {}).pop(key, None) is not None:
+        _save_state(state)
+
+
+def send(level, key, title, body, sticky=False):
     """level: 'ALERT' (upload blocked / needs the owner) or 'WARN' (works now, will break soon). Returns True if sent."""
     now = _now()
     stamp = now.strftime("%Y-%m-%d %H:%M UTC")
     text = f"[MegaWheel {level}] {title}\n{stamp}\n\n{body}"
     _write(STATUS_FILE, f"STATUS: {level}\nTIME: {stamp}\nTITLE: {title}\n\n{body}\n")
     _write(LOG_FILE, f"{stamp} {level} {key} | {title} | {body.splitlines()[0] if body else ''}\n", "a")
-    try:
-        state = json.load(open(STATE_FILE, encoding="utf-8"))
-    except Exception:
-        state = {}
+    state = _state()
+    if sticky:
+        since = state.get("open", {}).get(key, {}).get("since", stamp)
+        state.setdefault("open", {})[key] = dict(level=level, title=title, since=since,
+                                                 detail=body.splitlines()[0] if body else "")
     today = now.strftime("%Y-%m-%d")
     if state.get(key) == today:
+        _save_state(state)
         return False                                            # already told the owner today
     state[key] = today
-    _write(STATE_FILE, json.dumps(state, indent=1))
+    _save_state(state)
     sent = _telegram(text)
     print(f"[alert] {level} {key}: {title}" + (" (Telegram terkirim)" if sent else ""), flush=True)
     return True
 
 
 def ok():
+    """End of a clean run: STATUS OK, unless sticky problems are still open (then WARN/ALERT with the list)."""
     stamp = _now().strftime("%Y-%m-%d %H:%M UTC")
-    _write(STATUS_FILE, f"STATUS: OK\nTIME: {stamp}\nTITLE: daily publish run finished without errors\n")
+    open_ = _state().get("open", {})
+    if not open_:
+        _write(STATUS_FILE, f"STATUS: OK\nTIME: {stamp}\nTITLE: daily publish run finished without errors\n")
+        return
+    level = "ALERT" if any(v["level"] == "ALERT" for v in open_.values()) else "WARN"
+    lines = "\n".join(f"- [{v['level']}] {v['title']} (sejak {v['since']}): {v['detail']}" for v in open_.values())
+    _write(STATUS_FILE, f"STATUS: {level}\nTIME: {stamp}\nTITLE: upload harian selesai, tetapi ada masalah terbuka\n\n{lines}\n")
 
 
 if __name__ == "__main__":

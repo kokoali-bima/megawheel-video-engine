@@ -212,7 +212,7 @@ def upload(max_n, dry=False):
             vid = e["video_id"]
             alert.send("ALERT", f"missing_mp4_{it['episode']}", f"MP4 Ep. {it['episode']} tidak ada di VM",
                        f"{mp4} - mungkin sudah diarsipkan ke Drive: 'drive_sync.py fetch {vid}' lalu "
-                       f"'publish_queue.py requeue {it['episode']}'.")
+                       f"'publish_queue.py requeue {it['episode']}'.", sticky=True)
             print(f"[queue] Ep. {it['episode']}: MP4 lokal tidak ada -> {'(dry-run) ' if dry else ''}UPLOAD_FAILED, lanjut", flush=True)
             continue
         if dry:
@@ -247,7 +247,7 @@ def upload(max_n, dry=False):
                 save(q)
                 alert.send("ALERT", f"upload_failed_{it['episode']}", f"Upload Ep. {it['episode']} ditolak YouTube (HTTP {status})",
                            f"{ex}\nItem diparkir sebagai UPLOAD_FAILED; episode lain tetap lanjut. Perbaiki lalu "
-                           f"'publish_queue.py requeue {it['episode']}'.")
+                           f"'publish_queue.py requeue {it['episode']}'.", sticky=True)
                 print(f"[queue] Ep. {it['episode']} DITOLAK (HTTP {status}) -> UPLOAD_FAILED; lanjut ke item berikutnya.", flush=True)
                 continue
             alert.send("ALERT", "upload_error", f"Upload Ep. {it['episode']} gagal", str(ex)[:500])
@@ -278,6 +278,9 @@ def requeue(ep):
     hit[0].update(status="QUEUED")
     hit[0].pop("fail_reason", None)
     save(q)
+    import alert
+    alert.resolve(f"upload_failed_{ep}")
+    alert.resolve(f"missing_mp4_{ep}")
     print(f"[queue] Ep. {ep}: kembali QUEUED; jalankan 'plan' untuk slot baru")
 
 
