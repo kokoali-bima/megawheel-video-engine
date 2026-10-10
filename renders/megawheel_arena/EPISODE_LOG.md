@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:30). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:57). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -66,6 +66,10 @@
 | 57 | S02 | smash25d | Titan, Grizzly, Nitro, Tilly | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 58 | S02 | smash25d | Sprinkles, Rocky, Nitro, Zippy | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 59 | S02 | smash25d | Titan, Rocky, Tilly, Nitro | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 60 | S02 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-10-08 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 61 | S03 | race25d | Titan, Rocky, Nitro, Siren | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 62 | S03 | smash25d | Sprinkles, Grizzly, Nitro, Zippy | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 63 | S03 | smash25d | Buster, Rocky, Nitro, Siren | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1501 | S01 | story15_trailer | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | https://www.youtube.com/shorts/BB8Lr9LwL9g |  |  |  |  |
@@ -75,7 +79,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_RACE25D_V4_S047 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-10-08 | 38.55 s | `renders/megawheel_arena/pending/2026-10-08_race25d_v4_s047` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 

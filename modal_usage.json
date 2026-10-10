@@ -3592,6 +3592,26 @@
    "gpu_seconds": 43.2,
    "wall_seconds": 72.8,
    "cost_usd": 0.011
+  },
+  {
+   "date": "2026-10-10",
+   "note": "narrator SIM_PENDULUM_V2_S001 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 57.4,
+   "wall_seconds": 84.0,
+   "cost_usd": 0.0147
+  },
+  {
+   "date": "2026-10-10",
+   "note": "narrator SIM_DOMINO_V2_S001 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 60.3,
+   "wall_seconds": 83.4,
+   "cost_usd": 0.0154
   }
  ]
 }

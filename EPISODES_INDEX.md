@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:30) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:57) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -73,6 +73,10 @@
 | 57 | `SIM_SMASH25D_V5_S016` | smash25d | APPROVED | Fri 2026-10-16 19:00 |  |
 | 58 | `SIM_SMASH25D_V5_S017` | smash25d | APPROVED | Sat 2026-10-17 19:00 |  |
 | 59 | `SIM_SMASH25D_V5_S018` | smash25d | APPROVED | Sun 2026-10-18 19:00 |  |
+| 60 | `SIM_RACE25D_V4_S047` | race25d | APPROVED | Tue 2026-10-20 15:00 |  |
+| 61 | `SIM_RACE25D_V4_S057` | race25d | APPROVED | Wed 2026-10-21 15:00 |  |
+| 62 | `SIM_SMASH25D_V5_S020` | smash25d | APPROVED | Mon 2026-10-19 19:00 |  |
+| 63 | `SIM_SMASH25D_V5_S021` | smash25d | APPROVED | Tue 2026-10-20 19:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -843,6 +847,58 @@
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+ring; Level 2: Rocky (monster) → win; Level 3 (juara): Tilly (taxi) → p2+ring; Level 4: Nitro (f1) → p3+wreck
 - **Status:** APPROVED (approve 2026-10-10)
 - **Antrian:** QUEUED 2026-10-18T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 60 — `SIM_RACE25D_V4_S047`
+
+- **Judul YouTube:** Can Zippy Survive Falling Containers? 🏁 | Ep. 60 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S02/E060_2026-10-08_race25d/SIM_RACE25D_V4_S047.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S02/E060_2026-10-08_race25d/SIM_RACE25D_V4_S047.json` · audit: `renders/megawheel_arena/S02/E060_2026-10-08_race25d/SIM_RACE25D_V4_S047_audit.md`
+- **Season / seri / seed:** S02 / race25d / 47
+- **Tema / narator:** noon-clear-mountains / chatterbox:f1
+- **Durasi:** 38.55 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p3+meteor; Level 2: Grizzly (monster2) → p2+dodge_puddle; Level 3 (juara): Zippy (sports) → p4+container; Level 4: Tilly (taxi) → win
+- **Status:** APPROVED (approve 2026-10-10)
+- **Antrian:** QUEUED 2026-10-20T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 61 — `SIM_RACE25D_V4_S057`
+
+- **Judul YouTube:** Siren vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 61 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S03/E061_2026-10-10_race25d/SIM_RACE25D_V4_S057.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S03/E061_2026-10-10_race25d/SIM_RACE25D_V4_S057.json` · audit: `renders/megawheel_arena/S03/E061_2026-10-10_race25d/SIM_RACE25D_V4_S057_audit.md`
+- **Season / seri / seed:** S03 / race25d / 57
+- **Tema / narator:** sunset-rain-beach / chatterbox:m1
+- **Durasi:** 35.79 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p3+pothole; Level 2: Rocky (monster) → p2+dodge_wall; Level 3 (juara): Nitro (f1) → win; Level 4: Siren (police) → p4+hammer
+- **Status:** APPROVED (approve 2026-10-10)
+- **Antrian:** QUEUED 2026-10-21T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 62 — `SIM_SMASH25D_V5_S020`
+
+- **Judul YouTube:** Sprinkles, Grizzly, Nitro or Zippy? Last Car Standing! 💥 | Ep. 62 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S03/E062_2026-10-10_smash25d/SIM_SMASH25D_V5_S020.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S03/E062_2026-10-10_smash25d/SIM_SMASH25D_V5_S020.json` · audit: `renders/megawheel_arena/S03/E062_2026-10-10_smash25d/SIM_SMASH25D_V5_S020_audit.md`
+- **Season / seri / seed:** S03 / smash25d / 20
+- **Tema / narator:** night-clear-mountains / chatterbox:mw-announcers-m1f1
+- **Durasi:** 52.13 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2+ring; Level 2: Grizzly (monster2) → win; Level 3 (juara): Nitro (f1) → p3+ring; Level 4: Zippy (sports) → p4+wreck
+- **Status:** APPROVED (approve 2026-10-10)
+- **Antrian:** QUEUED 2026-10-19T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 63 — `SIM_SMASH25D_V5_S021`
+
+- **Judul YouTube:** Can Tiny Nitro Beat a School Bus? 💥 | Ep. 63 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S03/E063_2026-10-10_smash25d/SIM_SMASH25D_V5_S021.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S03/E063_2026-10-10_smash25d/SIM_SMASH25D_V5_S021.json` · audit: `renders/megawheel_arena/S03/E063_2026-10-10_smash25d/SIM_SMASH25D_V5_S021_audit.md`
+- **Season / seri / seed:** S03 / smash25d / 21
+- **Tema / narator:** sunset-rain-city / chatterbox:mw-announcers-m1f1
+- **Durasi:** 50.67 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p4+ring; Level 2: Rocky (monster) → win; Level 3 (juara): Nitro (f1) → p3+ring; Level 4: Siren (police) → p2+wreck
+- **Status:** APPROVED (approve 2026-10-10)
+- **Antrian:** QUEUED 2026-10-20T23:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
