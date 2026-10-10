@@ -4782,6 +4782,48 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E056_SIM_RACE25D_V4_S056.mp4",
       "approved_date": "2026-10-10",
       "title": "Zippy vs the Oil Slick! Who Wins the Race? 🏁 | Ep. 56 #Shorts"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S057",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 57,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "f1",
+        "police"
+      ],
+      "track_id": "race25d_9ba2c8bb@sunset-rain-beach",
+      "theme": "sunset-rain-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+pothole",
+        "p2+dodge_wall",
+        "win",
+        "p4+hammer"
+      ],
+      "duration": 35.79,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 196.6,
+        "start": 101.1,
+        "finish_gap": 101.0
+      },
+      "structure": "early_pair|hammer,pothole,wall",
+      "title_base": "Siren vs the Giant Hammer! Who Wins the Race? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s057",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s057/SIM_RACE25D_V4_S057_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1LGt1T-XyIwWIIpbPqnhsGCj0Fi3xcYRs",
+      "drive_id": "1I5__dSDfEU9zc4rgxK4FO8vOTy49dTaP",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S057.mp4"
     }
   ]
 }
