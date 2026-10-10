@@ -29,3 +29,4 @@ assets/
 # generated sprites for the Godot prototype (export_sprites.py)
 lab/godot_prototype/project/sprites/
 lab/godot_prototype/project/.godot/
+lab/new_obstacles/sim_exp.py
