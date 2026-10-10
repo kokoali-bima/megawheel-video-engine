@@ -42,3 +42,4 @@
 | 2026-10-11 05:56 | Claude Code Opus | SIM_RACE25D_V4_S048 | race25d | 48 | Hydro → Grizzly → Siren → Zippy | 36.6 s | PASS | produce.py · sunset-clear-desert · late_pair|hammer,oil,ufo |
 | 2026-10-11 06:00 | Claude Code Opus | SIM_SMASH25D_V5_S016 | smash25d | 16 | Titan → Grizzly → Nitro → Tilly | 49.3 s | PASS | produce.py · night-clear-mountains ·  |
 | 2026-10-11 06:03 | Claude Code Opus | SIM_RACE25D_V4_S051 | race25d | 51 | Hydro → Rocky → Siren → Tilly | 38.5 s | PASS | produce.py · morning-clear-mountains · gauntlet|container,crusher,ramp |
+| 2026-10-11 06:07 | Claude Code Opus | SIM_SMASH25D_V5_S017 | smash25d | 17 | Sprinkles → Rocky → Nitro → Zippy | 51.6 s | PASS | produce.py · night-snow-countryside ·  |

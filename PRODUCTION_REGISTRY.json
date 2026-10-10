@@ -4612,6 +4612,41 @@
       "drive_sheet_id": "1VJ_7GoPTTo84A89Wl4nIcfXTwTJWDs2R",
       "drive_id": "1hPYmvb2CHz4eDlnHmzHAJ6fKEbnRkIlK",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S051.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S017",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 17,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "f1",
+        "sports"
+      ],
+      "track_id": "smash25d_9724deb3@night-snow-countryside",
+      "arena": "lava",
+      "theme": "night-snow-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "win",
+        "p2+wreck",
+        "p3+ring"
+      ],
+      "duration": 51.62,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_smash25d_v5_s017",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_smash25d_v5_s017/SIM_SMASH25D_V5_S017_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1VoM6XyT5LIj7CTxKLTTnFNy8X_nraXHj",
+      "drive_id": "1NiwHSv9FZH7_qdR3ClEJpOD9whgeZpuV",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S017.mp4"
     }
   ]
 }
