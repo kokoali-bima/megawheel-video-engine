@@ -3,9 +3,20 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-10
+**📤 Upload / antrean / Drive**
+- `8e312a3` publish: daily run 2026-10-10 [cron daily_publish.sh]
+
 ## 2026-10-09
+**🔧 Lain-lain**
+- `310dc90` uploader: add youtube.force-ssl scope (metadata updates on own videos)
 **📤 Upload / antrean / Drive**
 - `a084217` publish: daily run 2026-10-09 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `3ac9b1f` analytics: daily report 2026-10-09
+
+</details>
 
 ## 2026-10-08
 **🔧 Lain-lain**
