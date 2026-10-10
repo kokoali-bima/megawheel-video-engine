@@ -13,6 +13,7 @@ the end of every clean run until resolve(key) is called - a clean run must never
   python generators/publishing/alert.py ok            # mark the latest status OK (end of a clean run)
   python generators/publishing/alert.py test          # send a harmless test alert
   python generators/publishing/alert.py send LEVEL KEY TITLE BODY
+  python generators/publishing/alert.py done <upload_rc>   # writes last_run into PUBLISH_STATUS.json
 """
 import datetime as dt
 import json
@@ -24,6 +25,7 @@ import urllib.request
 BASE = os.environ.get("MW_BASE", os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")))
 STATUS_FILE = os.environ.get("MW_ALERT_FILE", os.path.join(BASE, "renders", "megawheel_arena", "PUBLISH_ALERT.txt"))
 LOG_FILE = os.environ.get("MW_ALERT_LOG", os.path.join(BASE, "work", "publish_alerts.log"))
+STATUS_JSON = os.environ.get("MW_STATUS_JSON", os.path.join(BASE, "renders", "megawheel_arena", "PUBLISH_STATUS.json"))
 STATE_FILE = os.environ.get("MW_ALERT_STATE", os.path.join(BASE, "work", "publish_alert_state.json"))
 TG_ENV = os.environ.get("MW_TG_ENV", os.path.join(BASE, "credentials", "telegram.env"))
 
@@ -36,6 +38,25 @@ def _write(path, text, mode="w"):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, mode, encoding="utf-8") as fh:
         fh.write(text)
+
+
+def update_status(**kv):
+    """Machine-readable facts for the monitoring agent (stock per role, last run, next uploads). Merges into the file."""
+    try:
+        cur = json.load(open(STATUS_JSON, encoding="utf-8"))
+    except Exception:
+        cur = {}
+    cur.update(kv)
+    cur["updated_utc"] = _now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    open_ = _state().get("open", {})
+    cur["open_issues"] = [dict(key=k, level=v["level"], title=v["title"], since=v["since"]) for k, v in open_.items()]
+    _write(STATUS_JSON, json.dumps(cur, indent=1, ensure_ascii=False) + "\n")
+
+
+def done(rc):
+    """End of a daily run (any outcome): record the result so the agent never has to guess from log text."""
+    update_status(last_run=dict(finished_utc=_now().strftime("%Y-%m-%dT%H:%M:%SZ"), upload_rc=int(rc),
+                                result={0: "ok", 2: "upload_error", 3: "token_dead", 4: "quota"}.get(int(rc), "error")))
 
 
 def _telegram(text):
@@ -109,6 +130,8 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "ok":
         ok()
+    elif cmd == "done" and len(sys.argv) >= 3:               # alert.py done <upload_rc>
+        done(sys.argv[2])
     elif cmd == "send" and len(sys.argv) >= 6:               # alert.py send LEVEL KEY TITLE BODY
         send(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif cmd == "test":

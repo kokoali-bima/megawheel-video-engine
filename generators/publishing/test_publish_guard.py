@@ -11,7 +11,7 @@ import tempfile
 import types
 
 TMP = tempfile.mkdtemp(prefix="mwguard_")
-os.environ.update(MW_ALERT_FILE=f"{TMP}/PUBLISH_ALERT.txt", MW_ALERT_LOG=f"{TMP}/alerts.log",
+os.environ.update(MW_STATUS_JSON=f"{TMP}/PUBLISH_STATUS.json", MW_ALERT_FILE=f"{TMP}/PUBLISH_ALERT.txt", MW_ALERT_LOG=f"{TMP}/alerts.log",
                   MW_ALERT_STATE=f"{TMP}/state.json", MW_TG_ENV=f"{TMP}/none.env", MW_TOKEN_META=f"{TMP}/meta.json")
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -56,6 +56,16 @@ alert.resolve("sticky1")
 alert.resolve("sticky2")
 alert.ok()
 check("alert: once resolved, ok() reports OK again", status_text().startswith("STATUS: OK"))
+
+alert.update_status(stock=dict(all_ok=False, roles={"race": dict(ok=False, missing_days=["2026-10-16"])}))
+alert.done(0)
+alert.send("WARN", "sticky3", "Drive mati", "d", sticky=True)
+alert.done(3)
+sj = json.load(open(os.environ["MW_STATUS_JSON"]))
+check("status json: merges stock + last_run, keeps open issues, rc 3 -> token_dead",
+      sj["stock"]["all_ok"] is False and sj["last_run"]["result"] == "token_dead" and sj["last_run"]["upload_rc"] == 3
+      and any(i["key"] == "sticky3" for i in sj["open_issues"]))
+alert.resolve("sticky3")
 
 # ---------------------------------------------------------------- token age
 tok = f"{TMP}/tok.json"

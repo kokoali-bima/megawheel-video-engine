@@ -136,6 +136,7 @@ def plan(start):
     # stock standard: each of the next STOCK_DAYS days needs its CHALLENGE, RACE and SMASH Short
     today = now.astimezone(NY).date()
     days = [today + dt.timedelta(days=d) for d in range(1, STOCK_DAYS + 1)]
+    stock = {}
     for role in ("short", "race", "smash"):
         have = set()
         for it in q["items"]:
@@ -143,11 +144,24 @@ def plan(start):
             if role_of_item(it) == role:
                 have.add(t.astimezone(NY).date())
         missing = [str(d_) for d_ in days if d_ not in have]
+        stock[role] = dict(name=ROLE_NAME[role], ok=not missing, covered_days=STOCK_DAYS - len(missing), missing_days=missing)
         if missing:
             print(f"[queue] PERINGATAN STOK: belum ada {ROLE_NAME[role]} untuk {', '.join(missing)} "
                   f"-> produksi & approve lagi (standar {STOCK_DAYS} hari)")
         else:
             print(f"[queue] stok {ROLE_NAME[role]}: OK {STOCK_DAYS} hari ke depan")
+    try:                                                     # one reliable source for the monitoring agent
+        import alert
+        counts = {}
+        for it in q["items"]:
+            counts[it["status"]] = counts.get(it["status"], 0) + 1
+        nxt = [dict(episode=it["episode"], role=role_of_item(it), publish_at_utc=it["publish_at_utc"], status=it["status"])
+               for it in q["items"] if it["status"] in ("QUEUED", "SCHEDULED")
+               and dt.datetime.fromisoformat(it["publish_at_utc"].replace("Z", "+00:00")) > now][:8]
+        alert.update_status(stock=dict(standard_days=STOCK_DAYS, all_ok=all(v["ok"] for v in stock.values()), roles=stock),
+                            queue=counts, next_uploads=nxt)
+    except Exception as ex:                                  # status is informational: never break planning
+        print(f"[queue] PERINGATAN: PUBLISH_STATUS.json gagal ditulis ({ex})")
     show()
 
 

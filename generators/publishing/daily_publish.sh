@@ -28,6 +28,7 @@ PF_RC=0
 $PY $PUB/preflight.py || PF_RC=$?
 if [ "$PF_RC" -eq 3 ]; then                                  # only "token dead" stops the run
   echo "[daily] STOP: pre-flight gagal (token upload mati). Tidak ada upload. Alert ditulis ke PUBLISH_ALERT.txt"
+  $PY $PUB/alert.py done 3 || true
   bash git_sync.sh push "publish: pre-flight FAILED $(date -u +%F) [cron daily_publish.sh]" | tail -1 || true
   exit 3
 elif [ "$PF_RC" -ne 0 ]; then                                # a bug in the pre-flight must never block uploads
@@ -41,6 +42,8 @@ $PY $PUB/publish_queue.py plan | grep -E "PERINGATAN|stok" || true
 if [ "$UP_RC" -eq 0 ]; then
   $PY $PUB/alert.py ok
 fi
+$PY $PUB/alert.py done "$UP_RC" || true                      # PUBLISH_STATUS.json: last_run + open issues
 bash git_sync.sh push "publish: daily run $(date -u +%F) [cron daily_publish.sh]"
-echo "===== [daily] $(date -u +%FT%TZ) selesai (upload rc=$UP_RC)"
+echo "[daily] hasil upload: rc=$UP_RC (0 ok / 2 error / 3 token mati / 4 kuota)"
+echo "===== [daily] $(date -u +%FT%TZ) selesai"                # EXACT original marker line: monitoring bots grep it
 exit "$UP_RC"
