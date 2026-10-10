@@ -12,7 +12,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 GEN = os.path.join(HERE, "..", "..", "generators")
 LAB = os.environ.get("MW_LAB_OUT", "/root/lab/new_obstacles")
-for sub in ("physics_2d", "variety", "publishing"):
+for sub in ("physics_2d", "variety", "publishing", "voice"):
     sys.path.insert(0, os.path.join(GEN, sub))
 sys.path.insert(0, HERE)
 os.makedirs(f"{LAB}/out", exist_ok=True)
