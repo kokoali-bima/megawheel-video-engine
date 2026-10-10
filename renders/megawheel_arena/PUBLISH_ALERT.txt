@@ -1,6 +1,3 @@
-STATUS: WARN
-TIME: 2026-10-10 20:00 UTC
-TITLE: Token Drive mati - arsip ke Drive berhenti
-
-Upload YouTube tetap jalan. Perbaiki: jalankan 'drive_sync.py auth' (tunnel SSH).
-Video tetap aman di VM sampai Drive pulih (file lokal tidak dihapus).
+STATUS: OK
+TIME: 2026-10-10 22:30 UTC
+TITLE: daily publish run finished without errors
