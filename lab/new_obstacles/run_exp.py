@@ -27,5 +27,18 @@ import sim_exp  # noqa: E402
 sim_exp.WORK = f"{LAB}/work"
 sim_exp.CHANNEL_DIR = f"{LAB}/out"
 sim_exp.OUT_DIR = f"{LAB}/out/pending"
+_orig_tts = sim_exp.tts
+
+
+def _tts_lab(text):
+    """Edge TTS answers 403 on this VM (outdated token). Lines missing from the announcer cache were already queued
+    for the Modal voice-C call (cb_finish); a silent placeholder of a plausible length keeps this first pass alive."""
+    try:
+        return _orig_tts(text)
+    except Exception:
+        return sim_exp.np.zeros(int(sim_exp.SR * max(1.2, 0.075 * len(text))))
+
+
+sim_exp.tts = _tts_lab
 if __name__ == "__main__":
     sim_exp.main()

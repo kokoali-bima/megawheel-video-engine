@@ -62,7 +62,7 @@ sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 7.9, 6.2, 0.85, 1.05     # pivot height, chain length, swing (rad), ball radius
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 7.9, 6.2, 1.15, 1.05     # pivot height, chain length, swing (rad), ball radius
 DOM_W, DOM_H, DOM_GAP, DOM_DELAY, DOM_FALL, DOM_HOLD, DOM_RISE = 0.9, 5.2, 2.3, 0.20, 0.55, 0.9, 0.7
 BUMP_R = 1.1
 
@@ -151,8 +151,7 @@ def make_pendulum_track(seed):
     _lab_pit(tb, r, round(float(r.uniform(6.5, 8.5)), 1), 4.5,
              (round(float(r.uniform(5, 6.5)), 1), round(float(r.uniform(1.2, 1.6)), 2)), spans, obst, danger)
     tb.flat(float(r.uniform(13, 16)))
-    p1 = ball()
-    ball(dx=8.5, phase=round((p1["phase"] + p1["period"] / 2) % p1["period"], 2))
+    ball()
     tb.flat(18.0)
     _lab_finish(tb, "pendulum", spans, obst, danger, dict(pends=PENDS, pits=PITS, ramps=RAMPS))
 
@@ -250,7 +249,8 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
                 dist = math.hypot(ddx, ddy)
                 if dist < BUMP_R + 0.62 * bw:
                     bump_last[bi2] = t
-                    ux, uy = ddx / max(dist, 1e-6) + 0.55, ddy / max(dist, 1e-6) + 0.15
+                    ux = ddx / max(dist, 1e-6) + float(rng.uniform(0.9, 2.0))      # forward bias, random per bounce
+                    uy = ddy / max(dist, 1e-6) + float(rng.uniform(0.3, 0.9))
                     un = math.hypot(ux, uy)
                     sp_ = max(ch.velocity.length * 0.95, 9.0) + 2.0
                     ch.velocity = (ux / un * sp_, uy / un * sp_)
