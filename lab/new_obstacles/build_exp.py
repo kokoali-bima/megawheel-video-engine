@@ -62,7 +62,7 @@ sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 7.9, 6.2, 1.15, 1.05     # pivot height, chain length, swing (rad), ball radius
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 10.0, 6.5, 1.2, 1.0     # pivot height, chain length, swing (rad), ball radius
 DOM_W, DOM_H, DOM_GAP, DOM_DELAY, DOM_FALL, DOM_HOLD, DOM_RISE = 0.9, 5.2, 2.3, 0.20, 0.55, 0.9, 0.7
 BUMP_R = 1.1
 
@@ -136,7 +136,7 @@ def make_pendulum_track(seed):
     spans, obst, danger = [], [], []
 
     def ball(dx=0.0, phase=None):
-        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(3.0, 3.7)), 2),
+        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(3.6, 4.4)), 2),
                  phase=round(float(r.uniform(0, 3.0)) if phase is None else phase, 2))
         PENDS.append(p)
         spans.append((p["x"] - 2.2, p["x"] + 2.2))
@@ -144,8 +144,6 @@ def make_pendulum_track(seed):
         danger.append(p["x"] - 8.0)
         return p
 
-    ball()
-    tb.flat(float(r.uniform(13, 16)))
     ball()
     tb.flat(float(r.uniform(13, 16)))
     _lab_pit(tb, r, round(float(r.uniform(6.5, 8.5)), 1), 4.5,
@@ -254,7 +252,7 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
                     un = math.hypot(ux, uy)
                     sp_ = max(ch.velocity.length * 0.95, 9.0) + 2.0
                     ch.velocity = (ux / un * sp_, uy / un * sp_)
-                    ch.angular_velocity = float(rng.uniform(-3.5, 3.5))
+                    ch.angular_velocity = ch.angular_velocity * 0.2 + float(rng.uniform(-1.0, 1.0))
                     bump_log.append((t, bi2, sp_))
         # hydroplaning: each puddle once; snow: fishtail after a hard landing
 ''')
