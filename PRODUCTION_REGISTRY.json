@@ -4493,6 +4493,48 @@
       "drive_id": "10Dtj23gccxGJJNGR08XBzHDHdsbnl9kv",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S047.mp4",
       "render3d": true
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S048",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 48,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "police",
+        "sports"
+      ],
+      "track_id": "race25d_a4bd2f90@sunset-clear-desert",
+      "theme": "sunset-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+hammer",
+        "p2",
+        "win+dodge_oil",
+        "p4+ufo"
+      ],
+      "duration": 36.65,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 192.1,
+        "start": 115.1,
+        "finish_gap": 99.4
+      },
+      "structure": "late_pair|hammer,oil,ufo",
+      "title_base": "Can Hydro Survive the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s048",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s048/SIM_RACE25D_V4_S048_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1GCdyrGw9OKHDk2N7EExRYQ0hTLbX8QWD",
+      "drive_id": "1KF3_FJUpz2k7NQ1XYXZiO5DBnm2-kIbJ",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S048.mp4"
     }
   ]
 }
