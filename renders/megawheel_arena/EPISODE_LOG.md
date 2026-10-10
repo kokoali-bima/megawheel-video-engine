@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:28). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-10 23:30). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -75,7 +75,6 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_DUNGEON_V2_S016 | dungeon | Nitro, Titan, Sprinkles | 2026-10-08 | 50.17 s | `renders/megawheel_arena/pending/2026-10-08_dungeon_s016` |
 | SIM_RACE25D_V4_S047 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-10-08 | 38.55 s | `renders/megawheel_arena/pending/2026-10-08_race25d_v4_s047` |
 
 ## Ditolak
@@ -131,3 +130,4 @@
 | SIM_RACE25D_V4_S038 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
 | SIM_RACE25D_V4_S039 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
 | SIM_RACE25D_V4_S042 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
+| SIM_DUNGEON_V2_S016 | owner 2026-10-11: unrecognised review item; audit failed 6 checks (duration, LEVEL/FAIL/WINNER badges); archived | 2026-10-10 |

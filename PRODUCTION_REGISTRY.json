@@ -4437,19 +4437,21 @@
         "win"
       ],
       "duration": 50.17,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-08_dungeon_s016",
-      "audit": "renders/megawheel_arena/pending/2026-10-08_dungeon_s016/SIM_DUNGEON_V2_S016_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-08_dungeon_s016",
+      "audit": "renders/megawheel_arena/rejected/2026-10-08_dungeon_s016/SIM_DUNGEON_V2_S016_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
       "render3d": true,
       "drive_id": "1g8zOWjq13mA9aoEmJqXScvn5OaUnX5V6",
-      "drive_sheet_id": "10iIRZGSoWNjHMDMPizShtD_AChZsXeQh",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S016.mp4"
+      "drive_sheet_id": null,
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_DUNGEON_V2_S016.mp4",
+      "reject_reason": "owner 2026-10-11: unrecognised review item; audit failed 6 checks (duration, LEVEL/FAIL/WINNER badges); archived",
+      "rejected_date": "2026-10-10"
     },
     {
       "video_id": "SIM_RACE25D_V4_S047",
