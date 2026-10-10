@@ -4647,6 +4647,48 @@
       "drive_sheet_id": "1VoM6XyT5LIj7CTxKLTTnFNy8X_nraXHj",
       "drive_id": "1NiwHSv9FZH7_qdR3ClEJpOD9whgeZpuV",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S017.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S055",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 55,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "icecream",
+        "monster2",
+        "sports",
+        "police"
+      ],
+      "track_id": "race25d_edf4bc41@noon-rain-beach",
+      "theme": "noon-rain-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+pothole",
+        "p2+ramp",
+        "win",
+        "p4+container"
+      ],
+      "duration": 35.28,
+      "plan": {
+        "layout": "stagger",
+        "zone": 164.7,
+        "start": 103.2,
+        "finish_gap": 103.5
+      },
+      "structure": "stagger|container,pothole,ramp",
+      "title_base": "Siren vs Falling Containers! Who Wins the Race? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s055",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s055/SIM_RACE25D_V4_S055_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Sypm1gMrFBC309Shn9l2rAxrd_hdO9hX",
+      "drive_id": "1QgThHt_0gV1H5qcthdHuXrlhGor1BH-3",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S055.mp4"
     }
   ]
 }
