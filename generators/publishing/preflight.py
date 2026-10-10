@@ -113,7 +113,7 @@ def run(token_path, with_drive=True):
         return 3
     except Exception as ex:                                      # network etc.: do not claim the token is dead
         print(f"[preflight] PERINGATAN: cek token tidak bisa dilakukan ({type(ex).__name__}: {ex}); lanjut hati-hati")
-        alive = True
+        alive = False                                            # no proof either way: never mark 'proven' / never clear alerts
     state, msg = check_age(name, token_path, alive)
     print("[preflight]", msg)
     if state == "alert":
@@ -122,9 +122,10 @@ def run(token_path, with_drive=True):
     elif state == "warn":
         alert.send("WARN", "upload_token_age", "Token upload mendekati 7 hari", msg + "\nPublish app OAuth ke "
                    "'In production' (Google Cloud Console > OAuth consent screen) agar permanen.", sticky=True)
-    else:
+    elif alive:
         alert.resolve("upload_token_age")
-    alert.resolve("upload_token_dead")
+    if alive:
+        alert.resolve("upload_token_dead")
     free_gb = shutil.disk_usage(BASE).free / 2 ** 30
     if free_gb < 3:
         alert.send("WARN", "disk_low", "Disk VM hampir penuh", f"Sisa {free_gb:.1f} GB di {BASE}")
