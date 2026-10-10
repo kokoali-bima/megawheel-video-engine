@@ -54,13 +54,29 @@ pull → plan → upload --confirm (maks 5) → drive_sync sync → push, memaka
 berhenti kalau `git_sync pull` gagal. Pasang **di VM 99.3** (tempat kode dan token berada), **sekali sehari**:
 
 ```
-0 12 * * * /root/video-engine/generators/publishing/daily_publish.sh >> /root/video-engine/work/daily_publish.log 2>&1
+0 5 * * * /root/video-engine/generators/publishing/daily_publish.sh >> /root/video-engine/work/daily_publish.log 2>&1
 ```
-(12:00 WIB = 01:00 ET, jauh sebelum slot 11:00 ET.) Jangan menjadwalkan lebih sering dari 1× sehari (kuota YouTube),
-jangan menambah langkah approve/render ke cron. Cek hasil: `tail -50 /root/video-engine/work/daily_publish.log`.
+(Jam VM = UTC: 05:00 UTC = 12:00 WIB = 01:00 ET, jauh sebelum slot 11:00 ET.) Jangan menjadwalkan lebih sering dari 1×
+sehari (kuota YouTube), jangan menambah langkah approve/render ke cron. Cek hasil: `tail -50 /root/video-engine/work/daily_publish.log`.
 
-**Verifikasi harian: bot agent user, 14:00 WIB** (user 2026-10-01): membaca log, `publish_queue.py show`,
-`drive_sync.py status`, lalu melapor ke user ("PERLU TINDAKAN" di baris pertama kalau run gagal atau tidak ada).
+**Verifikasi harian: bot agent user, 14:00 WIB** (user 2026-10-01). Sejak 2026-10-11 bot membaca **fakta, bukan menebak dari
+teks log** (kasus: laporan 2026-10-10 menulis "Stok AMAN" padahal RACE/SMASH 16-17 Okt kosong, dan "PERLU TINDAKAN" hanya
+karena baris error Drive). Urutan baca di VM 99.3, folder `/root/video-engine`:
+
+1. `renders/megawheel_arena/PUBLISH_ALERT.txt`: baris pertama `STATUS: OK | WARN | ALERT`. WARN/ALERT = ada masalah terbuka
+   (token Drive mati, token upload hampir mati, video diparkir UPLOAD_FAILED, ...); daftar masalahnya ada di file yang sama.
+2. `renders/megawheel_arena/PUBLISH_STATUS.json` (diperbarui tiap run harian):
+   - `last_run.result`: `ok` | `upload_error` | `token_dead` | `quota` (+ `finished_utc`, `upload_rc`). Run hari ini ada bila
+     `finished_utc` tanggal hari ini (UTC; run jam 05:00 UTC).
+   - `stock.roles.{short,race,smash}`: `ok`, `covered_days` (dari 7), `missing_days`. **`stock.all_ok=false` = user harus
+     memproduksi & approve video lagi**; sebutkan jenis dan tanggal yang kosong, jangan menulis "AMAN".
+   - `queue`: jumlah per status; `next_uploads`: tayang berikutnya (UTC); `open_issues`: masalah yang masih terbuka.
+3. Cadangan: `work/daily_publish.log` (baris `[queue] OK -> ...` = satu upload sukses; penutup run: `===== [daily] <waktu> selesai`)
+   dan `publish_queue.py show`.
+
+"PERLU TINDAKAN" di baris pertama laporan **hanya jika**: STATUS bukan OK, atau `last_run.result` bukan `ok`, atau
+`last_run.finished_utc` bukan hari ini, atau `stock.all_ok=false` (tulis itu sebagai "perlu produksi video", bukan "run gagal").
+Baris `[drive] ...` di log bukan kegagalan upload: Drive hanya arsip (lihat `open_issues`).
 
 ## 2. Latar singkat untuk agent
 
