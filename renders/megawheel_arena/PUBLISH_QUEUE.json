@@ -438,37 +438,52 @@
   {
    "episode": 39,
    "video_id": "SIM_POTHOLES_V2_S027",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-14T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Nitro the Race Car Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 | Ep. 39 #Shorts",
+   "upload_started": "2026-10-10T05:00:05.570313+00:00",
+   "url": "https://www.youtube.com/shorts/_ep2xhmCcMg"
   },
   {
    "episode": 46,
    "video_id": "SIM_RACE25D_V4_S046",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-14T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Nitro Survive the Meteors? \ud83c\udfc1 | Ep. 46 #Shorts",
+   "upload_started": "2026-10-10T05:00:09.086098+00:00",
+   "url": "https://www.youtube.com/shorts/BJhlWYkiHF8"
   },
   {
    "episode": 44,
    "video_id": "SIM_SMASH25D_V5_S008",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-14T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Rocky, Tilly or Zippy? Last Car Standing! \ud83d\udca5 | Ep. 44 #Shorts",
+   "upload_started": "2026-10-10T05:00:13.536512+00:00",
+   "url": "https://www.youtube.com/shorts/qNLPmagWH3M"
   },
   {
    "episode": 42,
    "video_id": "SIM_LAVA_POTHOLES_V2_S026",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-15T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Siren the Police Car Survive Giant Lava Potholes? \ud83c\udf0b\ud83d\udd25 | Ep. 42 #Shorts",
+   "upload_started": "2026-10-10T05:00:17.892758+00:00",
+   "url": "https://www.youtube.com/shorts/ivasm__dTxM"
   },
   {
    "episode": 49,
    "video_id": "SIM_RACE25D_V4_S043",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-15T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Siren Survive the Giant Hammer? \ud83c\udfc1 | Ep. 49 #Shorts",
+   "upload_started": "2026-10-10T05:00:21.106556+00:00",
+   "url": "https://www.youtube.com/shorts/6HkCyVZqXrc"
   },
   {
    "episode": 47,
