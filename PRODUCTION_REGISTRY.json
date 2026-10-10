@@ -4570,6 +4570,48 @@
       "drive_sheet_id": "1F4s0aQ75eVb1eAOMYNjC30IXBKkPVQcd",
       "drive_id": "18kq7uJFHUHB_UYqmReZ4cqLtsEZ_QAfo",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S016.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S051",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 51,
+      "created": "2026-10-10",
+      "render_date": "2026-10-10",
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "police",
+        "taxi"
+      ],
+      "track_id": "race25d_0824fe15@morning-clear-mountains",
+      "theme": "morning-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "p2+dodge_crusher",
+        "p4+container",
+        "win+ramp"
+      ],
+      "duration": 38.48,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 221.1,
+        "start": 118.8,
+        "finish_gap": 108.0
+      },
+      "structure": "gauntlet|container,crusher,ramp",
+      "title_base": "Can Siren Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s051",
+      "audit": "renders/megawheel_arena/pending/2026-10-10_race25d_v4_s051/SIM_RACE25D_V4_S051_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1VJ_7GoPTTo84A89Wl4nIcfXTwTJWDs2R",
+      "drive_id": "1hPYmvb2CHz4eDlnHmzHAJ6fKEbnRkIlK",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S051.mp4"
     }
   ]
 }
