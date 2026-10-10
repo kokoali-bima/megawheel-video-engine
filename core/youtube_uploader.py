@@ -15,6 +15,7 @@ from typing import List, Optional, Dict, Any
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
@@ -30,6 +31,24 @@ SCOPES = [
 CREDENTIALS_DIR = os.path.expanduser("/root/video-engine/credentials")
 DEFAULT_CLIENT_SECRETS = os.path.join(CREDENTIALS_DIR, "client_secrets.json")
 DEFAULT_TOKEN_FILE = os.path.join(CREDENTIALS_DIR, "youtube_token.json")
+
+QUOTA_REASONS = {"quotaExceeded", "dailyLimitExceeded", "rateLimitExceeded", "uploadLimitExceeded"}
+
+
+class AuthExpired(PermissionError):
+    """The refresh token is dead (revoked / expired, e.g. OAuth app in 'Testing' = 7 days). Needs a new authorisation."""
+
+
+class QuotaExceeded(RuntimeError):
+    """YouTube API daily quota (or upload limit) is used up. Not a bug: wait for the reset, then run again."""
+
+
+def http_reason(ex) -> str:
+    """First error reason of a googleapiclient HttpError ('' when unknown)."""
+    try:
+        return json.loads(ex.content.decode("utf-8"))["error"]["errors"][0]["reason"]
+    except Exception:
+        return ""
 
 
 class YouTubeUploader:
@@ -55,8 +74,9 @@ class YouTubeUploader:
             logger.warning(f"Error checking credentials: {e}")
             return False
 
-    def get_service(self):
-        """Build and return an authenticated YouTube service object."""
+    def get_service(self, force_refresh: bool = False):
+        """Build and return an authenticated YouTube service object.
+        Raises AuthExpired when the refresh token is dead (is_authenticated() cannot see that)."""
         creds = None
         if os.path.exists(self.token_file):
             try:
@@ -64,9 +84,12 @@ class YouTubeUploader:
             except Exception as e:
                 logger.error(f"Failed to load token file: {e}")
 
-        if creds and creds.expired and creds.refresh_token:
-            logger.info("Refreshing expired YouTube access token...")
-            creds.refresh(Request())
+        if creds and creds.refresh_token and (creds.expired or force_refresh):
+            logger.info("Refreshing YouTube access token...")
+            try:
+                creds.refresh(Request())
+            except RefreshError as ex:
+                raise AuthExpired(f"refresh token YouTube ditolak Google: {ex}") from ex
             with open(self.token_file, "w", encoding="utf-8") as f:
                 f.write(creds.to_json())
 
@@ -81,6 +104,12 @@ class YouTubeUploader:
             )
 
         return build("youtube", "v3", credentials=creds)
+
+    def check_auth(self) -> str:
+        """LIVE check: force a token refresh and ask YouTube who we are (1 quota unit). Returns the channel title.
+        Raises AuthExpired when the refresh token is dead. Call this BEFORE touching the upload queue."""
+        yt = self.get_service(force_refresh=True)
+        return yt.channels().list(part="snippet", mine=True).execute()["items"][0]["snippet"]["title"]
 
     def generate_auth_url(self) -> Tuple_Auth:
         """Generate an OAuth authorization URL for manual browser approval."""
@@ -166,10 +195,16 @@ class YouTubeUploader:
         )
 
         response = None
-        while response is None:
-            status, response = request.next_chunk()
-            if status:
-                logger.info(f"Uploaded {int(status.progress() * 100)}%")
+        try:
+            while response is None:
+                # num_retries: exponential backoff on 5xx / 429 / connection resets (one network blip must not kill a batch)
+                status, response = request.next_chunk(num_retries=5)
+                if status:
+                    logger.info(f"Uploaded {int(status.progress() * 100)}%")
+        except HttpError as ex:
+            if http_reason(ex) in QUOTA_REASONS:
+                raise QuotaExceeded(f"{http_reason(ex)}: {ex}") from ex
+            raise
 
         video_id = response.get("id")
         if thumbnail_path and os.path.exists(thumbnail_path):

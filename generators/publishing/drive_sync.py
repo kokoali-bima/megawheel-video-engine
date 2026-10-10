@@ -36,12 +36,20 @@ ROOT_PATH = ["me", "ai-develop", "ipandu-video"]
 FOLDER_MIME = "application/vnd.google-apps.folder"
 SKIP_STATUS = {"AUDIT_FAILED", "CHECKS_FAILED", "PROTOTYPE_NOT_FOR_UPLOAD"}
 _svc, _folders = None, {}
+_dead = False                       # the Drive refresh token was rejected in this process: stop trying (and printing)
+
+
+class DriveDead(RuntimeError):
+    """Drive refresh token revoked/expired. Needs 'drive_sync.py auth'. Never fatal for uploading to YouTube."""
 
 
 # ------------------------------------------------------------------ Drive basics
 def service():
-    global _svc
+    global _svc, _dead
+    if _dead:
+        raise DriveDead("token Drive mati (sudah dicek di run ini)")
     if _svc is None:
+        from google.auth.exceptions import RefreshError
         from google.auth.transport.requests import Request
         from google.oauth2.credentials import Credentials
         from googleapiclient.discovery import build
@@ -49,7 +57,13 @@ def service():
             raise RuntimeError("drive_token.json belum ada: jalankan 'drive_sync.py auth' (sekali, lihat SOP)")
         creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
         if not creds.valid:
-            creds.refresh(Request())
+            try:
+                creds.refresh(Request())
+            except RefreshError as ex:
+                _dead = True        # one line per run instead of one error per video (225 lines on 2026-10-08..10)
+                print(f"[drive] TOKEN DRIVE MATI ({ex}) -> sinkron Drive dilewati di run ini. File lokal TIDAK dihapus. "
+                      f"Perbaiki: drive_sync.py auth", flush=True)
+                raise DriveDead(str(ex)) from ex
             with open(TOKEN, "w") as fh:
                 fh.write(creds.to_json())
         _svc = build("drive", "v3", credentials=creds, cache_discovery=False)
@@ -186,6 +200,9 @@ def sync(only=None):
     for vid in ids:
         try:
             sync_one(vid, quiet=not only)
+        except DriveDead:
+            print("[drive] sisa video dilewati (token mati); akan disinkronkan otomatis setelah token diperbarui")
+            return
         except Exception as ex:
             print(f"[drive] {vid}: GAGAL {ex}")
 
@@ -195,6 +212,8 @@ def try_sync_one(video_id):
     try:
         if os.path.exists(TOKEN):
             sync_one(video_id)
+    except DriveDead:
+        pass                                    # already reported once by service(); stay quiet
     except Exception as ex:
         print(f"[drive] sync {video_id} gagal (akan dicoba lagi oleh 'drive_sync.py sync'): {ex}")
 

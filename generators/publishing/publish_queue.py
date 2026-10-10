@@ -5,6 +5,8 @@ Usage (cd /root/video-engine):
   ./venv/bin/python generators/publishing/publish_queue.py plan [--start YYYY-MM-DD]   # assign slots, write PUBLISH_QUEUE.md
   ./venv/bin/python generators/publishing/publish_queue.py show
   ./venv/bin/python generators/publishing/publish_queue.py upload --confirm            # ONLY on the user's explicit instruction
+  ./venv/bin/python generators/publishing/publish_queue.py upload --dry-run            # pre-flight + what WOULD upload; changes nothing
+  ./venv/bin/python generators/publishing/publish_queue.py requeue <episode>           # parked UPLOAD_FAILED -> QUEUED
 
 Each queued episode is uploaded as private with YouTube `publishAt`; YouTube itself makes it public at the
 slot time (no cron on our side). Slots are in America/New_York, so US daylight-saving changes are automatic.
@@ -162,15 +164,27 @@ def show():
         print(fh.read())
 
 
-def upload(max_n):
-    """Upload up to max_n QUEUED episodes (YouTube API quota: videos.insert = 1600 of 10000 units/day)."""
-    from core.youtube_uploader import YouTubeUploader
+def upload(max_n, dry=False):
+    """Upload up to max_n QUEUED episodes (YouTube API quota: videos.insert = 1600 of 10000 units/day).
+    Exit codes: 0 ok | 2 unexpected error (item stays UPLOADING, next run checks YouTube first) | 3 token dead |
+    4 API quota used up. A bad single video (HTTP 4xx) is parked as UPLOAD_FAILED and the run goes on.
+    dry=True: pre-flight + selection only; nothing is uploaded or changed."""
+    from core.youtube_uploader import AuthExpired, QuotaExceeded, YouTubeUploader
+    from googleapiclient.errors import HttpError
+    import alert
     q = load()
     done = 0
     uploader = YouTubeUploader()
-    if not uploader.is_authenticated():
-        sys.exit("[queue] STOP: YouTube belum terotentikasi (jalankan auth_youtube.py).")
-    reconcile_uploading(q, uploader)                             # a previous run died mid-upload? never re-upload blindly
+    try:                                                         # LIVE token check first: nothing is touched if it fails
+        print(f"[queue] YouTube OK: channel '{uploader.check_auth()}'", flush=True)
+    except AuthExpired as ex:
+        alert.send("ALERT", "upload_token_dead", "Token upload YouTube MATI - upload otomatis berhenti", str(ex))
+        sys.exit(f"[queue] STOP: token YouTube mati ({ex}). Tidak ada item yang disentuh. Otorisasi ulang token upload.")
+    if dry:
+        stuck = [it["episode"] for it in q["items"] if it["status"] == "UPLOADING"]
+        print(f"[queue] DRY-RUN: tidak ada yang diubah/diunggah. Item UPLOADING tertinggal: {stuck or 'tidak ada'}")
+    else:
+        reconcile_uploading(q, uploader)                         # a previous run died mid-upload? never re-upload blindly
     now = dt.datetime.now(dt.timezone.utc)
     for it in q["items"]:
         if it["status"] != "QUEUED":
@@ -190,6 +204,21 @@ def upload(max_n):
         with open(f"{folder}/{e['video_id']}.json") as fh:
             m = json.load(fh)
         print(f"[queue] Ep. {it['episode']} | {m['title']} | publishAt {it['publish_at_utc']}", flush=True)
+        mp4 = f"{folder}/{e['video_id']}.mp4"
+        if not os.path.exists(mp4):                              # would crash mid-run: park it, keep the queue moving
+            if not dry:
+                it.update(status="UPLOAD_FAILED", fail_reason="file MP4 lokal tidak ada di VM")
+                save(q)
+            vid = e["video_id"]
+            alert.send("ALERT", f"missing_mp4_{it['episode']}", f"MP4 Ep. {it['episode']} tidak ada di VM",
+                       f"{mp4} - mungkin sudah diarsipkan ke Drive: 'drive_sync.py fetch {vid}' lalu "
+                       f"'publish_queue.py requeue {it['episode']}'.")
+            print(f"[queue] Ep. {it['episode']}: MP4 lokal tidak ada -> {'(dry-run) ' if dry else ''}UPLOAD_FAILED, lanjut", flush=True)
+            continue
+        if dry:
+            print(f"[queue] DRY-RUN: akan upload {mp4} ({os.path.getsize(mp4) / 2 ** 20:.1f} MB)", flush=True)
+            done += 1
+            continue
         it.update(status="UPLOADING", title=m["title"], upload_started=dt.datetime.now(dt.timezone.utc).isoformat())
         save(q)                                                  # marker first: a crash can never cause a duplicate
         try:
@@ -199,7 +228,34 @@ def upload(max_n):
                                          made_for_kids=False, publish_at=it["publish_at_utc"],
                                          shorts=role_of(e.get("series", "")) != "long",
                                          thumbnail_path=m.get("thumbnail"))
-        except Exception as ex:                                  # stop the run; the next run checks YouTube first
+        except AuthExpired as ex:                                # raised before any byte was sent: safe to re-queue
+            it["status"] = "QUEUED"
+            save(q)
+            alert.send("ALERT", "upload_token_dead", "Token upload YouTube MATI - upload otomatis berhenti", str(ex))
+            print(f"[queue] STOP: token mati di tengah run ({ex}). Ep. {it['episode']} kembali QUEUED.", flush=True)
+            sys.exit(3)
+        except QuotaExceeded as ex:                              # not a bug: quota resets 00:00 Pacific (07:00 UTC)
+            alert.send("WARN", "quota", "Kuota API YouTube habis - upload dilanjutkan run berikutnya",
+                       f"{ex}\nKuota direset 00:00 Pacific. Tidak perlu tindakan.")
+            print(f"[queue] STOP: kuota API habis ({ex}). Ep. {it['episode']} dicek ulang di run berikutnya.", flush=True)
+            sys.exit(4)
+        except HttpError as ex:
+            status = getattr(getattr(ex, "resp", None), "status", 0)
+            if 400 <= status < 500 and status not in (401, 408, 429):
+                # this single video is the problem (bad file/metadata): park it, keep the queue moving
+                it.update(status="UPLOAD_FAILED", fail_reason=f"HTTP {status}: {str(ex)[:200]}")
+                save(q)
+                alert.send("ALERT", f"upload_failed_{it['episode']}", f"Upload Ep. {it['episode']} ditolak YouTube (HTTP {status})",
+                           f"{ex}\nItem diparkir sebagai UPLOAD_FAILED; episode lain tetap lanjut. Perbaiki lalu "
+                           f"'publish_queue.py requeue {it['episode']}'.")
+                print(f"[queue] Ep. {it['episode']} DITOLAK (HTTP {status}) -> UPLOAD_FAILED; lanjut ke item berikutnya.", flush=True)
+                continue
+            alert.send("ALERT", "upload_error", f"Upload Ep. {it['episode']} gagal", str(ex)[:500])
+            print(f"[queue] STOP: upload Ep. {it['episode']} gagal ({ex}). Item tetap UPLOADING; run berikutnya "
+                  f"mengecek channel dulu (tidak upload ulang tanpa cek).", flush=True)
+            sys.exit(2)
+        except Exception as ex:                                  # network etc.: stop; the next run checks YouTube first
+            alert.send("ALERT", "upload_error", f"Upload Ep. {it['episode']} gagal", f"{type(ex).__name__}: {ex}"[:500])
             print(f"[queue] STOP: upload Ep. {it['episode']} gagal ({ex}). Item tetap UPLOADING; run berikutnya "
                   f"mengecek channel dulu (tidak upload ulang tanpa cek).", flush=True)
             sys.exit(2)
@@ -208,8 +264,21 @@ def upload(max_n):
         save(q)
         done += 1
         print(f"[queue] OK -> {res['url']}", flush=True)
-    episodes.write_log()
+    if not dry:
+        episodes.write_log()
     show()
+
+
+def requeue(ep):
+    """Put a parked UPLOAD_FAILED episode back into the queue (after the cause was fixed)."""
+    q = load()
+    hit = [it for it in q["items"] if it["episode"] == ep and it["status"] == "UPLOAD_FAILED"]
+    if not hit:
+        sys.exit(f"[queue] Ep. {ep}: tidak ada item UPLOAD_FAILED")
+    hit[0].update(status="QUEUED")
+    hit[0].pop("fail_reason", None)
+    save(q)
+    print(f"[queue] Ep. {ep}: kembali QUEUED; jalankan 'plan' untuk slot baru")
 
 
 def _channel_titles(uploader):
@@ -256,7 +325,9 @@ def reconcile_uploading(q, uploader):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["plan", "show", "upload"])
+    ap.add_argument("cmd", choices=["plan", "show", "upload", "requeue"])
+    ap.add_argument("episode", nargs="?", type=int, help="episode number (requeue)")
+    ap.add_argument("--dry-run", action="store_true", help="upload: pre-flight + selection only, nothing is changed")
     ap.add_argument("--start", help="first publish day (New York date), default: today/after last slot")
     ap.add_argument("--confirm", action="store_true", help="required for upload (user instruction)")
     ap.add_argument("--max", type=int, default=5, help="max uploads per run (API quota), default 5")
@@ -265,10 +336,12 @@ def main():
         plan(dt.date.fromisoformat(a.start) if a.start else None)
     elif a.cmd == "show":
         show()
+    elif a.cmd == "requeue":
+        requeue(a.episode)
     else:
-        if not a.confirm:
+        if not a.confirm and not a.dry_run:
             sys.exit("[queue] STOP: upload butuh --confirm (hanya atas instruksi eksplisit user).")
-        upload(a.max)
+        upload(a.max, dry=a.dry_run)
 
 
 if __name__ == "__main__":
