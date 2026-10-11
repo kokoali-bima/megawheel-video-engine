@@ -5750,16 +5750,18 @@
       },
       "structure": "gauntlet|container,meteor,puddle",
       "title_base": "Will Siren Make It Past Falling Containers? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064/SIM_RACE25D_V4_S064_audit.md",
+      "status": "REJECTED",
+      "folder": "renders/megawheel_arena/rejected/2026-10-11_race25d_v4_s064",
+      "audit": "renders/megawheel_arena/rejected/2026-10-11_race25d_v4_s064/SIM_RACE25D_V4_S064_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1vDwpR8hVpRlEqwLYRtmghDkL4ZLBtW7B",
+      "drive_sheet_id": null,
       "drive_id": "1MIg8Ui535OYhNqaUSmDzU5lYsmjWZUo5",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S064.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_RACE25D_V4_S064.mp4",
+      "reject_reason": "owner: police car hidden behind the container; fixed (near-side detour), re-rendered",
+      "rejected_date": "2026-10-11"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S029",

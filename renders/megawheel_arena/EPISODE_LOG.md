@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 07:06). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 07:08). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -96,7 +96,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_RACE25D_V4_S064 | race25d | Sprinkles, Rocky, Siren, Zippy | 2026-10-11 | 35.79 s | `renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
@@ -154,4 +154,5 @@
 | SIM_DUNGEON_V2_S016 | owner 2026-10-11: unrecognised review item; audit failed 6 checks (duration, LEVEL/FAIL/WINNER badges); archived | 2026-10-10 |
 | SIM_GAUNTLET_V2_S001 | producer: far-lane band hid speed bumps/ramps (owner report); re-rendered | 2026-10-11 |
 | SIM_GAUNTLET_V2_S002 | producer: same cast as S001 (sports, bigrig, f1) - rotation rule; replaced | 2026-10-11 |
+| SIM_RACE25D_V4_S064 | owner: police car hidden behind the container; fixed (near-side detour), re-rendered | 2026-10-11 |
 | SIM_GAUNTLET_V2_S003 | producer: far-lane band hid speed bumps/ramps (owner report); re-rendered | 2026-10-11 |
