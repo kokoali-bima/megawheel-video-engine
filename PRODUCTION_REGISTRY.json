@@ -6443,6 +6443,48 @@
       "drive_sheet_id": "15qFD71fmTIar2itQ-Evu5V7oV2nR-bJ4",
       "drive_id": "1s8Jmll0scvQ5GFWtKyuLrcTdoQGlxS_x",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_DOMINO_V2_S003.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S069",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 69,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_f33174e1@noon-clear-desert",
+      "theme": "noon-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "p2",
+        "p4+container",
+        "win+ramp+dodge_wall"
+      ],
+      "duration": 37.48,
+      "plan": {
+        "layout": "stagger",
+        "zone": 218.6,
+        "start": 99.2,
+        "finish_gap": 113.6
+      },
+      "structure": "stagger|container,ramp,wall",
+      "title_base": "Zippy vs Falling Containers! Who Wins the Race? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s069",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s069/SIM_RACE25D_V4_S069_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1Iz9XSzsMmrML5XZz0Q1LMuKnmZbAzxNJ",
+      "drive_id": "1jVRKI0Jul2DwPezxNJeFyPpF8zdO9hJ4",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S069.mp4"
     }
   ]
 }
