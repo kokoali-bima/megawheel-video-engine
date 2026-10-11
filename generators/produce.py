@@ -87,7 +87,8 @@ def pick_series(fmt, forced):
     import sim_engine as se                                      # SERIES_DEFS / SERIES_WEIGHT live in the engine
     active = registry._active(None)
     counts = {s: sum(1 for e in active if e.get("series") == s) for s in se.SERIES_DEFS}
-    return min(se.SERIES_DEFS, key=lambda s: counts[s] / se.SERIES_WEIGHT.get(s, 1))
+    # dungeon is the special 3D (godot3d / Modal) episode, never an automatic 2D pick
+    return min((x for x in se.SERIES_DEFS if x != "dungeon"), key=lambda s: counts[s] / se.SERIES_WEIGHT.get(s, 1))
 
 
 def next_seed(series):
