@@ -1,74 +1,73 @@
 {
-  "video_id": "SIM_GAUNTLET_V2_S005",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_GAUNTLET_V2_S004",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "gauntlet",
-  "seed": 5,
+  "seed": 4,
   "fps": 30,
-  "duration": 51.47,
-  "track_id": "gauntlet_c1dc2fad",
+  "duration": 49.3,
+  "track_id": "gauntlet_32cc7e21",
   "track_params": {
     "order": [
-      "domino",
-      "bumps",
       "lavajump",
+      "pothole",
+      "domino",
       "pendulum"
     ],
     "pends": [
       {
-        "x": 125.59,
-        "period": 5.84,
-        "phase": 1.71
+        "x": 112.1,
+        "period": 6.17,
+        "phase": 2.93
       }
     ],
     "doms": [
       {
-        "x0": 36.31,
+        "x0": 81.0,
         "n": 8,
-        "delay": 0.05,
-        "lead": 10.0
+        "delay": 0.051,
+        "lead": 9.6
       }
     ],
     "pits": [
       [
-        99.77,
-        106.57,
+        40.22,
+        48.02,
         4.5
-      ]
-    ],
-    "bumps": [
-      [
-        65.91,
-        68.9,
-        1.04
       ],
       [
-        74.27,
-        77.8,
-        1.55
+        62.33,
+        65.33,
+        2.9
       ]
     ],
+    "bumps": [],
     "ramps": [
       [
-        94.17,
-        99.77,
-        1.51
+        34.82,
+        40.22,
+        1.31
       ]
     ],
-    "puddles": [],
+    "puddles": [
+      [
+        18.4,
+        22.0
+      ]
+    ],
     "muds": []
   },
   "theme": {
-    "time": "noon",
+    "time": "morning",
     "weather": "clear",
-    "location": "city"
+    "location": "beach"
   },
-  "theme_id": "noon-clear-city",
+  "theme_id": "morning-clear-beach",
   "voice": "chatterbox:m1",
-  "fingerprint": "gauntlet|police,bigrig,taxi|gauntlet_c1dc2fad@noon-clear-city|flip@obs1+broken,chop@obs0+broken,win",
+  "fingerprint": "gauntlet|police,bigrig,f1|gauntlet_32cc7e21@morning-clear-beach|chop@obs2+broken,rollback@obs0,win",
   "outcomes": [
-    "flip@obs1+broken",
-    "chop@obs0+broken",
+    "chop@obs2+broken",
+    "rollback@obs0",
     "win"
   ],
   "analysis": [
@@ -76,14 +75,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->81.9 m, 3.0->57.0 m, 3.0->257.6 m",
+      "detail": "3.0->101.1 m, 3.0->48.2 m, 3.0->507.7 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "4 rintangan [dominoes, bump, lava, pendulum] (45-128 m), finish 150 m",
+      "detail": "4 rintangan [lava, pit, dominoes, pendulum] (40-114 m), finish 139 m",
       "hard": true
     },
     {
@@ -104,14 +103,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "5.7s, 5.7s, 10.6s",
+      "detail": "7.7s, 6.0s, 7.4s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "detail": "rintangan [1, 0]",
+      "detail": "rintangan [2, 0]",
       "hard": false
     },
     {
@@ -125,28 +124,28 @@
       "id": "duration",
       "desc": "Durasi total 40-58 s",
       "ok": true,
-      "detail": "48.5 s",
+      "detail": "46.3 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "detail": "11.3s, 13.6s, 23.6s",
+      "detail": "17.0s, 10.7s, 18.6s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "gauntlet|police,bigrig,taxi|gauntlet_c1dc2fad@noon-clear-city|flip@obs1+broken,chop@obs0+broken,win",
+      "detail": "gauntlet|police,bigrig,f1|gauntlet_32cc7e21@morning-clear-beach|chop@obs2+broken,rollback@obs0,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥",
-  "title": "Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥 #Shorts",
-  "description": "Siren the police car, Titan the big rig and Tilly the taxi take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "title_base": "Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Siren Make It? 💥",
+  "title": "Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Siren Make It? 💥 | Ep. 73 #Shorts",
+  "description": "Siren the police car, Titan the big rig and Nitro the race car take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "gauntlet",
@@ -160,28 +159,28 @@
     "MegaWheel Arena",
     "police car",
     "big rig",
-    "taxi"
+    "race car"
   ],
   "levels": [
     {
       "vehicle": "SIREN THE POLICE CAR",
-      "speed": 25.5,
-      "outcome": "flip",
-      "event_t": 5.73,
-      "obstacle": 1,
+      "speed": 19.5,
+      "outcome": "chop",
+      "event_t": 7.7,
+      "obstacle": 2,
       "broken": true,
       "bullet_time": true,
-      "replay": false,
+      "replay": true,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "OUCH!"
       ],
       "start": 3.0,
-      "duration": 11.27,
-      "event_out": 11.63,
+      "duration": 17.0,
+      "event_out": 13.33,
       "x_start": 3.0,
-      "x_end": 81.9,
+      "x_end": 101.1,
       "level_color": [
         45,
         183,
@@ -190,22 +189,23 @@
     },
     {
       "vehicle": "TITAN THE BIG RIG",
-      "speed": 9.53,
-      "outcome": "chop",
-      "event_t": 5.73,
+      "speed": 9.0,
+      "outcome": "rollback",
+      "event_t": 6.03,
       "obstacle": 0,
-      "broken": true,
+      "broken": false,
       "bullet_time": false,
-      "replay": true,
+      "replay": false,
       "bubbles": [
         "UH OH!",
+        "WHOA!",
         "OUCH!"
       ],
-      "start": 14.27,
-      "duration": 13.57,
-      "event_out": 21.17,
+      "start": 20.0,
+      "duration": 10.67,
+      "event_out": 27.2,
       "x_start": 3.0,
-      "x_end": 57.0,
+      "x_end": 48.2,
       "level_color": [
         255,
         132,
@@ -213,10 +213,10 @@
       ]
     },
     {
-      "vehicle": "TILLY THE TAXI",
-      "speed": 24.75,
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 33.0,
       "outcome": "win",
-      "event_t": 10.57,
+      "event_t": 7.37,
       "obstacle": 3,
       "broken": false,
       "bullet_time": true,
@@ -226,11 +226,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 27.83,
-      "duration": 23.63,
-      "event_out": 42.87,
+      "start": 30.67,
+      "duration": 18.63,
+      "event_out": 40.93,
       "x_start": 3.0,
-      "x_end": 257.6,
+      "x_end": 507.7,
       "level_color": [
         153,
         76,
@@ -241,16 +241,19 @@
   "narration": [
     "Ready... Go! Level one! Siren the police car is on patrol! Can Siren make it past the a gauntlet of giant swinging balls, falling dominoes and more?",
     "Ready... Go! Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
-    "Ready... Go! Level three! Tilly the taxi! Hop in... can Tilly get past the a gauntlet of giant swinging balls, falling dominoes and more?",
-    "Whoa! Siren flipped right over!",
-    "Crunch! Titan got flattened by the falling dominoes!",
-    "Yes! Tilly made it! We have a winner!",
+    "Ready... Go! Level three! Nitro the race car! Super fast... but can Nitro handle the a gauntlet of giant swinging balls, falling dominoes and more?",
+    "Crunch! Siren got flattened by the falling dominoes!",
+    "Uh oh! Titan slid all the way back down!",
+    "Yes! Nitro made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s005/SIM_GAUNTLET_V2_S005.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s005/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E073_2026-10-11_gauntlet/SIM_GAUNTLET_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E073_2026-10-11_gauntlet/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s005/SIM_GAUNTLET_V2_S005_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E073_2026-10-11_gauntlet/SIM_GAUNTLET_V2_S004_audit.md",
+  "episode": 73,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

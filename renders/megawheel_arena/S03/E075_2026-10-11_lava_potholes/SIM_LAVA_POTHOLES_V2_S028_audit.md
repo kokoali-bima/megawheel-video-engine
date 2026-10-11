@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-10-11_lava_potholes_s028/SIM_LAVA_POTHOLES_V2_S028.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S03/E075_2026-10-11_lava_potholes/SIM_LAVA_POTHOLES_V2_S028.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |

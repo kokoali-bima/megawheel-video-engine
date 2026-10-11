@@ -676,11 +676,67 @@
    "role": "smash"
   },
   {
+   "episode": 73,
+   "video_id": "SIM_GAUNTLET_V2_S004",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-24T15:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 69,
    "video_id": "SIM_RACE25D_V4_S060",
    "status": "QUEUED",
    "publish_at_utc": "2026-10-24T19:00:00Z",
    "role": "race"
+  },
+  {
+   "episode": 78,
+   "video_id": "SIM_SMASH25D_V5_S025",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-24T23:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 74,
+   "video_id": "SIM_GAUNTLET_V2_S005",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-25T15:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 76,
+   "video_id": "SIM_RACE25D_V4_S061",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-25T19:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 79,
+   "video_id": "SIM_SMASH25D_V5_S028",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-25T23:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 75,
+   "video_id": "SIM_LAVA_POTHOLES_V2_S028",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-26T15:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 77,
+   "video_id": "SIM_RACE25D_V4_S063",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-26T19:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 80,
+   "video_id": "SIM_SMASH25D_V5_S029",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-26T23:00:00Z",
+   "role": "smash"
   }
  ]
 }
