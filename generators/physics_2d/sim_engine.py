@@ -972,6 +972,8 @@ def make_story(series, seed, appearances=None, wins=None):
         appearances, wins = appearances or {}, wins or {}
         ROLE_ORDER = []
         for li, (opts, want) in enumerate(ROSTER):
+            if want != "win" and DOMS:                      # dominoes: a fast class must be free to outrun the wave -> the failing roles
+                opts = tuple(o for o in opts if SPEED_RANK[o] >= 2)    # come from the slower classes (rotation by appearances)
             tie = {o: float(r.random()) for o in opts}
             if want == "win":
                 ROLE_ORDER.append(sorted(opts, key=lambda o: (wins.get(o, 0), appearances.get(o, 0), tie[o])))
