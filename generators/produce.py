@@ -144,7 +144,7 @@ def gates(vid):
         recent = [x.get("structure") for x in fam[:10]]
         g("struktur variasi tidak sama dengan 10 video terakhir", st not in recent, st)
     else:
-        g("struktur variasi tercatat", e.get("series") in ("smash25d", "bumps", "splash", "lava", "pendulum", "domino", "pinball", "gauntlet"),
+        g("struktur variasi tercatat", e.get("series") in ("smash25d", "bumps", "splash", "lava", "pendulum", "domino", "pinball", "gauntlet", "dungeon"),
           "belum ada (format tanpa plan)")
     text = " ".join([man.get("title", ""), man.get("description", "")] + list(man.get("tags", [])))
     hit = FORBIDDEN.findall(text)
