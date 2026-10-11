@@ -6720,6 +6720,40 @@
       "drive_sheet_id": "1z_wAcyCvTJOjUruoligKzvdB64fjgRmV",
       "drive_id": "17ULHi1eEtORvshV4IjZyKUJcZ_4n3Q_y",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S033.mp4"
+    },
+    {
+      "video_id": "SIM_BUMPS_V2_S022",
+      "series": "bumps",
+      "engine_version": "v2",
+      "seed": 22,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "monster"
+      ],
+      "track_id": "bumps_56282b86@morning-clear-beach",
+      "theme": "morning-clear-beach",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "flip@obs2+broken",
+        "stuck@obs1",
+        "win"
+      ],
+      "duration": 50.13,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_bumps_s022",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_bumps_s022/SIM_BUMPS_V2_S022_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1UlIDYljdMVv258vzJmMRmRuErzA5u0ZF",
+      "drive_id": "1fY0J9NFnkgyCqG9wRPUzeCW8fYYGdRoB",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_BUMPS_V2_S022.mp4"
     }
   ]
 }
