@@ -5641,6 +5641,69 @@
       "drive_sheet_id": "17_oxQh6yCQnSAeXfsgbD_6cu7pddrTdD",
       "drive_id": "185CwUuyTJWMfYLgoR3Xqnp_LDLqG-D9R",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S028.mp4"
+    },
+    {
+      "video_id": "SIM_LAVA_POTHOLES_V2_S028",
+      "series": "lava_potholes",
+      "engine_version": "v2",
+      "seed": 28,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "firetruck",
+        "monster2"
+      ],
+      "track_id": "lava_potholes_56fce693@night-clear-volcano",
+      "theme": "night-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "pit@obs0",
+        "pit@obs2",
+        "win"
+      ],
+      "duration": 47.57,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "four_small",
+        "pits": [
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "wide_shallow",
+            "fill": "lava"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "crumble",
+            "fill": "lava"
+          },
+          {
+            "kind": "P",
+            "size": "M",
+            "shape": "step",
+            "fill": "lava"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "narrow_deep",
+            "fill": "lava"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "four_small|wide_shallow-S-lava,crumble-S-lava,step-M-lava,narrow_deep-S-lava",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_lava_potholes_s028",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_lava_potholes_s028/SIM_LAVA_POTHOLES_V2_S028_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1cRp7xiwbKFrjaQDQck4G7punceylmzVT",
+      "drive_id": "1Letow59ZWjUNR7PqmcT1aUkiAjxAI7d9",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_LAVA_POTHOLES_V2_S028.mp4"
     }
   ]
 }

@@ -3842,6 +3842,16 @@
    "gpu_seconds": 49.8,
    "wall_seconds": 86.3,
    "cost_usd": 0.0127
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_LAVA_POTHOLES_V2_S028 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 56.6,
+   "wall_seconds": 82.8,
+   "cost_usd": 0.0145
   }
  ]
 }
