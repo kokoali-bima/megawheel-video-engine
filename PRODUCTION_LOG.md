@@ -69,3 +69,4 @@
 | 2026-10-11 11:23 | Claude Code Opus | SIM_RACE25D_V4_S064 | race25d | 64 | Sprinkles → Rocky → Siren → Zippy | 35.8 s | PASS | produce.py · noon-clear-desert · gauntlet|container,meteor,puddle |
 | 2026-10-11 11:25 | Claude Code Opus | SIM_SMASH25D_V5_S029 | smash25d | 29 | Buster → Grizzly → Tilly → Nitro | 56.2 s | PASS | produce.py · sunset-clear-beach ·  |
 | 2026-10-11 11:32 | Claude Code Opus | SIM_GAUNTLET_V2_S003 | gauntlet | 3 | Siren → Titan → Tilly | 53.8 s | PASS | produce.py · morning-clear-desert ·  |
+| 2026-10-11 13:59 | Claude Code Opus | SIM_GAUNTLET_V2_S004 | gauntlet | 4 | Siren → Titan → Nitro | 49.3 s | PASS | produce.py · morning-clear-beach ·  |
