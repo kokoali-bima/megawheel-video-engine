@@ -4234,7 +4234,20 @@ def draw_mud(ctx, x0, x1):
 
 
 def draw_roadband(ctx, x0, x1):
-    """domino: the road seen from slightly above: a second lane behind the cars + a far curb."""
+    """The road seen from slightly above: a second lane behind the cars + a far curb (not over pits)."""
+    cuts = sorted((a, b) for a, b, _ in PITS if b > x0 and a < x1)
+    segs, cur = [], x0
+    for a, b in cuts:
+        if a > cur:
+            segs.append((cur, a))
+        cur = max(cur, b)
+    if cur < x1:
+        segs.append((cur, x1))
+    for sa, sb in segs:
+        _roadband_seg(ctx, sa, sb)
+
+
+def _roadband_seg(ctx, x0, x1):
     ctx.rectangle(x0, 0.0, x1 - x0, 1.6)
     g = cairo.LinearGradient(0, 0, 0, 1.6)
     g.add_color_stop_rgb(0, 0.3, 0.3, 0.36)
@@ -4724,9 +4737,9 @@ def draw_frame(ctx, g):
     ctx.scale(S * z, -S * z)
     ctx.translate(-camx, -camy)
     half = 540 / (S * z) + 2
-    draw_track(ctx, camx - half, camx + half, st)
-    if DOMS:
+    if DOMS:                                                    # far lane first: bumps / ramps drawn by draw_track stay on top
         draw_roadband(ctx, camx - half, camx + half)
+    draw_track(ctx, camx - half, camx + half, st)
     draw_mud(ctx, camx - half, camx + half)
     draw_ogres(ctx, st)
     draw_dominoes(ctx, st, False)
