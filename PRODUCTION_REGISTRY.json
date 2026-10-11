@@ -6030,6 +6030,48 @@
       "drive_sheet_id": "1ufOc6_yaBritILDXsrudCJ6unA76nojl",
       "drive_id": "1P8hEci90BkX2rym3EsQcqmnIdI-WKEQu",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S067.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S068",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 68,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_4b28e0d7@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4",
+        "p2",
+        "win+lava+dodge_pothole",
+        "p3+oil"
+      ],
+      "duration": 35.65,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 223.2,
+        "start": 95.2,
+        "finish_gap": 111.3
+      },
+      "structure": "early_pair|lava,oil,pothole",
+      "title_base": "Can Nitro Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s068",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s068/SIM_RACE25D_V4_S068_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1b8wuZtDWpYvB29wLelyOM-ATjn2u5Ecl",
+      "drive_id": "1txvzOxp1IFed7QC0WCgnpV0NC6YGXuNl",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S068.mp4"
     }
   ]
 }

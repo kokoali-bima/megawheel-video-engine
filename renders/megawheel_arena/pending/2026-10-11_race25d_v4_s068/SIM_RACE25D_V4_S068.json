@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_RACE25D_V4_S068",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 68,
+  "fps": 30,
+  "duration": 35.65,
+  "params": {
+    "cast": [
+      "icecream",
+      "monster",
+      "sports",
+      "f1"
+    ],
+    "lanes": [
+      3,
+      0,
+      2,
+      1
+    ],
+    "hazards": [
+      [
+        "pothole",
+        2,
+        96.4
+      ],
+      [
+        "lava",
+        3,
+        134.1
+      ],
+      [
+        "oil",
+        1,
+        315.5
+      ]
+    ],
+    "finish": 426.8,
+    "plan": {
+      "layout": "early_pair",
+      "zone": 223.2,
+      "start": 95.2,
+      "finish_gap": 111.3
+    }
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "mountains"
+  },
+  "theme_id": "noon-clear-mountains",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p4",
+    "p2",
+    "win+lava+dodge_pothole",
+    "p3+oil"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true,
+    "every hazard that hits is visible on screen (pixel sensor)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Nitro Survive the Oil Slick? 🏁",
+  "title": "Can Nitro Survive the Oil Slick? 🏁 #Shorts",
+  "description": "Sprinkles, Rocky, Zippy and Nitro race to the finish line! 🏁 Obstacles today: lava, oil, pothole! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "ice cream truck",
+    "monster truck",
+    "sports car",
+    "race car",
+    "lava",
+    "oil",
+    "pothole"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Nitro Survive the Oil Slick? Sprinkles, Rocky, Zippy and Nitro... who will win?",
+    "Nice move! Zippy dodges the pothole!",
+    "Lava! Zippy gets blasted!",
+    "Oil slick! Nitro spins like a top!",
+    "Zippy wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s068/SIM_RACE25D_V4_S068.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s068/preview"
+}
