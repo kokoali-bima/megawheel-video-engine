@@ -8,8 +8,8 @@ import sim_exp as se
 se.detect_font()
 se.load_cast()
 VK = ["sports", "bus", "monster", "taxi"]
-for piv, amp, pscale in itertools.product((8.8,), (1.2, 1.45), (0.8, 1.0, 1.3)):
-    se.PEND_PIV, se.PEND_AMP = piv, amp
+for piv, amp, pscale, K in itertools.product((8.6,), (1.3,), (0.8, 1.0, 1.3), (1.5, 2.5, 3.5)):
+    se.PEND_PIV, se.PEND_AMP, se.PEND_K = piv, amp, K
     c = Counter()
     for seed in (1, 2):
         se.make_theme(seed, dict(se.SERIES_DEFS["pendulum"]["force_theme"]))
@@ -22,4 +22,4 @@ for piv, amp, pscale in itertools.product((8.8,), (1.2, 1.45), (0.8, 1.0, 1.3)):
                 ev = se.simulate(v, sp)["event"]["type"]
                 c["win" if ev == "win" else ("smash" if ev == "smash" else "other")] += 1
     n = sum(c.values())
-    print(f"piv={piv} amp={amp} pscale={pscale}: win {c['win']/n:.0%} smash {c['smash']/n:.0%} other {c['other']/n:.0%}", flush=True)
+    print(f"piv={piv} amp={amp} pscale={pscale} K={K}: win {c['win']/n:.0%} smash {c['smash']/n:.0%} other {c['other']/n:.0%}", flush=True)

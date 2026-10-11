@@ -62,7 +62,7 @@ sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 8.4, 6.5, 1.2, 1.0     # pivot height, chain length, swing (rad), ball radius
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R, PEND_K = 8.6, 6.5, 1.3, 1.0, 2.5     # pivot height, chain length, swing (rad), ball radius
 DOM_W, DOM_H, DOM_GAP, DOM_FALL = 0.9, 5.2, 2.3, 0.55
 BUMP_R = 1.1
 
@@ -70,8 +70,13 @@ BUMP_R = 1.1
 def pend_state(p, t):
     """(head x, head y, head vx, swing angle) of one wrecking ball at time t."""
     w = 2 * math.pi / p["period"]
-    th = PEND_AMP * math.sin(w * (t + p["phase"]))
-    dth = PEND_AMP * w * math.cos(w * (t + p["phase"]))
+    sv = math.sin(w * (t + p["phase"]))
+    if PEND_K > 0:                      # hangs high at both ends, whips fast through the bottom (a gate, not a lullaby)
+        th = PEND_AMP * math.tanh(PEND_K * sv) / math.tanh(PEND_K)
+        dth = PEND_AMP * PEND_K * (1 - math.tanh(PEND_K * sv) ** 2) / math.tanh(PEND_K) * w * math.cos(w * (t + p["phase"]))
+    else:
+        th = PEND_AMP * sv
+        dth = PEND_AMP * w * math.cos(w * (t + p["phase"]))
     return (p["x"] + PEND_LEN * math.sin(th), PEND_PIV - PEND_LEN * math.cos(th), PEND_LEN * math.cos(th) * dth, th)
 
 
@@ -132,7 +137,7 @@ def make_pendulum_track(seed):
     spans, obst, danger = [], [], []
 
     def ball(dx=0.0, phase=None):
-        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(3.6, 4.4)), 2),
+        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(4.4, 5.4)), 2),
                  phase=round(float(r.uniform(0, 3.0)) if phase is None else phase, 2))
         PENDS.append(p)
         spans.append((p["x"] - 2.2, p["x"] + 2.2))
