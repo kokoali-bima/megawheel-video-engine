@@ -62,7 +62,7 @@ sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R, PEND_K, PEND_MARGIN = 8.6, 6.5, 1.3, 1.0, 3.5, 0.2     # pivot height, chain length, swing (rad), ball radius
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R, PEND_K, PEND_MARGIN = 8.6, 6.5, 1.3, 1.0, 3.5, 0.4     # pivot height, chain length, swing (rad), ball radius
 DOM_W, DOM_H, DOM_GAP, DOM_FALL = 0.9, 5.2, 2.3, 0.55
 BUMP_R = 1.1
 
@@ -137,7 +137,7 @@ def make_pendulum_track(seed):
     spans, obst, danger = [], [], []
 
     def ball(dx=0.0, phase=None):
-        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(4.4, 5.4)), 2),
+        p = dict(x=round(tb.x + 3.5 + dx, 2), period=round(float(r.uniform(5.2, 6.4)), 2),
                  phase=round(float(r.uniform(0, 3.0)) if phase is None else phase, 2))
         PENDS.append(p)
         spans.append((p["x"] - 2.2, p["x"] + 2.2))
