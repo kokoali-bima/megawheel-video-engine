@@ -4999,6 +4999,48 @@
       "drive_sheet_id": "1luqaFY1OuU6fQkGuCvW4JF3Iixfti9vh",
       "drive_id": "16fM8lVt5QL_3HUTeX0BDAPGiO93byNyM",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_PENDULUM_V2_S002.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S058",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 58,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "race25d_3ecb22b0@noon-rain-countryside",
+      "theme": "noon-rain-countryside",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "p2",
+        "p4+container",
+        "win+laser+dodge_puddle"
+      ],
+      "duration": 35.44,
+      "plan": {
+        "layout": "stagger",
+        "zone": 215.8,
+        "start": 98.7,
+        "finish_gap": 94.7
+      },
+      "structure": "stagger|container,laser,puddle",
+      "title_base": "Can Tilly Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s058",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s058/SIM_RACE25D_V4_S058_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1lKj2CLQzVYPBa9hV9DSIPwpZtDReGFDS",
+      "drive_id": "15FJIFHy085pl4aXEmUCOOBhO1ihhKPLH",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S058.mp4"
     }
   ]
 }

@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_RACE25D_V4_S058",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 58,
+  "fps": 30,
+  "duration": 35.44,
+  "params": {
+    "cast": [
+      "firetruck",
+      "monster2",
+      "taxi",
+      "f1"
+    ],
+    "lanes": [
+      0,
+      3,
+      2,
+      1
+    ],
+    "hazards": [
+      [
+        "puddle",
+        1,
+        96.4
+      ],
+      [
+        "container",
+        2,
+        175.7
+      ],
+      [
+        "laser",
+        0,
+        268.6
+      ]
+    ],
+    "finish": 363.3,
+    "plan": {
+      "layout": "stagger",
+      "zone": 215.8,
+      "start": 98.7,
+      "finish_gap": 94.7
+    }
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "rain",
+    "location": "countryside"
+  },
+  "theme_id": "noon-rain-countryside",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p3",
+    "p2",
+    "p4+container",
+    "win+laser+dodge_puddle"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true,
+    "every hazard that hits is visible on screen (pixel sensor)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Tilly Survive Falling Containers? 🏁",
+  "title": "Can Tilly Survive Falling Containers? 🏁 #Shorts",
+  "description": "Hydro, Grizzly, Tilly and Nitro race to the finish line! 🏁 Obstacles today: container, laser, puddle! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "fire truck",
+    "monster truck",
+    "taxi",
+    "race car",
+    "container",
+    "laser",
+    "puddle"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Tilly Survive Falling Containers? Hydro, Grizzly, Tilly and Nitro... who will win?",
+    "Nice move! Nitro dodges the puddle!",
+    "A container drops from the sky! Tilly crashes right into it!",
+    "Zap! The laser slices Nitro in two!",
+    "Nitro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s058/SIM_RACE25D_V4_S058.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s058/preview"
+}
