@@ -144,6 +144,13 @@ SERIES_DEFS = {
                     yt_title="Cars VS Giant Pinball Bumpers! Who Survives? 🔴",
                     tags=["cars", "pinball", "bumpers", "lava", "car crash", "crash test", "physics simulation",
                           "shorts", "MegaWheel Arena"]),
+    "gauntlet": dict(title="CARS VS THE GAUNTLET!", obst="a gauntlet of giant swinging balls, falling dominoes and more",
+                     max_fail=20.0, max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.5,
+                     fail_lines={"smash": "Bonk! {n} got smashed by the giant wrecking ball!",
+                                 "chop": "Crunch! {n} got flattened by the falling dominoes!"},
+                     yt_title="Cars VS The Giant Gauntlet! Who Survives? 💥",
+                     tags=["cars", "gauntlet", "wrecking ball", "dominoes", "obstacle course", "car crash",
+                           "crash test", "physics simulation", "shorts", "MegaWheel Arena"]),
 }
 # Filled by make_track(series, seed). Potholes seed 1 is the reference track.
 SERIES = ""
@@ -155,6 +162,7 @@ OBSTACLES = []      # [(x_center, kind)] in track order, used for HUD markers + 
 DANGER_X = []       # where faces get scared
 SIGNS = []          # x of warning signs
 PUDDLES = []        # (x0, x1) low-grip water on the road
+MUDS = []           # (x0, x1) mud patches: brown, slow the car a little (road variety, 2026-10-11)
 BARRIERS = []       # (x, width, height) concrete walls
 VENTS = []          # dict(x, period, phase, dur, height) erupting lava vents
 PENDS = []          # dict(x, period, phase) swinging wrecking balls (lab series pendulum)
@@ -177,8 +185,9 @@ TRACK_ID = ""
 
 
 def _reset_hazards():
-    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP, PIT_FILLS, PIT_SHAPES, AXES, OGRES, PENDS, DOMS, BUMPERS
+    global PUDDLES, BARRIERS, VENTS, RAMPS, PIT_KIND, PITS, BUMPS, RAMP, PIT_FILLS, PIT_SHAPES, AXES, OGRES, PENDS, DOMS, BUMPERS, MUDS
     PUDDLES, BARRIERS, VENTS, RAMPS, PITS, BUMPS = [], [], [], [], [], []
+    MUDS = []
     AXES, OGRES, PENDS, DOMS, BUMPERS = [], [], [], [], []
     PIT_FILLS, PIT_SHAPES = [], []
     PIT_KIND, RAMP = "mud", None
@@ -191,7 +200,7 @@ def make_track(series, seed):
     _reset_hazards()
     {"bumps": make_bumps_track, "splash": make_splash_track, "lava": make_lava_track,
      "lava_potholes": make_lava_potholes_track, "dungeon": make_dungeon_track,
-     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}.get(series, make_potholes_track)(seed)
+     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track, "gauntlet": make_gauntlet_track}.get(series, make_potholes_track)(seed)
     if not OBST_SPANS:
         OBST_SPANS = [(a, b) for a, b, _ in (PITS or BUMPS)]
 
@@ -469,8 +478,9 @@ def dom_pts(d, k, t, tt):
 
 def _lab_pit(tb, r, w, d, ramp, spans, obst, danger):
     x0 = tb.x
-    tb.to(ramp[0], ramp[1])
-    RAMPS.append((x0, tb.x, ramp[1]))
+    if ramp:
+        tb.to(ramp[0], ramp[1])
+        RAMPS.append((x0, tb.x, ramp[1]))
     tb.drop(-d)
     px0 = tb.x
     tb.flat(w)
@@ -478,8 +488,26 @@ def _lab_pit(tb, r, w, d, ramp, spans, obst, danger):
     PITS.append((px0, tb.x, d))
     spans.append((px0, tb.x))
     obst.append(((px0 + tb.x) / 2, "lava"))
-    danger.append(px0 - ramp[0])
+    danger.append(px0 - (ramp[0] if ramp else 4.0))
     return px0, tb.x
+
+
+def _sprinkle(r, spans, finish):
+    """Road variety (owner 2026-10-11): 0-2 water puddles / mud patches in the long flat gaps between hazards.
+    Never within 14 m of the start, never closer than 6 m to a hazard or a ramp."""
+    blocks = sorted([(a, b) for a, b in spans] + [(a, b) for a, b, _ in RAMPS] + [(a - 8, b + 2) for a, b, _ in PITS])
+    gaps, cur = [], START_X + 14.0
+    for a, b in blocks:
+        if a - 6.0 - cur >= 5.0:
+            gaps.append((cur, a - 6.0))
+        cur = max(cur, b + 6.0)
+    if finish - 8.0 - cur >= 5.0:
+        gaps.append((cur, finish - 8.0))
+    r.shuffle(gaps)
+    for g0, g1 in gaps[:int(r.integers(0, 3))]:
+        w = float(min(r.uniform(3.0, 5.5), g1 - g0))
+        x0 = round(float(r.uniform(g0, g1 - w)), 1)
+        (PUDDLES if r.random() < 0.5 else MUDS).append((x0, round(x0 + w, 1)))
 
 
 def _lab_finish(tb, tag, spans, obst, danger, params):
@@ -487,6 +515,8 @@ def _lab_finish(tb, tag, spans, obst, danger, params):
     tb.flat(12.0)
     FINISH_X = round(tb.x - 2.0, 1)
     tb.pts.append((FINISH_X + 80, 0))
+    _sprinkle(np.random.default_rng(int(sum(abs(q[0]) for q in tb.pts) * 100) % (2 ** 32)), spans, FINISH_X)
+    params = dict(params, puddles=PUDDLES, muds=MUDS)
     TRACK = tb.pts
     RAMP = RAMPS[0] if RAMPS else None
     TRACK_PARAMS = params
@@ -546,6 +576,69 @@ def make_domino_track(seed):
     field(9)
     tb.flat(14.0)
     _lab_finish(tb, "domino", spans, obst, danger, dict(doms=DOMS))
+
+
+def make_gauntlet_track(seed):
+    """Mixed road (owner 2026-10-11: dominoes + pendulum combined, plus the older obstacles): 4 hazards in a seed-drawn
+    order from pendulum / domino / pothole / speed bumps / lava jump; half of the seeds hold BOTH pendulum and domino."""
+    global PIT_KIND
+    r = np.random.default_rng(9800 + seed)
+    PIT_KIND = "mud"
+    others = ["pothole", "bumps", "lavajump"]
+    if r.random() < 0.5:
+        pick = ["pendulum", "domino"] + [str(x) for x in r.choice(others, 2, replace=False)]
+    else:
+        pick = [str(r.choice(["pendulum", "domino"]))] + [str(x) for x in r.choice(others, 3, replace=False)]
+    r.shuffle(pick)
+    tb = _TB(0.0)
+    tb.flat(float(r.uniform(34, 40)))
+    spans, obst, danger = [], [], []
+    for hz in pick:
+        if hz == "pendulum":
+            pd = dict(x=round(tb.x + 3.5, 2), period=round(float(r.uniform(5.2, 6.4)), 2), phase=round(float(r.uniform(0, 3.0)), 2))
+            PENDS.append(pd)
+            spans.append((pd["x"] - 2.2, pd["x"] + 2.2))
+            obst.append((pd["x"], "pendulum"))
+            danger.append(pd["x"] - 8.0)
+            tb.flat(float(r.uniform(14, 17)))
+        elif hz == "domino":
+            n = int(r.integers(7, 9))
+            d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.05, 0.06)), 3),
+                     lead=round(float(r.uniform(9.0, 10.5)), 1))
+            DOMS.append(d)
+            spans.append((d["x0"] + d["lead"] - 1.0, d["x0"] + n * DOM_GAP + DOM_H))
+            obst.append((d["x0"] + d["lead"] + 6.0, "dominoes"))
+            danger.append(d["x0"] + d["lead"] - 2.0)
+            tb.flat(n * DOM_GAP + DOM_H + 5.0)
+        elif hz == "pothole":
+            PIT_FILLS.append(str(r.choice(["mud", "water"])))
+            _lab_pit(tb, r, round(float(r.uniform(3.0, 4.6)), 1), round(float(r.uniform(2.8, 3.8)), 1), None, spans, obst, danger)
+            obst[-1] = (obst[-1][0], "pit")
+            tb.flat(float(r.uniform(14, 17)))
+        elif hz == "bumps":
+            h = round(float(r.uniform(0.9, 1.2)), 2)
+            tb.flat(2.0)
+            b0 = tb.x
+            for k in range(2):
+                w = round(2.0 + h * 0.95, 1)
+                x0 = tb.x
+                for q in range(13):
+                    t_ = q / 12
+                    tb.pts.append((round(x0 + w * t_, 3), round(h * math.sin(math.pi * t_), 3)))
+                BUMPS.append((x0, round(x0 + w, 1), h))
+                tb.flat(float(r.uniform(5.0, 6.5)))
+                h = round(h + float(r.uniform(0.5, 0.7)), 2)
+            spans.append((b0, BUMPS[-1][1]))
+            obst.append(((b0 + BUMPS[-1][1]) / 2, "bump"))
+            danger.append(b0 - 2.0)
+            tb.flat(float(r.uniform(10, 13)))
+        else:                                                    # lava jump: ramp + a wide lava pit
+            PIT_FILLS.append("lava")
+            _lab_pit(tb, r, round(float(r.uniform(6.5, 8.5)), 1), 4.5,
+                     (round(float(r.uniform(5, 6.5)), 1), round(float(r.uniform(1.2, 1.6)), 2)), spans, obst, danger)
+            tb.flat(float(r.uniform(14, 17)))
+    tb.flat(4.0)
+    _lab_finish(tb, "gauntlet", spans, obst, danger, dict(order=pick, pends=PENDS, doms=DOMS, pits=PITS, bumps=BUMPS, ramps=RAMPS))
 
 
 def make_pinball_track(seed):
@@ -1223,6 +1316,8 @@ def simulate(v, speed, after_fail=6.0, after_win=16.0, t_max=24.0):
                     ch.velocity = (ux / un * sp_, uy / un * sp_)
                     ch.angular_velocity = ch.angular_velocity * 0.1
                     bump_log.append((t, bi2, sp_))
+        if MUDS and event is None and any(m0 <= ch.position.x <= m1 for m0, m1 in MUDS):   # mud drags the car down a little
+            ch.velocity = (ch.velocity.x * 0.985, ch.velocity.y)
         # hydroplaning: each puddle once; snow: fishtail after a hard landing
         airborne = bool(rec["air"][-1])
         if event is None and (slide is None or t > slide["t0"] + slide["dur"]):
@@ -1396,7 +1491,7 @@ def candidate_runs():
         for vk in order:
             if any(vk == used for used, _ in story):         # nobody plays two levels
                 continue
-            if (want == "win" and SERIES_DEFS[SERIES].get("champ_fastest") and story      # domino: only a car that outruns the
+            if (want == "win" and (SERIES_DEFS[SERIES].get("champ_fastest") or DOMS) and story      # domino: only a car that outruns the
                     and SPEED_RANK[vk] > min(SPEED_RANK[u] for u, _ in story)):          # wave can win -> the fastest class wins
                 continue
             text = intro_text(li, vk)
@@ -2154,7 +2249,7 @@ def synth_whoosh():
 
 
 # auto series mix (user 2026-10-03, RESEARCH_W3: Potholes 872 / 1,280 views vs Bumps 133-796): half of CHALLENGE = potholes
-SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2, "pendulum": 0.6, "domino": 0.6, "pinball": 0.6}   # potholes family = 5/8 of CHALLENGE
+SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2, "pendulum": 0.6, "domino": 0.6, "pinball": 0.6, "gauntlet": 1.5}   # potholes family = 5/8 of CHALLENGE
 COLD_OPEN_S = 3.0   # every Short opens on its own biggest moment + a question (2026-10-03: 1.5 s; 2026-10-04 user: "jangan terlalu cepat, tambah 1-2 detik")
 
 
@@ -4122,6 +4217,20 @@ def draw_pendulums(ctx, st):
         ctx.stroke()
 
 
+def draw_mud(ctx, x0, x1):
+    """Mud patches on the road (brown, bubbly): variety only, plus a small drag in simulate()."""
+    for m0, m1 in MUDS:
+        if m1 < x0 - 1 or m0 > x1 + 1:
+            continue
+        ctx.rectangle(m0, -0.22, m1 - m0, 0.3)
+        ctx.set_source_rgb(0.36, 0.24, 0.13)
+        ctx.fill()
+        for k in range(int((m1 - m0) / 0.9)):
+            ctx.arc(m0 + 0.45 + k * 0.9, 0.08, 0.16 + 0.05 * (k % 3), math.pi, 2 * math.pi)
+            ctx.set_source_rgb(0.45, 0.31, 0.18)
+            ctx.fill()
+
+
 def draw_roadband(ctx, x0, x1):
     """domino: the road seen from slightly above: a second lane behind the cars + a far curb."""
     ctx.rectangle(x0, 0.0, x1 - x0, 1.6)
@@ -4616,6 +4725,7 @@ def draw_frame(ctx, g):
     draw_track(ctx, camx - half, camx + half, st)
     if DOMS:
         draw_roadband(ctx, camx - half, camx + half)
+    draw_mud(ctx, camx - half, camx + half)
     draw_ogres(ctx, st)
     draw_dominoes(ctx, st, False)
     draw_bumpers(ctx, st)
