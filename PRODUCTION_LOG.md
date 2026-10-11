@@ -78,3 +78,4 @@
 | 2026-10-11 14:26 | Claude Code Opus | SIM_DUNGEON_V2_S021 | dungeon | 21 | Tilly → Titan → Buster | 49.0 s | FAIL | gerbang produce.py gagal: struktur variasi tercatat |
 | 2026-10-11 14:31 | Claude Code Opus | SIM_GAUNTLET_V2_S007 | gauntlet | 7 | Tilly → Titan → Nitro | 54.1 s | PASS | produce.py · morning-clear-mountains ·  |
 | 2026-10-11 14:35 | Claude Code Opus | SIM_SMASH25D_V5_S032 | smash25d | 32 | Hydro → Rocky → Zippy → Siren | 49.0 s | PASS | produce.py · night-clear-desert ·  |
+| 2026-10-11 14:39 | Claude Code Opus | SIM_LAVA_POTHOLES_V2_S029 | lava_potholes | 29 | Tilly → Buster → Sprinkles | 58.3 s | PASS | produce.py · sunset-clear-volcano · double_ramp|v-M-lava,box-L-lava |

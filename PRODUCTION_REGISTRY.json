@@ -6239,6 +6239,57 @@
       "drive_sheet_id": "1fQ6esgI5qiE9Oksul95MtEXt-pKPGnJ4",
       "drive_id": "1QOJcMF3wmH9kjMcOyJMjN0MYfP7nlxvb",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S032.mp4"
+    },
+    {
+      "video_id": "SIM_LAVA_POTHOLES_V2_S029",
+      "series": "lava_potholes",
+      "engine_version": "v2",
+      "seed": 29,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bus",
+        "icecream"
+      ],
+      "track_id": "lava_potholes_7c7078a6@sunset-clear-volcano",
+      "theme": "sunset-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "pit@obs1",
+        "rollback@obs1+broken",
+        "win"
+      ],
+      "duration": 58.33,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "double_ramp",
+        "pits": [
+          {
+            "kind": "RP",
+            "size": "M",
+            "shape": "v",
+            "fill": "lava"
+          },
+          {
+            "kind": "RP",
+            "size": "L",
+            "shape": "box",
+            "fill": "lava"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "double_ramp|v-M-lava,box-L-lava",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_lava_potholes_s029",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_lava_potholes_s029/SIM_LAVA_POTHOLES_V2_S029_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1rzX1AD7IpJeMIMzBKvQmwSCd8OO0dfNJ",
+      "drive_id": "1OW8BELxhzNFywG5SwK5WZkzeXZ_0gvcs",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_LAVA_POTHOLES_V2_S029.mp4"
     }
   ]
 }
