@@ -52,3 +52,4 @@
 | 2026-10-11 09:42 | Claude Code Opus | SIM_PENDULUM_V2_S001 | pendulum | 1 | Tilly → Buster → Sprinkles | 53.3 s | FAIL | gerbang produce.py gagal: struktur variasi tercatat |
 | 2026-10-11 09:46 | Claude Code Opus | SIM_PENDULUM_V2_S002 | pendulum | 2 | Tilly → Buster → Titan | 57.6 s | PASS | produce.py · noon-clear-volcano ·  |
 | 2026-10-11 09:49 | Claude Code Opus | SIM_RACE25D_V4_S058 | race25d | 58 | Hydro → Grizzly → Tilly → Nitro | 35.4 s | PASS | produce.py · noon-rain-countryside · stagger|container,laser,puddle |
+| 2026-10-11 09:52 | Claude Code Opus | SIM_SMASH25D_V5_S022 | smash25d | 22 | Sprinkles → Rocky → Siren → Zippy | 56.2 s | PASS | produce.py · morning-clear-desert ·  |

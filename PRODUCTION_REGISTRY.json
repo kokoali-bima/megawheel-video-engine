@@ -5041,6 +5041,41 @@
       "drive_sheet_id": "1lKj2CLQzVYPBa9hV9DSIPwpZtDReGFDS",
       "drive_id": "15FJIFHy085pl4aXEmUCOOBhO1ihhKPLH",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S058.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S022",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 22,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "police",
+        "sports"
+      ],
+      "track_id": "smash25d_2be8ddc7@morning-clear-desert",
+      "arena": "sea",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "win",
+        "p2+wreck",
+        "p3+wreck"
+      ],
+      "duration": 56.17,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s022",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s022/SIM_SMASH25D_V5_S022_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "11FnFtH9zx2t8xY2jJRWo8b-bjrekPqBC",
+      "drive_id": "14aR0UUk5uiY9uJuQrTuMq_Qfv4az-Qs0",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S022.mp4"
     }
   ]
 }
