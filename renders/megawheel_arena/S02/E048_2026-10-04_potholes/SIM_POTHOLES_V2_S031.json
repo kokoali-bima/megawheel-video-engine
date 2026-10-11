@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S031",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-17T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 31,
@@ -261,5 +261,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S02/E048_2026-10-04_potholes/SIM_POTHOLES_V2_S031_audit.md",
   "episode": 48,
   "season": 2,
-  "approved_date": "2026-10-04"
+  "approved_date": "2026-10-04",
+  "youtube_url": "https://www.youtube.com/shorts/c8Y6AecAUCI",
+  "upload_date": "2026-10-11"
 }

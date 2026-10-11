@@ -488,37 +488,52 @@
   {
    "episode": 47,
    "video_id": "SIM_SMASH25D_V5_S009",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-15T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Tilly Beat a School Bus? \ud83d\udca5 | Ep. 47 #Shorts",
+   "upload_started": "2026-10-11T05:00:06.450657+00:00",
+   "url": "https://www.youtube.com/shorts/eWqvYeCTWqk"
   },
   {
    "episode": 45,
    "video_id": "SIM_BUMPS_V2_S021",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-16T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy the Sports Car Survive Giant Speed Bumps? \ud83d\ude97\ud83d\udca5 | Ep. 45 #Shorts",
+   "upload_started": "2026-10-11T05:00:13.764694+00:00",
+   "url": "https://www.youtube.com/shorts/Sh2WfMcLj-M"
   },
   {
    "episode": 53,
    "video_id": "SIM_RACE25D_V4_S048",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-16T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Hydro Survive the Giant Hammer? \ud83c\udfc1 | Ep. 53 #Shorts",
+   "upload_started": "2026-10-11T05:00:19.754698+00:00",
+   "url": "https://www.youtube.com/shorts/jbr_oreCvfY"
   },
   {
    "episode": 57,
    "video_id": "SIM_SMASH25D_V5_S016",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-16T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? \ud83d\udca5 | Ep. 57 #Shorts",
+   "upload_started": "2026-10-11T05:00:24.886498+00:00",
+   "url": "https://www.youtube.com/shorts/6eLjmpy02NM"
   },
   {
    "episode": 48,
    "video_id": "SIM_POTHOLES_V2_S031",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-17T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Police Car vs Giant Potholes! Can Siren Make It? \ud83d\ude97\ud83d\udca5 | Ep. 48 #Shorts",
+   "upload_started": "2026-10-11T05:00:30.173885+00:00",
+   "url": "https://www.youtube.com/shorts/c8Y6AecAUCI"
   },
   {
    "episode": 54,

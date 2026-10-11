@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_BUMPS_V2_S021",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-16T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 21,
@@ -226,5 +226,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S02/E045_2026-10-03_bumps/SIM_BUMPS_V2_S021_audit.md",
   "episode": 45,
   "season": 2,
-  "approved_date": "2026-10-03"
+  "approved_date": "2026-10-03",
+  "youtube_url": "https://www.youtube.com/shorts/Sh2WfMcLj-M",
+  "upload_date": "2026-10-11"
 }
