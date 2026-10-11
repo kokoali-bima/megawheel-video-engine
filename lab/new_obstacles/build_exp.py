@@ -495,5 +495,31 @@ sub("""    if any(0 < dx - front < 6.5 for dx in DANGER_X):
                                                        and st < L["event"]["t"]):
         return "scared\"""")
 
+
+# ------------------------------------------------------------------ 7. speed class order (owner 2026-10-11)
+# "mosok Grizzly atau Rocky lebih cepat dari si biru (Nitro) di jalan lurus?" Each level is simulated alone and its
+# speed is drawn from the character's own range; the ranges overlap (monster 9-20 vs F1 8-20), so a monster could
+# start faster than the F1 car in the next level. Rule (cast/CAST.md: Nitro "pembalap paling cepat", Zippy "super
+# cepat", Titan "lambat"): a faster class never starts slower than a slower class in the same video.
+sub("def pick_combo(rng, timed):", """SPEED_RANK = {"f1": 0, "sports": 1, "police": 2, "taxi": 2, "monster": 3, "monster2": 3, "firetruck": 4,
+              "icecream": 4, "bus": 5, "bigrig": 6}                      # smaller = faster class
+VEHICLES["f1"]["speeds"] = (11, 22)                                      # a race car never crawls at the start
+VEHICLES["sports"]["speeds"] = (9.5, 18)
+
+
+def speed_order_ok(Ls, tol=0.3):
+    for a in Ls:
+        for b in Ls:
+            if SPEED_RANK[a["vk"]] < SPEED_RANK[b["vk"]] and a["speed"] < b["speed"] - tol:
+                return False
+    return True
+
+
+def pick_combo(rng, timed):""")
+sub("""        Ls = [timed[li][ci] for li, ci in enumerate(combo)]
+        total = sum(L["dur"] for L in Ls)""", """        Ls = [timed[li][ci] for li, ci in enumerate(combo)]
+        if not speed_order_ok(Ls):
+            continue
+        total = sum(L["dur"] for L in Ls)""")
 open(DST, "w", encoding="utf-8").write(s)
 print("wrote", DST, len(s.splitlines()), "lines")
