@@ -60,3 +60,4 @@
 | 2026-10-11 10:19 | Claude Code Opus | SIM_DOMINO_V2_S001 | domino | 1 | Tilly → Buster → Siren | 52.9 s | PASS | produce.py · sunset-clear-beach ·  |
 | 2026-10-11 10:24 | Claude Code Opus | SIM_PINBALL_V2_S004 | pinball | 4 | Nitro → Hydro → Sprinkles | 59.9 s | PASS | produce.py · noon-clear-volcano ·  |
 | 2026-10-11 10:56 | Claude Code Opus | SIM_GAUNTLET_V2_S001 | gauntlet | 1 | Zippy → Titan → Nitro | 51.1 s | PASS | produce.py · sunset-clear-beach ·  |
+| 2026-10-11 10:59 | Claude Code Opus | SIM_RACE25D_V4_S061 | race25d | 61 | Buster → Rocky → Tilly → Siren | 35.6 s | PASS | produce.py · night-clear-city · stagger|oil,ramp,wall |
