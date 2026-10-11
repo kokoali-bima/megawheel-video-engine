@@ -14,8 +14,11 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "..", "..", "generators", "physics_2d", "sim_engine.py")
-DST = os.path.join(HERE, "sim_exp.py")
+PROMOTE = "--promote" in sys.argv        # owner-approved 2026-10-11 ("lanjut"): write the result INTO production sim_engine.py
+DST = SRC if PROMOTE else os.path.join(HERE, "sim_exp.py")
 s = open(SRC, encoding="utf-8").read()
+if PROMOTE:
+    assert "PENDS" not in s, "sim_engine.py already contains the new series (promoted before)"
 
 
 def sub(old, new, count=1):
@@ -521,5 +524,11 @@ sub("""        Ls = [timed[li][ci] for li, ci in enumerate(combo)]
         if not speed_order_ok(Ls):
             continue
         total = sum(L["dur"] for L in Ls)""")
+
+# ------------------------------------------------------------------ 8. rotation weight (small until real view data exists)
+sub('SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2}', 'SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2, "pendulum": 0.6, "domino": 0.6, "pinball": 0.6}')
+if PROMOTE:                                    # the comments say LAB while experimental; in production they are plain features
+    s = s.replace("LAB series", "series added 2026-10-11").replace("LAB:", "2026-10-11:").replace("LAB (domino)", "domino")
+    s = s.replace("# ---- LAB series (lab/new_obstacles)", "# ---- series added 2026-10-11 (pendulum / domino / pinball; developed in lab/new_obstacles)")
 open(DST, "w", encoding="utf-8").write(s)
 print("wrote", DST, len(s.splitlines()), "lines")
