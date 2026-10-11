@@ -6290,6 +6290,73 @@
       "drive_sheet_id": "1rzX1AD7IpJeMIMzBKvQmwSCd8OO0dfNJ",
       "drive_id": "1OW8BELxhzNFywG5SwK5WZkzeXZ_0gvcs",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_LAVA_POTHOLES_V2_S029.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S033",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 33,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "sports",
+        "f1"
+      ],
+      "track_id": "smash25d_f902f3e1@noon-clear-beach",
+      "arena": "mud",
+      "theme": "noon-clear-beach",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p2+ring",
+        "p3+ring",
+        "win"
+      ],
+      "duration": 46.19,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s033",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s033/SIM_SMASH25D_V5_S033_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S034",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 34,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "sports",
+        "taxi"
+      ],
+      "track_id": "smash25d_3a20d83e@noon-rain-city",
+      "arena": "mud",
+      "theme": "noon-rain-city",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p2+wreck",
+        "p4+ring",
+        "p3+wreck"
+      ],
+      "duration": 53.78,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s034",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s034/SIM_SMASH25D_V5_S034_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1D9nAiEHP2iSLP3w2kEW76_tPkDVg-xZI",
+      "drive_id": "1q7GWqlsYHLfpVnl0wgm4NIDa-PIZCFkn",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S034.mp4"
     }
   ]
 }

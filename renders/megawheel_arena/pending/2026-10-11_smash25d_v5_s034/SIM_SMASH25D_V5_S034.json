@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_SMASH25D_V5_S034",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "smash25d v5",
+  "series": "smash25d",
+  "seed": 34,
+  "fps": 30,
+  "duration": 53.78,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "sports",
+      "taxi"
+    ],
+    "arena": "mud",
+    "chaos": [
+      [
+        "kraggor",
+        4.95
+      ],
+      [
+        "ufo",
+        10.61
+      ],
+      [
+        "missile",
+        15.64
+      ],
+      [
+        "crack",
+        20.67
+      ]
+    ]
+  },
+  "arena": "mud",
+  "theme": {
+    "time": "noon",
+    "weather": "rain",
+    "location": "city"
+  },
+  "theme_id": "noon-rain-city",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "win",
+    "p2+wreck",
+    "p4+ring",
+    "p3+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Big Rig vs Monster Truck vs Sports Car vs Taxi! Who Survives? 💥",
+  "title": "Big Rig vs Monster Truck vs Sports Car vs Taxi! Who Survives? 💥 #Shorts",
+  "description": "Titan, Grizzly, Zippy and Tilly enter the Smash Arena on the mud pit! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "sports car",
+    "taxi",
+    "mud",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Titan, the big rig!",
+    "Grizzly, the monster truck!",
+    "Zippy, the sports car!",
+    "And... Tilly, the taxi!",
+    "Ready... Go!",
+    "Oh no... it's Kraggor!",
+    "Oh my goodness! What a hit!",
+    "A UFO! It's got Titan!",
+    "Did you see that?",
+    "Incoming missile!",
+    "Tilly is down!",
+    "The winner is... Titan! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Look at that! Kraggor flattens Grizzly!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s034/SIM_SMASH25D_V5_S034.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s034/preview"
+}
