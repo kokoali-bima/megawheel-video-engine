@@ -355,7 +355,8 @@ def draw_dominoes(ctx, st, front):
         tt = trig.get(di)
         for k in range(d["n"]):
             a = dom_angle(d, k, st, tt)
-            if (0.2 < a < 1.45) != front:
+            late = bool(cur and cur[0] and cur[0].get("crushed") is not None and st >= cur[0]["crushed"])
+            if ((0.2 < a < 1.45) or (late and a >= 1.45)) != front:      # after a crush the tiles lie ON the car
                 continue
             ctx.save()
             ctx.translate(d["x0"] + k * DOM_GAP + DOM_W / 2, 0.0)
