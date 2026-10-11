@@ -67,3 +67,4 @@
 | 2026-10-11 11:16 | Claude Code Opus | SIM_SMASH25D_V5_S028 | smash25d | 28 | Titan → Rocky → Siren → Zippy | 51.5 s | PASS | produce.py · sunset-clear-countryside ·  |
 | 2026-10-11 11:20 | Claude Code Opus | SIM_LAVA_POTHOLES_V2_S028 | lava_potholes | 28 | Tilly → Hydro → Grizzly | 47.6 s | PASS | produce.py · night-clear-volcano · four_small|wide_shallow-S-lava,crumble-S-lava,step-M-lava,narrow_deep-S-lava |
 | 2026-10-11 11:23 | Claude Code Opus | SIM_RACE25D_V4_S064 | race25d | 64 | Sprinkles → Rocky → Siren → Zippy | 35.8 s | PASS | produce.py · noon-clear-desert · gauntlet|container,meteor,puddle |
+| 2026-10-11 11:25 | Claude Code Opus | SIM_SMASH25D_V5_S029 | smash25d | 29 | Buster → Grizzly → Tilly → Nitro | 56.2 s | PASS | produce.py · sunset-clear-beach ·  |

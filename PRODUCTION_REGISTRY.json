@@ -5746,6 +5746,41 @@
       "drive_sheet_id": "1vDwpR8hVpRlEqwLYRtmghDkL4ZLBtW7B",
       "drive_id": "1MIg8Ui535OYhNqaUSmDzU5lYsmjWZUo5",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S064.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S029",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 29,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "smash25d_dc1cde9e@sunset-clear-beach",
+      "arena": "lava",
+      "theme": "sunset-clear-beach",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p3+ring",
+        "p2+wreck",
+        "p4+wreck"
+      ],
+      "duration": 56.24,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s029",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s029/SIM_SMASH25D_V5_S029_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1nTdcXYr3rBDvLWauH4sIC6-lADKLaWI3",
+      "drive_id": "1RdERPsstUleHjvorTfsnfwWM9BvI4c3D",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S029.mp4"
     }
   ]
 }
