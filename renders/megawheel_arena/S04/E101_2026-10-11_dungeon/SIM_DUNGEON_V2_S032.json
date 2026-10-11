@@ -1,63 +1,63 @@
 {
-  "video_id": "SIM_DUNGEON_V2_S031",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_DUNGEON_V2_S032",
+  "status": "APPROVED",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
-  "seed": 31,
+  "seed": 32,
   "fps": 30,
   "duration": 57.9,
-  "track_id": "dungeon_4d73da6e",
+  "track_id": "dungeon_5e996d6b",
   "track_params": {
     "axes": [
       {
-        "x": 38.25,
-        "period": 2.93,
-        "phase": 1.28
+        "x": 39.57,
+        "period": 2.96,
+        "phase": 1.65
       },
       {
-        "x": 88.88,
-        "period": 3.38,
-        "phase": 2.66
+        "x": 88.02,
+        "period": 3.24,
+        "phase": 2.24
       },
       {
-        "x": 101.6,
-        "period": 3.25,
-        "phase": 2.42
+        "x": 99.85,
+        "period": 3.44,
+        "phase": 1.72
       }
     ],
     "ogres": [
       {
-        "x": 54.05,
-        "period": 4.27,
-        "phase": 2.54
+        "x": 54.68,
+        "period": 4.09,
+        "phase": 1.1
       }
     ],
     "pits": [
       [
-        69.2,
-        77.5,
+        68.8,
+        77.3,
         4.5
       ]
     ],
     "ramps": [
       [
-        63.3,
-        69.2,
-        1.34
+        63.4,
+        68.8,
+        1.48
       ]
     ]
   },
   "theme": {
-    "time": "noon",
+    "time": "morning",
     "weather": "clear",
     "location": "volcano"
   },
-  "theme_id": "noon-clear-volcano",
+  "theme_id": "morning-clear-volcano",
   "voice": "chatterbox:f1",
-  "fingerprint": "dungeon|sports,firetruck,f1|dungeon_4d73da6e@noon-clear-volcano|smash@obs1+broken,pit@obs2+broken,win",
+  "fingerprint": "dungeon|taxi,bus,icecream|dungeon_5e996d6b@morning-clear-volcano|rollback@obs2+broken,chop@obs0+broken,win",
   "outcomes": [
-    "smash@obs1+broken",
-    "pit@obs2+broken",
+    "rollback@obs2+broken",
+    "chop@obs0+broken",
     "win"
   ],
   "analysis": [
@@ -65,14 +65,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->66.5 m, 3.0->73.4 m, 3.0->130.5 m",
+      "detail": "3.0->75.2 m, 3.0->39.9 m, 3.0->122.9 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "5 rintangan [axe, ogre, lava, axe, axe] (37-103 m), finish 113 m",
+      "detail": "5 rintangan [axe, ogre, lava, axe, axe] (38-101 m), finish 111 m",
       "hard": true
     },
     {
@@ -93,14 +93,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "6.0s, 11.1s, 10.4s",
+      "detail": "9.8s, 5.4s, 13.1s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "detail": "rintangan [1, 2]",
+      "detail": "rintangan [2, 0]",
       "hard": false
     },
     {
@@ -121,21 +121,21 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "detail": "14.1s, 19.0s, 21.8s",
+      "detail": "17.0s, 13.2s, 24.7s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "dungeon|sports,firetruck,f1|dungeon_4d73da6e@noon-clear-volcano|smash@obs1+broken,pit@obs2+broken,win",
+      "detail": "dungeon|taxi,bus,icecream|dungeon_5e996d6b@morning-clear-volcano|rollback@obs2+broken,chop@obs0+broken,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Sports Car vs Deadly Dungeon Traps! Can Zippy Make It? 🪓🌋 NEW 3D Graphics",
-  "title": "Sports Car vs Deadly Dungeon Traps! Can Zippy Make It? 🪓🌋 NEW 3D Graphics #Shorts",
-  "description": "Zippy the sports car, Hydro the fire truck and Nitro the race car take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "title_base": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics",
+  "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 101 #Shorts",
+  "description": "Tilly the taxi, Buster the school bus and Sprinkles the ice cream truck take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "dungeon",
@@ -148,40 +148,16 @@
     "3D graphics",
     "shorts",
     "MegaWheel Arena",
-    "sports car",
-    "fire truck",
-    "race car"
+    "taxi",
+    "school bus",
+    "ice cream truck"
   ],
   "levels": [
     {
-      "vehicle": "ZIPPY THE SPORTS CAR",
-      "speed": 9.5,
-      "outcome": "smash",
-      "event_t": 6.0,
-      "obstacle": 1,
-      "broken": true,
-      "bullet_time": false,
-      "replay": true,
-      "bubbles": [
-        "UH OH!",
-        "OUCH!"
-      ],
-      "start": 3.0,
-      "duration": 14.1,
-      "event_out": 10.3,
-      "x_start": 3.0,
-      "x_end": 66.5,
-      "level_color": [
-        45,
-        183,
-        76
-      ]
-    },
-    {
-      "vehicle": "HYDRO THE FIRE TRUCK",
-      "speed": 7.6,
-      "outcome": "pit",
-      "event_t": 11.13,
+      "vehicle": "TILLY THE TAXI",
+      "speed": 9.0,
+      "outcome": "rollback",
+      "event_t": 9.8,
       "obstacle": 2,
       "broken": true,
       "bullet_time": true,
@@ -191,11 +167,35 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 17.1,
-      "duration": 18.97,
-      "event_out": 31.93,
+      "start": 3.0,
+      "duration": 17.03,
+      "event_out": 16.63,
       "x_start": 3.0,
-      "x_end": 73.4,
+      "x_end": 75.2,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 7.6,
+      "outcome": "chop",
+      "event_t": 5.4,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 20.03,
+      "duration": 13.17,
+      "event_out": 26.73,
+      "x_start": 3.0,
+      "x_end": 39.9,
       "level_color": [
         255,
         132,
@@ -203,10 +203,10 @@
       ]
     },
     {
-      "vehicle": "NITRO THE RACE CAR",
-      "speed": 11.55,
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 9.2,
       "outcome": "win",
-      "event_t": 10.43,
+      "event_t": 13.07,
       "obstacle": 4,
       "broken": false,
       "bullet_time": true,
@@ -216,11 +216,11 @@
         "WHOA!",
         "YEAH!"
       ],
-      "start": 36.07,
-      "duration": 21.83,
-      "event_out": 48.57,
+      "start": 33.2,
+      "duration": 24.7,
+      "event_out": 48.53,
       "x_start": 3.0,
-      "x_end": 130.5,
+      "x_end": 122.9,
       "level_color": [
         153,
         76,
@@ -229,19 +229,22 @@
     }
   ],
   "narration": [
-    "Ready... Go! Level one! Zippy the sports car! Can Zippy survive the deadly dungeon traps?",
-    "Ready... Go! Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
-    "Ready... Go! Level three! Nitro the race car! Super fast... but can Nitro handle the deadly dungeon traps?",
-    "Smash! The ogre sent Zippy flying!",
-    "Oh no! Hydro fell into the lava and is melting!",
-    "Yes! Nitro made it! We have a winner!",
+    "Ready... Go! Level one! Tilly the taxi! Hop in... can Tilly get past the deadly dungeon traps?",
+    "Ready... Go! Level two! Buster the school bus. Big and heavy... can Buster make it?",
+    "Ready... Go! Level three! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Uh oh! Tilly slid all the way back down!",
+    "Chop! Buster got squashed by a giant axe!",
+    "Yes! Sprinkles made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031_audit.md",
-  "render3d": true
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032_audit.md",
+  "render3d": true,
+  "episode": 101,
+  "season": 4,
+  "approved_date": "2026-10-11"
 }

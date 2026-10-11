@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 11:41) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 12:23) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -111,6 +111,10 @@
 | 95 | `SIM_SMASH25D_V5_S037` | smash25d | APPROVED | Sat 2026-10-31 19:00 |  |
 | 96 | `SIM_DOMINO_V2_S003` | domino | APPROVED | Sun 2026-11-01 11:00 |  |
 | 97 | `SIM_PINBALL_V2_S006` | pinball | APPROVED | Mon 2026-11-02 11:00 |  |
+| 98 | `SIM_DUNGEON_V2_S026` | dungeon | APPROVED | Tue 2026-11-03 11:00 |  |
+| 99 | `SIM_DUNGEON_V2_S029` | dungeon | APPROVED | Tue 2026-11-10 11:00 |  |
+| 100 | `SIM_DUNGEON_V2_S031` | dungeon | APPROVED | Tue 2026-11-17 11:00 |  |
+| 101 | `SIM_DUNGEON_V2_S032` | dungeon | APPROVED | Tue 2026-11-24 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -1375,6 +1379,58 @@
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs1+broken; Level 2: Hydro (firetruck) → pit@obs0+broken; Level 3 (juara): Titan (bigrig) → win
 - **Status:** APPROVED (approve 2026-10-11)
 - **Antrian:** QUEUED 2026-11-02T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 98 — `SIM_DUNGEON_V2_S026`
+
+- **Judul YouTube:** Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 98 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E098_2026-10-11_dungeon/SIM_DUNGEON_V2_S026.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E098_2026-10-11_dungeon/SIM_DUNGEON_V2_S026.json` · audit: `renders/megawheel_arena/S04/E098_2026-10-11_dungeon/SIM_DUNGEON_V2_S026_audit.md`
+- **Season / seri / seed:** S04 / dungeon / 26
+- **Tema / narator:** night-clear-volcano / chatterbox:m1
+- **Durasi:** 50.1 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → chop@obs0+broken; Level 2: Sprinkles (icecream) → smash@obs1+broken; Level 3 (juara): Buster (bus) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-03T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 99 — `SIM_DUNGEON_V2_S029`
+
+- **Judul YouTube:** Will Siren the Police Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 99 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E099_2026-10-11_dungeon/SIM_DUNGEON_V2_S029.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E099_2026-10-11_dungeon/SIM_DUNGEON_V2_S029.json` · audit: `renders/megawheel_arena/S04/E099_2026-10-11_dungeon/SIM_DUNGEON_V2_S029_audit.md`
+- **Season / seri / seed:** S04 / dungeon / 29
+- **Tema / narator:** sunset-clear-volcano / chatterbox:m1
+- **Durasi:** 51.27 s
+- **Tokoh dan hasil:** Level 1: Siren (police) → pit@obs2; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-10T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 100 — `SIM_DUNGEON_V2_S031`
+
+- **Judul YouTube:** Sports Car vs Deadly Dungeon Traps! Can Zippy Make It? 🪓🌋 NEW 3D Graphics | Ep. 100 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E100_2026-10-11_dungeon/SIM_DUNGEON_V2_S031.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E100_2026-10-11_dungeon/SIM_DUNGEON_V2_S031.json` · audit: `renders/megawheel_arena/S04/E100_2026-10-11_dungeon/SIM_DUNGEON_V2_S031_audit.md`
+- **Season / seri / seed:** S04 / dungeon / 31
+- **Tema / narator:** noon-clear-volcano / chatterbox:f1
+- **Durasi:** 57.9 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → smash@obs1+broken; Level 2: Hydro (firetruck) → pit@obs2+broken; Level 3 (juara): Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-17T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 101 — `SIM_DUNGEON_V2_S032`
+
+- **Judul YouTube:** Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 101 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032.json` · audit: `renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032_audit.md`
+- **Season / seri / seed:** S04 / dungeon / 32
+- **Tema / narator:** morning-clear-volcano / chatterbox:f1
+- **Durasi:** 57.9 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs2+broken; Level 2: Buster (bus) → chop@obs0+broken; Level 3 (juara): Sprinkles (icecream) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-24T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`

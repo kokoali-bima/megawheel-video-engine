@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_DUNGEON_V2_S026",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
   "seed": 26,
@@ -134,7 +134,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics",
-  "title": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics #Shorts",
+  "title": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 98 #Shorts",
   "description": "Zippy the sports car, Sprinkles the ice cream truck and Buster the school bus take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -238,9 +238,12 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/SIM_DUNGEON_V2_S026.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E098_2026-10-11_dungeon/SIM_DUNGEON_V2_S026.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E098_2026-10-11_dungeon/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/SIM_DUNGEON_V2_S026_audit.md",
-  "render3d": true
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E098_2026-10-11_dungeon/SIM_DUNGEON_V2_S026_audit.md",
+  "render3d": true,
+  "episode": 98,
+  "season": 4,
+  "approved_date": "2026-10-11"
 }

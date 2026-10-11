@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_DUNGEON_V2_S031",
+  "video_id": "SIM_DUNGEON_V2_S032",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->66.5 m, 3.0->73.4 m, 3.0->130.5 m",
+      "value": "3.0->75.2 m, 3.0->39.9 m, 3.0->122.9 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "5 rintangan [axe, ogre, lava, axe, axe] (37-103 m), finish 113 m",
+      "value": "5 rintangan [axe, ogre, lava, axe, axe] (38-101 m), finish 111 m",
       "hard": true
     },
     {
@@ -39,7 +39,7 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "6.0s, 11.1s, 10.4s",
+      "value": "9.8s, 5.4s, 13.1s",
       "hard": true
     },
     {
@@ -47,7 +47,7 @@
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
       "ok": true,
-      "value": "rintangan [1, 2]",
+      "value": "rintangan [2, 0]",
       "hard": false
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "14.1s, 19.0s, 21.8s",
+      "value": "17.0s, 13.2s, 24.7s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "dungeon|sports,firetruck,f1|dungeon_4d73da6e@noon-clear-volcano|smash@obs1+broken,pit@obs2+broken,win",
+      "value": "dungeon|taxi,bus,icecream|dungeon_5e996d6b@morning-clear-volcano|rollback@obs2+broken,chop@obs0+broken,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S04/E101_2026-10-11_dungeon/SIM_DUNGEON_V2_S032.mp4",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": false,
-      "value": "34.7 MB",
+      "value": "35.1 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-1.1 dB",
+      "value": "-1.3 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-12.7 dB",
+      "value": "-12.9 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 10.7s",
+      "value": "48% piksel badge @ 17.0s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 17.7s",
+      "value": "56% piksel warna level @ 20.6s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 32.3s",
+      "value": "48% piksel badge @ 27.1s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 36.7s",
+      "value": "56% piksel warna level @ 33.8s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 49.0s",
+      "value": "28% piksel badge @ 48.9s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "44% piksel panel @ 57.1s",
+      "value": "47% piksel panel @ 57.1s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "dungeon|sports,firetruck,f1|dungeon_4d73da6e@noon-clear-volcano|smash@obs1+broken,pit@obs2+broken,win",
+      "value": "dungeon|taxi,bus,icecream|dungeon_5e996d6b@morning-clear-volcano|rollback@obs2+broken,chop@obs0+broken,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 31",
+      "value": "seed 32",
       "hard": true
     },
     {
