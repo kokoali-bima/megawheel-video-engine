@@ -1,51 +1,51 @@
 {
-  "video_id": "SIM_SMASH25D_V5_S032",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_SMASH25D_V5_S030",
+  "status": "APPROVED",
   "engine": "smash25d v5",
   "series": "smash25d",
-  "seed": 32,
+  "seed": 30,
   "fps": 30,
-  "duration": 49.05,
+  "duration": 48.81,
   "params": {
     "cast": [
-      "firetruck",
-      "monster",
+      "bus",
+      "monster2",
       "sports",
       "police"
     ],
-    "arena": "ice",
+    "arena": "sea",
     "chaos": [
       [
-        "missile",
-        5.29
+        "kraggor",
+        4.69
       ],
       [
         "ufo",
-        9.75
+        9.83
+      ],
+      [
+        "missile",
+        15.18
       ],
       [
         "crack",
-        15.34
-      ],
-      [
-        "kraggor",
-        19.98
+        19.97
       ]
     ]
   },
-  "arena": "ice",
+  "arena": "sea",
   "theme": {
-    "time": "night",
-    "weather": "clear",
-    "location": "desert"
+    "time": "morning",
+    "weather": "rain",
+    "location": "countryside"
   },
-  "theme_id": "night-clear-desert",
+  "theme_id": "morning-rain-countryside",
   "voice": "chatterbox:mw-announcers-m1f1",
   "outcomes": [
+    "p4+ring",
     "p2+ring",
     "p3+wreck",
-    "win",
-    "p4+ring"
+    "win"
   ],
   "checks": {
     "video+audio streams": true,
@@ -59,9 +59,9 @@
     "no frame without a car": true
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Hydro, Rocky, Zippy or Siren? Last Car Standing! 💥",
-  "title": "Hydro, Rocky, Zippy or Siren? Last Car Standing! 💥 #Shorts",
-  "description": "Hydro, Rocky, Zippy and Siren enter the Smash Arena on the ice rink! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "title_base": "Can Tiny Zippy Beat a School Bus? 💥",
+  "title": "Can Tiny Zippy Beat a School Bus? 💥 | Ep. 87 #Shorts",
+  "description": "Buster, Grizzly, Zippy and Siren enter the Smash Arena on the shark sea! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
     "car crash",
@@ -72,34 +72,37 @@
     "car battle",
     "shorts",
     "MegaWheel Arena",
-    "fire truck",
+    "school bus",
     "monster truck",
     "sports car",
     "police car",
-    "ice",
+    "sea",
     "ufo",
     "kaiju",
     "missile"
   ],
   "narration": [
     "Ladies and gentlemen... it's time to smash!",
-    "Hydro, the fire truck!",
-    "Rocky, the monster truck!",
+    "Buster, the school bus!",
+    "Grizzly, the monster truck!",
     "Zippy, the sports car!",
     "And... Siren, the police car!",
     "Ready... Go!",
+    "Oh no... it's Kraggor!",
+    "A UFO! It's got Grizzly!",
+    "Buster is out!",
     "Incoming missile!",
-    "Oh my goodness! What a hit!",
-    "A UFO! It's got Hydro!",
-    "Siren is out!",
-    "The floor is breaking!",
-    "The winner is... Zippy! Yeah!",
+    "Zippy is down!",
+    "The winner is... Siren! Yeah!",
     "What a champion!",
     "Let's see that again... in slow motion!",
-    "Kaboom! Right on Rocky!",
+    "Look at that! Kraggor flattens Zippy!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s032/SIM_SMASH25D_V5_S032.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s032/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E087_2026-10-11_smash25d/SIM_SMASH25D_V5_S030.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E087_2026-10-11_smash25d/preview",
+  "episode": 87,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

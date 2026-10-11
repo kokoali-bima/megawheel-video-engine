@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s004/SIM_PENDULUM_V2_S004.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S03/E083_2026-10-11_pendulum/SIM_PENDULUM_V2_S004.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |

@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_GAUNTLET_V2_S007",
+  "video_id": "SIM_PENDULUM_V2_S004",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->70.1 m, 3.0->123.0 m, 3.0->185.6 m",
+      "value": "3.0->76.8 m, 3.0->76.6 m, 3.0->119.7 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "4 rintangan [lava, pit, pendulum, dominoes] (41-120 m), finish 138 m",
+      "value": "3 rintangan [pendulum, lava, pendulum] (39-86 m), finish 108 m",
       "hard": true
     },
     {
@@ -39,15 +39,15 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "6.8s, 7.1s, 9.5s",
+      "value": "8.1s, 8.0s, 12.3s",
       "hard": true
     },
     {
       "section": "5.1 Analisa fisika",
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
-      "ok": true,
-      "value": "rintangan [1, 2]",
+      "ok": false,
+      "value": "rintangan [2, 2]",
       "hard": false
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-58 s",
       "ok": true,
-      "value": "51.1 s",
+      "value": "54.0 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "13.7s, 16.0s, 21.5s",
+      "value": "17.3s, 14.0s, 22.8s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "gauntlet|taxi,bigrig,f1|gauntlet_a29b180e@morning-clear-mountains|flip@obs1,smash@obs2+broken,win",
+      "value": "pendulum|f1,firetruck,bus|pendulum_489383cb@morning-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s007/SIM_GAUNTLET_V2_S007.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S03/E083_2026-10-11_pendulum/SIM_PENDULUM_V2_S004.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "54.10 s (manifest 54.1)",
+      "value": "57.00 s (manifest 57.0)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "13.8 MB",
+      "value": "15.4 MB",
       "hard": false
     },
     {
@@ -135,7 +135,7 @@
       "id": "max_volume",
       "desc": "max_volume -3..-0.1 dB (tidak clipping)",
       "ok": true,
-      "value": "-0.5 dB",
+      "value": "-0.6 dB",
       "hard": true
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-15.2 dB",
+      "value": "-13.9 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 14.2s",
+      "value": "48% piksel badge @ 13.6s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 17.3s",
+      "value": "56% piksel warna level @ 20.9s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 26.1s",
+      "value": "48% piksel badge @ 30.9s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 33.2s",
+      "value": "56% piksel warna level @ 34.8s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 45.2s",
+      "value": "28% piksel badge @ 48.7s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "66% piksel panel @ 53.3s",
+      "value": "68% piksel panel @ 56.2s",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "gauntlet|taxi,bigrig,f1|gauntlet_a29b180e@morning-clear-mountains|flip@obs1,smash@obs2+broken,win",
+      "value": "pendulum|f1,firetruck,bus|pendulum_489383cb@morning-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 7",
+      "value": "seed 4",
       "hard": true
     },
     {
@@ -247,7 +247,7 @@
       "id": "streak",
       "desc": "Maks 3 video berturut-turut dari seri yang sama",
       "ok": true,
-      "value": "0 video gauntlet berturut-turut sebelum ini",
+      "value": "0 video pendulum berturut-turut sebelum ini",
       "hard": false
     }
   ]

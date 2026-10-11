@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_GAUNTLET_V2_S007",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "gauntlet",
   "seed": 7,
@@ -139,7 +139,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? 💥",
-  "title": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? 💥 #Shorts",
+  "title": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? 💥 | Ep. 81 #Shorts",
   "description": "Tilly the taxi, Titan the big rig and Nitro the race car take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -244,8 +244,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s007/SIM_GAUNTLET_V2_S007.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s007/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E081_2026-10-11_gauntlet/SIM_GAUNTLET_V2_S007.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E081_2026-10-11_gauntlet/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s007/SIM_GAUNTLET_V2_S007_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E081_2026-10-11_gauntlet/SIM_GAUNTLET_V2_S007_audit.md",
+  "episode": 81,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }
