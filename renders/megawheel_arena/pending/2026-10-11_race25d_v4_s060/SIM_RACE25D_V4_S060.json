@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_RACE25D_V4_S060",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 60,
+  "fps": 30,
+  "duration": 35.65,
+  "params": {
+    "cast": [
+      "bus",
+      "monster2",
+      "f1",
+      "taxi"
+    ],
+    "lanes": [
+      2,
+      1,
+      0,
+      3
+    ],
+    "hazards": [
+      [
+        "meteor",
+        0,
+        149.3
+      ],
+      [
+        "wall",
+        2,
+        198.7
+      ],
+      [
+        "container",
+        1,
+        243.0
+      ]
+    ],
+    "finish": 331.6,
+    "plan": {
+      "layout": "gauntlet",
+      "zone": 180.8,
+      "start": 106.4,
+      "finish_gap": 88.6
+    }
+  },
+  "theme": {
+    "time": "night",
+    "weather": "rain",
+    "location": "countryside"
+  },
+  "theme_id": "night-rain-countryside",
+  "voice": "chatterbox:m1",
+  "outcomes": [
+    "p4+wall",
+    "p3+container",
+    "win+meteor",
+    "p2"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true,
+    "every hazard that hits is visible on screen (pixel sensor)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Grizzly Survive Falling Containers? 🏁",
+  "title": "Can Grizzly Survive Falling Containers? 🏁 #Shorts",
+  "description": "Buster, Grizzly, Nitro and Tilly race to the finish line! 🏁 Obstacles today: container, meteor, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "school bus",
+    "monster truck",
+    "race car",
+    "taxi",
+    "container",
+    "meteor",
+    "wall"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Can Grizzly Survive Falling Containers? Buster, Grizzly, Nitro and Tilly... who will win?",
+    "Kaboom! A meteor hits Nitro!",
+    "Crash! Buster slams into the wall!",
+    "A container drops from the sky! Grizzly crashes right into it!",
+    "Nitro wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060/SIM_RACE25D_V4_S060.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060/preview"
+}

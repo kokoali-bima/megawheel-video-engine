@@ -5153,6 +5153,48 @@
       "drive_sheet_id": "1148idYMN2-HUuBs2ADNhegdNNkdzpJFa",
       "drive_id": "1uiaPJyxjPTfULguPGw-jrKwwHrpEL11X",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S023.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S060",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 60,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "f1",
+        "taxi"
+      ],
+      "track_id": "race25d_c8552d4b@night-rain-countryside",
+      "theme": "night-rain-countryside",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p4+wall",
+        "p3+container",
+        "win+meteor",
+        "p2"
+      ],
+      "duration": 35.65,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 180.8,
+        "start": 106.4,
+        "finish_gap": 88.6
+      },
+      "structure": "gauntlet|container,meteor,wall",
+      "title_base": "Can Grizzly Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060/SIM_RACE25D_V4_S060_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "18MkMeMWg3bHMEHbZNtxfF-r2d55M-_RY",
+      "drive_id": "1tu8bSYXFam4v94I3lfCERKdNc0nluKHF",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S060.mp4"
     }
   ]
 }
