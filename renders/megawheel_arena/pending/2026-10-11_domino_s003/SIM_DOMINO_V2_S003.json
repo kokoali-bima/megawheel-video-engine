@@ -1,0 +1,238 @@
+{
+  "video_id": "SIM_DOMINO_V2_S003",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "domino",
+  "seed": 3,
+  "fps": 30,
+  "duration": 50.07,
+  "track_id": "domino_10a5d41d",
+  "track_params": {
+    "doms": [
+      {
+        "x0": 54.27,
+        "n": 9,
+        "delay": 0.055,
+        "lead": 9.5
+      },
+      {
+        "x0": 100.64,
+        "n": 10,
+        "delay": 0.05,
+        "lead": 9.9
+      },
+      {
+        "x0": 149.83,
+        "n": 9,
+        "delay": 0.06,
+        "lead": 9.9
+      }
+    ],
+    "puddles": [
+      [
+        17.3,
+        22.5
+      ]
+    ],
+    "muds": [
+      [
+        189.4,
+        194.4
+      ]
+    ]
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "beach"
+  },
+  "theme_id": "sunset-clear-beach",
+  "voice": "chatterbox:f1",
+  "fingerprint": "domino|police,bigrig,taxi|domino_10a5d41d@sunset-clear-beach|chop@obs1+broken,chop@obs0+broken,win",
+  "outcomes": [
+    "chop@obs1+broken",
+    "chop@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->124.7 m, 3.0->88.7 m, 3.0->447.4 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [dominoes, dominoes, dominoes] (63-176 m), finish 203 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "7.9s, 5.5s, 9.7s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [1, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "47.1 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "16.4s, 10.4s, 20.3s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "domino|police,bigrig,taxi|domino_10a5d41d@sunset-clear-beach|chop@obs1+broken,chop@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢",
+  "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 #Shorts",
+  "description": "Siren the police car, Titan the big rig and Tilly the taxi take on the A WAVE OF GIANT FALLING DOMINOES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "dominoes",
+    "domino chain reaction",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "police car",
+    "big rig",
+    "taxi"
+  ],
+  "levels": [
+    {
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 19.55,
+      "outcome": "chop",
+      "event_t": 7.87,
+      "obstacle": 1,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 16.4,
+      "event_out": 12.17,
+      "x_start": 3.0,
+      "x_end": 124.7,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 19.12,
+      "outcome": "chop",
+      "event_t": 5.47,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 19.4,
+      "duration": 10.37,
+      "event_out": 26.17,
+      "x_start": 3.0,
+      "x_end": 88.7,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "TILLY THE TAXI",
+      "speed": 28.05,
+      "outcome": "win",
+      "event_t": 9.7,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": false,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 29.77,
+      "duration": 20.3,
+      "event_out": 40.77,
+      "x_start": 3.0,
+      "x_end": 447.4,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Siren the police car is on patrol! Can Siren make it past the a wave of giant falling dominoes?",
+    "Ready... Go! Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Ready... Go! Level three! Tilly the taxi! Hop in... can Tilly get past the a wave of giant falling dominoes?",
+    "Crunch! Siren got flattened by the falling dominoes!",
+    "Crunch! Titan got flattened by the falling dominoes!",
+    "Yes! Tilly made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/SIM_DOMINO_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/SIM_DOMINO_V2_S003_audit.md"
+}
