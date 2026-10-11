@@ -5195,6 +5195,41 @@
       "drive_sheet_id": "18MkMeMWg3bHMEHbZNtxfF-r2d55M-_RY",
       "drive_id": "1tu8bSYXFam4v94I3lfCERKdNc0nluKHF",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S060.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S024",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 24,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "sports",
+        "police"
+      ],
+      "track_id": "smash25d_cb211e28@morning-rain-city",
+      "arena": "lava",
+      "theme": "morning-rain-city",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p2+ring",
+        "win",
+        "p3+wreck",
+        "p4+ring"
+      ],
+      "duration": 52.32,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s024",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s024/SIM_SMASH25D_V5_S024_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1ofMbqp5k5fZkgXSgJr1Tc04KDWPhxBnf",
+      "drive_id": "1c2rjtSIUDH4x2-US_LswDgS6RBsriL0I",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S024.mp4"
     }
   ]
 }
