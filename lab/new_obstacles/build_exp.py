@@ -163,8 +163,8 @@ def make_domino_track(seed):
     spans, obst, danger = [], [], []
 
     def field(n):
-        d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.06, 0.075)), 3),
-                 lead=round(float(r.uniform(10.0, 12.0)), 1))
+        d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.05, 0.06)), 3),
+                 lead=round(float(r.uniform(9.0, 10.5)), 1))
         DOMS.append(d)
         spans.append((d["x0"] + d["lead"] - 1.0, d["x0"] + n * DOM_GAP + DOM_H))
         obst.append((d["x0"] + d["lead"] + 6.0, "dominoes"))
