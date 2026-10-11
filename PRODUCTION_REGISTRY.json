@@ -5264,6 +5264,40 @@
       "drive_sheet_id": "1NNdeIUAXJ-oEXy_pH8R9HDdQbRaAwtJT",
       "drive_id": "1mg-9-oa_E4LAU_0VNvNunfIVpsoQS5Uu",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_DOMINO_V2_S001.mp4"
+    },
+    {
+      "video_id": "SIM_PINBALL_V2_S004",
+      "series": "pinball",
+      "engine_version": "v2",
+      "seed": 4,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "icecream"
+      ],
+      "track_id": "pinball_09e072b1@noon-clear-volcano",
+      "theme": "noon-clear-volcano",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "pit@obs1+broken",
+        "rollback@obs0+broken",
+        "win"
+      ],
+      "duration": 59.87,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_pinball_s004",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_pinball_s004/SIM_PINBALL_V2_S004_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1AuP1326F2ZdKjAlH7pdAcTA8HrNVn0LE",
+      "drive_id": "1mfquOwHWc9ksFp-YkzyNMuLCgF5bMbrM",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_PINBALL_V2_S004.mp4"
     }
   ]
 }
