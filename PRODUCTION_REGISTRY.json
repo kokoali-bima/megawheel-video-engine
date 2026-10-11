@@ -5461,6 +5461,87 @@
       "drive_sheet_id": "1VwdUSq2QoFnK8rKU5MhqeqC99C3o_wGy",
       "drive_id": "1XfUFgZMNHot0RQXwolr-lmL8S-tixn9o",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S002.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S062",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 62,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "race25d_7265ce12@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+hammer",
+        "p2",
+        "p3+dragon_ice",
+        "win+dodge_pothole"
+      ],
+      "duration": 38.34,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 200.8,
+        "start": 102.1,
+        "finish_gap": 103.0
+      },
+      "structure": "late_pair|dragon_ice,hammer,pothole",
+      "title_base": "Can Sprinkles Survive the Giant Hammer? 🏁",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s062",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s062/SIM_RACE25D_V4_S062_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S063",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 63,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "race25d_9dc7d28b@morning-clear-mountains",
+      "theme": "morning-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3+dodge_crusher",
+        "p2",
+        "p4+hammer",
+        "win+ramp"
+      ],
+      "duration": 38.92,
+      "plan": {
+        "layout": "early_pair",
+        "zone": 211.5,
+        "start": 105.7,
+        "finish_gap": 95.2
+      },
+      "structure": "early_pair|crusher,hammer,ramp",
+      "title_base": "Can Tilly Survive the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s063",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s063/SIM_RACE25D_V4_S063_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1xXWOfm308BLIwMPqmunzR_iLqldiX9tg",
+      "drive_id": "1LPbcsp447VnMx6ulkuTMkYWu9BujtEtl",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S063.mp4"
     }
   ]
 }
