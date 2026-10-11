@@ -187,16 +187,16 @@ def make_pinball_track(seed):
     r = np.random.default_rng(9700 + seed)
     PIT_KIND = "lava"
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(34, 38)))
+    tb.flat(float(r.uniform(30, 34)))
     spans, obst, danger = [], [], []
-    for n, w in ((3, 13.0), (4, 15.0), (4, 16.0)):
+    for n, w in ((3, 12.0), (3, 13.0)):
         w = round(w + float(r.uniform(-0.8, 0.8)), 1)
         x0, x1 = _lab_pit(tb, r, w, 4.5, (round(float(r.uniform(5, 6.0)), 1), round(float(r.uniform(1.4, 1.7)), 2)),
                           spans, obst, danger)
         for i in range(n):
             BUMPERS.append(dict(x=round(x0 + w * (i + 1) / (n + 1) + float(r.uniform(-0.6, 0.6)), 2),
                                 y=round([3.4, 5.0, 3.0, 4.6][i % 4] + float(r.uniform(-0.4, 0.4)), 2)))
-        tb.flat(float(r.uniform(12, 14)))
+        tb.flat(float(r.uniform(8, 10)))
     _lab_finish(tb, "pinball", spans, obst, danger, dict(bumpers=BUMPERS, pits=PITS, ramps=RAMPS))
 
 
