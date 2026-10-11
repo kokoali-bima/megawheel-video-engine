@@ -49,3 +49,4 @@
 | 2026-10-11 06:33 | Claude Code Opus | SIM_RACE25D_V4_S057 | race25d | 57 | Titan → Rocky → Nitro → Siren | 35.8 s | PASS | produce.py · sunset-rain-beach · early_pair|hammer,pothole,wall |
 | 2026-10-11 06:40 | Claude Code Opus | SIM_SMASH25D_V5_S020 | smash25d | 20 | Sprinkles → Grizzly → Nitro → Zippy | 52.1 s | PASS | produce.py · night-clear-mountains ·  |
 | 2026-10-11 06:43 | Claude Code Opus | SIM_SMASH25D_V5_S021 | smash25d | 21 | Buster → Rocky → Nitro → Siren | 50.7 s | PASS | produce.py · sunset-rain-city ·  |
+| 2026-10-11 09:42 | Claude Code Opus | SIM_PENDULUM_V2_S001 | pendulum | 1 | Tilly → Buster → Sprinkles | 53.3 s | FAIL | gerbang produce.py gagal: struktur variasi tercatat |

@@ -1,0 +1,231 @@
+{
+  "video_id": "SIM_PENDULUM_V2_S001",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "pendulum",
+  "seed": 1,
+  "fps": 30,
+  "duration": 53.33,
+  "track_id": "pendulum_e66d1bd6",
+  "track_params": {
+    "pends": [
+      {
+        "x": 42.22,
+        "period": 5.25,
+        "phase": 1.89
+      },
+      {
+        "x": 83.51,
+        "period": 6.12,
+        "phase": 0.9
+      }
+    ],
+    "pits": [
+      [
+        58.63,
+        66.53,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        52.93,
+        58.63,
+        1.4
+      ]
+    ]
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "noon-clear-volcano",
+  "voice": "chatterbox:m1",
+  "fingerprint": "pendulum|taxi,bus,icecream|pendulum_e66d1bd6@noon-clear-volcano|smash@obs2+broken,smash@obs0+broken,win",
+  "outcomes": [
+    "smash@obs2+broken",
+    "smash@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->76.5 m, 3.0->33.4 m, 3.0->120.4 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [pendulum, lava, pendulum] (40-86 m), finish 108 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.2s, 5.8s, 11.8s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "50.3 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "17.2s, 10.6s, 22.5s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "pendulum|taxi,bus,icecream|pendulum_e66d1bd6@noon-clear-volcano|smash@obs2+broken,smash@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Taxi vs A Giant Swinging Wrecking Ball! Can Tilly Make It? 💥",
+  "title": "Taxi vs A Giant Swinging Wrecking Ball! Can Tilly Make It? 💥 #Shorts",
+  "description": "Tilly the taxi, Buster the school bus and Sprinkles the ice cream truck take on the A GIANT SWINGING WRECKING BALL! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "wrecking ball",
+    "pendulum",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "taxi",
+    "school bus",
+    "ice cream truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "TILLY THE TAXI",
+      "speed": 11.0,
+      "outcome": "smash",
+      "event_t": 8.2,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 17.23,
+      "event_out": 13.43,
+      "x_start": 3.0,
+      "x_end": 76.5,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 7.6,
+      "outcome": "smash",
+      "event_t": 5.83,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 20.23,
+      "duration": 10.6,
+      "event_out": 27.23,
+      "x_start": 3.0,
+      "x_end": 33.4,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 9.6,
+      "outcome": "win",
+      "event_t": 11.83,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 30.83,
+      "duration": 22.5,
+      "event_out": 44.73,
+      "x_start": 3.0,
+      "x_end": 120.4,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Tilly the taxi! Hop in... can Tilly get past the a giant swinging wrecking ball?",
+    "Ready... Go! Level two! Buster the school bus. Big and heavy... can Buster make it?",
+    "Ready... Go! Level three! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Bonk! Tilly got smashed by the giant wrecking ball!",
+    "Bonk! Buster got smashed by the giant wrecking ball!",
+    "Yes! Sprinkles made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s001/SIM_PENDULUM_V2_S001.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s001/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s001/SIM_PENDULUM_V2_S001_audit.md"
+}
