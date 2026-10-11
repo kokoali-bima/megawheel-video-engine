@@ -1,0 +1,234 @@
+{
+  "video_id": "SIM_PENDULUM_V2_S004",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "pendulum",
+  "seed": 4,
+  "fps": 30,
+  "duration": 57.0,
+  "track_id": "pendulum_489383cb",
+  "track_params": {
+    "pends": [
+      {
+        "x": 40.94,
+        "period": 5.99,
+        "phase": 2.98
+      },
+      {
+        "x": 83.34,
+        "period": 6.1,
+        "phase": 1.04
+      }
+    ],
+    "pits": [
+      [
+        57.12,
+        64.92,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        51.62,
+        57.12,
+        1.47
+      ]
+    ],
+    "puddles": [],
+    "muds": []
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "morning-clear-volcano",
+  "voice": "chatterbox:m1",
+  "fingerprint": "pendulum|f1,firetruck,bus|pendulum_489383cb@morning-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
+  "outcomes": [
+    "smash@obs2+broken",
+    "smash@obs2+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->76.8 m, 3.0->76.6 m, 3.0->119.7 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [pendulum, lava, pendulum] (39-86 m), finish 108 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.1s, 8.0s, 12.3s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": false,
+      "detail": "rintangan [2, 2]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "54.0 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "17.3s, 14.0s, 22.8s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "pendulum|f1,firetruck,bus|pendulum_489383cb@morning-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Race Car vs A Giant Swinging Wrecking Ball! Can Nitro Make It? 💥",
+  "title": "Race Car vs A Giant Swinging Wrecking Ball! Can Nitro Make It? 💥 #Shorts",
+  "description": "Nitro the race car, Hydro the fire truck and Buster the school bus take on the A GIANT SWINGING WRECKING BALL! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "wrecking ball",
+    "pendulum",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "race car",
+    "fire truck",
+    "school bus"
+  ],
+  "levels": [
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 11.55,
+      "outcome": "smash",
+      "event_t": 8.07,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 17.27,
+      "event_out": 13.2,
+      "x_start": 3.0,
+      "x_end": 76.8,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 11.6,
+      "outcome": "smash",
+      "event_t": 8.0,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 20.27,
+      "duration": 13.97,
+      "event_out": 30.5,
+      "x_start": 3.0,
+      "x_end": 76.6,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 9.2,
+      "outcome": "win",
+      "event_t": 12.27,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 34.23,
+      "duration": 22.77,
+      "event_out": 48.27,
+      "x_start": 3.0,
+      "x_end": 119.7,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Nitro the race car! Super fast... but can Nitro handle the a giant swinging wrecking ball?",
+    "Ready... Go! Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Ready... Go! Level three! Buster the school bus. Big and heavy... can Buster make it?",
+    "Bonk! Nitro got smashed by the giant wrecking ball!",
+    "Bonk! Hydro got smashed by the giant wrecking ball!",
+    "Yes! Buster made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s004/SIM_PENDULUM_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s004/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s004/SIM_PENDULUM_V2_S004_audit.md"
+}

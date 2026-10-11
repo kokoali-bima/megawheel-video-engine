@@ -6357,6 +6357,40 @@
       "drive_sheet_id": "1D9nAiEHP2iSLP3w2kEW76_tPkDVg-xZI",
       "drive_id": "1q7GWqlsYHLfpVnl0wgm4NIDa-PIZCFkn",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S034.mp4"
+    },
+    {
+      "video_id": "SIM_PENDULUM_V2_S004",
+      "series": "pendulum",
+      "engine_version": "v2",
+      "seed": 4,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "bus"
+      ],
+      "track_id": "pendulum_489383cb@morning-clear-volcano",
+      "theme": "morning-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs2+broken",
+        "smash@obs2+broken",
+        "win"
+      ],
+      "duration": 57.0,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_pendulum_s004",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_pendulum_s004/SIM_PENDULUM_V2_S004_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1gRCQhf4upYDkjneR2SjuqlTOuC56LDui",
+      "drive_id": "12L7WyEK-tZHxJpAhJT8-Xqr4V5h3YfkB",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_PENDULUM_V2_S004.mp4"
     }
   ]
 }

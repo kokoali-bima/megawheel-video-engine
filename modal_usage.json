@@ -3942,6 +3942,16 @@
    "gpu_seconds": 51.8,
    "wall_seconds": 84.2,
    "cost_usd": 0.0132
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_PENDULUM_V2_S004 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 48.6,
+   "wall_seconds": 75.1,
+   "cost_usd": 0.0124
   }
  ]
 }
