@@ -1,6 +1,6 @@
 # ANALYTICS_REPORT — MegaWheel Arena
 
-Periode 2026-09-12 s/d 2026-10-09 (28 hari). Dibuat 2026-10-10 23:32 oleh yt_analytics.py.
+Periode 2026-09-13 s/d 2026-10-10 (28 hari). Dibuat 2026-10-11 06:30 oleh yt_analytics.py.
 
 **Channel:** 8,225 views · 1,812 menit tontonan · +32 subscriber
 
@@ -34,8 +34,8 @@ Periode 2026-09-12 s/d 2026-10-09 (28 hari). Dibuat 2026-10-10 23:32 oleh yt_ana
 | [Crash Battle! Only One Can Win! 💥 / Ep. 26 #Shorts](https://youtu.be/eQQzWYXAda8) | CHALLENGE | 149 | 26 | 26 | 51% | 3 | 0 |
 | [4 Cars Enter, 1 Survives! 💥 Smash Arena / Ep. 25 #Shorts](https://youtu.be/5ljCNw1Hnlg) | SMASH | 59 | 7 | 25 | 56% | 2 | 0 |
 | [Sprinkles' First Race 🍦🏁 / MegaWheel Arena Story Ep. 1](https://youtu.be/gAVCxOicZyM) | STORY | 52 | 67 | 93 | 14% | 2 | 1 |
-| [Slippery Race Showdown! Who Wins? 🏁💦 / Ep. 9 #Shorts](https://youtu.be/lA92He_9FeQ) | RACE | 48 | 7 | 17 | 57% | 4 | 0 |
 | [Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts](https://youtu.be/BB8Lr9LwL9g) | STORY | 48 | 5 | 15 | 53% | 3 | 0 |
+| [Slippery Race Showdown! Who Wins? 🏁💦 / Ep. 9 #Shorts](https://youtu.be/lA92He_9FeQ) | RACE | 48 | 7 | 17 | 57% | 4 | 0 |
 | [Who Survives the Smash Arena? 💥 / Ep. 28 #Shorts](https://youtu.be/ZXEi9fG7RZA) | SMASH | 46 | 7 | 42 | 84% | 1 | 0 |
 | [Crash Battle! Only One Can Win! 💥 / Ep. 23 #Shorts](https://youtu.be/ZjUnuZvelKY) | CHALLENGE | 41 | 5 | 19 | 41% | 3 | 0 |
 | [Last Car Standing Wins! 💥 / Ep. 22 #Shorts](https://youtu.be/Q-7067tL0A8) | CHALLENGE | 40 | 11 | 29 | 58% | 4 | 0 |

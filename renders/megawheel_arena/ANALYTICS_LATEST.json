@@ -1,7 +1,7 @@
 {
- "generated": "2026-10-10T23:32:24.871126+00:00",
- "start": "2026-09-12",
- "end": "2026-10-09",
+ "generated": "2026-10-11T06:30:05.648584+00:00",
+ "start": "2026-09-13",
+ "end": "2026-10-10",
  "days": 28,
  "channel": {
   "views": 8225,
@@ -219,17 +219,6 @@
    "subs": 1
   },
   {
-   "id": "lA92He_9FeQ",
-   "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
-   "series": "RACE",
-   "views": 48,
-   "minutes": 7,
-   "avg_view_s": 17,
-   "avg_view_pct": 56.72999999999999,
-   "likes": 4,
-   "subs": 0
-  },
-  {
    "id": "BB8Lr9LwL9g",
    "title": "Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts",
    "series": "STORY",
@@ -238,6 +227,17 @@
    "avg_view_s": 15,
    "avg_view_pct": 52.52,
    "likes": 3,
+   "subs": 0
+  },
+  {
+   "id": "lA92He_9FeQ",
+   "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
+   "series": "RACE",
+   "views": 48,
+   "minutes": 7,
+   "avg_view_s": 17,
+   "avg_view_pct": 56.72999999999999,
+   "likes": 4,
    "subs": 0
   },
   {
@@ -355,6 +355,7 @@
   "Sun 11/10 22:00 WIB - Ep 30 - SCHEDULED",
   "Mon 12/10 00:00 WIB - Ep 1002 - SCHEDULED",
   "Mon 12/10 02:00 WIB - Ep 37 - SCHEDULED",
-  "Mon 12/10 06:00 WIB - Ep 35 - SCHEDULED"
+  "Mon 12/10 06:00 WIB - Ep 35 - SCHEDULED",
+  "Mon 12/10 22:00 WIB - Ep 33 - SCHEDULED"
  ]
 }

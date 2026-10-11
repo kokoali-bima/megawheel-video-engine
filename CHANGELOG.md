@@ -3,9 +3,98 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-10-10
+## 2026-10-11
 **📤 Upload / antrean / Drive**
+- `a2052c8` publish: daily run 2026-10-11 [cron daily_publish.sh]
+- `c137d9a` publish: PUBLISH_STATUS.json (stock per role, last run, next uploads) for the monitoring agent; keep the original 'selesai' marker line
+- `4c3057d` publish: harden auto-upload (pre-flight token check, retries, alerts, token-age watch, quiet Drive, UPLOAD_FAILED parking)
+**🕳️ CHALLENGE (sim_engine)**
+- `d3014f8` produce: SIM_GAUNTLET_V2_S003 (pending review) [Claude Code Opus]
+- `c766a0d` produce: SIM_SMASH25D_V5_S029 (pending review) [Claude Code Opus]
+- `0d135d0` produce: SIM_RACE25D_V4_S064 (pending review) [Claude Code Opus]
+- `749acf9` produce: SIM_LAVA_POTHOLES_V2_S028 (pending review) [Claude Code Opus]
+- `5a12299` produce: SIM_SMASH25D_V5_S028 (pending review) [Claude Code Opus]
+- `f2d2c05` produce: SIM_RACE25D_V4_S063 (pending review) [Claude Code Opus]
+- `2650b97` produce: SIM_GAUNTLET_V2_S002 (pending review) [Claude Code Opus]
+- `699a66c` produce: SIM_SMASH25D_V5_S025 (pending review) [Claude Code Opus]
+- `5e9093d` produce: SIM_RACE25D_V4_S061 (pending review) [Claude Code Opus]
+- `c273f54` produce: SIM_GAUNTLET_V2_S001 (pending review) [Claude Code Opus]
+- `72a390d` produce: SIM_PINBALL_V2_S004 (pending review) [Claude Code Opus]
+- `41c796c` produce: SIM_DOMINO_V2_S001 (pending review) [Claude Code Opus]
+- `553a67d` produce: SIM_SMASH25D_V5_S024 (pending review) [Claude Code Opus]
+- `400e0a9` produce: SIM_RACE25D_V4_S060 (pending review) [Claude Code Opus]
+- `8aa997b` produce: SIM_SMASH25D_V5_S023 (pending review) [Claude Code Opus]
+- `7690dd0` produce: SIM_RACE25D_V4_S059 (pending review) [Claude Code Opus]
+- `4b8a7e6` produce: SIM_SMASH25D_V5_S022 (pending review) [Claude Code Opus]
+- `3405976` produce: SIM_RACE25D_V4_S058 (pending review) [Claude Code Opus]
+- `a51e7df` produce: SIM_PENDULUM_V2_S002 (pending review) [Claude Code Opus]
+- `a6ad6bb` produce: SIM_PENDULUM_V2_S001 AUDIT_FAILED (variation gate) [Claude Sonnet 5.5]
+- `30e8d23` produce: new CHALLENGE series are plan-less formats (variation gate)
+**🔧 Lain-lain**
+- `57978f0` reject: SIM_GAUNTLET_V2_S002 (cast repeat) [Claude Sonnet 5.5]
+- `e842c21` engine: domino series - failing roles from the slower classes so the fastest class can win (cast rotation)
+- `acaccbe` engine: gauntlet series (domino+pendulum combos + older obstacles), puddles/mud variety on new tracks
+- `5831470` approve: batch 1 stock to 31 Oct (owner: semuanya approved) [Claude Sonnet 5.5]
+- `60d6e7a` engine: domino champion must be the fastest class (speed-order rule + wave outrun)
+- `10c9898` engine: domino track longer lead-in/gaps (videos too short for the 44-57 s pacing window)
+- `4e1e8ee` engine: Edge-TTS failure -> silent placeholder when voice C is on (line already queued for Modal)
+- `9d64374` engine: CHALLENGE series pendulum/domino/pinball (owner-approved samples) + class speed order (F1 fastest) + weights 0.6 each
+- `c8da901` AGENT_UPLOAD_SCHEDULER: monitoring bot reads PUBLISH_ALERT.txt + PUBLISH_STATUS.json (facts, not log guesses); fix cron line to the real 05:00 UTC
+- `fa20ac8` ERROR_LOG: upload hardening lessons (7-day OAuth tokens, abort-before-push, Drive spam, poison items, alerts)
+- `809e1f0` preflight: a failed check (network) is no proof - never marks the token proven or clears alerts
+- `e584c88` alert: sticky open problems survive a clean run (status file never hides a live problem)
+**🧪 Lab (eksperimen)**
+- `964ad3e` lab: tune_prod helper [Claude Sonnet 5.5]
+- `48d1f1f` lab: class speed order constraint (F1 fastest) [Claude Sonnet 5.5]
+- `e19deb2` lab: domino wave faster [Claude Sonnet 5.5]
+- `d3e966b` lab: domino faster cars, longer lead [Claude Sonnet 5.5]
+- `ec48cdd` lab: domino tiles lie on the crushed car [Claude Sonnet 5.5]
+- `53a4ae6` lab: pendulum final params [Claude Sonnet 5.5]
+- `1f301b8` lab: pendulum margin scan [Claude Sonnet 5.5]
+- `aaf1d6c` lab: pendulum gate motion [Claude Sonnet 5.5]
+- `f6681b8` lab: scan_pend, domino faster wave [Claude Sonnet 5.5]
+- `45f1f93` lab: domino chase redesign, lower pendulum [Claude Sonnet 5.5]
+- `6fdefbf` lab: pinball 2 pits [Claude Sonnet 5.5]
+- `ea81583` lab: tune v3 [Claude Sonnet 5.5]
+- `0266108` lab: tune v2 [Claude Sonnet 5.5]
+- `d641c86` lab: tune pendulum/pinball, tts placeholder, tune_exp harness
+- `7472495` lab: run_exp adds voice path
+- `0f5a272` lab: new_obstacles (pendulum/domino/pinball) experimental builder + runner
+<details><summary>otomatis VM (2)</summary>
+
+- `cfb59db` records: modal usage (auto)
+- `29531cd` records: modal usage (auto)
+
+</details>
+
+## 2026-10-10
+**🔧 Lain-lain**
+- `012bd1c` approve: S047,S057,S020,S021 (owner: semua video approved) [Claude Sonnet 5.5]
+- `651972b` reject: SIM_DUNGEON_V2_S016 archived (owner request) [Claude Sonnet 5.5]
+- `2fa8968` approve: E053-E059 race/smash stock (owner request) [Claude Sonnet 5.5]
+- `5aaf97d` status: PUBLISH_STATUS.json [Claude Sonnet 5.5]
+- `73eb877` auto: records before status deploy
+- `72d0f40` auto: records before hardening deploy 2
+**🕳️ CHALLENGE (sim_engine)**
+- `ca50d0a` produce: SIM_SMASH25D_V5_S021 (pending review) [Claude Code Opus]
+- `e2ba7fa` produce: SIM_SMASH25D_V5_S020 (pending review) [Claude Code Opus]
+- `b74c500` produce: SIM_RACE25D_V4_S057 (pending review) [Claude Code Opus]
+- `fc123bf` produce: SIM_RACE25D_V4_S056 (pending review) [Claude Code Opus]
+- `68249d2` produce: SIM_SMASH25D_V5_S018 (pending review) [Claude Code Opus]
+- `d47a00c` produce: SIM_RACE25D_V4_S055 (pending review) [Claude Code Opus]
+- `a442296` produce: SIM_SMASH25D_V5_S017 (pending review) [Claude Code Opus]
+- `1a8ea05` produce: SIM_RACE25D_V4_S051 (pending review) [Claude Code Opus]
+- `6314785` produce: SIM_SMASH25D_V5_S016 (pending review) [Claude Code Opus]
+- `4b45aa0` produce: SIM_RACE25D_V4_S048 (pending review) [Claude Code Opus]
+**📤 Upload / antrean / Drive**
+- `5d4fec0` publish: tokens re-authorised under production OAuth apps (YouTube upload + Drive)
+- `56803b4` publish: Drive token restored, backlog synced, alert status OK
 - `8e312a3` publish: daily run 2026-10-10 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `53c1563` analytics: daily report 2026-10-10
+
+</details>
 
 ## 2026-10-09
 **🔧 Lain-lain**
