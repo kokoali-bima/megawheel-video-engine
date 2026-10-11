@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_PENDULUM_V2_S002",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "pendulum",
   "seed": 2,
@@ -122,7 +122,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥",
-  "title": "Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥 #Shorts",
+  "title": "Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥 | Ep. 64 #Shorts",
   "description": "Tilly the taxi, Buster the school bus and Titan the big rig take on the A GIANT SWINGING WRECKING BALL! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -225,8 +225,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s002/SIM_PENDULUM_V2_S002.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s002/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E064_2026-10-11_pendulum/SIM_PENDULUM_V2_S002.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E064_2026-10-11_pendulum/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pendulum_s002/SIM_PENDULUM_V2_S002_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E064_2026-10-11_pendulum/SIM_PENDULUM_V2_S002_audit.md",
+  "episode": 64,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

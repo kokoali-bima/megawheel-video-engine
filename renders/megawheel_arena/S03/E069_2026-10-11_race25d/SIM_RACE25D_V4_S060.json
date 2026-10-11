@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S060",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 60,
@@ -70,7 +70,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Grizzly Survive Falling Containers? 🏁",
-  "title": "Can Grizzly Survive Falling Containers? 🏁 #Shorts",
+  "title": "Can Grizzly Survive Falling Containers? 🏁 | Ep. 69 #Shorts",
   "description": "Buster, Grizzly, Nitro and Tilly race to the finish line! 🏁 Obstacles today: container, meteor, wall! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
   "tags": [
     "cars",
@@ -101,6 +101,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060/SIM_RACE25D_V4_S060.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s060/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E069_2026-10-11_race25d/SIM_RACE25D_V4_S060.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E069_2026-10-11_race25d/preview",
+  "episode": 69,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

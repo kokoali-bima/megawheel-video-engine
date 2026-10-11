@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_PINBALL_V2_S004",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "pinball",
   "seed": 4,
@@ -146,7 +146,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? 🔴",
-  "title": "Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? 🔴 #Shorts",
+  "title": "Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? 🔴 | Ep. 66 #Shorts",
   "description": "Nitro the race car, Hydro the fire truck and Sprinkles the ice cream truck take on the GIANT PINBALL BUMPERS OVER A LAVA PIT! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -249,8 +249,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s004/SIM_PINBALL_V2_S004.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s004/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E066_2026-10-11_pinball/SIM_PINBALL_V2_S004.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E066_2026-10-11_pinball/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s004/SIM_PINBALL_V2_S004_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E066_2026-10-11_pinball/SIM_PINBALL_V2_S004_audit.md",
+  "episode": 66,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

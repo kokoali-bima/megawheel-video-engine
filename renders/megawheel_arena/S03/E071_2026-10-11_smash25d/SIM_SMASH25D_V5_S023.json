@@ -1,0 +1,110 @@
+{
+  "video_id": "SIM_SMASH25D_V5_S023",
+  "status": "APPROVED",
+  "engine": "smash25d v5",
+  "series": "smash25d",
+  "seed": 23,
+  "fps": 30,
+  "duration": 55.38,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster",
+      "taxi",
+      "police"
+    ],
+    "arena": "sea",
+    "chaos": [
+      [
+        "ufo",
+        5.61
+      ],
+      [
+        "missile",
+        10.41
+      ],
+      [
+        "kraggor",
+        15.35
+      ],
+      [
+        "crack",
+        20.56
+      ]
+    ]
+  },
+  "arena": "sea",
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "mountains"
+  },
+  "theme_id": "sunset-clear-mountains",
+  "voice": "chatterbox:mw-announcers-m1f1",
+  "outcomes": [
+    "p4+ring",
+    "p3+wreck",
+    "win",
+    "p2+wreck"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "one winner, 3 cars out": true,
+    "battle 15-38 s": true,
+    "at least 3 chaos events": true,
+    "at least 3 big hits": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Titan, Rocky, Tilly or Siren? Last Car Standing! 💥",
+  "title": "Titan, Rocky, Tilly or Siren? Last Car Standing! 💥 | Ep. 71 #Shorts",
+  "description": "Titan, Rocky, Tilly and Siren enter the Smash Arena on the shark sea! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car crash",
+    "demolition derby",
+    "cartoon cars",
+    "funny cars",
+    "smash",
+    "car battle",
+    "shorts",
+    "MegaWheel Arena",
+    "big rig",
+    "monster truck",
+    "taxi",
+    "police car",
+    "sea",
+    "ufo",
+    "kaiju",
+    "missile"
+  ],
+  "narration": [
+    "Ladies and gentlemen... it's time to smash!",
+    "Titan, the big rig!",
+    "Rocky, the monster truck!",
+    "Tilly, the taxi!",
+    "And... Siren, the police car!",
+    "Ready... Go!",
+    "Did you see that?",
+    "A UFO! It's got Tilly!",
+    "Ouch! That's gotta hurt!",
+    "Incoming missile!",
+    "Titan is out!",
+    "Oh no... it's Kraggor!",
+    "The floor is breaking!",
+    "The winner is... Tilly! Yeah!",
+    "What a champion!",
+    "Let's see that again... in slow motion!",
+    "Kaboom! Right on Tilly!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E071_2026-10-11_smash25d/SIM_SMASH25D_V5_S023.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E071_2026-10-11_smash25d/preview",
+  "episode": 71,
+  "season": 3,
+  "approved_date": "2026-10-11"
+}

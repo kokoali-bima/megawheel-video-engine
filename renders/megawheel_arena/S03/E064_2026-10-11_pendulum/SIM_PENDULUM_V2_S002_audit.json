@@ -1,5 +1,5 @@
 {
-  "video_id": "SIM_PINBALL_V2_S004",
+  "video_id": "SIM_PENDULUM_V2_S002",
   "passed": true,
   "items": [
     {
@@ -7,7 +7,7 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "value": "3.0->76.1 m, 3.0->25.6 m, 3.0->116.2 m",
+      "value": "3.0->91.0 m, 3.0->76.7 m, 3.0->126.6 m",
       "hard": true
     },
     {
@@ -15,7 +15,7 @@
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "value": "2 rintangan [lava, lava] (39-79 m), finish 98 m",
+      "value": "3 rintangan [pendulum, lava, pendulum] (40-89 m), finish 112 m",
       "hard": true
     },
     {
@@ -39,15 +39,15 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "value": "7.8s, 3.9s, 12.1s",
+      "value": "7.5s, 7.6s, 11.2s",
       "hard": true
     },
     {
       "section": "5.1 Analisa fisika",
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
-      "ok": true,
-      "value": "rintangan [1, 0]",
+      "ok": false,
+      "value": "rintangan [2, 2]",
       "hard": false
     },
     {
@@ -63,7 +63,7 @@
       "id": "duration",
       "desc": "Durasi total 40-58 s",
       "ok": true,
-      "value": "56.9 s",
+      "value": "54.6 s",
       "hard": true
     },
     {
@@ -71,7 +71,7 @@
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "value": "16.5s, 13.0s, 27.4s",
+      "value": "16.7s, 16.6s, 21.2s",
       "hard": true
     },
     {
@@ -79,7 +79,7 @@
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "value": "pinball|f1,firetruck,icecream|pinball_09e072b1@noon-clear-volcano|pit@obs1+broken,rollback@obs0+broken,win",
+      "value": "pendulum|taxi,bus,bigrig|pendulum_d6e96e12@noon-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
       "hard": true
     },
     {
@@ -87,7 +87,7 @@
       "id": "file",
       "desc": "File video ada",
       "ok": true,
-      "value": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s004/SIM_PINBALL_V2_S004.mp4",
+      "value": "/root/video-engine/renders/megawheel_arena/S03/E064_2026-10-11_pendulum/SIM_PENDULUM_V2_S002.mp4",
       "hard": true
     },
     {
@@ -119,7 +119,7 @@
       "id": "duration",
       "desc": "Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s)",
       "ok": true,
-      "value": "59.87 s (manifest 59.87)",
+      "value": "57.57 s (manifest 57.57)",
       "hard": true
     },
     {
@@ -127,7 +127,7 @@
       "id": "size",
       "desc": "Ukuran wajar (8-20 MB)",
       "ok": true,
-      "value": "17.1 MB",
+      "value": "16.9 MB",
       "hard": false
     },
     {
@@ -143,7 +143,7 @@
       "id": "mean_volume",
       "desc": "mean_volume -20..-12 dB",
       "ok": true,
-      "value": "-14.2 dB",
+      "value": "-14.4 dB",
       "hard": true
     },
     {
@@ -175,7 +175,7 @@
       "id": "L1_badge",
       "desc": "L1: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 16.6s",
+      "value": "48% piksel badge @ 13.3s",
       "hard": true
     },
     {
@@ -183,7 +183,7 @@
       "id": "L2_pill",
       "desc": "L2: badge LEVEL 2 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 20.1s",
+      "value": "56% piksel warna level @ 20.3s",
       "hard": true
     },
     {
@@ -191,7 +191,7 @@
       "id": "L2_badge",
       "desc": "L2: badge FAIL tampil tepat di event",
       "ok": true,
-      "value": "48% piksel badge @ 25.1s",
+      "value": "48% piksel badge @ 29.8s",
       "hard": true
     },
     {
@@ -199,7 +199,7 @@
       "id": "L3_pill",
       "desc": "L3: badge LEVEL 3 tampil di awal level",
       "ok": true,
-      "value": "56% piksel warna level @ 33.1s",
+      "value": "56% piksel warna level @ 37.0s",
       "hard": true
     },
     {
@@ -207,7 +207,7 @@
       "id": "L3_badge",
       "desc": "L3: badge WINNER tampil tepat di event",
       "ok": true,
-      "value": "28% piksel badge @ 50.9s",
+      "value": "28% piksel badge @ 49.2s",
       "hard": true
     },
     {
@@ -215,7 +215,7 @@
       "id": "outro",
       "desc": "Panel outro LIKE/SUBSCRIBE tampil di akhir",
       "ok": true,
-      "value": "65% piksel panel @ 59.1s",
+      "value": "69% piksel panel @ 56.8s",
       "hard": true
     },
     {
@@ -223,7 +223,7 @@
       "id": "previews",
       "desc": "PNG preview tersedia (>= 6, termasuk outro)",
       "ok": true,
-      "value": "13 file",
+      "value": "14 file",
       "hard": true
     },
     {
@@ -231,7 +231,7 @@
       "id": "fingerprint",
       "desc": "Sidik jari unik di registry",
       "ok": true,
-      "value": "pinball|f1,firetruck,icecream|pinball_09e072b1@noon-clear-volcano|pit@obs1+broken,rollback@obs0+broken,win",
+      "value": "pendulum|taxi,bus,bigrig|pendulum_d6e96e12@noon-clear-volcano|smash@obs2+broken,smash@obs2+broken,win",
       "hard": true
     },
     {
@@ -239,7 +239,7 @@
       "id": "seed",
       "desc": "Seed belum dipakai video lain",
       "ok": true,
-      "value": "seed 4",
+      "value": "seed 2",
       "hard": true
     },
     {
@@ -247,7 +247,7 @@
       "id": "streak",
       "desc": "Maks 3 video berturut-turut dari seri yang sama",
       "ok": true,
-      "value": "0 video pinball berturut-turut sebelum ini",
+      "value": "0 video pendulum berturut-turut sebelum ini",
       "hard": false
     }
   ]
