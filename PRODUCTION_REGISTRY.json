@@ -6107,6 +6107,37 @@
       "drive_sheet_id": "1RDCeh0v2OvQqX6w0DsFccukNgU8H7N6I",
       "drive_id": "19faGA05ZxEt_bejsy8Ls879iaYJkpVep",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S030.mp4"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S021",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 21,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "bus"
+      ],
+      "track_id": "dungeon_3da53b4f@night-clear-volcano",
+      "theme": "night-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs1+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 49.0,
+      "status": "AUDIT_FAILED",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_dungeon_s021",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_dungeon_s021/SIM_DUNGEON_V2_S021_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
     }
   ]
 }
