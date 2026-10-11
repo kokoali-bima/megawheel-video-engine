@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 03:50). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 04:27). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -88,7 +88,14 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_GAUNTLET_V2_S001 | gauntlet | Zippy, Titan, Nitro | 2026-10-11 | 51.1 s | `renders/megawheel_arena/pending/2026-10-11_gauntlet_s001` |
+| SIM_RACE25D_V4_S061 | race25d | Buster, Rocky, Tilly, Siren | 2026-10-11 | 35.58 s | `renders/megawheel_arena/pending/2026-10-11_race25d_v4_s061` |
+| SIM_SMASH25D_V5_S025 | smash25d | Hydro, Grizzly, Zippy, Siren | 2026-10-11 | 50.58 s | `renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s025` |
+| SIM_RACE25D_V4_S063 | race25d | Sprinkles, Rocky, Tilly, Nitro | 2026-10-11 | 38.92 s | `renders/megawheel_arena/pending/2026-10-11_race25d_v4_s063` |
+| SIM_SMASH25D_V5_S028 | smash25d | Titan, Rocky, Siren, Zippy | 2026-10-11 | 51.55 s | `renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s028` |
+| SIM_LAVA_POTHOLES_V2_S028 | lava_potholes | Tilly, Hydro, Grizzly | 2026-10-11 | 47.57 s | `renders/megawheel_arena/pending/2026-10-11_lava_potholes_s028` |
+| SIM_RACE25D_V4_S064 | race25d | Sprinkles, Rocky, Siren, Zippy | 2026-10-11 | 35.79 s | `renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064` |
+| SIM_SMASH25D_V5_S029 | smash25d | Buster, Grizzly, Tilly, Nitro | 2026-10-11 | 56.24 s | `renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s029` |
 
 ## Ditolak
 
@@ -144,3 +151,4 @@
 | SIM_RACE25D_V4_S039 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
 | SIM_RACE25D_V4_S042 | user 2026-10-04: kontainer tidak terlihat (bug draw_container), mobil menabrak udara kosong | 2026-10-04 |
 | SIM_DUNGEON_V2_S016 | owner 2026-10-11: unrecognised review item; audit failed 6 checks (duration, LEVEL/FAIL/WINNER badges); archived | 2026-10-10 |
+| SIM_GAUNTLET_V2_S002 | producer: same cast as S001 (sports, bigrig, f1) - rotation rule; replaced | 2026-10-11 |

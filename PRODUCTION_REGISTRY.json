@@ -5449,18 +5449,20 @@
         "win"
       ],
       "duration": 53.57,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s002",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s002",
+      "audit": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1VwdUSq2QoFnK8rKU5MhqeqC99C3o_wGy",
+      "drive_sheet_id": null,
       "drive_id": "1XfUFgZMNHot0RQXwolr-lmL8S-tixn9o",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S002.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_GAUNTLET_V2_S002.mp4",
+      "reject_reason": "producer: same cast as S001 (sports, bigrig, f1) - rotation rule; replaced",
+      "rejected_date": "2026-10-11"
     },
     {
       "video_id": "SIM_RACE25D_V4_S062",

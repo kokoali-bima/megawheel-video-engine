@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_GAUNTLET_V2_S002",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "engine": "sim-prototype v2",
   "series": "gauntlet",
   "seed": 2,
@@ -254,8 +254,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s002/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md",
+  "reject_reason": "producer: same cast as S001 (sports, bigrig, f1) - rotation rule; replaced"
 }
