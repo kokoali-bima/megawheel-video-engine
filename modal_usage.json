@@ -4042,6 +4042,16 @@
    "gpu_seconds": 51.6,
    "wall_seconds": 78.9,
    "cost_usd": 0.0132
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DUNGEON_V2_S029 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 55.1,
+   "wall_seconds": 76.3,
+   "cost_usd": 0.0141
   }
  ]
 }
