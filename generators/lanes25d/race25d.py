@@ -318,7 +318,8 @@ def simulate(seed):
                         if a < 0.25:
                             c["x"] -= 3.2 * dt                   # bounce back off the wall
                         c["pitch"] = 0.08 * math.sin(a * 30) * max(0.0, 1 - a / 0.6)
-                    side = 1 if c["lane"] < 3 else -1
+                    side = -1 if c["lane"] >= 1 else 1           # drive around the wall on the NEAR side (a higher z is farther:
+                                                                 # going behind a 2.6 m container hid the car - owner 2026-10-11, S064)
                     c["z"] = c["lane"] + side * 0.45 * (ease_out((a - 1.0) / 0.5) if a < 2.4 else
                                                          1 - ease_out((a - 2.4) / 0.6))
                     target *= min(1.0, max(0.0, (a - 1.2) / 1.5))
