@@ -4965,6 +4965,40 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_PENDULUM_V2_S002",
+      "series": "pendulum",
+      "engine_version": "v2",
+      "seed": 2,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bus",
+        "bigrig"
+      ],
+      "track_id": "pendulum_d6e96e12@noon-clear-volcano",
+      "theme": "noon-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs2+broken",
+        "smash@obs2+broken",
+        "win"
+      ],
+      "duration": 57.57,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_pendulum_s002",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_pendulum_s002/SIM_PENDULUM_V2_S002_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1luqaFY1OuU6fQkGuCvW4JF3Iixfti9vh",
+      "drive_id": "16fM8lVt5QL_3HUTeX0BDAPGiO93byNyM",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_PENDULUM_V2_S002.mp4"
     }
   ]
 }
