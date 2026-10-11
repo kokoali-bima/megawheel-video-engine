@@ -5427,6 +5427,40 @@
       "drive_sheet_id": "1j9do6zAi9XadGQa8yn7F4yuQZU7lsh9v",
       "drive_id": "1NtD6FwCAaa6e94B08rMHCTck4jm8s_nJ",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S025.mp4"
+    },
+    {
+      "video_id": "SIM_GAUNTLET_V2_S002",
+      "series": "gauntlet",
+      "engine_version": "v2",
+      "seed": 2,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "sports",
+        "bigrig",
+        "f1"
+      ],
+      "track_id": "gauntlet_7c663f18@morning-clear-desert",
+      "theme": "morning-clear-desert",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "chop@obs3+broken",
+        "smash@obs0+broken",
+        "win"
+      ],
+      "duration": 53.57,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s002",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1VwdUSq2QoFnK8rKU5MhqeqC99C3o_wGy",
+      "drive_id": "1XfUFgZMNHot0RQXwolr-lmL8S-tixn9o",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S002.mp4"
     }
   ]
 }

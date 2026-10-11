@@ -1,0 +1,261 @@
+{
+  "video_id": "SIM_GAUNTLET_V2_S002",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "gauntlet",
+  "seed": 2,
+  "fps": 30,
+  "duration": 53.57,
+  "track_id": "gauntlet_7c663f18",
+  "track_params": {
+    "order": [
+      "pendulum",
+      "lavajump",
+      "bumps",
+      "domino"
+    ],
+    "pends": [
+      {
+        "x": 40.04,
+        "period": 6.28,
+        "phase": 1.75
+      }
+    ],
+    "doms": [
+      {
+        "x0": 113.2,
+        "n": 8,
+        "delay": 0.057,
+        "lead": 10.3
+      }
+    ],
+    "pits": [
+      [
+        57.71,
+        64.61,
+        4.5
+      ]
+    ],
+    "bumps": [
+      [
+        82.34,
+        85.2,
+        0.99
+      ],
+      [
+        91.31,
+        94.8,
+        1.53
+      ]
+    ],
+    "ramps": [
+      [
+        51.81,
+        57.71,
+        1.46
+      ]
+    ],
+    "puddles": [
+      [
+        103.1,
+        108.3
+      ]
+    ],
+    "muds": []
+  },
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "morning-clear-desert",
+  "voice": "chatterbox:m1",
+  "fingerprint": "gauntlet|sports,bigrig,f1|gauntlet_7c663f18@morning-clear-desert|chop@obs3+broken,smash@obs0+broken,win",
+  "outcomes": [
+    "chop@obs3+broken",
+    "smash@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->128.8 m, 3.0->61.3 m, 3.0->372.3 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "4 rintangan [pendulum, lava, bump, dominoes] (38-137 m), finish 155 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "8.3s, 4.3s, 10.2s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [3, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "50.6 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "15.5s, 12.7s, 22.3s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "gauntlet|sports,bigrig,f1|gauntlet_7c663f18@morning-clear-desert|chop@obs3+broken,smash@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Will Zippy the Sports Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥",
+  "title": "Will Zippy the Sports Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥 #Shorts",
+  "description": "Zippy the sports car, Titan the big rig and Nitro the race car take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "gauntlet",
+    "wrecking ball",
+    "dominoes",
+    "obstacle course",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "sports car",
+    "big rig",
+    "race car"
+  ],
+  "levels": [
+    {
+      "vehicle": "ZIPPY THE SPORTS CAR",
+      "speed": 27.0,
+      "outcome": "chop",
+      "event_t": 8.27,
+      "obstacle": 3,
+      "broken": true,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 15.53,
+      "event_out": 14.97,
+      "x_start": 3.0,
+      "x_end": 128.8,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 9.0,
+      "outcome": "smash",
+      "event_t": 4.33,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 18.53,
+      "duration": 12.7,
+      "event_out": 24.03,
+      "x_start": 3.0,
+      "x_end": 61.3,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "NITRO THE RACE CAR",
+      "speed": 28.88,
+      "outcome": "win",
+      "event_t": 10.17,
+      "obstacle": 3,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 31.23,
+      "duration": 22.33,
+      "event_out": 45.2,
+      "x_start": 3.0,
+      "x_end": 372.3,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Zippy the sports car! Can Zippy survive the a gauntlet of giant swinging balls, falling dominoes and more?",
+    "Ready... Go! Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Ready... Go! Level three! Nitro the race car! Super fast... but can Nitro handle the a gauntlet of giant swinging balls, falling dominoes and more?",
+    "Crunch! Zippy got flattened by the falling dominoes!",
+    "Bonk! Titan got smashed by the giant wrecking ball!",
+    "Yes! Nitro made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s002/SIM_GAUNTLET_V2_S002_audit.md"
+}
