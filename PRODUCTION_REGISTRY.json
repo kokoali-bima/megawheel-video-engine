@@ -6872,6 +6872,40 @@
       "drive_sheet_id": "1D8rgJ3mEX5RP42UHZ0Z5GuDmImEfxDsJ",
       "drive_id": "1j_2mBscDwn7h1cEYkQl8mW_ISWYzvKQV",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S031.mp4"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S032",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 32,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bus",
+        "icecream"
+      ],
+      "track_id": "dungeon_5e996d6b@morning-clear-volcano",
+      "theme": "morning-clear-volcano",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "rollback@obs2+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 57.9,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_dungeon_s032",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_dungeon_s032/SIM_DUNGEON_V2_S032_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1YjWGsQqCBUUY0A1VlEApYQ7177x_wH99",
+      "drive_id": "19LSKDp7qImYKvgdGCKkoKz90zOaKn3q6",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S032.mp4"
     }
   ]
 }
