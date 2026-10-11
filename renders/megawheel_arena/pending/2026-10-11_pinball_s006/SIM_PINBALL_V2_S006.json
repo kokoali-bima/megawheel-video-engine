@@ -1,0 +1,264 @@
+{
+  "video_id": "SIM_PINBALL_V2_S006",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "pinball",
+  "seed": 6,
+  "fps": 30,
+  "duration": 57.5,
+  "track_id": "pinball_01f38df1",
+  "track_params": {
+    "bumpers": [
+      {
+        "x": 40.64,
+        "y": 3.07
+      },
+      {
+        "x": 43.07,
+        "y": 4.62
+      },
+      {
+        "x": 45.52,
+        "y": 2.9
+      },
+      {
+        "x": 68.64,
+        "y": 3.18
+      },
+      {
+        "x": 71.4,
+        "y": 5.19
+      },
+      {
+        "x": 74.95,
+        "y": 2.86
+      }
+    ],
+    "pits": [
+      [
+        37.55,
+        48.85,
+        4.5
+      ],
+      [
+        64.74,
+        78.54,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        32.15,
+        37.55,
+        1.62
+      ],
+      [
+        58.84,
+        64.74,
+        1.53
+      ]
+    ],
+    "puddles": [
+      [
+        17.7,
+        22.9
+      ]
+    ],
+    "muds": []
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "sunset-clear-volcano",
+  "voice": "chatterbox:m1",
+  "fingerprint": "pinball|sports,firetruck,bigrig|pinball_01f38df1@sunset-clear-volcano|pit@obs1+broken,pit@obs0+broken,win",
+  "outcomes": [
+    "pit@obs1+broken",
+    "pit@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->76.3 m, 3.0->45.9 m, 3.0->106.3 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "2 rintangan [lava, lava] (38-79 m), finish 97 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "6.5s, 4.4s, 13.7s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [1, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "54.5 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "16.2s, 9.7s, 28.5s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "pinball|sports,firetruck,bigrig|pinball_01f38df1@sunset-clear-volcano|pit@obs1+broken,pit@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? 🔴",
+  "title": "Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? 🔴 #Shorts",
+  "description": "Zippy the sports car, Hydro the fire truck and Titan the big rig take on the GIANT PINBALL BUMPERS OVER A LAVA PIT! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "pinball",
+    "bumpers",
+    "lava",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "sports car",
+    "fire truck",
+    "big rig"
+  ],
+  "levels": [
+    {
+      "vehicle": "ZIPPY THE SPORTS CAR",
+      "speed": 16.73,
+      "outcome": "pit",
+      "event_t": 6.5,
+      "obstacle": 1,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 16.23,
+      "event_out": 13.07,
+      "x_start": 3.0,
+      "x_end": 76.3,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 12.4,
+      "outcome": "pit",
+      "event_t": 4.43,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 19.23,
+      "duration": 9.73,
+      "event_out": 25.37,
+      "x_start": 3.0,
+      "x_end": 45.9,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 7.4,
+      "outcome": "win",
+      "event_t": 13.7,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 28.97,
+      "duration": 28.53,
+      "event_out": 48.67,
+      "x_start": 3.0,
+      "x_end": 106.3,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Zippy the sports car! Can Zippy survive the giant pinball bumpers over a lava pit?",
+    "Ready... Go! Level two! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Ready... Go! Level three! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Boing! Zippy bounced right into the lava!",
+    "Boing! Hydro bounced right into the lava!",
+    "Yes! Titan made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s006/SIM_PINBALL_V2_S006.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s006/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s006/SIM_PINBALL_V2_S006_audit.md"
+}

@@ -3972,6 +3972,16 @@
    "gpu_seconds": 49.2,
    "wall_seconds": 77.0,
    "cost_usd": 0.0126
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_PINBALL_V2_S006 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 50.1,
+   "wall_seconds": 78.2,
+   "cost_usd": 0.0128
   }
  ]
 }
