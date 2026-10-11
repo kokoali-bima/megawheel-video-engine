@@ -57,3 +57,4 @@
 | 2026-10-11 10:00 | Claude Code Opus | SIM_SMASH25D_V5_S023 | smash25d | 23 | Titan → Rocky → Tilly → Siren | 55.4 s | PASS | produce.py · sunset-clear-mountains ·  |
 | 2026-10-11 10:05 | Claude Code Opus | SIM_RACE25D_V4_S060 | race25d | 60 | Buster → Grizzly → Nitro → Tilly | 35.6 s | PASS | produce.py · night-rain-countryside · gauntlet|container,meteor,wall |
 | 2026-10-11 10:08 | Claude Code Opus | SIM_SMASH25D_V5_S024 | smash25d | 24 | Hydro → Grizzly → Zippy → Siren | 52.3 s | PASS | produce.py · morning-rain-city ·  |
+| 2026-10-11 10:19 | Claude Code Opus | SIM_DOMINO_V2_S001 | domino | 1 | Tilly → Buster → Siren | 52.9 s | PASS | produce.py · sunset-clear-beach ·  |

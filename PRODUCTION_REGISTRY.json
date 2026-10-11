@@ -5230,6 +5230,40 @@
       "drive_sheet_id": "1ofMbqp5k5fZkgXSgJr1Tc04KDWPhxBnf",
       "drive_id": "1c2rjtSIUDH4x2-US_LswDgS6RBsriL0I",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S024.mp4"
+    },
+    {
+      "video_id": "SIM_DOMINO_V2_S001",
+      "series": "domino",
+      "engine_version": "v2",
+      "seed": 1,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bus",
+        "police"
+      ],
+      "track_id": "domino_2076ac00@sunset-clear-beach",
+      "theme": "sunset-clear-beach",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "chop@obs1+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 52.93,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_domino_s001",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_domino_s001/SIM_DOMINO_V2_S001_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1NNdeIUAXJ-oEXy_pH8R9HDdQbRaAwtJT",
+      "drive_id": "1mg-9-oa_E4LAU_0VNvNunfIVpsoQS5Uu",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DOMINO_V2_S001.mp4"
     }
   ]
 }
