@@ -1744,7 +1744,12 @@ def tts(text):
 
         async def go():
             await edge_tts.Communicate(text, voice, rate=TTS_RATE, pitch=TTS_PITCH).save(mp3)
-        asyncio.run(go())
+        try:
+            asyncio.run(go())
+        except Exception:                      # Edge answers 403 on this VM (2026-10-11). With voice C on, the line is already
+            if not CB["on"]:                   # queued for the Modal call (cb_finish): a silent placeholder keeps the pass alive
+                raise
+            return np.zeros(int(SR * max(1.2, 0.075 * len(text))))
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-af", TTS_CLARITY, "-ac", "1",
                         "-ar", str(SR), wav], check=True)
     x = read_wav(wav)
