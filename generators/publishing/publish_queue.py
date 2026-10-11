@@ -288,6 +288,11 @@ def upload(max_n, dry=False):
         save(q)
         done += 1
         print(f"[queue] OK -> {res['url']}", flush=True)
+        try:                                                     # playlist step is best effort: never stops the upload run
+            import playlists
+            playlists.add_for_episode(it["episode"], res["url"])
+        except Exception as ex:
+            print(f"[queue] playlist skipped: {ex}")
     if not dry:
         episodes.write_log()
     show()
