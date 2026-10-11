@@ -1,8 +1,8 @@
 # Audit otomatis: SIM_DUNGEON_V2_S029
 
-- Tanggal: 2026-10-11 11:48 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 29 · Track: dungeon_93c5dcfa
+- Tanggal: 2026-10-11 12:10 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 29 · Track: dungeon_93c5dcfa
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
-- **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
+- **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
 
 ## 5.1 Analisa fisika
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s) | ✅ | 51.27 s (manifest 51.27) |
-| Ukuran wajar (8-20 MB) | ✅ | 12.8 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 31.7 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.4 dB |
-| mean_volume -20..-12 dB | ✅ | -14.8 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.3 dB |
+| mean_volume -20..-12 dB | ✅ | -13.7 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 
@@ -46,7 +46,7 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 26.4s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 33.5s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 43.3s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 69% piksel panel @ 50.5s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 46% piksel panel @ 50.5s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |
@@ -58,6 +58,6 @@
 |---|---|---|
 | Sidik jari unik di registry | ✅ | dungeon|police,bigrig,f1|dungeon_93c5dcfa@sunset-clear-volcano|pit@obs2,chop@obs0+broken,win |
 | Seed belum dipakai video lain | ✅ | seed 29 |
-| Maks 3 video berturut-turut dari seri yang sama | ✅ | 1 video dungeon berturut-turut sebelum ini |
+| Maks 3 video berturut-turut dari seri yang sama | ⚠️ | 3 video dungeon berturut-turut sebelum ini |
 
 Keterangan: ❌ = wajib diperbaiki (gagal audit), ⚠️ = peringatan (boleh lanjut).

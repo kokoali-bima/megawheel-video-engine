@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_DUNGEON_V2_S031",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "sim-prototype v2",
+  "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
   "seed": 31,
   "fps": 30,
@@ -238,9 +238,10 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s031/SIM_DUNGEON_V2_S031_audit.md",
+  "render3d": true
 }
