@@ -527,7 +527,7 @@ def make_domino_track(seed):
     """Domino road: three fields of giant dominoes that topple in a wave toward +x (chasing the cars)."""
     r = np.random.default_rng(9600 + seed)
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(30, 34)))
+    tb.flat(float(r.uniform(50, 56)))
     spans, obst, danger = [], [], []
 
     def field(n):
@@ -540,9 +540,9 @@ def make_domino_track(seed):
         tb.flat(n * DOM_GAP + DOM_H + 4.0)
 
     field(9)
-    tb.flat(float(r.uniform(7, 9)))
+    tb.flat(float(r.uniform(16, 20)))
     field(10)
-    tb.flat(float(r.uniform(7, 9)))
+    tb.flat(float(r.uniform(16, 20)))
     field(9)
     tb.flat(14.0)
     _lab_finish(tb, "domino", spans, obst, danger, dict(doms=DOMS))
