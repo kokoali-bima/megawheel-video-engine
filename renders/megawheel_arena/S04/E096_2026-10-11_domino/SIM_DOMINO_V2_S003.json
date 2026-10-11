@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_DOMINO_V2_S003",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "domino",
   "seed": 3,
@@ -128,7 +128,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢",
-  "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 #Shorts",
+  "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 | Ep. 96 #Shorts",
   "description": "Siren the police car, Titan the big rig and Tilly the taxi take on the A WAVE OF GIANT FALLING DOMINOES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -231,8 +231,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/SIM_DOMINO_V2_S003.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_domino_s003/SIM_DOMINO_V2_S003_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003_audit.md",
+  "episode": 96,
+  "season": 4,
+  "approved_date": "2026-10-11"
 }

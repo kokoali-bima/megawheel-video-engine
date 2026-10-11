@@ -800,6 +800,62 @@
    "status": "QUEUED",
    "publish_at_utc": "2026-10-29T23:00:00Z",
    "role": "smash"
+  },
+  {
+   "episode": 90,
+   "video_id": "SIM_POTHOLES_V2_S033",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-30T15:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 92,
+   "video_id": "SIM_RACE25D_V4_S069",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-30T19:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 94,
+   "video_id": "SIM_SMASH25D_V5_S036",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-30T23:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 91,
+   "video_id": "SIM_BUMPS_V2_S022",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-31T15:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 93,
+   "video_id": "SIM_RACE25D_V4_S070",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-31T19:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 95,
+   "video_id": "SIM_SMASH25D_V5_S037",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-10-31T23:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 96,
+   "video_id": "SIM_DOMINO_V2_S003",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-01T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 97,
+   "video_id": "SIM_PINBALL_V2_S006",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-02T16:00:00Z",
+   "role": "short"
   }
  ]
 }

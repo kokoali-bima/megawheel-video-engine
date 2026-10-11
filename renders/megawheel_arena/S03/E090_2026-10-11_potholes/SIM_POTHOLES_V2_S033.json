@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_POTHOLES_V2_S033",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "potholes",
   "seed": 33,
@@ -153,7 +153,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Can Siren the Police Car Survive Giant Potholes? 🚗💥",
-  "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 #Shorts",
+  "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 90 #Shorts",
   "description": "Siren the police car, Sprinkles the ice cream truck and Hydro the fire truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -255,8 +255,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S03/E090_2026-10-11_potholes/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033_audit.md",
+  "episode": 90,
+  "season": 3,
+  "approved_date": "2026-10-11"
 }

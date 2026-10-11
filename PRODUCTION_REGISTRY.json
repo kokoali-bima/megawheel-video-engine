@@ -6431,18 +6431,20 @@
         "win"
       ],
       "duration": 50.07,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_domino_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_domino_s003/SIM_DOMINO_V2_S003_audit.md",
-      "episode": null,
-      "season": null,
+      "folder": "renders/megawheel_arena/S04/E096_2026-10-11_domino",
+      "audit": "renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003_audit.md",
+      "episode": 96,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "15qFD71fmTIar2itQ-Evu5V7oV2nR-bJ4",
+      "drive_sheet_id": null,
       "drive_id": "1s8Jmll0scvQ5GFWtKyuLrcTdoQGlxS_x",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DOMINO_V2_S003.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E096_SIM_DOMINO_V2_S003.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 | Ep. 96 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V4_S069",
@@ -6475,16 +6477,18 @@
       },
       "structure": "stagger|container,ramp,wall",
       "title_base": "Zippy vs Falling Containers! Who Wins the Race? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s069",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s069/SIM_RACE25D_V4_S069_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S04/E092_2026-10-11_race25d",
+      "audit": "renders/megawheel_arena/S04/E092_2026-10-11_race25d/SIM_RACE25D_V4_S069_audit.md",
+      "episode": 92,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1Iz9XSzsMmrML5XZz0Q1LMuKnmZbAzxNJ",
+      "drive_sheet_id": null,
       "drive_id": "1jVRKI0Jul2DwPezxNJeFyPpF8zdO9hJ4",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S069.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E092_SIM_RACE25D_V4_S069.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Zippy vs Falling Containers! Who Wins the Race? 🏁 | Ep. 92 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S035",
@@ -6542,16 +6546,18 @@
         "p3+ring"
       ],
       "duration": 51.18,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s036",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s036/SIM_SMASH25D_V5_S036_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S04/E094_2026-10-11_smash25d",
+      "audit": "renders/megawheel_arena/S04/E094_2026-10-11_smash25d/SIM_SMASH25D_V5_S036_audit.md",
+      "episode": 94,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1KdTB3yjegCMxcSAmIcksBTmEi7vLJZ4R",
+      "drive_sheet_id": null,
       "drive_id": "1Y7LUq-RiJiUxB-kX-2IzCZ_ayZdQwan5",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S036.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E094_SIM_SMASH25D_V5_S036.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Can Tiny Zippy Beat a School Bus? 💥 | Ep. 94 #Shorts"
     },
     {
       "video_id": "SIM_PINBALL_V2_S006",
@@ -6574,18 +6580,20 @@
         "win"
       ],
       "duration": 57.5,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_pinball_s006",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_pinball_s006/SIM_PINBALL_V2_S006_audit.md",
-      "episode": null,
-      "season": null,
+      "folder": "renders/megawheel_arena/S04/E097_2026-10-11_pinball",
+      "audit": "renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006_audit.md",
+      "episode": 97,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1WZm5qOHnhDsq55SDcSKSuACmWAr3cb2A",
+      "drive_sheet_id": null,
       "drive_id": "1sJNODU3GpkD7FgLO29NASmSdp8G2z9Tf",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_PINBALL_V2_S006.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E097_SIM_PINBALL_V2_S006.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? 🔴 | Ep. 97 #Shorts"
     },
     {
       "video_id": "SIM_RACE25D_V4_S070",
@@ -6618,16 +6626,18 @@
       },
       "structure": "late_pair|laser,oil,ufo",
       "title_base": "Can Sprinkles Survive the Oil Slick? 🏁",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s070",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s070/SIM_RACE25D_V4_S070_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S04/E093_2026-10-11_race25d",
+      "audit": "renders/megawheel_arena/S04/E093_2026-10-11_race25d/SIM_RACE25D_V4_S070_audit.md",
+      "episode": 93,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "15xCdruSwSebXH-JK5eW8gqNn4r8E4Leh",
+      "drive_sheet_id": null,
       "drive_id": "1fn5-Ksuxl5CgxIzC5R7bmMe6yCSTOLF5",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S070.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E093_SIM_RACE25D_V4_S070.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 93 #Shorts"
     },
     {
       "video_id": "SIM_SMASH25D_V5_S037",
@@ -6653,16 +6663,18 @@
         "p4+ring"
       ],
       "duration": 54.25,
-      "status": "RENDERED_PENDING_APPROVAL",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s037",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s037/SIM_SMASH25D_V5_S037_audit.md",
-      "episode": null,
-      "season": null,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S04/E095_2026-10-11_smash25d",
+      "audit": "renders/megawheel_arena/S04/E095_2026-10-11_smash25d/SIM_SMASH25D_V5_S037_audit.md",
+      "episode": 95,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1o0LB-Il68oTXevxpGzktrUa081zksS1d",
+      "drive_sheet_id": null,
       "drive_id": "1s1BftWQB5nlVDgeQTkEiK5IgrAtPozx8",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S037.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E095_SIM_SMASH25D_V5_S037.mp4",
+      "approved_date": "2026-10-11",
+      "title": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 95 #Shorts"
     },
     {
       "video_id": "SIM_POTHOLES_V2_S033",
@@ -6685,7 +6697,7 @@
         "win"
       ],
       "duration": 55.3,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "plan": {
         "template": "ramp_first",
         "pits": [
@@ -6711,15 +6723,17 @@
         "attempt": 0
       },
       "structure": "ramp_first|box-L-water,crumble-M-spikes,step-S-bomb",
-      "folder": "renders/megawheel_arena/pending/2026-10-11_potholes_s033",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033_audit.md",
-      "episode": null,
-      "season": null,
+      "folder": "renders/megawheel_arena/S03/E090_2026-10-11_potholes",
+      "audit": "renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033_audit.md",
+      "episode": 90,
+      "season": 3,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1z_wAcyCvTJOjUruoligKzvdB64fjgRmV",
+      "drive_sheet_id": null,
       "drive_id": "17ULHi1eEtORvshV4IjZyKUJcZ_4n3Q_y",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S033.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E090_SIM_POTHOLES_V2_S033.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 90 #Shorts"
     },
     {
       "video_id": "SIM_BUMPS_V2_S022",
@@ -6742,18 +6756,20 @@
         "win"
       ],
       "duration": 50.13,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_bumps_s022",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_bumps_s022/SIM_BUMPS_V2_S022_audit.md",
-      "episode": null,
-      "season": null,
+      "folder": "renders/megawheel_arena/S04/E091_2026-10-11_bumps",
+      "audit": "renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022_audit.md",
+      "episode": 91,
+      "season": 4,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "1UlIDYljdMVv258vzJmMRmRuErzA5u0ZF",
+      "drive_sheet_id": null,
       "drive_id": "1fY0J9NFnkgyCqG9wRPUzeCW8fYYGdRoB",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_BUMPS_V2_S022.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E091_SIM_BUMPS_V2_S022.mp4",
+      "approved_date": "2026-10-11",
+      "title": "Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥 | Ep. 91 #Shorts"
     }
   ]
 }

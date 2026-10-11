@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SMASH25D_V5_S037",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "smash25d v5",
   "series": "smash25d",
   "seed": 37,
@@ -60,7 +60,7 @@
   },
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥",
-  "title": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 #Shorts",
+  "title": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 95 #Shorts",
   "description": "Buster, Grizzly, Tilly and Nitro enter the Smash Arena on the shark sea! 💥 Missiles, a UFO, lava cracks and the monster Kraggor... last car standing wins!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car battles every day.\n\n#Shorts #SmashArena #CartoonCars #CarCrash #MegaWheelArena",
   "tags": [
     "cars",
@@ -100,6 +100,9 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:mw-announcers-m1f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s037/SIM_SMASH25D_V5_S037.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s037/preview"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E095_2026-10-11_smash25d/SIM_SMASH25D_V5_S037.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E095_2026-10-11_smash25d/preview",
+  "episode": 95,
+  "season": 4,
+  "approved_date": "2026-10-11"
 }

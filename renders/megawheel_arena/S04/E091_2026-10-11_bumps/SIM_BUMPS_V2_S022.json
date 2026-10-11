@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_BUMPS_V2_S022",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2",
   "series": "bumps",
   "seed": 22,
@@ -118,7 +118,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥",
-  "title": "Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥 #Shorts",
+  "title": "Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥 | Ep. 91 #Shorts",
   "description": "Tilly the taxi, Titan the big rig and Rocky the monster truck take on the GIANT SPEED BUMPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -220,8 +220,11 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_bumps_s022/SIM_BUMPS_V2_S022.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_bumps_s022/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E091_2026-10-11_bumps/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_bumps_s022/SIM_BUMPS_V2_S022_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022_audit.md",
+  "episode": 91,
+  "season": 4,
+  "approved_date": "2026-10-11"
 }

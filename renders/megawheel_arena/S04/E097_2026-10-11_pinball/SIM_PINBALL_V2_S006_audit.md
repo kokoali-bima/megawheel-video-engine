@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-10-11_pinball_s006/SIM_PINBALL_V2_S006.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |

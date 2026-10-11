@@ -4012,6 +4012,36 @@
    "gpu_seconds": 55.4,
    "wall_seconds": 85.4,
    "cost_usd": 0.0141
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DUNGEON_V2_S002 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 55.5,
+   "wall_seconds": 82.5,
+   "cost_usd": 0.0142
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DUNGEON_V2_S006 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 55.9,
+   "wall_seconds": 91.6,
+   "cost_usd": 0.0143
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DUNGEON_V2_S026 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 51.6,
+   "wall_seconds": 78.9,
+   "cost_usd": 0.0132
   }
  ]
 }

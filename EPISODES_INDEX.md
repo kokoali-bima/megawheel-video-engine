@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 09:59) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 11:41) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -103,6 +103,14 @@
 | 87 | `SIM_SMASH25D_V5_S030` | smash25d | APPROVED | Tue 2026-10-27 19:00 |  |
 | 88 | `SIM_SMASH25D_V5_S032` | smash25d | APPROVED | Wed 2026-10-28 19:00 |  |
 | 89 | `SIM_SMASH25D_V5_S034` | smash25d | APPROVED | Thu 2026-10-29 19:00 |  |
+| 90 | `SIM_POTHOLES_V2_S033` | potholes | APPROVED | Fri 2026-10-30 11:00 |  |
+| 91 | `SIM_BUMPS_V2_S022` | bumps | APPROVED | Sat 2026-10-31 11:00 |  |
+| 92 | `SIM_RACE25D_V4_S069` | race25d | APPROVED | Fri 2026-10-30 15:00 |  |
+| 93 | `SIM_RACE25D_V4_S070` | race25d | APPROVED | Sat 2026-10-31 15:00 |  |
+| 94 | `SIM_SMASH25D_V5_S036` | smash25d | APPROVED | Fri 2026-10-30 19:00 |  |
+| 95 | `SIM_SMASH25D_V5_S037` | smash25d | APPROVED | Sat 2026-10-31 19:00 |  |
+| 96 | `SIM_DOMINO_V2_S003` | domino | APPROVED | Sun 2026-11-01 11:00 |  |
+| 97 | `SIM_PINBALL_V2_S006` | pinball | APPROVED | Mon 2026-11-02 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -1263,6 +1271,110 @@
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → win; Level 2: Grizzly (monster2) → p2+wreck; Level 3 (juara): Zippy (sports) → p4+ring; Level 4: Tilly (taxi) → p3+wreck
 - **Status:** APPROVED (approve 2026-10-11)
 - **Antrian:** QUEUED 2026-10-29T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 90 — `SIM_POTHOLES_V2_S033`
+
+- **Judul YouTube:** Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 90 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033.json` · audit: `renders/megawheel_arena/S03/E090_2026-10-11_potholes/SIM_POTHOLES_V2_S033_audit.md`
+- **Season / seri / seed:** S03 / potholes / 33
+- **Tema / narator:** noon-clear-mountains / chatterbox:f1
+- **Durasi:** 55.3 s
+- **Tokoh dan hasil:** Level 1: Siren (police) → stuck@obs1; Level 2: Sprinkles (icecream) → pit@obs0+broken; Level 3 (juara): Hydro (firetruck) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-30T15:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 91 — `SIM_BUMPS_V2_S022`
+
+- **Judul YouTube:** Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥 | Ep. 91 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022.json` · audit: `renders/megawheel_arena/S04/E091_2026-10-11_bumps/SIM_BUMPS_V2_S022_audit.md`
+- **Season / seri / seed:** S04 / bumps / 22
+- **Tema / narator:** morning-clear-beach / chatterbox:f1
+- **Durasi:** 50.13 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs2+broken; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Rocky (monster) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-31T15:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 92 — `SIM_RACE25D_V4_S069`
+
+- **Judul YouTube:** Zippy vs Falling Containers! Who Wins the Race? 🏁 | Ep. 92 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E092_2026-10-11_race25d/SIM_RACE25D_V4_S069.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E092_2026-10-11_race25d/SIM_RACE25D_V4_S069.json` · audit: `renders/megawheel_arena/S04/E092_2026-10-11_race25d/SIM_RACE25D_V4_S069_audit.md`
+- **Season / seri / seed:** S04 / race25d / 69
+- **Tema / narator:** noon-clear-desert / chatterbox:f1
+- **Durasi:** 37.48 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p3; Level 2: Rocky (monster) → p2; Level 3 (juara): Zippy (sports) → p4+container; Level 4: Nitro (f1) → win+ramp+dodge_wall
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-30T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 93 — `SIM_RACE25D_V4_S070`
+
+- **Judul YouTube:** Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 93 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E093_2026-10-11_race25d/SIM_RACE25D_V4_S070.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E093_2026-10-11_race25d/SIM_RACE25D_V4_S070.json` · audit: `renders/megawheel_arena/S04/E093_2026-10-11_race25d/SIM_RACE25D_V4_S070_audit.md`
+- **Season / seri / seed:** S04 / race25d / 70
+- **Tema / narator:** night-snow-city / chatterbox:m1
+- **Durasi:** 34.79 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p3+oil; Level 2: Grizzly (monster2) → p2+dodge_laser; Level 3 (juara): Siren (police) → p4+ufo; Level 4: Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-31T19:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 94 — `SIM_SMASH25D_V5_S036`
+
+- **Judul YouTube:** Can Tiny Zippy Beat a School Bus? 💥 | Ep. 94 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E094_2026-10-11_smash25d/SIM_SMASH25D_V5_S036.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E094_2026-10-11_smash25d/SIM_SMASH25D_V5_S036.json` · audit: `renders/megawheel_arena/S04/E094_2026-10-11_smash25d/SIM_SMASH25D_V5_S036_audit.md`
+- **Season / seri / seed:** S04 / smash25d / 36
+- **Tema / narator:** night-clear-countryside / chatterbox:mw-announcers-m1f1
+- **Durasi:** 51.18 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p2+ring; Level 2: Rocky (monster) → p4+ring; Level 3 (juara): Zippy (sports) → win; Level 4: Siren (police) → p3+ring
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-30T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 95 — `SIM_SMASH25D_V5_S037`
+
+- **Judul YouTube:** School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 95 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E095_2026-10-11_smash25d/SIM_SMASH25D_V5_S037.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E095_2026-10-11_smash25d/SIM_SMASH25D_V5_S037.json` · audit: `renders/megawheel_arena/S04/E095_2026-10-11_smash25d/SIM_SMASH25D_V5_S037_audit.md`
+- **Season / seri / seed:** S04 / smash25d / 37
+- **Tema / narator:** morning-clear-beach / chatterbox:mw-announcers-m1f1
+- **Durasi:** 54.25 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p2+wreck; Level 2: Grizzly (monster2) → p3+wreck; Level 3 (juara): Tilly (taxi) → win; Level 4: Nitro (f1) → p4+ring
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-10-31T23:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 96 — `SIM_DOMINO_V2_S003`
+
+- **Judul YouTube:** Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 | Ep. 96 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003.json` · audit: `renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003_audit.md`
+- **Season / seri / seed:** S04 / domino / 3
+- **Tema / narator:** sunset-clear-beach / chatterbox:f1
+- **Durasi:** 50.07 s
+- **Tokoh dan hasil:** Level 1: Siren (police) → chop@obs1+broken; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Tilly (taxi) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-01T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 97 — `SIM_PINBALL_V2_S006`
+
+- **Judul YouTube:** Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? 🔴 | Ep. 97 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006.json` · audit: `renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006_audit.md`
+- **Season / seri / seed:** S04 / pinball / 6
+- **Tema / narator:** sunset-clear-volcano / chatterbox:m1
+- **Durasi:** 57.5 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs1+broken; Level 2: Hydro (firetruck) → pit@obs0+broken; Level 3 (juara): Titan (bigrig) → win
+- **Status:** APPROVED (approve 2026-10-11)
+- **Antrian:** QUEUED 2026-11-02T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
