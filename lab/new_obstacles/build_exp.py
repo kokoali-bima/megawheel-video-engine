@@ -62,7 +62,7 @@ sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R, PEND_K = 8.6, 6.5, 1.3, 1.0, 2.5     # pivot height, chain length, swing (rad), ball radius
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R, PEND_K, PEND_MARGIN = 8.6, 6.5, 1.3, 1.0, 3.5, 0.2     # pivot height, chain length, swing (rad), ball radius
 DOM_W, DOM_H, DOM_GAP, DOM_FALL = 0.9, 5.2, 2.3, 0.55
 BUMP_R = 1.1
 
@@ -208,7 +208,7 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
             if pi2 in pend_hit or event is not None:
                 continue
             hx, hy, hvx, _th = pend_state(pd, t)
-            if (abs(hvx) > 1.0 and abs(ch.position.x - hx) < PEND_R + 0.45 * bw
+            if (abs(hvx) > 1.0 and abs(ch.position.x - hx) < PEND_R + PEND_MARGIN * bw
                     and hy - PEND_R < ch.position.y + car_top and hy + PEND_R > ch.position.y - bh / 2):
                 pend_hit.add(pi2)
                 m_tot = v["mass"]

@@ -8,8 +8,9 @@ import sim_exp as se
 se.detect_font()
 se.load_cast()
 VK = ["sports", "bus", "monster", "taxi"]
-for piv, amp, pscale, K in itertools.product((8.6,), (1.3,), (0.8, 1.0, 1.3), (1.5, 2.5, 3.5)):
-    se.PEND_PIV, se.PEND_AMP, se.PEND_K = piv, amp, K
+for mg in (0.0, 0.2):
+  for piv, amp, pscale, K in itertools.product((8.6,), (1.3,), (1.0, 1.3), (3.5, 5.0)):
+    se.PEND_PIV, se.PEND_AMP, se.PEND_K, se.PEND_MARGIN = piv, amp, K, mg
     c = Counter()
     for seed in (1, 2):
         se.make_theme(seed, dict(se.SERIES_DEFS["pendulum"]["force_theme"]))
