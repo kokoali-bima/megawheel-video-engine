@@ -5988,6 +5988,48 @@
       "drive_sheet_id": "1iNxVBzwGDCdB2xtZmglfwbgLtyVJe4hG",
       "drive_id": "1cpBVYnzYOTVf7gw7QVwN7j3eonhk4cQj",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S066.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S067",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 67,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_a96c56da@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p3",
+        "p2+ramp",
+        "win+lava",
+        "p4+hammer"
+      ],
+      "duration": 36.2,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 208.6,
+        "start": 103.9,
+        "finish_gap": 103.5
+      },
+      "structure": "gauntlet|hammer,lava,ramp",
+      "title_base": "Will Nitro Make It Past the Giant Hammer? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s067",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s067/SIM_RACE25D_V4_S067_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1ufOc6_yaBritILDXsrudCJ6unA76nojl",
+      "drive_id": "1P8hEci90BkX2rym3EsQcqmnIdI-WKEQu",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S067.mp4"
     }
   ]
 }
