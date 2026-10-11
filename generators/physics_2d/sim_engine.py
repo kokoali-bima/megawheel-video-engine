@@ -2251,7 +2251,7 @@ def synth_whoosh():
 
 
 # auto series mix (user 2026-10-03, RESEARCH_W3: Potholes 872 / 1,280 views vs Bumps 133-796): half of CHALLENGE = potholes
-SERIES_WEIGHT = {"potholes": 3, "lava_potholes": 2, "pendulum": 0.6, "domino": 0.6, "pinball": 0.6, "gauntlet": 1.5}   # potholes family = 5/8 of CHALLENGE
+SERIES_WEIGHT = {"potholes": 1.5, "lava_potholes": 1.0, "gauntlet": 1.2}   # owner 2026-10-11: even mix, nobody gets bored; the rest = 1   # potholes family = 5/8 of CHALLENGE
 COLD_OPEN_S = 3.0   # every Short opens on its own biggest moment + a question (2026-10-03: 1.5 s; 2026-10-04 user: "jangan terlalu cepat, tambah 1-2 detik")
 
 
