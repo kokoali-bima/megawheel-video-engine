@@ -132,7 +132,7 @@ SERIES_DEFS = {
                      tags=["cars", "wrecking ball", "pendulum", "car crash", "crash test", "physics simulation",
                            "shorts", "MegaWheel Arena"]),
     "domino": dict(title="CARS VS GIANT DOMINOES!", obst="a wave of giant falling dominoes", max_fail=20.0,
-                   max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.7,
+                   max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.7, champ_fastest=True,
                    fail_lines={"chop": "Crunch! {n} got flattened by the falling dominoes!"},
                    yt_title="Cars VS Giant Falling Dominoes! Who Survives? 🁢",
                    tags=["cars", "dominoes", "domino chain reaction", "car crash", "crash test",
@@ -1395,6 +1395,9 @@ def candidate_runs():
     for li, (order, (_, want)) in enumerate(zip(ROLE_ORDER, ROSTER)):
         for vk in order:
             if any(vk == used for used, _ in story):         # nobody plays two levels
+                continue
+            if (want == "win" and SERIES_DEFS[SERIES].get("champ_fastest") and story      # domino: only a car that outruns the
+                    and SPEED_RANK[vk] > min(SPEED_RANK[u] for u, _ in story)):          # wave can win -> the fastest class wins
                 continue
             text = intro_text(li, vk)
             audio = tts(text)
