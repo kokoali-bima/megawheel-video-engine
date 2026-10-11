@@ -6663,6 +6663,63 @@
       "drive_sheet_id": "1o0LB-Il68oTXevxpGzktrUa081zksS1d",
       "drive_id": "1s1BftWQB5nlVDgeQTkEiK5IgrAtPozx8",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S037.mp4"
+    },
+    {
+      "video_id": "SIM_POTHOLES_V2_S033",
+      "series": "potholes",
+      "engine_version": "v2",
+      "seed": 33,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "police",
+        "icecream",
+        "firetruck"
+      ],
+      "track_id": "potholes_4aef05c9@noon-clear-mountains",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "stuck@obs1",
+        "pit@obs0+broken",
+        "win"
+      ],
+      "duration": 55.3,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": {
+        "template": "ramp_first",
+        "pits": [
+          {
+            "kind": "RP",
+            "size": "L",
+            "shape": "box",
+            "fill": "water"
+          },
+          {
+            "kind": "P",
+            "size": "M",
+            "shape": "crumble",
+            "fill": "spikes"
+          },
+          {
+            "kind": "P",
+            "size": "S",
+            "shape": "step",
+            "fill": "bomb"
+          }
+        ],
+        "attempt": 0
+      },
+      "structure": "ramp_first|box-L-water,crumble-M-spikes,step-S-bomb",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_potholes_s033",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1z_wAcyCvTJOjUruoligKzvdB64fjgRmV",
+      "drive_id": "17ULHi1eEtORvshV4IjZyKUJcZ_4n3Q_y",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_POTHOLES_V2_S033.mp4"
     }
   ]
 }

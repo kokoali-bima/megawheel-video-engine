@@ -1,0 +1,262 @@
+{
+  "video_id": "SIM_POTHOLES_V2_S033",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "potholes",
+  "seed": 33,
+  "fps": 30,
+  "duration": 55.3,
+  "track_id": "potholes_4aef05c9",
+  "track_params": {
+    "plan": {
+      "template": "ramp_first",
+      "pits": [
+        {
+          "kind": "RP",
+          "size": "L",
+          "shape": "box",
+          "fill": "water"
+        },
+        {
+          "kind": "P",
+          "size": "M",
+          "shape": "crumble",
+          "fill": "spikes"
+        },
+        {
+          "kind": "P",
+          "size": "S",
+          "shape": "step",
+          "fill": "bomb"
+        }
+      ],
+      "attempt": 0
+    },
+    "pits": [
+      {
+        "x0": 35.6,
+        "x1": 44.2,
+        "d": 5.4,
+        "shape": "box",
+        "fill": "water",
+        "kind": "RP"
+      },
+      {
+        "x0": 57.1,
+        "x1": 62.3,
+        "d": 3.7,
+        "shape": "crumble",
+        "fill": "spikes",
+        "kind": "P"
+      },
+      {
+        "x0": 74.5,
+        "x1": 77.4,
+        "d": 3.1,
+        "shape": "step",
+        "fill": "bomb",
+        "kind": "P"
+      }
+    ],
+    "ramps": [
+      [
+        29.3,
+        35.6,
+        1.4
+      ]
+    ]
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "mountains"
+  },
+  "theme_id": "noon-clear-mountains",
+  "voice": "chatterbox:f1",
+  "fingerprint": "potholes|police,icecream,firetruck|potholes_4aef05c9@noon-clear-mountains|stuck@obs1,pit@obs0+broken,win",
+  "outcomes": [
+    "stuck@obs1",
+    "pit@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->59.7 m, 3.0->40.6 m, 3.0->122.6 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "3 rintangan [pit, pit, pit] (36-77 m), finish 100 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "5.9s, 6.6s, 10.5s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [1, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "52.3 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 24 s",
+      "ok": true,
+      "detail": "12.5s, 16.6s, 23.2s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "potholes|police,icecream,firetruck|potholes_4aef05c9@noon-clear-mountains|stuck@obs1,pit@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Can Siren the Police Car Survive Giant Potholes? 🚗💥",
+  "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 #Shorts",
+  "description": "Siren the police car, Sprinkles the ice cream truck and Hydro the fire truck take on the GIANT POTHOLES! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "potholes",
+    "monster truck",
+    "crash test",
+    "physics simulation",
+    "shorts",
+    "MegaWheel Arena",
+    "police car",
+    "ice cream truck",
+    "fire truck"
+  ],
+  "levels": [
+    {
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 17.0,
+      "outcome": "stuck",
+      "event_t": 5.93,
+      "obstacle": 1,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 12.53,
+      "event_out": 12.27,
+      "x_start": 3.0,
+      "x_end": 59.7,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 7.2,
+      "outcome": "pit",
+      "event_t": 6.57,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 15.53,
+      "duration": 16.57,
+      "event_out": 25.2,
+      "x_start": 3.0,
+      "x_end": 40.6,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "HYDRO THE FIRE TRUCK",
+      "speed": 13.2,
+      "outcome": "win",
+      "event_t": 10.47,
+      "obstacle": 2,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 32.1,
+      "duration": 23.2,
+      "event_out": 46.0,
+      "x_start": 3.0,
+      "x_end": 122.6,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Siren the police car is on patrol! Can Siren make it past the giant potholes?",
+    "Ready... Go! Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Ready... Go! Level three! Hydro the fire truck! Long and heavy... can Hydro make it?",
+    "Uh oh... Siren is totally stuck!",
+    "Splash! Sprinkles sinks into the flooded pothole!",
+    "Yes! Hydro made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_potholes_s033/SIM_POTHOLES_V2_S033_audit.md"
+}

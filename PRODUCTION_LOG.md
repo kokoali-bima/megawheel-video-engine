@@ -87,3 +87,4 @@
 | 2026-10-11 17:14 | Claude Code Opus | SIM_PINBALL_V2_S006 | pinball | 6 | Zippy → Hydro → Titan | 57.5 s | PASS | produce.py · sunset-clear-volcano ·  |
 | 2026-10-11 17:18 | Claude Code Opus | SIM_RACE25D_V4_S070 | race25d | 70 | Sprinkles → Grizzly → Siren → Nitro | 34.8 s | PASS | produce.py · night-snow-city · late_pair|laser,oil,ufo |
 | 2026-10-11 17:22 | Claude Code Opus | SIM_SMASH25D_V5_S037 | smash25d | 37 | Buster → Grizzly → Tilly → Nitro | 54.2 s | PASS | produce.py · morning-clear-beach ·  |
+| 2026-10-11 18:05 | Claude Code Opus | SIM_POTHOLES_V2_S033 | potholes | 33 | Siren → Sprinkles → Hydro | 55.3 s | PASS | produce.py · noon-clear-mountains · ramp_first|box-L-water,crumble-M-spikes,step-S-bomb |
