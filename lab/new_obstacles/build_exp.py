@@ -38,7 +38,7 @@ sub('''"3D graphics", "shorts", "MegaWheel Arena"]),
                      tags=["cars", "wrecking ball", "pendulum", "car crash", "crash test", "physics simulation",
                            "shorts", "MegaWheel Arena"]),
     "domino": dict(title="CARS VS GIANT DOMINOES!", obst="a wave of giant falling dominoes", max_fail=20.0,
-                   max_win=26.0, win_pool="any", signature="scripted",
+                   max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.5,
                    fail_lines={"chop": "Crunch! {n} got flattened by the falling dominoes!"},
                    yt_title="Cars VS Giant Falling Dominoes! Who Survives? 🁢",
                    tags=["cars", "dominoes", "domino chain reaction", "car crash", "crash test",
@@ -55,15 +55,15 @@ sub('''"3D graphics", "shorts", "MegaWheel Arena"]),
 
 # ------------------------------------------------------------------ 2. hazard globals + reset + dispatch
 sub("AXES = []           #", "PENDS = []          # dict(x, period, phase) swinging wrecking balls (lab series pendulum)\n"
-    "DOMS = []           # dict(x0, n, stand, period, phase) domino fields (lab series domino)\n"
+    "DOMS = []           # dict(x0, n, delay, lead) domino fields; the wave starts when the car is `lead` m past x0\n"
     "BUMPERS = []        # dict(x, y) pinball bumpers over a pit (lab series pinball)\nAXES = []           #")
 sub("PIT_SHAPES, AXES, OGRES\n    PUDDLES", "PIT_SHAPES, AXES, OGRES, PENDS, DOMS, BUMPERS\n    PUDDLES")
 sub("    AXES, OGRES = [], []\n", "    AXES, OGRES, PENDS, DOMS, BUMPERS = [], [], [], [], []\n")
 sub('"dungeon": make_dungeon_track}', '"dungeon": make_dungeon_track,\n     "pendulum": make_pendulum_track, "domino": make_domino_track, "pinball": make_pinball_track}')
 
 # ------------------------------------------------------------------ 3. track builders + helpers
-sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 10.0, 6.5, 1.2, 1.0     # pivot height, chain length, swing (rad), ball radius
-DOM_W, DOM_H, DOM_GAP, DOM_DELAY, DOM_FALL, DOM_HOLD, DOM_RISE = 0.9, 5.2, 2.3, 0.20, 0.55, 0.9, 0.7
+sub("def make_bumps_track(seed):", '''PEND_PIV, PEND_LEN, PEND_AMP, PEND_R = 8.4, 6.5, 1.2, 1.0     # pivot height, chain length, swing (rad), ball radius
+DOM_W, DOM_H, DOM_GAP, DOM_FALL = 0.9, 5.2, 2.3, 0.55
 BUMP_R = 1.1
 
 
@@ -75,21 +75,17 @@ def pend_state(p, t):
     return (p["x"] + PEND_LEN * math.sin(th), PEND_PIV - PEND_LEN * math.cos(th), PEND_LEN * math.cos(th) * dth, th)
 
 
-def dom_angle(d, k, t):
-    """Fall angle (rad, 0 = standing, pi/2 = lying toward +x) of slab k of a domino field at time t."""
-    tau = (t + d["phase"]) % d["period"]
-    s0 = d["stand"] + k * DOM_DELAY
-    fall_end = d["stand"] + d["n"] * DOM_DELAY + DOM_FALL
-    if tau >= fall_end + DOM_HOLD:                                    # all stand up again (cartoon reset)
-        u = min(1.0, (tau - fall_end - DOM_HOLD) / DOM_RISE)
-        return (math.pi / 2) * (1 - u * u * (3 - 2 * u))
-    u = min(1.0, max(0.0, (tau - s0) / DOM_FALL))
+def dom_angle(d, k, t, tt):
+    """Fall angle (rad, 0 = standing, pi/2 = lying toward +x) of slab k. tt = the time the car triggered the field."""
+    if tt is None or t < tt:
+        return 0.0
+    u = min(1.0, max(0.0, (t - tt - k * d["delay"]) / DOM_FALL))
     return (math.pi / 2) * u * u
 
 
-def dom_pts(d, k, t):
+def dom_pts(d, k, t, tt):
     """(angle, [(x, y)] samples along the slab's centre line) for the crush test."""
-    a = dom_angle(d, k, t)
+    a = dom_angle(d, k, t, tt)
     px = d["x0"] + k * DOM_GAP + DOM_W / 2
     pts = []
     for sdist in np.linspace(0.2, DOM_H, 12):
@@ -162,21 +158,19 @@ def make_domino_track(seed):
     spans, obst, danger = [], [], []
 
     def field(n):
-        stand = round(float(r.uniform(1.0, 2.4)), 2)
-        d = dict(x0=round(tb.x + 1.0, 2), n=n, stand=stand,
-                 period=round(stand + n * DOM_DELAY + DOM_FALL + DOM_HOLD + DOM_RISE + float(r.uniform(0.3, 1.0)), 2),
-                 phase=round(float(r.uniform(0, 4.0)), 2))
+        d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.10, 0.13)), 3),
+                 lead=round(float(r.uniform(7.5, 9.0)), 1))
         DOMS.append(d)
-        spans.append((d["x0"] - 0.5, d["x0"] + n * DOM_GAP))
-        obst.append((d["x0"] + n * DOM_GAP / 2, "dominoes"))
-        danger.append(d["x0"] - 9.0)
-        tb.flat(n * DOM_GAP + 2.0)
+        spans.append((d["x0"] + d["lead"] - 1.0, d["x0"] + n * DOM_GAP + DOM_H))
+        obst.append((d["x0"] + d["lead"] + 6.0, "dominoes"))
+        danger.append(d["x0"] + d["lead"] - 2.0)
+        tb.flat(n * DOM_GAP + DOM_H + 4.0)
 
-    field(6)
-    tb.flat(float(r.uniform(9, 11)))
-    field(8)
-    tb.flat(float(r.uniform(9, 11)))
     field(7)
+    tb.flat(float(r.uniform(7, 9)))
+    field(9)
+    tb.flat(float(r.uniform(7, 9)))
+    field(8)
     tb.flat(14.0)
     _lab_finish(tb, "domino", spans, obst, danger, dict(doms=DOMS))
 
@@ -204,7 +198,7 @@ def make_bumps_track(seed):''')
 
 # ------------------------------------------------------------------ 4. physics
 sub("    axe_hit, ogre_hit, crushed, smashed = set(), set(), None, None\n",
-    "    axe_hit, ogre_hit, crushed, smashed = set(), set(), None, None\n    pend_hit, dom_hit, bump_last, bump_log = set(), set(), {}, []\n")
+    "    axe_hit, ogre_hit, crushed, smashed = set(), set(), None, None\n    pend_hit, dom_hit, dom_trig, bump_last, bump_log = set(), set(), {}, {}, []\n")
 sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landing\n", '''        for pi2, pd in enumerate(PENDS):                    # LAB: the wrecking ball smashes whoever it meets
             if pi2 in pend_hit or event is not None:
                 continue
@@ -219,15 +213,18 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
                 if broken is None:
                     debris = break_car(space, car, v, rng, v["break_dv"] * 2.0, i)
                     broken = dict(t=t, x=ch.position.x, y=ch.position.y)
-        for di2, dm in enumerate(DOMS):                     # LAB: a falling domino flattens whoever is under it
-            if event is not None or di2 in dom_hit or not (dm["x0"] - 2 < ch.position.x < dm["x0"] + dm["n"] * DOM_GAP + DOM_H):
+        for di2, dm in enumerate(DOMS):                     # LAB: the car trips the wave; a falling tile flattens it
+            if di2 not in dom_trig and ch.position.x >= dm["x0"] + dm["lead"]:
+                dom_trig[di2] = t
+            tt_ = dom_trig.get(di2)
+            if tt_ is None or event is not None or di2 in dom_hit:
                 continue
-            lo_x, hi_x = ch.position.x - bw / 2 - 0.2, ch.position.x + bw / 2 + 0.2
-            lo_y, hi_y = ch.position.y - bh / 2 - 0.3, ch.position.y + car_top
+            lo_x, hi_x = ch.position.x - bw / 2 * 0.9, ch.position.x + bw / 2 * 0.9
+            lo_y, hi_y = ch.position.y - bh / 2, ch.position.y + car_top
             for k in range(dm["n"]):
-                a_, pts = dom_pts(dm, k, t)
-                if 0.2 < a_ < 1.45 and any(lo_x - DOM_W / 2 < px_ < hi_x + DOM_W / 2 and lo_y - DOM_W / 2 < py_ < hi_y
-                                           for px_, py_ in pts):
+                a_, pts = dom_pts(dm, k, t, tt_)
+                if 0.25 < a_ < 1.35 and any(lo_x - DOM_W / 2 < px_ < hi_x + DOM_W / 2 and lo_y - DOM_W / 2 < py_ < hi_y
+                                            for px_, py_ in pts):
                     dom_hit.add(di2)
                     ch.velocity = (ch.velocity.x * 0.1, min(ch.velocity.y, 0.0) - 2.5)
                     ch.angular_velocity *= 0.3
@@ -256,7 +253,7 @@ sub("        # hydroplaning: each puddle once; snow: fishtail after a hard landi
                     bump_log.append((t, bi2, sp_))
         # hydroplaning: each puddle once; snow: fishtail after a hard landing
 ''')
-sub("                crushed=crushed, smashed=smashed,\n", "                crushed=crushed, smashed=smashed, bumps=bump_log,\n")
+sub("                crushed=crushed, smashed=smashed,\n", "                crushed=crushed, smashed=smashed, bumps=bump_log, dom_trig=dom_trig,\n")
 sub('''    if sig == "dungeon":''', '''    if sig == "scripted":                                        # LAB series: a smash / crush, a bumper kick or a lava plunge
         return (L["event"]["type"] in ("chop", "smash") or len(L.get("bumps") or []) >= 2
                 or (L.get("sunk") is not None and L.get("sunk_kind") == "lava"))
@@ -321,20 +318,61 @@ sub("def crush_amount(L, st):", '''def draw_pendulums(ctx, st):
         ctx.stroke()
 
 
+def draw_roadband(ctx, x0, x1):
+    """LAB (domino): the road seen from slightly above: a second lane behind the cars + a far curb."""
+    ctx.rectangle(x0, 0.0, x1 - x0, 1.6)
+    g = cairo.LinearGradient(0, 0, 0, 1.6)
+    g.add_color_stop_rgb(0, 0.3, 0.3, 0.36)
+    g.add_color_stop_rgb(1, 0.4, 0.4, 0.46)
+    ctx.set_source(g)
+    ctx.fill()
+    ctx.rectangle(x0, 1.6, x1 - x0, 0.28)
+    ctx.set_source_rgb(0.82, 0.8, 0.76)
+    ctx.fill()
+    ctx.rectangle(x0, 1.88, x1 - x0, 0.06)
+    ctx.set_source_rgb(0.2, 0.2, 0.26)
+    ctx.fill()
+    x = math.floor(x0 / 2.4) * 2.4
+    while x < x1:
+        ctx.rectangle(x, 0.78, 1.2, 0.07)
+        ctx.set_source_rgba(1, 1, 1, 0.45)
+        ctx.fill()
+        x += 2.4
+
+
 def draw_dominoes(ctx, st, front):
-    """LAB: giant ivory domino tiles. Standing / lying ones are behind the cars, falling ones in front."""
-    for d in DOMS:
+    """LAB: giant ivory domino boxes (back face + top/side for a 3D look). Standing / lying ones are behind the cars,
+    falling ones in front; a dust puff where each tile lands."""
+    cur = globals().get("_CUR_L")
+    trig = (cur[0].get("dom_trig") if cur and cur[0] else None) or {}
+    ox, oy = 0.34, 0.36
+    for di, d in enumerate(DOMS):
+        tt = trig.get(di)
         for k in range(d["n"]):
-            a = dom_angle(d, k, st)
+            a = dom_angle(d, k, st, tt)
             if (0.2 < a < 1.45) != front:
                 continue
             ctx.save()
             ctx.translate(d["x0"] + k * DOM_GAP + DOM_W / 2, 0.0)
             ctx.rotate(-a)
+            rrect(ctx, -DOM_W + ox, oy, DOM_W, DOM_H, 0.12)                 # back face (depth)
+            ctx.set_source_rgb(0.62, 0.6, 0.55)
+            ctx.fill()
+            for poly_ in ([(-DOM_W, DOM_H), (-DOM_W + ox, DOM_H + oy), (ox, DOM_H + oy), (0, DOM_H)],
+                          [(0, 0), (ox, oy), (ox, DOM_H + oy), (0, DOM_H)]):
+                ctx.move_to(*poly_[0])
+                for pt in poly_[1:]:
+                    ctx.line_to(*pt)
+                ctx.close_path()
+                ctx.set_source_rgb(0.78, 0.76, 0.7)
+                ctx.fill_preserve()
+                ctx.set_source_rgb(0.1, 0.1, 0.16)
+                ctx.set_line_width(0.05)
+                ctx.stroke()
             rrect(ctx, -DOM_W, 0.0, DOM_W, DOM_H, 0.12)
             g = cairo.LinearGradient(-DOM_W, 0, 0, 0)
-            g.add_color_stop_rgb(0, 0.98, 0.96, 0.9)
-            g.add_color_stop_rgb(1, 0.82, 0.8, 0.74)
+            g.add_color_stop_rgb(0, 0.99, 0.97, 0.91)
+            g.add_color_stop_rgb(1, 0.84, 0.82, 0.76)
             ctx.set_source(g)
             ctx.fill_preserve()
             ctx.set_source_rgb(0.1, 0.1, 0.16)
@@ -350,6 +388,17 @@ def draw_dominoes(ctx, st, front):
                 ctx.set_source_rgb(0.1, 0.1, 0.16)
                 ctx.fill()
             ctx.restore()
+            if tt is not None and front is False:
+                age = (st - tt - k * d["delay"] - DOM_FALL) / 0.4         # dust where the tile hit the ground
+                if 0 <= age < 1:
+                    for sg in (-1, 1):
+                        ctx.save()
+                        ctx.translate(d["x0"] + k * DOM_GAP + DOM_H * 0.9 + sg * (0.5 + 1.6 * age), 0.35)
+                        ctx.scale(0.8 + 1.0 * age, 0.45 + 0.5 * age)
+                        ctx.arc(0, 0, 1.0, 0, math.tau)
+                        ctx.restore()
+                        ctx.set_source_rgba(0.82, 0.78, 0.7, 0.6 * (1 - age))
+                        ctx.fill()
 
 
 def draw_bumpers(ctx, st):
@@ -388,7 +437,7 @@ def draw_bumpers(ctx, st):
 
 
 def crush_amount(L, st):''')
-sub("    draw_ogres(ctx, st)\n    draw_shadow(ctx, L, s)", "    draw_ogres(ctx, st)\n    draw_dominoes(ctx, st, False)\n    draw_bumpers(ctx, st)\n    draw_shadow(ctx, L, s)")
+sub("    draw_ogres(ctx, st)\n    draw_shadow(ctx, L, s)", "    if DOMS:\n        draw_roadband(ctx, camx - half, camx + half)\n    draw_ogres(ctx, st)\n    draw_dominoes(ctx, st, False)\n    draw_bumpers(ctx, st)\n    draw_shadow(ctx, L, s)")
 sub("    draw_axes(ctx, st)\n    draw_ogre_clubs(ctx, st)", "    draw_axes(ctx, st)\n    draw_pendulums(ctx, st)\n    draw_dominoes(ctx, st, True)\n    draw_ogre_clubs(ctx, st)")
 
 # ------------------------------------------------------------------ 6. audio
@@ -404,18 +453,14 @@ sub('''        sunk_lava = L.get("sunk") is not None and L.get("sunk_kind") == "
                     break
                 gain = float(np.clip(1.1 - abs(float(interp(rec["cx"], t_w)) - pd["x"]) / 16, 0.1, 1.0))
                 place(sfx, synth_whoosh(), st0 + out_time(L, t_w - 0.2), 0.9 * gain)
-        for di3, dm in enumerate(DOMS):                          # LAB: a clack as each tile lands
-            jj = -2
-            while True:
-                t0_ = jj * dm["period"] - dm["phase"]
-                jj += 1
-                if t0_ + dm["stand"] > L["live_end"]:
-                    break
-                for k in range(dm["n"]):
-                    t_l = t0_ + dm["stand"] + k * DOM_DELAY + DOM_FALL
-                    if 0.1 < t_l <= L["live_end"]:
-                        gain = float(np.clip(1.1 - abs(float(interp(rec["cx"], t_l)) - (dm["x0"] + k * DOM_GAP)) / 18, 0.1, 1.0))
-                        place(sfx, synth_impact(0.4 + 0.02 * k, seed=500 + k), st0 + out_time(L, t_l), 0.55 * gain)
+        for di3, tt3 in sorted((L.get("dom_trig") or {}).items()):   # LAB: dominoes: rumble + a clack per tile
+            dm = DOMS[di3]
+            place(sfx, synth_eruption(seed=47 + di3), st0 + out_time(L, tt3), 0.45)
+            for k in range(dm["n"]):
+                t_l = tt3 + k * dm["delay"] + DOM_FALL
+                if 0.1 < t_l <= L["live_end"]:
+                    gain = float(np.clip(1.1 - abs(float(interp(rec["cx"], t_l)) - (dm["x0"] + k * DOM_GAP)) / 18, 0.15, 1.0))
+                    place(sfx, synth_impact(0.45 + 0.02 * k, seed=500 + k), st0 + out_time(L, t_l), 0.6 * gain)
         notes_ = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66]
         for kb, (t_b, bi_, sp_b) in enumerate(L.get("bumps") or []):   # LAB: pinball: a bright note + thunk per bounce
             ob = st0 + out_time(L, t_b)
@@ -423,6 +468,26 @@ sub('''        sunk_lava = L.get("sunk") is not None and L.get("sunk_kind") == "
             place(sfx, synth_impact(0.35, seed=600 + kb), ob, 0.6)
         sunk_lava = L.get("sunk") is not None and L.get("sunk_kind") == "lava"
         met = L.get("content")''')
+
+
+sub("""def shake_offset(L, st):
+    dx = dy = 0.0
+""", """def shake_offset(L, st):
+    dx = dy = 0.0
+    if DOMS and L.get("dom_trig"):                                    # LAB: the road shakes while tiles fall near the car
+        cxr = float(car_state(L, st)["cx"])
+        for di_, tt_ in L["dom_trig"].items():
+            d_ = DOMS[di_]
+            near = sum(1 for k_ in range(d_["n"]) if 0 < st - tt_ - k_ * d_["delay"] < DOM_FALL + 0.2
+                       and abs(d_["x0"] + k_ * DOM_GAP - cxr) < 16)
+            if near and st < L["event"]["t"] + 1.0:
+                dx += 3.2 * min(near, 4) * math.sin(st * 97)
+                dy += 3.2 * min(near, 4) * math.cos(st * 83)
+""")
+sub("""    if any(0 < dx - front < 6.5 for dx in DANGER_X):
+        return "scared\"""", """    if any(0 < dx - front < 6.5 for dx in DANGER_X) or (DOMS and L.get("dom_trig") and st > min(L["dom_trig"].values())
+                                                       and st < L["event"]["t"]):
+        return "scared\"""")
 
 open(DST, "w", encoding="utf-8").write(s)
 print("wrote", DST, len(s.splitlines()), "lines")
