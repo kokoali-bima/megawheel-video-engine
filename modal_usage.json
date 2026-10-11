@@ -3772,6 +3772,26 @@
    "gpu_seconds": 44.2,
    "wall_seconds": 76.2,
    "cost_usd": 0.0113
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DOMINO_V2_S001 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 42.4,
+   "wall_seconds": 70.3,
+   "cost_usd": 0.0108
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_DOMINO_V2_S003 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 77.1,
+   "wall_seconds": 195.2,
+   "cost_usd": 0.0197
   }
  ]
 }
