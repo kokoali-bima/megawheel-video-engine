@@ -5118,6 +5118,41 @@
       "drive_sheet_id": "1MSsRyA9tusS1pNfVW-n5qfIO98IN1R6A",
       "drive_id": "1crkHcT4LKRITAZGGSFO-hE5x_3R3XyKn",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S059.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S023",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 23,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "taxi",
+        "police"
+      ],
+      "track_id": "smash25d_9e643619@sunset-clear-mountains",
+      "arena": "sea",
+      "theme": "sunset-clear-mountains",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p3+wreck",
+        "win",
+        "p2+wreck"
+      ],
+      "duration": 55.38,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s023",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s023/SIM_SMASH25D_V5_S023_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1148idYMN2-HUuBs2ADNhegdNNkdzpJFa",
+      "drive_id": "1uiaPJyxjPTfULguPGw-jrKwwHrpEL11X",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S023.mp4"
     }
   ]
 }
