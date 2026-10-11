@@ -6072,6 +6072,41 @@
       "drive_sheet_id": "1b8wuZtDWpYvB29wLelyOM-ATjn2u5Ecl",
       "drive_id": "1txvzOxp1IFed7QC0WCgnpV0NC6YGXuNl",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S068.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S030",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 30,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "sports",
+        "police"
+      ],
+      "track_id": "smash25d_274b8423@morning-rain-countryside",
+      "arena": "sea",
+      "theme": "morning-rain-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p2+ring",
+        "p3+wreck",
+        "win"
+      ],
+      "duration": 48.81,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s030",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s030/SIM_SMASH25D_V5_S030_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1RDCeh0v2OvQqX6w0DsFccukNgU8H7N6I",
+      "drive_id": "19faGA05ZxEt_bejsy8Ls879iaYJkpVep",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S030.mp4"
     }
   ]
 }
