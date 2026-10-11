@@ -86,7 +86,11 @@ def pick_series(fmt, forced):
         return forced
     import sim_engine as se                                      # SERIES_DEFS / SERIES_WEIGHT live in the engine
     active = registry._active(None)
-    counts = {s: sum(1 for e in active if e.get("series") == s) for s in se.SERIES_DEFS}
+    # rotation by the RECENT window (last 12 CHALLENGE videos), not all-time: a brand-new series must not crowd out the
+    # old circuits for weeks (owner 2026-10-11: dungeon + old circuits must come back)
+    chal = [e for e in active if e.get("series") in se.SERIES_DEFS and e.get("series") != "dungeon"]
+    recent = chal[-12:]
+    counts = {s: sum(1 for e in recent if e.get("series") == s) for s in se.SERIES_DEFS}
     # dungeon is the special 3D (godot3d / Modal) episode, never an automatic 2D pick
     return min((x for x in se.SERIES_DEFS if x != "dungeon"), key=lambda s: counts[s] / se.SERIES_WEIGHT.get(s, 1))
 
