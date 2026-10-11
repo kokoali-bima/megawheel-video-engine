@@ -1,0 +1,245 @@
+{
+  "video_id": "SIM_DUNGEON_V2_S026",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "dungeon",
+  "seed": 26,
+  "fps": 30,
+  "duration": 50.1,
+  "track_id": "dungeon_3ec589ba",
+  "track_params": {
+    "axes": [
+      {
+        "x": 38.41,
+        "period": 3.01,
+        "phase": 1.75
+      },
+      {
+        "x": 86.71,
+        "period": 3.36,
+        "phase": 1.13
+      },
+      {
+        "x": 98.74,
+        "period": 3.28,
+        "phase": 2.94
+      }
+    ],
+    "ogres": [
+      {
+        "x": 52.79,
+        "period": 3.72,
+        "phase": 2.41
+      }
+    ],
+    "pits": [
+      [
+        68.68,
+        76.68,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        63.28,
+        68.68,
+        1.34
+      ]
+    ]
+  },
+  "theme": {
+    "time": "night",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "night-clear-volcano",
+  "voice": "chatterbox:m1",
+  "fingerprint": "dungeon|sports,icecream,bus|dungeon_3ec589ba@night-clear-volcano|chop@obs0+broken,smash@obs1+broken,win",
+  "outcomes": [
+    "chop@obs0+broken",
+    "smash@obs1+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->37.1 m, 3.0->73.8 m, 3.0->122.1 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "5 rintangan [axe, ogre, lava, axe, axe] (37-100 m), finish 110 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "3.3s, 5.0s, 12.0s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [0, 1]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "47.1 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "11.7s, 12.9s, 22.5s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "dungeon|sports,icecream,bus|dungeon_3ec589ba@night-clear-volcano|chop@obs0+broken,smash@obs1+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics",
+  "title": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics #Shorts",
+  "description": "Zippy the sports car, Sprinkles the ice cream truck and Buster the school bus take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "dungeon",
+    "axe",
+    "ogre",
+    "lava",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "3D graphics",
+    "shorts",
+    "MegaWheel Arena",
+    "sports car",
+    "ice cream truck",
+    "school bus"
+  ],
+  "levels": [
+    {
+      "vehicle": "ZIPPY THE SPORTS CAR",
+      "speed": 18.0,
+      "outcome": "chop",
+      "event_t": 3.27,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 11.73,
+      "event_out": 7.43,
+      "x_start": 3.0,
+      "x_end": 37.1,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "SPRINKLES THE ICE CREAM TRUCK",
+      "speed": 12.0,
+      "outcome": "smash",
+      "event_t": 5.03,
+      "obstacle": 1,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 14.73,
+      "duration": 12.87,
+      "event_out": 20.93,
+      "x_start": 3.0,
+      "x_end": 73.8,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "BUSTER THE SCHOOL BUS",
+      "speed": 9.6,
+      "outcome": "win",
+      "event_t": 12.0,
+      "obstacle": 4,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 27.6,
+      "duration": 22.5,
+      "event_out": 41.37,
+      "x_start": 3.0,
+      "x_end": 122.1,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Zippy the sports car! Can Zippy survive the deadly dungeon traps?",
+    "Ready... Go! Level two! Sprinkles the ice cream truck! Yummy! Can Sprinkles make it?",
+    "Ready... Go! Level three! Buster the school bus. Big and heavy... can Buster make it?",
+    "Chop! Zippy got squashed by a giant axe!",
+    "Smash! The ogre sent Sprinkles flying!",
+    "Yes! Buster made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/SIM_DUNGEON_V2_S026.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_dungeon_s026/SIM_DUNGEON_V2_S026_audit.md"
+}
