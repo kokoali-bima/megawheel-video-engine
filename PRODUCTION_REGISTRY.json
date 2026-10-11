@@ -6586,6 +6586,48 @@
       "drive_sheet_id": "1WZm5qOHnhDsq55SDcSKSuACmWAr3cb2A",
       "drive_id": "1sJNODU3GpkD7FgLO29NASmSdp8G2z9Tf",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_PINBALL_V2_S006.mp4"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S070",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 70,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster2",
+        "police",
+        "f1"
+      ],
+      "track_id": "race25d_0fdd3d2b@night-snow-city",
+      "theme": "night-snow-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "p3+oil",
+        "p2+dodge_laser",
+        "p4+ufo",
+        "win"
+      ],
+      "duration": 34.79,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 208.0,
+        "start": 114.9,
+        "finish_gap": 90.5
+      },
+      "structure": "late_pair|laser,oil,ufo",
+      "title_base": "Can Sprinkles Survive the Oil Slick? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s070",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s070/SIM_RACE25D_V4_S070_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "15xCdruSwSebXH-JK5eW8gqNn4r8E4Leh",
+      "drive_id": "1fn5-Ksuxl5CgxIzC5R7bmMe6yCSTOLF5",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S070.mp4"
     }
   ]
 }
