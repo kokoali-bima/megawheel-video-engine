@@ -3802,6 +3802,16 @@
    "gpu_seconds": 55.4,
    "wall_seconds": 83.4,
    "cost_usd": 0.0141
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_GAUNTLET_V2_S001 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 55.1,
+   "wall_seconds": 80.7,
+   "cost_usd": 0.0141
   }
  ]
 }
