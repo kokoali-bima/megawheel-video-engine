@@ -6138,6 +6138,40 @@
       "season": null,
       "upload_date": null,
       "youtube_url": null
+    },
+    {
+      "video_id": "SIM_GAUNTLET_V2_S007",
+      "series": "gauntlet",
+      "engine_version": "v2",
+      "seed": 7,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "f1"
+      ],
+      "track_id": "gauntlet_a29b180e@morning-clear-mountains",
+      "theme": "morning-clear-mountains",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "flip@obs1",
+        "smash@obs2+broken",
+        "win"
+      ],
+      "duration": 54.1,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s007",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s007/SIM_GAUNTLET_V2_S007_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "148byEMLogp10tO1B5h1PgFHk7dFVf_52",
+      "drive_id": "13E1inWiQEcI0PKDAVfSlG2E7q1mPAvbT",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S007.mp4"
     }
   ]
 }
