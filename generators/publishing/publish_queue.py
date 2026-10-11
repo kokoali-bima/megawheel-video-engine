@@ -113,6 +113,16 @@ def plan(start):
     todo.sort(key=lambda e: (PLAN_ORDER[role_of(e.get("series", ""))], e["episode"]))
     now = dt.datetime.now(dt.timezone.utc)
     start_day = start or now.astimezone(NY).date()
+    pinned = {}                                                # owner-chosen date for one episode (e.g. the weekly dungeon)
+    for e in todo:                                             # "pin_slot_et": "2026-11-03T11:00" (America/New_York)
+        role_e = role_of(e.get("series", ""))
+        if e.get("pin_slot_et") and role_e in ("short", "race", "smash"):
+            s_ = dt.datetime.fromisoformat(e["pin_slot_et"]).replace(tzinfo=NY).astimezone(dt.timezone.utc)
+            if s_ > now + dt.timedelta(hours=2) and s_ not in taken and slot_role(s_) == role_e:
+                pinned[e["episode"]] = s_
+                taken.add(s_)
+            else:
+                print(f"[queue] PERINGATAN Ep. {e['episode']}: pin_slot_et {e['pin_slot_et']} tidak bisa dipakai (lewat/bentrok/peran salah)")
     gens = {r: next_slots(start_day, taken, now, SLOT_ROLES_OF[r]) for r in SLOT_ROLES_OF}
     for e in todo:
         if role_of(e.get("series", "")) == "promo":                # fixed extra time, never a regular slot
@@ -124,7 +134,7 @@ def plan(start):
                 print(f"[queue] SKIP Ep. {e['episode']}: waktu trailer {e['publish_at_et']} ET lewat/bentrok")
                 continue
         else:
-            slot = next(gens[role_of(e.get("series", ""))])
+            slot = pinned.get(e["episode"]) or next(gens[role_of(e.get("series", ""))])
         taken.add(slot)
         t = slot.strftime("%Y-%m-%dT%H:%M:%SZ")
         if e["episode"] in old and old[e["episode"]] != t:
