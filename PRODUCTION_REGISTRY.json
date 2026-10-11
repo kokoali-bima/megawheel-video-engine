@@ -5542,6 +5542,105 @@
       "drive_sheet_id": "1xXWOfm308BLIwMPqmunzR_iLqldiX9tg",
       "drive_id": "1LPbcsp447VnMx6ulkuTMkYWu9BujtEtl",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S063.mp4"
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S026",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 26,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bus",
+        "monster2",
+        "police",
+        "taxi"
+      ],
+      "track_id": "smash25d_f1e3b80d@night-clear-countryside",
+      "arena": "mud",
+      "theme": "night-clear-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "win",
+        "p3+ring",
+        "p4+ring",
+        "p2+ring"
+      ],
+      "duration": 49.56,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s026",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s026/SIM_SMASH25D_V5_S026_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S027",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 27,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "taxi",
+        "police"
+      ],
+      "track_id": "smash25d_33adaef9@noon-clear-mountains",
+      "arena": "mud",
+      "theme": "noon-clear-mountains",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p2+ring",
+        "p4+ring",
+        "win",
+        "p3+ring"
+      ],
+      "duration": 45.38,
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s027",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s027/SIM_SMASH25D_V5_S027_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_SMASH25D_V5_S028",
+      "series": "smash25d",
+      "engine_version": "v5",
+      "seed": 28,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "police",
+        "sports"
+      ],
+      "track_id": "smash25d_3d5ccbf2@sunset-clear-countryside",
+      "arena": "mud",
+      "theme": "sunset-clear-countryside",
+      "voice": "chatterbox:mw-announcers-m1f1",
+      "outcomes": [
+        "p4+ring",
+        "p3+ring",
+        "p2+wreck",
+        "win"
+      ],
+      "duration": 51.55,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s028",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_smash25d_v5_s028/SIM_SMASH25D_V5_S028_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "17_oxQh6yCQnSAeXfsgbD_6cu7pddrTdD",
+      "drive_id": "185CwUuyTJWMfYLgoR3Xqnp_LDLqG-D9R",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SMASH25D_V5_S028.mp4"
     }
   ]
 }
