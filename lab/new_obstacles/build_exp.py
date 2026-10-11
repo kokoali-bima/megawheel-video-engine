@@ -38,7 +38,7 @@ sub('''"3D graphics", "shorts", "MegaWheel Arena"]),
                      tags=["cars", "wrecking ball", "pendulum", "car crash", "crash test", "physics simulation",
                            "shorts", "MegaWheel Arena"]),
     "domino": dict(title="CARS VS GIANT DOMINOES!", obst="a wave of giant falling dominoes", max_fail=20.0,
-                   max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.35,
+                   max_win=26.0, win_pool="any", signature="scripted", speed_scale=1.7,
                    fail_lines={"chop": "Crunch! {n} got flattened by the falling dominoes!"},
                    yt_title="Cars VS Giant Falling Dominoes! Who Survives? 🁢",
                    tags=["cars", "dominoes", "domino chain reaction", "car crash", "crash test",
@@ -163,19 +163,19 @@ def make_domino_track(seed):
     spans, obst, danger = [], [], []
 
     def field(n):
-        d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.07, 0.09)), 3),
-                 lead=round(float(r.uniform(6.0, 7.0)), 1))
+        d = dict(x0=round(tb.x + 1.0, 2), n=n, delay=round(float(r.uniform(0.06, 0.075)), 3),
+                 lead=round(float(r.uniform(10.0, 12.0)), 1))
         DOMS.append(d)
         spans.append((d["x0"] + d["lead"] - 1.0, d["x0"] + n * DOM_GAP + DOM_H))
         obst.append((d["x0"] + d["lead"] + 6.0, "dominoes"))
         danger.append(d["x0"] + d["lead"] - 2.0)
         tb.flat(n * DOM_GAP + DOM_H + 4.0)
 
-    field(7)
-    tb.flat(float(r.uniform(7, 9)))
     field(9)
     tb.flat(float(r.uniform(7, 9)))
-    field(8)
+    field(10)
+    tb.flat(float(r.uniform(7, 9)))
+    field(9)
     tb.flat(14.0)
     _lab_finish(tb, "domino", spans, obst, danger, dict(doms=DOMS))
 
