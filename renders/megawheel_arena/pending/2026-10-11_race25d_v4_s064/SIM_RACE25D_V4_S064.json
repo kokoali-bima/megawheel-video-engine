@@ -1,0 +1,106 @@
+{
+  "video_id": "SIM_RACE25D_V4_S064",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "race25d v4",
+  "series": "race25d",
+  "seed": 64,
+  "fps": 30,
+  "duration": 35.79,
+  "params": {
+    "cast": [
+      "icecream",
+      "monster",
+      "police",
+      "sports"
+    ],
+    "lanes": [
+      1,
+      0,
+      3,
+      2
+    ],
+    "hazards": [
+      [
+        "container",
+        3,
+        145.9
+      ],
+      [
+        "meteor",
+        1,
+        191.2
+      ],
+      [
+        "puddle",
+        0,
+        230.6
+      ]
+    ],
+    "finish": 333.8,
+    "plan": {
+      "layout": "gauntlet",
+      "zone": 175.4,
+      "start": 99.7,
+      "finish_gap": 103.2
+    }
+  },
+  "theme": {
+    "time": "noon",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "noon-clear-desert",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p3+meteor",
+    "p2+dodge_puddle",
+    "p4+container",
+    "win"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true,
+    "every hazard that hits is visible on screen (pixel sensor)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Will Siren Make It Past Falling Containers? 🏁",
+  "title": "Will Siren Make It Past Falling Containers? 🏁 #Shorts",
+  "description": "Sprinkles, Rocky, Siren and Zippy race to the finish line! 🏁 Obstacles today: container, meteor, puddle! 💥\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarRace #CartoonCars #Racing #MegaWheelArena",
+  "tags": [
+    "cars",
+    "car race",
+    "racing",
+    "cartoon cars",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "shorts",
+    "MegaWheel Arena",
+    "ice cream truck",
+    "monster truck",
+    "police car",
+    "sports car",
+    "container",
+    "meteor",
+    "puddle"
+  ],
+  "narration": [
+    "Ready... Go!",
+    "Will Siren Make It Past Falling Containers? Sprinkles, Rocky, Siren and Zippy... who will win?",
+    "A container drops from the sky! Siren crashes right into it!",
+    "Nice move! Rocky dodges the puddle!",
+    "Kaboom! A meteor hits Sprinkles!",
+    "Zippy wins the race!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (cairo 2.5D render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064/SIM_RACE25D_V4_S064.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_race25d_v4_s064/preview"
+}
