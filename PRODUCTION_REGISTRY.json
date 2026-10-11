@@ -5907,6 +5907,87 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E074_SIM_GAUNTLET_V2_S005.mp4",
       "approved_date": "2026-10-11",
       "title": "Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥 | Ep. 74 #Shorts"
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S065",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 65,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_2463f6c9@night-clear-desert",
+      "theme": "night-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p2+dodge_oil",
+        "p3+pothole",
+        "win",
+        "p4+ufo"
+      ],
+      "duration": 34.05,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 167.7,
+        "start": 104.7,
+        "finish_gap": 105.3
+      },
+      "structure": "late_pair|oil,pothole,ufo",
+      "title_base": "Can Nitro Survive the UFO? 🏁",
+      "status": "AUDIT_FAILED",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s065",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s065/SIM_RACE25D_V4_S065_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null
+    },
+    {
+      "video_id": "SIM_RACE25D_V4_S066",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 66,
+      "created": "2026-10-11",
+      "render_date": "2026-10-11",
+      "vehicles": [
+        "icecream",
+        "monster",
+        "sports",
+        "f1"
+      ],
+      "track_id": "race25d_35e347ed@sunset-clear-desert",
+      "theme": "sunset-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+container",
+        "p2+dodge_laser",
+        "p3+dragon_ice",
+        "win"
+      ],
+      "duration": 38.69,
+      "plan": {
+        "layout": "late_pair",
+        "zone": 212.6,
+        "start": 114.2,
+        "finish_gap": 100.5
+      },
+      "structure": "late_pair|container,dragon_ice,laser",
+      "title_base": "Can Sprinkles Survive Falling Containers? 🏁",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "folder": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s066",
+      "audit": "renders/megawheel_arena/pending/2026-10-11_race25d_v4_s066/SIM_RACE25D_V4_S066_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1iNxVBzwGDCdB2xtZmglfwbgLtyVJe4hG",
+      "drive_id": "1cpBVYnzYOTVf7gw7QVwN7j3eonhk4cQj",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_RACE25D_V4_S066.mp4"
     }
   ]
 }

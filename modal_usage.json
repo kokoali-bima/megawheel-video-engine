@@ -3882,6 +3882,26 @@
    "gpu_seconds": 49.7,
    "wall_seconds": 80.7,
    "cost_usd": 0.0127
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_RACE25D_V4_S065 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 39.5,
+   "wall_seconds": 63.9,
+   "cost_usd": 0.0101
+  },
+  {
+   "date": "2026-10-11",
+   "note": "narrator SIM_RACE25D_V4_S066 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 54.2,
+   "wall_seconds": 90.7,
+   "cost_usd": 0.0138
   }
  ]
 }

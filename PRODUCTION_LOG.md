@@ -71,3 +71,4 @@
 | 2026-10-11 11:32 | Claude Code Opus | SIM_GAUNTLET_V2_S003 | gauntlet | 3 | Siren → Titan → Tilly | 53.8 s | PASS | produce.py · morning-clear-desert ·  |
 | 2026-10-11 13:59 | Claude Code Opus | SIM_GAUNTLET_V2_S004 | gauntlet | 4 | Siren → Titan → Nitro | 49.3 s | PASS | produce.py · morning-clear-beach ·  |
 | 2026-10-11 14:01 | Claude Code Opus | SIM_GAUNTLET_V2_S005 | gauntlet | 5 | Siren → Titan → Tilly | 51.5 s | PASS | produce.py · noon-clear-city ·  |
+| 2026-10-11 14:14 | Claude Code Opus | SIM_RACE25D_V4_S066 | race25d | 66 | Sprinkles → Rocky → Zippy → Nitro | 38.7 s | PASS | produce.py · sunset-clear-desert · late_pair|container,dragon_ice,laser |
