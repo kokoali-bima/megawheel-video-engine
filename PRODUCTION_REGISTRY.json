@@ -5338,18 +5338,20 @@
         "win"
       ],
       "duration": 51.1,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s001",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s001/SIM_GAUNTLET_V2_S001_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s001",
+      "audit": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s001/SIM_GAUNTLET_V2_S001_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "16vS8J8MT35jjWiuLrSPKOhuOjEcOOAD2",
+      "drive_sheet_id": null,
       "drive_id": "1zL6KJs5Fpd5Bq43rcIr9L4gC3_6Xj4J4",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S001.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_GAUNTLET_V2_S001.mp4",
+      "reject_reason": "producer: far-lane band hid speed bumps/ramps (owner report); re-rendered",
+      "rejected_date": "2026-10-11"
     },
     {
       "video_id": "SIM_RACE25D_V4_S061",
@@ -5805,18 +5807,20 @@
         "win"
       ],
       "duration": 53.8,
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "REJECTED",
       "plan": null,
       "structure": null,
-      "folder": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s003",
-      "audit": "renders/megawheel_arena/pending/2026-10-11_gauntlet_s003/SIM_GAUNTLET_V2_S003_audit.md",
+      "folder": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s003",
+      "audit": "renders/megawheel_arena/rejected/2026-10-11_gauntlet_s003/SIM_GAUNTLET_V2_S003_audit.md",
       "episode": null,
       "season": null,
       "upload_date": null,
       "youtube_url": null,
-      "drive_sheet_id": "19DuXODSeTPVHi4QWxhl_aQV8iSR2R59v",
+      "drive_sheet_id": null,
       "drive_id": "1Z5PIVeln9nbTKCz2TS2KKaOv_g8yXNSw",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_GAUNTLET_V2_S003.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/archive/rejected/SIM_GAUNTLET_V2_S003.mp4",
+      "reject_reason": "producer: far-lane band hid speed bumps/ramps (owner report); re-rendered",
+      "rejected_date": "2026-10-11"
     }
   ]
 }

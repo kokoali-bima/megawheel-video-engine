@@ -1,82 +1,72 @@
 {
-  "video_id": "SIM_GAUNTLET_V2_S001",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "video_id": "SIM_GAUNTLET_V2_S003",
+  "status": "REJECTED",
   "engine": "sim-prototype v2",
   "series": "gauntlet",
-  "seed": 1,
+  "seed": 3,
   "fps": 30,
-  "duration": 51.1,
-  "track_id": "gauntlet_5ed61ba7",
+  "duration": 53.8,
+  "track_id": "gauntlet_1e4e5ac3",
   "track_params": {
     "order": [
-      "pothole",
+      "pendulum",
       "domino",
-      "bumps",
-      "lavajump"
+      "pothole",
+      "bumps"
     ],
-    "pends": [],
+    "pends": [
+      {
+        "x": 41.22,
+        "period": 6.28,
+        "phase": 2.46
+      }
+    ],
     "doms": [
       {
-        "x0": 56.0,
-        "n": 7,
-        "delay": 0.059,
-        "lead": 9.4
+        "x0": 53.57,
+        "n": 8,
+        "delay": 0.058,
+        "lead": 10.0
       }
     ],
     "pits": [
       [
-        35.93,
-        39.73,
-        2.9
-      ],
-      [
-        117.45,
-        125.85,
-        4.5
+        81.17,
+        84.77,
+        3.6
       ]
     ],
     "bumps": [
       [
-        83.3,
-        86.2,
-        0.96
+        101.78,
+        104.9,
+        1.15
       ],
       [
-        92.33,
-        95.8,
-        1.58
+        110.84,
+        114.4,
+        1.7
       ]
     ],
-    "ramps": [
-      [
-        112.45,
-        117.45,
-        1.21
-      ]
-    ],
+    "ramps": [],
     "puddles": [
       [
-        53.2,
-        57.9
+        22.7,
+        27.7
       ]
     ],
-    "muds": [
-      [
-        140.1,
-        143.2
-      ]
-    ]
+    "muds": []
   },
   "theme": {
-    "time": "sunset",
+    "time": "morning",
     "weather": "clear",
-    "location": "beach"
+    "location": "desert"
   },
-  "theme_id": "sunset-clear-beach",
+  "theme_id": "morning-clear-desert",
   "voice": "chatterbox:m1",
-  "fingerprint": "gauntlet|sports,bigrig,f1|gauntlet_5ed61ba7@sunset-clear-beach|flip@obs2,chop@obs1+broken,win",
+  "fingerprint": "gauntlet|police,bigrig,taxi|gauntlet_1e4e5ac3@morning-clear-desert|chop@obs1+broken,chop@obs1+broken,win",
   "outcomes": [
-    "flip@obs2",
+    "chop@obs1+broken",
     "chop@obs1+broken",
     "win"
   ],
@@ -85,14 +75,14 @@
       "id": "forward",
       "desc": "Semua mobil bergerak maju ke kanan (+x)",
       "ok": true,
-      "detail": "3.0->99.5 m, 3.0->79.5 m, 3.0->351.1 m",
+      "detail": "3.0->71.2 m, 3.0->73.9 m, 3.0->192.0 m",
       "hard": true
     },
     {
       "id": "obstacles",
       "desc": "Minimal 2 rintangan di antara start dan finish",
       "ok": true,
-      "detail": "4 rintangan [pit, dominoes, bump, lava] (36-126 m), finish 154 m",
+      "detail": "4 rintangan [pendulum, dominoes, pit, bump] (39-114 m), finish 145 m",
       "hard": true
     },
     {
@@ -113,14 +103,14 @@
       "id": "timing",
       "desc": "Waktu event masuk akal",
       "ok": true,
-      "detail": "6.8s, 5.9s, 11.0s",
+      "detail": "6.9s, 7.9s, 14.0s",
       "hard": true
     },
     {
       "id": "distinct_fail",
       "desc": "Level gagal di rintangan berbeda",
-      "ok": true,
-      "detail": "rintangan [2, 1]",
+      "ok": false,
+      "detail": "rintangan [1, 1]",
       "hard": false
     },
     {
@@ -134,28 +124,28 @@
       "id": "duration",
       "desc": "Durasi total 40-58 s",
       "ok": true,
-      "detail": "48.1 s",
+      "detail": "50.8 s",
       "hard": true
     },
     {
       "id": "level_len",
       "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
       "ok": true,
-      "detail": "15.8s, 10.3s, 22.0s",
+      "detail": "11.3s, 15.7s, 23.7s",
       "hard": true
     },
     {
       "id": "unique",
       "desc": "Sidik jari belum ada di registry",
       "ok": true,
-      "detail": "gauntlet|sports,bigrig,f1|gauntlet_5ed61ba7@sunset-clear-beach|flip@obs2,chop@obs1+broken,win",
+      "detail": "gauntlet|police,bigrig,taxi|gauntlet_1e4e5ac3@morning-clear-desert|chop@obs1+broken,chop@obs1+broken,win",
       "hard": true
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Sports Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Zippy Make It? 💥",
-  "title": "Sports Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Zippy Make It? 💥 #Shorts",
-  "description": "Zippy the sports car, Titan the big rig and Nitro the race car take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "title_base": "Can Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥",
+  "title": "Can Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥 #Shorts",
+  "description": "Siren the police car, Titan the big rig and Tilly the taxi take on the A GAUNTLET OF GIANT SWINGING BALLS, FALLING DOMINOES AND MORE! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
     "gauntlet",
@@ -167,41 +157,16 @@
     "physics simulation",
     "shorts",
     "MegaWheel Arena",
-    "sports car",
+    "police car",
     "big rig",
-    "race car"
+    "taxi"
   ],
   "levels": [
     {
-      "vehicle": "ZIPPY THE SPORTS CAR",
-      "speed": 20.62,
-      "outcome": "flip",
-      "event_t": 6.83,
-      "obstacle": 2,
-      "broken": false,
-      "bullet_time": true,
-      "replay": true,
-      "bubbles": [
-        "UH OH!",
-        "WHOA!",
-        "OUCH!"
-      ],
-      "start": 3.0,
-      "duration": 15.83,
-      "event_out": 12.8,
-      "x_start": 3.0,
-      "x_end": 99.5,
-      "level_color": [
-        45,
-        183,
-        76
-      ]
-    },
-    {
-      "vehicle": "TITAN THE BIG RIG",
-      "speed": 16.88,
+      "vehicle": "SIREN THE POLICE CAR",
+      "speed": 11.25,
       "outcome": "chop",
-      "event_t": 5.87,
+      "event_t": 6.9,
       "obstacle": 1,
       "broken": true,
       "bullet_time": false,
@@ -211,11 +176,36 @@
         "WHOA!",
         "OUCH!"
       ],
-      "start": 18.83,
-      "duration": 10.3,
-      "event_out": 25.87,
+      "start": 3.0,
+      "duration": 11.33,
+      "event_out": 11.07,
       "x_start": 3.0,
-      "x_end": 79.5,
+      "x_end": 71.2,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 9.0,
+      "outcome": "chop",
+      "event_t": 7.9,
+      "obstacle": 1,
+      "broken": true,
+      "bullet_time": false,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 14.33,
+      "duration": 15.73,
+      "event_out": 23.4,
+      "x_start": 3.0,
+      "x_end": 73.9,
       "level_color": [
         255,
         132,
@@ -223,24 +213,24 @@
       ]
     },
     {
-      "vehicle": "NITRO THE RACE CAR",
-      "speed": 32.17,
+      "vehicle": "TILLY THE TAXI",
+      "speed": 18.75,
       "outcome": "win",
-      "event_t": 10.97,
+      "event_t": 13.97,
       "obstacle": 3,
       "broken": false,
-      "bullet_time": true,
+      "bullet_time": false,
       "replay": false,
       "bubbles": [
         "UH OH!",
         "WHOA!",
         "YEAH!"
       ],
-      "start": 29.13,
-      "duration": 21.97,
-      "event_out": 42.73,
+      "start": 30.07,
+      "duration": 23.73,
+      "event_out": 45.2,
       "x_start": 3.0,
-      "x_end": 351.1,
+      "x_end": 192.0,
       "level_color": [
         153,
         76,
@@ -249,18 +239,19 @@
     }
   ],
   "narration": [
-    "Ready... Go! Level one! Zippy the sports car! Can Zippy survive the a gauntlet of giant swinging balls, falling dominoes and more?",
+    "Ready... Go! Level one! Siren the police car is on patrol! Can Siren make it past the a gauntlet of giant swinging balls, falling dominoes and more?",
     "Ready... Go! Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
-    "Ready... Go! Level three! Nitro the race car! Super fast... but can Nitro handle the a gauntlet of giant swinging balls, falling dominoes and more?",
-    "Whoa! Zippy flipped right over!",
+    "Ready... Go! Level three! Tilly the taxi! Hop in... can Tilly get past the a gauntlet of giant swinging balls, falling dominoes and more?",
+    "Crunch! Siren got flattened by the falling dominoes!",
     "Crunch! Titan got flattened by the falling dominoes!",
-    "Yes! Nitro made it! We have a winner!",
+    "Yes! Tilly made it! We have a winner!",
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s001/SIM_GAUNTLET_V2_S001.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s001/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s003/SIM_GAUNTLET_V2_S003.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s003/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-11_gauntlet_s001/SIM_GAUNTLET_V2_S001_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-10-11_gauntlet_s003/SIM_GAUNTLET_V2_S003_audit.md",
+  "reject_reason": "producer: far-lane band hid speed bumps/ramps (owner report); re-rendered"
 }
