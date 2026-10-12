@@ -538,37 +538,52 @@
   {
    "episode": 54,
    "video_id": "SIM_RACE25D_V4_S051",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-17T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Siren Survive Falling Containers? \ud83c\udfc1 | Ep. 54 #Shorts",
+   "upload_started": "2026-10-12T05:00:06.523001+00:00",
+   "url": "https://www.youtube.com/shorts/puxQcUZoOdc"
   },
   {
    "episode": 58,
    "video_id": "SIM_SMASH25D_V5_S017",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-17T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Rocky, Nitro or Zippy? Last Car Standing! \ud83d\udca5 | Ep. 58 #Shorts",
+   "upload_started": "2026-10-12T05:00:14.797607+00:00",
+   "url": "https://www.youtube.com/shorts/0UhR4k8z9mk"
   },
   {
    "episode": 50,
    "video_id": "SIM_POTHOLES_V2_S028",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-18T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs Giant Potholes! Can Nitro Make It? \ud83d\ude97\ud83d\udca5 | Ep. 50 #Shorts",
+   "upload_started": "2026-10-12T05:00:21.249422+00:00",
+   "url": "https://www.youtube.com/shorts/8_uVESE2cr4"
   },
   {
    "episode": 55,
    "video_id": "SIM_RACE25D_V4_S055",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-18T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Siren vs Falling Containers! Who Wins the Race? \ud83c\udfc1 | Ep. 55 #Shorts",
+   "upload_started": "2026-10-12T05:00:27.751285+00:00",
+   "url": "https://www.youtube.com/shorts/NaQ5MVI0etc"
   },
   {
    "episode": 59,
    "video_id": "SIM_SMASH25D_V5_S018",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-18T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Nitro Beat a Big Rig? \ud83d\udca5 | Ep. 59 #Shorts",
+   "upload_started": "2026-10-12T05:00:34.217644+00:00",
+   "url": "https://www.youtube.com/shorts/2mJ7FCqvYTg"
   },
   {
    "episode": 51,

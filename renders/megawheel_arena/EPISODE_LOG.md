@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-11 12:23). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-12 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -56,16 +56,16 @@
 | 47 | S02 | smash25d | Buster, Grizzly, Tilly, Siren | 2026-10-03 | 2026-10-03 | 2026-10-11 | UPLOADED_SCHEDULED 2026-10-15T23:00:00Z | https://www.youtube.com/shorts/eWqvYeCTWqk |  |  |  |  |
 | 48 | S02 | potholes | Siren, Hydro, Zippy | 2026-10-04 | 2026-10-04 | 2026-10-11 | UPLOADED_SCHEDULED 2026-10-17T15:00:00Z | https://www.youtube.com/shorts/c8Y6AecAUCI |  |  |  |  |
 | 49 | S02 | race25d | Titan, Rocky, Tilly, Siren | 2026-10-04 | 2026-10-04 | 2026-10-10 | UPLOADED_SCHEDULED 2026-10-15T19:00:00Z | https://www.youtube.com/shorts/6HkCyVZqXrc |  |  |  |  |
-| 50 | S02 | potholes | Nitro, Hydro, Sprinkles | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
+| 50 | S02 | potholes | Nitro, Hydro, Sprinkles | 2026-10-04 | 2026-10-04 | 2026-10-12 | UPLOADED_SCHEDULED 2026-10-18T15:00:00Z | https://www.youtube.com/shorts/8_uVESE2cr4 |  |  |  |  |
 | 51 | S02 | potholes | Siren, Titan, Nitro | 2026-10-04 | 2026-10-04 |  | APPROVED |  |  |  |  |  |
 | 52 | S02 | dungeon | Tilly, Titan, Siren | 2026-10-07 | 2026-10-07 |  | APPROVED |  |  |  |  |  |
 | 53 | S02 | race25d | Hydro, Grizzly, Siren, Zippy | 2026-10-10 | 2026-10-10 | 2026-10-11 | UPLOADED_SCHEDULED 2026-10-16T19:00:00Z | https://www.youtube.com/shorts/jbr_oreCvfY |  |  |  |  |
-| 54 | S02 | race25d | Hydro, Rocky, Siren, Tilly | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
-| 55 | S02 | race25d | Sprinkles, Grizzly, Zippy, Siren | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 54 | S02 | race25d | Hydro, Rocky, Siren, Tilly | 2026-10-10 | 2026-10-10 | 2026-10-12 | UPLOADED_SCHEDULED 2026-10-17T19:00:00Z | https://www.youtube.com/shorts/puxQcUZoOdc |  |  |  |  |
+| 55 | S02 | race25d | Sprinkles, Grizzly, Zippy, Siren | 2026-10-10 | 2026-10-10 | 2026-10-12 | UPLOADED_SCHEDULED 2026-10-18T19:00:00Z | https://www.youtube.com/shorts/NaQ5MVI0etc |  |  |  |  |
 | 56 | S02 | race25d | Hydro, Grizzly, Tilly, Zippy | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 57 | S02 | smash25d | Titan, Grizzly, Nitro, Tilly | 2026-10-10 | 2026-10-10 | 2026-10-11 | UPLOADED_SCHEDULED 2026-10-16T23:00:00Z | https://www.youtube.com/shorts/6eLjmpy02NM |  |  |  |  |
-| 58 | S02 | smash25d | Sprinkles, Rocky, Nitro, Zippy | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
-| 59 | S02 | smash25d | Titan, Rocky, Tilly, Nitro | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
+| 58 | S02 | smash25d | Sprinkles, Rocky, Nitro, Zippy | 2026-10-10 | 2026-10-10 | 2026-10-12 | UPLOADED_SCHEDULED 2026-10-17T23:00:00Z | https://www.youtube.com/shorts/0UhR4k8z9mk |  |  |  |  |
+| 59 | S02 | smash25d | Titan, Rocky, Tilly, Nitro | 2026-10-10 | 2026-10-10 | 2026-10-12 | UPLOADED_SCHEDULED 2026-10-18T23:00:00Z | https://www.youtube.com/shorts/2mJ7FCqvYTg |  |  |  |  |
 | 60 | S02 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-10-08 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 61 | S03 | race25d | Titan, Rocky, Nitro, Siren | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
 | 62 | S03 | smash25d | Sprinkles, Grizzly, Nitro, Zippy | 2026-10-10 | 2026-10-10 |  | APPROVED |  |  |  |  |  |
