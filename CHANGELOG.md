@@ -3,12 +3,66 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-10-11
+## 2026-10-12
 **📤 Upload / antrean / Drive**
+- `2ccf47c` publish: daily run 2026-10-12 [cron daily_publish.sh]
+
+## 2026-10-11
+**🔧 Lain-lain**
+- `1656cd9` Playlists: 4 MegaWheel playlists by type, auto-add after upload (separate token, best effort)
+- `931c27b` approve: 4 dungeon 3D (weekly, pinned Nov 3/10/17/24 11:00 ET) [Claude Sonnet 5.5]
+- `3d1e8ed` approve: stock 31 Oct final (owner: Approved) [Claude Sonnet 5.5]
+- `6fee802` engine: even CHALLENGE series weights (potholes 1.5, gauntlet 1.2, rest 1) for a balanced November
+- `f7503c5` approve: batch 3 (owner: approved) [Claude Sonnet 5.5]
+- `639666f` reject: RACE S064 (car hidden by container) [Claude Sonnet 5.5]
+- `0957820` approve: batch 2 minus S064 (owner: tinggal satu yang belum) [Claude Sonnet 5.5]
+- `195d331` reject: gauntlet S001,S003 (band hid bumps) [Claude Sonnet 5.5]
+- `191265b` engine: far-lane road band behind bumps/ramps (was hiding speed bumps), masked over pits
+- `57978f0` reject: SIM_GAUNTLET_V2_S002 (cast repeat) [Claude Sonnet 5.5]
+- `e842c21` engine: domino series - failing roles from the slower classes so the fastest class can win (cast rotation)
+- `acaccbe` engine: gauntlet series (domino+pendulum combos + older obstacles), puddles/mud variety on new tracks
+- `5831470` approve: batch 1 stock to 31 Oct (owner: semuanya approved) [Claude Sonnet 5.5]
+- `60d6e7a` engine: domino champion must be the fastest class (speed-order rule + wave outrun)
+- `10c9898` engine: domino track longer lead-in/gaps (videos too short for the 44-57 s pacing window)
+- `4e1e8ee` engine: Edge-TTS failure -> silent placeholder when voice C is on (line already queued for Modal)
+- `9d64374` engine: CHALLENGE series pendulum/domino/pinball (owner-approved samples) + class speed order (F1 fastest) + weights 0.6 each
+- `c8da901` AGENT_UPLOAD_SCHEDULER: monitoring bot reads PUBLISH_ALERT.txt + PUBLISH_STATUS.json (facts, not log guesses); fix cron line to the real 05:00 UTC
+- `fa20ac8` ERROR_LOG: upload hardening lessons (7-day OAuth tokens, abort-before-push, Drive spam, poison items, alerts)
+- `809e1f0` preflight: a failed check (network) is no proof - never marks the token proven or clears alerts
+- `e584c88` alert: sticky open problems survive a clean run (status file never hides a live problem)
+**📤 Upload / antrean / Drive**
+- `79a7f28` publish_queue: optional pin_slot_et per episode (weekly dungeon on a chosen date)
 - `a2052c8` publish: daily run 2026-10-11 [cron daily_publish.sh]
 - `c137d9a` publish: PUBLISH_STATUS.json (stock per role, last run, next uploads) for the monitoring agent; keep the original 'selesai' marker line
 - `4c3057d` publish: harden auto-upload (pre-flight token check, retries, alerts, token-age watch, quiet Drive, UPLOAD_FAILED parking)
 **🕳️ CHALLENGE (sim_engine)**
+- `d6a9b58` produce: SIM_DUNGEON_V2_S032 (pending review) [Claude Code Opus]
+- `0c2f872` produce: SIM_DUNGEON_V2_S031 (pending review) [Claude Code Opus]
+- `8ffc399` produce: SIM_DUNGEON_V2_S029 (pending review) [Claude Code Opus]
+- `5207c29` produce: SIM_DUNGEON_V2_S026 (pending review) [Claude Code Opus]
+- `9f0b17e` produce: dungeon allowed with --series dungeon (weekly 3D special), still never auto-picked
+- `35292a0` produce: SIM_BUMPS_V2_S022 (pending review) [Claude Code Opus]
+- `26492ad` produce: SIM_POTHOLES_V2_S033 (pending review) [Claude Code Opus]
+- `39ba22e` produce: CHALLENGE series rotation uses the last 12 videos (old circuits return, new series do not crowd them out)
+- `34801cf` produce: SIM_SMASH25D_V5_S037 (pending review) [Claude Code Opus]
+- `66ac39b` produce: SIM_RACE25D_V4_S070 (pending review) [Claude Code Opus]
+- `fc2b17a` produce: SIM_PINBALL_V2_S006 (pending review) [Claude Code Opus]
+- `67092fe` produce: SIM_SMASH25D_V5_S036 (pending review) [Claude Code Opus]
+- `651eb3a` produce: SIM_RACE25D_V4_S069 (pending review) [Claude Code Opus]
+- `f1b5ab5` produce: SIM_DOMINO_V2_S003 (pending review) [Claude Code Opus]
+- `3b54095` produce: SIM_PENDULUM_V2_S004 (pending review) [Claude Code Opus]
+- `d44e45f` produce: SIM_SMASH25D_V5_S034 (pending review) [Claude Code Opus]
+- `ee16bbb` produce: SIM_LAVA_POTHOLES_V2_S029 (pending review) [Claude Code Opus]
+- `85265b6` produce: SIM_SMASH25D_V5_S032 (pending review) [Claude Code Opus]
+- `3c960e8` produce: SIM_GAUNTLET_V2_S007 (pending review) [Claude Code Opus]
+- `3b0317b` produce: dungeon S021 AUDIT_FAILED record [Claude Sonnet 5.5]
+- `be916c3` produce: auto CHALLENGE pick never chooses the 3D dungeon series
+- `532be45` produce: SIM_SMASH25D_V5_S030 (pending review) [Claude Code Opus]
+- `2273707` produce: SIM_RACE25D_V4_S068 (pending review) [Claude Code Opus]
+- `577e6ee` produce: SIM_RACE25D_V4_S067 (pending review) [Claude Code Opus]
+- `cea5235` produce: SIM_RACE25D_V4_S066 (pending review) [Claude Code Opus]
+- `592ebcd` produce: SIM_GAUNTLET_V2_S005 (pending review) [Claude Code Opus]
+- `bf7fc65` produce: SIM_GAUNTLET_V2_S004 (pending review) [Claude Code Opus]
 - `d3014f8` produce: SIM_GAUNTLET_V2_S003 (pending review) [Claude Code Opus]
 - `c766a0d` produce: SIM_SMASH25D_V5_S029 (pending review) [Claude Code Opus]
 - `0d135d0` produce: SIM_RACE25D_V4_S064 (pending review) [Claude Code Opus]
@@ -30,19 +84,8 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `a51e7df` produce: SIM_PENDULUM_V2_S002 (pending review) [Claude Code Opus]
 - `a6ad6bb` produce: SIM_PENDULUM_V2_S001 AUDIT_FAILED (variation gate) [Claude Sonnet 5.5]
 - `30e8d23` produce: new CHALLENGE series are plan-less formats (variation gate)
-**🔧 Lain-lain**
-- `57978f0` reject: SIM_GAUNTLET_V2_S002 (cast repeat) [Claude Sonnet 5.5]
-- `e842c21` engine: domino series - failing roles from the slower classes so the fastest class can win (cast rotation)
-- `acaccbe` engine: gauntlet series (domino+pendulum combos + older obstacles), puddles/mud variety on new tracks
-- `5831470` approve: batch 1 stock to 31 Oct (owner: semuanya approved) [Claude Sonnet 5.5]
-- `60d6e7a` engine: domino champion must be the fastest class (speed-order rule + wave outrun)
-- `10c9898` engine: domino track longer lead-in/gaps (videos too short for the 44-57 s pacing window)
-- `4e1e8ee` engine: Edge-TTS failure -> silent placeholder when voice C is on (line already queued for Modal)
-- `9d64374` engine: CHALLENGE series pendulum/domino/pinball (owner-approved samples) + class speed order (F1 fastest) + weights 0.6 each
-- `c8da901` AGENT_UPLOAD_SCHEDULER: monitoring bot reads PUBLISH_ALERT.txt + PUBLISH_STATUS.json (facts, not log guesses); fix cron line to the real 05:00 UTC
-- `fa20ac8` ERROR_LOG: upload hardening lessons (7-day OAuth tokens, abort-before-push, Drive spam, poison items, alerts)
-- `809e1f0` preflight: a failed check (network) is no proof - never marks the token proven or clears alerts
-- `e584c88` alert: sticky open problems survive a clean run (status file never hides a live problem)
+**🏁 RACE (race25d)**
+- `153b0d4` race25d: car drives around wall/container on the near side (was hidden behind the box)
 **🧪 Lab (eksperimen)**
 - `964ad3e` lab: tune_prod helper [Claude Sonnet 5.5]
 - `48d1f1f` lab: class speed order constraint (F1 fastest) [Claude Sonnet 5.5]
@@ -60,8 +103,10 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `d641c86` lab: tune pendulum/pinball, tts placeholder, tune_exp harness
 - `7472495` lab: run_exp adds voice path
 - `0f5a272` lab: new_obstacles (pendulum/domino/pinball) experimental builder + runner
-<details><summary>otomatis VM (2)</summary>
+<details><summary>otomatis VM (4)</summary>
 
+- `1d55fce` records: dungeon 3D conversions + Modal ledger [Claude Sonnet 5.5]
+- `577f817` analytics: daily report 2026-10-11
 - `cfb59db` records: modal usage (auto)
 - `29531cd` records: modal usage (auto)
 
