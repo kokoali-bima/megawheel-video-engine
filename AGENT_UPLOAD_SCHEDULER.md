@@ -78,6 +78,14 @@ karena baris error Drive). Urutan baca di VM 99.3, folder `/root/video-engine`:
 `last_run.finished_utc` bukan hari ini, atau `stock.all_ok=false` (tulis itu sebagai "perlu produksi video", bukan "run gagal").
 Baris `[drive] ...` di log bukan kegagalan upload: Drive hanya arsip (lihat `open_issues`).
 
+## 1c. Playlist otomatis (ditambahkan 2026-10-12)
+- 4 playlist publik di channel: **MegaWheel Challenges** (seri CHALLENGE), **MegaWheel Races** (race25d), **MegaWheel Smash Arena** (smash25d), **MegaWheel Stories** (story15 + trailer). ID tersimpan di `credentials/playlists.json`.
+- `publish_queue.py upload` memanggil `playlists.add_for_episode()` setelah setiap upload berhasil (best effort: error hanya dicetak, upload tidak pernah terhenti). Token TERPISAH `credentials/youtube_playlist_token.json` (scope `youtube`); token upload tidak diubah.
+- Alat: `generators/publishing/playlists.py auth-url|auth-finish|ensure|backfill [--dry-run]|add EPISODE`. Backfill awal 55 video (21/15/15/4) sudah dijalankan 2026-10-12. Jika token playlist mati, upload tetap jalan; jalankan `backfill` setelah otorisasi ulang.
+
+## 1d. Analitik (28 hari sampai 11 Okt 2026)
+9.407 views, +37 subs. CHALLENGE rata-rata 427 views (terbaik: potholes/speed bumps/splash zone), RACE 150, SMASH 111, STORY 40 (film panjang 61 views, 14 % ditonton). Konversi subs ~0,4 %. Laporan: `yt_analytics.py report --days 28` -> `renders/megawheel_arena/ANALYTICS_REPORT.md`.
+
 ## 2. Latar singkat untuk agent
 
 | Hal | Nilai |
