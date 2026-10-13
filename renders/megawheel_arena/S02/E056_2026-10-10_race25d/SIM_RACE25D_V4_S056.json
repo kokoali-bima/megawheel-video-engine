@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_RACE25D_V4_S056",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-19T19:00:00Z",
   "engine": "race25d v4",
   "series": "race25d",
   "seed": 56,
@@ -105,5 +105,7 @@
   "preview_dir": "/root/video-engine/renders/megawheel_arena/S02/E056_2026-10-10_race25d/preview",
   "episode": 56,
   "season": 2,
-  "approved_date": "2026-10-10"
+  "approved_date": "2026-10-10",
+  "youtube_url": "https://www.youtube.com/shorts/Wls3wOxIct0",
+  "upload_date": "2026-10-13"
 }

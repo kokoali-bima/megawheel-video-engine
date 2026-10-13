@@ -588,37 +588,52 @@
   {
    "episode": 51,
    "video_id": "SIM_POTHOLES_V2_S029",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-19T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Siren the Police Car Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 | Ep. 51 #Shorts",
+   "upload_started": "2026-10-13T05:00:06.139583+00:00",
+   "url": "https://www.youtube.com/shorts/JYouVAHqUeA"
   },
   {
    "episode": 56,
    "video_id": "SIM_RACE25D_V4_S056",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-19T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Zippy vs the Oil Slick! Who Wins the Race? \ud83c\udfc1 | Ep. 56 #Shorts",
+   "upload_started": "2026-10-13T05:00:14.057685+00:00",
+   "url": "https://www.youtube.com/shorts/Wls3wOxIct0"
   },
   {
    "episode": 62,
    "video_id": "SIM_SMASH25D_V5_S020",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-19T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Grizzly, Nitro or Zippy? Last Car Standing! \ud83d\udca5 | Ep. 62 #Shorts",
+   "upload_started": "2026-10-13T05:00:22.107566+00:00",
+   "url": "https://www.youtube.com/shorts/lym-XWogLPk"
   },
   {
    "episode": 52,
    "video_id": "SIM_DUNGEON_V2_S015",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-20T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Tilly the Taxi Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 52 #Shorts",
+   "upload_started": "2026-10-13T05:00:30.503611+00:00",
+   "url": "https://www.youtube.com/shorts/DERf3rVbKd0"
   },
   {
    "episode": 60,
    "video_id": "SIM_RACE25D_V4_S047",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-20T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Zippy Survive Falling Containers? \ud83c\udfc1 | Ep. 60 #Shorts",
+   "upload_started": "2026-10-13T05:00:37.203978+00:00",
+   "url": "https://www.youtube.com/shorts/YsTdVDb4fWc"
   },
   {
    "episode": 63,
