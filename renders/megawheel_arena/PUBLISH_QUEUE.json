@@ -638,37 +638,52 @@
   {
    "episode": 63,
    "video_id": "SIM_SMASH25D_V5_S021",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-20T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Nitro Beat a School Bus? \ud83d\udca5 | Ep. 63 #Shorts",
+   "upload_started": "2026-10-14T05:00:07.849225+00:00",
+   "url": "https://www.youtube.com/shorts/vZAkrIzQ7zQ"
   },
   {
    "episode": 64,
    "video_id": "SIM_PENDULUM_V2_S002",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-21T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? \ud83d\udca5 | Ep. 64 #Shorts",
+   "upload_started": "2026-10-14T05:00:19.626242+00:00",
+   "url": "https://www.youtube.com/shorts/YTTl_1sokjE"
   },
   {
    "episode": 61,
    "video_id": "SIM_RACE25D_V4_S057",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-21T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Siren vs the Giant Hammer! Who Wins the Race? \ud83c\udfc1 | Ep. 61 #Shorts",
+   "upload_started": "2026-10-14T05:00:25.302663+00:00",
+   "url": "https://www.youtube.com/shorts/qs4m4wnQx2s"
   },
   {
    "episode": 70,
    "video_id": "SIM_SMASH25D_V5_S022",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-21T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Ice Cream Truck vs Monster Truck vs Police Car vs Sports Car! Who Survives? \ud83d\udca5 | Ep. 70 #Shorts",
+   "upload_started": "2026-10-14T05:00:31.992566+00:00",
+   "url": "https://www.youtube.com/shorts/YOg4cwmPHdw"
   },
   {
    "episode": 65,
    "video_id": "SIM_DOMINO_V2_S001",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-22T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs A Wave Of Giant Falling Dominoes! Can Tilly Make It? \ud83c\udc62 | Ep. 65 #Shorts",
+   "upload_started": "2026-10-14T05:00:39.554140+00:00",
+   "url": "https://www.youtube.com/shorts/mVQhUTvk9ZI"
   },
   {
    "episode": 67,

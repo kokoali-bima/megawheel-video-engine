@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_PENDULUM_V2_S002",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-21T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "pendulum",
   "seed": 2,
@@ -231,5 +231,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E064_2026-10-11_pendulum/SIM_PENDULUM_V2_S002_audit.md",
   "episode": 64,
   "season": 3,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/YTTl_1sokjE",
+  "upload_date": "2026-10-14"
 }
