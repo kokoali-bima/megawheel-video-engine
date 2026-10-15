@@ -688,37 +688,52 @@
   {
    "episode": 67,
    "video_id": "SIM_RACE25D_V4_S058",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-22T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Tilly Survive Falling Containers? \ud83c\udfc1 | Ep. 67 #Shorts",
+   "upload_started": "2026-10-15T05:00:07.189726+00:00",
+   "url": "https://www.youtube.com/shorts/Guo_ikHKcMk"
   },
   {
    "episode": 71,
    "video_id": "SIM_SMASH25D_V5_S023",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-22T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Rocky, Tilly or Siren? Last Car Standing! \ud83d\udca5 | Ep. 71 #Shorts",
+   "upload_started": "2026-10-15T05:00:17.047279+00:00",
+   "url": "https://www.youtube.com/shorts/diUdJsm2_SM"
   },
   {
    "episode": 66,
    "video_id": "SIM_PINBALL_V2_S004",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-23T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? \ud83d\udd34 | Ep. 66 #Shorts",
+   "upload_started": "2026-10-15T05:00:23.634081+00:00",
+   "url": "https://www.youtube.com/shorts/qoeUhMg2-7Q"
   },
   {
    "episode": 68,
    "video_id": "SIM_RACE25D_V4_S059",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-23T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Grizzly Survive the Giant Hammer? \ud83c\udfc1 | Ep. 68 #Shorts",
+   "upload_started": "2026-10-15T05:00:31.121695+00:00",
+   "url": "https://www.youtube.com/shorts/_BkZRCpEhPg"
   },
   {
    "episode": 72,
    "video_id": "SIM_SMASH25D_V5_S024",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-23T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Zippy Beat a Fire Truck? \ud83d\udca5 | Ep. 72 #Shorts",
+   "upload_started": "2026-10-15T05:00:37.849947+00:00",
+   "url": "https://www.youtube.com/shorts/ygW5VWZpx1c"
   },
   {
    "episode": 73,
