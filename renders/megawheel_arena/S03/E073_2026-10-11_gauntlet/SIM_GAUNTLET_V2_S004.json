@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_GAUNTLET_V2_S004",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-24T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "gauntlet",
   "seed": 4,
@@ -255,5 +255,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E073_2026-10-11_gauntlet/SIM_GAUNTLET_V2_S004_audit.md",
   "episode": 73,
   "season": 3,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/VFZjvEaUpsc",
+  "upload_date": "2026-10-16"
 }

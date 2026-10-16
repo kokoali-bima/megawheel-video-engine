@@ -738,37 +738,52 @@
   {
    "episode": 73,
    "video_id": "SIM_GAUNTLET_V2_S004",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-24T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Siren Make It? \ud83d\udca5 | Ep. 73 #Shorts",
+   "upload_started": "2026-10-16T05:00:07.386967+00:00",
+   "url": "https://www.youtube.com/shorts/VFZjvEaUpsc"
   },
   {
    "episode": 69,
    "video_id": "SIM_RACE25D_V4_S060",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-24T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Grizzly Survive Falling Containers? \ud83c\udfc1 | Ep. 69 #Shorts",
+   "upload_started": "2026-10-16T05:00:29.638073+00:00",
+   "url": "https://www.youtube.com/shorts/KIZF_hjOXJY"
   },
   {
    "episode": 78,
    "video_id": "SIM_SMASH25D_V5_S025",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-24T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Fire Truck vs Monster Truck vs Sports Car vs Police Car! Who Survives? \ud83d\udca5 | Ep. 78 #Shorts",
+   "upload_started": "2026-10-16T05:00:37.787137+00:00",
+   "url": "https://www.youtube.com/shorts/2FRVVI2q_vM"
   },
   {
    "episode": 74,
    "video_id": "SIM_GAUNTLET_V2_S005",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-25T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? \ud83d\udca5 | Ep. 74 #Shorts",
+   "upload_started": "2026-10-16T05:00:45.700073+00:00",
+   "url": "https://www.youtube.com/shorts/xm-xShnbV_g"
   },
   {
    "episode": 76,
    "video_id": "SIM_RACE25D_V4_S061",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-25T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Siren Survive the Wall? \ud83c\udfc1 | Ep. 76 #Shorts",
+   "upload_started": "2026-10-16T05:00:51.884213+00:00",
+   "url": "https://www.youtube.com/shorts/dpIG3zz0nQs"
   },
   {
    "episode": 79,
