@@ -28,4 +28,18 @@ def probe() -> str:
 
 @app.local_entrypoint()
 def main():
-    print(probe.remote())
+    print(_budget_remote('megawheel', {'label': '/root/video-engine/lab/godot3d_challenge/modal_gpu_probe.py::probe', 'timeout': 300, 'gpu': 'T4'}, probe))
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

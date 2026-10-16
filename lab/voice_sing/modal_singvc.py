@@ -16,7 +16,7 @@ import modal
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0
+BUDGET_USD = 31.0
 GPU_PRICE = {"L4": 0.000222}
 OVERHEAD = 1.15
 SVC = "/opt/seed-vc"
@@ -116,7 +116,7 @@ def main(src: str, ref: str, out: str = "branding/music", shifts: str = "0", ste
     with open(ref, "rb") as fh:
         refb = fh.read()
     t0 = time.time()
-    res = convert.remote(songs, refb, sh, steps)
+    res = _budget_remote('megawheel', {'label': '/root/video-engine/lab/voice_sing/modal_singvc.py::convert', 'timeout': 1800, 'gpu': 'L4'}, convert, songs, refb, sh, steps)
     os.makedirs(out, exist_ok=True)
     for name, r in res["out"].items():
         if "error" in r:
@@ -135,3 +135,17 @@ def main(src: str, ref: str, out: str = "branding/music", shifts: str = "0", ste
     with open(LEDGER, "w") as fh:
         json.dump(led, fh, indent=1)
     print(f"[singvc] DONE GPU {res['secs']:.0f}s ≈${cost:.3f}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

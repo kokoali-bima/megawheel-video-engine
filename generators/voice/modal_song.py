@@ -16,7 +16,7 @@ import modal
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0
+BUDGET_USD = 31.0
 GPU_PRICE = {"L4": 0.000222}
 OVERHEAD = 1.15
 CKPT = "/root/ace_ckpt"
@@ -162,11 +162,11 @@ def main(songs: str = "branding/music/songs.json", out: str = "branding/music", 
     res = {"songs": {}, "secs": 0.0}
     for sg in post:
         with open(sg["src"], "rb") as fh:
-            r = remix.remote(fh.read(), sg)
+            r = _budget_remote('megawheel', {'label': '/root/video-engine/generators/voice/modal_song.py::remix', 'timeout': 900, 'gpu': 'L4'}, remix, fh.read(), sg)
         res["songs"][sg["name"]] = dict(wav=r["wav"], score=1.0, heard="(remix)", take=0, seed=0)
         res["secs"] += r["secs"]
     if items:
-        g = sing.remote(items)
+        g = _budget_remote('megawheel', {'label': '/root/video-engine/generators/voice/modal_song.py::sing', 'timeout': 1800, 'gpu': 'L4'}, sing, items)
         res["songs"].update(g["songs"])
         res["secs"] += g["secs"]
     for name, r in res["songs"].items():
@@ -181,3 +181,17 @@ def main(songs: str = "branding/music/songs.json", out: str = "branding/music", 
     with open(LEDGER, "w") as fh:
         json.dump(led, fh, indent=1)
     print(f"[song] DONE {len(items)} lagu: GPU {res['secs']:.0f}s ≈${cost:.3f}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

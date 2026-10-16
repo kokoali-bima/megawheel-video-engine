@@ -18,7 +18,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 GLB_LOCAL = os.path.join(ROOT, "assets", "kenney_car_kit", "Models", "GLB format")
 SCENE_LOCAL = os.path.join(ROOT, "generators", "blender3d", "bench_scene.py")
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0                       # monthly cap for our own runs (user, 2026-09-30); Modal workspace limit = $30
+BUDGET_USD = 31.0                       # monthly cap for our own runs (user, 2026-09-30); Modal workspace limit = $30
 MAX_FRAMES, MAX_CHUNKS = 1800, 8
 GPU_PRICE = {"T4": 0.000164, "L4": 0.000222, "A10": 0.000306, "L40S": 0.000542}   # $/s (modal.com/pricing)
 OVERHEAD = 1.15                         # CPU + memory of the container on top of the GPU price
@@ -87,7 +87,7 @@ def main(frames: int = 90, chunks: int = 3, engine: str = "CYCLES", samples: int
     per = -(-frames // chunks)
     ranges = [(s, min(frames, s + per - 1), engine, samples, fps) for s in range(1, frames + 1, per)]
     t0 = time.time()
-    results = list(render_chunk.starmap(ranges))
+    results = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/blender3d/modal_render.py::render_chunk', 'timeout': 1800, 'gpu': 'L40S'}, render_chunk, ranges))
     wall = time.time() - t0
     os.makedirs(out, exist_ok=True)
     lst = os.path.join(out, "chunks.txt")
@@ -112,3 +112,17 @@ def main(frames: int = 90, chunks: int = 3, engine: str = "CYCLES", samples: int
         json.dump(led, fh, indent=1)
     print(f"[modal] DONE {frames} frame di {chunks} GPU {gpu}: wall {wall:.0f}s, GPU {gpu_secs:.0f}s, "
           f"≈${cost:.3f} ({gpu_secs / frames:.2f} GPU-s/frame termasuk startup) -> {final}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

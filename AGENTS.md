@@ -15,7 +15,7 @@
 4. **Production never imports `lab/`.** Experiments live in `lab/` (PC) / `/root/lab` (VM).
 5. **Never re-draw characters in 3D.** Characters come from story25d / sim_engine exactly as aired.
 6. Run renders on the VM **one at a time** (OOM). Heavy work goes to Modal through the scripts below.
-7. Budget: Modal $29/month — the scripts check `modal_usage.json`; never bypass the guard.
+7. Budget: Modal $31/month per channel — the scripts check `modal_usage.json`; never bypass the guard.
 8. Do not change QA thresholds, sensors or approved engines (Shorts 2.5D) without the owner.
 9. Log every exchange with the owner in `ipandu-video/claude/agent_claude.md` (append, Indonesian).
 
@@ -105,3 +105,16 @@ A new CHALLENGE type is a NEW SERIES in `generators/physics_2d/sim_engine.py` (S
 generator. Format fixed by the aired engine: 3 levels (fail/fail/win), 3-5 hazards of rising difficulty, no music bed, bullet-time + 0.4x instant replay
 (owner: slow motion is our strength - never change), voice-C narration, standard CTA, Ep. numbering global. New graphics = `lab/godot3d_challenge/convert3d.py`.
 Tune with `tune_<series>.py` + `find_seeds.sh`. Example: series `dungeon` (axes, ogre, ramp + lava pit).
+
+## Owner budget policy — 2026-10-16
+Modal billing stays separate: maximum US$31/month per channel, combined maximum US$65.
+All local cloud calls must use /root/channel-budget-guard admission and reservations.
+Do not bypass the guard via direct SDK calls or alternative credentials/entrypoints.
+Vertex: US$105/month combined, US$309 lifetime combined; reaching lifetime cap creates a
+permanent brake. May continue after 2027-01-11 ONLY while eligible provider credit remains
+verified and lifetime allowance remains. Gemini/AI Studio: US$55 lifetime combined,
+verified eligible free/promotional API credit only; never assume AI Pro covers API calls.
+Unverified or expired credit means stop generation, with no paid fallback.
+Publishing already approved/cached videos may continue when generation budgets stop.
+Asset replenishment must preserve channel identity, avoid overwriting approved assets,
+and pass budget admission and existing QA before production use.

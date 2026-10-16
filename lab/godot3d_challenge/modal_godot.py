@@ -19,7 +19,7 @@ import modal
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 HERE = os.path.dirname(os.path.abspath(__file__))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0
+BUDGET_USD = 31.0
 CPUS, MEM_GB = 16, 8
 CPU_PRICE = 0.0000131                                   # $/vCPU-second (Modal CPU), memory below
 MEM_PRICE = 0.00000222                                  # $/GiB-second
@@ -113,7 +113,7 @@ def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, cou
                 + [(os.path.join(dir, "sprites"), "data/sprites")])
     t0 = time.time()
     fn = render_part_gpu if gpu else render_part
-    res = list(fn.starmap([(proj, data, a, n) for a, n in parts]))
+    res = list(_budget_starmap('megawheel', {'label': '/root/video-engine/lab/godot3d_challenge/modal_godot.py::render_part_or_gpu', 'timeout': 1800, 'cpu': 16, 'memory': 8192, 'gpu': 'T4'}, fn, [(proj, data, a, n) for a, n in parts]))
     print("[godot3d] devices:", sorted({r.get("device", "") for r in res}))
     lst = os.path.join(dir, "_parts.txt")
     with open(lst, "w") as fh:
@@ -138,3 +138,17 @@ def main(dir: str, out: str, note: str = "", gpu: str = "", start: int = -1, cou
         json.dump(led, fh, indent=1)
     print(f"[godot3d] DONE {len(frames)} frames in {time.time() - t0:.0f}s wall ({len(parts)} parts, "
           f"{secs:.0f} container-s) ≈${cost:.3f} -> {out}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

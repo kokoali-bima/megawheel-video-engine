@@ -22,7 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 REMOTE = "/root/video-engine"
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0
+BUDGET_USD = 31.0
 CPU_PRICE, MEM_PRICE, T4_PRICE = 0.0000131, 0.00000222, 0.000164     # $/vCPU-s, $/GiB-s, $/GPU-s
 OVERHEAD = 1.15
 GODOT_URL = "https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip"
@@ -196,16 +196,16 @@ def smoke(episode: str, scenes: str, n: int = 8, out: str = "work/story3d/smoke"
     nums = [int(x) for x in scenes.split(",") if x]
     job = f"{episode}_smoke{int(time.time())}"
     t0 = time.time()
-    ov = list(overlay.starmap([(job, episode, k, aspect) for k in nums]))
+    ov = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::overlay', 'timeout': 2400, 'cpu': 8, 'memory': 8192}, overlay, [(job, episode, k, aspect) for k in nums]))
     cpu_s = sum(r["secs"] * 8 for r in ov)
     for r in ov:
         print(f"[smoke] overlay s{r['num']:02d}: {'OK' if r['ok'] else 'GAGAL'} {r['frames']} frames {r['secs']:.0f}s")
         if not r["ok"]:
             print(r["log"])
     good = [r["num"] for r in ov if r["ok"]]
-    picks = list(smoke_pick.starmap([(job, k) for k in good]))
+    picks = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::smoke_pick', 'timeout': 600, 'cpu': 2, 'memory': 4096}, smoke_pick, [(job, k) for k in good]))
     jobs = [(job, p["num"], st, n) for p in picks for st in p["starts"]]
-    wr = list(world_smoke.starmap(jobs))
+    wr = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::world_smoke', 'timeout': 900, 'cpu': 4, 'memory': 8192, 'gpu': 'T4'}, world_smoke, jobs))
     os.makedirs(out, exist_ok=True)
     gpu_s = 0.0
     for r in wr:
@@ -238,7 +238,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
     job = f"{episode}_{int(time.time())}"
     t0 = time.time()
     cpu_s = gpu_s = 0.0
-    ov = list(overlay.starmap([(job, episode, n, aspect) for n in nums]))
+    ov = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::overlay', 'timeout': 2400, 'cpu': 8, 'memory': 8192}, overlay, [(job, episode, n, aspect) for n in nums]))
     for r in ov:
         cpu_s += r["secs"] * 8
         print(f"[story3d] overlay s{r['num']:02d}: {'OK' if r['ok'] else 'GAGAL'} {r['frames']} frames {r['secs']:.0f}s")
@@ -246,7 +246,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
             print(r["log"])
     good = [r for r in ov if r["ok"]]
     jobs = [(job, r["num"], s, min(PART, r["frames"] - s)) for r in good for s in range(0, r["frames"], PART)]
-    wr = list(world.starmap(jobs))
+    wr = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::world', 'timeout': 1800, 'cpu': 4, 'memory': 8192, 'gpu': 'T4'}, world, jobs))
     bad = set()
     for r in wr:
         gpu_s += r["secs"]
@@ -255,7 +255,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
         if not r["ok"] or r["errors"]:
             print(f"[story3d] world s{r['num']:02d}@{r['start']}: ok={r['ok']} errors={r['errors']}")
     print(f"[story3d] world: {len(wr)} part(s) on {sorted({r['device'][:40] for r in wr})}")
-    cr = list(compose.starmap([(job, r["num"]) for r in good if r["num"] not in bad]))
+    cr = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::compose', 'timeout': 1800, 'cpu': 4, 'memory': 8192}, compose, [(job, r["num"]) for r in good if r["num"] not in bad]))
     os.makedirs(out, exist_ok=True)
     reports = {}
     for r in cr:
@@ -438,7 +438,7 @@ def assemble(episode: str, order: str = "", out: str = "work/story3d"):
     for j in joins:
         print(f"[assemble] {j['a']:02d}->{j['b']:02d}: {j['kind']} {j['dur']}s"
               + (f" + hitam {j['hold']}s + fade in {j['din']}s" if j.get("hold") else "") + f" ({j['why']})")
-    r = assemble_remote.remote(episode, nums, joins)
+    r = _budget_remote('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::assemble_remote', 'timeout': 3600, 'cpu': 16, 'memory': 16384}, assemble_remote, episode, nums, joins)
     if not r["ok"]:
         raise SystemExit(f"[assemble] STOP: {r['error']}")
     os.makedirs(out, exist_ok=True)
@@ -461,3 +461,17 @@ def assemble(episode: str, order: str = "", out: str = "work/story3d"):
     print(f"[assemble] -> {path} ({sum(r['durs']) / 60:.2f} menit bahan, {r['secs']:.0f}s)")
     if bad:
         raise SystemExit(5)
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

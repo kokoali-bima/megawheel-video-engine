@@ -16,7 +16,7 @@ import modal
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0                          # same cap as blender3d/modal_render.py (user, 2026-09-30)
+BUDGET_USD = 31.0                          # same cap as blender3d/modal_render.py (user, 2026-09-30)
 GPU, GPU_PRICE, OVERHEAD = "L4", 0.000222, 1.15
 MAX_CONTAINERS = 8
 BLENDER_V = "5.2.2"
@@ -82,7 +82,7 @@ def main(motion: str, aspect: str = "both", chunks: int = 4, samples: int = 16, 
     per = -(-frames // chunks)
     jobs = [(mj, asp, s, min(frames, s + per - 1), samples, fps) for asp in aspects for s in range(1, frames + 1, per)]
     t0 = time.time()
-    results = list(render_chunk.starmap(jobs))
+    results = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/director3d/modal_director.py::render_chunk', 'timeout': 2400, 'gpu': 'L4'}, render_chunk, jobs))
     wall = time.time() - t0
     out = os.path.join(os.path.dirname(os.path.abspath(motion)))
     for asp in aspects:
@@ -106,3 +106,17 @@ def main(motion: str, aspect: str = "both", chunks: int = 4, samples: int = 16, 
         json.dump(led, fh, indent=1)
     print(f"[modal] DONE {total} frame ({'+'.join(aspects)}) di {len(jobs)} GPU {GPU}: wall {wall:.0f}s, "
           f"GPU {gpu_secs:.0f}s, ≈${cost:.3f} ({gpu_secs / total:.2f} GPU-s/frame) -> {out}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

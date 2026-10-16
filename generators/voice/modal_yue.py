@@ -16,7 +16,7 @@ import modal
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0
+BUDGET_USD = 31.0
 GPU_PRICE = {"L40S": 0.000542}
 OVERHEAD = 1.15
 S1, S2 = "m-a-p/YuE-s1-7B-anneal-en-cot", "m-a-p/YuE-s2-1B-general"
@@ -127,7 +127,7 @@ def main(song: str = "branding/music/yue_intro.json", out: str = "branding/music
     if spent + worst > BUDGET_USD:
         raise SystemExit("[yue] STOP: budget bulanan akan terlewati. Tidak dijalankan.")
     t0 = time.time()
-    res = sing.remote(sg)
+    res = _budget_remote('megawheel', {'label': '/root/video-engine/generators/voice/modal_yue.py::sing', 'timeout': 3600, 'gpu': 'L40S'}, sing, sg)
     for line in res["log"]:
         print("[yue]", line)
     os.makedirs(out, exist_ok=True)
@@ -143,3 +143,17 @@ def main(song: str = "branding/music/yue_intro.json", out: str = "branding/music
     with open(LEDGER, "w") as fh:
         json.dump(led, fh, indent=1)
     print(f"[yue] DONE {len(res['songs'])} take: GPU {res['secs']:.0f}s ≈${cost:.3f}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+

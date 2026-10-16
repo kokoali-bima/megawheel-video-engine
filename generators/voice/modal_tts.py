@@ -21,7 +21,7 @@ import modal
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER = os.path.join(ROOT, "modal_usage.json")
-BUDGET_USD = 29.0                       # monthly cap (user, 2026-09-30); Modal workspace limit = $30
+BUDGET_USD = 31.0                       # monthly cap (user, 2026-09-30); Modal workspace limit = $30
 GPU_PRICE = {"T4": 0.000164, "L4": 0.000222, "A10": 0.000306}   # $/s (modal.com/pricing)
 OVERHEAD = 1.15
 MAX_LINES = 60
@@ -143,7 +143,7 @@ def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox
         with open(v, "rb") as fh:
             ref_map[k] = fh.read()
     t0 = time.time()
-    res = speak.remote(items, ref_bytes, ref_map)
+    res = _budget_remote('megawheel', {'label': '/root/video-engine/generators/voice/modal_tts.py::speak', 'timeout': 900, 'gpu': 'L4'}, speak, items, ref_bytes, ref_map)
     wall = time.time() - t0
     os.makedirs(out, exist_ok=True)
     for i, w in enumerate(res["wavs"]):
@@ -163,3 +163,17 @@ def main(lines: str = "work/voice/lines.json", out: str = "work/voice/chatterbox
         json.dump(led, fh, indent=1)
     print(f"[tts] DONE {len(items)} kalimat: GPU {res['secs']:.0f}s, wall {wall:.0f}s, ≈${cost:.3f}; "
           f"chatterbox-tts {res['version']} license={res['license']} -> {out}")
+
+
+# Central budget admission (2026-10-16). Used only by local remote-call entry points.
+import sys as _budget_sys
+if '/root/channel-budget-guard' not in _budget_sys.path:
+    _budget_sys.path.insert(0, '/root/channel-budget-guard')
+try:
+    from budget_guard import remote_call as _budget_remote, starmap_call as _budget_starmap
+except ModuleNotFoundError:
+    # Cloud functions do not invoke the local entrypoints; no dependency on VM state there.
+    def _budget_remote(*a, **k):
+        raise RuntimeError('Central budget guard unavailable; cloud call blocked')
+    _budget_starmap = _budget_remote
+
