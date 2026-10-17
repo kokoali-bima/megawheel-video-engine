@@ -788,37 +788,52 @@
   {
    "episode": 79,
    "video_id": "SIM_SMASH25D_V5_S028",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-25T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Big Rig vs Monster Truck vs Police Car vs Sports Car! Who Survives? \ud83d\udca5 | Ep. 79 #Shorts",
+   "upload_started": "2026-10-17T05:00:06.887656+00:00",
+   "url": "https://www.youtube.com/shorts/n7E87OZBYe8"
   },
   {
    "episode": 75,
    "video_id": "SIM_LAVA_POTHOLES_V2_S028",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-26T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs Giant Lava Potholes! Can Tilly Make It? \ud83c\udf0b\ud83d\udd25 | Ep. 75 #Shorts",
+   "upload_started": "2026-10-17T05:00:17.180494+00:00",
+   "url": "https://www.youtube.com/shorts/lHByBBaLVXo"
   },
   {
    "episode": 77,
    "video_id": "SIM_RACE25D_V4_S063",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-26T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Tilly Survive the Giant Hammer? \ud83c\udfc1 | Ep. 77 #Shorts",
+   "upload_started": "2026-10-17T05:00:23.297047+00:00",
+   "url": "https://www.youtube.com/shorts/wJRlHjwcgWg"
   },
   {
    "episode": 80,
    "video_id": "SIM_SMASH25D_V5_S029",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-26T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Buster, Grizzly, Tilly or Nitro? Last Car Standing! \ud83d\udca5 | Ep. 80 #Shorts",
+   "upload_started": "2026-10-17T05:00:29.546626+00:00",
+   "url": "https://www.youtube.com/shorts/trI9Q77SAxU"
   },
   {
    "episode": 81,
    "video_id": "SIM_GAUNTLET_V2_S007",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-27T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? \ud83d\udca5 | Ep. 81 #Shorts",
+   "upload_started": "2026-10-17T05:00:36.706654+00:00",
+   "url": "https://www.youtube.com/shorts/Mb76nmh0YyM"
   },
   {
    "episode": 84,

@@ -1,15 +1,15 @@
 {
  "last_run": {
-  "finished_utc": "2026-10-16T05:01:49Z",
+  "finished_utc": "2026-10-17T05:01:40Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-10-16T05:01:49Z",
+ "updated_utc": "2026-10-17T05:01:40Z",
  "open_issues": [
   {
    "key": "upload_token_age",
-   "level": "WARN",
-   "title": "Token upload mendekati 7 hari",
+   "level": "ALERT",
+   "title": "Token upload hampir mati (umur token)",
    "since": "2026-10-16 05:00 UTC"
   }
  ],
@@ -38,28 +38,10 @@
   }
  },
  "queue": {
-  "SCHEDULED": 80,
-  "QUEUED": 25
+  "SCHEDULED": 85,
+  "QUEUED": 20
  },
  "next_uploads": [
-  {
-   "episode": 45,
-   "role": "short",
-   "publish_at_utc": "2026-10-16T15:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 53,
-   "role": "race",
-   "publish_at_utc": "2026-10-16T19:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 57,
-   "role": "smash",
-   "publish_at_utc": "2026-10-16T23:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 48,
    "role": "short",
@@ -88,6 +70,24 @@
    "episode": 55,
    "role": "race",
    "publish_at_utc": "2026-10-18T19:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 59,
+   "role": "smash",
+   "publish_at_utc": "2026-10-18T23:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 51,
+   "role": "short",
+   "publish_at_utc": "2026-10-19T15:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 56,
+   "role": "race",
+   "publish_at_utc": "2026-10-19T19:00:00Z",
    "status": "SCHEDULED"
   }
  ]
