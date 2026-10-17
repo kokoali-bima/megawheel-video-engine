@@ -3,11 +3,22 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-17
+**📤 Upload / antrean / Drive**
+- `acd46fc` publish: daily run 2026-10-17 [cron daily_publish.sh]
+**📚 Dokumen**
+- `49f5da8` docs: video VM moved to ipandu-video-engine (178.104.136.26 / private 192.168.99.4), 2026-10-17
+
 ## 2026-10-16
 **📤 Upload / antrean / Drive**
 - `bf25e9b` publish: daily run 2026-10-16 [cron daily_publish.sh]
 **🔧 Lain-lain**
 - `87fc15c` auto: records left uncommitted before daily run
+<details><summary>otomatis VM (1)</summary>
+
+- `08eeabb` analytics: daily report 2026-10-16
+
+</details>
 
 ## 2026-10-15
 **📤 Upload / antrean / Drive**
