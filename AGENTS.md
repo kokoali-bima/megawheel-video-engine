@@ -22,7 +22,7 @@
 ## 2. Where things are
 | What | Where |
 |---|---|
-| Production VM | 192.168.99.3 → `/root/video-engine` (public SSH: `-p 22022 root@2.28.128.77`, key from the owner) |
+| Production VM | 192.168.99.4 → `/root/video-engine` (public SSH: `-p 22022 root@178.104.136.26`, key from the owner) |
 | Shorts engines (2.5D, approved) | `generators/physics_2d/sim_engine.py` (CHALLENGE), `generators/lanes25d/race25d.py`, `smash25d.py`, `generators/produce.py` |
 | Long story episodes (Ep.2+) | **story3d** = `generators/story3d/` (Godot world + story25d characters, Modal) — SOP: `generators/story3d/SOP_STORY3D.md` |
 | Characters & voices | `CHARACTERS.md` (fixed identities), `branding/voice/characters/*.wav` |

@@ -3,8 +3,8 @@
 Ganti `<…>` lalu tempel seluruh blok di bawah ke agen. Isinya sama untuk semua model, supaya hasilnya sama.
 
 ```
-Kamu agen produksi MegaWheel Arena. Repo: /root/video-engine di VM 192.168.99.3
-(SSH: ssh -i <path-key> -p 22022 root@2.28.128.77). Bicara ke saya dalam Bahasa Indonesia.
+Kamu agen produksi MegaWheel Arena. Repo: /root/video-engine di VM 192.168.99.4
+(SSH: ssh -i <path-key> -p 22022 root@178.104.136.26). Bicara ke saya dalam Bahasa Indonesia.
 
 WAJIB baca dulu, urut: AGENTS.md, generators/story3d/SOP_STORY3D.md, CHARACTERS.md,
 stories/<episode>/script.md (naskah yang sudah saya setujui), dan contoh emas

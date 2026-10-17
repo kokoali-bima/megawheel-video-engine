@@ -13,7 +13,7 @@ BACA DULU, urut (jangan mulai bekerja sebelum selesai):
 6. Riwayat chat terakhir: ipandu-video/claude/agent_claude.md (tambahkan entri setiap selesai satu pertukaran)
 
 Repo di PC: F:\drive-aliwardana\My Drive\me\ai-develop\ipandu-video\megawheel-video-engine
-VM produksi: 192.168.99.3  (SSH -p 22022 root@2.28.128.77, key dari saya; repo /root/video-engine)
+VM produksi: 192.168.99.4  (SSH -p 22022 root@178.104.136.26, key dari saya; repo /root/video-engine)
 
 TUGAS SEKARANG: S01E02 sudah selesai, disetujui, antri tayang (Ep.1002 Min 11 Okt 13:00 ET; trailer Ep.1502). Baca juga stories/CH01_dungeon_axes/HANDOVER_CHALLENGE.md: Short CHALLENGE 'Cars VS Dungeon Axes' (engine baru, 9:16) - selesaikan review/kirim ke Drive, daftarkan pending dengan judul 'NEW 3D Graphics'. Lalu cek hasil cron upload (work/daily_publish.log). Short challenge berikutnya: rotasi 10 tokoh, rintangan baru, jangan pernah ulang. Baca ERROR_LOG.md bagian Z sebelum menyentuh git/VM.
 

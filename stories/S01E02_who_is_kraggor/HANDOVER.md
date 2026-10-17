@@ -51,7 +51,7 @@ Owner notes 2026-10-07 applied: net fitted to Kraggor and behind the cars (`net.
 Open: owner review of the full episode; outro/ident/"Previously" (Ep.1 assets) still to be assembled around the 15 scenes; the Drive working tree on the PC lags origin/main (CRLF noise) - work from a clean clone.
 New engine since 5-8: claw (arm pointing / handing a key), chalk drawings, net (screen-space rope net), grown-up crying Kraggor (mode sad), SFX kraggor_giggle/moan, net_drop, gate_creak, key_click, arm_slide, wind ambience, Godot towers / partylights / speedgate / ruins location, prop to_shot.
 
-## How to run (VM 192.168.99.3, SSH -p 22022 root@2.28.128.77, key from the owner)
+## How to run (VM 192.168.99.4, SSH -p 22022 root@178.104.136.26, key from the owner)
 ```
 cd /root/video-engine && bash git_sync.sh pull
 venv/bin/python generators/story3d/validate_scene.py --episode S01E02_who_is_kraggor --scenes 5,6,7,8
