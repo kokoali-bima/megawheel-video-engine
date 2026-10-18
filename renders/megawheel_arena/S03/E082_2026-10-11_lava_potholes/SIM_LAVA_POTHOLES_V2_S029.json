@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_LAVA_POTHOLES_V2_S029",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-10-28T15:00:00Z",
   "engine": "sim-prototype v2",
   "series": "lava_potholes",
   "seed": 29,
@@ -254,5 +254,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S03/E082_2026-10-11_lava_potholes/SIM_LAVA_POTHOLES_V2_S029_audit.md",
   "episode": 82,
   "season": 3,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/KZNCFqh33go",
+  "upload_date": "2026-10-18"
 }
