@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_DUNGEON_V2_S038
 
-- Tanggal: 2026-10-19 08:12 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 38 · Track: dungeon_18b2aebf
+- Tanggal: 2026-10-19 08:17 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 38 · Track: dungeon_18b2aebf
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s) | ✅ | 53.33 s (manifest 53.33) |
-| Ukuran wajar (8-20 MB) | ✅ | 13.8 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 33.8 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.5 dB |
-| mean_volume -20..-12 dB | ✅ | -14.1 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.4 dB |
+| mean_volume -20..-12 dB | ✅ | -13.3 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 
@@ -46,7 +46,7 @@
 | L2: badge FAIL tampil tepat di event | ✅ | 48% piksel badge @ 31.3s |
 | L3: badge LEVEL 3 tampil di awal level | ✅ | 56% piksel warna level @ 34.9s |
 | L3: badge WINNER tampil tepat di event | ✅ | 28% piksel badge @ 45.2s |
-| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 69% piksel panel @ 52.5s |
+| Panel outro LIKE/SUBSCRIBE tampil di akhir | ✅ | 62% piksel panel @ 52.5s |
 
 ## 5.2 Preview
 | Cek | Hasil | Nilai |

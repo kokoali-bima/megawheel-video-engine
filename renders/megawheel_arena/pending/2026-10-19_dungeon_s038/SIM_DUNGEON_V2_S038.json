@@ -1,7 +1,7 @@
 {
   "video_id": "SIM_DUNGEON_V2_S038",
   "status": "RENDERED_PENDING_APPROVAL",
-  "engine": "sim-prototype v2",
+  "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
   "seed": 38,
   "fps": 30,
@@ -133,8 +133,8 @@
     }
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
-  "title_base": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics",
-  "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics #Shorts",
+  "title_base": "Can Zippy the Sports Car Survive 5 Deadly Dungeon Traps? 🌋🪓 NEW 3D Graphics",
+  "title": "Can Zippy the Sports Car Survive 5 Deadly Dungeon Traps? 🌋🪓 NEW 3D Graphics | Ep. 102 #Shorts",
   "description": "Tilly the taxi, Titan the big rig and Zippy the sports car take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
   "tags": [
     "cars",
@@ -238,9 +238,13 @@
     "Let's see that again, in slow motion!",
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
-  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)",
   "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038.mp4",
   "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038_audit.md"
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038_audit.md",
+  "render3d": true,
+  "episode": 102,
+  "season": 4,
+  "ai_director": "DeepSeek Flash + Antigravity"
 }
