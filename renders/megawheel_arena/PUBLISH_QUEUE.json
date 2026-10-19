@@ -888,37 +888,52 @@
   {
    "episode": 83,
    "video_id": "SIM_PENDULUM_V2_S004",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-29T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs A Giant Swinging Wrecking Ball! Can Nitro Make It? \ud83d\udca5 | Ep. 83 #Shorts",
+   "upload_started": "2026-10-19T05:00:07.620649+00:00",
+   "url": "https://www.youtube.com/shorts/XTuIEMNarGE"
   },
   {
    "episode": 86,
    "video_id": "SIM_RACE25D_V4_S068",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-29T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Nitro Survive the Oil Slick? \ud83c\udfc1 | Ep. 86 #Shorts",
+   "upload_started": "2026-10-19T05:00:16.476795+00:00",
+   "url": "https://www.youtube.com/shorts/PsnDA9kn7ig"
   },
   {
    "episode": 89,
    "video_id": "SIM_SMASH25D_V5_S034",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-29T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Big Rig vs Monster Truck vs Sports Car vs Taxi! Who Survives? \ud83d\udca5 | Ep. 89 #Shorts",
+   "upload_started": "2026-10-19T05:00:23.057691+00:00",
+   "url": "https://www.youtube.com/shorts/jiixposH0eo"
   },
   {
    "episode": 90,
    "video_id": "SIM_POTHOLES_V2_S033",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-30T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Siren the Police Car Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 | Ep. 90 #Shorts",
+   "upload_started": "2026-10-19T05:00:30.796045+00:00",
+   "url": "https://www.youtube.com/shorts/LA5GZDAqS1U"
   },
   {
    "episode": 92,
    "video_id": "SIM_RACE25D_V4_S069",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-30T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Zippy vs Falling Containers! Who Wins the Race? \ud83c\udfc1 | Ep. 92 #Shorts",
+   "upload_started": "2026-10-19T05:00:37.932112+00:00",
+   "url": "https://www.youtube.com/shorts/dfyq1sts3ZI"
   },
   {
    "episode": 94,

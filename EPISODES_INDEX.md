@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-18 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-19 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -96,16 +96,16 @@
 | 80 | `SIM_SMASH25D_V5_S029` | smash25d | UPLOADED_SCHEDULED 2026-10-26T23:00:00Z | Mon 2026-10-26 19:00 | https://www.youtube.com/shorts/trI9Q77SAxU |
 | 81 | `SIM_GAUNTLET_V2_S007` | gauntlet | UPLOADED_SCHEDULED 2026-10-27T15:00:00Z | Tue 2026-10-27 11:00 | https://www.youtube.com/shorts/Mb76nmh0YyM |
 | 82 | `SIM_LAVA_POTHOLES_V2_S029` | lava_potholes | UPLOADED_SCHEDULED 2026-10-28T15:00:00Z | Wed 2026-10-28 11:00 | https://www.youtube.com/shorts/KZNCFqh33go |
-| 83 | `SIM_PENDULUM_V2_S004` | pendulum | APPROVED | Thu 2026-10-29 11:00 |  |
+| 83 | `SIM_PENDULUM_V2_S004` | pendulum | UPLOADED_SCHEDULED 2026-10-29T15:00:00Z | Thu 2026-10-29 11:00 | https://www.youtube.com/shorts/XTuIEMNarGE |
 | 84 | `SIM_RACE25D_V4_S066` | race25d | UPLOADED_SCHEDULED 2026-10-27T19:00:00Z | Tue 2026-10-27 15:00 | https://www.youtube.com/shorts/4xdJO93mknM |
 | 85 | `SIM_RACE25D_V4_S067` | race25d | UPLOADED_SCHEDULED 2026-10-28T19:00:00Z | Wed 2026-10-28 15:00 | https://www.youtube.com/shorts/cwG86oKxxwQ |
-| 86 | `SIM_RACE25D_V4_S068` | race25d | APPROVED | Thu 2026-10-29 15:00 |  |
+| 86 | `SIM_RACE25D_V4_S068` | race25d | UPLOADED_SCHEDULED 2026-10-29T19:00:00Z | Thu 2026-10-29 15:00 | https://www.youtube.com/shorts/PsnDA9kn7ig |
 | 87 | `SIM_SMASH25D_V5_S030` | smash25d | UPLOADED_SCHEDULED 2026-10-27T23:00:00Z | Tue 2026-10-27 19:00 | https://www.youtube.com/shorts/i6zipDevoTA |
 | 88 | `SIM_SMASH25D_V5_S032` | smash25d | UPLOADED_SCHEDULED 2026-10-28T23:00:00Z | Wed 2026-10-28 19:00 | https://www.youtube.com/shorts/8q9Bbk-An5U |
-| 89 | `SIM_SMASH25D_V5_S034` | smash25d | APPROVED | Thu 2026-10-29 19:00 |  |
-| 90 | `SIM_POTHOLES_V2_S033` | potholes | APPROVED | Fri 2026-10-30 11:00 |  |
+| 89 | `SIM_SMASH25D_V5_S034` | smash25d | UPLOADED_SCHEDULED 2026-10-29T23:00:00Z | Thu 2026-10-29 19:00 | https://www.youtube.com/shorts/jiixposH0eo |
+| 90 | `SIM_POTHOLES_V2_S033` | potholes | UPLOADED_SCHEDULED 2026-10-30T15:00:00Z | Fri 2026-10-30 11:00 | https://www.youtube.com/shorts/LA5GZDAqS1U |
 | 91 | `SIM_BUMPS_V2_S022` | bumps | APPROVED | Sat 2026-10-31 11:00 |  |
-| 92 | `SIM_RACE25D_V4_S069` | race25d | APPROVED | Fri 2026-10-30 15:00 |  |
+| 92 | `SIM_RACE25D_V4_S069` | race25d | UPLOADED_SCHEDULED 2026-10-30T19:00:00Z | Fri 2026-10-30 15:00 | https://www.youtube.com/shorts/dfyq1sts3ZI |
 | 93 | `SIM_RACE25D_V4_S070` | race25d | APPROVED | Sat 2026-10-31 15:00 |  |
 | 94 | `SIM_SMASH25D_V5_S036` | smash25d | APPROVED | Fri 2026-10-30 19:00 |  |
 | 95 | `SIM_SMASH25D_V5_S037` | smash25d | APPROVED | Sat 2026-10-31 19:00 |  |
@@ -1195,9 +1195,9 @@
 - **Tema / narator:** morning-clear-volcano / chatterbox:m1
 - **Durasi:** 57.0 s
 - **Tokoh dan hasil:** Level 1: Nitro (f1) → smash@obs2+broken; Level 2: Hydro (firetruck) → smash@obs2+broken; Level 3 (juara): Buster (bus) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-29T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-29T15:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-29T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/XTuIEMNarGE
 
 ## Ep. 84 — `SIM_RACE25D_V4_S066`
 
@@ -1234,9 +1234,9 @@
 - **Tema / narator:** noon-clear-mountains / chatterbox:m1
 - **Durasi:** 35.65 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p4; Level 2: Rocky (monster) → p2; Level 3 (juara): Zippy (sports) → win+lava+dodge_pothole; Level 4: Nitro (f1) → p3+oil
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-29T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-29T19:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-29T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/PsnDA9kn7ig
 
 ## Ep. 87 — `SIM_SMASH25D_V5_S030`
 
@@ -1273,9 +1273,9 @@
 - **Tema / narator:** noon-rain-city / chatterbox:mw-announcers-m1f1
 - **Durasi:** 53.78 s
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → win; Level 2: Grizzly (monster2) → p2+wreck; Level 3 (juara): Zippy (sports) → p4+ring; Level 4: Tilly (taxi) → p3+wreck
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-29T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-29T23:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-29T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/jiixposH0eo
 
 ## Ep. 90 — `SIM_POTHOLES_V2_S033`
 
@@ -1286,9 +1286,9 @@
 - **Tema / narator:** noon-clear-mountains / chatterbox:f1
 - **Durasi:** 55.3 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → stuck@obs1; Level 2: Sprinkles (icecream) → pit@obs0+broken; Level 3 (juara): Hydro (firetruck) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-30T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-30T15:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-30T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/LA5GZDAqS1U
 
 ## Ep. 91 — `SIM_BUMPS_V2_S022`
 
@@ -1312,9 +1312,9 @@
 - **Tema / narator:** noon-clear-desert / chatterbox:f1
 - **Durasi:** 37.48 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p3; Level 2: Rocky (monster) → p2; Level 3 (juara): Zippy (sports) → p4+container; Level 4: Nitro (f1) → win+ramp+dodge_wall
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-30T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-30T19:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-30T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/dfyq1sts3ZI
 
 ## Ep. 93 — `SIM_RACE25D_V4_S070`
 
