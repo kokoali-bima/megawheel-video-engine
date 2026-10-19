@@ -92,7 +92,7 @@ def main():
                 se.ROLE_ORDER[li] = [vk] + [o for o in order if o != vk]
             se.STORY = [(order[0], want) for order, (_, want) in zip(se.ROLE_ORDER, se.ROSTER)]
         se.make_story = story
-    sys.argv = ["sim_engine.py", "--seed", str(a.seed), "--series", a.series, "--preview-only", "--name", name]
+    sys.argv = [os.path.join(ROOT, "generators", "physics_2d", "sim_engine.py"), "--seed", str(a.seed), "--series", a.series, "--preview-only", "--name", name]
     se.main()                                                    # the real engine: sim + timeline + audio + checks
     L0 = se.LEVELS
     print(f"[export] {len(se.INDEX)} frames, levels {[L['vk'] for L in L0]}", flush=True)

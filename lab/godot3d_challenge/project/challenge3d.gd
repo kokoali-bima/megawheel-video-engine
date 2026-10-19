@@ -653,7 +653,7 @@ void fragment() {
 	fire.position = Vector3(0.6, 0.3, 0.25)
 	car.add_child(fire)
 	spray = _emitter(140, 0.9, Vector2(4, 9), Vector3(0, -12, 0), Vector2(0.2, 0.55), Color(0.95, 0.98, 1.0, 0.95),
-					 Color(0.8, 0.92, 1.0, 0), 30.0, false)            # rooster tails of water from the tyres
+					 Color(0.8, 0.92, 1.0, 0), 30.0, true)             # rooster tails of water from the tyres
 	spray.direction = Vector3(-0.8, 0.9, 0.25)
 	spray.local_coords = false
 	add_child(spray)
@@ -1026,7 +1026,7 @@ func _process(_d: float) -> void:
 			wheels[k].visible = false
 	var gh = ground_h(float(f[8]))
 	var above = float(f[9]) - gh
-	blob.visible = above < 6.0
+	blob.visible = false
 	blob.position = Vector3(float(f[8]), gh + 0.02, 0)
 	blob.scale = Vector3(float(cast[vk]["body"][0]) * 1.05, 1, 1.4)
 	blob.material_override.albedo_color.a = 0.5 * clampf(1.0 - above / 6.0, 0.0, 1.0)
@@ -1046,7 +1046,7 @@ func _process(_d: float) -> void:
 	if spray.emitting and not fired.has("pd" + str(int(cx / 3.0))):   # entering water: side sheets of spray
 		fired["pd" + str(int(cx / 3.0))] = true
 		_burst(Vector3(cx, ground_h(cx) + 0.2, 0.4), 90, 0.9, Vector2(4, 9), Vector3(0, -13, 0), Vector2(0.18, 0.45),
-			   Color(1, 1, 1, 0.95), Color(0.8, 0.92, 1.0, 0), 75.0, false)
+			   Color(1, 1, 1, 0.95), Color(0.8, 0.92, 1.0, 0), 75.0, true)
 	if wl.size() > 0:
 		spray.position = Vector3(float(wl[0][0]), float(wl[0][1]) - 0.3, 0.4)
 	for vf in vent_fx:                                      # eruptions on the engine's exact schedule
