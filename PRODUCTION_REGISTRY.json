@@ -6966,19 +6966,19 @@
       "created": "2026-10-19",
       "render_date": "2026-10-19",
       "vehicles": [
-        "police",
-        "firetruck",
-        "monster"
+        "sports",
+        "icecream",
+        "monster2"
       ],
-      "track_id": "splash_e87583b8@noon-rain-city",
-      "theme": "noon-rain-city",
-      "voice": "en-US-JennyNeural",
+      "track_id": "splash_e87583b8@night-rain-countryside",
+      "theme": "night-rain-countryside",
+      "voice": "chatterbox:f1",
       "outcomes": [
         "crash@obs2+broken",
         "pit@obs0+broken",
         "win"
       ],
-      "duration": 58.57,
+      "duration": 59.2,
       "status": "RENDERED_PENDING_APPROVAL",
       "plan": null,
       "structure": null,
@@ -6987,11 +6987,7 @@
       "episode": null,
       "season": null,
       "upload_date": null,
-      "youtube_url": null,
-      "drive_sheet_id": "1G3FZF1ruiyoit9H2qMniyyjRiSdr3w4u",
-      "drive_id": "1hSBXvk2ND8UvuuRdZnR32n2nxvXZ7BZz",
-      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SPLASH_V2_S013.mp4",
-      "render3d": true
+      "youtube_url": null
     }
   ]
 }

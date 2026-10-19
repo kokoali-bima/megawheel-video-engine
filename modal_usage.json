@@ -4158,6 +4158,37 @@
    "cpu_container_seconds": 118.4,
    "wall_seconds": 188.6,
    "cost_usd": 0.0319
+  },
+  {
+   "date": "2026-10-19",
+   "note": "test prefetch r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.4,
+   "wall_seconds": 81.9,
+   "cost_usd": 0.0121
+  },
+  {
+   "date": "2026-10-19",
+   "note": "narrator SIM_SPLASH_V2_S013 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 53.3,
+   "wall_seconds": 81.0,
+   "cost_usd": 0.0136
+  },
+  {
+   "date": "2026-10-19",
+   "note": "godot3d convert SIM_SPLASH_V2_S013",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 126.5,
+   "wall_seconds": 68.2,
+   "cost_usd": 0.0341
   }
  ]
 }

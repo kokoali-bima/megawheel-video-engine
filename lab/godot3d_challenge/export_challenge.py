@@ -139,10 +139,25 @@ def main():
         s = se.car_state(L, st)
         si = st * se.REC_HZ
         det = [d is not None and si >= d for d in L["detached"]]
+        cx = s["cx"]
+        cy = s["cy"] - s.get("sink", 0.0)
+        ca = s["ca"]
+        ys = se.yaw_scale(s.get("yaw", 0.0))
+        co, sn = math.cos(ca), math.sin(ca)
+        squeezed_wheels = []
+        for wi, (wx, wy, an) in enumerate(s["wheels"]):
+            if det[wi]:
+                squeezed_wheels.append([round(wx, 4), round(wy, 4), round(an, 3)])
+            else:
+                dx, dy = wx - cx, (wy - s.get("sink", 0.0)) - cy
+                along, perp = dx * co + dy * sn, -dx * sn + dy * co
+                along *= ys
+                px = cx + along * co - perp * sn
+                py = cy + along * sn + perp * co
+                squeezed_wheels.append([round(px, 4), round(py, 4), round(an, 3)])
         frames.append([li, mode[0], round(st, 4), round(camx, 4), round(camy, 4), round(z, 4), round(shx, 2),
-                       round(shy, 2), round(s["cx"], 4), round(s["cy"] - s.get("sink", 0.0), 4), round(s["ca"], 4),
-                       round(se.yaw_scale(s.get("yaw", 0.0)), 3), [[round(x, 4), round(y, 4), round(an, 3)]
-                                                                    for x, y, an in s["wheels"]], det,
+                       round(shy, 2), round(cx, 4), round(cy, 4), round(ca, 4),
+                       round(ys, 3), squeezed_wheels, det,
                        se.mood_at(L, st, s), bool(L["broken"] is not None and st >= L["broken"]["t"]),
                        round(se.melt_amount(L, st), 3), bool(L.get("burned") is not None and st >= L["burned"]),
                        round(s["speed"], 2), round(s["air"], 2), round(se.crush_amount(L, st), 3)])

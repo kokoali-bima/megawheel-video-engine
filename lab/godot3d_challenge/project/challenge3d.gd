@@ -1021,6 +1021,7 @@ func _process(_d: float) -> void:
 			wheels[k].visible = true
 			wheels[k].position = Vector3(float(wl[k][0]), float(wl[k][1]), -0.05)
 			wheels[k].rotation = Vector3(0, 0, float(wl[k][2]))
+			wheels[k].scale = Vector3(maxf(0.25, absf(ys)), 1.0, 1.0)
 		else:
 			wheels[k].visible = false
 	var gh = ground_h(float(f[8]))
