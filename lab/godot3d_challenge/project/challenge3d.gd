@@ -19,6 +19,7 @@ var car: Node3D
 var body: MeshInstance3D
 var body_mat: ShaderMaterial
 var wheels = []
+var wheel_pivots = []
 var blob: MeshInstance3D
 var fx_root: Node3D
 var smoke: CPUParticles3D
@@ -620,13 +621,16 @@ void fragment() {
 	body.position = Vector3(0, 0, 0.05)
 	car.add_child(body)
 	for i in range(6):                                       # up to 6 wheels; the data decides how many show (Titan = 4)
+		var wp = Node3D.new()
+		add_child(wp)
+		wheel_pivots.append(wp)
 		var w = Sprite3D.new()
 		w.pixel_size = 1.0 / 60.0
-		w.shaded = true
+		w.shaded = false
 		w.double_sided = true
 		w.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
-		w.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-		add_child(w)
+		w.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		wp.add_child(w)
 		wheels.append(w)
 	blob = MeshInstance3D.new()                              # contact shadow (cairo look)
 	var cm = CylinderMesh.new()
@@ -946,7 +950,7 @@ func _break(x: float, y: float, vk: String, ca: float, ys: float) -> void:
 		var ws = Sprite3D.new()
 		ws.texture = tex[vk + "_wheel"]
 		ws.pixel_size = 1.0 / 60.0
-		ws.shaded = true
+		ws.shaded = false
 		ws.double_sided = true
 		ws.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 		wb.add_child(ws)
@@ -1017,13 +1021,13 @@ func _process(_d: float) -> void:
 	body_mat.set_shader_parameter("burn", burn)
 	var wl = f[12]
 	for k in range(wheels.size()):
-		if k < wl.size():
-			wheels[k].visible = true
-			wheels[k].position = Vector3(float(wl[k][0]), float(wl[k][1]), -0.05)
+		if k < wl.size() and absf(ys) >= 0.25:
+			wheel_pivots[k].visible = true
+			wheel_pivots[k].position = Vector3(float(wl[k][0]), float(wl[k][1]), -0.05)
+			wheel_pivots[k].scale = Vector3(clampf(absf(ys), 0.2, 1.0), 1.0, 1.0)
 			wheels[k].rotation = Vector3(0, 0, float(wl[k][2]))
-			wheels[k].scale = Vector3(maxf(0.25, absf(ys)), 1.0, 1.0)
 		else:
-			wheels[k].visible = false
+			wheel_pivots[k].visible = false
 	var gh = ground_h(float(f[8]))
 	var above = float(f[9]) - gh
 	blob.visible = false
