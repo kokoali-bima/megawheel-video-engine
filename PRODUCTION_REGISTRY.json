@@ -6922,6 +6922,40 @@
       "approved_date": "2026-10-11",
       "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 101 #Shorts",
       "pin_slot_et": "2026-11-24T11:00"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S038",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 38,
+      "created": "2026-10-19",
+      "render_date": "2026-10-19",
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "sports"
+      ],
+      "track_id": "dungeon_18b2aebf@sunset-clear-volcano",
+      "theme": "sunset-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "pit@obs2+broken",
+        "chop@obs0+broken",
+        "win"
+      ],
+      "duration": 53.33,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-19_dungeon_s038",
+      "audit": "renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1IkDc219z9nDQv71bY_zXy3JSUGdkh2ML",
+      "drive_id": "1b2J-GGWt7qPdct2wO-v8S-Nj7vlkMScg",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S038.mp4"
     }
   ]
 }

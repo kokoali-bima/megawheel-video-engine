@@ -1,0 +1,246 @@
+{
+  "video_id": "SIM_DUNGEON_V2_S038",
+  "status": "RENDERED_PENDING_APPROVAL",
+  "engine": "sim-prototype v2",
+  "series": "dungeon",
+  "seed": 38,
+  "fps": 30,
+  "duration": 53.33,
+  "track_id": "dungeon_18b2aebf",
+  "track_params": {
+    "axes": [
+      {
+        "x": 37.24,
+        "period": 2.93,
+        "phase": 0.48
+      },
+      {
+        "x": 84.16,
+        "period": 3.32,
+        "phase": 2.98
+      },
+      {
+        "x": 96.99,
+        "period": 3.45,
+        "phase": 2.73
+      }
+    ],
+    "ogres": [
+      {
+        "x": 51.8,
+        "period": 3.73,
+        "phase": 2.0
+      }
+    ],
+    "pits": [
+      [
+        65.89,
+        73.69,
+        4.5
+      ]
+    ],
+    "ramps": [
+      [
+        60.59,
+        65.89,
+        1.5
+      ]
+    ]
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "volcano"
+  },
+  "theme_id": "sunset-clear-volcano",
+  "voice": "chatterbox:m1",
+  "fingerprint": "dungeon|taxi,bigrig,sports|dungeon_18b2aebf@sunset-clear-volcano|pit@obs2+broken,chop@obs0+broken,win",
+  "outcomes": [
+    "pit@obs2+broken",
+    "chop@obs0+broken",
+    "win"
+  ],
+  "analysis": [
+    {
+      "id": "forward",
+      "desc": "Semua mobil bergerak maju ke kanan (+x)",
+      "ok": true,
+      "detail": "3.0->70.4 m, 3.0->43.2 m, 3.0->144.9 m",
+      "hard": true
+    },
+    {
+      "id": "obstacles",
+      "desc": "Minimal 2 rintangan di antara start dan finish",
+      "ok": true,
+      "detail": "5 rintangan [axe, ogre, lava, axe, axe] (36-99 m), finish 108 m",
+      "hard": true
+    },
+    {
+      "id": "story",
+      "desc": "Pola cerita sesuai STORY",
+      "ok": true,
+      "detail": "['fail', 'fail', 'win'] (target ['fail', 'fail', 'win'])",
+      "hard": true
+    },
+    {
+      "id": "no_timeout",
+      "desc": "Tidak ada timeout",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "timing",
+      "desc": "Waktu event masuk akal",
+      "ok": true,
+      "detail": "10.6s, 6.5s, 7.8s",
+      "hard": true
+    },
+    {
+      "id": "distinct_fail",
+      "desc": "Level gagal di rintangan berbeda",
+      "ok": true,
+      "detail": "rintangan [2, 0]",
+      "hard": false
+    },
+    {
+      "id": "spectacular",
+      "desc": "Minimal 1 momen spektakuler di level gagal (hancur/terbalik/lompatan bullet-time)",
+      "ok": true,
+      "detail": "",
+      "hard": true
+    },
+    {
+      "id": "duration",
+      "desc": "Durasi total 40-58 s",
+      "ok": true,
+      "detail": "50.3 s",
+      "hard": true
+    },
+    {
+      "id": "level_len",
+      "desc": "Level gagal <= 20 s, level menang (+outro) <= 26 s",
+      "ok": true,
+      "detail": "20.3s, 11.0s, 19.1s",
+      "hard": true
+    },
+    {
+      "id": "unique",
+      "desc": "Sidik jari belum ada di registry",
+      "ok": true,
+      "detail": "dungeon|taxi,bigrig,sports|dungeon_18b2aebf@sunset-clear-volcano|pit@obs2+broken,chop@obs0+broken,win",
+      "hard": true
+    }
+  ],
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics",
+  "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics #Shorts",
+  "description": "Tilly the taxi, Titan the big rig and Zippy the sports car take on the DEADLY DUNGEON TRAPS! 💥 Only one makes it to the finish line. Who's your pick? 🏁\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #CarCrash #CrashTest #PhysicsSimulation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "cars",
+    "dungeon",
+    "axe",
+    "ogre",
+    "lava",
+    "car crash",
+    "crash test",
+    "physics simulation",
+    "3D graphics",
+    "shorts",
+    "MegaWheel Arena",
+    "taxi",
+    "big rig",
+    "sports car"
+  ],
+  "levels": [
+    {
+      "vehicle": "TILLY THE TAXI",
+      "speed": 7.0,
+      "outcome": "pit",
+      "event_t": 10.6,
+      "obstacle": 2,
+      "broken": true,
+      "bullet_time": true,
+      "replay": true,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "OUCH!"
+      ],
+      "start": 3.0,
+      "duration": 20.27,
+      "event_out": 16.03,
+      "x_start": 3.0,
+      "x_end": 70.4,
+      "level_color": [
+        45,
+        183,
+        76
+      ]
+    },
+    {
+      "vehicle": "TITAN THE BIG RIG",
+      "speed": 6.0,
+      "outcome": "chop",
+      "event_t": 6.5,
+      "obstacle": 0,
+      "broken": true,
+      "bullet_time": false,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "OUCH!"
+      ],
+      "start": 23.27,
+      "duration": 11.0,
+      "event_out": 30.93,
+      "x_start": 3.0,
+      "x_end": 43.2,
+      "level_color": [
+        255,
+        132,
+        20
+      ]
+    },
+    {
+      "vehicle": "ZIPPY THE SPORTS CAR",
+      "speed": 16.73,
+      "outcome": "win",
+      "event_t": 7.77,
+      "obstacle": 4,
+      "broken": false,
+      "bullet_time": true,
+      "replay": false,
+      "bubbles": [
+        "UH OH!",
+        "WHOA!",
+        "YEAH!"
+      ],
+      "start": 34.27,
+      "duration": 19.07,
+      "event_out": 44.83,
+      "x_start": 3.0,
+      "x_end": 144.9,
+      "level_color": [
+        153,
+        76,
+        234
+      ]
+    }
+  ],
+  "narration": [
+    "Ready... Go! Level one! Tilly the taxi! Hop in... can Tilly get past the deadly dungeon traps?",
+    "Ready... Go! Level two! Titan the big rig! The biggest truck on the road... can Titan make it?",
+    "Ready... Go! Level three! Zippy the sports car! Can Zippy survive the deadly dungeon traps?",
+    "Oh no! Tilly fell into the lava and is melting!",
+    "Chop! Titan got squashed by a giant axe!",
+    "Yes! Zippy made it! We have a winner!",
+    "Let's see that again, in slow motion!",
+    "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
+  ],
+  "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:m1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/preview",
+  "cold_open_s": 3.0,
+  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_dungeon_s038/SIM_DUNGEON_V2_S038_audit.md"
+}
