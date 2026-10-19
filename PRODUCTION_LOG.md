@@ -94,3 +94,4 @@
 | 2026-10-11 18:55 | Claude Code Opus | SIM_DUNGEON_V2_S031 | dungeon | 31 | Zippy → Hydro → Nitro | 57.9 s | PASS | produce.py · noon-clear-volcano ·  |
 | 2026-10-11 18:59 | Claude Code Opus | SIM_DUNGEON_V2_S032 | dungeon | 32 | Tilly → Buster → Sprinkles | 57.9 s | PASS | produce.py · morning-clear-volcano ·  |
 | 2026-10-19 15:12 | Claude Code Opus | SIM_DUNGEON_V2_S038 | dungeon | 38 | Tilly → Titan → Zippy | 53.3 s | PASS | produce.py · sunset-clear-volcano ·  |
+| 2026-10-19 15:29 | Claude Code Opus | SIM_SPLASH_V2_S013 | splash | 13 | Siren → Hydro → Rocky | 58.6 s | PASS | produce.py · noon-rain-city ·  |

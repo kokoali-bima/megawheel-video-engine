@@ -6957,6 +6957,40 @@
       "drive_id": "1DZIH_jqzfd9R8PBh2GXLYswUhQ0FgOvL",
       "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S038.mp4",
       "render3d": true
+    },
+    {
+      "video_id": "SIM_SPLASH_V2_S013",
+      "series": "splash",
+      "engine_version": "v2",
+      "seed": 13,
+      "created": "2026-10-19",
+      "render_date": "2026-10-19",
+      "vehicles": [
+        "police",
+        "firetruck",
+        "monster"
+      ],
+      "track_id": "splash_e87583b8@noon-rain-city",
+      "theme": "noon-rain-city",
+      "voice": "en-US-JennyNeural",
+      "outcomes": [
+        "crash@obs2+broken",
+        "pit@obs0+broken",
+        "win"
+      ],
+      "duration": 58.57,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-10-19_splash_s013",
+      "audit": "renders/megawheel_arena/pending/2026-10-19_splash_s013/SIM_SPLASH_V2_S013_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1h0XaKgxF_aqTE1mh053TvN-l1D2g1Srx",
+      "drive_id": "12wOJCsInRtpkwOsVxP9Bd3fPwU8qqJFk",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_SPLASH_V2_S013.mp4"
     }
   ]
 }
