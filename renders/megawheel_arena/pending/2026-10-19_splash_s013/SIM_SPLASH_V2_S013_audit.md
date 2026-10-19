@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_SPLASH_V2_S013
 
-- Tanggal: 2026-10-19 08:29 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 13 · Track: splash_e87583b8
+- Tanggal: 2026-10-19 08:43 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 · Seed: 13 · Track: splash_e87583b8
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS dengan catatan** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -27,13 +27,13 @@
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
 | Durasi 20-175 s (tidak dibatasi kaku, user 2026-10-04; batas teknis Shorts) dan sama dengan manifest (±0.3 s) | ✅ | 58.57 s (manifest 58.57) |
-| Ukuran wajar (8-20 MB) | ⚠️ | 29.4 MB |
+| Ukuran wajar (8-20 MB) | ⚠️ | 25.1 MB |
 
 ## 6.2 Audio
 | Cek | Hasil | Nilai |
 |---|---|---|
-| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -0.4 dB |
-| mean_volume -20..-12 dB | ✅ | -14.4 dB |
+| max_volume -3..-0.1 dB (tidak clipping) | ✅ | -1.4 dB |
+| mean_volume -20..-12 dB | ✅ | -13.2 dB |
 | Narasi terakhir = CTA baku | ✅ | Tap LIKE if you enjoyed this video, DISLIKE if you didn't, a... |
 | Narasi lengkap (intro + hasil tiap level + CTA) | ✅ | 8 baris |
 

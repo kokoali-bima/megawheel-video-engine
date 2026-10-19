@@ -4147,6 +4147,17 @@
    "cpu_container_seconds": 125.0,
    "wall_seconds": 70.1,
    "cost_usd": 0.0337
+  },
+  {
+   "date": "2026-10-19",
+   "note": "godot3d convert SIM_SPLASH_V2_S013",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 118.4,
+   "wall_seconds": 188.6,
+   "cost_usd": 0.0319
   }
  ]
 }
