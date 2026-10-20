@@ -760,7 +760,7 @@ s9["shots"] = [
     {"cam": "wide", "on": "sprinkles", "dx": 2, "zoom": 0.6, "hold": 3.0, "move": {"pan": 2}, "claw": CL9,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
-     "sfx": [["chain_rattle", 0.4, 0.5], ["kraggor_hum", 1.0, 0.4]]},      # A01: nothing audible 19.0-22.5 s before
+     "sfx": [["chain_rattle", 0.4, 0.5], ["thud_far", 1.5, 0.6], ["chain_rattle", 2.2, 0.5]]},   # A01 fill: short, sourced sounds
     {"cam": "low", "on": "zippy", "beat": "emotion", "hold": 4.0, "move": {"push": 0.12}, "claw": CL9,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
@@ -776,8 +776,8 @@ s9["shots"] = [
      "moves": {"zippy": {"to_x": 41.0, "to_z": 2.0, "speed": 8.0, "delay": 3.2,
                          "sink": {"at": 0.0, "dur": 0.6, "depth": 0.0, "tilt": 0.0,
                                   "from_depth": 0.5, "from_tilt": -0.55, "noclip": True}}},
-     "sfx": [["car_boing", 0.0, 0.5], ["chain_rattle", 0.8, 0.5], ["kraggor_hum", 1.7, 0.4], ["engine", 3.2, 0.5],
-             ["kraggor_hum", 4.0, 0.4], ["engine", 5.0, 0.5], ["engine", 6.1, 0.5]]},
+     "sfx": [["car_boing", 0.0, 0.5], ["chain_rattle", 0.8, 0.5], ["thud_far", 2.1, 0.6], ["engine", 3.2, 0.5],
+             ["engine", 4.3, 0.5], ["engine", 5.2, 0.5], ["engine", 6.1, 0.5]]},
     {"cam": "track", "on": "zippy", "dx": 3, "zoom": 1.0, "hold": 3.0, "move": {"push": 0.05}, "claw": CL9,
      "moves": {"zippy": {"to_x": 59.0, "to_z": 1.6, "speed": 10.0}},
      "sfx": [["engine", 0.1, 0.5], ["engine", 1.1, 0.5], ["engine", 2.1, 0.5]]},
@@ -789,7 +789,7 @@ s9["shots"] = [
      "sfx": [["engine", 0.1, 0.5], ["engine", 1.2, 0.5]]},
     {"cam": "wide", "on": "rocky", "zoom": 0.55, "dx": 10, "hold": 5.2, "move": {"pan": 2}, "claw": CL9,
      "moves": {"rocky": {"to_x": 42.0, "to_z": 2.0, "speed": 8.0}},
-     "sfx": [["kraggor_hum", 0.2, 0.4], ["engine", 0.6, 0.5], ["engine", 1.7, 0.5], ["kraggor_hum", 2.4, 0.4],
+     "sfx": [["thud_far", 0.1, 0.6], ["engine", 0.6, 0.5], ["engine", 1.7, 0.5], ["thud_far", 2.8, 0.6],
              ["engine", 3.2, 0.5], ["engine", 4.2, 0.5]]},
     {"cam": "track", "on": "rocky", "dx": 3, "zoom": 1.0, "hold": 3.0, "move": {"push": 0.05},
      "moves": {"rocky": {"to_x": 46.0, "to_z": 0.0, "speed": 6.0}},
