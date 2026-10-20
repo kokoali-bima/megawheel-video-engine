@@ -985,6 +985,13 @@
    "role": "short"
   },
   {
+   "episode": 103,
+   "video_id": "SIM_SPLASH_V2_S013",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-04T16:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 99,
    "video_id": "SIM_DUNGEON_V2_S029",
    "status": "QUEUED",
@@ -1003,6 +1010,13 @@
    "video_id": "SIM_DUNGEON_V2_S032",
    "status": "QUEUED",
    "publish_at_utc": "2026-11-24T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 102,
+   "video_id": "SIM_DUNGEON_V2_S038",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-12-01T16:00:00Z",
    "role": "short"
   }
  ]

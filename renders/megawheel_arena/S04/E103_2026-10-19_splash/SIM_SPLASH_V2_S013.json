@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SPLASH_V2_S013",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "splash",
   "seed": 13,
@@ -132,7 +132,7 @@
   ],
   "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
   "title_base": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics",
-  "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics | #Shorts",
+  "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics | Ep. 103 #Shorts",
   "description": "🚨 MEGAWHEEL ARENA — SPLASH EPISODE 13 🚨\nHeavy rain. Three deadly city obstacles. One champion.\n\nAt noon in Rainy City, the wet asphalt is slick, the puddles are deep, and the Giant Deep Water Pit is waiting. Siren the Police Car attacks the course first — but the slick concrete wall ends the run in a hard crash. Next, Hydro the Fire Truck charges in with emergency speed and plunges headfirst into the water pit with an epic splash. Then Rocky the Monster Truck rolls up on giant mud tires. Can Rocky conquer the deep water, climb the steep slick hill, and smash through the final barrier to reach the 97m finish?\n\n00:00 Rainy City at Noon — course preview\n00:08 Siren the Police Car — slick wall crash\n00:24 Hydro the Fire Truck — giant water pit splash\n00:40 Rocky the Monster Truck — final run to the trophy\n00:56 Finish line at 97m\n\nWho do you think had the craziest outcome? Comment below!\n🔔 Subscribe to MegaWheel Arena for more physics simulation car challenges.\n#Shorts #MegaWheelArena #CarChallenge #WaterPit #RainyCity #MonsterTruck #PhysicsSimulation",
   "tags": [
     "MegaWheel Arena",
@@ -251,10 +251,13 @@
     "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!"
   ],
   "assets": "100% procedurally generated (pymunk physics + cairo render + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1; picture re-drawn in 3D with Godot 4.4.1 (rendered on Modal GPU T4)",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_splash_s013/SIM_SPLASH_V2_S013.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_splash_s013/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E103_2026-10-19_splash/SIM_SPLASH_V2_S013.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E103_2026-10-19_splash/preview",
   "cold_open_s": 3.0,
-  "audit_path": "/root/video-engine/renders/megawheel_arena/pending/2026-10-19_splash_s013/SIM_SPLASH_V2_S013_audit.md",
+  "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E103_2026-10-19_splash/SIM_SPLASH_V2_S013_audit.md",
   "render3d": true,
-  "ai_director": "DeepSeek Flash + Antigravity"
+  "ai_director": "DeepSeek Flash + Antigravity",
+  "episode": 103,
+  "season": 4,
+  "approved_date": "2026-10-20"
 }

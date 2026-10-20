@@ -1,6 +1,6 @@
 # Audit otomatis: SIM_SPLASH_V2_S013
 
-- Tanggal: 2026-10-19 10:32 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 13 · Track: splash_e87583b8
+- Tanggal: 2026-10-19 23:19 · Auditor: audit.py (otomatis) · Engine: sim-prototype v2 + godot3d (lab/godot3d_challenge) · Seed: 13 · Track: splash_e87583b8
 - Mengacu: `/root/video-engine/BLUEPRINT.md` bagian 5, 6, 7
 - **Hasil: LOLOS** → boleh dikirim sebagai preview (RENDERED_PENDING_APPROVAL)
 
@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-10-19_splash_s013/SIM_SPLASH_V2_S013.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S04/E103_2026-10-19_splash/SIM_SPLASH_V2_S013.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |
