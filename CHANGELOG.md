@@ -3,11 +3,32 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-20
+**📤 Upload / antrean / Drive**
+- `a850844` publish: daily run 2026-10-20 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `d6db772` story3d: S01E03 engine features, scene data and builder
+- `4da7d77` approve: Ep. 102 (dungeon s038) and Ep. 103 (splash s013) queued for publish
+
 ## 2026-10-19
+**🔧 Lain-lain**
+- `1d78f06` fix: wheel pivot hierarchy, unshaded wheel sprites, and edge-on visibility threshold
+- `b748acd` fix: remove fake contact blob shadow on water puddles, unshade splash particles, defect #56
+- `498acdb` fix: wheel yaw squeeze math, chatterbox tts budget guard, defects #54-#55
+- `ffb0548` feat: produce Ep 3D splash S013 with Godot on Modal
+- `51fa713` feat: produce Ep 102 3D dungeon S038
+- `58cb4df` chore: sync auto timestamp update
+- `934d1ce` auto: records left uncommitted before daily run
+**🕳️ CHALLENGE (sim_engine)**
+- `2b90b27` produce: SIM_SPLASH_V2_S013 (pending review) [Claude Code Opus]
+- `23c7336` produce: SIM_DUNGEON_V2_S038 (pending review) [Claude Code Opus]
 **📤 Upload / antrean / Drive**
 - `2f59d48` publish: daily run 2026-10-19 [cron daily_publish.sh]
-**🔧 Lain-lain**
-- `934d1ce` auto: records left uncommitted before daily run
+<details><summary>otomatis VM (1)</summary>
+
+- `260ae88` analytics: daily report 2026-10-19
+
+</details>
 
 ## 2026-10-18
 **📤 Upload / antrean / Drive**
