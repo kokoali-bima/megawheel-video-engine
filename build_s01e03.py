@@ -760,7 +760,7 @@ s9["shots"] = [
     {"cam": "wide", "on": "sprinkles", "dx": 2, "zoom": 0.6, "hold": 3.0, "move": {"pan": 2}, "claw": CL9,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
-     "sfx": [["chain_rattle", 0.4, 0.5]]},
+     "sfx": [["chain_rattle", 0.4, 0.5], ["kraggor_hum", 1.0, 0.4]]},      # A01: nothing audible 19.0-22.5 s before
     {"cam": "low", "on": "zippy", "beat": "emotion", "hold": 4.0, "move": {"push": 0.12}, "claw": CL9,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
