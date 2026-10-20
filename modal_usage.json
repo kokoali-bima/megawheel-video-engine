@@ -4283,6 +4283,16 @@
    "gpu_seconds": 193.0,
    "wall_seconds": 306.6,
    "cost_usd": 0.0584
+  },
+  {
+   "date": "2026-10-20",
+   "note": "S01E03 scene 9 voiced preview (media review)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 388.1,
+   "gpu_seconds": 194.0,
+   "wall_seconds": 137.3,
+   "cost_usd": 0.0591
   }
  ]
 }
