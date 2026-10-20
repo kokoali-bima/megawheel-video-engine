@@ -307,6 +307,8 @@ def audit_scene(d, mp4):
         for q in range(len(A_)):
             for r_ in range(q + 1, len(A_)):
                 a, b = A_[q], A_[r_]
+                if sorted((a[0], b[0])) in sh.get("contact", []):      # declared contact (tow / brace): not a staging error
+                    continue
                 if abs(a[2] - b[2]) < 0.9:
                     gap = abs(a[1] - b[1]) - (a[6] * a[5] + b[6] * b[5]) / 2
                     if gap < 1.0:

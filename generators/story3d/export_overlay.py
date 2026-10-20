@@ -219,7 +219,8 @@ def run(episode, scene_no, aspect, out):
                   cam="insert" if "look" in s else s.get("cam", "wide"), on=s.get("on"),
                   move=s.get("move") or {}, cut=s.get("cut", "soft"), lines=len(s.get("lines", [])),
                   sfx=[x if isinstance(x, str) else x[0] for x in s.get("sfx", [])], fx=s.get("fx", []),
-                  caption=bool(s.get("caption")))
+                  caption=bool(s.get("caption")),
+                  contact=[sorted(p) for p in s.get("contact", [])])      # coupled pairs: the QA staging sensor skips them
              for i, s in enumerate(box.get("shots") or [])]
     rows = [[i // PART, f] for i, f in enumerate(frames)]
     json.dump(dict(fps=ST.FPS, frames=rows), open(os.path.join(out, "frames.json"), "w"))
