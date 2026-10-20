@@ -938,37 +938,52 @@
   {
    "episode": 94,
    "video_id": "SIM_SMASH25D_V5_S036",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-30T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Can Tiny Zippy Beat a School Bus? \ud83d\udca5 | Ep. 94 #Shorts",
+   "upload_started": "2026-10-20T05:00:06.387736+00:00",
+   "url": "https://www.youtube.com/shorts/ec1zc5iboQE"
   },
   {
    "episode": 91,
    "video_id": "SIM_BUMPS_V2_S022",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-31T15:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs Giant Speed Bumps! Can Tilly Make It? \ud83d\ude97\ud83d\udca5 | Ep. 91 #Shorts",
+   "upload_started": "2026-10-20T05:00:14.802709+00:00",
+   "url": "https://www.youtube.com/shorts/yFWEjAOlIB4"
   },
   {
    "episode": 93,
    "video_id": "SIM_RACE25D_V4_S070",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-31T19:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Sprinkles Survive the Oil Slick? \ud83c\udfc1 | Ep. 93 #Shorts",
+   "upload_started": "2026-10-20T05:00:20.981536+00:00",
+   "url": "https://www.youtube.com/shorts/nuWeVdaiJe8"
   },
   {
    "episode": 95,
    "video_id": "SIM_SMASH25D_V5_S037",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-10-31T23:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? \ud83d\udca5 | Ep. 95 #Shorts",
+   "upload_started": "2026-10-20T05:00:28.174820+00:00",
+   "url": "https://www.youtube.com/shorts/S6FoCd1kejM"
   },
   {
    "episode": 96,
    "video_id": "SIM_DOMINO_V2_S003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-01T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? \ud83c\udc62 | Ep. 96 #Shorts",
+   "upload_started": "2026-10-20T05:00:35.018205+00:00",
+   "url": "https://www.youtube.com/shorts/uHkmWJYEZvA"
   },
   {
    "episode": 97,

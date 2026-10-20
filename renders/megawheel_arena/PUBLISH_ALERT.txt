@@ -1,5 +1,3 @@
-STATUS: ALERT
-TIME: 2026-10-19 05:01 UTC
-TITLE: upload harian selesai, tetapi ada masalah terbuka
-
-- [ALERT] Token upload hampir mati (umur token) (sejak 2026-10-16 05:00 UTC): youtube_token.json: umur 8.3 hari - bila app OAuth masih 'Testing' token ini mati dalam < 1 hari
+STATUS: OK
+TIME: 2026-10-20 05:01 UTC
+TITLE: daily publish run finished without errors

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-20 02:49) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-20 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -104,12 +104,12 @@
 | 88 | `SIM_SMASH25D_V5_S032` | smash25d | UPLOADED_SCHEDULED 2026-10-28T23:00:00Z | Wed 2026-10-28 19:00 | https://www.youtube.com/shorts/8q9Bbk-An5U |
 | 89 | `SIM_SMASH25D_V5_S034` | smash25d | UPLOADED_SCHEDULED 2026-10-29T23:00:00Z | Thu 2026-10-29 19:00 | https://www.youtube.com/shorts/jiixposH0eo |
 | 90 | `SIM_POTHOLES_V2_S033` | potholes | UPLOADED_SCHEDULED 2026-10-30T15:00:00Z | Fri 2026-10-30 11:00 | https://www.youtube.com/shorts/LA5GZDAqS1U |
-| 91 | `SIM_BUMPS_V2_S022` | bumps | APPROVED | Sat 2026-10-31 11:00 |  |
+| 91 | `SIM_BUMPS_V2_S022` | bumps | UPLOADED_SCHEDULED 2026-10-31T15:00:00Z | Sat 2026-10-31 11:00 | https://www.youtube.com/shorts/yFWEjAOlIB4 |
 | 92 | `SIM_RACE25D_V4_S069` | race25d | UPLOADED_SCHEDULED 2026-10-30T19:00:00Z | Fri 2026-10-30 15:00 | https://www.youtube.com/shorts/dfyq1sts3ZI |
-| 93 | `SIM_RACE25D_V4_S070` | race25d | APPROVED | Sat 2026-10-31 15:00 |  |
-| 94 | `SIM_SMASH25D_V5_S036` | smash25d | APPROVED | Fri 2026-10-30 19:00 |  |
-| 95 | `SIM_SMASH25D_V5_S037` | smash25d | APPROVED | Sat 2026-10-31 19:00 |  |
-| 96 | `SIM_DOMINO_V2_S003` | domino | APPROVED | Sun 2026-11-01 11:00 |  |
+| 93 | `SIM_RACE25D_V4_S070` | race25d | UPLOADED_SCHEDULED 2026-10-31T19:00:00Z | Sat 2026-10-31 15:00 | https://www.youtube.com/shorts/nuWeVdaiJe8 |
+| 94 | `SIM_SMASH25D_V5_S036` | smash25d | UPLOADED_SCHEDULED 2026-10-30T23:00:00Z | Fri 2026-10-30 19:00 | https://www.youtube.com/shorts/ec1zc5iboQE |
+| 95 | `SIM_SMASH25D_V5_S037` | smash25d | UPLOADED_SCHEDULED 2026-10-31T23:00:00Z | Sat 2026-10-31 19:00 | https://www.youtube.com/shorts/S6FoCd1kejM |
+| 96 | `SIM_DOMINO_V2_S003` | domino | UPLOADED_SCHEDULED 2026-11-01T16:00:00Z | Sun 2026-11-01 11:00 | https://www.youtube.com/shorts/uHkmWJYEZvA |
 | 97 | `SIM_PINBALL_V2_S006` | pinball | APPROVED | Mon 2026-11-02 11:00 |  |
 | 98 | `SIM_DUNGEON_V2_S026` | dungeon | APPROVED | Tue 2026-11-03 11:00 |  |
 | 99 | `SIM_DUNGEON_V2_S029` | dungeon | APPROVED | Tue 2026-11-10 11:00 |  |
@@ -1301,9 +1301,9 @@
 - **Tema / narator:** morning-clear-beach / chatterbox:f1
 - **Durasi:** 50.13 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs2+broken; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Rocky (monster) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-31T15:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-31T15:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-31T15:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/yFWEjAOlIB4
 
 ## Ep. 92 — `SIM_RACE25D_V4_S069`
 
@@ -1327,9 +1327,9 @@
 - **Tema / narator:** night-snow-city / chatterbox:m1
 - **Durasi:** 34.79 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p3+oil; Level 2: Grizzly (monster2) → p2+dodge_laser; Level 3 (juara): Siren (police) → p4+ufo; Level 4: Nitro (f1) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-31T19:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-31T19:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-31T19:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/nuWeVdaiJe8
 
 ## Ep. 94 — `SIM_SMASH25D_V5_S036`
 
@@ -1340,9 +1340,9 @@
 - **Tema / narator:** night-clear-countryside / chatterbox:mw-announcers-m1f1
 - **Durasi:** 51.18 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p2+ring; Level 2: Rocky (monster) → p4+ring; Level 3 (juara): Zippy (sports) → win; Level 4: Siren (police) → p3+ring
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-30T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-30T23:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-30T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/ec1zc5iboQE
 
 ## Ep. 95 — `SIM_SMASH25D_V5_S037`
 
@@ -1353,9 +1353,9 @@
 - **Tema / narator:** morning-clear-beach / chatterbox:mw-announcers-m1f1
 - **Durasi:** 54.25 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p2+wreck; Level 2: Grizzly (monster2) → p3+wreck; Level 3 (juara): Tilly (taxi) → win; Level 4: Nitro (f1) → p4+ring
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-10-31T23:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-10-31T23:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-10-31T23:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/S6FoCd1kejM
 
 ## Ep. 96 — `SIM_DOMINO_V2_S003`
 
@@ -1366,9 +1366,9 @@
 - **Tema / narator:** sunset-clear-beach / chatterbox:f1
 - **Durasi:** 50.07 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → chop@obs1+broken; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Tilly (taxi) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-01T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-01T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-01T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/uHkmWJYEZvA
 
 ## Ep. 97 — `SIM_PINBALL_V2_S006`
 

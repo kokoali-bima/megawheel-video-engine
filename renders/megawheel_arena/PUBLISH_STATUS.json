@@ -1,18 +1,11 @@
 {
  "last_run": {
-  "finished_utc": "2026-10-19T05:01:40Z",
+  "finished_utc": "2026-10-20T05:01:41Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-10-20T02:49:14Z",
- "open_issues": [
-  {
-   "key": "upload_token_age",
-   "level": "ALERT",
-   "title": "Token upload hampir mati (umur token)",
-   "since": "2026-10-16 05:00 UTC"
-  }
- ],
+ "updated_utc": "2026-10-20T05:01:41Z",
+ "open_issues": [],
  "stock": {
   "standard_days": 7,
   "all_ok": true,
@@ -38,8 +31,8 @@
   }
  },
  "queue": {
-  "SCHEDULED": 95,
-  "QUEUED": 12
+  "SCHEDULED": 100,
+  "QUEUED": 7
  },
  "next_uploads": [
   {

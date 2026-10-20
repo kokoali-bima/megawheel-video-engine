@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_DOMINO_V2_S003",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-01T16:00:00Z",
   "engine": "sim-prototype v2",
   "series": "domino",
   "seed": 3,
@@ -237,5 +237,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E096_2026-10-11_domino/SIM_DOMINO_V2_S003_audit.md",
   "episode": 96,
   "season": 4,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/uHkmWJYEZvA",
+  "upload_date": "2026-10-20"
 }
