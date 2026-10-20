@@ -1,0 +1,333 @@
+{
+ "title": "Scene 2 - Beyond the Rusty Gate",
+ "chapter": "Beyond the Rusty Gate",
+ "location": "speedway",
+ "theme_location": "countryside",
+ "time": "morning",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "fog": 0.35,
+ "mountains": true,
+ "start_x": -2.0,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -34,
+   "z": 1.2,
+   "face": 1,
+   "emo": "normal"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -44,
+   "z": 2.6,
+   "face": 1,
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -52,
+   "z": 0.3,
+   "face": 1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -62,
+   "z": 2.0,
+   "face": 1,
+   "emo": "normal"
+  }
+ },
+ "props": [
+  {
+   "type": "speedgate",
+   "x": -14.0,
+   "z": 1.3,
+   "half": 6.4,
+   "open_shot": 0,
+   "open_dt": 0.0,
+   "open_dur": 0.2
+  },
+  {
+   "type": "scoreboard",
+   "x": 22.0,
+   "z": 4.4,
+   "w": 7.0,
+   "texts": [
+    [
+     0.0,
+     "LAP 5 OF 5\nFINAL LAP"
+    ]
+   ]
+  },
+  {
+   "type": "trophy_case",
+   "x": 36.0,
+   "z": 3.4
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_wonder",
+   "from": 0,
+   "to": 1,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.2,
+   "tail": 1.0
+  },
+  {
+   "cue": "cue_grandpa_memory",
+   "from": 7,
+   "to": 8,
+   "vol": 0.35,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.2
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": -6,
+   "hold": 7.2,
+   "cut": "hard",
+   "move": {
+    "pan": 2
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.88,
+    "sy": 0.6,
+    "scale": 0.45,
+    "stand": true,
+    "gz": 6.5
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 2,
+     "speed": 9.5
+    },
+    "buster": {
+     "to_x": -8,
+     "speed": 9.5
+    },
+    "zippy": {
+     "to_x": -16,
+     "speed": 9.5
+    },
+    "rocky": {
+     "to_x": -26,
+     "speed": 9.5
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.3,
+     0.4
+    ],
+    [
+     "gate_creak",
+     0.0,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "buster",
+    "zippy",
+    "rocky"
+   ],
+   "dx": -4,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "zippy": "surprised"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Whoa... sixty years of dust and not one tire track!",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 12,
+   "hold": 4.2,
+   "move": {
+    "pan": 2.5
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 14,
+     "speed": 8
+    },
+    "buster": {
+     "to_x": 6,
+     "speed": 8
+    },
+    "zippy": {
+     "to_x": -2,
+     "speed": 8
+    },
+    "rocky": {
+     "to_x": -10,
+     "speed": 8
+    }
+   }
+  },
+  {
+   "look": {
+    "x": 22.0,
+    "z": 4.4,
+    "y": 4.6,
+    "fit": 9.0
+   },
+   "hold": 3.4,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "drone",
+     0.0,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "rocky",
+   "with": "zippy",
+   "dx": 2,
+   "move": {
+    "push": 0.06
+   },
+   "emote": {
+    "rocky": "worried"
+   },
+   "lines": [
+    [
+     "rocky",
+     "The scoreboard's stuck on the final lap... like it's waiting for us.",
+     "worried"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "move": {
+    "pull": 0.06
+   },
+   "emote": {
+    "sprinkles": "excited"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "And the trophy case has a keyhole... our key might open it!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 36.0,
+    "z": 3.4,
+    "y": 1.8,
+    "fit": 6.0
+   },
+   "hold": 3.2,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "key_glint",
+     0.6,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 18,
+   "hold": 3.6,
+   "move": {
+    "pull": 0.1
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 20,
+     "speed": 5
+    },
+    "buster": {
+     "to_x": 12,
+     "speed": 4
+    }
+   },
+   "emote": {
+    "buster": "sad"
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "buster",
+   "beat": "emotion",
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "buster": "sad"
+   },
+   "lines": [
+    [
+     "buster",
+     "Don't open that case yet, Sprinkles. That scoreboard stopped for me... over sixty years ago.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "with": "buster",
+   "dx": 2,
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "worried",
+    "buster": "sad"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "You were here, Buster? What happened?",
+     "worried"
+    ],
+    [
+     "buster",
+     "Come back to town with me. Your grandpa left a box in your garage.",
+     "sad"
+    ]
+   ]
+  }
+ ]
+}

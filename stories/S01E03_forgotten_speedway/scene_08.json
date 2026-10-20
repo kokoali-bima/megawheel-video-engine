@@ -1,0 +1,528 @@
+{
+ "title": "Scene 8 - The Forgotten Speedway Final",
+ "chapter": "The Final Lap",
+ "location": "mountain",
+ "theme_location": "countryside",
+ "time": "sunset",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "mountains": true,
+ "fog": 0.25,
+ "gorge": [
+  14.0,
+  38.0
+ ],
+ "ramps": [
+  [
+   -40.0,
+   -30.0,
+   1.6
+  ]
+ ],
+ "actors": {
+  "nitro": {
+   "vk": "f1",
+   "x": -90,
+   "z": 2.8,
+   "face": 1,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -96,
+   "z": 1.3,
+   "face": 1,
+   "emo": "determined"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -112,
+   "z": 0.2,
+   "face": 1,
+   "emo": "determined"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -120,
+   "z": 2.1,
+   "face": 1,
+   "emo": "normal"
+  }
+ },
+ "props": [
+  {
+   "type": "bridge",
+   "x0": 14.0,
+   "x1": 38.0,
+   "planks": 36,
+   "posts": 7,
+   "z0": -0.4,
+   "z1": 3.4,
+   "keys": [
+    [
+     52.13,
+     0.0,
+     0.0
+    ],
+    [
+     54.730000000000004,
+     0.3,
+     0.4
+    ]
+   ],
+   "outer_keys": [
+    [
+     52.13,
+     0.0,
+     0.0
+    ],
+    [
+     52.53,
+     0.0,
+     0.0
+    ],
+    [
+     53.330000000000005,
+     0.4,
+     0.35
+    ],
+    [
+     54.730000000000004,
+     0.7,
+     0.8
+    ]
+   ],
+   "holes": [
+    [
+     53.330000000000005,
+     0.36,
+     0.5
+    ]
+   ],
+   "diag": [
+    25.0,
+    52.730000000000004
+   ]
+  },
+  {
+   "type": "rockslide",
+   "x": 33.0,
+   "n": 10,
+   "from_shot": 11
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_heroic_stand",
+   "from": 1,
+   "to": 5,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 0.8,
+   "tail": 0.8
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.45,
+   "dx": -92,
+   "hold": 5.0,
+   "cut": "hard",
+   "move": {
+    "pan": 2
+   },
+   "lines": [
+    [
+     "announcer",
+     "Green flag on the Memorial Lap! Nitro out front, Zippy right there!",
+     "excited"
+    ]
+   ],
+   "moves": {
+    "nitro": {
+     "to_x": -64,
+     "speed": 12
+    },
+    "zippy": {
+     "to_x": -70,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": -88,
+     "speed": 12
+    },
+    "rocky": {
+     "to_x": -96,
+     "speed": 12
+    }
+   }
+  },
+  {
+   "cam": "track",
+   "on": "nitro",
+   "dx": 4,
+   "zoom": 1.0,
+   "hold": 5.0,
+   "speedlines": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "nitro": {
+     "to_x": -44,
+     "speed": 16
+    },
+    "zippy": {
+     "to_x": -49,
+     "speed": 19
+    },
+    "sprinkles": {
+     "to_x": -66,
+     "speed": 18
+    },
+    "rocky": {
+     "to_x": -76,
+     "speed": 17
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "dx": -44,
+   "hold": 5.0,
+   "lift": 0.4,
+   "move": {
+    "pan": 2
+   },
+   "lines": [
+    [
+     "announcer2",
+     "The hill looms! Sprinkles is dropping back!",
+     "surprised"
+    ]
+   ],
+   "moves": {
+    "nitro": {
+     "to_x": -34,
+     "speed": 6
+    },
+    "zippy": {
+     "to_x": -39,
+     "speed": 6
+    },
+    "sprinkles": {
+     "to_x": -50,
+     "speed": 10
+    },
+    "rocky": {
+     "to_x": -60,
+     "speed": 10
+    }
+   }
+  },
+  {
+   "cam": "low",
+   "on": "sprinkles",
+   "beat": "emotion",
+   "hold": 2.8,
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Build your speed before the hill... and keep rolling!",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "rocky",
+   "dx": 3,
+   "zoom": 1.0,
+   "hold": 4.0,
+   "speedlines": true,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "rocky": "excited"
+   },
+   "lines": [
+    [
+     "rocky",
+     "Keep rolling, Sprinkles!",
+     "excited"
+    ]
+   ],
+   "moves": {
+    "rocky": {
+     "to_x": -52,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": -44,
+     "speed": 12
+    }
+   }
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": 3,
+   "zoom": 1.1,
+   "hold": 3.0,
+   "speedlines": true,
+   "move": {
+    "push": 0.08
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": -22,
+     "speed": 22
+    },
+    "nitro": {
+     "to_x": -26,
+     "speed": 7
+    },
+    "zippy": {
+     "to_x": -31,
+     "speed": 7
+    },
+    "rocky": {
+     "to_x": -40,
+     "speed": 14
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "zoom": 0.6,
+   "dx": -20,
+   "hold": 5.0,
+   "move": {
+    "pan": 2
+   },
+   "emote": {
+    "nitro": "angry"
+   },
+   "lines": [
+    [
+     "announcer",
+     "Sprinkles roars past Nitro at the summit!",
+     "excited"
+    ]
+   ],
+   "moves": {
+    "sprinkles": {
+     "to_x": 8,
+     "speed": 22
+    },
+    "nitro": {
+     "to_x": 2,
+     "speed": 22
+    },
+    "zippy": {
+     "to_x": -4,
+     "speed": 22
+    },
+    "rocky": {
+     "to_x": -14,
+     "speed": 22
+    }
+   }
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "dx": -2,
+   "hold": 4.6,
+   "move": {
+    "pan": 2
+   },
+   "emote": {
+    "sprinkles": "determined",
+    "nitro": "angry"
+   },
+   "moves": {
+    "nitro": {
+     "to_x": 24,
+     "speed": 8
+    },
+    "sprinkles": {
+     "to_x": 18,
+     "speed": 8
+    },
+    "zippy": {
+     "to_x": 8,
+     "speed": 10
+    },
+    "rocky": {
+     "to_x": 0,
+     "speed": 10
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "nitro",
+   "dx": 3,
+   "zoom": 1.0,
+   "hold": 4.4,
+   "speedlines": true,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "nitro": "angry"
+   },
+   "lines": [
+    [
+     "nitro",
+     "Nice try, ice cream! Nobody passes me twice!",
+     "angry"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "nitro",
+   "with": "zippy",
+   "dx": 3,
+   "hold": 4.4,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "nitro": "angry",
+    "zippy": "worried"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Nitro, she's right behind you again!",
+     "worried"
+    ],
+    [
+     "nitro",
+     "Not for long. Into the canyon!",
+     "angry"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "rocky",
+   "zoom": 0.6,
+   "dx": 6,
+   "hold": 7.2,
+   "move": {
+    "pan": 1.5
+   },
+   "moves": {
+    "nitro": {
+     "to_x": 33,
+     "to_z": 2.7,
+     "speed": 4.0
+    },
+    "sprinkles": {
+     "to_x": 29,
+     "to_z": 0.2,
+     "speed": 4.0
+    },
+    "zippy": {
+     "to_x": 24.2,
+     "to_z": 1.3,
+     "speed": 4.0
+    },
+    "rocky": {
+     "to_x": 17,
+     "to_z": 2.1,
+     "speed": 4.0
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "dx": 0.0,
+   "zoom": 0.55,
+   "hold": 3.2,
+   "cut": "hard",
+   "move": {
+    "handheld": 3
+   },
+   "claw": [
+    {
+     "x": 22.0,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": -1.0,
+     "from_dy": -11.0,
+     "at": 0.2,
+     "dur": 0.9
+    },
+    {
+     "x": 26.5,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": 1.0,
+     "from_dy": -11.0,
+     "at": 0.3,
+     "dur": 0.9
+    }
+   ],
+   "moves": {
+    "zippy": {
+     "to_x": 24.2,
+     "speed": 1.0,
+     "sink": {
+      "at": 1.5,
+      "dur": 1.0,
+      "depth": 0.5,
+      "tilt": -0.55,
+      "noclip": true
+     }
+    }
+   },
+   "emote": {
+    "zippy": "scared",
+    "sprinkles": "worried",
+    "rocky": "worried"
+   },
+   "sfx": [
+    [
+     "rockslide",
+     0.0,
+     0.6
+    ]
+   ]
+  }
+ ],
+ "note": "Bridge collapse timeline starts at T8=52.13 s (REAL start of the last shot); events end at T8+2.6 s, inside the 3.2 s real shot."
+}

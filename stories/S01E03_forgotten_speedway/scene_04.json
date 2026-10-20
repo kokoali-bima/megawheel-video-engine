@@ -1,0 +1,396 @@
+{
+ "title": "Scene 4 - Flashback: Grandpa's Final Lap",
+ "chapter": "Grandpa's Final Lap",
+ "location": "mountain",
+ "theme_location": "countryside",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "storm",
+ "letterbox": true,
+ "gap": 0.5,
+ "tail": 1.0,
+ "edge_fade": false,
+ "fog": 0.25,
+ "mountains": true,
+ "tint": "sepia",
+ "rain": true,
+ "lightning": [
+  [
+   2,
+   0.3
+  ],
+  [
+   3,
+   0.4
+  ]
+ ],
+ "actors": {
+  "grandpa_cone": {
+   "vk": "icecream",
+   "x": -30,
+   "z": 0.8,
+   "face": 1,
+   "emo": "determined",
+   "color": [
+    0.93,
+    0.86,
+    0.7
+   ],
+   "accent": [
+    0.62,
+    0.42,
+    0.25
+   ],
+   "mustache": false
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -44,
+   "z": 2.2,
+   "face": 1,
+   "emo": "determined"
+  }
+ },
+ "props": [
+  {
+   "type": "rockslide",
+   "x": -8.0,
+   "n": 10,
+   "from_shot": 2
+  },
+  {
+   "type": "kraggor_small",
+   "x": 6.0,
+   "z": 3.6,
+   "face": -1,
+   "height": 3.0,
+   "mode": "scared",
+   "from_shot": 8,
+   "to_shot": 9
+  },
+  {
+   "type": "key",
+   "x": 4.5,
+   "z": 3.2,
+   "from_shot": 8,
+   "to_shot": 9
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_grandpa_memory",
+   "from": 7,
+   "to": 10,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 0.8,
+   "tail": 0.6
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "hold": 7.0,
+   "cut": "hard",
+   "move": {
+    "pan": 2
+   },
+   "caption": "OVER SIXTY YEARS AGO. LAP 5 OF 5.",
+   "moves": {
+    "grandpa_cone": {
+     "to_x": 6,
+     "speed": 9
+    },
+    "buster": {
+     "to_x": -6,
+     "speed": 9
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2,
+     0.5
+    ],
+    [
+     "thunder_roll",
+     1.5,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "grandpa_cone",
+   "with": "buster",
+   "dx": -6,
+   "zoom": 0.9,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "grandpa_cone": "excited",
+    "buster": "laugh"
+   },
+   "lines": [
+    [
+     "grandpa_cone",
+     "Last lap, Buster! Stay close!",
+     "excited"
+    ],
+    [
+     "buster",
+     "Not for long, Cone!",
+     "laugh"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": -4,
+   "hold": 4.6,
+   "move": {
+    "pan": 1.5
+   },
+   "emote": {
+    "buster": "scared"
+   },
+   "moves": {
+    "buster": {
+     "to_x": -9,
+     "speed": 3.0,
+     "stuck": true
+    },
+    "grandpa_cone": {
+     "to_x": 14,
+     "speed": 8
+    }
+   },
+   "sfx": [
+    [
+     "thunder_roll",
+     0.1,
+     0.8
+    ],
+    [
+     "rockslide",
+     0.3,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "buster",
+   "dx": 2.5,
+   "zoom": 1.05,
+   "move": {
+    "handheld": 5
+   },
+   "emote": {
+    "buster": "scared"
+   },
+   "lines": [
+    [
+     "buster",
+     "Cone! The road fell out from under me... I'm stuck!",
+     "scared"
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "grandpa_cone",
+   "beat": "emotion",
+   "hold": 3.8,
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "grandpa_cone": "determined"
+   },
+   "moves": {
+    "grandpa_cone": {
+     "to_x": 15,
+     "face": -1,
+     "squash": 0.4,
+     "at": 0.0
+    }
+   }
+  },
+  {
+   "cam": "two",
+   "on": "grandpa_cone",
+   "with": "buster",
+   "dx": -6,
+   "beat": "emotion",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "grandpa_cone": "determined"
+   },
+   "lines": [
+    [
+     "grandpa_cone",
+     "I'm not leaving you, Buster!",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": 2,
+   "hold": 4.2,
+   "move": {
+    "pan": 2
+   },
+   "contact": [
+    [
+     "grandpa_cone",
+     "buster"
+    ]
+   ],
+   "moves": {
+    "grandpa_cone": {
+     "to_x": -2.5,
+     "to_z": 2.2,
+     "speed": 8,
+     "face": -1
+    }
+   },
+   "emote": {
+    "grandpa_cone": "determined",
+    "buster": "worried"
+   },
+   "sfx": [
+    [
+     "chain_rattle",
+     0.0,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.7,
+   "dx": 1,
+   "hold": 3.2,
+   "move": {
+    "pan": 1.5
+   },
+   "moves": {
+    "grandpa_cone": {
+     "to_x": 6.5,
+     "to_z": 2.2,
+     "speed": 6,
+     "reverse": true,
+     "face": -1
+    },
+    "buster": {
+     "to_x": 0,
+     "to_z": 2.2,
+     "speed": 6,
+     "delay": 0.0
+    }
+   },
+   "sfx": [
+    [
+     "chain_rattle",
+     0.0,
+     0.5
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 5.5,
+    "z": 3.4,
+    "y": 1.5,
+    "fit": 6.0
+   },
+   "hold": 5.0,
+   "move": {
+    "push": 0.08
+   },
+   "sfx": [
+    [
+     "key_glint",
+     0.8,
+     0.5
+    ],
+    [
+     "whimper",
+     0.3,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "grandpa_cone",
+   "with": "buster",
+   "dx": 1,
+   "zoom": 0.9,
+   "move": {
+    "push": 0.08
+   },
+   "contact": [
+    [
+     "grandpa_cone",
+     "buster"
+    ]
+   ],
+   "emote": {
+    "grandpa_cone": "happy",
+    "buster": "sad"
+   },
+   "lines": [
+    [
+     "grandpa_cone",
+     "A trophy gets dusty, Buster. A friend never does.",
+     "calm"
+    ],
+    [
+     "buster",
+     "Thank you... Cone.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "dx": 3,
+   "hold": 6.0,
+   "move": {
+    "crane": 1.2,
+    "pull": 0.1
+   },
+   "contact": [
+    [
+     "grandpa_cone",
+     "buster"
+    ]
+   ],
+   "moves": {
+    "grandpa_cone": {
+     "to_x": 9.5,
+     "speed": 6
+    },
+    "buster": {
+     "to_x": 3,
+     "speed": 6
+    }
+   },
+   "punch": true,
+   "emote": {
+    "grandpa_cone": "happy"
+   }
+  }
+ ],
+ "note": "Same lane, true bumper contact (centre distance 6.5 m = bus half 3.7 + ice-cream half 2.8), towed. Cue covers only last four shots. Motion and cue lengths are timing ESTIMATES until real speech exists."
+}

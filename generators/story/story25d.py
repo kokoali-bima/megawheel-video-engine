@@ -1284,9 +1284,11 @@ def stands_top_world():
 KR_BODY, KR_DARK = (0.24, 0.55, 0.36), (0.15, 0.34, 0.22)
 
 
-def kraggor_body(ctx, roar):
+def kraggor_body(ctx, roar, hands=None):
     """Kraggor's body in head units (own design): shoulders, metal belly, clawed arms, legs, tail.
-    Origin = neck base used by smash25d.draw_kraggor_head; y grows downwards."""
+    Origin = neck base used by smash25d.draw_kraggor_head; y grows downwards.
+    hands: optional ((lx, ly), (rx, ry)) arm ENDS in head units - mode "hold" raises both arms to exactly these
+    points (kraggor_hold_pose); None = the roar / bridge formula below."""
     def fill(path_fn, col):
         path_fn()
         ctx.set_source_rgb(*se.lit(col))
@@ -1309,7 +1311,10 @@ def kraggor_body(ctx, roar):
         ctx.stroke()
     lift = -6.5 * roar
     for sgn in (-1, 1):                                                                  # arms with white claws
-        hx, hy = sgn * 9.6, 7.0 + lift
+        if hands is None:
+            hx, hy = sgn * 9.6, 7.0 + lift
+        else:
+            hx, hy = hands[0] if sgn < 0 else hands[1]
         fill(lambda sgn=sgn, hx=hx, hy=hy: (ctx.move_to(sgn * 5.2, -1.6), ctx.line_to(hx + sgn * 0.6, hy - 1.2),
                                            ctx.line_to(hx - sgn * 1.4, hy + 1.0), ctx.line_to(sgn * 4.8, 2.2),
                                            ctx.close_path()), KR_BODY)
@@ -1484,7 +1489,7 @@ def draw_actor_fx(ctx, a, t, camx):
     k = k_of(a["z"]) * a["small"]
     cy_ = gy - (a["h"] + 1.2) * k
     ctx.save()
-    if a["h"] < -0.02:                                              # sinking into a pit: hidden behind the near rim
+    if a["h"] < -0.02 and not a.get("noclip"):                      # sinking into a pit: hidden behind the near rim (noclip: bridge, body stays visible)
         ctx.rectangle(-9000, -9000, 30000, 9000 + ground_y(LAVA_NEAR_Z))
         ctx.clip()
     if a.get("rot"):
@@ -2464,6 +2469,214 @@ def kraggor_baby_head(ctx, mood, t, cone_r=0.0):
     ctx.restore()
 
 
+KR_ROCK_PTS = [(-0.95, -0.2), (-0.62, -0.78), (0.05, -1.0), (0.72, -0.62), (0.98, 0.05),
+               (0.55, 0.78), (-0.15, 0.98), (-0.82, 0.55), (-1.0, 0.1)]
+KR_ROCK_HI = [(-0.55, -0.55), (-0.2, -0.72), (0.02, -0.45), (-0.33, -0.24)]
+
+
+def _rock_pt(cx, cy, r, rot, x, y):
+    c, s = math.cos(rot), math.sin(rot)
+    return cx + (x * c - y * s) * r, cy + (x * s + y * c) * r
+
+
+def draw_rock(ctx, cx, cy, r, rot=0.0):
+    # rigid flat rock: grey-brown polygon, dark outline, one lighter facet
+    pts = [_rock_pt(cx, cy, r, rot, x, y) for x, y in KR_ROCK_PTS]
+    se.poly(ctx, pts)
+    ctx.set_source_rgb(0.40, 0.37, 0.33)
+    ctx.fill_preserve()
+    ctx.set_source_rgb(0.12, 0.10, 0.08)
+    ctx.set_line_width(max(2.0, r * 0.07))
+    ctx.stroke()
+    hp = [_rock_pt(cx, cy, r, rot, x, y) for x, y in KR_ROCK_HI]
+    se.poly(ctx, hp)
+    ctx.set_source_rgba(0.78, 0.74, 0.66, 0.75)
+    ctx.fill()
+
+
+# ---- mode "hold": arm + rock choreography (S01E03 scene 6). ONE geometry for the drawn hands AND the rock anchor:
+# kraggor_hold_pose() gives the two hand ends in head units, kraggor_body() draws exactly those ends, and
+# kraggor_head() / kraggor_hand_centres() project them with the same transform -> the rock cannot float off the hands.
+KR_ROCK_GAP = 0.15        # head units between the top of Kraggor's head and the underside of the held rock
+KR_HAND_SPREAD = 1.05     # hands at +-1.05 rock radii: they touch the sides / underside of the rock
+KR_HAND_DROP = 0.62       # hands sit 0.62 radii below the rock centre
+KR_ARM_TREMOR = 0.09      # head units of strain tremor while the rock is held (hands AND rock shake together)
+KR_SWING = (5.5, 3.0)     # head units the hands travel in the throw direction (sideways + slightly down)
+KR_RELEASE_P = 0.30       # the rock leaves the hands at 30 % of throw_dur
+
+
+def _kr_sc(spec):
+    return float(spec.get("scale", 1.0)) * (H / 1080.0)
+
+
+def _kr_rock_r_u(spec):
+    rk = spec.get("rock") or {}
+    return float(rk.get("r", 0.07)) * H / (40.0 * max(1e-6, _kr_sc(spec)))
+
+
+def kraggor_hold_pose(spec, u):
+    """Arm + rock choreography of mode "hold", in head units (x right, y down, origin = the neck base):
+    relaxed hold pose -> pick (both arms rise, the rock is lifted) -> overhead grip above the head (+ strain tremor)
+    -> throw (the arms swing in the throw direction, the rock leaves) -> back to the relaxed hold pose.
+    l/r: hand ends, rock: rock centre while it is in the hands, rel: rock centre the moment it leaves.
+    Pure function of spec + u (no state), so the drawing and the anchors are always the same numbers."""
+    rk = spec.get("rock") or {}
+    relax = (9.6, 7.0 - 6.5 * float(spec.get("arms", 1.9)))            # bridge pose: arms out, hands at the tips
+    r_u = _kr_rock_r_u(spec)
+    top_u = kraggor_ext()[1] / 40.0                                    # top of the head (y is negative upwards)
+    hx = KR_HAND_SPREAD * r_u
+    cy = top_u - KR_ROCK_GAP - r_u                                     # the rock's underside just clears the head
+    hy = cy + KR_HAND_DROP * r_u                                       # hands on its lower sides
+    pick_at = float(rk.get("pick_at", 1.0))
+    pick_dur = max(0.001, float(rk.get("pick_dur", 1.2)))
+    hold_dur = max(0.0, float(rk.get("hold_dur", 0.8)))
+    throw_dur = max(0.001, float(rk.get("throw_dur", 1.2)))
+    t_hold = pick_at + pick_dur
+    t_throw = t_hold + hold_dur
+    t_end = t_throw + throw_dur
+    ret = max(0.05, float(rk.get("return_dur", 0.55)))
+    sgn = 1.0 if float(rk.get("throw_to", (1.25, 0.5))[0]) >= float(spec.get("sx", 0.62)) else -1.0
+    swing = (sgn * KR_SWING[0], KR_SWING[1])
+    trem = KR_ARM_TREMOR * math.sin(u * 31.0)
+    out = dict(l=(-relax[0], relax[1]), r=(relax[0], relax[1]), rock=None, rel=None, phase="idle")
+    if u < pick_at:
+        return out
+    if u < t_hold:                                                     # pick: both arms rise to the overhead grip
+        p = (u - pick_at) / pick_dur
+        e = p * p * (3 - 2 * p)
+        x_ = relax[0] + (hx - relax[0]) * e
+        y_ = relax[1] + (hy - relax[1]) * e + trem * e
+        out.update(l=(-x_, y_), r=(x_, y_), rock=(0.0, y_ - KR_HAND_DROP * r_u), phase="pick")
+        return out
+    if u < t_throw:                                                    # hold: rock above the head, strain tremor
+        out.update(l=(-hx + 0.5 * trem, hy + trem), r=(hx - 0.5 * trem, hy + trem),
+                   rock=(0.0, hy + trem - KR_HAND_DROP * r_u), phase="hold")
+        return out
+    rel_l = (-hx + swing[0], hy + swing[1])
+    rel_r = (hx + swing[0], hy + swing[1])
+    out["rel"] = (swing[0], hy + swing[1] - KR_HAND_DROP * r_u)
+    if u < t_end:                                                      # throw: swing, release, follow-through
+        p = (u - t_throw) / throw_dur
+        fade = max(0.0, 1.0 - p / KR_RELEASE_P)
+        e = 1.0 - (1.0 - min(1.0, p / KR_RELEASE_P)) ** 2
+        if p < KR_RELEASE_P:                                           # still in the hands: no jump at the release
+            out.update(l=(-hx + swing[0] * e, hy + trem * fade + swing[1] * e),
+                       r=(hx + swing[0] * e, hy + trem * fade + swing[1] * e),
+                       rock=(swing[0] * e, hy + trem * fade + swing[1] * e - KR_HAND_DROP * r_u), phase="throw")
+        else:                                                          # the rock has flown, the arms follow through
+            f = (p - KR_RELEASE_P) / (1.0 - KR_RELEASE_P)
+            fe = f * f * (3 - 2 * f)
+            out.update(l=(rel_l[0] + 3.0 * sgn * fe, rel_l[1] + 1.0 * fe),
+                       r=(rel_r[0] + 3.0 * sgn * fe, rel_r[1] + 1.0 * fe), phase="throw")
+        return out
+    if u < t_end + ret:                                                # back down to the relaxed hold pose
+        f = min(1.0, (u - t_end) / ret)
+        fe = f * f * (3 - 2 * f)
+        sl = (rel_l[0] + 3.0 * sgn, rel_l[1] + 1.0)
+        sr = (rel_r[0] + 3.0 * sgn, rel_r[1] + 1.0)
+        out.update(l=(sl[0] + (-relax[0] - sl[0]) * fe, sl[1] + (relax[1] - sl[1]) * fe),
+                   r=(sr[0] + (relax[0] - sr[0]) * fe, sr[1] + (relax[1] - sr[1]) * fe), phase="return")
+    return out
+
+
+def kraggor_hold_hands(spec, u):
+    """The two hand ends (head units) that mode "hold" draws - None without a held rock (plain bridge pose)."""
+    if not spec.get("rock"):
+        return None
+    p = kraggor_hold_pose(spec, u)
+    return p["l"], p["r"]
+
+
+def kraggor_base_y(spec, stands_top=None):
+    """Screen y of the neck base. Mode "hold" with a rock drops Kraggor just enough for the raised rock to clear the
+    top letterbox bar - otherwise his head (and anything above it) would be cut off above the frame. The far ground
+    is drawn after him and then covers his legs: he reads as standing further back, not floating.
+    A STAND placement (stand=True: stands_top is the far ground line ground_y(gz) projected by the camera) pins the
+    FEET to that line - the letterbox fit must never translate him down off it. A7 (S01E03 scene 6): that shift was
+    ADDED on top of the stand base (+239 px), so the feet landed at 0.77-0.80 of the frame height, on the near
+    pavement, in front of the road, with the cars passing through his body. With stand=True the fit is skipped and the
+    builder chooses the SCALE so the held rock still clears the bar (the rock radius is screen-space, so a smaller
+    giant needs a smaller scale for the same rock to fit). Hold WITHOUT stand keeps the old fit; other modes
+    (calm / smile / munch / roar / rise / sad / baby) never reach this branch and are unchanged."""
+    base = stands_top if stands_top is not None else spec.get("sy", 0.42) * H
+    if spec.get("mode") != "hold" or not spec.get("rock") or spec.get("no_fit") or spec.get("stand"):
+        return base
+    sc = _kr_sc(spec) * (1.0 + float(spec.get("push", 0.0) or 0.0))
+    r_u = _kr_rock_r_u(spec)
+    cy_u = kraggor_ext()[1] / 40.0 - KR_ROCK_GAP - r_u
+    bar = (H * 0.085 + 10.0) if W > H else 10.0
+    top = base + sc * 40.0 * (1.2 + cy_u) - float(spec["rock"].get("r", 0.07)) * H
+    return base + max(0.0, bar - top)
+
+
+def kraggor_screen_point(spec, u, p, stands_top=None):
+    """A point in head units -> screen px, with EXACTLY the transform kraggor_head(mode="hold") draws with."""
+    sc = _kr_sc(spec)
+    if spec.get("push"):
+        e = min(1.0, u / 1.8)
+        sc *= 1 + spec["push"] * e * e * (3 - 2 * e)
+    return (spec.get("sx", 0.62) * W + sc * 40.0 * p[0],
+            kraggor_base_y(spec, stands_top) + sc * 40.0 * (1.2 + p[1]))
+
+
+def kraggor_hand_centres(spec, u, stands_top=None):
+    """Screen px of the two hands + the held rock centre + the release point (the anchors the rock is drawn at)."""
+    pose = kraggor_hold_pose(spec, u)
+    l = kraggor_screen_point(spec, u, pose["l"], stands_top)
+    r = kraggor_screen_point(spec, u, pose["r"], stands_top)
+    rock = kraggor_screen_point(spec, u, pose["rock"], stands_top) if pose.get("rock") else None
+    rel = kraggor_screen_point(spec, u, pose["rel"], stands_top) if pose.get("rel") else None
+    return l, r, rock, rel
+
+
+def draw_kraggor_rock(ctx, u, spec, stands_top=None):
+    """The held rock, placed FROM the hand anchors (never from an independent path): lifted off the ground into the
+    overhead grip, held between the hands with the same strain tremor, then thrown on ONE continuous arc that starts
+    exactly where the hands let go - evaluated every frame, so there is no jump - and exits the right edge."""
+    rk = spec.get("rock")
+    if not rk:
+        return
+    pick_at = float(rk.get("pick_at", 1.0))
+    if u < pick_at:
+        return
+    pick_dur = max(0.001, float(rk.get("pick_dur", 1.2)))
+    hold_dur = max(0.0, float(rk.get("hold_dur", 0.8)))
+    throw_dur = max(0.001, float(rk.get("throw_dur", 1.2)))
+    t_hold = pick_at + pick_dur
+    t_throw = t_hold + hold_dur
+    t_rel = t_throw + KR_RELEASE_P * throw_dur
+    t_end = t_throw + throw_dur
+    r = float(rk.get("r", 0.07)) * H
+    fx = float(rk.get("throw_to", (1.25, 0.5))[0])
+    tx, ty = fx * W, float(rk.get("throw_to", (1.25, 0.5))[1]) * H
+    _hl, _hr, hrock, rel = kraggor_hand_centres(spec, u, stands_top)
+    if u < t_hold:                                                     # picked up: the ground -> the hands
+        p = (u - pick_at) / pick_dur
+        e = min(1.0, max(0.0, (p - 0.08) / 0.92))
+        e = e * e * (3 - 2 * e)
+        gx, gy = float(rk.get("from", (0.5, 0.5))[0]) * W, float(rk.get("from", (0.5, 0.5))[1]) * H
+        _l2, _r2, target, _rel2 = kraggor_hand_centres(spec, t_hold + 1e-4, stands_top)   # the overhead grip
+        hx, hy = target if target else (gx, gy)
+        cx, cy, rot = gx + (hx - gx) * e, gy + (hy - gy) * e, 0.3 * e
+    elif u < t_rel:                                                    # in the hands: above the head, then swung
+        cx, cy = hrock if hrock else (tx, ty)
+        rot = 0.0
+    elif u < t_end:                                                    # one continuous quadratic arc out of the hands
+        tau = (u - t_rel) / max(1e-6, t_end - t_rel)
+        x0, y0 = rel if rel else (cx, cy)
+        rise = max(float(rk.get("arc", 0.18)) * H, 0.5 * (ty - y0) + 0.10 * H)
+        bar = (H * 0.085 if W > H else 0.0) + r + 8.0                  # keep the whole rock under the letterbox
+        rise = min(rise, max(0.0, 0.5 * (y0 + ty) - bar))
+        cx = x0 + (tx - x0) * tau
+        cy = y0 + (ty - y0) * tau - rise * 4.0 * tau * (1.0 - tau)
+        rot = 2.2 * tau
+    else:                                                              # gone off frame (or rests at throw_to)
+        if fx > 1.1 or fx < -0.1:
+            return
+        cx, cy, rot = tx, ty, 0.0
+    draw_rock(ctx, cx, cy, r, rot)
+
+
 def kraggor_head(ctx, u, spec, stands_top=None):
     """Kraggor (smash25d head design + our body) in screen space, standing at base_y (stands top / horizon).
     mode: rise | roar | calm | munch | smile."""
@@ -2474,11 +2687,17 @@ def kraggor_head(ctx, u, spec, stands_top=None):
         a = min(u, 0.8)
     elif mode == "munch":
         a = 0.8 + 0.18 * (1 + math.sin(u * 9))
+    elif mode == "hold":
+        a = 3.0
     else:
         a = 3.0
     rise = se.ease_out_back(min(1.0, a / 0.8))
     roar = max(0.0, math.sin(min(math.pi, max(0.0, a - 0.8) * 1.6))) if mode == "roar" else 0.0
-    base_y = stands_top if stands_top is not None else spec.get("sy", 0.42) * H
+    hands = None
+    if mode == "hold":                                             # S01E03 WP6: bridge pose, or the overhead rock grip
+        roar = float(spec.get("arms", 1.9)) + 0.04 * math.sin(u * 31)
+        hands = kraggor_hold_hands(spec, u)
+    base_y = kraggor_base_y(spec, stands_top)
     sc = spec.get("scale", 1.0) * (H / 1080)
     if spec.get("push"):                                           # slow push-in on Kraggor
         e = min(1.0, u / 1.8)
@@ -2490,7 +2709,7 @@ def kraggor_head(ctx, u, spec, stands_top=None):
     ctx.save()
     ctx.translate(905, 1.2 * 40 + (1 - rise) * 13 * 40)
     ctx.scale(40, 40)
-    kraggor_body(ctx, roar)
+    kraggor_body(ctx, roar, hands)
     ctx.restore()
     if spec.get("baby"):                                           # little Kraggor: young head, soft face (S01E02 sc.5)
         kraggor_baby_head(ctx, mode, u, spec.get("cone_r", 0.0))
@@ -3691,6 +3910,16 @@ def amb_wind(n, rng):
     return wind * 0.8 + amb_birds(n, rng) * 0.5
 
 
+def amb_mountain_wind(n, rng):
+    """Bare rock gorge, no trees, no animals: wind in slow uneven swells (low body) plus a faint thin gust through the rock."""
+    tt = np.arange(n) / se.SR
+    body = fft_band(rng.normal(0, 1, n), 40, 300)
+    body = body / max(1e-9, np.abs(body).max()) * (0.45 + 0.55 * np.sin(2 * math.pi * tt / 11.0 + 0.7) ** 2)
+    gust = fft_band(rng.normal(0, 1, n), 350, 900)
+    gust = gust / max(1e-9, np.abs(gust).max()) * (np.sin(2 * math.pi * tt / 6.3) ** 6) * 0.22
+    return body + gust
+
+
 def _kraggor_hum(contour, dur=2.0, vib=5.5, growl=0.0, seed=3):
     """Kraggor telling his story without words: a soft low vocal hum (a voice, never a bell) - a fundamental near
     100-140 Hz with a vowel-like spread of overtones (500 / 900 Hz regions), slow vibrato, gentle attack. contour:
@@ -3806,6 +4035,8 @@ def ambience_bed(scene, n):
         x, g = amb_cave(n, rng, drips=False), 0.045
     elif kind == "wind":
         x, g = amb_wind(n, rng), 0.09
+    elif kind == "mountain_wind":                                  # S01E03: bare mountain gorge, wind only (owner 2026-10-18)
+        x, g = amb_mountain_wind(n, rng), 0.07
     else:
         return np.zeros(n)
     x = np.pad(x, (0, max(0, n - len(x))))[:n]
@@ -4005,6 +4236,15 @@ def render_scene(ep, num, aspect):
                             mv["squash"] + (1 - mv["squash"]) * se.ease_out_back(min(1.0, (a0 - mv.get("hold", 99)) / 0.4))
                 if mv.get("dizzy") and j == si:
                     a["dizzy"] = True
+                if "to_z" in mv:                                   # lane depth, same easing and arrival time as to_x
+                    dz = mv["to_z"] - a["z"]
+                    if "to_x" in mv:
+                        dxz = mv["to_x"] - a["x"]
+                        T = abs(dxz) / max(0.1, mv.get("speed", 3.0)) * 1.25 + 0.4
+                    else:
+                        T = abs(dz) / max(0.1, mv.get("speed", 3.0)) * 1.25 + 0.4
+                    pr = min(1.0, max(0.0, (uu - mv.get("delay", 0.0)) / T))
+                    a["z"] += dz * pr * pr * (3 - 2 * pr)
                 if "to_x" in mv:                                   # eased: slow -> fast -> slow -> stop
                     sp = mv.get("speed", 3.0)
                     d = mv["to_x"] - a["x"]
@@ -4035,11 +4275,21 @@ def render_scene(ep, num, aspect):
                 if mv.get("sink") and j == si:                     # falls into the lava: nose down, gone below the surface
                     sk = mv["sink"]
                     tk = uu - sk["at"]
-                    if tk > 0:
-                        pk = min(1.0, tk / sk["dur"])
-                        a["h"] -= sk["depth"] * pk * pk
-                        a["rot"] = sk.get("tilt", 0.7) * pk
+                    dur = float(sk["dur"])
+                    from_d = float(sk.get("from_depth", 0.0))      # recovery sink: start pose (tilted / sunk) -> upright
+                    from_r = float(sk.get("from_tilt", 0.0))
+                    if dur <= 0.0:                                 # static start state: already sunk from frame 0
+                        pk = 1.0 if tk >= 0.0 else 0.0
+                    else:
+                        pk = min(1.0, tk / dur) if tk > 0.0 else 0.0
+                    if pk > 0.0:
+                        a["h"] -= from_d + (sk["depth"] - from_d) * pk * pk
+                        a["rot"] = from_r + (sk.get("tilt", 0.7) - from_r) * pk
+                        a["noclip"] = bool(sk.get("noclip"))
                         a["v"] = 0.0
+                    elif "from_depth" in sk or "from_tilt" in sk:  # before the sink: hold the starting pose
+                        a["h"] -= from_d
+                        a["rot"] = from_r
                 if mv.get("crumple") and j == si:                  # the struck end telescopes in (rigid, straight lines)
                     cm = mv["crumple"]
                     tc = uu - cm["at"]
@@ -4177,12 +4427,34 @@ def render_scene(ep, num, aspect):
                 kraggor_far(ctx, t, u, sh["kraggor_far"], camx)
             kr = sh.get("kraggor")
             if kr and not kr.get("front"):
+                walk = kr.get("walk")                              # optional: walk to the rim and climb down (scene 7)
+                sink_px = 0.0
+                if walk:                                           # work on a copy: the shot spec stays untouched
+                    kr = dict(kr)
+                    wd = max(0.001, float(walk.get("dur", 1.0)))
+                    wp = min(1.0, max(0.0, u / wd))
+                    we = wp * wp * (3 - 2 * wp)
+                    sx0 = float(kr.get("sx", 0.62))
+                    gz0 = float(kr.get("gz", 7.0))
+                    if "to_sx" in walk:
+                        kr["sx"] = sx0 + (float(walk["to_sx"]) - sx0) * we
+                    if "to_gz" in walk:
+                        kr["gz"] = gz0 + (float(walk["to_gz"]) - gz0) * we
+                    if walk.get("sink"):
+                        sp = min(1.0, max(0.0, (wp - 0.5) / 0.5))
+                        se = sp * sp * (3 - 2 * sp)
+                        sink_px = float(walk["sink"]) * kraggor_ext()[3] * float(kr.get("scale", 1.0)) * (H / 1080) * se
                 st_screen = H / 2 + (stands_top_world() - piv_y) * zoom
                 if kr.get("stand"):                                # feet on the far ground, not floating
                     sc_ = kr.get("scale", 1.0) * (H / 1080)
                     st_screen = H / 2 + (ground_y(kr.get("gz", 7.0)) - piv_y) * zoom - (1.2 + 19.2) * 40 * sc_
+                ground_line = st_screen
+                st_screen += sink_px
                 ctx.save()
                 ctx.identity_matrix()
+                if sink_px > 0.0:                                  # descending behind the rim: clip at the ground line
+                    ctx.rectangle(-W, -H, 3 * W, ground_line + H)
+                    ctx.clip()
                 if kr.get("ghost"):                                # a translucent dark silhouette (owner 2026-10-07)
                     ctx.push_group()
                 kraggor_head(ctx, u, kr, stands_top=st_screen)
@@ -4194,6 +4466,8 @@ def render_scene(ep, num, aspect):
                     ctx.set_operator(cairo.OPERATOR_OVER)
                     ctx.pop_group_to_source()
                     ctx.paint_with_alpha(float(kr["ghost"]))
+                if kr.get("rock"):
+                    draw_kraggor_rock(ctx, u, kr, st_screen)
                 nt = sh.get("net")
                 if nt and nt.get("over") == "kraggor" and kr.get("stand"):      # the net covers ONLY Kraggor, behind the cars
                     sc_n, cx_n = kr.get("scale", 1.0) * (H / 1080), kr.get("sx", 0.62) * W
@@ -4284,8 +4558,9 @@ def render_scene(ep, num, aspect):
                                                                  min(1.0, (uu - ft.get("stay", 99)) / 0.6) ** 2)
             if uu >= 0:
                 draw_foot(ctx, ft["x"], ft.get("z", 1.0), camx, drop)
-        if sh.get("claw"):
-            draw_claw(ctx, sh["claw"], camx, u)
+        if sh.get("claw"):                                        # S01E03: a LIST = several arms (Kraggor holding the bridge from below)
+            for c_ in (sh["claw"] if isinstance(sh["claw"], list) else [sh["claw"]]):
+                draw_claw(ctx, c_, camx, u)
         draw_props_layer(ctx, loc, camx, 13, back=False)
         ctx.restore()
         for a in actors.values():

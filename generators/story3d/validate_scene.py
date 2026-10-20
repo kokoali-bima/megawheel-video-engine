@@ -19,30 +19,35 @@ LN = CONTRACT["lint"]                                          # every number be
 SCENE_KEYS = {"title", "chapter", "location", "theme_location", "time", "weather", "ambience", "fog", "letterbox",
               "shops", "shops_z", "gap", "tail", "edge_fade", "actors", "props", "score", "shots", "headlights",
               "contact_shadow", "glide", "hill", "finish", "music", "song", "song_stereo", "stands_text", "tears",
-              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava", "lava_z", "ramps"}
+              "tint", "note", "jcut", "mountains", "rain", "lightning", "wall_z", "beam_x", "exit_x", "lava", "lava_z", "ramps", "gorge", "start_x"}
 SHOT_KEYS = {"beat", "cam", "on", "with", "zoom", "dx", "lift", "hold", "lead", "gap", "tail", "cut", "glide", "move", "moves",
              "lines", "emote", "sfx", "fx", "caption", "note", "title", "flicker", "kraggor", "kraggor_far", "eyes",
              "look", "claw", "net", "hud", "impacts", "interrupt", "punch", "freeze", "roll", "speedlines", "confetti", "crown", "card", "endcard", "nametag",
              "photo_glow", "toss", "foot", "triple", "calendar", "music", "fog", "tint", "group", "follow", "lean",
-             "jcut"}
+             "jcut", "contact"}
 ACTOR_KEYS = {"vk", "x", "z", "face", "h", "emo", "hidden", "color", "accent", "mustache", "patched", "small", "jumbo"}
 MOVE_KEYS = {"push", "pull", "pan", "crane", "dutch", "handheld", "whip"}
-ACTOR_MOVE_KEYS = {"to_x", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
+ACTOR_MOVE_KEYS = {"to_x", "to_z", "speed", "x", "face", "h", "show", "hop", "reverse", "stuck", "dizzy", "squash", "delay",
                    "at", "hold", "patched", "jump", "sink", "fling", "crumple", "ramp"}
+SINK_KEYS = {"at", "dur", "depth", "tilt", "noclip", "from_depth", "from_tilt"}   # from_*: recovery sinks start in a pose
 CAMS = {"wide", "two", "group", "medium", "close", "ecu", "low", "track"}
 SINGLE = {"close", "ecu", "medium", "low"}                     # one-character framings
 # film coverage rules (owner 2026-10-06: "tiap ngobrol di-zoom ke yang bicara ... seperti film per pemeran"):
 # establish the group, let exchanges play in two / group shots, single close-ups only for emotional beats.
 COVER = dict(pingpong=LN["pingpong"], single_share=LN["single_share"], group_lines=LN["group_lines"])
 SIZE_RANK = {"wide": 0, "track": 1, "group": 1, "two": 2, "medium": 3, "low": 3, "close": 4, "ecu": 5}
-LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins", "dungeon"}
+LOCATIONS = {"town", "arena", "country", "trackside", "podium", "garage", "forest", "mountain", "cave", "ruins", "speedway", "dungeon"}
 TIMES = {"morning", "noon", "sunset", "night"}                 # exactly the themes sim_engine knows
-AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "cave_dry", "wind", "none"}
+AMBIENCE = {"birds", "night", "city_night", "crowd", "room", "rain", "storm", "cave", "cave_dry", "wind", "mountain_wind", "none"}
 EMOTES = {"normal", "talk", "happy", "laugh", "proud", "excited", "scared", "surprised", "sad", "cry", "angry",
           "worried", "determined", "shy", "dizzy", "whisper"}
 LINE_EMOS = EMOTES | {"calm"}
-PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece",
-         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate", "chop", "ogre", "lava"}
+PROPS = {"streetlamps", "footprints", "barricade", "poster", "photo", "desk", "podium", "mud", "stage", "spotlight", "sketch", "crate", "lamp", "album", "photo_piece", "boulder",
+         "treasure", "sign", "key", "rockslide", "kraggor_small", "chalk", "towers", "partylights", "speedgate", "chop", "ogre", "lava", "bridge", "rescue", "scoreboard", "trophy_case", "blueprint"}
+KRAGGOR_KEYS = {"mode", "sx", "sy", "scale", "arms", "push", "baby", "cone_r", "wink", "wink_eye",
+                "front", "stand", "gz", "ghost", "tint", "rock", "walk"}
+BOULDER_KEYS = {"type", "x", "z", "r", "lift", "from_shot", "to_shot", "hide_t"}
+WINCH_KEYS = {"t0", "dur", "from", "to", "from_z", "to_z", "taut_t", "release_t", "sag"}
 NARRATORS = {"narrator", "announcer", "announcer2"}
 MAX_LINE = LN["max_line"]
 
@@ -115,6 +120,9 @@ def lint(ep, n):
     for p in sc.get("props", []):
         if p.get("type") not in PROPS:
             err.append(f"prop '{p.get('type')}' tidak dikenal {sorted(PROPS)}")
+        if p.get("type") == "boulder":
+            for k in set(p) - BOULDER_KEYS:
+                err.append(f"prop boulder: kunci tidak dikenal '{k}'")
     for pr in sc.get("props", []):                                 # K01 continuity with aired episodes
         if pr.get("type") == "photo" and (pr.get("torn") or pr.get("tail")):
             err.append("prop 'photo' = foto dinding Grandpa di pantai dari Ep.1 (tanpa Kraggor); tidak boleh sobek/"
@@ -128,6 +136,9 @@ def lint(ep, n):
         tag = f"shot {i}"
         for k in set(sh) - SHOT_KEYS:
             err.append(f"{tag}: kunci tidak dikenal '{k}'")
+        if isinstance(sh.get("kraggor"), dict):
+            for k in set(sh["kraggor"]) - KRAGGOR_KEYS:
+                err.append(f"{tag}: kunci kraggor tidak dikenal '{k}'")
         cam = sh.get("cam", "wide")
         if "look" not in sh and cam not in CAMS:
             err.append(f"{tag}: cam '{cam}' tidak dikenal {sorted(CAMS)}")
@@ -143,17 +154,25 @@ def lint(ep, n):
                 continue
             for k in set(mv) - ACTOR_MOVE_KEYS:
                 err.append(f"{tag}: gerak aktor {aid} tidak dikenal '{k}'")
+            if isinstance(mv.get("sink"), dict):
+                for k in set(mv["sink"]) - SINK_KEYS:
+                    err.append(f"{tag}: gerak sink {aid} tidak dikenal '{k}'")
             x, z, hid = pos[aid]
             if "show" in mv:
                 hid = not mv["show"]
-            if "to_x" in mv and sh.get("hold") and not sh.get("lines") and not sh.get("interrupt"):   # C08: a move must END inside its shot (unless the cut interrupts it on purpose)
-                d_ = abs(float(mv["to_x"]) - float(mv.get("x", x)))
-                need = 1.5 * d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))   # eased
+            if ("to_x" in mv or "to_z" in mv) and sh.get("hold") and not sh.get("lines") and not sh.get("interrupt"):   # C08: a move must END inside its shot (unless the cut interrupts it on purpose)
+                x0 = float(mv.get("x", x))
+                d_ = abs(float(mv["to_x"]) - x0) if "to_x" in mv else 0.0
+                need_x = 1.5 * d_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))   # eased
+                dz_ = abs(float(mv["to_z"]) - z) if "to_z" in mv else 0.0
+                need_z = 1.5 * dz_ / max(0.1, float(mv.get("speed", 4.0))) + float(mv.get("delay", 0.0))
+                need = max(need_x, need_z)
                 leaves = i + 1 < len(shots) and shots[i + 1].get("moves", {}).get(aid, {}).get("show") is False
                 if need > float(sh["hold"]) - 0.2 and not hid and not leaves:   # (an exit that is hidden next: ok)
                     err.append(f"{tag}: {aid} butuh {need:.1f}s untuk sampai, shot hanya {sh['hold']}s - percepat "
                                f"(speed) atau perpanjang hold; kalau tidak ia masih di jalan saat shot berikutnya [C08]")
             x = float(mv.get("to_x", mv.get("x", x)))
+            z = float(mv.get("to_z", z))
             pos[aid] = (x, z, hid)
         for aid, e in sh.get("emote", {}).items():
             if aid not in actors:
@@ -193,10 +212,13 @@ def lint(ep, n):
                 warn.append(f"{tag}: close-up pada {sh['on']} padahal {spk} yang bicara (reaksi? sengaja?)")
         # bumper to bumper: cars in nearly the same lane need air between them (a line of cars reads as a traffic
         # jam, not a conversation - owner review scene 2, 2026-10-06)
+        contacts = {frozenset(p) for p in sh.get("contact", [])}
         vis = [(k, v) for k, v in pos.items() if not v[2]]
         for q in range(len(vis)):
             for r in range(q + 1, len(vis)):
                 (ka, (xa, za, _)), (kb, (xb, zb, _)) = vis[q], vis[r]
+                if frozenset((ka, kb)) in contacts:
+                    continue
                 if abs(za - zb) < 0.9 and (sh.get("lines") or sh.get("cam") in ("group", "two")):
                     gap = abs(xa - xb) - (body_len(actors[ka]["vk"]) + body_len(actors[kb]["vk"])) / 2
                     if gap < LN["bumper_gap"]:
@@ -219,7 +241,7 @@ def lint(ep, n):
                 continue
             half = body_len(actors[aid]["vk"]) / 2
             for oid, (ox, oz, oh) in pos.items():
-                if oid == aid or oh or oz >= z - 0.05:
+                if oid == aid or oh or oz >= z - 0.05 or frozenset((aid, oid)) in contacts:
                     continue
                 oh_ = body_len(actors[oid]["vk"]) / 2
                 cov = max(0.0, min(x + half, ox + oh_) - max(x - half, ox - oh_)) / (2 * half)

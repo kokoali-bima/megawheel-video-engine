@@ -43,6 +43,16 @@ var glints = []                    # [material] things that sparkle (the old key
 var gates = []                     # [left pivot, right pivot, open shot, dt, dur] the speedway gate leaves
 var torches = []                   # [OmniLight3D, phase] dungeon torches that flicker
 var sun_light: DirectionalLight3D
+var gorge = []                     # [x0, x1]: the ground is cut open between these x (S01E03 WP2)
+var bridge_planks = []             # [MeshInstance3D, xr 0..1, base_y, kind(0 plank,1 post), x]
+var bridge_keys = []               # [[t, sag, drop]] scene-time keyframes of the deck
+var scoreboards = []               # [[Label3D, [[t, text]...]]] S01E03 WP3
+var rescues = []                   # S01E03 WP9: winch cable, spray, beacon lights
+var drawers = []                   # [[drawer node, t_open, x_closed, x_open]]
+var bridge_okeys = []              # [[t, tilt_rad, drop_m]] the outer lane
+var bridge_struts = []             # [[MeshInstance3D, t_break]]
+var boulders = []                 # [node, x0, z0, r, lift]: boulders that can roll off the road
+var bridge_holes = []              # [[t, xr_a, xr_b]] planks that fall away after t
 
 
 func _ready() -> void:
@@ -66,6 +76,9 @@ func _ready() -> void:
 			kfar = fr[1]["kfar"]
 			kfar_cam = float(fr[1]["camx"])
 			break
+	var gg = S["scene"].get("gorge", [])
+	if gg.size() == 2:
+		gorge = [float(gg[0]), float(gg[1])]
 	var loc0 = str(S["scene"].get("location", "town"))
 	if loc0 == "garage":
 		_environment_interior()
@@ -79,6 +92,8 @@ func _ready() -> void:
 	else:
 		_environment()
 		_ground()
+		if gorge.size() == 2:
+			_gorge()
 	var loc = str(S["scene"].get("location", "town"))
 	if loc == "garage" or loc == "cave" or loc == "dungeon":
 		pass
@@ -88,6 +103,9 @@ func _ready() -> void:
 		_mountain_road()
 	elif loc == "ruins":
 		_ruins()
+	elif loc == "speedway":
+		_ruins()
+		_speedway()
 	elif loc == "arena":
 		_arena()
 	else:
@@ -280,21 +298,172 @@ func _ground() -> void:
 	var far_z = dist(3.2)
 	var near_z = dist(-0.6)
 	var cx = 40.0
-	box(Vector3(700, 0.1, far_z - near_z), Vector3(cx, -0.05, -(near_z + far_z) / 2), road)   # asphalt
+	_gseg(Vector3(700, 0.1, far_z - near_z), Vector3(cx, -0.05, -(near_z + far_z) / 2), road)   # asphalt
 	var walk = toon(Color(0.33, 0.33, 0.37) if NIGHT else Color(0.66, 0.63, 0.6))
-	box(Vector3(700, 0.25, dist(5.0) - far_z), Vector3(cx, 0.07, -(far_z + dist(5.0)) / 2), walk)   # far pavement
-	box(Vector3(700, 0.12, near_z - 2.0), Vector3(cx, -0.04, -(near_z + 2.0) / 2), walk)             # near pavement
+	_gseg(Vector3(700, 0.25, dist(5.0) - far_z), Vector3(cx, 0.07, -(far_z + dist(5.0)) / 2), walk)   # far pavement
+	_gseg(Vector3(700, 0.12, near_z - 2.0), Vector3(cx, -0.04, -(near_z + 2.0) / 2), walk)             # near pavement
 	var grass = toon(Color(0.08, 0.13, 0.1) if NIGHT else Color(0.38, 0.62, 0.32))
-	box(Vector3(900, 0.1, 400), Vector3(cx, -0.06, -dist(5.0) - 200), grass)
+	_gseg(Vector3(900, 0.1, 400), Vector3(cx, -0.06, -dist(5.0) - 200), grass)
 	var dash = StandardMaterial3D.new()                      # lane dashes at z = 1.3 every 4 m (as the cairo road)
 	dash.albedo_color = Color(0.9, 0.9, 0.85)
 	dash.diffuse_mode = BaseMaterial3D.DIFFUSE_TOON
 	var x = -300.0
 	while x < 380.0:
-		box(Vector3(1.6, 0.02, 0.22), Vector3(x + 0.8, 0.005, -dist(1.3)), dash)
+		if gorge.size() != 2 or x + 0.8 < gorge[0] or x + 0.8 > gorge[1]:
+			box(Vector3(1.6, 0.02, 0.22), Vector3(x + 0.8, 0.005, -dist(1.3)), dash)
 		x += 4.0
 	var curb = toon(Color(0.5, 0.5, 0.55) if NIGHT else Color(0.85, 0.85, 0.85))
-	box(Vector3(700, 0.3, 0.25), Vector3(cx, 0.1, -far_z), curb)
+	_gseg(Vector3(700, 0.3, 0.25), Vector3(cx, 0.1, -far_z), curb)
+
+
+
+func _gseg(sz: Vector3, pos: Vector3, mat: Material) -> void:
+	# a ground slab (width sz.x centred at pos.x) with the gorge cut out of it
+	if gorge.size() != 2:
+		box(sz, pos, mat)
+		return
+	var a = pos.x - sz.x / 2.0
+	var b = pos.x + sz.x / 2.0
+	if a < gorge[0]:
+		var e = minf(b, gorge[0])
+		box(Vector3(e - a, sz.y, sz.z), Vector3((a + e) / 2.0, pos.y, pos.z), mat)
+	if b > gorge[1]:
+		var st = maxf(a, gorge[1])
+		box(Vector3(b - st, sz.y, sz.z), Vector3((st + b) / 2.0, pos.y, pos.z), mat)
+
+
+func _gorge() -> void:
+	# a deep gorge across the whole depth of the scene: two rock faces, a dark floor in the mist, a back wall
+	var rock = toon(Color(0.42, 0.34, 0.3))
+	var rock2 = toon(Color(0.3, 0.25, 0.25))
+	var z_near = -dist(-0.6) + 2.0
+	var z_far = -dist(5.0) - 200.0
+	var span = z_near - z_far
+	var zc = (z_near + z_far) / 2.0
+	var gw = gorge[1] - gorge[0]
+	box(Vector3(1.2, 30.0, span), Vector3(gorge[0] - 0.6, -15.0, zc), rock)
+	box(Vector3(1.2, 30.0, span), Vector3(gorge[1] + 0.6, -15.0, zc), rock)
+	box(Vector3(gw, 0.5, span), Vector3((gorge[0] + gorge[1]) / 2.0, -29.0, zc), rock2)
+	box(Vector3(gw + 2.4, 30.0, 1.0), Vector3((gorge[0] + gorge[1]) / 2.0, -15.0, z_far), rock2)
+	var haze = StandardMaterial3D.new()                      # a pale mist layer deep in the gorge
+	haze.albedo_color = Color(0.85, 0.82, 0.9, 0.55)
+	haze.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	haze.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	box(Vector3(gw, 0.2, span), Vector3((gorge[0] + gorge[1]) / 2.0, -12.0, zc), haze)
+
+
+func _bridge(p) -> void:
+	# a timber bridge over the gorge, TWO lanes: the INNER lane (far side, next to the cliff wall) stays attached, the OUTER lane
+	# (near side) can break. keys [[t, sag, drop]] (scene seconds) = whole-deck sag; outer_keys [[t, tilt_rad, drop_m]] = the outer lane
+	# tipping toward the gorge; holes [[t, xr_a, xr_b]] = OUTER planks that fall away after t.
+	var x0 = float(p["x0"])
+	var x1 = float(p["x1"])
+	var za = dist(float(p.get("z0", -0.4)))
+	var zb = dist(float(p.get("z1", 3.4)))
+	var zm = (za + zb) / 2.0
+	var wood = toon(Color(0.5, 0.33, 0.18))
+	var dark = toon(Color(0.28, 0.18, 0.1))
+	var rope = toon(Color(0.7, 0.62, 0.45))
+	var n = int(p.get("planks", 36))
+	var pw = (x1 - x0) / float(n)
+	for k in range(n):
+		var xc = x0 + (float(k) + 0.5) * pw
+		var mat = wood if k % 3 != 0 else dark
+		var inner = box(Vector3(pw * 0.9, 0.22, zb - zm), Vector3(xc, -0.11, -(zm + zb) / 2.0), mat)
+		bridge_planks.append([inner, (float(k) + 0.5) / float(n), -0.11, 0, xc, 0])
+		var outer = box(Vector3(pw * 0.9, 0.22, zm - za), Vector3(xc, -0.11, -(za + zm) / 2.0), mat)
+		bridge_planks.append([outer, (float(k) + 0.5) / float(n), -0.11, 0, xc, 1])
+	var np_ = int(p.get("posts", 7))
+	for k in range(np_):
+		var xr = float(k) / float(np_ - 1)
+		for side in [0, 1]:
+			var zz = zb if side == 0 else za
+			var xc2 = x0 + xr * (x1 - x0)
+			var po = box(Vector3(0.22, 1.5, 0.22), Vector3(xc2, 0.65, -zz), dark)
+			bridge_planks.append([po, xr, 0.65, 1, xc2, side])
+	for side in [0, 1]:                                      # two rope rails
+		var zr = zb if side == 0 else za
+		var rl = box(Vector3(x1 - x0, 0.07, 0.07), Vector3((x0 + x1) / 2.0, 1.25, -zr), rope)
+		bridge_planks.append([rl, 0.5, 1.25, 2, (x0 + x1) / 2.0, side])
+	if p.has("diag"):                                        # the diagonal strut under the outer lane (breaks with the rockfall)
+		var dg = p["diag"]
+		var st = box(Vector3(3.0, 0.3, 0.3), Vector3(float(dg[0]), -1.4, -(za + zm) / 2.0), dark)
+		st.rotation.z = 0.7
+		bridge_struts.append([st, float(dg[1])])
+	bridge_keys = p.get("keys", [])
+	bridge_okeys = p.get("outer_keys", [])
+	bridge_holes = p.get("holes", [])
+
+
+func _bridge_sag(t: float) -> Vector2:
+	# (sag, drop) at scene time t, linear between keyframes
+	if bridge_keys.size() == 0:
+		return Vector2.ZERO
+	if t <= float(bridge_keys[0][0]):
+		return Vector2(float(bridge_keys[0][1]), float(bridge_keys[0][2]))
+	for k in range(bridge_keys.size() - 1):
+		var a = bridge_keys[k]
+		var b = bridge_keys[k + 1]
+		if t <= float(b[0]):
+			var u = (t - float(a[0])) / maxf(0.001, float(b[0]) - float(a[0]))
+			u = u * u * (3.0 - 2.0 * u)
+			return Vector2(lerpf(float(a[1]), float(b[1]), u), lerpf(float(a[2]), float(b[2]), u))
+	var l = bridge_keys[bridge_keys.size() - 1]
+	return Vector2(float(l[1]), float(l[2]))
+
+
+func _bridge_okey(t: float) -> Vector2:
+	# (tilt rad, drop m) of the outer lane at scene time t
+	if bridge_okeys.size() == 0:
+		return Vector2.ZERO
+	if t <= float(bridge_okeys[0][0]):
+		return Vector2(float(bridge_okeys[0][1]), float(bridge_okeys[0][2]))
+	for k in range(bridge_okeys.size() - 1):
+		var a = bridge_okeys[k]
+		var b = bridge_okeys[k + 1]
+		if t <= float(b[0]):
+			var u = (t - float(a[0])) / maxf(0.001, float(b[0]) - float(a[0]))
+			u = u * u * (3.0 - 2.0 * u)
+			return Vector2(lerpf(float(a[1]), float(b[1]), u), lerpf(float(a[2]), float(b[2]), u))
+	var l = bridge_okeys[bridge_okeys.size() - 1]
+	return Vector2(float(l[1]), float(l[2]))
+
+
+func _bridge_update(t: float) -> void:
+	var sd = _bridge_sag(t)
+	var ok = _bridge_okey(t)
+	for bp in bridge_planks:
+		var xr = float(bp[1])
+		var dy = -sd.x * (1.0 - pow(2.0 * xr - 1.0, 2.0)) - sd.y * xr * xr * xr
+		var slope = (-sd.x * (-2.0 * (2.0 * xr - 1.0) * 2.0) - sd.y * 3.0 * xr * xr)
+		var node = bp[0]
+		var outer = int(bp[5]) == 1
+		node.position.y = float(bp[2]) + dy
+		if int(bp[3]) == 0:
+			node.rotation.z = atan(slope / 20.0)
+			if outer:
+				node.position.y -= ok.y
+				node.rotation.x = ok.x
+				var gone = false
+				var gone_t = 0.0
+				for h in bridge_holes:
+					if t > float(h[0]) and xr >= float(h[1]) and xr <= float(h[2]):
+						gone = true
+						gone_t = float(h[0])
+						node.position.y -= 40.0 * pow(minf(t - float(h[0]), 1.2), 2.0)
+						node.rotation.x += 1.5 * (t - float(h[0]))
+				node.visible = not (gone and (gone_t < 0.0 or (t - gone_t) > 1.4))
+		elif int(bp[3]) == 1:
+			node.rotation.z = -0.5 * sd.y * xr
+			if outer:
+				node.position.y -= ok.y * 0.6
+				node.rotation.x = ok.x * 0.7
+	for st in bridge_struts:                                  # the diagonal strut snaps at its time
+		var st_t = float(st[1])
+		var u2 = 1.0 if st_t < 0.0 else clampf((t - st_t) / 0.5, 0.0, 1.0)
+		st[0].rotation.z = 0.7 + 1.1 * u2
+		st[0].position.y = -1.4 - 3.0 * u2 * u2
+		st[0].visible = u2 < 1.0 or (st_t >= 0.0 and (t - st_t) < 1.2)
 
 
 func _buildings() -> void:
@@ -565,6 +734,51 @@ func _crate(p) -> void:
 	crates.append([node, shelf, float(p.get("floor_z", z)), int(p.get("fall_shot", 1)), dust, false, x])
 
 
+func _boulder(p) -> void:
+	# a rough grey-brown boulder; optional "lift" rolls it off the road in an arc
+	var x0 = float(p.get("x", 0.0))
+	var z0 = float(p.get("z", 3.0))
+	var r = float(p.get("r", 1.0))
+	var rock = MeshInstance3D.new()
+	var sm = SphereMesh.new()
+	sm.radius = r
+	sm.height = r * 2.0
+	sm.radial_segments = 8
+	sm.rings = 4
+	rock.mesh = sm
+	rock.material_override = toon(Color(0.4, 0.36, 0.32))
+	rock.scale = Vector3(1.0, 0.8, 1.0)
+	rock.position = wp(x0, z0, r * 0.8)
+	add_child(rock)
+	var lift = p.get("lift")
+	var hide_t = p.get("hide_t")
+	boulders.append([rock, x0, z0, r, lift, hide_t])
+	if p.has("from_shot") or p.has("to_shot"):
+		timed.append([rock, int(p.get("from_shot", 0)), int(p.get("to_shot", 9999))])
+
+
+func _boulder_update(t: float) -> void:
+	for b in boulders:
+		var node = b[0]
+		if b.size() > 5 and b[5] != null:
+			node.visible = t < float(b[5])
+		var x0 = float(b[1])
+		var z0 = float(b[2])
+		var r = float(b[3])
+		var lift = b[4]
+		if lift == null:
+			node.position = wp(x0, z0, r * 0.8)
+			continue
+		var t0 = float(lift.get("t0", 0.0))
+		var dur = maxf(0.01, float(lift.get("dur", 1.0)))
+		var u = clampf((t - t0) / dur, 0.0, 1.0)
+		var e = u * u * (3.0 - 2.0 * u)
+		var x = lerpf(x0, float(lift.get("to_x", x0)), e)
+		var z = lerpf(z0, float(lift.get("to_z", z0)), e)
+		var h = r * 0.8 + float(lift.get("arc", 0.0)) * 4.0 * u * (1.0 - u)
+		node.position = wp(x, z, h)
+
+
 func _mountain_backdrop() -> void:
 	# big blue-grey mountains far behind the town (scene 6: the place they are going)
 	var cols = [Color(0.55, 0.62, 0.75), Color(0.48, 0.55, 0.7), Color(0.6, 0.66, 0.78)]
@@ -819,6 +1033,242 @@ func _sign(p) -> void:
 	lb.outline_size = 0
 	lb.position = wp(x, z, 1.95) + Vector3(0, 0, 0.09)
 	add_child(lb)
+
+
+func _scoreboard(p) -> void:
+	# S01E03 WP3: an old mechanical scoreboard on two posts; text changes over scene time: texts [[t, "LAP 4 OF 5"], [t2, ...]]
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 4.4))
+	var w = float(p.get("w", 6.0))
+	var iron = toon(Color(0.22, 0.2, 0.2))
+	for sx in [-1.0, 1.0]:
+		box(Vector3(0.3, 4.4, 0.3), wp(x + sx * (w / 2 + 0.2), z, 2.2), iron)
+	box(Vector3(w + 0.6, 2.2, 0.3), wp(x, z, 4.6), iron)
+	box(Vector3(w, 1.9, 0.12), wp(x, z, 4.6) + Vector3(0, 0, 0.2), toon(Color(0.08, 0.1, 0.09)))
+	var lb = Label3D.new()
+	lb.font_size = 96
+	lb.pixel_size = 0.0085
+	lb.modulate = Color(0.95, 0.85, 0.4)
+	lb.outline_size = 0
+	lb.position = wp(x, z, 4.6) + Vector3(0, 0, 0.3)
+	var tx = p.get("texts", [[0.0, "LAP 1 OF 5"]])
+	lb.text = str(tx[0][1])
+	add_child(lb)
+	scoreboards.append([lb, tx])
+
+
+func _trophy_case(p) -> void:
+	# S01E03 WP3: a glass trophy case with a gold cup and a locked drawer with a keyhole; drawer_t = when it slides open
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 3.4))
+	var wood = toon(Color(0.36, 0.22, 0.12))
+	box(Vector3(3.2, 1.0, 1.4), wp(x, z, 0.5), wood)
+	var gl = StandardMaterial3D.new()
+	gl.albedo_color = Color(0.7, 0.9, 1.0, 0.22)
+	gl.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	gl.roughness = 0.1
+	box(Vector3(3.0, 1.9, 1.2), wp(x, z, 1.95), gl)
+	for sx in [-1.5, 1.5]:
+		box(Vector3(0.1, 1.9, 0.1), wp(x + sx, z - 0.6, 1.95), wood)
+	var gold = toon(Color(1.0, 0.78, 0.2))
+	box(Vector3(0.7, 0.3, 0.7), wp(x - 0.5, z, 1.15), gold)
+	var cup = MeshInstance3D.new()
+	var cm = CylinderMesh.new()
+	cm.top_radius = 0.45
+	cm.bottom_radius = 0.18
+	cm.height = 0.8
+	cup.mesh = cm
+	cup.material_override = gold
+	cup.position = wp(x - 0.5, z, 1.75)
+	add_child(cup)
+	var dr = Node3D.new()                                     # the drawer in the front of the base
+	dr.position = wp(x + 0.7, z + 0.72, 0.5)
+	add_child(dr)
+	var front = MeshInstance3D.new()
+	var fm = BoxMesh.new()
+	fm.size = Vector3(1.3, 0.55, 0.1)
+	front.mesh = fm
+	front.material_override = toon(Color(0.45, 0.28, 0.15))
+	dr.add_child(front)
+	var kh = MeshInstance3D.new()                             # keyhole
+	var km = CylinderMesh.new()
+	km.top_radius = 0.06
+	km.bottom_radius = 0.06
+	km.height = 0.04
+	kh.mesh = km
+	kh.rotation_degrees = Vector3(90, 0, 0)
+	kh.position = Vector3(0, 0, 0.06)
+	kh.material_override = toon(Color(0.02, 0.02, 0.02))
+	dr.add_child(kh)
+	drawers.append([dr, float(p.get("drawer_t", 9999.0)), dr.position.z, dr.position.z + 0.7])
+
+
+func _blueprint(p) -> void:
+	# S01E03 WP3: an unrolled blue plan of the speedway (a track outline in white lines) lying flat or leaning
+	var x = float(p.get("x", 0.0))
+	var z = float(p.get("z", 3.0))
+	var h = float(p.get("h", 0.06))
+	var tilt = float(p.get("tilt", 0.0))
+	var root = Node3D.new()
+	root.position = wp(x, z, h)
+	root.rotation_degrees.x = -tilt
+	add_child(root)
+	var paper = MeshInstance3D.new()
+	var pm = BoxMesh.new()
+	pm.size = Vector3(float(p.get("w", 2.4)), 0.03, 1.6)
+	paper.mesh = pm
+	paper.material_override = toon(Color(0.12, 0.28, 0.6))
+	root.add_child(paper)
+	var white = toon(Color(0.9, 0.93, 1.0))
+	for seg in [[-0.6, -0.4, 1.0, 0.0], [0.5, -0.4, 0.0, 0.8], [-0.1, 0.4, 1.2, 0.0], [-0.7, 0.0, 0.0, 0.8]]:
+		var sm = MeshInstance3D.new()
+		var bm = BoxMesh.new()
+		bm.size = Vector3(maxf(0.04, seg[2]), 0.035, maxf(0.04, seg[3]))
+		sm.mesh = bm
+		sm.material_override = white
+		sm.position = Vector3(seg[0] + seg[2] / 2, 0.01, seg[1] + seg[3] / 2)
+		root.add_child(sm)
+
+
+func _rescue(p) -> void:
+	# S01E03 WP9: Hydro rescue gear. winch {t0,dur,from:[x,y],to:[x,y]} = steel cable paying out from the truck to a point;
+	# spray {t0,t1,from:[x,y],dir:[dx,dy]} = water jet; beacon {x,y,t0,t1} = alternating red/blue flashing lights.
+	var z = float(p.get("z", 0.8))
+	var r = {"z": z}
+	if p.has("winch"):
+		var w = p["winch"]
+		var segs = []
+		for k in range(14):
+			var cb = MeshInstance3D.new()
+			var cbm = CylinderMesh.new()
+			cbm.top_radius = 0.16
+			cbm.bottom_radius = 0.16
+			cbm.height = 1.0
+			cb.mesh = cbm
+			cb.material_override = toon(Color(0.12, 0.13, 0.16))
+			cb.visible = false
+			add_child(cb)
+			segs.append(cb)
+		var hk = box(Vector3(0.5, 0.5, 0.5), Vector3(0, 0, 0), toon(Color(0.85, 0.7, 0.15)))     # the hook
+		hk.visible = false
+		var fz = float(w.get("from_z", z))
+		var an = wp(float(w["from"][0]), fz, 0.0)                  # anchor: a steel bollard + base plate under the winch
+		box(Vector3(0.9, 0.12, 0.9), an + Vector3(0, 0.06, 0), toon(Color(0.2, 0.2, 0.22)))
+		box(Vector3(0.35, 0.7, 0.35), an + Vector3(0, 0.4, 0), toon(Color(0.85, 0.7, 0.15)))
+		r["winch"] = w
+		r["segs"] = segs
+		r["hook"] = hk
+	if p.has("spray"):
+		var sp = p["spray"]
+		var e = CPUParticles3D.new()
+		e.amount = 140
+		e.lifetime = 0.9
+		e.direction = Vector3(float(sp["dir"][0]), float(sp["dir"][1]), 0.0)
+		e.spread = 6.0
+		e.initial_velocity_min = 11.0
+		e.initial_velocity_max = 14.0
+		e.gravity = Vector3(0, -9.0, 0)
+		e.position = wp(float(sp["from"][0]), z, float(sp["from"][1]))
+		var qm = QuadMesh.new()
+		qm.size = Vector2(0.28, 0.28)
+		var m = StandardMaterial3D.new()
+		m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+		var sg = Gradient.new()                                   # round soft droplets, not squares
+		sg.set_color(0, Color(0.85, 0.95, 1.0, 0.95))
+		sg.set_color(1, Color(0.85, 0.95, 1.0, 0.0))
+		var sgt = GradientTexture2D.new()
+		sgt.gradient = sg
+		sgt.fill = GradientTexture2D.FILL_RADIAL
+		sgt.fill_from = Vector2(0.5, 0.5)
+		sgt.fill_to = Vector2(1.0, 0.5)
+		m.albedo_texture = sgt
+		qm.material = m
+		e.mesh = qm
+		e.emitting = true                                         # always running (pre-warmed), shown only in t0..t1
+		e.preprocess = 1.0
+		e.visible = false
+		add_child(e)
+		r["spray"] = sp
+		r["jet"] = e
+	if p.has("beacon"):
+		var bc = p["beacon"]
+		var lr = OmniLight3D.new()
+		lr.light_color = Color(1.0, 0.1, 0.1)
+		lr.omni_range = 5.0
+		lr.position = wp(float(bc["x"]) - 0.6, z, float(bc["y"]))
+		add_child(lr)
+		var lb = OmniLight3D.new()
+		lb.light_color = Color(0.15, 0.3, 1.0)
+		lb.omni_range = 5.0
+		lb.position = wp(float(bc["x"]) + 0.6, z, float(bc["y"]))
+		add_child(lb)
+		var mr = box(Vector3(0.5, 0.3, 0.4), lr.position, toon(Color(1.0, 0.1, 0.1)))
+		var mb = box(Vector3(0.5, 0.3, 0.4), lb.position, toon(Color(0.15, 0.3, 1.0)))
+		r["beacon"] = bc
+		r["lr"] = lr
+		r["lb"] = lb
+		r["mr"] = mr
+		r["mb"] = mb
+	rescues.append(r)
+
+
+func _rescue_update(t: float) -> void:
+	for r in rescues:
+		var z = float(r["z"])
+		if r.has("winch"):
+			# phases: pay out slack (t0..t0+dur) -> taut (at taut_t the sag is gone) -> release at release_t (hook reels back)
+			var w = r["winch"]
+			var u = clampf((t - float(w["t0"])) / maxf(0.01, float(w["dur"])), 0.0, 1.0)
+			var rel = clampf((t - float(w.get("release_t", 9999.0))) / 0.8, 0.0, 1.0)
+			u = u * (1.0 - rel)
+			var tz = float(w.get("taut_t", float(w["t0"]) + float(w["dur"])))
+			var taut = clampf((t - tz) / 0.5, 0.0, 1.0) * (1.0 - rel)
+			var sag = float(w.get("sag", 1.2)) * (1.0 - taut) * (1.0 - 0.6 * rel)
+			var fz = float(w.get("from_z", z))
+			var toz = float(w.get("to_z", z))
+			var a = wp(float(w["from"][0]), fz, float(w["from"][1]))
+			var tip = a.lerp(wp(float(w["to"][0]), toz, float(w["to"][1])), u)
+			var on = t >= float(w["t0"]) and u > 0.001
+			var n = r["segs"].size()
+			var prev = a
+			for k in range(n):
+				var s2 = float(k + 1) / float(n)
+				var pt = a.lerp(tip, s2) + Vector3(0, -sag * sin(PI * s2) * minf(1.0, u * 1.5), 0)
+				var sg = r["segs"][k]
+				var d = pt - prev
+				sg.visible = on
+				sg.position = (prev + pt) / 2.0
+				sg.scale = Vector3(1, maxf(0.01, d.length()), 1)
+				sg.rotation = Vector3(0, 0, atan2(d.y, d.x) - PI / 2.0)
+				prev = pt
+			r["hook"].visible = on
+			r["hook"].position = tip
+		if r.has("spray"):
+			var sp = r["spray"]
+			r["jet"].visible = t >= float(sp["t0"]) and t <= float(sp["t1"])
+		if r.has("beacon"):
+			var bc = r["beacon"]
+			var on2 = t >= float(bc.get("t0", 0.0)) and t <= float(bc.get("t1", 9999.0))
+			var ph = fmod(t * 4.0, 1.0) < 0.5
+			r["lr"].light_energy = (2.2 if (on2 and ph) else 0.0)
+			r["lb"].light_energy = (2.2 if (on2 and not ph) else 0.0)
+			r["mr"].visible = on2 and ph
+			r["mb"].visible = on2 and not ph
+
+
+func _wp3_update(t: float) -> void:
+	_rescue_update(t)
+	for sb in scoreboards:
+		var txt = str(sb[1][0][1])
+		for e in sb[1]:
+			if t >= float(e[0]):
+				txt = str(e[1])
+		sb[0].text = txt
+	for dw in drawers:
+		var u = clampf((t - float(dw[1])) / 0.8, 0.0, 1.0)
+		dw[0].position.z = lerpf(float(dw[2]), float(dw[3]), u)
 
 
 func _key(p) -> void:
@@ -1104,6 +1554,41 @@ func _ruins() -> void:
 	for fl in [52.0, 98.0, 126.0]:                           # tilted floodlight poles
 		var pole = box(Vector3(0.5, 22.0, 0.5), Vector3(fl, 10.0, -dist(14.0)), rust)
 		pole.rotation_degrees.z = rng.randf_range(-12, 12)
+
+
+func _speedway() -> void:
+	# S01E03 WP1: the old MegaWheel Speedway: cracked asphalt, a faded start/finish line, a crumbling barrier of old tyres/blocks
+	var sc = S["scene"]
+	var sx = float(sc.get("start_x", 40.0))
+	var za = dist(-0.4)
+	var zb = dist(3.2)
+	var zc = (za + zb) / 2.0
+	var faded = toon(Color(0.86, 0.84, 0.76))
+	var dark = toon(Color(0.1, 0.1, 0.12))
+	var blk = toon(Color(0.2, 0.2, 0.22))
+	var sq = 1.5                                              # faded chequered start/finish line: 2 rows of squares, some missing
+	var nz = int((zb - za) / sq)
+	for r in range(2):
+		for k in range(nz):
+			if (r + k) % 2 == 0 and rng.randf() < 0.78:
+				box(Vector3(sq, 0.02, sq), Vector3(sx + r * sq, 0.012, -(za + (float(k) + 0.5) * sq)), faded)
+	var x = -90.0
+	while x < 160.0:                                          # cracks: thin dark zig-zags across the lanes
+		var cz = rng.randf_range(za + 0.5, zb - 0.5)
+		var len_ = rng.randf_range(2.0, 6.0)
+		var cr = box(Vector3(len_, 0.02, 0.16), Vector3(x, 0.011, -cz), dark)
+		cr.rotation_degrees.y = rng.randf_range(-35, 35)
+		if rng.randf() < 0.5:
+			var cr2 = box(Vector3(len_ * 0.5, 0.02, 0.12), Vector3(x + len_ * 0.4, 0.011, -cz - 0.4), dark)
+			cr2.rotation_degrees.y = rng.randf_range(20, 70)
+		x += rng.randf_range(4.0, 10.0)
+	var bx = -90.0
+	while bx < 160.0:                                         # crumbling barrier blocks along the far edge
+		if rng.randf() < 0.7:
+			var bh = rng.randf_range(0.5, 1.2)
+			var b = box(Vector3(rng.randf_range(1.2, 2.2), bh, 0.7), Vector3(bx, bh / 2, -(zb + 0.9)), blk)
+			b.rotation_degrees.z = rng.randf_range(-8, 8)
+		bx += rng.randf_range(2.4, 4.0)
 
 
 func _speedgate(p) -> void:
@@ -1395,10 +1880,22 @@ func _props() -> void:
 			_hanging_lamp(p)
 		elif str(p["type"]) == "crate":
 			_crate(p)
+		elif str(p["type"]) == "boulder":
+			_boulder(p)
 		elif str(p["type"]) == "stage":
 			_stage(p)
 		elif str(p["type"]) == "spotlight":
 			_spot(p)
+		elif str(p["type"]) == "bridge":
+			_bridge(p)
+		elif str(p["type"]) == "rescue":
+			_rescue(p)
+		elif str(p["type"]) == "scoreboard":
+			_scoreboard(p)
+		elif str(p["type"]) == "trophy_case":
+			_trophy_case(p)
+		elif str(p["type"]) == "blueprint":
+			_blueprint(p)
 		elif str(p["type"]) == "barricade":
 			_barricade(p)
 		elif str(p["type"]) == "footprints":
@@ -1606,7 +2103,8 @@ func _kraggor_far() -> void:
 	var q = MeshInstance3D.new()
 	q.mesh = qm
 	q.material_override = m
-	q.position = Vector3(kx, hu / 2 * mpu, -kd)
+	var kdy = float(kfar.get("dy", 0.0))                     # S01E03: lower him into the gorge (behind the bridge)
+	q.position = Vector3(kx, hu / 2 * mpu + kdy, -kd)
 	q.visible = false
 	add_child(q)
 	knodes.append(q)
@@ -1628,7 +2126,7 @@ func _kraggor_far() -> void:
 	bm.disable_fog = true                                    # the shape reads by alpha, not by the fog
 	bg.mesh = bq
 	bg.material_override = bm
-	bg.position = Vector3(kx, hu * 0.72 * mpu, -kd - 6.0)
+	bg.position = Vector3(kx, hu * 0.72 * mpu + kdy, -kd - 6.0)
 	bg.visible = false
 	add_child(bg)
 	knodes.append(bg)
@@ -1648,7 +2146,7 @@ func _kraggor_far() -> void:
 		sp.height = 2.0
 		s.mesh = sp
 		s.material_override = em
-		s.position = Vector3(kx + (float(e[0]) - cxu) * mpu, (float(ext[1]) + hu - float(e[1])) * mpu, -kd + 1.0)
+		s.position = Vector3(kx + (float(e[0]) - cxu) * mpu, (float(ext[1]) + hu - float(e[1])) * mpu + kdy, -kd + 1.0)
 		s.visible = false
 		add_child(s)
 		keyes.append(s)
@@ -1801,6 +2299,10 @@ func _process(_d: float) -> void:
 				if ud > 0.0:
 					var fall = 40.0 - 4.9 * ud * ud * 4.0
 					rk[0].position = rk[1] + Vector3(0, maxf(0.0, fall), 0)
+	if bridge_planks.size() > 0:
+		_bridge_update(t)
+	_boulder_update(t)
+	_wp3_update(t)
 	for tq in torches:                                       # dungeon torches flicker
 		tq[0].light_energy = 3.2 + 0.6 * sin(t * 13.0 + float(tq[1])) + 0.4 * sin(t * 29.0 + float(tq[1]) * 2.0)
 	for gt in gates:                                         # the speedway gate swings open (ease in-out)

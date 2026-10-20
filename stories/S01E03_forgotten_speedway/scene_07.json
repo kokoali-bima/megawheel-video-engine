@@ -1,0 +1,320 @@
+{
+ "title": "Scene 7 - Starting Grid: The Memorial Lap",
+ "chapter": "The Memorial Lap",
+ "location": "speedway",
+ "theme_location": "countryside",
+ "time": "sunset",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "mountains": true,
+ "start_x": -12.0,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -22,
+   "z": 0.3,
+   "face": 1,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -31,
+   "z": 1.2,
+   "face": 1,
+   "emo": "excited"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -40,
+   "z": 2.0,
+   "face": 1,
+   "emo": "normal"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -49,
+   "z": 2.8,
+   "face": 1,
+   "emo": "normal"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -4,
+   "z": 3.1,
+   "face": -1,
+   "emo": "worried"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 6,
+   "z": 3.1,
+   "face": -1,
+   "emo": "happy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 16,
+   "z": 1.0,
+   "face": -1,
+   "emo": "proud"
+  },
+  "hydro": {
+   "vk": "firetruck",
+   "x": 53,
+   "z": 3.2,
+   "face": -1,
+   "emo": "determined"
+  }
+ },
+ "props": [
+  {
+   "type": "scoreboard",
+   "x": 0.0,
+   "z": 4.6,
+   "w": 7.0,
+   "texts": [
+    [
+     0.0,
+     "LAP 5 OF 5\nFINAL LAP"
+    ],
+    [
+     10.8,
+     "LAP 5 OF 5\nMEMORIAL LAP"
+    ]
+   ]
+  },
+  {
+   "type": "rescue",
+   "z": 3.2,
+   "beacon": {
+    "x": 52.0,
+    "y": 2.9,
+    "t0": 0.0,
+    "t1": 99.0
+   },
+   "winch": {
+    "t0": 16.8,
+    "dur": 0.8,
+    "taut_t": 17.7,
+    "release_t": 999.0,
+    "sag": 0.8,
+    "from": [
+     49.2,
+     1.4
+    ],
+    "to": [
+     57.0,
+     0.2
+    ]
+   }
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 4,
+   "to": 6,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.0
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.45,
+   "dx": -22,
+   "hold": 6.0,
+   "cut": "hard",
+   "move": {
+    "pan": 2
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.6,
+    "sy": 0.55,
+    "scale": 0.55,
+    "stand": true,
+    "gz": 6.5
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "dx": 12,
+   "hold": 3.8,
+   "lift": -0.4,
+   "move": {
+    "pan": 1.2
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.6,
+    "sy": 0.55,
+    "scale": 0.55,
+    "stand": true,
+    "gz": 6.5,
+    "walk": {
+     "to_sx": 1.3,
+     "dur": 3.0
+    }
+   }
+  },
+  {
+   "cam": "medium",
+   "on": "buster",
+   "beat": "emotion",
+   "hold": 6.0,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "buster": "proud"
+   },
+   "sfx": [
+    [
+     "key_click",
+     1.2,
+     0.5
+    ],
+    [
+     "chain_rattle",
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "hydro",
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "hydro": "determined"
+   },
+   "lines": [
+    [
+     "hydro",
+     "Rescue team in position at the bridge access. Winch anchored. If a car slips, I'm on the span in seconds.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.45,
+   "dx": 4,
+   "hold": 5.0,
+   "move": {
+    "pull": 0.08
+   },
+   "emote": {
+    "tilly": "happy"
+   },
+   "sfx": [
+    [
+     "honk_cheer",
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "nitro",
+    "rocky"
+   ],
+   "dx": -4,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "nitro": "angry",
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "nitro",
+     "Beat you to the bridge, ice cream. Then we crawl across, no passing.",
+     "angry"
+    ],
+    [
+     "sprinkles",
+     "I'm ready. This lap belongs to Grandpa.",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "low",
+   "on": "siren",
+   "beat": "emotion",
+   "move": {
+    "push": 0.1
+   },
+   "emote": {
+    "siren": "proud"
+   },
+   "lines": [
+    [
+     "siren",
+     "For Grandpa Cone, and every racer who puts friends first. Ready... set... GO!",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": 3,
+   "zoom": 1.0,
+   "hold": 6.0,
+   "speedlines": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 6,
+     "speed": 12
+    },
+    "zippy": {
+     "to_x": -4,
+     "speed": 14
+    },
+    "nitro": {
+     "to_x": -12,
+     "speed": 14
+    },
+    "rocky": {
+     "to_x": -22,
+     "speed": 14
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.7
+    ]
+   ]
+  }
+ ],
+ "note": "Scoreboard swap and winch t0/taut_t use REAL shot starts from real_shot_times.json. anchor: ground bollard at winch from.x, drum on the truck; Kraggor walks along the access road toward the gorge rim and out of frame (walk to_sx 1.3); the next shots show the empty road, the arms appear only in the bridge shots."
+}

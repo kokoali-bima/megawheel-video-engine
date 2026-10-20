@@ -1,0 +1,252 @@
+{
+ "title": "Scene 3 - The Torn Poster",
+ "chapter": "The Torn Poster",
+ "location": "garage",
+ "theme_location": "city",
+ "time": "noon",
+ "weather": "clear",
+ "ambience": "room",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -4,
+   "z": 1.2,
+   "face": 1,
+   "emo": "normal"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 6.5,
+   "z": 2.6,
+   "face": -1,
+   "emo": "worried"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 14.5,
+   "z": 0.4,
+   "face": -1,
+   "emo": "normal"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 22,
+   "z": 1.6,
+   "face": -1,
+   "emo": "determined"
+  },
+  "hydro": {
+   "vk": "firetruck",
+   "x": 31,
+   "z": 2.6,
+   "face": -1,
+   "emo": "determined"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": 40,
+   "z": 0.5,
+   "face": -1,
+   "emo": "normal"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 48,
+   "z": 2.8,
+   "face": -1,
+   "emo": "happy"
+  }
+ },
+ "props": [
+  {
+   "type": "poster",
+   "x": 3.0,
+   "z": 3.9,
+   "y": 3.0,
+   "text": "CHAMPIONSHIP FINAL\n5 LAPS"
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_grandpa_memory",
+   "from": 0,
+   "to": 2,
+   "vol": 0.35,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.0
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 10,
+   "hold": 6.5,
+   "cut": "hard",
+   "move": {
+    "pan": 2
+   }
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "with": "buster",
+   "dx": 3,
+   "move": {
+    "push": 0.06
+   },
+   "emote": {
+    "sprinkles": "excited"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Grandpa's dusty old box has a poster... Championship Final, five laps!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "siren",
+    "hydro",
+    "zippy"
+   ],
+   "dx": 4,
+   "move": {
+    "pull": 0.05
+   },
+   "emote": {
+    "siren": "worried"
+   },
+   "lines": [
+    [
+     "siren",
+     "That speedway's been shut for decades. The track needs a safety check first.",
+     "worried"
+    ],
+    [
+     "hydro",
+     "I'm Hydro, Rescue Team. We check each sector before it opens for racing.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 12,
+   "hold": 4.6,
+   "move": {
+    "pan": 2
+   },
+   "emote": {
+    "nitro": "angry"
+   }
+  },
+  {
+   "cam": "two",
+   "on": "nitro",
+   "with": "tilly",
+   "dx": 2,
+   "move": {
+    "push": 0.05
+   },
+   "lines": [
+    [
+     "nitro",
+     "Fine, inspect it. I'm still the fastest car in town.",
+     "angry"
+    ]
+   ]
+  },
+  {
+   "cam": "close",
+   "on": "buster",
+   "beat": "emotion",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "buster": "sad"
+   },
+   "lines": [
+    [
+     "buster",
+     "Your grandpa and I raced there long ago. I was number seven.",
+     "sad"
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "siren",
+    "hydro"
+   ],
+   "dx": 1,
+   "move": {
+    "pull": 0.05
+   },
+   "emote": {
+    "zippy": "surprised"
+   },
+   "lines": [
+    [
+     "zippy",
+     "You raced Grandpa Cone?!",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.5,
+   "dx": 14,
+   "hold": 4.4,
+   "move": {
+    "pan": 2
+   },
+   "emote": {
+    "siren": "worried",
+    "hydro": "determined",
+    "nitro": "normal",
+    "tilly": "worried"
+   }
+  },
+  {
+   "look": {
+    "x": 3.0,
+    "z": 3.9,
+    "y": 3.0,
+    "fit": 5.0
+   },
+   "hold": 6.0,
+   "move": {
+    "push": 0.1
+   },
+   "lines": [
+    [
+     "buster",
+     "Fifth and final lap. Your grandpa was right in front of me. That close.",
+     "sad"
+    ]
+   ],
+   "sfx": [
+    [
+     "thunder_roll",
+     4.6,
+     0.4
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,267 @@
+{
+ "title": "Scene 1 - Cold open: The Collapsing Turn",
+ "chapter": "The Collapsing Turn",
+ "location": "mountain",
+ "theme_location": "countryside",
+ "time": "sunset",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.3,
+ "tail": 0.6,
+ "edge_fade": false,
+ "fog": 0.25,
+ "mountains": true,
+ "gorge": [
+  14.0,
+  38.0
+ ],
+ "actors": {
+  "nitro": {
+   "vk": "f1",
+   "x": 33,
+   "z": 2.7,
+   "face": 1,
+   "emo": "determined"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 17,
+   "z": 2.1,
+   "face": 1,
+   "emo": "worried"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 29.0,
+   "z": 0.2,
+   "face": 1,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": 24,
+   "z": 1.3,
+   "face": 1,
+   "emo": "scared"
+  }
+ },
+ "props": [
+  {
+   "type": "bridge",
+   "x0": 14.0,
+   "x1": 38.0,
+   "planks": 36,
+   "posts": 7,
+   "z0": -0.4,
+   "z1": 3.4,
+   "keys": [
+    [
+     1.6,
+     0,
+     0
+    ],
+    [
+     4.2,
+     0.3,
+     0.4
+    ]
+   ],
+   "outer_keys": [
+    [
+     1.6,
+     0,
+     0
+    ],
+    [
+     2.0,
+     0,
+     0
+    ],
+    [
+     2.8,
+     0.4,
+     0.35
+    ],
+    [
+     4.2,
+     0.7,
+     0.8
+    ]
+   ],
+   "holes": [
+    [
+     2.8,
+     0.36,
+     0.5
+    ]
+   ],
+   "diag": [
+    25.0,
+    2.2
+   ]
+  },
+  {
+   "type": "rockslide",
+   "x": 33.0,
+   "n": 10,
+   "from_shot": 1
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_heroic_stand",
+   "from": 2,
+   "to": 2,
+   "vol": 0.42,
+   "start": 0.0,
+   "fade": 0.6,
+   "tail": 0.5
+  }
+ ],
+ "shots": [
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": 2.0,
+   "zoom": 0.7,
+   "hold": 1.6,
+   "cut": "hard",
+   "move": {
+    "push": 0.08
+   },
+   "moves": {
+    "rocky": {
+     "to_x": 17.0,
+     "speed": 3.0
+    }
+   },
+   "caption": "CAN THEY SURVIVE THE CANYON BRIDGE?",
+   "sfx": [
+    [
+     "engine",
+     0.1,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "dx": 0.0,
+   "zoom": 0.55,
+   "hold": 3.2,
+   "cut": "hard",
+   "move": {
+    "handheld": 3
+   },
+   "claw": [
+    {
+     "x": 22.0,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": -1.0,
+     "from_dy": -11.0,
+     "at": 0.2,
+     "dur": 0.9
+    },
+    {
+     "x": 26.5,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": 1.0,
+     "from_dy": -11.0,
+     "at": 0.3,
+     "dur": 0.9
+    }
+   ],
+   "moves": {
+    "zippy": {
+     "to_x": 24.2,
+     "speed": 1.0,
+     "sink": {
+      "at": 1.5,
+      "dur": 1.0,
+      "depth": 0.5,
+      "tilt": -0.55,
+      "noclip": true
+     }
+    }
+   },
+   "emote": {
+    "zippy": "scared",
+    "sprinkles": "worried",
+    "rocky": "worried"
+   },
+   "sfx": [
+    [
+     "rockslide",
+     0.0,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "zippy",
+   "with": "sprinkles",
+   "dx": 1.5,
+   "hold": 4.4,
+   "cut": "hard",
+   "move": {
+    "push": 0.1
+   },
+   "freeze": 0.4,
+   "claw": [
+    {
+     "x": 22.0,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": -1.0,
+     "from_dy": -11.0,
+     "at": 0.0,
+     "dur": 0.1
+    },
+    {
+     "x": 26.5,
+     "z": 0.4,
+     "y": -0.3,
+     "from_dx": 1.0,
+     "from_dy": -11.0,
+     "at": 0.0,
+     "dur": 0.1
+    }
+   ],
+   "moves": {
+    "zippy": {
+     "to_x": 24.2,
+     "speed": 1.0,
+     "sink": {
+      "at": 0.0,
+      "dur": 0.1,
+      "depth": 0.5,
+      "tilt": -0.55,
+      "noclip": true
+     }
+    }
+   },
+   "emote": {
+    "zippy": "scared",
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "zippy",
+     "Outer lane's giving way! Keep going!",
+     "scared"
+    ],
+    [
+     "sprinkles",
+     "Never! Hold on to me, Zippy!",
+     "determined"
+    ]
+   ]
+  }
+ ],
+ "note": "T0=1.6 is the approach duration; bridge sink/hole/tilt times are fixed relative to T0. Speech timing estimates only."
+}

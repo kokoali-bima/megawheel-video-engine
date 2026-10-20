@@ -1,0 +1,384 @@
+{
+ "title": "Scene 5 - The Sector 1-2 Safety Sprint",
+ "chapter": "The Safety Sprint",
+ "location": "speedway",
+ "theme_location": "countryside",
+ "time": "noon",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "mountains": true,
+ "finish": 108.0,
+ "start_x": -4.0,
+ "ramps": [
+  [
+   72.0,
+   78.0,
+   1.4
+  ]
+ ],
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": 0,
+   "z": -0.2,
+   "face": 1,
+   "emo": "determined"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -9,
+   "z": 0.9,
+   "face": 1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -17,
+   "z": 2.0,
+   "face": 1,
+   "emo": "excited"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -27,
+   "z": 3.1,
+   "face": 1,
+   "emo": "normal"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 94,
+   "z": 1.0,
+   "face": -1,
+   "emo": "determined"
+  },
+  "hydro": {
+   "vk": "firetruck",
+   "x": 108,
+   "z": 2.6,
+   "face": -1,
+   "emo": "determined"
+  }
+ },
+ "props": [
+  {
+   "type": "mud",
+   "x": 44.0,
+   "w": 8.0
+  },
+  {
+   "type": "barricade",
+   "x": 120.0,
+   "from_shot": 0,
+   "to_shot": 99
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_sprinkles_theme",
+   "from": 5,
+   "to": 8,
+   "vol": 0.38,
+   "start": 0.0,
+   "fade": 0.8,
+   "tail": 1.0
+  }
+ ],
+ "shots": [
+  {
+   "cam": "medium",
+   "on": "sprinkles",
+   "beat": "emotion",
+   "cut": "hard",
+   "move": {
+    "push": 0.06
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "He traded his last lap for you, Buster. Now we finish that lap for him... together!",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "hydro",
+   "with": "siren",
+   "dx": -5,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "hydro": "determined",
+    "siren": "normal"
+   },
+   "lines": [
+    [
+     "hydro",
+     "Sector Three stays closed until it's inspected. Short loop only: Sectors One and Two.",
+     "calm"
+    ],
+    [
+     "siren",
+     "Nice and safe. Four cars, one short loop. Racers... start your engines!",
+     "determined"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.45,
+   "dx": -12,
+   "hold": 3.8,
+   "move": {
+    "pan": 2
+   },
+   "lines": [
+    [
+     "announcer",
+     "Sprinkles, Nitro, Zippy and Rocky... one short loop, and the mud is already hungry!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": -6,
+   "zoom": 0.46,
+   "hold": 3.4,
+   "speedlines": true,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "nitro": {
+     "to_x": 34,
+     "speed": 40
+    },
+    "zippy": {
+     "to_x": 30,
+     "speed": 30
+    },
+    "rocky": {
+     "to_x": 30,
+     "speed": 12
+    },
+    "sprinkles": {
+     "to_x": 26,
+     "speed": 11
+    }
+   },
+   "lines": [
+    [
+     "announcer2",
+     "And it's Nitro and Zippy out front!",
+     "excited"
+    ]
+   ],
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "nitro",
+   "zoom": 0.6,
+   "dx": -3.5,
+   "hold": 4.6,
+   "move": {
+    "pan": 1.5
+   },
+   "emote": {
+    "nitro": "scared",
+    "zippy": "scared"
+   },
+   "moves": {
+    "nitro": {
+     "to_x": 56,
+     "speed": 10,
+     "stuck": true,
+     "dizzy": true
+    },
+    "zippy": {
+     "to_x": 49,
+     "speed": 10,
+     "stuck": true,
+     "dizzy": true
+    }
+   },
+   "lines": [
+    [
+     "announcer",
+     "Mud! The track swallowed their speed!",
+     "surprised"
+    ]
+   ],
+   "sfx": [
+    [
+     "splat",
+     0.4,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "track",
+   "on": "sprinkles",
+   "dx": 3,
+   "zoom": 1.0,
+   "hold": 3.6,
+   "move": {
+    "push": 0.05
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 58,
+     "speed": 14
+    },
+    "rocky": {
+     "to_x": 56,
+     "speed": 12
+    }
+   },
+   "emote": {
+    "sprinkles": "determined"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Slow is smooth... and smooth is fast.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "zoom": 0.5,
+   "dx": 2,
+   "hold": 6.2,
+   "move": {
+    "pan": 2.5
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 112,
+     "speed": 20
+    },
+    "rocky": {
+     "to_x": 100,
+     "speed": 14
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ],
+    [
+     "car_boing",
+     1.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "nitro",
+   "with": "zippy",
+   "dx": 3,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "nitro": "angry",
+    "zippy": "surprised"
+   },
+   "lines": [
+    [
+     "nitro",
+     "That ice cream truck just dusted me in the mud?!",
+     "angry"
+    ],
+    [
+     "zippy",
+     "An ice cream truck outdrove me... my paint will never live this down!",
+     "surprised"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "zoom": 0.6,
+   "dx": 1.0,
+   "hold": 5.0,
+   "move": {
+    "pan": 1.5
+   },
+   "emote": {
+    "hydro": "proud",
+    "siren": "proud"
+   },
+   "lines": [
+    [
+     "announcer2",
+     "Sprinkles rolls first in the Safety Sprint!",
+     "excited"
+    ]
+   ],
+   "sfx": [
+    [
+     "honk_cheer",
+     0.5,
+     0.6
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "siren",
+    "hydro"
+   ],
+   "dx": 0,
+   "move": {
+    "pull": 0.06
+   },
+   "kraggor": {
+    "mode": "calm",
+    "sx": 0.88,
+    "sy": 0.6,
+    "scale": 0.45,
+    "stand": true,
+    "gz": 6.5
+   },
+   "emote": {
+    "sprinkles": "worried"
+   },
+   "punch": true,
+   "lines": [
+    [
+     "sprinkles",
+     "The short loop works... Now how do we clear Sector Three for Grandpa's real final lap?",
+     "worried"
+    ]
+   ]
+  }
+ ]
+}

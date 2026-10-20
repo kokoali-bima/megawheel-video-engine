@@ -1,0 +1,366 @@
+{
+ "title": "Scene 10 - The Memorial Trophy",
+ "chapter": "The Memorial Trophy",
+ "location": "speedway",
+ "theme_location": "countryside",
+ "time": "night",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "mountains": true,
+ "start_x": 60.0,
+ "finish": 60.0,
+ "actors": {
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -34,
+   "z": -0.2,
+   "face": 1,
+   "emo": "determined"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -34,
+   "z": 0.9,
+   "face": 1,
+   "emo": "happy"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": -34,
+   "z": 2.0,
+   "face": 1,
+   "emo": "happy"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -34,
+   "z": 3.1,
+   "face": 1,
+   "emo": "happy"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 80,
+   "z": 1.0,
+   "face": -1,
+   "emo": "proud"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": 94,
+   "z": 2.6,
+   "face": -1,
+   "emo": "proud"
+  },
+  "hydro": {
+   "vk": "firetruck",
+   "x": 108,
+   "z": 0.2,
+   "face": -1,
+   "emo": "happy"
+  },
+  "tilly": {
+   "vk": "taxi",
+   "x": 120,
+   "z": 3.0,
+   "face": -1,
+   "emo": "happy"
+  }
+ },
+ "props": [
+  {
+   "type": "scoreboard",
+   "x": 72.0,
+   "z": 4.6,
+   "w": 7.0,
+   "texts": [
+    [
+     0.0,
+     "LAP 5 OF 5\nMEMORIAL LAP"
+    ],
+    [
+     7.75,
+     "MEMORIAL LAP\nCOMPLETE"
+    ]
+   ]
+  },
+  {
+   "type": "trophy_case",
+   "x": 98.0,
+   "z": 3.6,
+   "drawer_t": 24.2
+  },
+  {
+   "type": "blueprint",
+   "x": 99.4,
+   "z": 4.9,
+   "h": 0.05,
+   "w": 2.0,
+   "from_shot": 7,
+   "to_shot": 7
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_kraggor_tender",
+   "from": 2,
+   "to": 4,
+   "vol": 0.38,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 1.2
+  }
+ ],
+ "shots": [
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "rocky",
+    "nitro"
+   ],
+   "zoom": 0.5,
+   "dx": 0.0,
+   "hold": 6.0,
+   "cut": "hard",
+   "move": {
+    "pan": 1.5
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 35.7,
+     "speed": 22.0
+    },
+    "zippy": {
+     "to_x": 39.4,
+     "speed": 22.0
+    },
+    "rocky": {
+     "to_x": 42.35,
+     "speed": 22.0
+    },
+    "nitro": {
+     "to_x": 45.2,
+     "speed": 22.0
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "zippy",
+    "rocky",
+    "nitro"
+   ],
+   "zoom": 0.55,
+   "dx": 0.0,
+   "hold": 4.2,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "sprinkles": "happy"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 60.7,
+     "speed": 20.0
+    },
+    "zippy": {
+     "to_x": 64.4,
+     "speed": 20.0
+    },
+    "rocky": {
+     "to_x": 67.35,
+     "speed": 20.0
+    },
+    "nitro": {
+     "to_x": 70.2,
+     "speed": 20.0
+    }
+   },
+   "lines": [
+    [
+     "announcer",
+     "Four cars hit the old finish line as one!",
+     "excited"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "on": "sprinkles",
+   "zoom": 0.5,
+   "dx": 0.0,
+   "hold": 5.5,
+   "move": {
+    "pan": 1.5
+   },
+   "emote": {
+    "siren": "proud"
+   },
+   "kraggor": {
+    "mode": "smile",
+    "sx": 0.86,
+    "sy": 0.6,
+    "scale": 0.5,
+    "stand": true,
+    "gz": 6.0
+   },
+   "lines": [
+    [
+     "siren",
+     "Memorial Lap complete. No one crossed alone today.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "sprinkles",
+   "with": "buster",
+   "zoom": 0.5,
+   "dx": 12,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "buster": "proud",
+    "sprinkles": "happy"
+   },
+   "moves": {
+    "sprinkles": {
+     "to_x": 84,
+     "speed": 6
+    }
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "This one's for you, Grandpa. And for you, Buster.",
+     "happy"
+    ],
+    [
+     "buster",
+     "I'm so proud of you, Sprinkles. And I think Grandpa would be too.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 98.0,
+    "z": 3.6,
+    "y": 1.8,
+    "fit": 6.5
+   },
+   "hold": 6.0,
+   "move": {
+    "push": 0.1
+   },
+   "sfx": [
+    [
+     "key_click",
+     0.8,
+     0.6
+    ],
+    [
+     "key_glint",
+     0.4,
+     0.5
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "siren",
+    "hydro"
+   ],
+   "dx": 0.0,
+   "zoom": 0.5,
+   "move": {
+    "pull": 0.05
+   },
+   "kraggor": {
+    "mode": "munch",
+    "sx": 0.86,
+    "sy": 0.6,
+    "scale": 0.5,
+    "stand": true,
+    "gz": 6.0
+   },
+   "emote": {
+    "hydro": "happy",
+    "siren": "happy"
+   },
+   "lines": [
+    [
+     "sprinkles",
+     "Free ice cream for everyone who kept that bridge standing!",
+     "happy"
+    ]
+   ]
+  },
+  {
+   "cam": "group",
+   "group": [
+    "sprinkles",
+    "siren",
+    "hydro"
+   ],
+   "dx": 0.0,
+   "zoom": 0.5,
+   "hold": 4.0,
+   "move": {
+    "pull": 0.08
+   },
+   "kraggor": {
+    "mode": "munch",
+    "sx": 0.86,
+    "sy": 0.6,
+    "scale": 0.5,
+    "stand": true,
+    "gz": 6.0
+   },
+   "emote": {
+    "hydro": "happy",
+    "sprinkles": "happy"
+   }
+  },
+  {
+   "look": {
+    "x": 98.0,
+    "z": 3.0,
+    "y": 0.4,
+    "fit": 5.0
+   },
+   "hold": 4.6,
+   "move": {
+    "push": 0.1
+   },
+   "lines": [
+    [
+     "narrator",
+     "Grandpa's unfinished lap was finally complete... and his blueprint showed another mountain road waiting to be explored.",
+     "calm"
+    ]
+   ]
+  }
+ ],
+ "note": "Photo-finish spread 0.52 s (first nose 0.98 s, last 1.50 s into shot 1); COMPLETE at +1.75 s, after the last nose and within the 0.5 s finish window."
+}

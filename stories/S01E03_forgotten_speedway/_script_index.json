@@ -1,0 +1,316 @@
+[
+ {
+  "scene": 1,
+  "chapter": "The Collapsing Turn",
+  "est_s": 10.4,
+  "lines": [
+   {
+    "who": "zippy",
+    "text": "Outer lane's giving way! Keep going!"
+   },
+   {
+    "who": "sprinkles",
+    "text": "Never! Hold on to me, Zippy!"
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "chapter": "Beyond the Rusty Gate",
+  "est_s": 51.2,
+  "lines": [
+   {
+    "who": "zippy",
+    "text": "Whoa... sixty years of dust and not one tire track!"
+   },
+   {
+    "who": "rocky",
+    "text": "The scoreboard's stuck on the final lap... like it's waiting for us."
+   },
+   {
+    "who": "sprinkles",
+    "text": "And the trophy case has a keyhole... our key might open it!"
+   },
+   {
+    "who": "buster",
+    "text": "Don't open that case yet, Sprinkles. That scoreboard stopped for me... over sixty years ago."
+   },
+   {
+    "who": "sprinkles",
+    "text": "You were here, Buster? What happened?"
+   },
+   {
+    "who": "buster",
+    "text": "Come back to town with me. Your grandpa left a box in your garage."
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "chapter": "The Torn Poster",
+  "est_s": 48.8,
+  "lines": [
+   {
+    "who": "sprinkles",
+    "text": "Grandpa's dusty old box has a poster... Championship Final, five laps!"
+   },
+   {
+    "who": "siren",
+    "text": "That speedway's been shut for decades. The track needs a safety check first."
+   },
+   {
+    "who": "hydro",
+    "text": "I'm Hydro, Rescue Team. We check each sector before it opens for racing."
+   },
+   {
+    "who": "nitro",
+    "text": "Fine, inspect it. I'm still the fastest car in town."
+   },
+   {
+    "who": "buster",
+    "text": "Your grandpa and I raced there long ago. I was number seven."
+   },
+   {
+    "who": "zippy",
+    "text": "You raced Grandpa Cone?!"
+   },
+   {
+    "who": "buster",
+    "text": "Fifth and final lap. Your grandpa was right in front of me. That close."
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "chapter": "Grandpa's Final Lap",
+  "est_s": 52.3,
+  "lines": [
+   {
+    "who": "grandpa_cone",
+    "text": "Last lap, Buster! Stay close!"
+   },
+   {
+    "who": "buster",
+    "text": "Not for long, Cone!"
+   },
+   {
+    "who": "buster",
+    "text": "Cone! The road fell out from under me... I'm stuck!"
+   },
+   {
+    "who": "grandpa_cone",
+    "text": "I'm not leaving you, Buster!"
+   },
+   {
+    "who": "grandpa_cone",
+    "text": "A trophy gets dusty, Buster. A friend never does."
+   },
+   {
+    "who": "buster",
+    "text": "Thank you... Cone."
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "chapter": "The Safety Sprint",
+  "est_s": 61.8,
+  "lines": [
+   {
+    "who": "sprinkles",
+    "text": "He traded his last lap for you, Buster. Now we finish that lap for him... together!"
+   },
+   {
+    "who": "hydro",
+    "text": "Sector Three stays closed until it's inspected. Short loop only: Sectors One and Two."
+   },
+   {
+    "who": "siren",
+    "text": "Nice and safe. Four cars, one short loop. Racers... start your engines!"
+   },
+   {
+    "who": "announcer",
+    "text": "Sprinkles, Nitro, Zippy and Rocky... one short loop, and the mud is already hungry!"
+   },
+   {
+    "who": "announcer2",
+    "text": "And it's Nitro and Zippy out front!"
+   },
+   {
+    "who": "announcer",
+    "text": "Mud! The track swallowed their speed!"
+   },
+   {
+    "who": "sprinkles",
+    "text": "Slow is smooth... and smooth is fast."
+   },
+   {
+    "who": "nitro",
+    "text": "That ice cream truck just dusted me in the mud?!"
+   },
+   {
+    "who": "zippy",
+    "text": "An ice cream truck outdrove me... my paint will never live this down!"
+   },
+   {
+    "who": "announcer2",
+    "text": "Sprinkles rolls first in the Safety Sprint!"
+   },
+   {
+    "who": "sprinkles",
+    "text": "The short loop works... Now how do we clear Sector Three for Grandpa's real final lap?"
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "chapter": "Testing the Bridge",
+  "est_s": 45.7,
+  "lines": [
+   {
+    "who": "zippy",
+    "text": "I'm a racecar, not a broom!"
+   },
+   {
+    "who": "nitro",
+    "text": "Less complaining, more sweeping!"
+   },
+   {
+    "who": "rocky",
+    "text": "Eight tons of monster truck, and she didn't even creak."
+   },
+   {
+    "who": "hydro",
+    "text": "Beams hold two heavy trucks at a time. Cross slowly, no passing on the span. I can't test for falling rock."
+   },
+   {
+    "who": "siren",
+    "text": "Structure checked and cleared. Prepare for one official tribute lap... the Grandpa Cone Memorial Lap!"
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "chapter": "The Memorial Lap",
+  "est_s": 49.2,
+  "lines": [
+   {
+    "who": "hydro",
+    "text": "Rescue team in position at the bridge access. Winch anchored. If a car slips, I'm on the span in seconds."
+   },
+   {
+    "who": "nitro",
+    "text": "Beat you to the bridge, ice cream. Then we crawl across, no passing."
+   },
+   {
+    "who": "sprinkles",
+    "text": "I'm ready. This lap belongs to Grandpa."
+   },
+   {
+    "who": "siren",
+    "text": "For Grandpa Cone, and every racer who puts friends first. Ready... set... GO!"
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "chapter": "The Final Lap",
+  "est_s": 58.0,
+  "lines": [
+   {
+    "who": "announcer",
+    "text": "Green flag on the Memorial Lap! Nitro out front, Zippy right there!"
+   },
+   {
+    "who": "announcer2",
+    "text": "The hill looms! Sprinkles is dropping back!"
+   },
+   {
+    "who": "sprinkles",
+    "text": "Build your speed before the hill... and keep rolling!"
+   },
+   {
+    "who": "rocky",
+    "text": "Keep rolling, Sprinkles!"
+   },
+   {
+    "who": "announcer",
+    "text": "Sprinkles roars past Nitro at the summit!"
+   },
+   {
+    "who": "nitro",
+    "text": "Nice try, ice cream! Nobody passes me twice!"
+   },
+   {
+    "who": "zippy",
+    "text": "Nitro, she's right behind you again!"
+   },
+   {
+    "who": "nitro",
+    "text": "Not for long. Into the canyon!"
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "chapter": "The Champion's Choice",
+  "est_s": 64.3,
+  "lines": [
+   {
+    "who": "nitro",
+    "text": "I'm clear on this side. I'll keep the exit open!"
+   },
+   {
+    "who": "sprinkles",
+    "text": "Hold the exit, Nitro. We finish together, or not at all."
+   },
+   {
+    "who": "hydro",
+    "text": "Cable is on Zippy's tow ring. Stay still. I'm taking the load."
+   },
+   {
+    "who": "rocky",
+    "text": "Not budging, Hydro!"
+   },
+   {
+    "who": "hydro",
+    "text": "Zippy first, then Sprinkles, then Rocky. One car at a time on the inner lane. Steady pace."
+   },
+   {
+    "who": "rocky",
+    "text": "We're all safe on the straightaway. Time to cross that line as a team!"
+   }
+  ]
+ },
+ {
+  "scene": 10,
+  "chapter": "The Memorial Trophy",
+  "est_s": 46.7,
+  "lines": [
+   {
+    "who": "announcer",
+    "text": "Four cars hit the old finish line as one!"
+   },
+   {
+    "who": "siren",
+    "text": "Memorial Lap complete. No one crossed alone today."
+   },
+   {
+    "who": "sprinkles",
+    "text": "This one's for you, Grandpa. And for you, Buster."
+   },
+   {
+    "who": "buster",
+    "text": "I'm so proud of you, Sprinkles. And I think Grandpa would be too."
+   },
+   {
+    "who": "sprinkles",
+    "text": "Free ice cream for everyone who kept that bridge standing!"
+   },
+   {
+    "who": "narrator",
+    "text": "Grandpa's unfinished lap was finally complete... and his blueprint showed another mountain road waiting to be explored."
+   }
+  ]
+ }
+]

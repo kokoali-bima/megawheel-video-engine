@@ -1,0 +1,357 @@
+{
+ "title": "Scene 6 - Clearing & Testing the Canyon Bridge",
+ "chapter": "Testing the Bridge",
+ "location": "mountain",
+ "theme_location": "countryside",
+ "time": "sunset",
+ "weather": "clear",
+ "ambience": "mountain_wind",
+ "letterbox": true,
+ "gap": 0.45,
+ "tail": 0.9,
+ "edge_fade": false,
+ "mountains": true,
+ "fog": 0.25,
+ "gorge": [
+  14.0,
+  38.0
+ ],
+ "actors": {
+  "hydro": {
+   "vk": "firetruck",
+   "x": 22,
+   "z": 2.6,
+   "face": 1,
+   "emo": "determined"
+  },
+  "rocky": {
+   "vk": "monster",
+   "x": 31,
+   "z": 2.0,
+   "face": 1,
+   "emo": "determined"
+  },
+  "siren": {
+   "vk": "police",
+   "x": 6,
+   "z": 1.0,
+   "face": 1,
+   "emo": "determined"
+  },
+  "sprinkles": {
+   "vk": "icecream",
+   "x": -6,
+   "z": 0.3,
+   "face": 1,
+   "emo": "normal"
+  },
+  "zippy": {
+   "vk": "sports",
+   "x": -20,
+   "z": 1.8,
+   "face": 1,
+   "emo": "angry"
+  },
+  "nitro": {
+   "vk": "f1",
+   "x": -34,
+   "z": 2.8,
+   "face": 1,
+   "emo": "normal"
+  },
+  "buster": {
+   "vk": "bus",
+   "x": -48,
+   "z": 0.6,
+   "face": 1,
+   "emo": "normal"
+  }
+ },
+ "props": [
+  {
+   "type": "bridge",
+   "x0": 14.0,
+   "x1": 38.0,
+   "planks": 36,
+   "posts": 7,
+   "z0": -0.4,
+   "z1": 3.4,
+   "keys": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     21.8,
+     0.12,
+     0.1
+    ]
+   ],
+   "outer_keys": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     6.0,
+     0.12,
+     0.1
+    ]
+   ],
+   "holes": [],
+   "diag": [
+    25.0,
+    999.0
+   ]
+  },
+  {
+   "type": "boulder",
+   "x": -12.0,
+   "z": 1.4,
+   "r": 1.4,
+   "hide_t": 1.0
+  },
+  {
+   "type": "rescue",
+   "z": 2.6,
+   "spray": {
+    "t0": 12.3,
+    "t1": 15.9,
+    "from": [
+     24.0,
+     1.6
+    ],
+    "dir": [
+     0.0,
+     -0.9
+    ]
+   },
+   "beacon": {
+    "x": 22.0,
+    "y": 2.9,
+    "t0": 39.0,
+    "t1": 79.0
+   }
+  }
+ ],
+ "score": [
+  {
+   "cue": "cue_heroic_stand",
+   "from": 7,
+   "to": 7,
+   "vol": 0.4,
+   "start": 0.0,
+   "fade": 1.0,
+   "tail": 0.8
+  }
+ ],
+ "shots": [
+  {
+   "cam": "wide",
+   "on": "zippy",
+   "dx": 10,
+   "zoom": 0.55,
+   "hold": 7.0,
+   "cut": "hard",
+   "kraggor": {
+    "mode": "hold",
+    "sx": 0.54,
+    "sy": 0.55,
+    "scale": 0.28,
+    "arms": 0.8,
+    "stand": true,
+    "gz": 6.0,
+    "rock": {
+     "from": [
+      0.60685,
+      0.55243
+     ],
+     "pick_at": 1.0,
+     "pick_dur": 1.2,
+     "hold_dur": 0.8,
+     "throw_dur": 1.2,
+     "throw_to": [
+      1.25,
+      0.55
+     ],
+     "arc": 0.18,
+     "r": 0.07
+    }
+   },
+   "moves": {
+    "zippy": {
+     "x": -26
+    },
+    "sprinkles": {
+     "x": 10
+    }
+   },
+   "sfx": [
+    [
+     "stomp_near",
+     1.0,
+     0.5
+    ],
+    [
+     "rockslide",
+     3.36,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "zippy",
+   "with": "nitro",
+   "dx": 2,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "zippy": "angry"
+   },
+   "moves": {
+    "zippy": {
+     "x": -20
+    },
+    "sprinkles": {
+     "x": -6
+    }
+   },
+   "lines": [
+    [
+     "zippy",
+     "I'm a racecar, not a broom!",
+     "angry"
+    ],
+    [
+     "nitro",
+     "Less complaining, more sweeping!",
+     "normal"
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.6,
+   "dx": 8,
+   "hold": 4.4,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "hydro": "determined"
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.4
+    ]
+   ]
+  },
+  {
+   "look": {
+    "x": 24.0,
+    "z": 1.4,
+    "y": 0.3,
+    "fit": 8.0
+   },
+   "hold": 4.0,
+   "move": {
+    "push": 0.06
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.3
+    ]
+   ]
+  },
+  {
+   "cam": "wide",
+   "zoom": 0.55,
+   "dx": 6,
+   "hold": 6.2,
+   "move": {
+    "pan": 2
+   },
+   "moves": {
+    "hydro": {
+     "to_x": 25,
+     "speed": 3.0
+    },
+    "rocky": {
+     "to_x": 33,
+     "speed": 3.0,
+     "delay": 0.8
+    }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.4
+    ]
+   ]
+  },
+  {
+   "cam": "two",
+   "on": "rocky",
+   "with": "hydro",
+   "dx": 2,
+   "move": {
+    "push": 0.05
+   },
+   "emote": {
+    "rocky": "proud"
+   },
+   "lines": [
+    [
+     "rocky",
+     "Eight tons of monster truck, and she didn't even creak.",
+     "proud"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "hydro",
+   "move": {
+    "pull": 0.05
+   },
+   "emote": {
+    "hydro": "determined"
+   },
+   "lines": [
+    [
+     "hydro",
+     "Beams hold two heavy trucks at a time. Cross slowly, no passing on the span. I can't test for falling rock.",
+     "calm"
+    ]
+   ]
+  },
+  {
+   "cam": "medium",
+   "on": "siren",
+   "beat": "emotion",
+   "move": {
+    "push": 0.08
+   },
+   "emote": {
+    "siren": "determined"
+   },
+   "lines": [
+    [
+     "siren",
+     "Structure checked and cleared. Prepare for one official tribute lap... the Grandpa Cone Memorial Lap!",
+     "determined"
+    ]
+   ]
+  }
+ ],
+ "note": "Boulder handover at pick_at=1.0 s; arms lift it overhead between both hands (story25d.kraggor_hold_pose). Spray start, bridge sag and beacon start use REAL shot starts from real_shot_times.json."
+}

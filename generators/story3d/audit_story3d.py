@@ -166,7 +166,7 @@ def audit_scene(d, mp4):
     metrics["reproj_px"] = round(err, 3)
     if err > THRESH["reproj_px"]:
         fail.append(f"roll/proyeksi: dunia Godot meleset {err:.1f}px dari tokoh (jalan miring / mobil melayang)")
-    road = sc.get("location", "town") in ("town", "arena", "trackside", "podium", "country")
+    road = sc.get("location", "town") in ("town", "arena", "trackside", "podium", "country", "speedway")
     for f in fr[::15]:
         for a in f["actors"]:
             if road and not (-0.7 <= a[2] <= 3.3):
