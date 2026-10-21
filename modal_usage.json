@@ -4443,6 +4443,16 @@
    "gpu_seconds": 195.2,
    "wall_seconds": 158.9,
    "cost_usd": 0.0598
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 10 (The Finish Line of Champions)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 497.4,
+   "gpu_seconds": 132.2,
+   "wall_seconds": 165.4,
+   "cost_usd": 0.0444
   }
  ]
 }
