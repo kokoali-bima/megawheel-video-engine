@@ -404,6 +404,11 @@
      "engine",
      3.6,
      0.35
+    ],
+    [
+     "engine",
+     4.6,
+     0.35
     ]
    ]
   },
@@ -437,6 +442,18 @@
      "Thank you... Cone.",
      "sad"
     ]
+   ],
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.35
+    ],
+    [
+     "engine",
+     3.0,
+     0.35
+    ]
    ]
   },
   {
@@ -467,7 +484,29 @@
    "punch": true,
    "emote": {
     "grandpa_cone": "happy"
-   }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.5,
+     0.45
+    ],
+    [
+     "engine",
+     2.0,
+     0.4
+    ],
+    [
+     "engine",
+     3.5,
+     0.4
+    ],
+    [
+     "engine",
+     4.8,
+     0.4
+    ]
+   ]
   }
  ],
  "note": "Same lane, true bumper contact (centre distance 6.5 m = bus half 3.7 + ice-cream half 2.8), towed. Cue covers only last four shots. Motion and cue lengths are timing ESTIMATES until real speech exists."
