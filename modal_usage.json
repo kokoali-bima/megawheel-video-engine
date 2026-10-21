@@ -4303,6 +4303,16 @@
    "gpu_seconds": 238.2,
    "wall_seconds": 173.1,
    "cost_usd": 0.0719
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 1 voiced preview (palm pose)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 119.9,
+   "gpu_seconds": 56.7,
+   "wall_seconds": 99.8,
+   "cost_usd": 0.0174
   }
  ]
 }
