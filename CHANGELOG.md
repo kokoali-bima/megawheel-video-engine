@@ -3,12 +3,44 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-10-20
-**📤 Upload / antrean / Drive**
-- `a850844` publish: daily run 2026-10-20 [cron daily_publish.sh]
+## 2026-10-21
 **🔧 Lain-lain**
+- `4cf9b5f` Merge remote-tracking branch 'origin/main'
+- `4abccf5` record modal usage
+- `3602f9f` fix(s08): extend cue_heroic_stand to shot 7 and add engine SFX to shot 6 to eliminate A01 silence
+- `23a0a52` Merge remote-tracking branch 'origin/main' into main
+- `fcfffc6` S01E03 scene 8: pace engine sounds across canyon approach shot to satisfy A01
+- `a232a2a` S01E03: promote Kraggor palm pose and scenes 01, 08, 09
+**📤 Upload / antrean / Drive**
+- `6d02c42` publish: daily run 2026-10-21 [cron daily_publish.sh]
+<details><summary>otomatis VM (4)</summary>
+
+- `b3125ac` records: modal usage
+- `89e4db4` records: modal usage
+- `b9a59d0` records: modal usage
+- `2d71938` records: modal usage
+
+</details>
+
+## 2026-10-20
+**🔧 Lain-lain**
+- `912de55` S01E03 scene 9: replace the Kraggor hum fill with short sourced sounds
+- `9fd1807` S01E03 scene 9: fill the 19.0-22.5 s audio gap with Kraggor hum (A01)
+- `e829051` S01E03 scene 9 QA fixes after the first voiced render
 - `d6db772` story3d: S01E03 engine features, scene data and builder
 - `4da7d77` approve: Ep. 102 (dungeon s038) and Ep. 103 (splash s013) queued for publish
+**📤 Upload / antrean / Drive**
+- `a850844` publish: daily run 2026-10-20 [cron daily_publish.sh]
+<details><summary>otomatis VM (6)</summary>
+
+- `7414302` records: modal usage
+- `fc12db2` records: modal usage
+- `220f9dc` records: modal usage
+- `adde514` records: modal usage (auto)
+- `f845c92` records: modal usage
+- `1c15a74` analytics: daily report 2026-10-20
+
+</details>
 
 ## 2026-10-19
 **🔧 Lain-lain**
