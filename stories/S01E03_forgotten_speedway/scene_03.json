@@ -73,11 +73,10 @@
  "score": [
   {
    "cue": "cue_grandpa_memory",
-   "from": 0,
-   "to": 2,
-   "vol": 0.35,
-   "start": 0.0,
-   "fade": 1.0,
+   "from": 5,
+   "to": 8,
+   "vol": 0.3,
+   "fade": 1.2,
    "tail": 1.0
   }
  ],
@@ -91,7 +90,18 @@
    "move": {
     "pan": 2
    },
-   "sfx": []
+   "sfx": [
+    [
+     "box_drop",
+     1.5,
+     0.5
+    ],
+    [
+     "key_glint",
+     4.2,
+     0.4
+    ]
+   ]
   },
   {
    "cam": "two",
@@ -150,7 +160,13 @@
    "emote": {
     "nitro": "angry"
    },
-   "sfx": []
+   "sfx": [
+    [
+     "thud_far",
+     1.8,
+     0.5
+    ]
+   ]
   },
   {
    "cam": "two",
