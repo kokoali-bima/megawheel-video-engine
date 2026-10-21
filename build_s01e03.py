@@ -265,11 +265,11 @@ def save(n, d):
 def write_outputs():
     os.makedirs(EP, exist_ok=True)
     for n, _chapter, _lines, _est in SCRIPT:
-        with open(f"{EP}/scene_{n:02d}.json", "w", encoding="utf-8") as fh:
+        with open(f"{EP}/scene_{n:02d}.json", "w", encoding="utf-8", newline="\n") as fh:
             json.dump(SCENES[n], fh, indent=1, ensure_ascii=False)
     index = [{"scene": n, "chapter": c, "est_s": e, "lines": [{"who": w, "text": t} for w, t in ls]}
              for n, c, ls, e in SCRIPT]
-    with open(f"{EP}/_script_index.json", "w", encoding="utf-8") as fh:
+    with open(f"{EP}/_script_index.json", "w", encoding="utf-8", newline="\n") as fh:
         json.dump(index, fh, indent=1, ensure_ascii=False)
 
 
@@ -688,7 +688,7 @@ s8["shots"] = [
                "sprinkles": {"to_x": 29, "to_z": 0.2, "speed": 4.0},
                "zippy": {"to_x": 24.2, "to_z": 1.3, "speed": 4.0},
                "rocky": {"to_x": 17, "to_z": 2.1, "speed": 4.0}},
-     "sfx": [["engine", 0.0, 0.4]]},
+     "sfx": [["engine", 0.0, 0.5], ["engine", 1.5, 0.5], ["engine", 3.0, 0.5], ["engine", 4.5, 0.5], ["engine", 6.0, 0.5]]},
     {"cam": "wide", "on": "sprinkles", "dx": 0.0, "zoom": 0.55, "hold": 3.2, "cut": "hard", "move": {"handheld": 3},
      "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.2, "dur": 0.9, "pose": "palm", "bend": 0.05},
               {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.3, "dur": 0.9, "pose": "palm", "bend": 0.05}],
