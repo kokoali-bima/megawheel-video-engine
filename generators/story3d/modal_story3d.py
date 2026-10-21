@@ -108,7 +108,7 @@ def _world(job: str, num: int, start: int, n: int) -> dict:
     return dict(num=num, start=start, n=n, ok=os.path.exists(mp4), errors=errs, device=dev, secs=time.time() - t0)
 
 
-@app.function(image=gpu_img, gpu="T4", cpu=4, memory=8192, timeout=1800, volumes={"/vol": vol})
+@app.function(image=gpu_img, gpu="T4", cpu=4, memory=8192, timeout=300, volumes={"/vol": vol})
 def world(job: str, num: int, start: int, n: int) -> dict:
     return _world(job, num, start, n)
 
@@ -246,7 +246,7 @@ def main(episode: str, scenes: str, out: str = "work/story3d", aspect: str = "h"
             print(r["log"])
     good = [r for r in ov if r["ok"]]
     jobs = [(job, r["num"], s, min(PART, r["frames"] - s)) for r in good for s in range(0, r["frames"], PART)]
-    wr = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::world', 'timeout': 1800, 'cpu': 4, 'memory': 8192, 'gpu': 'T4'}, world, jobs))
+    wr = list(_budget_starmap('megawheel', {'label': '/root/video-engine/generators/story3d/modal_story3d.py::world', 'timeout': 300, 'cpu': 4, 'memory': 8192, 'gpu': 'T4'}, world, jobs))
     bad = set()
     for r in wr:
         gpu_s += r["secs"]
