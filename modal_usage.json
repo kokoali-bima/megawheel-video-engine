@@ -4383,6 +4383,16 @@
    "gpu_seconds": 156.4,
    "wall_seconds": 124.8,
    "cost_usd": 0.0483
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 3 v2 (cadence sfx)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 345.3,
+   "gpu_seconds": 134.5,
+   "wall_seconds": 119.1,
+   "cost_usd": 0.0423
   }
  ]
 }
