@@ -75,7 +75,7 @@
    "cue": "cue_grandpa_memory",
    "from": 5,
    "to": 8,
-   "vol": 0.3,
+   "vol": 0.75,
    "fade": 1.2,
    "tail": 1.0
   }
@@ -240,7 +240,13 @@
     "nitro": "normal",
     "tilly": "worried"
    },
-   "sfx": []
+   "sfx": [
+    [
+     "memory",
+     0.6,
+     0.7
+    ]
+   ]
   },
   {
    "look": {

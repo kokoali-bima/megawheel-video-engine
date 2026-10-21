@@ -4483,6 +4483,16 @@
    "gpu_seconds": 160.1,
    "wall_seconds": 137.7,
    "cost_usd": 0.0486
+  },
+  {
+   "date": "2026-10-21",
+   "note": "story3d S01E03_forgotten_speedway 3",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 391.0,
+   "gpu_seconds": 140.8,
+   "wall_seconds": 135.3,
+   "cost_usd": 0.0448
   }
  ]
 }
