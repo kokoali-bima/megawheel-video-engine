@@ -1,18 +1,17 @@
 {
  "title": "Scene 5 - The Sector 1-2 Safety Sprint",
  "chapter": "The Safety Sprint",
- "location": "speedway",
+ "location": "trackside",
  "theme_location": "countryside",
  "time": "noon",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "mountains": true,
  "finish": 108.0,
- "start_x": -4.0,
  "ramps": [
   [
    72.0,
@@ -184,13 +183,7 @@
      "excited"
     ]
    ],
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.6
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",
@@ -285,28 +278,8 @@
    },
    "sfx": [
     [
-     "engine",
-     0.0,
-     0.6
-    ],
-    [
      "car_boing",
      1.4,
-     0.5
-    ],
-    [
-     "engine",
-     2.8,
-     0.5
-    ],
-    [
-     "engine",
-     4.2,
-     0.5
-    ],
-    [
-     "engine",
-     5.4,
      0.5
     ]
    ]

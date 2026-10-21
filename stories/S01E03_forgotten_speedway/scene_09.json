@@ -5,17 +5,13 @@
  "theme_location": "countryside",
  "time": "sunset",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "mountains": true,
  "fog": 0.25,
- "gorge": [
-  14.0,
-  38.0
- ],
  "actors": {
   "nitro": {
    "vk": "f1",
@@ -53,79 +49,7 @@
    "emo": "determined"
   }
  },
- "props": [
-  {
-   "type": "bridge",
-   "x0": 14.0,
-   "x1": 38.0,
-   "planks": 36,
-   "posts": 7,
-   "z0": -0.4,
-   "z1": 3.4,
-   "keys": [
-    [
-     0,
-     0.3,
-     0.4
-    ],
-    [
-     60.0,
-     0.3,
-     0.4
-    ]
-   ],
-   "outer_keys": [
-    [
-     0,
-     0.7,
-     0.8
-    ],
-    [
-     60.0,
-     0.7,
-     0.8
-    ]
-   ],
-   "holes": [
-    [
-     -3.0,
-     0.36,
-     0.5
-    ]
-   ],
-   "diag": [
-    25.0,
-    -3.0
-   ]
-  },
-  {
-   "type": "rescue",
-   "z": 3.2,
-   "winch": {
-    "t0": 0.5,
-    "dur": 0.8,
-    "taut_t": 19.23,
-    "release_t": 34.87,
-    "sag": 1.2,
-    "from": [
-     49.2,
-     1.4
-    ],
-    "to": [
-     24.8,
-     0.9
-    ],
-    "from_z": 3.2,
-    "to_z": 1.3
-   },
-   "beacon": {
-    "x": 52.0,
-    "y": 2.9,
-    "t0": 0.0,
-    "t1": 99.0
-   }
-  }
- ],
+ "props": [],
  "score": [
   {
    "cue": "cue_heroic_stand",
@@ -180,8 +104,7 @@
    ],
    "moves": {
     "nitro": {
-     "to_x": 43.5,
-     "to_z": 3.2,
+     "to_x": 37.0,
      "speed": 6.0
     },
     "zippy": {
@@ -295,16 +218,9 @@
      "bend_dur": 0.8
     }
    ],
-   "contact": [
-    [
-     "sprinkles",
-     "zippy"
-    ]
-   ],
    "moves": {
     "sprinkles": {
      "to_x": 29.1,
-     "to_z": 1.3,
      "speed": 3.0
     },
     "zippy": {
@@ -367,12 +283,6 @@
      "bend_at": 0.0,
      "bend_dur": 0.8
     }
-   ],
-   "contact": [
-    [
-     "sprinkles",
-     "zippy"
-    ]
    ],
    "moves": {
     "zippy": {
@@ -438,12 +348,6 @@
      "bend_at": 0.2,
      "bend_dur": 0.8
     }
-   ],
-   "contact": [
-    [
-     "sprinkles",
-     "zippy"
-    ]
    ],
    "moves": {
     "zippy": {
@@ -514,12 +418,6 @@
      "bend_dur": 0.8
     }
    ],
-   "contact": [
-    [
-     "sprinkles",
-     "zippy"
-    ]
-   ],
    "moves": {
     "zippy": {
      "to_x": 24.2,
@@ -585,7 +483,6 @@
    "moves": {
     "sprinkles": {
      "to_x": 30.2,
-     "to_z": 0.2,
      "speed": 3.0,
      "delay": 3.0
     },
@@ -651,7 +548,6 @@
    "moves": {
     "zippy": {
      "to_x": 41.0,
-     "to_z": 2.0,
      "speed": 8.0,
      "delay": 3.2,
      "sink": {
@@ -680,26 +576,6 @@
      "thud_far",
      2.1,
      0.6
-    ],
-    [
-     "engine",
-     3.2,
-     0.5
-    ],
-    [
-     "engine",
-     4.3,
-     0.5
-    ],
-    [
-     "engine",
-     5.2,
-     0.5
-    ],
-    [
-     "engine",
-     6.1,
-     0.5
     ]
    ]
   },
@@ -745,27 +621,10 @@
    "moves": {
     "zippy": {
      "to_x": 59.0,
-     "to_z": 1.6,
      "speed": 10.0
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.1,
-     0.5
-    ],
-    [
-     "engine",
-     1.1,
-     0.5
-    ],
-    [
-     "engine",
-     2.1,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",
@@ -809,22 +668,10 @@
    "moves": {
     "sprinkles": {
      "to_x": 42.0,
-     "to_z": 2.0,
      "speed": 8.0
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.1,
-     0.5
-    ],
-    [
-     "engine",
-     1.2,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "track",
@@ -868,22 +715,10 @@
    "moves": {
     "sprinkles": {
      "to_x": 52.5,
-     "to_z": 0.8,
      "speed": 8.0
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.1,
-     0.5
-    ],
-    [
-     "engine",
-     1.2,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",
@@ -927,7 +762,6 @@
    "moves": {
     "rocky": {
      "to_x": 42.0,
-     "to_z": 2.0,
      "speed": 8.0
     }
    },
@@ -938,29 +772,9 @@
      0.6
     ],
     [
-     "engine",
-     0.6,
-     0.5
-    ],
-    [
-     "engine",
-     1.7,
-     0.5
-    ],
-    [
      "thud_far",
      2.8,
      0.6
-    ],
-    [
-     "engine",
-     3.2,
-     0.5
-    ],
-    [
-     "engine",
-     4.2,
-     0.5
     ]
    ]
   },
@@ -975,8 +789,7 @@
    },
    "moves": {
     "rocky": {
-     "to_x": 46.0,
-     "to_z": 0.0,
+     "to_x": 45.0,
      "speed": 6.0
     }
    },
@@ -984,16 +797,6 @@
     [
      "steps_far",
      0.2,
-     0.5
-    ],
-    [
-     "engine",
-     0.2,
-     0.5
-    ],
-    [
-     "engine",
-     1.4,
      0.5
     ]
    ]

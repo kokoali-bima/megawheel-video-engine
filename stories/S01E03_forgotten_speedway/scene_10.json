@@ -1,17 +1,16 @@
 {
  "title": "Scene 10 - The Memorial Trophy",
  "chapter": "The Memorial Trophy",
- "location": "speedway",
+ "location": "trackside",
  "theme_location": "countryside",
  "time": "night",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "mountains": true,
- "start_x": 60.0,
  "finish": 60.0,
  "actors": {
   "sprinkles": {
@@ -71,39 +70,7 @@
    "emo": "happy"
   }
  },
- "props": [
-  {
-   "type": "scoreboard",
-   "x": 72.0,
-   "z": 4.6,
-   "w": 7.0,
-   "texts": [
-    [
-     0.0,
-     "LAP 5 OF 5\nMEMORIAL LAP"
-    ],
-    [
-     7.75,
-     "MEMORIAL LAP\nCOMPLETE"
-    ]
-   ]
-  },
-  {
-   "type": "trophy_case",
-   "x": 98.0,
-   "z": 3.6,
-   "drawer_t": 24.2
-  },
-  {
-   "type": "blueprint",
-   "x": 99.4,
-   "z": 4.9,
-   "h": 0.05,
-   "w": 2.0,
-   "from_shot": 7,
-   "to_shot": 7
-  }
- ],
+ "props": [],
  "score": [
   {
    "cue": "cue_kraggor_tender",
@@ -149,28 +116,7 @@
      "speed": 22.0
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.5
-    ],
-    [
-     "engine",
-     1.5,
-     0.5
-    ],
-    [
-     "engine",
-     3.0,
-     0.5
-    ],
-    [
-     "engine",
-     4.5,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "group",
@@ -296,21 +242,6 @@
      "key_glint",
      0.4,
      0.5
-    ],
-    [
-     "engine",
-     2.2,
-     0.35
-    ],
-    [
-     "engine",
-     3.6,
-     0.35
-    ],
-    [
-     "engine",
-     4.8,
-     0.35
     ]
    ]
   },
@@ -376,16 +307,6 @@
      "honk_cheer",
      0.5,
      0.5
-    ],
-    [
-     "engine",
-     2.0,
-     0.35
-    ],
-    [
-     "engine",
-     3.2,
-     0.35
     ]
    ]
   },

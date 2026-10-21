@@ -5,17 +5,13 @@
  "theme_location": "countryside",
  "time": "sunset",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "mountains": true,
  "fog": 0.25,
- "gorge": [
-  14.0,
-  38.0
- ],
  "actors": {
   "hydro": {
    "vk": "firetruck",
@@ -67,75 +63,7 @@
    "emo": "normal"
   }
  },
- "props": [
-  {
-   "type": "bridge",
-   "x0": 14.0,
-   "x1": 38.0,
-   "planks": 36,
-   "posts": 7,
-   "z0": -0.4,
-   "z1": 3.4,
-   "keys": [
-    [
-     0.0,
-     0.0,
-     0.0
-    ],
-    [
-     21.8,
-     0.12,
-     0.1
-    ]
-   ],
-   "outer_keys": [
-    [
-     0,
-     0,
-     0
-    ],
-    [
-     6.0,
-     0.12,
-     0.1
-    ]
-   ],
-   "holes": [],
-   "diag": [
-    25.0,
-    999.0
-   ]
-  },
-  {
-   "type": "boulder",
-   "x": -12.0,
-   "z": 1.4,
-   "r": 1.4,
-   "hide_t": 1.0
-  },
-  {
-   "type": "rescue",
-   "z": 2.6,
-   "spray": {
-    "t0": 12.3,
-    "t1": 15.9,
-    "from": [
-     24.0,
-     1.6
-    ],
-    "dir": [
-     0.0,
-     -0.9
-    ]
-   },
-   "beacon": {
-    "x": 22.0,
-    "y": 2.9,
-    "t0": 39.0,
-    "t1": 79.0
-   }
-  }
- ],
+ "props": [],
  "score": [
   {
    "cue": "cue_heroic_stand",
@@ -198,16 +126,6 @@
      "rockslide",
      3.36,
      0.4
-    ],
-    [
-     "engine",
-     0.0,
-     0.4
-    ],
-    [
-     "engine",
-     5.2,
-     0.4
     ]
    ]
   },
@@ -254,23 +172,7 @@
    "emote": {
     "hydro": "determined"
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.4
-    ],
-    [
-     "engine",
-     1.8,
-     0.4
-    ],
-    [
-     "engine",
-     3.2,
-     0.4
-    ]
-   ]
+   "sfx": []
   },
   {
    "look": {
@@ -283,23 +185,7 @@
    "move": {
     "push": 0.06
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.3
-    ],
-    [
-     "engine",
-     1.8,
-     0.35
-    ],
-    [
-     "engine",
-     3.0,
-     0.35
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",
@@ -320,28 +206,7 @@
      "delay": 0.8
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.4
-    ],
-    [
-     "engine",
-     1.8,
-     0.4
-    ],
-    [
-     "engine",
-     3.4,
-     0.4
-    ],
-    [
-     "engine",
-     4.8,
-     0.4
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "two",

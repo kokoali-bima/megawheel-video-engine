@@ -1,18 +1,17 @@
 {
  "title": "Scene 2 - Beyond the Rusty Gate",
  "chapter": "Beyond the Rusty Gate",
- "location": "speedway",
+ "location": "trackside",
  "theme_location": "countryside",
  "time": "morning",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "fog": 0.35,
  "mountains": true,
- "start_x": -2.0,
  "actors": {
   "sprinkles": {
    "vk": "icecream",
@@ -52,23 +51,6 @@
    "open_shot": 0,
    "open_dt": 0.0,
    "open_dur": 0.2
-  },
-  {
-   "type": "scoreboard",
-   "x": 22.0,
-   "z": 4.4,
-   "w": 7.0,
-   "texts": [
-    [
-     0.0,
-     "LAP 5 OF 5\nFINAL LAP"
-    ]
-   ]
-  },
-  {
-   "type": "trophy_case",
-   "x": 36.0,
-   "z": 3.4
   }
  ],
  "score": [
@@ -128,11 +110,6 @@
     }
    },
    "sfx": [
-    [
-     "engine",
-     0.3,
-     0.4
-    ],
     [
      "gate_creak",
      0.0,
@@ -207,23 +184,7 @@
      "speed": 8
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.4
-    ],
-    [
-     "engine",
-     1.5,
-     0.4
-    ],
-    [
-     "engine",
-     3.0,
-     0.4
-    ]
-   ]
+   "sfx": []
   },
   {
    "look": {
@@ -330,13 +291,7 @@
    "emote": {
     "buster": "sad"
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.4
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "medium",

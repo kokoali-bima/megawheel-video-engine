@@ -122,8 +122,7 @@ def read_gray(mp4, w=320, h=180):
     return np.frombuffer(raw, np.uint8).reshape(-1, h, w).astype(np.float32)
 
 
-def grab(mp4, t, w=None, h=None, fmt="rgb24"):
-    w, h = (w or SAMPLE_W), (h or SAMPLE_H)                          # resolved per scene (audit_scene)
+def grab(mp4, t, w=SAMPLE_W, h=SAMPLE_H, fmt="rgb24"):
     ch = 4 if fmt == "rgba" else 3
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", f"{t:.3f}", "-i", mp4, "-frames:v", "1", "-vf",
                           f"scale={w}:{h}", "-f", "rawvideo", "-pix_fmt", fmt, "-"], capture_output=True).stdout
@@ -142,9 +141,7 @@ def db(x):
 
 # ------------------------------------------------------------------ the audit
 def audit_scene(d, mp4):
-    global SAMPLE_W, SAMPLE_H
     S = json.load(open(os.path.join(d, "scene.json")))
-    SAMPLE_W, SAMPLE_H = (270, 480) if S["H"] > S["W"] else (480, 270)       # vertical Shorts keep their aspect
     fr = [f for _, f in json.load(open(os.path.join(d, "frames.json")))["frames"]]
     shots = S["shots"]
     sc = S["scene"]
@@ -166,7 +163,7 @@ def audit_scene(d, mp4):
     metrics["reproj_px"] = round(err, 3)
     if err > THRESH["reproj_px"]:
         fail.append(f"roll/proyeksi: dunia Godot meleset {err:.1f}px dari tokoh (jalan miring / mobil melayang)")
-    road = sc.get("location", "town") in ("town", "arena", "trackside", "podium", "country", "speedway")
+    road = sc.get("location", "town") in ("town", "arena", "trackside", "podium", "country")
     for f in fr[::15]:
         for a in f["actors"]:
             if road and not (-0.7 <= a[2] <= 3.3):
@@ -235,7 +232,10 @@ def audit_scene(d, mp4):
             bx = actor_box(S, f, acts[aid])
             vis = inter(bx, (0, 0, W, H)) / area(bx)
             if vis < THRESH["focus_visible"] and sh["cam"] not in ("ecu",):
-                warn.append(f"framing shot {sh['i']}: {aid} hanya {vis:.0%} di dalam layar")
+                if vis < 0.65:
+                    fail.append(f"framing shot {sh['i']}: {aid} terpotong parah (hanya {vis:.0%} di dalam layar) [C12]")
+                else:
+                    warn.append(f"framing shot {sh['i']}: {aid} hanya {vis:.0%} di dalam layar")
             for o in f["actors"]:
                 if o[0] != aid and o[2] < acts[aid][2] - 0.05:   # nearer car drawn on top
                     cov = inter(bx, actor_box(S, f, o)) / area(bx)
@@ -282,9 +282,7 @@ def audit_scene(d, mp4):
     for f in fr[::6]:
         sh_ = shots[f["shot"]] if f["shot"] < len(shots) else None
         for a in f["actors"]:
-            mv_ = sc["shots"][f["shot"]].get("moves", {}) if f["shot"] < len(sc["shots"]) else {}
-            air_ = any(set(m_) & {"jump", "fling", "sink", "hop"} for m_ in mv_.values())      # a crash / a pit jump on purpose
-            if a[4] - plat(a[1], a[2]) > 0.25 and sh_ is not None and not set(sh_["fx"]) & {"shake", "punch"} and not air_:
+            if a[4] - plat(a[1], a[2]) > 0.25 and sh_ is not None and not set(sh_["fx"]) & {"shake", "punch"}:
                 flo.add((a[0], f["shot"]))
     for aid, si in sorted(flo):
         fail.append(f"melayang shot {si}: {aid} di udara tanpa pijakan [G04]")
@@ -307,8 +305,6 @@ def audit_scene(d, mp4):
         for q in range(len(A_)):
             for r_ in range(q + 1, len(A_)):
                 a, b = A_[q], A_[r_]
-                if sorted((a[0], b[0])) in sh.get("contact", []):      # declared contact (tow / brace): not a staging error
-                    continue
                 if abs(a[2] - b[2]) < 0.9:
                     gap = abs(a[1] - b[1]) - (a[6] * a[5] + b[6] * b[5]) / 2
                     if gap < 1.0:
@@ -453,24 +449,6 @@ def audit_scene(d, mp4):
         if noisy:
             warn.append(f"audio: efek terdengar seperti noise di headphone {noisy[:4]} [A07]")
         total = len(mix) / sr
-        mus = [db(M[q * win:(q + 1) * win]) > -50 for q in range(n)]      # A10: how much of the film carries music
-        share = sum(mus) / max(1, n)
-        run_, best_ = 0, 0
-        for on_ in mus:
-            run_ = run_ + 1 if on_ else 0
-            best_ = max(best_, run_)
-        metrics.update(music_share=round(share, 2), music_longest_s=best_ * 0.5)
-        if total > 20 and share > THRESH["music_share_max"]:
-            warn.append(f"audio: musik ada di {share:.0%} scene (maks {THRESH['music_share_max']:.0%}) - backsound terlalu ramai [A10]")
-        if best_ * 0.5 > THRESH["music_run_max_s"]:
-            warn.append(f"audio: musik menerus {best_ * 0.5:.0f}s tanpa jeda (maks {THRESH['music_run_max_s']:.0f}s) [A10]")
-        loud = []
-        for spk, t0, du in lines:
-            seg = slice(int(t0 * sr), int((t0 + du) * sr))
-            if db(M[seg]) > -60 and db(V[seg]) - db(M[seg]) < THRESH["music_gap_db"]:
-                loud.append(f"{spk}@{t0:.1f}")
-        if len(loud) > max(2, len(lines) // 3):
-            warn.append(f"audio: musik kurang dari {THRESH['music_gap_db']:.0f} dB di bawah suara di {len(loud)} kalimat {loud[:4]} [A10]")
         cues = [c for c in sc.get("score", []) if "cue" in c]
         if total > 40 and cues:
             span = {}

@@ -344,6 +344,33 @@
    "keys": [
     "challenge"
    ]
+  },
+  {
+   "id": "C12",
+   "date": "2026-10-21",
+   "note": "Kendaraan besar (bus, firetruck, bigrig dengan bodi > 6.0m) dilarang menggunakan cam: close/ecu karena memotong bodi/kepala; wajib cam: medium (zoom <= 1.25) atau group/two dengan safe margin",
+   "check": "lint+qa",
+   "keys": [
+    "large_vehicle_crop"
+   ]
+  },
+  {
+   "id": "C13",
+   "date": "2026-10-21",
+   "note": "Standar balapan Cars: mobil dilarang berhenti mendadak saat berbicara di lintasan balap/konvoi; wajib continuous momentum (speed > 0, roda berputar, background parallax scrolling)",
+   "check": "lint+qa",
+   "keys": [
+    "cars_momentum"
+   ]
+  },
+  {
+   "id": "A11",
+   "date": "2026-10-21",
+   "note": "Dilarang menyuntikkan sfx sintetis palsu (engine cine_whoosh) berulang-ulang yang mengganggu (huwek-huweegh); gunakan foley/ambience alami dan spotting musik emosional",
+   "check": "lint+qa",
+   "keys": [
+    "no_synthetic_whoosh"
+   ]
   }
  ],
  "lint": {

@@ -5,17 +5,13 @@
  "theme_location": "countryside",
  "time": "sunset",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.45,
  "tail": 0.9,
  "edge_fade": false,
  "mountains": true,
  "fog": 0.25,
- "gorge": [
-  14.0,
-  38.0
- ],
  "ramps": [
   [
    -40.0,
@@ -54,60 +50,6 @@
   }
  },
  "props": [
-  {
-   "type": "bridge",
-   "x0": 14.0,
-   "x1": 38.0,
-   "planks": 36,
-   "posts": 7,
-   "z0": -0.4,
-   "z1": 3.4,
-   "keys": [
-    [
-     52.13,
-     0.0,
-     0.0
-    ],
-    [
-     54.730000000000004,
-     0.3,
-     0.4
-    ]
-   ],
-   "outer_keys": [
-    [
-     52.13,
-     0.0,
-     0.0
-    ],
-    [
-     52.53,
-     0.0,
-     0.0
-    ],
-    [
-     53.330000000000005,
-     0.4,
-     0.35
-    ],
-    [
-     54.730000000000004,
-     0.7,
-     0.8
-    ]
-   ],
-   "holes": [
-    [
-     53.330000000000005,
-     0.36,
-     0.5
-    ]
-   ],
-   "diag": [
-    25.0,
-    52.730000000000004
-   ]
-  },
   {
    "type": "rockslide",
    "x": 33.0,
@@ -304,18 +246,7 @@
    "move": {
     "push": 0.08
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.6
-    ],
-    [
-     "engine",
-     1.5,
-     0.6
-    ]
-   ],
+   "sfx": [],
    "moves": {
     "sprinkles": {
      "to_x": -22,
@@ -403,13 +334,7 @@
      "speed": 10
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "track",
@@ -506,52 +431,22 @@
    "moves": {
     "nitro": {
      "to_x": 33,
-     "to_z": 2.7,
      "speed": 4.0
     },
     "sprinkles": {
      "to_x": 29,
-     "to_z": 0.2,
      "speed": 4.0
     },
     "zippy": {
      "to_x": 24.2,
-     "to_z": 1.3,
      "speed": 4.0
     },
     "rocky": {
      "to_x": 17,
-     "to_z": 2.1,
      "speed": 4.0
     }
    },
-   "sfx": [
-    [
-     "engine",
-     0.0,
-     0.5
-    ],
-    [
-     "engine",
-     1.5,
-     0.5
-    ],
-    [
-     "engine",
-     3.0,
-     0.5
-    ],
-    [
-     "engine",
-     4.5,
-     0.5
-    ],
-    [
-     "engine",
-     6.0,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",

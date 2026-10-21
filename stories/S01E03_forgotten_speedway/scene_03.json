@@ -91,28 +91,7 @@
    "move": {
     "pan": 2
    },
-   "sfx": [
-    [
-     "engine",
-     0.5,
-     0.4
-    ],
-    [
-     "engine",
-     2.0,
-     0.35
-    ],
-    [
-     "engine",
-     3.5,
-     0.4
-    ],
-    [
-     "engine",
-     5.0,
-     0.35
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "two",
@@ -171,23 +150,7 @@
    "emote": {
     "nitro": "angry"
    },
-   "sfx": [
-    [
-     "engine",
-     0.5,
-     0.4
-    ],
-    [
-     "engine",
-     2.0,
-     0.35
-    ],
-    [
-     "engine",
-     3.5,
-     0.35
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "two",
@@ -206,7 +169,7 @@
    ]
   },
   {
-   "cam": "close",
+   "cam": "medium",
    "on": "buster",
    "beat": "emotion",
    "move": {
@@ -221,7 +184,8 @@
      "Your grandpa and I raced there long ago. I was number seven.",
      "sad"
     ]
-   ]
+   ],
+   "zoom": 1.25
   },
   {
    "cam": "group",
@@ -260,23 +224,7 @@
     "nitro": "normal",
     "tilly": "worried"
    },
-   "sfx": [
-    [
-     "engine",
-     0.2,
-     0.3
-    ],
-    [
-     "engine",
-     1.8,
-     0.3
-    ],
-    [
-     "engine",
-     3.2,
-     0.3
-    ]
-   ]
+   "sfx": []
   },
   {
    "look": {

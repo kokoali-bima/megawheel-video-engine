@@ -5,17 +5,13 @@
  "theme_location": "countryside",
  "time": "sunset",
  "weather": "clear",
- "ambience": "mountain_wind",
+ "ambience": "wind",
  "letterbox": true,
  "gap": 0.3,
  "tail": 0.6,
  "edge_fade": false,
  "fog": 0.25,
  "mountains": true,
- "gorge": [
-  14.0,
-  38.0
- ],
  "actors": {
   "nitro": {
    "vk": "f1",
@@ -47,60 +43,6 @@
   }
  },
  "props": [
-  {
-   "type": "bridge",
-   "x0": 14.0,
-   "x1": 38.0,
-   "planks": 36,
-   "posts": 7,
-   "z0": -0.4,
-   "z1": 3.4,
-   "keys": [
-    [
-     1.6,
-     0,
-     0
-    ],
-    [
-     4.2,
-     0.3,
-     0.4
-    ]
-   ],
-   "outer_keys": [
-    [
-     1.6,
-     0,
-     0
-    ],
-    [
-     2.0,
-     0,
-     0
-    ],
-    [
-     2.8,
-     0.4,
-     0.35
-    ],
-    [
-     4.2,
-     0.7,
-     0.8
-    ]
-   ],
-   "holes": [
-    [
-     2.8,
-     0.36,
-     0.5
-    ]
-   ],
-   "diag": [
-    25.0,
-    2.2
-   ]
-  },
   {
    "type": "rockslide",
    "x": 33.0,
@@ -137,13 +79,7 @@
     }
    },
    "caption": "CAN THEY SURVIVE THE CANYON BRIDGE?",
-   "sfx": [
-    [
-     "engine",
-     0.1,
-     0.5
-    ]
-   ]
+   "sfx": []
   },
   {
    "cam": "wide",
