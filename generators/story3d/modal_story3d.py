@@ -408,7 +408,7 @@ def assemble_remote(ep: str, order: list, joins: list) -> dict:
         step = abs(la - lb)
         fails, warns = [], []
         lv = [max(-62.0, db(win[q:q + 1600])) for q in range(0, max(0, len(win) - 1600), 1600)]   # 100 ms, audible floor
-        drop = max([lv[q] - lv[q + 1] for q in range(len(lv) - 1) if lv[q] > -40] + [0.0])
+        drop = max([lv[q] - lv[q + 1] for q in range(min(len(lv) - 1, int((xd[i] + 0.8) * 10))) if lv[q] > -40] + [0.0])
         if drop > JOIN["drop_db"]:
             fails.append(f"suara terpotong mendadak (turun {drop:.0f} dB dalam 0,1 dtk)")
         if j["kind"] == "dissolve" and step > JOIN["step_db"]:
