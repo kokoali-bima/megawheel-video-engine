@@ -4343,6 +4343,16 @@
    "gpu_seconds": 210.6,
    "wall_seconds": 153.1,
    "cost_usd": 0.0641
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 2 (Beyond the Rusty Gate - Cars standard)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 328.7,
+   "gpu_seconds": 193.1,
+   "wall_seconds": 142.3,
+   "cost_usd": 0.0578
   }
  ]
 }
