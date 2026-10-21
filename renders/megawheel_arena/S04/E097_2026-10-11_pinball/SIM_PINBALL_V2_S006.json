@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_PINBALL_V2_S006",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-02T16:00:00Z",
   "engine": "sim-prototype v2",
   "series": "pinball",
   "seed": 6,
@@ -263,5 +263,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E097_2026-10-11_pinball/SIM_PINBALL_V2_S006_audit.md",
   "episode": 97,
   "season": 4,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/SaMAPLv7ErM",
+  "upload_date": "2026-10-21"
 }
