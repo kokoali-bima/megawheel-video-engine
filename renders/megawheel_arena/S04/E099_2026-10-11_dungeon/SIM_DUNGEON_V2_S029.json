@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_DUNGEON_V2_S029",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-10T16:00:00Z",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
   "seed": 29,
@@ -246,5 +246,7 @@
   "render3d": true,
   "episode": 99,
   "season": 4,
-  "approved_date": "2026-10-11"
+  "approved_date": "2026-10-11",
+  "youtube_url": "https://www.youtube.com/shorts/-AXUqUCBwBk",
+  "upload_date": "2026-10-21"
 }

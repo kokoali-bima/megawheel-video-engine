@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-20 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-21 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -110,13 +110,13 @@
 | 94 | `SIM_SMASH25D_V5_S036` | smash25d | UPLOADED_SCHEDULED 2026-10-30T23:00:00Z | Fri 2026-10-30 19:00 | https://www.youtube.com/shorts/ec1zc5iboQE |
 | 95 | `SIM_SMASH25D_V5_S037` | smash25d | UPLOADED_SCHEDULED 2026-10-31T23:00:00Z | Sat 2026-10-31 19:00 | https://www.youtube.com/shorts/S6FoCd1kejM |
 | 96 | `SIM_DOMINO_V2_S003` | domino | UPLOADED_SCHEDULED 2026-11-01T16:00:00Z | Sun 2026-11-01 11:00 | https://www.youtube.com/shorts/uHkmWJYEZvA |
-| 97 | `SIM_PINBALL_V2_S006` | pinball | APPROVED | Mon 2026-11-02 11:00 |  |
-| 98 | `SIM_DUNGEON_V2_S026` | dungeon | APPROVED | Tue 2026-11-03 11:00 |  |
-| 99 | `SIM_DUNGEON_V2_S029` | dungeon | APPROVED | Tue 2026-11-10 11:00 |  |
-| 100 | `SIM_DUNGEON_V2_S031` | dungeon | APPROVED | Tue 2026-11-17 11:00 |  |
+| 97 | `SIM_PINBALL_V2_S006` | pinball | UPLOADED_SCHEDULED 2026-11-02T16:00:00Z | Mon 2026-11-02 11:00 | https://www.youtube.com/shorts/SaMAPLv7ErM |
+| 98 | `SIM_DUNGEON_V2_S026` | dungeon | UPLOADED_SCHEDULED 2026-11-03T16:00:00Z | Tue 2026-11-03 11:00 | https://www.youtube.com/shorts/MsN81LV_nP4 |
+| 99 | `SIM_DUNGEON_V2_S029` | dungeon | UPLOADED_SCHEDULED 2026-11-10T16:00:00Z | Tue 2026-11-10 11:00 | https://www.youtube.com/shorts/-AXUqUCBwBk |
+| 100 | `SIM_DUNGEON_V2_S031` | dungeon | UPLOADED_SCHEDULED 2026-11-17T16:00:00Z | Tue 2026-11-17 11:00 | https://www.youtube.com/shorts/30CLnhlfxQI |
 | 101 | `SIM_DUNGEON_V2_S032` | dungeon | APPROVED | Tue 2026-11-24 11:00 |  |
 | 102 | `SIM_DUNGEON_V2_S038` | dungeon | APPROVED | Tue 2026-12-01 11:00 |  |
-| 103 | `SIM_SPLASH_V2_S013` | splash | APPROVED | Wed 2026-11-04 11:00 |  |
+| 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -1379,9 +1379,9 @@
 - **Tema / narator:** sunset-clear-volcano / chatterbox:m1
 - **Durasi:** 57.5 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs1+broken; Level 2: Hydro (firetruck) → pit@obs0+broken; Level 3 (juara): Titan (bigrig) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-02T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-02T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-02T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/SaMAPLv7ErM
 
 ## Ep. 98 — `SIM_DUNGEON_V2_S026`
 
@@ -1392,9 +1392,9 @@
 - **Tema / narator:** night-clear-volcano / chatterbox:m1
 - **Durasi:** 50.1 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → chop@obs0+broken; Level 2: Sprinkles (icecream) → smash@obs1+broken; Level 3 (juara): Buster (bus) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-03T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-03T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-03T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/MsN81LV_nP4
 
 ## Ep. 99 — `SIM_DUNGEON_V2_S029`
 
@@ -1405,9 +1405,9 @@
 - **Tema / narator:** sunset-clear-volcano / chatterbox:m1
 - **Durasi:** 51.27 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → pit@obs2; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Nitro (f1) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-10T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-10T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-10T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/-AXUqUCBwBk
 
 ## Ep. 100 — `SIM_DUNGEON_V2_S031`
 
@@ -1418,9 +1418,9 @@
 - **Tema / narator:** noon-clear-volcano / chatterbox:f1
 - **Durasi:** 57.9 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → smash@obs1+broken; Level 2: Hydro (firetruck) → pit@obs2+broken; Level 3 (juara): Nitro (f1) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-17T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-17T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-17T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/30CLnhlfxQI
 
 ## Ep. 101 — `SIM_DUNGEON_V2_S032`
 
@@ -1457,9 +1457,9 @@
 - **Tema / narator:** noon-rain-city / chatterbox:f1
 - **Durasi:** 59.7 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → crash@obs2+broken; Level 2: Hydro (firetruck) → pit@obs0+broken; Level 3 (juara): Rocky (monster) → win
-- **Status:** APPROVED (approve 2026-10-20)
-- **Antrian:** QUEUED 2026-11-04T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-04T16:00:00Z (approve 2026-10-20)
+- **Antrian:** SCHEDULED 2026-11-04T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/qLmoNh8nyEU
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
 

@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_SPLASH_V2_S013",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-04T16:00:00Z",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "splash",
   "seed": 13,
@@ -259,5 +259,7 @@
   "ai_director": "DeepSeek Flash + Antigravity",
   "episode": 103,
   "season": 4,
-  "approved_date": "2026-10-20"
+  "approved_date": "2026-10-20",
+  "youtube_url": "https://www.youtube.com/shorts/qLmoNh8nyEU",
+  "upload_date": "2026-10-21"
 }

@@ -988,37 +988,52 @@
   {
    "episode": 97,
    "video_id": "SIM_PINBALL_V2_S006",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-02T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? \ud83d\udd34 | Ep. 97 #Shorts",
+   "upload_started": "2026-10-21T05:00:06.253864+00:00",
+   "url": "https://www.youtube.com/shorts/SaMAPLv7ErM"
   },
   {
    "episode": 98,
    "video_id": "SIM_DUNGEON_V2_S026",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-03T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 98 #Shorts",
+   "upload_started": "2026-10-21T05:00:14.655732+00:00",
+   "url": "https://www.youtube.com/shorts/MsN81LV_nP4"
   },
   {
    "episode": 103,
    "video_id": "SIM_SPLASH_V2_S013",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-04T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? \ud83d\udca6\ud83c\udf27\ufe0f NEW 3D Graphics | Ep. 103 #Shorts",
+   "upload_started": "2026-10-21T05:00:22.784698+00:00",
+   "url": "https://www.youtube.com/shorts/qLmoNh8nyEU"
   },
   {
    "episode": 99,
    "video_id": "SIM_DUNGEON_V2_S029",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-10T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Siren the Police Car Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 99 #Shorts",
+   "upload_started": "2026-10-21T05:00:30.296191+00:00",
+   "url": "https://www.youtube.com/shorts/-AXUqUCBwBk"
   },
   {
    "episode": 100,
    "video_id": "SIM_DUNGEON_V2_S031",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-17T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Sports Car vs Deadly Dungeon Traps! Can Zippy Make It? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 100 #Shorts",
+   "upload_started": "2026-10-21T05:00:37.632200+00:00",
+   "url": "https://www.youtube.com/shorts/30CLnhlfxQI"
   },
   {
    "episode": 101,
