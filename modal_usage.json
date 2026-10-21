@@ -4413,6 +4413,16 @@
    "gpu_seconds": 176.8,
    "wall_seconds": 212.2,
    "cost_usd": 0.0617
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 5 (Dust Storm Ridge)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 387.7,
+   "gpu_seconds": 166.4,
+   "wall_seconds": 204.6,
+   "cost_usd": 0.0517
   }
  ]
 }
