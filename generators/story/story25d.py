@@ -2033,9 +2033,21 @@ def kraggor_sad(ctx, t):
     ctx.restore()
 
 
+def _capsule(ctx, x0, y0, x1, y1, w, lw):
+    """A rounded segment (finger / thumb) with the paw's dark outline: dark stroke, then the lit body on top."""
+    ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+    for col, wd in ((KR_DARK, w + 2 * lw), (se.lit(KR_BODY), w)):
+        ctx.move_to(x0, y0)
+        ctx.line_to(x1, y1)
+        ctx.set_source_rgb(*col)
+        ctx.set_line_width(wd)
+        ctx.stroke()
+
+
 def draw_claw(ctx, c, camx, u):
     """Kraggor's giant arm reaching in from the right to point at (x, y) in the world - or to hand something over
-    (holds: "key"). Drawn in world space, so it stays on its target while the camera pushes in."""
+    (holds: "key"). Drawn in world space, so it stays on its target while the camera pushes in.
+    pose "palm" (S01E03): an open hand UNDER the bridge deck, palm up, fingers up its outer side."""
     f = min(1.0, max(0.0, (u - c.get("at", 0.0)) / c.get("dur", 1.1)))
     f = f * f * (3 - 2 * f)
     z = c.get("z", 2.0)
@@ -2047,6 +2059,131 @@ def draw_claw(ctx, c, camx, u):
     ang = math.atan2(cy_ - by, cx_ - bx)
     nx, ny = -math.sin(ang), math.cos(ang)
     w0, w1 = 3.2 * k, 1.1 * k
+    if c.get("pose") == "palm":                                # S01E03: an OPEN hand under the bridge deck - palm up,
+        sgn = 1.0 if c.get("from_dx", 17.0) > 0 else -1.0      # fingers up its OUTER side, claws sideways (inward)
+        b0 = float(c.get("bend", 0.05))
+        b1 = float(c.get("bend_to", b0))
+        bs = min(1.0, max(0.0, (u - float(c.get("bend_at", 0.0))) / max(1e-6, float(c.get("bend_dur", 0.8)))))
+        bend = b0 + (b1 - b0) * bs * bs * (3 - 2 * bs)         # the arm bends more as the load settles on it
+        hx = cx_ + sgn * 0.03 * k * math.sin(2 * math.pi * u / 4.3 + (0.0 if sgn < 0 else 1.7))   # slow breathing
+        hy = cy_ + bend * 0.35 * k                             # the bend also lowers the whole hand
+        wxp, wyp = hx, hy + 0.30 * k                           # wrist: just below the palm
+        ddx, ddy = wxp - bx, wyp - by                          # 1. forearm: tapered band on a quadratic centre line,
+        dl = max(1e-6, math.hypot(ddx, ddy))                   # bowing to the outer side under the load
+        bnx, bny = -ddy / dl, ddx / dl
+        if bnx * sgn < 0:
+            bnx, bny = -bnx, -bny
+        qx_, qy_ = (bx + wxp) / 2 + bnx * bend * 1.2 * k, (by + wyp) / 2 + bny * bend * 1.2 * k
+        edge_l, edge_r = [], []
+        for i in range(13):
+            p_ = i / 12.0
+            ex_ = (1 - p_) ** 2 * bx + 2 * (1 - p_) * p_ * qx_ + p_ * p_ * wxp
+            ey_ = (1 - p_) ** 2 * by + 2 * (1 - p_) * p_ * qy_ + p_ * p_ * wyp
+            tx_, ty_ = (2 * (1 - p_) * (qx_ - bx) + 2 * p_ * (wxp - qx_),
+                        2 * (1 - p_) * (qy_ - by) + 2 * p_ * (wyp - qy_))
+            tl_ = max(1e-6, math.hypot(tx_, ty_))
+            hw_ = (w0 + (1.3 * k - w0) * p_) / 2
+            edge_l.append((ex_ - ty_ / tl_ * hw_, ey_ + tx_ / tl_ * hw_))
+            edge_r.append((ex_ + ty_ / tl_ * hw_, ey_ - tx_ / tl_ * hw_))
+        se.poly(ctx, edge_l + edge_r[::-1])
+        ctx.set_source_rgb(*se.lit(KR_BODY))
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*KR_DARK)
+        ctx.set_line_width(0.07 * k)
+        ctx.stroke()
+        ctx.save()                                             # 2. palm: flat ellipse, its top edge = the contact line
+        ctx.translate(hx, hy)
+        ctx.rotate(-sgn * 0.12)                                # inner edge a little lower
+        ctx.save()
+        ctx.scale(1.15 * k, 0.42 * k)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*se.lit(KR_BODY))
+        ctx.fill_preserve()
+        ctx.set_source_rgb(*KR_DARK)
+        ctx.set_line_width(0.07 * k)
+        ctx.stroke()
+        ctx.save()                                             # lighter inner patch: the open palm catches the light
+        ctx.scale(0.8 * k, 0.26 * k)
+        ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+        ctx.restore()
+        ctx.set_source_rgb(*se.lit(tuple(KR_BODY[j] + 0.35 * ((0.80, 0.92, 0.82)[j] - KR_BODY[j]) for j in range(3))))
+        ctx.fill()
+        ctx.restore()
+        if c.get("girder", True):                              # 2b. the girder RESTS on the open palm (review 2026-10-07:
+            gl, gt = 2.3 * k, 0.34 * k                         # "the girder must rest on the palm, claws sideways")
+            ga = -sgn * 0.14                                   # follows the tilted deck: the end toward the hole is lower
+            gx = hx + max(0.25 * k, gl / 2 - 0.6 * k) * sgn    # shifted to the outer side, but its inner end never more
+            gy = hy - 0.42 * k + 0.04 * k - gt / 2             # than 0.6k past the palm centre (Zippy stays visible);
+            ctx.save()                                         # bottom edge on the palm top edge (hy has the bend in it)
+            ctx.translate(gx, gy)
+            ctx.rotate(ga)
+            ctx.save()                                         # contact shadow: the beam pressing on the palm
+            ctx.translate(0, gt / 2)
+            ctx.scale(0.7 * k, 0.07 * k)
+            ctx.arc(0, 0, 1.0, 0, 2 * math.pi)
+            ctx.restore()
+            ctx.set_source_rgba(0, 0, 0, 0.25)
+            ctx.fill()
+            se.rrect(ctx, -gl / 2, -gt / 2, gl, gt, 0.06 * k)  # the timber beam (a stub of the bridge underframe)
+            ctx.set_source_rgb(*se.lit((0.55, 0.36, 0.20)))
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*KR_DARK)
+            ctx.set_line_width(0.06 * k)
+            ctx.stroke()
+            for gy_ in (-0.1 * k, 0.09 * k):                   # grain lines along its length
+                ctx.move_to(-gl / 2 + 0.12 * k, gy_)
+                ctx.line_to(gl / 2 - 0.12 * k, gy_ + 0.02 * k)
+                ctx.set_source_rgba(*se.shade((0.55, 0.36, 0.20), 0.7), 0.8)
+                ctx.set_line_width(0.03 * k)
+                ctx.stroke()
+            ex_ = -sgn * (gl / 2 - 0.02 * k)                   # cut end grain, at the inner end (Zippy's side)
+            ctx.arc(ex_, 0, 0.17 * k, 0, 2 * math.pi)
+            ctx.set_source_rgb(*se.lit((0.72, 0.50, 0.30)))
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*KR_DARK)
+            ctx.set_line_width(0.04 * k)
+            ctx.stroke()
+            for rr in (0.11, 0.055):                           # two concentric growth rings
+                ctx.arc(ex_, 0, rr * k, 0, 2 * math.pi)
+                ctx.set_source_rgb(*KR_DARK)
+                ctx.set_line_width(0.025 * k)
+                ctx.stroke()
+            ctx.restore()
+        th0 = (hx - sgn * 1.0 * k, hy + 0.06 * k)              # 3. thumb on the INNER side (Zippy's side): no claw
+        _capsule(ctx, th0[0], th0[1], th0[0] + sgn * 0.45 * k, th0[1] - 0.32 * k, 0.30 * k, 0.07 * k)
+        # 4. three fingers on the OUTER rim. The claws are drawn BEFORE the finger capsules (their base is tucked
+        # under the fingertip, so no claw is ever painted on top of a finger): each talon grows out of the fingertip
+        # centre, points sideways toward the bridge centre (never up) and hooks gently down at its tip.
+        fingers = []
+        for off, rise, cl in ((0.55, 0.95, 0.54), (0.85, 1.10, 0.66), (1.10, 0.90, 0.60)):
+            f0 = (hx + sgn * off * k, hy - 0.12 * k)
+            f1 = (f0[0] - sgn * 0.25 * k, f0[1] - rise * k)    # ... curling a little toward the bridge centre
+            fingers.append((f0, f1))
+            bx_, by_ = f1                                      # the base sits on the fingertip CENTRE ...
+            dirx, hw = -sgn, 0.15 * k                          # ... 0.30k wide there (hidden under the finger)
+            reach = (0.18 + cl) * k                            # 0.18k = fingertip radius, cl = visible length
+            tx_, ty_ = bx_ + dirx * reach, by_ + 0.10 * k      # the tip hooks 0.10k below the horizontal
+            ctx.move_to(bx_, by_ - hw)
+            ctx.curve_to(bx_ + dirx * reach * 0.32, by_ - hw * 0.73, tx_ - dirx * reach * 0.22, ty_ - 0.08 * k,
+                         tx_, ty_)                             # upper edge: concave, narrowing to a point
+            ctx.curve_to(tx_ - dirx * reach * 0.20, ty_ + 0.06 * k, bx_ + dirx * reach * 0.30, by_ + hw * 1.33,
+                         bx_, by_ + hw)                        # lower edge back to the base
+            ctx.close_path()
+            ctx.set_source_rgb(0.97, 0.95, 0.88)               # ivory talon
+            ctx.fill_preserve()
+            ctx.set_source_rgb(*KR_DARK)
+            ctx.set_line_width(0.045 * k)
+            ctx.stroke()
+            ctx.move_to(bx_ + dirx * reach * 0.10, by_ - hw * 0.45)   # highlight along the top edge
+            ctx.curve_to(bx_ + dirx * reach * 0.33, by_ - hw * 0.38, bx_ + dirx * reach * 0.56, by_ - hw * 0.23,
+                         bx_ + dirx * reach * 0.78, by_)
+            ctx.set_source_rgba(1, 1, 1, 0.6)
+            ctx.set_line_width(0.02 * k)
+            ctx.stroke()
+        for f0, f1 in fingers:
+            _capsule(ctx, f0[0], f0[1], f1[0], f1[1], 0.36 * k, 0.07 * k)
+        return
     pts = [(bx + nx * w0 / 2, by + ny * w0 / 2), (cx_ + nx * w1 / 2, cy_ + ny * w1 / 2),
            (cx_ - nx * w1 / 2, cy_ - ny * w1 / 2), (bx - nx * w0 / 2, by - ny * w0 / 2)]
     se.poly(ctx, pts)

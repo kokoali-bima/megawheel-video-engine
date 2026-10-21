@@ -344,13 +344,13 @@ s1["shots"] = [
      "moves": {"rocky": {"to_x": 17.0, "speed": 3.0}}, "caption": "CAN THEY SURVIVE THE CANYON BRIDGE?",
      "sfx": [["engine", 0.1, 0.5]]},
     {"cam": "wide", "on": "sprinkles", "dx": 0.0, "zoom": 0.55, "hold": 3.2, "cut": "hard", "move": {"handheld": 3},
-     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.2, "dur": 0.9},
-              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.3, "dur": 0.9}],
+     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.2, "dur": 0.9, "pose": "palm", "bend": 0.05},
+              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.3, "dur": 0.9, "pose": "palm", "bend": 0.05}],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": {"at": 1.5, "dur": 1.0, "depth": 0.5, "tilt": -0.55, "noclip": True}}},
      "emote": {"zippy": "scared", "sprinkles": "worried", "rocky": "worried"}, "sfx": [["rockslide", 0.0, 0.6]]},
     {"cam": "two", "on": "zippy", "with": "sprinkles", "dx": 1.5, "hold": 4.4, "cut": "hard", "move": {"push": 0.1}, "freeze": 0.4,
-     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.0, "dur": 0.1},
-              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.0, "dur": 0.1}],
+     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.0, "dur": 0.1, "pose": "palm", "bend": 0.05},
+              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.0, "dur": 0.1, "pose": "palm", "bend": 0.05}],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": {"at": 0.0, "dur": 0.1, "depth": 0.5, "tilt": -0.55, "noclip": True}}},
      "emote": {"zippy": "scared", "sprinkles": "determined"},
      "lines": [L("zippy", "Outer lane's giving way! Keep going!", "scared"), L("sprinkles", "Never! Hold on to me, Zippy!", "determined")]},
@@ -690,8 +690,8 @@ s8["shots"] = [
                "rocky": {"to_x": 17, "to_z": 2.1, "speed": 4.0}},
      "sfx": [["engine", 0.0, 0.4]]},
     {"cam": "wide", "on": "sprinkles", "dx": 0.0, "zoom": 0.55, "hold": 3.2, "cut": "hard", "move": {"handheld": 3},
-     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.2, "dur": 0.9},
-              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.3, "dur": 0.9}],
+     "claw": [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": 0.2, "dur": 0.9, "pose": "palm", "bend": 0.05},
+              {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": 0.3, "dur": 0.9, "pose": "palm", "bend": 0.05}],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": {"at": 1.5, "dur": 1.0, "depth": 0.5, "tilt": -0.55, "noclip": True}}},
      "emote": {"zippy": "scared", "sprinkles": "worried", "rocky": "worried"}, "sfx": [["rockslide", 0.0, 0.6]]},
 ]
@@ -718,8 +718,20 @@ s9["props"] = [{"type": "bridge", "x0": 14.0, "x1": 38.0, "planks": 36, "posts":
                 "outer_keys": [[0, 0.7, 0.8], [60.0, 0.7, 0.8]],
                 "holes": [[-3.0, 0.36, 0.5]], "diag": [25.0, -3.0]},
                RESCUE9]
-CL9 = [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": -1.0, "dur": 0.1},
+CL9_BASE = [{"x": 22.0, "z": 0.4, "y": -0.3, "from_dx": -1.0, "from_dy": -11.0, "at": -1.0, "dur": 0.1},
        {"x": 26.5, "z": 0.4, "y": -0.3, "from_dx": 1.0, "from_dy": -11.0, "at": -1.0, "dur": 0.1}]
+
+
+def claws9(b0, b1=None, at=0.0, dur=0.8):
+    """Palm pose (open hand under the girder); the forearm bends more while it takes the load."""
+    return [dict(c, pose="palm", bend=b0, bend_to=(b0 if b1 is None else b1), bend_at=at, bend_dur=dur) for c in CL9_BASE]
+
+
+CL9 = claws9(0.05)                      # shots 0-3
+CL9_LOAD = claws9(0.05, 0.28, 0.2)      # shot 4: the cable tensions (19.23 s) and the arms take the load
+CL9_HELD = claws9(0.28)                 # shots 5-6
+CL9_REL = claws9(0.28, 0.10, 0.8)       # shot 7: cable released at +0.8 s, the load eases
+CL9_AFTER = claws9(0.10)                # shots 8-11
 ZIP_TIP = {"at": 0.0, "dur": 0.0, "depth": 0.5, "tilt": -0.55, "noclip": True}
 s9["score"] = [{"cue": "cue_heroic_stand", "from": 0, "to": 3, "vol": 0.42, "start": 0.0, "fade": 0.8, "tail": 0.8}]
 # ---- FRAMING UP TO THE CABLE RELEASE (h projection: screen_x = 960 + (x-camx)*k(z)*zoom, k=10500/(100+9z)) -----
@@ -757,37 +769,37 @@ s9["shots"] = [
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
      "lines": [L("hydro", "Cable is on Zippy's tow ring. Stay still. I'm taking the load.", "determined"),
                L("rocky", "Not budging, Hydro!", "determined")]},
-    {"cam": "wide", "on": "sprinkles", "dx": 2, "zoom": 0.6, "hold": 3.0, "move": {"pan": 2}, "claw": CL9,
+    {"cam": "wide", "on": "sprinkles", "dx": 2, "zoom": 0.6, "hold": 3.0, "move": {"pan": 2}, "claw": CL9_LOAD,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
      "sfx": [["chain_rattle", 0.4, 0.5], ["thud_far", 1.5, 0.6], ["chain_rattle", 2.2, 0.5]]},   # A01 fill: short, sourced sounds
-    {"cam": "low", "on": "zippy", "beat": "emotion", "hold": 4.0, "move": {"push": 0.12}, "claw": CL9,
+    {"cam": "low", "on": "zippy", "beat": "emotion", "hold": 4.0, "move": {"push": 0.12}, "claw": CL9_HELD,
      "contact": [["sprinkles", "zippy"]],
      "moves": {"zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
      "sfx": [["roar", 0.4, 0.7]]},
-    {"cam": "wide", "on": "sprinkles", "dx": 8, "zoom": 0.55, "move": {"pull": 0.05}, "emote": {"hydro": "determined"}, "claw": CL9,
+    {"cam": "wide", "on": "sprinkles", "dx": 8, "zoom": 0.55, "move": {"pull": 0.05}, "emote": {"hydro": "determined"}, "claw": CL9_HELD,
      "moves": {"sprinkles": {"to_x": 30.2, "to_z": 0.2, "speed": 3.0, "delay": 3.0},   # back off 1.1 m: less box overlap with Zippy
                "zippy": {"to_x": 24.2, "speed": 1.0, "sink": ZIP_TIP}},
      "lines": [L("hydro", "Zippy first, then Sprinkles, then Rocky. One car at a time on the inner lane. Steady pace.", "determined")]},
     # Evacuation lane z 2.0 (inner lane, 1.2 m off Nitro at z 3.2). Zippy leaves in the SECOND half of this long shot,
     # so the QA mid-frame sees him still at the ring (he passes behind Sprinkles at z 0.2 only afterwards).
     # Parking: the first car goes farthest, each later car parks nearer in x and z, so nobody passes behind a parked car.
-    {"cam": "wide", "on": "zippy", "zoom": 0.55, "dx": 10, "hold": 7.0, "move": {"pan": 2}, "claw": CL9,
+    {"cam": "wide", "on": "zippy", "zoom": 0.55, "dx": 10, "hold": 7.0, "move": {"pan": 2}, "claw": CL9_REL,
      "moves": {"zippy": {"to_x": 41.0, "to_z": 2.0, "speed": 8.0, "delay": 3.2,
                          "sink": {"at": 0.0, "dur": 0.6, "depth": 0.0, "tilt": 0.0,
                                   "from_depth": 0.5, "from_tilt": -0.55, "noclip": True}}},
      "sfx": [["car_boing", 0.0, 0.5], ["chain_rattle", 0.8, 0.5], ["thud_far", 2.1, 0.6], ["engine", 3.2, 0.5],
              ["engine", 4.3, 0.5], ["engine", 5.2, 0.5], ["engine", 6.1, 0.5]]},
-    {"cam": "track", "on": "zippy", "dx": 3, "zoom": 1.0, "hold": 3.0, "move": {"push": 0.05}, "claw": CL9,
+    {"cam": "track", "on": "zippy", "dx": 3, "zoom": 1.0, "hold": 3.0, "move": {"push": 0.05}, "claw": CL9_AFTER,
      "moves": {"zippy": {"to_x": 59.0, "to_z": 1.6, "speed": 10.0}},
      "sfx": [["engine", 0.1, 0.5], ["engine", 1.1, 0.5], ["engine", 2.1, 0.5]]},
-    {"cam": "wide", "on": "sprinkles", "zoom": 0.55, "dx": 10, "hold": 2.7, "move": {"pan": 2}, "claw": CL9,
+    {"cam": "wide", "on": "sprinkles", "zoom": 0.55, "dx": 10, "hold": 2.7, "move": {"pan": 2}, "claw": CL9_AFTER,
      "moves": {"sprinkles": {"to_x": 42.0, "to_z": 2.0, "speed": 8.0}},
      "sfx": [["engine", 0.1, 0.5], ["engine", 1.2, 0.5]]},
-    {"cam": "track", "on": "sprinkles", "dx": 3, "zoom": 1.0, "hold": 2.5, "move": {"push": 0.05}, "claw": CL9,
+    {"cam": "track", "on": "sprinkles", "dx": 3, "zoom": 1.0, "hold": 2.5, "move": {"push": 0.05}, "claw": CL9_AFTER,
      "moves": {"sprinkles": {"to_x": 52.5, "to_z": 0.8, "speed": 8.0}},
      "sfx": [["engine", 0.1, 0.5], ["engine", 1.2, 0.5]]},
-    {"cam": "wide", "on": "rocky", "zoom": 0.55, "dx": 10, "hold": 5.2, "move": {"pan": 2}, "claw": CL9,
+    {"cam": "wide", "on": "rocky", "zoom": 0.55, "dx": 10, "hold": 5.2, "move": {"pan": 2}, "claw": CL9_AFTER,
      "moves": {"rocky": {"to_x": 42.0, "to_z": 2.0, "speed": 8.0}},
      "sfx": [["thud_far", 0.1, 0.6], ["engine", 0.6, 0.5], ["engine", 1.7, 0.5], ["thud_far", 2.8, 0.6],
              ["engine", 3.2, 0.5], ["engine", 4.2, 0.5]]},

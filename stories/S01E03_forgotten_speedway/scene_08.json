@@ -485,7 +485,9 @@
      "from_dx": -1.0,
      "from_dy": -11.0,
      "at": 0.2,
-     "dur": 0.9
+     "dur": 0.9,
+     "pose": "palm",
+     "bend": 0.05
     },
     {
      "x": 26.5,
@@ -494,7 +496,9 @@
      "from_dx": 1.0,
      "from_dy": -11.0,
      "at": 0.3,
-     "dur": 0.9
+     "dur": 0.9,
+     "pose": "palm",
+     "bend": 0.05
     }
    ],
    "moves": {
