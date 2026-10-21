@@ -4393,6 +4393,16 @@
    "gpu_seconds": 134.5,
    "wall_seconds": 119.1,
    "cost_usd": 0.0423
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 4 (Grandpa Final Lap)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 965.7,
+   "gpu_seconds": 154.5,
+   "wall_seconds": 334.4,
+   "cost_usd": 0.0586
   }
  ]
 }
