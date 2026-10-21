@@ -76,16 +76,16 @@
    "cue": "cue_wonder",
    "from": 0,
    "to": 1,
-   "vol": 0.4,
+   "vol": 0.35,
    "start": 0.0,
    "fade": 1.2,
    "tail": 1.0
   },
   {
    "cue": "cue_grandpa_memory",
-   "from": 7,
-   "to": 8,
-   "vol": 0.35,
+   "from": 6,
+   "to": 9,
+   "vol": 0.32,
    "start": 0.0,
    "fade": 1.0,
    "tail": 1.2
@@ -206,7 +206,14 @@
      "to_x": -10,
      "speed": 8
     }
-   }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.4
+    ]
+   ]
   },
   {
    "look": {
@@ -223,7 +230,7 @@
     [
      "drone",
      0.0,
-     0.3
+     0.15
     ]
    ]
   },
@@ -312,7 +319,14 @@
    },
    "emote": {
     "buster": "sad"
-   }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.4
+    ]
+   ]
   },
   {
    "cam": "medium",

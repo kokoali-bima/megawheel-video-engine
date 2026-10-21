@@ -148,7 +148,14 @@
    },
    "emote": {
     "nitro": "angry"
-   }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.5,
+     0.4
+    ]
+   ]
   },
   {
    "cam": "two",
@@ -220,7 +227,14 @@
     "hydro": "determined",
     "nitro": "normal",
     "tilly": "worried"
-   }
+   },
+   "sfx": [
+    [
+     "engine",
+     0.2,
+     0.3
+    ]
+   ]
   },
   {
    "look": {

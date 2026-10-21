@@ -366,8 +366,8 @@ s2["actors"] = {"sprinkles": A("icecream", -34, 1.2, 1, "normal"), "buster": A("
 s2["props"] = [{"type": "speedgate", "x": -14.0, "z": 1.3, "half": 6.4, "open_shot": 0, "open_dt": 0.0, "open_dur": 0.2},
                {"type": "scoreboard", "x": 22.0, "z": 4.4, "w": 7.0, "texts": [[0.0, "LAP 5 OF 5\nFINAL LAP"]]},
                {"type": "trophy_case", "x": 36.0, "z": 3.4}]
-s2["score"] = [{"cue": "cue_wonder", "from": 0, "to": 1, "vol": 0.4, "start": 0.0, "fade": 1.2, "tail": 1.0},
-               {"cue": "cue_grandpa_memory", "from": 7, "to": 8, "vol": 0.35, "start": 0.0, "fade": 1.0, "tail": 1.2}]
+s2["score"] = [{"cue": "cue_wonder", "from": 0, "to": 1, "vol": 0.35, "start": 0.0, "fade": 1.2, "tail": 1.0},
+                {"cue": "cue_grandpa_memory", "from": 6, "to": 9, "vol": 0.32, "start": 0.0, "fade": 1.0, "tail": 1.2}]
 s2["shots"] = [
     {"cam": "wide", "zoom": 0.5, "dx": -6, "hold": 7.2, "cut": "hard", "move": {"pan": 2}, "kraggor": KR_CALM,
      "moves": {"sprinkles": {"to_x": 2, "speed": 9.5}, "buster": {"to_x": -8, "speed": 9.5}, "zippy": {"to_x": -16, "speed": 9.5}, "rocky": {"to_x": -26, "speed": 9.5}},
@@ -376,8 +376,9 @@ s2["shots"] = [
      "moves": {"sprinkles": {"to_x": 6, "speed": 4}, "buster": {"to_x": -4, "speed": 4}, "zippy": {"to_x": -12, "speed": 4}, "rocky": {"to_x": -22, "speed": 4}},
      "lines": [L("zippy", "Whoa... sixty years of dust and not one tire track!", "surprised")]},
     {"cam": "wide", "zoom": 0.5, "dx": 12, "hold": 4.2, "move": {"pan": 2.5},
-     "moves": {"sprinkles": {"to_x": 14, "speed": 8}, "buster": {"to_x": 6, "speed": 8}, "zippy": {"to_x": -2, "speed": 8}, "rocky": {"to_x": -10, "speed": 8}}},
-    {"look": {"x": 22.0, "z": 4.4, "y": 4.6, "fit": 9.0}, "hold": 3.4, "move": {"push": 0.08}, "sfx": [["drone", 0.0, 0.3]]},
+     "moves": {"sprinkles": {"to_x": 14, "speed": 8}, "buster": {"to_x": 6, "speed": 8}, "zippy": {"to_x": -2, "speed": 8}, "rocky": {"to_x": -10, "speed": 8}},
+     "sfx": [["engine", 0.0, 0.4]]},
+    {"look": {"x": 22.0, "z": 4.4, "y": 4.6, "fit": 9.0}, "hold": 3.4, "move": {"push": 0.08}, "sfx": [["drone", 0.0, 0.15]]},
     {"cam": "two", "on": "rocky", "with": "zippy", "dx": 2, "move": {"push": 0.06}, "emote": {"rocky": "worried"},
      "moves": {"rocky": {"to_x": -6, "speed": 3}, "zippy": {"to_x": 2, "speed": 3}},
      "lines": [L("rocky", "The scoreboard's stuck on the final lap... like it's waiting for us.", "worried")]},
@@ -385,7 +386,7 @@ s2["shots"] = [
      "lines": [L("sprinkles", "And the trophy case has a keyhole... our key might open it!", "excited")]},
     {"look": {"x": 36.0, "z": 3.4, "y": 1.8, "fit": 6.0}, "hold": 3.2, "move": {"push": 0.08}, "sfx": [["key_glint", 0.6, 0.5]]},
     {"cam": "wide", "zoom": 0.5, "dx": 18, "hold": 3.6, "move": {"pull": 0.1}, "moves": {"sprinkles": {"to_x": 20, "speed": 5}, "buster": {"to_x": 12, "speed": 4}},
-     "emote": {"buster": "sad"}},
+     "emote": {"buster": "sad"}, "sfx": [["engine", 0.0, 0.4]]},
     {"cam": "medium", "on": "buster", "beat": "emotion", "move": {"push": 0.05}, "emote": {"buster": "sad"},
      "lines": [L("buster", "Don't open that case yet, Sprinkles. That scoreboard stopped for me... over sixty years ago.", "sad")]},
     {"cam": "two", "on": "sprinkles", "with": "buster", "dx": 2, "move": {"push": 0.1}, "emote": {"sprinkles": "worried", "buster": "sad"},
@@ -407,14 +408,14 @@ s3["shots"] = [
     {"cam": "group", "group": ["siren", "hydro", "zippy"], "dx": 4, "move": {"pull": 0.05}, "emote": {"siren": "worried"},
      "lines": [L("siren", "That speedway's been shut for decades. The track needs a safety check first.", "worried"),
                L("hydro", "I'm Hydro, Rescue Team. We check each sector before it opens for racing.", "calm")]},
-    {"cam": "wide", "zoom": 0.5, "dx": 12, "hold": 4.6, "move": {"pan": 2}, "emote": {"nitro": "angry"}},
+    {"cam": "wide", "zoom": 0.5, "dx": 12, "hold": 4.6, "move": {"pan": 2}, "emote": {"nitro": "angry"}, "sfx": [["engine", 0.5, 0.4]]},
     {"cam": "two", "on": "nitro", "with": "tilly", "dx": 2, "move": {"push": 0.05},
      "lines": [L("nitro", "Fine, inspect it. I'm still the fastest car in town.", "angry")]},
     {"cam": "close", "on": "buster", "beat": "emotion", "move": {"push": 0.08}, "emote": {"buster": "sad"},
      "lines": [L("buster", "Your grandpa and I raced there long ago. I was number seven.", "sad")]},
     {"cam": "group", "group": ["sprinkles", "zippy", "siren", "hydro"], "dx": 1, "move": {"pull": 0.05}, "emote": {"zippy": "surprised"},
      "lines": [L("zippy", "You raced Grandpa Cone?!", "surprised")]},
-    {"cam": "wide", "zoom": 0.5, "dx": 14, "hold": 4.4, "move": {"pan": 2}, "emote": {"siren": "worried", "hydro": "determined", "nitro": "normal", "tilly": "worried"}},
+    {"cam": "wide", "zoom": 0.5, "dx": 14, "hold": 4.4, "move": {"pan": 2}, "emote": {"siren": "worried", "hydro": "determined", "nitro": "normal", "tilly": "worried"}, "sfx": [["engine", 0.2, 0.3]]},
     {"look": {"x": 3.0, "z": 3.9, "y": 3.0, "fit": 5.0}, "hold": 6.0, "move": {"push": 0.1},
      "lines": [L("buster", "Fifth and final lap. Your grandpa was right in front of me. That close.", "sad")], "sfx": [["thunder_roll", 4.6, 0.4]]},
 ]
@@ -445,7 +446,7 @@ s4["shots"] = [
     {"cam": "track", "on": "buster", "dx": 2.5, "zoom": 1.05, "move": {"handheld": 5}, "emote": {"buster": "scared"},
      "lines": [L("buster", "Cone! The road fell out from under me... I'm stuck!", "scared")]},
     {"cam": "low", "on": "grandpa_cone", "beat": "emotion", "hold": 3.8, "move": {"push": 0.1}, "emote": {"grandpa_cone": "determined"},
-     "moves": {"grandpa_cone": {"to_x": 15, "face": -1, "squash": 0.4, "at": 0.0}}},
+     "moves": {"grandpa_cone": {"to_x": 15, "face": -1, "squash": 0.4, "at": 0.0}}, "sfx": [["engine", 0.0, 0.5]]},
     {"cam": "two", "on": "grandpa_cone", "with": "buster", "dx": -6, "beat": "emotion", "move": {"push": 0.08}, "emote": {"grandpa_cone": "determined"},
      "lines": [L("grandpa_cone", "I'm not leaving you, Buster!", "determined")]},
     {"cam": "wide", "zoom": 0.7, "dx": 2, "hold": 4.2, "move": {"pan": 2},
@@ -631,7 +632,8 @@ s7["shots"] = [
      "sfx": [["engine", 0.2, 0.4]]},
     {"cam": "wide", "zoom": 0.6, "dx": 12, "hold": 3.8, "lift": -0.4, "move": {"pan": 1.2},
      "kraggor": {"mode": "calm", "sx": 0.6, "sy": 0.55, "scale": 0.55, "stand": True, "gz": 6.5,
-                 "walk": {"to_sx": 1.3, "dur": 3.0}}},
+                 "walk": {"to_sx": 1.3, "dur": 3.0}},
+     "sfx": [["thud_far", 0.5, 0.4], ["thud_far", 2.0, 0.4]]},
     {"cam": "medium", "on": "buster", "beat": "emotion", "hold": 6.0, "move": {"push": 0.05}, "emote": {"buster": "proud"},
      "sfx": [["key_click", 1.2, 0.5], ["chain_rattle", 0.4, 0.5]]},
     {"cam": "medium", "on": "hydro", "move": {"push": 0.05}, "emote": {"hydro": "determined"},
@@ -843,7 +845,7 @@ SB10 = {"type": "scoreboard", "x": 72.0, "z": 4.6, "w": 7.0,
 CASE10 = {"type": "trophy_case", "x": 98.0, "z": 3.6, "drawer_t": 17.0}
 BP10 = {"type": "blueprint", "x": 99.4, "z": 4.9, "h": 0.05, "w": 2.0, "from_shot": 7, "to_shot": 7}
 s10["props"] = [SB10, CASE10, BP10]
-s10["score"] = [{"cue": "cue_kraggor_tender", "from": 2, "to": 4, "vol": 0.38, "start": 0.0, "fade": 1.0, "tail": 1.2}]
+s10["score"] = [{"cue": "cue_kraggor_tender", "from": 4, "to": 7, "vol": 0.38, "start": 0.0, "fade": 1.0, "tail": 1.2}]
 # ---- SHOT 0/1 FRAMING: PHOTO-FINISH DIAGONAL (0.5 s spread; owner decision A5) ------------------------------
 # Bodies: icecream 5.6 (half 2.8), sports 4.2 (2.1), monster 4.3 (2.15), f1 4.6 (2.3).
 # Shot 1 start centres (set by shot 0) are 35.7 / 39.4 / 42.35 / 45.2 (lanes 0..3), i.e. noses
@@ -885,7 +887,7 @@ s10["shots"] = [
      "lines": [L("sprinkles", "Free ice cream for everyone who kept that bridge standing!", "happy")]},
     {"cam": "group", "group": ["sprinkles", "siren", "hydro"], "dx": 0.0, "zoom": 0.5, "hold": 4.0, "move": {"pull": 0.08},
      "kraggor": {"mode": "munch", "sx": 0.86, "sy": 0.6, "scale": 0.5, "stand": True, "gz": 6.0},
-     "emote": {"hydro": "happy", "sprinkles": "happy"}},
+     "emote": {"hydro": "happy", "sprinkles": "happy"}, "sfx": [["honk_cheer", 0.5, 0.5]]},
     {"look": {"x": 98.0, "z": 3.0, "y": 0.4, "fit": 5.0}, "hold": 4.6, "move": {"push": 0.1},
      "lines": [L("narrator", "Grandpa's unfinished lap was finally complete... and his blueprint showed another mountain road waiting to be explored.", "calm")]},
 ]
