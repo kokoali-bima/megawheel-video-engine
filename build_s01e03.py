@@ -656,7 +656,7 @@ s8["actors"] = {"nitro": A("f1", -90, 2.8, 1, "determined"), "zippy": A("sports"
 BR8 = {"type": "bridge", "x0": 14.0, "x1": 38.0, "planks": 36, "posts": 7, "z0": -0.4, "z1": 3.4,
        "keys": [[0, 0, 0]], "outer_keys": [[0, 0, 0]], "holes": [], "diag": [25.0, 0.0]}
 s8["props"] = [BR8, {"type": "rockslide", "x": 33.0, "n": 10, "from_shot": 11}]
-s8["score"] = [{"cue": "cue_heroic_stand", "from": 1, "to": 5, "vol": 0.4, "start": 0.0, "fade": 0.8, "tail": 0.8}]
+s8["score"] = [{"cue": "cue_heroic_stand", "from": 1, "to": 7, "vol": 0.4, "start": 0.0, "fade": 0.8, "tail": 0.8}]
 s8["shots"] = [
     {"cam": "wide", "zoom": 0.45, "dx": -92, "hold": 5.0, "cut": "hard", "move": {"pan": 2},
      "lines": [L("announcer", "Green flag on the Memorial Lap! Nitro out front, Zippy right there!", "excited")],
@@ -672,6 +672,7 @@ s8["shots"] = [
      "lines": [L("rocky", "Keep rolling, Sprinkles!", "excited")],
      "moves": {"rocky": {"to_x": -52, "speed": 12}, "sprinkles": {"to_x": -44, "speed": 12}}},
     {"cam": "track", "on": "sprinkles", "dx": 3, "zoom": 1.1, "hold": 3.0, "speedlines": True, "move": {"push": 0.08},
+     "sfx": [["engine", 0.0, 0.6], ["engine", 1.5, 0.6]],
      "moves": {"sprinkles": {"to_x": -22, "speed": 22}, "nitro": {"to_x": -26, "speed": 7}, "zippy": {"to_x": -31, "speed": 7}, "rocky": {"to_x": -40, "speed": 14}}},
     {"cam": "wide", "on": "sprinkles", "zoom": 0.6, "dx": -20, "hold": 5.0, "move": {"pan": 2}, "emote": {"nitro": "angry"},
      "lines": [L("announcer", "Sprinkles roars past Nitro at the summit!", "excited")],

@@ -119,7 +119,7 @@
   {
    "cue": "cue_heroic_stand",
    "from": 1,
-   "to": 5,
+   "to": 7,
    "vol": 0.4,
    "start": 0.0,
    "fade": 0.8,
@@ -286,6 +286,18 @@
    "move": {
     "push": 0.08
    },
+   "sfx": [
+    [
+     "engine",
+     0.0,
+     0.6
+    ],
+    [
+     "engine",
+     1.5,
+     0.6
+    ]
+   ],
    "moves": {
     "sprinkles": {
      "to_x": -22,
