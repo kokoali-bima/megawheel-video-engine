@@ -4353,6 +4353,16 @@
    "gpu_seconds": 193.1,
    "wall_seconds": 142.3,
    "cost_usd": 0.0578
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 2 v2 (fix A01 silence & Cars standard)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 319.2,
+   "gpu_seconds": 153.9,
+   "wall_seconds": 116.6,
+   "cost_usd": 0.0471
   }
  ]
 }
