@@ -4323,6 +4323,16 @@
    "gpu_seconds": 192.4,
    "wall_seconds": 159.7,
    "cost_usd": 0.0598
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 8 v2 voiced preview (A01 engine fix)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 295.0,
+   "gpu_seconds": 184.8,
+   "wall_seconds": 133.1,
+   "cost_usd": 0.055
   }
  ]
 }
