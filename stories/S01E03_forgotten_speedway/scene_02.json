@@ -155,6 +155,24 @@
    "emote": {
     "zippy": "surprised"
    },
+   "moves": {
+    "sprinkles": {
+     "to_x": 6,
+     "speed": 4
+    },
+    "buster": {
+     "to_x": -4,
+     "speed": 4
+    },
+    "zippy": {
+     "to_x": -12,
+     "speed": 4
+    },
+    "rocky": {
+     "to_x": -22,
+     "speed": 4
+    }
+   },
    "lines": [
     [
      "zippy",
@@ -219,6 +237,16 @@
    },
    "emote": {
     "rocky": "worried"
+   },
+   "moves": {
+    "rocky": {
+     "to_x": -6,
+     "speed": 3
+    },
+    "zippy": {
+     "to_x": 2,
+     "speed": 3
+    }
    },
    "lines": [
     [

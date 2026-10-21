@@ -129,6 +129,17 @@
    "move": {
     "push": 0.05
    },
+   "speedlines": true,
+   "moves": {
+    "grandpa_cone": {
+     "to_x": 10,
+     "speed": 10
+    },
+    "buster": {
+     "to_x": -2,
+     "speed": 10
+    }
+   },
    "emote": {
     "grandpa_cone": "excited",
     "buster": "laugh"

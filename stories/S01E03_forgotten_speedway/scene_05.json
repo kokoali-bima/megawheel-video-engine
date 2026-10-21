@@ -308,6 +308,18 @@
     "nitro": "angry",
     "zippy": "surprised"
    },
+   "moves": {
+    "nitro": {
+     "to_x": 57,
+     "speed": 0.6,
+     "dizzy": true
+    },
+    "zippy": {
+     "to_x": 50,
+     "speed": 0.6,
+     "dizzy": true
+    }
+   },
    "lines": [
     [
      "nitro",

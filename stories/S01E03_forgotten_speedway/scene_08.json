@@ -237,6 +237,24 @@
    "emote": {
     "sprinkles": "determined"
    },
+   "moves": {
+    "sprinkles": {
+     "to_x": -46,
+     "speed": 12
+    },
+    "rocky": {
+     "to_x": -56,
+     "speed": 12
+    },
+    "nitro": {
+     "to_x": -30,
+     "speed": 6
+    },
+    "zippy": {
+     "to_x": -35,
+     "speed": 6
+    }
+   },
    "lines": [
     [
      "sprinkles",
@@ -406,6 +424,24 @@
    "emote": {
     "nitro": "angry"
    },
+   "moves": {
+    "nitro": {
+     "to_x": 28,
+     "speed": 10
+    },
+    "sprinkles": {
+     "to_x": 24,
+     "speed": 9
+    },
+    "zippy": {
+     "to_x": 16,
+     "speed": 10
+    },
+    "rocky": {
+     "to_x": 8,
+     "speed": 10
+    }
+   },
    "lines": [
     [
      "nitro",
@@ -426,6 +462,24 @@
    "emote": {
     "nitro": "angry",
     "zippy": "worried"
+   },
+   "moves": {
+    "nitro": {
+     "to_x": 31,
+     "speed": 6
+    },
+    "zippy": {
+     "to_x": 21,
+     "speed": 6
+    },
+    "sprinkles": {
+     "to_x": 27,
+     "speed": 6
+    },
+    "rocky": {
+     "to_x": 14,
+     "speed": 6
+    }
    },
    "lines": [
     [
