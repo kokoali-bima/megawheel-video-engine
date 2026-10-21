@@ -4363,6 +4363,16 @@
    "gpu_seconds": 153.9,
    "wall_seconds": 116.6,
    "cost_usd": 0.0471
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 2 v3 (fix A01 silence shot 2)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 395.0,
+   "gpu_seconds": 152.5,
+   "wall_seconds": 174.6,
+   "cost_usd": 0.048
   }
  ]
 }
