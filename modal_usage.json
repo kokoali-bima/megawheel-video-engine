@@ -4433,6 +4433,16 @@
    "gpu_seconds": 178.8,
    "wall_seconds": 176.8,
    "cost_usd": 0.0567
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 7 (The Bridge That Groans)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 413.7,
+   "gpu_seconds": 195.2,
+   "wall_seconds": 158.9,
+   "cost_usd": 0.0598
   }
  ]
 }
