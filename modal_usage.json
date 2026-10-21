@@ -4403,6 +4403,16 @@
    "gpu_seconds": 154.5,
    "wall_seconds": 334.4,
    "cost_usd": 0.0586
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 4 v2 (airtight cadence)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 801.1,
+   "gpu_seconds": 176.8,
+   "wall_seconds": 212.2,
+   "cost_usd": 0.0617
   }
  ]
 }
