@@ -14,9 +14,7 @@
   ],
   "joins": {
    "7-8": [
-    "fadeblack",
-    1.8,
-    1.8,
+    "dissolve",
     1.2
    ]
   }
