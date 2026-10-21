@@ -4453,6 +4453,16 @@
    "gpu_seconds": 132.2,
    "wall_seconds": 165.4,
    "cost_usd": 0.0444
+  },
+  {
+   "date": "2026-10-21",
+   "note": "S01E03 scene 7 v2 (smooth tail)",
+   "engine": "story3d (cairo overlay + godot-4.4.1 T4)",
+   "scenes": 1,
+   "cpu_seconds": 432.1,
+   "gpu_seconds": 152.0,
+   "wall_seconds": 165.3,
+   "cost_usd": 0.0486
   }
  ]
 }
