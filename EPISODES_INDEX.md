@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-22 15:08) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-22 15:18) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -117,7 +117,7 @@
 | 101 | `SIM_DUNGEON_V2_S032` | dungeon | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | Tue 2026-11-24 11:00 | https://www.youtube.com/shorts/zxPurjmlF6w |
 | 102 | `SIM_DUNGEON_V2_S038` | dungeon | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | Tue 2026-12-01 11:00 | https://www.youtube.com/shorts/U3oGHMwFI0I |
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
-| 104 | `MW_SPLASH_3D_S021` | splash | APPROVED |  |  |
+| 104 | `MW_SPLASH_3D_S021` | splash | APPROVED | Thu 2026-11-05 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1501 | `2026-10-02_story15_trailer_e01` | story15_trailer | UPLOADED_SCHEDULED 2026-10-03T21:00:00Z | Sat 2026-10-03 17:00 | https://www.youtube.com/shorts/BB8Lr9LwL9g |
@@ -1472,7 +1472,7 @@
 - **Durasi:** 57.0 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → crash@obs1+broken; Level 2: Sprinkles (icecream) → crash@obs1+broken; Level 3 (juara): Buster (bus) → win
 - **Status:** APPROVED (approve 2026-10-22)
-- **Antrian:** belum masuk antrian
+- **Antrian:** QUEUED 2026-11-05T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`

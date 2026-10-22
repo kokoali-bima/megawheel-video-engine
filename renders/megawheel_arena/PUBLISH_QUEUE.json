@@ -1016,6 +1016,13 @@
    "url": "https://www.youtube.com/shorts/qLmoNh8nyEU"
   },
   {
+   "episode": 104,
+   "video_id": "MW_SPLASH_3D_S021",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-05T16:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 99,
    "video_id": "SIM_DUNGEON_V2_S029",
    "status": "SCHEDULED",
