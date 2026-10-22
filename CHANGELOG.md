@@ -3,8 +3,22 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-22
+**📤 Upload / antrean / Drive**
+- `9dbbe66` publish: daily run 2026-10-22 [cron daily_publish.sh]
+
 ## 2026-10-21
 **🔧 Lain-lain**
+- `b1281e6` fix(assemble): measure drop strictly within transition window instead of into subsequent dialogue
+- `40e99c2` fix(assemble): use curve=tri for fadeblack audio fadeout to prevent steep decibel cliff
+- `927866e` fix(s07): smooth tail engine audio slope to eliminate transition volume drop
+- `f0a7078` fix(assemble): set join 7-8 to 1.2s dissolve for continuous racing flow
+- `c964f7e` feat(edit): add edit.json with smooth 1.8s fadeblack for join 7-8
+- `bf0e9bf` fix(sfx): eliminate end-shot silence in scene 4, airtight cadence scenes 6 and 7
+- `f5522d2` fix(sfx): add engine and cadence sfx across scenes 3,4,5,6,7,10 to prevent A01 silence
+- `de2bbf5` fix(s02): pace engine pulses across shot 2 and replace drone with whoosh on scoreboard to satisfy A01
+- `4974013` fix(audio-sensors): eliminate A01 silence across scenes 2, 3, 4, 7, 10 and tune score spotting
+- `d786987` feat(cars-standard): apply continuous dynamic racing momentum across scenes 2, 4, 5, 8
 - `4cf9b5f` Merge remote-tracking branch 'origin/main'
 - `4abccf5` record modal usage
 - `3602f9f` fix(s08): extend cue_heroic_stand to shot 7 and add engine SFX to shot 6 to eliminate A01 silence
@@ -13,8 +27,31 @@ berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 - `a232a2a` S01E03: promote Kraggor palm pose and scenes 01, 08, 09
 **📤 Upload / antrean / Drive**
 - `6d02c42` publish: daily run 2026-10-21 [cron daily_publish.sh]
-<details><summary>otomatis VM (4)</summary>
+<details><summary>otomatis VM (27)</summary>
 
+- `3c9e17d` records: modal usage
+- `9bfa52e` records: modal usage
+- `a39e2a7` records: modal usage
+- `e2f95b6` records: modal usage
+- `33e1756` records: modal usage
+- `a1ad76b` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `b17b9c4` records: modal usage
+- `ae037d3` records: modal usage
+- `c2e787c` records: modal usage
+- `c6ca785` records: modal usage
+- `568a4e9` records: modal usage
+- `8d55f4f` records: modal usage
+- `da1f489` records: modal usage
+- `d187c28` records: modal usage
+- `1314975` records: modal usage
+- `8034386` records: modal usage
+- `ba77a66` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `ea497a7` records: modal usage
+- `2931a53` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `b439ec5` records: modal usage
+- `0b25c89` Merge branch 'main' of github-megawheel:kokoali-bima/megawheel-video-engine
+- `a6ea3f8` records: modal usage
+- `37f3862` analytics: daily report 2026-10-21
 - `b3125ac` records: modal usage
 - `89e4db4` records: modal usage
 - `b9a59d0` records: modal usage
