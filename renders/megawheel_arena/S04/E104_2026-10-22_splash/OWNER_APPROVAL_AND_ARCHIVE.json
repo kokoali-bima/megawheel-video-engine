@@ -1,0 +1,103 @@
+{
+  "approved": {
+    "video_id": "MW_SPLASH_3D_S021",
+    "series": "splash",
+    "engine_version": "v2",
+    "seed": 21,
+    "vehicles": [
+      "police",
+      "icecream",
+      "bus"
+    ],
+    "track_id": "splash_b1402a47@night-clear-city",
+    "theme": "night-clear-city",
+    "voice": "chatterbox:m1",
+    "outcomes": [
+      "crash@obs1+broken",
+      "crash@obs1+broken",
+      "win"
+    ],
+    "duration": 57.0,
+    "status": "APPROVED",
+    "folder": "renders/megawheel_arena/S04/E104_2026-10-22_splash",
+    "render3d": true,
+    "episode": 104,
+    "season": 4,
+    "render_date": "2026-10-22",
+    "drive_id": "169hvmF-2eU3Rc3zmSZSjnD6T3idKfZkJ",
+    "drive_path": "me/ai-develop/ipandu-video/review/approved/E104_MW_SPLASH_3D_S021.mp4",
+    "review_variant": "R2_BRIGHT",
+    "approved_review_md5": "1ea6d10bd2bbcc420564d9ec3cd3d3d1",
+    "approval_instruction": "Owner explicitly approved R2 and requested archival of earlier failed reviews",
+    "audit": "renders/megawheel_arena/S04/E104_2026-10-22_splash/MW_SPLASH_3D_S021_audit.md",
+    "approved_date": "2026-10-22",
+    "title": "Can Siren the Police Car Survive Slippery Splash Zone? \ud83d\udca6\ud83d\ude97 | Ep. 104 #Shorts"
+  },
+  "archived": [
+    {
+      "id": "1sUqdNZ1nCFHw3SwOYb-Vn7Fs1fZ96suO",
+      "name": "MW_DIRECTOR_3D_LAVA_POTHOLES_S036.mp4",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "23644704"
+    },
+    {
+      "id": "1-mKMb5uj4mufQo1ee7i8-xEXt8Kl3mLH",
+      "name": "MW_DIRECTOR_3D_LAVA_POTHOLES_S036_sheet.png",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "651556"
+    },
+    {
+      "id": "177OYc14V1KHXoT7zmioQkljOK2lD_hdc",
+      "name": "MW_SPLASH_3D_S015.mp4",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "22219157"
+    },
+    {
+      "id": "1Rp5K_L1nTF2yjog1llZ4AQMLq5a8n6Va",
+      "name": "MW_SPLASH_3D_S015_sheet.png",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "657535"
+    },
+    {
+      "id": "1coYimdf8K-3SIxmwjWYJUI6YIBkgIKy5",
+      "name": "MW_SPLASH_3D_S021.mp4",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "25263223"
+    },
+    {
+      "id": "1q3i6GEsd2zHdDkAh23M8s9j4snICqUqK",
+      "name": "MW_SPLASH_3D_S021_sheet.png",
+      "trashed": false,
+      "parents": [
+        "16_oXwrny3-7_ieLyDPs3zuytdVJA9euD"
+      ],
+      "size": "687133"
+    }
+  ],
+  "permanently_deleted": 0,
+  "approved_drive": {
+    "id": "169hvmF-2eU3Rc3zmSZSjnD6T3idKfZkJ",
+    "name": "E104_MW_SPLASH_3D_S021.mp4",
+    "trashed": false,
+    "parents": [
+      "1x0zfFa-IeKTEdjuy0NQZZOfLi4okYmx1"
+    ],
+    "webViewLink": "https://drive.google.com/file/d/169hvmF-2eU3Rc3zmSZSjnD6T3idKfZkJ/view?usp=drivesdk",
+    "size": "27592307"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "id": "native_audit",
+      "desc": "Native audit (production rules, private registry)",
+      "ok": true,
+      "value": "30/31 items ok"
+    },
+    {
+      "id": "camera_parity",
+      "desc": "Native camera parity (exported camera == camera_track x punch x shake)",
+      "ok": true,
+      "value": "frames 1620 vs 1620, cam violations 0, non-camera field mismatches 0 (no old export compared)"
+    },
+    {
+      "id": "wheel_count",
+      "desc": "Attached wheels equal the cast wheel count on every frame",
+      "ok": true
+    },
+    {
+      "id": "story",
+      "desc": "Three distinct cast characters on three levels",
+      "ok": true,
+      "value": [
+        "police",
+        "icecream",
+        "bus"
+      ]
+    },
+    {
+      "id": "video",
+      "desc": "H.264 1080x1920 30fps + AAC",
+      "ok": true,
+      "value": "h264 1080x1920 30/1 audio=['aac']"
+    },
+    {
+      "id": "frame_count",
+      "desc": "Frame count = timeline + cold open (+-2)",
+      "ok": true,
+      "value": "1710 vs 1710"
+    },
+    {
+      "id": "duration",
+      "desc": "Native Shorts technical range and matches the manifest (+-0.3 s)",
+      "ok": true,
+      "value": "57.00 vs 57.0"
+    },
+    {
+      "id": "luminance",
+      "desc": "No black / white frames (10 samples)",
+      "ok": true,
+      "value": [
+        105,
+        105,
+        105,
+        105,
+        104,
+        106,
+        102,
+        105,
+        108,
+        112
+      ]
+    }
+  ]
+}

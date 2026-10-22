@@ -1,0 +1,42 @@
+{
+  "seed": 21,
+  "series": "splash",
+  "target_total": [
+    44.0,
+    57.0
+  ],
+  "export_ready": true,
+  "native_analysis_passed": true,
+  "duration_ok": true,
+  "final_duration": 57.0,
+  "geometry": {
+    "passed": true,
+    "length_ok": true,
+    "violations": 0,
+    "cam_violations": [],
+    "field_violations": [],
+    "frames": 1620,
+    "expected_frames": 1620,
+    "detail": "frames 1620 vs 1620, cam violations 0, non-camera field mismatches 0 (no old export compared)",
+    "zoom_gain": 1.0,
+    "native_camera": true,
+    "native_hud": true,
+    "camera_identity": "sim_engine.camera_track",
+    "frames_sha256": "43b4ff24cc12b535fd3ca414052f38c78b2bb58148451f773cab42137a2caf08",
+    "expected_sha256": "b48bb4315a6bd32a385a172532e4087a3ebfc2cd28c604b6084d85ecd4cedf02"
+  },
+  "source": {
+    "production_head": "7d3ce83aa07b26c93ad4bb18280c7a28807d457f",
+    "source_sha256": {
+      "PRODUCTION_REGISTRY.json": "2df0049e5672cdd7e1607c1fbb4337b742b80cb345ea537c16ab41cbeb36d586",
+      "generators/physics_2d/sim_engine.py": "62fcbcd49f2866cc1e50a843e86c2f814fbfb84077128b31dc9157fd629eefbc",
+      "generators/physics_2d/registry.py": "880113202cd1950d38f3eb1ac392c015277109eaf3ee30b8df7bcdb0916dcfff",
+      "generators/physics_2d/audit.py": "42f9d10346aaca1cd75387aef7ffb3f65a6b825c0c20f045b1ff4dc4a7d29f13",
+      "generators/variety/variety.py": "a68f93fdbd24cfb97e98e911c99c3645a627d9d5ddea48fbbe7116c751cf1c7c",
+      "lab/godot3d_challenge/export_challenge.py": "ad105800744cdf99c2ce49c5f5860a2617a7b6952f32b7a684239d154f5f34a7",
+      "lab/godot3d_challenge/compose.py": "5933895795a2e0f12306ae3ca087880fe8d943f7b75ca7ccb4ecd1f3e823302a"
+    },
+    "root": "/root/lab/mw_splash_beam_20261022",
+    "series": "splash"
+  }
+}

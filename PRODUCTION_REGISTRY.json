@@ -6997,6 +6997,40 @@
       "drive_path": "me/ai-develop/ipandu-video/archive/S04/E103_SIM_SPLASH_V2_S013.mp4",
       "approved_date": "2026-10-20",
       "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics | Ep. 103 #Shorts"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S021",
+      "series": "splash",
+      "engine_version": "v2",
+      "seed": 21,
+      "vehicles": [
+        "police",
+        "icecream",
+        "bus"
+      ],
+      "track_id": "splash_b1402a47@night-clear-city",
+      "theme": "night-clear-city",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "crash@obs1+broken",
+        "crash@obs1+broken",
+        "win"
+      ],
+      "duration": 57.0,
+      "status": "APPROVED",
+      "folder": "renders/megawheel_arena/S04/E104_2026-10-22_splash",
+      "render3d": true,
+      "episode": 104,
+      "season": 4,
+      "render_date": "2026-10-22",
+      "drive_id": "169hvmF-2eU3Rc3zmSZSjnD6T3idKfZkJ",
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E104_MW_SPLASH_3D_S021.mp4",
+      "review_variant": "R2_BRIGHT",
+      "approved_review_md5": "1ea6d10bd2bbcc420564d9ec3cd3d3d1",
+      "approval_instruction": "Owner explicitly approved R2 and requested archival of earlier failed reviews",
+      "audit": "renders/megawheel_arena/S04/E104_2026-10-22_splash/MW_SPLASH_3D_S021_audit.md",
+      "approved_date": "2026-10-22",
+      "title": "Can Siren the Police Car Survive Slippery Splash Zone? 💦🚗 | Ep. 104 #Shorts"
     }
   ]
 }

@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "items": [
+    {
+      "name": "replay tokoh sama dengan versi review",
+      "ok": true,
+      "value": "['SIREN THE POLICE CAR', 'SPRINKLES THE ICE CREAM TRUCK', 'BUSTER THE SCHOOL BUS']"
+    },
+    {
+      "name": "replay outcomes sama dengan versi review",
+      "ok": true,
+      "value": "['crash@obs1+broken', 'crash@obs1+broken', 'win'] vs ['crash@obs1+broken', 'crash@obs1+broken', 'win']"
+    },
+    {
+      "name": "replay theme_id sama dengan versi review",
+      "ok": true,
+      "value": "night-clear-city vs night-clear-city"
+    },
+    {
+      "name": "replay voice sama dengan versi review",
+      "ok": true,
+      "value": "chatterbox:m1 vs chatterbox:m1"
+    },
+    {
+      "name": "replay track_id sama dengan versi review",
+      "ok": true,
+      "value": "splash_b1402a47 vs splash_b1402a47"
+    },
+    {
+      "name": "replay durasi sama (tanpa cold open)",
+      "ok": true,
+      "value": "54.0 vs 57.0"
+    },
+    {
+      "name": "semua roda tergambar (jumlah roda = data mobil, maks 6)",
+      "ok": true,
+      "value": "ok"
+    },
+    {
+      "name": "tidak ada SCRIPT ERROR Godot",
+      "ok": true,
+      "value": "[]"
+    },
+    {
+      "name": "1080x1920 30 fps + audio",
+      "ok": true,
+      "value": "1080x1920 30/1 audio=True"
+    },
+    {
+      "name": "jumlah frame = timeline + cold open (\u00b12)",
+      "ok": true,
+      "value": "1710 vs 1710"
+    },
+    {
+      "name": "durasi = manifest (\u00b10.3 s)",
+      "ok": true,
+      "value": "57.00 vs 57.0"
+    },
+    {
+      "name": "tidak ada frame hitam / putih (12 sampel)",
+      "ok": true,
+      "value": "[105, 104, 107, 97, 106, 103, 106, 101, 105, 103, 114, 112]"
+    },
+    {
+      "name": "L1: tabrakan -> panel copot (tanpa ledakan kecuali lava)",
+      "ok": true,
+      "value": "t=6.37"
+    },
+    {
+      "name": "L2: tabrakan -> panel copot (tanpa ledakan kecuali lava)",
+      "ok": true,
+      "value": "t=6.93"
+    }
+  ]
+}
