@@ -26,3 +26,9 @@ Keep camera/FOV28/tilt7, native frame coordinates, vehicle sizes/art, wheels, si
 Independent Python tests verified that cast geometry and all renderer code outside the three permitted headlight areas remained unchanged. Three daytime frames were rendered before/after; the inspected first-frame PNGs were byte-identical. Runtime checks passed on the old Splash fixture and the new Splash export. This is scoped regression evidence, not an image analysis of every daytime frame.
 
 The runtime probe is an additional operator gate; the existing `convert3d.py` does not invoke it automatically. Do not report universal automated enforcement until that integration exists. No existing QA thresholds were changed.
+
+
+## Night readability — owner review 2026-10-22
+Keep the navy night sky and directional shafts, but provide enough cool fill for cast paint, faces and hazards. Outside dungeon, night ambient color is (0.78,0.82,1.0), ambient energy is 1.0 times scene.light; directional night color is (0.78,0.84,1.0), with factor0.75. Day and dungeon settings remain unchanged. Do not brighten the finished MP4 or alter the HUD.
+
+For S021 fixed fixtures, run `venv/bin/python lab/godot3d_challenge/probe_night_readability.py <fixture-directory>`. It measures actual interior paint regions for all three cast members, requires brighter paint without clipped highlights, identical top-sky pixels and an identical S013 daytime reference frame. Retain before/after PNGs and JSON. These regions are specific to this fixture and are not a universal luminance test for every camera or character. Final cast/event/outro review remains mandatory; the probe is an additional operator gate, not automatically called by convert3d.

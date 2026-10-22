@@ -129,8 +129,8 @@ func _environment() -> void:
 	env.background_mode = Environment.BG_SKY
 	env.sky = sk
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(1, 0.97, 0.95) if not scene["night"] else Color(0.55, 0.6, 0.85)
-	env.ambient_light_energy = 0.55 * float(scene["light"])
+	env.ambient_light_color = Color(1, 0.97, 0.95) if not scene["night"] else Color(0.78, 0.82, 1.0)
+	env.ambient_light_energy = (1.0 if scene["night"] and not _is_dungeon() else 0.55) * float(scene["light"])
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
 	env.glow_intensity = 0.35
@@ -153,8 +153,8 @@ func _environment() -> void:
 	sun.rotation_degrees = {"morning": Vector3(-28, 145, 0), "noon": Vector3(-62, 160, 0),
 							"sunset": Vector3(-18, 125, 0), "night": Vector3(-45, 150, 0)}.get(tm, Vector3(-55, 150, 0))
 	sun.light_color = {"morning": Color(1, 0.9, 0.78), "noon": Color(1, 0.98, 0.94), "sunset": Color(1, 0.72, 0.5),
-					   "night": Color(0.6, 0.7, 1.0)}.get(tm, Color(1, 1, 1))
-	sun.light_energy = 1.15 * float(scene["light"]) * (0.45 if scene["night"] else 1.0) * (0.35 if _is_dungeon() else 1.0)
+					   "night": (Color(0.6, 0.7, 1.0) if _is_dungeon() else Color(0.78, 0.84, 1.0))}.get(tm, Color(1, 1, 1))
+	sun.light_energy = 1.15 * float(scene["light"]) * ((0.45 if _is_dungeon() else 0.75) if scene["night"] else 1.0) * (0.35 if _is_dungeon() else 1.0)
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 90.0
 	add_child(sun)

@@ -105,3 +105,5 @@
 
 ## Night headlights — owner requirement 2026-10-22
 CHALLENGE 3D night headlights use a forward/down spotlight and a soft tapered light shaft. Do not add glowing spherical front/tail lamps. Preserve native camera, cast art and scale. Run the independent runtime probe and inspect final cast/crash/outro images before review; see `lab/godot3d_challenge/HEADLIGHT_STANDARD.md`. This extra operator gate is not yet integrated into convert3d.py.
+
+Night readability owner review 2026-10-22: keep navy sky, raise cool fill so car paint/faces/hazards read on a phone; see HEADLIGHT_STANDARD night-readability contract and fixed-fixture pixel regression probe. Do not judge readability from whole-frame average or bright HUD alone.
