@@ -665,6 +665,10 @@ void fragment() {
 
 func _body_mesh(vk: String) -> void:
 	var c = cast[vk]
+	var old_rig := car.get_node_or_null("HeadlightRig")
+	if old_rig != null:                                    # one rig per car, never accumulate
+		car.remove_child(old_rig)
+		old_rig.queue_free()
 	for ch in car.get_children():
 		if ch is SpotLight3D or (ch is MeshInstance3D and ch != body and ch.mesh is SphereMesh):
 			ch.queue_free()
@@ -1010,6 +1014,7 @@ func _process(_d: float) -> void:
 	var ys = float(f[11])
 	car.position = Vector3(float(f[8]), float(f[9]), 0)
 	car.rotation = Vector3(0, 0, float(f[10]))
+	_update_headlights(ys)
 	var melt = float(f[16])
 	var crush = float(f[20]) if f.size() > 20 else 0.0     # an axe came down on the car: flat, a little wider
 	body.scale = Vector3(ys * (1.0 + 0.2 * crush), (1.0 - 0.32 * melt) * (1.0 - 0.5 * crush), 1.0)
@@ -1453,30 +1458,73 @@ func _set_hit(x: float, y: float, f) -> void:
 
 
 func _headlights(parent: Node3D, front_x: float, y: float, back_x: float) -> void:
-	## night theme: real headlights (a spot that lights the road ahead) + glowing lamp + red tail light
+	## night theme: ONE real forward+downward spot (lights the road) + a feathered visible shaft.
+	## The cast art is the housing; nothing is redrawn. A spotlight alone is invisible in air under
+	## gl_compatibility, hence the translucent beam mesh. Tail light = native sprite only.
 	if not scene["night"]:
 		return
-	var sp = SpotLight3D.new()
-	sp.position = Vector3(front_x, y, 0.3)
-	sp.rotation_degrees = Vector3(0, -90, 0)               # points along +x (the driving direction)
-	sp.rotate_object_local(Vector3.RIGHT, deg_to_rad(-8))
-	sp.light_color = Color(1, 0.95, 0.75)
-	sp.light_energy = 6.0
-	sp.spot_range = 22.0
-	sp.spot_angle = 24.0
-	parent.add_child(sp)
-	for pr in [[front_x, Color(1, 0.97, 0.8), 0.22], [back_x, Color(1, 0.1, 0.1), 0.14]]:
-		var lamp = MeshInstance3D.new()
-		var sm = SphereMesh.new()
-		sm.radius = pr[2]
-		sm.height = pr[2] * 2
-		lamp.mesh = sm
-		var lm = StandardMaterial3D.new()
-		lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		lm.albedo_color = pr[1]
-		lm.emission_enabled = true
-		lm.emission = pr[1]
-		lm.emission_energy_multiplier = 4.0
-		lamp.material_override = lm
-		lamp.position = Vector3(pr[0], y, 0.12)
-		parent.add_child(lamp)
+	var rig := Node3D.new()
+	rig.name = "HeadlightRig"
+	parent.add_child(rig)
+	var spot := SpotLight3D.new()
+	spot.name = "RoadSpot"
+	spot.position = Vector3(front_x, y, 0.3)               # native front bumper, just in front of the car plane
+	spot.rotation_degrees = Vector3(-22, -90, 0)           # local -Z -> +X (forward) AND downward to the road
+	spot.light_color = Color(1.0, 0.94, 0.78)
+	spot.light_energy = 5.0
+	spot.spot_range = 16.0
+	spot.spot_angle = 32.0
+	spot.spot_angle_attenuation = 1.4
+	spot.spot_attenuation = 1.2
+	spot.shadow_enabled = false
+	rig.add_child(spot)
+	var beam_len := 8.0
+	var beam_h := 1.8
+	var tilt := deg_to_rad(-12.0)                          # beam axis dips toward the road over its length
+	var shaft := MeshInstance3D.new()
+	shaft.name = "LightShaft"
+	var qm := QuadMesh.new()
+	qm.size = Vector2(beam_len, beam_h)
+	shaft.mesh = qm
+	var code := """shader_type spatial;
+render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;
+uniform vec4 beam_color : source_color = vec4(1.0, 0.95, 0.82, 1.0);
+uniform float beam_len = 8.0;
+uniform float beam_h = 1.8;
+uniform float beam_alpha = 0.22;
+varying float v_along;
+varying float v_side;
+void vertex() {
+	v_along = clamp(VERTEX.x / beam_len + 0.5, 0.0, 1.0);
+	v_side = clamp(VERTEX.y / max(beam_h * 0.5, 0.001), -1.0, 1.0);
+}
+void fragment() {
+	float half_w = mix(0.06, 0.92, v_along);
+	float lateral = 1.0 - smoothstep(half_w * 0.25, half_w, abs(v_side));
+	float fade = (1.0 - smoothstep(0.45, 1.0, v_along)) * smoothstep(0.0, 0.05, v_along);
+	ALBEDO = beam_color.rgb;
+	ALPHA = beam_alpha * lateral * fade;
+}
+"""
+	var sh := Shader.new()
+	sh.code = code
+	var smat := ShaderMaterial.new()
+	smat.shader = sh
+	smat.set_shader_parameter("beam_len", beam_len)
+	smat.set_shader_parameter("beam_h", beam_h)
+	smat.set_shader_parameter("beam_alpha", 0.22)
+	shaft.material_override = smat
+	shaft.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	shaft.position = Vector3(front_x + cos(tilt) * beam_len * 0.5, y + sin(tilt) * beam_len * 0.5, 0.26)
+	shaft.rotation = Vector3(0, 0, tilt)
+	rig.add_child(shaft)
+
+
+func _update_headlights(ys: float) -> void:
+	## the rig lives under the car, so pitch/roll follow every flip and jump; here it only follows the
+	## native yaw squeeze: mirror when the car faces left, hide near edge-on, restore when visible again.
+	var rig := car.get_node_or_null("HeadlightRig") as Node3D
+	if rig == null:
+		return
+	rig.rotation = Vector3(0.0, PI if ys < 0.0 else 0.0, 0.0)
+	rig.visible = absf(ys) > 0.2

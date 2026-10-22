@@ -101,3 +101,7 @@
     Mobil berbentuk kartu tetap diberi bayangan elips di bawahnya, seperti di cairo.
 11. Tabrakan/kerusakan CHALLENGE: **berantakan boleh, ledakan jangan** (user 2026-10-03). Pengecualian: mobil yang masuk/tersembur **lava** boleh terbakar + meledak (seperti mobil terbakar sungguhan). SMASH: ledakan misil/chaos tetap boleh. Bola api, kilatan, dan asap tebal
     menutupi kerusakan yang ditunggu penonton. Tunjukkan panel copot, kaca, baut, roda lepas, dan serpihan yang tetap tergeletak.
+
+
+## Night headlights — owner requirement 2026-10-22
+CHALLENGE 3D night headlights use a forward/down spotlight and a soft tapered light shaft. Do not add glowing spherical front/tail lamps. Preserve native camera, cast art and scale. Run the independent runtime probe and inspect final cast/crash/outro images before review; see `lab/godot3d_challenge/HEADLIGHT_STANDARD.md`. This extra operator gate is not yet integrated into convert3d.py.
