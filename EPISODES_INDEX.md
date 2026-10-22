@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-21 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-22 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -114,8 +114,8 @@
 | 98 | `SIM_DUNGEON_V2_S026` | dungeon | UPLOADED_SCHEDULED 2026-11-03T16:00:00Z | Tue 2026-11-03 11:00 | https://www.youtube.com/shorts/MsN81LV_nP4 |
 | 99 | `SIM_DUNGEON_V2_S029` | dungeon | UPLOADED_SCHEDULED 2026-11-10T16:00:00Z | Tue 2026-11-10 11:00 | https://www.youtube.com/shorts/-AXUqUCBwBk |
 | 100 | `SIM_DUNGEON_V2_S031` | dungeon | UPLOADED_SCHEDULED 2026-11-17T16:00:00Z | Tue 2026-11-17 11:00 | https://www.youtube.com/shorts/30CLnhlfxQI |
-| 101 | `SIM_DUNGEON_V2_S032` | dungeon | APPROVED | Tue 2026-11-24 11:00 |  |
-| 102 | `SIM_DUNGEON_V2_S038` | dungeon | APPROVED | Tue 2026-12-01 11:00 |  |
+| 101 | `SIM_DUNGEON_V2_S032` | dungeon | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | Tue 2026-11-24 11:00 | https://www.youtube.com/shorts/zxPurjmlF6w |
+| 102 | `SIM_DUNGEON_V2_S038` | dungeon | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | Tue 2026-12-01 11:00 | https://www.youtube.com/shorts/U3oGHMwFI0I |
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
@@ -1431,9 +1431,9 @@
 - **Tema / narator:** morning-clear-volcano / chatterbox:f1
 - **Durasi:** 57.9 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs2+broken; Level 2: Buster (bus) → chop@obs0+broken; Level 3 (juara): Sprinkles (icecream) → win
-- **Status:** APPROVED (approve 2026-10-11)
-- **Antrian:** QUEUED 2026-11-24T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-24T16:00:00Z (approve 2026-10-11)
+- **Antrian:** SCHEDULED 2026-11-24T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/zxPurjmlF6w
 
 ## Ep. 102 — `SIM_DUNGEON_V2_S038`
 
@@ -1444,9 +1444,9 @@
 - **Tema / narator:** sunset-clear-volcano / chatterbox:m1
 - **Durasi:** 53.33 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → pit@obs2+broken; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Zippy (sports) → win
-- **Status:** APPROVED (approve 2026-10-20)
-- **Antrian:** QUEUED 2026-12-01T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-12-01T16:00:00Z (approve 2026-10-20)
+- **Antrian:** SCHEDULED 2026-12-01T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/U3oGHMwFI0I
 
 ## Ep. 103 — `SIM_SPLASH_V2_S013`
 

@@ -1,6 +1,6 @@
 {
   "video_id": "SIM_DUNGEON_V2_S038",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-12-01T16:00:00Z",
   "engine": "sim-prototype v2 + godot3d (lab/godot3d_challenge)",
   "series": "dungeon",
   "seed": 38,
@@ -247,5 +247,7 @@
   "episode": 102,
   "season": 4,
   "ai_director": "DeepSeek Flash + Antigravity",
-  "approved_date": "2026-10-20"
+  "approved_date": "2026-10-20",
+  "youtube_url": "https://www.youtube.com/shorts/U3oGHMwFI0I",
+  "upload_date": "2026-10-22"
 }

@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-21 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-10-22 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -107,8 +107,8 @@
 | 98 | S04 | dungeon | Zippy, Sprinkles, Buster | 2026-10-11 | 2026-10-11 | 2026-10-21 | UPLOADED_SCHEDULED 2026-11-03T16:00:00Z | https://www.youtube.com/shorts/MsN81LV_nP4 |  |  |  |  |
 | 99 | S04 | dungeon | Siren, Titan, Nitro | 2026-10-11 | 2026-10-11 | 2026-10-21 | UPLOADED_SCHEDULED 2026-11-10T16:00:00Z | https://www.youtube.com/shorts/-AXUqUCBwBk |  |  |  |  |
 | 100 | S04 | dungeon | Zippy, Hydro, Nitro | 2026-10-11 | 2026-10-11 | 2026-10-21 | UPLOADED_SCHEDULED 2026-11-17T16:00:00Z | https://www.youtube.com/shorts/30CLnhlfxQI |  |  |  |  |
-| 101 | S04 | dungeon | Tilly, Buster, Sprinkles | 2026-10-11 | 2026-10-11 |  | APPROVED |  |  |  |  |  |
-| 102 | S04 | dungeon | Tilly, Titan, Zippy | 2026-10-19 | 2026-10-20 |  | APPROVED |  |  |  |  |  |
+| 101 | S04 | dungeon | Tilly, Buster, Sprinkles | 2026-10-11 | 2026-10-11 | 2026-10-22 | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | https://www.youtube.com/shorts/zxPurjmlF6w |  |  |  |  |
+| 102 | S04 | dungeon | Tilly, Titan, Zippy | 2026-10-19 | 2026-10-20 | 2026-10-22 | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | https://www.youtube.com/shorts/U3oGHMwFI0I |  |  |  |  |
 | 103 | S04 | splash | Siren, Hydro, Rocky | 2026-10-19 | 2026-10-20 | 2026-10-21 | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | https://www.youtube.com/shorts/qLmoNh8nyEU |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |

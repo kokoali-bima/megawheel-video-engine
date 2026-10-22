@@ -1038,16 +1038,22 @@
   {
    "episode": 101,
    "video_id": "SIM_DUNGEON_V2_S032",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-24T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 101 #Shorts",
+   "upload_started": "2026-10-22T05:00:06.585201+00:00",
+   "url": "https://www.youtube.com/shorts/zxPurjmlF6w"
   },
   {
    "episode": 102,
    "video_id": "SIM_DUNGEON_V2_S038",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-12-01T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy the Sports Car Survive 5 Deadly Dungeon Traps? \ud83c\udf0b\ud83e\ude93 NEW 3D Graphics | Ep. 102 #Shorts",
+   "upload_started": "2026-10-22T05:00:17.016270+00:00",
+   "url": "https://www.youtube.com/shorts/U3oGHMwFI0I"
   }
  ]
 }
