@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SPLASH_3D_S021",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-05T16:00:00Z",
   "engine": "sim-prototype v2 + godot3d (Godot3D splash director pilot)",
   "series": "splash",
   "seed": 21,
@@ -242,5 +242,7 @@
   "audit_path": "/root/video-engine/renders/megawheel_arena/S04/E104_2026-10-22_splash/MW_SPLASH_3D_S021_audit.md",
   "episode": 104,
   "season": 4,
-  "approved_date": "2026-10-22"
+  "approved_date": "2026-10-22",
+  "youtube_url": "https://www.youtube.com/shorts/0qVPxSCaBUI",
+  "upload_date": "2026-10-23"
 }
