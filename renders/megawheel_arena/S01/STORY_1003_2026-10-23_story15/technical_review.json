@@ -1,0 +1,14 @@
+{
+  "candidate_sha256": "364cb9eda380a4cd9aada2003214fa48f77cd61fe612b7b088f76ca5f8222c84",
+  "duration_s": 589.164,
+  "size_bytes": 165254098,
+  "frame_count_scanned": 17673,
+  "unexpected_black_frames": 0,
+  "intentional_transition_black_frames": 354,
+  "audio_clip_samples": 0,
+  "av_duration_difference_s": 0.06499999999994088,
+  "production_master_preserved": true,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "status": "technical verification PASS; creative QA and reviewed exceptions are separate"
+}

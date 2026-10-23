@@ -1,0 +1,52 @@
+{
+  "video_id": "2026-10-23_story15_e03",
+  "title": "The Forgotten Speedway: Can They Escape the Broken Bridge? | MegaWheel Arena Ep. 3",
+  "title_base": "The Forgotten Speedway: Can They Escape the Broken Bridge? | MegaWheel Arena Ep. 3",
+  "description": "The bridge is breaking, and Zippy is caught on it! Car cartoon and animated adventure fans, buckle up for a rescue at the Forgotten Speedway.\n\nAn old key found in Grandpa Cone's wooden box sends Sprinkles and her friends to the abandoned Forgotten Speedway. A flashback shows young Grandpa Cone choosing to help Buster instead of winning his race, and the crew soon learns why that choice still matters. Out on the mountain road, the competitive cars meet a crumbling bridge, and Zippy ends up in real trouble. Hydro swings into action with the rescue cable while Kraggor holds the bridge up from below, and everyone has to work together to bring Zippy home safely. Teamwork and friendship carry the day.\n\nSubscribe to MegaWheel Arena for more car cartoon adventures! Watch Episode 2: https://www.youtube.com/watch?v=SdByNtxACP4\n\n#MegaWheelArena #CarCartoon #RescueAdventure",
+  "tags": [
+    "MegaWheel Arena",
+    "car cartoon",
+    "animated adventure",
+    "rescue cartoon",
+    "bridge rescue",
+    "cartoon car story",
+    "Forgotten Speedway",
+    "Sprinkles and friends",
+    "Zippy rescue",
+    "Kraggor",
+    "Grandpa Cone",
+    "Buster",
+    "family cartoon",
+    "story episode 3",
+    "cartoon rescue crew"
+  ],
+  "language": "en-US",
+  "series": "story15",
+  "story_episode": 3,
+  "engine": "story3d",
+  "engine_version": "story3d-s01e03-rebuild-v5",
+  "seed": 3,
+  "track_id": "forgotten_speedway",
+  "vehicles": [
+    "icecream",
+    "sports",
+    "monster",
+    "bus",
+    "police",
+    "f1",
+    "firetruck"
+  ],
+  "outcomes": [
+    "story15"
+  ],
+  "duration": 589.164,
+  "render_date": "2026-10-23",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15/2026-10-23_story15_e03.mp4",
+  "thumbnail": "/root/video-engine/renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15/2026-10-23_story15_e03_thumb.jpg",
+  "status": "APPROVED",
+  "assets": "Godot environments + canonical story25d characters; cached synthetic voices/music; owner-approved reviewed QA exceptions",
+  "source_sha256": "364cb9eda380a4cd9aada2003214fa48f77cd61fe612b7b088f76ca5f8222c84",
+  "episode": 1003,
+  "season": 1,
+  "approved_date": "2026-10-23"
+}

@@ -1,0 +1,192 @@
+{
+ "ok": true,
+ "joins": [
+  {
+   "join": "1->0",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 8.6,
+   "level_before": -22.5,
+   "level_after": -20.0,
+   "silence": 2.45,
+   "fail": [
+    "suara terpotong mendadak (turun 15 dB dalam 0,1 dtk)"
+   ],
+   "warn": [],
+   "drop": 15.4
+  },
+  {
+   "join": "0->2",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 41.13,
+   "level_before": -33.7,
+   "level_after": -39.1,
+   "silence": 0.7,
+   "fail": [],
+   "warn": [],
+   "drop": 8.1
+  },
+  {
+   "join": "2->3",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 91.83,
+   "level_before": -23.0,
+   "level_after": -46.6,
+   "silence": 1.35,
+   "fail": [
+    "suara terpotong mendadak (turun 22 dB dalam 0,1 dtk)"
+   ],
+   "warn": [
+    "beda level 23.6 dB antar scene (cek: kontras disengaja?)"
+   ],
+   "drop": 22.0
+  },
+  {
+   "join": "3->4",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 143.13,
+   "level_before": -30.9,
+   "level_after": -42.8,
+   "silence": 0.75,
+   "fail": [],
+   "warn": [],
+   "drop": 2.5
+  },
+  {
+   "join": "4->5",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 197.63,
+   "level_before": -29.6,
+   "level_after": -21.4,
+   "silence": 0.45,
+   "fail": [],
+   "warn": [],
+   "drop": 7.0
+  },
+  {
+   "join": "5->6",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 257.7,
+   "level_before": -25.0,
+   "level_after": -55.0,
+   "silence": 1.0,
+   "fail": [],
+   "warn": [
+    "beda level 30.1 dB antar scene (cek: kontras disengaja?)"
+   ],
+   "drop": 2.5
+  },
+  {
+   "join": "6->7",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 305.17,
+   "level_before": -25.2,
+   "level_after": -40.8,
+   "silence": 0.85,
+   "fail": [],
+   "warn": [
+    "beda level 15.6 dB antar scene (cek: kontras disengaja?)"
+   ],
+   "drop": 3.7
+  },
+  {
+   "join": "7->8",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 356.3,
+   "level_before": -31.5,
+   "level_after": -20.9,
+   "silence": 0.45,
+   "fail": [],
+   "warn": [],
+   "drop": 4.2
+  },
+  {
+   "join": "8->9",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 413.4,
+   "level_before": -40.4,
+   "level_after": -29.3,
+   "silence": 0.7,
+   "fail": [],
+   "warn": [],
+   "drop": 10.4
+  },
+  {
+   "join": "9->10",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 480.71,
+   "level_before": -74.1,
+   "level_after": -44.7,
+   "silence": 1.25,
+   "fail": [],
+   "warn": [
+    "beda level 29.4 dB antar scene (cek: kontras disengaja?)"
+   ],
+   "drop": 2.5
+  },
+  {
+   "join": "10->20",
+   "kind": "fadeblack",
+   "dur": 1.0,
+   "at": 526.01,
+   "level_before": -29.0,
+   "level_after": -19.8,
+   "silence": 2.05,
+   "fail": [],
+   "warn": [],
+   "drop": 4.5
+  }
+ ],
+ "durs": [
+  9.6,
+  4.0,
+  30.733333,
+  4.0,
+  48.9,
+  4.0,
+  49.5,
+  4.0,
+  52.7,
+  4.0,
+  58.266667,
+  4.0,
+  45.666667,
+  4.0,
+  49.333333,
+  4.0,
+  55.299674,
+  4.0,
+  65.514,
+  4.0,
+  43.499023,
+  4.0,
+  60.231
+ ],
+ "scene_starts": [
+  0.0,
+  12.0,
+  44.53,
+  95.23,
+  146.53,
+  201.03,
+  261.1,
+  308.57,
+  359.7,
+  416.8,
+  484.11,
+  529.41
+ ],
+ "secs": 51.622605085372925,
+ "candidate": "/root/lab/s01e03_rebuild_20261022/delivery_v5/S01E03_forgotten_speedway_candidate.mp4",
+ "changed": 20,
+ "verdict": "FAIL"
+}

@@ -7033,6 +7033,36 @@
       "title": "Can Siren the Police Car Survive Slippery Splash Zone? 💦🚗 | Ep. 104 #Shorts",
       "youtube_url": "https://www.youtube.com/shorts/0qVPxSCaBUI",
       "upload_date": "2026-10-23"
+    },
+    {
+      "video_id": "2026-10-23_story15_e03",
+      "series": "story15",
+      "story_episode": 3,
+      "engine": "story3d",
+      "engine_version": "story3d-s01e03-rebuild-v5",
+      "seed": 3,
+      "track_id": "forgotten_speedway",
+      "vehicles": [
+        "icecream",
+        "sports",
+        "monster",
+        "bus",
+        "police",
+        "f1",
+        "firetruck"
+      ],
+      "outcomes": [
+        "story15"
+      ],
+      "duration": 589.164,
+      "render_date": "2026-10-23",
+      "folder": "renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15",
+      "audit": "renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15/2026-10-23_story15_e03_audit.md",
+      "status": "APPROVED",
+      "title": "The Forgotten Speedway: Can They Escape the Broken Bridge? | MegaWheel Arena Ep. 3",
+      "episode": 1003,
+      "season": 1,
+      "approved_date": "2026-10-23"
     }
   ]
 }
