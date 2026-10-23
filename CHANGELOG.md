@@ -3,9 +3,23 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-23
+**📤 Upload / antrean / Drive**
+- `2679a5f` publish: daily run 2026-10-23 [cron daily_publish.sh]
+
 ## 2026-10-22
 **📤 Upload / antrean / Drive**
+- `bd45565` publish: queue approved Splash Ep104 for automatic daily upload [Codex]
 - `9dbbe66` publish: daily run 2026-10-22 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `35eaec8` approve: Splash S021 bright R2 as Ep104 on owner instruction [Codex]
+- `56858d5` fix: improve challenge night readability while preserving daytime
+- `044d816` fix: replace challenge night lamp orbs with directional beams
+<details><summary>otomatis VM (1)</summary>
+
+- `7d3ce83` analytics: daily report 2026-10-22
+
+</details>
 
 ## 2026-10-21
 **🔧 Lain-lain**
