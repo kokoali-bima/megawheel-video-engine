@@ -7058,11 +7058,15 @@
       "render_date": "2026-10-23",
       "folder": "renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15",
       "audit": "renders/megawheel_arena/S01/STORY_1003_2026-10-23_story15/2026-10-23_story15_e03_audit.md",
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-10-25T17:00:00Z",
       "title": "The Forgotten Speedway: Can They Escape the Broken Bridge? | MegaWheel Arena Ep. 3",
       "episode": 1003,
       "season": 1,
-      "approved_date": "2026-10-23"
+      "approved_date": "2026-10-23",
+      "youtube_url": "https://www.youtube.com/shorts/3wtRIEEN4WY",
+      "upload_date": "2026-10-24",
+      "drive_id": "130W3XgofsG144GVpwV-y5_avavcepw5s",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1003_2026-10-23_story15_e03.mp4"
     }
   ]
 }
