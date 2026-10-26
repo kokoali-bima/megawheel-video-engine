@@ -131,3 +131,10 @@ dan video tidak dibandingkan dengan versi 2.5D di detik yang sama sebelum dilapo
 | 2026-10-07 | kapak pendulum selalu kena | zona bahaya terlalu lebar | kapak vertikal + simulasi tabrakan di generator |
 | 2026-10-07 | heredoc python di bash rusak (escape) | quoting | tulis skrip dengan tool Write lalu jalankan |
 | 2026-10-08 | Modal TTS CLI orphaned after its runner disconnected | Python timeout lived only in the dead parent process | Wrap `modal run` in GNU `timeout --signal=TERM --kill-after=30s 1500s`; verify `pgrep` and `modal app list` before GPU work |
+
+## E. Disk dan retensi
+
+| Tanggal | Gejala | Penyebab | Pencegahan |
+|---|---|---|---|
+| 2026-10-26 | Disk VM video 72 GB padahal semua video tayang sudah di Drive | Folder percobaan lab (45 iterasi `s01e03_lab`, `s3d`, `fx`, `delivery_v2..v5`, `overlay.mov` ber-GB) tidak pernah dibersihkan; duplikat byte-identik ~7,5 GB; salinan lokal archive/review tidak dipangkas | `tools/retention.py` (kebijakan `tools/retention_policy.json`, cron harian 04:20): percobaan > 30 hari dihapus, `promote` atau `.keep` untuk yang masih dipakai; dibersihkan manual 72 -> 34 GB |
+| 2026-10-26 | Skrip retensi ikut ter-eksekusi saat dokumen diedit lewat ssh | Backtick di dalam heredoc tanpa kutip dijalankan shell VM sebagai command substitution | Kirim skrip lewat stdin dari file (`ssh ... python3 - < file.py`), jangan taruh backtick di heredoc tak berkutip |

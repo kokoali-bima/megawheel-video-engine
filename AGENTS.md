@@ -18,6 +18,7 @@
 7. Budget: Modal $31/month per channel — the scripts check `modal_usage.json`; never bypass the guard.
 8. Do not change QA thresholds, sensors or approved engines (Shorts 2.5D) without the owner.
 9. Log every exchange with the owner in `ipandu-video/claude/agent_claude.md` (append, Indonesian).
+10. **30-day rule for experiments (owner 2026-10-26):** everything uploaded to YouTube lives on Drive (drive_sync). Experiments in `/root/lab`, `/root/*_lab` and `/tmp/infrasoft-*` live at most 30 days (newest file mtime), then `tools/retention.py` (daily cron 04:20) deletes them. Still needed? `python3 tools/retention.py promote /root/lab/NAME` moves it to `/root/kept`, or put an empty `.keep` file inside the folder. `scan` shows what will go (warning from day 23). `sfx` and `branding` are exempt.
 
 ## 2. Where things are
 | What | Where |

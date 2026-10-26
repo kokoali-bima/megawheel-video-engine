@@ -1,0 +1,8 @@
+{
+  "max_age_days": 30,
+  "warn_days": 7,
+  "max_units_per_run": 50,
+  "promote_dir": "/root/kept",
+  "roots": [{"path": "/root/lab", "keep": ["sfx", "branding"]}],
+  "globs": ["/root/*_lab", "/tmp/infrasoft-*"]
+}
