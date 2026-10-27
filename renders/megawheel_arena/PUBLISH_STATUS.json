@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-10-26T05:00:58Z",
+  "finished_utc": "2026-10-27T05:01:03Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-10-26T05:00:58Z",
+ "updated_utc": "2026-10-27T05:01:03Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -19,19 +19,21 @@
    "race": {
     "name": "RACE race25d (15:00 ET)",
     "ok": false,
-    "covered_days": 5,
+    "covered_days": 4,
     "missing_days": [
      "2026-11-01",
-     "2026-11-02"
+     "2026-11-02",
+     "2026-11-03"
     ]
    },
    "smash": {
     "name": "SMASH smash25d (19:00 ET)",
     "ok": false,
-    "covered_days": 5,
+    "covered_days": 4,
     "missing_days": [
      "2026-11-01",
-     "2026-11-02"
+     "2026-11-02",
+     "2026-11-03"
     ]
    }
   }
@@ -40,24 +42,6 @@
   "SCHEDULED": 109
  },
  "next_uploads": [
-  {
-   "episode": 75,
-   "role": "short",
-   "publish_at_utc": "2026-10-26T15:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 77,
-   "role": "race",
-   "publish_at_utc": "2026-10-26T19:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 80,
-   "role": "smash",
-   "publish_at_utc": "2026-10-26T23:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 81,
    "role": "short",
@@ -86,6 +70,24 @@
    "episode": 85,
    "role": "race",
    "publish_at_utc": "2026-10-28T19:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 88,
+   "role": "smash",
+   "publish_at_utc": "2026-10-28T23:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 83,
+   "role": "short",
+   "publish_at_utc": "2026-10-29T15:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 86,
+   "role": "race",
+   "publish_at_utc": "2026-10-29T19:00:00Z",
    "status": "SCHEDULED"
   }
  ]
