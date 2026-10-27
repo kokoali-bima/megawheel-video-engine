@@ -13,7 +13,9 @@
 3. Git author is always `kokoali-bima <mu.aliwardana@gmail.com>`. On the VM sync ONLY with `bash git_sync.sh pull|push`.
    The Modal usage ledger (`modal_usage.json`) is dirty after every run: `git_sync.sh status` prints `ledger: BERSIH|KOTOR`, `pull` commits+pushes a dirty ledger itself (loud `!! LEDGER ... KOTOR` line) and produce_story3d commits it when it ends. Never `git checkout -- modal_usage.json` (deletes cost records). If `status` says behind or the ledger is dirty, run `pull` BEFORE any render.
 4. **Production never imports `lab/`.** Experiments live in `lab/` (PC) / `/root/lab` (VM).
-5. **Never re-draw characters in 3D.** Characters come from story25d / sim_engine exactly as aired.
+5. **3D characters (owner 2026-10-27, replaces "never re-draw characters in 3D"):** allowed only when rebuilt from the exact
+   aired 2D designs (shapes, colours, decals, faces and moods of `sim_engine.draw_body/draw_face`); never generic or
+   off-model cars (Kenney / AI-video cars were rejected). Lab builder: `/root/lab/car3d/project/car_builder.gd`.
 6. Run renders on the VM **one at a time** (OOM). Heavy work goes to Modal through the scripts below.
 7. Budget: Modal $31/month per channel — the scripts check `modal_usage.json`; never bypass the guard.
 8. Do not change QA thresholds, sensors or approved engines (Shorts 2.5D) without the owner.
