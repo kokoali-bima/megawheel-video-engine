@@ -15,6 +15,12 @@ latest lineup/frames in `../samples/` (names below). Talk to the owner in Bahasa
    when rebuilt from the exact aired 2D designs; generic/off-model cars stay forbidden.
 6. S021 (Bumps) v6 was approved and then WITHDRAWN by the owner: it is the same simulation as the already-aired Ep. 45
    (YouTube reused-content risk). Nothing was queued or uploaded. To air 3D Shorts: render NEW seeds, never re-air an aired story.
+8. Camera (owner 2026-10-27): hybrid program in `project/cam_program.gd` (`CamProgram.pose`): level intro low FRONT (like
+   samples/megawheel_hero_v1_gaya3D_tampak_depan.mp4) swinging to 3/4, live 3/4 yaw 16 deg with LIFT 10 deg ("a bit higher, it is 3D now"),
+   replay swings to front-side 75 deg raised 12 deg (odd replays from behind) and dollies in, winner = slow orbit. The camera is rotated
+   rigidly around the CAR point, so the 2D overlay (HUD, FAIL, bubbles) stays aligned. A "FrontWorld" (green ground + trees + hills on the
+   camera side) rises only when |yaw| > 30 deg; live frames keep the brown cross-section so pits stay readable (owner chose this, option
+   `CAR3D_FRONT=1` = always green). Camera never goes below ground_h + 1.5 m. Tuning: `CAR3D_YAW`, constants in cam_program.gd.
 7. No Modal: everything renders on the VM CPU (Godot 4.4.1 opengl3/llvmpipe under xvfb), about 7-8 min per episode with
    supersampling 2x. DeepSeek cap raised by the owner to US$10 cumulative (`DEEPSEEK_BUDGET_USD=10` env on ds_run calls).
 
@@ -24,6 +30,7 @@ latest lineup/frames in `../samples/` (names below). Talk to the owner in Bahasa
 | Spec | `car3d/CONTRACT.md` (parts 1-3: GLB/Kenney era, kept for history), `car3d/CONTRACT_PART4_BUILDER.md` (THE spec: builder 4, polish 4b, damage 4c, identity 4d) |
 | Builder code (source of truth on PC/Drive) | `car3d/project/car_builder.gd` (`class_name CarBuilder`: shaders, geometry, faces/moods, wheels, damage, debris, headlights, 5 cars) and `car3d/project/car_builder_big.gd` (`CarBuilderBig`: f1, bus, firetruck, bigrig, icecream) |
 | Game scene (lab copy) | `car3d/project/challenge3d.gd` = copy of the live `video-engine/lab/godot3d_challenge/project/challenge3d.gd` + the builder mode (`glb_dir == "builder"`), `_break3d`, dent call, supersampling (`CAR3D_SS`), headlights hook |
+| Camera program | `car3d/project/cam_program.gd` (pose + FrontWorld), wired in `challenge3d.gd` builder camera block |
 | QC lineup | `car3d/project/lineup_builder.gd` + `lineup.tscn` (side = orthographic like the 2D, quarter = 3/4 view) |
 | VM lab (runs) | `/root/lab/car3d/` (project/, gr.sh, fullb.sh, lu.sh, videos) and `/root/lab/crash3d/` (parked solver). Both have a `.keep` file (retention keeps them). |
 | GitHub copy | `video-engine/lab/car3d_builder/` (commit after c77b621): contracts, project scripts, vm_scripts. Production never imports lab/. |
@@ -52,7 +59,7 @@ latest lineup/frames in `../samples/` (names below). Talk to the owner in Bahasa
 
 ## 5. Open items (in the owner's order)
 1. Owner review of v8 (two headlight beams) and any remaining characters that look off.
-2. Camera views (BeamNG-like angles) for the 3D cast: the owner said to discuss only after the cars are right.
+2. Camera: DONE as above (v10 = first full episode with the camera program); owner review pending.
 3. Animated mood transitions (now an instant switch), panels tearing off the body itself (now only dents + flying pieces).
 4. Promotion to production (needs the owner): the live converter is `video-engine/lab/godot3d_challenge/convert3d.py <video_id>`
    (export_challenge.py -> Godot -> compose.py). Promotion = put `car_builder*.gd` + the builder mode into that Godot project

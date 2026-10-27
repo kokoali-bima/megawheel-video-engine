@@ -27,6 +27,11 @@ var fire: CPUParticles3D
 var dot_tex: GradientTexture2D
 var cur_vk = ""
 var start_off = 0                                        # test renders: start at this output frame
+var cam_yaw_deg := 16.0                                  # 3/4 view: live frames look from the front-side (+ = toward the car front)
+var front_world: Node3D = null                            # scenery on the camera side, raised only for swung cameras
+var cam_sweep_deg := 50.0                                # replay: the camera sweeps -sweep .. +sweep around the car
+var replay_u: PackedFloat32Array = PackedFloat32Array()  # per frame: 0..1 inside a replay run, -1 on live frames
+var replay_k: PackedInt32Array = PackedInt32Array()      # per frame: 0-based replay run index, -1 on live frames
 var last_li = -1
 var last_st = -1.0
 var fired = {}
@@ -60,6 +65,32 @@ func _ready() -> void:
 		glb_dir = a[2]
 	scene = JSON.parse_string(FileAccess.open(dir + "/scene.json", FileAccess.READ).get_as_text())
 	frames = JSON.parse_string(FileAccess.open(dir + "/frames.json", FileAccess.READ).get_as_text())["frames"]
+	var ev_yaw := OS.get_environment("CAR3D_YAW")            # tuning overrides for test renders
+	if ev_yaw != "":
+		cam_yaw_deg = float(ev_yaw)
+	var ev_sweep := OS.get_environment("CAR3D_SWEEP")
+	if ev_sweep != "":
+		cam_sweep_deg = float(ev_sweep)
+	replay_u.resize(frames.size())
+	replay_k.resize(frames.size())
+	for i in range(frames.size()):
+		replay_u[i] = -1.0
+		replay_k[i] = -1
+	var run_k := 0
+	var i := 0
+	while i < frames.size():
+		if str(frames[i][1]) != "r":
+			i += 1
+			continue
+		var ra := i                                          # first frame of this replay run
+		var rb := i
+		while rb + 1 < frames.size() and str(frames[rb + 1][1]) == "r":
+			rb += 1                                          # last frame of this replay run
+		for j in range(ra, rb + 1):
+			replay_u[j] = float(j - ra) / float(maxi(1, rb - ra))
+			replay_k[j] = run_k
+		run_k += 1
+		i = rb + 1
 	cast = scene["cast"]
 	rng.seed = 7
 	var g = Gradient.new()
@@ -81,6 +112,8 @@ func _ready() -> void:
 	_track()
 	_landscape()
 	_props()
+	if glb_dir == "builder" and not _is_dungeon():
+		front_world = CamProgram.build_front_world(self, str(scene["theme"]["location"]), ROAD_HZ, 11)
 	if _is_dungeon():
 		_axes()
 		_ogres()
@@ -1321,6 +1354,25 @@ func _process(_d: float) -> void:
 	var Y = float(f[4]) + (float(scene["ground_y"]) - 960.0) / ppm + float(f[7]) / ppm
 	cam.position = Vector3(X, Y + D * tan(deg_to_rad(TILT)), D)
 	cam.look_at(Vector3(X, Y, 0), Vector3.UP)
+	if glb_dir == "builder":                                # stage 1: rigid 3/4 turn around the CAR point (overlay stays aligned)
+		var piv := Vector3(float(f[8]), float(f[9]), 0.0)
+		var lvp: Dictionary = scene["levels"][int(f[0])]           # hybrid program: intro front-low, live 3/4, replay head-on, winner orbit
+		var is_win: bool = str(lvp["event"]["type"]) == "win"
+		var pz: Vector3 = CamProgram.pose(float(f[2]), replay_u[i], replay_k[i], is_win, float(lvp["event"]["t"]), cam_yaw_deg)
+		var yaw := deg_to_rad(pz.x)
+		var lift := deg_to_rad(pz.y)
+		if front_world != null:
+			front_world.position.y = 0.0 if OS.get_environment("CAR3D_FRONT") == "1" else CamProgram.front_world_y(pz.x)   # CAR3D_FRONT=1: always green (comparison)
+		var t := cam.global_transform
+		t = Transform3D(Basis(Vector3.UP, yaw), piv) * Transform3D(Basis(), -piv) * t
+		var right := t.basis.x.normalized()
+		t = Transform3D(Basis(right, -lift), piv) * Transform3D(Basis(), -piv) * t   # -lift: rotation about +x lowers a +z camera, so negate to raise it
+		t.origin = piv + (t.origin - piv) * pz.z                  # dolly along the line through the car (overlay stays aligned)
+		var gmin: float = ground_h(t.origin.x) + 1.5              # never inside the ground (pit replays)
+		if t.origin.y < gmin:
+			t.origin.y = gmin
+			t = t.looking_at(piv, Vector3.UP)
+		cam.global_transform = t
 	# car
 	var broken = bool(f[15])
 	var mood = "broken" if broken else str(f[14])
