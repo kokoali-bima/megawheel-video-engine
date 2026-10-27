@@ -3,9 +3,20 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-27
+**📤 Upload / antrean / Drive**
+- `d01b962` publish: daily run 2026-10-27 [cron daily_publish.sh]
+
 ## 2026-10-26
+**🔧 Lain-lain**
+- `f326bca` retention: 30-day policy for lab experiments (tools/retention.py + policy + tests), AGENTS rule 10, ERROR_LOG section E
 **📤 Upload / antrean / Drive**
 - `9a01a33` publish: daily run 2026-10-26 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `d9685c9` analytics: daily report 2026-10-26
+
+</details>
 
 ## 2026-10-25
 **📤 Upload / antrean / Drive**
