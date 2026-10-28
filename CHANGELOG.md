@@ -3,9 +3,25 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-28
+**📤 Upload / antrean / Drive**
+- `ab927dc` publish: daily run 2026-10-28 [cron daily_publish.sh]
+**🧪 Lab (eksperimen)**
+- `be98005` lab/car3d_builder: two products (Shorts v5 default, wide BeamNG/Cars video), windshields + windshield faces, BeamNG cameras, MegaKit nature, Forward+ look, handover update
+
 ## 2026-10-27
+**🧪 Lab (eksperimen)**
+- `6dd2a5d` lab/car3d_builder: hybrid camera program (front intro, 3/4 live, cinematic replay, winner orbit, FrontWorld), detail fixes
+- `de8d909` lab/car3d_builder: original MegaWheel cast rebuilt in 3D for Godot (CarBuilder, builder mode, lineup, handover); lab only, production unchanged
+**🔧 Lain-lain**
+- `c77b621` AGENTS: rule 5 now allows 3D characters rebuilt from the exact aired 2D designs (owner 2026-10-27)
 **📤 Upload / antrean / Drive**
 - `d01b962` publish: daily run 2026-10-27 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `8e2a60f` analytics: daily report 2026-10-27
+
+</details>
 
 ## 2026-10-26
 **🔧 Lain-lain**
