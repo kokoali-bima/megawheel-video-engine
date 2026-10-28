@@ -66,3 +66,63 @@ latest lineup/frames in `../samples/` (names below). Talk to the owner in Bahasa
    (or a generators/ copy), render NEW seeds only, QA, Drive review copy, owner approval, then the normal `episodes.py approve` + cron publish.
 5. Parked: `../crash3d/` (own node-beam solver + Blender, see memory megawheel-crash3d-solver) and the Modal budget-guard block
    (118 unsettled MegaWheel reservations; never edit that ledger).
+
+---
+## 6. UPDATE 2026-10-27/28 (latest state; read this first, it supersedes section 5)
+Paused by the owner ("back to iPandu and iSmart-LA for a while"). Nothing is uploaded or queued; production repo untouched except AGENTS rule 5 (c77b621) and lab copies.
+
+### Owner decisions in this round
+1. TWO products:
+   - **Shorts 9:16** = the v5 style (the aired 2D side camera, side diorama, eyes in the SIDE windows). This is the DEFAULT of `challenge3d.gd` builder mode (no env vars needed).
+   - **Wide full video 16:9** = BeamNG-style cameras + Pixar "Cars" look (~65-70% is the target), eyes on the WINDSHIELD, mouth follows the mood (5 moods), no Challenge HUD.
+     If it works it may REPLACE the weekly long video.
+2. Every car must have a windshield (+ rear window) in both products (done: `project/face_front.gd`, `FaceFront.apply`).
+3. Kenney Nature Kit rejected ("not mature, far from Cars"). Use **Quaternius Stylized Nature MegaKit (free Standard, CC0)** models + **Poly Haven (CC0)** PBR ground textures. TwistedTree models are excluded (red leaves).
+4. No AI-generated video, ever. Real 3D physics like BeamNG (cars leaving the road, rolling sideways) needs a NEW Godot 3D physics engine (VehicleBody3D/Jolt) = stage 2, only if the wide prototype convinces.
+5. GPU look (SDFGI, SSAO, volumetric fog, DOF) renders on **Modal, MegaWheel account**; owner extra allowance **US$12.5** (when spent, wait for next month). Not used yet (0 spent).
+6. Re-exports must never overwrite running episodes: lab exports go to `/root/lab/car3d/eps/<id>` only.
+
+### Env switches (all in `project/challenge3d.gd` + helpers)
+| Var | Effect |
+|---|---|
+| (none) | Shorts v5: 2D camera, side faces, original side diorama |
+| `CAR3D_CAM=program` | old hybrid 3/4 camera program (`CamProgram.pose`) + FrontWorld (kept, not the chosen Shorts style) |
+| `CAR3D_CAM=beamng` | BeamNG tripod cameras (`CamProgram.beam_shot`): roadside tripod past each obstacle, front-side intro, replay from a second higher angle, orbit close-up of the wreck after FAIL, winner orbit; 3D speech bubbles (Label3D); dense nature (`NatureDress.dress`) and old cone trees stripped |
+| `CAR3D_FACE=windshield` | Cars-movie face on the windshield + mouth on the front bumper (default `side`) |
+| `CAR3D_DAY=1` | forces a sunny noon sky whatever the episode theme was |
+| `CAR3D_WIDE=1` | camera keeps HEIGHT (16:9) |
+| `CAR3D_SS=2.0` | 2x supersampling (CPU renders); outlines scale with it |
+| `CAR3D_YAW`, `CAR3D_FRONT=1` | program-camera tuning / always-green front |
+
+### Files added in this round (PC `car3d/` = source of truth; VM `/root/lab/car3d/`)
+- `project/cam_program.gd` (`CamProgram`: pose, beam_shot, pois_from_scene, ground_y, ease helpers, FrontWorld)
+- `project/face_front.gd` (`FaceFront`: windows + windshield face, moods named eyes_*/mouth_* under per-eye holders)
+- `project/nature_dress.gd` (`NatureDress`: MegaKit bands near/mid/far both sides, Poly Haven triplanar ground, `strip_cone_trees`)
+- `project/look_upgrade.gd` (`LookUpgrade`: Forward+ only; AGX/ACES, SSAO/SSIL/SDFGI, volumetric fog, glow, soft 4-split shadows, DOF; no-op on CPU)
+- `modal_godot3d.py` (lab copy of the live `modal_godot.py`: app `megawheel-car3d`, font in the image, env.json carries CAR3D_* vars, passes `builder`, class cache shipped)
+- `export_challenge_3d.py` (lab copy of export_challenge.py: `--no-bubbles` removes bubbles + speed lines from overlay.mov and writes `levels[].bubbles` into scene.json; ROOT pinned to /root/video-engine)
+- `vm_scripts/wide.sh EPISODE_DIR OUT [N] [START]` (1920x1080 project copy `project_wide`, beamng+windshield+day+wide, audio from mix.wav)
+- `beamng_ref/` (reference BeamNG videos 3VynaM2zSDU "Cars vs Potholes #4" 30M views and tJCHZOlPXeA cinematic crash test, contact sheets, `_pylib` yt-dlp + ffmpeg for the PC; YouTube blocks the VM IP)
+- Assets on the VM (gitignored `assets/`): `/root/video-engine/assets/quaternius_nature` (glTF + Textures copied next to the .gltf), `/root/video-engine/assets/polyhaven` (asphalt_02, aerial_grass_rock, forest_ground_04, brown_mud_leaves_01, rock_face; 2k diff/nor_gl/rough), `/root/video-engine/assets/kenney_nature_kit` (rejected, unused).
+- Lab export used for tests: `/root/lab/car3d/eps/S022` (seed 22 potholes, `--no-bubbles`; NOTE the sim differs a bit from the aired Ep because the registry changed since: fine for tests, new episodes must be exported this way from the start).
+
+### Camera analysis (BeamNG vs ours, side by side, `beamng_ref/` sheets)
+BeamNG: static roadside tripod ~4-5 m high, 12-15 m from the impact, looking diagonally down the road; car fills ~25-35% of a 16:9 frame; hard cuts per obstacle;
+replay from a second higher angle; orbit close-ups of the wreck; dense roadside (grass, bushes, trees close to the road, tree shadows on asphalt, road markings, signs), daylight.
+Ours (beamng v1): tripod 2.2 m high at z 6.5 (too low/close for 9:16; for 16:9 it reads better) -> TODO raise to ~4 m and pull back.
+
+### Latest outputs
+- Shorts 9:16: `samples/S026_car3d_v5.mp4` (owner's reference for the Shorts style), `S021bumps_car3d_v6.mp4`, `S022potholes_car3d_v8.mp4` (two headlight beams), `S022potholes_car3d_v9cam.mp4`.
+- BeamNG camera 9:16 test: `samples/S022_beamng_v1.mp4`; VM `/root/lab/car3d/S022potholes_car3d_v10.mp4` (rejected hybrid camera).
+- Wide 16:9 test (CPU, 160 frames): VM `/root/lab/car3d/wide_test.mp4`, sheet `wide1.png` (green MegaKit trees, Poly Haven ground, windshield face, mood mouths).
+
+### NEXT STEPS (in order)
+1. Wide video polish: ground texture too yellow/dry (tint `aerial_grass_rock` greener or switch to `forest_ground_04` mix); left side of the road sparser than the right; raise the tripod (~4 m) and pull back (~12 m) per the BeamNG analysis.
+2. Windshield faces on CAB cars (police, taxi, monster): check from the front at full resolution (fixed the eye-node naming bug; verify).
+3. First GPU test on Modal (MegaWheel): `modal_godot3d.py` with `project_gpu` (Forward+: `renderer/rendering_method="forward_plus"`, shadow 4096, soft quality 4). Run a 10 s piece first, read the real bill (`modal billing report --for today --json`), keep the total under US$12.5.
+   Budget guard: `reconcile_budget.py` settled the 10 old reservations (backup `backups/ledger_before_reconcile_20261027.sqlite3`), but `modal_cli_preflight`/`reserve` still STOP with
+   "Modal native workspace limits are above $31/unverified": policy.json says megawheel native limit 35 and the old preflight compares against `channel_month_usd` 31.
+   Do NOT edit the ledger/policy without the owner: ask whether to set `native_channel_limits_usd.megawheel` to the real workspace limit or raise the cap by the US$12.5 allowance.
+   Month spend so far (official): MegaWheel metered US$28.66 in Oct (credits cover it).
+4. Then a full wide episode (S022 lab export) with audio; owner review; then cost per episode and the decision on the weekly long video.
+5. Stage 2 (only after owner approval): Godot 3D vehicle physics (VehicleBody3D + Jolt) for real sideways crashes; reuse CarBuilder cars as the visual.

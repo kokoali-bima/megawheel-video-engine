@@ -29,6 +29,10 @@ var cur_vk = ""
 var start_off = 0                                        # test renders: start at this output frame
 var cam_yaw_deg := 16.0                                  # 3/4 view: live frames look from the front-side (+ = toward the car front)
 var front_world: Node3D = null                            # scenery on the camera side, raised only for swung cameras
+var beam_mode := false                                   # CAR3D_CAM=beamng: scripted BeamNG-style camera + 3D speech bubbles
+var beam_pois: Array = []
+var beam_start_x: Array = []
+var beam_labels: Array = []
 var cam_sweep_deg := 50.0                                # replay: the camera sweeps -sweep .. +sweep around the car
 var replay_u: PackedFloat32Array = PackedFloat32Array()  # per frame: 0..1 inside a replay run, -1 on live frames
 var replay_k: PackedInt32Array = PackedInt32Array()      # per frame: 0-based replay run index, -1 on live frames
@@ -91,6 +95,11 @@ func _ready() -> void:
 			replay_k[j] = run_k
 		run_k += 1
 		i = rb + 1
+	if OS.get_environment("CAR3D_DAY") == "1":                # wide full video: sunny Cars-movie day, whatever the Short's theme was
+		scene["night"] = false
+		scene["theme"]["time"] = "noon"
+		scene["sky"] = [[0.0, [0.32, 0.58, 0.95]], [1.0, [0.78, 0.88, 1.0]]]
+		scene["light"] = 1.0
 	cast = scene["cast"]
 	rng.seed = 7
 	var g = Gradient.new()
@@ -112,8 +121,41 @@ func _ready() -> void:
 	_track()
 	_landscape()
 	_props()
-	if glb_dir == "builder" and not _is_dungeon():
-		front_world = CamProgram.build_front_world(self, str(scene["theme"]["location"]), ROAD_HZ, 11)
+	if glb_dir == "builder" and not _is_dungeon() and OS.get_environment("CAR3D_CAM") in ["program", "beamng"]:   # Shorts (default) keep the side diorama
+		if OS.get_environment("CAR3D_CAM") == "beamng":       # wide BeamNG-style video: Quaternius MegaKit + Poly Haven ground
+			NatureDress.strip_cone_trees(self)
+			NatureDress.dress(self, "/root/video-engine/assets/quaternius_nature", -40.0, float(scene["finish_x"]) + 60.0, ROAD_HZ, 7, Color(0.3, 0.55, 0.25))
+		else:
+			front_world = CamProgram.build_front_world(self, str(scene["theme"]["location"]), ROAD_HZ, 11)
+		beam_mode = OS.get_environment("CAR3D_CAM") == "beamng"
+		if beam_mode:
+			beam_pois = CamProgram.pois_from_scene(scene)
+			beam_start_x = []
+			for li_b in range(scene["levels"].size()):
+				var sx_b := 0.0
+				for k_b in range(frames.size()):
+					if int(frames[k_b][0]) == li_b:
+						sx_b = float(frames[k_b][8])
+						break
+				beam_start_x.append(sx_b)
+			var fnt: FontFile = null                             # comic font for the speech bubbles (fallback: default)
+			var ff_b := FontFile.new()
+			if ff_b.load_dynamic_font("/root/.fonts/LuckiestGuy-Regular.ttf") == OK:
+				fnt = ff_b
+			for n_b in range(3):
+				var lb_b := Label3D.new()
+				lb_b.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				lb_b.no_depth_test = true
+				lb_b.font_size = 72
+				lb_b.pixel_size = 0.012
+				lb_b.outline_size = 22
+				lb_b.modulate = Color(0.9, 0.15, 0.2)
+				lb_b.outline_modulate = Color(1, 1, 1)
+				if fnt != null:
+					lb_b.font = fnt
+				lb_b.visible = false
+				add_child(lb_b)
+				beam_labels.append(lb_b)
 	if _is_dungeon():
 		_axes()
 		_ogres()
@@ -126,6 +168,9 @@ func _ready() -> void:
 	cam.far = 900.0
 	add_child(cam)
 	cam.make_current()
+	if OS.get_environment("CAR3D_WIDE") == "1":               # 16:9 full video: the shot fov is vertical
+		cam.keep_aspect = Camera3D.KEEP_HEIGHT
+	LookUpgrade.apply_camera(cam)                                 # Forward+ only: depth of field
 	var ss := OS.get_environment("CAR3D_SS")                 # supersampling for smoother edges (e.g. 1.5); empty = off
 	if ss != "":
 		get_viewport().scaling_3d_scale = float(ss)
@@ -203,6 +248,7 @@ func _environment() -> void:
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 90.0
 	add_child(sun)
+	LookUpgrade.apply(env, sun, bool(scene["night"]))            # Forward+ (GPU) only: GI, AO, volumetric fog, soft shadows
 
 
 func _quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, n: Vector3) -> void:
@@ -1354,7 +1400,7 @@ func _process(_d: float) -> void:
 	var Y = float(f[4]) + (float(scene["ground_y"]) - 960.0) / ppm + float(f[7]) / ppm
 	cam.position = Vector3(X, Y + D * tan(deg_to_rad(TILT)), D)
 	cam.look_at(Vector3(X, Y, 0), Vector3.UP)
-	if glb_dir == "builder":                                # stage 1: rigid 3/4 turn around the CAR point (overlay stays aligned)
+	if glb_dir == "builder" and OS.get_environment("CAR3D_CAM") == "program":   # 3/4 hybrid program; default = the aired 2D camera (Shorts v5 style)
 		var piv := Vector3(float(f[8]), float(f[9]), 0.0)
 		var lvp: Dictionary = scene["levels"][int(f[0])]           # hybrid program: intro front-low, live 3/4, replay head-on, winner orbit
 		var is_win: bool = str(lvp["event"]["type"]) == "win"
@@ -1373,6 +1419,30 @@ func _process(_d: float) -> void:
 			t.origin.y = gmin
 			t = t.looking_at(piv, Vector3.UP)
 		cam.global_transform = t
+	if glb_dir == "builder" and beam_mode:                  # BeamNG camera + 3D speech bubbles (CAR3D_CAM=beamng)
+		var li_b: int = int(f[0])
+		var st_b: float = float(f[2])
+		var lvb: Dictionary = scene["levels"][li_b]
+		var ev_t: float = float(lvb["event"]["t"])
+		var win_b: bool = str(lvb["event"]["type"]) == "win"
+		var carp := Vector3(float(f[8]), float(f[9]), 0.0)
+		var shot: Dictionary = CamProgram.beam_shot(carp, st_b, str(f[1]) == "r", float(beam_start_x[li_b]), beam_pois, scene["track"], not win_b, ev_t, win_b, ev_t)
+		cam.fov = float(shot["fov"])
+		cam.global_transform = Transform3D(Basis(), shot["pos"]).looking_at(shot["target"], Vector3.UP)
+		if front_world != null:
+			front_world.position.y = 0.0
+		for lb_h in beam_labels:
+			(lb_h as Label3D).visible = false
+		var bub: Array = lvb.get("bubbles", [])
+		for n_b in range(mini(3, bub.size())):
+			var b: Array = bub[n_b]
+			var age: float = st_b - float(b[0])
+			if 0.0 <= age and age < 1.1:
+				var lb_s: Label3D = beam_labels[n_b]
+				lb_s.text = str(b[1])
+				lb_s.position = carp + Vector3(0.6, 2.4, 0.0)
+				lb_s.scale = Vector3.ONE * maxf(0.01, CamProgram.ease_out_back(age / 0.2))
+				lb_s.visible = true
 	# car
 	var broken = bool(f[15])
 	var mood = "broken" if broken else str(f[14])

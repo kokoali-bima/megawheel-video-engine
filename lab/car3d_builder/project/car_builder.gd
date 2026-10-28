@@ -1120,5 +1120,7 @@ static func build(vk: String) -> Node3D:
 		_: root = _build_sports()
 	root.name = "car_" + vk
 	_build_cracks(root, vk)
+	var face_mode := OS.get_environment("CAR3D_FACE")            # "side" (Shorts, default) or "windshield" (wide BeamNG-style video)
+	FaceFront.apply(root, vk, face_mode if face_mode != "" else "side")   # glass windows always; Cars-style face only in windshield mode
 	set_mood(root, "normal", 0.0)
 	return root
