@@ -3,11 +3,21 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-10-29
+**📤 Upload / antrean / Drive**
+- `dfc6792` publish: daily run 2026-10-29 [cron daily_publish.sh]
+
 ## 2026-10-28
 **📤 Upload / antrean / Drive**
 - `ab927dc` publish: daily run 2026-10-28 [cron daily_publish.sh]
 **🧪 Lab (eksperimen)**
 - `be98005` lab/car3d_builder: two products (Shorts v5 default, wide BeamNG/Cars video), windshields + windshield faces, BeamNG cameras, MegaKit nature, Forward+ look, handover update
+<details><summary>otomatis VM (2)</summary>
+
+- `43d76a3` records: modal usage (auto)
+- `2cd74e2` analytics: daily report 2026-10-28
+
+</details>
 
 ## 2026-10-27
 **🧪 Lab (eksperimen)**
