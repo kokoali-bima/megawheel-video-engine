@@ -1,17 +1,17 @@
 # ANALYTICS_REPORT — MegaWheel Arena
 
-Periode 2026-10-01 s/d 2026-10-28 (28 hari). Dibuat 2026-10-29 06:30 oleh yt_analytics.py.
+Periode 2026-10-02 s/d 2026-10-29 (28 hari). Dibuat 2026-10-30 06:30 oleh yt_analytics.py.
 
-**Channel:** 49,363 views · 9,097 menit tontonan · +91 subscriber
+**Channel:** 51,706 views · 9,448 menit tontonan · +98 subscriber
 
 ## Per seri
 
 | Seri | Video | Views | Rata-rata views | Rata-rata % ditonton | Subs |
 |---|---|---|---|---|---|
-| CHALLENGE | 51 | 33,197 | 650 | 51% | 54 |
-| RACE | 27 | 15,392 | 570 | 55% | 21 |
+| CHALLENGE | 54 | 35,455 | 656 | 51% | 64 |
+| RACE | 27 | 15,456 | 572 | 55% | 21 |
 | SMASH | 3 | 435 | 145 | 54% | 1 |
-| STORY | 4 | 267 | 66 | 31% | 1 |
+| STORY | 4 | 268 | 67 | 31% | 1 |
 
 ## Per video (urut views)
 
@@ -19,60 +19,63 @@ Periode 2026-10-01 s/d 2026-10-28 (28 hari). Dibuat 2026-10-29 06:30 oleh yt_ana
 |---|---|---|---|---|---|---|---|
 | [Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 / Ep. 48 #Shorts](https://youtu.be/c8Y6AecAUCI) | CHALLENGE | 2,392 | 773 | 37 | 74% | 14 | 8 |
 | [Will Siren the Police Car Survive Giant Lava Potholes? 🌋🔥 / Ep. 42 #Sh](https://youtu.be/ivasm__dTxM) | CHALLENGE | 1,381 | 331 | 29 | 63% | 10 | 4 |
-| [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 5 #Shorts](https://youtu.be/xEWas3W61QU) | CHALLENGE | 1,358 | 288 | 24 | 52% | 16 | 1 |
 | [Can Zippy the Sports Car Survive Giant Speed Bumps? 🚗💥 / Ep. 45 #Short](https://youtu.be/Sh2WfMcLj-M) | CHALLENGE | 1,237 | 222 | 23 | 46% | 11 | 1 |
-| [Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 / Ep. 50 #Shorts](https://youtu.be/8_uVESE2cr4) | RACE | 1,208 | 246 | 27 | 56% | 10 | 4 |
+| [Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 / Ep. 50 #Shorts](https://youtu.be/8_uVESE2cr4) | RACE | 1,209 | 247 | 27 | 56% | 10 | 4 |
 | [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 18 #Shorts](https://youtu.be/dO6mPkPhO70) | CHALLENGE | 1,207 | 290 | 31 | 65% | 20 | 7 |
 | [Cars VS Slippery Splash Zone! Who Survives? 💦🚗 / Ep. 16 #Shorts](https://youtu.be/_lZj6d402lU) | CHALLENGE | 1,176 | 240 | 24 | 42% | 20 | 1 |
 | [Siren vs Falling Containers! Who Wins the Race? 🏁 / Ep. 55 #Shorts](https://youtu.be/NaQ5MVI0etc) | RACE | 1,119 | 152 | 22 | 61% | 7 | 0 |
-| [Will Siren the Police Car Survive Giant Potholes? 🚗💥 / Ep. 51 #Shorts](https://youtu.be/JYouVAHqUeA) | CHALLENGE | 1,095 | 222 | 27 | 53% | 10 | 1 |
+| [Will Siren the Police Car Survive Giant Potholes? 🚗💥 / Ep. 51 #Shorts](https://youtu.be/JYouVAHqUeA) | CHALLENGE | 1,096 | 223 | 27 | 53% | 10 | 1 |
 | [Can Hydro Survive the Giant Hammer? 🏁 / Ep. 53 #Shorts](https://youtu.be/jbr_oreCvfY) | RACE | 1,086 | 178 | 22 | 60% | 7 | 1 |
-| [Can Tilly Survive Falling Containers? 🏁 / Ep. 67 #Shorts](https://youtu.be/Guo_ikHKcMk) | CHALLENGE | 1,075 | 166 | 19 | 56% | 5 | 2 |
-| [Taxi vs A Wave Of Giant Falling Dominoes! Can Tilly Make It? 🁢 / Ep. 6](https://youtu.be/mVQhUTvk9ZI) | CHALLENGE | 1,074 | 201 | 23 | 44% | 14 | 2 |
+| [Can Tilly Survive Falling Containers? 🏁 / Ep. 67 #Shorts](https://youtu.be/Guo_ikHKcMk) | CHALLENGE | 1,074 | 166 | 19 | 55% | 5 | 2 |
+| [Taxi vs A Wave Of Giant Falling Dominoes! Can Tilly Make It? 🁢 / Ep. 6](https://youtu.be/mVQhUTvk9ZI) | CHALLENGE | 1,072 | 201 | 23 | 44% | 14 | 2 |
+| [Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More!](https://youtu.be/Mb76nmh0YyM) | CHALLENGE | 1,050 | 214 | 25 | 46% | 10 | 2 |
 | [Can Siren Survive Falling Containers? 🏁 / Ep. 54 #Shorts](https://youtu.be/puxQcUZoOdc) | CHALLENGE | 1,046 | 172 | 20 | 52% | 8 | 1 |
-| [Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥 / Ep. 64](https://youtu.be/YTTl_1sokjE) | CHALLENGE | 1,044 | 212 | 27 | 47% | 9 | 1 |
-| [Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? ](https://youtu.be/qoeUhMg2-7Q) | RACE | 1,038 | 192 | 26 | 45% | 11 | 2 |
+| [Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥 / Ep. 64](https://youtu.be/YTTl_1sokjE) | CHALLENGE | 1,045 | 213 | 27 | 47% | 9 | 1 |
+| [Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? ](https://youtu.be/qoeUhMg2-7Q) | RACE | 1,041 | 193 | 26 | 44% | 11 | 2 |
+| [Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, ](https://youtu.be/xm-xShnbV_g) | CHALLENGE | 1,039 | 185 | 26 | 50% | 11 | 1 |
 | [Siren vs the Giant Hammer! Who Wins the Race? 🏁 / Ep. 61 #Shorts](https://youtu.be/qs4m4wnQx2s) | RACE | 1,037 | 127 | 18 | 50% | 10 | 1 |
-| [Can Grizzly Survive Falling Containers? 🏁 / Ep. 69 #Shorts](https://youtu.be/KIZF_hjOXJY) | CHALLENGE | 1,031 | 130 | 18 | 51% | 12 | 3 |
-| [Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And](https://youtu.be/VFZjvEaUpsc) | CHALLENGE | 1,029 | 201 | 24 | 50% | 2 | 1 |
+| [Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And](https://youtu.be/VFZjvEaUpsc) | CHALLENGE | 1,031 | 203 | 24 | 50% | 2 | 1 |
 | [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 21 #Shorts](https://youtu.be/ggvN5p10cfQ) | CHALLENGE | 1,027 | 177 | 25 | 54% | 9 | 2 |
-| [Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, ](https://youtu.be/xm-xShnbV_g) | CHALLENGE | 1,024 | 181 | 25 | 50% | 9 | 1 |
-| [Can Tiny Zippy Beat a Fire Truck? 💥 / Ep. 72 #Shorts](https://youtu.be/ygW5VWZpx1c) | CHALLENGE | 1,022 | 175 | 28 | 53% | 6 | 1 |
-| [Zippy vs the Oil Slick! Who Wins the Race? 🏁 / Ep. 56 #Shorts](https://youtu.be/Wls3wOxIct0) | RACE | 1,022 | 97 | 16 | 46% | 6 | 0 |
-| [Can Grizzly Survive the Giant Hammer? 🏁 / Ep. 68 #Shorts](https://youtu.be/_BkZRCpEhPg) | RACE | 1,022 | 126 | 17 | 46% | 11 | 1 |
+| [Can Tiny Zippy Beat a Fire Truck? 💥 / Ep. 72 #Shorts](https://youtu.be/ygW5VWZpx1c) | CHALLENGE | 1,024 | 175 | 28 | 53% | 6 | 1 |
+| [Can Grizzly Survive the Giant Hammer? 🏁 / Ep. 68 #Shorts](https://youtu.be/_BkZRCpEhPg) | RACE | 1,024 | 126 | 17 | 46% | 11 | 1 |
+| [Zippy vs the Oil Slick! Who Wins the Race? 🏁 / Ep. 56 #Shorts](https://youtu.be/Wls3wOxIct0) | RACE | 1,023 | 97 | 16 | 46% | 6 | 0 |
+| [Can Grizzly Survive Falling Containers? 🏁 / Ep. 69 #Shorts](https://youtu.be/KIZF_hjOXJY) | CHALLENGE | 1,018 | 129 | 18 | 51% | 12 | 3 |
 | [Can Tiny Nitro Beat a School Bus? 💥 / Ep. 63 #Shorts](https://youtu.be/vZAkrIzQ7zQ) | CHALLENGE | 1,016 | 144 | 23 | 46% | 10 | 0 |
-| [Can Siren Survive the Wall? 🏁 / Ep. 76 #Shorts](https://youtu.be/dpIG3zz0nQs) | RACE | 1,008 | 118 | 16 | 47% | 6 | 1 |
+| [Can Siren Survive the Wall? 🏁 / Ep. 76 #Shorts](https://youtu.be/dpIG3zz0nQs) | RACE | 1,012 | 119 | 16 | 47% | 6 | 1 |
 | [Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 / Ep. 57](https://youtu.be/6eLjmpy02NM) | RACE | 1,001 | 135 | 25 | 50% | 4 | 2 |
-| [Sprinkles, Grizzly, Nitro or Zippy? Last Car Standing! 💥 / Ep. 62 #Sho](https://youtu.be/lym-XWogLPk) | CHALLENGE | 978 | 160 | 26 | 50% | 6 | 1 |
+| [Big Rig vs Monster Truck vs Police Car vs Sports Car! Who Survives? 💥 ](https://youtu.be/n7E87OZBYe8) | CHALLENGE | 994 | 145 | 25 | 48% | 11 | 0 |
+| [Sprinkles, Grizzly, Nitro or Zippy? Last Car Standing! 💥 / Ep. 62 #Sho](https://youtu.be/lym-XWogLPk) | CHALLENGE | 979 | 161 | 26 | 50% | 6 | 1 |
 | [Sprinkles, Rocky, Nitro or Zippy? Last Car Standing! 💥 / Ep. 58 #Short](https://youtu.be/0UhR4k8z9mk) | CHALLENGE | 977 | 134 | 26 | 50% | 5 | 1 |
-| [Titan, Rocky, Tilly or Siren? Last Car Standing! 💥 / Ep. 71 #Shorts](https://youtu.be/diUdJsm2_SM) | CHALLENGE | 972 | 132 | 24 | 44% | 8 | 0 |
+| [Titan, Rocky, Tilly or Siren? Last Car Standing! 💥 / Ep. 71 #Shorts](https://youtu.be/diUdJsm2_SM) | CHALLENGE | 973 | 132 | 24 | 44% | 8 | 0 |
+| [Can Tilly Survive the Giant Hammer? 🏁 / Ep. 77 #Shorts](https://youtu.be/wJRlHjwcgWg) | RACE | 971 | 119 | 19 | 49% | 9 | 0 |
 | [Can Siren Survive the Oil Slick? 🏁 / Ep. 40 #Shorts](https://youtu.be/Gp7yvNydnKs) | RACE | 968 | 159 | 20 | 57% | 13 | 0 |
-| [Ice Cream Truck vs Monster Truck vs Police Car vs Sports Car! Who Surv](https://youtu.be/YOg4cwmPHdw) | CHALLENGE | 966 | 123 | 22 | 39% | 9 | 0 |
+| [Ice Cream Truck vs Monster Truck vs Police Car vs Sports Car! Who Surv](https://youtu.be/YOg4cwmPHdw) | CHALLENGE | 967 | 123 | 22 | 39% | 9 | 0 |
 | [Cars VS Slippery Splash Zone! Who Survives? 💦🚗 / Ep. 20 #Shorts](https://youtu.be/16KM8XY8BCA) | CHALLENGE | 965 | 205 | 24 | 50% | 16 | 3 |
-| [Can Tiny Nitro Beat a Big Rig? 💥 / Ep. 59 #Shorts](https://youtu.be/2mJ7FCqvYTg) | CHALLENGE | 961 | 113 | 22 | 42% | 4 | 0 |
-| [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 3 #Shorts](https://youtu.be/yf0y4R83hto) | CHALLENGE | 936 | 216 | 27 | 59% | 15 | 2 |
-| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 6 #Shorts](https://youtu.be/nXlV3f6Wux8) | CHALLENGE | 936 | 261 | 32 | 68% | 23 | 5 |
-| [Big Rig vs Monster Truck vs Police Car vs Sports Car! Who Survives? 💥 ](https://youtu.be/n7E87OZBYe8) | CHALLENGE | 926 | 128 | 24 | 47% | 10 | 0 |
-| [Can Tilly Survive the Giant Hammer? 🏁 / Ep. 77 #Shorts](https://youtu.be/wJRlHjwcgWg) | RACE | 918 | 109 | 19 | 49% | 9 | 0 |
+| [Can Tiny Nitro Beat a Big Rig? 💥 / Ep. 59 #Shorts](https://youtu.be/2mJ7FCqvYTg) | CHALLENGE | 962 | 113 | 21 | 41% | 4 | 0 |
+| [Can Sprinkles Survive Falling Containers? 🏁 / Ep. 84 #Shorts](https://youtu.be/4xdJO93mknM) | CHALLENGE | 927 | 133 | 21 | 54% | 7 | 4 |
+| [Buster, Grizzly, Tilly or Nitro? Last Car Standing! 💥 / Ep. 80 #Shorts](https://youtu.be/trI9Q77SAxU) | CHALLENGE | 924 | 106 | 20 | 36% | 7 | 1 |
+| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 6 #Shorts](https://youtu.be/nXlV3f6Wux8) | CHALLENGE | 898 | 249 | 32 | 68% | 22 | 5 |
 | [Can Nitro the Race Car Survive Giant Potholes? 🚗💥 / Ep. 39 #Shorts](https://youtu.be/_ep2xhmCcMg) | RACE | 875 | 134 | 23 | 47% | 8 | 0 |
-| [Fire Truck vs Monster Truck vs Sports Car vs Police Car! Who Survives?](https://youtu.be/2FRVVI2q_vM) | CHALLENGE | 756 | 68 | 20 | 41% | 7 | 0 |
+| [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 5 #Shorts](https://youtu.be/xEWas3W61QU) | CHALLENGE | 810 | 182 | 25 | 54% | 11 | 1 |
+| [Fire Truck vs Monster Truck vs Sports Car vs Police Car! Who Survives?](https://youtu.be/2FRVVI2q_vM) | CHALLENGE | 751 | 68 | 20 | 41% | 7 | 0 |
+| [Can Tiny Zippy Beat a School Bus? 💥 / Ep. 87 #Shorts](https://youtu.be/i6zipDevoTA) | CHALLENGE | 738 | 138 | 25 | 52% | 6 | 4 |
 | [Can Siren Survive the Giant Hammer? 🏁 / Ep. 49 #Shorts](https://youtu.be/6HkCyVZqXrc) | RACE | 678 | 315 | 48 | 121% | 9 | 2 |
 | [Can Tiny Tilly Beat a School Bus? 💥 / Ep. 47 #Shorts](https://youtu.be/eWqvYeCTWqk) | CHALLENGE | 498 | 86 | 25 | 53% | 7 | 0 |
+| [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 3 #Shorts](https://youtu.be/yf0y4R83hto) | CHALLENGE | 438 | 105 | 28 | 61% | 9 | 2 |
 | [Cars VS Giant Potholes! Who Survives? 🚗💥 / Ep. 17 #Shorts](https://youtu.be/15-W4OJNtt4) | CHALLENGE | 413 | 81 | 29 | 59% | 7 | 0 |
 | [Wildest Race Ever! Who Crosses First? 🏁 / Ep. 15 #Shorts](https://youtu.be/grvQnQ1E94k) | RACE | 408 | 56 | 22 | 63% | 12 | 0 |
 | [Can Tilly Survive the Meteors? 🏁 / Ep. 37 #Shorts](https://youtu.be/1aa8NVWoMhQ) | RACE | 379 | 58 | 20 | 57% | 3 | 1 |
-| [Buster, Grizzly, Tilly or Nitro? Last Car Standing! 💥 / Ep. 80 #Shorts](https://youtu.be/trI9Q77SAxU) | CHALLENGE | 345 | 45 | 22 | 39% | 5 | 1 |
 | [Crazy Obstacle Race! Who Survives? 🏁💥 / Ep. 13 #Shorts](https://youtu.be/qePl8AzQ9Rw) | RACE | 300 | 63 | 22 | 67% | 10 | 4 |
-| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 4 #Shorts](https://youtu.be/3CfgGpkOx3Q) | CHALLENGE | 274 | 69 | 27 | 54% | 10 | 1 |
-| [Taxi vs Giant Lava Potholes! Can Tilly Make It? 🌋🔥 / Ep. 75 #Shorts](https://youtu.be/lHByBBaLVXo) | CHALLENGE | 251 | 21 | 24 | 51% | 2 | 2 |
+| [Taxi vs Giant Lava Potholes! Can Tilly Make It? 🌋🔥 / Ep. 75 #Shorts](https://youtu.be/lHByBBaLVXo) | CHALLENGE | 257 | 24 | 25 | 53% | 2 | 2 |
+| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 4 #Shorts](https://youtu.be/3CfgGpkOx3Q) | CHALLENGE | 253 | 63 | 27 | 55% | 9 | 1 |
 | [Meteors, Lasers & Lava! Who Wins the Race? 🏁 / Ep. 14 #Shorts](https://youtu.be/_CL0pzpWPTg) | RACE | 241 | 35 | 21 | 61% | 5 | 0 |
 | [4 Cars Enter, 1 Survives! 💥 Smash Arena / Ep. 27 #Shorts](https://youtu.be/pjx_weAS40w) | SMASH | 212 | 21 | 21 | 46% | 3 | 0 |
 | [Cars VS Lava Road! Who Survives? 🌋🔥 / Ep. 19 #Shorts](https://youtu.be/6YB8aBiEn_o) | CHALLENGE | 204 | 32 | 28 | 61% | 5 | 0 |
 | [4 Cars, 1 Finish Line! Who Wins? 🏁 / Ep. 12 #Shorts](https://youtu.be/ABojeEOuK4M) | RACE | 187 | 14 | 16 | 46% | 4 | 0 |
 | [Hydro, Grizzly, Siren or Zippy? Last Car Standing! 💥 / Ep. 32 #Shorts](https://youtu.be/k9fMTUKrdeA) | CHALLENGE | 186 | 34 | 25 | 51% | 5 | 0 |
 | [Crash Battle! Only One Can Win! 💥 / Ep. 26 #Shorts](https://youtu.be/eQQzWYXAda8) | CHALLENGE | 180 | 30 | 25 | 47% | 5 | 0 |
-| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 2 #Shorts](https://youtu.be/dVBtbf8Bi_Q) | CHALLENGE | 168 | 41 | 22 | 46% | 3 | 0 |
 | [Can Zippy Survive the Oil Slick? 🏁 / Ep. 31 #Shorts](https://youtu.be/vZFKVw21xA8) | RACE | 166 | 36 | 21 | 58% | 5 | 0 |
+| [Cars VS Giant Speed Bumps! Who Survives? 🚗💥 / Ep. 2 #Shorts](https://youtu.be/dVBtbf8Bi_Q) | CHALLENGE | 158 | 38 | 22 | 45% | 3 | 0 |
 | [Can Nitro Survive the Meteors? 🏁 / Ep. 46 #Shorts](https://youtu.be/BJhlWYkiHF8) | RACE | 145 | 31 | 23 | 65% | 10 | 2 |
 | [Who Survives the Smash Arena? 💥 / Ep. 28 #Shorts](https://youtu.be/ZXEi9fG7RZA) | SMASH | 143 | 37 | 34 | 68% | 7 | 1 |
 | [Can Nitro Survive the Giant Hammer? 🏁 / Ep. 43 #Shorts](https://youtu.be/MsJCeAgnOrY) | RACE | 138 | 20 | 17 | 50% | 3 | 0 |
@@ -82,12 +85,12 @@ Periode 2026-10-01 s/d 2026-10-28 (28 hari). Dibuat 2026-10-29 06:30 oleh yt_ana
 | [Can Zippy Survive Falling Containers? 🏁 / Ep. 60 #Shorts](https://youtu.be/YsTdVDb4fWc) | CHALLENGE | 114 | 12 | 23 | 60% | 1 | 0 |
 | [Fire Truck vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 / Ep.](https://youtu.be/1g38LQv-7k8) | RACE | 111 | 9 | 16 | 32% | 0 | 0 |
 | [Can Tiny Nitro Beat a Big Rig? 💥 / Ep. 35 #Shorts](https://youtu.be/etUL6wxoccA) | CHALLENGE | 106 | 28 | 33 | 62% | 5 | 0 |
-| [Sprinkles' First Race 🍦🏁 / MegaWheel Arena Story Ep. 1](https://youtu.be/gAVCxOicZyM) | STORY | 95 | 166 | 128 | 19% | 5 | 1 |
+| [Sprinkles' First Race 🍦🏁 / MegaWheel Arena Story Ep. 1](https://youtu.be/gAVCxOicZyM) | STORY | 96 | 166 | 128 | 19% | 5 | 1 |
 | [Taxi vs Giant Potholes! Can Tilly Make It? 🚗💥 / Ep. 33 #Shorts](https://youtu.be/hBNWKl7lX6I) | CHALLENGE | 94 | 24 | 27 | 58% | 0 | 0 |
 | [Sprinkles, Rocky, Zippy or Siren? Last Car Standing! 💥 / Ep. 41 #Short](https://youtu.be/2ekvyKZl7v8) | CHALLENGE | 86 | 20 | 27 | 53% | 2 | 0 |
 | [4 Cars Enter, 1 Survives! 💥 Smash Arena / Ep. 25 #Shorts](https://youtu.be/5ljCNw1Hnlg) | SMASH | 80 | 10 | 22 | 50% | 4 | 0 |
-| [Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts](https://youtu.be/BB8Lr9LwL9g) | STORY | 71 | 7 | 14 | 52% | 4 | 0 |
 | [Slippery Race Showdown! Who Wins? 🏁💦 / Ep. 9 #Shorts](https://youtu.be/lA92He_9FeQ) | RACE | 71 | 9 | 18 | 61% | 4 | 0 |
+| [Sprinkles' First Race 🍦 Full Episode This Sunday! #Shorts](https://youtu.be/BB8Lr9LwL9g) | STORY | 71 | 7 | 14 | 52% | 4 | 0 |
 | [Last Car Standing Wins! 💥 / Ep. 22 #Shorts](https://youtu.be/Q-7067tL0A8) | CHALLENGE | 66 | 14 | 24 | 48% | 4 | 0 |
 | [Crash Battle! Only One Can Win! 💥 / Ep. 23 #Shorts](https://youtu.be/ZjUnuZvelKY) | CHALLENGE | 59 | 7 | 18 | 38% | 3 | 0 |
 | [Meteors, Lasers & Lava! Who Wins the Race? 🏁 / Ep. 10 #Shorts](https://youtu.be/0o6TY6tXF_c) | RACE | 55 | 4 | 12 | 38% | 2 | 0 |
@@ -100,7 +103,7 @@ Periode 2026-10-01 s/d 2026-10-28 (28 hari). Dibuat 2026-10-29 06:30 oleh yt_ana
 | [Crash Battle! Only One Can Win! 💥 / Ep. 24 #Shorts](https://youtu.be/RCBE3lgA2uo) | CHALLENGE | 44 | 10 | 31 | 65% | 3 | 0 |
 | [Wildest Race Ever! Who Crosses First? 🏁 / Ep. 11 #Shorts](https://youtu.be/WinoMp1Dmzw) | RACE | 38 | 4 | 17 | 51% | 2 | 0 |
 | [Nitro vs the Giant Hammer! Who Wins the Race? 🏁 / Ep. 34 #Shorts](https://youtu.be/nYMwvHZvwmY) | RACE | 37 | 3 | 18 | 49% | 2 | 0 |
-| [Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics / ](https://youtu.be/DERf3rVbKd0) | CHALLENGE | 29 | 7 | 25 | 50% | 1 | 0 |
+| [Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics / ](https://youtu.be/DERf3rVbKd0) | CHALLENGE | 30 | 7 | 24 | 48% | 1 | 0 |
 | [The Forgotten Speedway: Can They Escape the Broken Bridge? / MegaWheel](https://youtu.be/3wtRIEEN4WY) | CHALLENGE | 19 | 6 | 25 | 4% | 3 | 0 |
 
 **Terbaik:** Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts (2,392 views, 74% ditonton)
