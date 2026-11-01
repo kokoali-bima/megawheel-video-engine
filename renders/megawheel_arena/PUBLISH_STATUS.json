@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-10-31T05:00:59Z",
+  "finished_utc": "2026-11-01T05:00:59Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-10-31T10:21:12Z",
+ "updated_utc": "2026-11-01T05:00:59Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -13,10 +13,11 @@
    "short": {
     "name": "CHALLENGE (11:00 ET)",
     "ok": false,
-    "covered_days": 5,
+    "covered_days": 4,
     "missing_days": [
      "2026-11-06",
-     "2026-11-07"
+     "2026-11-07",
+     "2026-11-08"
     ]
    },
    "race": {
@@ -24,13 +25,13 @@
     "ok": false,
     "covered_days": 0,
     "missing_days": [
-     "2026-11-01",
      "2026-11-02",
      "2026-11-03",
      "2026-11-04",
      "2026-11-05",
      "2026-11-06",
-     "2026-11-07"
+     "2026-11-07",
+     "2026-11-08"
     ]
    },
    "smash": {
@@ -38,13 +39,13 @@
     "ok": false,
     "covered_days": 0,
     "missing_days": [
-     "2026-11-01",
      "2026-11-02",
      "2026-11-03",
      "2026-11-04",
      "2026-11-05",
      "2026-11-06",
-     "2026-11-07"
+     "2026-11-07",
+     "2026-11-08"
     ]
    }
   }
@@ -53,24 +54,6 @@
   "SCHEDULED": 109
  },
  "next_uploads": [
-  {
-   "episode": 91,
-   "role": "short",
-   "publish_at_utc": "2026-10-31T15:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 93,
-   "role": "race",
-   "publish_at_utc": "2026-10-31T19:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 95,
-   "role": "smash",
-   "publish_at_utc": "2026-10-31T23:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 96,
    "role": "short",
@@ -99,6 +82,24 @@
    "episode": 104,
    "role": "short",
    "publish_at_utc": "2026-11-05T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 99,
+   "role": "short",
+   "publish_at_utc": "2026-11-10T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 100,
+   "role": "short",
+   "publish_at_utc": "2026-11-17T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 101,
+   "role": "short",
+   "publish_at_utc": "2026-11-24T16:00:00Z",
    "status": "SCHEDULED"
   }
  ]
