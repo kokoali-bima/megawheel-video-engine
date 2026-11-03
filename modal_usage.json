@@ -4543,6 +4543,26 @@
    "gpu_seconds": 28.8,
    "wall_seconds": 1799.2,
    "cost_usd": 0.0074
+  },
+  {
+   "date": "2026-11-02",
+   "note": "narrator LAB_R3D_S071 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 53.2,
+   "wall_seconds": 1125.2,
+   "cost_usd": 0.0136
+  },
+  {
+   "date": "2026-11-03",
+   "note": "smash3d ult r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 3,
+   "gpu_seconds": 47.0,
+   "wall_seconds": 231.2,
+   "cost_usd": 0.012
   }
  ]
 }
