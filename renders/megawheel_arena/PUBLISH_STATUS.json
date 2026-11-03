@@ -4,7 +4,7 @@
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-03T05:01:04Z",
+ "updated_utc": "2026-11-03T13:04:31Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -52,7 +52,8 @@
   }
  },
  "queue": {
-  "SCHEDULED": 109
+  "SCHEDULED": 109,
+  "QUEUED": 1
  },
  "next_uploads": [
   {
@@ -60,6 +61,12 @@
    "role": "short",
    "publish_at_utc": "2026-11-03T16:00:00Z",
    "status": "SCHEDULED"
+  },
+  {
+   "episode": 105,
+   "role": "race",
+   "publish_at_utc": "2026-11-03T20:00:00Z",
+   "status": "QUEUED"
   },
   {
    "episode": 103,

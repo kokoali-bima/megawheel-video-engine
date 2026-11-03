@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-03 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-03 13:07). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -111,6 +111,7 @@
 | 102 | S04 | dungeon | Tilly, Titan, Zippy | 2026-10-19 | 2026-10-20 | 2026-10-22 | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | https://www.youtube.com/shorts/U3oGHMwFI0I |  |  |  |  |
 | 103 | S04 | splash | Siren, Hydro, Rocky | 2026-10-19 | 2026-10-20 | 2026-10-21 | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | https://www.youtube.com/shorts/qLmoNh8nyEU |  |  |  |  |
 | 104 | S04 | splash | Siren, Sprinkles, Buster | 2026-10-22 | 2026-10-22 | 2026-10-23 | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | https://www.youtube.com/shorts/0qVPxSCaBUI |  |  |  |  |
+| 105 | S04 | race25d | Titan, Grizzly, Tilly, Nitro | 2026-11-03 | 2026-11-03 | 2026-11-03 | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | https://www.youtube.com/shorts/CmFaZq12F6c |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1003 | S01 | story15 | Sprinkles, Zippy, Rocky, Buster, Siren, Nitro, Hydro | 2026-10-23 | 2026-10-23 | 2026-10-24 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | https://www.youtube.com/shorts/3wtRIEEN4WY |  |  |  |  |

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-03 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-03 13:07) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -118,6 +118,7 @@
 | 102 | `SIM_DUNGEON_V2_S038` | dungeon | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | Tue 2026-12-01 11:00 | https://www.youtube.com/shorts/U3oGHMwFI0I |
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 104 | `MW_SPLASH_3D_S021` | splash | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | Thu 2026-11-05 11:00 | https://www.youtube.com/shorts/0qVPxSCaBUI |
+| 105 | `MW_RACE_3D_S071` | race25d | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | Tue 2026-11-03 15:00 | https://www.youtube.com/shorts/CmFaZq12F6c |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1475,6 +1476,19 @@
 - **Status:** UPLOADED_SCHEDULED 2026-11-05T16:00:00Z (approve 2026-10-22)
 - **Antrian:** SCHEDULED 2026-11-05T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/0qVPxSCaBUI
+
+## Ep. 105 — `MW_RACE_3D_S071`
+
+- **Judul YouTube:** We Went 3D! 🔥 Can Titan Survive Falling Containers? | Ep. 105 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E105_2026-11-03_race25d/MW_RACE_3D_S071.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E105_2026-11-03_race25d/MW_RACE_3D_S071.json` · audit: `renders/megawheel_arena/S04/E105_2026-11-03_race25d/MW_RACE_3D_S071_audit.md`
+- **Season / seri / seed:** S04 / race25d / 71
+- **Tema / narator:** sunset-clear-desert / chatterbox:f1
+- **Durasi:** 32.87 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+container; Level 2: Grizzly (monster2) → p2; Level 3 (juara): Tilly (taxi) → win+dodge_pothole; Level 4: Nitro (f1) → p3+ufo
+- **Status:** UPLOADED_SCHEDULED 2026-11-03T20:00:00Z (approve 2026-11-03)
+- **Antrian:** SCHEDULED 2026-11-03T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/CmFaZq12F6c
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
 

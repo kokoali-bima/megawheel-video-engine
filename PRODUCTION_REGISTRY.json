@@ -7067,6 +7067,50 @@
       "upload_date": "2026-10-24",
       "drive_id": "130W3XgofsG144GVpwV-y5_avavcepw5s",
       "drive_path": "me/ai-develop/ipandu-video/archive/S01/E1003_2026-10-23_story15_e03.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S071",
+      "series": "race25d",
+      "engine_version": "v4",
+      "seed": 71,
+      "created": "2026-11-03",
+      "render_date": "2026-11-03",
+      "vehicles": [
+        "bigrig",
+        "monster2",
+        "taxi",
+        "f1"
+      ],
+      "track_id": "race25d_s071_3d@sunset-clear-desert",
+      "theme": "sunset-clear-desert",
+      "voice": "chatterbox:f1",
+      "outcomes": [
+        "p4+container",
+        "p2",
+        "win+dodge_pothole",
+        "p3+ufo"
+      ],
+      "duration": 32.87,
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 175.5,
+        "start": 104.1,
+        "finish_gap": 107.5
+      },
+      "structure": "gauntlet|container,pothole,ufo",
+      "title_base": "We Went 3D! 🔥 Can Titan Survive Falling Containers?",
+      "status": "UPLOADED_SCHEDULED 2026-11-03T20:00:00Z",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/S04/E105_2026-11-03_race25d",
+      "audit": "renders/megawheel_arena/S04/E105_2026-11-03_race25d/MW_RACE_3D_S071_audit.md",
+      "episode": 105,
+      "season": 4,
+      "upload_date": "2026-11-03",
+      "youtube_url": "https://www.youtube.com/shorts/CmFaZq12F6c",
+      "approved_date": "2026-11-03",
+      "title": "We Went 3D! 🔥 Can Titan Survive Falling Containers? | Ep. 105 #Shorts",
+      "drive_id": "1PYkFIyVAKlgzFOtn9BSkzoRISYqElQoJ",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S04/E105_MW_RACE_3D_S071.mp4"
     }
   ]
 }

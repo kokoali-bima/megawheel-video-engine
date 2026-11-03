@@ -1,0 +1,115 @@
+{
+  "video_id": "MW_RACE_3D_S071",
+  "status": "UPLOADED_SCHEDULED 2026-11-03T20:00:00Z",
+  "engine": "race25d v4 + godot3d race3d (agy_car3d_beamng)",
+  "series": "race25d",
+  "seed": 71,
+  "fps": 30,
+  "duration": 32.87,
+  "params": {
+    "cast": [
+      "bigrig",
+      "monster2",
+      "taxi",
+      "f1"
+    ],
+    "lanes": [
+      3,
+      0,
+      1,
+      2
+    ],
+    "hazards": [
+      [
+        "ufo",
+        2,
+        151.9
+      ],
+      [
+        "container",
+        3,
+        194.7
+      ],
+      [
+        "pothole",
+        1,
+        233.8
+      ]
+    ],
+    "finish": 341.3,
+    "plan": {
+      "layout": "gauntlet",
+      "zone": 175.5,
+      "start": 104.1,
+      "finish_gap": 107.5
+    }
+  },
+  "theme": {
+    "time": "sunset",
+    "weather": "clear",
+    "location": "desert"
+  },
+  "theme_id": "sunset-clear-desert",
+  "voice": "chatterbox:f1",
+  "outcomes": [
+    "p4+container",
+    "p2",
+    "win+dodge_pothole",
+    "p3+ufo"
+  ],
+  "checks": {
+    "video+audio streams": true,
+    "duration 20-175 s (not capped; Shorts limit)": true,
+    "has winner": true,
+    "at least 2 hazards hit": true,
+    "has replay": true,
+    "previews": true,
+    "no frame without a car (whip pans <= 10 frames)": true,
+    "realistic order (slower ahead only if the faster one was hit)": true,
+    "every hazard that hits is visible on screen (pixel sensor)": true
+  },
+  "cta": "Tap LIKE if you enjoyed this video, DISLIKE if you didn't, and smash SUBSCRIBE to MegaWheel Arena!",
+  "title_base": "We Went 3D! 🔥 Can Titan Survive Falling Containers?",
+  "title": "We Went 3D! 🔥 Can Titan Survive Falling Containers? | Ep. 105 #Shorts",
+  "description": "BIG UPGRADE: MegaWheel Arena just went from 2.5D to FULL 3D! 🔥🏁\nTitan, Grizzly, Tilly and Nitro race through falling containers, a giant pothole and a UFO abduction! 💥\n\n🗳️ 3D or 2.5D, which one do you like more? Vote in the comments!\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #3DRace #CarRace #CartoonCars #3DAnimation #Racing #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "3D race",
+    "3D car race",
+    "3D cars",
+    "car race",
+    "cartoon cars",
+    "animated cars",
+    "cars cartoon",
+    "racing",
+    "race cars",
+    "funny cars",
+    "obstacle race",
+    "car crash",
+    "truck race",
+    "big rig",
+    "monster truck",
+    "taxi",
+    "race car",
+    "falling containers",
+    "pothole",
+    "ufo",
+    "3D animation",
+    "2.5D vs 3D",
+    "car racing game",
+    "beamng style",
+    "MegaWheel Arena",
+    "shorts",
+    "Autorennen",
+    "Auto Cartoon"
+  ],
+  "assets": "100% procedurally generated (Godot 3D render of the race25d simulation + synthesized audio), narration Chatterbox TTS (open source, Modal GPU) synthetic voice chatterbox:f1",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E105_2026-11-03_race25d/MW_RACE_3D_S071.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E105_2026-11-03_race25d/preview",
+  "render3d": true,
+  "approval_instruction": "Owner approved the 3D Race S071 sample in chat 2026-11-03 and asked to queue it per SOP",
+  "episode": 105,
+  "season": 4,
+  "approved_date": "2026-11-03",
+  "youtube_url": "https://www.youtube.com/shorts/CmFaZq12F6c",
+  "upload_date": "2026-11-03"
+}
