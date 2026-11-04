@@ -4573,6 +4573,56 @@
    "gpu_seconds": 28.5,
    "wall_seconds": 2483.0,
    "cost_usd": 0.0073
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_R3D_S072 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 32.2,
+   "wall_seconds": 106.6,
+   "cost_usd": 0.0082
+  },
+  {
+   "date": "2026-11-04",
+   "note": "smash3d ult r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 42.3,
+   "wall_seconds": 70.6,
+   "cost_usd": 0.0108
+  },
+  {
+   "date": "2026-11-04",
+   "note": "announcer LAB_SCAN_S49 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 41.3,
+   "wall_seconds": 83.0,
+   "cost_usd": 0.0105
+  },
+  {
+   "date": "2026-11-04",
+   "note": "announcer LAB_SCAN_S68 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 27.0,
+   "wall_seconds": 48.9,
+   "cost_usd": 0.0069
+  },
+  {
+   "date": "2026-11-04",
+   "note": "announcer LAB_SCAN_S70 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 44.1,
+   "wall_seconds": 1202.6,
+   "cost_usd": 0.0113
   }
  ]
 }
