@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 17:20). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 18:59). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -116,6 +116,9 @@
 | 107 | S04 | race25d | Buster, Rocky, Tilly, Nitro | 2026-11-04 | 2026-11-04 |  | APPROVED |  |  |  |  |  |
 | 108 | S04 | race25d | Sprinkles, Rocky, Siren, Zippy | 2026-11-04 | 2026-11-04 |  | APPROVED |  |  |  |  |  |
 | 109 | S04 | race25d | Sprinkles, Grizzly, Nitro, Tilly | 2026-11-04 | 2026-11-04 |  | APPROVED |  |  |  |  |  |
+| 110 | S04 | smash25d | Hydro, Grizzly, Tilly, Zippy | 2026-11-04 | 2026-11-04 | 2026-11-04 | UPLOADED_SCHEDULED 2026-11-05T00:00:00Z | https://www.youtube.com/shorts/UTVc7gPmdkI |  |  |  |  |
+| 111 | S04 | smash25d | Titan, Rocky, Zippy, Tilly | 2026-11-04 | 2026-11-04 |  | APPROVED |  |  |  |  |  |
+| 112 | S04 | smash25d | Buster, Grizzly, Siren, Nitro | 2026-11-04 | 2026-11-04 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1003 | S01 | story15 | Sprinkles, Zippy, Rocky, Buster, Siren, Nitro, Hydro | 2026-10-23 | 2026-10-23 | 2026-10-24 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | https://www.youtube.com/shorts/3wtRIEEN4WY |  |  |  |  |

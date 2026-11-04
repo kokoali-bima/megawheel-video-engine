@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 17:20) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 18:59) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -123,6 +123,9 @@
 | 107 | `MW_RACE_3D_S217` | race25d | APPROVED | Thu 2026-11-05 15:00 |  |
 | 108 | `MW_RACE_3D_S088` | race25d | APPROVED | Fri 2026-11-06 15:00 |  |
 | 109 | `MW_RACE_3D_S108` | race25d | APPROVED | Sat 2026-11-07 15:00 |  |
+| 110 | `MW_SMASH_3D_S062_R2` | smash25d | UPLOADED_SCHEDULED 2026-11-05T00:00:00Z | Wed 2026-11-04 19:00 | https://www.youtube.com/shorts/UTVc7gPmdkI |
+| 111 | `MW_SMASH_3D_S043_R2` | smash25d | APPROVED | Thu 2026-11-05 19:00 |  |
+| 112 | `MW_SMASH_3D_S039_R2` | smash25d | APPROVED | Fri 2026-11-06 19:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1544,6 +1547,45 @@
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2+pothole; Level 2: Grizzly (monster2) → win; Level 3 (juara): Nitro (f1) → p3+container; Level 4: Tilly (taxi) → p4+dragon_ice
 - **Status:** APPROVED (approve 2026-11-04)
 - **Antrian:** QUEUED 2026-11-07T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 110 — `MW_SMASH_3D_S062_R2`
+
+- **Judul YouTube:** 4 Cars Enter the Ice Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 110 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E110_2026-11-04_smash25d/MW_SMASH_3D_S062_R2.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E110_2026-11-04_smash25d/MW_SMASH_3D_S062_R2.json` · audit: `renders/megawheel_arena/S04/E110_2026-11-04_smash25d/MW_SMASH_3D_S062_R2_audit.md`
+- **Season / seri / seed:** S04 / smash25d / 62
+- **Tema / narator:** noon-clear-mountains / 
+- **Durasi:** 58.23 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Tilly (taxi) → p3+wreck; Level 4: Zippy (sports) → p2+wreck
+- **Status:** UPLOADED_SCHEDULED 2026-11-05T00:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-05T00:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/UTVc7gPmdkI
+
+## Ep. 111 — `MW_SMASH_3D_S043_R2`
+
+- **Judul YouTube:** 4 Cars Enter the Lava Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 111 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E111_2026-11-04_smash25d/MW_SMASH_3D_S043_R2.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E111_2026-11-04_smash25d/MW_SMASH_3D_S043_R2.json` · audit: `renders/megawheel_arena/S04/E111_2026-11-04_smash25d/MW_SMASH_3D_S043_R2_audit.md`
+- **Season / seri / seed:** S04 / smash25d / 43
+- **Tema / narator:** night-rain-countryside / 
+- **Durasi:** 56.93 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+wreck; Level 2: Rocky (monster) → win; Level 3 (juara): Zippy (sports) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-06T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 112 — `MW_SMASH_3D_S039_R2`
+
+- **Judul YouTube:** 4 Cars Enter the Mud Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 112 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E112_2026-11-04_smash25d/MW_SMASH_3D_S039_R2.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E112_2026-11-04_smash25d/MW_SMASH_3D_S039_R2.json` · audit: `renders/megawheel_arena/S04/E112_2026-11-04_smash25d/MW_SMASH_3D_S039_R2_audit.md`
+- **Season / seri / seed:** S04 / smash25d / 39
+- **Tema / narator:** morning-clear-desert / 
+- **Durasi:** 58.7 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Siren (police) → p3+wreck; Level 4: Nitro (f1) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-07T00:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
