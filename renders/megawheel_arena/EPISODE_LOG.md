@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 15:11). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 17:20). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -126,9 +126,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| MW_SMASH_3D_S062 | smash25d | Hydro, Grizzly, Tilly, Zippy | 2026-11-04 | 58.23 s | `renders/megawheel_arena/pending/2026-11-04_smash3d_s062` |
-| MW_SMASH_3D_S043 | smash25d | Titan, Rocky, Zippy, Tilly | 2026-11-04 | 56.93 s | `renders/megawheel_arena/pending/2026-11-04_smash3d_s043` |
-| MW_SMASH_3D_S039 | smash25d | Buster, Grizzly, Siren, Nitro | 2026-11-04 | 58.7 s | `renders/megawheel_arena/pending/2026-11-04_smash3d_s039` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
@@ -188,3 +186,6 @@
 | SIM_GAUNTLET_V2_S002 | producer: same cast as S001 (sports, bigrig, f1) - rotation rule; replaced | 2026-10-11 |
 | SIM_RACE25D_V4_S064 | owner: police car hidden behind the container; fixed (near-side detour), re-rendered | 2026-10-11 |
 | SIM_GAUNTLET_V2_S003 | producer: far-lane band hid speed bumps/ramps (owner report); re-rendered | 2026-10-11 |
+| MW_SMASH_3D_S062 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |
+| MW_SMASH_3D_S043 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |
+| MW_SMASH_3D_S039 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |

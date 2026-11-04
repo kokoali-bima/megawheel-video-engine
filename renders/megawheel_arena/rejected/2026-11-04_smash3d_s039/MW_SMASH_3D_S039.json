@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SMASH_3D_S039",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "series": "smash25d",
   "seed": 39,
   "render3d": true,
@@ -30,7 +30,8 @@
     "shorts"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-04_smash3d_s039/MW_SMASH_3D_S039.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-04_smash3d_s039/preview",
-  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-04_smash3d_s039/MW_SMASH_3D_S039.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-04_smash3d_s039/preview",
+  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
+  "reject_reason": "owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2"
 }
