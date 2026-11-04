@@ -7125,7 +7125,7 @@
       ],
       "theme": "morning-clear-beach",
       "track_id": "race25d_scan72@morning-clear-beach",
-      "status": "APPROVED",
+      "status": "UPLOADED_SCHEDULED 2026-11-04T20:00:00Z",
       "duration": 34.47,
       "outcomes": [
         "p4+ufo",
@@ -7148,10 +7148,10 @@
       "title_base": "Nitro vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics",
       "episode": 106,
       "season": 4,
-      "upload_date": null,
-      "youtube_url": null,
+      "upload_date": "2026-11-04",
+      "youtube_url": "https://www.youtube.com/shorts/yEIw_K4Fswo",
       "drive_id": "1uhyridPFpoTu-qPctPG3-WTmvUxPgyEk",
-      "drive_path": "me/ai-develop/ipandu-video/review/approved/E106_MW_RACE_3D_S072.mp4",
+      "drive_path": "me/ai-develop/ipandu-video/archive/S04/E106_MW_RACE_3D_S072.mp4",
       "approved_date": "2026-11-04",
       "title": "Nitro vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 106 #Shorts",
       "staged_at": 1793799356.1

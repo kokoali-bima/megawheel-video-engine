@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 15:00) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 15:11) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -119,7 +119,7 @@
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 104 | `MW_SPLASH_3D_S021` | splash | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | Thu 2026-11-05 11:00 | https://www.youtube.com/shorts/0qVPxSCaBUI |
 | 105 | `MW_RACE_3D_S071` | race25d | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | Tue 2026-11-03 15:00 | https://www.youtube.com/shorts/CmFaZq12F6c |
-| 106 | `MW_RACE_3D_S072` | race25d | APPROVED | Wed 2026-11-04 15:00 |  |
+| 106 | `MW_RACE_3D_S072` | race25d | UPLOADED_SCHEDULED 2026-11-04T20:00:00Z | Wed 2026-11-04 15:00 | https://www.youtube.com/shorts/yEIw_K4Fswo |
 | 107 | `MW_RACE_3D_S217` | race25d | APPROVED | Thu 2026-11-05 15:00 |  |
 | 108 | `MW_RACE_3D_S088` | race25d | APPROVED | Fri 2026-11-06 15:00 |  |
 | 109 | `MW_RACE_3D_S108` | race25d | APPROVED | Sat 2026-11-07 15:00 |  |
@@ -1503,9 +1503,9 @@
 - **Tema / narator:** morning-clear-beach / 
 - **Durasi:** 34.47 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p4+ufo; Level 2: Rocky (monster) → p3+dragon_ice; Level 3 (juara): Nitro (f1) → p2+container; Level 4: Siren (police) → win
-- **Status:** APPROVED (approve 2026-11-04)
-- **Antrian:** QUEUED 2026-11-04T20:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-04T20:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-04T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/yEIw_K4Fswo
 
 ## Ep. 107 — `MW_RACE_3D_S217`
 

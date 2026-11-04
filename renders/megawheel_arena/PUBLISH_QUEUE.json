@@ -1038,9 +1038,12 @@
   {
    "episode": 106,
    "video_id": "MW_RACE_3D_S072",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-04T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Nitro vs Falling Containers! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 106 #Shorts",
+   "upload_started": "2026-11-04T15:11:47.286486+00:00",
+   "url": "https://www.youtube.com/shorts/yEIw_K4Fswo"
   },
   {
    "episode": 104,
