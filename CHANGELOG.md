@@ -3,11 +3,29 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-04
+**📤 Upload / antrean / Drive**
+- `2ff55f8` publish: daily run 2026-11-04 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `4629bdb` auto: records left uncommitted before daily run
+<details><summary>otomatis VM (1)</summary>
+
+- `a46fdf4` records before analytics
+
+</details>
+
 ## 2026-11-03
+**🔧 Lain-lain**
+- `0cbc5cf` approve: 3D Race S071 as Ep105 on owner instruction, scheduled 2026-11-03 15:00 ET
+- `4ae6c44` auto: records left uncommitted before daily run
 **📤 Upload / antrean / Drive**
 - `950ea84` publish: daily run 2026-11-03 [cron daily_publish.sh]
-**🔧 Lain-lain**
-- `4ae6c44` auto: records left uncommitted before daily run
+<details><summary>otomatis VM (2)</summary>
+
+- `63d709c` records: modal usage (auto)
+- `86a8c19` analytics: daily report 2026-11-03
+
+</details>
 
 ## 2026-11-02
 **📤 Upload / antrean / Drive**
