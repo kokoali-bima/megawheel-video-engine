@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 15:00) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -119,6 +119,10 @@
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 104 | `MW_SPLASH_3D_S021` | splash | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | Thu 2026-11-05 11:00 | https://www.youtube.com/shorts/0qVPxSCaBUI |
 | 105 | `MW_RACE_3D_S071` | race25d | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | Tue 2026-11-03 15:00 | https://www.youtube.com/shorts/CmFaZq12F6c |
+| 106 | `MW_RACE_3D_S072` | race25d | APPROVED | Wed 2026-11-04 15:00 |  |
+| 107 | `MW_RACE_3D_S217` | race25d | APPROVED | Thu 2026-11-05 15:00 |  |
+| 108 | `MW_RACE_3D_S088` | race25d | APPROVED | Fri 2026-11-06 15:00 |  |
+| 109 | `MW_RACE_3D_S108` | race25d | APPROVED | Sat 2026-11-07 15:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1489,6 +1493,58 @@
 - **Status:** UPLOADED_SCHEDULED 2026-11-03T20:00:00Z (approve 2026-11-03)
 - **Antrian:** SCHEDULED 2026-11-03T20:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/CmFaZq12F6c
+
+## Ep. 106 — `MW_RACE_3D_S072`
+
+- **Judul YouTube:** Nitro vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 106 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E106_2026-11-04_race25d/MW_RACE_3D_S072.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E106_2026-11-04_race25d/MW_RACE_3D_S072.json` · audit: `renders/megawheel_arena/S04/E106_2026-11-04_race25d/MW_RACE_3D_S072_audit.md`
+- **Season / seri / seed:** S04 / race25d / 72
+- **Tema / narator:** morning-clear-beach / 
+- **Durasi:** 34.47 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p4+ufo; Level 2: Rocky (monster) → p3+dragon_ice; Level 3 (juara): Nitro (f1) → p2+container; Level 4: Siren (police) → win
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-04T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 107 — `MW_RACE_3D_S217`
+
+- **Judul YouTube:** Tilly vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 107 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E107_2026-11-04_race25d/MW_RACE_3D_S217.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E107_2026-11-04_race25d/MW_RACE_3D_S217.json` · audit: `renders/megawheel_arena/S04/E107_2026-11-04_race25d/MW_RACE_3D_S217_audit.md`
+- **Season / seri / seed:** S04 / race25d / 217
+- **Tema / narator:** night-clear-beach / 
+- **Durasi:** 33.83 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Rocky (monster) → p2+laser; Level 3 (juara): Tilly (taxi) → p4+container; Level 4: Nitro (f1) → p3+dragon_fire
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-05T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 108 — `MW_RACE_3D_S088`
+
+- **Judul YouTube:** Can Rocky Survive Falling Containers? 🏁 NEW 3D Graphics | Ep. 108 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E108_2026-11-04_race25d/MW_RACE_3D_S088.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E108_2026-11-04_race25d/MW_RACE_3D_S088.json` · audit: `renders/megawheel_arena/S04/E108_2026-11-04_race25d/MW_RACE_3D_S088_audit.md`
+- **Season / seri / seed:** S04 / race25d / 88
+- **Tema / narator:** morning-rain-countryside / 
+- **Durasi:** 33.9 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → win; Level 2: Rocky (monster) → p4+container; Level 3 (juara): Siren (police) → p2+meteor; Level 4: Zippy (sports) → p3+dragon_ice
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-06T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 109 — `MW_RACE_3D_S108`
+
+- **Judul YouTube:** Will Nitro Make It Past Falling Containers? 🏁 NEW 3D Graphics | Ep. 109 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E109_2026-11-04_race25d/MW_RACE_3D_S108.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E109_2026-11-04_race25d/MW_RACE_3D_S108.json` · audit: `renders/megawheel_arena/S04/E109_2026-11-04_race25d/MW_RACE_3D_S108_audit.md`
+- **Season / seri / seed:** S04 / race25d / 108
+- **Tema / narator:** sunset-rain-city / 
+- **Durasi:** 34.9 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2+pothole; Level 2: Grizzly (monster2) → win; Level 3 (juara): Nitro (f1) → p3+container; Level 4: Tilly (taxi) → p4+dragon_ice
+- **Status:** APPROVED (approve 2026-11-04)
+- **Antrian:** QUEUED 2026-11-07T20:00:00Z
+- **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
 

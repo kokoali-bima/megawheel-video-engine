@@ -4683,6 +4683,106 @@
    "gpu_seconds": 54.5,
    "wall_seconds": 107.2,
    "cost_usd": 0.0139
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_R3D_S072 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.4,
+   "wall_seconds": 74.0,
+   "cost_usd": 0.0121
+  },
+  {
+   "date": "2026-11-04",
+   "note": "smash3d ult r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 40.2,
+   "wall_seconds": 519.8,
+   "cost_usd": 0.0103
+  },
+  {
+   "date": "2026-11-04",
+   "note": "library refill review candidate",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 21.9,
+   "wall_seconds": 46.7,
+   "cost_usd": 0.0056
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_R3D_S217 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 39.8,
+   "wall_seconds": 576.2,
+   "cost_usd": 0.0102
+  },
+  {
+   "date": "2026-11-04",
+   "note": "smash3d ult r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 38.0,
+   "wall_seconds": 996.5,
+   "cost_usd": 0.0097
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_R3D_S088 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.5,
+   "wall_seconds": 1345.7,
+   "cost_usd": 0.0121
+  },
+  {
+   "date": "2026-11-04",
+   "note": "smash3d ult r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 37.8,
+   "wall_seconds": 120.3,
+   "cost_usd": 0.0097
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_CH3D_POTHOLES_S041 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 37.4,
+   "wall_seconds": 634.2,
+   "cost_usd": 0.0095
+  },
+  {
+   "date": "2026-11-04",
+   "note": "narrator LAB_R3D_S108 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 43.0,
+   "wall_seconds": 1459.6,
+   "cost_usd": 0.011
+  },
+  {
+   "date": "2026-11-04",
+   "note": "smash3d ult r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 28.1,
+   "wall_seconds": 643.0,
+   "cost_usd": 0.0072
   }
  ]
 }

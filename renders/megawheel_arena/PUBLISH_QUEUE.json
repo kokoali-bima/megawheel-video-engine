@@ -1036,6 +1036,13 @@
    "url": "https://www.youtube.com/shorts/qLmoNh8nyEU"
   },
   {
+   "episode": 106,
+   "video_id": "MW_RACE_3D_S072",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-04T20:00:00Z",
+   "role": "race"
+  },
+  {
    "episode": 104,
    "video_id": "MW_SPLASH_3D_S021",
    "status": "SCHEDULED",
@@ -1044,6 +1051,27 @@
    "title": "Can Siren the Police Car Survive Slippery Splash Zone? \ud83d\udca6\ud83d\ude97 | Ep. 104 #Shorts",
    "upload_started": "2026-10-23T05:00:07.467202+00:00",
    "url": "https://www.youtube.com/shorts/0qVPxSCaBUI"
+  },
+  {
+   "episode": 107,
+   "video_id": "MW_RACE_3D_S217",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-05T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 108,
+   "video_id": "MW_RACE_3D_S088",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-06T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 109,
+   "video_id": "MW_RACE_3D_S108",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-07T20:00:00Z",
+   "role": "race"
   },
   {
    "episode": 99,
