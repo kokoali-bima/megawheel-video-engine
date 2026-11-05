@@ -1080,6 +1080,13 @@
    "role": "smash"
   },
   {
+   "episode": 113,
+   "video_id": "MW_BUMPS_3D_S040",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-06T16:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 108,
    "video_id": "MW_RACE_3D_S088",
    "status": "QUEUED",
@@ -1094,11 +1101,32 @@
    "role": "smash"
   },
   {
+   "episode": 114,
+   "video_id": "MW_POTHOLES_3D_S041",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-07T16:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 109,
    "video_id": "MW_RACE_3D_S108",
    "status": "QUEUED",
    "publish_at_utc": "2026-11-07T20:00:00Z",
    "role": "race"
+  },
+  {
+   "episode": 115,
+   "video_id": "MW_LAVA_3D_S043",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-08T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 116,
+   "video_id": "MW_POTHOLES_3D_S124",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-09T16:00:00Z",
+   "role": "short"
   },
   {
    "episode": 99,

@@ -1,6 +1,6 @@
 {
   "video_id": "MW_LAVA_3D_S043",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "series": "lava",
   "seed": 43,
   "render3d": true,
@@ -13,7 +13,7 @@
   },
   "theme_id": "morning-clear-volcano",
   "title_base": "Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics",
-  "title": "Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics #Shorts",
+  "title": "Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics | Ep. 115 #Shorts",
   "description": "Can Nitro, Buster and Hydro survive the challenge in NEW 3D graphics? 🚗💥\n\n💬 Comment A if you love the NEW 3D graphics, or B if you prefer the classic look!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment who you think makes it!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #3DCars #CarChallenge #CartoonCars #3DAnimation #MonsterTruck #MegaWheelArena",
   "tags": [
     "3D cars",
@@ -30,7 +30,10 @@
     "lava"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-05_lava3d_s043/MW_LAVA_3D_S043.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-05_lava3d_s043/preview",
-  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S04/E115_2026-11-05_lava/MW_LAVA_3D_S043.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S04/E115_2026-11-05_lava/preview",
+  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
+  "episode": 115,
+  "season": 4,
+  "approved_date": "2026-11-05"
 }

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-04 18:59) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-05 03:39) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -126,6 +126,10 @@
 | 110 | `MW_SMASH_3D_S062_R2` | smash25d | UPLOADED_SCHEDULED 2026-11-05T00:00:00Z | Wed 2026-11-04 19:00 | https://www.youtube.com/shorts/UTVc7gPmdkI |
 | 111 | `MW_SMASH_3D_S043_R2` | smash25d | APPROVED | Thu 2026-11-05 19:00 |  |
 | 112 | `MW_SMASH_3D_S039_R2` | smash25d | APPROVED | Fri 2026-11-06 19:00 |  |
+| 113 | `MW_BUMPS_3D_S040` | bumps | APPROVED | Fri 2026-11-06 11:00 |  |
+| 114 | `MW_POTHOLES_3D_S041` | potholes | APPROVED | Sat 2026-11-07 11:00 |  |
+| 115 | `MW_LAVA_3D_S043` | lava | APPROVED | Sun 2026-11-08 11:00 |  |
+| 116 | `MW_POTHOLES_3D_S124` | potholes | APPROVED | Mon 2026-11-09 11:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1586,6 +1590,58 @@
 - **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Siren (police) → p3+wreck; Level 4: Nitro (f1) → p2+wreck
 - **Status:** APPROVED (approve 2026-11-04)
 - **Antrian:** QUEUED 2026-11-07T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 113 — `MW_BUMPS_3D_S040`
+
+- **Judul YouTube:** Can Tilly Survive Giant Speed Bumps? 🚗💥 NEW 3D Graphics | Ep. 113 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E113_2026-11-05_bumps/MW_BUMPS_3D_S040.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E113_2026-11-05_bumps/MW_BUMPS_3D_S040.json` · audit: `renders/megawheel_arena/S04/E113_2026-11-05_bumps/MW_BUMPS_3D_S040_audit.md`
+- **Season / seri / seed:** S04 / bumps / 40
+- **Tema / narator:** noon-clear-countryside / 
+- **Durasi:** 51.7 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs0; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Grizzly (monster2) → win
+- **Status:** APPROVED (approve 2026-11-05)
+- **Antrian:** QUEUED 2026-11-06T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 114 — `MW_POTHOLES_3D_S041`
+
+- **Judul YouTube:** Will Zippy the Sports Car Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 114 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E114_2026-11-05_potholes/MW_POTHOLES_3D_S041.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E114_2026-11-05_potholes/MW_POTHOLES_3D_S041.json` · audit: `renders/megawheel_arena/S04/E114_2026-11-05_potholes/MW_POTHOLES_3D_S041_audit.md`
+- **Season / seri / seed:** S04 / potholes / 41
+- **Tema / narator:** night-clear-mountains / 
+- **Durasi:** 47.57 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs0; Level 2: Hydro (firetruck) → stuck@obs1; Level 3 (juara): Titan (bigrig) → win
+- **Status:** APPROVED (approve 2026-11-05)
+- **Antrian:** QUEUED 2026-11-07T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 115 — `MW_LAVA_3D_S043`
+
+- **Judul YouTube:** Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics | Ep. 115 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E115_2026-11-05_lava/MW_LAVA_3D_S043.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E115_2026-11-05_lava/MW_LAVA_3D_S043.json` · audit: `renders/megawheel_arena/S04/E115_2026-11-05_lava/MW_LAVA_3D_S043_audit.md`
+- **Season / seri / seed:** S04 / lava / 43
+- **Tema / narator:** morning-clear-volcano / 
+- **Durasi:** 49.9 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → pit@obs0; Level 2: Buster (bus) → rollback@obs1; Level 3 (juara): Hydro (firetruck) → win
+- **Status:** APPROVED (approve 2026-11-05)
+- **Antrian:** QUEUED 2026-11-08T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 116 — `MW_POTHOLES_3D_S124`
+
+- **Judul YouTube:** Can Tilly Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 116 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S04/E116_2026-11-05_potholes/MW_POTHOLES_3D_S124.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S04/E116_2026-11-05_potholes/MW_POTHOLES_3D_S124.json` · audit: `renders/megawheel_arena/S04/E116_2026-11-05_potholes/MW_POTHOLES_3D_S124_audit.md`
+- **Season / seri / seed:** S04 / potholes / 124
+- **Tema / narator:** night-snow-mountains / 
+- **Durasi:** 52.4 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs0; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Buster (bus) → win
+- **Status:** APPROVED (approve 2026-11-05)
+- **Antrian:** QUEUED 2026-11-09T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
