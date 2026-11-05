@@ -7835,6 +7835,39 @@
       "staged_at": 1793877105.8,
       "drive_id": "1mYh21QXQw7CMhLlMYkFSxS1aUGnu7vrs",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_SMASH_3D_S104.mp4"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S121",
+      "series": "splash",
+      "engine_version": "3d",
+      "seed": 121,
+      "vehicles": [
+        "taxi",
+        "icecream",
+        "monster"
+      ],
+      "theme": "morning-clear-countryside",
+      "track_id": "splash_scan121@morning-clear-countryside",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 57.6,
+      "outcomes": [
+        "crash@obs0",
+        "rollback@obs1",
+        "win"
+      ],
+      "created": "2026-11-05",
+      "render_date": "2026-11-05",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-05_splash3d_s121",
+      "audit": "renders/megawheel_arena/pending/2026-11-05_splash3d_s121/MW_SPLASH_3D_S121_audit.md",
+      "title_base": "Taxi vs Slippery Splash Zone! Can Tilly Make It? 💦🚗 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1793879383.2,
+      "drive_id": "1BK-R91qF4QgnQlXm6akSpUunSZ0ZDTww",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S121.mp4"
     }
   ]
 }
