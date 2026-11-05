@@ -1068,37 +1068,52 @@
   {
    "episode": 107,
    "video_id": "MW_RACE_3D_S217",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-05T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Tilly vs Falling Containers! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 107 #Shorts",
+   "upload_started": "2026-11-05T05:00:06.605317+00:00",
+   "url": "https://www.youtube.com/shorts/GWJc_r7ZF-Q"
   },
   {
    "episode": 111,
    "video_id": "MW_SMASH_3D_S043_R2",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-06T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "4 Cars Enter the Lava Arena! Who Survives? \ud83d\udca5 NEW 3D Graphics | Ep. 111 #Shorts",
+   "upload_started": "2026-11-05T05:00:16.912073+00:00",
+   "url": "https://www.youtube.com/shorts/_VvjsGfjf0s"
   },
   {
    "episode": 113,
    "video_id": "MW_BUMPS_3D_S040",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-06T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Tilly Survive Giant Speed Bumps? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 113 #Shorts",
+   "upload_started": "2026-11-05T05:00:28.570441+00:00",
+   "url": "https://www.youtube.com/shorts/M-eAqay4M4Q"
   },
   {
    "episode": 108,
    "video_id": "MW_RACE_3D_S088",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-06T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Rocky Survive Falling Containers? \ud83c\udfc1 NEW 3D Graphics | Ep. 108 #Shorts",
+   "upload_started": "2026-11-05T05:00:38.949772+00:00",
+   "url": "https://www.youtube.com/shorts/MTlsgscsj3Q"
   },
   {
    "episode": 112,
    "video_id": "MW_SMASH_3D_S039_R2",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-07T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "4 Cars Enter the Mud Arena! Who Survives? \ud83d\udca5 NEW 3D Graphics | Ep. 112 #Shorts",
+   "upload_started": "2026-11-05T05:00:46.614609+00:00",
+   "url": "https://www.youtube.com/shorts/TK2avDRy0aM"
   },
   {
    "episode": 114,

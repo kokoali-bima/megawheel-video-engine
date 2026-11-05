@@ -1,6 +1,6 @@
 {
   "video_id": "MW_RACE_3D_S217",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-05T20:00:00Z",
   "series": "race25d",
   "seed": 217,
   "render3d": true,
@@ -40,5 +40,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 107,
   "season": 4,
-  "approved_date": "2026-11-04"
+  "approved_date": "2026-11-04",
+  "youtube_url": "https://www.youtube.com/shorts/GWJc_r7ZF-Q",
+  "upload_date": "2026-11-05"
 }

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-05 03:39) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-05 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -120,13 +120,13 @@
 | 104 | `MW_SPLASH_3D_S021` | splash | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | Thu 2026-11-05 11:00 | https://www.youtube.com/shorts/0qVPxSCaBUI |
 | 105 | `MW_RACE_3D_S071` | race25d | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | Tue 2026-11-03 15:00 | https://www.youtube.com/shorts/CmFaZq12F6c |
 | 106 | `MW_RACE_3D_S072` | race25d | UPLOADED_SCHEDULED 2026-11-04T20:00:00Z | Wed 2026-11-04 15:00 | https://www.youtube.com/shorts/yEIw_K4Fswo |
-| 107 | `MW_RACE_3D_S217` | race25d | APPROVED | Thu 2026-11-05 15:00 |  |
-| 108 | `MW_RACE_3D_S088` | race25d | APPROVED | Fri 2026-11-06 15:00 |  |
+| 107 | `MW_RACE_3D_S217` | race25d | UPLOADED_SCHEDULED 2026-11-05T20:00:00Z | Thu 2026-11-05 15:00 | https://www.youtube.com/shorts/GWJc_r7ZF-Q |
+| 108 | `MW_RACE_3D_S088` | race25d | UPLOADED_SCHEDULED 2026-11-06T20:00:00Z | Fri 2026-11-06 15:00 | https://www.youtube.com/shorts/MTlsgscsj3Q |
 | 109 | `MW_RACE_3D_S108` | race25d | APPROVED | Sat 2026-11-07 15:00 |  |
 | 110 | `MW_SMASH_3D_S062_R2` | smash25d | UPLOADED_SCHEDULED 2026-11-05T00:00:00Z | Wed 2026-11-04 19:00 | https://www.youtube.com/shorts/UTVc7gPmdkI |
-| 111 | `MW_SMASH_3D_S043_R2` | smash25d | APPROVED | Thu 2026-11-05 19:00 |  |
-| 112 | `MW_SMASH_3D_S039_R2` | smash25d | APPROVED | Fri 2026-11-06 19:00 |  |
-| 113 | `MW_BUMPS_3D_S040` | bumps | APPROVED | Fri 2026-11-06 11:00 |  |
+| 111 | `MW_SMASH_3D_S043_R2` | smash25d | UPLOADED_SCHEDULED 2026-11-06T00:00:00Z | Thu 2026-11-05 19:00 | https://www.youtube.com/shorts/_VvjsGfjf0s |
+| 112 | `MW_SMASH_3D_S039_R2` | smash25d | UPLOADED_SCHEDULED 2026-11-07T00:00:00Z | Fri 2026-11-06 19:00 | https://www.youtube.com/shorts/TK2avDRy0aM |
+| 113 | `MW_BUMPS_3D_S040` | bumps | UPLOADED_SCHEDULED 2026-11-06T16:00:00Z | Fri 2026-11-06 11:00 | https://www.youtube.com/shorts/M-eAqay4M4Q |
 | 114 | `MW_POTHOLES_3D_S041` | potholes | APPROVED | Sat 2026-11-07 11:00 |  |
 | 115 | `MW_LAVA_3D_S043` | lava | APPROVED | Sun 2026-11-08 11:00 |  |
 | 116 | `MW_POTHOLES_3D_S124` | potholes | APPROVED | Mon 2026-11-09 11:00 |  |
@@ -1523,9 +1523,9 @@
 - **Tema / narator:** night-clear-beach / 
 - **Durasi:** 33.83 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Rocky (monster) → p2+laser; Level 3 (juara): Tilly (taxi) → p4+container; Level 4: Nitro (f1) → p3+dragon_fire
-- **Status:** APPROVED (approve 2026-11-04)
-- **Antrian:** QUEUED 2026-11-05T20:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-05T20:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-05T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/GWJc_r7ZF-Q
 
 ## Ep. 108 — `MW_RACE_3D_S088`
 
@@ -1536,9 +1536,9 @@
 - **Tema / narator:** morning-rain-countryside / 
 - **Durasi:** 33.9 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → win; Level 2: Rocky (monster) → p4+container; Level 3 (juara): Siren (police) → p2+meteor; Level 4: Zippy (sports) → p3+dragon_ice
-- **Status:** APPROVED (approve 2026-11-04)
-- **Antrian:** QUEUED 2026-11-06T20:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-06T20:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-06T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/MTlsgscsj3Q
 
 ## Ep. 109 — `MW_RACE_3D_S108`
 
@@ -1575,9 +1575,9 @@
 - **Tema / narator:** night-rain-countryside / 
 - **Durasi:** 56.93 s
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+wreck; Level 2: Rocky (monster) → win; Level 3 (juara): Zippy (sports) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
-- **Status:** APPROVED (approve 2026-11-04)
-- **Antrian:** QUEUED 2026-11-06T00:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-06T00:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-06T00:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/_VvjsGfjf0s
 
 ## Ep. 112 — `MW_SMASH_3D_S039_R2`
 
@@ -1588,9 +1588,9 @@
 - **Tema / narator:** morning-clear-desert / 
 - **Durasi:** 58.7 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Siren (police) → p3+wreck; Level 4: Nitro (f1) → p2+wreck
-- **Status:** APPROVED (approve 2026-11-04)
-- **Antrian:** QUEUED 2026-11-07T00:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-07T00:00:00Z (approve 2026-11-04)
+- **Antrian:** SCHEDULED 2026-11-07T00:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/TK2avDRy0aM
 
 ## Ep. 113 — `MW_BUMPS_3D_S040`
 
@@ -1601,9 +1601,9 @@
 - **Tema / narator:** noon-clear-countryside / 
 - **Durasi:** 51.7 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs0; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Grizzly (monster2) → win
-- **Status:** APPROVED (approve 2026-11-05)
-- **Antrian:** QUEUED 2026-11-06T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-06T16:00:00Z (approve 2026-11-05)
+- **Antrian:** SCHEDULED 2026-11-06T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/M-eAqay4M4Q
 
 ## Ep. 114 — `MW_POTHOLES_3D_S041`
 

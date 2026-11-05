@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SMASH_3D_S043_R2",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-06T00:00:00Z",
   "series": "smash25d",
   "seed": 43,
   "render3d": true,
@@ -35,5 +35,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 111,
   "season": 4,
-  "approved_date": "2026-11-04"
+  "approved_date": "2026-11-04",
+  "youtube_url": "https://www.youtube.com/shorts/_VvjsGfjf0s",
+  "upload_date": "2026-11-05"
 }
