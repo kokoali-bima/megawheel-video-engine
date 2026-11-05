@@ -3,13 +3,25 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-05
+**📤 Upload / antrean / Drive**
+- `d2485da` publish: daily run 2026-11-05 [cron daily_publish.sh]
+- `5572178` queue: approve Challenge 3D Ep.113-116 (hook test A/B)
+**🔧 Lain-lain**
+- `a9d6b9f` stage: Challenge 3D S040/S041/S043/S124 for review; hook test B on S040+S124
+
 ## 2026-11-04
 **📤 Upload / antrean / Drive**
+- `d1fa828` queue: approve Smash R2 Ep.110-112, upload Ep.110 for 2026-11-05 00:00Z slot
+- `89545f1` publish: Ep.106 uploaded manually via publish_queue (owner: avoid empty slot) 2026-11-04
+- `3f02ded` publish: plan Ep.106-109 race3d queued (owner approved 2026-11-04)
 - `2ff55f8` publish: daily run 2026-11-04 [cron daily_publish.sh]
 **🔧 Lain-lain**
+- `ff9a2b3` review: Smash 4-6 Nov re-rendered (_R2), old S062/S043/S039 rejected per owner review
 - `4629bdb` auto: records left uncommitted before daily run
-<details><summary>otomatis VM (1)</summary>
+<details><summary>otomatis VM (2)</summary>
 
+- `a86d8de` analytics: daily report 2026-11-04
 - `a46fdf4` records before analytics
 
 </details>
