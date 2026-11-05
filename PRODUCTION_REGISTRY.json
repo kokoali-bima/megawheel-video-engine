@@ -7515,6 +7515,138 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E112_MW_SMASH_3D_S039_R2.mp4",
       "approved_date": "2026-11-04",
       "title": "4 Cars Enter the Mud Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 112 #Shorts"
+    },
+    {
+      "video_id": "MW_BUMPS_3D_S040",
+      "series": "bumps",
+      "engine_version": "3d",
+      "seed": 40,
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "monster2"
+      ],
+      "theme": "noon-clear-countryside",
+      "track_id": "bumps_scan40@noon-clear-countryside",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 51.7,
+      "outcomes": [
+        "flip@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-05",
+      "render_date": "2026-11-05",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-05_bumps3d_s040",
+      "audit": "renders/megawheel_arena/pending/2026-11-05_bumps3d_s040/MW_BUMPS_3D_S040_audit.md",
+      "title_base": "Can Tilly Survive Giant Speed Bumps? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1793849543.0,
+      "drive_id": "1IJ7FM_RhZ2fM8ypFvzue5oJqnQri2Fdm",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_BUMPS_3D_S040.mp4"
+    },
+    {
+      "video_id": "MW_POTHOLES_3D_S041",
+      "series": "potholes",
+      "engine_version": "3d",
+      "seed": 41,
+      "vehicles": [
+        "sports",
+        "firetruck",
+        "bigrig"
+      ],
+      "theme": "night-clear-mountains",
+      "track_id": "potholes_scan41@night-clear-mountains",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 47.57,
+      "outcomes": [
+        "pit@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-05",
+      "render_date": "2026-11-05",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-05_potholes3d_s041",
+      "audit": "renders/megawheel_arena/pending/2026-11-05_potholes3d_s041/MW_POTHOLES_3D_S041_audit.md",
+      "title_base": "Will Zippy the Sports Car Survive Giant Potholes? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1793849547.4,
+      "drive_id": "1Y8qu8vMloQxKV2cL8uibJotGpQP-Wugb",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S041.mp4"
+    },
+    {
+      "video_id": "MW_LAVA_3D_S043",
+      "series": "lava",
+      "engine_version": "3d",
+      "seed": 43,
+      "vehicles": [
+        "f1",
+        "bus",
+        "firetruck"
+      ],
+      "theme": "morning-clear-volcano",
+      "track_id": "lava_scan43@morning-clear-volcano",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 49.9,
+      "outcomes": [
+        "pit@obs0",
+        "rollback@obs1",
+        "win"
+      ],
+      "created": "2026-11-05",
+      "render_date": "2026-11-05",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-05_lava3d_s043",
+      "audit": "renders/megawheel_arena/pending/2026-11-05_lava3d_s043/MW_LAVA_3D_S043_audit.md",
+      "title_base": "Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1793849551.5,
+      "drive_id": "13xYUvav9ehjf7jg112DQgkkbOPP-dFWF",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_LAVA_3D_S043.mp4"
+    },
+    {
+      "video_id": "MW_POTHOLES_3D_S124",
+      "series": "potholes",
+      "engine_version": "3d",
+      "seed": 124,
+      "vehicles": [
+        "taxi",
+        "bigrig",
+        "bus"
+      ],
+      "theme": "night-snow-mountains",
+      "track_id": "potholes_scan124@night-snow-mountains",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 52.4,
+      "outcomes": [
+        "rollback@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-05",
+      "render_date": "2026-11-05",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-05_potholes3d_s124",
+      "audit": "renders/megawheel_arena/pending/2026-11-05_potholes3d_s124/MW_POTHOLES_3D_S124_audit.md",
+      "title_base": "Can Tilly Survive Giant Potholes? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1793849556.1,
+      "drive_id": "10DSh6Z0T4qS6em5yH0DAV8rWXLYtEAgP",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S124.mp4"
     }
   ]
 }
