@@ -3,12 +3,23 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-06
+**📤 Upload / antrean / Drive**
+- `ebc5d24` publish: daily run 2026-11-06 [cron daily_publish.sh]
+
 ## 2026-11-05
+**🔧 Lain-lain**
+- `4b9f6b7` stage: Challenge 3D S121 (splash, cached voice re-pick of S111)
+- `9075317` stage: Smash 3D S048/S073/S109/S140/S104 for review
+- `a9d6b9f` stage: Challenge 3D S040/S041/S043/S124 for review; hook test B on S040+S124
 **📤 Upload / antrean / Drive**
 - `d2485da` publish: daily run 2026-11-05 [cron daily_publish.sh]
 - `5572178` queue: approve Challenge 3D Ep.113-116 (hook test A/B)
-**🔧 Lain-lain**
-- `a9d6b9f` stage: Challenge 3D S040/S041/S043/S124 for review; hook test B on S040+S124
+<details><summary>otomatis VM (1)</summary>
+
+- `07664d4` analytics: daily report 2026-11-05
+
+</details>
 
 ## 2026-11-04
 **📤 Upload / antrean / Drive**
