@@ -1118,30 +1118,42 @@
   {
    "episode": 114,
    "video_id": "MW_POTHOLES_3D_S041",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-07T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Zippy the Sports Car Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 114 #Shorts",
+   "upload_started": "2026-11-06T05:00:06.488023+00:00",
+   "url": "https://www.youtube.com/shorts/mzSJunAcKWU"
   },
   {
    "episode": 109,
    "video_id": "MW_RACE_3D_S108",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-07T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Will Nitro Make It Past Falling Containers? \ud83c\udfc1 NEW 3D Graphics | Ep. 109 #Shorts",
+   "upload_started": "2026-11-06T05:00:15.603900+00:00",
+   "url": "https://www.youtube.com/shorts/NJk3DdYJBmo"
   },
   {
    "episode": 115,
    "video_id": "MW_LAVA_3D_S043",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-08T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs Erupting Lava Road! Can Nitro Make It? \ud83c\udf0b\ud83d\udd25 NEW 3D Graphics | Ep. 115 #Shorts",
+   "upload_started": "2026-11-06T05:00:22.699396+00:00",
+   "url": "https://www.youtube.com/shorts/W5fQ0Cj2Abs"
   },
   {
    "episode": 116,
    "video_id": "MW_POTHOLES_3D_S124",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-09T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Tilly Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 116 #Shorts",
+   "upload_started": "2026-11-06T05:00:29.639067+00:00",
+   "url": "https://www.youtube.com/shorts/sFB6TsArNw0"
   },
   {
    "episode": 99,

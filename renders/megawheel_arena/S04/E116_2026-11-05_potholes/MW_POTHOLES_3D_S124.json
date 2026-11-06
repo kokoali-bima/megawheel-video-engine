@@ -1,6 +1,6 @@
 {
   "video_id": "MW_POTHOLES_3D_S124",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-09T16:00:00Z",
   "series": "potholes",
   "seed": 124,
   "render3d": true,
@@ -35,5 +35,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 116,
   "season": 4,
-  "approved_date": "2026-11-05"
+  "approved_date": "2026-11-05",
+  "youtube_url": "https://www.youtube.com/shorts/sFB6TsArNw0",
+  "upload_date": "2026-11-06"
 }
