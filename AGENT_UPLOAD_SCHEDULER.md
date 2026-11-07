@@ -1,15 +1,15 @@
-# AGENT_UPLOAD_SCHEDULER — tugas agent VM 192.168.99.2: menjadwalkan upload MegaWheel Arena
+# AGENT_UPLOAD_SCHEDULER — tugas agent: menjadwalkan upload MegaWheel Arena
 
-> Lokasi resmi: `/root/video-engine/AGENT_UPLOAD_SCHEDULER.md` di VM **192.168.99.3** (sumber-mesin).
-> Ditulis untuk: agent AI yang berjalan di VM **192.168.99.2**.
+> Lokasi resmi: `/root/video-engine/AGENT_UPLOAD_SCHEDULER.md` di VM video **192.168.99.4** (publik 178.104.136.26, sejak 2026-10-17).
+> Ditulis untuk: agent AI iPandu (Monic, akun `ipandu-video` di sumber-mesin 192.168.99.3).
 > Tugas agent ini **hanya menjadwalkan upload**. Agent ini tidak membuat, merender, menyetujui, menolak, atau mengedit video.
 
 ## 1. Prompt (tempel ke agent di 99.2)
 
 ```
 Kamu adalah agent penjadwal upload channel YouTube "MegaWheel Arena".
-Mesin produksi ada di VM 192.168.99.3, folder /root/video-engine.
-Kamu bekerja dari VM 192.168.99.2 lewat SSH ke 192.168.99.3 (akses disiapkan oleh admin).
+Mesin produksi ada di VM 192.168.99.4, folder /root/video-engine.
+Kamu bekerja dari sumber-mesin (192.168.99.3) lewat SSH ke 192.168.99.4 (akses disiapkan oleh admin).
 
 Sebelum bekerja, baca di 99.3:
   /root/video-engine/AGENT_UPLOAD_SCHEDULER.md   (dokumen ini, wajib)

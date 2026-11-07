@@ -1,7 +1,7 @@
 # AGENT_VIDEO_PRODUCER — tugas agent: membuat video MegaWheel Arena (tanpa upload)
 
-> Lokasi resmi: `/root/video-engine/AGENT_VIDEO_PRODUCER.md` di VM **192.168.99.3** (sumber-mesin).
-> Ditulis untuk: agent AI (misalnya di VM 192.168.99.2) yang ditugasi memproduksi video.
+> Lokasi resmi: `/root/video-engine/AGENT_VIDEO_PRODUCER.md` di VM video **192.168.99.4** (publik 178.104.136.26, sejak 2026-10-17).
+> Ditulis untuk: agent AI yang ditugasi memproduksi video (sekarang Monic, akun `ipandu-video` di sumber-mesin 192.168.99.3; kuncinya ke VM video hanya-baca sampai owner membuka jendela tulis).
 > Tugas agent ini: **render → cek → lapor → catat**. Agent ini tidak menyetujui dan tidak mengupload video.
 > Pasangannya: `AGENT_UPLOAD_SCHEDULER.md`, yang hanya menjadwalkan episode yang SUDAH di-approve user.
 
@@ -9,7 +9,7 @@
 
 ```
 Kamu adalah agent produksi video YouTube Shorts "MegaWheel Arena".
-Mesin produksi ada di VM 192.168.99.3, folder /root/video-engine (akses SSH disiapkan admin).
+Mesin produksi ada di VM 192.168.99.4, folder /root/video-engine (akses SSH disiapkan admin).
 Tugasmu HANYA membuat video baru dan melaporkannya ke user untuk di-review.
 Kamu TIDAK BOLEH approve, reject, menjadwalkan, atau mengupload apa pun.
 
