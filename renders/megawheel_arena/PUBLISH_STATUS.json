@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-06T05:01:37Z",
+  "finished_utc": "2026-11-07T05:01:07Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-06T05:01:37Z",
+ "updated_utc": "2026-11-07T05:01:07Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -13,24 +13,26 @@
    "short": {
     "name": "CHALLENGE (11:00 ET)",
     "ok": false,
-    "covered_days": 4,
+    "covered_days": 3,
     "missing_days": [
      "2026-11-11",
      "2026-11-12",
-     "2026-11-13"
+     "2026-11-13",
+     "2026-11-14"
     ]
    },
    "race": {
     "name": "RACE race25d (15:00 ET)",
     "ok": false,
-    "covered_days": 1,
+    "covered_days": 0,
     "missing_days": [
      "2026-11-08",
      "2026-11-09",
      "2026-11-10",
      "2026-11-11",
      "2026-11-12",
-     "2026-11-13"
+     "2026-11-13",
+     "2026-11-14"
     ]
    },
    "smash": {
@@ -38,13 +40,13 @@
     "ok": false,
     "covered_days": 0,
     "missing_days": [
-     "2026-11-07",
      "2026-11-08",
      "2026-11-09",
      "2026-11-10",
      "2026-11-11",
      "2026-11-12",
-     "2026-11-13"
+     "2026-11-13",
+     "2026-11-14"
     ]
    }
   }
@@ -53,24 +55,6 @@
   "SCHEDULED": 121
  },
  "next_uploads": [
-  {
-   "episode": 113,
-   "role": "short",
-   "publish_at_utc": "2026-11-06T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 108,
-   "role": "race",
-   "publish_at_utc": "2026-11-06T20:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 112,
-   "role": "smash",
-   "publish_at_utc": "2026-11-07T00:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 114,
    "role": "short",
@@ -99,6 +83,24 @@
    "episode": 99,
    "role": "short",
    "publish_at_utc": "2026-11-10T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 100,
+   "role": "short",
+   "publish_at_utc": "2026-11-17T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 101,
+   "role": "short",
+   "publish_at_utc": "2026-11-24T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 102,
+   "role": "short",
+   "publish_at_utc": "2026-12-01T16:00:00Z",
    "status": "SCHEDULED"
   }
  ]
