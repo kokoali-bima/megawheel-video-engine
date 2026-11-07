@@ -7868,6 +7868,174 @@
       "staged_at": 1793879383.2,
       "drive_id": "1BK-R91qF4QgnQlXm6akSpUunSZ0ZDTww",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S121.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S237",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 237,
+      "vehicles": [
+        "bus",
+        "monster2",
+        "police",
+        "sports"
+      ],
+      "theme": "noon-clear-desert",
+      "track_id": "race25d_scan237@noon-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 34.23,
+      "outcomes": [
+        "p4+hammer",
+        "p2+dodge",
+        "p3+oil",
+        "win"
+      ],
+      "plan": {
+        "layout": "spread",
+        "zone": 187.8,
+        "start": 95.4,
+        "finish_gap": 102.8
+      },
+      "structure": "spread|hammer,lava,oil",
+      "created": "2026-11-07",
+      "render_date": "2026-11-07",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-07_race3d_s237",
+      "audit": "renders/megawheel_arena/pending/2026-11-07_race3d_s237/MW_RACE_3D_S237_audit.md",
+      "title_base": "Buster vs the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794065799.8,
+      "drive_id": "1t3dspZXjRB7_QkPfOYiEvH1rFm7Bh1A8",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S237.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S381",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 381,
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "police",
+        "sports"
+      ],
+      "theme": "sunset-clear-city",
+      "track_id": "race25d_scan381@sunset-clear-city",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 35.47,
+      "outcomes": [
+        "p4+wall",
+        "win",
+        "p3+dragon_fire",
+        "p2+oil"
+      ],
+      "plan": {
+        "layout": "early_pair",
+        "zone": 210.7,
+        "start": 102.0,
+        "finish_gap": 91.6
+      },
+      "structure": "early_pair|dragon_fire,oil,wall",
+      "created": "2026-11-07",
+      "render_date": "2026-11-07",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-07_race3d_s381",
+      "audit": "renders/megawheel_arena/pending/2026-11-07_race3d_s381/MW_RACE_3D_S381_audit.md",
+      "title_base": "Will Zippy Make It Past the Oil Slick? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794065804.2,
+      "drive_id": "1h1J4g4a--_rTCFLNk4uvgLlX67M02Fvl",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S381.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S528",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 528,
+      "vehicles": [
+        "bus",
+        "monster",
+        "police",
+        "f1"
+      ],
+      "theme": "sunset-clear-desert",
+      "track_id": "race25d_scan528@sunset-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 33.71,
+      "outcomes": [
+        "p3+laser",
+        "p2+meteor",
+        "p4+container",
+        "win"
+      ],
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 215.9,
+        "start": 109.6,
+        "finish_gap": 105.4
+      },
+      "structure": "gauntlet|container,laser,meteor",
+      "created": "2026-11-07",
+      "render_date": "2026-11-07",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-07_race3d_s528",
+      "audit": "renders/megawheel_arena/pending/2026-11-07_race3d_s528/MW_RACE_3D_S528_audit.md",
+      "title_base": "Siren Meets Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794065807.2,
+      "drive_id": "1GyAWi-5g_nRJXWOr1hY6fD5ONn8QPPwI",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S528.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S379",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 379,
+      "vehicles": [
+        "firetruck",
+        "monster2",
+        "police",
+        "taxi"
+      ],
+      "theme": "noon-clear-beach",
+      "track_id": "race25d_scan379@noon-clear-beach",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 33.87,
+      "outcomes": [
+        "win",
+        "p2+laser",
+        "p3+hammer",
+        "p4+dragon_ice"
+      ],
+      "plan": {
+        "layout": "late_pair",
+        "zone": 171.5,
+        "start": 97.0,
+        "finish_gap": 91.5
+      },
+      "structure": "late_pair|dragon_ice,hammer,laser",
+      "created": "2026-11-07",
+      "render_date": "2026-11-07",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-07_race3d_s379",
+      "audit": "renders/megawheel_arena/pending/2026-11-07_race3d_s379/MW_RACE_3D_S379_audit.md",
+      "title_base": "Will Siren Make It Past the Giant Hammer? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794065809.8,
+      "drive_id": "1D83Dk1xVRVLiiQyxsoT2xrJe1Y5eRmaY",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S379.mp4"
     }
   ]
 }
