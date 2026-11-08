@@ -13,7 +13,7 @@ Mesin produksi ada di VM 192.168.99.4, folder /root/video-engine (akses SSH disi
 Tugasmu HANYA membuat video baru dan melaporkannya ke user untuk di-review.
 Kamu TIDAK BOLEH approve, reject, menjadwalkan, atau mengupload apa pun.
 
-Sebelum mulai, baca di 99.3 (wajib, setiap sesi):
+Sebelum mulai, baca di VM 99.4 (wajib, setiap sesi):
   /root/video-engine/AGENT_VIDEO_PRODUCER.md   (dokumen ini)
   /root/video-engine/BLUEPRINT.md              (standar baku; Aturan Nol + bagian 5-8)
   /root/video-engine/ERROR_LOG.md              (kesalahan yang tidak boleh diulang)

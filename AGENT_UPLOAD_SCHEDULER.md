@@ -4,14 +4,14 @@
 > Ditulis untuk: agent AI iPandu (Monic, akun `ipandu-video` di sumber-mesin 192.168.99.3).
 > Tugas agent ini **hanya menjadwalkan upload**. Agent ini tidak membuat, merender, menyetujui, menolak, atau mengedit video.
 
-## 1. Prompt (tempel ke agent di 99.2)
+## 1. Prompt (tempel ke agent Monic di sumber-mesin)
 
 ```
 Kamu adalah agent penjadwal upload channel YouTube "MegaWheel Arena".
 Mesin produksi ada di VM 192.168.99.4, folder /root/video-engine.
 Kamu bekerja dari sumber-mesin (192.168.99.3) lewat SSH ke 192.168.99.4 (akses disiapkan oleh admin).
 
-Sebelum bekerja, baca di 99.3:
+Sebelum bekerja, baca di VM 99.4:
   /root/video-engine/AGENT_UPLOAD_SCHEDULER.md   (dokumen ini, wajib)
   /root/video-engine/BLUEPRINT.md bagian 10      (SOP publikasi)
   /root/video-engine/PROJECT_PROGRESS.md         (status proyek; tugas A2/A4 = uji upload & upload Ep. 2-8)
@@ -38,7 +38,7 @@ Rutinitas harian (sekali sehari, sekitar 08:00 WIB):
 Aturan keras:
  - Jangan pernah menjalankan episodes.py approve/reject/set, sim_engine.py, publish.py, atau script lain di luar
    publish_queue.py (show, plan, upload --confirm) dan git_sync.sh (pull, push). Menyetujui video adalah hak user.
- - Jangan mengubah file apa pun di 99.3 selain yang ditulis publish_queue.py dan langkah git di atas.
+ - Jangan mengubah file apa pun di 99.4 selain yang ditulis publish_queue.py dan langkah git di atas.
  - Jangan pernah membuat video publik langsung, atau memakai --privacy public. Semua lewat jadwal publishAt.
  - Jangan menyentuh /root/video-engine/credentials/ (token YouTube). Jangan mencetak isinya.
  - Jangan menaikkan --max di atas 5 (kuota API YouTube: 1 upload = 1600 dari 10000 unit/hari).
@@ -51,7 +51,7 @@ Aturan keras:
 
 Satu-satunya script untuk upload terjadwal: `generators/publishing/daily_publish.sh`. Script ini menjalankan
 pull → plan → upload --confirm (maks 5) → drive_sync sync → push, memakai kunci (tidak pernah jalan dobel), dan
-berhenti kalau `git_sync pull` gagal. Pasang **di VM 99.3** (tempat kode dan token berada), **sekali sehari**:
+berhenti kalau `git_sync pull` gagal. Pasang **di VM 99.4** (tempat kode dan token berada), **sekali sehari**:
 
 ```
 0 5 * * * /root/video-engine/generators/publishing/daily_publish.sh >> /root/video-engine/work/daily_publish.log 2>&1
@@ -61,7 +61,7 @@ sehari (kuota YouTube), jangan menambah langkah approve/render ke cron. Cek hasi
 
 **Verifikasi harian: bot agent user, 14:00 WIB** (user 2026-10-01). Sejak 2026-10-11 bot membaca **fakta, bukan menebak dari
 teks log** (kasus: laporan 2026-10-10 menulis "Stok AMAN" padahal RACE/SMASH 16-17 Okt kosong, dan "PERLU TINDAKAN" hanya
-karena baris error Drive). Urutan baca di VM 99.3, folder `/root/video-engine`:
+karena baris error Drive). Urutan baca di VM 99.4, folder `/root/video-engine`:
 
 1. `renders/megawheel_arena/PUBLISH_ALERT.txt`: baris pertama `STATUS: OK | WARN | ALERT`. WARN/ALERT = ada masalah terbuka
    (token Drive mati, token upload hampir mati, video diparkir UPLOAD_FAILED, ...); daftar masalahnya ada di file yang sama.
