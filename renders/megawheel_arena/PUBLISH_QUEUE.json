@@ -1146,6 +1146,26 @@
    "url": "https://www.youtube.com/shorts/W5fQ0Cj2Abs"
   },
   {
+   "episode": 118,
+   "video_id": "MW_RACE_3D_S237",
+   "status": "SCHEDULED",
+   "publish_at_utc": "2026-11-08T20:00:00Z",
+   "role": "race",
+   "title": "Buster vs the Giant Hammer! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 118 #Shorts",
+   "upload_started": "2026-11-08T14:25:42.642209+00:00",
+   "url": "https://www.youtube.com/shorts/FfqULpJd2cA"
+  },
+  {
+   "episode": 122,
+   "video_id": "MW_SMASH_3D_S048",
+   "status": "SCHEDULED",
+   "publish_at_utc": "2026-11-09T00:00:00Z",
+   "role": "smash",
+   "title": "4 Cars Enter the Sea Arena! Who Survives? \ud83d\udca5 NEW 3D Graphics | Ep. 122 #Shorts",
+   "upload_started": "2026-11-08T14:25:50.944718+00:00",
+   "url": "https://www.youtube.com/shorts/f1yKrndR86w"
+  },
+  {
    "episode": 116,
    "video_id": "MW_POTHOLES_3D_S124",
    "status": "SCHEDULED",
@@ -1156,6 +1176,26 @@
    "url": "https://www.youtube.com/shorts/sFB6TsArNw0"
   },
   {
+   "episode": 119,
+   "video_id": "MW_RACE_3D_S379",
+   "status": "SCHEDULED",
+   "publish_at_utc": "2026-11-09T20:00:00Z",
+   "role": "race",
+   "title": "Will Siren Make It Past the Giant Hammer? \ud83c\udfc1 NEW 3D Graphics | Ep. 119 #Shorts",
+   "upload_started": "2026-11-08T14:26:04.256020+00:00",
+   "url": "https://www.youtube.com/shorts/HrtpeinSfxY"
+  },
+  {
+   "episode": 123,
+   "video_id": "MW_SMASH_3D_S073",
+   "status": "SCHEDULED",
+   "publish_at_utc": "2026-11-10T00:00:00Z",
+   "role": "smash",
+   "title": "Titan, Rocky, Nitro or Tilly? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 123 #Shorts",
+   "upload_started": "2026-11-08T14:26:11.050530+00:00",
+   "url": "https://www.youtube.com/shorts/1hpNM4IhFno"
+  },
+  {
    "episode": 99,
    "video_id": "SIM_DUNGEON_V2_S029",
    "status": "SCHEDULED",
@@ -1164,6 +1204,51 @@
    "title": "Will Siren the Police Car Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 99 #Shorts",
    "upload_started": "2026-10-21T05:00:30.296191+00:00",
    "url": "https://www.youtube.com/shorts/-AXUqUCBwBk"
+  },
+  {
+   "episode": 120,
+   "video_id": "MW_RACE_3D_S381",
+   "status": "SCHEDULED",
+   "publish_at_utc": "2026-11-10T20:00:00Z",
+   "role": "race",
+   "title": "Will Zippy Make It Past the Oil Slick? \ud83c\udfc1 NEW 3D Graphics | Ep. 120 #Shorts",
+   "upload_started": "2026-11-08T14:26:20.720642+00:00",
+   "url": "https://www.youtube.com/shorts/IemgtFt_1Ts"
+  },
+  {
+   "episode": 124,
+   "video_id": "MW_SMASH_3D_S104",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-11T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 117,
+   "video_id": "MW_SPLASH_3D_S121",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-11T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 121,
+   "video_id": "MW_RACE_3D_S528",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-11T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 125,
+   "video_id": "MW_SMASH_3D_S109",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-12T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 126,
+   "video_id": "MW_SMASH_3D_S140",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-13T00:00:00Z",
+   "role": "smash"
   },
   {
    "episode": 100,

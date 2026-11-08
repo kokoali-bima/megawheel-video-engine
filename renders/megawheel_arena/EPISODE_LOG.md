@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-08 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-08 14:26). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -123,6 +123,16 @@
 | 114 | S04 | potholes | Zippy, Hydro, Titan | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-07T16:00:00Z | https://www.youtube.com/shorts/mzSJunAcKWU |  |  |  |  |
 | 115 | S04 | lava | Nitro, Buster, Hydro | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-08T16:00:00Z | https://www.youtube.com/shorts/W5fQ0Cj2Abs |  |  |  |  |
 | 116 | S04 | potholes | Tilly, Titan, Buster | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-09T16:00:00Z | https://www.youtube.com/shorts/sFB6TsArNw0 |  |  |  |  |
+| 117 | S04 | splash | Tilly, Sprinkles, Rocky | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 118 | S04 | race25d | Buster, Grizzly, Siren, Zippy | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-08T20:00:00Z | https://www.youtube.com/shorts/FfqULpJd2cA |  |  |  |  |
+| 119 | S04 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-09T20:00:00Z | https://www.youtube.com/shorts/HrtpeinSfxY |  |  |  |  |
+| 120 | S04 | race25d | Hydro, Rocky, Siren, Zippy | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-10T20:00:00Z | https://www.youtube.com/shorts/IemgtFt_1Ts |  |  |  |  |
+| 121 | S05 | race25d | Buster, Rocky, Siren, Nitro | 2026-11-07 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 122 | S05 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-11-05 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-09T00:00:00Z | https://www.youtube.com/shorts/f1yKrndR86w |  |  |  |  |
+| 123 | S05 | smash25d | Titan, Rocky, Nitro, Tilly | 2026-11-05 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-10T00:00:00Z | https://www.youtube.com/shorts/1hpNM4IhFno |  |  |  |  |
+| 124 | S05 | smash25d | Titan, Grizzly, Nitro, Zippy | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 125 | S05 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 126 | S05 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1003 | S01 | story15 | Sprinkles, Zippy, Rocky, Buster, Siren, Nitro, Hydro | 2026-10-23 | 2026-10-23 | 2026-10-24 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | https://www.youtube.com/shorts/3wtRIEEN4WY |  |  |  |  |
@@ -133,16 +143,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| MW_SMASH_3D_S048 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-11-05 | 56.37 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s048` |
-| MW_SMASH_3D_S073 | smash25d | Titan, Rocky, Nitro, Tilly | 2026-11-05 | 56.77 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s073` |
-| MW_SMASH_3D_S109 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-05 | 55.07 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s109` |
-| MW_SMASH_3D_S140 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 57.43 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s140` |
-| MW_SMASH_3D_S104 | smash25d | Titan, Grizzly, Nitro, Zippy | 2026-11-05 | 56.93 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s104` |
-| MW_SPLASH_3D_S121 | splash | Tilly, Sprinkles, Rocky | 2026-11-05 | 57.6 s | `renders/megawheel_arena/pending/2026-11-05_splash3d_s121` |
-| MW_RACE_3D_S237 | race25d | Buster, Grizzly, Siren, Zippy | 2026-11-07 | 34.23 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s237` |
-| MW_RACE_3D_S381 | race25d | Hydro, Rocky, Siren, Zippy | 2026-11-07 | 35.47 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s381` |
-| MW_RACE_3D_S528 | race25d | Buster, Rocky, Siren, Nitro | 2026-11-07 | 33.71 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s528` |
-| MW_RACE_3D_S379 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-07 | 33.87 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s379` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
