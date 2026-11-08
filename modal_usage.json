@@ -4803,6 +4803,16 @@
    "gpu_seconds": 29.1,
    "wall_seconds": 1301.3,
    "cost_usd": 0.0074
+  },
+  {
+   "date": "2026-11-08",
+   "note": "diag voice 2026-11-08 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 28.3,
+   "wall_seconds": 65.0,
+   "cost_usd": 0.0072
   }
  ]
 }
