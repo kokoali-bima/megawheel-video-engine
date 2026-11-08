@@ -3,9 +3,26 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-08
+**📤 Upload / antrean / Drive**
+- `8277853` publish: daily run 2026-11-08 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `27d6583` auto: records left uncommitted before daily run
+**📚 Dokumen**
+- `dff0b86` docs: manuals read from the video VM 99.4, not 99.3
+
 ## 2026-11-07
+**📚 Dokumen**
+- `0932491` docs: agent manuals name the current video VM (192.168.99.4) and Monic
+**🔧 Lain-lain**
+- `07ec3e8` stage: Race 5-8 re-pick (C-063 star hazard) for owner review
 **📤 Upload / antrean / Drive**
 - `74256b7` publish: daily run 2026-11-07 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `18c86f1` analytics: daily report 2026-11-07
+
+</details>
 
 ## 2026-11-06
 **📤 Upload / antrean / Drive**
