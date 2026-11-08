@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-07T05:01:07Z",
+  "finished_utc": "2026-11-08T05:01:06Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-07T05:01:07Z",
+ "updated_utc": "2026-11-08T05:01:06Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -13,12 +13,13 @@
    "short": {
     "name": "CHALLENGE (11:00 ET)",
     "ok": false,
-    "covered_days": 3,
+    "covered_days": 2,
     "missing_days": [
      "2026-11-11",
      "2026-11-12",
      "2026-11-13",
-     "2026-11-14"
+     "2026-11-14",
+     "2026-11-15"
     ]
    },
    "race": {
@@ -26,13 +27,13 @@
     "ok": false,
     "covered_days": 0,
     "missing_days": [
-     "2026-11-08",
      "2026-11-09",
      "2026-11-10",
      "2026-11-11",
      "2026-11-12",
      "2026-11-13",
-     "2026-11-14"
+     "2026-11-14",
+     "2026-11-15"
     ]
    },
    "smash": {
@@ -40,13 +41,13 @@
     "ok": false,
     "covered_days": 0,
     "missing_days": [
-     "2026-11-08",
      "2026-11-09",
      "2026-11-10",
      "2026-11-11",
      "2026-11-12",
      "2026-11-13",
-     "2026-11-14"
+     "2026-11-14",
+     "2026-11-15"
     ]
    }
   }
@@ -55,18 +56,6 @@
   "SCHEDULED": 121
  },
  "next_uploads": [
-  {
-   "episode": 114,
-   "role": "short",
-   "publish_at_utc": "2026-11-07T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 109,
-   "role": "race",
-   "publish_at_utc": "2026-11-07T20:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 115,
    "role": "short",

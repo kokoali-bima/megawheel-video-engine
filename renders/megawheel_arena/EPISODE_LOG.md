@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-07 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-08 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -139,6 +139,10 @@
 | MW_SMASH_3D_S140 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 57.43 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s140` |
 | MW_SMASH_3D_S104 | smash25d | Titan, Grizzly, Nitro, Zippy | 2026-11-05 | 56.93 s | `renders/megawheel_arena/pending/2026-11-05_smash3d_s104` |
 | MW_SPLASH_3D_S121 | splash | Tilly, Sprinkles, Rocky | 2026-11-05 | 57.6 s | `renders/megawheel_arena/pending/2026-11-05_splash3d_s121` |
+| MW_RACE_3D_S237 | race25d | Buster, Grizzly, Siren, Zippy | 2026-11-07 | 34.23 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s237` |
+| MW_RACE_3D_S381 | race25d | Hydro, Rocky, Siren, Zippy | 2026-11-07 | 35.47 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s381` |
+| MW_RACE_3D_S528 | race25d | Buster, Rocky, Siren, Nitro | 2026-11-07 | 33.71 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s528` |
+| MW_RACE_3D_S379 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-07 | 33.87 s | `renders/megawheel_arena/pending/2026-11-07_race3d_s379` |
 
 ## Ditolak
 
