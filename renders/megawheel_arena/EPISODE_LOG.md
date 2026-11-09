@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-09 11:04). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-09 11:06). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -153,10 +153,6 @@
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
 | MW_RACE_3D_S640 | race25d | Titan, Grizzly, Nitro, Tilly | 2026-11-09 | 34.1 s | `renders/megawheel_arena/pending/2026-11-09_race3d_s640` |
-| MW_RACE_3D_S550 | race25d | Sprinkles, Rocky, Nitro, Zippy | 2026-11-09 | 35.23 s | `renders/megawheel_arena/pending/2026-11-09_race3d_s550` |
-| MW_RACE_3D_S531 | race25d | Titan, Grizzly, Nitro, Tilly | 2026-11-09 | 35.23 s | `renders/megawheel_arena/pending/2026-11-09_race3d_s531` |
-| MW_RACE_3D_S593 | race25d | Buster, Rocky, Zippy, Nitro | 2026-11-09 | 32.63 s | `renders/megawheel_arena/pending/2026-11-09_race3d_s593` |
-| MW_RACE_3D_S611 | race25d | Hydro, Rocky, Siren, Zippy | 2026-11-09 | 35.93 s | `renders/megawheel_arena/pending/2026-11-09_race3d_s611` |
 
 ## Ditolak
 
@@ -219,3 +215,7 @@
 | MW_SMASH_3D_S062 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |
 | MW_SMASH_3D_S043 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |
 | MW_SMASH_3D_S039 | owner review 2026-11-04: lava crack floated above the floor, eyes on both sides, shaky picture; re-rendered as _R2 | 2026-11-04 |
+| MW_RACE_3D_S550 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
+| MW_RACE_3D_S531 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
+| MW_RACE_3D_S593 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
+| MW_RACE_3D_S611 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |

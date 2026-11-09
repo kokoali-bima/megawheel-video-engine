@@ -1,6 +1,6 @@
 {
   "video_id": "MW_RACE_3D_S611",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "series": "race25d",
   "seed": 611,
   "render3d": true,
@@ -35,7 +35,8 @@
     "shorts"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-09_race3d_s611/MW_RACE_3D_S611.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-09_race3d_s611/preview",
-  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)"
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-09_race3d_s611/MW_RACE_3D_S611.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-09_race3d_s611/preview",
+  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
+  "reject_reason": "owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065)"
 }
