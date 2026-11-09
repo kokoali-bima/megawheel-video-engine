@@ -8443,6 +8443,138 @@
       "staged_at": 1794204195.5,
       "drive_id": "1OgaZh289SWCheegSbGYsj3_yIR99fbCd",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_LAVA_POTHOLES_3D_S136.mp4"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S161",
+      "series": "splash",
+      "engine_version": "3d",
+      "seed": 161,
+      "vehicles": [
+        "police",
+        "bigrig",
+        "monster2"
+      ],
+      "theme": "sunset-clear-city",
+      "track_id": "splash_scan161@sunset-clear-city",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 49.6,
+      "outcomes": [
+        "crash@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-09",
+      "render_date": "2026-11-09",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-09_splash3d_s161",
+      "audit": "renders/megawheel_arena/pending/2026-11-09_splash3d_s161/MW_SPLASH_3D_S161_audit.md",
+      "title_base": "Will Siren the Police Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794208770.0,
+      "drive_id": "13kPP4HvdOSi3bmsuGtJj7Avp1PxtjBCp",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S161.mp4"
+    },
+    {
+      "video_id": "MW_POTHOLES_3D_S163",
+      "series": "potholes",
+      "engine_version": "3d",
+      "seed": 163,
+      "vehicles": [
+        "sports",
+        "firetruck",
+        "bigrig"
+      ],
+      "theme": "sunset-clear-desert",
+      "track_id": "potholes_scan163@sunset-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 56.5,
+      "outcomes": [
+        "pit@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-09",
+      "render_date": "2026-11-09",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-09_potholes3d_s163",
+      "audit": "renders/megawheel_arena/pending/2026-11-09_potholes3d_s163/MW_POTHOLES_3D_S163_audit.md",
+      "title_base": "Sports Car vs Giant Potholes! Can Zippy Make It? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794208774.4,
+      "drive_id": "1xlazO8LGScKGnPmqdoYI0ujSMKv404jk",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S163.mp4"
+    },
+    {
+      "video_id": "MW_BUMPS_3D_S164",
+      "series": "bumps",
+      "engine_version": "3d",
+      "seed": 164,
+      "vehicles": [
+        "police",
+        "bus",
+        "monster"
+      ],
+      "theme": "noon-clear-beach",
+      "track_id": "bumps_scan164@noon-clear-beach",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 50.33,
+      "outcomes": [
+        "flip@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-09",
+      "render_date": "2026-11-09",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-09_bumps3d_s164",
+      "audit": "renders/megawheel_arena/pending/2026-11-09_bumps3d_s164/MW_BUMPS_3D_S164_audit.md",
+      "title_base": "Will Siren the Police Car Survive Giant Speed Bumps? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794208779.1,
+      "drive_id": "10HqsM-n9mXP2Vks-U49gp4exQaVgsjCo",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_BUMPS_3D_S164.mp4"
+    },
+    {
+      "video_id": "MW_LAVA_3D_S162",
+      "series": "lava",
+      "engine_version": "3d",
+      "seed": 162,
+      "vehicles": [
+        "f1",
+        "icecream",
+        "firetruck"
+      ],
+      "theme": "sunset-clear-volcano",
+      "track_id": "lava_scan162@sunset-clear-volcano",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 49.9,
+      "outcomes": [
+        "pit@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-09",
+      "render_date": "2026-11-09",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-09_lava3d_s162",
+      "audit": "renders/megawheel_arena/pending/2026-11-09_lava3d_s162/MW_LAVA_3D_S162_audit.md",
+      "title_base": "Can Nitro the Race Car Survive Erupting Lava Road? 🌋🔥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794208783.2,
+      "drive_id": "1lIyU97uc1ztF7YJMh3dGLGPOAkINdprU",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_LAVA_3D_S162.mp4"
     }
   ]
 }
