@@ -3,13 +3,32 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-09
+**🔧 Lain-lain**
+- `c8d3d3f` stage Race 9-13, Smash 9-12, Challenge 6 for review (2026-11-09)
+- `c5774cc` auto: records left uncommitted before daily run
+**📤 Upload / antrean / Drive**
+- `80f5a61` publish: daily run 2026-11-09 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `8cd78f5` records before analytics
+
+</details>
+
 ## 2026-11-08
 **📤 Upload / antrean / Drive**
+- `d2eee96` publish: schedule update 2026-11-08 [Antigravity Gemini Flash]
 - `8277853` publish: daily run 2026-11-08 [cron daily_publish.sh]
 **🔧 Lain-lain**
 - `27d6583` auto: records left uncommitted before daily run
 **📚 Dokumen**
 - `dff0b86` docs: manuals read from the video VM 99.4, not 99.3
+<details><summary>otomatis VM (2)</summary>
+
+- `662367c` records: modal usage (auto)
+- `34811e0` analytics: daily report 2026-11-08
+
+</details>
 
 ## 2026-11-07
 **📚 Dokumen**
