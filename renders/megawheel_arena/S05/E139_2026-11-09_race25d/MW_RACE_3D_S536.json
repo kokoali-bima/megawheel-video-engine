@@ -1,6 +1,6 @@
 {
   "video_id": "MW_RACE_3D_S536",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "APPROVED",
   "series": "race25d",
   "seed": 536,
   "render3d": true,
@@ -13,7 +13,7 @@
   },
   "theme_id": "morning-clear-desert",
   "title_base": "Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics",
-  "title": "Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics #Shorts",
+  "title": "Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics | Ep. 139 #Shorts",
   "description": "Buster, Grizzly, Tilly and Zippy race to the finish line in NEW 3D graphics! 🏁\n\n💬 Comment A if you love the NEW 3D graphics, or B if you prefer the classic look!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #3DRace #CarRace #CartoonCars #3DAnimation #MonsterTruck #MegaWheelArena",
   "tags": [
     "3D race",
@@ -35,7 +35,10 @@
     "shorts"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-09_race3d_s536/MW_RACE_3D_S536.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-09_race3d_s536/preview",
-  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)"
+  "video_path": "/root/video-engine/renders/megawheel_arena/S05/E139_2026-11-09_race25d/MW_RACE_3D_S536.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S05/E139_2026-11-09_race25d/preview",
+  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
+  "episode": 139,
+  "season": 5,
+  "approved_date": "2026-11-09"
 }

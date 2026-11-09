@@ -1,0 +1,1364 @@
+{
+  "items": [
+    {
+      "episode": 2,
+      "video_id": "SIM_BUMPS_V2_S002",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-09-30T19:00:00Z",
+      "url": "https://www.youtube.com/shorts/dVBtbf8Bi_Q"
+    },
+    {
+      "episode": 3,
+      "video_id": "SIM_POTHOLES_V2_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-09-30T23:00:00Z",
+      "url": "https://www.youtube.com/shorts/yf0y4R83hto"
+    },
+    {
+      "episode": 4,
+      "video_id": "SIM_BUMPS_V2_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-01T15:00:00Z",
+      "url": "https://www.youtube.com/shorts/3CfgGpkOx3Q"
+    },
+    {
+      "episode": 5,
+      "video_id": "SIM_POTHOLES_V2_S005",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-01T19:00:00Z",
+      "url": "https://www.youtube.com/shorts/xEWas3W61QU"
+    },
+    {
+      "episode": 6,
+      "video_id": "SIM_BUMPS_V2_S006",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-01T23:00:00Z",
+      "url": "https://www.youtube.com/shorts/nXlV3f6Wux8"
+    },
+    {
+      "episode": 1,
+      "video_id": "SIM_POTHOLES_V2_S001",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-02T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 1 #Shorts",
+      "upload_started": "2026-10-02T05:00:05.103838+00:00",
+      "url": "https://www.youtube.com/shorts/PwlO0ptmi-c"
+    },
+    {
+      "episode": 9,
+      "video_id": "SIM_RACE25D_V1_S001",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-02T19:00:00Z",
+      "role": "race",
+      "title": "Slippery Race Showdown! Who Wins? 🏁💦 | Ep. 9 #Shorts",
+      "upload_started": "2026-10-02T05:00:12.047807+00:00",
+      "url": "https://www.youtube.com/shorts/lA92He_9FeQ"
+    },
+    {
+      "episode": 22,
+      "video_id": "SIM_SMASH25D_V4_S001",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-02T23:00:00Z",
+      "role": "smash",
+      "title": "Last Car Standing Wins! 💥 | Ep. 22 #Shorts",
+      "upload_started": "2026-10-02T05:00:16.440714+00:00",
+      "url": "https://www.youtube.com/shorts/Q-7067tL0A8"
+    },
+    {
+      "episode": 7,
+      "video_id": "SIM_SPLASH_V2_S007",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-03T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 7 #Shorts",
+      "upload_started": "2026-10-02T05:00:21.596827+00:00",
+      "url": "https://www.youtube.com/shorts/0FEC9QmNYw0"
+    },
+    {
+      "episode": 10,
+      "video_id": "SIM_RACE25D_V2_S002",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-03T19:00:00Z",
+      "role": "race",
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 10 #Shorts",
+      "upload_started": "2026-10-02T05:00:25.824303+00:00",
+      "url": "https://www.youtube.com/shorts/0o6TY6tXF_c"
+    },
+    {
+      "episode": 1501,
+      "video_id": "2026-10-02_story15_trailer_e01",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-03T21:00:00Z",
+      "role": "promo",
+      "title": "Sprinkles' First Race 🍦 Full Episode This Sunday!",
+      "upload_started": "2026-10-03T05:00:06.187685+00:00",
+      "url": "https://www.youtube.com/shorts/BB8Lr9LwL9g"
+    },
+    {
+      "episode": 23,
+      "video_id": "SIM_SMASH25D_V4_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-03T23:00:00Z",
+      "role": "smash",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
+      "upload_started": "2026-10-03T05:00:13.278770+00:00",
+      "url": "https://www.youtube.com/shorts/ZjUnuZvelKY"
+    },
+    {
+      "episode": 8,
+      "video_id": "SIM_LAVA_V2_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-04T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
+      "upload_started": "2026-10-03T05:00:18.093502+00:00",
+      "url": "https://www.youtube.com/shorts/LIP2P98Be6M"
+    },
+    {
+      "episode": 1001,
+      "video_id": "2026-10-02_story15_e01",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-04T17:00:00Z",
+      "role": "long",
+      "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+      "upload_started": "2026-10-03T05:00:23.180287+00:00",
+      "url": "https://www.youtube.com/shorts/gAVCxOicZyM"
+    },
+    {
+      "episode": 11,
+      "video_id": "SIM_RACE25D_V2_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-04T19:00:00Z",
+      "role": "race",
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 11 #Shorts",
+      "upload_started": "2026-10-03T05:00:47.499529+00:00",
+      "url": "https://www.youtube.com/shorts/WinoMp1Dmzw"
+    },
+    {
+      "episode": 24,
+      "video_id": "SIM_SMASH25D_V4_S007",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-04T23:00:00Z",
+      "role": "smash",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts",
+      "upload_started": "2026-10-04T05:00:05.557704+00:00",
+      "url": "https://www.youtube.com/shorts/RCBE3lgA2uo"
+    },
+    {
+      "episode": 16,
+      "video_id": "SIM_SPLASH_V2_S011",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-05T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 16 #Shorts",
+      "upload_started": "2026-10-04T05:00:12.628285+00:00",
+      "url": "https://www.youtube.com/shorts/_lZj6d402lU"
+    },
+    {
+      "episode": 12,
+      "video_id": "SIM_RACE25D_V2_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-05T19:00:00Z",
+      "role": "race",
+      "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts",
+      "upload_started": "2026-10-04T05:00:16.879233+00:00",
+      "url": "https://www.youtube.com/shorts/ABojeEOuK4M"
+    },
+    {
+      "episode": 25,
+      "video_id": "SIM_SMASH25D_V4_S008",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-05T23:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
+      "upload_started": "2026-10-04T05:00:22.066127+00:00",
+      "url": "https://www.youtube.com/shorts/5ljCNw1Hnlg"
+    },
+    {
+      "episode": 17,
+      "video_id": "SIM_POTHOLES_V2_S007",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-06T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 17 #Shorts",
+      "upload_started": "2026-10-04T05:00:26.687067+00:00",
+      "url": "https://www.youtube.com/shorts/15-W4OJNtt4"
+    },
+    {
+      "episode": 13,
+      "video_id": "SIM_RACE25D_V2_S005",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-06T19:00:00Z",
+      "role": "race",
+      "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts",
+      "upload_started": "2026-10-05T05:00:05.211924+00:00",
+      "url": "https://www.youtube.com/shorts/qePl8AzQ9Rw"
+    },
+    {
+      "episode": 26,
+      "video_id": "SIM_SMASH25D_V4_S011",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-06T23:00:00Z",
+      "role": "smash",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 26 #Shorts",
+      "upload_started": "2026-10-05T05:00:11.988645+00:00",
+      "url": "https://www.youtube.com/shorts/eQQzWYXAda8"
+    },
+    {
+      "episode": 1502,
+      "video_id": "2026-10-07_story15_trailer_e02",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-07T12:00:00Z",
+      "role": "promo",
+      "title": "Who Is Kraggor? 🦖 Full Episode This Sunday!",
+      "upload_started": "2026-10-07T07:14:46.813486+00:00",
+      "url": "https://www.youtube.com/shorts/v4oErNoDW64"
+    },
+    {
+      "episode": 18,
+      "video_id": "SIM_BUMPS_V2_S010",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-07T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Giant Speed Bumps! Who Survives? 🚗💥 | Ep. 18 #Shorts",
+      "upload_started": "2026-10-05T05:00:16.988867+00:00",
+      "url": "https://www.youtube.com/shorts/dO6mPkPhO70"
+    },
+    {
+      "episode": 14,
+      "video_id": "SIM_RACE25D_V2_S006",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-07T19:00:00Z",
+      "role": "race",
+      "title": "Meteors, Lasers & Lava! Who Wins the Race? 🏁 | Ep. 14 #Shorts",
+      "upload_started": "2026-10-05T05:00:22.422717+00:00",
+      "url": "https://www.youtube.com/shorts/_CL0pzpWPTg"
+    },
+    {
+      "episode": 27,
+      "video_id": "SIM_SMASH25D_V4_S012",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-07T23:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts",
+      "upload_started": "2026-10-05T05:00:27.286151+00:00",
+      "url": "https://www.youtube.com/shorts/pjx_weAS40w"
+    },
+    {
+      "episode": 19,
+      "video_id": "SIM_LAVA_V2_S021",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-08T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 19 #Shorts",
+      "upload_started": "2026-10-06T05:00:06.096689+00:00",
+      "url": "https://www.youtube.com/shorts/6YB8aBiEn_o"
+    },
+    {
+      "episode": 15,
+      "video_id": "SIM_RACE25D_V2_S007",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-08T19:00:00Z",
+      "role": "race",
+      "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts",
+      "upload_started": "2026-10-06T05:00:12.558354+00:00",
+      "url": "https://www.youtube.com/shorts/grvQnQ1E94k"
+    },
+    {
+      "episode": 28,
+      "video_id": "SIM_SMASH25D_V4_S014",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-08T23:00:00Z",
+      "role": "smash",
+      "title": "Who Survives the Smash Arena? 💥 | Ep. 28 #Shorts",
+      "upload_started": "2026-10-06T05:00:17.057151+00:00",
+      "url": "https://www.youtube.com/shorts/ZXEi9fG7RZA"
+    },
+    {
+      "episode": 20,
+      "video_id": "SIM_SPLASH_V2_S012",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-09T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Slippery Splash Zone! Who Survives? 💦🚗 | Ep. 20 #Shorts",
+      "upload_started": "2026-10-06T05:00:22.372172+00:00",
+      "url": "https://www.youtube.com/shorts/16KM8XY8BCA"
+    },
+    {
+      "episode": 31,
+      "video_id": "SIM_RACE25D_V4_S036",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-09T19:00:00Z",
+      "role": "race",
+      "title": "Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
+      "upload_started": "2026-10-06T05:00:27.577821+00:00",
+      "url": "https://www.youtube.com/shorts/vZFKVw21xA8"
+    },
+    {
+      "episode": 29,
+      "video_id": "SIM_SMASH25D_V4_S015",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-09T23:00:00Z",
+      "role": "smash",
+      "title": "Crash Battle! Only One Can Win! 💥 | Ep. 29 #Shorts",
+      "upload_started": "2026-10-07T07:14:54.342168+00:00",
+      "url": "https://www.youtube.com/shorts/AbvICeQ1lPE"
+    },
+    {
+      "episode": 21,
+      "video_id": "SIM_POTHOLES_V2_S008",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-10T15:00:00Z",
+      "role": "short",
+      "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts",
+      "upload_started": "2026-10-07T07:15:00.013523+00:00",
+      "url": "https://www.youtube.com/shorts/ggvN5p10cfQ"
+    },
+    {
+      "episode": 34,
+      "video_id": "SIM_RACE25D_V4_S045",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-10T19:00:00Z",
+      "role": "race",
+      "title": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 34 #Shorts",
+      "upload_started": "2026-10-07T07:15:04.591131+00:00",
+      "url": "https://www.youtube.com/shorts/nYMwvHZvwmY"
+    },
+    {
+      "episode": 32,
+      "video_id": "SIM_SMASH25D_V5_S002",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-10T23:00:00Z",
+      "role": "smash",
+      "title": "Hydro, Grizzly, Siren or Zippy? Last Car Standing! 💥 | Ep. 32 #Shorts",
+      "upload_started": "2026-10-07T07:15:11.208275+00:00",
+      "url": "https://www.youtube.com/shorts/k9fMTUKrdeA"
+    },
+    {
+      "episode": 30,
+      "video_id": "SIM_POTHOLES_V2_S021",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-11T15:00:00Z",
+      "role": "short",
+      "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 30 #Shorts",
+      "upload_started": "2026-10-08T05:00:05.948945+00:00",
+      "url": "https://www.youtube.com/shorts/S1t8T9lwAMs"
+    },
+    {
+      "episode": 1002,
+      "video_id": "2026-10-07_story15_e02",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-11T17:00:00Z",
+      "role": "long",
+      "title": "Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2",
+      "upload_started": "2026-10-08T05:00:13.190552+00:00",
+      "url": "https://www.youtube.com/shorts/SdByNtxACP4"
+    },
+    {
+      "episode": 37,
+      "video_id": "SIM_RACE25D_V4_S040",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-11T19:00:00Z",
+      "role": "race",
+      "title": "Can Tilly Survive the Meteors? 🏁 | Ep. 37 #Shorts",
+      "upload_started": "2026-10-08T05:00:40.979456+00:00",
+      "url": "https://www.youtube.com/shorts/1aa8NVWoMhQ"
+    },
+    {
+      "episode": 35,
+      "video_id": "SIM_SMASH25D_V5_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-11T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 35 #Shorts",
+      "upload_started": "2026-10-08T05:00:47.618675+00:00",
+      "url": "https://www.youtube.com/shorts/etUL6wxoccA"
+    },
+    {
+      "episode": 33,
+      "video_id": "SIM_POTHOLES_V2_S022",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-12T15:00:00Z",
+      "role": "short",
+      "title": "Taxi vs Giant Potholes! Can Tilly Make It? 🚗💥 | Ep. 33 #Shorts",
+      "upload_started": "2026-10-08T05:00:52.913053+00:00",
+      "url": "https://www.youtube.com/shorts/hBNWKl7lX6I"
+    },
+    {
+      "episode": 40,
+      "video_id": "SIM_RACE25D_V4_S037",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-12T19:00:00Z",
+      "role": "race",
+      "title": "Can Siren Survive the Oil Slick? 🏁 | Ep. 40 #Shorts",
+      "upload_started": "2026-10-09T05:00:05.903121+00:00",
+      "url": "https://www.youtube.com/shorts/Gp7yvNydnKs"
+    },
+    {
+      "episode": 38,
+      "video_id": "SIM_SMASH25D_V5_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-12T23:00:00Z",
+      "role": "smash",
+      "title": "Fire Truck vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 38 #Shorts",
+      "upload_started": "2026-10-09T05:00:09.596769+00:00",
+      "url": "https://www.youtube.com/shorts/1g38LQv-7k8"
+    },
+    {
+      "episode": 36,
+      "video_id": "SIM_LAVA_POTHOLES_V2_S025",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-13T15:00:00Z",
+      "role": "short",
+      "title": "Race Car vs Giant Lava Potholes! Can Nitro Make It? 🌋🔥 | Ep. 36 #Shorts",
+      "upload_started": "2026-10-09T05:00:13.272559+00:00",
+      "url": "https://www.youtube.com/shorts/8XC7Jkb0aZA"
+    },
+    {
+      "episode": 43,
+      "video_id": "SIM_RACE25D_V4_S044",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-13T19:00:00Z",
+      "role": "race",
+      "title": "Can Nitro Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts",
+      "upload_started": "2026-10-09T05:00:16.330207+00:00",
+      "url": "https://www.youtube.com/shorts/MsJCeAgnOrY"
+    },
+    {
+      "episode": 41,
+      "video_id": "SIM_SMASH25D_V5_S005",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-13T23:00:00Z",
+      "role": "smash",
+      "title": "Sprinkles, Rocky, Zippy or Siren? Last Car Standing! 💥 | Ep. 41 #Shorts",
+      "upload_started": "2026-10-09T05:00:19.697069+00:00",
+      "url": "https://www.youtube.com/shorts/2ekvyKZl7v8"
+    },
+    {
+      "episode": 39,
+      "video_id": "SIM_POTHOLES_V2_S027",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-14T15:00:00Z",
+      "role": "short",
+      "title": "Can Nitro the Race Car Survive Giant Potholes? 🚗💥 | Ep. 39 #Shorts",
+      "upload_started": "2026-10-10T05:00:05.570313+00:00",
+      "url": "https://www.youtube.com/shorts/_ep2xhmCcMg"
+    },
+    {
+      "episode": 46,
+      "video_id": "SIM_RACE25D_V4_S046",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-14T19:00:00Z",
+      "role": "race",
+      "title": "Can Nitro Survive the Meteors? 🏁 | Ep. 46 #Shorts",
+      "upload_started": "2026-10-10T05:00:09.086098+00:00",
+      "url": "https://www.youtube.com/shorts/BJhlWYkiHF8"
+    },
+    {
+      "episode": 44,
+      "video_id": "SIM_SMASH25D_V5_S008",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-14T23:00:00Z",
+      "role": "smash",
+      "title": "Titan, Rocky, Tilly or Zippy? Last Car Standing! 💥 | Ep. 44 #Shorts",
+      "upload_started": "2026-10-10T05:00:13.536512+00:00",
+      "url": "https://www.youtube.com/shorts/qNLPmagWH3M"
+    },
+    {
+      "episode": 42,
+      "video_id": "SIM_LAVA_POTHOLES_V2_S026",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-15T15:00:00Z",
+      "role": "short",
+      "title": "Will Siren the Police Car Survive Giant Lava Potholes? 🌋🔥 | Ep. 42 #Shorts",
+      "upload_started": "2026-10-10T05:00:17.892758+00:00",
+      "url": "https://www.youtube.com/shorts/ivasm__dTxM"
+    },
+    {
+      "episode": 49,
+      "video_id": "SIM_RACE25D_V4_S043",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-15T19:00:00Z",
+      "role": "race",
+      "title": "Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
+      "upload_started": "2026-10-10T05:00:21.106556+00:00",
+      "url": "https://www.youtube.com/shorts/6HkCyVZqXrc"
+    },
+    {
+      "episode": 47,
+      "video_id": "SIM_SMASH25D_V5_S009",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-15T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Tilly Beat a School Bus? 💥 | Ep. 47 #Shorts",
+      "upload_started": "2026-10-11T05:00:06.450657+00:00",
+      "url": "https://www.youtube.com/shorts/eWqvYeCTWqk"
+    },
+    {
+      "episode": 45,
+      "video_id": "SIM_BUMPS_V2_S021",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-16T15:00:00Z",
+      "role": "short",
+      "title": "Can Zippy the Sports Car Survive Giant Speed Bumps? 🚗💥 | Ep. 45 #Shorts",
+      "upload_started": "2026-10-11T05:00:13.764694+00:00",
+      "url": "https://www.youtube.com/shorts/Sh2WfMcLj-M"
+    },
+    {
+      "episode": 53,
+      "video_id": "SIM_RACE25D_V4_S048",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-16T19:00:00Z",
+      "role": "race",
+      "title": "Can Hydro Survive the Giant Hammer? 🏁 | Ep. 53 #Shorts",
+      "upload_started": "2026-10-11T05:00:19.754698+00:00",
+      "url": "https://www.youtube.com/shorts/jbr_oreCvfY"
+    },
+    {
+      "episode": 57,
+      "video_id": "SIM_SMASH25D_V5_S016",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-16T23:00:00Z",
+      "role": "smash",
+      "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 | Ep. 57 #Shorts",
+      "upload_started": "2026-10-11T05:00:24.886498+00:00",
+      "url": "https://www.youtube.com/shorts/6eLjmpy02NM"
+    },
+    {
+      "episode": 48,
+      "video_id": "SIM_POTHOLES_V2_S031",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-17T15:00:00Z",
+      "role": "short",
+      "title": "Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts",
+      "upload_started": "2026-10-11T05:00:30.173885+00:00",
+      "url": "https://www.youtube.com/shorts/c8Y6AecAUCI"
+    },
+    {
+      "episode": 54,
+      "video_id": "SIM_RACE25D_V4_S051",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-17T19:00:00Z",
+      "role": "race",
+      "title": "Can Siren Survive Falling Containers? 🏁 | Ep. 54 #Shorts",
+      "upload_started": "2026-10-12T05:00:06.523001+00:00",
+      "url": "https://www.youtube.com/shorts/puxQcUZoOdc"
+    },
+    {
+      "episode": 58,
+      "video_id": "SIM_SMASH25D_V5_S017",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-17T23:00:00Z",
+      "role": "smash",
+      "title": "Sprinkles, Rocky, Nitro or Zippy? Last Car Standing! 💥 | Ep. 58 #Shorts",
+      "upload_started": "2026-10-12T05:00:14.797607+00:00",
+      "url": "https://www.youtube.com/shorts/0UhR4k8z9mk"
+    },
+    {
+      "episode": 50,
+      "video_id": "SIM_POTHOLES_V2_S028",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-18T15:00:00Z",
+      "role": "short",
+      "title": "Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 | Ep. 50 #Shorts",
+      "upload_started": "2026-10-12T05:00:21.249422+00:00",
+      "url": "https://www.youtube.com/shorts/8_uVESE2cr4"
+    },
+    {
+      "episode": 55,
+      "video_id": "SIM_RACE25D_V4_S055",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-18T19:00:00Z",
+      "role": "race",
+      "title": "Siren vs Falling Containers! Who Wins the Race? 🏁 | Ep. 55 #Shorts",
+      "upload_started": "2026-10-12T05:00:27.751285+00:00",
+      "url": "https://www.youtube.com/shorts/NaQ5MVI0etc"
+    },
+    {
+      "episode": 59,
+      "video_id": "SIM_SMASH25D_V5_S018",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-18T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 59 #Shorts",
+      "upload_started": "2026-10-12T05:00:34.217644+00:00",
+      "url": "https://www.youtube.com/shorts/2mJ7FCqvYTg"
+    },
+    {
+      "episode": 51,
+      "video_id": "SIM_POTHOLES_V2_S029",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-19T15:00:00Z",
+      "role": "short",
+      "title": "Will Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 51 #Shorts",
+      "upload_started": "2026-10-13T05:00:06.139583+00:00",
+      "url": "https://www.youtube.com/shorts/JYouVAHqUeA"
+    },
+    {
+      "episode": 56,
+      "video_id": "SIM_RACE25D_V4_S056",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-19T19:00:00Z",
+      "role": "race",
+      "title": "Zippy vs the Oil Slick! Who Wins the Race? 🏁 | Ep. 56 #Shorts",
+      "upload_started": "2026-10-13T05:00:14.057685+00:00",
+      "url": "https://www.youtube.com/shorts/Wls3wOxIct0"
+    },
+    {
+      "episode": 62,
+      "video_id": "SIM_SMASH25D_V5_S020",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-19T23:00:00Z",
+      "role": "smash",
+      "title": "Sprinkles, Grizzly, Nitro or Zippy? Last Car Standing! 💥 | Ep. 62 #Shorts",
+      "upload_started": "2026-10-13T05:00:22.107566+00:00",
+      "url": "https://www.youtube.com/shorts/lym-XWogLPk"
+    },
+    {
+      "episode": 52,
+      "video_id": "SIM_DUNGEON_V2_S015",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-20T15:00:00Z",
+      "role": "short",
+      "title": "Can Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 52 #Shorts",
+      "upload_started": "2026-10-13T05:00:30.503611+00:00",
+      "url": "https://www.youtube.com/shorts/DERf3rVbKd0"
+    },
+    {
+      "episode": 60,
+      "video_id": "SIM_RACE25D_V4_S047",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-20T19:00:00Z",
+      "role": "race",
+      "title": "Can Zippy Survive Falling Containers? 🏁 | Ep. 60 #Shorts",
+      "upload_started": "2026-10-13T05:00:37.203978+00:00",
+      "url": "https://www.youtube.com/shorts/YsTdVDb4fWc"
+    },
+    {
+      "episode": 63,
+      "video_id": "SIM_SMASH25D_V5_S021",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-20T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Nitro Beat a School Bus? 💥 | Ep. 63 #Shorts",
+      "upload_started": "2026-10-14T05:00:07.849225+00:00",
+      "url": "https://www.youtube.com/shorts/vZAkrIzQ7zQ"
+    },
+    {
+      "episode": 64,
+      "video_id": "SIM_PENDULUM_V2_S002",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-21T15:00:00Z",
+      "role": "short",
+      "title": "Will Tilly the Taxi Survive A Giant Swinging Wrecking Ball? 💥 | Ep. 64 #Shorts",
+      "upload_started": "2026-10-14T05:00:19.626242+00:00",
+      "url": "https://www.youtube.com/shorts/YTTl_1sokjE"
+    },
+    {
+      "episode": 61,
+      "video_id": "SIM_RACE25D_V4_S057",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-21T19:00:00Z",
+      "role": "race",
+      "title": "Siren vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 61 #Shorts",
+      "upload_started": "2026-10-14T05:00:25.302663+00:00",
+      "url": "https://www.youtube.com/shorts/qs4m4wnQx2s"
+    },
+    {
+      "episode": 70,
+      "video_id": "SIM_SMASH25D_V5_S022",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-21T23:00:00Z",
+      "role": "smash",
+      "title": "Ice Cream Truck vs Monster Truck vs Police Car vs Sports Car! Who Survives? 💥 | Ep. 70 #Shorts",
+      "upload_started": "2026-10-14T05:00:31.992566+00:00",
+      "url": "https://www.youtube.com/shorts/YOg4cwmPHdw"
+    },
+    {
+      "episode": 65,
+      "video_id": "SIM_DOMINO_V2_S001",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-22T15:00:00Z",
+      "role": "short",
+      "title": "Taxi vs A Wave Of Giant Falling Dominoes! Can Tilly Make It? 🁢 | Ep. 65 #Shorts",
+      "upload_started": "2026-10-14T05:00:39.554140+00:00",
+      "url": "https://www.youtube.com/shorts/mVQhUTvk9ZI"
+    },
+    {
+      "episode": 67,
+      "video_id": "SIM_RACE25D_V4_S058",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-22T19:00:00Z",
+      "role": "race",
+      "title": "Can Tilly Survive Falling Containers? 🏁 | Ep. 67 #Shorts",
+      "upload_started": "2026-10-15T05:00:07.189726+00:00",
+      "url": "https://www.youtube.com/shorts/Guo_ikHKcMk"
+    },
+    {
+      "episode": 71,
+      "video_id": "SIM_SMASH25D_V5_S023",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-22T23:00:00Z",
+      "role": "smash",
+      "title": "Titan, Rocky, Tilly or Siren? Last Car Standing! 💥 | Ep. 71 #Shorts",
+      "upload_started": "2026-10-15T05:00:17.047279+00:00",
+      "url": "https://www.youtube.com/shorts/diUdJsm2_SM"
+    },
+    {
+      "episode": 66,
+      "video_id": "SIM_PINBALL_V2_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-23T15:00:00Z",
+      "role": "short",
+      "title": "Race Car vs Giant Pinball Bumpers Over A Lava Pit! Can Nitro Make It? 🔴 | Ep. 66 #Shorts",
+      "upload_started": "2026-10-15T05:00:23.634081+00:00",
+      "url": "https://www.youtube.com/shorts/qoeUhMg2-7Q"
+    },
+    {
+      "episode": 68,
+      "video_id": "SIM_RACE25D_V4_S059",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-23T19:00:00Z",
+      "role": "race",
+      "title": "Can Grizzly Survive the Giant Hammer? 🏁 | Ep. 68 #Shorts",
+      "upload_started": "2026-10-15T05:00:31.121695+00:00",
+      "url": "https://www.youtube.com/shorts/_BkZRCpEhPg"
+    },
+    {
+      "episode": 72,
+      "video_id": "SIM_SMASH25D_V5_S024",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-23T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Zippy Beat a Fire Truck? 💥 | Ep. 72 #Shorts",
+      "upload_started": "2026-10-15T05:00:37.849947+00:00",
+      "url": "https://www.youtube.com/shorts/ygW5VWZpx1c"
+    },
+    {
+      "episode": 73,
+      "video_id": "SIM_GAUNTLET_V2_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-24T15:00:00Z",
+      "role": "short",
+      "title": "Police Car vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Siren Make It? 💥 | Ep. 73 #Shorts",
+      "upload_started": "2026-10-16T05:00:07.386967+00:00",
+      "url": "https://www.youtube.com/shorts/VFZjvEaUpsc"
+    },
+    {
+      "episode": 69,
+      "video_id": "SIM_RACE25D_V4_S060",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-24T19:00:00Z",
+      "role": "race",
+      "title": "Can Grizzly Survive Falling Containers? 🏁 | Ep. 69 #Shorts",
+      "upload_started": "2026-10-16T05:00:29.638073+00:00",
+      "url": "https://www.youtube.com/shorts/KIZF_hjOXJY"
+    },
+    {
+      "episode": 78,
+      "video_id": "SIM_SMASH25D_V5_S025",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-24T23:00:00Z",
+      "role": "smash",
+      "title": "Fire Truck vs Monster Truck vs Sports Car vs Police Car! Who Survives? 💥 | Ep. 78 #Shorts",
+      "upload_started": "2026-10-16T05:00:37.787137+00:00",
+      "url": "https://www.youtube.com/shorts/2FRVVI2q_vM"
+    },
+    {
+      "episode": 74,
+      "video_id": "SIM_GAUNTLET_V2_S005",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-25T15:00:00Z",
+      "role": "short",
+      "title": "Will Siren the Police Car Survive A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More? 💥 | Ep. 74 #Shorts",
+      "upload_started": "2026-10-16T05:00:45.700073+00:00",
+      "url": "https://www.youtube.com/shorts/xm-xShnbV_g"
+    },
+    {
+      "episode": 1003,
+      "video_id": "2026-10-23_story15_e03",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-25T17:00:00Z",
+      "role": "long",
+      "title": "The Forgotten Speedway: Can They Escape the Broken Bridge? | MegaWheel Arena Ep. 3",
+      "upload_started": "2026-10-24T05:00:07.267346+00:00",
+      "url": "https://www.youtube.com/shorts/3wtRIEEN4WY"
+    },
+    {
+      "episode": 76,
+      "video_id": "SIM_RACE25D_V4_S061",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-25T19:00:00Z",
+      "role": "race",
+      "title": "Can Siren Survive the Wall? 🏁 | Ep. 76 #Shorts",
+      "upload_started": "2026-10-16T05:00:51.884213+00:00",
+      "url": "https://www.youtube.com/shorts/dpIG3zz0nQs"
+    },
+    {
+      "episode": 79,
+      "video_id": "SIM_SMASH25D_V5_S028",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-25T23:00:00Z",
+      "role": "smash",
+      "title": "Big Rig vs Monster Truck vs Police Car vs Sports Car! Who Survives? 💥 | Ep. 79 #Shorts",
+      "upload_started": "2026-10-17T05:00:06.887656+00:00",
+      "url": "https://www.youtube.com/shorts/n7E87OZBYe8"
+    },
+    {
+      "episode": 75,
+      "video_id": "SIM_LAVA_POTHOLES_V2_S028",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-26T15:00:00Z",
+      "role": "short",
+      "title": "Taxi vs Giant Lava Potholes! Can Tilly Make It? 🌋🔥 | Ep. 75 #Shorts",
+      "upload_started": "2026-10-17T05:00:17.180494+00:00",
+      "url": "https://www.youtube.com/shorts/lHByBBaLVXo"
+    },
+    {
+      "episode": 77,
+      "video_id": "SIM_RACE25D_V4_S063",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-26T19:00:00Z",
+      "role": "race",
+      "title": "Can Tilly Survive the Giant Hammer? 🏁 | Ep. 77 #Shorts",
+      "upload_started": "2026-10-17T05:00:23.297047+00:00",
+      "url": "https://www.youtube.com/shorts/wJRlHjwcgWg"
+    },
+    {
+      "episode": 80,
+      "video_id": "SIM_SMASH25D_V5_S029",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-26T23:00:00Z",
+      "role": "smash",
+      "title": "Buster, Grizzly, Tilly or Nitro? Last Car Standing! 💥 | Ep. 80 #Shorts",
+      "upload_started": "2026-10-17T05:00:29.546626+00:00",
+      "url": "https://www.youtube.com/shorts/trI9Q77SAxU"
+    },
+    {
+      "episode": 81,
+      "video_id": "SIM_GAUNTLET_V2_S007",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-27T15:00:00Z",
+      "role": "short",
+      "title": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? 💥 | Ep. 81 #Shorts",
+      "upload_started": "2026-10-17T05:00:36.706654+00:00",
+      "url": "https://www.youtube.com/shorts/Mb76nmh0YyM"
+    },
+    {
+      "episode": 84,
+      "video_id": "SIM_RACE25D_V4_S066",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-27T19:00:00Z",
+      "role": "race",
+      "title": "Can Sprinkles Survive Falling Containers? 🏁 | Ep. 84 #Shorts",
+      "upload_started": "2026-10-18T05:00:06.243715+00:00",
+      "url": "https://www.youtube.com/shorts/4xdJO93mknM"
+    },
+    {
+      "episode": 87,
+      "video_id": "SIM_SMASH25D_V5_S030",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-27T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Zippy Beat a School Bus? 💥 | Ep. 87 #Shorts",
+      "upload_started": "2026-10-18T05:00:13.720842+00:00",
+      "url": "https://www.youtube.com/shorts/i6zipDevoTA"
+    },
+    {
+      "episode": 82,
+      "video_id": "SIM_LAVA_POTHOLES_V2_S029",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-28T15:00:00Z",
+      "role": "short",
+      "title": "Will Tilly the Taxi Survive Giant Lava Potholes? 🌋🔥 | Ep. 82 #Shorts",
+      "upload_started": "2026-10-18T05:00:21.680568+00:00",
+      "url": "https://www.youtube.com/shorts/KZNCFqh33go"
+    },
+    {
+      "episode": 85,
+      "video_id": "SIM_RACE25D_V4_S067",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-28T19:00:00Z",
+      "role": "race",
+      "title": "Will Nitro Make It Past the Giant Hammer? 🏁 | Ep. 85 #Shorts",
+      "upload_started": "2026-10-18T05:00:28.062437+00:00",
+      "url": "https://www.youtube.com/shorts/cwG86oKxxwQ"
+    },
+    {
+      "episode": 88,
+      "video_id": "SIM_SMASH25D_V5_S032",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-28T23:00:00Z",
+      "role": "smash",
+      "title": "Hydro, Rocky, Zippy or Siren? Last Car Standing! 💥 | Ep. 88 #Shorts",
+      "upload_started": "2026-10-18T05:00:35.055525+00:00",
+      "url": "https://www.youtube.com/shorts/8q9Bbk-An5U"
+    },
+    {
+      "episode": 83,
+      "video_id": "SIM_PENDULUM_V2_S004",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-29T15:00:00Z",
+      "role": "short",
+      "title": "Race Car vs A Giant Swinging Wrecking Ball! Can Nitro Make It? 💥 | Ep. 83 #Shorts",
+      "upload_started": "2026-10-19T05:00:07.620649+00:00",
+      "url": "https://www.youtube.com/shorts/XTuIEMNarGE"
+    },
+    {
+      "episode": 86,
+      "video_id": "SIM_RACE25D_V4_S068",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-29T19:00:00Z",
+      "role": "race",
+      "title": "Can Nitro Survive the Oil Slick? 🏁 | Ep. 86 #Shorts",
+      "upload_started": "2026-10-19T05:00:16.476795+00:00",
+      "url": "https://www.youtube.com/shorts/PsnDA9kn7ig"
+    },
+    {
+      "episode": 89,
+      "video_id": "SIM_SMASH25D_V5_S034",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-29T23:00:00Z",
+      "role": "smash",
+      "title": "Big Rig vs Monster Truck vs Sports Car vs Taxi! Who Survives? 💥 | Ep. 89 #Shorts",
+      "upload_started": "2026-10-19T05:00:23.057691+00:00",
+      "url": "https://www.youtube.com/shorts/jiixposH0eo"
+    },
+    {
+      "episode": 90,
+      "video_id": "SIM_POTHOLES_V2_S033",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-30T15:00:00Z",
+      "role": "short",
+      "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 90 #Shorts",
+      "upload_started": "2026-10-19T05:00:30.796045+00:00",
+      "url": "https://www.youtube.com/shorts/LA5GZDAqS1U"
+    },
+    {
+      "episode": 92,
+      "video_id": "SIM_RACE25D_V4_S069",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-30T19:00:00Z",
+      "role": "race",
+      "title": "Zippy vs Falling Containers! Who Wins the Race? 🏁 | Ep. 92 #Shorts",
+      "upload_started": "2026-10-19T05:00:37.932112+00:00",
+      "url": "https://www.youtube.com/shorts/dfyq1sts3ZI"
+    },
+    {
+      "episode": 94,
+      "video_id": "SIM_SMASH25D_V5_S036",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-30T23:00:00Z",
+      "role": "smash",
+      "title": "Can Tiny Zippy Beat a School Bus? 💥 | Ep. 94 #Shorts",
+      "upload_started": "2026-10-20T05:00:06.387736+00:00",
+      "url": "https://www.youtube.com/shorts/ec1zc5iboQE"
+    },
+    {
+      "episode": 91,
+      "video_id": "SIM_BUMPS_V2_S022",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-31T15:00:00Z",
+      "role": "short",
+      "title": "Taxi vs Giant Speed Bumps! Can Tilly Make It? 🚗💥 | Ep. 91 #Shorts",
+      "upload_started": "2026-10-20T05:00:14.802709+00:00",
+      "url": "https://www.youtube.com/shorts/yFWEjAOlIB4"
+    },
+    {
+      "episode": 93,
+      "video_id": "SIM_RACE25D_V4_S070",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-31T19:00:00Z",
+      "role": "race",
+      "title": "Can Sprinkles Survive the Oil Slick? 🏁 | Ep. 93 #Shorts",
+      "upload_started": "2026-10-20T05:00:20.981536+00:00",
+      "url": "https://www.youtube.com/shorts/nuWeVdaiJe8"
+    },
+    {
+      "episode": 95,
+      "video_id": "SIM_SMASH25D_V5_S037",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-10-31T23:00:00Z",
+      "role": "smash",
+      "title": "School Bus vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 95 #Shorts",
+      "upload_started": "2026-10-20T05:00:28.174820+00:00",
+      "url": "https://www.youtube.com/shorts/S6FoCd1kejM"
+    },
+    {
+      "episode": 96,
+      "video_id": "SIM_DOMINO_V2_S003",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-01T16:00:00Z",
+      "role": "short",
+      "title": "Can Siren the Police Car Survive A Wave Of Giant Falling Dominoes? 🁢 | Ep. 96 #Shorts",
+      "upload_started": "2026-10-20T05:00:35.018205+00:00",
+      "url": "https://www.youtube.com/shorts/uHkmWJYEZvA"
+    },
+    {
+      "episode": 97,
+      "video_id": "SIM_PINBALL_V2_S006",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-02T16:00:00Z",
+      "role": "short",
+      "title": "Can Zippy the Sports Car Survive Giant Pinball Bumpers Over A Lava Pit? 🔴 | Ep. 97 #Shorts",
+      "upload_started": "2026-10-21T05:00:06.253864+00:00",
+      "url": "https://www.youtube.com/shorts/SaMAPLv7ErM"
+    },
+    {
+      "episode": 98,
+      "video_id": "SIM_DUNGEON_V2_S026",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-03T16:00:00Z",
+      "role": "short",
+      "title": "Will Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 98 #Shorts",
+      "upload_started": "2026-10-21T05:00:14.655732+00:00",
+      "url": "https://www.youtube.com/shorts/MsN81LV_nP4"
+    },
+    {
+      "episode": 105,
+      "video_id": "MW_RACE_3D_S071",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-03T20:00:00Z",
+      "role": "race",
+      "title": "We Went 3D! 🔥 Can Titan Survive Falling Containers? | Ep. 105 #Shorts",
+      "upload_started": "2026-11-03T13:07:33.182143+00:00",
+      "url": "https://www.youtube.com/shorts/CmFaZq12F6c"
+    },
+    {
+      "episode": 103,
+      "video_id": "SIM_SPLASH_V2_S013",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-04T16:00:00Z",
+      "role": "short",
+      "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics | Ep. 103 #Shorts",
+      "upload_started": "2026-10-21T05:00:22.784698+00:00",
+      "url": "https://www.youtube.com/shorts/qLmoNh8nyEU"
+    },
+    {
+      "episode": 106,
+      "video_id": "MW_RACE_3D_S072",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-04T20:00:00Z",
+      "role": "race",
+      "title": "Nitro vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 106 #Shorts",
+      "upload_started": "2026-11-04T15:11:47.286486+00:00",
+      "url": "https://www.youtube.com/shorts/yEIw_K4Fswo"
+    },
+    {
+      "episode": 110,
+      "video_id": "MW_SMASH_3D_S062_R2",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-05T00:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter the Ice Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 110 #Shorts",
+      "upload_started": "2026-11-04T18:58:57.791707+00:00",
+      "url": "https://www.youtube.com/shorts/UTVc7gPmdkI"
+    },
+    {
+      "episode": 104,
+      "video_id": "MW_SPLASH_3D_S021",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-05T16:00:00Z",
+      "role": "short",
+      "title": "Can Siren the Police Car Survive Slippery Splash Zone? 💦🚗 | Ep. 104 #Shorts",
+      "upload_started": "2026-10-23T05:00:07.467202+00:00",
+      "url": "https://www.youtube.com/shorts/0qVPxSCaBUI"
+    },
+    {
+      "episode": 107,
+      "video_id": "MW_RACE_3D_S217",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-05T20:00:00Z",
+      "role": "race",
+      "title": "Tilly vs Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 107 #Shorts",
+      "upload_started": "2026-11-05T05:00:06.605317+00:00",
+      "url": "https://www.youtube.com/shorts/GWJc_r7ZF-Q"
+    },
+    {
+      "episode": 111,
+      "video_id": "MW_SMASH_3D_S043_R2",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-06T00:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter the Lava Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 111 #Shorts",
+      "upload_started": "2026-11-05T05:00:16.912073+00:00",
+      "url": "https://www.youtube.com/shorts/_VvjsGfjf0s"
+    },
+    {
+      "episode": 113,
+      "video_id": "MW_BUMPS_3D_S040",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-06T16:00:00Z",
+      "role": "short",
+      "title": "Can Tilly Survive Giant Speed Bumps? 🚗💥 NEW 3D Graphics | Ep. 113 #Shorts",
+      "upload_started": "2026-11-05T05:00:28.570441+00:00",
+      "url": "https://www.youtube.com/shorts/M-eAqay4M4Q"
+    },
+    {
+      "episode": 108,
+      "video_id": "MW_RACE_3D_S088",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-06T20:00:00Z",
+      "role": "race",
+      "title": "Can Rocky Survive Falling Containers? 🏁 NEW 3D Graphics | Ep. 108 #Shorts",
+      "upload_started": "2026-11-05T05:00:38.949772+00:00",
+      "url": "https://www.youtube.com/shorts/MTlsgscsj3Q"
+    },
+    {
+      "episode": 112,
+      "video_id": "MW_SMASH_3D_S039_R2",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-07T00:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter the Mud Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 112 #Shorts",
+      "upload_started": "2026-11-05T05:00:46.614609+00:00",
+      "url": "https://www.youtube.com/shorts/TK2avDRy0aM"
+    },
+    {
+      "episode": 114,
+      "video_id": "MW_POTHOLES_3D_S041",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-07T16:00:00Z",
+      "role": "short",
+      "title": "Will Zippy the Sports Car Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 114 #Shorts",
+      "upload_started": "2026-11-06T05:00:06.488023+00:00",
+      "url": "https://www.youtube.com/shorts/mzSJunAcKWU"
+    },
+    {
+      "episode": 109,
+      "video_id": "MW_RACE_3D_S108",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-07T20:00:00Z",
+      "role": "race",
+      "title": "Will Nitro Make It Past Falling Containers? 🏁 NEW 3D Graphics | Ep. 109 #Shorts",
+      "upload_started": "2026-11-06T05:00:15.603900+00:00",
+      "url": "https://www.youtube.com/shorts/NJk3DdYJBmo"
+    },
+    {
+      "episode": 115,
+      "video_id": "MW_LAVA_3D_S043",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-08T16:00:00Z",
+      "role": "short",
+      "title": "Race Car vs Erupting Lava Road! Can Nitro Make It? 🌋🔥 NEW 3D Graphics | Ep. 115 #Shorts",
+      "upload_started": "2026-11-06T05:00:22.699396+00:00",
+      "url": "https://www.youtube.com/shorts/W5fQ0Cj2Abs"
+    },
+    {
+      "episode": 118,
+      "video_id": "MW_RACE_3D_S237",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-08T20:00:00Z",
+      "role": "race",
+      "title": "Buster vs the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 118 #Shorts",
+      "upload_started": "2026-11-08T14:25:42.642209+00:00",
+      "url": "https://www.youtube.com/shorts/FfqULpJd2cA"
+    },
+    {
+      "episode": 122,
+      "video_id": "MW_SMASH_3D_S048",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-09T00:00:00Z",
+      "role": "smash",
+      "title": "4 Cars Enter the Sea Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 122 #Shorts",
+      "upload_started": "2026-11-08T14:25:50.944718+00:00",
+      "url": "https://www.youtube.com/shorts/f1yKrndR86w"
+    },
+    {
+      "episode": 116,
+      "video_id": "MW_POTHOLES_3D_S124",
+      "status": "DELETED",
+      "publish_at_utc": "2026-11-09T16:00:00Z",
+      "role": "short",
+      "title": "Can Tilly Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 116 #Shorts",
+      "upload_started": "2026-11-06T05:00:29.639067+00:00",
+      "url": "https://www.youtube.com/shorts/sFB6TsArNw0",
+      "deleted_at": "2026-11-09T23:21:16.292070Z",
+      "deleted_reason": "owner 2026-11-10: not fit to air"
+    },
+    {
+      "episode": 119,
+      "video_id": "MW_RACE_3D_S379",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-09T20:00:00Z",
+      "role": "race",
+      "title": "Will Siren Make It Past the Giant Hammer? 🏁 NEW 3D Graphics | Ep. 119 #Shorts",
+      "upload_started": "2026-11-08T14:26:04.256020+00:00",
+      "url": "https://www.youtube.com/shorts/HrtpeinSfxY"
+    },
+    {
+      "episode": 123,
+      "video_id": "MW_SMASH_3D_S073",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-10T00:00:00Z",
+      "role": "smash",
+      "title": "Titan, Rocky, Nitro or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 123 #Shorts",
+      "upload_started": "2026-11-08T14:26:11.050530+00:00",
+      "url": "https://www.youtube.com/shorts/1hpNM4IhFno"
+    },
+    {
+      "episode": 99,
+      "video_id": "SIM_DUNGEON_V2_S029",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-10T16:00:00Z",
+      "role": "short",
+      "title": "Will Siren the Police Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 99 #Shorts",
+      "upload_started": "2026-10-21T05:00:30.296191+00:00",
+      "url": "https://www.youtube.com/shorts/-AXUqUCBwBk"
+    },
+    {
+      "episode": 120,
+      "video_id": "MW_RACE_3D_S381",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-10T20:00:00Z",
+      "role": "race",
+      "title": "Will Zippy Make It Past the Oil Slick? 🏁 NEW 3D Graphics | Ep. 120 #Shorts",
+      "upload_started": "2026-11-08T14:26:20.720642+00:00",
+      "url": "https://www.youtube.com/shorts/IemgtFt_1Ts"
+    },
+    {
+      "episode": 124,
+      "video_id": "MW_SMASH_3D_S104",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-11T00:00:00Z",
+      "role": "smash",
+      "title": "Titan, Grizzly, Nitro or Zippy? Last Car Standing! 💥 NEW 3D Graphics | Ep. 124 #Shorts",
+      "upload_started": "2026-11-09T05:00:07.133292+00:00",
+      "url": "https://www.youtube.com/shorts/vWLM-GWwbwI"
+    },
+    {
+      "episode": 117,
+      "video_id": "MW_SPLASH_3D_S121",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-11T16:00:00Z",
+      "role": "short",
+      "title": "Taxi vs Slippery Splash Zone! Can Tilly Make It? 💦🚗 NEW 3D Graphics | Ep. 117 #Shorts",
+      "upload_started": "2026-11-09T05:00:16.943066+00:00",
+      "url": "https://www.youtube.com/shorts/tjQbP65Qmew"
+    },
+    {
+      "episode": 121,
+      "video_id": "MW_RACE_3D_S528",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-11T20:00:00Z",
+      "role": "race",
+      "title": "Siren Meets Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 121 #Shorts",
+      "upload_started": "2026-11-09T05:00:27.857877+00:00",
+      "url": "https://www.youtube.com/shorts/xQLXPQbK73Q"
+    },
+    {
+      "episode": 125,
+      "video_id": "MW_SMASH_3D_S109",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-12T00:00:00Z",
+      "role": "smash",
+      "title": "Sprinkles, Rocky, Zippy or Nitro? Last Car Standing! 💥 NEW 3D Graphics | Ep. 125 #Shorts",
+      "upload_started": "2026-11-09T05:00:34.216083+00:00",
+      "url": "https://www.youtube.com/shorts/-bzDMtN-75s"
+    },
+    {
+      "episode": 127,
+      "video_id": "MW_LAVA_POTHOLES_3D_S136",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-12T16:00:00Z",
+      "role": "short"
+    },
+    {
+      "episode": 126,
+      "video_id": "MW_SMASH_3D_S140",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-13T00:00:00Z",
+      "role": "smash",
+      "title": "Sprinkles, Grizzly, Tilly or Siren? Last Car Standing! 💥 NEW 3D Graphics | Ep. 126 #Shorts",
+      "upload_started": "2026-11-09T05:00:44.657995+00:00",
+      "url": "https://www.youtube.com/shorts/1U2YEYgAjyg"
+    },
+    {
+      "episode": 128,
+      "video_id": "MW_SPLASH_3D_S161",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-13T16:00:00Z",
+      "role": "short"
+    },
+    {
+      "episode": 132,
+      "video_id": "MW_SMASH_3D_S194",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-14T00:00:00Z",
+      "role": "smash"
+    },
+    {
+      "episode": 129,
+      "video_id": "MW_POTHOLES_3D_S163",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-14T16:00:00Z",
+      "role": "short"
+    },
+    {
+      "episode": 133,
+      "video_id": "MW_SMASH_3D_S256",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-15T00:00:00Z",
+      "role": "smash"
+    },
+    {
+      "episode": 130,
+      "video_id": "MW_BUMPS_3D_S164",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-15T16:00:00Z",
+      "role": "short"
+    },
+    {
+      "episode": 134,
+      "video_id": "MW_SMASH_3D_S193",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-16T00:00:00Z",
+      "role": "smash"
+    },
+    {
+      "episode": 131,
+      "video_id": "MW_LAVA_3D_S162",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-16T16:00:00Z",
+      "role": "short"
+    },
+    {
+      "episode": 135,
+      "video_id": "MW_SMASH_3D_S187",
+      "status": "QUEUED",
+      "publish_at_utc": "2026-11-17T00:00:00Z",
+      "role": "smash"
+    },
+    {
+      "episode": 100,
+      "video_id": "SIM_DUNGEON_V2_S031",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-17T16:00:00Z",
+      "role": "short",
+      "title": "Sports Car vs Deadly Dungeon Traps! Can Zippy Make It? 🪓🌋 NEW 3D Graphics | Ep. 100 #Shorts",
+      "upload_started": "2026-10-21T05:00:37.632200+00:00",
+      "url": "https://www.youtube.com/shorts/30CLnhlfxQI"
+    },
+    {
+      "episode": 101,
+      "video_id": "SIM_DUNGEON_V2_S032",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-11-24T16:00:00Z",
+      "role": "short",
+      "title": "Will Tilly the Taxi Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 101 #Shorts",
+      "upload_started": "2026-10-22T05:00:06.585201+00:00",
+      "url": "https://www.youtube.com/shorts/zxPurjmlF6w"
+    },
+    {
+      "episode": 102,
+      "video_id": "SIM_DUNGEON_V2_S038",
+      "status": "SCHEDULED",
+      "publish_at_utc": "2026-12-01T16:00:00Z",
+      "role": "short",
+      "title": "Can Zippy the Sports Car Survive 5 Deadly Dungeon Traps? 🌋🪓 NEW 3D Graphics | Ep. 102 #Shorts",
+      "upload_started": "2026-10-22T05:00:17.016270+00:00",
+      "url": "https://www.youtube.com/shorts/U3oGHMwFI0I"
+    }
+  ]
+}

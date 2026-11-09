@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-09 11:06) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-09 23:51) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -112,10 +112,10 @@
 | 96 | `SIM_DOMINO_V2_S003` | domino | UPLOADED_SCHEDULED 2026-11-01T16:00:00Z | Sun 2026-11-01 11:00 | https://www.youtube.com/shorts/uHkmWJYEZvA |
 | 97 | `SIM_PINBALL_V2_S006` | pinball | UPLOADED_SCHEDULED 2026-11-02T16:00:00Z | Mon 2026-11-02 11:00 | https://www.youtube.com/shorts/SaMAPLv7ErM |
 | 98 | `SIM_DUNGEON_V2_S026` | dungeon | UPLOADED_SCHEDULED 2026-11-03T16:00:00Z | Tue 2026-11-03 11:00 | https://www.youtube.com/shorts/MsN81LV_nP4 |
-| 99 | `SIM_DUNGEON_V2_S029` | dungeon | UPLOADED_SCHEDULED 2026-11-10T16:00:00Z | Tue 2026-11-10 11:00 | https://www.youtube.com/shorts/-AXUqUCBwBk |
-| 100 | `SIM_DUNGEON_V2_S031` | dungeon | UPLOADED_SCHEDULED 2026-11-17T16:00:00Z | Tue 2026-11-17 11:00 | https://www.youtube.com/shorts/30CLnhlfxQI |
-| 101 | `SIM_DUNGEON_V2_S032` | dungeon | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | Tue 2026-11-24 11:00 | https://www.youtube.com/shorts/zxPurjmlF6w |
-| 102 | `SIM_DUNGEON_V2_S038` | dungeon | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | Tue 2026-12-01 11:00 | https://www.youtube.com/shorts/U3oGHMwFI0I |
+| 99 | `SIM_DUNGEON_V2_S029` | dungeon | UPLOADED_SCHEDULED 2026-11-10T16:00:00Z | Mon 2026-11-09 18:23 | https://www.youtube.com/shorts/-AXUqUCBwBk |
+| 100 | `SIM_DUNGEON_V2_S031` | dungeon | UPLOADED_SCHEDULED 2026-11-17T16:00:00Z | Mon 2026-11-16 11:00 | https://www.youtube.com/shorts/30CLnhlfxQI |
+| 101 | `SIM_DUNGEON_V2_S032` | dungeon | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | Mon 2026-11-23 11:00 | https://www.youtube.com/shorts/zxPurjmlF6w |
+| 102 | `SIM_DUNGEON_V2_S038` | dungeon | UPLOADED_SCHEDULED 2026-12-01T16:00:00Z | Mon 2026-11-30 11:00 | https://www.youtube.com/shorts/U3oGHMwFI0I |
 | 103 | `SIM_SPLASH_V2_S013` | splash | UPLOADED_SCHEDULED 2026-11-04T16:00:00Z | Wed 2026-11-04 11:00 | https://www.youtube.com/shorts/qLmoNh8nyEU |
 | 104 | `MW_SPLASH_3D_S021` | splash | UPLOADED_SCHEDULED 2026-11-05T16:00:00Z | Thu 2026-11-05 11:00 | https://www.youtube.com/shorts/0qVPxSCaBUI |
 | 105 | `MW_RACE_3D_S071` | race25d | UPLOADED_SCHEDULED 2026-11-03T20:00:00Z | Tue 2026-11-03 15:00 | https://www.youtube.com/shorts/CmFaZq12F6c |
@@ -129,8 +129,8 @@
 | 113 | `MW_BUMPS_3D_S040` | bumps | UPLOADED_SCHEDULED 2026-11-06T16:00:00Z | Fri 2026-11-06 11:00 | https://www.youtube.com/shorts/M-eAqay4M4Q |
 | 114 | `MW_POTHOLES_3D_S041` | potholes | UPLOADED_SCHEDULED 2026-11-07T16:00:00Z | Sat 2026-11-07 11:00 | https://www.youtube.com/shorts/mzSJunAcKWU |
 | 115 | `MW_LAVA_3D_S043` | lava | UPLOADED_SCHEDULED 2026-11-08T16:00:00Z | Sun 2026-11-08 11:00 | https://www.youtube.com/shorts/W5fQ0Cj2Abs |
-| 116 | `MW_POTHOLES_3D_S124` | potholes | UPLOADED_SCHEDULED 2026-11-09T16:00:00Z | Mon 2026-11-09 11:00 | https://www.youtube.com/shorts/sFB6TsArNw0 |
-| 117 | `MW_SPLASH_3D_S121` | splash | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | Wed 2026-11-11 11:00 | https://www.youtube.com/shorts/tjQbP65Qmew |
+| 116 | `MW_POTHOLES_3D_S124` | potholes | DELETED_FROM_YOUTUBE | Mon 2026-11-09 11:00 | https://www.youtube.com/shorts/sFB6TsArNw0 |
+| 117 | `MW_SPLASH_3D_S121` | splash | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | Tue 2026-11-10 11:00 | https://www.youtube.com/shorts/tjQbP65Qmew |
 | 118 | `MW_RACE_3D_S237` | race25d | UPLOADED_SCHEDULED 2026-11-08T20:00:00Z | Sun 2026-11-08 15:00 | https://www.youtube.com/shorts/FfqULpJd2cA |
 | 119 | `MW_RACE_3D_S379` | race25d | UPLOADED_SCHEDULED 2026-11-09T20:00:00Z | Mon 2026-11-09 15:00 | https://www.youtube.com/shorts/HrtpeinSfxY |
 | 120 | `MW_RACE_3D_S381` | race25d | UPLOADED_SCHEDULED 2026-11-10T20:00:00Z | Tue 2026-11-10 15:00 | https://www.youtube.com/shorts/IemgtFt_1Ts |
@@ -140,15 +140,20 @@
 | 124 | `MW_SMASH_3D_S104` | smash25d | UPLOADED_SCHEDULED 2026-11-11T00:00:00Z | Tue 2026-11-10 19:00 | https://www.youtube.com/shorts/vWLM-GWwbwI |
 | 125 | `MW_SMASH_3D_S109` | smash25d | UPLOADED_SCHEDULED 2026-11-12T00:00:00Z | Wed 2026-11-11 19:00 | https://www.youtube.com/shorts/-bzDMtN-75s |
 | 126 | `MW_SMASH_3D_S140` | smash25d | UPLOADED_SCHEDULED 2026-11-13T00:00:00Z | Thu 2026-11-12 19:00 | https://www.youtube.com/shorts/1U2YEYgAjyg |
-| 127 | `MW_LAVA_POTHOLES_3D_S136` | lava_potholes | APPROVED | Thu 2026-11-12 11:00 |  |
-| 128 | `MW_SPLASH_3D_S161` | splash | APPROVED | Fri 2026-11-13 11:00 |  |
-| 129 | `MW_POTHOLES_3D_S163` | potholes | APPROVED | Sat 2026-11-14 11:00 |  |
-| 130 | `MW_BUMPS_3D_S164` | bumps | APPROVED | Sun 2026-11-15 11:00 |  |
-| 131 | `MW_LAVA_3D_S162` | lava | APPROVED | Mon 2026-11-16 11:00 |  |
+| 127 | `MW_LAVA_POTHOLES_3D_S136` | lava_potholes | APPROVED | Wed 2026-11-11 11:00 |  |
+| 128 | `MW_SPLASH_3D_S161` | splash | APPROVED | Thu 2026-11-12 11:00 |  |
+| 129 | `MW_POTHOLES_3D_S163` | potholes | APPROVED | Fri 2026-11-13 11:00 |  |
+| 130 | `MW_BUMPS_3D_S164` | bumps | APPROVED | Sat 2026-11-14 11:00 |  |
+| 131 | `MW_LAVA_3D_S162` | lava | APPROVED | Sun 2026-11-15 11:00 |  |
 | 132 | `MW_SMASH_3D_S194` | smash25d | APPROVED | Fri 2026-11-13 19:00 |  |
 | 133 | `MW_SMASH_3D_S256` | smash25d | APPROVED | Sat 2026-11-14 19:00 |  |
 | 134 | `MW_SMASH_3D_S193` | smash25d | APPROVED | Sun 2026-11-15 19:00 |  |
 | 135 | `MW_SMASH_3D_S187` | smash25d | APPROVED | Mon 2026-11-16 19:00 |  |
+| 136 | `MW_RACE_3D_S640` | race25d | APPROVED | Thu 2026-11-12 15:00 |  |
+| 137 | `MW_RACE_3D_S743` | race25d | APPROVED | Fri 2026-11-13 15:00 |  |
+| 138 | `MW_RACE_3D_S1153` | race25d | APPROVED | Sat 2026-11-14 15:00 |  |
+| 139 | `MW_RACE_3D_S536` | race25d | APPROVED | Sun 2026-11-15 15:00 |  |
+| 140 | `MW_RACE_3D_S539` | race25d | APPROVED | Mon 2026-11-16 15:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1439,7 +1444,7 @@
 - **Durasi:** 51.27 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → pit@obs2; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Nitro (f1) → win
 - **Status:** UPLOADED_SCHEDULED 2026-11-10T16:00:00Z (approve 2026-10-11)
-- **Antrian:** SCHEDULED 2026-11-10T16:00:00Z
+- **Antrian:** SCHEDULED 2026-11-09T23:23:30Z
 - **YouTube:** https://www.youtube.com/shorts/-AXUqUCBwBk
 
 ## Ep. 100 — `SIM_DUNGEON_V2_S031`
@@ -1452,7 +1457,7 @@
 - **Durasi:** 57.9 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → smash@obs1+broken; Level 2: Hydro (firetruck) → pit@obs2+broken; Level 3 (juara): Nitro (f1) → win
 - **Status:** UPLOADED_SCHEDULED 2026-11-17T16:00:00Z (approve 2026-10-11)
-- **Antrian:** SCHEDULED 2026-11-17T16:00:00Z
+- **Antrian:** SCHEDULED 2026-11-16T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/30CLnhlfxQI
 
 ## Ep. 101 — `SIM_DUNGEON_V2_S032`
@@ -1465,7 +1470,7 @@
 - **Durasi:** 57.9 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs2+broken; Level 2: Buster (bus) → chop@obs0+broken; Level 3 (juara): Sprinkles (icecream) → win
 - **Status:** UPLOADED_SCHEDULED 2026-11-24T16:00:00Z (approve 2026-10-11)
-- **Antrian:** SCHEDULED 2026-11-24T16:00:00Z
+- **Antrian:** SCHEDULED 2026-11-23T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/zxPurjmlF6w
 
 ## Ep. 102 — `SIM_DUNGEON_V2_S038`
@@ -1478,7 +1483,7 @@
 - **Durasi:** 53.33 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → pit@obs2+broken; Level 2: Titan (bigrig) → chop@obs0+broken; Level 3 (juara): Zippy (sports) → win
 - **Status:** UPLOADED_SCHEDULED 2026-12-01T16:00:00Z (approve 2026-10-20)
-- **Antrian:** SCHEDULED 2026-12-01T16:00:00Z
+- **Antrian:** SCHEDULED 2026-11-30T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/U3oGHMwFI0I
 
 ## Ep. 103 — `SIM_SPLASH_V2_S013`
@@ -1659,8 +1664,8 @@
 - **Tema / narator:** night-snow-mountains / 
 - **Durasi:** 52.4 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → rollback@obs0; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Buster (bus) → win
-- **Status:** UPLOADED_SCHEDULED 2026-11-09T16:00:00Z (approve 2026-11-05)
-- **Antrian:** SCHEDULED 2026-11-09T16:00:00Z
+- **Status:** DELETED_FROM_YOUTUBE (approve 2026-11-05)
+- **Antrian:** DELETED 2026-11-09T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/sFB6TsArNw0
 
 ## Ep. 117 — `MW_SPLASH_3D_S121`
@@ -1673,7 +1678,7 @@
 - **Durasi:** 57.6 s
 - **Tokoh dan hasil:** Level 1: Tilly (taxi) → crash@obs0; Level 2: Sprinkles (icecream) → rollback@obs1; Level 3 (juara): Rocky (monster) → win
 - **Status:** UPLOADED_SCHEDULED 2026-11-11T16:00:00Z (approve 2026-11-08)
-- **Antrian:** SCHEDULED 2026-11-11T16:00:00Z
+- **Antrian:** SCHEDULED 2026-11-10T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/tjQbP65Qmew
 
 ## Ep. 118 — `MW_RACE_3D_S237`
@@ -1803,7 +1808,7 @@
 - **Durasi:** 49.67 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → rollback@obs0; Level 2: Hydro (firetruck) → stuck@obs1; Level 3 (juara): Sprinkles (icecream) → win
 - **Status:** APPROVED (approve 2026-11-09)
-- **Antrian:** QUEUED 2026-11-12T16:00:00Z
+- **Antrian:** QUEUED 2026-11-11T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 128 — `MW_SPLASH_3D_S161`
@@ -1816,7 +1821,7 @@
 - **Durasi:** 49.6 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → crash@obs0; Level 2: Titan (bigrig) → stuck@obs1; Level 3 (juara): Grizzly (monster2) → win
 - **Status:** APPROVED (approve 2026-11-09)
-- **Antrian:** QUEUED 2026-11-13T16:00:00Z
+- **Antrian:** QUEUED 2026-11-12T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 129 — `MW_POTHOLES_3D_S163`
@@ -1829,7 +1834,7 @@
 - **Durasi:** 56.5 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs0; Level 2: Hydro (firetruck) → stuck@obs1; Level 3 (juara): Titan (bigrig) → win
 - **Status:** APPROVED (approve 2026-11-09)
-- **Antrian:** QUEUED 2026-11-14T16:00:00Z
+- **Antrian:** QUEUED 2026-11-13T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 130 — `MW_BUMPS_3D_S164`
@@ -1842,7 +1847,7 @@
 - **Durasi:** 50.33 s
 - **Tokoh dan hasil:** Level 1: Siren (police) → flip@obs0; Level 2: Buster (bus) → stuck@obs1; Level 3 (juara): Rocky (monster) → win
 - **Status:** APPROVED (approve 2026-11-09)
-- **Antrian:** QUEUED 2026-11-15T16:00:00Z
+- **Antrian:** QUEUED 2026-11-14T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 131 — `MW_LAVA_3D_S162`
@@ -1855,7 +1860,7 @@
 - **Durasi:** 49.9 s
 - **Tokoh dan hasil:** Level 1: Nitro (f1) → pit@obs0; Level 2: Sprinkles (icecream) → stuck@obs1; Level 3 (juara): Hydro (firetruck) → win
 - **Status:** APPROVED (approve 2026-11-09)
-- **Antrian:** QUEUED 2026-11-16T16:00:00Z
+- **Antrian:** QUEUED 2026-11-15T16:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 132 — `MW_SMASH_3D_S194`
@@ -1908,6 +1913,71 @@
 - **Tokoh dan hasil:** Level 1: Titan (bigrig) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Nitro (f1) → p3+wreck; Level 4: Siren (police) → p2+wreck
 - **Status:** APPROVED (approve 2026-11-09)
 - **Antrian:** QUEUED 2026-11-17T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 136 — `MW_RACE_3D_S640`
+
+- **Judul YouTube:** Can Titan Survive the UFO? 🏁 NEW 3D Graphics | Ep. 136 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E136_2026-11-09_race25d/MW_RACE_3D_S640.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E136_2026-11-09_race25d/MW_RACE_3D_S640.json` · audit: `renders/megawheel_arena/S05/E136_2026-11-09_race25d/MW_RACE_3D_S640_audit.md`
+- **Season / seri / seed:** S05 / race25d / 640
+- **Tema / narator:** noon-clear-mountains / 
+- **Durasi:** 34.1 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+ufo; Level 2: Grizzly (monster2) → p2; Level 3 (juara): Nitro (f1) → p3+wall+dodge; Level 4: Tilly (taxi) → win
+- **Status:** APPROVED (approve 2026-11-09)
+- **Antrian:** QUEUED 2026-11-12T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 137 — `MW_RACE_3D_S743`
+
+- **Judul YouTube:** Can Rocky Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 137 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E137_2026-11-09_race25d/MW_RACE_3D_S743.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E137_2026-11-09_race25d/MW_RACE_3D_S743.json` · audit: `renders/megawheel_arena/S05/E137_2026-11-09_race25d/MW_RACE_3D_S743_audit.md`
+- **Season / seri / seed:** S05 / race25d / 743
+- **Tema / narator:** morning-rain-countryside / 
+- **Durasi:** 32.6 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2; Level 2: Rocky (monster) → p4+dragon_ice; Level 3 (juara): Tilly (taxi) → p3+laser+dodge; Level 4: Zippy (sports) → win
+- **Status:** APPROVED (approve 2026-11-09)
+- **Antrian:** QUEUED 2026-11-13T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 138 — `MW_RACE_3D_S1153`
+
+- **Judul YouTube:** Nitro Meets the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 138 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E138_2026-11-09_race25d/MW_RACE_3D_S1153.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E138_2026-11-09_race25d/MW_RACE_3D_S1153.json` · audit: `renders/megawheel_arena/S05/E138_2026-11-09_race25d/MW_RACE_3D_S1153_audit.md`
+- **Season / seri / seed:** S05 / race25d / 1153
+- **Tema / narator:** night-clear-city / 
+- **Durasi:** 32.53 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → win; Level 2: Rocky (monster) → p2+dodge; Level 3 (juara): Nitro (f1) → p4+hammer; Level 4: Tilly (taxi) → p3+puddle
+- **Status:** APPROVED (approve 2026-11-09)
+- **Antrian:** QUEUED 2026-11-14T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 139 — `MW_RACE_3D_S536`
+
+- **Judul YouTube:** Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics | Ep. 139 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E139_2026-11-09_race25d/MW_RACE_3D_S536.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E139_2026-11-09_race25d/MW_RACE_3D_S536.json` · audit: `renders/megawheel_arena/S05/E139_2026-11-09_race25d/MW_RACE_3D_S536_audit.md`
+- **Season / seri / seed:** S05 / race25d / 536
+- **Tema / narator:** morning-clear-desert / 
+- **Durasi:** 34.83 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p2; Level 2: Grizzly (monster2) → win; Level 3 (juara): Tilly (taxi) → p3+oil; Level 4: Zippy (sports) → p4+crusher+dodge
+- **Status:** APPROVED (approve 2026-11-09)
+- **Antrian:** QUEUED 2026-11-15T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 140 — `MW_RACE_3D_S539`
+
+- **Judul YouTube:** Can Zippy Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 140 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E140_2026-11-09_race25d/MW_RACE_3D_S539.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E140_2026-11-09_race25d/MW_RACE_3D_S539.json` · audit: `renders/megawheel_arena/S05/E140_2026-11-09_race25d/MW_RACE_3D_S539_audit.md`
+- **Season / seri / seed:** S05 / race25d / 539
+- **Tema / narator:** night-clear-beach / 
+- **Durasi:** 33.51 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2; Level 2: Rocky (monster) → win; Level 3 (juara): Nitro (f1) → p4+ufo+dodge; Level 4: Zippy (sports) → p3+dragon_ice
+- **Status:** APPROVED (approve 2026-11-09)
+- **Antrian:** QUEUED 2026-11-16T20:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`

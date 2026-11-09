@@ -7633,7 +7633,7 @@
       ],
       "theme": "night-snow-mountains",
       "track_id": "potholes_scan124@night-snow-mountains",
-      "status": "UPLOADED_SCHEDULED 2026-11-09T16:00:00Z",
+      "status": "DELETED_FROM_YOUTUBE",
       "duration": 52.4,
       "outcomes": [
         "rollback@obs0",
@@ -7654,7 +7654,9 @@
       "drive_id": "10DSh6Z0T4qS6em5yH0DAV8rWXLYtEAgP",
       "drive_path": "me/ai-develop/ipandu-video/archive/S04/E116_MW_POTHOLES_3D_S124.mp4",
       "approved_date": "2026-11-05",
-      "title": "Can Tilly Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 116 #Shorts"
+      "title": "Can Tilly Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 116 #Shorts",
+      "deleted_date": "2026-11-10",
+      "deleted_reason": "owner 2026-11-10: not fit to air; removed from channel (was sFB6TsArNw0, 8 views)"
     },
     {
       "video_id": "MW_SMASH_3D_S048",
@@ -8070,7 +8072,7 @@
       ],
       "theme": "noon-clear-mountains",
       "track_id": "race25d_scan640@noon-clear-mountains",
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "duration": 34.1,
       "outcomes": [
         "p4+ufo",
@@ -8088,16 +8090,18 @@
       "created": "2026-11-09",
       "render_date": "2026-11-09",
       "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-09_race3d_s640",
-      "audit": "renders/megawheel_arena/pending/2026-11-09_race3d_s640/MW_RACE_3D_S640_audit.md",
+      "folder": "renders/megawheel_arena/S05/E136_2026-11-09_race25d",
+      "audit": "renders/megawheel_arena/S05/E136_2026-11-09_race25d/MW_RACE_3D_S640_audit.md",
       "title_base": "Can Titan Survive the UFO? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
+      "episode": 136,
+      "season": 5,
       "upload_date": null,
       "youtube_url": null,
       "staged_at": 1794204156.3,
       "drive_id": "1OKt7Tn-6g7Ik08PbZklZRE3ZgEyjtVWH",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S640.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E136_MW_RACE_3D_S640.mp4",
+      "approved_date": "2026-11-09",
+      "title": "Can Titan Survive the UFO? 🏁 NEW 3D Graphics | Ep. 136 #Shorts"
     },
     {
       "video_id": "MW_RACE_3D_S550",
@@ -8615,7 +8619,7 @@
       ],
       "theme": "morning-rain-countryside",
       "track_id": "race25d_scan743@morning-rain-countryside",
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "duration": 32.6,
       "outcomes": [
         "p2",
@@ -8633,16 +8637,18 @@
       "created": "2026-11-09",
       "render_date": "2026-11-09",
       "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-09_race3d_s743",
-      "audit": "renders/megawheel_arena/pending/2026-11-09_race3d_s743/MW_RACE_3D_S743_audit.md",
+      "folder": "renders/megawheel_arena/S05/E137_2026-11-09_race25d",
+      "audit": "renders/megawheel_arena/S05/E137_2026-11-09_race25d/MW_RACE_3D_S743_audit.md",
       "title_base": "Can Rocky Survive the Ice Dragon? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
+      "episode": 137,
+      "season": 5,
       "upload_date": null,
       "youtube_url": null,
       "staged_at": 1794233712.2,
       "drive_id": "1N890wtegqkMEaEfGS5kfbDT1MBVSsTrN",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S743.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E137_MW_RACE_3D_S743.mp4",
+      "approved_date": "2026-11-09",
+      "title": "Can Rocky Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 137 #Shorts"
     },
     {
       "video_id": "MW_RACE_3D_S1153",
@@ -8657,7 +8663,7 @@
       ],
       "theme": "night-clear-city",
       "track_id": "race25d_scan1153@night-clear-city",
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "duration": 32.53,
       "outcomes": [
         "win",
@@ -8675,16 +8681,18 @@
       "created": "2026-11-09",
       "render_date": "2026-11-09",
       "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-09_race3d_s1153",
-      "audit": "renders/megawheel_arena/pending/2026-11-09_race3d_s1153/MW_RACE_3D_S1153_audit.md",
+      "folder": "renders/megawheel_arena/S05/E138_2026-11-09_race25d",
+      "audit": "renders/megawheel_arena/S05/E138_2026-11-09_race25d/MW_RACE_3D_S1153_audit.md",
       "title_base": "Nitro Meets the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
+      "episode": 138,
+      "season": 5,
       "upload_date": null,
       "youtube_url": null,
       "staged_at": 1794233712.3,
       "drive_id": "1SGYq9dPjyNZq7AgHbi0GtAEOCOIfBe91",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S1153.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E138_MW_RACE_3D_S1153.mp4",
+      "approved_date": "2026-11-09",
+      "title": "Nitro Meets the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 138 #Shorts"
     },
     {
       "video_id": "MW_RACE_3D_S536",
@@ -8699,7 +8707,7 @@
       ],
       "theme": "morning-clear-desert",
       "track_id": "race25d_scan536@morning-clear-desert",
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "duration": 34.83,
       "outcomes": [
         "p2",
@@ -8717,16 +8725,18 @@
       "created": "2026-11-09",
       "render_date": "2026-11-09",
       "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-09_race3d_s536",
-      "audit": "renders/megawheel_arena/pending/2026-11-09_race3d_s536/MW_RACE_3D_S536_audit.md",
+      "folder": "renders/megawheel_arena/S05/E139_2026-11-09_race25d",
+      "audit": "renders/megawheel_arena/S05/E139_2026-11-09_race25d/MW_RACE_3D_S536_audit.md",
       "title_base": "Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
+      "episode": 139,
+      "season": 5,
       "upload_date": null,
       "youtube_url": null,
       "staged_at": 1794233712.3,
       "drive_id": "1slQp5xYe5GctR7p3CdFgPcH52qk9mV24",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S536.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E139_MW_RACE_3D_S536.mp4",
+      "approved_date": "2026-11-09",
+      "title": "Can Tilly Survive the Oil Slick? 🏁 NEW 3D Graphics | Ep. 139 #Shorts"
     },
     {
       "video_id": "MW_RACE_3D_S539",
@@ -8741,7 +8751,7 @@
       ],
       "theme": "night-clear-beach",
       "track_id": "race25d_scan539@night-clear-beach",
-      "status": "RENDERED_PENDING_APPROVAL",
+      "status": "APPROVED",
       "duration": 33.51,
       "outcomes": [
         "p2",
@@ -8759,16 +8769,18 @@
       "created": "2026-11-09",
       "render_date": "2026-11-09",
       "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-09_race3d_s539",
-      "audit": "renders/megawheel_arena/pending/2026-11-09_race3d_s539/MW_RACE_3D_S539_audit.md",
+      "folder": "renders/megawheel_arena/S05/E140_2026-11-09_race25d",
+      "audit": "renders/megawheel_arena/S05/E140_2026-11-09_race25d/MW_RACE_3D_S539_audit.md",
       "title_base": "Can Zippy Survive the Ice Dragon? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
+      "episode": 140,
+      "season": 5,
       "upload_date": null,
       "youtube_url": null,
       "staged_at": 1794233712.3,
       "drive_id": "1J_o4SWdvcfF4Jwi2mLf8Oo02P0nGotMY",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S539.mp4"
+      "drive_path": "me/ai-develop/ipandu-video/review/approved/E140_MW_RACE_3D_S539.mp4",
+      "approved_date": "2026-11-09",
+      "title": "Can Zippy Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 140 #Shorts"
     }
   ]
 }
