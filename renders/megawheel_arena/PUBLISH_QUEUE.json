@@ -1218,37 +1218,52 @@
   {
    "episode": 124,
    "video_id": "MW_SMASH_3D_S104",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-11T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Grizzly, Nitro or Zippy? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 124 #Shorts",
+   "upload_started": "2026-11-09T05:00:07.133292+00:00",
+   "url": "https://www.youtube.com/shorts/vWLM-GWwbwI"
   },
   {
    "episode": 117,
    "video_id": "MW_SPLASH_3D_S121",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-11T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Taxi vs Slippery Splash Zone! Can Tilly Make It? \ud83d\udca6\ud83d\ude97 NEW 3D Graphics | Ep. 117 #Shorts",
+   "upload_started": "2026-11-09T05:00:16.943066+00:00",
+   "url": "https://www.youtube.com/shorts/tjQbP65Qmew"
   },
   {
    "episode": 121,
    "video_id": "MW_RACE_3D_S528",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-11T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Siren Meets Falling Containers! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 121 #Shorts",
+   "upload_started": "2026-11-09T05:00:27.857877+00:00",
+   "url": "https://www.youtube.com/shorts/xQLXPQbK73Q"
   },
   {
    "episode": 125,
    "video_id": "MW_SMASH_3D_S109",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-12T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Rocky, Zippy or Nitro? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 125 #Shorts",
+   "upload_started": "2026-11-09T05:00:34.216083+00:00",
+   "url": "https://www.youtube.com/shorts/-bzDMtN-75s"
   },
   {
    "episode": 126,
    "video_id": "MW_SMASH_3D_S140",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-13T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Grizzly, Tilly or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 126 #Shorts",
+   "upload_started": "2026-11-09T05:00:44.657995+00:00",
+   "url": "https://www.youtube.com/shorts/1U2YEYgAjyg"
   },
   {
    "episode": 100,

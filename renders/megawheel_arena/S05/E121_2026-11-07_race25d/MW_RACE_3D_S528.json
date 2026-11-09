@@ -1,6 +1,6 @@
 {
   "video_id": "MW_RACE_3D_S528",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-11T20:00:00Z",
   "series": "race25d",
   "seed": 528,
   "render3d": true,
@@ -40,5 +40,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 121,
   "season": 5,
-  "approved_date": "2026-11-08"
+  "approved_date": "2026-11-08",
+  "youtube_url": "https://www.youtube.com/shorts/xQLXPQbK73Q",
+  "upload_date": "2026-11-09"
 }

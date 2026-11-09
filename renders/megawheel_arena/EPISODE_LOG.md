@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-08 14:26). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-09 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -123,16 +123,16 @@
 | 114 | S04 | potholes | Zippy, Hydro, Titan | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-07T16:00:00Z | https://www.youtube.com/shorts/mzSJunAcKWU |  |  |  |  |
 | 115 | S04 | lava | Nitro, Buster, Hydro | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-08T16:00:00Z | https://www.youtube.com/shorts/W5fQ0Cj2Abs |  |  |  |  |
 | 116 | S04 | potholes | Tilly, Titan, Buster | 2026-11-05 | 2026-11-05 | 2026-11-06 | UPLOADED_SCHEDULED 2026-11-09T16:00:00Z | https://www.youtube.com/shorts/sFB6TsArNw0 |  |  |  |  |
-| 117 | S04 | splash | Tilly, Sprinkles, Rocky | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 117 | S04 | splash | Tilly, Sprinkles, Rocky | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | https://www.youtube.com/shorts/tjQbP65Qmew |  |  |  |  |
 | 118 | S04 | race25d | Buster, Grizzly, Siren, Zippy | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-08T20:00:00Z | https://www.youtube.com/shorts/FfqULpJd2cA |  |  |  |  |
 | 119 | S04 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-09T20:00:00Z | https://www.youtube.com/shorts/HrtpeinSfxY |  |  |  |  |
 | 120 | S04 | race25d | Hydro, Rocky, Siren, Zippy | 2026-11-07 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-10T20:00:00Z | https://www.youtube.com/shorts/IemgtFt_1Ts |  |  |  |  |
-| 121 | S05 | race25d | Buster, Rocky, Siren, Nitro | 2026-11-07 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 121 | S05 | race25d | Buster, Rocky, Siren, Nitro | 2026-11-07 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-11T20:00:00Z | https://www.youtube.com/shorts/xQLXPQbK73Q |  |  |  |  |
 | 122 | S05 | smash25d | Hydro, Grizzly, Siren, Zippy | 2026-11-05 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-09T00:00:00Z | https://www.youtube.com/shorts/f1yKrndR86w |  |  |  |  |
 | 123 | S05 | smash25d | Titan, Rocky, Nitro, Tilly | 2026-11-05 | 2026-11-08 | 2026-11-08 | UPLOADED_SCHEDULED 2026-11-10T00:00:00Z | https://www.youtube.com/shorts/1hpNM4IhFno |  |  |  |  |
-| 124 | S05 | smash25d | Titan, Grizzly, Nitro, Zippy | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
-| 125 | S05 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
-| 126 | S05 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 2026-11-08 |  | APPROVED |  |  |  |  |  |
+| 124 | S05 | smash25d | Titan, Grizzly, Nitro, Zippy | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-11T00:00:00Z | https://www.youtube.com/shorts/vWLM-GWwbwI |  |  |  |  |
+| 125 | S05 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-12T00:00:00Z | https://www.youtube.com/shorts/-bzDMtN-75s |  |  |  |  |
+| 126 | S05 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-13T00:00:00Z | https://www.youtube.com/shorts/1U2YEYgAjyg |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1003 | S01 | story15 | Sprinkles, Zippy, Rocky, Buster, Siren, Nitro, Hydro | 2026-10-23 | 2026-10-23 | 2026-10-24 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | https://www.youtube.com/shorts/3wtRIEEN4WY |  |  |  |  |
