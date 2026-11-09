@@ -1256,6 +1256,13 @@
    "url": "https://www.youtube.com/shorts/-bzDMtN-75s"
   },
   {
+   "episode": 127,
+   "video_id": "MW_LAVA_POTHOLES_3D_S136",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-12T16:00:00Z",
+   "role": "short"
+  },
+  {
    "episode": 126,
    "video_id": "MW_SMASH_3D_S140",
    "status": "SCHEDULED",
@@ -1264,6 +1271,62 @@
    "title": "Sprinkles, Grizzly, Tilly or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 126 #Shorts",
    "upload_started": "2026-11-09T05:00:44.657995+00:00",
    "url": "https://www.youtube.com/shorts/1U2YEYgAjyg"
+  },
+  {
+   "episode": 128,
+   "video_id": "MW_SPLASH_3D_S161",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-13T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 132,
+   "video_id": "MW_SMASH_3D_S194",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-14T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 129,
+   "video_id": "MW_POTHOLES_3D_S163",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-14T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 133,
+   "video_id": "MW_SMASH_3D_S256",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-15T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 130,
+   "video_id": "MW_BUMPS_3D_S164",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-15T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 134,
+   "video_id": "MW_SMASH_3D_S193",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-16T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 131,
+   "video_id": "MW_LAVA_3D_S162",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-16T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 135,
+   "video_id": "MW_SMASH_3D_S187",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-17T00:00:00Z",
+   "role": "smash"
   },
   {
    "episode": 100,
