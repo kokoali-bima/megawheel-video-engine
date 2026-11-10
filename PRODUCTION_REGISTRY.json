@@ -8781,6 +8781,39 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E140_MW_RACE_3D_S539.mp4",
       "approved_date": "2026-11-09",
       "title": "Can Zippy Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 140 #Shorts"
+    },
+    {
+      "video_id": "MW_POTHOLES_3D_S849",
+      "series": "potholes",
+      "engine_version": "3d",
+      "seed": 849,
+      "vehicles": [
+        "f1",
+        "firetruck",
+        "bigrig"
+      ],
+      "theme": "sunset-clear-desert",
+      "track_id": "potholes_scan849@sunset-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 49.27,
+      "outcomes": [
+        "pit@obs0",
+        "rollback@obs1",
+        "win"
+      ],
+      "created": "2026-11-10",
+      "render_date": "2026-11-10",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s849",
+      "audit": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s849/MW_POTHOLES_3D_S849_audit.md",
+      "title_base": "Can Nitro Survive Giant Potholes? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794286575.7,
+      "drive_id": "1g0OyTPpGiH0kr2lEHF2uYCTlb8X79-Ea",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S849.mp4"
     }
   ]
 }
