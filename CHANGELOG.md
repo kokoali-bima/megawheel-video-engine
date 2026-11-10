@@ -3,14 +3,26 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-10
+**🔧 Lain-lain**
+- `572504a` swap Ep.129: S163 -> S849 (owner 2026-11-10); S163 set private, schedule removed on YouTube (C-069)
+- `fb63269` stage Challenge S849 to replace S163 (Ep.129) after winner clearance sensor C-069
+**📤 Upload / antrean / Drive**
+- `0ad3dbd` publish: daily run 2026-11-10 [cron daily_publish.sh]
+
 ## 2026-11-09
 **🔧 Lain-lain**
+- `6536376` approve Race Ep.136-140 (S640 S743 S1153 S536 S539, owner 2026-11-10); S124 deleted by owner
+- `7db529b` stage Race S743 S1153 S536 S539 (slots 10-13, dodge rule C-065, window 4 C-066)
+- `f9258ef` approve Challenge S136/S161/S163/S164/S162 + Smash S194/S256/S193/S187 (owner 2026-11-09)
+- `11b47ce` stage Challenge 7-10 for review (2026-11-09)
 - `c8d3d3f` stage Race 9-13, Smash 9-12, Challenge 6 for review (2026-11-09)
 - `c5774cc` auto: records left uncommitted before daily run
 **📤 Upload / antrean / Drive**
 - `80f5a61` publish: daily run 2026-11-09 [cron daily_publish.sh]
-<details><summary>otomatis VM (1)</summary>
+<details><summary>otomatis VM (2)</summary>
 
+- `27bf130` analytics: daily report 2026-11-09
 - `8cd78f5` records before analytics
 
 </details>
