@@ -1,6 +1,6 @@
 {
   "video_id": "MW_POTHOLES_3D_S163",
-  "status": "UPLOADED_SCHEDULED 2026-11-13T16:00:00Z",
+  "status": "REPLACED",
   "series": "potholes",
   "seed": 163,
   "render3d": true,
@@ -30,12 +30,13 @@
     "potholes"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-09_potholes/MW_POTHOLES_3D_S163.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-09_potholes/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/E129_2026-11-09_potholes_replaced/MW_POTHOLES_3D_S163.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/E129_2026-11-09_potholes_replaced/preview",
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 129,
   "season": 5,
   "approved_date": "2026-11-09",
   "youtube_url": "https://www.youtube.com/shorts/SjHBY02ANiU",
-  "upload_date": "2026-11-10"
+  "upload_date": "2026-11-10",
+  "replaced_by": "MW_POTHOLES_3D_S849"
 }

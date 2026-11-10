@@ -4,7 +4,7 @@
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-10T05:01:53Z",
+ "updated_utc": "2026-11-10T05:19:51Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -37,9 +37,9 @@
   }
  },
  "queue": {
-  "SCHEDULED": 135,
+  "SCHEDULED": 134,
   "DELETED": 1,
-  "QUEUED": 9
+  "QUEUED": 10
  },
  "next_uploads": [
   {

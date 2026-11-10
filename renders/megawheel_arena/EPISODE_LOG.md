@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-10 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-10 05:19). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -135,7 +135,7 @@
 | 126 | S05 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-13T00:00:00Z | https://www.youtube.com/shorts/1U2YEYgAjyg |  |  |  |  |
 | 127 | S05 | lava_potholes | Zippy, Hydro, Sprinkles | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | https://www.youtube.com/shorts/JCOH6N2Jv_o |  |  |  |  |
 | 128 | S05 | splash | Siren, Titan, Grizzly | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-12T16:00:00Z | https://www.youtube.com/shorts/zQnxW07Cbak |  |  |  |  |
-| 129 | S05 | potholes | Zippy, Hydro, Titan | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-13T16:00:00Z | https://www.youtube.com/shorts/SjHBY02ANiU |  |  |  |  |
+| 129 | S05 | potholes | Nitro, Hydro, Titan | 2026-11-10 | 2026-11-10 |  | APPROVED |  |  |  |  |  |
 | 130 | S05 | bumps | Siren, Buster, Rocky | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 131 | S05 | lava | Nitro, Sprinkles, Hydro | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 132 | S05 | smash25d | Hydro, Rocky, Siren, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
@@ -157,7 +157,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| MW_POTHOLES_3D_S849 | potholes | Nitro, Hydro, Titan | 2026-11-10 | 49.27 s | `renders/megawheel_arena/pending/2026-11-10_potholes3d_s849` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 

@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-10 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-10 05:19) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -142,7 +142,7 @@
 | 126 | `MW_SMASH_3D_S140` | smash25d | UPLOADED_SCHEDULED 2026-11-13T00:00:00Z | Thu 2026-11-12 19:00 | https://www.youtube.com/shorts/1U2YEYgAjyg |
 | 127 | `MW_LAVA_POTHOLES_3D_S136` | lava_potholes | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | Wed 2026-11-11 11:00 | https://www.youtube.com/shorts/JCOH6N2Jv_o |
 | 128 | `MW_SPLASH_3D_S161` | splash | UPLOADED_SCHEDULED 2026-11-12T16:00:00Z | Thu 2026-11-12 11:00 | https://www.youtube.com/shorts/zQnxW07Cbak |
-| 129 | `MW_POTHOLES_3D_S163` | potholes | UPLOADED_SCHEDULED 2026-11-13T16:00:00Z | Fri 2026-11-13 11:00 | https://www.youtube.com/shorts/SjHBY02ANiU |
+| 129 | `MW_POTHOLES_3D_S849` | potholes | APPROVED | Fri 2026-11-13 11:00 |  |
 | 130 | `MW_BUMPS_3D_S164` | bumps | APPROVED | Sat 2026-11-14 11:00 |  |
 | 131 | `MW_LAVA_3D_S162` | lava | APPROVED | Sun 2026-11-15 11:00 |  |
 | 132 | `MW_SMASH_3D_S194` | smash25d | APPROVED | Fri 2026-11-13 19:00 |  |
@@ -1824,18 +1824,18 @@
 - **Antrian:** SCHEDULED 2026-11-12T16:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/zQnxW07Cbak
 
-## Ep. 129 — `MW_POTHOLES_3D_S163`
+## Ep. 129 — `MW_POTHOLES_3D_S849`
 
-- **Judul YouTube:** Sports Car vs Giant Potholes! Can Zippy Make It? 🚗💥 NEW 3D Graphics | Ep. 129 #Shorts
-- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-09_potholes/MW_POTHOLES_3D_S163.mp4`
-- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-09_potholes/MW_POTHOLES_3D_S163.json` · audit: `renders/megawheel_arena/S05/E129_2026-11-09_potholes/MW_POTHOLES_3D_S163_audit.md`
-- **Season / seri / seed:** S05 / potholes / 163
+- **Judul YouTube:** Can Nitro Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 129 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-10_potholes/MW_POTHOLES_3D_S849.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E129_2026-11-10_potholes/MW_POTHOLES_3D_S849.json` · audit: `renders/megawheel_arena/S05/E129_2026-11-10_potholes/MW_POTHOLES_3D_S849_audit.md`
+- **Season / seri / seed:** S05 / potholes / 849
 - **Tema / narator:** sunset-clear-desert / 
-- **Durasi:** 56.5 s
-- **Tokoh dan hasil:** Level 1: Zippy (sports) → pit@obs0; Level 2: Hydro (firetruck) → stuck@obs1; Level 3 (juara): Titan (bigrig) → win
-- **Status:** UPLOADED_SCHEDULED 2026-11-13T16:00:00Z (approve 2026-11-09)
-- **Antrian:** SCHEDULED 2026-11-13T16:00:00Z
-- **YouTube:** https://www.youtube.com/shorts/SjHBY02ANiU
+- **Durasi:** 49.27 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → pit@obs0; Level 2: Hydro (firetruck) → rollback@obs1; Level 3 (juara): Titan (bigrig) → win
+- **Status:** APPROVED (approve 2026-11-10)
+- **Antrian:** QUEUED 2026-11-13T16:00:00Z
+- **YouTube:** belum diupload
 
 ## Ep. 130 — `MW_BUMPS_3D_S164`
 
