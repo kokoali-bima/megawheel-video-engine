@@ -1,6 +1,6 @@
 {
   "video_id": "MW_POTHOLES_3D_S849",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-13T16:00:00Z",
   "series": "potholes",
   "seed": 849,
   "render3d": true,
@@ -36,5 +36,7 @@
   "episode": 129,
   "season": 5,
   "approved_date": "2026-11-10",
-  "replaces": "MW_POTHOLES_3D_S163"
+  "replaces": "MW_POTHOLES_3D_S163",
+  "youtube_url": "https://www.youtube.com/shorts/7xGYkU1uEGc",
+  "upload_date": "2026-11-11"
 }

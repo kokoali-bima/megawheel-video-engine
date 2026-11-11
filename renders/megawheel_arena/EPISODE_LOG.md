@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-10 05:19). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-11 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -135,16 +135,16 @@
 | 126 | S05 | smash25d | Sprinkles, Grizzly, Tilly, Siren | 2026-11-05 | 2026-11-08 | 2026-11-09 | UPLOADED_SCHEDULED 2026-11-13T00:00:00Z | https://www.youtube.com/shorts/1U2YEYgAjyg |  |  |  |  |
 | 127 | S05 | lava_potholes | Zippy, Hydro, Sprinkles | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-11T16:00:00Z | https://www.youtube.com/shorts/JCOH6N2Jv_o |  |  |  |  |
 | 128 | S05 | splash | Siren, Titan, Grizzly | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-12T16:00:00Z | https://www.youtube.com/shorts/zQnxW07Cbak |  |  |  |  |
-| 129 | S05 | potholes | Nitro, Hydro, Titan | 2026-11-10 | 2026-11-10 |  | APPROVED |  |  |  |  |  |
-| 130 | S05 | bumps | Siren, Buster, Rocky | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 129 | S05 | potholes | Nitro, Hydro, Titan | 2026-11-10 | 2026-11-10 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-13T16:00:00Z | https://www.youtube.com/shorts/7xGYkU1uEGc |  |  |  |  |
+| 130 | S05 | bumps | Siren, Buster, Rocky | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T16:00:00Z | https://www.youtube.com/shorts/YtwS4YoMwZs |  |  |  |  |
 | 131 | S05 | lava | Nitro, Sprinkles, Hydro | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
-| 132 | S05 | smash25d | Hydro, Rocky, Siren, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
-| 133 | S05 | smash25d | Buster, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 132 | S05 | smash25d | Hydro, Rocky, Siren, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T00:00:00Z | https://www.youtube.com/shorts/KpP109__t9Q |  |  |  |  |
+| 133 | S05 | smash25d | Buster, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-15T00:00:00Z | https://www.youtube.com/shorts/ng9Fic1XM5Q |  |  |  |  |
 | 134 | S05 | smash25d | Buster, Grizzly, Siren, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 135 | S05 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 136 | S05 | race25d | Titan, Grizzly, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-12T20:00:00Z | https://www.youtube.com/shorts/J4qistPtNXw |  |  |  |  |
 | 137 | S05 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-13T20:00:00Z | https://www.youtube.com/shorts/0sTqfnXpmCE |  |  |  |  |
-| 138 | S05 | race25d | Sprinkles, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 138 | S05 | race25d | Sprinkles, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T20:00:00Z | https://www.youtube.com/shorts/OSrDOW8KXY8 |  |  |  |  |
 | 139 | S05 | race25d | Buster, Grizzly, Tilly, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 140 | S05 | race25d | Sprinkles, Rocky, Nitro, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
@@ -157,7 +157,26 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| MW_RACE_3D_S766 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-10 | 33.21 s | `renders/megawheel_arena/pending/2026-11-10_race3d_s766` |
+| MW_RACE_3D_S761 | race25d | Titan, Grizzly, Siren, Zippy | 2026-11-10 | 32.73 s | `renders/megawheel_arena/pending/2026-11-10_race3d_s761` |
+| MW_RACE_3D_S872 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-10 | 32.03 s | `renders/megawheel_arena/pending/2026-11-10_race3d_s872` |
+| MW_RACE_3D_S776 | race25d | Titan, Grizzly, Zippy, Siren | 2026-11-10 | 33.83 s | `renders/megawheel_arena/pending/2026-11-10_race3d_s776` |
+| MW_SMASH_3D_S292 | smash25d | Hydro, Grizzly, Tilly, Zippy | 2026-11-10 | 58.23 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s292` |
+| MW_SMASH_3D_S335 | smash25d | Titan, Grizzly, Tilly, Siren | 2026-11-10 | 56.11 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s335` |
+| MW_SMASH_3D_S293 | smash25d | Sprinkles, Rocky, Zippy, Tilly | 2026-11-10 | 57.17 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s293` |
+| MW_SMASH_3D_S407 | smash25d | Titan, Grizzly, Zippy, Nitro | 2026-11-10 | 58.01 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s407` |
+| MW_SMASH_3D_S298 | smash25d | Hydro, Grizzly, Siren, Tilly | 2026-11-10 | 56.2 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s298` |
+| MW_SMASH_3D_S342 | smash25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-10 | 57.87 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s342` |
+| MW_SMASH_3D_S396 | smash25d | Buster, Grizzly, Zippy, Tilly | 2026-11-10 | 57.87 s | `renders/megawheel_arena/pending/2026-11-10_smash3d_s396` |
+| MW_POTHOLES_3D_S2055 | potholes | Zippy, Titan, Buster | 2026-11-10 | 47.93 s | `renders/megawheel_arena/pending/2026-11-10_potholes3d_s2055` |
+| MW_BUMPS_3D_S2003 | bumps | Tilly, Hydro, Grizzly | 2026-11-10 | 51.6 s | `renders/megawheel_arena/pending/2026-11-10_bumps3d_s2003` |
+| MW_LAVA_POTHOLES_3D_S2006 | lava_potholes | Tilly, Titan, Siren | 2026-11-10 | 47.1 s | `renders/megawheel_arena/pending/2026-11-10_lava_potholes3d_s2006` |
+| MW_SPLASH_3D_S2000 | splash | Zippy, Sprinkles, Hydro | 2026-11-10 | 52.1 s | `renders/megawheel_arena/pending/2026-11-10_splash3d_s2000` |
+| MW_LAVA_3D_S2001 | lava | Zippy, Titan, Grizzly | 2026-11-10 | 47.23 s | `renders/megawheel_arena/pending/2026-11-10_lava3d_s2001` |
+| MW_POTHOLES_3D_S2096 | potholes | Tilly, Titan, Sprinkles | 2026-11-10 | 48.43 s | `renders/megawheel_arena/pending/2026-11-10_potholes3d_s2096` |
+| MW_RACE_3D_S816 | race25d | Titan, Rocky, Zippy, Tilly | 2026-11-11 | 32.77 s | `renders/megawheel_arena/pending/2026-11-11_race3d_s816` |
+| MW_RACE_3D_S787 | race25d | Hydro, Rocky, Siren, Nitro | 2026-11-11 | 33.3 s | `renders/megawheel_arena/pending/2026-11-11_race3d_s787` |
+| MW_RACE_3D_S817 | race25d | Buster, Grizzly, Tilly, Zippy | 2026-11-11 | 34.13 s | `renders/megawheel_arena/pending/2026-11-11_race3d_s817` |
 
 ## Ditolak
 

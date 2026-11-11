@@ -1303,9 +1303,12 @@
   {
    "episode": 129,
    "video_id": "MW_POTHOLES_3D_S849",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-13T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Nitro Survive Giant Potholes? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 129 #Shorts",
+   "upload_started": "2026-11-11T05:00:06.096580+00:00",
+   "url": "https://www.youtube.com/shorts/7xGYkU1uEGc"
   },
   {
    "episode": 137,
@@ -1320,30 +1323,42 @@
   {
    "episode": 132,
    "video_id": "MW_SMASH_3D_S194",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-14T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Hydro, Rocky, Siren or Zippy? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 132 #Shorts",
+   "upload_started": "2026-11-11T05:00:15.654419+00:00",
+   "url": "https://www.youtube.com/shorts/KpP109__t9Q"
   },
   {
    "episode": 130,
    "video_id": "MW_BUMPS_3D_S164",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-14T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Siren the Police Car Survive Giant Speed Bumps? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 130 #Shorts",
+   "upload_started": "2026-11-11T05:00:28.485262+00:00",
+   "url": "https://www.youtube.com/shorts/YtwS4YoMwZs"
   },
   {
    "episode": 138,
    "video_id": "MW_RACE_3D_S1153",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-14T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Nitro Meets the Giant Hammer! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 138 #Shorts",
+   "upload_started": "2026-11-11T05:00:38.318396+00:00",
+   "url": "https://www.youtube.com/shorts/OSrDOW8KXY8"
   },
   {
    "episode": 133,
    "video_id": "MW_SMASH_3D_S256",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-15T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Buster, Rocky, Nitro or Tilly? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 133 #Shorts",
+   "upload_started": "2026-11-11T05:00:44.910767+00:00",
+   "url": "https://www.youtube.com/shorts/ng9Fic1XM5Q"
   },
   {
    "episode": 131,
