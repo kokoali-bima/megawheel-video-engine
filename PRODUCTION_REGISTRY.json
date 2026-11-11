@@ -9244,39 +9244,6 @@
       "drive_path": "me/ai-develop/ipandu-video/review/MW_SMASH_3D_S396.mp4"
     },
     {
-      "video_id": "MW_POTHOLES_3D_S2055",
-      "series": "potholes",
-      "engine_version": "3d",
-      "seed": 2055,
-      "vehicles": [
-        "sports",
-        "bigrig",
-        "bus"
-      ],
-      "theme": "morning-clear-mountains",
-      "track_id": "potholes_scan2055@morning-clear-mountains",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 47.93,
-      "outcomes": [
-        "pit@obs0",
-        "stuck@obs1",
-        "win"
-      ],
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s2055",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s2055/MW_POTHOLES_3D_S2055_audit.md",
-      "title_base": "Can Zippy the Sports Car Survive Giant Potholes? 🚗💥 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336486.0,
-      "drive_id": "1XgxmdJcktjtwHCRbomppmV7fC2Kz6e9b",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S2055.mp4"
-    },
-    {
       "video_id": "MW_BUMPS_3D_S2003",
       "series": "bumps",
       "engine_version": "3d",
@@ -9310,39 +9277,6 @@
       "drive_path": "me/ai-develop/ipandu-video/review/MW_BUMPS_3D_S2003.mp4"
     },
     {
-      "video_id": "MW_LAVA_POTHOLES_3D_S2006",
-      "series": "lava_potholes",
-      "engine_version": "3d",
-      "seed": 2006,
-      "vehicles": [
-        "taxi",
-        "bigrig",
-        "police"
-      ],
-      "theme": "morning-clear-volcano",
-      "track_id": "lava_potholes_scan2006@morning-clear-volcano",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 47.1,
-      "outcomes": [
-        "pit@obs0",
-        "stuck@obs1",
-        "win"
-      ],
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_lava_potholes3d_s2006",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_lava_potholes3d_s2006/MW_LAVA_POTHOLES_3D_S2006_audit.md",
-      "title_base": "Can Tilly Survive Giant Lava Potholes? 🚗💥 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336491.1,
-      "drive_id": "1FVuJnreqka6f0auR1tWm4MMyKrwgtICM",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_LAVA_POTHOLES_3D_S2006.mp4"
-    },
-    {
       "video_id": "MW_SPLASH_3D_S2000",
       "series": "splash",
       "engine_version": "3d",
@@ -9374,72 +9308,6 @@
       "staged_at": 1794336493.5,
       "drive_id": "1eOzBmjWSipl4olvG6MXDS10pc-x5vPGo",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S2000.mp4"
-    },
-    {
-      "video_id": "MW_LAVA_3D_S2001",
-      "series": "lava",
-      "engine_version": "3d",
-      "seed": 2001,
-      "vehicles": [
-        "sports",
-        "bigrig",
-        "monster2"
-      ],
-      "theme": "noon-clear-volcano",
-      "track_id": "lava_scan2001@noon-clear-volcano",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 47.23,
-      "outcomes": [
-        "rollback@obs0",
-        "stuck@obs1",
-        "win"
-      ],
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_lava3d_s2001",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_lava3d_s2001/MW_LAVA_3D_S2001_audit.md",
-      "title_base": "Can Zippy the Sports Car Survive Erupting Lava Road? 🌋🔥 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336496.2,
-      "drive_id": "1zNpM-qapq3MBfVvl-cQNSAXB3JQRLho5",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_LAVA_3D_S2001.mp4"
-    },
-    {
-      "video_id": "MW_POTHOLES_3D_S2096",
-      "series": "potholes",
-      "engine_version": "3d",
-      "seed": 2096,
-      "vehicles": [
-        "taxi",
-        "bigrig",
-        "icecream"
-      ],
-      "theme": "morning-clear-countryside",
-      "track_id": "potholes_scan2096@morning-clear-countryside",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 48.43,
-      "outcomes": [
-        "flip@obs0",
-        "rollback@obs1",
-        "win"
-      ],
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s2096",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_potholes3d_s2096/MW_POTHOLES_3D_S2096_audit.md",
-      "title_base": "Will Tilly the Taxi Survive Giant Potholes? 🚗💥 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794347882.7,
-      "drive_id": "18xp8oOBQemzEZEXeKQkM6qS-ipB1jUNR",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S2096.mp4"
     },
     {
       "video_id": "MW_RACE_3D_S816",
@@ -9566,6 +9434,138 @@
       "staged_at": 1794359119.4,
       "drive_id": "1ioQwlM8wXGhdPxDfaPkjmbIsIssE8Xa7",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S817.mp4"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S2110",
+      "series": "splash",
+      "engine_version": "3d",
+      "seed": 2110,
+      "vehicles": [
+        "f1",
+        "bus",
+        "icecream"
+      ],
+      "theme": "sunset-clear-city",
+      "track_id": "splash_scan2110@sunset-clear-city",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 56.9,
+      "outcomes": [
+        "flip@obs0",
+        "crash@obs1",
+        "win"
+      ],
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2110",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2110/MW_SPLASH_3D_S2110_audit.md",
+      "title_base": "Race Car vs Slippery Splash Zone! Can Nitro Make It? 💦🚗 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794378794.2,
+      "drive_id": "1kbahj5FjWivRtPXXDoVpvmGWVsG871yP",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S2110.mp4"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S2100",
+      "series": "splash",
+      "engine_version": "3d",
+      "seed": 2100,
+      "vehicles": [
+        "sports",
+        "bus",
+        "bigrig"
+      ],
+      "theme": "noon-rain-beach",
+      "track_id": "splash_scan2100@noon-rain-beach",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 48.47,
+      "outcomes": [
+        "flip@obs0",
+        "crash@obs1",
+        "win"
+      ],
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2100",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2100/MW_SPLASH_3D_S2100_audit.md",
+      "title_base": "Can Zippy the Sports Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794378799.0,
+      "drive_id": "1moxc2hUpCLrnJEzuldg-65jmlkz4tCBF",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S2100.mp4"
+    },
+    {
+      "video_id": "MW_BUMPS_3D_S2101",
+      "series": "bumps",
+      "engine_version": "3d",
+      "seed": 2101,
+      "vehicles": [
+        "f1",
+        "bus",
+        "monster"
+      ],
+      "theme": "sunset-snow-city",
+      "track_id": "bumps_scan2101@sunset-snow-city",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 52.63,
+      "outcomes": [
+        "flip@obs0",
+        "stuck@obs1",
+        "win"
+      ],
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_bumps3d_s2101",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_bumps3d_s2101/MW_BUMPS_3D_S2101_audit.md",
+      "title_base": "Race Car vs Giant Speed Bumps! Can Nitro Make It? 🚗💥 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794378801.8,
+      "drive_id": "1R5Q62UrCmYapiLvB_As2SprA2O4xL8GF",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_BUMPS_3D_S2101.mp4"
+    },
+    {
+      "video_id": "MW_SPLASH_3D_S2103",
+      "series": "splash",
+      "engine_version": "3d",
+      "seed": 2103,
+      "vehicles": [
+        "f1",
+        "icecream",
+        "bus"
+      ],
+      "theme": "sunset-clear-desert",
+      "track_id": "splash_scan2103@sunset-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 55.7,
+      "outcomes": [
+        "crash@obs0",
+        "rollback@obs1",
+        "win"
+      ],
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2103",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_splash3d_s2103/MW_SPLASH_3D_S2103_audit.md",
+      "title_base": "Can Nitro the Race Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794378804.6,
+      "drive_id": "1gLa856xj-bhG8sNXPbW8SKqIFqik5UV1",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_SPLASH_3D_S2103.mp4"
     }
   ]
 }
