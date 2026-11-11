@@ -8992,132 +8992,6 @@
       "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S776.mp4"
     },
     {
-      "video_id": "MW_RACE_3D_S816",
-      "series": "race25d",
-      "engine_version": "3d",
-      "seed": 816,
-      "vehicles": [
-        "bigrig",
-        "monster",
-        "sports",
-        "taxi"
-      ],
-      "theme": "morning-rain-mountains",
-      "track_id": "race25d_scan816@morning-rain-mountains",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 32.97,
-      "outcomes": [
-        "p2",
-        "win",
-        "p3+dragon_fire",
-        "p4+container+dodge"
-      ],
-      "plan": {
-        "layout": "gauntlet",
-        "zone": 176.4,
-        "start": 113.8,
-        "finish_gap": 99.0
-      },
-      "structure": "gauntlet|container,dragon_fire,laser",
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_race3d_s816",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_race3d_s816/MW_RACE_3D_S816_audit.md",
-      "title_base": "Will Tilly Make It Past Falling Containers? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336458.2,
-      "drive_id": "1Vuu4H4wmoDNaNzXob7264wEPbaVxIhjg",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S816.mp4"
-    },
-    {
-      "video_id": "MW_RACE_3D_S787",
-      "series": "race25d",
-      "engine_version": "3d",
-      "seed": 787,
-      "vehicles": [
-        "firetruck",
-        "monster",
-        "police",
-        "f1"
-      ],
-      "theme": "night-clear-desert",
-      "track_id": "race25d_scan787@night-clear-desert",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 33.51,
-      "outcomes": [
-        "p3+puddle",
-        "p4+ufo",
-        "p2+dodge",
-        "win"
-      ],
-      "plan": {
-        "layout": "spread",
-        "zone": 164.2,
-        "start": 108.5,
-        "finish_gap": 106.7
-      },
-      "structure": "spread|oil,puddle,ufo",
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_race3d_s787",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_race3d_s787/MW_RACE_3D_S787_audit.md",
-      "title_base": "Can Rocky Survive the UFO? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336460.5,
-      "drive_id": "1dwy9UHL-XXeyBRWyrU2OCkCQw8Q5CJ9j",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S787.mp4"
-    },
-    {
-      "video_id": "MW_RACE_3D_S817",
-      "series": "race25d",
-      "engine_version": "3d",
-      "seed": 817,
-      "vehicles": [
-        "bus",
-        "monster2",
-        "taxi",
-        "sports"
-      ],
-      "theme": "morning-clear-city",
-      "track_id": "race25d_scan817@morning-clear-city",
-      "status": "RENDERED_PENDING_APPROVAL",
-      "duration": 34.33,
-      "outcomes": [
-        "p2",
-        "p4+hammer",
-        "p3+dragon_fire+dodge",
-        "win"
-      ],
-      "plan": {
-        "layout": "late_pair",
-        "zone": 185.8,
-        "start": 110.0,
-        "finish_gap": 94.8
-      },
-      "structure": "late_pair|dragon_fire,hammer,laser",
-      "created": "2026-11-10",
-      "render_date": "2026-11-10",
-      "render3d": true,
-      "folder": "renders/megawheel_arena/pending/2026-11-10_race3d_s817",
-      "audit": "renders/megawheel_arena/pending/2026-11-10_race3d_s817/MW_RACE_3D_S817_audit.md",
-      "title_base": "Will Grizzly Make It Past the Giant Hammer? 🏁 NEW 3D Graphics",
-      "episode": null,
-      "season": null,
-      "upload_date": null,
-      "youtube_url": null,
-      "staged_at": 1794336462.6,
-      "drive_id": "1ixotuK4cSR4L-kK9FbuViTHtftweClUx",
-      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S817.mp4"
-    },
-    {
       "video_id": "MW_SMASH_3D_S292",
       "series": "smash25d",
       "engine_version": "3d",
@@ -9566,6 +9440,132 @@
       "staged_at": 1794347882.7,
       "drive_id": "18xp8oOBQemzEZEXeKQkM6qS-ipB1jUNR",
       "drive_path": "me/ai-develop/ipandu-video/review/MW_POTHOLES_3D_S2096.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S816",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 816,
+      "vehicles": [
+        "bigrig",
+        "monster",
+        "sports",
+        "taxi"
+      ],
+      "theme": "morning-rain-mountains",
+      "track_id": "race25d_scan816@morning-rain-mountains",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 32.77,
+      "outcomes": [
+        "p2",
+        "win",
+        "p3+dragon_fire",
+        "p4+container+dodge"
+      ],
+      "plan": {
+        "layout": "gauntlet",
+        "zone": 176.4,
+        "start": 113.8,
+        "finish_gap": 99.0
+      },
+      "structure": "gauntlet|container,dragon_fire,laser",
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_race3d_s816",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_race3d_s816/MW_RACE_3D_S816_audit.md",
+      "title_base": "Will Tilly Make It Past Falling Containers? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794359114.2,
+      "drive_id": "1djnXgEt39LLlo_NWxZTQvCvteiHX7ObB",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S816.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S787",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 787,
+      "vehicles": [
+        "firetruck",
+        "monster",
+        "police",
+        "f1"
+      ],
+      "theme": "night-clear-desert",
+      "track_id": "race25d_scan787@night-clear-desert",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 33.3,
+      "outcomes": [
+        "p3+puddle",
+        "p4+ufo",
+        "p2+dodge",
+        "win"
+      ],
+      "plan": {
+        "layout": "spread",
+        "zone": 164.2,
+        "start": 108.5,
+        "finish_gap": 106.7
+      },
+      "structure": "spread|oil,puddle,ufo",
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_race3d_s787",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_race3d_s787/MW_RACE_3D_S787_audit.md",
+      "title_base": "Can Rocky Survive the UFO? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794359117.7,
+      "drive_id": "1Tu0s0ZFJ9HPdpOKJUP4ttBRnpcXW3ppm",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S787.mp4"
+    },
+    {
+      "video_id": "MW_RACE_3D_S817",
+      "series": "race25d",
+      "engine_version": "3d",
+      "seed": 817,
+      "vehicles": [
+        "bus",
+        "monster2",
+        "taxi",
+        "sports"
+      ],
+      "theme": "morning-clear-city",
+      "track_id": "race25d_scan817@morning-clear-city",
+      "status": "RENDERED_PENDING_APPROVAL",
+      "duration": 34.13,
+      "outcomes": [
+        "p2",
+        "p4+hammer",
+        "p3+dragon_fire+dodge",
+        "win"
+      ],
+      "plan": {
+        "layout": "late_pair",
+        "zone": 185.8,
+        "start": 110.0,
+        "finish_gap": 94.8
+      },
+      "structure": "late_pair|dragon_fire,hammer,laser",
+      "created": "2026-11-11",
+      "render_date": "2026-11-11",
+      "render3d": true,
+      "folder": "renders/megawheel_arena/pending/2026-11-11_race3d_s817",
+      "audit": "renders/megawheel_arena/pending/2026-11-11_race3d_s817/MW_RACE_3D_S817_audit.md",
+      "title_base": "Will Grizzly Make It Past the Giant Hammer? 🏁 NEW 3D Graphics",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "staged_at": 1794359119.4,
+      "drive_id": "1ioQwlM8wXGhdPxDfaPkjmbIsIssE8Xa7",
+      "drive_path": "me/ai-develop/ipandu-video/review/MW_RACE_3D_S817.mp4"
     }
   ]
 }

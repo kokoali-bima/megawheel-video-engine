@@ -5023,6 +5023,46 @@
    "gpu_seconds": 46.6,
    "wall_seconds": 264.5,
    "cost_usd": 0.0119
+  },
+  {
+   "date": "2026-11-10",
+   "note": "probe",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 38.6,
+   "wall_seconds": 584.8,
+   "cost_usd": 0.0099
+  },
+  {
+   "date": "2026-11-10",
+   "note": "narrator LAB_R3D_S816 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 44.6,
+   "wall_seconds": 75.6,
+   "cost_usd": 0.0114
+  },
+  {
+   "date": "2026-11-10",
+   "note": "narrator LAB_R3D_S787 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 42.7,
+   "wall_seconds": 894.9,
+   "cost_usd": 0.0109
+  },
+  {
+   "date": "2026-11-11",
+   "note": "narrator LAB_R3D_S817 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 59.8,
+   "wall_seconds": 831.8,
+   "cost_usd": 0.0153
   }
  ]
 }

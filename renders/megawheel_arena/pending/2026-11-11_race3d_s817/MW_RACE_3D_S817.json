@@ -5,7 +5,7 @@
   "seed": 817,
   "render3d": true,
   "engine": "race25d + godot3d race (agy_car3d_beamng slate)",
-  "duration": 34.33,
+  "duration": 34.13,
   "theme": {
     "time": "morning",
     "weather": "clear",
@@ -35,7 +35,7 @@
     "shorts"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-10_race3d_s817/MW_RACE_3D_S817.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-10_race3d_s817/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-11_race3d_s817/MW_RACE_3D_S817.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-11_race3d_s817/preview",
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)"
 }
