@@ -3,12 +3,29 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-11
+**📤 Upload / antrean / Drive**
+- `1438ff2` publish: daily run 2026-11-11 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `a94dc8c` restage Race S816/S787/S817 (21-23 Nov) with Chatterbox narration after Modal guard auto-reconcile
+<details><summary>otomatis VM (1)</summary>
+
+- `7f97796` records before analytics
+
+</details>
+
 ## 2026-11-10
 **🔧 Lain-lain**
+- `c436ba9` stage slate 17-23 Nov: 7 Race, 7 Smash, 6 Challenge (C-069 clearance-checked; Challenge 21 Nov S2032 -> S2096 cached voice, Modal guard ceiling)
 - `572504a` swap Ep.129: S163 -> S849 (owner 2026-11-10); S163 set private, schedule removed on YouTube (C-069)
 - `fb63269` stage Challenge S849 to replace S163 (Ep.129) after winner clearance sensor C-069
 **📤 Upload / antrean / Drive**
 - `0ad3dbd` publish: daily run 2026-11-10 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `5ea4d86` analytics: daily report 2026-11-10
+
+</details>
 
 ## 2026-11-09
 **🔧 Lain-lain**
