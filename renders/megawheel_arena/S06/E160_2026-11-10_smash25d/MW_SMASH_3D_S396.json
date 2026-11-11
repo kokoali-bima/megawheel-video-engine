@@ -1,0 +1,39 @@
+{
+  "video_id": "MW_SMASH_3D_S396",
+  "status": "APPROVED",
+  "series": "smash25d",
+  "seed": 396,
+  "render3d": true,
+  "engine": "smash25d + godot3d smash (agy_car3d_beamng slate)",
+  "duration": 57.87,
+  "theme": {
+    "time": "morning",
+    "weather": "clear",
+    "location": "city"
+  },
+  "theme_id": "morning-clear-city",
+  "title_base": "Buster, Grizzly, Zippy or Tilly? Last Car Standing! 💥 NEW 3D Graphics",
+  "title": "Buster, Grizzly, Zippy or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 160 #Shorts",
+  "description": "Buster, Grizzly, Zippy and Tilly battle in the 3D Smash Arena! 💥 Last car standing wins!\n\n💬 Comment A if you love the NEW 3D graphics, or B if you prefer the classic look!\n\nWatch till the end for the slow-motion replay! 🎬\n\n🏆 Comment your champion below!\n🔔 Subscribe to MegaWheel Arena for new car challenges every week.\n\n#Shorts #3DCars #CarCrash #CartoonCars #3DAnimation #MonsterTruck #MegaWheelArena",
+  "tags": [
+    "3D cars",
+    "car crash",
+    "demolition derby",
+    "smash arena",
+    "cartoon cars",
+    "animated cars",
+    "monster truck",
+    "last car standing",
+    "crash test",
+    "3D animation",
+    "MegaWheel Arena",
+    "shorts"
+  ],
+  "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
+  "video_path": "/root/video-engine/renders/megawheel_arena/S06/E160_2026-11-10_smash25d/MW_SMASH_3D_S396.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/S06/E160_2026-11-10_smash25d/preview",
+  "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
+  "episode": 160,
+  "season": 6,
+  "approved_date": "2026-11-11"
+}

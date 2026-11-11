@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-11 05:02) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-11 23:12) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -154,6 +154,26 @@
 | 138 | `MW_RACE_3D_S1153` | race25d | UPLOADED_SCHEDULED 2026-11-14T20:00:00Z | Sat 2026-11-14 15:00 | https://www.youtube.com/shorts/OSrDOW8KXY8 |
 | 139 | `MW_RACE_3D_S536` | race25d | APPROVED | Sun 2026-11-15 15:00 |  |
 | 140 | `MW_RACE_3D_S539` | race25d | APPROVED | Mon 2026-11-16 15:00 |  |
+| 141 | `MW_RACE_3D_S766` | race25d | APPROVED | Tue 2026-11-17 15:00 |  |
+| 142 | `MW_SMASH_3D_S292` | smash25d | APPROVED | Tue 2026-11-17 19:00 |  |
+| 143 | `MW_SPLASH_3D_S2110` | splash | APPROVED | Tue 2026-11-17 11:00 |  |
+| 144 | `MW_RACE_3D_S761` | race25d | APPROVED | Wed 2026-11-18 15:00 |  |
+| 145 | `MW_SMASH_3D_S335` | smash25d | APPROVED | Wed 2026-11-18 19:00 |  |
+| 146 | `MW_BUMPS_3D_S2003` | bumps | APPROVED | Wed 2026-11-18 11:00 |  |
+| 147 | `MW_RACE_3D_S872` | race25d | APPROVED | Thu 2026-11-19 15:00 |  |
+| 148 | `MW_SMASH_3D_S293` | smash25d | APPROVED | Thu 2026-11-19 19:00 |  |
+| 149 | `MW_SPLASH_3D_S2100` | splash | APPROVED | Thu 2026-11-19 11:00 |  |
+| 150 | `MW_RACE_3D_S776` | race25d | APPROVED | Fri 2026-11-20 15:00 |  |
+| 151 | `MW_SMASH_3D_S407` | smash25d | APPROVED | Fri 2026-11-20 19:00 |  |
+| 152 | `MW_BUMPS_3D_S2101` | bumps | APPROVED | Fri 2026-11-20 11:00 |  |
+| 153 | `MW_RACE_3D_S816` | race25d | APPROVED | Sat 2026-11-21 15:00 |  |
+| 154 | `MW_SMASH_3D_S298` | smash25d | APPROVED | Sat 2026-11-21 19:00 |  |
+| 155 | `MW_SPLASH_3D_S2103` | splash | APPROVED | Sat 2026-11-21 11:00 |  |
+| 156 | `MW_RACE_3D_S787` | race25d | APPROVED | Sun 2026-11-22 15:00 |  |
+| 157 | `MW_SMASH_3D_S342` | smash25d | APPROVED | Sun 2026-11-22 19:00 |  |
+| 158 | `MW_SPLASH_3D_S2000` | splash | APPROVED | Sun 2026-11-22 11:00 |  |
+| 159 | `MW_RACE_3D_S817` | race25d | APPROVED | Mon 2026-11-23 15:00 |  |
+| 160 | `MW_SMASH_3D_S396` | smash25d | APPROVED | Mon 2026-11-23 19:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -1978,6 +1998,266 @@
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p2; Level 2: Rocky (monster) → win; Level 3 (juara): Nitro (f1) → p4+ufo+dodge; Level 4: Zippy (sports) → p3+dragon_ice
 - **Status:** APPROVED (approve 2026-11-09)
 - **Antrian:** QUEUED 2026-11-16T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 141 — `MW_RACE_3D_S766`
+
+- **Judul YouTube:** Grizzly vs the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 141 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E141_2026-11-10_race25d/MW_RACE_3D_S766.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E141_2026-11-10_race25d/MW_RACE_3D_S766.json` · audit: `renders/megawheel_arena/S05/E141_2026-11-10_race25d/MW_RACE_3D_S766_audit.md`
+- **Season / seri / seed:** S05 / race25d / 766
+- **Tema / narator:** morning-clear-mountains / 
+- **Durasi:** 33.21 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p2+dodge; Level 2: Grizzly (monster2) → p4+hammer; Level 3 (juara): Siren (police) → win; Level 4: Tilly (taxi) → p3+wall
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-17T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 142 — `MW_SMASH_3D_S292`
+
+- **Judul YouTube:** Last Car Standing in the Lava Arena! 💥 NEW 3D Graphics | Ep. 142 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E142_2026-11-10_smash25d/MW_SMASH_3D_S292.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E142_2026-11-10_smash25d/MW_SMASH_3D_S292.json` · audit: `renders/megawheel_arena/S05/E142_2026-11-10_smash25d/MW_SMASH_3D_S292_audit.md`
+- **Season / seri / seed:** S05 / smash25d / 292
+- **Tema / narator:** night-clear-desert / 
+- **Durasi:** 58.23 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Tilly (taxi) → p3+wreck; Level 4: Zippy (sports) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-18T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 143 — `MW_SPLASH_3D_S2110`
+
+- **Judul YouTube:** Race Car vs Slippery Splash Zone! Can Nitro Make It? 💦🚗 NEW 3D Graphics | Ep. 143 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E143_2026-11-11_splash/MW_SPLASH_3D_S2110.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E143_2026-11-11_splash/MW_SPLASH_3D_S2110.json` · audit: `renders/megawheel_arena/S05/E143_2026-11-11_splash/MW_SPLASH_3D_S2110_audit.md`
+- **Season / seri / seed:** S05 / splash / 2110
+- **Tema / narator:** sunset-clear-city / 
+- **Durasi:** 56.9 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → flip@obs0; Level 2: Buster (bus) → crash@obs1; Level 3 (juara): Sprinkles (icecream) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-17T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 144 — `MW_RACE_3D_S761`
+
+- **Judul YouTube:** Falling Containers Ahead! Can Siren Still Win? 🏁 NEW 3D Graphics | Ep. 144 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E144_2026-11-10_race25d/MW_RACE_3D_S761.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E144_2026-11-10_race25d/MW_RACE_3D_S761.json` · audit: `renders/megawheel_arena/S05/E144_2026-11-10_race25d/MW_RACE_3D_S761_audit.md`
+- **Season / seri / seed:** S05 / race25d / 761
+- **Tema / narator:** noon-clear-countryside / 
+- **Durasi:** 32.73 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p2+dodge; Level 2: Grizzly (monster2) → p4+ufo; Level 3 (juara): Siren (police) → p3+container; Level 4: Zippy (sports) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-18T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 145 — `MW_SMASH_3D_S335`
+
+- **Judul YouTube:** Titan, Grizzly, Tilly or Siren? Last Car Standing! 💥 NEW 3D Graphics | Ep. 145 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E145_2026-11-10_smash25d/MW_SMASH_3D_S335.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E145_2026-11-10_smash25d/MW_SMASH_3D_S335.json` · audit: `renders/megawheel_arena/S05/E145_2026-11-10_smash25d/MW_SMASH_3D_S335_audit.md`
+- **Season / seri / seed:** S05 / smash25d / 335
+- **Tema / narator:** morning-clear-mountains / 
+- **Durasi:** 56.11 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+wreck; Level 2: Grizzly (monster2) → p3+wreck; Level 3 (juara): Tilly (taxi) → p2+wreck; Level 4: Siren (police) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-19T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 146 — `MW_BUMPS_3D_S2003`
+
+- **Judul YouTube:** Will Tilly the Taxi Survive Giant Speed Bumps? 🚗💥 NEW 3D Graphics | Ep. 146 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E146_2026-11-10_bumps/MW_BUMPS_3D_S2003.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E146_2026-11-10_bumps/MW_BUMPS_3D_S2003.json` · audit: `renders/megawheel_arena/S05/E146_2026-11-10_bumps/MW_BUMPS_3D_S2003_audit.md`
+- **Season / seri / seed:** S05 / bumps / 2003
+- **Tema / narator:** night-clear-countryside / 
+- **Durasi:** 51.6 s
+- **Tokoh dan hasil:** Level 1: Tilly (taxi) → flip@obs0; Level 2: Hydro (firetruck) → flip@obs1; Level 3 (juara): Grizzly (monster2) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-18T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 147 — `MW_RACE_3D_S872`
+
+- **Judul YouTube:** Can Grizzly Survive the Lava? 🏁 NEW 3D Graphics | Ep. 147 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E147_2026-11-10_race25d/MW_RACE_3D_S872.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E147_2026-11-10_race25d/MW_RACE_3D_S872.json` · audit: `renders/megawheel_arena/S05/E147_2026-11-10_race25d/MW_RACE_3D_S872_audit.md`
+- **Season / seri / seed:** S05 / race25d / 872
+- **Tema / narator:** noon-rain-mountains / 
+- **Durasi:** 32.03 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p4; Level 2: Grizzly (monster2) → p2+lava; Level 3 (juara): Siren (police) → p3+pothole+dodge; Level 4: Tilly (taxi) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-19T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 148 — `MW_SMASH_3D_S293`
+
+- **Judul YouTube:** Sprinkles, Rocky, Zippy or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 148 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E148_2026-11-10_smash25d/MW_SMASH_3D_S293.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E148_2026-11-10_smash25d/MW_SMASH_3D_S293.json` · audit: `renders/megawheel_arena/S05/E148_2026-11-10_smash25d/MW_SMASH_3D_S293_audit.md`
+- **Season / seri / seed:** S05 / smash25d / 293
+- **Tema / narator:** morning-clear-countryside / 
+- **Durasi:** 57.17 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → p4+wreck; Level 2: Rocky (monster) → win; Level 3 (juara): Zippy (sports) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-20T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 149 — `MW_SPLASH_3D_S2100`
+
+- **Judul YouTube:** Can Zippy the Sports Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics | Ep. 149 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E149_2026-11-11_splash/MW_SPLASH_3D_S2100.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E149_2026-11-11_splash/MW_SPLASH_3D_S2100.json` · audit: `renders/megawheel_arena/S05/E149_2026-11-11_splash/MW_SPLASH_3D_S2100_audit.md`
+- **Season / seri / seed:** S05 / splash / 2100
+- **Tema / narator:** noon-rain-beach / 
+- **Durasi:** 48.47 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → flip@obs0; Level 2: Buster (bus) → crash@obs1; Level 3 (juara): Titan (bigrig) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-19T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 150 — `MW_RACE_3D_S776`
+
+- **Judul YouTube:** Siren Meets the Giant Hammer! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 150 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S05/E150_2026-11-10_race25d/MW_RACE_3D_S776.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S05/E150_2026-11-10_race25d/MW_RACE_3D_S776.json` · audit: `renders/megawheel_arena/S05/E150_2026-11-10_race25d/MW_RACE_3D_S776_audit.md`
+- **Season / seri / seed:** S05 / race25d / 776
+- **Tema / narator:** night-snow-countryside / 
+- **Durasi:** 33.83 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p2; Level 2: Grizzly (monster2) → win; Level 3 (juara): Zippy (sports) → p3+container+dodge; Level 4: Siren (police) → p4+hammer
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-20T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 151 — `MW_SMASH_3D_S407`
+
+- **Judul YouTube:** Titan, Grizzly, Zippy or Nitro? Last Car Standing! 💥 NEW 3D Graphics | Ep. 151 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E151_2026-11-10_smash25d/MW_SMASH_3D_S407.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E151_2026-11-10_smash25d/MW_SMASH_3D_S407.json` · audit: `renders/megawheel_arena/S06/E151_2026-11-10_smash25d/MW_SMASH_3D_S407_audit.md`
+- **Season / seri / seed:** S06 / smash25d / 407
+- **Tema / narator:** night-clear-mountains / 
+- **Durasi:** 58.01 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p4+wreck; Level 2: Grizzly (monster2) → p3+wreck; Level 3 (juara): Zippy (sports) → p2+wreck; Level 4: Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-21T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 152 — `MW_BUMPS_3D_S2101`
+
+- **Judul YouTube:** Race Car vs Giant Speed Bumps! Can Nitro Make It? 🚗💥 NEW 3D Graphics | Ep. 152 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E152_2026-11-11_bumps/MW_BUMPS_3D_S2101.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E152_2026-11-11_bumps/MW_BUMPS_3D_S2101.json` · audit: `renders/megawheel_arena/S06/E152_2026-11-11_bumps/MW_BUMPS_3D_S2101_audit.md`
+- **Season / seri / seed:** S06 / bumps / 2101
+- **Tema / narator:** sunset-snow-city / 
+- **Durasi:** 52.63 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → flip@obs0; Level 2: Buster (bus) → stuck@obs1; Level 3 (juara): Rocky (monster) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-20T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 153 — `MW_RACE_3D_S816`
+
+- **Judul YouTube:** Will Tilly Make It Past Falling Containers? 🏁 NEW 3D Graphics | Ep. 153 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E153_2026-11-11_race25d/MW_RACE_3D_S816.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E153_2026-11-11_race25d/MW_RACE_3D_S816.json` · audit: `renders/megawheel_arena/S06/E153_2026-11-11_race25d/MW_RACE_3D_S816_audit.md`
+- **Season / seri / seed:** S06 / race25d / 816
+- **Tema / narator:** morning-rain-mountains / 
+- **Durasi:** 32.77 s
+- **Tokoh dan hasil:** Level 1: Titan (bigrig) → p2; Level 2: Rocky (monster) → win; Level 3 (juara): Zippy (sports) → p3+dragon_fire; Level 4: Tilly (taxi) → p4+container+dodge
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-21T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 154 — `MW_SMASH_3D_S298`
+
+- **Judul YouTube:** Hydro, Grizzly, Siren or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 154 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E154_2026-11-10_smash25d/MW_SMASH_3D_S298.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E154_2026-11-10_smash25d/MW_SMASH_3D_S298.json` · audit: `renders/megawheel_arena/S06/E154_2026-11-10_smash25d/MW_SMASH_3D_S298_audit.md`
+- **Season / seri / seed:** S06 / smash25d / 298
+- **Tema / narator:** noon-clear-desert / 
+- **Durasi:** 56.2 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p4+wreck; Level 2: Grizzly (monster2) → win; Level 3 (juara): Siren (police) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-22T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 155 — `MW_SPLASH_3D_S2103`
+
+- **Judul YouTube:** Can Nitro the Race Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics | Ep. 155 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E155_2026-11-11_splash/MW_SPLASH_3D_S2103.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E155_2026-11-11_splash/MW_SPLASH_3D_S2103.json` · audit: `renders/megawheel_arena/S06/E155_2026-11-11_splash/MW_SPLASH_3D_S2103_audit.md`
+- **Season / seri / seed:** S06 / splash / 2103
+- **Tema / narator:** sunset-clear-desert / 
+- **Durasi:** 55.7 s
+- **Tokoh dan hasil:** Level 1: Nitro (f1) → crash@obs0; Level 2: Sprinkles (icecream) → rollback@obs1; Level 3 (juara): Buster (bus) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-21T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 156 — `MW_RACE_3D_S787`
+
+- **Judul YouTube:** Can Rocky Survive the UFO? 🏁 NEW 3D Graphics | Ep. 156 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E156_2026-11-11_race25d/MW_RACE_3D_S787.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E156_2026-11-11_race25d/MW_RACE_3D_S787.json` · audit: `renders/megawheel_arena/S06/E156_2026-11-11_race25d/MW_RACE_3D_S787_audit.md`
+- **Season / seri / seed:** S06 / race25d / 787
+- **Tema / narator:** night-clear-desert / 
+- **Durasi:** 33.3 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p3+puddle; Level 2: Rocky (monster) → p4+ufo; Level 3 (juara): Siren (police) → p2+dodge; Level 4: Nitro (f1) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-22T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 157 — `MW_SMASH_3D_S342`
+
+- **Judul YouTube:** Sprinkles, Rocky, Nitro or Siren? Last Car Standing! 💥 NEW 3D Graphics | Ep. 157 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E157_2026-11-10_smash25d/MW_SMASH_3D_S342.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E157_2026-11-10_smash25d/MW_SMASH_3D_S342.json` · audit: `renders/megawheel_arena/S06/E157_2026-11-10_smash25d/MW_SMASH_3D_S342_audit.md`
+- **Season / seri / seed:** S06 / smash25d / 342
+- **Tema / narator:** night-clear-beach / 
+- **Durasi:** 57.87 s
+- **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → win; Level 2: Rocky (monster) → p4+wreck; Level 3 (juara): Nitro (f1) → p3+wreck; Level 4: Siren (police) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-23T00:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 158 — `MW_SPLASH_3D_S2000`
+
+- **Judul YouTube:** Will Zippy the Sports Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics | Ep. 158 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E158_2026-11-10_splash/MW_SPLASH_3D_S2000.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E158_2026-11-10_splash/MW_SPLASH_3D_S2000.json` · audit: `renders/megawheel_arena/S06/E158_2026-11-10_splash/MW_SPLASH_3D_S2000_audit.md`
+- **Season / seri / seed:** S06 / splash / 2000
+- **Tema / narator:** night-clear-mountains / 
+- **Durasi:** 52.1 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → flip@obs0; Level 2: Sprinkles (icecream) → rollback@obs1; Level 3 (juara): Hydro (firetruck) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-22T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 159 — `MW_RACE_3D_S817`
+
+- **Judul YouTube:** Will Grizzly Make It Past the Giant Hammer? 🏁 NEW 3D Graphics | Ep. 159 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E159_2026-11-11_race25d/MW_RACE_3D_S817.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E159_2026-11-11_race25d/MW_RACE_3D_S817.json` · audit: `renders/megawheel_arena/S06/E159_2026-11-11_race25d/MW_RACE_3D_S817_audit.md`
+- **Season / seri / seed:** S06 / race25d / 817
+- **Tema / narator:** morning-clear-city / 
+- **Durasi:** 34.13 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → p2; Level 2: Grizzly (monster2) → p4+hammer; Level 3 (juara): Tilly (taxi) → p3+dragon_fire+dodge; Level 4: Zippy (sports) → win
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-23T20:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 160 — `MW_SMASH_3D_S396`
+
+- **Judul YouTube:** Buster, Grizzly, Zippy or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 160 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E160_2026-11-10_smash25d/MW_SMASH_3D_S396.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E160_2026-11-10_smash25d/MW_SMASH_3D_S396.json` · audit: `renders/megawheel_arena/S06/E160_2026-11-10_smash25d/MW_SMASH_3D_S396_audit.md`
+- **Season / seri / seed:** S06 / smash25d / 396
+- **Tema / narator:** morning-clear-city / 
+- **Durasi:** 57.87 s
+- **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Zippy (sports) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-11)
+- **Antrian:** QUEUED 2026-11-24T00:00:00Z
 - **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`

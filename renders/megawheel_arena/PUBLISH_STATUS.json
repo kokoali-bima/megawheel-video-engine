@@ -4,59 +4,38 @@
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-11T05:02:08Z",
+ "updated_utc": "2026-11-11T23:13:00Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
-  "all_ok": false,
+  "all_ok": true,
   "roles": {
    "short": {
     "name": "CHALLENGE (11:00 ET)",
-    "ok": false,
-    "covered_days": 5,
-    "missing_days": [
-     "2026-11-17",
-     "2026-11-18"
-    ]
+    "ok": true,
+    "covered_days": 7,
+    "missing_days": []
    },
    "race": {
     "name": "RACE race25d (15:00 ET)",
-    "ok": false,
-    "covered_days": 5,
-    "missing_days": [
-     "2026-11-17",
-     "2026-11-18"
-    ]
+    "ok": true,
+    "covered_days": 7,
+    "missing_days": []
    },
    "smash": {
     "name": "SMASH smash25d (19:00 ET)",
-    "ok": false,
-    "covered_days": 5,
-    "missing_days": [
-     "2026-11-17",
-     "2026-11-18"
-    ]
+    "ok": true,
+    "covered_days": 7,
+    "missing_days": []
    }
   }
  },
  "queue": {
   "SCHEDULED": 139,
   "DELETED": 1,
-  "QUEUED": 5
+  "QUEUED": 25
  },
  "next_uploads": [
-  {
-   "episode": 127,
-   "role": "short",
-   "publish_at_utc": "2026-11-11T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 121,
-   "role": "race",
-   "publish_at_utc": "2026-11-11T20:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 125,
    "role": "smash",
@@ -91,6 +70,18 @@
    "episode": 137,
    "role": "race",
    "publish_at_utc": "2026-11-13T20:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 132,
+   "role": "smash",
+   "publish_at_utc": "2026-11-14T00:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 130,
+   "role": "short",
+   "publish_at_utc": "2026-11-14T16:00:00Z",
    "status": "SCHEDULED"
   }
  ]
