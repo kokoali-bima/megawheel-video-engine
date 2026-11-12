@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-11T05:02:08Z",
+  "finished_utc": "2026-11-12T05:02:01Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-12T00:48:35Z",
+ "updated_utc": "2026-11-12T05:02:01Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -31,9 +31,9 @@
   }
  },
  "queue": {
-  "SCHEDULED": 139,
+  "SCHEDULED": 144,
   "DELETED": 1,
-  "QUEUED": 25
+  "QUEUED": 20
  },
  "next_uploads": [
   {

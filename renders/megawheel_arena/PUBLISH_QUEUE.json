@@ -1363,23 +1363,32 @@
   {
    "episode": 131,
    "video_id": "MW_LAVA_3D_S162",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-15T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Nitro the Race Car Survive Erupting Lava Road? \ud83c\udf0b\ud83d\udd25 NEW 3D Graphics | Ep. 131 #Shorts",
+   "upload_started": "2026-11-12T05:00:07.724690+00:00",
+   "url": "https://www.youtube.com/shorts/laCB4xlIu-M"
   },
   {
    "episode": 139,
    "video_id": "MW_RACE_3D_S536",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-15T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Tilly Survive the Oil Slick? \ud83c\udfc1 NEW 3D Graphics | Ep. 139 #Shorts",
+   "upload_started": "2026-11-12T05:00:17.240583+00:00",
+   "url": "https://www.youtube.com/shorts/_rbjJiRv478"
   },
   {
    "episode": 134,
    "video_id": "MW_SMASH_3D_S193",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-16T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Buster, Grizzly, Siren or Zippy? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 134 #Shorts",
+   "upload_started": "2026-11-12T05:00:23.342662+00:00",
+   "url": "https://www.youtube.com/shorts/M6kk-Tp_JTM"
   },
   {
    "episode": 100,
@@ -1395,16 +1404,22 @@
   {
    "episode": 140,
    "video_id": "MW_RACE_3D_S539",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-16T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Zippy Survive the Ice Dragon? \ud83c\udfc1 NEW 3D Graphics | Ep. 140 #Shorts",
+   "upload_started": "2026-11-12T05:00:32.582310+00:00",
+   "url": "https://www.youtube.com/shorts/k31g03Xaq08"
   },
   {
    "episode": 135,
    "video_id": "MW_SMASH_3D_S187",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-17T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Grizzly, Nitro or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 135 #Shorts",
+   "upload_started": "2026-11-12T05:00:38.460321+00:00",
+   "url": "https://www.youtube.com/shorts/90Go5Eq3mOw"
   },
   {
    "episode": 143,

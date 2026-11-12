@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-11 22:48). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-12 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -137,16 +137,16 @@
 | 128 | S05 | splash | Siren, Titan, Grizzly | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-12T16:00:00Z | https://www.youtube.com/shorts/zQnxW07Cbak |  |  |  |  |
 | 129 | S05 | potholes | Nitro, Hydro, Titan | 2026-11-10 | 2026-11-10 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-13T16:00:00Z | https://www.youtube.com/shorts/7xGYkU1uEGc |  |  |  |  |
 | 130 | S05 | bumps | Siren, Buster, Rocky | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T16:00:00Z | https://www.youtube.com/shorts/YtwS4YoMwZs |  |  |  |  |
-| 131 | S05 | lava | Nitro, Sprinkles, Hydro | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 131 | S05 | lava | Nitro, Sprinkles, Hydro | 2026-11-09 | 2026-11-09 | 2026-11-12 | UPLOADED_SCHEDULED 2026-11-15T16:00:00Z | https://www.youtube.com/shorts/laCB4xlIu-M |  |  |  |  |
 | 132 | S05 | smash25d | Hydro, Rocky, Siren, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T00:00:00Z | https://www.youtube.com/shorts/KpP109__t9Q |  |  |  |  |
 | 133 | S05 | smash25d | Buster, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-15T00:00:00Z | https://www.youtube.com/shorts/ng9Fic1XM5Q |  |  |  |  |
-| 134 | S05 | smash25d | Buster, Grizzly, Siren, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
-| 135 | S05 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 134 | S05 | smash25d | Buster, Grizzly, Siren, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-12 | UPLOADED_SCHEDULED 2026-11-16T00:00:00Z | https://www.youtube.com/shorts/M6kk-Tp_JTM |  |  |  |  |
+| 135 | S05 | smash25d | Titan, Grizzly, Nitro, Siren | 2026-11-09 | 2026-11-09 | 2026-11-12 | UPLOADED_SCHEDULED 2026-11-17T00:00:00Z | https://www.youtube.com/shorts/90Go5Eq3mOw |  |  |  |  |
 | 136 | S05 | race25d | Titan, Grizzly, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-12T20:00:00Z | https://www.youtube.com/shorts/J4qistPtNXw |  |  |  |  |
 | 137 | S05 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-10 | UPLOADED_SCHEDULED 2026-11-13T20:00:00Z | https://www.youtube.com/shorts/0sTqfnXpmCE |  |  |  |  |
 | 138 | S05 | race25d | Sprinkles, Rocky, Nitro, Tilly | 2026-11-09 | 2026-11-09 | 2026-11-11 | UPLOADED_SCHEDULED 2026-11-14T20:00:00Z | https://www.youtube.com/shorts/OSrDOW8KXY8 |  |  |  |  |
-| 139 | S05 | race25d | Buster, Grizzly, Tilly, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
-| 140 | S05 | race25d | Sprinkles, Rocky, Nitro, Zippy | 2026-11-09 | 2026-11-09 |  | APPROVED |  |  |  |  |  |
+| 139 | S05 | race25d | Buster, Grizzly, Tilly, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-12 | UPLOADED_SCHEDULED 2026-11-15T20:00:00Z | https://www.youtube.com/shorts/_rbjJiRv478 |  |  |  |  |
+| 140 | S05 | race25d | Sprinkles, Rocky, Nitro, Zippy | 2026-11-09 | 2026-11-09 | 2026-11-12 | UPLOADED_SCHEDULED 2026-11-16T20:00:00Z | https://www.youtube.com/shorts/k31g03Xaq08 |  |  |  |  |
 | 141 | S05 | race25d | Hydro, Grizzly, Siren, Tilly | 2026-11-10 | 2026-11-11 |  | APPROVED |  |  |  |  |  |
 | 142 | S05 | smash25d | Hydro, Grizzly, Tilly, Zippy | 2026-11-10 | 2026-11-11 |  | APPROVED |  |  |  |  |  |
 | 143 | S05 | splash | Nitro, Buster, Sprinkles | 2026-11-11 | 2026-11-11 |  | APPROVED |  |  |  |  |  |
