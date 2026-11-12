@@ -5143,6 +5143,36 @@
    "gpu_seconds": 43.6,
    "wall_seconds": 680.0,
    "cost_usd": 0.0111
+  },
+  {
+   "date": "2026-11-12",
+   "note": "announcer LAB_SCAN_S514 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.3,
+   "wall_seconds": 96.3,
+   "cost_usd": 0.01
+  },
+  {
+   "date": "2026-11-12",
+   "note": "announcer LAB_SCAN_S498 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.7,
+   "wall_seconds": 231.9,
+   "cost_usd": 0.0101
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_R3D_S943 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 57.6,
+   "wall_seconds": 678.9,
+   "cost_usd": 0.0147
   }
  ]
 }
