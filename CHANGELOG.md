@@ -3,13 +3,29 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
-## 2026-11-11
+## 2026-11-12
 **📤 Upload / antrean / Drive**
-- `1438ff2` publish: daily run 2026-11-11 [cron daily_publish.sh]
+- `825ce31` publish: daily run 2026-11-12 [cron daily_publish.sh]
 **🔧 Lain-lain**
-- `a94dc8c` restage Race S816/S787/S817 (21-23 Nov) with Chatterbox narration after Modal guard auto-reconcile
+- `a15ccf3` auto: records left uncommitted before daily run
+**🕳️ CHALLENGE (sim_engine)**
+- `d68c017` sim_engine: MW_FAST_START switch for hook test V1 (READY/GO <= 0.7 s, default off)
 <details><summary>otomatis VM (1)</summary>
 
+- `da7759d` records before analytics
+
+</details>
+
+## 2026-11-11
+**🔧 Lain-lain**
+- `cd6aefb` approve slate 17-23 Nov on owner word (Ep. 141-160: 7 Race, 7 Smash, 6 Challenge) + publish_queue plan
+- `fd44426` C-070 restage Challenge 17/19/20/21 Nov: S2055/S2006/S2096/S2001 (cars passed pits without a ramp) -> splash S2110/S2100/S2103 + bumps S2101; S2000 moves to 22 Nov
+- `a94dc8c` restage Race S816/S787/S817 (21-23 Nov) with Chatterbox narration after Modal guard auto-reconcile
+**📤 Upload / antrean / Drive**
+- `1438ff2` publish: daily run 2026-11-11 [cron daily_publish.sh]
+<details><summary>otomatis VM (2)</summary>
+
+- `f96335e` analytics: daily report 2026-11-11
 - `7f97796` records before analytics
 
 </details>
