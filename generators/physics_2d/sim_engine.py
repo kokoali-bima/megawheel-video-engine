@@ -237,7 +237,7 @@ def make_splash_track(seed):
     PIT_KIND = "water"                                       # the pit is a deep water pool
     order = [str(k) for k in r.permutation(["wall", "hill", "pit"])]
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(15, 18)))
+    tb.flat(float(r.uniform(15, 18)) - (8.0 if FAST_START else 0.0))   # hook test V1: short run-up
     params, spans, obst, danger = [], [], [], []
     for kind in order:
         pl = round(float(r.uniform(4.5, 6.5)), 1)             # shorter track (B1: durations were too long)
@@ -667,7 +667,7 @@ def make_bumps_track(seed):
     c = BUMP_CFG
     r = np.random.default_rng(2000 + seed)
     n = int(r.integers(c["n"][0], c["n"][1]))
-    bumps, x = [], float(r.uniform(*c["x_first"]))
+    bumps, x = [], float(r.uniform(*c["x_first"])) - (24.0 if FAST_START else 0.0)   # hook test V1: short run-up
     for i in range(n):
         h = round(float(min(c.get("h_max", 9.0), c["h0"] + i * r.uniform(*c["dh"]))), 2)
         w = round(float(c["w0"] + h * r.uniform(*c["wk"])), 1)
@@ -983,6 +983,8 @@ def make_story(series, seed, appearances=None, wins=None):
 
 
 def intro_text(li, vk):
+    if FAST_START and li == 0:                    # hook test V1 (owner 2026-11-12): short level-1 intro, fail comes sooner
+        return "! ".join(VEHICLES[vk]["intro"].replace(". ", "! ").split("! ")[:2]).format(lvl=NUM_WORDS[li]) + "!"
     return VEHICLES[vk]["intro"].format(lvl=NUM_WORDS[li], obst=SERIES_DEFS[SERIES]["obst"])
 FAIL_LINES = {"pit": "Oh no! {n} fell into the giant pothole!",
               "flip": "Whoa! {n} flipped right over!",

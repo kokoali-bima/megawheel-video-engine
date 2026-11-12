@@ -5193,6 +5193,86 @@
    "gpu_seconds": 55.8,
    "wall_seconds": 281.7,
    "cost_usd": 0.0143
+  },
+  {
+   "date": "2026-11-12",
+   "note": "library refill review candidate",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 28.4,
+   "wall_seconds": 4637.3,
+   "cost_usd": 0.0073
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_R3D_S965 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 48.3,
+   "wall_seconds": 540.6,
+   "cost_usd": 0.0123
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_CH3D_BUMPS_S2111 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.1,
+   "wall_seconds": 72.2,
+   "cost_usd": 0.01
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_CH3D_SPLASH_S2115 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 41.2,
+   "wall_seconds": 1384.4,
+   "cost_usd": 0.0105
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_CH3D_SPLASH_S2124 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.8,
+   "wall_seconds": 593.5,
+   "cost_usd": 0.0102
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator TEST_race25d_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 46.5,
+   "wall_seconds": 1410.6,
+   "cost_usd": 0.0119
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator TEST_race25d_902 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 41.8,
+   "wall_seconds": 266.1,
+   "cost_usd": 0.0107
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator TEST_race25d_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 46.9,
+   "wall_seconds": 183.3,
+   "cost_usd": 0.012
   }
  ]
 }
