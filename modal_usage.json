@@ -5173,6 +5173,16 @@
    "gpu_seconds": 57.6,
    "wall_seconds": 678.9,
    "cost_usd": 0.0147
+  },
+  {
+   "date": "2026-11-12",
+   "note": "narrator LAB_R3D_S974 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 47.0,
+   "wall_seconds": 208.1,
+   "cost_usd": 0.012
   }
  ]
 }
