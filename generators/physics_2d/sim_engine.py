@@ -1809,6 +1809,9 @@ READY_SET_GO = "Ready... set... let's go!"     # one phrase ("GO!" alone came ou
 READY_SENTINEL = "__READY_GO__"                  # narration placeholder for the spoken READY... GO!
 READY_GO_T = 0.5                                 # when "GO!" pops (s after READY); set by ready_go_audio()
 HOLD_S = 0.0                                     # CHALLENGE: car waits on the line this long (READY... GO!)
+FAST_START = os.environ.get("MW_FAST_START") == "1"  # hook test V1 (owner 2026-11-12): READY/GO <= 0.7 s
+if FAST_START:
+    READY_SET_GO = "Ready? Go!"
 
 
 def last_word_onset(x):
@@ -1826,6 +1829,8 @@ def ready_go_audio():
     global READY_GO_T
     x = tts(READY_SET_GO)
     READY_GO_T = max(0.42, last_word_onset(x))
+    if FAST_START:
+        READY_GO_T = min(READY_GO_T, 0.58)
     return x
 
 
