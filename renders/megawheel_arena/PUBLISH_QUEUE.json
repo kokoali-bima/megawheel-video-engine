@@ -1424,37 +1424,52 @@
   {
    "episode": 143,
    "video_id": "MW_SPLASH_3D_S2110",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-17T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs Slippery Splash Zone! Can Nitro Make It? \ud83d\udca6\ud83d\ude97 NEW 3D Graphics | Ep. 143 #Shorts",
+   "upload_started": "2026-11-13T05:00:07.224570+00:00",
+   "url": "https://www.youtube.com/shorts/3Ngl7BZMMog"
   },
   {
    "episode": 141,
    "video_id": "MW_RACE_3D_S766",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-17T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Grizzly vs the Giant Hammer! Who Wins the Race? \ud83c\udfc1 NEW 3D Graphics | Ep. 141 #Shorts",
+   "upload_started": "2026-11-13T05:00:20.460260+00:00",
+   "url": "https://www.youtube.com/shorts/5j6JdaQ53Jo"
   },
   {
    "episode": 142,
    "video_id": "MW_SMASH_3D_S292",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-18T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Last Car Standing in the Lava Arena! \ud83d\udca5 NEW 3D Graphics | Ep. 142 #Shorts",
+   "upload_started": "2026-11-13T05:00:29.548699+00:00",
+   "url": "https://www.youtube.com/shorts/rQjKDfHSOkk"
   },
   {
    "episode": 146,
    "video_id": "MW_BUMPS_3D_S2003",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-18T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Tilly the Taxi Survive Giant Speed Bumps? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 146 #Shorts",
+   "upload_started": "2026-11-13T05:00:40.827595+00:00",
+   "url": "https://www.youtube.com/shorts/h-zoOU3A3sM"
   },
   {
    "episode": 144,
    "video_id": "MW_RACE_3D_S761",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-18T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Falling Containers Ahead! Can Siren Still Win? \ud83c\udfc1 NEW 3D Graphics | Ep. 144 #Shorts",
+   "upload_started": "2026-11-13T05:00:49.208514+00:00",
+   "url": "https://www.youtube.com/shorts/m_GvJYYVf4A"
   },
   {
    "episode": 145,
