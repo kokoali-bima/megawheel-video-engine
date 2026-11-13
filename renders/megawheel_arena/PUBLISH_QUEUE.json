@@ -1588,6 +1588,132 @@
    "role": "smash"
   },
   {
+   "episode": 161,
+   "video_id": "MW_BUMPS_3D_S2111",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-24T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 162,
+   "video_id": "MW_RACE_3D_S943",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-24T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 163,
+   "video_id": "MW_SMASH_3D_S422",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-25T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 164,
+   "video_id": "MW_SPLASH_3D_S2115",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-25T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 165,
+   "video_id": "MW_RACE_3D_S925",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-25T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 166,
+   "video_id": "MW_SMASH_3D_S427",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-26T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 167,
+   "video_id": "MW_SPLASH_3D_S2124",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-26T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 168,
+   "video_id": "MW_RACE_3D_S974",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-26T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 169,
+   "video_id": "MW_SMASH_3D_S433",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-27T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 170,
+   "video_id": "MW_SPLASH_3D_S2160",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-27T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 171,
+   "video_id": "MW_RACE_3D_S1023",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-27T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 172,
+   "video_id": "MW_SMASH_3D_S435",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-28T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 173,
+   "video_id": "MW_BUMPS_3D_S2112",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-28T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 174,
+   "video_id": "MW_RACE_3D_S929",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-28T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 175,
+   "video_id": "MW_SMASH_3D_S556",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-29T00:00:00Z",
+   "role": "smash"
+  },
+  {
+   "episode": 176,
+   "video_id": "MW_SPLASH_3D_S2117",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-29T16:00:00Z",
+   "role": "short"
+  },
+  {
+   "episode": 177,
+   "video_id": "MW_RACE_3D_S965",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-29T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 178,
+   "video_id": "MW_SMASH_3D_S425",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-30T00:00:00Z",
+   "role": "smash"
+  },
+  {
    "episode": 102,
    "video_id": "SIM_DUNGEON_V2_S038",
    "status": "SCHEDULED",
@@ -1597,6 +1723,20 @@
    "upload_started": "2026-10-22T05:00:17.016270+00:00",
    "url": "https://www.youtube.com/shorts/U3oGHMwFI0I",
    "shifted_from": "2026-12-01T16:00:00Z"
+  },
+  {
+   "episode": 179,
+   "video_id": "MW_RACE_3D_S1009",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-11-30T20:00:00Z",
+   "role": "race"
+  },
+  {
+   "episode": 180,
+   "video_id": "MW_SMASH_3D_S436",
+   "status": "QUEUED",
+   "publish_at_utc": "2026-12-01T00:00:00Z",
+   "role": "smash"
   }
  ]
 }
