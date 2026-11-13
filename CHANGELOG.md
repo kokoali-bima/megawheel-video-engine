@@ -3,15 +3,22 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-13
+**📤 Upload / antrean / Drive**
+- `e482e7e` publish: daily run 2026-11-13 [cron daily_publish.sh]
+
 ## 2026-11-12
+**🔧 Lain-lain**
+- `1786e5b` stage slate 24-30 Nov for review (7 Race, 7 Smash, 6 Challenge: hook test A vs V1) + sim_engine V1: short level-1 intro and short run-up under MW_FAST_START (default off)
+- `a15ccf3` auto: records left uncommitted before daily run
 **📤 Upload / antrean / Drive**
 - `825ce31` publish: daily run 2026-11-12 [cron daily_publish.sh]
-**🔧 Lain-lain**
-- `a15ccf3` auto: records left uncommitted before daily run
 **🕳️ CHALLENGE (sim_engine)**
 - `d68c017` sim_engine: MW_FAST_START switch for hook test V1 (READY/GO <= 0.7 s, default off)
-<details><summary>otomatis VM (1)</summary>
+<details><summary>otomatis VM (3)</summary>
 
+- `8cd410d` records: modal usage (auto)
+- `8c9d4d1` analytics: daily report 2026-11-12
 - `da7759d` records before analytics
 
 </details>
