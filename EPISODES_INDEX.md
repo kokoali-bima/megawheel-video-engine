@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-13 08:57) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-13 13:43) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -2373,7 +2373,7 @@
 
 ## Ep. 168 — `MW_RACE_3D_S974`
 
-- **Judul YouTube:** the Giant Hammer Ahead! Can Siren Still Win? 🏁 NEW 3D Graphics | Ep. 168 #Shorts
+- **Judul YouTube:** The Giant Hammer Ahead! Can Siren Still Win? 🏁 NEW 3D Graphics | Ep. 168 #Shorts
 - **File MP4:** `/root/video-engine/renders/megawheel_arena/S06/E168_2026-11-12_race25d/MW_RACE_3D_S974.mp4`
 - **Manifest:** `/root/video-engine/renders/megawheel_arena/S06/E168_2026-11-12_race25d/MW_RACE_3D_S974.json` · audit: `renders/megawheel_arena/S06/E168_2026-11-12_race25d/MW_RACE_3D_S974_audit.md`
 - **Season / seri / seed:** S06 / race25d / 974
