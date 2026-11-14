@@ -3,9 +3,21 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-14
+**📤 Upload / antrean / Drive**
+- `d08b93c` publish: daily run 2026-11-14 [cron daily_publish.sh]
+
 ## 2026-11-13
+**🔧 Lain-lain**
+- `a6bd62a` Ep. 168 title: capitalise first letter (owner OK, still QUEUED)
+- `3369d92` approve slate 24-30 Nov on owner word (Ep. 161-180: 7 Race, 7 Smash, 6 Challenge = hook test A vs V1) + publish_queue plan
 **📤 Upload / antrean / Drive**
 - `e482e7e` publish: daily run 2026-11-13 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `ddfd1da` analytics: daily report 2026-11-13
+
+</details>
 
 ## 2026-11-12
 **🔧 Lain-lain**
