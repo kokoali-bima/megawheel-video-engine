@@ -1,6 +1,6 @@
 {
   "video_id": "MW_BUMPS_3D_S2101",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-20T16:00:00Z",
   "series": "bumps",
   "seed": 2101,
   "render3d": true,
@@ -35,5 +35,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 152,
   "season": 6,
-  "approved_date": "2026-11-11"
+  "approved_date": "2026-11-11",
+  "youtube_url": "https://www.youtube.com/shorts/5WLEFngv9wU",
+  "upload_date": "2026-11-14"
 }

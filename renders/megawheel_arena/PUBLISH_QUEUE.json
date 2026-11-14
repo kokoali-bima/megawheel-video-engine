@@ -1474,37 +1474,52 @@
   {
    "episode": 145,
    "video_id": "MW_SMASH_3D_S335",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-19T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Grizzly, Tilly or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 145 #Shorts",
+   "upload_started": "2026-11-14T05:00:07.419285+00:00",
+   "url": "https://www.youtube.com/shorts/6cc3xogGOn0"
   },
   {
    "episode": 149,
    "video_id": "MW_SPLASH_3D_S2100",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-19T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy the Sports Car Survive Slippery Splash Zone? \ud83d\udca6\ud83d\ude97 NEW 3D Graphics | Ep. 149 #Shorts",
+   "upload_started": "2026-11-14T05:00:18.169321+00:00",
+   "url": "https://www.youtube.com/shorts/8-MnXZGhuWY"
   },
   {
    "episode": 147,
    "video_id": "MW_RACE_3D_S872",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-19T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Grizzly Survive the Lava? \ud83c\udfc1 NEW 3D Graphics | Ep. 147 #Shorts",
+   "upload_started": "2026-11-14T05:00:25.656379+00:00",
+   "url": "https://www.youtube.com/shorts/puwbkwcIFxY"
   },
   {
    "episode": 148,
    "video_id": "MW_SMASH_3D_S293",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-20T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Rocky, Zippy or Tilly? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 148 #Shorts",
+   "upload_started": "2026-11-14T05:00:32.504304+00:00",
+   "url": "https://www.youtube.com/shorts/y8zUwlsP1Rk"
   },
   {
    "episode": 152,
    "video_id": "MW_BUMPS_3D_S2101",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-20T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Race Car vs Giant Speed Bumps! Can Nitro Make It? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 152 #Shorts",
+   "upload_started": "2026-11-14T05:00:41.786186+00:00",
+   "url": "https://www.youtube.com/shorts/5WLEFngv9wU"
   },
   {
    "episode": 150,
