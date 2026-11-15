@@ -5283,6 +5283,16 @@
    "gpu_seconds": 28.6,
    "wall_seconds": 302.2,
    "cost_usd": 0.0073
+  },
+  {
+   "date": "2026-11-14",
+   "note": "library refill review candidate",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 29.6,
+   "wall_seconds": 79.2,
+   "cost_usd": 0.0075
   }
  ]
 }
