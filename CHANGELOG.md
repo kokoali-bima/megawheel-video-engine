@@ -3,9 +3,20 @@
 Dibuat otomatis oleh `tools/make_changelog.py` dari riwayat git (terbaru di atas). Setelan terbaik yang
 berlaku: **CONFIG_BEST.md**. Kesalahan & pelajaran: **ERROR_LOG.md**.
 
+## 2026-11-15
+**📤 Upload / antrean / Drive**
+- `827471c` publish: daily run 2026-11-15 [cron daily_publish.sh]
+**🔧 Lain-lain**
+- `b822558` auto: records left uncommitted before daily run
+
 ## 2026-11-14
 **📤 Upload / antrean / Drive**
 - `d08b93c` publish: daily run 2026-11-14 [cron daily_publish.sh]
+<details><summary>otomatis VM (1)</summary>
+
+- `d5adfdb` analytics: daily report 2026-11-14
+
+</details>
 
 ## 2026-11-13
 **🔧 Lain-lain**
