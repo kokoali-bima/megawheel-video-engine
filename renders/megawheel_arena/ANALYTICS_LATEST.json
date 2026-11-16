@@ -1,28 +1,28 @@
 {
- "generated": "2026-11-15T06:30:06.581422+00:00",
- "start": "2026-10-18",
- "end": "2026-11-14",
+ "generated": "2026-11-16T06:30:06.533110+00:00",
+ "start": "2026-10-19",
+ "end": "2026-11-15",
  "days": 28,
  "channel": {
-  "views": 53048,
-  "minutes": 9485,
-  "subs": 71
+  "views": 51114,
+  "minutes": 9120,
+  "subs": 69
  },
  "series": {
-  "RACE": {
-   "videos": 39,
-   "views": 14535,
-   "avg_view_pct": 46.0
-  },
   "CHALLENGE": {
-   "videos": 86,
-   "views": 38390,
-   "avg_view_pct": 46.8
+   "videos": 88,
+   "views": 38636,
+   "avg_view_pct": 46.5
+  },
+  "RACE": {
+   "videos": 40,
+   "views": 12363,
+   "avg_view_pct": 43.7
   },
   "STORY": {
    "videos": 4,
-   "views": 61,
-   "avg_view_pct": 25.7
+   "views": 53,
+   "avg_view_pct": 25.6
   },
   "SMASH": {
    "videos": 3,
@@ -31,17 +31,6 @@
   }
  },
  "videos": [
-  {
-   "id": "8_uVESE2cr4",
-   "title": "Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 | Ep. 50 #Shorts",
-   "series": "RACE",
-   "views": 1210,
-   "minutes": 247,
-   "avg_view_s": 27,
-   "avg_view_pct": 56.25,
-   "likes": 10,
-   "subs": 4
-  },
   {
    "id": "Mb76nmh0YyM",
    "title": "Taxi vs A Gauntlet Of Giant Swinging Balls, Falling Dominoes And More! Can Tilly Make It? 💥 | Ep. 81",
@@ -63,17 +52,6 @@
    "avg_view_pct": 57.330000000000005,
    "likes": 9,
    "subs": 5
-  },
-  {
-   "id": "NaQ5MVI0etc",
-   "title": "Siren vs Falling Containers! Who Wins the Race? 🏁 | Ep. 55 #Shorts",
-   "series": "RACE",
-   "views": 1121,
-   "minutes": 152,
-   "avg_view_s": 22,
-   "avg_view_pct": 61.529999999999994,
-   "likes": 7,
-   "subs": 0
   },
   {
    "id": "JYouVAHqUeA",
@@ -252,6 +230,17 @@
    "subs": 2
   },
   {
+   "id": "1hpNM4IhFno",
+   "title": "Titan, Rocky, Nitro or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 123 #Shorts",
+   "series": "CHALLENGE",
+   "views": 1028,
+   "minutes": 166,
+   "avg_view_s": 26,
+   "avg_view_pct": 46.59,
+   "likes": 8,
+   "subs": 1
+  },
+  {
    "id": "dpIG3zz0nQs",
    "title": "Can Siren Survive the Wall? 🏁 | Ep. 76 #Shorts",
    "series": "RACE",
@@ -260,17 +249,6 @@
    "avg_view_s": 16,
    "avg_view_pct": 46.94,
    "likes": 7,
-   "subs": 1
-  },
-  {
-   "id": "1hpNM4IhFno",
-   "title": "Titan, Rocky, Nitro or Tilly? Last Car Standing! 💥 NEW 3D Graphics | Ep. 123 #Shorts",
-   "series": "CHALLENGE",
-   "views": 1026,
-   "minutes": 166,
-   "avg_view_s": 26,
-   "avg_view_pct": 46.59,
-   "likes": 8,
    "subs": 1
   },
   {
@@ -362,6 +340,17 @@
    "subs": 2
   },
   {
+   "id": "vWLM-GWwbwI",
+   "title": "Titan, Grizzly, Nitro or Zippy? Last Car Standing! 💥 NEW 3D Graphics | Ep. 124 #Shorts",
+   "series": "CHALLENGE",
+   "views": 996,
+   "minutes": 204,
+   "avg_view_s": 23,
+   "avg_view_pct": 41.08,
+   "likes": 5,
+   "subs": 1
+  },
+  {
    "id": "UTVc7gPmdkI",
    "title": "4 Cars Enter the Ice Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 110 #Shorts",
    "series": "CHALLENGE",
@@ -369,17 +358,6 @@
    "minutes": 157,
    "avg_view_s": 21,
    "avg_view_pct": 36.24,
-   "likes": 5,
-   "subs": 1
-  },
-  {
-   "id": "vWLM-GWwbwI",
-   "title": "Titan, Grizzly, Nitro or Zippy? Last Car Standing! 💥 NEW 3D Graphics | Ep. 124 #Shorts",
-   "series": "CHALLENGE",
-   "views": 992,
-   "minutes": 202,
-   "avg_view_s": 23,
-   "avg_view_pct": 40.86,
    "likes": 5,
    "subs": 1
   },
@@ -417,17 +395,6 @@
    "subs": 0
   },
   {
-   "id": "2mJ7FCqvYTg",
-   "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 59 #Shorts",
-   "series": "CHALLENGE",
-   "views": 963,
-   "minutes": 113,
-   "avg_view_s": 21,
-   "avg_view_pct": 41.44,
-   "likes": 4,
-   "subs": 0
-  },
-  {
    "id": "trI9Q77SAxU",
    "title": "Buster, Grizzly, Tilly or Nitro? Last Car Standing! 💥 | Ep. 80 #Shorts",
    "series": "CHALLENGE",
@@ -439,6 +406,17 @@
    "subs": 1
   },
   {
+   "id": "-bzDMtN-75s",
+   "title": "Sprinkles, Rocky, Zippy or Nitro? Last Car Standing! 💥 NEW 3D Graphics | Ep. 125 #Shorts",
+   "series": "CHALLENGE",
+   "views": 952,
+   "minutes": 210,
+   "avg_view_s": 24,
+   "avg_view_pct": 43.39,
+   "likes": 9,
+   "subs": 2
+  },
+  {
    "id": "RqxCo8Uy_-I",
    "title": "Who Survives the 3D Shark Arena? 💥 Dino Kaiju & UFO Attack! #Shorts",
    "series": "CHALLENGE",
@@ -448,17 +426,6 @@
    "avg_view_pct": 53.29999999999999,
    "likes": 10,
    "subs": 1
-  },
-  {
-   "id": "-bzDMtN-75s",
-   "title": "Sprinkles, Rocky, Zippy or Nitro? Last Car Standing! 💥 NEW 3D Graphics | Ep. 125 #Shorts",
-   "series": "CHALLENGE",
-   "views": 845,
-   "minutes": 191,
-   "avg_view_s": 24,
-   "avg_view_pct": 43.9,
-   "likes": 8,
-   "subs": 0
   },
   {
    "id": "jiixposH0eo",
@@ -494,6 +461,17 @@
    "subs": 1
   },
   {
+   "id": "J4qistPtNXw",
+   "title": "Can Titan Survive the UFO? 🏁 NEW 3D Graphics | Ep. 136 #Shorts",
+   "series": "RACE",
+   "views": 731,
+   "minutes": 92,
+   "avg_view_s": 19,
+   "avg_view_pct": 55.65,
+   "likes": 2,
+   "subs": 0
+  },
+  {
    "id": "f1yKrndR86w",
    "title": "4 Cars Enter the Sea Arena! Who Survives? 💥 NEW 3D Graphics | Ep. 122 #Shorts",
    "series": "CHALLENGE",
@@ -505,15 +483,26 @@
    "subs": 2
   },
   {
-   "id": "J4qistPtNXw",
-   "title": "Can Titan Survive the UFO? 🏁 NEW 3D Graphics | Ep. 136 #Shorts",
-   "series": "RACE",
-   "views": 665,
-   "minutes": 79,
-   "avg_view_s": 19,
-   "avg_view_pct": 55.77000000000001,
+   "id": "2mJ7FCqvYTg",
+   "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 59 #Shorts",
+   "series": "CHALLENGE",
+   "views": 568,
+   "minutes": 66,
+   "avg_view_s": 22,
+   "avg_view_pct": 41.78,
    "likes": 2,
    "subs": 0
+  },
+  {
+   "id": "xQLXPQbK73Q",
+   "title": "Siren Meets Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 121 #Shorts",
+   "series": "RACE",
+   "views": 531,
+   "minutes": 128,
+   "avg_view_s": 25,
+   "avg_view_pct": 74.44,
+   "likes": 10,
+   "subs": 2
   },
   {
    "id": "PsnDA9kn7ig",
@@ -527,15 +516,15 @@
    "subs": 1
   },
   {
-   "id": "xQLXPQbK73Q",
-   "title": "Siren Meets Falling Containers! Who Wins the Race? 🏁 NEW 3D Graphics | Ep. 121 #Shorts",
-   "series": "RACE",
-   "views": 433,
-   "minutes": 105,
-   "avg_view_s": 26,
-   "avg_view_pct": 77.98,
-   "likes": 10,
-   "subs": 1
+   "id": "7xGYkU1uEGc",
+   "title": "Can Nitro Survive Giant Potholes? 🚗💥 NEW 3D Graphics | Ep. 129 #Shorts",
+   "series": "CHALLENGE",
+   "views": 492,
+   "minutes": 57,
+   "avg_view_s": 20,
+   "avg_view_pct": 41.97,
+   "likes": 5,
+   "subs": 0
   },
   {
    "id": "W5fQ0Cj2Abs",
@@ -574,10 +563,10 @@
    "id": "tjQbP65Qmew",
    "title": "Taxi vs Slippery Splash Zone! Can Tilly Make It? 💦🚗 NEW 3D Graphics | Ep. 117 #Shorts",
    "series": "CHALLENGE",
-   "views": 393,
-   "minutes": 117,
+   "views": 397,
+   "minutes": 120,
    "avg_view_s": 27,
-   "avg_view_pct": 47.64,
+   "avg_view_pct": 48.02,
    "likes": 5,
    "subs": 1
   },
@@ -591,6 +580,17 @@
    "avg_view_pct": 58.43000000000001,
    "likes": 3,
    "subs": 1
+  },
+  {
+   "id": "KpP109__t9Q",
+   "title": "Hydro, Rocky, Siren or Zippy? Last Car Standing! 💥 NEW 3D Graphics | Ep. 132 #Shorts",
+   "series": "CHALLENGE",
+   "views": 369,
+   "minutes": 43,
+   "avg_view_s": 18,
+   "avg_view_pct": 31.78,
+   "likes": 3,
+   "subs": 0
   },
   {
    "id": "yFWEjAOlIB4",
@@ -640,7 +640,7 @@
    "id": "0qVPxSCaBUI",
    "title": "Can Siren the Police Car Survive Slippery Splash Zone? 💦🚗 | Ep. 104 #Shorts",
    "series": "CHALLENGE",
-   "views": 321,
+   "views": 323,
    "minutes": 103,
    "avg_view_s": 36,
    "avg_view_pct": 63.23,
@@ -659,15 +659,15 @@
    "subs": 0
   },
   {
-   "id": "0UhR4k8z9mk",
-   "title": "Sprinkles, Rocky, Nitro or Zippy? Last Car Standing! 💥 | Ep. 58 #Shorts",
+   "id": "JCOH6N2Jv_o",
+   "title": "Sports Car vs Giant Lava Potholes! Can Zippy Make It? 🌋🔥 NEW 3D Graphics | Ep. 127 #Shorts",
    "series": "CHALLENGE",
-   "views": 298,
-   "minutes": 46,
-   "avg_view_s": 23,
-   "avg_view_pct": 45.41,
-   "likes": 2,
-   "subs": 0
+   "views": 297,
+   "minutes": 85,
+   "avg_view_s": 32,
+   "avg_view_pct": 64.05,
+   "likes": 4,
+   "subs": 1
   },
   {
    "id": "_VvjsGfjf0s",
@@ -706,7 +706,7 @@
    "id": "IemgtFt_1Ts",
    "title": "Will Zippy Make It Past the Oil Slick? 🏁 NEW 3D Graphics | Ep. 120 #Shorts",
    "series": "CHALLENGE",
-   "views": 257,
+   "views": 258,
    "minutes": 59,
    "avg_view_s": 23,
    "avg_view_pct": 64.51,
@@ -723,17 +723,6 @@
    "avg_view_pct": 54.83,
    "likes": 3,
    "subs": 0
-  },
-  {
-   "id": "JCOH6N2Jv_o",
-   "title": "Sports Car vs Giant Lava Potholes! Can Zippy Make It? 🌋🔥 NEW 3D Graphics | Ep. 127 #Shorts",
-   "series": "CHALLENGE",
-   "views": 244,
-   "minutes": 70,
-   "avg_view_s": 31,
-   "avg_view_pct": 62.34,
-   "likes": 4,
-   "subs": 1
   },
   {
    "id": "8q9Bbk-An5U",
@@ -761,10 +750,10 @@
    "id": "1U2YEYgAjyg",
    "title": "Sprinkles, Grizzly, Tilly or Siren? Last Car Standing! 💥 NEW 3D Graphics | Ep. 126 #Shorts",
    "series": "CHALLENGE",
-   "views": 184,
-   "minutes": 12,
-   "avg_view_s": 28,
-   "avg_view_pct": 48.73,
+   "views": 191,
+   "minutes": 13,
+   "avg_view_s": 27,
+   "avg_view_pct": 48.06,
    "likes": 4,
    "subs": 0
   },
@@ -780,6 +769,17 @@
    "subs": 0
   },
   {
+   "id": "NaQ5MVI0etc",
+   "title": "Siren vs Falling Containers! Who Wins the Race? 🏁 | Ep. 55 #Shorts",
+   "series": "RACE",
+   "views": 175,
+   "minutes": 33,
+   "avg_view_s": 29,
+   "avg_view_pct": 82.15,
+   "likes": 1,
+   "subs": 0
+  },
+  {
    "id": "qLmoNh8nyEU",
    "title": "Cars VS Giant Water Pit: Can Rocky Survive Rainy City? 💦🌧️ NEW 3D Graphics | Ep. 103 #Shorts",
    "series": "CHALLENGE",
@@ -788,17 +788,6 @@
    "avg_view_s": 21,
    "avg_view_pct": 36.59,
    "likes": 4,
-   "subs": 0
-  },
-  {
-   "id": "jbr_oreCvfY",
-   "title": "Can Hydro Survive the Giant Hammer? 🏁 | Ep. 53 #Shorts",
-   "series": "RACE",
-   "views": 126,
-   "minutes": 33,
-   "avg_view_s": 33,
-   "avg_view_pct": 91.08,
-   "likes": 1,
    "subs": 0
   },
   {
@@ -813,46 +802,13 @@
    "subs": 0
   },
   {
-   "id": "6eLjmpy02NM",
-   "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 | Ep. 57 #Shorts",
-   "series": "RACE",
-   "views": 96,
-   "minutes": 20,
-   "avg_view_s": 23,
-   "avg_view_pct": 47.45,
-   "likes": 1,
-   "subs": 1
-  },
-  {
    "id": "puxQcUZoOdc",
    "title": "Can Siren Survive Falling Containers? 🏁 | Ep. 54 #Shorts",
    "series": "CHALLENGE",
-   "views": 76,
-   "minutes": 11,
-   "avg_view_s": 18,
-   "avg_view_pct": 48.4,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "c8Y6AecAUCI",
-   "title": "Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts",
-   "series": "CHALLENGE",
-   "views": 74,
-   "minutes": 17,
-   "avg_view_s": 32,
-   "avg_view_pct": 63.470000000000006,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "ivasm__dTxM",
-   "title": "Will Siren the Police Car Survive Giant Lava Potholes? 🌋🔥 | Ep. 42 #Shorts",
-   "series": "CHALLENGE",
-   "views": 66,
-   "minutes": 17,
-   "avg_view_s": 35,
-   "avg_view_pct": 76.56,
+   "views": 59,
+   "minutes": 7,
+   "avg_view_s": 17,
+   "avg_view_pct": 45.52,
    "likes": 0,
    "subs": 0
   },
@@ -868,14 +824,36 @@
    "subs": 0
   },
   {
+   "id": "c8Y6AecAUCI",
+   "title": "Police Car vs Giant Potholes! Can Siren Make It? 🚗💥 | Ep. 48 #Shorts",
+   "series": "CHALLENGE",
+   "views": 48,
+   "minutes": 9,
+   "avg_view_s": 33,
+   "avg_view_pct": 65.82,
+   "likes": 0,
+   "subs": 0
+  },
+  {
    "id": "NJk3DdYJBmo",
    "title": "Will Nitro Make It Past Falling Containers? 🏁 NEW 3D Graphics | Ep. 109 #Shorts",
    "series": "CHALLENGE",
-   "views": 46,
+   "views": 47,
    "minutes": 5,
    "avg_view_s": 18,
    "avg_view_pct": 51.96000000000001,
    "likes": 2,
+   "subs": 0
+  },
+  {
+   "id": "8_uVESE2cr4",
+   "title": "Race Car vs Giant Potholes! Can Nitro Make It? 🚗💥 | Ep. 50 #Shorts",
+   "series": "RACE",
+   "views": 47,
+   "minutes": 11,
+   "avg_view_s": 31,
+   "avg_view_pct": 66.41,
+   "likes": 1,
    "subs": 0
   },
   {
@@ -887,17 +865,6 @@
    "avg_view_s": 14,
    "avg_view_pct": 44.27,
    "likes": 2,
-   "subs": 0
-  },
-  {
-   "id": "Sh2WfMcLj-M",
-   "title": "Can Zippy the Sports Car Survive Giant Speed Bumps? 🚗💥 | Ep. 45 #Shorts",
-   "series": "CHALLENGE",
-   "views": 45,
-   "minutes": 12,
-   "avg_view_s": 28,
-   "avg_view_pct": 56.95,
-   "likes": 1,
    "subs": 0
   },
   {
@@ -923,48 +890,37 @@
    "subs": 0
   },
   {
-   "id": "_ep2xhmCcMg",
-   "title": "Can Nitro the Race Car Survive Giant Potholes? 🚗💥 | Ep. 39 #Shorts",
-   "series": "RACE",
-   "views": 29,
-   "minutes": 9,
-   "avg_view_s": 48,
-   "avg_view_pct": 98.43,
-   "likes": 1,
-   "subs": 0
-  },
-  {
-   "id": "eWqvYeCTWqk",
-   "title": "Can Tiny Tilly Beat a School Bus? 💥 | Ep. 47 #Shorts",
+   "id": "0UhR4k8z9mk",
+   "title": "Sprinkles, Rocky, Nitro or Zippy? Last Car Standing! 💥 | Ep. 58 #Shorts",
    "series": "CHALLENGE",
-   "views": 28,
-   "minutes": 4,
-   "avg_view_s": 22,
-   "avg_view_pct": 45.53,
-   "likes": 1,
-   "subs": 0
-  },
-  {
-   "id": "6HkCyVZqXrc",
-   "title": "Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
-   "series": "RACE",
-   "views": 26,
-   "minutes": 2,
-   "avg_view_s": 14,
-   "avg_view_pct": 36.89,
+   "views": 32,
+   "minutes": 3,
+   "avg_view_s": 17,
+   "avg_view_pct": 33.58,
    "likes": 0,
    "subs": 0
   },
   {
-   "id": "SdByNtxACP4",
-   "title": "Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2",
-   "series": "STORY",
+   "id": "ivasm__dTxM",
+   "title": "Will Siren the Police Car Survive Giant Lava Potholes? 🌋🔥 | Ep. 42 #Shorts",
+   "series": "CHALLENGE",
+   "views": 26,
+   "minutes": 6,
+   "avg_view_s": 32,
+   "avg_view_pct": 69.87,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "Sh2WfMcLj-M",
+   "title": "Can Zippy the Sports Car Survive Giant Speed Bumps? 🚗💥 | Ep. 45 #Shorts",
+   "series": "CHALLENGE",
    "views": 21,
-   "minutes": 18,
-   "avg_view_s": 77,
-   "avg_view_pct": 10.79,
-   "likes": 2,
-   "subs": 1
+   "minutes": 5,
+   "avg_view_s": 25,
+   "avg_view_pct": 50.529999999999994,
+   "likes": 1,
+   "subs": 0
   },
   {
    "id": "yf0y4R83hto",
@@ -978,25 +934,25 @@
    "subs": 0
   },
   {
-   "id": "qNLPmagWH3M",
-   "title": "Titan, Rocky, Tilly or Zippy? Last Car Standing! 💥 | Ep. 44 #Shorts",
-   "series": "CHALLENGE",
-   "views": 17,
-   "minutes": 2,
-   "avg_view_s": 18,
-   "avg_view_pct": 36.28,
-   "likes": 0,
+   "id": "_ep2xhmCcMg",
+   "title": "Can Nitro the Race Car Survive Giant Potholes? 🚗💥 | Ep. 39 #Shorts",
+   "series": "RACE",
+   "views": 19,
+   "minutes": 7,
+   "avg_view_s": 60,
+   "avg_view_pct": 124.07999999999998,
+   "likes": 1,
    "subs": 0
   },
   {
-   "id": "gAVCxOicZyM",
-   "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
-   "series": "STORY",
+   "id": "6HkCyVZqXrc",
+   "title": "Can Siren Survive the Giant Hammer? 🏁 | Ep. 49 #Shorts",
+   "series": "RACE",
    "views": 17,
-   "minutes": 20,
-   "avg_view_s": 95,
-   "avg_view_pct": 13.930000000000001,
-   "likes": 1,
+   "minutes": 0,
+   "avg_view_s": 5,
+   "avg_view_pct": 12.809999999999999,
+   "likes": 0,
    "subs": 0
   },
   {
@@ -1033,14 +989,36 @@
    "subs": 0
   },
   {
-   "id": "BJhlWYkiHF8",
-   "title": "Can Nitro Survive the Meteors? 🏁 | Ep. 46 #Shorts",
-   "series": "RACE",
-   "views": 14,
+   "id": "gAVCxOicZyM",
+   "title": "Sprinkles' First Race 🍦🏁 | MegaWheel Arena Story Ep. 1",
+   "series": "STORY",
+   "views": 16,
+   "minutes": 18,
+   "avg_view_s": 91,
+   "avg_view_pct": 13.37,
+   "likes": 1,
+   "subs": 0
+  },
+  {
+   "id": "eWqvYeCTWqk",
+   "title": "Can Tiny Tilly Beat a School Bus? 💥 | Ep. 47 #Shorts",
+   "series": "CHALLENGE",
+   "views": 15,
    "minutes": 1,
-   "avg_view_s": 24,
-   "avg_view_pct": 67.34,
+   "avg_view_s": 19,
+   "avg_view_pct": 39.2,
    "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "jbr_oreCvfY",
+   "title": "Can Hydro Survive the Giant Hammer? 🏁 | Ep. 53 #Shorts",
+   "series": "RACE",
+   "views": 15,
+   "minutes": 1,
+   "avg_view_s": 15,
+   "avg_view_pct": 41.49,
+   "likes": 1,
    "subs": 0
   },
   {
@@ -1073,6 +1051,28 @@
    "minutes": 3,
    "avg_view_s": 34,
    "avg_view_pct": 72.67,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "SdByNtxACP4",
+   "title": "Who Is Kraggor? 🦖🍦 | MegaWheel Arena Story Ep. 2",
+   "series": "STORY",
+   "views": 14,
+   "minutes": 16,
+   "avg_view_s": 81,
+   "avg_view_pct": 11.27,
+   "likes": 2,
+   "subs": 1
+  },
+  {
+   "id": "6eLjmpy02NM",
+   "title": "Big Rig vs Monster Truck vs Race Car vs Taxi! Who Survives? 💥 | Ep. 57 #Shorts",
+   "series": "RACE",
+   "views": 13,
+   "minutes": 1,
+   "avg_view_s": 17,
+   "avg_view_pct": 34.54,
    "likes": 0,
    "subs": 0
   },
@@ -1121,35 +1121,13 @@
    "subs": 0
   },
   {
-   "id": "1g38LQv-7k8",
-   "title": "Fire Truck vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 38 #Shorts",
-   "series": "RACE",
+   "id": "qNLPmagWH3M",
+   "title": "Titan, Rocky, Tilly or Zippy? Last Car Standing! 💥 | Ep. 44 #Shorts",
+   "series": "CHALLENGE",
    "views": 10,
    "minutes": 1,
-   "avg_view_s": 15,
-   "avg_view_pct": 29.65,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "MsJCeAgnOrY",
-   "title": "Can Nitro Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts",
-   "series": "RACE",
-   "views": 10,
-   "minutes": 0,
-   "avg_view_s": 13,
-   "avg_view_pct": 37.93,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "2ekvyKZl7v8",
-   "title": "Sprinkles, Rocky, Zippy or Siren? Last Car Standing! 💥 | Ep. 41 #Shorts",
-   "series": "CHALLENGE",
-   "views": 9,
-   "minutes": 0,
-   "avg_view_s": 13,
-   "avg_view_pct": 26.93,
+   "avg_view_s": 18,
+   "avg_view_pct": 36.38,
    "likes": 0,
    "subs": 0
   },
@@ -1165,24 +1143,24 @@
    "subs": 0
   },
   {
-   "id": "8XC7Jkb0aZA",
-   "title": "Race Car vs Giant Lava Potholes! Can Nitro Make It? 🌋🔥 | Ep. 36 #Shorts",
+   "id": "BJhlWYkiHF8",
+   "title": "Can Nitro Survive the Meteors? 🏁 | Ep. 46 #Shorts",
    "series": "RACE",
-   "views": 9,
-   "minutes": 1,
-   "avg_view_s": 18,
-   "avg_view_pct": 36.57,
+   "views": 8,
+   "minutes": 0,
+   "avg_view_s": 22,
+   "avg_view_pct": 62.18,
    "likes": 0,
    "subs": 0
   },
   {
-   "id": "ggvN5p10cfQ",
-   "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts",
-   "series": "CHALLENGE",
+   "id": "Gp7yvNydnKs",
+   "title": "Can Siren Survive the Oil Slick? 🏁 | Ep. 40 #Shorts",
+   "series": "RACE",
    "views": 8,
    "minutes": 0,
-   "avg_view_s": 5,
-   "avg_view_pct": 11.84,
+   "avg_view_s": 2,
+   "avg_view_pct": 6.11,
    "likes": 0,
    "subs": 0
   },
@@ -1198,39 +1176,6 @@
    "subs": 0
   },
   {
-   "id": "hBNWKl7lX6I",
-   "title": "Taxi vs Giant Potholes! Can Tilly Make It? 🚗💥 | Ep. 33 #Shorts",
-   "series": "CHALLENGE",
-   "views": 7,
-   "minutes": 1,
-   "avg_view_s": 34,
-   "avg_view_pct": 70.9,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "Gp7yvNydnKs",
-   "title": "Can Siren Survive the Oil Slick? 🏁 | Ep. 40 #Shorts",
-   "series": "RACE",
-   "views": 7,
-   "minutes": 0,
-   "avg_view_s": 0,
-   "avg_view_pct": 0,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "1aa8NVWoMhQ",
-   "title": "Can Tilly Survive the Meteors? 🏁 | Ep. 37 #Shorts",
-   "series": "RACE",
-   "views": 7,
-   "minutes": 0,
-   "avg_view_s": 7,
-   "avg_view_pct": 21.19,
-   "likes": 0,
-   "subs": 0
-  },
-  {
    "id": "ZjUnuZvelKY",
    "title": "Crash Battle! Only One Can Win! 💥 | Ep. 23 #Shorts",
    "series": "CHALLENGE",
@@ -1242,13 +1187,24 @@
    "subs": 0
   },
   {
-   "id": "S1t8T9lwAMs",
-   "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 30 #Shorts",
-   "series": "CHALLENGE",
+   "id": "1g38LQv-7k8",
+   "title": "Fire Truck vs Monster Truck vs Taxi vs Race Car! Who Survives? 💥 | Ep. 38 #Shorts",
+   "series": "RACE",
    "views": 7,
    "minutes": 1,
-   "avg_view_s": 44,
-   "avg_view_pct": 84.62,
+   "avg_view_s": 18,
+   "avg_view_pct": 34.9,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "ggvN5p10cfQ",
+   "title": "Cars VS Giant Potholes! Who Survives? 🚗💥 | Ep. 21 #Shorts",
+   "series": "CHALLENGE",
+   "views": 7,
+   "minutes": 0,
+   "avg_view_s": 5,
+   "avg_view_pct": 11.84,
    "likes": 0,
    "subs": 0
   },
@@ -1275,13 +1231,24 @@
    "subs": 0
   },
   {
-   "id": "k9fMTUKrdeA",
-   "title": "Hydro, Grizzly, Siren or Zippy? Last Car Standing! 💥 | Ep. 32 #Shorts",
-   "series": "CHALLENGE",
+   "id": "1aa8NVWoMhQ",
+   "title": "Can Tilly Survive the Meteors? 🏁 | Ep. 37 #Shorts",
+   "series": "RACE",
    "views": 6,
    "minutes": 0,
-   "avg_view_s": 8,
-   "avg_view_pct": 16.67,
+   "avg_view_s": 6,
+   "avg_view_pct": 18.04,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "S1t8T9lwAMs",
+   "title": "Can Siren the Police Car Survive Giant Potholes? 🚗💥 | Ep. 30 #Shorts",
+   "series": "CHALLENGE",
+   "views": 6,
+   "minutes": 1,
+   "avg_view_s": 44,
+   "avg_view_pct": 84.62,
    "likes": 0,
    "subs": 0
   },
@@ -1293,6 +1260,28 @@
    "minutes": 0,
    "avg_view_s": 9,
    "avg_view_pct": 20.72,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "MsJCeAgnOrY",
+   "title": "Can Nitro Survive the Giant Hammer? 🏁 | Ep. 43 #Shorts",
+   "series": "RACE",
+   "views": 6,
+   "minutes": 0,
+   "avg_view_s": 22,
+   "avg_view_pct": 63.43,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "8XC7Jkb0aZA",
+   "title": "Race Car vs Giant Lava Potholes! Can Nitro Make It? 🌋🔥 | Ep. 36 #Shorts",
+   "series": "RACE",
+   "views": 6,
+   "minutes": 1,
+   "avg_view_s": 21,
+   "avg_view_pct": 43.01,
    "likes": 0,
    "subs": 0
   },
@@ -1319,13 +1308,24 @@
    "subs": 0
   },
   {
-   "id": "nYMwvHZvwmY",
-   "title": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 34 #Shorts",
+   "id": "0sTqfnXpmCE",
+   "title": "Can Rocky Survive the Ice Dragon? 🏁 NEW 3D Graphics | Ep. 137 #Shorts",
    "series": "RACE",
    "views": 5,
    "minutes": 0,
-   "avg_view_s": 7,
-   "avg_view_pct": 18.62,
+   "avg_view_s": 6,
+   "avg_view_pct": 18.28,
+   "likes": 1,
+   "subs": 0
+  },
+  {
+   "id": "2ekvyKZl7v8",
+   "title": "Sprinkles, Rocky, Zippy or Siren? Last Car Standing! 💥 | Ep. 41 #Shorts",
+   "series": "CHALLENGE",
+   "views": 5,
+   "minutes": 0,
+   "avg_view_s": 9,
+   "avg_view_pct": 18.04,
    "likes": 0,
    "subs": 0
   },
@@ -1341,17 +1341,6 @@
    "subs": 0
   },
   {
-   "id": "vZFKVw21xA8",
-   "title": "Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
-   "series": "RACE",
-   "views": 5,
-   "minutes": 0,
-   "avg_view_s": 3,
-   "avg_view_pct": 8.59,
-   "likes": 0,
-   "subs": 0
-  },
-  {
    "id": "RCBE3lgA2uo",
    "title": "Crash Battle! Only One Can Win! 💥 | Ep. 24 #Shorts",
    "series": "CHALLENGE",
@@ -1363,35 +1352,13 @@
    "subs": 0
   },
   {
-   "id": "etUL6wxoccA",
-   "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 35 #Shorts",
+   "id": "k9fMTUKrdeA",
+   "title": "Hydro, Grizzly, Siren or Zippy? Last Car Standing! 💥 | Ep. 32 #Shorts",
    "series": "CHALLENGE",
    "views": 5,
    "minutes": 0,
-   "avg_view_s": 6,
-   "avg_view_pct": 12.82,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "grvQnQ1E94k",
-   "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts",
-   "series": "RACE",
-   "views": 4,
-   "minutes": 0,
-   "avg_view_s": 24,
-   "avg_view_pct": 68.57,
-   "likes": 0,
-   "subs": 0
-  },
-  {
-   "id": "5ljCNw1Hnlg",
-   "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
-   "series": "SMASH",
-   "views": 4,
-   "minutes": 0,
    "avg_view_s": 8,
-   "avg_view_pct": 17.49,
+   "avg_view_pct": 16.67,
    "likes": 0,
    "subs": 0
   },
@@ -1407,6 +1374,72 @@
    "subs": 0
   },
   {
+   "id": "hBNWKl7lX6I",
+   "title": "Taxi vs Giant Potholes! Can Tilly Make It? 🚗💥 | Ep. 33 #Shorts",
+   "series": "CHALLENGE",
+   "views": 4,
+   "minutes": 0,
+   "avg_view_s": 17,
+   "avg_view_pct": 37.29,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "nYMwvHZvwmY",
+   "title": "Nitro vs the Giant Hammer! Who Wins the Race? 🏁 | Ep. 34 #Shorts",
+   "series": "RACE",
+   "views": 4,
+   "minutes": 0,
+   "avg_view_s": 7,
+   "avg_view_pct": 18.62,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "5ljCNw1Hnlg",
+   "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 25 #Shorts",
+   "series": "SMASH",
+   "views": 4,
+   "minutes": 0,
+   "avg_view_s": 8,
+   "avg_view_pct": 17.49,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "vZFKVw21xA8",
+   "title": "Can Zippy Survive the Oil Slick? 🏁 | Ep. 31 #Shorts",
+   "series": "RACE",
+   "views": 4,
+   "minutes": 0,
+   "avg_view_s": 4,
+   "avg_view_pct": 12.839999999999998,
+   "likes": 0,
+   "subs": 0
+  },
+  {
+   "id": "zQnxW07Cbak",
+   "title": "Will Siren the Police Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics | Ep. 128 #Shorts",
+   "series": "CHALLENGE",
+   "views": 4,
+   "minutes": 1,
+   "avg_view_s": 29,
+   "avg_view_pct": 58.8,
+   "likes": 1,
+   "subs": 0
+  },
+  {
+   "id": "etUL6wxoccA",
+   "title": "Can Tiny Nitro Beat a Big Rig? 💥 | Ep. 35 #Shorts",
+   "series": "CHALLENGE",
+   "views": 4,
+   "minutes": 0,
+   "avg_view_s": 7,
+   "avg_view_pct": 13.61,
+   "likes": 0,
+   "subs": 0
+  },
+  {
    "id": "pjx_weAS40w",
    "title": "4 Cars Enter, 1 Survives! 💥 Smash Arena | Ep. 27 #Shorts",
    "series": "SMASH",
@@ -1418,8 +1451,8 @@
    "subs": 0
   },
   {
-   "id": "ABojeEOuK4M",
-   "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts",
+   "id": "grvQnQ1E94k",
+   "title": "Wildest Race Ever! Who Crosses First? 🏁 | Ep. 15 #Shorts",
    "series": "RACE",
    "views": 3,
    "minutes": 0,
@@ -1440,9 +1473,9 @@
    "subs": 0
   },
   {
-   "id": "qePl8AzQ9Rw",
-   "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts",
-   "series": "RACE",
+   "id": "LIP2P98Be6M",
+   "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
+   "series": "CHALLENGE",
    "views": 3,
    "minutes": 0,
    "avg_view_s": 0,
@@ -1451,9 +1484,9 @@
    "subs": 0
   },
   {
-   "id": "LIP2P98Be6M",
-   "title": "Cars VS Lava Road! Who Survives? 🌋🔥 | Ep. 8 #Shorts",
-   "series": "CHALLENGE",
+   "id": "ABojeEOuK4M",
+   "title": "4 Cars, 1 Finish Line! Who Wins? 🏁 | Ep. 12 #Shorts",
+   "series": "RACE",
    "views": 3,
    "minutes": 0,
    "avg_view_s": 0,
@@ -1473,10 +1506,10 @@
    "subs": 0
   },
   {
-   "id": "zQnxW07Cbak",
-   "title": "Will Siren the Police Car Survive Slippery Splash Zone? 💦🚗 NEW 3D Graphics | Ep. 128 #Shorts",
-   "series": "CHALLENGE",
-   "views": 1,
+   "id": "qePl8AzQ9Rw",
+   "title": "Crazy Obstacle Race! Who Survives? 🏁💥 | Ep. 13 #Shorts",
+   "series": "RACE",
+   "views": 3,
    "minutes": 0,
    "avg_view_s": 0,
    "avg_view_pct": 0,
@@ -1485,9 +1518,9 @@
   }
  ],
  "upcoming": [
-  "Sun 15/11 23:00 WIB - Ep 131 - SCHEDULED",
-  "Mon 16/11 03:00 WIB - Ep 139 - SCHEDULED",
-  "Mon 16/11 07:00 WIB - Ep 134 - SCHEDULED",
-  "Mon 16/11 23:00 WIB - Ep 100 - SCHEDULED"
+  "Mon 16/11 23:00 WIB - Ep 100 - SCHEDULED",
+  "Tue 17/11 03:00 WIB - Ep 140 - SCHEDULED",
+  "Tue 17/11 07:00 WIB - Ep 135 - SCHEDULED",
+  "Tue 17/11 23:00 WIB - Ep 143 - SCHEDULED"
  ]
 }
