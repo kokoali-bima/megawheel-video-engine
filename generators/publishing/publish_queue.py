@@ -246,12 +246,15 @@ def upload(max_n, dry=False):
         it.update(status="UPLOADING", title=m["title"], upload_started=dt.datetime.now(dt.timezone.utc).isoformat())
         save(q)                                                  # marker first: a crash can never cause a duplicate
         try:
+            import localizations as _locs
+            _vid_locs = _locs.build(m["title"], episodes.with_credit(m["description"]))
             res = uploader.upload_shorts(video_path=f"{folder}/{e['video_id']}.mp4", title=m["title"],
                                          description=episodes.with_credit(m["description"]), tags=m["tags"],
                                          category_id=CATEGORY_FILM_ANIMATION, privacy_status="private",
                                          made_for_kids=False, publish_at=it["publish_at_utc"],
                                          shorts=role_of(e.get("series", "")) != "long",
-                                         thumbnail_path=m.get("thumbnail"))
+                                         thumbnail_path=m.get("thumbnail"),
+                                         localizations=_vid_locs)
         except AuthExpired as ex:                                # raised before any byte was sent: safe to re-queue
             it["status"] = "QUEUED"
             save(q)

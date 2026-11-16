@@ -5303,6 +5303,36 @@
    "gpu_seconds": 23.1,
    "wall_seconds": 2158.9,
    "cost_usd": 0.0059
+  },
+  {
+   "date": "2026-11-16",
+   "note": "library refill review candidate",
+   "gpu": "L4",
+   "engine": "ace-step-v1-3.5B",
+   "songs": 1,
+   "gpu_seconds": 29.3,
+   "wall_seconds": 265.8,
+   "cost_usd": 0.0075
+  },
+  {
+   "date": "2026-11-16",
+   "note": "c0071 test t4",
+   "gpu": "L4",
+   "engine": "chatterbox-mtl",
+   "lines": 2,
+   "gpu_seconds": 49.6,
+   "wall_seconds": 72.9,
+   "cost_usd": 0.0127
+  },
+  {
+   "date": "2026-11-16",
+   "note": "c0071 ep135 multilang t4",
+   "gpu": "L4",
+   "engine": "chatterbox-mtl",
+   "lines": 95,
+   "gpu_seconds": 745.5,
+   "wall_seconds": 772.9,
+   "cost_usd": 0.1903
   }
  ]
 }

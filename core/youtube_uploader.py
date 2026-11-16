@@ -139,7 +139,8 @@ class YouTubeUploader:
         made_for_kids: bool = False,  # general-audience channel (BLUEPRINT rule 7)
         publish_at: Optional[str] = None,  # ISO-8601 UTC ("2026-10-01T15:00:00Z"): YouTube publishes it then
         shorts: bool = True,  # False for long-form episodes (story15): no #Shorts added
-        thumbnail_path: Optional[str] = None  # custom thumbnail (jpg/png < 2 MB); never fails the upload
+        thumbnail_path: Optional[str] = None,  # custom thumbnail (jpg/png < 2 MB); never fails the upload
+        localizations: Optional[Dict[str, Dict[str, str]]] = None  # optional i18n title/description map
     ) -> Dict[str, Any]:
         """
         Upload a Shorts video to YouTube with resumable chunking.
@@ -188,8 +189,12 @@ class YouTubeUploader:
         )
 
         logger.info(f"Initiating YouTube Shorts upload for {video_path} ('{title}')...")
+        parts = "snippet,status"
+        if localizations:
+            body["localizations"] = localizations
+            parts = "snippet,status,localizations"
         request = youtube.videos().insert(
-            part="snippet,status",
+            part=parts,
             body=body,
             media_body=media
         )
