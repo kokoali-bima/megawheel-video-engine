@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SPLASH_3D_S2000",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-22T16:00:00Z",
   "series": "splash",
   "seed": 2000,
   "render3d": true,
@@ -35,5 +35,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 158,
   "season": 6,
-  "approved_date": "2026-11-11"
+  "approved_date": "2026-11-11",
+  "youtube_url": "https://www.youtube.com/shorts/sn3DebpVswE",
+  "upload_date": "2026-11-16"
 }

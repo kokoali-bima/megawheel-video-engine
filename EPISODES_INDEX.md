@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-15 05:02) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-16 05:02) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -169,11 +169,11 @@
 | 153 | `MW_RACE_3D_S816` | race25d | UPLOADED_SCHEDULED 2026-11-21T20:00:00Z | Sat 2026-11-21 15:00 | https://www.youtube.com/shorts/Z0pONNH4gOI |
 | 154 | `MW_SMASH_3D_S298` | smash25d | UPLOADED_SCHEDULED 2026-11-22T00:00:00Z | Sat 2026-11-21 19:00 | https://www.youtube.com/shorts/74uYD8gkB-0 |
 | 155 | `MW_SPLASH_3D_S2103` | splash | UPLOADED_SCHEDULED 2026-11-21T16:00:00Z | Sat 2026-11-21 11:00 | https://www.youtube.com/shorts/sKHKsb7C_SQ |
-| 156 | `MW_RACE_3D_S787` | race25d | APPROVED | Sun 2026-11-22 15:00 |  |
-| 157 | `MW_SMASH_3D_S342` | smash25d | APPROVED | Sun 2026-11-22 19:00 |  |
-| 158 | `MW_SPLASH_3D_S2000` | splash | APPROVED | Sun 2026-11-22 11:00 |  |
-| 159 | `MW_RACE_3D_S817` | race25d | APPROVED | Mon 2026-11-23 15:00 |  |
-| 160 | `MW_SMASH_3D_S396` | smash25d | APPROVED | Mon 2026-11-23 19:00 |  |
+| 156 | `MW_RACE_3D_S787` | race25d | UPLOADED_SCHEDULED 2026-11-22T20:00:00Z | Sun 2026-11-22 15:00 | https://www.youtube.com/shorts/0kW8KxLWHxs |
+| 157 | `MW_SMASH_3D_S342` | smash25d | UPLOADED_SCHEDULED 2026-11-23T00:00:00Z | Sun 2026-11-22 19:00 | https://www.youtube.com/shorts/YDpVqiqW5ug |
+| 158 | `MW_SPLASH_3D_S2000` | splash | UPLOADED_SCHEDULED 2026-11-22T16:00:00Z | Sun 2026-11-22 11:00 | https://www.youtube.com/shorts/sn3DebpVswE |
+| 159 | `MW_RACE_3D_S817` | race25d | UPLOADED_SCHEDULED 2026-11-23T20:00:00Z | Mon 2026-11-23 15:00 | https://www.youtube.com/shorts/Uj5eDxXamQc |
+| 160 | `MW_SMASH_3D_S396` | smash25d | UPLOADED_SCHEDULED 2026-11-24T00:00:00Z | Mon 2026-11-23 19:00 | https://www.youtube.com/shorts/Oc8UgPw-yvA |
 | 161 | `MW_BUMPS_3D_S2111` | bumps | APPROVED | Tue 2026-11-24 11:00 |  |
 | 162 | `MW_RACE_3D_S943` | race25d | APPROVED | Tue 2026-11-24 15:00 |  |
 | 163 | `MW_SMASH_3D_S422` | smash25d | APPROVED | Tue 2026-11-24 19:00 |  |
@@ -2224,9 +2224,9 @@
 - **Tema / narator:** night-clear-desert / 
 - **Durasi:** 33.3 s
 - **Tokoh dan hasil:** Level 1: Hydro (firetruck) → p3+puddle; Level 2: Rocky (monster) → p4+ufo; Level 3 (juara): Siren (police) → p2+dodge; Level 4: Nitro (f1) → win
-- **Status:** APPROVED (approve 2026-11-11)
-- **Antrian:** QUEUED 2026-11-22T20:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-22T20:00:00Z (approve 2026-11-11)
+- **Antrian:** SCHEDULED 2026-11-22T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/0kW8KxLWHxs
 
 ## Ep. 157 — `MW_SMASH_3D_S342`
 
@@ -2237,9 +2237,9 @@
 - **Tema / narator:** night-clear-beach / 
 - **Durasi:** 57.87 s
 - **Tokoh dan hasil:** Level 1: Sprinkles (icecream) → win; Level 2: Rocky (monster) → p4+wreck; Level 3 (juara): Nitro (f1) → p3+wreck; Level 4: Siren (police) → p2+wreck
-- **Status:** APPROVED (approve 2026-11-11)
-- **Antrian:** QUEUED 2026-11-23T00:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-23T00:00:00Z (approve 2026-11-11)
+- **Antrian:** SCHEDULED 2026-11-23T00:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/YDpVqiqW5ug
 
 ## Ep. 158 — `MW_SPLASH_3D_S2000`
 
@@ -2250,9 +2250,9 @@
 - **Tema / narator:** night-clear-mountains / 
 - **Durasi:** 52.1 s
 - **Tokoh dan hasil:** Level 1: Zippy (sports) → flip@obs0; Level 2: Sprinkles (icecream) → rollback@obs1; Level 3 (juara): Hydro (firetruck) → win
-- **Status:** APPROVED (approve 2026-11-11)
-- **Antrian:** QUEUED 2026-11-22T16:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-22T16:00:00Z (approve 2026-11-11)
+- **Antrian:** SCHEDULED 2026-11-22T16:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/sn3DebpVswE
 
 ## Ep. 159 — `MW_RACE_3D_S817`
 
@@ -2263,9 +2263,9 @@
 - **Tema / narator:** morning-clear-city / 
 - **Durasi:** 34.13 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → p2; Level 2: Grizzly (monster2) → p4+hammer; Level 3 (juara): Tilly (taxi) → p3+dragon_fire+dodge; Level 4: Zippy (sports) → win
-- **Status:** APPROVED (approve 2026-11-11)
-- **Antrian:** QUEUED 2026-11-23T20:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-23T20:00:00Z (approve 2026-11-11)
+- **Antrian:** SCHEDULED 2026-11-23T20:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/Uj5eDxXamQc
 
 ## Ep. 160 — `MW_SMASH_3D_S396`
 
@@ -2276,9 +2276,9 @@
 - **Tema / narator:** morning-clear-city / 
 - **Durasi:** 57.87 s
 - **Tokoh dan hasil:** Level 1: Buster (bus) → win; Level 2: Grizzly (monster2) → p4+wreck; Level 3 (juara): Zippy (sports) → p3+wreck; Level 4: Tilly (taxi) → p2+wreck
-- **Status:** APPROVED (approve 2026-11-11)
-- **Antrian:** QUEUED 2026-11-24T00:00:00Z
-- **YouTube:** belum diupload
+- **Status:** UPLOADED_SCHEDULED 2026-11-24T00:00:00Z (approve 2026-11-11)
+- **Antrian:** SCHEDULED 2026-11-24T00:00:00Z
+- **YouTube:** https://www.youtube.com/shorts/Oc8UgPw-yvA
 
 ## Ep. 161 — `MW_BUMPS_3D_S2111`
 

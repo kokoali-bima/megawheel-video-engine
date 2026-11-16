@@ -1574,23 +1574,32 @@
   {
    "episode": 158,
    "video_id": "MW_SPLASH_3D_S2000",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-22T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Will Zippy the Sports Car Survive Slippery Splash Zone? \ud83d\udca6\ud83d\ude97 NEW 3D Graphics | Ep. 158 #Shorts",
+   "upload_started": "2026-11-16T05:00:10.779094+00:00",
+   "url": "https://www.youtube.com/shorts/sn3DebpVswE"
   },
   {
    "episode": 156,
    "video_id": "MW_RACE_3D_S787",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-22T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Rocky Survive the UFO? \ud83c\udfc1 NEW 3D Graphics | Ep. 156 #Shorts",
+   "upload_started": "2026-11-16T05:00:23.032484+00:00",
+   "url": "https://www.youtube.com/shorts/0kW8KxLWHxs"
   },
   {
    "episode": 157,
    "video_id": "MW_SMASH_3D_S342",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-23T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Sprinkles, Rocky, Nitro or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 157 #Shorts",
+   "upload_started": "2026-11-16T05:00:29.112459+00:00",
+   "url": "https://www.youtube.com/shorts/YDpVqiqW5ug"
   },
   {
    "episode": 101,
@@ -1606,16 +1615,22 @@
   {
    "episode": 159,
    "video_id": "MW_RACE_3D_S817",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-23T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Will Grizzly Make It Past the Giant Hammer? \ud83c\udfc1 NEW 3D Graphics | Ep. 159 #Shorts",
+   "upload_started": "2026-11-16T05:00:39.361284+00:00",
+   "url": "https://www.youtube.com/shorts/Uj5eDxXamQc"
   },
   {
    "episode": 160,
    "video_id": "MW_SMASH_3D_S396",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-24T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Buster, Grizzly, Zippy or Tilly? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 160 #Shorts",
+   "upload_started": "2026-11-16T05:00:46.630320+00:00",
+   "url": "https://www.youtube.com/shorts/Oc8UgPw-yvA"
   },
   {
    "episode": 161,
