@@ -1,6 +1,6 @@
 {
   "video_id": "MW_RACE_3D_S943",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-24T20:00:00Z",
   "series": "race25d",
   "seed": 943,
   "render3d": true,
@@ -40,5 +40,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 162,
   "season": 6,
-  "approved_date": "2026-11-13"
+  "approved_date": "2026-11-13",
+  "youtube_url": "https://www.youtube.com/shorts/lY9yL_99G4Q",
+  "upload_date": "2026-11-17"
 }

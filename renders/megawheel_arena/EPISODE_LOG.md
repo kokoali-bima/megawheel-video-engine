@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-16 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-17 05:12). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -167,11 +167,11 @@
 | 158 | S06 | splash | Zippy, Sprinkles, Hydro | 2026-11-10 | 2026-11-11 | 2026-11-16 | UPLOADED_SCHEDULED 2026-11-22T16:00:00Z | https://www.youtube.com/shorts/sn3DebpVswE |  |  |  |  |
 | 159 | S06 | race25d | Buster, Grizzly, Tilly, Zippy | 2026-11-11 | 2026-11-11 | 2026-11-16 | UPLOADED_SCHEDULED 2026-11-23T20:00:00Z | https://www.youtube.com/shorts/Uj5eDxXamQc |  |  |  |  |
 | 160 | S06 | smash25d | Buster, Grizzly, Zippy, Tilly | 2026-11-10 | 2026-11-11 | 2026-11-16 | UPLOADED_SCHEDULED 2026-11-24T00:00:00Z | https://www.youtube.com/shorts/Oc8UgPw-yvA |  |  |  |  |
-| 161 | S06 | bumps | Siren, Titan, Grizzly | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 162 | S06 | race25d | Buster, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 163 | S06 | smash25d | Titan, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 164 | S06 | splash | Siren, Titan, Sprinkles | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 165 | S06 | race25d | Titan, Grizzly, Siren, Tilly | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
+| 161 | S06 | bumps | Siren, Titan, Grizzly | 2026-11-12 | 2026-11-13 | 2026-11-17 | UPLOADED_SCHEDULED 2026-11-24T16:00:00Z | https://www.youtube.com/shorts/_m7fUkwtKeQ |  |  |  |  |
+| 162 | S06 | race25d | Buster, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 | 2026-11-17 | UPLOADED_SCHEDULED 2026-11-24T20:00:00Z | https://www.youtube.com/shorts/lY9yL_99G4Q |  |  |  |  |
+| 163 | S06 | smash25d | Titan, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 | 2026-11-17 | UPLOADED_SCHEDULED 2026-11-25T00:00:00Z | https://www.youtube.com/shorts/gokPi-MgFUg |  |  |  |  |
+| 164 | S06 | splash | Siren, Titan, Sprinkles | 2026-11-12 | 2026-11-13 | 2026-11-17 | UPLOADED_SCHEDULED 2026-11-25T16:00:00Z | https://www.youtube.com/shorts/jNA3NCNx5GI |  |  |  |  |
+| 165 | S06 | race25d | Titan, Grizzly, Siren, Tilly | 2026-11-12 | 2026-11-13 | 2026-11-17 | UPLOADED_SCHEDULED 2026-11-25T20:00:00Z | https://www.youtube.com/shorts/WV0WqGxQHb4 |  |  |  |  |
 | 166 | S06 | smash25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
 | 167 | S06 | splash | Tilly, Titan, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
 | 168 | S06 | race25d | Sprinkles, Rocky, Tilly, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
@@ -197,7 +197,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| – | | | | | tidak ada |
+| SIM_DUNGEON_V2_S039 | dungeon | Zippy, Hydro, Rocky | 2026-11-16 | 50.8 s | `renders/megawheel_arena/pending/2026-11-16_dungeon_s039` |
 
 ## Ditolak
 
