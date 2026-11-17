@@ -10390,6 +10390,41 @@
       "drive_path": "me/ai-develop/ipandu-video/review/approved/E176_MW_SPLASH_3D_S2117.mp4",
       "approved_date": "2026-11-13",
       "title": "Siren vs the Splash Zone! Who Makes It? 🚗💥 NEW 3D Graphics | Ep. 176 #Shorts"
+    },
+    {
+      "video_id": "SIM_DUNGEON_V2_S039",
+      "series": "dungeon",
+      "engine_version": "v2",
+      "seed": 39,
+      "created": "2026-11-16",
+      "render_date": "2026-11-16",
+      "vehicles": [
+        "sports",
+        "firetruck",
+        "monster"
+      ],
+      "track_id": "dungeon_bda59df6@night-clear-volcano",
+      "theme": "night-clear-volcano",
+      "voice": "chatterbox:m1",
+      "outcomes": [
+        "smash@obs1+broken",
+        "rollback@obs2+broken",
+        "win"
+      ],
+      "duration": 50.8,
+      "status": "RENDERED_PENDING_APPROVAL",
+      "plan": null,
+      "structure": null,
+      "folder": "renders/megawheel_arena/pending/2026-11-16_dungeon_s039",
+      "audit": "renders/megawheel_arena/pending/2026-11-16_dungeon_s039/SIM_DUNGEON_V2_S039_audit.md",
+      "episode": null,
+      "season": null,
+      "upload_date": null,
+      "youtube_url": null,
+      "drive_sheet_id": "1bxpNeJNMzsb7XVE3iYMFXwzRlziiWpE_",
+      "drive_id": "1_sEBE6YNrqpEZZlTfsaB0Tj9zKopt2gs",
+      "drive_path": "me/ai-develop/ipandu-video/review/SIM_DUNGEON_V2_S039.mp4",
+      "render3d": true
     }
   ]
 }

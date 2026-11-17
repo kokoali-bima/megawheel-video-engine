@@ -385,7 +385,7 @@ def make_dungeon_track(seed):
     r = np.random.default_rng(9000 + seed)
     PIT_KIND = "lava"
     tb = _TB(0.0)
-    tb.flat(float(r.uniform(36, 41)))                        # first hazard after the intro narration (events need >= ~6 s)
+    tb.flat(float(r.uniform(18, 22)) if FAST_START else float(r.uniform(36, 41)))  # hook: action in ~2.5s when FAST_START
     spans, obst, danger = [], [], []
 
     def axe():
@@ -1420,13 +1420,13 @@ def bh_car(v):
     return v["body"][1] + v["wheel_r"] * 2 + v["travel"]
 
 
-TARGET_TOTAL = (44.0, 57.0)   # seconds, pacing window (v3.9: +READY-GO hold, voice C; Shorts limit 60 s)
+TARGET_TOTAL = (32.0, 41.0) if os.environ.get("MW_COMPACT") == "1" else (44.0, 57.0)   # seconds, pacing window
 PICK_STATS = {}
 
 
 def event_min_t(intro_d):
     """Earliest allowed outcome: may overlap the intro's tail; the outcome line waits for the intro."""
-    return max(2.5, intro_d - 1.0)
+    return max(1.5 if FAST_START else 2.5, intro_d - 1.0)
 
 
 def level_cap(L):
@@ -2298,7 +2298,7 @@ def add_cold_open(mp4, t_star, text, dur=COLD_OPEN_S, y0=760, band=False):
         draw_text(ctx, ln, W / 2, y0 + i * 125, 112, fill=(1, 0.86, 0.12), max_w=1000)
     png, tmp = mp4 + ".cold.png", mp4 + ".cold.mp4"
     surf.write_to_png(png)
-    t0 = max(0.0, t_star - dur * 0.55)
+    t0 = max(0.0, t_star - dur * 0.85)
     # the clip is a separate (seeked) input: reading one input twice would buffer the whole video in RAM
     fc = (f"[0:v]setpts=PTS-STARTPTS[c0];[c0][1:v]overlay=0:0:shortest=1,"
           f"fade=t=out:st={dur - 0.12:.3f}:d=0.12:color=white[cv];"
@@ -4554,7 +4554,7 @@ def draw_hud(ctx, L, li, st, tl, gt, mode, car_x):
         ctx.save()
         ctx.translate(540, 640)
         ctx.scale(pulse, pulse)
-        draw_text(ctx, "WHO WILL MAKE IT?", 0, 0, 70, fill=(1, 1, 1), stroke=(0.85, 0.1, 0.2),
+        draw_text(ctx, "WHO SURVIVES? PICK 1!" if FAST_START else "WHO WILL MAKE IT?", 0, 0, 68, fill=(1, 1, 1), stroke=(0.85, 0.1, 0.2),
                   alpha=min(1.0, (2.6 - gt) / 0.3))
         ctx.restore()
     frac = min(1.0, max(0.0, (car_x - START_X) / (FINISH_X - START_X)))
@@ -4622,6 +4622,14 @@ def draw_hud(ctx, L, li, st, tl, gt, mode, car_x):
         ctx.scale(p, p)
         draw_text(ctx, CHANNEL.upper(), 0, 140, 58, fill=(1, 1, 1), stroke=(0.1, 0.1, 0.3))
         ctx.restore()
+        if FAST_START:
+            rrect(ctx, -400, 235, 800, 78, 39)
+            ctx.set_source_rgba(0.1, 0.1, 0.25, 0.92)
+            ctx.fill_preserve()
+            ctx.set_source_rgb(1, 0.86, 0.12)
+            ctx.set_line_width(5)
+            ctx.stroke()
+            draw_text(ctx, "WHICH CAR SURVIVED BEST? COMMENT!", 0, 274, 38, fill=(1, 0.86, 0.12), max_w=760)
         ctx.restore()
 
 
@@ -4790,9 +4798,20 @@ def render_chunk(args):
                           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium",
                           "-crf", "19", "-pix_fmt", "yuv420p", "-threads", "2", path], stdin=subprocess.PIPE)
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
+    loop_n = max(1, int(0.2 * FPS))
+    total_f = len(INDEX)
+    surf0 = None
+    if FAST_START and b > total_f - loop_n:
+        surf0 = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
+        draw_frame(cairo.Context(surf0), 0)
+        surf0.flush()
     for g in range(a, b):
         ctx = cairo.Context(surf)
         draw_frame(ctx, g)
+        if surf0 is not None and g >= total_f - loop_n:
+            alpha = (g - (total_f - loop_n) + 1) / float(loop_n)
+            ctx.set_source_surface(surf0, 0, 0)
+            ctx.paint_with_alpha(min(1.0, alpha))
         surf.flush()
         p.stdin.write(bytes(surf.get_data()))
     p.stdin.close()

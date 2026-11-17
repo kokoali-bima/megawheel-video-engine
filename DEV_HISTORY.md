@@ -442,3 +442,7 @@ Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
 - Validation: exporter compiled; first S047 pass filled one missing TTS cache line, then stopped before Modal Godot rendering.
 - Follow-up: intercepted the internal voice-cache re-exec so Race keeps race-only argv while the exporter restarts itself only after the cache is filled.
 - Validation: `python3 -m py_compile lab/godot3d_race/export_race.py` passed; no Modal Godot render was attempted during the failed argument handoff.
+
+## 2026-11-16 — Shorts Retention Improvements (`sim_engine.py` `MW_FAST_START=1`)
+- **Perubahan**: `make_dungeon_track` memangkas jalan datar awal (`36–41 m` -> `18–22 m`) saat `FAST_START`; `event_min_t` diturunkan ke `max(1.5, intro_d - 1.0)`; teks hook *sound-off* `"WHO SURVIVES? PICK 1!"`; banner polling komentar `"WHICH CAR SURVIVED BEST? COMMENT!"` di outro; serta *seamless loop* 0,2 s ke frame 0.
+- **Uji**: `SIM_DUNGEON_V2_S039` (`dungeon`, seed 39, `47.8 s`, Zippy → Hydro → Rocky) — `[audit] PASS`.

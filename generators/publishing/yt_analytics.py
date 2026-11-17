@@ -83,23 +83,29 @@ def upcoming(hours=36):
     return out
 
 
+def _vpct(v, ev):
+    return round(ev / v * 100.0, 1) if v else 0.0
+
+
 def telegram(start, end, days, tot, groups, rows, titles):
     """ANALYTICS_TELEGRAM.txt (< 4000 chars, plain text) + ANALYTICS_LATEST.json."""
+    ch_vpct = _vpct(tot[0], tot[1])
     t = [f"📊 MegaWheel Arena - {days} hari ({start:%d/%m}-{end:%d/%m})",
-         f"👀 {tot[0]:,} views | ⏱️ {tot[1]:,} menit | 👥 +{tot[2]} subs",
+         f"👀 {tot[0]:,} views ({ch_vpct:.1f}% viewed) | ⏱️ {tot[2]:,} menit | 👥 +{tot[3]} subs",
          "(data YouTube Analytics terlambat 1-3 hari)", ""]
     if groups:
         t.append("Per seri:")
         for s_, rs in sorted(groups.items(), key=lambda kv: -sum(r[1] for r in kv[1])):
             v = sum(r[1] for r in rs)
-            t.append(f"- {s_}: {v:,} views / {len(rs)} video, {sum(r[4] for r in rs) / len(rs):.0f}% ditonton")
+            ev = sum(r[2] for r in rs)
+            t.append(f"- {s_}: {v:,} views ({_vpct(v, ev):.0f}% viewed) / {len(rs)} video, {sum(r[5] for r in rs) / len(rs):.0f}% ditonton")
         t.append("")
     if rows:
         t.append("🏆 Top 3:")
         for r in rows[:3]:
-            t.append(f"- {titles.get(r[0], r[0])[:60]}: {r[1]:,} views ({r[4]:.0f}%)")
+            t.append(f"- {titles.get(r[0], r[0])[:55]}: {r[1]:,} views ({_vpct(r[1], r[2]):.0f}% viewed, {r[5]:.0f}%)")
         w = rows[-1]
-        t += [f"🐢 Terlemah: {titles.get(w[0], w[0])[:60]}: {w[1]:,} views", ""]
+        t += [f"🐢 Terlemah: {titles.get(w[0], w[0])[:55]}: {w[1]:,} views ({_vpct(w[1], w[2]):.0f}% viewed)", ""]
     nxt = upcoming()
     if nxt:
         t.append("🗓️ Upload 36 jam ke depan:")
@@ -108,11 +114,14 @@ def telegram(start, end, days, tot, groups, rows, titles):
     with open(TG, "w") as fh:
         fh.write(text + "\n")
     data = dict(generated=dt.datetime.now(dt.timezone.utc).isoformat(), start=str(start), end=str(end), days=days,
-                channel=dict(views=tot[0], minutes=tot[1], subs=tot[2]),
-                series={s_: dict(videos=len(rs), views=sum(r[1] for r in rs),
-                                 avg_view_pct=round(sum(r[4] for r in rs) / len(rs), 1)) for s_, rs in groups.items()},
+                channel=dict(views=tot[0], engaged_views=tot[1], viewed_pct=ch_vpct, swiped_pct=round(100.0 - ch_vpct, 1),
+                             minutes=tot[2], subs=tot[3]),
+                series={s_: dict(videos=len(rs), views=sum(r[1] for r in rs), engaged_views=sum(r[2] for r in rs),
+                                 viewed_pct=_vpct(sum(r[1] for r in rs), sum(r[2] for r in rs)),
+                                 avg_view_pct=round(sum(r[5] for r in rs) / len(rs), 1)) for s_, rs in groups.items()},
                 videos=[dict(id=r[0], title=titles.get(r[0], ""), series=series_of(titles.get(r[0], "")), views=r[1],
-                             minutes=r[2], avg_view_s=r[3], avg_view_pct=r[4], likes=r[5], subs=r[6]) for r in rows],
+                             engaged_views=r[2], viewed_pct=_vpct(r[1], r[2]), swiped_pct=round(100.0 - _vpct(r[1], r[2]), 1),
+                             minutes=r[3], avg_view_s=r[4], avg_view_pct=r[5], likes=r[6], subs=r[7]) for r in rows],
                 upcoming=nxt)
     with open(JS, "w") as fh:
         json.dump(data, fh, indent=1, ensure_ascii=False)
@@ -123,11 +132,11 @@ def report(days, to_drive):
     ya, yt = services()
     end = dt.date.today() - dt.timedelta(days=1)          # analytics lag ~1-2 days
     start = end - dt.timedelta(days=days - 1)
-    metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,likes,subscribersGained"
+    metrics = "views,engagedViews,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,likes,subscribersGained"
     per = ya.reports().query(ids="channel==MINE", startDate=str(start), endDate=str(end), metrics=metrics,
                              dimensions="video", sort="-views", maxResults=200).execute()
     daily = ya.reports().query(ids="channel==MINE", startDate=str(start), endDate=str(end),
-                               metrics="views,estimatedMinutesWatched,subscribersGained", dimensions="day").execute()
+                               metrics="views,engagedViews,estimatedMinutesWatched,subscribersGained", dimensions="day").execute()
     rows = per.get("rows", [])
     ids = [r[0] for r in rows]
     titles = {}
@@ -136,26 +145,27 @@ def report(days, to_drive):
             titles[it["id"]] = it["snippet"]["title"]
     lines = [f"# ANALYTICS_REPORT — MegaWheel Arena", "",
              f"Periode {start} s/d {end} ({days} hari). Dibuat {dt.datetime.now():%Y-%m-%d %H:%M} oleh yt_analytics.py.", ""]
-    tot = [sum(r[i] for r in daily.get("rows", [])) for i in (1, 2, 3)]
-    lines += [f"**Channel:** {tot[0]:,} views · {tot[1]:,} menit tontonan · +{tot[2]} subscriber", ""]
+    tot = [sum(r[i] for r in daily.get("rows", [])) for i in (1, 2, 3, 4)]
+    lines += [f"**Channel:** {tot[0]:,} views · {tot[1]:,} engaged ({_vpct(tot[0], tot[1]):.1f}% viewed / {100.0 - _vpct(tot[0], tot[1]):.1f}% swiped) · {tot[2]:,} menit tontonan · +{tot[3]} subscriber", ""]
     groups = {}
     for r in rows:
         groups.setdefault(series_of(titles.get(r[0], "")), []).append(r)
-    lines += ["## Per seri", "", "| Seri | Video | Views | Rata-rata views | Rata-rata % ditonton | Subs |", "|---|---|---|---|---|---|"]
+    lines += ["## Per seri", "", "| Seri | Video | Views | Engaged | Viewed % | Rata-rata views | Rata-rata % ditonton | Subs |", "|---|---|---|---|---|---|---|---|"]
     for s, rs in sorted(groups.items(), key=lambda kv: -sum(r[1] for r in kv[1])):
         v = sum(r[1] for r in rs)
-        lines.append(f"| {s} | {len(rs)} | {v:,} | {v // max(1, len(rs)):,} | "
-                     f"{sum(r[4] for r in rs) / len(rs):.0f}% | {sum(r[6] for r in rs)} |")
+        ev = sum(r[2] for r in rs)
+        lines.append(f"| {s} | {len(rs)} | {v:,} | {ev:,} | {_vpct(v, ev):.1f}% | {v // max(1, len(rs)):,} | "
+                     f"{sum(r[5] for r in rs) / len(rs):.0f}% | {sum(r[7] for r in rs)} |")
     lines += ["", "## Per video (urut views)", "",
-              "| Video | Seri | Views | Menit | Durasi rata2 (dtk) | % ditonton | Likes | Subs |", "|---|---|---|---|---|---|---|---|"]
+              "| Video | Seri | Views | Viewed % | Menit | Durasi rata2 (dtk) | % ditonton | Likes | Subs |", "|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         title = re.sub(r"\|", "/", titles.get(r[0], r[0]))[:70]
-        lines.append(f"| [{title}](https://youtu.be/{r[0]}) | {series_of(title)} | {r[1]:,} | {r[2]:,} | {r[3]} | "
-                     f"{r[4]:.0f}% | {r[5]} | {r[6]} |")
+        lines.append(f"| [{title}](https://youtu.be/{r[0]}) | {series_of(title)} | {r[1]:,} | {_vpct(r[1], r[2]):.1f}% | {r[3]:,} | {r[4]} | "
+                     f"{r[5]:.0f}% | {r[6]} | {r[7]} |")
     if rows:
         best, worst = rows[0], rows[-1]
-        lines += ["", f"**Terbaik:** {titles.get(best[0], best[0])} ({best[1]:,} views, {best[4]:.0f}% ditonton)",
-                  f"**Terlemah:** {titles.get(worst[0], worst[0])} ({worst[1]:,} views, {worst[4]:.0f}% ditonton)"]
+        lines += ["", f"**Terbaik:** {titles.get(best[0], best[0])} ({best[1]:,} views, {_vpct(best[1], best[2]):.1f}% viewed, {best[5]:.0f}% ditonton)",
+                  f"**Terlemah:** {titles.get(worst[0], worst[0])} ({worst[1]:,} views, {_vpct(worst[1], worst[2]):.1f}% viewed, {worst[5]:.0f}% ditonton)"]
     with open(OUT, "w") as fh:
         fh.write("\n".join(lines) + "\n")
     telegram(start, end, days, tot, groups, rows, titles)

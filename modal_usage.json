@@ -5333,6 +5333,107 @@
    "gpu_seconds": 745.5,
    "wall_seconds": 772.9,
    "cost_usd": 0.1903
+  },
+  {
+   "date": "2026-11-16",
+   "note": "narrator SIM_DUNGEON_V2_S046 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 44.7,
+   "wall_seconds": 132.2,
+   "cost_usd": 0.0114
+  },
+  {
+   "date": "2026-11-16",
+   "note": "narrator SIM_DUNGEON_V2_S039 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 2,
+   "gpu_seconds": 45.7,
+   "wall_seconds": 75.3,
+   "cost_usd": 0.0117
+  },
+  {
+   "date": "2026-11-16",
+   "note": "godot3d convert SIM_DUNGEON_V2_S039",
+   "cpu": 16,
+   "gpu": "T4",
+   "engine": "godot-4.4.1-vulkan-T4",
+   "parts": 3,
+   "cpu_container_seconds": 146.5,
+   "wall_seconds": 82.0,
+   "cost_usd": 0.0394
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_bumps_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 38.2,
+   "wall_seconds": 318.3,
+   "cost_usd": 0.0098
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_splash_903 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 39.4,
+   "wall_seconds": 725.7,
+   "cost_usd": 0.0101
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_race25d_901 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 40.8,
+   "wall_seconds": 67.3,
+   "cost_usd": 0.0104
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_race25d_903 r2",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 45.4,
+   "wall_seconds": 999.5,
+   "cost_usd": 0.0116
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_POTHOLES_34 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 4,
+   "gpu_seconds": 56.9,
+   "wall_seconds": 1325.2,
+   "cost_usd": 0.0145
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator LAB_CH3D_POTHOLES_S035 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 37.8,
+   "wall_seconds": 169.9,
+   "cost_usd": 0.0097
+  },
+  {
+   "date": "2026-11-17",
+   "note": "narrator TEST_potholes_903 r1",
+   "gpu": "L4",
+   "engine": "chatterbox-tts",
+   "lines": 1,
+   "gpu_seconds": 49.2,
+   "wall_seconds": 344.2,
+   "cost_usd": 0.0126
   }
  ]
 }
