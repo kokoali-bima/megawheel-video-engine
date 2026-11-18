@@ -1685,37 +1685,52 @@
   {
    "episode": 166,
    "video_id": "MW_SMASH_3D_S427",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-26T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Last Car Standing in the Sea Arena! \ud83d\udca5 NEW 3D Graphics | Ep. 166 #Shorts",
+   "upload_started": "2026-11-18T05:00:06.855388+00:00",
+   "url": "https://www.youtube.com/shorts/CU68r0HGT3U"
   },
   {
    "episode": 167,
    "video_id": "MW_SPLASH_3D_S2124",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-26T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Tilly the Taxi Survive Slippery Splash Zone? \ud83d\udca6\ud83d\ude97 NEW 3D Graphics | Ep. 167 #Shorts",
+   "upload_started": "2026-11-18T05:00:22.793544+00:00",
+   "url": "https://www.youtube.com/shorts/TSDOuSm4BZg"
   },
   {
    "episode": 168,
    "video_id": "MW_RACE_3D_S974",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-26T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "The Giant Hammer Ahead! Can Siren Still Win? \ud83c\udfc1 NEW 3D Graphics | Ep. 168 #Shorts",
+   "upload_started": "2026-11-18T05:00:37.628235+00:00",
+   "url": "https://www.youtube.com/shorts/z7teVyXuRwM"
   },
   {
    "episode": 169,
    "video_id": "MW_SMASH_3D_S433",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-27T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Hydro, Rocky, Nitro or Tilly? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 169 #Shorts",
+   "upload_started": "2026-11-18T05:00:48.877275+00:00",
+   "url": "https://www.youtube.com/shorts/qLs84UbfVqs"
   },
   {
    "episode": 170,
    "video_id": "MW_SPLASH_3D_S2160",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-27T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Tilly Survive the Splash Zone? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 170 #Shorts",
+   "upload_started": "2026-11-18T05:01:03.349343+00:00",
+   "url": "https://www.youtube.com/shorts/7R0UVh3TPOU"
   },
   {
    "episode": 171,

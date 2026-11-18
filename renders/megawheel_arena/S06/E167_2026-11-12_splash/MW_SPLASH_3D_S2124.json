@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SPLASH_3D_S2124",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-11-26T16:00:00Z",
   "series": "splash",
   "seed": 2124,
   "render3d": true,
@@ -35,5 +35,7 @@
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "episode": 167,
   "season": 6,
-  "approved_date": "2026-11-13"
+  "approved_date": "2026-11-13",
+  "youtube_url": "https://www.youtube.com/shorts/TSDOuSm4BZg",
+  "upload_date": "2026-11-18"
 }

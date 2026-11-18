@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-17T05:14:04Z",
+  "finished_utc": "2026-11-18T05:02:44Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-17T05:14:04Z",
+ "updated_utc": "2026-11-18T05:02:44Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -31,29 +31,11 @@
   }
  },
  "queue": {
-  "SCHEDULED": 169,
+  "SCHEDULED": 174,
   "DELETED": 1,
-  "QUEUED": 15
+  "QUEUED": 10
  },
  "next_uploads": [
-  {
-   "episode": 143,
-   "role": "short",
-   "publish_at_utc": "2026-11-17T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 141,
-   "role": "race",
-   "publish_at_utc": "2026-11-17T20:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 142,
-   "role": "smash",
-   "publish_at_utc": "2026-11-18T00:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 146,
    "role": "short",
@@ -82,6 +64,24 @@
    "episode": 147,
    "role": "race",
    "publish_at_utc": "2026-11-19T20:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 148,
+   "role": "smash",
+   "publish_at_utc": "2026-11-20T00:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 152,
+   "role": "short",
+   "publish_at_utc": "2026-11-20T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 150,
+   "role": "race",
+   "publish_at_utc": "2026-11-20T20:00:00Z",
    "status": "SCHEDULED"
   }
  ]
