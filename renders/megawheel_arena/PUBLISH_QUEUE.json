@@ -1735,37 +1735,52 @@
   {
    "episode": 171,
    "video_id": "MW_RACE_3D_S1023",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-27T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Titan Survive the Ice Dragon? \ud83c\udfc1 NEW 3D Graphics | Ep. 171 #Shorts",
+   "upload_started": "2026-11-19T05:00:07.836117+00:00",
+   "url": "https://www.youtube.com/shorts/k8WrFtJXPBE"
   },
   {
    "episode": 172,
    "video_id": "MW_SMASH_3D_S435",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-28T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Last Car Standing in the Mud Arena! \ud83d\udca5 NEW 3D Graphics | Ep. 172 #Shorts",
+   "upload_started": "2026-11-19T05:00:19.714529+00:00",
+   "url": "https://www.youtube.com/shorts/Ae0gYVD1FqE"
   },
   {
    "episode": 173,
    "video_id": "MW_BUMPS_3D_S2112",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-28T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy Survive Giant Speed Bumps? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 173 #Shorts",
+   "upload_started": "2026-11-19T05:00:33.923080+00:00",
+   "url": "https://www.youtube.com/shorts/r70Ueo7SYq0"
   },
   {
    "episode": 174,
    "video_id": "MW_RACE_3D_S929",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-28T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Will Siren Make It Past the Oil Slick? \ud83c\udfc1 NEW 3D Graphics | Ep. 174 #Shorts",
+   "upload_started": "2026-11-19T05:00:47.146144+00:00",
+   "url": "https://www.youtube.com/shorts/ZAnH4Hsi_5s"
   },
   {
    "episode": 175,
    "video_id": "MW_SMASH_3D_S556",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-29T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Titan, Rocky, Zippy or Nitro? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 175 #Shorts",
+   "upload_started": "2026-11-19T05:00:58.043413+00:00",
+   "url": "https://www.youtube.com/shorts/nZtJx56cDKI"
   },
   {
    "episode": 176,

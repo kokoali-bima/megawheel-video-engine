@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-18 05:01). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-19 05:01). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -177,11 +177,11 @@
 | 168 | S06 | race25d | Sprinkles, Rocky, Tilly, Siren | 2026-11-12 | 2026-11-13 | 2026-11-18 | UPLOADED_SCHEDULED 2026-11-26T20:00:00Z | https://www.youtube.com/shorts/z7teVyXuRwM |  |  |  |  |
 | 169 | S06 | smash25d | Hydro, Rocky, Nitro, Tilly | 2026-11-12 | 2026-11-13 | 2026-11-18 | UPLOADED_SCHEDULED 2026-11-27T00:00:00Z | https://www.youtube.com/shorts/qLs84UbfVqs |  |  |  |  |
 | 170 | S06 | splash | Tilly, Titan, Hydro | 2026-11-12 | 2026-11-13 | 2026-11-18 | UPLOADED_SCHEDULED 2026-11-27T16:00:00Z | https://www.youtube.com/shorts/7R0UVh3TPOU |  |  |  |  |
-| 171 | S06 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 172 | S06 | smash25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 173 | S06 | bumps | Zippy, Buster, Grizzly | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 174 | S06 | race25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
-| 175 | S06 | smash25d | Titan, Rocky, Zippy, Nitro | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
+| 171 | S06 | race25d | Titan, Grizzly, Zippy, Tilly | 2026-11-12 | 2026-11-13 | 2026-11-19 | UPLOADED_SCHEDULED 2026-11-27T20:00:00Z | https://www.youtube.com/shorts/k8WrFtJXPBE |  |  |  |  |
+| 172 | S06 | smash25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 | 2026-11-19 | UPLOADED_SCHEDULED 2026-11-28T00:00:00Z | https://www.youtube.com/shorts/Ae0gYVD1FqE |  |  |  |  |
+| 173 | S06 | bumps | Zippy, Buster, Grizzly | 2026-11-12 | 2026-11-13 | 2026-11-19 | UPLOADED_SCHEDULED 2026-11-28T16:00:00Z | https://www.youtube.com/shorts/r70Ueo7SYq0 |  |  |  |  |
+| 174 | S06 | race25d | Sprinkles, Rocky, Nitro, Siren | 2026-11-12 | 2026-11-13 | 2026-11-19 | UPLOADED_SCHEDULED 2026-11-28T20:00:00Z | https://www.youtube.com/shorts/ZAnH4Hsi_5s |  |  |  |  |
+| 175 | S06 | smash25d | Titan, Rocky, Zippy, Nitro | 2026-11-12 | 2026-11-13 | 2026-11-19 | UPLOADED_SCHEDULED 2026-11-29T00:00:00Z | https://www.youtube.com/shorts/nZtJx56cDKI |  |  |  |  |
 | 176 | S06 | splash | Siren, Sprinkles, Buster | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
 | 177 | S06 | race25d | Titan, Rocky, Zippy, Siren | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
 | 178 | S06 | smash25d | Buster, Rocky, Nitro, Zippy | 2026-11-12 | 2026-11-13 |  | APPROVED |  |  |  |  |  |
