@@ -1756,8 +1756,8 @@ def main():
         voice = f"edge:{voice}+{EDGE_VOICES['f1']}"
     print(f"[smash] announcer: {voice}", flush=True)
     # INTRO: wide shot "Ladies and gentlemen", then every fighter is introduced (slot = length of the call)
-    wide_len = len(say(ladies, "intro", "m1")) / se.SR + 0.45
-    slots = [max(1.7, len(say(cl, "hype", "m1")) / se.SR + 0.5) for cl in calls]
+    wide_len = len(say(ladies, "intro", "m1")) / se.SR + 0.25
+    slots = [max(1.3, len(say(cl, "hype", "m1")) / se.SR + 0.2) for cl in calls]
     intro_starts = [wide_len + sum(slots[:i]) for i in range(4)]
     intro_frames = [("intro", j / FPS) for j in range(int((wide_len + sum(slots)) * FPS))]
     lf = len(intro_frames) / FPS

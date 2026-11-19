@@ -446,3 +446,21 @@ Tambahan dari user: jadwal upload 3 video/hari mengikuti jam US.
 ## 2026-11-16 — Shorts Retention Improvements (`sim_engine.py` `MW_FAST_START=1`)
 - **Perubahan**: `make_dungeon_track` memangkas jalan datar awal (`36–41 m` -> `18–22 m`) saat `FAST_START`; `event_min_t` diturunkan ke `max(1.5, intro_d - 1.0)`; teks hook *sound-off* `"WHO SURVIVES? PICK 1!"`; banner polling komentar `"WHICH CAR SURVIVED BEST? COMMENT!"` di outro; serta *seamless loop* 0,2 s ke frame 0.
 - **Uji**: `SIM_DUNGEON_V2_S039` (`dungeon`, seed 39, `47.8 s`, Zippy → Hydro → Rocky) — `[audit] PASS`.
+
+## 2026-11-19 — SMASH intro trim (retention, `smash25d.py`)
+- **Perubahan**: `generators/lanes25d/smash25d.py` baris 1759-1760 (fungsi `main()`, blok INTRO) — jeda setelah tiap baris
+  pengumuman fighter dipangkas `+0.5` -> `+0.2` detik, lantai minimum slot `max(1.7, ...)` -> `max(1.3, ...)`, dan jeda
+  pembuka "Ladies and gentlemen" `+0.45` -> `+0.25` detik. Tidak menyentuh simulasi pertarungan, kamera, atau
+  `intro_card()` (animasi kartu cuma butuh 0.35 s, masih longgar di slot baru).
+- **Alasan**: audit retensi 28-hari (data `ANALYTICS_LATEST.json`) menunjukkan video format SMASH ("4 Cars
+  Enter.../Last Car Standing") rata-rata 41.3% retensi vs format 1v1-vs-obstacle 56.1%, dengan durasi tonton absolut
+  viewer yang hampir sama (~23-26 detik) di kedua format — intro 4-fighter yang ~11-13 detik sebelum pertarungan
+  mulai diduga penyebab utama. Permintaan owner (C-0081, NEEDS_WRITE disetujui 2026-11-19).
+- **Uji**: seed 335 (slot 6, slate `/tmp/chk3d/sl_smash2/slate_smash.json`) di-export+render ulang lewat
+  `render_slate.py --only smash:6` ke `/tmp/chk3d/render3_var` (bukan folder produksi/lab biasa). `qc.json` PASS,
+  semua gate OK, tidak ada error. Baseline vs varian: durasi 56.11s -> 54.7s (-1.41s), frame 1683 -> 1641 (-42
+  frame @30fps = match persis), luma/stream/winner/tema identik — murni intro lebih cepat, tidak ada regresi visual.
+  Narasi tetap utuh (tidak overlap), dicek dari export.log.
+- **Catatan**: perbaikan ini konservatif (~2.6% dari durasi total). Kalau hasil ini belum cukup menaikkan retensi
+  nyata di produksi, langkah lanjutan yang lebih besar (restrukturisasi 4 kartu intro jadi tampil lebih cepat/paralel,
+  bukan cuma pangkas jeda) perlu dibahas terpisah dengan owner sebelum dikerjakan.
