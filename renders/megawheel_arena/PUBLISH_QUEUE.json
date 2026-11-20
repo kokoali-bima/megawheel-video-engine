@@ -1785,23 +1785,32 @@
   {
    "episode": 176,
    "video_id": "MW_SPLASH_3D_S2117",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-29T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Siren vs the Splash Zone! Who Makes It? \ud83d\ude97\ud83d\udca5 NEW 3D Graphics | Ep. 176 #Shorts",
+   "upload_started": "2026-11-20T05:00:06.167012+00:00",
+   "url": "https://www.youtube.com/shorts/yfq9VtiDAE4"
   },
   {
    "episode": 177,
    "video_id": "MW_RACE_3D_S965",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-29T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Will Rocky Make It Past Falling Containers? \ud83c\udfc1 NEW 3D Graphics | Ep. 177 #Shorts",
+   "upload_started": "2026-11-20T05:00:21.512462+00:00",
+   "url": "https://www.youtube.com/shorts/V4x235mecdQ"
   },
   {
    "episode": 178,
    "video_id": "MW_SMASH_3D_S425",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-30T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Buster, Rocky, Nitro or Zippy? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 178 #Shorts",
+   "upload_started": "2026-11-20T05:00:32.934545+00:00",
+   "url": "https://www.youtube.com/shorts/1g5gBfPPbMc"
   },
   {
    "episode": 102,
@@ -1817,16 +1826,22 @@
   {
    "episode": 179,
    "video_id": "MW_RACE_3D_S1009",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-11-30T20:00:00Z",
-   "role": "race"
+   "role": "race",
+   "title": "Can Zippy Survive the Giant Hammer? \ud83c\udfc1 NEW 3D Graphics | Ep. 179 #Shorts",
+   "upload_started": "2026-11-20T05:00:46.556097+00:00",
+   "url": "https://www.youtube.com/shorts/P-Nphfrm9ug"
   },
   {
    "episode": 180,
    "video_id": "MW_SMASH_3D_S436",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-12-01T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Hydro, Rocky, Tilly or Siren? Last Car Standing! \ud83d\udca5 NEW 3D Graphics | Ep. 180 #Shorts",
+   "upload_started": "2026-11-20T05:00:57.112400+00:00",
+   "url": "https://www.youtube.com/shorts/ZKE023C4M4U"
   }
  ]
 }
