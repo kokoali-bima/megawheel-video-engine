@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SMASH_3D_S5019",
-  "status": "APPROVED",
+  "status": "UPLOADED_SCHEDULED 2026-12-02T00:00:00Z",
   "series": "smash25d",
   "seed": 5019,
   "render3d": true,
@@ -37,5 +37,7 @@
   "format": "guest35",
   "episode": 182,
   "season": 7,
-  "approved_date": "2026-11-25"
+  "approved_date": "2026-11-25",
+  "youtube_url": "https://www.youtube.com/shorts/o_uIAsU-Nv8",
+  "upload_date": "2026-11-26"
 }

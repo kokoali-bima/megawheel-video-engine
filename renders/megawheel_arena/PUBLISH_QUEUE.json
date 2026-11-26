@@ -1846,16 +1846,22 @@
   {
    "episode": 182,
    "video_id": "MW_SMASH_3D_S5019",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-12-02T00:00:00Z",
-   "role": "smash"
+   "role": "smash",
+   "title": "Race Champion Siren Crashes the Smash Arena! \ud83d\udca5 NEW 3D Graphics | Ep. 182 #Shorts",
+   "upload_started": "2026-11-26T05:00:08.647909+00:00",
+   "url": "https://www.youtube.com/shorts/o_uIAsU-Nv8"
   },
   {
    "episode": 181,
    "video_id": "SIM_DUNGEON_V2_S039",
-   "status": "QUEUED",
+   "status": "SCHEDULED",
    "publish_at_utc": "2026-12-07T16:00:00Z",
-   "role": "short"
+   "role": "short",
+   "title": "Can Zippy the Sports Car Survive Deadly Dungeon Traps? \ud83e\ude93\ud83c\udf0b NEW 3D Graphics | Ep. 181 #Shorts",
+   "upload_started": "2026-11-26T05:00:22.529562+00:00",
+   "url": "https://www.youtube.com/shorts/zgUurddCSrw"
   }
  ]
 }
