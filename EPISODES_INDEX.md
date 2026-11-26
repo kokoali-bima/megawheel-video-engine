@@ -1,6 +1,6 @@
 # EPISODES_INDEX — identitas pasti setiap episode MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-25 05:01) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-25 09:40) setiap approve/reject/upload. **Jangan diedit manual.** Sumber data: `PRODUCTION_REGISTRY.json`.
 
 ## Cara mengenali episode (wajib untuk semua agent)
 
@@ -194,6 +194,8 @@
 | 178 | `MW_SMASH_3D_S425` | smash25d | UPLOADED_SCHEDULED 2026-11-30T00:00:00Z | Sun 2026-11-29 19:00 | https://www.youtube.com/shorts/1g5gBfPPbMc |
 | 179 | `MW_RACE_3D_S1009` | race25d | UPLOADED_SCHEDULED 2026-11-30T20:00:00Z | Mon 2026-11-30 15:00 | https://www.youtube.com/shorts/P-Nphfrm9ug |
 | 180 | `MW_SMASH_3D_S436` | smash25d | UPLOADED_SCHEDULED 2026-12-01T00:00:00Z | Mon 2026-11-30 19:00 | https://www.youtube.com/shorts/ZKE023C4M4U |
+| 181 | `SIM_DUNGEON_V2_S039` | dungeon | APPROVED | Mon 2026-12-07 11:00 |  |
+| 182 | `MW_SMASH_3D_S5019` | smash25d | APPROVED | Tue 2026-12-01 19:00 |  |
 | 1001 | `2026-10-02_story15_e01` | story15 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | Sun 2026-10-04 13:00 | https://www.youtube.com/shorts/gAVCxOicZyM |
 | 1002 | `2026-10-07_story15_e02` | story15 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | Sun 2026-10-11 13:00 | https://www.youtube.com/shorts/SdByNtxACP4 |
 | 1003 | `2026-10-23_story15_e03` | story15 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | Sun 2026-10-25 13:00 | https://www.youtube.com/shorts/3wtRIEEN4WY |
@@ -2539,6 +2541,32 @@
 - **Status:** UPLOADED_SCHEDULED 2026-12-01T00:00:00Z (approve 2026-11-13)
 - **Antrian:** SCHEDULED 2026-12-01T00:00:00Z
 - **YouTube:** https://www.youtube.com/shorts/ZKE023C4M4U
+
+## Ep. 181 — `SIM_DUNGEON_V2_S039`
+
+- **Judul YouTube:** Can Zippy the Sports Car Survive Deadly Dungeon Traps? 🪓🌋 NEW 3D Graphics | Ep. 181 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S07/E181_2026-11-16_dungeon/SIM_DUNGEON_V2_S039.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S07/E181_2026-11-16_dungeon/SIM_DUNGEON_V2_S039.json` · audit: `renders/megawheel_arena/S07/E181_2026-11-16_dungeon/SIM_DUNGEON_V2_S039_audit.md`
+- **Season / seri / seed:** S07 / dungeon / 39
+- **Tema / narator:** night-clear-volcano / chatterbox:m1
+- **Durasi:** 50.8 s
+- **Tokoh dan hasil:** Level 1: Zippy (sports) → smash@obs1+broken; Level 2: Hydro (firetruck) → rollback@obs2+broken; Level 3 (juara): Rocky (monster) → win
+- **Status:** APPROVED (approve 2026-11-25)
+- **Antrian:** QUEUED 2026-12-07T16:00:00Z
+- **YouTube:** belum diupload
+
+## Ep. 182 — `MW_SMASH_3D_S5019`
+
+- **Judul YouTube:** Race Champion Siren Crashes the Smash Arena! 💥 NEW 3D Graphics | Ep. 182 #Shorts
+- **File MP4:** `/root/video-engine/renders/megawheel_arena/S07/E182_2026-11-25_smash25d/MW_SMASH_3D_S5019.mp4`
+- **Manifest:** `/root/video-engine/renders/megawheel_arena/S07/E182_2026-11-25_smash25d/MW_SMASH_3D_S5019.json` · audit: `renders/megawheel_arena/S07/E182_2026-11-25_smash25d/MW_SMASH_3D_S5019_audit.md`
+- **Season / seri / seed:** S07 / smash25d / 5019
+- **Tema / narator:** night-clear-city / 
+- **Durasi:** 34.9 s
+- **Tokoh dan hasil:** Level 1: Hydro (firetruck) → win; Level 2: Grizzly (monster2) → p3+wreck; Level 3 (juara): Nitro (f1) → p4+wreck; Level 4: Siren (police) → p2+wreck
+- **Status:** APPROVED (approve 2026-11-25)
+- **Antrian:** QUEUED 2026-12-02T00:00:00Z
+- **YouTube:** belum diupload
 
 ## Ep. 1001 — `2026-10-02_story15_e01`
 

@@ -22,7 +22,7 @@
 ## 6.1 Teknis
 | Cek | Hasil | Nilai |
 |---|---|---|
-| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/pending/2026-11-16_dungeon_s039/SIM_DUNGEON_V2_S039.mp4 |
+| File video ada | ✅ | /root/video-engine/renders/megawheel_arena/S07/E181_2026-11-16_dungeon/SIM_DUNGEON_V2_S039.mp4 |
 | H.264 1080x1920 | ✅ | h264 1080x1920 |
 | Frame rate 30 | ✅ | 30/1 |
 | Audio AAC ada | ✅ | aac |

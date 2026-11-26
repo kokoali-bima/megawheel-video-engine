@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-25 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-25 09:40). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -187,6 +187,8 @@
 | 178 | S06 | smash25d | Buster, Rocky, Nitro, Zippy | 2026-11-12 | 2026-11-13 | 2026-11-20 | UPLOADED_SCHEDULED 2026-11-30T00:00:00Z | https://www.youtube.com/shorts/1g5gBfPPbMc |  |  |  |  |
 | 179 | S06 | race25d | Titan, Grizzly, Tilly, Zippy | 2026-11-12 | 2026-11-13 | 2026-11-20 | UPLOADED_SCHEDULED 2026-11-30T20:00:00Z | https://www.youtube.com/shorts/P-Nphfrm9ug |  |  |  |  |
 | 180 | S06 | smash25d | Hydro, Rocky, Tilly, Siren | 2026-11-12 | 2026-11-13 | 2026-11-20 | UPLOADED_SCHEDULED 2026-12-01T00:00:00Z | https://www.youtube.com/shorts/ZKE023C4M4U |  |  |  |  |
+| 181 | S07 | dungeon | Zippy, Hydro, Rocky | 2026-11-16 | 2026-11-25 |  | APPROVED |  |  |  |  |  |
+| 182 | S07 | smash25d | Hydro, Grizzly, Nitro, Siren | 2026-11-25 | 2026-11-25 |  | APPROVED |  |  |  |  |  |
 | 1001 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-02 | 2026-10-02 | 2026-10-03 | UPLOADED_SCHEDULED 2026-10-04T17:00:00Z | https://www.youtube.com/shorts/gAVCxOicZyM |  |  |  |  |
 | 1002 | S01 | story15 | Sprinkles, Zippy, Buster, Rocky, Siren, Tilly, Nitro | 2026-10-07 | 2026-10-07 | 2026-10-08 | UPLOADED_SCHEDULED 2026-10-11T17:00:00Z | https://www.youtube.com/shorts/SdByNtxACP4 |  |  |  |  |
 | 1003 | S01 | story15 | Sprinkles, Zippy, Rocky, Buster, Siren, Nitro, Hydro | 2026-10-23 | 2026-10-23 | 2026-10-24 | UPLOADED_SCHEDULED 2026-10-25T17:00:00Z | https://www.youtube.com/shorts/3wtRIEEN4WY |  |  |  |  |
@@ -197,7 +199,7 @@
 
 | Video ID | Seri | Tokoh | Render | Durasi | Folder |
 |---|---|---|---|---|---|
-| SIM_DUNGEON_V2_S039 | dungeon | Zippy, Hydro, Rocky | 2026-11-16 | 50.8 s | `renders/megawheel_arena/pending/2026-11-16_dungeon_s039` |
+| – | | | | | tidak ada |
 
 ## Ditolak
 
