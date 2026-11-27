@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-26T05:01:57Z",
+  "finished_utc": "2026-11-27T05:01:41Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-26T05:01:57Z",
+ "updated_utc": "2026-11-27T05:01:41Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -13,30 +13,33 @@
    "short": {
     "name": "CHALLENGE (11:00 ET)",
     "ok": false,
-    "covered_days": 4,
+    "covered_days": 3,
     "missing_days": [
      "2026-12-01",
      "2026-12-02",
-     "2026-12-03"
+     "2026-12-03",
+     "2026-12-04"
     ]
    },
    "race": {
     "name": "RACE race25d (15:00 ET)",
     "ok": false,
-    "covered_days": 4,
+    "covered_days": 3,
     "missing_days": [
      "2026-12-01",
      "2026-12-02",
-     "2026-12-03"
+     "2026-12-03",
+     "2026-12-04"
     ]
    },
    "smash": {
     "name": "SMASH smash25d (19:00 ET)",
     "ok": false,
-    "covered_days": 5,
+    "covered_days": 4,
     "missing_days": [
      "2026-12-02",
-     "2026-12-03"
+     "2026-12-03",
+     "2026-12-04"
     ]
    }
   }
@@ -46,24 +49,6 @@
   "DELETED": 1
  },
  "next_uploads": [
-  {
-   "episode": 167,
-   "role": "short",
-   "publish_at_utc": "2026-11-26T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 168,
-   "role": "race",
-   "publish_at_utc": "2026-11-26T20:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 169,
-   "role": "smash",
-   "publish_at_utc": "2026-11-27T00:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 170,
    "role": "short",
@@ -92,6 +77,24 @@
    "episode": 174,
    "role": "race",
    "publish_at_utc": "2026-11-28T20:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 175,
+   "role": "smash",
+   "publish_at_utc": "2026-11-29T00:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 176,
+   "role": "short",
+   "publish_at_utc": "2026-11-29T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 177,
+   "role": "race",
+   "publish_at_utc": "2026-11-29T20:00:00Z",
    "status": "SCHEDULED"
   }
  ]

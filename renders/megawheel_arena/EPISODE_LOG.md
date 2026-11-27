@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-26 12:42). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-27 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -212,6 +212,14 @@
 | MW_SPLASH_3D_S2206 | splash | Nitro, Sprinkles, Titan | 2026-11-26 | 53.57 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2206` |
 | MW_BUMPS_3D_S2216 | bumps | Zippy, Hydro, Grizzly | 2026-11-26 | 48.27 s | `renders/megawheel_arena/pending/2026-11-26_bumps3d_s2216` |
 | MW_SPLASH_3D_S2205 | splash | Tilly, Buster, Rocky | 2026-11-26 | 55.5 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2205` |
+| MW_SMASH_3D_S715_R2 | smash25d | Buster, Zippy, Tilly, Grizzly | 2026-11-26 | 35.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s715_R2` |
+| MW_SMASH_3D_S955_R2 | smash25d | Buster, Grizzly, Nitro, Tilly | 2026-11-26 | 35.53 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s955_R2` |
+| MW_SMASH_3D_S947_R2 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-26 | 34.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s947_R2` |
+| MW_SMASH_3D_S1129_R2 | smash25d | Grizzly, Zippy, Nitro, Hydro | 2026-11-26 | 34.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s1129_R2` |
+| MW_SMASH_3D_S654_R2 | smash25d | Buster, Grizzly, Nitro, Zippy | 2026-11-26 | 32.13 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s654_R2` |
+| MW_SMASH_3D_S662_R2 | smash25d | Rocky, Tilly, Zippy, Buster | 2026-11-26 | 35.37 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s662_R2` |
+| MW_SMASH_3D_S5019_R3 | smash25d | Hydro, Grizzly, Nitro, Siren | 2026-11-26 | 34.9 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s5019_R3` |
+| MW_SMASH_3D_S5041 | smash25d | Rocky, Zippy, Siren, dozer | 2026-11-26 | 35.0 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s5041` |
 
 ## Ditolak
 
