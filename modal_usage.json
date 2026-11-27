@@ -5614,6 +5614,18 @@
    "gpu_seconds": 40.4,
    "wall_seconds": 286.6,
    "cost_usd": 0.0103
+  },
+  {
+   "date": "2026-11-27",
+   "note": "channel2 blender test (owner asked Blender on Modal 2026-11-27)",
+   "gpu": "L4",
+   "engine": "CYCLES",
+   "samples": 32,
+   "frames": 1607,
+   "chunks": 8,
+   "gpu_seconds": 7150.3,
+   "wall_seconds": 1594.9,
+   "cost_usd": 1.8255
   }
  ]
 }

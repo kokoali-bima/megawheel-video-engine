@@ -1,6 +1,6 @@
 # EPISODE LOG — MegaWheel Arena
 
-> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-26 05:00). Jangan diedit manual; isi metrik dengan `episodes.py set`.
+> Dibuat otomatis oleh `generators/publishing/episodes.py` (2026-11-26 12:42). Jangan diedit manual; isi metrik dengan `episodes.py set`.
 > Status: APPROVED = siap upload · UPLOADED_* = sudah di YouTube.
 
 ## Episode
@@ -206,19 +206,12 @@
 | MW_RACE_3D_S1157 | race25d | Titan, Grizzly, Nitro, Siren | 2026-11-26 | 31.43 s | `renders/megawheel_arena/pending/2026-11-26_race3d_s1157` |
 | MW_RACE_3D_S1451 | race25d | Buster, Grizzly, Tilly, Siren | 2026-11-26 | 37.81 s | `renders/megawheel_arena/pending/2026-11-26_race3d_s1451` |
 | MW_RACE_3D_S1301 | race25d | Sprinkles, Rocky, Tilly, Zippy | 2026-11-26 | 34.77 s | `renders/megawheel_arena/pending/2026-11-26_race3d_s1301` |
-| MW_SMASH_3D_S715 | smash25d | Buster, Zippy, Tilly, Grizzly | 2026-11-26 | 35.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s715` |
-| MW_SMASH_3D_S955 | smash25d | Buster, Grizzly, Nitro, Tilly | 2026-11-26 | 35.53 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s955` |
-| MW_SMASH_3D_S947 | smash25d | Sprinkles, Rocky, Zippy, Nitro | 2026-11-26 | 34.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s947` |
-| MW_SMASH_3D_S1129 | smash25d | Grizzly, Zippy, Nitro, Hydro | 2026-11-26 | 34.97 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s1129` |
-| MW_SMASH_3D_S654 | smash25d | Buster, Grizzly, Nitro, Zippy | 2026-11-26 | 32.13 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s654` |
-| MW_SMASH_3D_S662 | smash25d | Rocky, Tilly, Zippy, Buster | 2026-11-26 | 35.37 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s662` |
 | MW_BUMPS_3D_S2219 | bumps | Nitro, Hydro, Grizzly | 2026-11-26 | 47.53 s | `renders/megawheel_arena/pending/2026-11-26_bumps3d_s2219` |
 | MW_SPLASH_3D_S2202 | splash | Nitro, Buster, Rocky | 2026-11-26 | 58.33 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2202` |
 | MW_SPLASH_3D_S2203 | splash | Zippy, Buster, Hydro | 2026-11-26 | 47.0 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2203` |
 | MW_SPLASH_3D_S2206 | splash | Nitro, Sprinkles, Titan | 2026-11-26 | 53.57 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2206` |
 | MW_BUMPS_3D_S2216 | bumps | Zippy, Hydro, Grizzly | 2026-11-26 | 48.27 s | `renders/megawheel_arena/pending/2026-11-26_bumps3d_s2216` |
 | MW_SPLASH_3D_S2205 | splash | Tilly, Buster, Rocky | 2026-11-26 | 55.5 s | `renders/megawheel_arena/pending/2026-11-26_splash3d_s2205` |
-| MW_SMASH_3D_S5019_R2 | smash25d | Hydro, Grizzly, Nitro, Siren | 2026-11-26 | 34.9 s | `renders/megawheel_arena/pending/2026-11-26_smash3d_s5019_R2` |
 
 ## Ditolak
 
@@ -285,3 +278,10 @@
 | MW_RACE_3D_S531 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
 | MW_RACE_3D_S593 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
 | MW_RACE_3D_S611 | owner 2026-11-09: Race must also show a car dodging; slot re-picked (C-065) | 2026-11-09 |
+| MW_SMASH_3D_S715 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S955 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S947 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S1129 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S654 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S662 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |
+| MW_SMASH_3D_S5019_R2 | superseded: another fighter visible under the guest '?' (C-078 re-render) | 2026-11-26 |

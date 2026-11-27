@@ -1,6 +1,6 @@
 {
   "video_id": "MW_SMASH_3D_S1129",
-  "status": "RENDERED_PENDING_APPROVAL",
+  "status": "REJECTED",
   "series": "smash25d",
   "seed": 1129,
   "render3d": true,
@@ -30,9 +30,10 @@
     "shorts"
   ],
   "assets": "100% procedurally generated (Godot 3D render of the MegaWheel simulation + synthesized audio), narration Chatterbox TTS (open source) synthetic voice",
-  "video_path": "/root/video-engine/renders/megawheel_arena/pending/2026-11-26_smash3d_s1129/MW_SMASH_3D_S1129.mp4",
-  "preview_dir": "/root/video-engine/renders/megawheel_arena/pending/2026-11-26_smash3d_s1129/preview",
+  "video_path": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-26_smash3d_s1129/MW_SMASH_3D_S1129.mp4",
+  "preview_dir": "/root/video-engine/renders/megawheel_arena/rejected/2026-11-26_smash3d_s1129/preview",
   "approval_instruction": "Waiting for the owner's review in chat (owner 2026-11-04: review first, approve, then upload)",
   "guest": "firetruck",
-  "format": "guest35"
+  "format": "guest35",
+  "reject_reason": "superseded: another fighter visible under the guest '?' (C-078 re-render)"
 }
