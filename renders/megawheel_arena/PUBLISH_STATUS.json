@@ -1,10 +1,10 @@
 {
  "last_run": {
-  "finished_utc": "2026-11-27T05:01:41Z",
+  "finished_utc": "2026-11-28T05:01:39Z",
   "upload_rc": 0,
   "result": "ok"
  },
- "updated_utc": "2026-11-27T05:01:41Z",
+ "updated_utc": "2026-11-28T05:01:39Z",
  "open_issues": [],
  "stock": {
   "standard_days": 7,
@@ -13,33 +13,36 @@
    "short": {
     "name": "CHALLENGE (11:00 ET)",
     "ok": false,
-    "covered_days": 3,
+    "covered_days": 2,
     "missing_days": [
      "2026-12-01",
      "2026-12-02",
      "2026-12-03",
-     "2026-12-04"
+     "2026-12-04",
+     "2026-12-05"
     ]
    },
    "race": {
     "name": "RACE race25d (15:00 ET)",
     "ok": false,
-    "covered_days": 3,
+    "covered_days": 2,
     "missing_days": [
      "2026-12-01",
      "2026-12-02",
      "2026-12-03",
-     "2026-12-04"
+     "2026-12-04",
+     "2026-12-05"
     ]
    },
    "smash": {
     "name": "SMASH smash25d (19:00 ET)",
     "ok": false,
-    "covered_days": 4,
+    "covered_days": 3,
     "missing_days": [
      "2026-12-02",
      "2026-12-03",
-     "2026-12-04"
+     "2026-12-04",
+     "2026-12-05"
     ]
    }
   }
@@ -49,24 +52,6 @@
   "DELETED": 1
  },
  "next_uploads": [
-  {
-   "episode": 170,
-   "role": "short",
-   "publish_at_utc": "2026-11-27T16:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 171,
-   "role": "race",
-   "publish_at_utc": "2026-11-27T20:00:00Z",
-   "status": "SCHEDULED"
-  },
-  {
-   "episode": 172,
-   "role": "smash",
-   "publish_at_utc": "2026-11-28T00:00:00Z",
-   "status": "SCHEDULED"
-  },
   {
    "episode": 173,
    "role": "short",
@@ -95,6 +80,24 @@
    "episode": 177,
    "role": "race",
    "publish_at_utc": "2026-11-29T20:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 178,
+   "role": "smash",
+   "publish_at_utc": "2026-11-30T00:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 102,
+   "role": "short",
+   "publish_at_utc": "2026-11-30T16:00:00Z",
+   "status": "SCHEDULED"
+  },
+  {
+   "episode": 179,
+   "role": "race",
+   "publish_at_utc": "2026-11-30T20:00:00Z",
    "status": "SCHEDULED"
   }
  ]
