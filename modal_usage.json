@@ -5626,6 +5626,16 @@
    "gpu_seconds": 7150.3,
    "wall_seconds": 1594.9,
    "cost_usd": 1.8255
+  },
+  {
+   "date": "2026-11-28",
+   "note": "channel2 hunyuan i2v test (owner 2026-11-28)",
+   "gpu": "L40S",
+   "engine": "HunyuanVideo-1.5 480p i2v step-distilled",
+   "clips": 3,
+   "gpu_seconds": 1165.6,
+   "wall_seconds": 662.4,
+   "cost_usd": 0.916
   }
  ]
 }
